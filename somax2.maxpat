@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 972.0, 731.0 ],
+		"rect" : [ 34.0, 78.0, 972.0, 731.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -2167,7 +2167,55 @@
 				"box" : 				{
 					"clipheight" : 20.0,
 					"data" : 					{
-						"clips" : [  ]
+						"clips" : [ 							{
+								"absolutepath" : "/Users/joakimborg/Music/Sax_gentle_cat_Slow.wav",
+								"filename" : "Sax_gentle_cat_Slow.wav",
+								"filekind" : "audiofile",
+								"loop" : 0,
+								"content_state" : 								{
+									"pitchcorrection" : [ 0 ],
+									"followglobaltempo" : [ 0 ],
+									"timestretch" : [ 0 ],
+									"pitchshift" : [ 1.0 ],
+									"formant" : [ 1.0 ],
+									"formantcorrection" : [ 0 ],
+									"mode" : [ "basic" ],
+									"quality" : [ "basic" ],
+									"originallengthms" : [ 0.0 ],
+									"originallength" : [ 0.0, "ticks" ],
+									"play" : [ 0 ],
+									"slurtime" : [ 0.0 ],
+									"originaltempo" : [ 120.0 ],
+									"basictuning" : [ 440 ],
+									"speed" : [ 1.0 ]
+								}
+
+							}
+, 							{
+								"absolutepath" : "/Users/joakimborg/Music/Monophonic/Syrinx.aiff",
+								"filename" : "Syrinx.aiff",
+								"filekind" : "audiofile",
+								"loop" : 0,
+								"content_state" : 								{
+									"pitchcorrection" : [ 0 ],
+									"followglobaltempo" : [ 0 ],
+									"timestretch" : [ 0 ],
+									"pitchshift" : [ 1.0 ],
+									"formant" : [ 1.0 ],
+									"formantcorrection" : [ 0 ],
+									"mode" : [ "basic" ],
+									"quality" : [ "basic" ],
+									"originallengthms" : [ 0.0 ],
+									"originallength" : [ 0.0, "ticks" ],
+									"play" : [ 0 ],
+									"slurtime" : [ 0.0 ],
+									"originaltempo" : [ 120.0 ],
+									"basictuning" : [ 440 ],
+									"speed" : [ 1.0 ]
+								}
+
+							}
+ ]
 					}
 ,
 					"id" : "obj-42",
@@ -3786,6 +3834,20 @@
 				"bootpath" : "~/Documents/Max 8/Packages/Somax2/abstractions/somax",
 				"patcherrelativepath" : "./abstractions/somax",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "Sax_gentle_cat_Slow.wav",
+				"bootpath" : "~/Music",
+				"patcherrelativepath" : "../../../../Music",
+				"type" : "WAVE",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "Syrinx.aiff",
+				"bootpath" : "~/Music/Monophonic",
+				"patcherrelativepath" : "../../../../Music/Monophonic",
+				"type" : "AIFF",
 				"implicit" : 1
 			}
 , 			{

@@ -1,10 +1,9 @@
 # -*- coding: ISO-8859-1 -*-
 
 # standard library imports
-from struct import unpack
 
 # custom import
-from somaxlibrary.midi.DataTypeConverters import readBew, readVar, varLen
+from somaxlibrary.legacy.midi import readBew, readVar, varLen
 
 
 class RawInstreamFile:

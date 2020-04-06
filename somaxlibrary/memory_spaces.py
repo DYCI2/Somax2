@@ -9,7 +9,7 @@ from typing import Tuple, ClassVar, Dict, Union
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import InvalidLabelInput, TransformError
-from somaxlibrary.influence import AbstractInfluence, ClassicInfluence
+from somaxlibrary.peak_event import PeakEvent, ClassicPeakEvent
 from somaxlibrary.labels import AbstractLabel
 from somaxlibrary.parameter import Parameter, ParamWithSetter
 from somaxlibrary.parameter import Parametric
@@ -36,7 +36,7 @@ class AbstractMemorySpace(Parametric):
         raise NotImplementedError("AbstractMemorySpace.read is abstract.")
 
     @abstractmethod
-    def influence(self, label: AbstractLabel, time: float, **_kwargs) -> [AbstractInfluence]:
+    def influence(self, label: AbstractLabel, time: float, **_kwargs) -> [PeakEvent]:
         raise NotImplementedError("AbstractMemorySpace.influence is abstract.")
 
     @staticmethod
@@ -117,7 +117,7 @@ class NGramMemorySpace(AbstractMemorySpace):
                 else:
                     self.structured_data[key] = [value]
 
-    def influence(self, label: AbstractLabel, time: float, **_kwargs) -> [AbstractInfluence]:
+    def influence(self, label: AbstractLabel, time: float, **_kwargs) -> [PeakEvent]:
         """ Raises: InvalidLabelInput"""
         if not type(label) == self.label_type:  # Rejects subclasses
             raise InvalidLabelInput(f"An atom with type {self.label_type} can't handle labels of type {type(label)}.")
@@ -127,7 +127,7 @@ class NGramMemorySpace(AbstractMemorySpace):
         if len(self.influence_history) < self._ngram_size.value:
             return []
         else:
-            matches: [AbstractInfluence] = []
+            matches: [PeakEvent] = []
             for transform_tuple in self.transforms:
                 # Inverse transform_tuple of input (equivalent to transform_tuple of memory)
                 transformed_labels: [AbstractLabel] = list(copy(self.influence_history))
@@ -139,7 +139,7 @@ class NGramMemorySpace(AbstractMemorySpace):
                     matching_events: [CorpusEvent] = self.structured_data[key]
                     for event in matching_events:
                         # TODO: Generalize rather than specific ClassicInfluence.
-                        matches.append(ClassicInfluence(event, transform_hash))
+                        matches.append(ClassicPeakEvent(event, transform_hash))
                 except KeyError:  # no matches found
                     continue
         return matches

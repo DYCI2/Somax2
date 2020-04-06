@@ -174,6 +174,8 @@ class Player(ScheduledMidiObject, Parametric):
         atom.set_activity_pattern(activity_pattern_class, self.corpus)
 
     def read_corpus(self, filepath: str):
+        # TODO: Handle midi files, audio files and json files separately!
+        raise NotImplementedError("Reading is in the progress of being rewritten")
         self.corpus = Corpus(filepath)
         for streamview in self.streamviews.values():
             streamview.read(self.corpus)

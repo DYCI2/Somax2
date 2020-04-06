@@ -8,8 +8,8 @@ from numpy import array, exp, where, log2, floor, ceil, zeros, log, arange, roun
     power, dot, insert
 
 from somaxlibrary import virfun
-from somaxlibrary.midi.MidiInFile import MidiInFile
-from somaxlibrary.midi.MidiOutStream import MidiOutStream
+from somaxlibrary.legacy.midi import MidiInFile
+from somaxlibrary.legacy.midi import MidiOutStream
 
 
 class CorpusBuilder(object):

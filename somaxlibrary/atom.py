@@ -3,7 +3,7 @@ from typing import ClassVar, Dict, Union
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.corpus import Corpus
-from somaxlibrary.influence import AbstractInfluence
+from somaxlibrary.peak_event import PeakEvent
 from somaxlibrary.labels import AbstractLabel
 from somaxlibrary.memory_spaces import AbstractMemorySpace
 from somaxlibrary.parameter import Parametric, Parameter
@@ -38,7 +38,7 @@ class Atom(Parametric):
                                "parameters": parameters}
         return self.parameter_dict
 
-    def read(self, corpus):
+    def read(self, corpus: Corpus):
         self.logger.debug(f"[read]: Reading corpus {corpus}.")
         self.memory_space.read(corpus)
         self.activity_pattern.corpus = corpus
@@ -52,7 +52,7 @@ class Atom(Parametric):
     # influences the memory with incoming data
     def influence(self, label: AbstractLabel, time: float, **kwargs):
         """ Raises: InvalidLabelInput"""
-        matched_events: [AbstractInfluence] = self.memory_space.influence(label, time, **kwargs)
+        matched_events: [PeakEvent] = self.memory_space.influence(label, time, **kwargs)
         if matched_events:
             self.update_peaks(time)
             self.activity_pattern.insert(matched_events)  # we insert the events into the activity profile

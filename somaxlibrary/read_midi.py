@@ -1,8 +1,4 @@
-from somaxlibrary.midi.MidiOutStream import MidiOutStream
-from somaxlibrary.midi.MidiInFile import MidiInFile
-from somaxlibrary.midi.RawInstreamFile import RawInstreamFile
-from somaxlibrary.midi.MidiFileParser import MidiFileParser
-from somaxlibrary.midi.MidiToText import MidiToText
+from somaxlibrary.legacy.midi import MidiOutStream
 import bisect
 
 

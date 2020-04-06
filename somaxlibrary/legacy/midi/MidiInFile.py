@@ -1,7 +1,7 @@
 # -*- coding: ISO-8859-1 -*-
 
-from somaxlibrary.midi.RawInstreamFile import RawInstreamFile
-from somaxlibrary.midi.MidiFileParser import MidiFileParser
+from somaxlibrary.legacy.midi import RawInstreamFile
+from somaxlibrary.legacy.midi import MidiFileParser
 
 
 class MidiInFile:

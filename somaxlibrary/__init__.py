@@ -5,9 +5,9 @@ import somaxlibrary.corpus
 import somaxlibrary.corpus_builder
 import somaxlibrary.corpus_event
 import somaxlibrary.exceptions
-import somaxlibrary.gen_corpus
+import somaxlibrary.legacy.gen_corpus
 import somaxlibrary.improvisation_memory
-import somaxlibrary.influence
+import somaxlibrary.peak_event
 import somaxlibrary.io_parser
 import somaxlibrary.labels
 import somaxlibrary.memory_spaces
