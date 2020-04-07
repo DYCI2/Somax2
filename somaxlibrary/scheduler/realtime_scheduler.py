@@ -34,7 +34,7 @@ class RealtimeScheduler(BaseScheduler):
             t: float = time.time()
             delta_time: float = t - self._last_callback_time
             self._last_callback_time = t
-            self.tick += delta_time * self.tempo / 60.0
+            self._tick += delta_time * self.tempo / 60.0
 
     ######################################################
     # REAL-TIME CONTROL
@@ -54,7 +54,7 @@ class RealtimeScheduler(BaseScheduler):
         self.running = False
         remamining_queue: [ScheduledEvent] = self.queue[:]
         self.queue = []
-        self.tick = 0
+        self._tick = 0
         for event in remamining_queue[:]:
             # Add new triggers for all existing automatically triggered
             if isinstance(event, AutomaticTriggerEvent):
@@ -99,8 +99,7 @@ class RealtimeScheduler(BaseScheduler):
             else:
                 onset: float = trigger_time + max(0.0, note.onset)
             self.queue.append(
-                ScheduledMidiEvent(onset, player, note.pitch, note.velocity, note.channel,
-                                   corpus_event.state_index))
+                ScheduledMidiEvent(onset, player, note.pitch, note.velocity, note.channel, corpus_event.state_index))
         if player.hold_notes_artificially:
             player.artificially_held_notes = note_offs
         else:

@@ -269,7 +269,7 @@ class SomaxServer(Caller):
     def start(self):
         self.clear_all()
         self.scheduler.start()
-        self.logger.info(f"Scheduler Started. Current beat is {self.scheduler.beat}.")
+        self.logger.info(f"Scheduler Started. Current tick is {self.scheduler.tick}.")
 
     def stop(self):
         """stops the scheduler and reset all players"""

@@ -1,4 +1,5 @@
 import logging
+import time
 from abc import abstractmethod, ABC
 
 from typing import Optional, Callable, Any
@@ -30,11 +31,10 @@ class BaseScheduler(ABC):
     ######################################################
 
     def add_trigger_event(self, player: Player):
-        self._update_tick()
         if player.trigger_mode == TriggerMode.AUTOMATIC and not self._has_trigger(player):
-            self._add_automatic_trigger_event(player, self.tick - self.TRIGGER_PRETIME * self.tempo / 60.0, self.tick)
+            self._add_automatic_trigger_event(player, self._tick - self.TRIGGER_PRETIME * self.tempo / 60.0, self._tick)
         elif player.trigger_mode == TriggerMode.MANUAL and self.running:
-            self._add_manual_trigger_event(player, self.tick)
+            self._add_manual_trigger_event(player, self._tick)
         else:
             self.logger.debug("[add_trigger_event] Could not add trigger.")
 
@@ -92,6 +92,7 @@ class BaseScheduler(ABC):
         self.tempo = tempo_event.tempo
 
     def _process_trigger_event(self, trigger_event: AbstractTriggerEvent) -> None:
+        print("TEMP Trigger", trigger_event.target_time)
         player: Player = trigger_event.player
         try:
             event: CorpusEvent = player.new_event(trigger_event.target_time)
@@ -156,7 +157,7 @@ class BaseScheduler(ABC):
                 if isinstance(event, AutomaticTriggerEvent) and event.player == player:
                     return True
             except AttributeError:
-                continue
+                continue    # TODO: Handle?
         return False
 
     def _sanity_check(self):
@@ -166,11 +167,7 @@ class BaseScheduler(ABC):
     def tick(self) -> float:
         if self.running:
             self._update_tick()
-        return self.tick
-
-    @tick.setter
-    def tick(self, value):
-        self._tick = value
+        return self._tick
 
     @abstractmethod
     def _update_tick(self) -> None:
