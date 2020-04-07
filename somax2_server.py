@@ -23,7 +23,7 @@ from somaxlibrary.player import Player
 from somaxlibrary.target import Target, SimpleOscTarget
 from somaxlibrary.transforms import AbstractTransform
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
-from somaxlibrary.scheduler.Scheduler import Scheduler
+from somaxlibrary.scheduler.realtime_scheduler import RealtimeScheduler
 
 
 class SomaxServer(Caller):
@@ -35,7 +35,7 @@ class SomaxServer(Caller):
         self.logger.addHandler(OscLogForwarder(self.target))
         self.logger.info(f"Initializing SoMaxServer with input port {in_port} and ip '{ip}'.")
         self.players: {str: Player} = dict()
-        self.scheduler = Scheduler()
+        self.scheduler = RealtimeScheduler()
         self.builder = CorpusBuilder()
         self.ip: str = ip
         self.in_port: int = in_port
@@ -183,7 +183,7 @@ class SomaxServer(Caller):
             return
         # TODO: Error handling (KeyError players + path_and_name)
         path_and_name: [str] = IOParser.parse_streamview_atom_path(path)
-        time: float = self.scheduler.time
+        time: float = self.scheduler.tick
         try:
             for label in labels:
                 self.players[player].influence(path_and_name, label, time, **kwargs)
@@ -284,14 +284,14 @@ class SomaxServer(Caller):
             player.clear()
 
     def get_time(self):
-        self.target.send("time", self.scheduler.time)
+        self.target.send("time", self.scheduler.tick)
 
     def get_tempo(self):
         self.target.send("tempo", self.scheduler.tempo)
 
     def set_tempo(self, tempo: float):
         # TODO: Error checking
-        self.scheduler.add_tempo_event(self.scheduler.time, tempo)
+        self.scheduler.add_tempo_event(self.scheduler.tick, tempo)
 
     def set_tempo_master(self, player: Union[str, None]):
         try:
@@ -400,7 +400,7 @@ class SomaxServer(Caller):
 
     def _debug_state(self, player: str, state_index: int):
         event: CorpusEvent = self.players[player].corpus.event_at(state_index)
-        self.scheduler.add_corpus_event(self.players[player], self.scheduler.time, event)
+        self.scheduler.add_corpus_event(self.players[player], self.scheduler.tick, event)
 
     @staticmethod
     def _osc_callback(self):
