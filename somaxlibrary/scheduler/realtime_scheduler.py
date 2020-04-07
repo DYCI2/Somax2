@@ -4,6 +4,7 @@ from typing import Optional, Any
 
 from somaxlibrary.corpus import ContentType
 from somaxlibrary.corpus_event import CorpusEvent, Note
+from somaxlibrary.labels import AbstractLabel
 from somaxlibrary.player import Player
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, AutomaticTriggerEvent, ScheduledMidiEvent, \
     ScheduledAudioEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent
@@ -77,6 +78,7 @@ class RealtimeScheduler(BaseScheduler):
             self._add_midi_event(player, trigger_time, corpus_event)
 
     def _add_midi_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
+        print([note for note in corpus_event.notes])
         # Handle held notes from previous state:
         note_offs_previous: [Note] = [n for n in player.held_notes if n not in corpus_event.held_to()]
         note_ons: [Note] = [n for n in corpus_event.notes if n not in player.held_notes]
@@ -114,7 +116,8 @@ class RealtimeScheduler(BaseScheduler):
                                                     corpus_event.tempo)
         self.queue.append(event)
 
-    def add_influence_event(self):
+    # TODO: Subject to change with implementation from branch `corpus-builder`
+    def add_influence_event(self, player: Player, trigger_time: float, influence_path: str, label: AbstractLabel):
         raise AttributeError(f"Queued Influence Events are not supported for class {self.__class__.__name__}.")
 
     ######################################################
@@ -138,4 +141,3 @@ class RealtimeScheduler(BaseScheduler):
 
     def _process_influence_event(self, influence_event: ScheduledInfluenceEvent):
         raise AttributeError(f"Queued Influence Events are not supported for class {self.__class__.__name__}.")
-

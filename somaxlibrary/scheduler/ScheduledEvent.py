@@ -2,6 +2,7 @@ from abc import ABC
 from typing import Callable, Any, Dict
 
 from somaxlibrary.corpus_event import CorpusEvent
+from somaxlibrary.labels import AbstractLabel
 from somaxlibrary.player import Player
 
 
@@ -49,10 +50,12 @@ class ScheduledCorpusEvent(ScheduledPlayerEvent):
         self.corpus_event: CorpusEvent = corpus_event
 
 
+# TODO: Subject to change with implementation from branch `corpus-builder`
 class ScheduledInfluenceEvent(ScheduledPlayerEvent):
-    def __init__(self, trigger_time: float, player: Player):
+    def __init__(self, trigger_time: float, player: Player, path: str, label: AbstractLabel):
         super().__init__(trigger_time, player)
-        raise NotImplementedError("TODO!")  # TODO
+        self.path = path
+        self.label = label
 
 
 class AbstractTriggerEvent(ScheduledPlayerEvent, ABC):

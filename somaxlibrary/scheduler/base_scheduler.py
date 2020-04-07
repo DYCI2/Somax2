@@ -2,11 +2,12 @@ import logging
 import time
 from abc import abstractmethod, ABC
 
-from typing import Optional, Callable, Any
+from typing import Optional, Callable, Any, List
 
 from somaxlibrary.corpus import ContentType
 from somaxlibrary.corpus_event import CorpusEvent, Note
 from somaxlibrary.exceptions import InvalidCorpus
+from somaxlibrary.labels import AbstractLabel
 from somaxlibrary.player import Player
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledMidiEvent, ScheduledAudioEvent, \
     AutomaticTriggerEvent, \
@@ -62,8 +63,9 @@ class BaseScheduler(ABC):
         """ Not required to implement """
         pass
 
+    # TODO: Subject to change with implementation from branch `corpus-builder`
     @abstractmethod
-    def add_influence_event(self):
+    def add_influence_event(self, player: Player, trigger_time: float, influence_path: str, label: AbstractLabel):
         """ Not required to implement """
         pass
 
@@ -71,22 +73,23 @@ class BaseScheduler(ABC):
     # PROCESS (INTERNAL)
     ######################################################
 
-    def _process_internal_events(self) -> Optional[Any]:
+    def _process_internal_events(self) -> List[ScheduledEvent]:
         events: [ScheduledEvent] = [e for e in self.queue if e.trigger_time <= self.tick]
         self.queue = [e for e in self.queue if e.trigger_time > self.tick]
         for event in events:
             if isinstance(event, TempoEvent):
-                return self._process_tempo_event(event)
+                self._process_tempo_event(event)
             if isinstance(event, ScheduledMidiEvent):
-                return self._process_midi_event(event)
+                self._process_midi_event(event)
             elif isinstance(event, ScheduledAudioEvent):
-                return self._process_audio_event(event)
+                self._process_audio_event(event)
             elif isinstance(event, AbstractTriggerEvent):
-                return self._process_trigger_event(event)
+                self._process_trigger_event(event)
             elif isinstance(event, ScheduledInfluenceEvent):
-                return self._process_influence_event(event)
+                self._process_influence_event(event)
             elif isinstance(event, ScheduledCorpusEvent):
-                return self._process_corpus_event(event)
+                self._process_corpus_event(event)
+        return events
 
     def _process_tempo_event(self, tempo_event: TempoEvent) -> None:
         self.tempo = tempo_event.tempo
@@ -157,7 +160,7 @@ class BaseScheduler(ABC):
                 if isinstance(event, AutomaticTriggerEvent) and event.player == player:
                     return True
             except AttributeError:
-                continue    # TODO: Handle?
+                continue  # TODO: Handle?
         return False
 
     def _sanity_check(self):
