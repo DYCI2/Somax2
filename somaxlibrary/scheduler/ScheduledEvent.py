@@ -52,7 +52,7 @@ class ScheduledCorpusEvent(ScheduledPlayerEvent):
 
 # TODO: Subject to change with implementation from branch `corpus-builder`
 class ScheduledInfluenceEvent(ScheduledPlayerEvent):
-    def __init__(self, trigger_time: float, player: Player, path: str, label: AbstractLabel):
+    def __init__(self, trigger_time: float, player: Player, path: [str], label: AbstractLabel):
         super().__init__(trigger_time, player)
         self.path = path
         self.label = label

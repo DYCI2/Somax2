@@ -98,7 +98,7 @@ class SomaxServer(Caller):
         ip: str = self.io_parser.parse_ip(ip)
         trig_mode: TriggerMode = self.io_parser.parse_trigger_mode(trig_mode)
         target: Target = SimpleOscTarget(address, port, ip)
-        self.players[name] = Player(name, target, trig_mode)
+        self.players[name] = Player(name, trig_mode, target=target)
 
         if trig_mode == TriggerMode.AUTOMATIC:
             self.scheduler.add_trigger_event(self.players[name])

@@ -19,11 +19,11 @@ from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 class BaseScheduler(ABC):
     TRIGGER_PRETIME: float = 0.01  # seconds
 
-    def __init__(self, tempo: float = 120.0, running: bool = False):
+    def __init__(self, tempo: float = 120.0, running: bool = False, trigger_pretime: float = TRIGGER_PRETIME):
         self.logger = logging.getLogger(__name__)
         self.tempo: float = tempo
         self._tick: float = 0.0
-        self.queue: [ScheduledEvent] = []
+        self.queue: List[ScheduledEvent] = []
         self.tempo_master: Optional[Player] = None
         self.running: bool = running
 
@@ -31,11 +31,11 @@ class BaseScheduler(ABC):
     # ADD (INTERNAL AND EXTERNAL)
     ######################################################
 
-    def add_trigger_event(self, player: Player):
+    def add_trigger_event(self, player: Player, trigger_time: Optional[float] = None):
         if player.trigger_mode == TriggerMode.AUTOMATIC and not self._has_trigger(player):
             self._add_automatic_trigger_event(player, self._tick - self.TRIGGER_PRETIME * self.tempo / 60.0, self._tick)
         elif player.trigger_mode == TriggerMode.MANUAL and self.running:
-            self._add_manual_trigger_event(player, self._tick)
+            self._add_manual_trigger_event(player, trigger_time if trigger_time else self._tick)
         else:
             self.logger.debug("[add_trigger_event] Could not add trigger.")
 
@@ -65,7 +65,7 @@ class BaseScheduler(ABC):
 
     # TODO: Subject to change with implementation from branch `corpus-builder`
     @abstractmethod
-    def add_influence_event(self, player: Player, trigger_time: float, influence_path: str, label: AbstractLabel):
+    def add_influence_event(self, player: Player, trigger_time: float, influence_path: [str], label: AbstractLabel):
         """ Not required to implement """
         pass
 

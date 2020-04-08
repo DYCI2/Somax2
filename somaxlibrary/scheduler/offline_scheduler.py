@@ -1,4 +1,4 @@
-from typing import Optional, Any
+from typing import Optional, Any, List
 
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.labels import AbstractLabel
@@ -10,17 +10,20 @@ from somaxlibrary.scheduler.base_scheduler import BaseScheduler
 
 
 class OfflineScheduler(BaseScheduler):
-    def __init__(self, termination_tick: float, tempo: float = 120.0):
-        super().__init__(tempo)
-        self.current_event: Optional[ScheduledEvent] = None
-        self.termination_tick: float = termination_tick
+    def __init__(self, tempo: float = 120.0):
+        super().__init__(tempo, trigger_pretime=0)
+        self.previous_event: Optional[ScheduledEvent] = None
 
-    def next(self) -> CorpusEvent:
-        raise NotImplementedError("TODO!")  # TODO
+    def next(self) -> List[CorpusEvent]:
+        """Raises: IndexError if queue is empty"""
+        self._update_tick()
+        events: List[ScheduledEvent] = self._process_internal_events()
+        self.previous_event = events[0]
+        return [e.corpus_event for e in events if isinstance(e, ScheduledCorpusEvent)]
 
     def _update_tick(self) -> None:
-        if self.current_event:
-            self._tick = self.current_event.trigger_time
+        if self.previous_event:
+            self._tick = self.previous_event.trigger_time
         else:
             self.logger.warn("Could not update tick. No current event exists.")
 
@@ -38,7 +41,7 @@ class OfflineScheduler(BaseScheduler):
         raise AttributeError(f"Audio Events are not supported for class {self.__class__.__name__}.")
 
     # TODO: Subject to change with implementation from branch `corpus-builder`
-    def add_influence_event(self, player: Player, trigger_time: float, influence_path: str, label: AbstractLabel):
+    def add_influence_event(self, player: Player, trigger_time: float, influence_path: [str], label: AbstractLabel):
         self.queue.append(ScheduledInfluenceEvent(trigger_time, player, influence_path, label))
 
     ######################################################

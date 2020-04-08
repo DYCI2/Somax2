@@ -1,6 +1,6 @@
 import logging
 from copy import deepcopy
-from typing import ClassVar
+from typing import ClassVar, Optional
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.atom import Atom
@@ -24,11 +24,11 @@ from somaxlibrary.scheduler.ScheduledObject import ScheduledMidiObject, TriggerM
 
 class Player(ScheduledMidiObject, Parametric):
 
-    def __init__(self, name: str, target: Target, triggering_mode: TriggerMode):
+    def __init__(self, name: str, triggering_mode: TriggerMode, target: Optional[Target] = None):
         super(Player, self).__init__(triggering_mode)
         self.logger = logging.getLogger(__name__)
         self.name: str = name  # name of the player
-        self.target: Target = target
+        self.target: Optional[Target] = target
 
         self.streamviews: {str: StreamView} = dict()
         self.merge_actions: {str: AbstractMergeAction} = {}
