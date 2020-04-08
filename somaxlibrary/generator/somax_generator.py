@@ -3,25 +3,35 @@ import itertools
 import logging
 from abc import ABC, abstractmethod
 from typing import List
+import time
+from timeit import default_timer as timer
 
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.player import Player
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 from somaxlibrary.scheduler.offline_scheduler import OfflineScheduler
+from somaxlibrary.scheduler.optimized_offline_scheduler import OptimizedOfflineScheduler
 
 
 class SomaxGenerator(ABC):
-    def __init__(self, source_corpus: Corpus, influence_corpus: Corpus, mode: TriggerMode):
+    def __init__(self, source_corpus: Corpus, influence_corpus: Corpus, mode: TriggerMode = TriggerMode.AUTOMATIC,
+                 use_optimization: bool = True):
+        print(f"{time.time()}: TEMP Init start")
         self.logger = logging.getLogger(__name__)
         self.source_corpus: Corpus = source_corpus
         self.influence_corpus: Corpus = influence_corpus
         self.mode: TriggerMode = mode
-        self.player: Player = self._initialize()
-        self.scheduler: OfflineScheduler = OfflineScheduler()
+        self.player: Player = self._initialize(self.source_corpus)
+        if use_optimization:
+            self.scheduler: OptimizedOfflineScheduler = OptimizedOfflineScheduler(self.mode, self.player)
+        else:
+            self.scheduler: OfflineScheduler = OfflineScheduler()
+        self.logger.debug("Initialization completed")
+        print(f"{time.time()}: TEMP Init completed")
 
     @abstractmethod
-    def _initialize(self) -> Player:
+    def _initialize(self, source_corpus: Corpus) -> Player:
         # TODO: Structure, parameters. + Scheduler mode. Note that influence is tempo master
         pass
 
@@ -33,10 +43,13 @@ class SomaxGenerator(ABC):
 
         # ticks, times_ms and tempi all have length `len(corpus_events) + 1`
         ticks: List[float] = [start_tick]  # cumulative
-        times_ms: List[float] = [self.influence_corpus.events[0].absolute_onset]  # cumulative
+        # TODO: Subject to change with implementation from branch `corpus-builder` - not absolute time
+        times_ms: List[float] = [self.influence_corpus.events[0].absolute_time[0]]  # cumulative
         tempi: List[float] = [self.influence_corpus.events[0].tempo]
         corpus_events: List[CorpusEvent] = []
 
+        # t = timer()
+        # i = 0
         while ticks[-1] <= end_tick:
             try:
                 events: List[CorpusEvent] = self.scheduler.next()
@@ -49,19 +62,34 @@ class SomaxGenerator(ABC):
 
             except IndexError:
                 self.logger.info("Scheduler is empty. Terminating generation")
+                raise
+            # i += 1
+            # print(f"i={i}, Δt={timer() - t}")
+            # t = timer()
+        self.logger.debug("Iteration over Scheduler completed")
+        print(f"{time.time()}: TEMP Iteration over Sched completed")
 
         return self._build_new_corpus(corpus_events, ticks, times_ms, tempi)
 
     def _influence(self, influence_corpus: Corpus, start_tick: float, end_tick: float):
-        for e in itertools.takewhile(lambda l: start_tick <= l.onset <= end_tick - l.duration, influence_corpus.events):
-            for label in e.labels.values():
-                self.scheduler.add_influence_event(self.player, e.onset, [], label)
-            self.scheduler.add_tempo_event(e.onset, e.tempo)
-            if self.mode == TriggerMode.MANUAL:
-                self.scheduler.add_trigger_event(self.player, e.onset)
+        events: [CorpusEvent] = [e for e in influence_corpus.events if start_tick <= e.onset <= end_tick - e.duration]
+        if isinstance(self.scheduler, OptimizedOfflineScheduler):
+            self.scheduler.add_influences_optimized(events)
+        else:
+            for event in events:
+                for label in event.labels:
+                    self.scheduler.add_influence_event(self.player, event.onset, [], label)
+                self.scheduler.add_tempo_event(event.onset, event.tempo)
+                # Add one trigger for each influence
+                if self.mode == TriggerMode.MANUAL:
+                    self.scheduler.add_trigger_event(self.player, event.onset)
+        # Add a single trigger at the beginning
+        if self.mode == TriggerMode.AUTOMATIC:
+            self.scheduler.add_trigger_event(self.player, start_tick)
+        self.logger.debug("Influence completed")
+        print(f"{time.time()}: TEMP Influence completed")
 
-    @staticmethod
-    def _build_new_corpus(corpus_events: [CorpusEvent], ticks: List[float], times_ms: List[float],
+    def _build_new_corpus(self, corpus_events: [CorpusEvent], ticks: List[float], times_ms: List[float],
                           tempi: List[float]) -> Corpus:
         """ Notes: ticks, times_ms and tempi should all have length `len(corpus_events) + 1`"""
         corpus_events = copy.deepcopy(corpus_events)
@@ -72,6 +100,8 @@ class SomaxGenerator(ABC):
             event.tempo = tempi[i]
             # TODO: IMPORTANT Change note durations too!!!!
         # TODO: Subject to change with implementation from branch `corpus-builder` - should return a corpus
+        self.logger.debug(f"Constructed new corpus with {len(corpus_events)} events")
+        print(f"{time.time()}: TEMP Completed completed")
         return corpus_events
 
     @staticmethod

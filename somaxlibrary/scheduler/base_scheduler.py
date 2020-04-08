@@ -74,8 +74,8 @@ class BaseScheduler(ABC):
     ######################################################
 
     def _process_internal_events(self) -> List[ScheduledEvent]:
-        events: [ScheduledEvent] = [e for e in self.queue if e.trigger_time <= self.tick]
-        self.queue = [e for e in self.queue if e.trigger_time > self.tick]
+        events: [ScheduledEvent] = [e for e in self.queue if e.trigger_time <= self._tick]
+        self.queue = [e for e in self.queue if e.trigger_time > self._tick]
         for event in events:
             if isinstance(event, TempoEvent):
                 self._process_tempo_event(event)
@@ -95,7 +95,7 @@ class BaseScheduler(ABC):
         self.tempo = tempo_event.tempo
 
     def _process_trigger_event(self, trigger_event: AbstractTriggerEvent) -> None:
-        print("TEMP Trigger", trigger_event.target_time)
+        # print(f"Trigger: target time={trigger_event.target_time}, scheduler_time={self._tick}") TODO Remove
         player: Player = trigger_event.player
         try:
             event: CorpusEvent = player.new_event(trigger_event.target_time)
@@ -142,9 +142,9 @@ class BaseScheduler(ABC):
 
     def flush_held(self, player: Player):
         for note in player.held_notes:
-            self.queue.append(ScheduledMidiEvent(self.tick, player, note.pitch, 0, note.channel, None))
+            self.queue.append(ScheduledMidiEvent(self._tick, player, note.pitch, 0, note.channel, None))
         for note in player.artificially_held_notes:
-            self.queue.append(ScheduledMidiEvent(self.tick, player, note.pitch, 0, note.channel, None))
+            self.queue.append(ScheduledMidiEvent(self._tick, player, note.pitch, 0, note.channel, None))
         player.held_notes = []
         player.artificially_held_notes = []
 

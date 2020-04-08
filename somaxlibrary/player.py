@@ -1,6 +1,6 @@
 import logging
 from copy import deepcopy
-from typing import ClassVar, Optional
+from typing import ClassVar, Optional, List, Tuple, Type
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.atom import Atom
@@ -24,11 +24,11 @@ from somaxlibrary.scheduler.ScheduledObject import ScheduledMidiObject, TriggerM
 
 class Player(ScheduledMidiObject, Parametric):
 
-    def __init__(self, name: str, triggering_mode: TriggerMode, target: Optional[Target] = None):
+    def __init__(self, name: str, triggering_mode: TriggerMode, target: Target):
         super(Player, self).__init__(triggering_mode)
         self.logger = logging.getLogger(__name__)
         self.name: str = name  # name of the player
-        self.target: Optional[Target] = target
+        self.target: Target = target
 
         self.streamviews: {str: StreamView} = dict()
         self.merge_actions: {str: AbstractMergeAction} = {}
@@ -51,7 +51,7 @@ class Player(ScheduledMidiObject, Parametric):
     # CREATION/DELETION STREAMVIEWS/ATOMS
     ######################################################
 
-    def create_streamview(self, path: [str], weight: float, merge_actions: (ClassVar, ...)):
+    def create_streamview(self, path: List[str], weight: float, merge_actions: Tuple[Type[AbstractMergeAction], ...]):
         """creates streamview at target path"""
         self.logger.debug("[create_streamview] Creating streamview {} in player {} with merge_actions {}..."
                           .format(path, self.name, merge_actions))
@@ -65,9 +65,9 @@ class Player(ScheduledMidiObject, Parametric):
             self.streamviews[streamview].create_streamview(path, weight, merge_actions)
         self._parse_parameters()
 
-    def create_atom(self, path: [str], weight: float, label_type: ClassVar[AbstractLabel],
-                    activity_type: ClassVar[AbstractActivityPattern], memory_type: ClassVar[AbstractMemorySpace],
-                    self_influenced: bool, transforms: [(ClassVar[AbstractTransform], ...)]):
+    def create_atom(self, path: List[str], weight: float, label_type: Type[AbstractLabel],
+                    activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
+                    self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
         """raises: InvalidPath, KeyError, DuplicateKeyError"""
         self.logger.debug(f"[create_atom] Attempting to create atom at {path}...")
         streamview: str = path.pop(0)
@@ -173,11 +173,14 @@ class Player(ScheduledMidiObject, Parametric):
         atom: Atom = self._get_atom(path)
         atom.set_activity_pattern(activity_pattern_class, self.corpus)
 
-    def read_corpus(self, filepath: str):
-        self.corpus = Corpus(filepath)
+    def load_corpus(self, corpus: Corpus):
+        self.corpus = corpus
         for streamview in self.streamviews.values():
             streamview.read(self.corpus)
         self.target.send("corpus", [self.corpus.name, str(self.corpus.content_type), self.corpus.length()])
+
+    def read_corpus(self, filepath: str):
+        self.load_corpus(Corpus(filepath))
 
     def add_transform(self, path: [str], transform: (AbstractTransform, ...)) -> None:
         """ raises TransformError, KeyError"""

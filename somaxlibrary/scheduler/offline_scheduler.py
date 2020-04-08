@@ -12,20 +12,21 @@ from somaxlibrary.scheduler.base_scheduler import BaseScheduler
 class OfflineScheduler(BaseScheduler):
     def __init__(self, tempo: float = 120.0):
         super().__init__(tempo, trigger_pretime=0)
-        self.previous_event: Optional[ScheduledEvent] = None
+        # self.previous_event: Optional[ScheduledEvent] = None
 
     def next(self) -> List[CorpusEvent]:
         """Raises: IndexError if queue is empty"""
         self._update_tick()
         events: List[ScheduledEvent] = self._process_internal_events()
-        self.previous_event = events[0]
+        # self.previous_event = events[0]
         return [e.corpus_event for e in events if isinstance(e, ScheduledCorpusEvent)]
 
     def _update_tick(self) -> None:
-        if self.previous_event:
-            self._tick = self.previous_event.trigger_time
-        else:
-            self.logger.warn("Could not update tick. No current event exists.")
+        self._tick = min([e.trigger_time for e in self.queue])
+        # if self.previous_event:
+        #     self._tick = self.previous_event.trigger_time
+        # else:
+        #     self.logger.warn("Could not update tick. No current event exists.")
 
     ######################################################
     # ADD (INTERNAL AND EXTERNAL)
