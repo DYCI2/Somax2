@@ -2,7 +2,7 @@ import logging
 from typing import ClassVar, Any, Union, List
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern, ClassicActivityPattern
-from somaxlibrary.labels import AbstractLabel, MelodicLabel
+from somaxlibrary.legacy_labels import AbstractLegacyLabel, MelodicLegacyLabel
 from somaxlibrary.memory_spaces import AbstractMemorySpace, NGramMemorySpace
 from somaxlibrary.merge_actions import AbstractMergeAction, DistanceMergeAction
 from somaxlibrary.transforms import AbstractTransform, NoTransform
@@ -13,7 +13,7 @@ class IOParser:
     DEFAULT_IP = "127.0.0.1"
     DEFAULT_ACTIVITY_TYPE: ClassVar = ClassicActivityPattern
     DEFAULT_MERGE_ACTIONS: (ClassVar, ...) = (DistanceMergeAction,)  # Only for StreamView!!
-    DEFAULT_LABEL_TYPE: ClassVar = MelodicLabel
+    DEFAULT_LABEL_TYPE: ClassVar = MelodicLegacyLabel
     DEFAULT_TRANSFORMS: [(ClassVar, ...)] = [(NoTransform(),)]  # objects, not classes
     DEFAULT_TRIGGER = TriggerMode.AUTOMATIC
     DEFAULT_MEMORY_TYPE: ClassVar = NGramMemorySpace
@@ -51,14 +51,14 @@ class IOParser:
     def parse_activity_type(self, activity_type: str) -> ClassVar[AbstractActivityPattern]:
         return self._parse_single(activity_type, AbstractActivityPattern, self.DEFAULT_ACTIVITY_TYPE)
 
-    def parse_label_type(self, label_type: str) -> ClassVar[AbstractLabel]:
-        return self._parse_single(label_type, AbstractLabel, self.DEFAULT_LABEL_TYPE)
+    def parse_label_type(self, label_type: str) -> ClassVar[AbstractLegacyLabel]:
+        return self._parse_single(label_type, AbstractLegacyLabel, self.DEFAULT_LABEL_TYPE)
 
     def parse_memspace_type(self, memspace: str) -> ClassVar[AbstractMemorySpace]:
         return self._parse_single(memspace, AbstractMemorySpace, self.DEFAULT_MEMORY_TYPE)
 
     @staticmethod
-    def parse_label(label: Any) -> AbstractLabel:
+    def parse_label(label: Any) -> AbstractLegacyLabel:
         raise IOError
 
     def parse_trigger_mode(self, trigger_mode: str) -> TriggerMode:

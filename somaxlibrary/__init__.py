@@ -9,7 +9,7 @@ import somaxlibrary.legacy.gen_corpus
 import somaxlibrary.improvisation_memory
 import somaxlibrary.peak_event
 import somaxlibrary.io_parser
-import somaxlibrary.labels
+import somaxlibrary.legacy_labels
 import somaxlibrary.memory_spaces
 import somaxlibrary.merge_actions
 import somaxlibrary.osc_log_forwarder
@@ -17,9 +17,7 @@ import somaxlibrary.parameter
 import somaxlibrary.peaks
 import somaxlibrary.peak_selector
 import somaxlibrary.player
-import somaxlibrary.read_midi
+import somaxlibrary.legacy.midi.read_midi
 import somaxlibrary.streamview
 import somaxlibrary.target
-import somaxlibrary.tools
 import somaxlibrary.transforms
-import somaxlibrary.virfun

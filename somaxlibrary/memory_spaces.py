@@ -10,7 +10,7 @@ from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import InvalidLabelInput, TransformError
 from somaxlibrary.peak_event import PeakEvent, ClassicPeakEvent
-from somaxlibrary.labels import AbstractLabel
+from somaxlibrary.legacy_labels import AbstractLegacyLabel
 from somaxlibrary.parameter import Parameter, ParamWithSetter
 from somaxlibrary.parameter import Parametric
 from somaxlibrary.transforms import AbstractTransform
@@ -20,13 +20,13 @@ from somaxlibrary.transforms import AbstractTransform
 class AbstractMemorySpace(Parametric):
     """ MemorySpaces determine how events are matched to labels """
 
-    def __init__(self, corpus: Corpus, label_type: ClassVar[AbstractLabel],
+    def __init__(self, corpus: Corpus, label_type: ClassVar[AbstractLegacyLabel],
                  transforms: [(ClassVar[AbstractTransform], ...)], **_kwargs):
         """ Note: kwargs can be used if additional information is need to construct the data structure."""
         super(AbstractMemorySpace, self).__init__()
         self.logger = logging.getLogger(__name__)
         self.corpus: Corpus = corpus
-        self.label_type: ClassVar[AbstractLabel] = label_type
+        self.label_type: ClassVar[AbstractLegacyLabel] = label_type
         # TODO: Should also check that they work for this label
         self.transforms: [(AbstractTransform, ...)] = []
         self.add_transforms(transforms)
@@ -36,7 +36,7 @@ class AbstractMemorySpace(Parametric):
         raise NotImplementedError("AbstractMemorySpace.read is abstract.")
 
     @abstractmethod
-    def influence(self, label: AbstractLabel, time: float, **_kwargs) -> [PeakEvent]:
+    def influence(self, label: AbstractLegacyLabel, time: float, **_kwargs) -> [PeakEvent]:
         raise NotImplementedError("AbstractMemorySpace.influence is abstract.")
 
     @staticmethod
@@ -50,7 +50,7 @@ class AbstractMemorySpace(Parametric):
     def clear(self) -> None:
         """ Reset the playing state of the Memory Space without removing its corpus memory. """
 
-    def set_label(self, label: ClassVar[AbstractLabel]):
+    def set_label(self, label: ClassVar[AbstractLegacyLabel]):
         self.clear()
         self.label_type = label
         if self.corpus:
@@ -80,7 +80,7 @@ class AbstractMemorySpace(Parametric):
 
 
 class NGramMemorySpace(AbstractMemorySpace):
-    def __init__(self, corpus: Corpus, label_type: ClassVar[AbstractLabel],
+    def __init__(self, corpus: Corpus, label_type: ClassVar[AbstractLegacyLabel],
                  transforms: [(ClassVar[AbstractTransform], ...)], history_len: int = 3, **_kwargs):
         super(NGramMemorySpace, self).__init__(corpus, label_type, transforms)
         self.logger.debug(f"[__init__] Initializing NGramMemorySpace with corpus {corpus}, "
@@ -89,7 +89,7 @@ class NGramMemorySpace(AbstractMemorySpace):
         self._ngram_size: Parameter = ParamWithSetter(history_len, 1, None, 'int',
                                                       "Number of events to hard-match. (TODO)",
                                                       self.set_ngram_size)  # TODO
-        self.influence_history: deque[AbstractLabel] = deque([], history_len)
+        self.influence_history: deque[AbstractLegacyLabel] = deque([], history_len)
 
         self.corpus: Corpus = None
         if corpus:
@@ -105,7 +105,7 @@ class NGramMemorySpace(AbstractMemorySpace):
         self.structured_data = {}
         labels: deque = deque([], self._ngram_size.value)
         for event in self.corpus.events:
-            label: AbstractLabel = event.label(self.label_type)
+            label: AbstractLegacyLabel = event.label(self.label_type)
             labels.append(label.label)
             if len(labels) < self._ngram_size.value:
                 continue
@@ -117,7 +117,7 @@ class NGramMemorySpace(AbstractMemorySpace):
                 else:
                     self.structured_data[key] = [value]
 
-    def influence(self, label: AbstractLabel, time: float, **_kwargs) -> [PeakEvent]:
+    def influence(self, label: AbstractLegacyLabel, time: float, **_kwargs) -> [PeakEvent]:
         """ Raises: InvalidLabelInput"""
         if not type(label) == self.label_type:  # Rejects subclasses
             raise InvalidLabelInput(f"An atom with type {self.label_type} can't handle labels of type {type(label)}.")
@@ -130,7 +130,7 @@ class NGramMemorySpace(AbstractMemorySpace):
             matches: [PeakEvent] = []
             for transform_tuple in self.transforms:
                 # Inverse transform_tuple of input (equivalent to transform_tuple of memory)
-                transformed_labels: [AbstractLabel] = list(copy(self.influence_history))
+                transformed_labels: [AbstractLegacyLabel] = list(copy(self.influence_history))
                 for transform in reversed(transform_tuple):
                     transformed_labels = [transform.inverse(l) for l in transformed_labels]
                 key: Tuple[int, ...] = tuple(l.label for l in transformed_labels)
@@ -146,7 +146,7 @@ class NGramMemorySpace(AbstractMemorySpace):
 
     def set_ngram_size(self, new_size: int):
         self._ngram_size.value = new_size
-        self.influence_history: deque[AbstractLabel] = deque([], new_size)
+        self.influence_history: deque[AbstractLegacyLabel] = deque([], new_size)
         if self.corpus:
             self.read(self.corpus)
 

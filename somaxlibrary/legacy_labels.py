@@ -10,7 +10,7 @@ from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import InvalidLabelInput
 
 
-class AbstractLabel(ABC):
+class AbstractLegacyLabel(ABC):
 
     def __init__(self, label: int):
         """
@@ -34,7 +34,7 @@ class AbstractLabel(ABC):
 
     @classmethod
     @abstractmethod
-    def classify(cls, data: Union[CorpusEvent, Any], **kwargs) -> 'AbstractLabel':
+    def classify(cls, data: Union[CorpusEvent, Any], **kwargs) -> 'AbstractLegacyLabel':
         """ # TODO
         Raises
         ------
@@ -47,12 +47,12 @@ class AbstractLabel(ABC):
         raise NotImplementedError("AbstractLabel.classify is abstract.")
 
     @classmethod
-    def classify_as(cls, influence_keyword: str, data: Any, **kwargs) -> ['AbstractLabel']:
+    def classify_as(cls, influence_keyword: str, data: Any, **kwargs) -> ['AbstractLegacyLabel']:
         """ Raises: InvalidLabelInput """
         # TODO: [OPTIMIZATION]: ev. refactor this to own class to avoid calling `classes` continuously (if slow)
-        classes: [ClassVar] = AbstractLabel.classes().values()
-        labels: ['AbstractLabel'] = []
-        for c in classes:  # type: ClassVar[AbstractLabel]
+        classes: [ClassVar] = AbstractLegacyLabel.classes().values()
+        labels: ['AbstractLegacyLabel'] = []
+        for c in classes:  # type: ClassVar[AbstractLegacyLabel]
             if influence_keyword in c._influence_keywords():
                 labels.append(c.classify(data, **kwargs))
         if labels:
@@ -68,7 +68,7 @@ class AbstractLabel(ABC):
                                            member) and member.__module__ == __name__))
 
 
-class MelodicLabel(AbstractLabel):
+class MelodicLegacyLabel(AbstractLegacyLabel):
     MAX_LABEL = 140
 
     def __repr__(self):
@@ -79,7 +79,7 @@ class MelodicLabel(AbstractLabel):
         return ["pitch"]
 
     @classmethod
-    def classify(cls, data: Union[int, CorpusEvent], **_kwargs) -> 'MelodicLabel':
+    def classify(cls, data: Union[int, CorpusEvent], **_kwargs) -> 'MelodicLegacyLabel':
         if isinstance(data, CorpusEvent):
             return cls._label_from_event(data)
         elif isinstance(data, int):
@@ -88,12 +88,12 @@ class MelodicLabel(AbstractLabel):
             raise InvalidLabelInput("Melodic Label data could not be classified due to invalid type input.")
 
     @classmethod
-    def _label_from_event(cls, event: CorpusEvent, mod12: bool = False) -> 'MelodicLabel':
+    def _label_from_event(cls, event: CorpusEvent, mod12: bool = False) -> 'MelodicLegacyLabel':
         return cls._label_from_pitch(event.pitch, mod12)
 
     @classmethod
-    def _label_from_pitch(cls, pitch: int, mod12: bool = False) -> 'MelodicLabel':
-        if pitch < 0 or pitch > MelodicLabel.MAX_LABEL:
+    def _label_from_pitch(cls, pitch: int, mod12: bool = False) -> 'MelodicLegacyLabel':
+        if pitch < 0 or pitch > MelodicLegacyLabel.MAX_LABEL:
             raise InvalidLabelInput("Melodic Label data could not be classified due to invalid range.")
         if mod12:
             return cls(pitch % 12)
@@ -101,7 +101,7 @@ class MelodicLabel(AbstractLabel):
             return cls(pitch)
 
 
-class PitchClassLabel(MelodicLabel):
+class PitchClassLabel(MelodicLegacyLabel):
     def __repr__(self):
         return f"PitchClassLabel(label={self.label})"
 
@@ -115,7 +115,7 @@ class PitchClassLabel(MelodicLabel):
             raise InvalidLabelInput("Melodic Label data could not be classified due to invalid type input.")
 
 
-class HarmonicLabel(AbstractLabel):
+class HarmonicLegacyLabel(AbstractLegacyLabel):
     SOM_DATA = np.loadtxt(os.path.join(os.path.dirname(__file__), '../tables/misc_hsom'), dtype=float, delimiter=",")
     SOM_CLASSES = np.loadtxt(os.path.join(os.path.dirname(__file__), '../tables/misc_hsom_c'), dtype=int, delimiter=",")
     NODE_SPECIFICITY = 2.0
@@ -128,22 +128,22 @@ class HarmonicLabel(AbstractLabel):
         return ["chroma"]
 
     @classmethod
-    def classify(cls, data: Union[CorpusEvent, List[float], int], **kwargs) -> 'HarmonicLabel':
+    def classify(cls, data: Union[CorpusEvent, List[float], int], **kwargs) -> 'HarmonicLegacyLabel':
         if isinstance(data, CorpusEvent):
-            return HarmonicLabel._label_from_event(data)
+            return HarmonicLegacyLabel._label_from_event(data)
         elif type(data) is list or isinstance(data, np.ndarray):
-            return HarmonicLabel._label_from_chroma(np.array(data))
+            return HarmonicLegacyLabel._label_from_chroma(np.array(data))
         elif isinstance(data, int):
-            return HarmonicLabel._label_from_pitch(data)
+            return HarmonicLegacyLabel._label_from_pitch(data)
         else:
             raise InvalidLabelInput(f"Harmonic Label data could not be classified due to incorrect type.")
 
     @classmethod
-    def _label_from_event(cls, event: CorpusEvent) -> 'HarmonicLabel':
-        return HarmonicLabel._label_from_chroma(event.chroma)
+    def _label_from_event(cls, event: CorpusEvent) -> 'HarmonicLegacyLabel':
+        return HarmonicLegacyLabel._label_from_chroma(event.chroma)
 
     @classmethod
-    def _label_from_chroma(cls, chroma: np.array) -> 'HarmonicLabel':
+    def _label_from_chroma(cls, chroma: np.array) -> 'HarmonicLegacyLabel':
         if len(chroma) != 12:
             raise InvalidLabelInput(f"Harmonic Label data could not be classified from content with size {len(chroma)}."
                                     f" Required size is 12.")
@@ -151,15 +151,15 @@ class HarmonicLabel(AbstractLabel):
         max_value = np.max(chroma)
         if max_value > 0:
             chroma /= max_value
-        clust_vec = np.exp(-HarmonicLabel.NODE_SPECIFICITY
-                           * np.sqrt(np.sum(np.power(chroma - HarmonicLabel.SOM_DATA, 2), axis=1)))
+        clust_vec = np.exp(-HarmonicLegacyLabel.NODE_SPECIFICITY
+                           * np.sqrt(np.sum(np.power(chroma - HarmonicLegacyLabel.SOM_DATA, 2), axis=1)))
         # pick corresponding SOM class from chroma information
-        label = HarmonicLabel.SOM_CLASSES[np.argmax(clust_vec)]
+        label = HarmonicLegacyLabel.SOM_CLASSES[np.argmax(clust_vec)]
         return cls(label)
 
     @classmethod
-    def _label_from_pitch(cls, pitch: int) -> 'HarmonicLabel':
+    def _label_from_pitch(cls, pitch: int) -> 'HarmonicLegacyLabel':
         pitch_class: int = pitch % 12
         chroma = np.zeros(12, dtype='float32')
         chroma[pitch_class] = 1.0
-        return HarmonicLabel._label_from_chroma(chroma)
+        return HarmonicLegacyLabel._label_from_chroma(chroma)

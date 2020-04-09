@@ -6,7 +6,7 @@ from somaxlibrary.atom import Atom
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import DuplicateKeyError
-from somaxlibrary.labels import AbstractLabel
+from somaxlibrary.legacy_labels import AbstractLegacyLabel
 from somaxlibrary.memory_spaces import NGramMemorySpace
 from somaxlibrary.merge_actions import AbstractMergeAction
 from somaxlibrary.parameter import Parameter
@@ -61,7 +61,7 @@ class StreamView(Parametric):
         else:
             return self.atoms[target_name]
 
-    def create_atom(self, path: [str], weight: float, label_type: ClassVar[AbstractLabel],
+    def create_atom(self, path: [str], weight: float, label_type: ClassVar[AbstractLegacyLabel],
                     activity_type: ClassVar[AbstractActivityPattern], memory_type: ClassVar[NGramMemorySpace],
                     corpus: Corpus, self_influenced: bool, transforms: [(ClassVar[AbstractTransform], ...)]):
         """Raises: KeyError, InvalidPath, DuplicateKeyError"""

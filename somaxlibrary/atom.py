@@ -4,14 +4,14 @@ from typing import ClassVar, Dict, Union
 from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.peak_event import PeakEvent
-from somaxlibrary.labels import AbstractLabel
+from somaxlibrary.legacy_labels import AbstractLegacyLabel
 from somaxlibrary.memory_spaces import AbstractMemorySpace
 from somaxlibrary.parameter import Parametric, Parameter
 from somaxlibrary.transforms import AbstractTransform
 
 
 class Atom(Parametric):
-    def __init__(self, name: str, weight: float, label_type: ClassVar[AbstractLabel],
+    def __init__(self, name: str, weight: float, label_type: ClassVar[AbstractLegacyLabel],
                  activity_type: ClassVar[AbstractActivityPattern], memory_type: ClassVar[AbstractMemorySpace],
                  corpus: Corpus, self_influenced: bool, transforms: [(ClassVar[AbstractTransform], ...)]):
         super().__init__()
@@ -50,14 +50,14 @@ class Atom(Parametric):
         self.weight = weight
 
     # influences the memory with incoming data
-    def influence(self, label: AbstractLabel, time: float, **kwargs):
+    def influence(self, label: AbstractLegacyLabel, time: float, **kwargs):
         """ Raises: InvalidLabelInput"""
         matched_events: [PeakEvent] = self.memory_space.influence(label, time, **kwargs)
         if matched_events:
             self.update_peaks(time)
             self.activity_pattern.insert(matched_events)  # we insert the events into the activity profile
 
-    def set_label(self, label: ClassVar[AbstractLabel]):
+    def set_label(self, label: ClassVar[AbstractLegacyLabel]):
         self.memory_space.set_label(label)
 
     def set_activity_pattern(self, activity_pattern_class: ClassVar[AbstractActivityPattern], corpus: Corpus):

@@ -15,7 +15,7 @@ from somaxlibrary.corpus_builder import CorpusBuilder
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import InvalidPath, InvalidLabelInput, DuplicateKeyError, InvalidJsonFormat, ParameterError
 from somaxlibrary.io_parser import IOParser
-from somaxlibrary.labels import AbstractLabel
+from somaxlibrary.legacy_labels import AbstractLegacyLabel
 from somaxlibrary.memory_spaces import AbstractMemorySpace
 from somaxlibrary.merge_actions import AbstractMergeAction
 from somaxlibrary.osc_log_forwarder import OscLogForwarder
@@ -133,7 +133,7 @@ class SomaxServer(Caller):
                     transforms: (str, ...) = (""), transform_parse_mode=""):
         self.logger.debug(f"[create_atom] called for player {player} with path {path}.")
         path_and_name: [str] = IOParser.parse_streamview_atom_path(path)
-        label: ClassVar[AbstractLabel] = self.io_parser.parse_label_type(label)
+        label: ClassVar[AbstractLegacyLabel] = self.io_parser.parse_label_type(label)
         activity_type: ClassVar[AbstractActivityPattern] = self.io_parser.parse_activity_type(activity_type)
         memory_type: ClassVar[AbstractMemorySpace] = self.io_parser.parse_memspace_type(memory_type)
 
@@ -177,7 +177,7 @@ class SomaxServer(Caller):
         if not self.scheduler.running:
             return
         try:
-            labels: [AbstractLabel] = AbstractLabel.classify_as(label_keyword, value, **kwargs)
+            labels: [AbstractLegacyLabel] = AbstractLegacyLabel.classify_as(label_keyword, value, **kwargs)
         except InvalidLabelInput as e:
             self.logger.error(str(e) + "No action performed.")
             return
@@ -221,7 +221,7 @@ class SomaxServer(Caller):
     def set_label(self, player: str, path: str, label: str == ""):
         # TODO: Will (probably) return default if not found. Should fail instead
         self.logger.debug(f"[set_label] called for player '{player}' with path '{path}' and new label '{label}'.")
-        label_class: ClassVar[AbstractLabel] = self.io_parser.parse_label_type(label)
+        label_class: ClassVar[AbstractLegacyLabel] = self.io_parser.parse_label_type(label)
         path_as_list: [str] = self.io_parser.parse_streamview_atom_path(path)
         try:
             self.players[player].set_label(path_as_list, label_class)

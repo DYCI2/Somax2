@@ -1,9 +1,8 @@
 from numpy import array, exp, where, log2, floor, ceil, zeros, log, arange, round, maximum, ones_like, average, argmax, \
-    power, dot, transpose, insert, concatenate
-from scipy import io
-import os, json, bisect, itertools, operator
+    power, dot, insert, concatenate
+import os, bisect, itertools, operator
 from somaxlibrary import virfun
-import somaxlibrary.read_midi as midi
+import somaxlibrary.legacy.midi.read_midi as midi
 
 
 

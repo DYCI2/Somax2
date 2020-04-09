@@ -9,7 +9,7 @@ from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import DuplicateKeyError, TransformError
 from somaxlibrary.exceptions import InvalidPath, InvalidCorpus, InvalidConfiguration, InvalidLabelInput
 from somaxlibrary.improvisation_memory import ImprovisationMemory
-from somaxlibrary.labels import AbstractLabel
+from somaxlibrary.legacy_labels import AbstractLegacyLabel
 from somaxlibrary.memory_spaces import AbstractMemorySpace
 from somaxlibrary.merge_actions import DistanceMergeAction, PhaseModulationMergeAction, AbstractMergeAction, \
     NextStateMergeAction
@@ -65,7 +65,7 @@ class Player(ScheduledMidiObject, Parametric):
             self.streamviews[streamview].create_streamview(path, weight, merge_actions)
         self._parse_parameters()
 
-    def create_atom(self, path: [str], weight: float, label_type: ClassVar[AbstractLabel],
+    def create_atom(self, path: [str], weight: float, label_type: ClassVar[AbstractLegacyLabel],
                     activity_type: ClassVar[AbstractActivityPattern], memory_type: ClassVar[AbstractMemorySpace],
                     self_influenced: bool, transforms: [(ClassVar[AbstractTransform], ...)]):
         """raises: InvalidPath, KeyError, DuplicateKeyError"""
@@ -122,7 +122,7 @@ class Player(ScheduledMidiObject, Parametric):
         self.logger.debug(f"[new_event] Player {self.name} successfully created new event.")
         return event
 
-    def influence(self, path: [str], label: AbstractLabel, time: float, **kwargs) -> None:
+    def influence(self, path: [str], label: AbstractLegacyLabel, time: float, **kwargs) -> None:
         """ Raises: InvalidLabelInput, KeyError"""
         if not path:
             for atom in self._all_atoms():
@@ -165,7 +165,7 @@ class Player(ScheduledMidiObject, Parametric):
             raise TypeError("Critical Implementation error in transforms. TODO")
         self.transforms[transform_hash] = transform
 
-    def set_label(self, path: [str], label_class: ClassVar[AbstractLabel]):
+    def set_label(self, path: [str], label_class: ClassVar[AbstractLegacyLabel]):
         atom: Atom = self._get_atom(path)
         atom.set_label(label_class)
 
@@ -230,7 +230,7 @@ class Player(ScheduledMidiObject, Parametric):
 
     def _influence_self(self, event: CorpusEvent, time: float) -> None:
         atoms: [Atom] = self._self_atoms()
-        labels: [AbstractLabel] = event.labels
+        labels: [AbstractLegacyLabel] = event.labels
         for atom in atoms:
             for label in labels:
                 try:
