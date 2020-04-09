@@ -5,6 +5,7 @@ from somaxlibrary.classification.classifier import PitchClassifier
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_builder.event_parameters import TopNote, VirtualFundamental
 from somaxlibrary.corpus_event import CorpusEvent
+from somaxlibrary.exceptions import InvalidLabelInput
 from somaxlibrary.influence import AbstractInfluence, KeywordInfluence, CorpusInfluence
 from somaxlibrary.new_label import IntNewLabel
 
@@ -28,6 +29,8 @@ class BasicPitchClassifier(PitchClassifier, ABC):
         elif isinstance(influence, CorpusInfluence):
             # TODO: Handle or comment on KeyError, which technically should never occur
             return self._label_from_corpus_event(influence.corpus_event)
+        else:
+            raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
     @abstractmethod
     def _label_from_corpus_event(self, event: CorpusEvent) -> IntNewLabel:

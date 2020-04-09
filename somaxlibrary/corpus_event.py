@@ -3,8 +3,8 @@ from typing import Optional, List, Dict, Type
 
 import pandas as pd
 
-from event_parameters.event_parameter import AbstractEventParameter
-from matrix_keys import MatrixKeys as Keys
+from somaxlibrary.corpus_builder.event_parameters.event_parameter import AbstractEventParameter
+from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
 
 """ Keys correspond to parent module names, ex. "pitch" or "chroma". """
 EventParameterDict = Dict[str, List[AbstractEventParameter]]

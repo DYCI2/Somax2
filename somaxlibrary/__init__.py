@@ -5,7 +5,6 @@ import somaxlibrary.corpus
 import somaxlibrary.corpus_builder
 import somaxlibrary.corpus_event
 import somaxlibrary.exceptions
-import somaxlibrary.legacy.gen_corpus
 import somaxlibrary.improvisation_memory
 import somaxlibrary.peak_event
 import somaxlibrary.io_parser
@@ -17,7 +16,6 @@ import somaxlibrary.parameter
 import somaxlibrary.peaks
 import somaxlibrary.peak_selector
 import somaxlibrary.player
-import somaxlibrary.legacy.midi.read_midi
 import somaxlibrary.streamview
 import somaxlibrary.target
 import somaxlibrary.transforms

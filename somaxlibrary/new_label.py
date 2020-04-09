@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class AbstractNewLabel(ABC):
     @abstractmethod
     def __hash__(self):
@@ -11,4 +12,4 @@ class IntNewLabel(AbstractNewLabel):
         self.label = label
 
     def __hash__(self):
-        pass
+        return hash(self.label)

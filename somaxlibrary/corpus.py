@@ -4,12 +4,12 @@ from typing import List, Optional, Type
 import matplotlib.pyplot as plt
 import numpy as np
 
-from chromagram import Chromagram
-from corpus_event import CorpusEvent
-from event_parameters import AbstractEventParameter
-from matrix_keys import MatrixKeys as Keys
-from note_matrix import NoteMatrix
-from spectrogram import Spectrogram
+from somaxlibrary.corpus_builder.chromagram import Chromagram
+from somaxlibrary.corpus_event import CorpusEvent
+from somaxlibrary.corpus_builder.event_parameters import AbstractEventParameter
+from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
+from somaxlibrary.corpus_builder.note_matrix import NoteMatrix
+from somaxlibrary.corpus_builder.spectrogram import Spectrogram
 
 
 class ContentType(Enum):
