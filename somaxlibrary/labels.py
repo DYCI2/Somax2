@@ -148,9 +148,9 @@ class HarmonicLabel(AbstractLabel):
             raise InvalidLabelInput(f"Harmonic Label data could not be classified from content with size {len(chroma)}."
                                     f" Required size is 12.")
         chroma = np.array(chroma, dtype='float32')
-        max_value = np.max(chroma)
-        if max_value > 0:
-            chroma /= max_value
+        # max_value = np.max(chroma)
+        # if max_value > 0:
+        #     chroma /= max_value
         clust_vec = np.exp(-HarmonicLabel.NODE_SPECIFICITY
                            * np.sqrt(np.sum(np.power(chroma - HarmonicLabel.SOM_DATA, 2), axis=1)))
         # pick corresponding SOM class from chroma information
