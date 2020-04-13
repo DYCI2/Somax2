@@ -1,11 +1,11 @@
 import numpy as np
 
 from ...chromagram import Chromagram
-from ...event_parameters import AbstractEventParameter
+from ...event_parameters import AbstractTrait
 from ...spectrogram import Spectrogram
 
 
-class OnsetChroma(AbstractEventParameter):
+class OnsetChroma(AbstractTrait):
     def __init__(self, foreground: np.ndarray, background: np.ndarray):
         self.foreground: np.ndarray = foreground
         self.background: np.ndarray = background

@@ -3,7 +3,7 @@ from typing import List, Optional
 
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.influence import AbstractInfluence, InfluenceKeyword
-from somaxlibrary.new_label import AbstractNewLabel
+from somaxlibrary.label import AbstractLabel
 
 
 class AbstractClassifier(ABC):
@@ -15,11 +15,11 @@ class AbstractClassifier(ABC):
         pass
 
     @abstractmethod
-    def classify_corpus(self, corpus: Corpus) -> List[AbstractNewLabel]:
+    def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
         pass
 
     @abstractmethod
-    def classify_influence(self, influence: AbstractInfluence) -> AbstractNewLabel:
+    def classify_influence(self, influence: AbstractInfluence) -> AbstractLabel:
         pass
 
     @abstractmethod

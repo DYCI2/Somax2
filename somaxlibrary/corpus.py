@@ -6,7 +6,7 @@ import numpy as np
 
 from somaxlibrary.corpus_builder.chromagram import Chromagram
 from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.corpus_builder.event_parameters import AbstractEventParameter
+from somaxlibrary.corpus_builder.event_parameters import AbstractTrait
 from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somaxlibrary.corpus_builder.note_matrix import NoteMatrix
 from somaxlibrary.corpus_builder.spectrogram import Spectrogram
@@ -40,11 +40,11 @@ class Corpus:
     def export(self, filepath: str):
         raise NotImplementedError("Not implemented yet")  # TODO
 
-    def analyze(self, event_parameter: Type[AbstractEventParameter], **kwargs):
+    def analyze(self, event_parameter: Type[AbstractTrait], **kwargs):
         for event in self.events:
-            parameter: AbstractEventParameter = event_parameter.analyze(event, self.fg_spectrogram, self.bg_spectrogram,
-                                                                        self.fg_chromagram, self.bg_chromagram,
-                                                                        **kwargs)
+            parameter: AbstractTrait = event_parameter.analyze(event, self.fg_spectrogram, self.bg_spectrogram,
+                                                               self.fg_chromagram, self.bg_chromagram,
+                                                               **kwargs)
             event.add_parameter(parameter)
 
     def length(self) -> int:

@@ -1,25 +1,25 @@
 from abc import ABC, abstractmethod
 
 
-class AbstractNewLabel(ABC):
+class AbstractLabel(ABC):
     @abstractmethod
     def __hash__(self):
         pass
 
     @abstractmethod
-    def __eq__(self, other: 'AbstractNewLabel'):
+    def __eq__(self, other: 'AbstractLabel'):
         """Notes: Strictly not needed in current implementation but should always be implemented when __hash__ is"""
         pass
 
 
-class IntNewLabel(AbstractNewLabel):
+class IntLabel(AbstractLabel):
     def __init__(self, label: int):
         self.label = label
 
     def __hash__(self):
         return hash(self.label)
 
-    def __eq__(self, other: 'AbstractNewLabel'):
-        return isinstance(other, IntNewLabel) and self.label == other.label
+    def __eq__(self, other: 'AbstractLabel'):
+        return isinstance(other, IntLabel) and self.label == other.label
 
 

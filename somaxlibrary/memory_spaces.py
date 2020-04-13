@@ -9,7 +9,7 @@ from typing import Tuple, Dict, Union, Optional, List, Type
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import TransformError
-from somaxlibrary.new_label import AbstractNewLabel
+from somaxlibrary.label import AbstractLabel
 from somaxlibrary.parameter import Parameter, ParamWithSetter
 from somaxlibrary.parameter import Parametric
 from somaxlibrary.peak_event import PeakEvent, ClassicPeakEvent
@@ -21,7 +21,7 @@ class AbstractMemorySpace(Parametric):
     """ MemorySpaces determine how events are matched to labels """
 
     def __init__(self, transforms: List[Tuple[Type[AbstractTransform], ...]], corpus: Optional[Corpus] = None,
-                 labels: Optional[List[AbstractNewLabel]] = None, **_kwargs):
+                 labels: Optional[List[AbstractLabel]] = None, **_kwargs):
         """ Note: kwargs can be used if additional information is need to construct the data structure.
             Note: labels are not classified in default constructor as additional parameters might need init before."""
         super(AbstractMemorySpace, self).__init__()
@@ -30,14 +30,14 @@ class AbstractMemorySpace(Parametric):
         self.transforms: [(AbstractTransform, ...)] = []
         self.add_transforms(transforms)
         self._corpus: Optional[Corpus] = corpus
-        self._labels: Optional[List[AbstractNewLabel]] = labels
+        self._labels: Optional[List[AbstractLabel]] = labels
 
     @abstractmethod
-    def model(self, corpus: Corpus, labels: List[AbstractNewLabel], **_kwargs) -> None:
+    def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:
         pass
 
     @abstractmethod
-    def influence(self, label: AbstractNewLabel, time: float, **_kwargs) -> List[PeakEvent]:
+    def influence(self, label: AbstractLabel, time: float, **_kwargs) -> List[PeakEvent]:
         pass
 
     @staticmethod
@@ -81,7 +81,7 @@ class AbstractMemorySpace(Parametric):
 
 class NGramMemorySpace(AbstractMemorySpace):
     def __init__(self, transforms: List[Tuple[Type[AbstractTransform], ...]], corpus: Optional[Corpus] = None,
-                 labels: Optional[List[AbstractNewLabel]] = None, history_len: int = 3, **_kwargs):
+                 labels: Optional[List[AbstractLabel]] = None, history_len: int = 3, **_kwargs):
         super(NGramMemorySpace, self).__init__(transforms, corpus, labels, **_kwargs)
         self.logger.debug(f"[__init__] Initializing NGramMemorySpace with corpus {corpus} "
                           f"and history length {history_len}.")
@@ -98,7 +98,7 @@ class NGramMemorySpace(AbstractMemorySpace):
     def __repr__(self):
         return f"NGramMemorySpace with size {self._ngram_size.value}, type {self.label_type} and corpus {self.corpus}."
 
-    def model(self, corpus: Corpus, labels: List[AbstractNewLabel], **_kwargs) -> None:
+    def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:
         self.logger.debug(f"[model] Modelling corpus '{corpus}'.")
         self._corpus = corpus
         self._labels = labels
@@ -116,7 +116,7 @@ class NGramMemorySpace(AbstractMemorySpace):
                 else:
                     self._structured_data[key] = [value]
 
-    def influence(self, label: AbstractNewLabel, time: float, **_kwargs) -> List[PeakEvent]:
+    def influence(self, label: AbstractLabel, time: float, **_kwargs) -> List[PeakEvent]:
         label_value: int = hash(label)
         self.logger.debug(f"[influence] Influencing memory space {self} with label {label_value}.")
         self._influence_history.append(label_value)
@@ -142,7 +142,7 @@ class NGramMemorySpace(AbstractMemorySpace):
 
     def set_ngram_size(self, new_size: int):
         self._ngram_size.value = new_size
-        self._influence_history: deque[AbstractNewLabel] = deque([], new_size)
+        self._influence_history: deque[AbstractLabel] = deque([], new_size)
         self._remodel()
 
     def clear(self) -> None:

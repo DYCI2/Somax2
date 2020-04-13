@@ -1,9 +1,9 @@
 from ...chromagram import Chromagram
-from ...event_parameters import AbstractEventParameter
+from ...event_parameters import AbstractTrait
 from ...spectrogram import Spectrogram
 
 
-class TopNote(AbstractEventParameter):
+class TopNote(AbstractTrait):
     def __init__(self, pitch: int):
         self.pitch = pitch
 

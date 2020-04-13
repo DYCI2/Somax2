@@ -11,7 +11,7 @@ from . import event_parameters
 from .chromagram import Chromagram
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_event import Note, CorpusEvent
-from .event_parameters import AbstractEventParameter
+from .event_parameters import AbstractTrait
 from .matrix_keys import MatrixKeys as Keys
 from .note_matrix import NoteMatrix
 from .spectrogram import Spectrogram
@@ -108,7 +108,7 @@ class CorpusBuilder:
         return Corpus(events, "TODO TEMPORARY NAME", ContentType.MIDI, {})  # TODO Name and build params.
 
     @staticmethod
-    def all_event_parameters() -> List[Tuple[str, Type[AbstractEventParameter]]]:
+    def all_event_parameters() -> List[Tuple[str, Type[AbstractTrait]]]:
         return inspect.getmembers(event_parameters, lambda m: inspect.isclass(m) and not inspect.isabstract(m))
 
 

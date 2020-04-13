@@ -3,11 +3,11 @@ from typing import Optional, List, Dict, Type
 
 import pandas as pd
 
-from somaxlibrary.corpus_builder.event_parameters.event_parameter import AbstractEventParameter
+from somaxlibrary.corpus_builder.event_parameters.event_parameter import AbstractTrait
 from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
 
 """ Keys correspond to parent module names, ex. "pitch" or "chroma". """
-EventParameterDict = Dict[str, List[AbstractEventParameter]]
+EventParameterDict = Dict[str, List[AbstractTrait]]
 
 
 class Note:
@@ -54,7 +54,7 @@ class Note:
 class CorpusEvent:
     def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float,
                  duration: Optional[float] = None, absolute_duration: Optional[float] = None,
-                 notes: Optional[List[Note]] = None, event_parameters: Optional[List[AbstractEventParameter]] = None):
+                 notes: Optional[List[Note]] = None, event_parameters: Optional[List[AbstractTrait]] = None):
         self.logger = logging.getLogger(__name__)
         self.state_index: int = state_index
         self.tempo: float = tempo
@@ -65,8 +65,8 @@ class CorpusEvent:
         self.absolute_duration: Optional[float] = absolute_duration
 
         self.notes: [Note] = notes if notes else []
-        self.parameters: {Type[AbstractEventParameter],
-                          AbstractEventParameter} = event_parameters if event_parameters else {}
+        self.parameters: {Type[AbstractTrait],
+                          AbstractTrait} = event_parameters if event_parameters else {}
 
         # self._labels = {}  # {ClassVar[AbstractLabel]: AbstractLabel}, precompiled for performance
 
@@ -95,10 +95,10 @@ class CorpusEvent:
         self.notes.extend([Note.relative_to(n, parent_onset, self.onset, parent_abs_onset, self.absolute_onset)
                            for n in notes])
 
-    def add_parameter(self, parameter: AbstractEventParameter):
+    def add_parameter(self, parameter: AbstractTrait):
         self.parameters[type(parameter)] = parameter
 
-    def get_parameter(self, parameter_type: Type[AbstractEventParameter]) -> AbstractEventParameter:
+    def get_parameter(self, parameter_type: Type[AbstractTrait]) -> AbstractTrait:
         """Raises KeyError"""
         return self.parameters[parameter_type]
 

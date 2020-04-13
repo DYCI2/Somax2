@@ -10,7 +10,7 @@ from somaxlibrary.corpus_builder.event_parameters import OnsetChroma
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import InvalidLabelInput
 from somaxlibrary.influence import AbstractInfluence, CorpusInfluence, KeywordInfluence
-from somaxlibrary.new_label import AbstractNewLabel, IntNewLabel
+from somaxlibrary.label import AbstractLabel, IntLabel
 
 
 # TODO: This class needs a lot of optimization. A larger corpus will mean higher computation time to a
@@ -36,15 +36,15 @@ class SomChromaClassifier(ChromaClassifier):
         # No clustering required for class
         pass
 
-    def classify_corpus(self, corpus: Corpus) -> List[IntNewLabel]:
+    def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
         self._corpus = corpus
-        labels: List[IntNewLabel] = []
+        labels: List[IntLabel] = []
         for event in corpus.events:  # type: CorpusEvent
             # TODO: Handle or comment on KeyError, which technically should never occur
             labels.append(self._label_from_chroma(event.get_parameter(OnsetChroma).foreground))
         return labels
 
-    def classify_influence(self, influence: AbstractInfluence) -> AbstractNewLabel:
+    def classify_influence(self, influence: AbstractInfluence) -> AbstractLabel:
         if isinstance(influence, KeywordInfluence) and influence.keyword in self._influence_keywords():
             # TODO: Potentially unsafe as type of influence data is unchecked
             return self._label_from_chroma(influence.influence_data)
@@ -54,7 +54,7 @@ class SomChromaClassifier(ChromaClassifier):
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
-    def _label_from_chroma(self, chroma: np.ndarray) -> IntNewLabel:
+    def _label_from_chroma(self, chroma: np.ndarray) -> IntLabel:
         # TODO: Test this: Drastically changed from previous implementation
         rms: np.ndarray = np.sqrt(np.sum(np.power(chroma - self._som_data, 2), axis=1))
-        return IntNewLabel(self._som_classes[np.argmin(rms)])
+        return IntLabel(self._som_classes[np.argmin(rms)])

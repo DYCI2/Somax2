@@ -6,7 +6,7 @@ from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.influence import AbstractInfluence
 from somaxlibrary.memory_spaces import AbstractMemorySpace
-from somaxlibrary.new_label import AbstractNewLabel
+from somaxlibrary.label import AbstractLabel
 from somaxlibrary.parameter import Parametric, Parameter
 from somaxlibrary.peak_event import PeakEvent
 from somaxlibrary.transforms import AbstractTransform
@@ -46,7 +46,7 @@ class Atom(Parametric):
         self.logger.debug(f"[read]: Reading corpus {corpus}.")
         self._corpus = corpus
         self._classifier.cluster(corpus)
-        labels: List[AbstractNewLabel] = self._classifier.classify_corpus(corpus)
+        labels: List[AbstractLabel] = self._classifier.classify_corpus(corpus)
         self._memory_space.model(corpus, labels)
         self._activity_pattern.corpus = corpus
 
@@ -59,7 +59,7 @@ class Atom(Parametric):
     # influences the memory with incoming data
     def influence(self, influence: AbstractInfluence, time: float, **kwargs):
         """ Raises: InvalidLabelInput"""
-        label: AbstractNewLabel = self._classifier.classify_influence(influence)
+        label: AbstractLabel = self._classifier.classify_influence(influence)
         matched_events: [PeakEvent] = self._memory_space.influence(label, time, **kwargs)
         if matched_events:
             self.update_peaks(time)

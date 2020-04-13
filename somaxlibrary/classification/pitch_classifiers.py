@@ -7,7 +7,7 @@ from somaxlibrary.corpus_builder.event_parameters import TopNote, VirtualFundame
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import InvalidLabelInput
 from somaxlibrary.influence import AbstractInfluence, KeywordInfluence, CorpusInfluence
-from somaxlibrary.new_label import IntNewLabel
+from somaxlibrary.label import IntLabel
 
 
 class BasicPitchClassifier(PitchClassifier, ABC):
@@ -18,15 +18,15 @@ class BasicPitchClassifier(PitchClassifier, ABC):
         # No clustering required for class
         pass
 
-    def classify_corpus(self, corpus: Corpus) -> List[IntNewLabel]:
+    def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
         self._corpus = corpus
-        labels: List[IntNewLabel] = []
+        labels: List[IntLabel] = []
         for event in corpus.events:  # type: CorpusEvent
             # TODO: Handle or comment on KeyError, which technically should never occur
             labels.append(self._label_from_corpus_event(event))
         return labels
 
-    def classify_influence(self, influence: AbstractInfluence) -> IntNewLabel:
+    def classify_influence(self, influence: AbstractInfluence) -> IntLabel:
         if isinstance(influence, KeywordInfluence) and influence.keyword in self._influence_keywords():
             # TODO: Potentially unsafe as type of influence data is unchecked
             return self._label_from_influence_data(pitch=influence.influence_data)
@@ -37,11 +37,11 @@ class BasicPitchClassifier(PitchClassifier, ABC):
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
     @abstractmethod
-    def _label_from_corpus_event(self, event: CorpusEvent) -> IntNewLabel:
+    def _label_from_corpus_event(self, event: CorpusEvent) -> IntLabel:
         pass
 
     @abstractmethod
-    def _label_from_influence_data(self, pitch: int) -> IntNewLabel:
+    def _label_from_influence_data(self, pitch: int) -> IntLabel:
         pass
 
 
@@ -50,11 +50,11 @@ class TopNoteClassifier(BasicPitchClassifier):
             Corpus:    Uses EventParameter TopNote in range [0, 127]
             Influence: Responds to keyword "pitch" in range [0, 127]. """
 
-    def _label_from_corpus_event(self, event: CorpusEvent) -> IntNewLabel:
-        return IntNewLabel(event.get_parameter(TopNote).pitch)
+    def _label_from_corpus_event(self, event: CorpusEvent) -> IntLabel:
+        return IntLabel(event.get_parameter(TopNote).pitch)
 
-    def _label_from_influence_data(self, pitch: int) -> IntNewLabel:
-        return IntNewLabel(pitch)
+    def _label_from_influence_data(self, pitch: int) -> IntLabel:
+        return IntLabel(pitch)
 
 
 class PitchClassClassifier(BasicPitchClassifier):
@@ -62,11 +62,11 @@ class PitchClassClassifier(BasicPitchClassifier):
             Corpus: Uses EventParameter TopNote in range [0, 127]
             Influence: Responds to keyword "pitch" in range [0, 127]. """
 
-    def _label_from_corpus_event(self, event: CorpusEvent) -> IntNewLabel:
-        return IntNewLabel(event.get_parameter(TopNote).pitch % 12)
+    def _label_from_corpus_event(self, event: CorpusEvent) -> IntLabel:
+        return IntLabel(event.get_parameter(TopNote).pitch % 12)
 
-    def _label_from_influence_data(self, pitch: int) -> IntNewLabel:
-        return IntNewLabel(pitch % 12)
+    def _label_from_influence_data(self, pitch: int) -> IntLabel:
+        return IntLabel(pitch % 12)
 
 
 class VirtualFundamentalClassifier(BasicPitchClassifier):
@@ -74,8 +74,8 @@ class VirtualFundamentalClassifier(BasicPitchClassifier):
             Corpus: Uses EventParameter VirtualFundamental in range [128, 139]
             Influence: Responds to keyword "pitch" in range [128, 139]. """
 
-    def _label_from_corpus_event(self, event: CorpusEvent) -> IntNewLabel:
-        return IntNewLabel(event.get_parameter(VirtualFundamental).pitch)
+    def _label_from_corpus_event(self, event: CorpusEvent) -> IntLabel:
+        return IntLabel(event.get_parameter(VirtualFundamental).pitch)
 
-    def _label_from_influence_data(self, pitch: int) -> IntNewLabel:
-        return IntNewLabel(pitch)
+    def _label_from_influence_data(self, pitch: int) -> IntLabel:
+        return IntLabel(pitch)

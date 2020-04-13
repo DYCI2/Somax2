@@ -1,10 +1,10 @@
 from ...chromagram import Chromagram
-from ...event_parameters import AbstractEventParameter
+from ...event_parameters import AbstractTrait
 from ...event_parameters.pitch import virfun
 from ...spectrogram import Spectrogram
 
 
-class VirtualFundamental(AbstractEventParameter):
+class VirtualFundamental(AbstractTrait):
     def __init__(self, pitch: int):
         self.pitch = pitch
 
