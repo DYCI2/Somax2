@@ -11,11 +11,15 @@ from somaxlibrary.new_label import IntNewLabel
 
 
 class BasicPitchClassifier(PitchClassifier, ABC):
+    def __init__(self):
+        super().__init__()
+
     def cluster(self, corpus: Corpus, **kwargs) -> None:
         # No clustering required for class
         pass
 
     def classify_corpus(self, corpus: Corpus) -> List[IntNewLabel]:
+        self._corpus = corpus
         labels: List[IntNewLabel] = []
         for event in corpus.events:  # type: CorpusEvent
             # TODO: Handle or comment on KeyError, which technically should never occur

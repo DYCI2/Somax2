@@ -1,25 +1,26 @@
 import logging
 from copy import deepcopy
-from typing import ClassVar
+from typing import Dict, Optional, Tuple, Type, List
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.atom import Atom
+from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import DuplicateKeyError, TransformError
 from somaxlibrary.exceptions import InvalidPath, InvalidCorpus, InvalidConfiguration, InvalidLabelInput
 from somaxlibrary.improvisation_memory import ImprovisationMemory
-from somaxlibrary.legacy_labels import AbstractLegacyLabel
+from somaxlibrary.influence import AbstractInfluence, CorpusInfluence
 from somaxlibrary.memory_spaces import AbstractMemorySpace
 from somaxlibrary.merge_actions import DistanceMergeAction, PhaseModulationMergeAction, AbstractMergeAction, \
     NextStateMergeAction
 from somaxlibrary.parameter import Parametric
 from somaxlibrary.peak_selector import AbstractPeakSelector, MaxPeakSelector, DefaultPeakSelector
 from somaxlibrary.peaks import Peaks
+from somaxlibrary.scheduler.ScheduledObject import ScheduledMidiObject, TriggerMode
 from somaxlibrary.streamview import StreamView
 from somaxlibrary.target import Target
 from somaxlibrary.transforms import AbstractTransform
-from somaxlibrary.scheduler.ScheduledObject import ScheduledMidiObject, TriggerMode
 
 
 class Player(ScheduledMidiObject, Parametric):
@@ -30,11 +31,11 @@ class Player(ScheduledMidiObject, Parametric):
         self.name: str = name  # name of the player
         self.target: Target = target
 
-        self.streamviews: {str: StreamView} = dict()
-        self.merge_actions: {str: AbstractMergeAction} = {}
-        self.corpus: Corpus = None
-        self.peak_selectors: {str: AbstractPeakSelector} = {}
-        self.transforms: {int: (AbstractTransform, ...)} = {}  # key: hash
+        self.streamviews: Dict[str, StreamView] = dict()
+        self.merge_actions: Dict[str, AbstractMergeAction] = {}
+        self.corpus: Optional[Corpus] = None
+        self.peak_selectors: Dict[str, AbstractPeakSelector] = {}
+        self.transforms: Dict[int, Tuple[AbstractTransform, ...]] = {}  # key: hash
 
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
         self._previous_peaks: Peaks = Peaks.create_empty()
@@ -51,7 +52,7 @@ class Player(ScheduledMidiObject, Parametric):
     # CREATION/DELETION STREAMVIEWS/ATOMS
     ######################################################
 
-    def create_streamview(self, path: [str], weight: float, merge_actions: (ClassVar, ...)):
+    def create_streamview(self, path: [str], weight: float, merge_actions: Tuple[Type, ...]):
         """creates streamview at target path"""
         self.logger.debug("[create_streamview] Creating streamview {} in player {} with merge_actions {}..."
                           .format(path, self.name, merge_actions))
@@ -65,17 +66,18 @@ class Player(ScheduledMidiObject, Parametric):
             self.streamviews[streamview].create_streamview(path, weight, merge_actions)
         self._parse_parameters()
 
-    def create_atom(self, path: [str], weight: float, label_type: ClassVar[AbstractLegacyLabel],
-                    activity_type: ClassVar[AbstractActivityPattern], memory_type: ClassVar[AbstractMemorySpace],
-                    self_influenced: bool, transforms: [(ClassVar[AbstractTransform], ...)]):
+    def create_atom(self, path: List[str], weight: float, classifier: Type[AbstractClassifier],
+                 activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
+                 corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
         """raises: InvalidPath, KeyError, DuplicateKeyError"""
         self.logger.debug(f"[create_atom] Attempting to create atom at {path}...")
+        self.corpus = corpus
         streamview: str = path.pop(0)
         if not path:  # path is empty means no streamview path was given
             raise InvalidPath(f"Cannot create an atom directly in Player.")
         else:
-            self.streamviews[streamview].create_atom(path, weight, label_type, activity_type, memory_type,
-                                                     self.corpus, self_influenced, transforms)
+            self.streamviews[streamview].create_atom(path, weight, classifier, activity_type, memory_type,
+                                                     corpus, self_influenced, transforms)
         for transform_tuple in transforms:
             self.store_transform(transform_tuple)
         self._parse_parameters()
@@ -101,7 +103,7 @@ class Player(ScheduledMidiObject, Parametric):
         self.logger.debug("[new_event] Peaks were updated")
         peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus, **kwargs)
         self.logger.debug("[new_event] Merge finished")
-        event_and_transforms: (CorpusEvent, int) = None
+        event_and_transforms: Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]] = None
         for peak_selector in self.peak_selectors.values():
             event_and_transforms = peak_selector.decide(peaks, self.improvisation_memory, self.corpus, self.transforms,
                                                         **kwargs)
@@ -112,7 +114,7 @@ class Player(ScheduledMidiObject, Parametric):
             raise InvalidConfiguration("All PeakSelectors failed. SoMax requires at least one default peak selector.")
 
         event: CorpusEvent = deepcopy(event_and_transforms[0])
-        transforms: (AbstractTransform, ...) = event_and_transforms[1]
+        transforms: Tuple[AbstractTransform, ...] = event_and_transforms[1]
         self.improvisation_memory.append(event, scheduler_time, transforms)
 
         for transform in transforms:
@@ -122,18 +124,18 @@ class Player(ScheduledMidiObject, Parametric):
         self.logger.debug(f"[new_event] Player {self.name} successfully created new event.")
         return event
 
-    def influence(self, path: [str], label: AbstractLegacyLabel, time: float, **kwargs) -> None:
+    def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> None:
         """ Raises: InvalidLabelInput, KeyError"""
         if not path:
             for atom in self._all_atoms():
                 try:
-                    atom.influence(label, time, **kwargs)
+                    atom.influence(influence, time, **kwargs)
                 except InvalidLabelInput:
                     # Ignore atom if label doesn't match
                     continue
         else:
             try:
-                self._get_atom(path).influence(label, time, **kwargs)
+                self._get_atom(path).influence(influence, time, **kwargs)
             except InvalidLabelInput:
                 # Ignore atom if label doesn't match
                 pass
@@ -165,11 +167,10 @@ class Player(ScheduledMidiObject, Parametric):
             raise TypeError("Critical Implementation error in transforms. TODO")
         self.transforms[transform_hash] = transform
 
-    def set_label(self, path: [str], label_class: ClassVar[AbstractLegacyLabel]):
-        atom: Atom = self._get_atom(path)
-        atom.set_label(label_class)
+    def set_classifier(self):
+        raise RuntimeError("Player.set_classifier is not supported yet.")   # TODO
 
-    def set_activity_pattern(self, path: [str], activity_pattern_class: ClassVar[AbstractActivityPattern]):
+    def set_activity_pattern(self, path: List[str], activity_pattern_class: Type[AbstractActivityPattern]):
         atom: Atom = self._get_atom(path)
         atom.set_activity_pattern(activity_pattern_class, self.corpus)
 
@@ -190,7 +191,7 @@ class Player(ScheduledMidiObject, Parametric):
                 except TransformError as e:
                     self.logger.error(f"{str(e)}")
         else:
-            self._get_atom(path).memory_space.add_transforms(transform)
+            self._get_atom(path)._memory_space.add_transforms(transform)
 
     def clear(self):
         self.improvisation_memory = ImprovisationMemory()
@@ -229,14 +230,10 @@ class Player(ScheduledMidiObject, Parametric):
             streamview.update_peaks(time)
 
     def _influence_self(self, event: CorpusEvent, time: float) -> None:
-        atoms: [Atom] = self._self_atoms()
-        labels: [AbstractLegacyLabel] = event.labels
+        atoms: List[Atom] = self._self_atoms()
+        influence: CorpusInfluence = CorpusInfluence(event)
         for atom in atoms:
-            for label in labels:
-                try:
-                    atom.influence(label, time)
-                except InvalidLabelInput:
-                    continue
+            atom.influence(influence, time)
 
     def _merged_peaks(self, time: float, history: ImprovisationMemory, corpus: Corpus, **kwargs) -> Peaks:
         weight_sum: float = 0.0

@@ -22,10 +22,11 @@ class SomChromaClassifier(ChromaClassifier):
                 Corpus:    Uses foreground chroma (12 non-normalized floats) of EventParameter OnsetChroma
                 Influence: Responds to keyword "chroma" followed by 12 non-normalized floats. """
 
-    SOM_DATA_FILE = 'misc_hsom'  # Note: not normalized
+    SOM_DATA_FILE = 'misc_hsom'  # Note: vectors in file are not normalized
     SOM_CLASS_FILE = 'misc_hsom_c'
 
     def __init__(self):
+        super().__init__()
         with resources.path(tables, self.SOM_DATA_FILE) as p:
             self._som_data = np.loadtxt(p.absolute(), dtype=np.float32, delimiter=",")  # Shape: (N, 12)
         with resources.path(tables, self.SOM_CLASS_FILE) as p:
@@ -36,6 +37,7 @@ class SomChromaClassifier(ChromaClassifier):
         pass
 
     def classify_corpus(self, corpus: Corpus) -> List[IntNewLabel]:
+        self._corpus = corpus
         labels: List[IntNewLabel] = []
         for event in corpus.events:  # type: CorpusEvent
             # TODO: Handle or comment on KeyError, which technically should never occur

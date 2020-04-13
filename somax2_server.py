@@ -4,26 +4,27 @@ import logging
 import logging.config
 import os
 import sys
-from typing import ClassVar, Any, Dict, Union
+from typing import Any, Dict, Union, Type
 
-from maxosc.maxosc import Caller, MaxOscError
+from maxosc.maxosc import Caller
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import AsyncIOOSCUDPServer
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern
+from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus_builder import CorpusBuilder
 from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.exceptions import InvalidPath, InvalidLabelInput, DuplicateKeyError, InvalidJsonFormat, ParameterError
+from somaxlibrary.exceptions import InvalidPath, DuplicateKeyError, InvalidJsonFormat, ParameterError
+from somaxlibrary.influence import KeywordInfluence, InfluenceKeyword
 from somaxlibrary.io_parser import IOParser
-from somaxlibrary.legacy_labels import AbstractLegacyLabel
 from somaxlibrary.memory_spaces import AbstractMemorySpace
 from somaxlibrary.merge_actions import AbstractMergeAction
 from somaxlibrary.osc_log_forwarder import OscLogForwarder
 from somaxlibrary.player import Player
-from somaxlibrary.target import Target, SimpleOscTarget
-from somaxlibrary.transforms import AbstractTransform
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 from somaxlibrary.scheduler.Scheduler import Scheduler
+from somaxlibrary.target import Target, SimpleOscTarget
+from somaxlibrary.transforms import AbstractTransform
 
 
 class SomaxServer(Caller):
@@ -128,21 +129,22 @@ class SomaxServer(Caller):
         except DuplicateKeyError as e:
             self.logger.error(f"{str(e)} No streamview was created.")
 
-    def create_atom(self, player: str, path: str, weight: float = 1.0, label: str = "",
+    def create_atom(self, player: str, path: str, weight: float = 1.0, classifier: str = "",
                     activity_type: str = "", memory_type: str = "", self_influenced: bool = False,
                     transforms: (str, ...) = (""), transform_parse_mode=""):
         self.logger.debug(f"[create_atom] called for player {player} with path {path}.")
         path_and_name: [str] = IOParser.parse_streamview_atom_path(path)
-        label: ClassVar[AbstractLegacyLabel] = self.io_parser.parse_label_type(label)
-        activity_type: ClassVar[AbstractActivityPattern] = self.io_parser.parse_activity_type(activity_type)
-        memory_type: ClassVar[AbstractMemorySpace] = self.io_parser.parse_memspace_type(memory_type)
+
+        label: Type[AbstractClassifier] = self.io_parser.parse_classifier_type(classifier)
+        activity_type: Type[AbstractActivityPattern] = self.io_parser.parse_activity_type(activity_type)
+        memory_type: Type[AbstractMemorySpace] = self.io_parser.parse_memspace_type(memory_type)
 
         try:
-            transforms: [(ClassVar[AbstractTransform], ...)] = self.io_parser.parse_transforms(transforms,
-                                                                                               transform_parse_mode)
+            transforms: [(Type[AbstractTransform], ...)] = self.io_parser.parse_transforms(transforms,
+                                                                                           transform_parse_mode)
         except IOError as e:
             self.logger.error(f"{str(e)} Setting Transforms to default.")
-            transforms: [(ClassVar[AbstractTransform], ...)] = IOParser.DEFAULT_TRANSFORMS
+            transforms: [(Type[AbstractTransform], ...)] = IOParser.DEFAULT_TRANSFORMS
         try:
             self.players[player].create_atom(path_and_name, weight, label, activity_type, memory_type,
                                              self_influenced, transforms)
@@ -177,16 +179,17 @@ class SomaxServer(Caller):
         if not self.scheduler.running:
             return
         try:
-            labels: [AbstractLegacyLabel] = AbstractLegacyLabel.classify_as(label_keyword, value, **kwargs)
-        except InvalidLabelInput as e:
-            self.logger.error(str(e) + "No action performed.")
+            keyword: InfluenceKeyword = InfluenceKeyword(label_keyword)
+        except ValueError:
+            self.logger.error(f"Keyword '{label_keyword}' is not supported.")
             return
+        influence: KeywordInfluence = KeywordInfluence(keyword, value)
+
         # TODO: Error handling (KeyError players + path_and_name)
         path_and_name: [str] = IOParser.parse_streamview_atom_path(path)
         time: float = self.scheduler.time
         try:
-            for label in labels:
-                self.players[player].influence(path_and_name, label, time, **kwargs)
+            self.players[player].influence(path_and_name, influence, time, **kwargs)
         except KeyError:
             self.logger.error(f"No player named '{player}' exists.")
 
@@ -208,7 +211,7 @@ class SomaxServer(Caller):
         self.logger.debug(f"[add_transform] called for player {player} with path {path}.")
         path_and_name: [str] = self.io_parser.parse_streamview_atom_path(path)
         try:
-            transforms: [(ClassVar[AbstractTransform], ...)] = self.io_parser.parse_transforms(transforms, parse_mode)
+            transforms: [(Type[AbstractTransform], ...)] = self.io_parser.parse_transforms(transforms, parse_mode)
         except IOError as e:
             self.logger.error(f"{str(e)} No Transform was added.")
             return
@@ -218,21 +221,14 @@ class SomaxServer(Caller):
             self.logger.error(f"Could not add transform at path {path}. The parent streamview/player does not exist.")
         # TODO: parameter dict
 
-    def set_label(self, player: str, path: str, label: str == ""):
-        # TODO: Will (probably) return default if not found. Should fail instead
-        self.logger.debug(f"[set_label] called for player '{player}' with path '{path}' and new label '{label}'.")
-        label_class: ClassVar[AbstractLegacyLabel] = self.io_parser.parse_label_type(label)
-        path_as_list: [str] = self.io_parser.parse_streamview_atom_path(path)
-        try:
-            self.players[player].set_label(path_as_list, label_class)
-        except KeyError:
-            self.logger.error(f"Could not set label for atom at {path}.")
+    def set_classifier(self):
+        raise RuntimeError("Player.set_classifier is not supported yet")  # TODO
 
     def set_activity_pattern(self, player: str, path: str, activity_pattern: str == ""):
         # TODO: Will return default if not found. Should fail instead
         self.logger.debug(f"[set_activity_pattern] called for player '{player}' with path '{path}' "
                           f"and new pattern '{activity_pattern}'.")
-        activity_class: ClassVar[AbstractActivityPattern] = self.io_parser.parse_activity_type(activity_pattern)
+        activity_class: Type[AbstractActivityPattern] = self.io_parser.parse_activity_type(activity_pattern)
         path_as_list: [str] = self.io_parser.parse_streamview_atom_path(path)
         try:
             self.players[player].set_activity_pattern(path_as_list, activity_class)

@@ -1,7 +1,8 @@
 import logging
-from typing import ClassVar, Any, Union, List
+from typing import ClassVar, Any, Union, List, Type
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern, ClassicActivityPattern
+from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.legacy_labels import AbstractLegacyLabel, MelodicLegacyLabel
 from somaxlibrary.memory_spaces import AbstractMemorySpace, NGramMemorySpace
 from somaxlibrary.merge_actions import AbstractMergeAction, DistanceMergeAction
@@ -51,8 +52,8 @@ class IOParser:
     def parse_activity_type(self, activity_type: str) -> ClassVar[AbstractActivityPattern]:
         return self._parse_single(activity_type, AbstractActivityPattern, self.DEFAULT_ACTIVITY_TYPE)
 
-    def parse_label_type(self, label_type: str) -> ClassVar[AbstractLegacyLabel]:
-        return self._parse_single(label_type, AbstractLegacyLabel, self.DEFAULT_LABEL_TYPE)
+    def parse_classifier_type(self, classifier: str) -> Type[AbstractClassifier]:
+        raise NotImplementedError("IOParser.parse_classifier_type is not supported yet.")
 
     def parse_memspace_type(self, memspace: str) -> ClassVar[AbstractMemorySpace]:
         return self._parse_single(memspace, AbstractMemorySpace, self.DEFAULT_MEMORY_TYPE)
