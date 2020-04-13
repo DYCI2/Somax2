@@ -2,7 +2,7 @@ from abc import ABC
 from typing import Callable, Any, Dict
 
 from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.labels import AbstractLabel
+from somaxlibrary.label import AbstractLabel
 from somaxlibrary.player import Player
 
 

@@ -1,17 +1,14 @@
 import logging
-import time
 from abc import abstractmethod, ABC
+from typing import Optional, Any, List
 
-from typing import Optional, Callable, Any, List
-
-from somaxlibrary.corpus import ContentType
-from somaxlibrary.corpus_event import CorpusEvent, Note
+from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import InvalidCorpus
-from somaxlibrary.labels import AbstractLabel
+from somaxlibrary.label import AbstractLabel
 from somaxlibrary.player import Player
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledMidiEvent, ScheduledAudioEvent, \
     AutomaticTriggerEvent, \
-    OscEvent, TempoEvent, ManualTriggerEvent, AbstractTriggerEvent, CallableEvent, ScheduledInfluenceEvent, \
+    TempoEvent, ManualTriggerEvent, AbstractTriggerEvent, ScheduledInfluenceEvent, \
     ScheduledCorpusEvent
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 
@@ -26,6 +23,7 @@ class BaseScheduler(ABC):
         self.queue: List[ScheduledEvent] = []
         self.tempo_master: Optional[Player] = None
         self.running: bool = running
+        self._trigger_pretime: float = trigger_pretime
 
     ######################################################
     # ADD (INTERNAL AND EXTERNAL)
@@ -33,7 +31,7 @@ class BaseScheduler(ABC):
 
     def add_trigger_event(self, player: Player, trigger_time: Optional[float] = None):
         if player.trigger_mode == TriggerMode.AUTOMATIC and not self._has_trigger(player):
-            self._add_automatic_trigger_event(player, self._tick - self.TRIGGER_PRETIME * self.tempo / 60.0, self._tick)
+            self._add_automatic_trigger_event(player, self._tick - self._trigger_pretime * self.tempo / 60.0, self._tick)
         elif player.trigger_mode == TriggerMode.MANUAL and self.running:
             self._add_manual_trigger_event(player, trigger_time if trigger_time else self._tick)
         else:

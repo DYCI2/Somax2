@@ -1,8 +1,8 @@
 import logging
-from typing import ClassVar, Any, Union, List
+from typing import ClassVar, Any, Union, List, Type
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern, ClassicActivityPattern
-from somaxlibrary.labels import AbstractLabel, MelodicLabel
+from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.memory_spaces import AbstractMemorySpace, NGramMemorySpace
 from somaxlibrary.merge_actions import AbstractMergeAction, DistanceMergeAction
 from somaxlibrary.transforms import AbstractTransform, NoTransform
@@ -13,7 +13,6 @@ class IOParser:
     DEFAULT_IP = "127.0.0.1"
     DEFAULT_ACTIVITY_TYPE: ClassVar = ClassicActivityPattern
     DEFAULT_MERGE_ACTIONS: (ClassVar, ...) = (DistanceMergeAction,)  # Only for StreamView!!
-    DEFAULT_LABEL_TYPE: ClassVar = MelodicLabel
     DEFAULT_TRANSFORMS: [(ClassVar, ...)] = [(NoTransform(),)]  # objects, not classes
     DEFAULT_TRIGGER = TriggerMode.AUTOMATIC
     DEFAULT_MEMORY_TYPE: ClassVar = NGramMemorySpace
@@ -51,15 +50,11 @@ class IOParser:
     def parse_activity_type(self, activity_type: str) -> ClassVar[AbstractActivityPattern]:
         return self._parse_single(activity_type, AbstractActivityPattern, self.DEFAULT_ACTIVITY_TYPE)
 
-    def parse_label_type(self, label_type: str) -> ClassVar[AbstractLabel]:
-        return self._parse_single(label_type, AbstractLabel, self.DEFAULT_LABEL_TYPE)
+    def parse_classifier_type(self, classifier: str) -> Type[AbstractClassifier]:
+        raise NotImplementedError("IOParser.parse_classifier_type is not supported yet.")
 
     def parse_memspace_type(self, memspace: str) -> ClassVar[AbstractMemorySpace]:
         return self._parse_single(memspace, AbstractMemorySpace, self.DEFAULT_MEMORY_TYPE)
-
-    @staticmethod
-    def parse_label(label: Any) -> AbstractLabel:
-        raise IOError
 
     def parse_trigger_mode(self, trigger_mode: str) -> TriggerMode:
         if not trigger_mode:

@@ -1,17 +1,25 @@
 from abc import ABC
+from enum import Enum
+from typing import Any
 
 from somaxlibrary.corpus_event import CorpusEvent
 
 
+class InfluenceKeyword(Enum):
+    PITCH = "pitch"
+    CHROMA = "chroma"
+
+
 class AbstractInfluence(ABC):
-    """ An influence is an event matched by a MemorySpace/influence call before it's transformed into a peak"""
-
-    def __init__(self, event: CorpusEvent, transform_hash: int, **_kwargs):
-        self.event: CorpusEvent = event
-        self.transform_hash: int = transform_hash
+    pass
 
 
-class ClassicInfluence(AbstractInfluence):
+class CorpusInfluence(AbstractInfluence):
+    def __init__(self, corpus_event: CorpusEvent):
+        self.corpus_event: CorpusEvent = corpus_event
 
-    def __init__(self, event: CorpusEvent, transform_hash: int, **_kwargs):
-        super(ClassicInfluence, self).__init__(event, transform_hash)
+
+class KeywordInfluence(AbstractInfluence):
+    def __init__(self, keyword: InfluenceKeyword, influence_data: Any):
+        self.keyword: InfluenceKeyword = keyword
+        self.influence_data: Any = influence_data

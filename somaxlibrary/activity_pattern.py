@@ -7,7 +7,7 @@ from typing import ClassVar, Dict, Union
 import numpy as np
 
 from somaxlibrary.corpus import Corpus
-from somaxlibrary.influence import AbstractInfluence
+from somaxlibrary.peak_event import PeakEvent
 from somaxlibrary.parameter import Parameter, ParamWithSetter
 from somaxlibrary.parameter import Parametric
 from somaxlibrary.peaks import Peaks
@@ -25,7 +25,7 @@ class AbstractActivityPattern(Parametric):
         self.corpus: Corpus = corpus
 
     @abstractmethod
-    def insert(self, influences: [AbstractInfluence]) -> None:
+    def insert(self, influences: [PeakEvent]) -> None:
         raise NotImplementedError("AbstractActivityPattern.insert is abstract.")
 
     @abstractmethod
@@ -74,7 +74,7 @@ class ClassicActivityPattern(AbstractActivityPattern):
         self.last_update_time: float = 0.0
         self._parse_parameters()
 
-    def insert(self, influences: [AbstractInfluence]) -> None:
+    def insert(self, influences: [PeakEvent]) -> None:
         self.logger.debug(f"[insert]: Inserting {len(influences)} influences.")
         scores: [float] = []
         times: [float] = []
@@ -123,7 +123,7 @@ class ManualActivityPattern(AbstractActivityPattern):
         self._event_indices: np.ndarray = np.zeros(0, dtype=np.int32)
         self._parse_parameters()
 
-    def insert(self, influences: [AbstractInfluence]) -> None:
+    def insert(self, influences: [PeakEvent]) -> None:
         self.logger.debug(f"[insert]: Inserting {len(influences)} influences.")
         scores: [float] = []
         times: [float] = []

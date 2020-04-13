@@ -1,14 +1,12 @@
 # -*- coding: ISO-8859-1 -*-
 
 # std library
-from struct import unpack
 
 # custom
-from somaxlibrary.midi.DataTypeConverters import readBew, readVar, varLen, toBytes
+from somaxlibrary.legacy.midi import readBew, toBytes
 
 # uhh I don't really like this, but there are so many constants to 
 # import otherwise
-from somaxlibrary.midi.constants import *
 
 
 class EventDispatcher:
@@ -279,7 +277,7 @@ class EventDispatcher:
 
 if __name__ == '__main__':
 
-    from somaxlibrary.midi.MidiToText import MidiToText
+    from somaxlibrary.legacy.midi import MidiToText
     
     outstream = MidiToText()
     dispatcher = EventDispatcher(outstream)

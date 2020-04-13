@@ -1,14 +1,12 @@
 # -*- coding: ISO-8859-1 -*-
 
 # std library
-from struct import unpack
 
 # uhh I don't really like this, but there are so many constants to 
 # import otherwise
-from somaxlibrary.midi.constants import *
 
 
-from somaxlibrary.midi.EventDispatcher import EventDispatcher
+from somaxlibrary.legacy.midi import EventDispatcher
 
 class MidiFileParser:
 
@@ -184,7 +182,7 @@ if __name__ == '__main__':
 #    
 #    
 #    # do parsing
-    from somaxlibrary.midi.MidiToText import MidiToText
+    from somaxlibrary.legacy.midi import MidiToText
     from RawInstreamFile import RawInstreamFile
 
     midi_in = MidiFileParser(RawInstreamFile(test_file), MidiToText())

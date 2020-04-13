@@ -1,12 +1,15 @@
-import json
-import logging
 from enum import Enum
-from typing import Dict, ClassVar
+from typing import List, Optional, Type
 
+import matplotlib.pyplot as plt
+import numpy as np
+
+from somaxlibrary.corpus_builder.chromagram import Chromagram
 from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.exceptions import InvalidJsonFormat
-from somaxlibrary.labels import AbstractLabel
-from somaxlibrary.tools import SequencedList
+from somaxlibrary.corpus_builder.event_parameters import AbstractTrait
+from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
+from somaxlibrary.corpus_builder.note_matrix import NoteMatrix
+from somaxlibrary.corpus_builder.spectrogram import Spectrogram
 
 
 class ContentType(Enum):
@@ -15,85 +18,81 @@ class ContentType(Enum):
 
 
 class Corpus:
-    DEFAULT_TIMING = "relative"
-    ONSET_IDX = 0
-    DURATION_IDX = 1
+    def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType, build_parameters: dict,
+                 fg_spectrogram: Optional[Spectrogram] = None, bg_spectrogram: Optional[Spectrogram] = None,
+                 fg_chromagram: Optional[Chromagram] = None, bg_chromagram: Optional[Chromagram] = None):
+        self.events: [CorpusEvent] = events
+        self.onsets: np.ndarray = np.array([e.onset for e in self.events])
+        self.name: str = name
+        self.content_type: ContentType = content_type
+        self._build_parameters: dict = build_parameters  # TODO: Including version
 
-    def __init__(self, filepath: str = None, timing_type: str = DEFAULT_TIMING):
-        """
-        # TODO
-        :param filepath:
-        :param timing_type: "relative" or "absolute"
-        """
-        self.logger = logging.getLogger(__name__)
-        # TODO: Remove this disgusting SequencedList
-        self.ordered_events: SequencedList[float, CorpusEvent] = SequencedList()
-        self.name: str = ""
-        self.content_type: ContentType = None
+        # These parameters will not be stored when exported and will hence not exist in json-parsed corpora.
+        self.fg_spectrogram: Optional[Spectrogram] = fg_spectrogram
+        self.bg_spectrogram: Optional[Spectrogram] = bg_spectrogram
+        self.fg_chromagram: Optional[Chromagram] = fg_chromagram
+        self.bg_chromagram: Optional[Chromagram] = bg_chromagram
 
-        if filepath:
-            self.read_file(filepath, timing_type)
+    @classmethod
+    def from_json(cls, filepath: str):
+        raise NotImplementedError("Not implemented yet")  # TODO
 
-    def __repr__(self):
-        return f"Corpus(content_type={self.content_type}, len={len(self.ordered_events)})."
+    def export(self, filepath: str):
+        raise NotImplementedError("Not implemented yet")  # TODO
 
-    def read_file(self, filepath: str, timing_type: str = DEFAULT_TIMING):
-        """" Raises: OSError """
-        self.reset()
-        with open(filepath, 'r') as jfile:
-            corpus_data = json.load(jfile)
-        try:
-            self.content_type = ContentType(corpus_data["typeID"])
-            self.name = corpus_data["name"]
-        except ValueError as e:
-            self.logger.debug(repr(e))
-            raise InvalidJsonFormat(f"Could not read json file. typeID should be either 'MIDI' or 'Audio'.")
-
-        try:
-            events = corpus_data["data"]
-            self.ordered_events = self._parse_events(events, timing_type)
-            self._classify_events()
-            self.logger.debug(f"[read_file] Corpus {self} successfully read.")
-        except KeyError as e:
-            self.logger.debug(repr(e))
-            raise InvalidJsonFormat(f"The corpus does not have the correct format.")
-
-    @staticmethod
-    def _parse_events(events: [Dict], timing_type: str) -> [CorpusEvent]:
-        parsed_events: SequencedList[float, CorpusEvent] = SequencedList()
-        for event in events:
-            c = CorpusEvent(event["state"], event["tempo"], event["time"][timing_type][Corpus.ONSET_IDX],
-                            event["time"][timing_type][Corpus.DURATION_IDX], event["chroma"], event["pitch"],
-                            event["notes"], timing_type, event["time"]["absolute"])
-            parsed_events.append(event["time"][timing_type][0], c)
-        return parsed_events
-
-    def _classify_events(self):
-        valid_label_classes: {str, ClassVar[AbstractLabel]} = AbstractLabel.classes()
-        for _time, event in self.ordered_events:
-            event.classify(valid_label_classes)
-
-    def reset(self):
-        self.ordered_events = SequencedList()
-        self.content_type = None
+    def analyze(self, event_parameter: Type[AbstractTrait], **kwargs):
+        for event in self.events:
+            parameter: AbstractTrait = event_parameter.analyze(event, self.fg_spectrogram, self.bg_spectrogram,
+                                                               self.fg_chromagram, self.bg_chromagram,
+                                                               **kwargs)
+            event.add_parameter(parameter)
 
     def length(self) -> int:
-        return len(self.ordered_events)
+        return len(self.events)
 
     def duration(self) -> float:
-        last_event: CorpusEvent = self.ordered_events.orderedEventList[-1]
+        last_event: CorpusEvent = self.events[-1]
         return last_event.onset + last_event.duration
 
-    def event_at(self, index: int):
-        return self.ordered_events.orderedEventList[index]
+    def event_at(self, index: int) -> CorpusEvent:
+        return self.events[index]
 
     def event_closest(self, time: float) -> CorpusEvent:
-        # TODO: Very unoptimized
-        event = self.ordered_events.get_events(time)[0][0]
-        if not event:
-            return self.ordered_events.orderedEventList[1]
-        return event
+        idx: int = np.searchsorted(self.onsets, time)
+        if idx > 0 and (idx == self.length() or np.abs(time - self.onsets[idx - 1]) < np.abs(time - self.onsets[idx])):
+            return self.events[idx - 1]
+        else:
+            return self.events[idx]
 
-    @property
-    def events(self):
-        return self.ordered_events.orderedEventList
+    def to_note_matrix(self) -> NoteMatrix:
+        note_data: List[List[float]] = [[] for _ in range(8)]
+        for event in self.events:
+            for note in event.notes:
+                note_data[Keys.PITCH.value].append(note.pitch)
+                note_data[Keys.VELOCITY.value].append(note.velocity)
+                note_data[Keys.CHANNEL.value].append(note.channel)
+                note_data[Keys.REL_ONSET.value].append(note.onset + event.onset)
+                note_data[Keys.REL_DURATION.value].append(note.duration)
+                note_data[Keys.ABS_ONSET.value].append(note.absolute_onset + event.absolute_onset)
+                note_data[Keys.ABS_DURATION.value].append(note.absolute_duration)
+                note_data[Keys.TEMPO.value].append(event.tempo)
+        note_matrix: np.ndarray = np.array(note_data).T
+
+        # Remove duplicates
+        note_matrix = note_matrix[np.lexsort((note_matrix[:, Keys.PITCH.value], note_matrix[:, Keys.REL_ONSET.value]))]
+        delta_ticks: np.ndarray = np.diff(note_matrix[:, Keys.REL_ONSET.value], prepend=np.inf)
+        delta_pitch: np.ndarray = np.diff(note_matrix[:, Keys.PITCH.value], prepend=np.inf)
+        note_matrix = note_matrix[(delta_ticks > 0.001) | (delta_pitch > 0.001), :]
+
+        return NoteMatrix(note_matrix)
+
+    def plot(self):
+        import matplotlib as mpl
+        mpl.use('Qt5Agg')
+        _, axes = plt.subplots(6, 1, gridspec_kw={'height_ratios': [1, 5, 3, 3, 1, 1]})
+        self.fg_spectrogram.plot(axes[2])
+        self.bg_spectrogram.plot(axes[3])
+        self.fg_chromagram.plot(axes[4])
+        self.bg_chromagram.plot(axes[5])
+        self.to_note_matrix().plot(axes=(axes[0], axes[1]))
+        plt.show()

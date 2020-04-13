@@ -4,7 +4,7 @@ from typing import Optional, Any
 
 from somaxlibrary.corpus import ContentType
 from somaxlibrary.corpus_event import CorpusEvent, Note
-from somaxlibrary.labels import AbstractLabel
+from somaxlibrary.label import AbstractLabel
 from somaxlibrary.player import Player
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, AutomaticTriggerEvent, ScheduledMidiEvent, \
     ScheduledAudioEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent

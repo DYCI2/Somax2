@@ -6,7 +6,7 @@ from typing import Union, ClassVar
 
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import TransformError
-from somaxlibrary.labels import AbstractLabel, MelodicLabel, PitchClassLabel
+from somaxlibrary.label import AbstractLabel
 
 
 class AbstractTransform(ABC):
@@ -24,10 +24,11 @@ class AbstractTransform(ABC):
         """Notes: Strictly not needed in current implementation, but should always be implemented when __hash__ is"""
         raise NotImplementedError("AbstractTransform.__eq__ is abstract.")
 
-    @staticmethod
-    @abstractmethod
-    def valid_labels() -> [ClassVar[AbstractLabel]]:
-        raise NotImplementedError("AbstractTransform.valid_labels is abstract.")
+    # TODO: Must get this data from elsewhere, for example Classifier. Possibly at init even
+    # @staticmethod
+    # @abstractmethod
+    # def valid_labels() -> [ClassVar[AbstractLegacyLabel]]:
+    #     raise NotImplementedError("AbstractTransform.valid_labels is abstract.")
 
     def transform(self, obj: Union[AbstractLabel, CorpusEvent]) -> Union[AbstractLabel, CorpusEvent]:
         if isinstance(obj, AbstractLabel):
@@ -84,9 +85,10 @@ class NoTransform(AbstractTransform):
     def __eq__(self, other):
         return type(other) == type(self)
 
-    @staticmethod
-    def valid_labels() -> [ClassVar[AbstractLabel]]:
-        return list(AbstractLabel.classes().values())  # all transforms are valid
+    # TODO
+    # @staticmethod
+    # def valid_labels() -> [Type[AbstractNewLabel]]:
+    #     return list(AbstractLegacyLabel.classes().values())  # all transforms are valid
 
     def _transform_label(self, obj: AbstractLabel) -> AbstractLabel:
         return obj
@@ -104,6 +106,8 @@ class NoTransform(AbstractTransform):
 # TODO: Structure according to old implementation below with chroma
 class TransposeTransform(AbstractTransform):
     def __init__(self, semitones: int):
+        raise NotImplementedError(
+            "TransposeTransform._transform_label is not supported. See https://trello.com/c/kOBiD8CU/29-transforms")
         super(TransposeTransform, self).__init__()
         self.semitones = semitones
 
@@ -116,13 +120,22 @@ class TransposeTransform(AbstractTransform):
     def __repr__(self):
         return f"TransposeTransform(semitones={self.semitones})"
 
-    @staticmethod
-    def valid_labels() -> [ClassVar[AbstractLabel]]:
-        return [MelodicLabel, PitchClassLabel]
+    # TODO
+    # @staticmethod
+    # def valid_labels() -> [ClassVar[AbstractLegacyLabel]]:
+    #     return [MelodicLegacyLabel, PitchClassLabel]
 
     def _transform_label(self, obj: AbstractLabel) -> AbstractLabel:
-        if type(obj) == MelodicLabel:
-            return MelodicLabel(obj.label + self.semitones)
+        # TODO This will not need specific classes for MelodicLabel/PitchLabel etc. It should just extract the
+        #  AbstractInfluence from the AbstractNewLabel and handle three cases: CorpusEvent, and AbstractNewLabel.
+        #  It should also extract the classifier and classify the event again (copy) the event.
+        #  For a CorpusEvent, it should return a copy of the event with the specific parameter transformed
+        #  For an AbstractNewLabel it needs to handle two additional types: KeywordInfluence and CorpusInfluence.
+        #  - For KeywordInfluence: check if keyword can be transformed and then transform value + classify again,
+        #        returning a new AbstractNewLabel
+        #  - For CorpusInfluence: transform value (copy) + classify again, returning a new AbstractNewLabel
+        if type(obj) == MelodicLegacyLabel:
+            return MelodicLegacyLabel(obj.label + self.semitones)
         elif type(obj) == PitchClassLabel:
             return PitchClassLabel((obj.label + self.semitones) % 12)
         else:
@@ -135,8 +148,8 @@ class TransposeTransform(AbstractTransform):
         return obj
 
     def _inverse_label(self, obj: AbstractLabel) -> AbstractLabel:
-        if type(obj) == MelodicLabel:
-            return MelodicLabel(obj.label - self.semitones)
+        if type(obj) == MelodicLegacyLabel:
+            return MelodicLegacyLabel(obj.label - self.semitones)
         elif type(obj) == PitchClassLabel:
             return PitchClassLabel((obj.label - self.semitones) % 12)
         else:

@@ -1,13 +1,13 @@
 import logging
-from typing import Callable, Tuple, ClassVar
+from typing import Callable, Tuple, ClassVar, Type, List, Dict
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.atom import Atom
+from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import DuplicateKeyError
-from somaxlibrary.labels import AbstractLabel
-from somaxlibrary.memory_spaces import NGramMemorySpace
+from somaxlibrary.memory_spaces import AbstractMemorySpace
 from somaxlibrary.merge_actions import AbstractMergeAction
 from somaxlibrary.parameter import Parameter
 from somaxlibrary.parameter import Parametric
@@ -23,9 +23,9 @@ class StreamView(Parametric):
                           .format(name, weight, merge_actions))
 
         self.name = name
-        self._merge_actions: {str: AbstractMergeAction} = {}
-        self.atoms: {str: Atom} = dict()
-        self.streamviews: {str: StreamView} = {}
+        self._merge_actions: Dict[str, AbstractMergeAction] = {}
+        self.atoms: Dict[str, Atom] = dict()
+        self.streamviews: Dict[str, StreamView] = {}
         self._weight: Parameter = Parameter(weight, 0.0, None, 'float', "Relative scaling of streamview peaks.")
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this Streamview.")
         self._parse_parameters()
@@ -49,21 +49,21 @@ class StreamView(Parametric):
             return self
         target_name: str = path.pop(0)
         if path:  # Path is not empty: descend recursively
-            return self.streamviews[target_name]._get_streamview(path)
+            return self.streamviews[target_name].get_streamview(path)
         else:
             return self.streamviews[target_name]
 
-    def get_atom(self, path: [str]) -> Atom:
+    def get_atom(self, path: List[str]) -> Atom:
         """ Raises: KeyError. Technically also IndexError, but should not occur if input is well-formatted (expected)"""
         target_name: str = path.pop(0)
         if path:  # Path is not empty: descend recursively
-            return self.streamviews[target_name]._get_atom(path)
+            return self.streamviews[target_name].get_atom(path)
         else:
             return self.atoms[target_name]
 
-    def create_atom(self, path: [str], weight: float, label_type: ClassVar[AbstractLabel],
-                    activity_type: ClassVar[AbstractActivityPattern], memory_type: ClassVar[NGramMemorySpace],
-                    corpus: Corpus, self_influenced: bool, transforms: [(ClassVar[AbstractTransform], ...)]):
+    def create_atom(self, path: List[str], weight: float, classifier: Type[AbstractClassifier],
+                    activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
+                    corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
         """Raises: KeyError, InvalidPath, DuplicateKeyError"""
         self.logger.debug("[create_atom] Attempting to create atom with path {}.".format(path))
 
@@ -72,13 +72,13 @@ class StreamView(Parametric):
         if new_atom_name in parent_streamview.atoms.keys():
             raise DuplicateKeyError(f"An atom with the name '{new_atom_name}' already exists in "
                                     f"streamview '{parent_streamview.name}'.")
-        parent_streamview.atoms[new_atom_name] = Atom(new_atom_name, weight, label_type, activity_type, memory_type,
+        parent_streamview.atoms[new_atom_name] = Atom(new_atom_name, weight, classifier, activity_type, memory_type,
                                                       corpus, self_influenced, transforms)
 
     def delete_atom(self, name: str):
         del self.atoms[name]
 
-    def create_streamview(self, path: [str], weight: float, merge_actions: (ClassVar, ...)):
+    def create_streamview(self, path: [str], weight: float, merge_actions: Tuple[Type, ...]):
         """Raises: KeyError, InvalidPath, DuplicateKeyError"""
         self.logger.debug("[create_streamview] Attempting to create streamview with path {}.".format(path))
 
@@ -95,7 +95,7 @@ class StreamView(Parametric):
         for atom in self.atoms.values():
             atom.update_peaks(time)
 
-    def merged_peaks(self, time: float, influence_history: [CorpusEvent], corpus: Corpus, **kwargs) -> Peaks:
+    def merged_peaks(self, time: float, influence_history: List[CorpusEvent], corpus: Corpus, **kwargs) -> Peaks:
         # TODO: Crashes if streamview doesn't contain any atoms or streamviews
         peaks_list: [Peaks] = []
         # TODO: Does not account for nested streamview weights

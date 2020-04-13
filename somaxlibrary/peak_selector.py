@@ -1,6 +1,7 @@
 import logging
 import random
 from abc import abstractmethod
+from typing import Tuple, Optional
 
 import numpy as np
 
@@ -21,13 +22,15 @@ class AbstractPeakSelector(Parametric):
     # TODO: Should probably pass transform dict too for future uses/extendability
     @abstractmethod
     def decide(self, peaks: Peaks, influence_history: [(CorpusEvent, (AbstractTransform, ...))],
-               corpus: Corpus, transform_dict: {int: (AbstractTransform, ...)}, **kwargs) -> (CorpusEvent, int):
-        raise NotImplementedError("AbstractPeakSelector.decide is abstract.")
+               corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},
+               **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
+        pass
 
 
 class MaxPeakSelector(AbstractPeakSelector):
     def decide(self, peaks: Peaks, influence_history: [(CorpusEvent, (AbstractTransform, ...))],
-               corpus: Corpus, transform_dict: {int: (AbstractTransform, ...)}, **_kwargs) -> (CorpusEvent, int):
+               corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},
+               **_kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
         self.logger.debug("[decide] MaxPeakSelector called.")
         if peaks.empty():
             return None
@@ -40,7 +43,8 @@ class MaxPeakSelector(AbstractPeakSelector):
 
 class DefaultPeakSelector(AbstractPeakSelector):
     def decide(self, _peaks: Peaks, influence_history: ImprovisationMemory,
-               corpus: Corpus, transform_dict: {int: (AbstractTransform, ...)}, **_kwargs) -> (CorpusEvent, int):
+               corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},
+               **_kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
         self.logger.debug("[decide] DefaultPeakSelector called.")
         try:
             last_event, _, last_transform = influence_history.get_latest()
