@@ -223,4 +223,17 @@ dmypy.json
 
 # End of https://www.gitignore.io/api/macos,python,pycharm+all
 
-*.log
+*.logcorpus/Borron1.json
+corpus/Piano_Solo_Intuition_20121002.json
+corpus/beethoven-furelise.json
+corpus/debussy_part.json
+corpus/debussy_string_quartet.json
+corpus/keithjarrett_kolnconcert.json
+corpus/mozart1.json
+corpus/ravel_scarbo.json
+corpus/satie-gymnopedie1.json
+corpus/schoenberg_drei_klavierstucke_11_2.json
+corpus/scriabin5.json
+corpus/stravinsky_rite_of_spring1.json
+corpus
+log
