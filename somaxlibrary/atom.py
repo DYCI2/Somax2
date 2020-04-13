@@ -51,6 +51,7 @@ class Atom(Parametric):
 
     # influences the memory with incoming data
     def influence(self, label: AbstractLegacyLabel, time: float, **kwargs):
+        # TODO: Handle label/influence type here instead of old location at memoryspace
         """ Raises: InvalidLabelInput"""
         matched_events: [PeakEvent] = self.memory_space.influence(label, time, **kwargs)
         if matched_events:
