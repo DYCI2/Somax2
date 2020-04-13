@@ -8,7 +8,6 @@ import somaxlibrary.exceptions
 import somaxlibrary.improvisation_memory
 import somaxlibrary.peak_event
 import somaxlibrary.io_parser
-import somaxlibrary.legacy_labels
 import somaxlibrary.memory_spaces
 import somaxlibrary.merge_actions
 import somaxlibrary.osc_log_forwarder

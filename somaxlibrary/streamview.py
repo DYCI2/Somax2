@@ -78,7 +78,7 @@ class StreamView(Parametric):
     def delete_atom(self, name: str):
         del self.atoms[name]
 
-    def create_streamview(self, path: [str], weight: float, merge_actions: Tuple[ClassVar, ...]):
+    def create_streamview(self, path: [str], weight: float, merge_actions: Tuple[Type, ...]):
         """Raises: KeyError, InvalidPath, DuplicateKeyError"""
         self.logger.debug("[create_streamview] Attempting to create streamview with path {}.".format(path))
 

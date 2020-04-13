@@ -12,7 +12,7 @@ from pythonosc.osc_server import AsyncIOOSCUDPServer
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.classification.classifier import AbstractClassifier
-from somaxlibrary.corpus_builder import CorpusBuilder
+from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import InvalidPath, DuplicateKeyError, InvalidJsonFormat, ParameterError
 from somaxlibrary.influence import KeywordInfluence, InfluenceKeyword
