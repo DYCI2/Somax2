@@ -30,6 +30,11 @@ class SimpleOscTarget(Target):
         self.send("parameter_dict", "bang")
 
 
+class NoTarget(Target):
+    def send(self, _keyword: str, _content: Any, **_kwargs):
+        pass
+
+
 class CallableTarget(Target):
 
     def __init__(self, callback_func: Callable):

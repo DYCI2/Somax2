@@ -22,7 +22,7 @@ from somaxlibrary.merge_actions import AbstractMergeAction
 from somaxlibrary.osc_log_forwarder import OscLogForwarder
 from somaxlibrary.player import Player
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
-from somaxlibrary.scheduler.Scheduler import Scheduler
+from somaxlibrary.scheduler.realtime_scheduler import RealtimeScheduler
 from somaxlibrary.target import Target, SimpleOscTarget
 from somaxlibrary.transforms import AbstractTransform
 
@@ -36,7 +36,7 @@ class SomaxServer(Caller):
         self.logger.addHandler(OscLogForwarder(self.target))
         self.logger.info(f"Initializing SoMaxServer with input port {in_port} and ip '{ip}'.")
         self.players: {str: Player} = dict()
-        self.scheduler = Scheduler()
+        self.scheduler = RealtimeScheduler()
         self.builder = CorpusBuilder()
         self.ip: str = ip
         self.in_port: int = in_port
@@ -99,7 +99,7 @@ class SomaxServer(Caller):
         ip: str = self.io_parser.parse_ip(ip)
         trig_mode: TriggerMode = self.io_parser.parse_trigger_mode(trig_mode)
         target: Target = SimpleOscTarget(address, port, ip)
-        self.players[name] = Player(name, target, trig_mode)
+        self.players[name] = Player(name, trig_mode, target=target)
 
         if trig_mode == TriggerMode.AUTOMATIC:
             self.scheduler.add_trigger_event(self.players[name])
@@ -187,7 +187,7 @@ class SomaxServer(Caller):
 
         # TODO: Error handling (KeyError players + path_and_name)
         path_and_name: [str] = IOParser.parse_streamview_atom_path(path)
-        time: float = self.scheduler.time
+        time: float = self.scheduler.tick
         try:
             self.players[player].influence(path_and_name, influence, time, **kwargs)
         except KeyError:
@@ -265,7 +265,7 @@ class SomaxServer(Caller):
     def start(self):
         self.clear_all()
         self.scheduler.start()
-        self.logger.info(f"Scheduler Started. Current beat is {self.scheduler.beat}.")
+        self.logger.info(f"Scheduler Started. Current tick is {self.scheduler.tick}.")
 
     def stop(self):
         """stops the scheduler and reset all players"""
@@ -280,14 +280,14 @@ class SomaxServer(Caller):
             player.clear()
 
     def get_time(self):
-        self.target.send("time", self.scheduler.time)
+        self.target.send("time", self.scheduler.tick)
 
     def get_tempo(self):
         self.target.send("tempo", self.scheduler.tempo)
 
     def set_tempo(self, tempo: float):
         # TODO: Error checking
-        self.scheduler.add_tempo_event(self.scheduler.time, tempo)
+        self.scheduler.add_tempo_event(self.scheduler.tick, tempo)
 
     def set_tempo_master(self, player: Union[str, None]):
         try:
@@ -396,7 +396,7 @@ class SomaxServer(Caller):
 
     def _debug_state(self, player: str, state_index: int):
         event: CorpusEvent = self.players[player].corpus.event_at(state_index)
-        self.scheduler.add_corpus_event(self.players[player], self.scheduler.time, event)
+        self.scheduler.add_corpus_event(self.players[player], self.scheduler.tick, event)
 
     @staticmethod
     def _osc_callback(self):

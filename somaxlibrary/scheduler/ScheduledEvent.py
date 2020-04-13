@@ -1,5 +1,8 @@
 from abc import ABC
+from typing import Callable, Any, Dict
 
+from somaxlibrary.corpus_event import CorpusEvent
+from somaxlibrary.label import AbstractLabel
 from somaxlibrary.player import Player
 
 
@@ -20,9 +23,9 @@ class ScheduledPlayerEvent(ScheduledEvent):
         self.player: Player = player
 
 
-class MidiEvent(ScheduledPlayerEvent):
+class ScheduledMidiEvent(ScheduledPlayerEvent):
     def __init__(self, trigger_time: float, player: Player, note: int, velocity: int, channel: int, state: int):
-        super(MidiEvent, self).__init__(trigger_time, player)
+        super(ScheduledMidiEvent, self).__init__(trigger_time, player)
         self.note: int = note
         self.velocity: int = velocity
         self.channel: int = channel
@@ -32,13 +35,27 @@ class MidiEvent(ScheduledPlayerEvent):
         return f"MidiEvent(trigger_time={self.trigger_time},player={self.player},note={self.note},velocity={self.velocity},channel={self.channel},state={self.state})"
 
 
-class AudioEvent(ScheduledPlayerEvent):
+class ScheduledAudioEvent(ScheduledPlayerEvent):
     def __init__(self, trigger_time: float, player: Player, onset: float, duration: float, state: int, tempo: float):
-        super(AudioEvent, self).__init__(trigger_time, player)
+        super(ScheduledAudioEvent, self).__init__(trigger_time, player)
         self.onset: float = onset
         self.duration: float = duration
         self.state: int = state
         self.tempo: float = tempo
+
+
+class ScheduledCorpusEvent(ScheduledPlayerEvent):
+    def __init__(self, trigger_time: float, player: Player, corpus_event: CorpusEvent):
+        super().__init__(trigger_time, player)
+        self.corpus_event: CorpusEvent = corpus_event
+
+
+# TODO: Subject to change with implementation from branch `corpus-builder`
+class ScheduledInfluenceEvent(ScheduledPlayerEvent):
+    def __init__(self, trigger_time: float, player: Player, path: [str], label: AbstractLabel):
+        super().__init__(trigger_time, player)
+        self.path = path
+        self.label = label
 
 
 class AbstractTriggerEvent(ScheduledPlayerEvent, ABC):
@@ -61,6 +78,11 @@ class ManualTriggerEvent(AbstractTriggerEvent):
 
 
 class OscEvent(ScheduledEvent):
+    pass  # TODO
 
-    def __init__(self):
-        pass  # TODO
+
+class CallableEvent(ScheduledEvent):
+    def __init__(self, trigger_time: float, func: Callable, **kwargs):
+        super().__init__(trigger_time)
+        self.func: Callable = func
+        self.kwargs: Dict[str, Any] = kwargs

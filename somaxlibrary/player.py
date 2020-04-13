@@ -25,7 +25,7 @@ from somaxlibrary.transforms import AbstractTransform
 
 class Player(ScheduledMidiObject, Parametric):
 
-    def __init__(self, name: str, target: Target, triggering_mode: TriggerMode):
+    def __init__(self, name: str, triggering_mode: TriggerMode, target: Target):
         super(Player, self).__init__(triggering_mode)
         self.logger = logging.getLogger(__name__)
         self.name: str = name  # name of the player
@@ -52,7 +52,7 @@ class Player(ScheduledMidiObject, Parametric):
     # CREATION/DELETION STREAMVIEWS/ATOMS
     ######################################################
 
-    def create_streamview(self, path: [str], weight: float, merge_actions: Tuple[Type, ...]):
+    def create_streamview(self, path: List[str], weight: float, merge_actions: Tuple[Type[AbstractMergeAction], ...]):
         """creates streamview at target path"""
         self.logger.debug("[create_streamview] Creating streamview {} in player {} with merge_actions {}..."
                           .format(path, self.name, merge_actions))
@@ -174,13 +174,14 @@ class Player(ScheduledMidiObject, Parametric):
         atom: Atom = self._get_atom(path)
         atom.set_activity_pattern(activity_pattern_class, self.corpus)
 
-    def read_corpus(self, filepath: str):
-        # TODO: Handle midi files, audio files and json files separately!
-        raise NotImplementedError("Reading is in the progress of being rewritten")
-        self.corpus = Corpus(filepath)
+    def load_corpus(self, corpus: Corpus):
+        self.corpus = corpus
         for streamview in self.streamviews.values():
             streamview.read(self.corpus)
         self.target.send("corpus", [self.corpus.name, str(self.corpus.content_type), self.corpus.length()])
+
+    def read_corpus(self, filepath: str):
+        self.load_corpus(Corpus(filepath))
 
     def add_transform(self, path: [str], transform: (AbstractTransform, ...)) -> None:
         """ raises TransformError, KeyError"""
