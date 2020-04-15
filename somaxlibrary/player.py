@@ -22,7 +22,7 @@ from somaxlibrary.peaks import Peaks
 from somaxlibrary.scheduler.ScheduledObject import ScheduledMidiObject, TriggerMode
 from somaxlibrary.streamview import StreamView
 from somaxlibrary.target import Target
-from somaxlibrary.transforms import AbstractTransform
+from somaxlibrary.transforms import AbstractTransform, NoTransform
 
 
 class Player(ScheduledMidiObject, Parametric):
@@ -97,9 +97,9 @@ class Player(ScheduledMidiObject, Parametric):
         """ Raises: InvalidCorpus """
         self.logger.debug("[new_event] Player {} attempting to create a new event at scheduler time '{}'."
                           .format(self.name, scheduler_time))
-
         if not self.corpus:
             raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
+
 
         self._update_peaks(scheduler_time)
         self.logger.debug("[new_event] Peaks were updated")
@@ -116,11 +116,12 @@ class Player(ScheduledMidiObject, Parametric):
             raise InvalidConfiguration("All PeakSelectors failed. SoMax requires at least one default peak selector.")
 
         event: CorpusEvent = deepcopy(event_and_transforms[0])
-        transforms: Tuple[AbstractTransform, ...] = event_and_transforms[1]
+        # transforms: Tuple[AbstractTransform, ...] = event_and_transforms[1] # TODO: Transforms removed until update
+        transforms: Tuple[AbstractTransform, ...] = (NoTransform(),)
         self.improvisation_memory.append(event, scheduler_time, transforms)
 
-        for transform in transforms:
-            event = transform.transform(event)
+        # for transform in transforms: # TODO: Transforms removed until update
+        #     event = transform.transform(event) # TODO: Transforms removed until update
 
         self._influence_self(event, scheduler_time)
         self.logger.debug(f"[new_event] Player {self.name} successfully created new event.")
@@ -272,5 +273,5 @@ class Player(ScheduledMidiObject, Parametric):
         # TODO: Does not handle nested streamviews
         for streamview in self.streamviews.values():
             for atom in streamview.atoms.values():
-                peaks: Peaks = atom.activity_pattern.peaks
+                peaks: Peaks = atom.get_peaks()
                 self.target.send("num_peaks", [atom.name, peaks.size()])

@@ -13,7 +13,7 @@ from somaxlibrary.label import AbstractLabel
 from somaxlibrary.parameter import Parameter, ParamWithSetter
 from somaxlibrary.parameter import Parametric
 from somaxlibrary.peak_event import PeakEvent, ClassicPeakEvent
-from somaxlibrary.transforms import AbstractTransform
+from somaxlibrary.transforms import AbstractTransform, NoTransform
 
 
 # TODO: Abstract Influence type. Dependent on (determined by?) ActivityPattern. CUrrently hardcoded in NGram.
@@ -95,7 +95,7 @@ class NGramMemorySpace(AbstractMemorySpace):
         self._parse_parameters()
 
     def __repr__(self):
-        return f"NGramMemorySpace with size {self._ngram_size.value}, and corpus {self._corpus}."#
+        return f"NGramMemorySpace with size {self._ngram_size.value}, and corpus {self._corpus}."  #
 
     def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:
         self.logger.debug(f"[model] Modelling corpus '{corpus}'.")
@@ -123,21 +123,34 @@ class NGramMemorySpace(AbstractMemorySpace):
             return []
         else:
             matches: List[PeakEvent] = []
-            for transform_tuple in self.transforms:
-                # Inverse transform_tuple of input (equivalent to transform_tuple of memory)
-                transformed_labels: List[int] = list(copy(self._influence_history))
-                for transform in reversed(transform_tuple):
-                    transformed_labels = [transform.inverse(l) for l in transformed_labels]
-                key: Tuple[int, ...] = tuple(l.label for l in transformed_labels)
-                transform_hash: int = hash(transform_tuple)
-                try:
-                    matching_events: List[CorpusEvent] = self._structured_data[key]
-                    for event in matching_events:
-                        # TODO: Generalize rather than specific ClassicInfluence.
-                        matches.append(ClassicPeakEvent(event, transform_hash))
-                except KeyError:  # no matches found
-                    continue
-        return matches
+            # TODO: TEMPORARY CODE WITHOUT TRANSFORMS:
+            key: Tuple[int, ...] = tuple(self._influence_history)
+            transform_hash: int = hash((NoTransform(),))
+            try:
+                matching_events: List[CorpusEvent] = self._structured_data[key]
+                for event in matching_events:
+                    matches.append(ClassicPeakEvent(event, transform_hash))
+                return matches
+            except KeyError:  # no matches found
+                return []
+            # TODO: TEMPORARY CODE END
+
+            # TODO: Transforms removed until update
+            # for transform_tuple in self.transforms:
+            #     # Inverse transform_tuple of input (equivalent to transform_tuple of memory)
+            #     transformed_labels: List[int] = list(copy(self._influence_history))
+            #     for transform in reversed(transform_tuple):
+            #         transformed_labels = [transform.inverse(l) for l in transformed_labels]
+            #     key: Tuple[int, ...] = tuple(l.label for l in transformed_labels)
+            #     transform_hash: int = hash(transform_tuple)
+            #     try:
+            #         matching_events: List[CorpusEvent] = self._structured_data[key]
+            #         for event in matching_events:
+            #             # TODO: Generalize rather than specific ClassicInfluence.
+            #             matches.append(ClassicPeakEvent(event, transform_hash))
+            #     except KeyError:  # no matches found
+            #         continue
+        # return matches
 
     def set_ngram_size(self, new_size: int):
         self._ngram_size.value = new_size

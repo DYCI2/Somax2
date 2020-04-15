@@ -9,17 +9,12 @@ import pandas as pd
 
 from . import event_parameters
 from .chromagram import Chromagram
-from somaxlibrary.corpus import Corpus
+from somaxlibrary.corpus import Corpus, ContentType
 from somaxlibrary.corpus_event import Note, CorpusEvent
 from .event_parameters import AbstractTrait
 from .matrix_keys import MatrixKeys as Keys
 from .note_matrix import NoteMatrix
 from .spectrogram import Spectrogram
-
-
-class ContentType(Enum):
-    MIDI = "MIDI"
-    AUDIO = "Audio"
 
 
 class CorpusBuilder:

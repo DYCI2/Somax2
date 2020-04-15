@@ -78,7 +78,6 @@ class RealtimeScheduler(BaseScheduler):
             self._add_midi_event(player, trigger_time, corpus_event)
 
     def _add_midi_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
-        print([note for note in corpus_event.notes])
         # Handle held notes from previous state:
         note_offs_previous: [Note] = [n for n in player.held_notes if n not in corpus_event.held_to()]
         note_ons: [Note] = [n for n in corpus_event.notes if n not in player.held_notes]
