@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1582.0, 471.0 ],
+		"rect" : [ 34.0, 79.0, 1582.0, 638.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -38,6 +38,38 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-76",
+					"linecount" : 7,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1137.0, 926.0, 51.0, 102.0 ],
+					"presentation" : 1,
+					"presentation_linecount" : 7,
+					"presentation_rect" : [ 846.0, 442.0, 51.0, 102.0 ],
+					"text" : "influence player1 melodic::melodic pitch 72"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-75",
+					"linecount" : 6,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1200.0, 939.0, 210.0, 89.0 ],
+					"presentation" : 1,
+					"presentation_linecount" : 6,
+					"presentation_rect" : [ 909.0, 455.0, 210.0, 89.0 ],
+					"text" : "influence player1 harmonic::harmonic chroma [ 0.453888 0.013819 0.036557 0.009857 0.011914 0.136087 0.051329 0.734712 0.084002 0.010881 0.073956 0.037428 ]"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-55",
 					"maxclass" : "message",
@@ -2025,7 +2057,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 406.0, 70.896678966789636, 213.0, 24.0 ],
+					"patching_rect" : [ 400.0, 38.896678966789636, 213.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 436.0, 1.0, 377.0, 24.0 ],
 					"text" : "Audio Input",
@@ -2190,9 +2222,33 @@
 			}
 , 			{
 				"box" : 				{
-					"clipheight" : 20.0,
+					"clipheight" : 29.0,
 					"data" : 					{
-						"clips" : [  ]
+						"clips" : [ 							{
+								"absolutepath" : "/Users/joakimborg/Music/Sax_gentle_cat_Slow.wav",
+								"filename" : "Sax_gentle_cat_Slow.wav",
+								"filekind" : "audiofile",
+								"loop" : 0,
+								"content_state" : 								{
+									"originallength" : [ 0.0, "ticks" ],
+									"quality" : [ "basic" ],
+									"originaltempo" : [ 120.0 ],
+									"basictuning" : [ 440 ],
+									"pitchcorrection" : [ 0 ],
+									"formant" : [ 1.0 ],
+									"play" : [ 0 ],
+									"followglobaltempo" : [ 0 ],
+									"originallengthms" : [ 0.0 ],
+									"mode" : [ "basic" ],
+									"timestretch" : [ 0 ],
+									"formantcorrection" : [ 0 ],
+									"speed" : [ 1.0 ],
+									"pitchshift" : [ 1.0 ],
+									"slurtime" : [ 0.0 ]
+								}
+
+							}
+ ]
 					}
 ,
 					"id" : "obj-42",
@@ -3624,6 +3680,20 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-65", 0 ],
+					"source" : [ "obj-75", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-65", 0 ],
+					"source" : [ "obj-76", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-65", 0 ],
 					"source" : [ "obj-8", 0 ]
 				}
 
@@ -3814,6 +3884,13 @@
 				"bootpath" : "~/Documents/Max 8/Packages/Somax2/abstractions/somax",
 				"patcherrelativepath" : "./abstractions/somax",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "Sax_gentle_cat_Slow.wav",
+				"bootpath" : "~/Music",
+				"patcherrelativepath" : "../../../../Music",
+				"type" : "WAVE",
 				"implicit" : 1
 			}
 , 			{

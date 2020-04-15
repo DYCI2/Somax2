@@ -58,7 +58,7 @@ class Corpus:
         return self.events[index]
 
     def event_closest(self, time: float) -> CorpusEvent:
-        idx: int = np.searchsorted(self.onsets, time)
+        idx: int = int(np.searchsorted(self.onsets, time))
         if idx > 0 and (idx == self.length() or np.abs(time - self.onsets[idx - 1]) < np.abs(time - self.onsets[idx])):
             return self.events[idx - 1]
         else:

@@ -103,7 +103,7 @@ class NGramMemorySpace(AbstractMemorySpace):
         self._labels = labels
         self._structured_data = {}
         labels: deque[int] = deque([], self._ngram_size.value)
-        for event, label in zip(corpus.events, labels):
+        for event, label in zip(self._corpus.events, self._labels):
             labels.append(hash(label))
             if len(labels) < self._ngram_size.value:
                 continue
