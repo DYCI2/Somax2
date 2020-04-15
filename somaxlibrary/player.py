@@ -1,4 +1,5 @@
 import logging
+import os
 from copy import deepcopy
 from typing import Dict, Optional, Tuple, Type, List
 
@@ -6,6 +7,7 @@ from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.atom import Atom
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus import Corpus
+from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import DuplicateKeyError, TransformError
 from somaxlibrary.exceptions import InvalidPath, InvalidCorpus, InvalidConfiguration, InvalidLabelInput
@@ -181,7 +183,13 @@ class Player(ScheduledMidiObject, Parametric):
         self.target.send("corpus", [self.corpus.name, str(self.corpus.content_type), self.corpus.length()])
 
     def read_corpus(self, filepath: str):
-        self.load_corpus(Corpus(filepath))
+        _, file_extension = os.path.splitext(filepath)
+        if file_extension == ".json":
+            self.load_corpus(Corpus.from_json(filepath))
+        elif file_extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS + CorpusBuilder.MIDI_FILE_EXTENSIONS:
+            self.load_corpus(CorpusBuilder().build(filepath))
+        else:
+            raise IOError(f"File path with extension {file_extension} is not supported.")
 
     def add_transform(self, path: [str], transform: (AbstractTransform, ...)) -> None:
         """ raises TransformError, KeyError"""

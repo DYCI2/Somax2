@@ -2,7 +2,7 @@ import copy
 import itertools
 import logging
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Optional, Dict, Any
 import time
 from timeit import default_timer as timer
 
@@ -16,13 +16,14 @@ from somaxlibrary.scheduler.optimized_offline_scheduler import OptimizedOfflineS
 
 class SomaxGenerator(ABC):
     def __init__(self, source_corpus: Corpus, influence_corpus: Corpus, mode: TriggerMode = TriggerMode.AUTOMATIC,
-                 use_optimization: bool = True):
+                 use_optimization: bool = True, name: Optional[str] = None):
         print(f"{time.time()}: TEMP Init start")
         self.logger = logging.getLogger(__name__)
         self.source_corpus: Corpus = source_corpus
         self.influence_corpus: Corpus = influence_corpus
         self.mode: TriggerMode = mode
         self.player: Player = self._initialize(self.source_corpus)
+        self.name: Optional[str] = name
         if use_optimization:
             self.scheduler: OptimizedOfflineScheduler = OptimizedOfflineScheduler(self.mode, self.player)
         else:
@@ -43,8 +44,7 @@ class SomaxGenerator(ABC):
 
         # ticks, times_ms and tempi all have length `len(corpus_events) + 1`
         ticks: List[float] = [start_tick]  # cumulative
-        # TODO: Subject to change with implementation from branch `corpus-builder` - not absolute time
-        times_ms: List[float] = [self.influence_corpus.events[0].absolute_time[0]]  # cumulative
+        times_ms: List[float] = [self.influence_corpus.events[0].absolute_onset]  # cumulative
         tempi: List[float] = [self.influence_corpus.events[0].tempo]
         corpus_events: List[CorpusEvent] = []
 
@@ -56,8 +56,7 @@ class SomaxGenerator(ABC):
                 for event in events:
                     corpus_events.append(event)
                     ticks.append(self.scheduler.tick)
-                    # TODO: Subject to change with implementation from branch `corpus-builder` - should not use absolute_time[1] but abs.dur
-                    times_ms.append(times_ms[-1] + event.absolute_time[1] * event.tempo / self.scheduler.tempo)
+                    times_ms.append(times_ms[-1] + event.absolute_duration * event.tempo / self.scheduler.tempo)
                     tempi.append(self.scheduler.tempo)
 
             except IndexError:
@@ -69,7 +68,15 @@ class SomaxGenerator(ABC):
         self.logger.debug("Iteration over Scheduler completed")
         print(f"{time.time()}: TEMP Iteration over Sched completed")
 
-        return self._build_new_corpus(corpus_events, ticks, times_ms, tempi)
+        corpus_events: List[CorpusEvent] = self._update_times(corpus_events, ticks, times_ms, tempi)
+        name = self.name if self.name else f"{self.influence_corpus.name}On{self.source_corpus.name}"
+        return Corpus(corpus_events, name, self.source_corpus.content_type, self._generate_build_parameters())
+
+    def _generate_build_parameters(self) -> Dict[str, Any]:
+        return {"source_corpus": self.source_corpus.name,
+                "influence_corpus": self.influence_corpus,
+                "mode": self.mode,
+                "scheduler": self.scheduler.__class__}
 
     def _influence(self, influence_corpus: Corpus, start_tick: float, end_tick: float):
         events: [CorpusEvent] = [e for e in influence_corpus.events if start_tick <= e.onset <= end_tick - e.duration]
@@ -89,18 +96,17 @@ class SomaxGenerator(ABC):
         self.logger.debug("Influence completed")
         print(f"{time.time()}: TEMP Influence completed")
 
-    def _build_new_corpus(self, corpus_events: [CorpusEvent], ticks: List[float], times_ms: List[float],
-                          tempi: List[float]) -> Corpus:
+    def _update_times(self, corpus_events: List[CorpusEvent], ticks: List[float], times_ms: List[float],
+                      tempi: List[float]) -> List[CorpusEvent]:
         """ Notes: ticks, times_ms and tempi should all have length `len(corpus_events) + 1`"""
         corpus_events = copy.deepcopy(corpus_events)
         for i, event in enumerate(corpus_events):
             event.onset = ticks[i]
-            # TODO: Subject to change with implementation from branch `corpus-builder` - should not set event.absolute_time but abs onset + abs dur
-            event.absolute_time = (times_ms[i], times_ms[i + 1] - times_ms[i])
+            event.absolute_onset = times_ms[i]
+            event.absolute_duration = times_ms[i + 1] - times_ms[i]
             event.tempo = tempi[i]
-            # TODO: IMPORTANT Change note durations too!!!!
-        # TODO: Subject to change with implementation from branch `corpus-builder` - should return a corpus
-        self.logger.debug(f"Constructed new corpus with {len(corpus_events)} events")
+            # TODO: IMPORTANT Change note _absolute_ durations too as well as relative onsets - depend on previous event!!!!
+        self.logger.warning("Note absolute durations have not been updated - incomplete implementation")
         print(f"{time.time()}: TEMP Completed completed")
         return corpus_events
 

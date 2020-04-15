@@ -2,7 +2,7 @@ import inspect
 import logging
 import sys
 from abc import ABC, abstractmethod
-from typing import Union, ClassVar
+from typing import Union, Type
 
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import TransformError
@@ -27,7 +27,7 @@ class AbstractTransform(ABC):
     # TODO: Must get this data from elsewhere, for example Classifier. Possibly at init even
     # @staticmethod
     # @abstractmethod
-    # def valid_labels() -> [ClassVar[AbstractLegacyLabel]]:
+    # def valid_labels() -> [Type[AbstractLegacyLabel]]:
     #     raise NotImplementedError("AbstractTransform.valid_labels is abstract.")
 
     def transform(self, obj: Union[AbstractLabel, CorpusEvent]) -> Union[AbstractLabel, CorpusEvent]:
@@ -63,7 +63,7 @@ class AbstractTransform(ABC):
         raise NotImplementedError("AbstractTransform._transform_label is abstract.")
 
     @staticmethod
-    def classes() -> {str: ClassVar}:
+    def classes() -> {str: Type}:
         """Returns class objects for all non-abstract classes in this module."""
         return dict(inspect.getmembers(sys.modules[__name__],
                                        lambda member: inspect.isclass(member) and not inspect.isabstract(
@@ -106,9 +106,9 @@ class NoTransform(AbstractTransform):
 # TODO: Structure according to old implementation below with chroma
 class TransposeTransform(AbstractTransform):
     def __init__(self, semitones: int):
+        super().__init__()
         raise NotImplementedError(
             "TransposeTransform._transform_label is not supported. See https://trello.com/c/kOBiD8CU/29-transforms")
-        super(TransposeTransform, self).__init__()
         self.semitones = semitones
 
     def __hash__(self):
@@ -122,7 +122,7 @@ class TransposeTransform(AbstractTransform):
 
     # TODO
     # @staticmethod
-    # def valid_labels() -> [ClassVar[AbstractLegacyLabel]]:
+    # def valid_labels() -> [Type[AbstractLegacyLabel]]:
     #     return [MelodicLegacyLabel, PitchClassLabel]
 
     def _transform_label(self, obj: AbstractLabel) -> AbstractLabel:

@@ -62,12 +62,11 @@ class AbstractMemorySpace(Parametric):
     def add_transforms(self, transforms: List[Tuple[Type[AbstractTransform], ...]]) -> None:
         # TODO: Not supported for
         """ raises: TransformError """
-        raise RuntimeError("AbstractMemorySpace.add_transform is not supported yet.")
         # Ensure that all transforms are valid for the MemorySpace's label type
         for transform_tuple in transforms:
-            if not all(self.label_type in t.valid_labels() for t in transform_tuple):  # TODO: Update/handle
-                raise TransformError(
-                    f"Could not add transform {transform_tuple} to memspace with label type {self.label_type}.")
+            self.logger.warning("MemorySpaces.add_transform has not been updated yet")  # TODO: Update/handle
+            # if not all(self.label_type in t.valid_labels() for t in transform_tuple):
+            #     raise TransformError(f"Could not add transform {transform_tuple} to memspace with label type {self.label_type}.")
         for transform_tuple in transforms:
             if transform_tuple in self.transforms:
                 self.logger.warning(f"Transform {transform_tuple} was not added as it already exists in memspace.")
@@ -96,7 +95,7 @@ class NGramMemorySpace(AbstractMemorySpace):
         self._parse_parameters()
 
     def __repr__(self):
-        return f"NGramMemorySpace with size {self._ngram_size.value}, type {self.label_type} and corpus {self.corpus}."
+        return f"NGramMemorySpace with size {self._ngram_size.value}, and corpus {self._corpus}."#
 
     def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:
         self.logger.debug(f"[model] Modelling corpus '{corpus}'.")

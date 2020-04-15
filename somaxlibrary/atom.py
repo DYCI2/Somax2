@@ -9,6 +9,7 @@ from somaxlibrary.memory_spaces import AbstractMemorySpace
 from somaxlibrary.label import AbstractLabel
 from somaxlibrary.parameter import Parametric, Parameter
 from somaxlibrary.peak_event import PeakEvent
+from somaxlibrary.peaks import Peaks
 from somaxlibrary.transforms import AbstractTransform
 
 
@@ -96,3 +97,6 @@ class Atom(Parametric):
 
     def is_enabled(self):
         return self.enabled.value
+
+    def get_peaks(self) -> Peaks:
+        return self._activity_pattern.peaks

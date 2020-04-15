@@ -89,10 +89,14 @@ class Corpus:
     def plot(self):
         import matplotlib as mpl
         mpl.use('Qt5Agg')
-        _, axes = plt.subplots(6, 1, gridspec_kw={'height_ratios': [1, 5, 3, 3, 1, 1]})
-        self.fg_spectrogram.plot(axes[2])
-        self.bg_spectrogram.plot(axes[3])
-        self.fg_chromagram.plot(axes[4])
-        self.bg_chromagram.plot(axes[5])
-        self.to_note_matrix().plot(axes=(axes[0], axes[1]))
+        if all([v is not None for v in [self.fg_spectrogram, self.bg_spectrogram, self.fg_chromagram, self.bg_chromagram]]):
+            _, axes = plt.subplots(6, 1, gridspec_kw={'height_ratios': [1, 5, 3, 3, 1, 1]})
+            self.fg_spectrogram.plot(axes[2])
+            self.bg_spectrogram.plot(axes[3])
+            self.fg_chromagram.plot(axes[4])
+            self.bg_chromagram.plot(axes[5])
+            self.to_note_matrix().plot(axes=(axes[0], axes[1]))
+        else:
+            _, axes = plt.subplots(2, 1, gridspec_kw={'height_ratios': [1, 5]})
+            self.to_note_matrix().plot(axes=(axes[0], axes[1]))
         plt.show()

@@ -97,7 +97,7 @@ class StreamView(Parametric):
 
     def merged_peaks(self, time: float, influence_history: List[CorpusEvent], corpus: Corpus, **kwargs) -> Peaks:
         # TODO: Crashes if streamview doesn't contain any atoms or streamviews
-        peaks_list: [Peaks] = []
+        peaks_list: List[Peaks] = []
         # TODO: Does not account for nested streamview weights
         # Peaks from child streamviews
         for streamview in self.streamviews.values():
@@ -109,7 +109,7 @@ class StreamView(Parametric):
         for atom in self.atoms.values():
             weight_sum += atom.weight if atom.is_enabled() else 0.0
         for atom in self.atoms.values():
-            peaks: Peaks = atom.activity_pattern.peaks
+            peaks: Peaks = atom.get_peaks()
             peaks.scores *= atom.weight / weight_sum
             peaks_list.append(peaks)
 

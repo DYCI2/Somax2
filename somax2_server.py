@@ -35,7 +35,7 @@ class SomaxServer(Caller):
         self.target: Target = SimpleOscTarget("/server", out_port, ip)  # TODO: Change to multiosctarget for distributed
         self.logger.addHandler(OscLogForwarder(self.target))
         self.logger.info(f"Initializing SoMaxServer with input port {in_port} and ip '{ip}'.")
-        self.players: {str: Player} = dict()
+        self.players: Dict[str, Player] = dict()
         self.scheduler = RealtimeScheduler()
         self.builder = CorpusBuilder()
         self.ip: str = ip
@@ -135,7 +135,11 @@ class SomaxServer(Caller):
         self.logger.debug(f"[create_atom] called for player {player} with path {path}.")
         path_and_name: [str] = IOParser.parse_streamview_atom_path(path)
 
-        label: Type[AbstractClassifier] = self.io_parser.parse_classifier_type(classifier)
+        try:
+            classifier: Type[AbstractClassifier] = AbstractClassifier.from_string(classifier)
+        except IOError as e:
+            self.logger.error(f"{str(e)} Did not create an atom.")
+            return
         activity_type: Type[AbstractActivityPattern] = self.io_parser.parse_activity_type(activity_type)
         memory_type: Type[AbstractMemorySpace] = self.io_parser.parse_memspace_type(memory_type)
 
@@ -146,7 +150,7 @@ class SomaxServer(Caller):
             self.logger.error(f"{str(e)} Setting Transforms to default.")
             transforms: [(Type[AbstractTransform], ...)] = IOParser.DEFAULT_TRANSFORMS
         try:
-            self.players[player].create_atom(path_and_name, weight, label, activity_type, memory_type,
+            self.players[player].create_atom(path_and_name, weight, classifier, activity_type, memory_type, None,
                                              self_influenced, transforms)
             self.logger.info(f"Created atom with path '{player + '::' + path}'")
             self.players[player]._parse_parameters()  # TODO: Not ideal

@@ -23,6 +23,7 @@ class AbstractActivityPattern(Parametric):
         self.logger = logging.getLogger(__name__)
         self._peaks: Peaks = Peaks.create_empty()
         self.corpus: Corpus = corpus
+        self.logger.warning("ActivityPattern.peaks does not return a copy of peaks - potentially volatile as these values are scaled.")
 
     @abstractmethod
     def insert(self, influences: [PeakEvent]) -> None:
@@ -46,6 +47,7 @@ class AbstractActivityPattern(Parametric):
     @property
     def peaks(self) -> Peaks:
         """ Returns a copy of peaks"""
+        # TODO: Doesn't return a copy - check if this is the intended implementation or if tooltip is!!!
         return self._peaks
 
     def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:

@@ -1,7 +1,7 @@
 from typing import Optional, Any, List
 
 from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.labels import AbstractLabel
+from somaxlibrary.label import AbstractLabel
 from somaxlibrary.player import Player
 
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledInfluenceEvent, ScheduledAudioEvent, \

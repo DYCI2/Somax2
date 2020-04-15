@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 972.0, 731.0 ],
+		"rect" : [ 34.0, 79.0, 1852.0, 471.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -2192,55 +2192,7 @@
 				"box" : 				{
 					"clipheight" : 20.0,
 					"data" : 					{
-						"clips" : [ 							{
-								"absolutepath" : "/Users/joakimborg/Music/Sax_gentle_cat_Slow.wav",
-								"filename" : "Sax_gentle_cat_Slow.wav",
-								"filekind" : "audiofile",
-								"loop" : 0,
-								"content_state" : 								{
-									"pitchcorrection" : [ 0 ],
-									"followglobaltempo" : [ 0 ],
-									"timestretch" : [ 0 ],
-									"pitchshift" : [ 1.0 ],
-									"formant" : [ 1.0 ],
-									"formantcorrection" : [ 0 ],
-									"mode" : [ "basic" ],
-									"quality" : [ "basic" ],
-									"originallengthms" : [ 0.0 ],
-									"originallength" : [ 0.0, "ticks" ],
-									"play" : [ 0 ],
-									"slurtime" : [ 0.0 ],
-									"originaltempo" : [ 120.0 ],
-									"basictuning" : [ 440 ],
-									"speed" : [ 1.0 ]
-								}
-
-							}
-, 							{
-								"absolutepath" : "/Users/joakimborg/Music/Monophonic/Syrinx.aiff",
-								"filename" : "Syrinx.aiff",
-								"filekind" : "audiofile",
-								"loop" : 0,
-								"content_state" : 								{
-									"pitchcorrection" : [ 0 ],
-									"followglobaltempo" : [ 0 ],
-									"timestretch" : [ 0 ],
-									"pitchshift" : [ 1.0 ],
-									"formant" : [ 1.0 ],
-									"formantcorrection" : [ 0 ],
-									"mode" : [ "basic" ],
-									"quality" : [ "basic" ],
-									"originallengthms" : [ 0.0 ],
-									"originallength" : [ 0.0, "ticks" ],
-									"play" : [ 0 ],
-									"slurtime" : [ 0.0 ],
-									"originaltempo" : [ 120.0 ],
-									"basictuning" : [ 440 ],
-									"speed" : [ 1.0 ]
-								}
-
-							}
- ]
+						"clips" : [  ]
 					}
 ,
 					"id" : "obj-42",
@@ -2696,18 +2648,6 @@
 					"patching_rect" : [ 111.0, 77.396678966789636, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 340.0, 92.896678966789636, 24.0, 24.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-11",
-					"linecount" : 4,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 974.0, 624.0, 301.0, 74.0 ],
-					"text" : "TODO: \n\n- Complete integration, add player etc\n- Add inputs and outputs (with gates)\n"
 				}
 
 			}
@@ -3877,20 +3817,6 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "Sax_gentle_cat_Slow.wav",
-				"bootpath" : "~/Music",
-				"patcherrelativepath" : "../../../../Music",
-				"type" : "WAVE",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "Syrinx.aiff",
-				"bootpath" : "~/Music/Monophonic",
-				"patcherrelativepath" : "../../../../Music/Monophonic",
-				"type" : "AIFF",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "yin~.mxo",
 				"type" : "iLaX"
 			}
@@ -3923,9 +3849,8 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3936,20 +3861,20 @@
 						"autogradient" : 0
 					}
 ,
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"message" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3959,7 +3884,8 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-
+,
+					"fontface" : [ 1 ]
 				}
 ,
 				"button" : 				{

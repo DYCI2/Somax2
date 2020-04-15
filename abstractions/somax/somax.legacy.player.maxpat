@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 0,
-			"revision" : 4,
+			"minor" : 1,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1586.0, 818.0 ],
+		"rect" : [ 34.0, 78.0, 1852.0, 1030.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -166,13 +166,11 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-189",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 48.0, 351.0, 31.0, 35.0 ],
-					"text" : "Scarbo"
+					"patching_rect" : [ 48.0, 351.0, 31.0, 22.0 ]
 				}
 
 			}
@@ -2395,8 +2393,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 4,
+							"minor" : 1,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2908,7 +2906,7 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-26",
-					"items" : [ "Obama_original", ",", "debussy_part_harm", ",", "Sax_gentle cat_Slow", ",", "corpus", ",", "0046_Beethoven_Quartet_127_3-4", ",", "0048_Beethoven_Quartet_131_1-7", ",", "Sax_gentle_cat_Slow", ",", "Scarbo", ",", "debussy", ",", "tests_audio", ",", "CarineIntuition", ",", "ScarboXX normalized 75", ",", "debussy_part", ",", "keith_rh", ",", "Scarbo copy", ",", "keith_lh", ",", "best_composition", ",", ".json" ],
+					"items" : [ "scriabin5", ",", "ravel_scarbo", ",", "stravinsky_rite_of_spring1", ",", "Piano_Solo_Intuition_20121002", ",", "mozart1", ",", "debussy_string_quartet", ",", "keithjarrett_kolnconcert", ",", "satie-gymnopedie1", ",", "debussy_part", ",", "Borron1", ",", "beethoven-furelise", ",", "schoenberg_drei_klavierstucke_11_2", ",", ".json" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -3016,13 +3014,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-38",
-					"linecount" : 5,
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 656.0, 159.0, 404.0, 76.0 ],
-					"text" : "new_player $1 $2 override=True, create_streamview $1 self, create_atom $1 self::self label=MelodicLabel self_influenced=True, create_streamview $1 melodic, create_atom $1 melodic::melodic label=PitchClassLabel, create_streamview $1 harmonic, create_atom $1 harmonic::harmonic label=HarmonicLabel, bang"
+					"patching_rect" : [ 656.0, 159.0, 1085.0, 35.0 ],
+					"text" : "new_player $1 $2 override=True, create_streamview $1 self, create_atom $1 self::self classifier=TopNoteClassifier self_influenced=True, create_streamview $1 melodic, create_atom $1 melodic::melodic classifier=PitchClassClassifier, create_streamview $1 harmonic, create_atom $1 harmonic::harmonic classifier=SomChromaClassifier, bang"
 				}
 
 			}
@@ -4687,16 +4685,7 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"toggle" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
 				"default" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
@@ -4709,13 +4698,14 @@
 						"autogradient" : 0
 					}
 ,
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontface" : [ 1 ]
 				}
 ,
 				"newobj" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontface" : [ 1 ]
 				}
 ,
@@ -4733,6 +4723,14 @@
 					}
 ,
 					"fontface" : [ 1 ]
+				}
+,
+				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"parentstyle" : "",

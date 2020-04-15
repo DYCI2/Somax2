@@ -23,8 +23,8 @@ class ContentType(Enum):
 
 
 class CorpusBuilder:
-    _MIDI_FILE_EXTENSIONS = [".mid", ".midi"]
-    _AUDIO_FILE_EXTENSIONS = []
+    MIDI_FILE_EXTENSIONS = [".mid", ".midi"]
+    AUDIO_FILE_EXTENSIONS = []
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
@@ -32,13 +32,13 @@ class CorpusBuilder:
     def build(self, filepath: str, **kwargs) -> Corpus:
         # TODO: Handle folders
         name, extension = os.path.splitext(filepath.split("/")[-1])
-        if extension in CorpusBuilder._MIDI_FILE_EXTENSIONS:
+        if extension in CorpusBuilder.MIDI_FILE_EXTENSIONS:
             return self.build_midi(filepath, name, **kwargs)
-        elif extension in CorpusBuilder._AUDIO_FILE_EXTENSIONS:
+        elif extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS:
             return self.build_audio(filepath, name, **kwargs)
         else:
             raise IOError("Invalid file. Valid extensions are {}.".format(
-                "','".join(self._MIDI_FILE_EXTENSIONS + self._AUDIO_FILE_EXTENSIONS)))
+                "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
 
     def build_midi(self, filepath: str, name: str, foreground_channels: Tuple[int] = np.arange(1, 17),
                    background_channels: Tuple[int] = np.arange(1, 17), **kwargs) -> Corpus:
@@ -102,8 +102,8 @@ class CorpusBuilder:
 
         # Finalize last slice
         final_note: Note = max(events[-1].notes, key=lambda n: n.onset + n.duration)
-        note_end: float = max(0.0, final_note.duration + final_note.onset)
-        note_absolute_end: float = max(0.0, final_note.absolute_duration + final_note.absolute_onset)
+        note_end: float = events[-1].onset + max(0.0, final_note.duration + final_note.onset)
+        note_absolute_end: float = events[-1].absolute_onset + max(0.0, final_note.absolute_duration + final_note.absolute_onset)
         events[-1].set_duration(end=note_end, absolute_end=note_absolute_end)
         return Corpus(events, "TODO TEMPORARY NAME", ContentType.MIDI, {})  # TODO Name and build params.
 
