@@ -20,11 +20,11 @@ class TestGenerator(SomaxGenerator):
         player.create_streamview(["melodic"], 1.0, (DistanceMergeAction, PhaseModulationMergeAction))
 
         player.create_atom(["self", "self"], 1.0, TopNoteClassifier, ClassicActivityPattern, NGramMemorySpace,
-                           source_corpus, True, [])
+                           source_corpus, True, [(NoTransform, )], )
         player.create_atom(["harmonic", "harmonic"], 1.0, SomChromaClassifier, ClassicActivityPattern, NGramMemorySpace,
-                           source_corpus, True, [])
+                           source_corpus, True, [(NoTransform, )])
         player.create_atom(["melodic", "melodic"], 1.0, PitchClassClassifier, ClassicActivityPattern, NGramMemorySpace,
-                           source_corpus, True, [])
+                           source_corpus, True, [(NoTransform, )])
 
         player.load_corpus(source_corpus)
 
@@ -35,12 +35,12 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s.%(msecs)03d [%(levelname)s]: %(name)s: %(message)s',
                         datefmt="%H:%M:%S")
 
-    source: Corpus = CorpusBuilder().build("/Users/joakimborg/MIDI/debussy.mid")
-    influence: Corpus = CorpusBuilder().build("/Users/joakimborg/Downloads/satie-gymnopedie1.mid")
-    # influence = source
+    source: Corpus = CorpusBuilder().build("/Users/joakimborg/MIDI/mozart36/symphony_425_1_(c)ishii.mid")
+    # influence: Corpus = CorpusBuilder().build("/Users/joakimborg/Downloads/satie-gymnopedie1.mid")
+    influence = source
     t = TestGenerator(source, influence, use_optimization=True)
-    corpus: Corpus = t.run()
-    print(corpus)
-    print(len(corpus.events))
-    # corpus.plot()
-    corpus.plot()
+    output: Corpus = t.run()
+    print(output)
+    print(len(output.events))
+    print("Number of matching events:", sum([int(a.state_index == b.state_index) for (a, b) in zip(influence.events, output.events)]))
+    # output.plot()
