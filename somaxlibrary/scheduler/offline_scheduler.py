@@ -14,12 +14,12 @@ class OfflineScheduler(BaseScheduler):
         super().__init__(tempo, trigger_pretime=0)
         # self.previous_event: Optional[ScheduledEvent] = None
 
-    def next(self) -> List[CorpusEvent]:
+    def next(self) -> List[ScheduledEvent]:
         """Raises: IndexError if queue is empty"""
         self._update_tick()
         events: List[ScheduledEvent] = self._process_internal_events()
         # self.previous_event = events[0]
-        return [e.corpus_event for e in events if isinstance(e, ScheduledCorpusEvent)]
+        return events
 
     def _update_tick(self) -> None:
         self._tick = min([e.trigger_time for e in self.queue])

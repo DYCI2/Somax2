@@ -40,7 +40,7 @@ class Player(ScheduledMidiObject, Parametric):
         self.transforms: Dict[int, Tuple[AbstractTransform, ...]] = {}  # key: hash
 
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
-        self._previous_peaks: Peaks = Peaks.create_empty()
+        self.previous_peaks: Peaks = Peaks.create_empty()
 
         # TODO: Temporary: Add as input arguments instead
         for merge_action in [DistanceMergeAction, PhaseModulationMergeAction, NextStateMergeAction]:
@@ -260,7 +260,7 @@ class Player(ScheduledMidiObject, Parametric):
         for merge_action in self.merge_actions.values():
             if merge_action.is_enabled():
                 all_peaks = merge_action.merge(all_peaks, time, history, corpus, **kwargs)
-        self._previous_peaks = all_peaks
+        self.previous_peaks = all_peaks
         return all_peaks
 
     ######################################################
@@ -269,7 +269,7 @@ class Player(ScheduledMidiObject, Parametric):
 
     def send_peaks(self):
         peak_group: str = self.name
-        self.target.send("num_peaks", [peak_group, self._previous_peaks.size()])
+        self.target.send("num_peaks", [peak_group, self.previous_peaks.size()])
         # TODO: Does not handle nested streamviews
         for streamview in self.streamviews.values():
             for atom in streamview.atoms.values():

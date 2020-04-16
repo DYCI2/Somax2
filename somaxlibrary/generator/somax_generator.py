@@ -2,13 +2,16 @@ import copy
 import itertools
 import logging
 from abc import ABC, abstractmethod
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Tuple
 import time
 from timeit import default_timer as timer
 
+from evaluation.peaks_statistics import PeaksStatistics
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_event import CorpusEvent
+from somaxlibrary.peaks import Peaks
 from somaxlibrary.player import Player
+from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 from somaxlibrary.scheduler.offline_scheduler import OfflineScheduler
 from somaxlibrary.scheduler.optimized_offline_scheduler import OptimizedOfflineScheduler
@@ -16,27 +19,34 @@ from somaxlibrary.scheduler.optimized_offline_scheduler import OptimizedOfflineS
 
 class SomaxGenerator(ABC):
     def __init__(self, source_corpus: Corpus, influence_corpus: Corpus, mode: TriggerMode = TriggerMode.AUTOMATIC,
-                 use_optimization: bool = True, name: Optional[str] = None):
+                 use_optimization: bool = True, gather_peak_statistics: bool = False, name: Optional[str] = None,
+                 **kwargs):
         print(f"{time.time()}: TEMP Init start")
         self.logger = logging.getLogger(__name__)
         self.source_corpus: Corpus = source_corpus
         self.influence_corpus: Corpus = influence_corpus
         self.mode: TriggerMode = mode
-        self.player: Player = self._initialize(self.source_corpus)
+        self.player: Player = self._initialize(self.source_corpus, **kwargs)
         self.name: Optional[str] = name
+
         if use_optimization:
             self.scheduler: OptimizedOfflineScheduler = OptimizedOfflineScheduler(self.mode, self.player)
         else:
             self.scheduler: OfflineScheduler = OfflineScheduler()
+
+        if gather_peak_statistics:
+            self.peak_statistics: Optional[PeaksStatistics] = PeaksStatistics()
+        else:
+            self.peak_statistics = None
         self.logger.debug("Initialization completed")
         print(f"{time.time()}: TEMP Init completed")
 
     @abstractmethod
-    def _initialize(self, source_corpus: Corpus) -> Player:
+    def _initialize(self, source_corpus: Corpus, **kwargs) -> Player:
         # TODO: Structure, parameters. + Scheduler mode. Note that influence is tempo master
         pass
 
-    def run(self) -> Corpus:
+    def run(self) -> Tuple[Corpus, Optional[PeaksStatistics]]:
         start_tick: float = self.influence_corpus.events[0].onset
         end_tick: float = self.influence_corpus.events[-1].onset + self.influence_corpus.events[-1].duration
 
@@ -52,12 +62,20 @@ class SomaxGenerator(ABC):
         # i = 0
         while ticks[-1] <= end_tick:
             try:
-                events: List[CorpusEvent] = self.scheduler.next()
+                # TODO: Highly unoptimized
+                events: List[ScheduledEvent] = self.scheduler.next()
                 for event in events:
-                    corpus_events.append(event)
-                    ticks.append(self.scheduler.tick)
-                    times_ms.append(times_ms[-1] + event.absolute_duration * event.tempo / self.scheduler.tempo)
-                    tempi.append(self.scheduler.tempo)
+                    if isinstance(event, ScheduledCorpusEvent):
+                        ce: CorpusEvent = event.corpus_event
+                        corpus_events.append(ce)
+                        ticks.append(self.scheduler.tick)
+                        times_ms.append(times_ms[-1] + ce.absolute_duration * ce.tempo / self.scheduler.tempo)
+                        tempi.append(self.scheduler.tempo)
+                        if self.peak_statistics:
+                            self.peak_statistics.append(event.player.previous_peaks)
+
+                    elif isinstance(event, ScheduledInfluenceEvent) and self.peak_statistics:
+                        self.peak_statistics.num_peaks_generated = event.num_peaks_generated
 
             except IndexError:
                 self.logger.info("Scheduler is empty. Terminating generation")
@@ -70,7 +88,8 @@ class SomaxGenerator(ABC):
 
         corpus_events: List[CorpusEvent] = self._update_times(corpus_events, ticks, times_ms, tempi)
         name = self.name if self.name else f"{self.influence_corpus.name}On{self.source_corpus.name}"
-        return Corpus(corpus_events, name, self.source_corpus.content_type, self._generate_build_parameters())
+        corpus = Corpus(corpus_events, name, self.source_corpus.content_type, self._generate_build_parameters())
+        return corpus, self.peak_statistics
 
     def _generate_build_parameters(self) -> Dict[str, Any]:
         return {"source_corpus": self.source_corpus.name,
