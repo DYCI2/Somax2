@@ -1,6 +1,7 @@
 from abc import ABC
-from typing import Callable, Any, Dict
+from typing import Callable, Any, Dict, Optional
 
+from somaxlibrary.atom import Atom
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.label import AbstractLabel
 from somaxlibrary.player import Player
@@ -56,6 +57,7 @@ class ScheduledInfluenceEvent(ScheduledPlayerEvent):
         super().__init__(trigger_time, player)
         self.path = path
         self.label = label
+        self.num_generated_peaks: Optional[Dict[Atom, int]] = None  # added to event after it's been processed
 
 
 class AbstractTriggerEvent(ScheduledPlayerEvent, ABC):

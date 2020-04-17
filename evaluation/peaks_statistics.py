@@ -1,7 +1,8 @@
-from typing import List
+from typing import List, Dict
 
 import numpy as np
 
+from somaxlibrary.atom import Atom
 from somaxlibrary.peaks import Peaks
 
 
@@ -10,7 +11,7 @@ class PeaksStatistics:
         self.num_peaks: List[int] = []
         self.score_selected_peaks: List[float] = []
         self.avg_score_nonselected: List[float] = []
-        self.num_peaks_generated: List[int] = []
+        self.num_peaks_generated: List[Dict[Atom, int]] = []
 
     def append(self, peaks: Peaks):
         self.num_peaks.append(int(peaks.size()))

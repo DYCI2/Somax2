@@ -1,5 +1,6 @@
-from typing import Optional, Any, List
+from typing import Optional, Any, List, Dict
 
+from somaxlibrary.atom import Atom
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.label import AbstractLabel
 from somaxlibrary.player import Player
@@ -61,4 +62,7 @@ class OfflineScheduler(BaseScheduler):
 
     # TODO: Subject to change with implementation from branch `corpus-builder`
     def _process_influence_event(self, influence_event: ScheduledInfluenceEvent) -> None:
-        influence_event.player.influence(influence_event.path, influence_event.label, influence_event.trigger_time)
+        num_generated_peaks: Dict[Atom, int] = influence_event.player.influence(influence_event.path,
+                                                                                influence_event.label,
+                                                                                influence_event.trigger_time)
+        influence_event.num_generated_peaks = num_generated_peaks

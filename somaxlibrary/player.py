@@ -69,8 +69,8 @@ class Player(ScheduledMidiObject, Parametric):
         self._parse_parameters()
 
     def create_atom(self, path: List[str], weight: float, classifier: Type[AbstractClassifier],
-                 activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
-                 corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
+                    activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
+                    corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
         """raises: InvalidPath, KeyError, DuplicateKeyError"""
         self.logger.debug(f"[create_atom] Attempting to create atom at {path}...")
         self.corpus = corpus
@@ -100,7 +100,6 @@ class Player(ScheduledMidiObject, Parametric):
         if not self.corpus:
             raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
 
-
         self._update_peaks(scheduler_time)
         self.logger.debug("[new_event] Peaks were updated")
         peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus, **kwargs)
@@ -127,21 +126,27 @@ class Player(ScheduledMidiObject, Parametric):
         self.logger.debug(f"[new_event] Player {self.name} successfully created new event.")
         return event
 
-    def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> None:
-        """ Raises: InvalidLabelInput, KeyError"""
+    def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
+        """ Raises: InvalidLabelInput, KeyError
+            Return values are only for gathering statistics (Evaluator, etc.) and not used in runtime."""
+        num_generated_peaks: Dict[Atom, int] = {}
         if not path:
             for atom in self._all_atoms():
                 try:
-                    atom.influence(influence, time, **kwargs)
+                    num_peaks: int = atom.influence(influence, time, **kwargs)
+                    num_generated_peaks[atom] = num_peaks
                 except InvalidLabelInput:
                     # Ignore atom if label doesn't match
                     continue
         else:
             try:
-                self._get_atom(path).influence(influence, time, **kwargs)
+                atom: Atom = self._get_atom(path)
+                num_peaks: int = atom.influence(influence, time, **kwargs)
+                num_generated_peaks[atom] = num_peaks
             except InvalidLabelInput:
                 # Ignore atom if label doesn't match
                 pass
+        return num_generated_peaks
 
     ######################################################
     # MODIFY STATE
@@ -171,7 +176,7 @@ class Player(ScheduledMidiObject, Parametric):
         self.transforms[transform_hash] = transform
 
     def set_classifier(self):
-        raise RuntimeError("Player.set_classifier is not supported yet.")   # TODO
+        raise RuntimeError("Player.set_classifier is not supported yet.")  # TODO
 
     def set_activity_pattern(self, path: List[str], activity_pattern_class: Type[AbstractActivityPattern]):
         atom: Atom = self._get_atom(path)

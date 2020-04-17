@@ -1,7 +1,7 @@
 import collections
 import functools
 from abc import ABC
-from typing import TypeVar, Union, Dict, Any, Callable
+from typing import TypeVar, Union, Dict, Any, Callable, List
 
 # TODO: Poor type description
 MaxCompatible = TypeVar('MaxCompatible', int, float, bool)
@@ -58,14 +58,14 @@ class Parametric(HasParameterDict):
             d[name] = param.max_representation()
         return d
 
-    def set_param(self, path: [str], value: Any):
+    def set_param(self, path: List[str], value: Any):
         """ raises IndexError: if path spec is invalid, for example empty list,
                    ParameterError: if path spec is invalid or if trying to set an object that is not a Parameter.
         """
         param: Parameter = self.get_param(path)
         param.set_value(value)
 
-    def get_param(self, param_path: [str]) -> Parameter:
+    def get_param(self, param_path: List[str]) -> Parameter:
         """ raises KeyError """
         param_name: str = param_path.pop(-1)
         parent_dict: Dict[str, Union[Parametric, Parameter]] = functools.reduce(lambda d, key: d[key].parameter_dict,

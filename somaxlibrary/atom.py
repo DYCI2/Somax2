@@ -5,8 +5,8 @@ from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.influence import AbstractInfluence
-from somaxlibrary.memory_spaces import AbstractMemorySpace
 from somaxlibrary.label import AbstractLabel
+from somaxlibrary.memory_spaces import AbstractMemorySpace
 from somaxlibrary.parameter import Parametric, Parameter
 from somaxlibrary.peak_event import PeakEvent
 from somaxlibrary.peaks import Peaks
@@ -58,13 +58,14 @@ class Atom(Parametric):
         self.weight = weight
 
     # influences the memory with incoming data
-    def influence(self, influence: AbstractInfluence, time: float, **kwargs):
+    def influence(self, influence: AbstractInfluence, time: float, **kwargs) -> int:
         """ Raises: InvalidLabelInput"""
         label: AbstractLabel = self._classifier.classify_influence(influence)
-        matched_events: [PeakEvent] = self._memory_space.influence(label, time, **kwargs)
+        matched_events: List[PeakEvent] = self._memory_space.influence(label, time, **kwargs)
         if matched_events:
             self.update_peaks(time)
             self._activity_pattern.insert(matched_events)  # we insert the events into the activity profile
+            return len(matched_events)
 
     def set_classifier(self, **kwargs):
         raise RuntimeError("Atom.set_classifier is not supported yet")  # TODO

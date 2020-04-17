@@ -1,15 +1,12 @@
 import copy
-import itertools
 import logging
+import time
 from abc import ABC, abstractmethod
 from typing import List, Optional, Dict, Any, Tuple
-import time
-from timeit import default_timer as timer
 
 from evaluation.peaks_statistics import PeaksStatistics
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.peaks import Peaks
 from somaxlibrary.player import Player
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
@@ -75,7 +72,7 @@ class SomaxGenerator(ABC):
                             self.peak_statistics.append(event.player.previous_peaks)
 
                     elif isinstance(event, ScheduledInfluenceEvent) and self.peak_statistics:
-                        self.peak_statistics.num_peaks_generated = event.num_peaks_generated
+                        self.peak_statistics.num_generated_peaks.append(event.num_generated_peaks)
 
             except IndexError:
                 self.logger.info("Scheduler is empty. Terminating generation")
