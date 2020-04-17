@@ -2,6 +2,8 @@ import inspect
 from abc import ABC, abstractmethod
 from typing import List, Optional, Type, Dict
 
+import numpy as np
+
 import somaxlibrary.classification
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.influence import AbstractInfluence, InfluenceKeyword
@@ -40,6 +42,19 @@ class AbstractClassifier(ABC):
 
     @abstractmethod
     def classify_influence(self, influence: AbstractInfluence) -> AbstractLabel:
+        pass
+
+    @staticmethod
+    @abstractmethod
+    def rms(influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+        """ The rms method is not strictly necessary to implement - it's only used for offline performance analysis.
+            To leave it unimplemented, simply define it as
+            ```
+                @staticmethod
+                def rms(influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+                    raise NotImplementedError(f"{self.__class__}.rms is not implemented")
+            ```
+        """
         pass
 
     @abstractmethod

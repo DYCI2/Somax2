@@ -18,7 +18,6 @@ class SomaxGenerator(ABC):
     def __init__(self, source_corpus: Corpus, influence_corpus: Corpus, mode: TriggerMode = TriggerMode.AUTOMATIC,
                  use_optimization: bool = True, gather_peak_statistics: bool = False, name: Optional[str] = None,
                  **kwargs):
-        print(f"{time.time()}: TEMP Init start")
         self.logger = logging.getLogger(__name__)
         self.source_corpus: Corpus = source_corpus
         self.influence_corpus: Corpus = influence_corpus

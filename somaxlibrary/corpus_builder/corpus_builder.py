@@ -7,11 +7,11 @@ from typing import Tuple, List, Type
 import numpy as np
 import pandas as pd
 
-from . import event_parameters
+from . import traits
 from .chromagram import Chromagram
 from somaxlibrary.corpus import Corpus, ContentType
 from somaxlibrary.corpus_event import Note, CorpusEvent
-from .event_parameters import AbstractTrait
+from .traits import AbstractTrait
 from .matrix_keys import MatrixKeys as Keys
 from .note_matrix import NoteMatrix
 from .spectrogram import Spectrogram
@@ -51,7 +51,7 @@ class CorpusBuilder:
         fg_chromagram: Chromagram = Chromagram.from_midi(fg_spectrogram)  # TODO: Pass build params
         bg_chromagram: Chromagram = Chromagram.from_midi(bg_spectrogram)  # TODO: Pass build params
         self.logger.debug(f"Chromagrams {fg_chromagram} and {bg_chromagram} constructed.")
-        corpus: Corpus = self.slice_midi(note_matrix)  # TODO: Pass build params
+        corpus: Corpus = self.slice_midi(note_matrix, name)  # TODO: Pass build params
         corpus.fg_spectrogram = fg_spectrogram
         corpus.bg_spectrogram = bg_spectrogram
         corpus.fg_chromagram = fg_chromagram
@@ -79,7 +79,7 @@ class CorpusBuilder:
     #         eventparam.classify(corpus, audio_stft_fg, bg, audio_chromagram_fg, bg)
     #     return corpus
 
-    def slice_midi(self, note_matrix: NoteMatrix, tolerance_ms: float = 30.0) -> Corpus:  # TODO: Params
+    def slice_midi(self, note_matrix: NoteMatrix, name: str, tolerance_ms: float = 30.0) -> Corpus:  # TODO: Params
         index: int = 0
         events: [CorpusEvent] = [CorpusEvent.incomplete(index, note_matrix.notes.iloc[0])]
         # TODO: Using iterrows will be very slow for large matrices. Subject to optimization
@@ -100,11 +100,11 @@ class CorpusBuilder:
         note_end: float = events[-1].onset + max(0.0, final_note.duration + final_note.onset)
         note_absolute_end: float = events[-1].absolute_onset + max(0.0, final_note.absolute_duration + final_note.absolute_onset)
         events[-1].set_duration(end=note_end, absolute_end=note_absolute_end)
-        return Corpus(events, "TODO TEMPORARY NAME", ContentType.MIDI, {})  # TODO Name and build params.
+        return Corpus(events, name, ContentType.MIDI, {"TODO": "build_params"})  # TODO build params.
 
     @staticmethod
     def all_event_parameters() -> List[Tuple[str, Type[AbstractTrait]]]:
-        return inspect.getmembers(event_parameters, lambda m: inspect.isclass(m) and not inspect.isabstract(m))
+        return inspect.getmembers(traits, lambda m: inspect.isclass(m) and not inspect.isabstract(m))
 
 
 if __name__ == '__main__':

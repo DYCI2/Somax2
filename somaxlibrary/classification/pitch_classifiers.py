@@ -1,9 +1,11 @@
 from abc import ABC, abstractmethod
 from typing import List
 
+import numpy as np
+
 from somaxlibrary.classification.classifier import PitchClassifier
 from somaxlibrary.corpus import Corpus
-from somaxlibrary.corpus_builder.event_parameters import TopNote, VirtualFundamental
+from somaxlibrary.corpus_builder.traits import TopNote, VirtualFundamental
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import InvalidLabelInput
 from somaxlibrary.influence import AbstractInfluence, KeywordInfluence, CorpusInfluence
@@ -44,6 +46,18 @@ class BasicPitchClassifier(PitchClassifier, ABC):
     def _label_from_influence_data(self, pitch: int) -> IntLabel:
         pass
 
+    @abstractmethod
+    def _trait_from_corpus_event(self, event: CorpusEvent) -> int:
+        pass
+
+    @staticmethod
+    def rms(influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+        influence_pitches: np.ndarray = np.array([self._trait_from_corpus_event(event)
+                                                  for event in influence_corpus.events], dtype=int)
+        output_pitches: np.ndarray = np.array([self._trait_from_corpus_event(event)
+                                               for event in output_corpus.events], dtype=int)
+        return (influence_pitches != output_pitches).astype(int)
+
 
 class TopNoteClassifier(BasicPitchClassifier):
     """ Classifies an event to its corresponding midi number in range [0, 127].
@@ -51,10 +65,13 @@ class TopNoteClassifier(BasicPitchClassifier):
             Influence: Responds to keyword "pitch" in range [0, 127]. """
 
     def _label_from_corpus_event(self, event: CorpusEvent) -> IntLabel:
-        return IntLabel(event.get_parameter(TopNote).pitch)
+        return IntLabel(event.get_trait(TopNote).pitch)
 
     def _label_from_influence_data(self, pitch: int) -> IntLabel:
         return IntLabel(pitch)
+
+    def _trait_from_corpus_event(self, event: CorpusEvent) -> int:
+        return event.get_trait(TopNote).pitch
 
 
 class PitchClassClassifier(BasicPitchClassifier):
@@ -63,10 +80,13 @@ class PitchClassClassifier(BasicPitchClassifier):
             Influence: Responds to keyword "pitch" in range [0, 127]. """
 
     def _label_from_corpus_event(self, event: CorpusEvent) -> IntLabel:
-        return IntLabel(event.get_parameter(TopNote).pitch % 12)
+        return IntLabel(event.get_trait(TopNote).pitch % 12)
 
     def _label_from_influence_data(self, pitch: int) -> IntLabel:
         return IntLabel(pitch % 12)
+
+    def _trait_from_corpus_event(self, event: CorpusEvent) -> int:
+        return event.get_trait(TopNote).pitch % 12
 
 
 class VirtualFundamentalClassifier(BasicPitchClassifier):
@@ -75,7 +95,10 @@ class VirtualFundamentalClassifier(BasicPitchClassifier):
             Influence: Responds to keyword "pitch" in range [128, 139]. """
 
     def _label_from_corpus_event(self, event: CorpusEvent) -> IntLabel:
-        return IntLabel(event.get_parameter(VirtualFundamental).pitch)
+        return IntLabel(event.get_trait(VirtualFundamental).pitch)
 
     def _label_from_influence_data(self, pitch: int) -> IntLabel:
         return IntLabel(pitch)
+
+    def _trait_from_corpus_event(self, event: CorpusEvent) -> int:
+        return event.get_trait(VirtualFundamental).pitch

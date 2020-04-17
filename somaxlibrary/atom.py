@@ -23,6 +23,7 @@ class Atom(Parametric):
         self.name = name
         self._weight: Parameter = Parameter(weight, 0.0, None, 'float', "Relative scaling of atom peaks.")
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this Atom.")
+
         self._classifier: AbstractClassifier = classifier()
         self._activity_pattern: AbstractActivityPattern = activity_type()  # creates activity
         self._memory_space: AbstractMemorySpace = memory_type(transforms)

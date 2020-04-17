@@ -23,12 +23,20 @@ class ClassifierType(Enum):
 
 
 class AtomComponent(Enum):
-    MEMSPACE = "memory_space"
-    CLASSIFIER = "classifier"
-    ACTIVITY_PATTERN = "activity_pattern"
+    MEMSPACE = "_memory_space"
+    CLASSIFIER = "_classifier"
+    ACTIVITY_PATTERN = "_activity_pattern"
 
 
 class EvaluationGenerator(SomaxGenerator, ABC):
+    def __init__(self, source_corpus: Corpus, influence_corpus: Corpus,
+                 classifier_class: Optional[Type[AbstractClassifier]], classifier_type: Optional[ClassifierType],
+                 mode: TriggerMode = TriggerMode.AUTOMATIC, use_optimization: bool = True,
+                 gather_peak_statistics: bool = False, name: Optional[str] = None, **kwargs):
+        super().__init__(source_corpus, influence_corpus, mode, use_optimization, gather_peak_statistics, name,
+                         **kwargs)
+        self.classifier_class: Optional[Type[AbstractClassifier]] = classifier_class
+        self.classifier_type: Optional[ClassifierType] = classifier_type
 
     def set_atom_parameter(self, classifier_type: ClassifierType, atom_component: AtomComponent, parameter_name: str,
                            value: Any):
@@ -37,32 +45,33 @@ class EvaluationGenerator(SomaxGenerator, ABC):
 
 
 class SingleAtomGenerator(EvaluationGenerator):
-    def _initialize(self, source_corpus: Corpus, classifier_class: Type[AbstractClassifier] = AbstractClassifier,
-                    use_phase_modulation: bool = False, **kwargs) -> Player:
+
+    def __init__(self, source_corpus: Corpus, influence_corpus: Corpus, classifier_class: Type[AbstractClassifier],
+                 classifier_type: ClassifierType, mode: TriggerMode = TriggerMode.AUTOMATIC,
+                 use_optimization: bool = True, gather_peak_statistics: bool = False, name: Optional[str] = None,
+                 use_phase_modulation: bool = False, **kwargs):
+        super().__init__(source_corpus, influence_corpus, classifier_class, classifier_type, mode, use_optimization,
+                         gather_peak_statistics, name, **kwargs)
+        self.use_phase_modulation: bool = use_phase_modulation
+
+    def _initialize(self, source_corpus: Corpus, **kwargs) -> Player:
         player: Player = Player("player1", TriggerMode.AUTOMATIC, NoTarget())
 
         merge_actions: Tuple[Type[AbstractMergeAction], ...] = (DistanceMergeAction, PhaseModulationMergeAction) \
-            if use_phase_modulation else (PhaseModulationMergeAction,)
+            if self.use_phase_modulation else (PhaseModulationMergeAction,)
 
-        path: str = ClassifierType.EXTRA.value
+        path: str = str(self.classifier_type.value)
         player.create_streamview([path], 1.0, merge_actions)
-        player.create_atom([path, path], 1.0, classifier_class, ClassicActivityPattern,
+        player.create_atom([path, path], 1.0, self.classifier_class, ClassicActivityPattern,
                            NGramMemorySpace, source_corpus, True, [(NoTransform,)], )
         player.load_corpus(source_corpus)
 
         return player
 
-    def set_memspace_parameter(self):
-        pass
 
-    def set_classifier_parameter(self):
-        pass
+class BaseGenerator(EvaluationGenerator):
 
-
-class BaseGenerator(SomaxGenerator, EvaluationGenerator):
-
-    def _initialize(self, source_corpus: Corpus, classifier_class: Optional[Type[AbstractClassifier]] = None,
-                    classifier_type: Optional[ClassifierType] = None, **kwargs) -> Player:
+    def _initialize(self, source_corpus: Corpus, **kwargs) -> Player:
         player: Player = Player("player1", TriggerMode.AUTOMATIC, NoTarget())
 
         merge_actions: Tuple[Type[AbstractMergeAction], ...] = (DistanceMergeAction, PhaseModulationMergeAction)
@@ -70,15 +79,15 @@ class BaseGenerator(SomaxGenerator, EvaluationGenerator):
         player.create_streamview([ClassifierType.SELF.value], weight, merge_actions)
         player.create_streamview([ClassifierType.HARMONIC.value], weight, merge_actions)
         player.create_streamview([ClassifierType.MELODIC.value], weight, merge_actions)
-        if classifier_type == ClassifierType.EXTRA:
+        if self.classifier_type == ClassifierType.EXTRA:
             player.create_streamview([ClassifierType.EXTRA.value], weight, merge_actions)
 
         self_classifier: Type[AbstractClassifier] = TopNoteClassifier if \
-            not classifier_type == classifier_type.MELODIC else classifier_class
+            not self.classifier_type or not self.classifier_type == ClassifierType.MELODIC else self.classifier_class
         melodic_classifier: Type[AbstractClassifier] = PitchClassClassifier if \
-            not classifier_type == classifier_type.MELODIC else classifier_class
+            not self.classifier_type or not self.classifier_type == ClassifierType.MELODIC else self.classifier_class
         harmonic_classifier: Type[AbstractClassifier] = SomChromaClassifier if \
-            not classifier_type == classifier_type.HARMONIC else classifier_class
+            not self.classifier_type or not self.classifier_type == ClassifierType.HARMONIC else self.classifier_class
 
         player.create_atom([ClassifierType.SELF.value, ClassifierType.SELF.value], 1.0, self_classifier,
                            ClassicActivityPattern, NGramMemorySpace, source_corpus, True, [(NoTransform,)], )
@@ -86,8 +95,8 @@ class BaseGenerator(SomaxGenerator, EvaluationGenerator):
                            ClassicActivityPattern, NGramMemorySpace, source_corpus, True, [(NoTransform,)])
         player.create_atom([ClassifierType.MELODIC.value, ClassifierType.MELODIC.value], 1.0, melodic_classifier,
                            ClassicActivityPattern, NGramMemorySpace, source_corpus, True, [(NoTransform,)])
-        if classifier_type == ClassifierType.EXTRA:
-            player.create_atom([ClassifierType.EXTRA.value, ClassifierType.EXTRA.value], 1.0, classifier_class,
+        if self.classifier_type == ClassifierType.EXTRA:
+            player.create_atom([ClassifierType.EXTRA.value, ClassifierType.EXTRA.value], 1.0, self.classifier_class,
                                ClassicActivityPattern, NGramMemorySpace, source_corpus, True, [(NoTransform,)])
 
         return player

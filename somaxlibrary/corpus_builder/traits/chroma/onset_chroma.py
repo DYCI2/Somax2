@@ -1,7 +1,7 @@
 import numpy as np
 
 from ...chromagram import Chromagram
-from ...event_parameters import AbstractTrait
+from ...traits import AbstractTrait
 from ...spectrogram import Spectrogram
 
 

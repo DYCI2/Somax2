@@ -3,7 +3,7 @@ from typing import Optional, List, Dict, Type
 
 import pandas as pd
 
-from somaxlibrary.corpus_builder.event_parameters.event_parameter import AbstractTrait
+from somaxlibrary.corpus_builder.traits.trait import AbstractTrait
 from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
 
 """ Keys correspond to parent module names, ex. "pitch" or "chroma". """
@@ -65,8 +65,8 @@ class CorpusEvent:
         self.absolute_duration: Optional[float] = absolute_duration
 
         self.notes: [Note] = notes if notes else []
-        self.parameters: {Type[AbstractTrait],
-                          AbstractTrait} = event_parameters if event_parameters else {}
+        self.traits: {Type[AbstractTrait],
+                      AbstractTrait} = event_parameters if event_parameters else {}
 
         # self._labels = {}  # {ClassVar[AbstractLabel]: AbstractLabel}, precompiled for performance
 
@@ -95,12 +95,12 @@ class CorpusEvent:
         self.notes.extend([Note.relative_to(n, parent_onset, self.onset, parent_abs_onset, self.absolute_onset)
                            for n in notes])
 
-    def add_parameter(self, parameter: AbstractTrait):
-        self.parameters[type(parameter)] = parameter
+    def add_trait(self, trait: AbstractTrait):
+        self.traits[type(trait)] = trait
 
-    def get_parameter(self, parameter_type: Type[AbstractTrait]) -> AbstractTrait:
+    def get_trait(self, trait_type: Type[AbstractTrait]) -> AbstractTrait:
         """Raises KeyError"""
-        return self.parameters[parameter_type]
+        return self.traits[trait_type]
 
     def held_to(self) -> [Note]:
         return [note for note in self.notes if note.onset < 0.0]
