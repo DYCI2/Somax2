@@ -1,8 +1,9 @@
 from abc import ABC
-from typing import Callable, Any, Dict, Optional
+from typing import Callable, Any, Dict, Optional, List
 
 from somaxlibrary.atom import Atom
 from somaxlibrary.corpus_event import CorpusEvent
+from somaxlibrary.influence import AbstractInfluence
 from somaxlibrary.label import AbstractLabel
 from somaxlibrary.player import Player
 
@@ -51,12 +52,11 @@ class ScheduledCorpusEvent(ScheduledPlayerEvent):
         self.corpus_event: CorpusEvent = corpus_event
 
 
-# TODO: Subject to change with implementation from branch `corpus-builder`
 class ScheduledInfluenceEvent(ScheduledPlayerEvent):
-    def __init__(self, trigger_time: float, player: Player, path: [str], label: AbstractLabel):
+    def __init__(self, trigger_time: float, player: Player, path: List[str], influence: AbstractInfluence):
         super().__init__(trigger_time, player)
         self.path = path
-        self.label = label
+        self.influence = influence
         self.num_generated_peaks: Optional[Dict[Atom, int]] = None  # added to event after it's been processed
 
 

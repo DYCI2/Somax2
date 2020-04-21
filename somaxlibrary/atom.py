@@ -67,6 +67,8 @@ class Atom(Parametric):
             self.update_peaks(time)
             self._activity_pattern.insert(matched_events)  # we insert the events into the activity profile
             return len(matched_events)
+        else:
+            return 0
 
     def set_classifier(self, **kwargs):
         raise RuntimeError("Atom.set_classifier is not supported yet")  # TODO
@@ -89,12 +91,17 @@ class Atom(Parametric):
     def self_influenced(self) -> float:
         return self._self_influenced.value
 
+    @property
+    def classifier(self):
+        return self._classifier
+
     @self_influenced.setter
     def self_influenced(self, self_influenced: bool):
         self._self_influenced.value = self_influenced
 
     def clear(self):
         self._activity_pattern.clear()
+        self._classifier.clear()
         self._memory_space.clear()
 
     def is_enabled(self):

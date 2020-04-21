@@ -11,7 +11,7 @@ class PeaksStatistics:
         self.num_peaks: List[int] = []
         self.score_selected_peaks: List[float] = []
         self.avg_score_nonselected: List[float] = []
-        self.num_peaks_generated: List[Dict[Atom, int]] = []
+        self.num_generated_peaks: List[Dict[Atom, int]] = []
 
     def append(self, peaks: Peaks):
         num_peaks: int = int(peaks.size())

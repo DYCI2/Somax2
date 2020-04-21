@@ -4,6 +4,7 @@ from typing import Optional, Any, List
 
 from somaxlibrary.corpus_event import CorpusEvent
 from somaxlibrary.exceptions import InvalidCorpus
+from somaxlibrary.influence import AbstractInfluence
 from somaxlibrary.label import AbstractLabel
 from somaxlibrary.player import Player
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledMidiEvent, ScheduledAudioEvent, \
@@ -31,7 +32,8 @@ class BaseScheduler(ABC):
 
     def add_trigger_event(self, player: Player, trigger_time: Optional[float] = None):
         if player.trigger_mode == TriggerMode.AUTOMATIC and not self._has_trigger(player):
-            self._add_automatic_trigger_event(player, self._tick - self._trigger_pretime * self.tempo / 60.0, self._tick)
+            self._add_automatic_trigger_event(player, self._tick - self._trigger_pretime * self.tempo / 60.0,
+                                              self._tick)
         elif player.trigger_mode == TriggerMode.MANUAL and self.running:
             self._add_manual_trigger_event(player, trigger_time if trigger_time else self._tick)
         else:
@@ -61,9 +63,9 @@ class BaseScheduler(ABC):
         """ Not required to implement """
         pass
 
-    # TODO: Subject to change with implementation from branch `corpus-builder`
     @abstractmethod
-    def add_influence_event(self, player: Player, trigger_time: float, influence_path: [str], label: AbstractLabel):
+    def add_influence_event(self, player: Player, trigger_time: float, influence_path: List[str],
+                            influence: AbstractInfluence):
         """ Not required to implement """
         pass
 

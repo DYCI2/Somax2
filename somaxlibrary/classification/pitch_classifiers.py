@@ -3,6 +3,7 @@ from typing import List
 
 import numpy as np
 
+from evaluation.evaluation_utils import EvaluationUtils
 from somaxlibrary.classification.classifier import PitchClassifier
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_builder.traits import TopNote, VirtualFundamental
@@ -38,25 +39,33 @@ class BasicPitchClassifier(PitchClassifier, ABC):
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
-    @abstractmethod
-    def _label_from_corpus_event(self, event: CorpusEvent) -> IntLabel:
-        pass
+    def clear(self) -> None:
+        pass  # All basic pitch classifiers are stateless
 
+    @staticmethod
     @abstractmethod
-    def _label_from_influence_data(self, pitch: int) -> IntLabel:
-        pass
-
-    @abstractmethod
-    def _trait_from_corpus_event(self, event: CorpusEvent) -> int:
+    def _label_from_corpus_event(event: CorpusEvent) -> IntLabel:
         pass
 
     @staticmethod
-    def rms(influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-        influence_pitches: np.ndarray = np.array([self._trait_from_corpus_event(event)
+    @abstractmethod
+    def _label_from_influence_data(pitch: int) -> IntLabel:
+        pass
+
+    @staticmethod
+    @abstractmethod
+    def _trait_from_corpus_event(event: CorpusEvent) -> int:
+        pass
+
+    @classmethod
+    def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+        """ rms: 1 when two pitches are not the same, 0 otherwise. """
+        influence_pitches: np.ndarray = np.array([cls._trait_from_corpus_event(event)
                                                   for event in influence_corpus.events], dtype=int)
-        output_pitches: np.ndarray = np.array([self._trait_from_corpus_event(event)
+        output_pitches: np.ndarray = np.array([cls._trait_from_corpus_event(event)
                                                for event in output_corpus.events], dtype=int)
-        return (influence_pitches != output_pitches).astype(int)
+        return np.not_equal(EvaluationUtils.diff(influence_pitches, influence_corpus.onsets, output_pitches,
+                                                 output_corpus.onsets), 0).astype(int)
 
 
 class TopNoteClassifier(BasicPitchClassifier):
@@ -64,13 +73,16 @@ class TopNoteClassifier(BasicPitchClassifier):
             Corpus:    Uses EventParameter TopNote in range [0, 127]
             Influence: Responds to keyword "pitch" in range [0, 127]. """
 
-    def _label_from_corpus_event(self, event: CorpusEvent) -> IntLabel:
+    @staticmethod
+    def _label_from_corpus_event(event: CorpusEvent) -> IntLabel:
         return IntLabel(event.get_trait(TopNote).pitch)
 
-    def _label_from_influence_data(self, pitch: int) -> IntLabel:
+    @staticmethod
+    def _label_from_influence_data(pitch: int) -> IntLabel:
         return IntLabel(pitch)
 
-    def _trait_from_corpus_event(self, event: CorpusEvent) -> int:
+    @staticmethod
+    def _trait_from_corpus_event(event: CorpusEvent) -> int:
         return event.get_trait(TopNote).pitch
 
 
@@ -79,13 +91,16 @@ class PitchClassClassifier(BasicPitchClassifier):
             Corpus: Uses EventParameter TopNote in range [0, 127]
             Influence: Responds to keyword "pitch" in range [0, 127]. """
 
-    def _label_from_corpus_event(self, event: CorpusEvent) -> IntLabel:
+    @staticmethod
+    def _label_from_corpus_event(event: CorpusEvent) -> IntLabel:
         return IntLabel(event.get_trait(TopNote).pitch % 12)
 
-    def _label_from_influence_data(self, pitch: int) -> IntLabel:
+    @staticmethod
+    def _label_from_influence_data(pitch: int) -> IntLabel:
         return IntLabel(pitch % 12)
 
-    def _trait_from_corpus_event(self, event: CorpusEvent) -> int:
+    @staticmethod
+    def _trait_from_corpus_event(event: CorpusEvent) -> int:
         return event.get_trait(TopNote).pitch % 12
 
 
@@ -94,11 +109,14 @@ class VirtualFundamentalClassifier(BasicPitchClassifier):
             Corpus: Uses EventParameter VirtualFundamental in range [128, 139]
             Influence: Responds to keyword "pitch" in range [128, 139]. """
 
-    def _label_from_corpus_event(self, event: CorpusEvent) -> IntLabel:
+    @staticmethod
+    def _label_from_corpus_event(event: CorpusEvent) -> IntLabel:
         return IntLabel(event.get_trait(VirtualFundamental).pitch)
 
-    def _label_from_influence_data(self, pitch: int) -> IntLabel:
+    @staticmethod
+    def _label_from_influence_data(pitch: int) -> IntLabel:
         return IntLabel(pitch)
 
-    def _trait_from_corpus_event(self, event: CorpusEvent) -> int:
+    @staticmethod
+    def _trait_from_corpus_event(event: CorpusEvent) -> int:
         return event.get_trait(VirtualFundamental).pitch

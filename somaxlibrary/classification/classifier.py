@@ -44,9 +44,15 @@ class AbstractClassifier(ABC):
     def classify_influence(self, influence: AbstractInfluence) -> AbstractLabel:
         pass
 
-    @staticmethod
     @abstractmethod
-    def rms(influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+    def clear(self) -> None:
+        """ This function should reset any runtime state related to previous influences inside the classifier without
+            unloading any data. If the classifier is stateless, leave this method blank."""
+        pass
+
+    @classmethod
+    @abstractmethod
+    def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
         """ The rms method is not strictly necessary to implement - it's only used for offline performance analysis.
             To leave it unimplemented, simply define it as
             ```

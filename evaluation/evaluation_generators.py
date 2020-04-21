@@ -30,9 +30,10 @@ class AtomComponent(Enum):
 
 class EvaluationGenerator(SomaxGenerator, ABC):
     def __init__(self, source_corpus: Corpus, influence_corpus: Corpus,
-                 classifier_class: Optional[Type[AbstractClassifier]], classifier_type: Optional[ClassifierType],
-                 mode: TriggerMode = TriggerMode.AUTOMATIC, use_optimization: bool = True,
-                 gather_peak_statistics: bool = False, name: Optional[str] = None, **kwargs):
+                 classifier_class: Optional[Type[AbstractClassifier]] = None,
+                 classifier_type: Optional[ClassifierType] = None, mode: TriggerMode = TriggerMode.AUTOMATIC,
+                 use_optimization: bool = True, gather_peak_statistics: bool = False,
+                 name: Optional[str] = None, **kwargs):
         super().__init__(source_corpus, influence_corpus, mode, use_optimization, gather_peak_statistics, name,
                          **kwargs)
         self.classifier_class: Optional[Type[AbstractClassifier]] = classifier_class
@@ -54,7 +55,7 @@ class SingleAtomGenerator(EvaluationGenerator):
                          gather_peak_statistics, name, **kwargs)
         self.use_phase_modulation: bool = use_phase_modulation
 
-    def _initialize(self, source_corpus: Corpus, **kwargs) -> Player:
+    def initialize(self, **kwargs) -> None:
         player: Player = Player("player1", TriggerMode.AUTOMATIC, NoTarget())
 
         merge_actions: Tuple[Type[AbstractMergeAction], ...] = (DistanceMergeAction, PhaseModulationMergeAction) \
@@ -63,15 +64,15 @@ class SingleAtomGenerator(EvaluationGenerator):
         path: str = str(self.classifier_type.value)
         player.create_streamview([path], 1.0, merge_actions)
         player.create_atom([path, path], 1.0, self.classifier_class, ClassicActivityPattern,
-                           NGramMemorySpace, source_corpus, True, [(NoTransform,)], )
-        player.load_corpus(source_corpus)
+                           NGramMemorySpace, self.source_corpus, True, [(NoTransform,)], )
+        player.load_corpus(self.source_corpus)
 
-        return player
+        self.player = player
 
 
 class BaseGenerator(EvaluationGenerator):
 
-    def _initialize(self, source_corpus: Corpus, **kwargs) -> Player:
+    def initialize(self, **kwargs) -> None:
         player: Player = Player("player1", TriggerMode.AUTOMATIC, NoTarget())
 
         merge_actions: Tuple[Type[AbstractMergeAction], ...] = (DistanceMergeAction, PhaseModulationMergeAction)
@@ -90,13 +91,13 @@ class BaseGenerator(EvaluationGenerator):
             not self.classifier_type or not self.classifier_type == ClassifierType.HARMONIC else self.classifier_class
 
         player.create_atom([ClassifierType.SELF.value, ClassifierType.SELF.value], 1.0, self_classifier,
-                           ClassicActivityPattern, NGramMemorySpace, source_corpus, True, [(NoTransform,)], )
+                           ClassicActivityPattern, NGramMemorySpace, self.source_corpus, True, [(NoTransform,)], )
         player.create_atom([ClassifierType.HARMONIC.value, ClassifierType.HARMONIC.value], 1.0, harmonic_classifier,
-                           ClassicActivityPattern, NGramMemorySpace, source_corpus, True, [(NoTransform,)])
+                           ClassicActivityPattern, NGramMemorySpace, self.source_corpus, True, [(NoTransform,)])
         player.create_atom([ClassifierType.MELODIC.value, ClassifierType.MELODIC.value], 1.0, melodic_classifier,
-                           ClassicActivityPattern, NGramMemorySpace, source_corpus, True, [(NoTransform,)])
+                           ClassicActivityPattern, NGramMemorySpace, self.source_corpus, True, [(NoTransform,)])
         if self.classifier_type == ClassifierType.EXTRA:
             player.create_atom([ClassifierType.EXTRA.value, ClassifierType.EXTRA.value], 1.0, self.classifier_class,
-                               ClassicActivityPattern, NGramMemorySpace, source_corpus, True, [(NoTransform,)])
+                               ClassicActivityPattern, NGramMemorySpace, self.source_corpus, True, [(NoTransform,)])
 
-        return player
+        self.player = player

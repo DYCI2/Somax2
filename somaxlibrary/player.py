@@ -131,7 +131,7 @@ class Player(ScheduledMidiObject, Parametric):
             Return values are only for gathering statistics (Evaluator, etc.) and not used in runtime."""
         num_generated_peaks: Dict[Atom, int] = {}
         if not path:
-            for atom in self._all_atoms():
+            for atom in self.all_atoms():
                 try:
                     num_peaks: int = atom.influence(influence, time, **kwargs)
                     num_generated_peaks[atom] = num_peaks
@@ -200,7 +200,7 @@ class Player(ScheduledMidiObject, Parametric):
     def add_transform(self, path: [str], transform: (AbstractTransform, ...)) -> None:
         """ raises TransformError, KeyError"""
         if not path:
-            for atom in self._all_atoms():
+            for atom in self.all_atoms():
                 try:
                     atom.memory_space.add_transforms(transform)
                 except TransformError as e:
@@ -210,6 +210,7 @@ class Player(ScheduledMidiObject, Parametric):
 
     def clear(self):
         self.improvisation_memory = ImprovisationMemory()
+        self.previous_peaks = Peaks.create_empty()
         for streamview in self.streamviews.values():
             streamview.clear()
 
@@ -233,8 +234,9 @@ class Player(ScheduledMidiObject, Parametric):
                     atoms.append(atom)
         return atoms
 
-    def _all_atoms(self) -> [Atom]:
-        atoms: [Atom] = []
+    def all_atoms(self) -> List[Atom]:
+        # TODO: Not recursive -> doesn't handle nested streamviews
+        atoms: List[Atom] = []
         for streamview in self.streamviews.values():
             for atom in streamview.atoms.values():
                 atoms.append(atom)

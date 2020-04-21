@@ -12,7 +12,7 @@ from somaxlibrary.target import NoTarget
 
 class TestGenerator(SomaxGenerator):
 
-    def _initialize(self, source_corpus: Corpus, **kwargs) -> Player:
+    def initialize(self, source_corpus: Corpus, **kwargs) -> Player:
         player: Player = Player("player1", TriggerMode.AUTOMATIC, NoTarget())
 
         player.create_streamview(["self"], 1.0, (DistanceMergeAction, PhaseModulationMergeAction))

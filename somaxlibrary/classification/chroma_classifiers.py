@@ -3,6 +3,7 @@ from typing import List
 
 import numpy as np
 
+from evaluation.evaluation_utils import EvaluationUtils
 from somaxlibrary.classification import tables
 from somaxlibrary.classification.classifier import ChromaClassifier
 from somaxlibrary.corpus import Corpus
@@ -59,10 +60,16 @@ class SomChromaClassifier(ChromaClassifier):
         rms: np.ndarray = np.sqrt(np.sum(np.power(chroma - self._som_data, 2), axis=1))
         return IntLabel(self._som_classes[np.argmin(rms)])
 
-    @staticmethod
-    def rms(influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-        influence_chromas: np.ndarray = np.array([event.get_trait(SomChromaClassifier).foreground
+    @classmethod
+    def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+        influence_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).foreground
                                                   for event in influence_corpus.events])
-        output_chromas: np.ndarray = np.array([event.get_trait(SomChromaClassifier).foreground
+        output_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).foreground
                                                for event in output_corpus.events])
-        return np.sqrt(np.sum(np.power(influence_chromas - output_chromas, 2), axis=1))
+        return np.sqrt(np.sum(np.power(EvaluationUtils.diff(influence_chromas, influence_corpus.onsets,
+                                                            output_chromas, output_corpus.onsets), 2), axis=1))
+
+    def clear(self) -> None:
+        pass  # SomChromaClassifier is stateless
+
+

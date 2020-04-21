@@ -4,6 +4,7 @@ from typing import Optional, Any
 
 from somaxlibrary.corpus import ContentType
 from somaxlibrary.corpus_event import CorpusEvent, Note
+from somaxlibrary.influence import AbstractInfluence
 from somaxlibrary.label import AbstractLabel
 from somaxlibrary.player import Player
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, AutomaticTriggerEvent, ScheduledMidiEvent, \
@@ -115,8 +116,8 @@ class RealtimeScheduler(BaseScheduler):
                                                     corpus_event.tempo)
         self.queue.append(event)
 
-    # TODO: Subject to change with implementation from branch `corpus-builder`
-    def add_influence_event(self, player: Player, trigger_time: float, influence_path: str, label: AbstractLabel):
+    def add_influence_event(self, player: Player, trigger_time: float, influence_path: str,
+                            influence: AbstractInfluence):
         raise AttributeError(f"Queued Influence Events are not supported for class {self.__class__.__name__}.")
 
     ######################################################

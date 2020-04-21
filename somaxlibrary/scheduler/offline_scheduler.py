@@ -2,6 +2,7 @@ from typing import Optional, Any, List, Dict
 
 from somaxlibrary.atom import Atom
 from somaxlibrary.corpus_event import CorpusEvent
+from somaxlibrary.influence import AbstractInfluence
 from somaxlibrary.label import AbstractLabel
 from somaxlibrary.player import Player
 
@@ -42,9 +43,9 @@ class OfflineScheduler(BaseScheduler):
     def _add_audio_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
         raise AttributeError(f"Audio Events are not supported for class {self.__class__.__name__}.")
 
-    # TODO: Subject to change with implementation from branch `corpus-builder`
-    def add_influence_event(self, player: Player, trigger_time: float, influence_path: [str], label: AbstractLabel):
-        self.queue.append(ScheduledInfluenceEvent(trigger_time, player, influence_path, label))
+    def add_influence_event(self, player: Player, trigger_time: float, influence_path: List[str],
+                            influence: AbstractInfluence):
+        self.queue.append(ScheduledInfluenceEvent(trigger_time, player, influence_path, influence))
 
     ######################################################
     # PROCESS (INTERNAL)
@@ -60,9 +61,8 @@ class OfflineScheduler(BaseScheduler):
     def _process_audio_event(self, audio_event: ScheduledAudioEvent):
         raise AttributeError(f"Audio Events are not supported for class {self.__class__.__name__}.")
 
-    # TODO: Subject to change with implementation from branch `corpus-builder`
     def _process_influence_event(self, influence_event: ScheduledInfluenceEvent) -> None:
         num_generated_peaks: Dict[Atom, int] = influence_event.player.influence(influence_event.path,
-                                                                                influence_event.label,
+                                                                                influence_event.influence,
                                                                                 influence_event.trigger_time)
         influence_event.num_generated_peaks = num_generated_peaks

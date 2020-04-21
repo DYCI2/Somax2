@@ -22,11 +22,11 @@ class SomaxGenerator(ABC):
         self.source_corpus: Corpus = source_corpus
         self.influence_corpus: Corpus = influence_corpus
         self.mode: TriggerMode = mode
-        self.player: Player = self._initialize(self.source_corpus, **kwargs)
         self.name: Optional[str] = name
+        self._player: Optional[Player] = None  # Initialized with self.initialize()
 
         if use_optimization:
-            self.scheduler: OptimizedOfflineScheduler = OptimizedOfflineScheduler(self.mode, self.player)
+            self.scheduler: OptimizedOfflineScheduler = OptimizedOfflineScheduler(self.mode, None)
         else:
             self.scheduler: OfflineScheduler = OfflineScheduler()
 
@@ -38,9 +38,15 @@ class SomaxGenerator(ABC):
         print(f"{time.time()}: TEMP Init completed")
 
     @abstractmethod
-    def _initialize(self, source_corpus: Corpus, **kwargs) -> Player:
+    def initialize(self, **kwargs) -> None:
+        """This function should initialize self.player and should be called immediately after
+            a SomaxGenerator object is constructed"""
         # TODO: Structure, parameters. + Scheduler mode. Note that influence is tempo master
         pass
+
+    def clear(self):
+        """ Resets player state (history, influences, peaks) but doesn't unload any data"""
+        self.player.clear()
 
     def run(self) -> Tuple[Corpus, Optional[PeaksStatistics]]:
         start_tick: float = self.influence_corpus.events[0].onset
@@ -69,7 +75,6 @@ class SomaxGenerator(ABC):
                         tempi.append(self.scheduler.tempo)
                         if self.peak_statistics:
                             self.peak_statistics.append(event.player.previous_peaks)
-
                     elif isinstance(event, ScheduledInfluenceEvent) and self.peak_statistics:
                         self.peak_statistics.num_generated_peaks.append(event.num_generated_peaks)
 
@@ -99,6 +104,7 @@ class SomaxGenerator(ABC):
             self.scheduler.add_influences_optimized(events)
         else:
             for event in events:
+                # TODO: Subject to change with implementation from branch `corpus-builder`
                 for label in event.labels:
                     self.scheduler.add_influence_event(self.player, event.onset, [], label)
                 self.scheduler.add_tempo_event(event.onset, event.tempo)
@@ -130,3 +136,13 @@ class SomaxGenerator(ABC):
         start_tick: float = max(source_corpus.events[0].onset, influence_corpus.events[0].onset)
         end_tick: float = min(source_corpus.length(), influence_corpus.length())
         return start_tick, end_tick
+
+    @property
+    def player(self):
+        return self._player
+
+    @player.setter
+    def player(self, player):
+        if isinstance(self.scheduler, OptimizedOfflineScheduler):
+            self.scheduler.player = player
+        self._player = player
