@@ -36,7 +36,6 @@ class SomaxGenerator(ABC):
         else:
             self.peak_statistics = None
         self.logger.debug("Initialization completed")
-        print(f"{time.time()}: TEMP Init completed")
 
     @abstractmethod
     def initialize(self, **kwargs) -> None:

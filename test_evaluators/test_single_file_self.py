@@ -18,7 +18,7 @@ if __name__ == '__main__':
     results = evaluator.generate()
     print(results)
 
-    idx = 1
+    idx = 2
     inf_pitches = np.array([event.get_trait(TopNote).pitch for event in results[idx].influence.events])
     out_pitches = np.array([event.get_trait(TopNote).pitch for event in results[idx].output.events])
     inf_onsets = results[idx].influence.onsets
