@@ -64,7 +64,7 @@ class SingleAtomGenerator(EvaluationGenerator):
         path: str = str(self.classifier_type.value)
         player.create_streamview([path], 1.0, merge_actions)
         player.create_atom([path, path], 1.0, self.classifier_class, ClassicActivityPattern,
-                           NGramMemorySpace, self.source_corpus, True, [(NoTransform,)], )
+                           NGramMemorySpace, self.source_corpus, False, [(NoTransform,)], )
         player.load_corpus(self.source_corpus)
 
         self.player = player
@@ -93,11 +93,11 @@ class BaseGenerator(EvaluationGenerator):
         player.create_atom([ClassifierType.SELF.value, ClassifierType.SELF.value], 1.0, self_classifier,
                            ClassicActivityPattern, NGramMemorySpace, self.source_corpus, True, [(NoTransform,)], )
         player.create_atom([ClassifierType.HARMONIC.value, ClassifierType.HARMONIC.value], 1.0, harmonic_classifier,
-                           ClassicActivityPattern, NGramMemorySpace, self.source_corpus, True, [(NoTransform,)])
+                           ClassicActivityPattern, NGramMemorySpace, self.source_corpus, False, [(NoTransform,)])
         player.create_atom([ClassifierType.MELODIC.value, ClassifierType.MELODIC.value], 1.0, melodic_classifier,
-                           ClassicActivityPattern, NGramMemorySpace, self.source_corpus, True, [(NoTransform,)])
+                           ClassicActivityPattern, NGramMemorySpace, self.source_corpus, False, [(NoTransform,)])
         if self.classifier_type == ClassifierType.EXTRA:
             player.create_atom([ClassifierType.EXTRA.value, ClassifierType.EXTRA.value], 1.0, self.classifier_class,
-                               ClassicActivityPattern, NGramMemorySpace, self.source_corpus, True, [(NoTransform,)])
+                               ClassicActivityPattern, NGramMemorySpace, self.source_corpus, False, [(NoTransform,)])
 
         self.player = player

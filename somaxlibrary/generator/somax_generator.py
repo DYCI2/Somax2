@@ -7,6 +7,7 @@ from typing import List, Optional, Dict, Any, Tuple
 from evaluation.peaks_statistics import PeaksStatistics
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_event import CorpusEvent
+from somaxlibrary.influence import CorpusInfluence
 from somaxlibrary.player import Player
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
@@ -51,18 +52,23 @@ class SomaxGenerator(ABC):
     def run(self) -> Tuple[Corpus, Optional[PeaksStatistics]]:
         start_tick: float = self.influence_corpus.events[0].onset
         end_tick: float = self.influence_corpus.events[-1].onset + self.influence_corpus.events[-1].duration
+        self.scheduler.tick = start_tick
+        self.scheduler.tempo = self.influence_corpus.events[0].tempo
 
         self._influence(self.influence_corpus, start_tick, end_tick)
 
-        # ticks, times_ms and tempi all have length `len(corpus_events) + 1`
-        ticks: List[float] = [start_tick]  # cumulative
-        times_ms: List[float] = [self.influence_corpus.events[0].absolute_onset]  # cumulative
-        tempi: List[float] = [self.influence_corpus.events[0].tempo]
+
+
+        onset_ticks: List[float] = []  # cumulative
+        # onset_times_ms has length `len(corpus_events) + 1`
+        onset_times_ms: List[float] = [self.influence_corpus.events[0].absolute_onset]  # cumulative
+        tempi: List[float] = []
         corpus_events: List[CorpusEvent] = []
+        last_onset_tick = start_tick
 
         # t = timer()
         # i = 0
-        while ticks[-1] <= end_tick:
+        while last_onset_tick <= end_tick:
             try:
                 # TODO: Highly unoptimized
                 events: List[ScheduledEvent] = self.scheduler.next()
@@ -70,8 +76,9 @@ class SomaxGenerator(ABC):
                     if isinstance(event, ScheduledCorpusEvent):
                         ce: CorpusEvent = event.corpus_event
                         corpus_events.append(ce)
-                        ticks.append(self.scheduler.tick)
-                        times_ms.append(times_ms[-1] + ce.absolute_duration * ce.tempo / self.scheduler.tempo)
+                        onset_ticks.append(self.scheduler.tick)
+                        onset_times_ms.append(onset_times_ms[-1] + ce.absolute_duration * ce.tempo / self.scheduler.tempo)
+                        last_onset_tick = onset_ticks[-1]
                         tempi.append(self.scheduler.tempo)
                         if self.peak_statistics:
                             self.peak_statistics.append(event.player.previous_peaks)
@@ -87,7 +94,7 @@ class SomaxGenerator(ABC):
         self.logger.debug("Iteration over Scheduler completed")
         print(f"{time.time()}: TEMP Iteration over Sched completed")
 
-        corpus_events: List[CorpusEvent] = self._update_times(corpus_events, ticks, times_ms, tempi)
+        corpus_events: List[CorpusEvent] = self._update_times(corpus_events, onset_ticks, onset_times_ms, tempi)
         name = self.name if self.name else f"{self.influence_corpus.name}On{self.source_corpus.name}"
         corpus = Corpus(corpus_events, name, self.source_corpus.content_type, self._generate_build_parameters())
         return corpus, self.peak_statistics
@@ -104,9 +111,7 @@ class SomaxGenerator(ABC):
             self.scheduler.add_influences_optimized(events)
         else:
             for event in events:
-                # TODO: Subject to change with implementation from branch `corpus-builder`
-                for label in event.labels:
-                    self.scheduler.add_influence_event(self.player, event.onset, [], label)
+                self.scheduler.add_influence_event(self.player, event.onset, [], CorpusInfluence(event))
                 self.scheduler.add_tempo_event(event.onset, event.tempo)
                 # Add one trigger for each influence
                 if self.mode == TriggerMode.MANUAL:
@@ -119,11 +124,11 @@ class SomaxGenerator(ABC):
 
     def _update_times(self, corpus_events: List[CorpusEvent], ticks: List[float], times_ms: List[float],
                       tempi: List[float]) -> List[CorpusEvent]:
-        """ Notes: ticks, times_ms and tempi should all have length `len(corpus_events) + 1`"""
         corpus_events = copy.deepcopy(corpus_events)
         for i, event in enumerate(corpus_events):
             event.onset = ticks[i]
             event.absolute_onset = times_ms[i]
+            # Note: times_ms has length `len(corpus_events) + 1` and is hence offset by 1
             event.absolute_duration = times_ms[i + 1] - times_ms[i]
             event.tempo = tempi[i]
             # TODO: IMPORTANT Change note _absolute_ durations too as well as relative onsets - depend on previous event!!!!

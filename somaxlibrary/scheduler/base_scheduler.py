@@ -172,6 +172,10 @@ class BaseScheduler(ABC):
             self._update_tick()
         return self._tick
 
+    @tick.setter
+    def tick(self, value):
+        self._tick = value
+
     @abstractmethod
     def _update_tick(self) -> None:
         pass
