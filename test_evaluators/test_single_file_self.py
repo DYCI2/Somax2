@@ -15,7 +15,7 @@ if __name__ == '__main__':
     np.seterr(all='raise')
     files: List[str] = ["/Users/joakimborg/MIDI/debussy_part.mid"]
     classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(TopNoteClassifier, ClassifierType.MELODIC)]
-    evaluator: SelfEvaluator = SelfEvaluator(files, TriggerMode.AUTOMATIC, [3], classifiers, None)
+    evaluator: SelfEvaluator = SelfEvaluator(files, TriggerMode.AUTOMATIC, [2, 3], classifiers, None)
     results = evaluator.generate()
     print(results)
 

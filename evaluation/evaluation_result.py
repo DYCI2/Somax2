@@ -71,7 +71,7 @@ class EvaluationResult:
         raw_rms: Dict[str, np.ndarray] = {}
         for atom in self.generator.player.all_atoms():
             if not isinstance(atom.classifier, main_classifier):
-                raw_rms[atom.classifier.__class__] = self.calc_raw_rms(atom.classifier, influence, output)
+                raw_rms[type(atom.classifier).__name__] = self.calc_raw_rms(atom.classifier, influence, output)
         return raw_rms
 
     @staticmethod
