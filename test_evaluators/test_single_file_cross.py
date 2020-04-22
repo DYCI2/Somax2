@@ -9,6 +9,7 @@ from evaluation.evaluator import SelfEvaluator, CrossEvaluator
 from somaxlibrary.classification import TopNoteClassifier
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus_builder.traits import TopNote
+from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 
 if __name__ == '__main__':
     np.seterr(all='raise')
@@ -16,7 +17,7 @@ if __name__ == '__main__':
                         datefmt="%H:%M:%S")
     files: List[str] = ["/Users/joakimborg/MIDI/debussy.mid", "/Users/joakimborg/MIDI/satie-gymnopedie1.mid"]
     classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(TopNoteClassifier, ClassifierType.MELODIC)]
-    evaluator: CrossEvaluator = CrossEvaluator(files, [3], classifiers, None)
+    evaluator: CrossEvaluator = CrossEvaluator(files, TriggerMode.MANUAL, [3], classifiers, None)
     results = evaluator.generate()
 
 

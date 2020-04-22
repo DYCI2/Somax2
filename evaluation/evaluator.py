@@ -9,13 +9,15 @@ from evaluation.evaluation_result import EvaluationResult
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
+from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 
 
 class Evaluator(ABC):
-    def __init__(self, files: List[str], ngram_orders: List[int],
+    def __init__(self, files: List[str], trigger_mode: TriggerMode, ngram_orders: List[int],
                  evaluation_classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]],
                  classification_parameter_values: Optional[Tuple[str, List[Any]]] = None):
         self.logger = logging.getLogger(__name__)
+        self.trigger_mode: TriggerMode = trigger_mode
         self.corpora: List[Corpus] = self._build_corpora(files)
         self.ngram_orders: List[int] = ngram_orders
         self.evaluation_classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = evaluation_classifiers
@@ -57,7 +59,7 @@ class Evaluator(ABC):
                                  f"as type '{classifier_type.value if classifier_type else None}'.")
                 for generator in self._generators(classifier, classifier_type, source, influence):
                     self.logger.info(f"[generate]: **** Evaluating for generator '{generator.__class__}'")
-                    generator.initialize()
+                    generator.initialize(trigger_mode=self.trigger_mode)
                     for ngram_order in self.ngram_orders:
                         if self.classification_parameter_values:
                             for classifier_param, value in self.classification_parameter_values:

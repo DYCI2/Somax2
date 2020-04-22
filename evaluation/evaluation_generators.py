@@ -31,11 +31,9 @@ class AtomComponent(Enum):
 class EvaluationGenerator(SomaxGenerator, ABC):
     def __init__(self, source_corpus: Corpus, influence_corpus: Corpus,
                  classifier_class: Optional[Type[AbstractClassifier]] = None,
-                 classifier_type: Optional[ClassifierType] = None, mode: TriggerMode = TriggerMode.AUTOMATIC,
-                 use_optimization: bool = True, gather_peak_statistics: bool = False,
-                 name: Optional[str] = None, **kwargs):
-        super().__init__(source_corpus, influence_corpus, mode, use_optimization, gather_peak_statistics, name,
-                         **kwargs)
+                 classifier_type: Optional[ClassifierType] = None, use_optimization: bool = True,
+                 gather_peak_statistics: bool = False, name: Optional[str] = None, **kwargs):
+        super().__init__(source_corpus, influence_corpus, use_optimization, gather_peak_statistics, name, **kwargs)
         self.classifier_class: Optional[Type[AbstractClassifier]] = classifier_class
         self.classifier_type: Optional[ClassifierType] = classifier_type
 
@@ -48,15 +46,14 @@ class EvaluationGenerator(SomaxGenerator, ABC):
 class SingleAtomGenerator(EvaluationGenerator):
 
     def __init__(self, source_corpus: Corpus, influence_corpus: Corpus, classifier_class: Type[AbstractClassifier],
-                 classifier_type: ClassifierType, mode: TriggerMode = TriggerMode.AUTOMATIC,
-                 use_optimization: bool = True, gather_peak_statistics: bool = False, name: Optional[str] = None,
-                 use_phase_modulation: bool = False, **kwargs):
-        super().__init__(source_corpus, influence_corpus, classifier_class, classifier_type, mode, use_optimization,
+                 classifier_type: ClassifierType, use_optimization: bool = True, gather_peak_statistics: bool = False,
+                 name: Optional[str] = None, use_phase_modulation: bool = False, **kwargs):
+        super().__init__(source_corpus, influence_corpus, classifier_class, classifier_type, use_optimization,
                          gather_peak_statistics, name, **kwargs)
         self.use_phase_modulation: bool = use_phase_modulation
 
-    def initialize(self, **kwargs) -> None:
-        player: Player = Player("player1", TriggerMode.AUTOMATIC, NoTarget())
+    def initialize(self, trigger_mode: TriggerMode = TriggerMode.AUTOMATIC, **kwargs) -> None:
+        player: Player = Player("player1", trigger_mode, NoTarget())
 
         merge_actions: Tuple[Type[AbstractMergeAction], ...] = (DistanceMergeAction, PhaseModulationMergeAction) \
             if self.use_phase_modulation else (PhaseModulationMergeAction,)
@@ -72,8 +69,8 @@ class SingleAtomGenerator(EvaluationGenerator):
 
 class BaseGenerator(EvaluationGenerator):
 
-    def initialize(self, **kwargs) -> None:
-        player: Player = Player("player1", TriggerMode.AUTOMATIC, NoTarget())
+    def initialize(self, trigger_mode: TriggerMode = TriggerMode.AUTOMATIC, **kwargs) -> None:
+        player: Player = Player("player1", trigger_mode, NoTarget())
 
         merge_actions: Tuple[Type[AbstractMergeAction], ...] = (DistanceMergeAction, PhaseModulationMergeAction)
         weight: float = 1.0

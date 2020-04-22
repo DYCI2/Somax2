@@ -16,18 +16,16 @@ from somaxlibrary.scheduler.optimized_offline_scheduler import OptimizedOfflineS
 
 
 class SomaxGenerator(ABC):
-    def __init__(self, source_corpus: Corpus, influence_corpus: Corpus, mode: TriggerMode = TriggerMode.AUTOMATIC,
-                 use_optimization: bool = True, gather_peak_statistics: bool = False, name: Optional[str] = None,
-                 **kwargs):
+    def __init__(self, source_corpus: Corpus, influence_corpus: Corpus, use_optimization: bool = True,
+                 gather_peak_statistics: bool = False, name: Optional[str] = None, **kwargs):
         self.logger = logging.getLogger(__name__)
         self.source_corpus: Corpus = source_corpus
         self.influence_corpus: Corpus = influence_corpus
-        self.mode: TriggerMode = mode
         self.name: Optional[str] = name
         self._player: Optional[Player] = None  # Initialized with self.initialize()
 
         if use_optimization:
-            self.scheduler: OptimizedOfflineScheduler = OptimizedOfflineScheduler(self.mode, None)
+            self.scheduler: OptimizedOfflineScheduler = OptimizedOfflineScheduler(None)
         else:
             self.scheduler: OfflineScheduler = OfflineScheduler()
 
@@ -56,8 +54,6 @@ class SomaxGenerator(ABC):
 
         self._influence(self.influence_corpus, start_tick, end_tick)
 
-
-
         onset_ticks: List[float] = []  # cumulative
         # onset_times_ms has length `len(corpus_events) + 1`
         onset_times_ms: List[float] = [self.influence_corpus.events[0].absolute_onset]  # cumulative
@@ -67,7 +63,7 @@ class SomaxGenerator(ABC):
 
         # t = timer()
         # i = 0
-        while last_onset_tick <= end_tick:
+        while last_onset_tick < end_tick:
             try:
                 # TODO: Highly unoptimized
                 events: List[ScheduledEvent] = self.scheduler.next()
@@ -76,7 +72,8 @@ class SomaxGenerator(ABC):
                         ce: CorpusEvent = event.corpus_event
                         corpus_events.append(ce)
                         onset_ticks.append(self.scheduler.tick)
-                        onset_times_ms.append(onset_times_ms[-1] + ce.absolute_duration * ce.tempo / self.scheduler.tempo)
+                        onset_times_ms.append(
+                            onset_times_ms[-1] + ce.absolute_duration * ce.tempo / self.scheduler.tempo)
                         last_onset_tick = onset_ticks[-1]
                         tempi.append(self.scheduler.tempo)
                         if self.peak_statistics:
@@ -101,7 +98,7 @@ class SomaxGenerator(ABC):
     def _generate_build_parameters(self) -> Dict[str, Any]:
         return {"source_corpus": self.source_corpus.name,
                 "influence_corpus": self.influence_corpus,
-                "mode": self.mode,
+                "mode": self._player.trigger_mode,
                 "scheduler": self.scheduler.__class__}
 
     def _influence(self, influence_corpus: Corpus, start_tick: float, end_tick: float):
@@ -109,15 +106,19 @@ class SomaxGenerator(ABC):
         if isinstance(self.scheduler, OptimizedOfflineScheduler):
             self.scheduler.add_influences_optimized(events)
         else:
+            raise NotImplementedError("Implementation for adding trigger events has changed "
+                                      "- OfflineScheduler is currently not supported.")
             for event in events:
                 self.scheduler.add_influence_event(self.player, event.onset, [], CorpusInfluence(event))
                 self.scheduler.add_tempo_event(event.onset, event.tempo)
                 # Add one trigger for each influence
-                if self.mode == TriggerMode.MANUAL:
+                if self._player.trigger_mode == TriggerMode.MANUAL:
                     self.scheduler.add_trigger_event(self.player, event.onset)
         # Add a single trigger at the beginning
-        if self.mode == TriggerMode.AUTOMATIC:
-            self.scheduler.add_trigger_event(self.player, start_tick)
+        # TODO: This has been moved to OptimizedOfflineScheduler. Legacy code still there as it
+        #  needs to be handled by OfflineScheduler too.
+        # if self._player.trigger_mode == TriggerMode.AUTOMATIC:
+        #     self.scheduler.add_trigger_event(self.player, start_tick)
         self.logger.debug("Influence completed")
         print(f"{time.time()}: TEMP Influence completed")
 
