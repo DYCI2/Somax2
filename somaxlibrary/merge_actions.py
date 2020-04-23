@@ -78,7 +78,7 @@ class DistanceMergeAction(AbstractMergeAction):
             row_indices: np.ndarray = np.floor(times * inv_duration * num_rows).astype(np.int32)
             interp_matrix: sparse.coo_matrix = sparse.coo_matrix(
                 (np.ones(num_cols), (row_indices, np.arange(num_cols))),
-                shape=(num_rows, num_cols))
+                shape=(num_rows + 1, num_cols))         # TODO: +1 Temporary solution to coo dimension errors. should probably not cause any behavioral differences
             interp_matrix: sparse.csc_matrix = interp_matrix.tocsc()
 
             interpolated_scores: np.ndarray = interp_matrix.dot(scores)
