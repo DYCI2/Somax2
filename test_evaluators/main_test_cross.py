@@ -25,7 +25,7 @@ if __name__ == '__main__':
     # classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(TopNoteClassifier, ClassifierType.MELODIC),
     #                                                                       (SomChromaClassifier, ClassifierType.HARMONIC)]
     classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(TopNoteClassifier, ClassifierType.MELODIC)]
-    evaluator: CrossEvaluator = CrossEvaluator(files, TriggerMode.MANUAL, [3], classifiers, None)
+    evaluator: CrossEvaluator = CrossEvaluator(files, TriggerMode.AUTOMATIC, [3], classifiers, None)
     build_time = timer() - t
     t = timer()
     print("################### Build time:", build_time)

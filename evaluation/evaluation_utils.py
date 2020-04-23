@@ -33,4 +33,3 @@ class EvaluationUtils:
         a_continuous: np.ndarray = EvaluationUtils._as_continuous(x1, t1, start_tick, end_tick)
         b_continuous: np.ndarray = EvaluationUtils._as_continuous(x2, t2, start_tick, end_tick)
         return b_continuous - a_continuous
-

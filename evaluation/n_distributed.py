@@ -12,3 +12,6 @@ class NDistributed:
     def from_array(cls, ar: np.ndarray) -> 'NDistributed':
         return cls(float(np.std(ar)), float(np.mean(ar)))
 
+    def encode(self):
+        return {"sigma": self.sigma,
+                "mu": self.mu}

@@ -31,10 +31,10 @@ class EvaluationResult:
         self.chain_lengths: np.ndarray = self.calc_chains_lengths(output)
         self.raw_rms_main: np.ndarray = self.calc_raw_rms(self.classifier, self.influence, self.output)
         self.raw_rms_others: Dict[str, np.ndarray] = self.calc_rms_other(self.classifier, self.influence, self.output)
-        self.num_peaks_generated: Optional[np.ndarray] = self.calc_num_peaks_generated(self.generator, self.peaks_statistics)
+        self.num_peaks_generated: Optional[np.ndarray] = self.calc_num_peaks_generated(self.generator,
+                                                                                       self.peaks_statistics)
 
         # Main evaluation parameters
-        self.self_similarity: float  # only relevant for SelfEvaluator
         self.chain_length: NDistributed = self.calc_chain_length(self.chain_lengths)
         self.jump_ratio: float = self.calc_jump_ratio(self.output, self.chain_lengths)
         self.avg_num_peaks: NDistributed = self.calc_avg_num_peaks(self.peaks_statistics)
@@ -42,11 +42,31 @@ class EvaluationResult:
         self.avg_score_nonsel: NDistributed = self.calc_avg_score_nonsel(self.peaks_statistics)
         self.selected_nonsel_ratio: float = self.calc_selected_nonsel_ratio(self.avg_score_selected,
                                                                             self.avg_score_nonsel)
-        self.avg_num_peaks_generated: Optional[NDistributed] = self.calc_avg_num_peaks_generated(self.num_peaks_generated)
+        self.avg_num_peaks_generated: Optional[NDistributed] = self.calc_avg_num_peaks_generated(
+            self.num_peaks_generated)
         self.non_generating_influences_ratio: float = self.calc_non_generating_influences_ratio(self.influence,
                                                                                                 self.num_peaks_generated)
         self.rms_main: NDistributed = self.calc_rms(self.raw_rms_main)
         self.rms_others: Dict[str, NDistributed] = self.calc_rms(self.raw_rms_others)
+
+    def encode(self):
+        return {"source": self.source.name,
+                "influence": self.influence.name,
+                "generator": self.generator.name,
+                "classifier": self.classifier.__name__,
+                "ngram_order": self.ngram_order,
+                "classification_param": self.classification_param,
+                "chain_length": self.chain_length,
+                "jump_ratio": self.jump_ratio,
+                "avg_num_peaks": self.avg_num_peaks,
+                "avg_score_selected": self.avg_score_selected,
+                "avg_score_nonsel": self.avg_score_nonsel,
+                "selected_nonsel_ratio": self.selected_nonsel_ratio,
+                "avg_num_peaks_generated": self.avg_num_peaks_generated,
+                "non_generating_influences_ratio": self.non_generating_influences_ratio,
+                "rms_main": self.rms_main,
+                "rms_others": self.rms_others,
+                }
 
     @staticmethod
     def calc_chains_lengths(output_corpus: Corpus) -> np.ndarray:
@@ -75,7 +95,8 @@ class EvaluationResult:
         return raw_rms
 
     @staticmethod
-    def calc_num_peaks_generated(generator: EvaluationGenerator, peaks_statistics: PeaksStatistics) -> Optional[np.ndarray]:
+    def calc_num_peaks_generated(generator: EvaluationGenerator, peaks_statistics: PeaksStatistics) -> Optional[
+        np.ndarray]:
         if generator.classifier_type:
             atom_name: str = generator.classifier_type.value
             return np.array([v for peak_dict in peaks_statistics.num_generated_peaks for atom, v in peak_dict.items() if
