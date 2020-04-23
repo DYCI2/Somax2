@@ -103,7 +103,7 @@ class PlotPage:
 
     def plot(self, source_name: str, influence_name: str, classifier_name: str):
         fig: Figure = plt.figure(dpi=100, figsize=(20, 10))
-        fig.suptitle(f"{source_name} on {influence_name}: {classifier_name}.")
+        fig.suptitle(f"{influence_name}(i) on {source_name}(s): {classifier_name}.")
         cols = 3
         rows = int(np.ceil(self.length() / cols))
         for i, (name, plot) in enumerate(self.plots.items(), start=1):

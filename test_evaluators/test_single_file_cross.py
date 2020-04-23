@@ -5,11 +5,9 @@ import numpy as np
 
 from evaluation.analytic_visualizer import AnalyticVisualizer
 from evaluation.evaluation_generators import ClassifierType
-from evaluation.evaluation_utils import EvaluationUtils
-from evaluation.evaluator import SelfEvaluator, CrossEvaluator
+from evaluation.evaluator import CrossEvaluator
 from somaxlibrary.classification import TopNoteClassifier
 from somaxlibrary.classification.classifier import AbstractClassifier
-from somaxlibrary.corpus_builder.traits import TopNote
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 
 if __name__ == '__main__':
