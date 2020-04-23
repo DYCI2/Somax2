@@ -36,17 +36,17 @@ class Evaluator(ABC):
     def _generators(classifier_class: Type[AbstractClassifier], classifier_type: ClassifierType,
                     source_corpus: Corpus, influence_corpus: Corpus) -> Iterator[EvaluationGenerator]:
         yield SingleAtomGenerator(source_corpus, influence_corpus, gather_peak_statistics=True,
-                                  name=f"SingleAtomNoPhase_{influence_corpus.name}_on_{source_corpus.name}",
+                                  name=f"SingleAtomNoPhase_{influence_corpus.name}(i)_on_{source_corpus.name}(s)",
                                   use_phase_modulation=False, classifier_class=classifier_class,
                                   classifier_type=classifier_type)
         yield SingleAtomGenerator(source_corpus, influence_corpus, gather_peak_statistics=True,
-                                  name=f"SingleAtomPhase_{influence_corpus.name}_on_{source_corpus.name}",
+                                  name=f"SingleAtomPhase_{influence_corpus.name}(i)_on_{source_corpus.name}(s)",
                                   use_phase_modulation=True, classifier_class=classifier_class,
                                   classifier_type=classifier_type)
         yield BaseGenerator(source_corpus, influence_corpus, gather_peak_statistics=True,
-                            name=f"BaseWithoutClassifier_{influence_corpus.name}_on_{source_corpus.name}")
+                            name=f"BaseWithoutClassifier_{influence_corpus.name}(i)_on_{source_corpus.name}(s)")
         yield BaseGenerator(source_corpus, influence_corpus, gather_peak_statistics=True,
-                            name=f"BaseWithClassifier_{influence_corpus.name}_on_{source_corpus.name}",
+                            name=f"BaseWithClassifier_{influence_corpus.name}(i)_on_{source_corpus.name}(s)",
                             classifier_class=classifier_class, classifier_type=classifier_type)
 
     def generate(self):
@@ -58,7 +58,7 @@ class Evaluator(ABC):
                 self.logger.info(f"[generate]: ** Evaluating for classifier '{classifier.__class__}' "
                                  f"as type '{classifier_type.value if classifier_type else None}'.")
                 for generator in self._generators(classifier, classifier_type, source, influence):
-                    self.logger.info(f"[generate]: **** Evaluating for generator '{generator.__class__}'")
+                    self.logger.info(f"[generate]: **** Evaluating for generator '{generator.name}'")
                     generator.initialize(trigger_mode=self.trigger_mode)
                     for ngram_order in self.ngram_orders:
                         if self.classification_parameter_values:

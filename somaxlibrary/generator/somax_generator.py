@@ -88,7 +88,6 @@ class SomaxGenerator(ABC):
             # print(f"i={i}, Δt={timer() - t}")
             # t = timer()
         self.logger.debug("Iteration over Scheduler completed")
-        print(f"{time.time()}: TEMP Iteration over Sched completed")
 
         corpus_events: List[CorpusEvent] = self._update_times(corpus_events, onset_ticks, onset_times_ms, tempi)
         name = self.name if self.name else f"{self.influence_corpus.name}On{self.source_corpus.name}"
@@ -120,7 +119,6 @@ class SomaxGenerator(ABC):
         # if self._player.trigger_mode == TriggerMode.AUTOMATIC:
         #     self.scheduler.add_trigger_event(self.player, start_tick)
         self.logger.debug("Influence completed")
-        print(f"{time.time()}: TEMP Influence completed")
 
     def _update_times(self, corpus_events: List[CorpusEvent], ticks: List[float], times_ms: List[float],
                       tempi: List[float]) -> List[CorpusEvent]:
@@ -133,7 +131,6 @@ class SomaxGenerator(ABC):
             event.tempo = tempi[i]
             # TODO: IMPORTANT Change note _absolute_ durations too as well as relative onsets - depend on previous event!!!!
         self.logger.warning("Note absolute durations have not been updated - incomplete implementation")
-        print(f"{time.time()}: TEMP Completed completed")
         return corpus_events
 
     @staticmethod

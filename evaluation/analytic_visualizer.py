@@ -1,3 +1,5 @@
+import copy
+import functools
 from typing import List, Type, Tuple, Dict, Callable, Union
 
 import matplotlib.pyplot as plt
@@ -13,7 +15,7 @@ from somaxlibrary.corpus import Corpus
 
 
 class PlotLine:
-    def __init__(self, param: Union[float, NDistributed], result: EvaluationResult):
+    def __init__(self, param: Union[float, NDistributed, None], result: EvaluationResult):
         self._values: List[float] = []
         self._errors: List[float] = []
         self._ngram_order: List[int] = []
@@ -39,6 +41,8 @@ class PlotLine:
 
 
 class Plot:
+    MARKERS = ["o", "s", "P", "X", "^", "d", "p", "v", "*"]
+
     def __init__(self, result: EvaluationResult, param_getter: Callable):
         self.lines: Dict[str, PlotLine] = {}
         self.param_getter: Callable = param_getter
@@ -55,12 +59,13 @@ class Plot:
         return len(self.lines)
 
     def plot(self, ax: Axes, parameter_name: str):
-        for generator_name, line in self.lines.items():
+        for i, (generator_name, line) in enumerate(self.lines.items()):
             x, y, e = line.line
             print(x, y, e, parameter_name, generator_name)
-            ax.errorbar(x, y, yerr=e, label=generator_name, marker='o', capsize=3)
+            ax.errorbar(x, y, yerr=e, label=generator_name, marker=self.MARKERS[i], capsize=3, alpha=0.5)
+            ax.set_xlabel("ngram order")
         ax.set_title(parameter_name)
-        ax.legend()
+        ax.legend(prop={'size': 6})
 
 
 class PlotPage:
@@ -76,13 +81,22 @@ class PlotPage:
             if param in self.plots:
                 self.plots[param].append(result)
             else:
-                self.plots[param] = Plot(result, lambda r: getattr(r, param))
+                self.plots[param] = Plot(result, functools.partial(PlotPage.__param_getter, param))
         other_classifiers: List[str] = [key for key in result.rms_others.keys()]
         for classifier_name in other_classifiers:
             if classifier_name in self.plots:
                 self.plots[classifier_name].append(result)
             else:
-                self.plots[classifier_name] = Plot(result, lambda r: r.rms_others.get(classifier_name))
+                self.plots[classifier_name] = Plot(result,
+                                                   functools.partial(PlotPage.__rms_others_getter, classifier_name))
+
+    @staticmethod
+    def __param_getter(param_name: str, result: EvaluationResult) -> Union[float, NDistributed, None]:
+        return getattr(result, param_name)
+
+    @staticmethod
+    def __rms_others_getter(classifier_name: str, result: EvaluationResult) -> Union[float, NDistributed, None]:
+        return result.rms_others.get(classifier_name)
 
     def length(self) -> int:
         return len(self.plots)
