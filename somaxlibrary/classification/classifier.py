@@ -5,7 +5,9 @@ from typing import List, Optional, Type, Dict
 import numpy as np
 
 import somaxlibrary.classification
+from evaluation.evaluation_utils import EvaluationUtils
 from somaxlibrary.corpus import Corpus
+from somaxlibrary.corpus_builder.traits import OnsetChroma
 from somaxlibrary.influence import AbstractInfluence, InfluenceKeyword
 from somaxlibrary.label import AbstractLabel
 
@@ -84,3 +86,12 @@ class PitchClassifier(AbstractClassifier, ABC):
 class ChromaClassifier(AbstractClassifier, ABC):
     def _influence_keywords(self) -> List[InfluenceKeyword]:
         return [InfluenceKeyword.CHROMA]
+
+    @classmethod
+    def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+        influence_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
+                                                  for event in influence_corpus.events])
+        output_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
+                                               for event in output_corpus.events])
+        return np.sqrt(np.sum(np.power(EvaluationUtils.diff(influence_chromas, influence_corpus.onsets,
+                                                            output_chromas, output_corpus.onsets), 2), axis=1))

@@ -1,7 +1,7 @@
 import logging
 import os
 from copy import deepcopy
-from typing import Dict, Optional, Tuple, Type, List
+from typing import Dict, Optional, Tuple, Type, List, Any
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.atom import Atom
@@ -70,7 +70,8 @@ class Player(ScheduledMidiObject, Parametric):
 
     def create_atom(self, path: List[str], weight: float, classifier: Type[AbstractClassifier],
                     activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
-                    corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
+                    corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]],
+                    classifier_parameters: Optional[Dict[str, Any]] = None):
         """raises: InvalidPath, KeyError, DuplicateKeyError"""
         self.logger.debug(f"[create_atom] Attempting to create atom at {path}...")
         self.corpus = corpus
@@ -79,7 +80,7 @@ class Player(ScheduledMidiObject, Parametric):
             raise InvalidPath(f"Cannot create an atom directly in Player.")
         else:
             self.streamviews[streamview].create_atom(path, weight, classifier, activity_type, memory_type,
-                                                     corpus, self_influenced, transforms)
+                                                     corpus, self_influenced, transforms, classifier_parameters)
         for transform_tuple in transforms:
             self.store_transform(transform_tuple)
         self._parse_parameters()

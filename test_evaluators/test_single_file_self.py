@@ -3,10 +3,12 @@ from typing import List, Tuple, Type
 
 import numpy as np
 
+from evaluation.analytic_visualizer import AnalyticVisualizer
 from evaluation.evaluation_generators import ClassifierType
 from evaluation.evaluation_utils import EvaluationUtils
 from evaluation.evaluator import SelfEvaluator
 from somaxlibrary.classification import TopNoteClassifier
+from somaxlibrary.classification.chroma_classifiers import AbsoluteGmmClassifier, RelativeGmmClassifier
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus_builder.traits import TopNote
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
@@ -14,14 +16,18 @@ from test_evaluators.exporter import Exporter
 
 if __name__ == '__main__':
     # files: List[str] = ["/Users/joakimborg/MIDI/debussy_part.mid", "/Users/joakimborg/MIDI/satie-gymnopedie1.mid"]
-    np.seterr(all='raise')
+    # np.seterr(all='raise')
     files: List[str] = ["/Users/joakimborg/MIDI/debussy_part.mid"]
-    classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(TopNoteClassifier, ClassifierType.MELODIC)]
-    evaluator: SelfEvaluator = SelfEvaluator(files, TriggerMode.AUTOMATIC, [2, 3], classifiers, None)
+    # classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(TopNoteClassifier, ClassifierType.MELODIC)]
+    classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(RelativeGmmClassifier, ClassifierType.HARMONIC)]
+    evaluator: SelfEvaluator = SelfEvaluator(files, TriggerMode.AUTOMATIC, [3], classifiers, None)
     results = evaluator.generate()
     print(results)
 
     Exporter.export_results(results)
+
+    visualizer = AnalyticVisualizer(results)
+    visualizer.plot()
 
     # print(json.dumps(results, default=lambda o: o.encode(), indent=4))
 

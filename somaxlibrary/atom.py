@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, Union, Type, List, Tuple, Optional
+from typing import Dict, Union, Type, List, Tuple, Optional, Any
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.classification.classifier import AbstractClassifier
@@ -16,7 +16,8 @@ from somaxlibrary.transforms import AbstractTransform
 class Atom(Parametric):
     def __init__(self, name: str, weight: float, classifier: Type[AbstractClassifier],
                  activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
-                 corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
+                 corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]],
+                 classifier_parameters: Optional[Dict[str, Any]] = None):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"[__init__ Creating atom '{name}'.")
@@ -24,7 +25,10 @@ class Atom(Parametric):
         self._weight: Parameter = Parameter(weight, 0.0, None, 'float', "Relative scaling of atom peaks.")
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this Atom.")
 
-        self._classifier: AbstractClassifier = classifier()
+        if classifier_parameters is not None:
+            self._classifier: AbstractClassifier = classifier(**classifier_parameters)
+        else:
+            self._classifier: AbstractClassifier = classifier()
         self._activity_pattern: AbstractActivityPattern = activity_type()  # creates activity
         self._memory_space: AbstractMemorySpace = memory_type(transforms)
         self._corpus: Optional[Corpus] = corpus

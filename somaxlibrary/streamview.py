@@ -1,5 +1,5 @@
 import logging
-from typing import Callable, Tuple, ClassVar, Type, List, Dict
+from typing import Callable, Tuple, ClassVar, Type, List, Dict, Optional, Any
 
 from somaxlibrary.activity_pattern import AbstractActivityPattern
 from somaxlibrary.atom import Atom
@@ -63,7 +63,8 @@ class StreamView(Parametric):
 
     def create_atom(self, path: List[str], weight: float, classifier: Type[AbstractClassifier],
                     activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
-                    corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
+                    corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]],
+                    classifier_parameters: Optional[Dict[str, Any]] = None):
         """Raises: KeyError, InvalidPath, DuplicateKeyError"""
         self.logger.debug("[create_atom] Attempting to create atom with path {}.".format(path))
 
@@ -73,7 +74,7 @@ class StreamView(Parametric):
             raise DuplicateKeyError(f"An atom with the name '{new_atom_name}' already exists in "
                                     f"streamview '{parent_streamview.name}'.")
         parent_streamview.atoms[new_atom_name] = Atom(new_atom_name, weight, classifier, activity_type, memory_type,
-                                                      corpus, self_influenced, transforms)
+                                                      corpus, self_influenced, transforms, classifier_parameters)
 
     def delete_atom(self, name: str):
         del self.atoms[name]

@@ -1,7 +1,9 @@
+from abc import ABC
 from importlib import resources
-from typing import List
+from typing import List, Optional
 
 import numpy as np
+from sklearn.mixture import GaussianMixture
 
 from evaluation.evaluation_utils import EvaluationUtils
 from somaxlibrary.classification import tables
@@ -42,7 +44,7 @@ class SomChromaClassifier(ChromaClassifier):
         labels: List[IntLabel] = []
         for event in corpus.events:  # type: CorpusEvent
             # TODO: Handle or comment on KeyError, which technically should never occur
-            labels.append(self._label_from_chroma(event.get_trait(OnsetChroma).foreground))
+            labels.append(self._label_from_chroma(event.get_trait(OnsetChroma).background))
         return labels
 
     def classify_influence(self, influence: AbstractInfluence) -> AbstractLabel:
@@ -51,7 +53,7 @@ class SomChromaClassifier(ChromaClassifier):
             return self._label_from_chroma(influence.influence_data)
         elif isinstance(influence, CorpusInfluence):
             # TODO: Handle or comment on KeyError, which technically should never occur
-            return self._label_from_chroma(influence.corpus_event.get_trait(OnsetChroma).foreground)
+            return self._label_from_chroma(influence.corpus_event.get_trait(OnsetChroma).background)
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
@@ -60,16 +62,52 @@ class SomChromaClassifier(ChromaClassifier):
         rms: np.ndarray = np.sqrt(np.sum(np.power(chroma - self._som_data, 2), axis=1))
         return IntLabel(self._som_classes[np.argmin(rms)])
 
-    @classmethod
-    def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-        influence_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).foreground
-                                                  for event in influence_corpus.events])
-        output_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).foreground
-                                               for event in output_corpus.events])
-        return np.sqrt(np.sum(np.power(EvaluationUtils.diff(influence_chromas, influence_corpus.onsets,
-                                                            output_chromas, output_corpus.onsets), 2), axis=1))
-
     def clear(self) -> None:
         pass  # SomChromaClassifier is stateless
 
 
+class GmmClassifier(ChromaClassifier, ABC):
+    def __init__(self, num_components: int = 100, max_iter: int = 500):
+        super().__init__()
+        self.num_components: int = num_components
+        self.max_iter: int = max_iter
+        self.gmm: Optional[GaussianMixture] = None
+
+    def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
+        self._corpus = corpus
+        labels: List[IntLabel] = []
+        for event in corpus.events:  # type: CorpusEvent
+            labels.append(IntLabel(int(self.gmm.predict(event.get_trait(OnsetChroma).background.reshape(1, -1)))))
+        return labels
+
+    def classify_influence(self, influence: AbstractInfluence) -> AbstractLabel:
+        if isinstance(influence, KeywordInfluence) and influence.keyword in self._influence_keywords():
+            return IntLabel(int(self.gmm.predict(influence.influence_data.reshape(1, -1))))
+        elif isinstance(influence, CorpusInfluence):
+            return IntLabel(
+                int(self.gmm.predict(influence.corpus_event.get_trait(OnsetChroma).background.reshape(1, -1))))
+        else:
+            raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
+
+    def clear(self) -> None:
+        pass  # GmmClassifier is stateless
+
+
+class AbsoluteGmmClassifier(GmmClassifier):
+    GMM_DATA_FILE = 'misc_hsom'
+
+    def __init__(self, num_components: int = 100, max_iter: int = 500):
+        super().__init__(num_components, max_iter)
+        with resources.path(tables, self.GMM_DATA_FILE) as p:
+            self._gmm_data: np.ndarray = np.loadtxt(p.absolute(), dtype=np.float32, delimiter=",")  # Shape: (N, 12)
+
+    def cluster(self, _corpus: Corpus) -> None:
+        self.gmm = GaussianMixture(n_components=self.num_components, max_iter=self.max_iter).fit(self._gmm_data)
+
+
+class RelativeGmmClassifier(GmmClassifier):
+
+    def cluster(self, corpus: Corpus) -> None:
+        chromas: List[np.ndarray] = [event.get_trait(OnsetChroma).background for event in corpus.events]
+        gmm_data: np.ndarray = np.row_stack(chromas)
+        self.gmm = GaussianMixture(n_components=self.num_components, max_iter=self.max_iter).fit(gmm_data)
