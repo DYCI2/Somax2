@@ -30,10 +30,10 @@ class SomChromaClassifier(ChromaClassifier):
 
     def __init__(self):
         super().__init__()
-        with resources.path(tables, self.SOM_DATA_FILE) as p:
-            self._som_data = np.loadtxt(p.absolute(), dtype=np.float32, delimiter=",")  # Shape: (N, 12)
-        with resources.path(tables, self.SOM_CLASS_FILE) as p:
-            self._som_classes = np.loadtxt(p.absolute(), dtype=int, delimiter=",")  # Shape: (N, )
+        with resources.path(tables, self.SOM_DATA_FILE) as path:
+            self._som_data = np.loadtxt(path.absolute(), dtype=np.float32, delimiter=",")  # Shape: (N, 12)
+        with resources.path(tables, self.SOM_CLASS_FILE) as path:
+            self._som_classes = np.loadtxt(path.absolute(), dtype=int, delimiter=",")  # Shape: (N, )
 
     def cluster(self, corpus: Corpus, **kwargs) -> None:
         # No clustering required for class
@@ -59,6 +59,9 @@ class SomChromaClassifier(ChromaClassifier):
 
     def _label_from_chroma(self, chroma: np.ndarray) -> IntLabel:
         # TODO: Test this: Drastically changed from previous implementation
+        max_val: float = np.max(chroma)
+        if max_val > 0:
+            chroma /= max_val
         rms: np.ndarray = np.sqrt(np.sum(np.power(chroma - self._som_data, 2), axis=1))
         return IntLabel(self._som_classes[np.argmin(rms)])
 

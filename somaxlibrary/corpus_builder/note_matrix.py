@@ -7,8 +7,8 @@ import pandas as pd
 from matplotlib import patches
 from matplotlib.axes import Axes
 
-from .matrix_keys import MatrixKeys as Keys
-from .midi_parser import MidiParser
+from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
+from somaxlibrary.corpus_builder.midi_parser import MidiParser
 
 
 class NoteMatrix:
@@ -122,7 +122,7 @@ class NoteMatrix:
         legends = [patches.Patch(color=col, label=f"Ch. {int(ch)}") for (ch, col) in channel_colors.items()]
         notes_ax.legend(handles=legends)
 
-        if slice_onset_ticks:
+        if slice_onset_ticks is not None:
             for slice_tick in slice_onset_ticks:
                 notes_ax.axvline(slice_tick, dashes=[1, 1], linewidth=1, c='k', alpha=0.2)
 
@@ -190,8 +190,8 @@ if __name__ == '__main__':
     import matplotlib
 
     matplotlib.use('Qt5Agg')
-    filepat = '/Users/joakimborg/MIDI/debussy.mid'
+    filepat = '/Users/joakimborg/MIDI/satie-gymnopedie1.mid'
     mat: NoteMatrix = NoteMatrix.from_midi_file(filepat)
-    mat.plot(filename=filepat)
+    mat.plot()
     # n = NoteMatrix.from_text(np.array([60, 62, 64, 67, 71, 60]))
     # n.plot()

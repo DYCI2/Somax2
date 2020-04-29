@@ -7,14 +7,14 @@ from typing import Tuple, List, Type
 import numpy as np
 import pandas as pd
 
-from . import traits
-from .chromagram import Chromagram
+from somaxlibrary.corpus_builder import traits
+from somaxlibrary.corpus_builder.chromagram import Chromagram
 from somaxlibrary.corpus import Corpus, ContentType
 from somaxlibrary.corpus_event import Note, CorpusEvent
-from .traits import AbstractTrait
-from .matrix_keys import MatrixKeys as Keys
-from .note_matrix import NoteMatrix
-from .spectrogram import Spectrogram
+from somaxlibrary.corpus_builder.traits import AbstractTrait
+from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
+from somaxlibrary.corpus_builder.note_matrix import NoteMatrix
+from somaxlibrary.corpus_builder.spectrogram import Spectrogram
 
 
 class CorpusBuilder:
@@ -124,5 +124,6 @@ if __name__ == '__main__':
     # print(len(corpus.events))
     logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s]: %(name)s: %(message)s')
     c: Corpus = CorpusBuilder().build('/Users/joakimborg/MIDI/debussy_part.mid')
+    c.plot()
     # c.to_note_matrix().plot(top_note=128, bottom_note=0)
     # c.plot()

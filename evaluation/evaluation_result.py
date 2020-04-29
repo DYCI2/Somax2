@@ -7,8 +7,10 @@ from evaluation.evaluation_generators import EvaluationGenerator
 from evaluation.n_distributed import NDistributed
 from evaluation.peaks_statistics import PeaksStatistics
 from somaxlibrary.atom import Atom
+from somaxlibrary.classification import SomChromaClassifier
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus import Corpus
+from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
 from somaxlibrary.generator.somax_generator import SomaxGenerator
 
 

@@ -91,7 +91,15 @@ class ChromaClassifier(AbstractClassifier, ABC):
     def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
         influence_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
                                                   for event in influence_corpus.events])
+        max_per_col: np.ndarray = np.max(influence_chromas, axis=1)
+        max_per_col[max_per_col == 0] = 1   # don't normalize empty vectors - avoid div0 error
+        influence_chromas /= max_per_col[:, np.newaxis]
+
         output_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
                                                for event in output_corpus.events])
+        max_per_col: np.ndarray = np.max(output_chromas, axis=1)
+        max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
+        output_chromas /= max_per_col[:, np.newaxis]
+
         return np.sqrt(np.sum(np.power(EvaluationUtils.diff(influence_chromas, influence_corpus.onsets,
                                                             output_chromas, output_corpus.onsets), 2), axis=1))

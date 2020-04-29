@@ -95,8 +95,8 @@ class Corpus:
             self.bg_spectrogram.plot(axes[3])
             self.fg_chromagram.plot(axes[4])
             self.bg_chromagram.plot(axes[5])
-            self.to_note_matrix().plot(axes=(axes[0], axes[1]))
+            self.to_note_matrix().plot(axes=(axes[0], axes[1]), slice_onset_ticks=self.onsets)
         else:
             _, axes = plt.subplots(2, 1, gridspec_kw={'height_ratios': [1, 5]})
-            self.to_note_matrix().plot(axes=(axes[0], axes[1]))
+            self.to_note_matrix().plot(axes=(axes[0], axes[1]), slice_onset_ticks=self.onsets)
         plt.show()
