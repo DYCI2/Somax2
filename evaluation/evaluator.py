@@ -40,15 +40,15 @@ class Evaluator(ABC):
                                   name=f"SingleAtomNoPhase_{influence_corpus.name}(i)_on_{source_corpus.name}(s)",
                                   use_phase_modulation=False, classifier_class=classifier_class,
                                   classifier_type=classifier_type)
-        yield SingleAtomGenerator(source_corpus, influence_corpus, gather_peak_statistics=True,
-                                  name=f"SingleAtomPhase_{influence_corpus.name}(i)_on_{source_corpus.name}(s)",
-                                  use_phase_modulation=True, classifier_class=classifier_class,
-                                  classifier_type=classifier_type)
-        yield BaseGenerator(source_corpus, influence_corpus, gather_peak_statistics=True,
-                            name=f"BaseWithoutClassifier_{influence_corpus.name}(i)_on_{source_corpus.name}(s)")
-        yield BaseGenerator(source_corpus, influence_corpus, gather_peak_statistics=True,
-                            name=f"BaseWithClassifier_{influence_corpus.name}(i)_on_{source_corpus.name}(s)",
-                            classifier_class=classifier_class, classifier_type=classifier_type)
+        # yield SingleAtomGenerator(source_corpus, influence_corpus, gather_peak_statistics=True,
+        #                           name=f"SingleAtomPhase_{influence_corpus.name}(i)_on_{source_corpus.name}(s)",
+        #                           use_phase_modulation=True, classifier_class=classifier_class,
+        #                           classifier_type=classifier_type)
+        # yield BaseGenerator(source_corpus, influence_corpus, gather_peak_statistics=True,
+        #                     name=f"BaseWithoutClassifier_{influence_corpus.name}(i)_on_{source_corpus.name}(s)")
+        # yield BaseGenerator(source_corpus, influence_corpus, gather_peak_statistics=True,
+        #                     name=f"BaseWithClassifier_{influence_corpus.name}(i)_on_{source_corpus.name}(s)",
+        #                     classifier_class=classifier_class, classifier_type=classifier_type)
 
     def generate(self):
         results: List[EvaluationResult] = []
@@ -88,7 +88,7 @@ class CrossEvaluator(Evaluator):
 
     @staticmethod
     def _corpus_combinations(corpora: List[Corpus]) -> Iterator[Tuple[Corpus, ...]]:
-        return itertools.permutations(corpora, 2)
+        return list(itertools.permutations(corpora, 2)) + [(c, c) for c in corpora]
 
 
 class SelfEvaluator(Evaluator):

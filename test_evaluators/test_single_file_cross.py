@@ -7,7 +7,7 @@ from evaluation.analytic_visualizer import AnalyticVisualizer
 from evaluation.evaluation_generators import ClassifierType
 from evaluation.evaluator import CrossEvaluator
 from somaxlibrary.classification import TopNoteClassifier
-from somaxlibrary.classification.chroma_classifiers import AbsoluteGmmClassifier
+from somaxlibrary.classification.chroma_classifiers import AbsoluteGmmClassifier, SomChromaClassifier
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 
@@ -18,6 +18,7 @@ if __name__ == '__main__':
     files: List[str] = ["/Users/joakimborg/MIDI/debussy.mid", "/Users/joakimborg/MIDI/satie-gymnopedie1.mid"]
     # classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(TopNoteClassifier, ClassifierType.MELODIC)]
     classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(AbsoluteGmmClassifier, ClassifierType.HARMONIC)]
+    # classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(SomChromaClassifier, ClassifierType.HARMONIC)]
     evaluator: CrossEvaluator = CrossEvaluator(files, TriggerMode.MANUAL, [3], classifiers, None)
     results = evaluator.generate()
 

@@ -4,6 +4,7 @@ from typing import Optional, Tuple, Any, List, Dict, Type, Union
 import numpy as np
 
 from evaluation.evaluation_generators import EvaluationGenerator
+from evaluation.evaluation_utils import EvaluationUtils
 from evaluation.n_distributed import NDistributed
 from evaluation.peaks_statistics import PeaksStatistics
 from somaxlibrary.atom import Atom
@@ -37,6 +38,7 @@ class EvaluationResult:
                                                                                        self.peaks_statistics)
 
         # Main evaluation parameters
+        self.self_similarity: float = self.calc_self_similarity(self.influence, self.output)
         self.chain_length: NDistributed = self.calc_chain_length(self.chain_lengths)
         self.jump_ratio: float = self.calc_jump_ratio(self.output, self.chain_lengths)
         self.avg_num_peaks: NDistributed = self.calc_avg_num_peaks(self.peaks_statistics)
@@ -58,6 +60,7 @@ class EvaluationResult:
                 "classifier": self.classifier.__name__,
                 "ngram_order": self.ngram_order,
                 "classification_param": self.classification_param,
+                "self_similarity": self.self_similarity,
                 "chain_length": self.chain_length,
                 "jump_ratio": self.jump_ratio,
                 "avg_num_peaks": self.avg_num_peaks,
@@ -111,7 +114,9 @@ class EvaluationResult:
         influence_indices: np.ndarray = np.array([event.state_index for event in influence.events], dtype=int)
         output_indices: np.ndarray = np.array([event.state_index for event in output.events], dtype=int)
         length: int = influence.length()
-        return float(np.sum(influence_indices == output_indices) / length)
+        diff: np.ndarray = EvaluationUtils.diff(influence_indices, influence.onsets, output_indices, output.onsets)
+        discrete_diff: float = float(np.sum(np.abs(diff) < 0.5) / diff.shape[0])
+        return discrete_diff
 
     @staticmethod
     def calc_chain_length(chains_lengths: np.ndarray) -> NDistributed:
@@ -135,7 +140,10 @@ class EvaluationResult:
 
     @staticmethod
     def calc_selected_nonsel_ratio(avg_score_selected: NDistributed, avg_score_nonsel: NDistributed) -> float:
-        return avg_score_selected.mu / avg_score_nonsel.mu
+        if avg_score_nonsel.mu > 0:
+            return avg_score_selected.mu / avg_score_nonsel.mu
+        else:
+            return np.inf
 
     @staticmethod
     def calc_avg_num_peaks_generated(num_peaks_generated: Optional[np.ndarray]) -> Optional[NDistributed]:

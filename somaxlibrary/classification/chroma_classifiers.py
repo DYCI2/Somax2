@@ -80,17 +80,26 @@ class GmmClassifier(ChromaClassifier, ABC):
         self._corpus = corpus
         labels: List[IntLabel] = []
         for event in corpus.events:  # type: CorpusEvent
-            labels.append(IntLabel(int(self.gmm.predict(event.get_trait(OnsetChroma).background.reshape(1, -1)))))
+            chroma: np.ndarray = event.get_trait(OnsetChroma).background.reshape(1, -1)
+            max_val: float = np.max(chroma)
+            if max_val > 0:
+                chroma /= max_val
+            labels.append(IntLabel(int(self.gmm.predict(chroma))))
         return labels
 
     def classify_influence(self, influence: AbstractInfluence) -> AbstractLabel:
         if isinstance(influence, KeywordInfluence) and influence.keyword in self._influence_keywords():
-            return IntLabel(int(self.gmm.predict(influence.influence_data.reshape(1, -1))))
+            chroma: np.ndarray = influence.influence_data.reshape(1, -1)
         elif isinstance(influence, CorpusInfluence):
-            return IntLabel(
-                int(self.gmm.predict(influence.corpus_event.get_trait(OnsetChroma).background.reshape(1, -1))))
+            chroma: np.ndarray = influence.corpus_event.get_trait(OnsetChroma).background.reshape(1, -1)
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
+
+        max_val: float = np.max(chroma)
+        if max_val > 0:
+            chroma /= max_val
+        return IntLabel(int(self.gmm.predict(chroma)))
+
 
     def clear(self) -> None:
         pass  # GmmClassifier is stateless
@@ -113,4 +122,7 @@ class RelativeGmmClassifier(GmmClassifier):
     def cluster(self, corpus: Corpus) -> None:
         chromas: List[np.ndarray] = [event.get_trait(OnsetChroma).background for event in corpus.events]
         gmm_data: np.ndarray = np.row_stack(chromas)
+        max_per_col: np.ndarray = np.max(chromas, axis=1)
+        max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
+        chromas /= max_per_col[:, np.newaxis]
         self.gmm = GaussianMixture(n_components=self.num_components, max_iter=self.max_iter).fit(gmm_data)

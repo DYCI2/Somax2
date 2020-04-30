@@ -82,10 +82,12 @@ class Spectrogram:
         spectrogram: np.ndarray = np.zeros((num_rows, num_cols))
 
         for i in range(num_notes):
+            note_duration: int = np.ceil((ends_ms[i] - onsets_ms[i]) / spectrogram_step_ms).astype(int)
+            if note_duration <= 0:
+                continue
             note_spectrum: np.ndarray = note_numbers[i] + np.round(12 * np.log2(np.arange(1, max_num_harmonics + 1)))
             note_spectrum = note_spectrum[np.where(note_spectrum < 128)].astype(int)
             amplitudes: np.ndarray = np.power(harmonics_decay, np.arange(note_spectrum.size))
-            note_duration: int = np.ceil((ends_ms[i] - onsets_ms[i]) / spectrogram_step_ms).astype(int)
             envelope: np.ndarray = filt.filter(np.ones(note_duration))
             onset_idx: int = np.round(onsets_ms[i] / spectrogram_step_ms)
             columns: np.ndarray = np.arange(onset_idx, onset_idx + envelope.size).astype(int)
