@@ -1,4 +1,6 @@
 import json
+import re
+import string
 from dataclasses import dataclass, field
 from typing import List, Union, Tuple, Dict
 
@@ -44,9 +46,9 @@ class Chart:
             print(f"   min:  {bar.min_bar.v}, {bar.min_bar.generator_name}")
             print(f"   mean: {bar.mean_bar.v}, {bar.mean_bar.generator_name}")
             print(f"   max:  {bar.max_bar.v}, {bar.max_bar.generator_name}")
-            ax.bar(x, bar.min_bar.v, yerr=np.array([[(bar.min_bar.e + min(0.0, bar.min_bar.v - bar.min_bar.e))], [bar.min_bar.e]]), color='b', width=0.25, label='min')
-            ax.bar(x + .25, bar.mean_bar.v, yerr=np.array([[(bar.mean_bar.e + min(0.0, bar.mean_bar.v - bar.mean_bar.e))], [bar.mean_bar.e]]), color='g', width=0.25, label='mean')
-            ax.bar(x + .5, bar.max_bar.v, yerr=np.array([[(bar.max_bar.e + min(0.0, bar.max_bar.v - bar.max_bar.e))], [bar.max_bar.e]]), color='r', width=0.25, label='max')
+            ax.bar(x, bar.min_bar.v, yerr=np.array([[(bar.min_bar.e + min(0.0, bar.min_bar.v - bar.min_bar.e))], [bar.min_bar.e]]), color='tab:blue', width=0.25, label='min')
+            ax.bar(x + .25, bar.mean_bar.v, yerr=np.array([[(bar.mean_bar.e + min(0.0, bar.mean_bar.v - bar.mean_bar.e))], [bar.mean_bar.e]]), color='tab:green', width=0.25, label='mean')
+            ax.bar(x + .5, bar.max_bar.v, yerr=np.array([[(bar.max_bar.e + min(0.0, bar.max_bar.v - bar.max_bar.e))], [bar.max_bar.e]]), color='tab:red', width=0.25, label='max')
         ax.set_title(self.parameter_name)
         ax.set_xticks([i+.25 for i in range(len(self.bars))])
         ax.set_xticklabels([bar_group.classifier_name for bar_group in self.bars])
@@ -86,6 +88,43 @@ class ParameterData:
             index = self.param_data.index(max(self.param_data))
             return Bar(self.generator_names[index], self.param_data[index], 0)
 
+
+def latex_print(charts: Dict[str, Chart], results: List[ImportedEvaluationResult]):
+    labels: Dict[str, str] = {}
+    i = 0
+    for res in results:
+        if res.source not in labels:
+            labels[res.source] = "(" + string.ascii_lowercase[i] + ")"
+            i += 1
+        if res.influence not in labels:
+            labels[res.influence] = "(" + string.ascii_lowercase[i] + ")"
+            i += 1
+
+
+
+    for name, chart in charts.items():
+        print("\\begin{tabular}{|c|c|c|c|c|}")
+        print("\\hline")
+        print("& $\\mu$ & $\\sigma$ & source & influence \\\\")
+        print("\\hline \\hline")
+        for bar in chart.bars:
+            rgx = re.match("^[A-Za-z]+_(.*)\(i\)_on_(.*)\(s\)$", bar.min_bar.generator_name)
+            influence = labels[rgx.group(1)]
+            source = labels[rgx.group(2)]
+            print(f"min & {bar.min_bar.v:.4f} & {bar.min_bar.e:.4f} & {source} & {influence} \\\\")
+
+            print(f"mean & {bar.mean_bar.v:.4f} & {bar.mean_bar.e:.4f} & () & () \\\\")
+
+            rgx = re.match("^[A-Za-z]+_(.*)\(i\)_on_(.*)\(s\)$", bar.max_bar.generator_name)
+            influence = labels[rgx.group(1)]
+            source = labels[rgx.group(2)]
+            print(f"max & {bar.max_bar.v:.4f} & {bar.max_bar.e:.4f} & {source} & {influence} \\\\")
+            print("\\hline")
+        print("\\hline")
+        print("\\end{tabular}")
+        print("\\caption{", name, "}")
+
+    print(labels)
 
 if __name__ == '__main__':
     files = [
@@ -144,6 +183,6 @@ if __name__ == '__main__':
         ax: Axes = fig.add_subplot(1, 1, 1)
         chart.plot(ax)
 
-    plt.show()
-    # one per parameter
+    # plt.show()
+    latex_print(charts, classifier_results)
 
