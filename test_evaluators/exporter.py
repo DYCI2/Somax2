@@ -14,6 +14,7 @@ class ImportedEvaluationResult:
     source: str
     influence: str
     generator: str
+    classifier: str
     ngram_order: int
     classification_param: Any
     self_similarity: float
@@ -34,6 +35,7 @@ class ImportedEvaluationResult:
             source=d["source"]
             , influence=d["influence"]
             , generator=d["generator"]
+            , classifier=d["classifier"]
             , ngram_order=d["ngram_order"]
             , classification_param=d["classification_param"]
             , self_similarity=d["self_similarity"]

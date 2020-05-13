@@ -10,6 +10,7 @@ class AbstractTrait(ABC):
     @abstractmethod
     def analyze(cls, event: 'CorpusEvent', fg_spectrogram: Spectrogram, bg_spectrogram: Spectrogram,
                 fg_chromagram: Chromagram, bg_chromagram: Chromagram, **kwargs):
+        # TODO: Add previous events as optional argument too
         pass
 
     def name(self) -> str:

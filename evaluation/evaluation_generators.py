@@ -56,7 +56,7 @@ class SingleAtomGenerator(EvaluationGenerator):
         player: Player = Player("player1", trigger_mode, NoTarget())
 
         merge_actions: Tuple[Type[AbstractMergeAction], ...] = (DistanceMergeAction, PhaseModulationMergeAction) \
-            if self.use_phase_modulation else (PhaseModulationMergeAction,)
+            if self.use_phase_modulation else (DistanceMergeAction,)
 
         path: str = str(self.classifier_type.value)
         player.create_streamview([path], 1.0, merge_actions)

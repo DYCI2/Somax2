@@ -2,6 +2,7 @@ import json
 from typing import List, Tuple, Type
 
 import numpy as np
+import sounddevice
 
 from evaluation.analytic_visualizer import AnalyticVisualizer
 from evaluation.evaluation_generators import ClassifierType
@@ -26,8 +27,13 @@ if __name__ == '__main__':
 
     Exporter.export_results(results)
 
-    visualizer = AnalyticVisualizer(results)
-    visualizer.plot()
+    # visualizer = AnalyticVisualizer(results)
+    # visualizer.plot()
+
+    fs = 44100
+    while True:
+        sounddevice.play(0.9 * np.sin(440 * 2 * np.pi / fs * np.arange(fs * 1)), fs, blocking=True)
+        sounddevice.sleep(500)
 
     # print(json.dumps(results, default=lambda o: o.encode(), indent=4))
 
