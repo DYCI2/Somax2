@@ -130,17 +130,17 @@ class HarmonicLabel(AbstractLabel):
     @classmethod
     def classify(cls, data: Union[CorpusEvent, List[float], int], **kwargs) -> 'HarmonicLabel':
         if isinstance(data, CorpusEvent):
-            return HarmonicLabel._label_from_event(data)
+            return cls._label_from_event(data)
         elif type(data) is list or isinstance(data, np.ndarray):
-            return HarmonicLabel._label_from_chroma(np.array(data))
+            return cls._label_from_chroma(np.array(data))
         elif isinstance(data, int):
-            return HarmonicLabel._label_from_pitch(data)
+            return cls._label_from_pitch(data)
         else:
             raise InvalidLabelInput(f"Harmonic Label data could not be classified due to incorrect type.")
 
     @classmethod
     def _label_from_event(cls, event: CorpusEvent) -> 'HarmonicLabel':
-        return HarmonicLabel._label_from_chroma(event.chroma)
+        return cls._label_from_chroma(event.chroma)
 
     @classmethod
     def _label_from_chroma(cls, chroma: np.array) -> 'HarmonicLabel':
@@ -163,3 +163,23 @@ class HarmonicLabel(AbstractLabel):
         chroma = np.zeros(12, dtype='float32')
         chroma[pitch_class] = 1.0
         return HarmonicLabel._label_from_chroma(chroma)
+
+
+class NormalizedHarmonicLabel(HarmonicLabel):
+    def __repr__(self):
+        return f"NormalizedHarmonicLabel(label={self.label})"
+
+    @classmethod
+    def _label_from_chroma(cls, chroma: np.array) -> 'HarmonicLabel':
+        if len(chroma) != 12:
+            raise InvalidLabelInput(f"Harmonic Label data could not be classified from content with size {len(chroma)}."
+                                    f" Required size is 12.")
+        chroma = np.array(chroma, dtype='float32')
+        max_value = np.max(chroma)
+        if max_value > 0:
+            chroma /= max_value
+        clust_vec = np.exp(-HarmonicLabel.NODE_SPECIFICITY
+                           * np.sqrt(np.sum(np.power(chroma - HarmonicLabel.SOM_DATA, 2), axis=1)))
+        # pick corresponding SOM class from chroma information
+        label = HarmonicLabel.SOM_CLASSES[np.argmax(clust_vec)]
+        return cls(label)
