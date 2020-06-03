@@ -98,5 +98,14 @@ class SelfEvaluator(Evaluator):
         return [(c, c) for c in corpora]
 
 
+class MultiEvaluator(CrossEvaluator):
+    @staticmethod
+    def _generators(classifier_class: Type[AbstractClassifier], classifier_type: ClassifierType,
+                    source_corpus: Corpus, influence_corpus: Corpus) -> Iterator[EvaluationGenerator]:
+        yield BaseGenerator(source_corpus, influence_corpus, gather_peak_statistics=True,
+                            name=f"BaseWithClassifier_{influence_corpus.name}(i)_on_{source_corpus.name}(s)",
+                            classifier_class=classifier_class, classifier_type=classifier_type)
+
+
 class TimeEvaluator(Evaluator):
     pass

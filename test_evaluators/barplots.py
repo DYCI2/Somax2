@@ -46,11 +46,17 @@ class Chart:
             print(f"   min:  {bar.min_bar.v}, {bar.min_bar.generator_name}")
             print(f"   mean: {bar.mean_bar.v}, {bar.mean_bar.generator_name}")
             print(f"   max:  {bar.max_bar.v}, {bar.max_bar.generator_name}")
-            ax.bar(x, bar.min_bar.v, yerr=np.array([[(bar.min_bar.e + min(0.0, bar.min_bar.v - bar.min_bar.e))], [bar.min_bar.e]]), color='tab:blue', width=0.25, label='min')
-            ax.bar(x + .25, bar.mean_bar.v, yerr=np.array([[(bar.mean_bar.e + min(0.0, bar.mean_bar.v - bar.mean_bar.e))], [bar.mean_bar.e]]), color='tab:green', width=0.25, label='mean')
-            ax.bar(x + .5, bar.max_bar.v, yerr=np.array([[(bar.max_bar.e + min(0.0, bar.max_bar.v - bar.max_bar.e))], [bar.max_bar.e]]), color='tab:red', width=0.25, label='max')
-        ax.set_title(self.parameter_name)
-        ax.set_xticks([i+.25 for i in range(len(self.bars))])
+            ax.bar(x, bar.min_bar.v,
+                   yerr=np.array([[(bar.min_bar.e + min(0.0, bar.min_bar.v - bar.min_bar.e))], [bar.min_bar.e]]),
+                   color='tab:blue', width=0.25, label='min')
+            ax.bar(x + .25, bar.mean_bar.v,
+                   yerr=np.array([[(bar.mean_bar.e + min(0.0, bar.mean_bar.v - bar.mean_bar.e))], [bar.mean_bar.e]]),
+                   color='tab:green', width=0.25, label='mean')
+            ax.bar(x + .5, bar.max_bar.v,
+                   yerr=np.array([[(bar.max_bar.e + min(0.0, bar.max_bar.v - bar.max_bar.e))], [bar.max_bar.e]]),
+                   color='tab:red', width=0.25, label='max')
+        # ax.set_title(self.parameter_name)
+        ax.set_xticks([i + .25 for i in range(len(self.bars))])
         ax.set_xticklabels([bar_group.classifier_name for bar_group in self.bars])
         ax.tick_params(axis='x', rotation=70)
         legend = ['min', 'mean', 'max']
@@ -100,31 +106,48 @@ def latex_print(charts: Dict[str, Chart], results: List[ImportedEvaluationResult
             labels[res.influence] = "(" + string.ascii_lowercase[i] + ")"
             i += 1
 
-
-
     for name, chart in charts.items():
-        print("\\begin{tabular}{|c|c|c|c|c|}")
+        print("\\begin{figure}")
+        print("\\centering")
+        print("\\begin{tabular}{|c|c|c|c|c|c|}")
         print("\\hline")
-        print("& $\\mu$ & $\\sigma$ & source & influence \\\\")
+        print("classifier & bar & $\\bar x$ & $s$ & source & influence \\\\")
         print("\\hline \\hline")
         for bar in chart.bars:
             rgx = re.match("^[A-Za-z]+_(.*)\(i\)_on_(.*)\(s\)$", bar.min_bar.generator_name)
             influence = labels[rgx.group(1)]
             source = labels[rgx.group(2)]
-            print(f"min & {bar.min_bar.v:.4f} & {bar.min_bar.e:.4f} & {source} & {influence} \\\\")
 
-            print(f"mean & {bar.mean_bar.v:.4f} & {bar.mean_bar.e:.4f} & () & () \\\\")
+            print("\\multirow{3}{4em}{", bar.classifier_name.replace("_", " "), "}", end='')
+
+            err = (bar.min_bar.e if bar.min_bar.e > 0.001 else 'n/a')
+            if isinstance(err, str):
+                print(f"& min & {bar.min_bar.v:.4f} & {err} & {source} & {influence} \\\\")
+            else:
+                print(f"& min & {bar.min_bar.v:.4f} & {err:.4f} & {source} & {influence} \\\\")
+                
+            err = (bar.mean_bar.e if bar.mean_bar.e > 0.001 else 'n/a')
+            if isinstance(err, str):
+                print(f"& mean & {bar.mean_bar.v:.4f} & {err} & (n/a) & (n/a) \\\\")
+            else:
+                print(f"& mean & {bar.mean_bar.v:.4f} & {err:.4f} & (n/a) & (n/a) \\\\")
 
             rgx = re.match("^[A-Za-z]+_(.*)\(i\)_on_(.*)\(s\)$", bar.max_bar.generator_name)
             influence = labels[rgx.group(1)]
             source = labels[rgx.group(2)]
-            print(f"max & {bar.max_bar.v:.4f} & {bar.max_bar.e:.4f} & {source} & {influence} \\\\")
+            err = (bar.max_bar.e if bar.max_bar.e > 0.001 else 'n/a')
+            if isinstance(err, str):
+                print(f"& max & {bar.max_bar.v:.4f} & {err} & {source} & {influence} \\\\")
+            else:
+                print(f"& max & {bar.max_bar.v:.4f} & {err:.4f} & {source} & {influence} \\\\")
             print("\\hline")
         print("\\hline")
         print("\\end{tabular}")
-        print("\\caption{", name, "}")
+        print("\\caption{", name.replace("_", " "), "}")
+        print("\\end{figure}")
 
     print(labels)
+
 
 if __name__ == '__main__':
     files = [
@@ -137,7 +160,7 @@ if __name__ == '__main__':
         "/Users/joakimborg/Documents/Max 8/Packages/Somax2/test_evaluators/evaluation_data/relgmm50_single_20200507_152351.json",
         "/Users/joakimborg/Documents/Max 8/Packages/Somax2/test_evaluators/evaluation_data/relgmm100_single_20200507_160146.json",
         "/Users/joakimborg/Documents/Max 8/Packages/Somax2/test_evaluators/evaluation_data/relgmm150_single_20200507_165022.json"
-        ]
+    ]
     charts: Dict[str, Chart] = {}
     for file in files:
         with open(file, "r") as read_file:
@@ -162,18 +185,32 @@ if __name__ == '__main__':
         classifier_name: str = classifier_results[0].classifier
         for attr in simple_attrs:  # Per parameter
             values: List[Union[NDistributed, float]] = [getattr(classifier, attr) for classifier in classifier_results
-                                                        if
-                                                        classifier.source != classifier.influence]
-            generator_names: List[str] = [classifier.generator for classifier in classifier_results if
-                                          classifier.source != classifier.influence]
+                                                        if classifier.source != classifier.influence]
+            generator_names: List[str] = [classifier.generator for classifier in classifier_results
+                                          if classifier.source != classifier.influence]
 
             parameter_data: ParameterData = ParameterData(values, generator_names)
             # parameter_datas.append(ParameterData(values, names))
-            bars: BarGroup = BarGroup(parameter_data.min(), parameter_data.mean(), parameter_data.max(), classifier_name)
+            bars: BarGroup = BarGroup(parameter_data.min(), parameter_data.mean(), parameter_data.max(),
+                                      classifier_name)
             if attr in charts:
                 charts[attr].bars.append(bars)
             else:
                 charts[attr] = Chart(attr, [bars])
+
+        for attr in ["self_similarity", "rms_main"]:
+            value: List[float] = [getattr(classifier, attr) for classifier in classifier_results
+                                            if classifier.source == classifier.influence]
+            generator_names: List[str] = [classifier.generator for classifier in classifier_results
+                                          if classifier.source == classifier.influence]
+            parameter_data: ParameterData = ParameterData(value, generator_names)
+            bars: BarGroup = BarGroup(parameter_data.min(), parameter_data.mean(), parameter_data.max(),
+                                      classifier_name)
+            attr_name: str = attr + "_self"
+            if attr_name in charts:
+                charts[attr_name].bars.append(bars)
+            else:
+                charts[attr_name] = Chart(attr_name, [bars])
 
     for name, chart in charts.items():
         fig: Figure = plt.figure()
@@ -182,7 +219,8 @@ if __name__ == '__main__':
         print(f"########################")
         ax: Axes = fig.add_subplot(1, 1, 1)
         chart.plot(ax)
+        fig.tight_layout()
+        # fig.savefig(f"{name}_single.png", dpi=300)
 
     # plt.show()
     latex_print(charts, classifier_results)
-

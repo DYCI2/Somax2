@@ -8,7 +8,8 @@ from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus import Corpus
 from somaxlibrary.generator.somax_generator import SomaxGenerator
 from somaxlibrary.memory_spaces import NGramMemorySpace
-from somaxlibrary.merge_actions import AbstractMergeAction, DistanceMergeAction, PhaseModulationMergeAction
+from somaxlibrary.merge_actions import AbstractMergeAction, DistanceMergeAction, PhaseModulationMergeAction, \
+    NextStateMergeAction
 from somaxlibrary.player import Player
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 from somaxlibrary.target import NoTarget
@@ -72,13 +73,14 @@ class BaseGenerator(EvaluationGenerator):
     def initialize(self, trigger_mode: TriggerMode = TriggerMode.AUTOMATIC, **kwargs) -> None:
         player: Player = Player("player1", trigger_mode, NoTarget())
 
-        merge_actions: Tuple[Type[AbstractMergeAction], ...] = (DistanceMergeAction, PhaseModulationMergeAction)
+        streamview_merge_actions:Tuple[Type[AbstractMergeAction], ...] = (DistanceMergeAction,)
+        player_merge_actions: Tuple[Type[AbstractMergeAction], ...] = (DistanceMergeAction, PhaseModulationMergeAction, NextStateMergeAction)
         weight: float = 1.0
-        player.create_streamview([ClassifierType.SELF.value], weight, merge_actions)
-        player.create_streamview([ClassifierType.HARMONIC.value], weight, merge_actions)
-        player.create_streamview([ClassifierType.MELODIC.value], weight, merge_actions)
+        player.create_streamview([ClassifierType.SELF.value], weight, streamview_merge_actions)
+        player.create_streamview([ClassifierType.HARMONIC.value], weight, streamview_merge_actions)
+        player.create_streamview([ClassifierType.MELODIC.value], weight, streamview_merge_actions)
         if self.classifier_type == ClassifierType.EXTRA:
-            player.create_streamview([ClassifierType.EXTRA.value], weight, merge_actions)
+            player.create_streamview([ClassifierType.EXTRA.value], weight, streamview_merge_actions)
 
         self_classifier: Type[AbstractClassifier] = TopNoteClassifier if \
             not self.classifier_type or not self.classifier_type == ClassifierType.MELODIC else self.classifier_class

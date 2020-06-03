@@ -10,20 +10,23 @@ from somaxlibrary.classification import TopNoteClassifier
 from somaxlibrary.classification.chroma_classifiers import AbsoluteGmmClassifier, SomChromaClassifier
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
+from test_evaluators.exporter import Exporter
 
 if __name__ == '__main__':
     # np.seterr(all='raise')
     logging.basicConfig(level=logging.INFO, format='%(asctime)s.%(msecs)03d [%(levelname)s]: %(name)s: %(message)s',
                         datefmt="%H:%M:%S")
-    files: List[str] = ["/Users/joakimborg/MIDI/debussy.mid", "/Users/joakimborg/MIDI/satie-gymnopedie1.mid"]
+    files: List[str] = ["/Users/joakimborg/MIDI/debussy.mid", "/Users/joakimborg/MIDI/brahms3/brahms3_1_and_2.mid"]
     # classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(TopNoteClassifier, ClassifierType.MELODIC)]
-    classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(AbsoluteGmmClassifier, ClassifierType.HARMONIC)]
+    classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(TopNoteClassifier, ClassifierType.MELODIC)]
     # classifiers: List[Tuple[Type[AbstractClassifier], ClassifierType]] = [(SomChromaClassifier, ClassifierType.HARMONIC)]
-    evaluator: CrossEvaluator = CrossEvaluator(files, TriggerMode.MANUAL, [3], classifiers, None)
+    evaluator: CrossEvaluator = CrossEvaluator(files, TriggerMode.MANUAL, [2], classifiers, None)
     results = evaluator.generate()
 
-    visualizer: AnalyticVisualizer = AnalyticVisualizer(results)
-    visualizer.plot()
+    Exporter.export_results(results, "test_somax2")
+
+    # visualizer: AnalyticVisualizer = AnalyticVisualizer(results)
+    # visualizer.plot()
 
 
     # idx = 1
