@@ -1,7 +1,7 @@
 from enum import Enum
 
-from somaxlibrary.corpus_event import Note
-from somaxlibrary.parameter import Parametric
+from somaxlibrary.runtime.corpus_event import Note
+from somaxlibrary.runtime.parameter import Parametric
 
 
 class TriggerMode(str, Enum):

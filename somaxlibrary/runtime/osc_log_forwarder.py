@@ -1,7 +1,7 @@
 import logging
 from logging import Handler
 
-from somaxlibrary.target import Target
+from somaxlibrary.runtime.target import Target
 
 
 class OscLogForwarder(Handler):

@@ -5,12 +5,12 @@ from typing import Tuple, Optional
 
 import numpy as np
 
-from somaxlibrary.corpus import Corpus
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.improvisation_memory import ImprovisationMemory
-from somaxlibrary.parameter import Parametric
-from somaxlibrary.peaks import Peaks
-from somaxlibrary.transforms import AbstractTransform, NoTransform
+from somaxlibrary.runtime.corpus import Corpus
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.improvisation_memory import ImprovisationMemory
+from somaxlibrary.runtime.parameter import Parametric
+from somaxlibrary.runtime.peaks import Peaks
+from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
 
 
 class AbstractPeakSelector(Parametric):

@@ -5,12 +5,12 @@ import numpy as np
 
 from evaluation.evaluation_utils import EvaluationUtils
 from somaxlibrary.classification.classifier import PitchClassifier
-from somaxlibrary.corpus import Corpus
+from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.corpus_builder.traits import TopNote, VirtualFundamental
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.exceptions import InvalidLabelInput
-from somaxlibrary.influence import AbstractInfluence, KeywordInfluence, CorpusInfluence
-from somaxlibrary.label import IntLabel
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.exceptions import InvalidLabelInput
+from somaxlibrary.runtime.influence import AbstractInfluence, KeywordInfluence, CorpusInfluence
+from somaxlibrary.runtime.label import IntLabel
 
 
 class BasicPitchClassifier(PitchClassifier, ABC):

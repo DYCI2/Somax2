@@ -1,5 +1,4 @@
 import itertools
-import itertools
 import logging
 from abc import abstractmethod, ABC
 from typing import List, Type, Any, Tuple, Iterator, Optional
@@ -8,7 +7,7 @@ from evaluation.evaluation_generators import ClassifierType, SingleAtomGenerator
     AtomComponent
 from evaluation.evaluation_result import EvaluationResult
 from somaxlibrary.classification.classifier import AbstractClassifier
-from somaxlibrary.corpus import Corpus
+from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 

@@ -10,21 +10,21 @@ from maxosc.maxosc import Caller
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import AsyncIOOSCUDPServer
 
-from somaxlibrary.activity_pattern import AbstractActivityPattern
+from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.exceptions import InvalidPath, DuplicateKeyError, InvalidJsonFormat, ParameterError
-from somaxlibrary.influence import KeywordInfluence, InfluenceKeyword
-from somaxlibrary.io_parser import IOParser
-from somaxlibrary.memory_spaces import AbstractMemorySpace
-from somaxlibrary.merge_actions import AbstractMergeAction
-from somaxlibrary.osc_log_forwarder import OscLogForwarder
-from somaxlibrary.player import Player
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.exceptions import InvalidPath, DuplicateKeyError, InvalidJsonFormat, ParameterError
+from somaxlibrary.runtime.influence import KeywordInfluence, InfluenceKeyword
+from somaxlibrary.runtime.io_parser import IOParser
+from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
+from somaxlibrary.runtime.merge_actions import AbstractMergeAction
+from somaxlibrary.runtime.osc_log_forwarder import OscLogForwarder
+from somaxlibrary.runtime.player import Player
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 from somaxlibrary.scheduler.realtime_scheduler import RealtimeScheduler
-from somaxlibrary.target import Target, SimpleOscTarget
-from somaxlibrary.transforms import AbstractTransform
+from somaxlibrary.runtime.target import Target, SimpleOscTarget
+from somaxlibrary.runtime.transforms import AbstractTransform
 
 
 class SomaxServer(Caller):

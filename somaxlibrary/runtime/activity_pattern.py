@@ -6,11 +6,11 @@ from typing import ClassVar, Dict, Union
 
 import numpy as np
 
-from somaxlibrary.corpus import Corpus
-from somaxlibrary.peak_event import PeakEvent
-from somaxlibrary.parameter import Parameter, ParamWithSetter
-from somaxlibrary.parameter import Parametric
-from somaxlibrary.peaks import Peaks
+from somaxlibrary.runtime.corpus import Corpus
+from somaxlibrary.runtime.peak_event import PeakEvent
+from somaxlibrary.runtime.parameter import Parameter, ParamWithSetter
+from somaxlibrary.runtime.parameter import Parametric
+from somaxlibrary.runtime.peaks import Peaks
 
 
 class AbstractActivityPattern(Parametric):

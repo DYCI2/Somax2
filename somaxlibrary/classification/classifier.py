@@ -6,10 +6,10 @@ import numpy as np
 
 import somaxlibrary.classification
 from evaluation.evaluation_utils import EvaluationUtils
-from somaxlibrary.corpus import Corpus
+from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.corpus_builder.traits import OnsetChroma
-from somaxlibrary.influence import AbstractInfluence, InfluenceKeyword
-from somaxlibrary.label import AbstractLabel
+from somaxlibrary.runtime.influence import AbstractInfluence, InfluenceKeyword
+from somaxlibrary.runtime.label import AbstractLabel
 
 
 class AbstractClassifier(ABC):

@@ -3,26 +3,26 @@ import os
 from copy import deepcopy
 from typing import Dict, Optional, Tuple, Type, List, Any
 
-from somaxlibrary.activity_pattern import AbstractActivityPattern
-from somaxlibrary.atom import Atom
+from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern
+from somaxlibrary.runtime.atom import Atom
 from somaxlibrary.classification.classifier import AbstractClassifier
-from somaxlibrary.corpus import Corpus
+from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.exceptions import DuplicateKeyError, TransformError
-from somaxlibrary.exceptions import InvalidPath, InvalidCorpus, InvalidConfiguration, InvalidLabelInput
-from somaxlibrary.improvisation_memory import ImprovisationMemory
-from somaxlibrary.influence import AbstractInfluence, CorpusInfluence
-from somaxlibrary.memory_spaces import AbstractMemorySpace
-from somaxlibrary.merge_actions import DistanceMergeAction, PhaseModulationMergeAction, AbstractMergeAction, \
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.exceptions import DuplicateKeyError, TransformError
+from somaxlibrary.runtime.exceptions import InvalidPath, InvalidCorpus, InvalidConfiguration, InvalidLabelInput
+from somaxlibrary.runtime.improvisation_memory import ImprovisationMemory
+from somaxlibrary.runtime.influence import AbstractInfluence, CorpusInfluence
+from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
+from somaxlibrary.runtime.merge_actions import DistanceMergeAction, PhaseModulationMergeAction, AbstractMergeAction, \
     NextStateMergeAction
-from somaxlibrary.parameter import Parametric
-from somaxlibrary.peak_selector import AbstractPeakSelector, MaxPeakSelector, DefaultPeakSelector
-from somaxlibrary.peaks import Peaks
+from somaxlibrary.runtime.parameter import Parametric
+from somaxlibrary.runtime.peak_selector import AbstractPeakSelector, MaxPeakSelector, DefaultPeakSelector
+from somaxlibrary.runtime.peaks import Peaks
 from somaxlibrary.scheduler.ScheduledObject import ScheduledMidiObject, TriggerMode
-from somaxlibrary.streamview import StreamView
-from somaxlibrary.target import Target
-from somaxlibrary.transforms import AbstractTransform, NoTransform
+from somaxlibrary.runtime.streamview import StreamView
+from somaxlibrary.runtime.target import Target
+from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
 
 
 class Player(ScheduledMidiObject, Parametric):

@@ -5,15 +5,14 @@ from typing import List, Optional
 import numpy as np
 from sklearn.mixture import GaussianMixture
 
-from evaluation.evaluation_utils import EvaluationUtils
 from somaxlibrary.classification import tables
 from somaxlibrary.classification.classifier import ChromaClassifier
-from somaxlibrary.corpus import Corpus
+from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.corpus_builder.traits import OnsetChroma
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.exceptions import InvalidLabelInput
-from somaxlibrary.influence import AbstractInfluence, CorpusInfluence, KeywordInfluence
-from somaxlibrary.label import AbstractLabel, IntLabel
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.exceptions import InvalidLabelInput
+from somaxlibrary.runtime.influence import AbstractInfluence, CorpusInfluence, KeywordInfluence
+from somaxlibrary.runtime.label import AbstractLabel, IntLabel
 
 
 # TODO: This class needs a lot of optimization. A larger corpus will mean higher computation time to a

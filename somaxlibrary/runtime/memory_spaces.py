@@ -3,17 +3,15 @@ import logging
 import sys
 from abc import abstractmethod
 from collections import deque
-from copy import copy
 from typing import Tuple, Dict, Union, Optional, List, Type
 
-from somaxlibrary.corpus import Corpus
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.exceptions import TransformError
-from somaxlibrary.label import AbstractLabel
-from somaxlibrary.parameter import Parameter, ParamWithSetter
-from somaxlibrary.parameter import Parametric
-from somaxlibrary.peak_event import PeakEvent, ClassicPeakEvent
-from somaxlibrary.transforms import AbstractTransform, NoTransform
+from somaxlibrary.runtime.corpus import Corpus
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.label import AbstractLabel
+from somaxlibrary.runtime.parameter import Parameter, ParamWithSetter
+from somaxlibrary.runtime.parameter import Parametric
+from somaxlibrary.runtime.peak_event import PeakEvent, ClassicPeakEvent
+from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
 
 
 # TODO: Abstract Influence type. Dependent on (determined by?) ActivityPattern. CUrrently hardcoded in NGram.

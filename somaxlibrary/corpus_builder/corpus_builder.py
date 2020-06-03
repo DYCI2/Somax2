@@ -1,7 +1,6 @@
 import inspect
 import logging
 import os
-from enum import Enum
 from typing import Tuple, List, Type
 
 import numpy as np
@@ -9,8 +8,8 @@ import pandas as pd
 
 from somaxlibrary.corpus_builder import traits
 from somaxlibrary.corpus_builder.chromagram import Chromagram
-from somaxlibrary.corpus import Corpus, ContentType
-from somaxlibrary.corpus_event import Note, CorpusEvent
+from somaxlibrary.runtime.corpus import Corpus, ContentType
+from somaxlibrary.runtime.corpus_event import Note, CorpusEvent
 from somaxlibrary.corpus_builder.traits import AbstractTrait
 from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somaxlibrary.corpus_builder.note_matrix import NoteMatrix

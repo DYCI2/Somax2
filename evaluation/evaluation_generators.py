@@ -2,18 +2,18 @@ from abc import ABC
 from enum import Enum
 from typing import Type, Tuple, Optional, Any, List
 
-from somaxlibrary.activity_pattern import ClassicActivityPattern
+from somaxlibrary.runtime.activity_pattern import ClassicActivityPattern
 from somaxlibrary.classification import TopNoteClassifier, SomChromaClassifier, PitchClassClassifier
 from somaxlibrary.classification.classifier import AbstractClassifier
-from somaxlibrary.corpus import Corpus
+from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.generator.somax_generator import SomaxGenerator
-from somaxlibrary.memory_spaces import NGramMemorySpace
-from somaxlibrary.merge_actions import AbstractMergeAction, DistanceMergeAction, PhaseModulationMergeAction, \
+from somaxlibrary.runtime.memory_spaces import NGramMemorySpace
+from somaxlibrary.runtime.merge_actions import AbstractMergeAction, DistanceMergeAction, PhaseModulationMergeAction, \
     NextStateMergeAction
-from somaxlibrary.player import Player
+from somaxlibrary.runtime.player import Player
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
-from somaxlibrary.target import NoTarget
-from somaxlibrary.transforms import NoTransform
+from somaxlibrary.runtime.target import NoTarget
+from somaxlibrary.runtime.transforms import NoTransform
 
 
 class ClassifierType(Enum):

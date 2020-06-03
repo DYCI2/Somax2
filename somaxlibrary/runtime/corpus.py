@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from somaxlibrary.corpus_builder.chromagram import Chromagram
-from somaxlibrary.corpus_event import CorpusEvent
+from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.corpus_builder.traits import AbstractTrait
 from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somaxlibrary.corpus_builder.note_matrix import NoteMatrix

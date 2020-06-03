@@ -1,18 +1,18 @@
 import logging
-from typing import Callable, Tuple, ClassVar, Type, List, Dict, Optional, Any
+from typing import Callable, Tuple, Type, List, Dict, Optional, Any
 
-from somaxlibrary.activity_pattern import AbstractActivityPattern
-from somaxlibrary.atom import Atom
+from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern
+from somaxlibrary.runtime.atom import Atom
 from somaxlibrary.classification.classifier import AbstractClassifier
-from somaxlibrary.corpus import Corpus
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.exceptions import DuplicateKeyError
-from somaxlibrary.memory_spaces import AbstractMemorySpace
-from somaxlibrary.merge_actions import AbstractMergeAction
-from somaxlibrary.parameter import Parameter
-from somaxlibrary.parameter import Parametric
-from somaxlibrary.peaks import Peaks
-from somaxlibrary.transforms import AbstractTransform
+from somaxlibrary.runtime.corpus import Corpus
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.exceptions import DuplicateKeyError
+from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
+from somaxlibrary.runtime.merge_actions import AbstractMergeAction
+from somaxlibrary.runtime.parameter import Parameter
+from somaxlibrary.runtime.parameter import Parametric
+from somaxlibrary.runtime.peaks import Peaks
+from somaxlibrary.runtime.transforms import AbstractTransform
 
 
 class StreamView(Parametric):

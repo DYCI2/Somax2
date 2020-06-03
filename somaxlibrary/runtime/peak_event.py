@@ -1,6 +1,6 @@
 from abc import ABC
 
-from somaxlibrary.corpus_event import CorpusEvent
+from somaxlibrary.runtime.corpus_event import CorpusEvent
 
 
 class PeakEvent(ABC):

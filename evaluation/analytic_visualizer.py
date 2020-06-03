@@ -1,4 +1,3 @@
-import copy
 import functools
 from typing import List, Type, Tuple, Dict, Callable, Union
 
@@ -7,11 +6,10 @@ import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 
-from evaluation.evaluation_generators import EvaluationGenerator
 from evaluation.evaluation_result import EvaluationResult
 from evaluation.n_distributed import NDistributed
 from somaxlibrary.classification.classifier import AbstractClassifier
-from somaxlibrary.corpus import Corpus
+from somaxlibrary.runtime.corpus import Corpus
 
 
 class PlotLine:

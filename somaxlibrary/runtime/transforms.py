@@ -4,9 +4,9 @@ import sys
 from abc import ABC, abstractmethod
 from typing import Union, Type
 
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.exceptions import TransformError
-from somaxlibrary.label import AbstractLabel
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.exceptions import TransformError
+from somaxlibrary.runtime.label import AbstractLabel
 
 
 class AbstractTransform(ABC):

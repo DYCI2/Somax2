@@ -1,14 +1,13 @@
 import copy
 import logging
-import time
 from abc import ABC, abstractmethod
 from typing import List, Optional, Dict, Any, Tuple
 
 from evaluation.peaks_statistics import PeaksStatistics
-from somaxlibrary.corpus import Corpus
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.influence import CorpusInfluence
-from somaxlibrary.player import Player
+from somaxlibrary.runtime.corpus import Corpus
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.influence import CorpusInfluence
+from somaxlibrary.runtime.player import Player
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 from somaxlibrary.scheduler.offline_scheduler import OfflineScheduler

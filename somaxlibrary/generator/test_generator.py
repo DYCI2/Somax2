@@ -1,13 +1,13 @@
-from somaxlibrary.activity_pattern import *
+from somaxlibrary.runtime.activity_pattern import *
 from somaxlibrary.classification.chroma_classifiers import SomChromaClassifier
 from somaxlibrary.classification.pitch_classifiers import TopNoteClassifier, PitchClassClassifier
 from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
 from somaxlibrary.generator.somax_generator import SomaxGenerator
-from somaxlibrary.memory_spaces import *
-from somaxlibrary.merge_actions import *
-from somaxlibrary.player import Player
+from somaxlibrary.runtime.memory_spaces import *
+from somaxlibrary.runtime.merge_actions import *
+from somaxlibrary.runtime.player import Player
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
-from somaxlibrary.target import NoTarget
+from somaxlibrary.runtime.target import NoTarget
 
 
 class TestGenerator(SomaxGenerator):

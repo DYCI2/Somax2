@@ -2,8 +2,8 @@ from typing import List, Dict
 
 import numpy as np
 
-from somaxlibrary.atom import Atom
-from somaxlibrary.peaks import Peaks
+from somaxlibrary.runtime.atom import Atom
+from somaxlibrary.runtime.peaks import Peaks
 
 
 class PeaksStatistics:

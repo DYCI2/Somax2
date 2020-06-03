@@ -1,9 +1,9 @@
 import itertools
 from typing import List, Iterator, Optional
 
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.influence import AbstractInfluence, CorpusInfluence
-from somaxlibrary.player import Player
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.influence import CorpusInfluence
+from somaxlibrary.runtime.player import Player
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 from somaxlibrary.scheduler.offline_scheduler import OfflineScheduler
 

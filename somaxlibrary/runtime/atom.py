@@ -1,16 +1,16 @@
 import logging
 from typing import Dict, Union, Type, List, Tuple, Optional, Any
 
-from somaxlibrary.activity_pattern import AbstractActivityPattern
+from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern
 from somaxlibrary.classification.classifier import AbstractClassifier
-from somaxlibrary.corpus import Corpus
-from somaxlibrary.influence import AbstractInfluence
-from somaxlibrary.label import AbstractLabel
-from somaxlibrary.memory_spaces import AbstractMemorySpace
-from somaxlibrary.parameter import Parametric, Parameter
-from somaxlibrary.peak_event import PeakEvent
-from somaxlibrary.peaks import Peaks
-from somaxlibrary.transforms import AbstractTransform
+from somaxlibrary.runtime.corpus import Corpus
+from somaxlibrary.runtime.influence import AbstractInfluence
+from somaxlibrary.runtime.label import AbstractLabel
+from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
+from somaxlibrary.runtime.parameter import Parametric, Parameter
+from somaxlibrary.runtime.peak_event import PeakEvent
+from somaxlibrary.runtime.peaks import Peaks
+from somaxlibrary.runtime.transforms import AbstractTransform
 
 
 class Atom(Parametric):

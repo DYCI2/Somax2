@@ -2,11 +2,10 @@ import logging
 from abc import abstractmethod, ABC
 from typing import Optional, Any, List
 
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.exceptions import InvalidCorpus
-from somaxlibrary.influence import AbstractInfluence
-from somaxlibrary.label import AbstractLabel
-from somaxlibrary.player import Player
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.exceptions import InvalidCorpus
+from somaxlibrary.runtime.influence import AbstractInfluence
+from somaxlibrary.runtime.player import Player
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledMidiEvent, ScheduledAudioEvent, \
     AutomaticTriggerEvent, \
     TempoEvent, ManualTriggerEvent, AbstractTriggerEvent, ScheduledInfluenceEvent, \

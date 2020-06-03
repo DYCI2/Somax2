@@ -1,10 +1,9 @@
-from typing import Optional, Any, List, Dict
+from typing import List, Dict
 
-from somaxlibrary.atom import Atom
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.influence import AbstractInfluence
-from somaxlibrary.label import AbstractLabel
-from somaxlibrary.player import Player
+from somaxlibrary.runtime.atom import Atom
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.influence import AbstractInfluence
+from somaxlibrary.runtime.player import Player
 
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledInfluenceEvent, ScheduledAudioEvent, \
     ScheduledMidiEvent, ScheduledCorpusEvent

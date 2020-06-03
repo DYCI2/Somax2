@@ -1,11 +1,11 @@
 import logging
 from typing import ClassVar, Any, Union, List, Type
 
-from somaxlibrary.activity_pattern import AbstractActivityPattern, ClassicActivityPattern
+from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern, ClassicActivityPattern
 from somaxlibrary.classification.classifier import AbstractClassifier
-from somaxlibrary.memory_spaces import AbstractMemorySpace, NGramMemorySpace
-from somaxlibrary.merge_actions import AbstractMergeAction, DistanceMergeAction
-from somaxlibrary.transforms import AbstractTransform, NoTransform
+from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace, NGramMemorySpace
+from somaxlibrary.runtime.merge_actions import AbstractMergeAction, DistanceMergeAction
+from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
 from somaxlibrary.scheduler.ScheduledObject import TriggerMode
 
 

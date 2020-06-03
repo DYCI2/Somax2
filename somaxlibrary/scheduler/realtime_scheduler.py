@@ -2,11 +2,10 @@ import asyncio
 import time
 from typing import Optional, Any
 
-from somaxlibrary.corpus import ContentType
-from somaxlibrary.corpus_event import CorpusEvent, Note
-from somaxlibrary.influence import AbstractInfluence
-from somaxlibrary.label import AbstractLabel
-from somaxlibrary.player import Player
+from somaxlibrary.runtime.corpus import ContentType
+from somaxlibrary.runtime.corpus_event import CorpusEvent, Note
+from somaxlibrary.runtime.influence import AbstractInfluence
+from somaxlibrary.runtime.player import Player
 from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, AutomaticTriggerEvent, ScheduledMidiEvent, \
     ScheduledAudioEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent
 from somaxlibrary.scheduler.base_scheduler import BaseScheduler

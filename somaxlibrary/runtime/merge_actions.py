@@ -7,11 +7,11 @@ from typing import ClassVar, Dict, Union
 import numpy as np
 from scipy import sparse
 
-from somaxlibrary.corpus import Corpus
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.improvisation_memory import ImprovisationMemory
-from somaxlibrary.parameter import Parametric, Parameter
-from somaxlibrary.peaks import Peaks
+from somaxlibrary.runtime.corpus import Corpus
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.improvisation_memory import ImprovisationMemory
+from somaxlibrary.runtime.parameter import Parametric, Parameter
+from somaxlibrary.runtime.peaks import Peaks
 
 
 class AbstractMergeAction(Parametric):

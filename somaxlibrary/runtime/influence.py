@@ -2,7 +2,7 @@ from abc import ABC
 from enum import Enum
 from typing import Any
 
-from somaxlibrary.corpus_event import CorpusEvent
+from somaxlibrary.runtime.corpus_event import CorpusEvent
 
 
 class InfluenceKeyword(Enum):

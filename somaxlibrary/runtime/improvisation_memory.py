@@ -1,7 +1,7 @@
 from collections import deque
 
-from somaxlibrary.corpus_event import CorpusEvent
-from somaxlibrary.transforms import AbstractTransform
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.transforms import AbstractTransform
 
 
 # TODO: Replace this class with just a corpus (and handle transforms for that!)
