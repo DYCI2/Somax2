@@ -1,7 +1,7 @@
 import collections
 import functools
 from abc import ABC
-from typing import TypeVar, Union, Dict, Any, Callable, List
+from typing import TypeVar, Union, Dict, Any, Callable, List, Tuple
 
 # TODO: Poor type description
 MaxCompatible = TypeVar('MaxCompatible', int, float, bool)
@@ -19,7 +19,7 @@ class Parameter(HasParameterDict):
     def __init__(self, default_value: MaxCompatible, min: Ranged, max: Ranged, type_str: str, description: str):
         super(Parameter, self).__init__()
         self.value: MaxCompatible = default_value
-        self.scope: (Ranged, Ranged) = (min, max)
+        self.scope: Tuple[Ranged, Ranged] = (min, max)
         self.type_str: str = type_str
         self.description: str = description
 
@@ -74,7 +74,7 @@ class Parametric(HasParameterDict):
 
     def _parse_parameters(self) -> {str: Parameter}:
         self.parameter_dict = {}
-        param_dict: {str: Union[Parameter, Parametric]} = {}
+        param_dict: Dict[str, Union[Parameter, Parametric]] = {}
         for name, variable in vars(self).items():
             # Parse all Parameter and Parametric into dict
             if isinstance(variable, Parameter) or isinstance(variable, Parametric):

@@ -85,7 +85,7 @@ class Player(ScheduledMidiObject, Parametric):
             self.store_transform(transform_tuple)
         self._parse_parameters()
 
-    def delete_atom(self, path: [str]):
+    def delete_atom(self, path: List[str]):
         atom_name: str = path.pop(-1)
         streamview: StreamView = self._get_streamview(path)
         streamview.delete_atom(atom_name)
@@ -198,7 +198,7 @@ class Player(ScheduledMidiObject, Parametric):
         else:
             raise IOError(f"File path with extension {file_extension} is not supported.")
 
-    def add_transform(self, path: [str], transform: (AbstractTransform, ...)) -> None:
+    def add_transform(self, path: List[str], transform: (AbstractTransform, ...)) -> None:
         """ raises TransformError, KeyError"""
         if not path:
             for atom in self.all_atoms():
@@ -219,16 +219,16 @@ class Player(ScheduledMidiObject, Parametric):
     # PRIVATE
     ######################################################
 
-    def _get_streamview(self, path: [str]) -> StreamView:
+    def _get_streamview(self, path: List[str]) -> StreamView:
         streamview: str = path.pop(0)
         return self.streamviews[streamview].get_streamview(path)
 
-    def _get_atom(self, path: [str]) -> Atom:
+    def _get_atom(self, path: List[str]) -> Atom:
         streamview: str = path.pop(0)
         return self.streamviews[streamview].get_atom(path)
 
     def _self_atoms(self) -> [Atom]:
-        atoms: [Atom] = []
+        atoms: List[Atom] = []
         for streamview in self.streamviews.values():
             for atom in streamview.atoms.values():
                 if atom.self_influenced:
@@ -257,7 +257,7 @@ class Player(ScheduledMidiObject, Parametric):
         weight_sum: float = 0.0
         for streamview in self.streamviews.values():
             weight_sum += streamview.weight if streamview.is_enabled() else 0.0
-        peaks_list: [Peaks] = []
+        peaks_list: List[Peaks] = []
         for streamview in self.streamviews.values():
             normalized_weight = streamview.weight / weight_sum
             peaks: Peaks = streamview.merged_peaks(time, history, corpus, **kwargs)

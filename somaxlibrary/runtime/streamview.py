@@ -43,7 +43,7 @@ class StreamView(Parametric):
         else:
             self._merge_actions[name] = merge_action
 
-    def get_streamview(self, path: [str]) -> 'StreamView':
+    def get_streamview(self, path: List[str]) -> 'StreamView':
         """ Raises: KeyError. Technically also IndexError, but should not occur if input is well-formatted (expected)"""
         if not path:
             return self
@@ -79,7 +79,7 @@ class StreamView(Parametric):
     def delete_atom(self, name: str):
         del self.atoms[name]
 
-    def create_streamview(self, path: [str], weight: float, merge_actions: Tuple[Type, ...]):
+    def create_streamview(self, path: List[str], weight: float, merge_actions: Tuple[Type, ...]):
         """Raises: KeyError, InvalidPath, DuplicateKeyError"""
         self.logger.debug("[create_streamview] Attempting to create streamview with path {}.".format(path))
 

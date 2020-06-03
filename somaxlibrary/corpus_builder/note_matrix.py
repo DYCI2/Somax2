@@ -1,5 +1,5 @@
 import colorsys
-from typing import Optional, List, Tuple
+from typing import Optional, List, Tuple, Dict, Any
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -79,7 +79,7 @@ class NoteMatrix:
     def length_ms(self) -> float:
         return float(np.max(self.notes[Keys.ABS_ONSET] + self.notes[Keys.ABS_DURATION]))
 
-    def split_by_channel(self, channels: [int]) -> 'NoteMatrix':
+    def split_by_channel(self, channels: List[int]) -> 'NoteMatrix':
         mask = self.notes[Keys.CHANNEL].isin(channels)
         return NoteMatrix(self.notes.copy()[mask])
 
@@ -95,15 +95,15 @@ class NoteMatrix:
 
         step_x: float = x_pixels / duration_ticks
 
-        channels: [int] = sorted([int(ch) for ch in self.notes[Keys.CHANNEL].unique()])
-        channel_colors: {int: (float, float, float)} = {}
+        channels: List[int] = sorted([int(ch) for ch in self.notes[Keys.CHANNEL].unique()])
+        channel_colors: Dict[int, Tuple[Any, ...]] = {}
         for i, channel in enumerate(channels):
             channel_colors[channel] = tuple(c for c in colorsys.hsv_to_rgb(i / len(channels), saturation, vibrance))
 
         image = self._midi_image(x_pixels, top_note, step_x, channel_colors)
 
         if not axes:
-            _, (tempo_ax, notes_ax) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [1, 5]})  # type: (Axes, Axes)
+            _, (tempo_ax, notes_ax) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [1, 5]})  # type: Tuple[Axes, Axes]
         else:
             tempo_ax, notes_ax = axes
         # fig.tight_layout(rect=[0.2, 0.03, 1, 0.95])
@@ -156,7 +156,7 @@ class NoteMatrix:
         plt.show()
 
     def _midi_image(self, num_x_px: int, num_y_px: int, step_x: float,
-                    color_dict: {int: (float, float, float)}) -> np.ndarray:
+                    color_dict: Dict[int, Tuple[Any, ...]]) -> np.ndarray:
         # shape: (N, 2). Each row is a pair of (start, end) tick.
         x_coords: np.ndarray = np.asarray(np.column_stack((self.notes[Keys.REL_ONSET],
                                                            self.notes[Keys.REL_ONSET]

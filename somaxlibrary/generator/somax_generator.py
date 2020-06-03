@@ -100,7 +100,7 @@ class SomaxGenerator(ABC):
                 "scheduler": self.scheduler.__class__}
 
     def _influence(self, influence_corpus: Corpus, start_tick: float, end_tick: float):
-        events: [CorpusEvent] = [e for e in influence_corpus.events if start_tick <= e.onset <= end_tick - e.duration]
+        events: List[CorpusEvent] = [e for e in influence_corpus.events if start_tick <= e.onset <= end_tick - e.duration]
         if isinstance(self.scheduler, OptimizedOfflineScheduler):
             self.scheduler.add_influences_optimized(events)
         else:

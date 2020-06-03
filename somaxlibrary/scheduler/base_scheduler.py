@@ -73,7 +73,7 @@ class BaseScheduler(ABC):
     ######################################################
 
     def _process_internal_events(self) -> List[ScheduledEvent]:
-        events: [ScheduledEvent] = [e for e in self.queue if e.trigger_time <= self._tick]
+        events: List[ScheduledEvent] = [e for e in self.queue if e.trigger_time <= self._tick]
         self.queue = [e for e in self.queue if e.trigger_time > self._tick]
         # sort to ensure that influences/midi/tempo/etc. are handled before triggers if simultaneous
         events.sort(key=lambda e: isinstance(e, AbstractTriggerEvent))

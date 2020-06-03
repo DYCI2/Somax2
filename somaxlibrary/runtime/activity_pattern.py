@@ -2,7 +2,7 @@ import inspect
 import logging
 import sys
 from abc import abstractmethod
-from typing import ClassVar, Dict, Union
+from typing import ClassVar, Dict, Union, List
 
 import numpy as np
 
@@ -26,7 +26,7 @@ class AbstractActivityPattern(Parametric):
         self.logger.warning("ActivityPattern.peaks does not return a copy of peaks - potentially volatile as these values are scaled.")
 
     @abstractmethod
-    def insert(self, influences: [PeakEvent]) -> None:
+    def insert(self, influences: List[PeakEvent]) -> None:
         raise NotImplementedError("AbstractActivityPattern.insert is abstract.")
 
     @abstractmethod
@@ -76,11 +76,11 @@ class ClassicActivityPattern(AbstractActivityPattern):
         self.last_update_time: float = 0.0
         self._parse_parameters()
 
-    def insert(self, influences: [PeakEvent]) -> None:
+    def insert(self, influences: List[PeakEvent]) -> None:
         self.logger.debug(f"[insert]: Inserting {len(influences)} influences.")
-        scores: [float] = []
-        times: [float] = []
-        transform_hashes: [int] = []
+        scores: List[float] = []
+        times: List[float] = []
+        transform_hashes: List[int] = []
         for influence in influences:
             times.append(influence.event.onset)
             scores.append(self.default_score.value)
@@ -125,11 +125,11 @@ class ManualActivityPattern(AbstractActivityPattern):
         self._event_indices: np.ndarray = np.zeros(0, dtype=np.int32)
         self._parse_parameters()
 
-    def insert(self, influences: [PeakEvent]) -> None:
+    def insert(self, influences: List[PeakEvent]) -> None:
         self.logger.debug(f"[insert]: Inserting {len(influences)} influences.")
-        scores: [float] = []
-        times: [float] = []
-        transform_hashes: [int] = []
+        scores: List[float] = []
+        times: List[float] = []
+        transform_hashes: List[int] = []
         for influence in influences:
             times.append(influence.event.onset)
             scores.append(self.default_score.value)

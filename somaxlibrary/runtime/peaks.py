@@ -1,3 +1,5 @@
+from typing import List
+
 import numpy as np
 
 
@@ -14,13 +16,13 @@ class Peaks:
         return cls(np.empty(0, dtype=np.float), np.empty(0, dtype=np.float), np.empty(0, dtype=np.int32))
 
     @classmethod
-    def concatenate(cls, peaks: ['Peaks']):
+    def concatenate(cls, peaks: List['Peaks']):
         scores: np.ndarray = np.concatenate([peak.scores for peak in peaks])
         times: np.ndarray = np.concatenate([peak.times for peak in peaks])
         transform_hashes: np.ndarray = np.concatenate([peak.transform_hashes for peak in peaks])
         return cls(scores, times, transform_hashes)
 
-    def append(self, scores: [float], times: [float], transform_hashes: [int]):
+    def append(self, scores: List[float], times: List[float], transform_hashes: List[int]):
         self.scores = np.concatenate((self.scores, scores))
         self.times = np.concatenate((self.times, times))
         self.transform_hashes = np.concatenate((self.transform_hashes, transform_hashes))

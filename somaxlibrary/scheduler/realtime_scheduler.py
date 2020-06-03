@@ -1,6 +1,6 @@
 import asyncio
 import time
-from typing import Optional, Any
+from typing import Optional, Any, List
 
 from somaxlibrary.runtime.corpus import ContentType
 from somaxlibrary.runtime.corpus_event import CorpusEvent, Note
@@ -53,7 +53,7 @@ class RealtimeScheduler(BaseScheduler):
 
     def stop(self) -> None:
         self.running = False
-        remamining_queue: [ScheduledEvent] = self.queue[:]
+        remamining_queue: List[ScheduledEvent] = self.queue[:]
         self.queue = []
         self._tick = 0
         for event in remamining_queue[:]:
@@ -79,9 +79,9 @@ class RealtimeScheduler(BaseScheduler):
 
     def _add_midi_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
         # Handle held notes from previous state:
-        note_offs_previous: [Note] = [n for n in player.held_notes if n not in corpus_event.held_to()]
-        note_ons: [Note] = [n for n in corpus_event.notes if n not in player.held_notes]
-        note_offs: [Note] = [n for n in corpus_event.notes if n not in corpus_event.held_from()]
+        note_offs_previous: List[Note] = [n for n in player.held_notes if n not in corpus_event.held_to()]
+        note_ons: List[Note] = [n for n in corpus_event.notes if n not in player.held_notes]
+        note_offs: List[Note] = [n for n in corpus_event.notes if n not in corpus_event.held_from()]
         player.held_notes = corpus_event.held_from()
 
         # TODO: Why is state index even in here?
@@ -110,7 +110,7 @@ class RealtimeScheduler(BaseScheduler):
                     ScheduledMidiEvent(onset, player, note.pitch, 0, note.channel, corpus_event.state_index))
 
     def _add_audio_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
-        raise NotImplementedError("Scheduler needs to be updated to handle Audio events properly")
+        raise NotImplementedError
         event: ScheduledEvent = ScheduledAudioEvent(trigger_time, player, corpus_event.absolute_time[0],
                                                     corpus_event.absolute_time[1], corpus_event.state_index,
                                                     corpus_event.tempo)

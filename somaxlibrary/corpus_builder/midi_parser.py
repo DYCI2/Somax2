@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 import mido
 import numpy as np
@@ -33,7 +33,7 @@ class MidiParser:
     @staticmethod
     def read_midi(midi_file_path: str) -> np.ndarray:
         midi_file: mido.MidiFile = mido.MidiFile(midi_file_path)
-        notes: [_MidiNote] = MidiParser._parse_notes(midi_file)
+        notes: List[_MidiNote] = MidiParser._parse_notes(midi_file)
         note_matrix: np.ndarray = MidiParser._to_numpy(notes, midi_file.ticks_per_beat)
         return note_matrix
 
@@ -41,7 +41,7 @@ class MidiParser:
     def monophonic_from_text(note_numbers: np.ndarray, velocities: np.ndarray, channels: np.ndarray,
                              durations_tick: np.ndarray, tempo: float):
         """ Notes: durations_tick are float point ticks, i.e. 1.0 is one quarter note """
-        notes: [_MidiNote] = []
+        notes: List[_MidiNote] = []
         ppq: int = 480
         onset_tick: int = 0
         onset_time: float = 0.0
@@ -58,8 +58,8 @@ class MidiParser:
     def _parse_notes(midi_file: mido.MidiFile) -> [_MidiNote]:
         ticks_per_beat: int = midi_file.ticks_per_beat
         tempo_bpm: float = MidiParser._DEFAULT_TEMPO_BPM
-        held_notes: [_MidiNote] = []
-        completed_notes: [_MidiNote] = []
+        held_notes: List[_MidiNote] = []
+        completed_notes: List[_MidiNote] = []
         current_tick: int = 0
         current_time: float = 0.0
 
@@ -72,7 +72,7 @@ class MidiParser:
                 held_notes.append(_MidiNote(msg.note, msg.velocity, msg.channel, current_tick,
                                             current_time, tempo_bpm))
             elif msg.type == 'note_off' or (msg.type == 'note_on' and msg.velocity == 0):
-                completed: [_MidiNote] = [note for note in held_notes if note.matches(msg.note, msg.channel)]
+                completed: List[_MidiNote] = [note for note in held_notes if note.matches(msg.note, msg.channel)]
                 for note in completed:
                     note.end_tick = current_tick
                     note.end_time = current_time
@@ -88,7 +88,7 @@ class MidiParser:
         return completed_notes
 
     @staticmethod
-    def _to_numpy(notes: [_MidiNote], ticks_per_beat: int) -> np.ndarray:
+    def _to_numpy(notes: List[_MidiNote], ticks_per_beat: int) -> np.ndarray:
         num_notes: int = len(notes)
         note_matrix: np.ndarray = np.zeros((num_notes, MidiParser._NUM_COLS))
 

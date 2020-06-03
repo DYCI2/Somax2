@@ -2,7 +2,7 @@ import inspect
 import logging
 import sys
 from abc import abstractmethod
-from typing import ClassVar, Dict, Union
+from typing import ClassVar, Dict, Union, List
 
 import numpy as np
 from scipy import sparse
@@ -67,7 +67,7 @@ class DistanceMergeAction(AbstractMergeAction):
         inv_duration: float = 1 / duration
         num_rows: int = int(duration / self._t_width.value)
 
-        peaks_list: [Peaks] = []
+        peaks_list: List[Peaks] = []
         for transform_hash in np.unique(peaks.transform_hashes):
             indices: np.ndarray = np.argwhere(peaks.transform_hashes == transform_hash)
             indices = indices.reshape((indices.size,))

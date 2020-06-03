@@ -21,7 +21,7 @@ class Corpus:
     def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType, build_parameters: dict,
                  fg_spectrogram: Optional[Spectrogram] = None, bg_spectrogram: Optional[Spectrogram] = None,
                  fg_chromagram: Optional[Chromagram] = None, bg_chromagram: Optional[Chromagram] = None):
-        self.events: [CorpusEvent] = events
+        self.events: List[CorpusEvent] = events
         self.onsets: np.ndarray = np.array([e.onset for e in self.events])
         self.name: str = name
         self.content_type: ContentType = content_type

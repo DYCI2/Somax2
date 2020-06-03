@@ -1,6 +1,6 @@
 import logging
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict
+from typing import Any, Callable, Dict, Tuple, List
 
 from maxosc.sender import Sender, SendFormat, MaxFormatter
 
@@ -24,7 +24,7 @@ class SimpleOscTarget(Target):
         self._client.send(self.address, [keyword, content])
 
     def send_dict(self, content: Dict, **_kwargs):
-        max_dict: [(str, str)] = self._max_formatter.format_maxdict_large(content)
+        max_dict: List[Tuple[str, str]] = self._max_formatter.format_maxdict_large(content)
         for address, value in max_dict:
             self.send("parameter_dict", (address, str(value)))
         self.send("parameter_dict", "bang")

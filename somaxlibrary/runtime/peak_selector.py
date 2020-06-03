@@ -1,7 +1,7 @@
 import logging
 import random
 from abc import abstractmethod
-from typing import Tuple, Optional
+from typing import Tuple, Optional, List
 
 import numpy as np
 
@@ -21,21 +21,21 @@ class AbstractPeakSelector(Parametric):
 
     # TODO: Should probably pass transform dict too for future uses/extendability
     @abstractmethod
-    def decide(self, peaks: Peaks, influence_history: [(CorpusEvent, (AbstractTransform, ...))],
+    def decide(self, peaks: Peaks, influence_history: List[(CorpusEvent, (AbstractTransform, ...))],
                corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},
                **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
         pass
 
 
 class MaxPeakSelector(AbstractPeakSelector):
-    def decide(self, peaks: Peaks, influence_history: [(CorpusEvent, (AbstractTransform, ...))],
+    def decide(self, peaks: Peaks, influence_history: List[(CorpusEvent, (AbstractTransform, ...))],
                corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},
                **_kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
         self.logger.debug("[decide] MaxPeakSelector called.")
         if peaks.empty():
             return None
         max_peak_value: float = np.max(peaks.scores)
-        max_peaks_idx: [int] = np.argwhere(peaks.scores == max_peak_value)
+        max_peaks_idx: List[int] = np.argwhere(peaks.scores == max_peak_value)
         peak_idx: int = random.choice(max_peaks_idx)
         transform_hash: int = int(peaks.transform_hashes[peak_idx])
         return corpus.event_closest(peaks.times[peak_idx]), transform_dict[transform_hash]

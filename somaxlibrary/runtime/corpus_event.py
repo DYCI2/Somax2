@@ -64,9 +64,8 @@ class CorpusEvent:
         self.duration: Optional[float] = duration
         self.absolute_duration: Optional[float] = absolute_duration
 
-        self.notes: [Note] = notes if notes else []
-        self.traits: {Type[AbstractTrait],
-                      AbstractTrait} = event_parameters if event_parameters else {}
+        self.notes: List[Note] = notes if notes else []
+        self.traits: Dict[Type[AbstractTrait], AbstractTrait] = event_parameters if event_parameters else {}
 
         # self._labels = {}  # {ClassVar[AbstractLabel]: AbstractLabel}, precompiled for performance
 
@@ -80,7 +79,7 @@ class CorpusEvent:
         pd.Series on the format specified in note_matrix.py"""
         event_onset: float = raw_note[Keys.REL_ONSET]
         event_absolute_onset: float = raw_note[Keys.ABS_ONSET]
-        notes: [Note] = [Note.from_raw(raw_note, event_onset, event_absolute_onset)]
+        notes: List[Note] = [Note.from_raw(raw_note, event_onset, event_absolute_onset)]
         return cls(state_index, raw_note[Keys.TEMPO], event_onset, event_absolute_onset, notes=notes)
 
     def set_duration(self, end: float, absolute_end: float):
