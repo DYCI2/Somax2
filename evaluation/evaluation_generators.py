@@ -11,7 +11,7 @@ from somaxlibrary.runtime.memory_spaces import NGramMemorySpace
 from somaxlibrary.runtime.merge_actions import AbstractMergeAction, DistanceMergeAction, PhaseModulationMergeAction, \
     NextStateMergeAction
 from somaxlibrary.runtime.player import Player
-from somaxlibrary.scheduler.ScheduledObject import TriggerMode
+from somaxlibrary.scheduler.scheduled_object import TriggerMode
 from somaxlibrary.runtime.target import NoTarget
 from somaxlibrary.runtime.transforms import NoTransform
 

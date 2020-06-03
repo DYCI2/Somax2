@@ -5,9 +5,7 @@ from typing import List, Optional, Type, Dict
 import numpy as np
 
 import somaxlibrary.classification
-from evaluation.evaluation_utils import EvaluationUtils
 from somaxlibrary.runtime.corpus import Corpus
-from somaxlibrary.corpus_builder.traits import OnsetChroma
 from somaxlibrary.runtime.influence import AbstractInfluence, InfluenceKeyword
 from somaxlibrary.runtime.label import AbstractLabel
 
@@ -78,29 +76,3 @@ class AbstractClassifier(ABC):
             self.classify_corpus(self._corpus)
 
 
-class PitchClassifier(AbstractClassifier, ABC):
-    def _influence_keywords(self) -> List[InfluenceKeyword]:
-        return [InfluenceKeyword.PITCH]
-
-
-class ChromaClassifier(AbstractClassifier, ABC):
-    def _influence_keywords(self) -> List[InfluenceKeyword]:
-        return [InfluenceKeyword.CHROMA]
-
-    @classmethod
-    def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-        influence_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
-                                                  for event in influence_corpus.events])
-        max_per_col: np.ndarray = np.max(influence_chromas, axis=1)
-        max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
-        influence_chromas /= max_per_col[:, np.newaxis]
-
-        output_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
-                                               for event in output_corpus.events])
-        max_per_col: np.ndarray = np.max(output_chromas, axis=1)
-        max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
-        output_chromas /= max_per_col[:, np.newaxis]
-
-        diff: np.ndarray = EvaluationUtils.diff(influence_chromas, influence_corpus.onsets, output_chromas,
-                                                output_corpus.onsets)
-        return np.sqrt(np.sum(np.power(diff, 2), axis=1) / diff.shape[1])

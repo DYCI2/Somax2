@@ -9,7 +9,7 @@ from evaluation.evaluation_result import EvaluationResult
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
-from somaxlibrary.scheduler.ScheduledObject import TriggerMode
+from somaxlibrary.scheduler.scheduled_object import TriggerMode
 
 
 class Evaluator(ABC):

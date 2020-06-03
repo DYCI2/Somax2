@@ -19,7 +19,7 @@ from somaxlibrary.runtime.merge_actions import DistanceMergeAction, PhaseModulat
 from somaxlibrary.runtime.parameter import Parametric
 from somaxlibrary.runtime.peak_selector import AbstractPeakSelector, MaxPeakSelector, DefaultPeakSelector
 from somaxlibrary.runtime.peaks import Peaks
-from somaxlibrary.scheduler.ScheduledObject import ScheduledMidiObject, TriggerMode
+from somaxlibrary.scheduler.scheduled_object import ScheduledMidiObject, TriggerMode
 from somaxlibrary.runtime.streamview import StreamView
 from somaxlibrary.runtime.target import Target
 from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
@@ -207,7 +207,7 @@ class Player(ScheduledMidiObject, Parametric):
                 except TransformError as e:
                     self.logger.error(f"{str(e)}")
         else:
-            self._get_atom(path)._memory_space.add_transforms(transform)
+            self._get_atom(path).memory_space.add_transforms(transform)
 
     def clear(self):
         self.improvisation_memory = ImprovisationMemory()

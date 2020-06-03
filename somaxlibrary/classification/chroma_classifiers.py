@@ -5,13 +5,14 @@ from typing import List, Optional
 import numpy as np
 from sklearn.mixture import GaussianMixture
 
+from evaluation.evaluation_utils import EvaluationUtils
 from somaxlibrary.classification import tables
-from somaxlibrary.classification.classifier import ChromaClassifier
+from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.corpus_builder.traits import OnsetChroma
 from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.exceptions import InvalidLabelInput
-from somaxlibrary.runtime.influence import AbstractInfluence, CorpusInfluence, KeywordInfluence
+from somaxlibrary.runtime.influence import AbstractInfluence, CorpusInfluence, KeywordInfluence, InfluenceKeyword
 from somaxlibrary.runtime.label import AbstractLabel, IntLabel
 
 
@@ -19,6 +20,29 @@ from somaxlibrary.runtime.label import AbstractLabel, IntLabel
 #  point where classification of an influence might not be real-time anymore.
 
 # TODO: Normalization. Normalization has been removed for now, but should be thoroughly tested.
+class ChromaClassifier(AbstractClassifier, ABC):
+    def _influence_keywords(self) -> List[InfluenceKeyword]:
+        return [InfluenceKeyword.CHROMA]
+
+    @classmethod
+    def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+        influence_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
+                                                  for event in influence_corpus.events])
+        max_per_col: np.ndarray = np.max(influence_chromas, axis=1)
+        max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
+        influence_chromas /= max_per_col[:, np.newaxis]
+
+        output_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
+                                               for event in output_corpus.events])
+        max_per_col: np.ndarray = np.max(output_chromas, axis=1)
+        max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
+        output_chromas /= max_per_col[:, np.newaxis]
+
+        diff: np.ndarray = EvaluationUtils.diff(influence_chromas, influence_corpus.onsets, output_chromas,
+                                                output_corpus.onsets)
+        return np.sqrt(np.sum(np.power(diff, 2), axis=1) / diff.shape[1])
+
+
 class SomChromaClassifier(ChromaClassifier):
     """ Classifies an event according to its chroma based on a pre-computed self-organizing map.
                 Corpus:    Uses foreground chroma (12 non-normalized floats) of EventParameter OnsetChroma

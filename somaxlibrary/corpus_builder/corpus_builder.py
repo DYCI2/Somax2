@@ -97,7 +97,8 @@ class CorpusBuilder:
         # Finalize last slice
         final_note: Note = max(events[-1].notes, key=lambda n: n.onset + n.duration)
         note_end: float = events[-1].onset + max(0.0, final_note.duration + final_note.onset)
-        note_absolute_end: float = events[-1].absolute_onset + max(0.0, final_note.absolute_duration + final_note.absolute_onset)
+        note_absolute_end: float = events[-1].absolute_onset + max(0.0,
+                                                                   final_note.absolute_duration + final_note.absolute_onset)
         events[-1].set_duration(end=note_end, absolute_end=note_absolute_end)
         return Corpus(events, name, ContentType.MIDI, {"TODO": "build_params"})  # TODO build params.
 
@@ -107,22 +108,6 @@ class CorpusBuilder:
 
 
 if __name__ == '__main__':
-    # import matplotlib
-    #
-    # matplotlib.use('Qt5Agg')
-    # filepath = '/Users/joakimborg/MIDI/debussy.mid'
-    # from timeit import default_timer as timer
-    #
-    # start = timer()
-    # note_matrix: NoteMatrix = NoteMatrix.from_midi_file(filepath)
-    # print("mid", timer() - start)
-    # corpus: Corpus = CorpusBuilder.slice_midi(note_matrix)
-    # print("finished", timer() - start)
-    # note_matrix.plot(slice_onset_ticks=corpus.get_slice_onsets())
-    # print("plotting", timer() - start)
-    # print(len(corpus.events))
     logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s]: %(name)s: %(message)s')
     c: Corpus = CorpusBuilder().build('/Users/joakimborg/MIDI/debussy_part.mid')
     c.plot()
-    # c.to_note_matrix().plot(top_note=128, bottom_note=0)
-    # c.plot()

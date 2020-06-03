@@ -8,8 +8,8 @@ from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.influence import CorpusInfluence
 from somaxlibrary.runtime.player import Player
-from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent
-from somaxlibrary.scheduler.ScheduledObject import TriggerMode
+from somaxlibrary.scheduler.scheduled_event import ScheduledEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent
+from somaxlibrary.scheduler.scheduled_object import TriggerMode
 from somaxlibrary.scheduler.offline_scheduler import OfflineScheduler
 from somaxlibrary.scheduler.optimized_offline_scheduler import OptimizedOfflineScheduler
 

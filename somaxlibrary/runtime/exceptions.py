@@ -34,6 +34,5 @@ class DuplicateKeyError(Exception):
 
 
 class ParameterError(Exception):
-    def __init__(self, error: object) -> object:
+    def __init__(self, error):
         super(ParameterError, self).__init__(error)
-        

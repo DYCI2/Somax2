@@ -6,7 +6,7 @@ from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace, NGramMemorySpace
 from somaxlibrary.runtime.merge_actions import AbstractMergeAction, DistanceMergeAction
 from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
-from somaxlibrary.scheduler.ScheduledObject import TriggerMode
+from somaxlibrary.scheduler.scheduled_object import TriggerMode
 
 
 class IOParser:

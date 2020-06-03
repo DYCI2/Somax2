@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from ..chromagram import Chromagram
-from ..spectrogram import Spectrogram
+from somaxlibrary.corpus_builder.chromagram import Chromagram
+from somaxlibrary.corpus_builder.spectrogram import Spectrogram
 
 
 class AbstractTrait(ABC):

@@ -99,6 +99,10 @@ class Atom(Parametric):
     def classifier(self):
         return self._classifier
 
+    @property
+    def memory_space(self):
+        return self._memory_space
+
     @self_influenced.setter
     def self_influenced(self, self_influenced: bool):
         self._self_influenced.value = self_influenced

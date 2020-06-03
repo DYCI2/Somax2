@@ -5,7 +5,7 @@ from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.influence import AbstractInfluence
 from somaxlibrary.runtime.player import Player
 
-from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledInfluenceEvent, ScheduledAudioEvent, \
+from somaxlibrary.scheduler.scheduled_event import ScheduledEvent, ScheduledInfluenceEvent, ScheduledAudioEvent, \
     ScheduledMidiEvent, ScheduledCorpusEvent
 from somaxlibrary.scheduler.base_scheduler import BaseScheduler
 

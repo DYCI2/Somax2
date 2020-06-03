@@ -6,7 +6,7 @@ from somaxlibrary.runtime.corpus import ContentType
 from somaxlibrary.runtime.corpus_event import CorpusEvent, Note
 from somaxlibrary.runtime.influence import AbstractInfluence
 from somaxlibrary.runtime.player import Player
-from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, AutomaticTriggerEvent, ScheduledMidiEvent, \
+from somaxlibrary.scheduler.scheduled_event import ScheduledEvent, AutomaticTriggerEvent, ScheduledMidiEvent, \
     ScheduledAudioEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent
 from somaxlibrary.scheduler.base_scheduler import BaseScheduler
 
@@ -110,6 +110,7 @@ class RealtimeScheduler(BaseScheduler):
                     ScheduledMidiEvent(onset, player, note.pitch, 0, note.channel, corpus_event.state_index))
 
     def _add_audio_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
+        raise NotImplementedError("Scheduler needs to be updated to handle Audio events properly")
         event: ScheduledEvent = ScheduledAudioEvent(trigger_time, player, corpus_event.absolute_time[0],
                                                     corpus_event.absolute_time[1], corpus_event.state_index,
                                                     corpus_event.tempo)

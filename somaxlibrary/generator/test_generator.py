@@ -6,7 +6,7 @@ from somaxlibrary.generator.somax_generator import SomaxGenerator
 from somaxlibrary.runtime.memory_spaces import *
 from somaxlibrary.runtime.merge_actions import *
 from somaxlibrary.runtime.player import Player
-from somaxlibrary.scheduler.ScheduledObject import TriggerMode
+from somaxlibrary.scheduler.scheduled_object import TriggerMode
 from somaxlibrary.runtime.target import NoTarget
 
 

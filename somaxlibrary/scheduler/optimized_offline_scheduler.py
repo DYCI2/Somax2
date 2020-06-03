@@ -4,7 +4,7 @@ from typing import List, Iterator, Optional
 from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.influence import CorpusInfluence
 from somaxlibrary.runtime.player import Player
-from somaxlibrary.scheduler.ScheduledObject import TriggerMode
+from somaxlibrary.scheduler.scheduled_object import TriggerMode
 from somaxlibrary.scheduler.offline_scheduler import OfflineScheduler
 
 

@@ -21,7 +21,7 @@ from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
 from somaxlibrary.runtime.merge_actions import AbstractMergeAction
 from somaxlibrary.runtime.osc_log_forwarder import OscLogForwarder
 from somaxlibrary.runtime.player import Player
-from somaxlibrary.scheduler.ScheduledObject import TriggerMode
+from somaxlibrary.scheduler.scheduled_object import TriggerMode
 from somaxlibrary.scheduler.realtime_scheduler import RealtimeScheduler
 from somaxlibrary.runtime.target import Target, SimpleOscTarget
 from somaxlibrary.runtime.transforms import AbstractTransform

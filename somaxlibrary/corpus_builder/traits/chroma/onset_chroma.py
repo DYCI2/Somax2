@@ -1,8 +1,8 @@
 import numpy as np
 
-from ...chromagram import Chromagram
-from ...traits import AbstractTrait
-from ...spectrogram import Spectrogram
+from somaxlibrary.corpus_builder.chromagram import Chromagram
+from somaxlibrary.corpus_builder.traits import AbstractTrait
+from somaxlibrary.corpus_builder.spectrogram import Spectrogram
 
 
 class OnsetChroma(AbstractTrait):

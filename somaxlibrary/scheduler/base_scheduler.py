@@ -6,11 +6,11 @@ from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.exceptions import InvalidCorpus
 from somaxlibrary.runtime.influence import AbstractInfluence
 from somaxlibrary.runtime.player import Player
-from somaxlibrary.scheduler.ScheduledEvent import ScheduledEvent, ScheduledMidiEvent, ScheduledAudioEvent, \
+from somaxlibrary.scheduler.scheduled_event import ScheduledEvent, ScheduledMidiEvent, ScheduledAudioEvent, \
     AutomaticTriggerEvent, \
     TempoEvent, ManualTriggerEvent, AbstractTriggerEvent, ScheduledInfluenceEvent, \
     ScheduledCorpusEvent
-from somaxlibrary.scheduler.ScheduledObject import TriggerMode
+from somaxlibrary.scheduler.scheduled_object import TriggerMode
 
 
 class BaseScheduler(ABC):
