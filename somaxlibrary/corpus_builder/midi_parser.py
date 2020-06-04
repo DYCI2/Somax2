@@ -25,9 +25,7 @@ class _MidiNote:
 
 
 class MidiParser:
-    # TODO: Integrate this into MatrixKeys either with aenum
     _NUM_COLS = len(Keys)
-
     _DEFAULT_TEMPO_BPM = 120
 
     @staticmethod

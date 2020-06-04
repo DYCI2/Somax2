@@ -20,24 +20,26 @@ class Filter(ABC):
 class MidiEnvelopeFilter(Filter):
     """Class for filtering 1d activation (binary) vectors with different coefficient for Attack and Release.
         Should be given a vector of ones (activation only), will concatenate release tail duration to vector, i.e.
-        f: R[1xM] -> R[1x(M+K)] where K denotes activation tail
+        f: R^[1xM] -> R^[1x(M+K)] where K denotes activation tail
         # TODO: PROPER DOCSTRING"""
 
     def __init__(self, amplitude_onset: float, amplitude_maximum: float, amplitude_threshold: float,
-                 tau_up: float, tau_down: float):
+                 tau_up: float, tau_down: float, step_size_ms: float):
         super().__init__(-tau_down * np.log(amplitude_threshold / amplitude_maximum))
         # TODO: Change tau values to actual ms values
         self.amplitude_onset: float = amplitude_onset
         self.amplitude_maximum: float = amplitude_maximum
         self.tau_up: float = tau_up
         self.tau_down: float = tau_down
+        self.step_size_ms: float = step_size_ms
 
-    def filter(self, vec: np.ndarray, step_size: float = 20.0, **kwargs) -> np.ndarray:
+    def filter(self, vec: np.ndarray, **kwargs) -> np.ndarray:
         # TODO: Self.amplitude maximum at end doesn't seem correct.
         amplitude_up: np.ndarray = (self.amplitude_onset - self.amplitude_maximum) \
-                                   * np.exp(-(np.arange(vec.size) * step_size) / self.tau_up) \
+                                   * np.exp(-(np.arange(vec.size) * self.step_size_ms) / self.tau_up) \
                                    + self.amplitude_maximum
-        amplitude_down = amplitude_up[-1] * np.exp(-(np.arange(0, self.decay_length_ms, step_size) / self.tau_down))
+        amplitude_down = amplitude_up[-1] * np.exp(-(np.arange(0, self.decay_length_ms, self.step_size_ms)
+                                                     / self.tau_down))
         return np.concatenate((amplitude_up, amplitude_down))
 
 
@@ -50,6 +52,8 @@ class NoFilter(Filter):
 
 
 class Spectrogram:
+
+    _NUM_MIDI_ROWS = 128
 
     def __init__(self, spectrogram: np.ndarray, duration_ms: float):
         self.spectrogram: np.ndarray = spectrogram
@@ -69,7 +73,7 @@ class Spectrogram:
         tau_down: float = 1000
         # TODO: Move outside and make abstract
         filt: Filter = MidiEnvelopeFilter(filter_amplitude_onset, filter_amplitude_max,
-                                          amplitude_threshold, tau_up, tau_down)
+                                          amplitude_threshold, tau_up, tau_down, spectrogram_step_ms)
 
         note_numbers: np.ndarray = note_matrix.pitches
         num_notes: int = len(note_matrix)
@@ -78,7 +82,7 @@ class Spectrogram:
         corpus_duration_ms: float = note_matrix.length_ms() + filt.decay_length_ms
 
         num_cols: int = int(np.ceil(corpus_duration_ms / spectrogram_step_ms)) + 1
-        num_rows: int = 128
+        num_rows: int = cls._NUM_MIDI_ROWS
         spectrogram: np.ndarray = np.zeros((num_rows, num_cols))
 
         for i in range(num_notes):
@@ -86,7 +90,7 @@ class Spectrogram:
             if note_duration <= 0:
                 continue
             note_spectrum: np.ndarray = note_numbers[i] + np.round(12 * np.log2(np.arange(1, max_num_harmonics + 1)))
-            note_spectrum = note_spectrum[np.where(note_spectrum < 128)].astype(int)
+            note_spectrum = note_spectrum[np.where(note_spectrum < num_rows)].astype(int)
             amplitudes: np.ndarray = np.power(harmonics_decay, np.arange(note_spectrum.size))
             envelope: np.ndarray = filt.filter(np.ones(note_duration))
             onset_idx: int = np.round(onsets_ms[i] / spectrogram_step_ms)
@@ -98,7 +102,7 @@ class Spectrogram:
 
     @classmethod
     def from_audio(cls, audio_data: np.ndarray):
-        pass
+        raise NotImplementedError("Audio Spectrogram is not implemented yet")
 
     def plot(self, ax: Optional[Axes] = None):
         if not ax:
@@ -110,69 +114,6 @@ class Spectrogram:
         ax.set_ylabel("Note Number")
         ax.set_xlabel("Time [ms]")
         # plt.colorbar()
-
-
-class LegacySpectrogram:
-    @staticmethod
-    def computePitchClassVector(noteMatrix, tStep=20.0, thresh=0.05, m_onset=0.5, p_max=1.0, tau_up=400, tau_down=1000,
-                                decayParam=0.5):
-        nbNotes = len(noteMatrix)
-        matrix = np.array(noteMatrix)
-        tRef = min(matrix[:, 5])
-        matrix[:, 5] -= tRef
-        tEndOfNM = max(matrix[:, 5] + matrix[:, 6]) + 1000
-        nbSteps = int(np.ceil(tEndOfNM / tStep))
-        pVector = np.zeros((128, nbSteps))
-        mVector = np.zeros((12, nbSteps))
-        nbMaxHarmonics = 10;
-
-        for i in range(0, nbNotes):
-            if (matrix[i, 5] == 0):
-                t_on = 0.0
-            else:
-                t_on = matrix[i, 5]
-
-            t_off = t_on + matrix[i, 6]
-
-            ind_t_on = int(np.floor(t_on / tStep))
-            ind_t_off = int(np.floor(t_off / tStep))
-            p_t_off = (m_onset - p_max) * np.exp(-(t_off - t_on) / tau_up) + p_max
-
-            t_end = min(tEndOfNM, t_off - tau_down * np.log(thresh / p_t_off))
-            ind_t_end = int(np.floor(t_end / tStep))
-
-            p_up = (m_onset - p_max) * np.exp(-(np.arange(ind_t_on, ind_t_off) * tStep - t_on) / tau_up) + p_max
-            p_down = p_t_off * np.exp(-(np.arange(ind_t_off, ind_t_end) * tStep - t_off) / tau_down)
-
-            ind_p = int(matrix[i, 3])  # + 1?
-
-            pVector[ind_p, ind_t_on:ind_t_off] = np.maximum(pVector[ind_p, ind_t_on:ind_t_off], p_up)
-            pVector[ind_p, ind_t_off:ind_t_end] = np.maximum(pVector[ind_p, ind_t_off:ind_t_end], p_down)
-
-            listOfMidiHarmonics = matrix[i, 3] + np.round(12 * np.log2(1 + np.arange(1, nbMaxHarmonics)))
-            listOfMidiHarmonics = listOfMidiHarmonics[np.where(listOfMidiHarmonics < 128)].astype(int)
-
-            if listOfMidiHarmonics.size != 0:
-                pVector[listOfMidiHarmonics, ind_t_on:ind_t_off] = np.maximum(
-                    pVector[listOfMidiHarmonics, ind_t_on:ind_t_off], \
-                    np.dot(np.power(
-                        np.ones_like(listOfMidiHarmonics) * decayParam,
-                        np.arange(1,
-                                  listOfMidiHarmonics.size + 1)).reshape(
-                        listOfMidiHarmonics.size, 1),
-                        p_up.reshape(1, p_up.size)))
-
-                pVector[listOfMidiHarmonics, ind_t_off:ind_t_end] = np.maximum(
-                    pVector[listOfMidiHarmonics, ind_t_off:ind_t_end], \
-                    np.dot(np.power(np.ones_like(listOfMidiHarmonics) * decayParam,
-                                    np.arange(1, listOfMidiHarmonics.size + 1)).reshape(
-                        listOfMidiHarmonics.size, 1), p_down.reshape(1, p_down.size)))
-
-        # for k in range(0, 128):
-        #     ind_pc = k % 12
-        #     mVector[ind_pc, :] = mVector[ind_pc, :] + pVector[k, :]
-        # return mVector, tRef
-        return pVector
 
 
 # TODO: Implement proper Spectrogram visualization (see code below for reference)
@@ -188,6 +129,7 @@ if __name__ == '__main__':
     # np.set_printoptions(linewidth=1000000, precision=3, suppress=True, threshold=1000000)
     # print(note_matrix._legacy_format()[0:10, :])
     from timeit import default_timer as timer
+
     # import matplotlib.colors as colors
 
     start = timer()

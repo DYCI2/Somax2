@@ -27,15 +27,15 @@ class CorpusBuilder:
         # TODO: Handle folders
         name, extension = os.path.splitext(filepath.split("/")[-1])
         if extension in CorpusBuilder.MIDI_FILE_EXTENSIONS:
-            return self.build_midi(filepath, name, **kwargs)
+            return self._build_midi(filepath, name, **kwargs)
         elif extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS:
             return self.build_audio(filepath, name, **kwargs)
         else:
             raise IOError("Invalid file. Valid extensions are {}.".format(
                 "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
 
-    def build_midi(self, filepath: str, name: str, foreground_channels: Tuple[int] = np.arange(1, 17),
-                   background_channels: Tuple[int] = np.arange(1, 17), **kwargs) -> Corpus:
+    def _build_midi(self, filepath: str, name: str, foreground_channels: Tuple[int] = tuple(range(1, 17)),
+                    background_channels: Tuple[int] = tuple(range(1, 17)), **kwargs) -> Corpus:
         # TODO: Replace kwargs with actual arguments
         # TODO: Option to plot note matrix, spectrograms, chromagrams and slices along the way!
         self.logger.debug(f"Building midi corpus {name}")
