@@ -2,14 +2,14 @@ import inspect
 import logging
 import sys
 from abc import abstractmethod
-from typing import ClassVar, Dict, Union, List
+from typing import Dict, Union, List, Type
 
 import numpy as np
 
 from somaxlibrary.runtime.corpus import Corpus
-from somaxlibrary.runtime.peak_event import PeakEvent
 from somaxlibrary.runtime.parameter import Parameter, ParamWithSetter
 from somaxlibrary.runtime.parameter import Parametric
+from somaxlibrary.runtime.peak_event import PeakEvent
 from somaxlibrary.runtime.peaks import Peaks
 
 
@@ -38,7 +38,7 @@ class AbstractActivityPattern(Parametric):
         raise NotImplementedError("AbstractActivityPattern.reset is abstract.")
 
     @staticmethod
-    def classes() -> {str: ClassVar}:
+    def classes() -> {str: Type}:
         """Returns class objects for all non-abstract classes in this module."""
         return dict(inspect.getmembers(sys.modules[__name__],
                                        lambda member: inspect.isclass(member) and not inspect.isabstract(

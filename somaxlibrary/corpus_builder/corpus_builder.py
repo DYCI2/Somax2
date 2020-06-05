@@ -25,14 +25,17 @@ class CorpusBuilder:
 
     def build(self, filepath: str, **kwargs) -> Corpus:
         # TODO: Handle folders
-        name, extension = os.path.splitext(filepath.split("/")[-1])
-        if extension in CorpusBuilder.MIDI_FILE_EXTENSIONS:
-            return self._build_midi(filepath, name, **kwargs)
-        elif extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS:
-            return self.build_audio(filepath, name, **kwargs)
+        if os.path.isdir(filepath):
+            raise NotImplementedError("Building corpora from folders is not supported yet.")
         else:
-            raise IOError("Invalid file. Valid extensions are {}.".format(
-                "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
+            name, extension = os.path.splitext(filepath.split("/")[-1])
+            if extension in CorpusBuilder.MIDI_FILE_EXTENSIONS:
+                return self._build_midi(filepath, name, **kwargs)
+            elif extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS:
+                return self._build_audio(filepath, name, **kwargs)
+            else:
+                raise IOError("Invalid file. Valid extensions are {}.".format(
+                    "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
 
     def _build_midi(self, filepath: str, name: str, foreground_channels: Tuple[int] = tuple(range(1, 17)),
                     background_channels: Tuple[int] = tuple(range(1, 17)), **kwargs) -> Corpus:
@@ -63,7 +66,7 @@ class CorpusBuilder:
         self.logger.debug(f"Analysis of Corpus {corpus} was completed.")
         return corpus
 
-    def build_audio(self, filepath: str, name: str, **kwargs) -> Corpus:
+    def _build_audio(self, filepath: str, name: str, **kwargs) -> Corpus:
         pass
 
     # def build_audio(self):

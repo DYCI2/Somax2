@@ -29,7 +29,7 @@ class IOParser:
         if not to_parse:
             return value_if_invalid
         else:
-            valid_classes: {str: ClassVar} = parent_class.classes()
+            valid_classes: {str: ClassVar} = parent_class._classes()
             try:
                 return valid_classes[to_parse]
             except KeyError:
