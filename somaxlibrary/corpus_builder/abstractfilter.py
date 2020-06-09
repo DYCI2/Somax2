@@ -8,7 +8,7 @@ from somaxlibrary.utils.introspective import Introspective
 
 
 class AbstractFilter(ABC, Introspective):
-    DEFAULT_KEYWORD = "default"
+    DEFAULT = "default"
     _DEFAULT_FILTER = "LeakyIntegrator"
 
     def __init__(self, decay_length_ms: float = 0.0, **_kwargs):
@@ -33,7 +33,7 @@ class AbstractFilter(ABC, Introspective):
     @staticmethod
     def parse(filter_class: str, **kwargs) -> 'AbstractFilter':
         classes: Dict[str, Type[AbstractFilter]] = AbstractFilter._classes()
-        if filter_class == AbstractFilter.DEFAULT_KEYWORD:
+        if filter_class == AbstractFilter.DEFAULT:
             return classes[AbstractFilter._DEFAULT_FILTER]()
         try:
             return classes[filter_class](**kwargs)

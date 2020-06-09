@@ -38,7 +38,7 @@ class Corpus:
     def from_json(cls, filepath: str):
         raise NotImplementedError("Not implemented yet")  # TODO
 
-    def export(self, filepath: str):
+    def export(self, output_folder: str, overwrite: bool = False):
         raise NotImplementedError("Not implemented yet")  # TODO
 
     def analyze(self, event_parameter: Type[AbstractTrait], **kwargs):

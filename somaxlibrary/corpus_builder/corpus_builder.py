@@ -5,6 +5,7 @@ from typing import Tuple, List, Type, Optional, Dict, Any
 
 import pandas as pd
 
+import settings
 from somaxlibrary.corpus_builder import traits
 from somaxlibrary.corpus_builder.abstractfilter import AbstractFilter
 from somaxlibrary.corpus_builder.chromagram import Chromagram
@@ -23,10 +24,10 @@ class CorpusBuilder:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
-    def build(self, filepath: str, corpus_name: Optional[str] = None, overwrite: bool = False,
+    def build(self, filepath: str, corpus_name: Optional[str] = None,
               foreground_channels: Tuple[int] = tuple(range(1, 17)),
               background_channels: Tuple[int] = tuple(range(1, 17)),
-              spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT_KEYWORD),
+              spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
               **kwargs) -> Corpus:
         # TODO: Handle folders
         if os.path.isdir(filepath):
@@ -35,20 +36,20 @@ class CorpusBuilder:
             filename, extension = os.path.splitext(filepath.split("/")[-1])
             name = corpus_name if corpus_name is not None else filename
             if extension in CorpusBuilder.MIDI_FILE_EXTENSIONS:
-                return self._build_midi(filepath, name, foreground_channels, background_channels,
-                                        spectrogram_filter, **kwargs)
+                corpus: Corpus = self._build_midi(filepath, name, foreground_channels, background_channels,
+                                                  spectrogram_filter, **kwargs)
             elif extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS:
-                return self._build_audio(filepath, name, foreground_channels, background_channels,
-                                         spectrogram_filter, **kwargs)
+                corpus: Corpus = self._build_audio(filepath, name, foreground_channels, background_channels,
+                                                   spectrogram_filter, **kwargs)
             else:
                 raise IOError("Invalid file. Valid extensions are {}.".format(
                     "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
+        return corpus
 
     def _build_midi(self, filepath: str, name: str, foreground_channels: Tuple[int],
                     background_channels: Tuple[int], spectrogram_filter: AbstractFilter, **kwargs) -> Corpus:
         # TODO: Option to plot note matrix, spectrograms, chromagrams and slices along the way!
         self.logger.debug(f"Building midi corpus {name}")
-        build_parameters = {...}  # stored in corpus to know how corpus was constructed
         note_matrix: NoteMatrix = NoteMatrix.from_midi_file(filepath)
         self.logger.debug(f"Note matrix {note_matrix} constructed.")
         fg_matrix: NoteMatrix = note_matrix.split_by_channel(foreground_channels)
@@ -128,9 +129,3 @@ class CorpusBuilder:
     @staticmethod
     def all_event_parameters() -> List[Tuple[str, Type[AbstractTrait]]]:
         return inspect.getmembers(traits, lambda m: inspect.isclass(m) and not inspect.isabstract(m))
-
-
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s]: %(name)s: %(message)s')
-    c: Corpus = CorpusBuilder().build('/Users/joakimborg/MIDI/debussy_part.mid')
-    c.plot()

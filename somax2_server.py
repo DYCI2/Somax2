@@ -4,15 +4,19 @@ import logging
 import logging.config
 import os
 import sys
-from typing import Any, Dict, Union, Type
+from typing import Any, Dict, Union, Type, Optional, Tuple
+from importlib import resources
 
 from maxosc.maxosc import Caller
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import AsyncIOOSCUDPServer
 
+import settings
+from somaxlibrary.corpus_builder.abstractfilter import AbstractFilter
 from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
+from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.exceptions import InvalidPath, DuplicateKeyError, InvalidJsonFormat, ParameterError
 from somaxlibrary.runtime.influence import KeywordInfluence, InfluenceKeyword
@@ -388,11 +392,23 @@ class SomaxServer(Caller):
     # CORPUS METHODS
     ######################################################
 
-    def build_corpus(self, path, output='corpus/', **kwargs):
+    def build_corpus(self, filepath: str, corpus_name: Optional[str] = None,
+                     output_folder: Optional[str] = settings.CORPUS_FOLDER, overwrite: bool = False,
+                     load_to_player: Optional[str] = None, filter_class: str = AbstractFilter.DEFAULT, **kwargs):
         # TODO: IO Error handling
-        self.logger.info(f"Building corpus from file '{path}' to location'{output}.")
-        self.builder.build_corpus(path, output, **kwargs)
-        self.logger.info("File {0} has been output at location '{1}'".format(path, output))
+        self.logger.info(f"Building corpus from file(s) '{filepath}'...")
+        spectrogram_filter: AbstractFilter = AbstractFilter.parse(filter_class)
+        corpus: Corpus = self.builder.build(filepath, corpus_name, spectrogram_filter=spectrogram_filter, **kwargs)
+
+        if output_folder is not None:
+            corpus.export(output_folder, overwrite=overwrite)
+
+        if load_to_player is not None:
+            try:
+                self.players[load_to_player].load_corpus(corpus)
+            except KeyError:
+                self.logger.error(f"Corpus was not loaded to player '{load_to_player}' "
+                                  f"as no player with that name exists.")
 
     ######################################################
     # DEBUGGING

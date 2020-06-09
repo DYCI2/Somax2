@@ -189,15 +189,6 @@ class Player(ScheduledMidiObject, Parametric):
             streamview.read(self.corpus)
         self.target.send("corpus", [self.corpus.name, str(self.corpus.content_type), self.corpus.length()])
 
-    def read_corpus(self, filepath: str):
-        _, file_extension = os.path.splitext(filepath)
-        if file_extension == ".json":
-            self.load_corpus(Corpus.from_json(filepath))
-        elif file_extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS + CorpusBuilder.MIDI_FILE_EXTENSIONS:
-            self.load_corpus(CorpusBuilder().build(filepath))
-        else:
-            raise IOError(f"File path with extension {file_extension} is not supported.")
-
     def add_transform(self, path: List[str], transform: (AbstractTransform, ...)) -> None:
         """ raises TransformError, KeyError"""
         if not path:
