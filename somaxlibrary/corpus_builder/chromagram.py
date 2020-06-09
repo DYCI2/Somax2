@@ -15,7 +15,6 @@ class Chromagram:
         self.chromagram: np.ndarray = chromagram
         self.duration_ms: float = duration_ms
         self.time_factor: float = 1 / duration_ms * chromagram.shape[1]
-        self.build_parameters: Dict[str, Any] = {}
 
     @classmethod
     def from_midi(cls, spectrogram: Spectrogram, **_kwargs):
@@ -41,5 +40,5 @@ class Chromagram:
         # plt.colorbar()
 
     @property
-    def build_parameters(self) -> Dict[str: Any]:
+    def build_parameters(self) -> Dict[str, Any]:
         return {}

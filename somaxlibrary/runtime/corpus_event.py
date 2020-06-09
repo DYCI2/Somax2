@@ -1,5 +1,5 @@
 import logging
-from typing import Optional, List, Dict, Type
+from typing import Optional, List, Dict, Type, Any
 
 import pandas as pd
 
@@ -49,6 +49,16 @@ class Note:
 
     def __eq__(self, other):
         return self.pitch == other.pitch and self.channel == other.channel
+
+    def encode(self) -> Dict[str, Any]:
+        return {"pitch": self.pitch,
+                "velocity": self.velocity,
+                "channel": self.channel,
+                "onset": self.onset,
+                "duration": self.duration,
+                "absolute_onset": self.absolute_onset,
+                "absolute_duration": self.absolute_duration
+                }
 
 
 class CorpusEvent:
@@ -106,3 +116,15 @@ class CorpusEvent:
 
     def held_from(self) -> [Note]:
         return [note for note in self.notes if note.onset + note.duration > self.duration]
+
+    def encode(self) -> Dict[str, Any]:
+        return {"state_index": self.state_index,
+                "tempo": self.tempo,
+                "onset": self.onset,
+                "absolute_onset": self.absolute_onset,
+                "duration": self.duration,
+                "absolute_duration": self.absolute_duration,
+                "notes": [note.encode() for note in self.notes],
+                "traits": {str(k): v for (k, v) in self.traits.items()}
+                }
+        # : Dict[Type[AbstractTrait], AbstractTrait] = event_parameters if event_parameters else {}

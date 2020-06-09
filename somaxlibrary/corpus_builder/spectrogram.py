@@ -46,7 +46,7 @@ class Spectrogram:
             note_spectrum: np.ndarray = note_numbers[i] + np.round(12 * np.log2(np.arange(1, max_num_harmonics + 1)))
             note_spectrum = note_spectrum[np.where(note_spectrum < num_rows)].astype(int)
             amplitudes: np.ndarray = np.power(harmonics_decay, np.arange(note_spectrum.size))
-            envelope: np.ndarray = filt.filter_midi(np.ones(note_duration))
+            envelope: np.ndarray = spectrogram_filter.filter_midi(np.ones(note_duration))
             onset_idx: int = np.round(onsets_ms[i] / step_ms)
             columns: np.ndarray = np.arange(onset_idx, onset_idx + envelope.size).astype(int)
             # TODO: Optimize if necessary: can be done with addition of sparse matrices

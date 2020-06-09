@@ -1,3 +1,5 @@
+from typing import Dict, Any
+
 from somaxlibrary.corpus_builder.chromagram import Chromagram
 from somaxlibrary.corpus_builder.traits import AbstractTrait
 from somaxlibrary.corpus_builder.traits.pitch import virfun
@@ -12,3 +14,8 @@ class VirtualFundamental(AbstractTrait):
     def analyze(cls, event: 'CorpusEvent', _fg_spectrogram: Spectrogram, _bg_spectrogram: Spectrogram,
                 _fg_chromagram: Chromagram, _bg_chromagram: Chromagram, **_kwargs):
         return cls(int(128 + (virfun.virfun([n.pitch for n in event.notes], 0.293) - 8) % 12))
+
+    def encode(self) -> Dict[str, Any]:
+        return {"pitch": self.pitch}
+
+

@@ -1,3 +1,5 @@
+from typing import Dict, Any
+
 import numpy as np
 
 from somaxlibrary.corpus_builder.chromagram import Chromagram
@@ -14,3 +16,7 @@ class OnsetChroma(AbstractTrait):
     def analyze(cls, event: 'CorpusEvent', _fg_spectrogram: Spectrogram, _bg_spectrogram: Spectrogram,
                 fg_chromagram: Chromagram, bg_chromagram: Chromagram, **_kwargs):
         return cls(fg_chromagram.at(event.absolute_onset), bg_chromagram.at(event.absolute_onset))
+
+    def encode(self) -> Dict[str, Any]:
+        return {"foreground": self.foreground.tolist(),
+                "background": self.background.tolist()}

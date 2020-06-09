@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Dict, Any
 
 from somaxlibrary.corpus_builder.chromagram import Chromagram
 from somaxlibrary.corpus_builder.spectrogram import Spectrogram
@@ -15,6 +16,10 @@ class AbstractTrait(ABC):
 
     def name(self) -> str:
         return self.__class__.__name__
+
+    @abstractmethod
+    def encode(self) -> Dict[str, Any]:
+        """ TODO docstring """
 
     # def parameter_type(self) -> str:
     #     return self.__class__.__module__.split(".")[-2]

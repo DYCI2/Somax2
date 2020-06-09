@@ -1,3 +1,5 @@
+from typing import Dict, Any
+
 from somaxlibrary.corpus_builder.chromagram import Chromagram
 from somaxlibrary.corpus_builder.traits import AbstractTrait
 from somaxlibrary.corpus_builder.spectrogram import Spectrogram
@@ -11,3 +13,7 @@ class TopNote(AbstractTrait):
     def analyze(cls, event: 'CorpusEvent', _fg_spectrogram: Spectrogram, _bg_spectrogram: Spectrogram,
                 _fg_chromagram: Chromagram, _bg_chromagram: Chromagram, **_kwargs):
         return cls(int(max([n.pitch for n in event.notes])))
+
+    def encode(self) -> Dict[str, Any]:
+        return {"pitch": self.pitch}
+

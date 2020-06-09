@@ -1,9 +1,14 @@
+import json
+import logging
+import os
 from enum import Enum
 from typing import List, Optional, Type, Dict, Any
 
+import jsonpickle
 import matplotlib.pyplot as plt
 import numpy as np
 
+import settings
 from somaxlibrary.corpus_builder.chromagram import Chromagram
 from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.corpus_builder.traits import AbstractTrait
@@ -16,6 +21,9 @@ class ContentType(Enum):
     MIDI = "MIDI"
     AUDIO = "Audio"
 
+    def encode(self):
+        return str(self)
+
 
 class Corpus:
     def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
@@ -27,8 +35,9 @@ class Corpus:
         self.name: str = name
         self.content_type: ContentType = content_type
         self._build_parameters: dict = build_parameters  # TODO: Including version
+        self.logger = logging.getLogger(__name__)
 
-        # These parameters will not be stored when exported and will hence not exist in json-parsed corpora.
+        # These parameters will not be stored when exported and will thus not exist in json-parsed corpora
         self.fg_spectrogram: Optional[Spectrogram] = fg_spectrogram
         self.bg_spectrogram: Optional[Spectrogram] = bg_spectrogram
         self.fg_chromagram: Optional[Chromagram] = fg_chromagram
@@ -38,8 +47,30 @@ class Corpus:
     def from_json(cls, filepath: str):
         raise NotImplementedError("Not implemented yet")  # TODO
 
-    def export(self, output_folder: str, overwrite: bool = False):
-        raise NotImplementedError("Not implemented yet")  # TODO
+    def export(self, output_folder: str = settings.CORPUS_FOLDER, overwrite: bool = False,
+               indentation: Optional[int] = None):
+        """ Raises IOError"""
+        filepath = os.path.join(output_folder, self.name + ".json")
+        if os.path.exists(filepath) and not overwrite:
+            raise IOError(f"Could not export corpus as file '{filepath}' already exists. "
+                          f"Set overwrite flag to True to overwrite existing.")
+        else:
+            with open(filepath, 'w') as f:
+                json.dump(self, f, indent=indentation, default=lambda o: o.encode())
+                self.logger.info(f"Successfully wrote corpus '{self.name} to file '{filepath}'.")
+
+
+        # print(json.dumps(self, indent=indentation, default=lambda o: o.encode()))
+
+    def encode(self) -> Dict[str, Any]:
+        return {"name": self.name,
+                "content_type": self.content_type,
+                "version": "TODO",  # TODO
+                "build_parameters": self._build_parameters,
+                "length": self.length(),
+                "duration": self.duration(),
+                "events": [event.encode() for event in self.events]
+                }
 
     def analyze(self, event_parameter: Type[AbstractTrait], **kwargs):
         for event in self.events:
@@ -103,6 +134,3 @@ class Corpus:
             _, axes = plt.subplots(2, 1, gridspec_kw={'height_ratios': [1, 5]})
             self.to_note_matrix().plot(axes=(axes[0], axes[1]))
         plt.show()
-
-
-
