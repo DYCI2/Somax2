@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Optional, Type
+from typing import List, Optional, Type, Dict, Any
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -18,9 +18,10 @@ class ContentType(Enum):
 
 
 class Corpus:
-    def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType, build_parameters: dict,
-                 fg_spectrogram: Optional[Spectrogram] = None, bg_spectrogram: Optional[Spectrogram] = None,
-                 fg_chromagram: Optional[Chromagram] = None, bg_chromagram: Optional[Chromagram] = None):
+    def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
+                 build_parameters: Dict[str, Any], fg_spectrogram: Optional[Spectrogram] = None,
+                 bg_spectrogram: Optional[Spectrogram] = None, fg_chromagram: Optional[Chromagram] = None,
+                 bg_chromagram: Optional[Chromagram] = None):
         self.events: List[CorpusEvent] = events
         self.onsets: np.ndarray = np.array([e.onset for e in self.events])
         self.name: str = name
@@ -87,9 +88,11 @@ class Corpus:
         return NoteMatrix(note_matrix)
 
     def plot(self):
+        raise NotImplementedError("Plotting a corpus is currently not supported")
         import matplotlib as mpl
         mpl.use('Qt5Agg')
-        if all([v is not None for v in [self.fg_spectrogram, self.bg_spectrogram, self.fg_chromagram, self.bg_chromagram]]):
+        if all([v is not None for v in
+                [self.fg_spectrogram, self.bg_spectrogram, self.fg_chromagram, self.bg_chromagram]]):
             _, axes = plt.subplots(6, 1, gridspec_kw={'height_ratios': [1, 5, 3, 3, 1, 1]})
             self.fg_spectrogram.plot(axes[2])
             self.bg_spectrogram.plot(axes[3])
@@ -100,3 +103,6 @@ class Corpus:
             _, axes = plt.subplots(2, 1, gridspec_kw={'height_ratios': [1, 5]})
             self.to_note_matrix().plot(axes=(axes[0], axes[1]))
         plt.show()
+
+
+
