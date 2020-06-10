@@ -21,14 +21,14 @@ class AbstractPeakSelector(Parametric):
 
     # TODO: Should probably pass transform dict too for future uses/extendability
     @abstractmethod
-    def decide(self, peaks: Peaks, influence_history: List[(CorpusEvent, (AbstractTransform, ...))],
+    def decide(self, peaks: Peaks, influence_history: List[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]],
                corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},
                **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
         pass
 
 
 class MaxPeakSelector(AbstractPeakSelector):
-    def decide(self, peaks: Peaks, influence_history: List[(CorpusEvent, (AbstractTransform, ...))],
+    def decide(self, peaks: Peaks, influence_history: List[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]],
                corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},
                **_kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
         self.logger.debug("[decide] MaxPeakSelector called.")

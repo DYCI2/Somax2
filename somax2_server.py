@@ -405,6 +405,10 @@ class SomaxServer(Caller):
                 corpus.export(output_folder, overwrite=overwrite)
             except IOError as e:
                 self.logger.error(str(e))
+                return
+            except (AttributeError, KeyError) as e:
+                self.logger.error(f"The corpus is incorrectly formatted. Error: {str(e)}")
+                return
 
         if load_to_player is not None:
             try:
