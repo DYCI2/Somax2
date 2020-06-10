@@ -14,6 +14,14 @@ class TopNote(AbstractTrait):
                 _fg_chromagram: Chromagram, _bg_chromagram: Chromagram, **_kwargs):
         return cls(int(max([n.pitch for n in event.notes])))
 
+    @classmethod
+    def decode(cls, trait_dict: Dict[str, Any]) -> 'AbstractTrait':
+        return cls(pitch=trait_dict["pitch"])
+
     def encode(self) -> Dict[str, Any]:
         return {"pitch": self.pitch}
+
+
+
+
 

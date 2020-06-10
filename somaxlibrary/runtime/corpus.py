@@ -4,17 +4,16 @@ import os
 from enum import Enum
 from typing import List, Optional, Type, Dict, Any
 
-import jsonpickle
 import matplotlib.pyplot as plt
 import numpy as np
 
 import settings
 from somaxlibrary.corpus_builder.chromagram import Chromagram
-from somaxlibrary.runtime.corpus_event import CorpusEvent
-from somaxlibrary.corpus_builder.traits import AbstractTrait
 from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somaxlibrary.corpus_builder.note_matrix import NoteMatrix
 from somaxlibrary.corpus_builder.spectrogram import Spectrogram
+from somaxlibrary.corpus_builder.traits import AbstractTrait
+from somaxlibrary.runtime.corpus_event import CorpusEvent
 
 
 class ContentType(Enum):
@@ -44,8 +43,17 @@ class Corpus:
         self.bg_chromagram: Optional[Chromagram] = bg_chromagram
 
     @classmethod
-    def from_json(cls, filepath: str):
-        raise NotImplementedError("Not implemented yet")  # TODO
+    def from_json(cls, filepath: str) -> 'Corpus':
+        """ Raises: IOError, KeyError (from AbstractTrait.from_json), AttributeError (from AbstractTrait.from_json)"""
+        with open(filepath, 'r') as f:
+            corpus_data: Dict[str, Any] = json.load(f)
+        name: str = corpus_data["name"]
+        content_type: ContentType = ContentType(corpus_data["content_type"])
+        version: str = corpus_data["version"]  # TODO
+        build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
+        events: List[CorpusEvent] = [CorpusEvent.decode(event_dict) for event_dict in corpus_data["events"]]
+
+        return cls(events, name, content_type, build_parameters)
 
     def export(self, output_folder: str = settings.CORPUS_FOLDER, overwrite: bool = False,
                indentation: Optional[int] = None):
@@ -59,12 +67,9 @@ class Corpus:
                 json.dump(self, f, indent=indentation, default=lambda o: o.encode())
                 self.logger.info(f"Successfully wrote corpus '{self.name} to file '{filepath}'.")
 
-
-        # print(json.dumps(self, indent=indentation, default=lambda o: o.encode()))
-
     def encode(self) -> Dict[str, Any]:
         return {"name": self.name,
-                "content_type": self.content_type,
+                "content_type": self.content_type.value,
                 "version": "TODO",  # TODO
                 "build_parameters": self._build_parameters,
                 "length": self.length(),

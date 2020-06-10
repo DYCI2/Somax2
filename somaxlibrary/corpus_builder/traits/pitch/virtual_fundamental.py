@@ -15,6 +15,10 @@ class VirtualFundamental(AbstractTrait):
                 _fg_chromagram: Chromagram, _bg_chromagram: Chromagram, **_kwargs):
         return cls(int(128 + (virfun.virfun([n.pitch for n in event.notes], 0.293) - 8) % 12))
 
+    @classmethod
+    def decode(cls, trait_dict: Dict[str, Any]) -> 'AbstractTrait':
+        return cls(pitch=trait_dict["pitch"])
+
     def encode(self) -> Dict[str, Any]:
         return {"pitch": self.pitch}
 
