@@ -27,7 +27,6 @@ class BasicPitchClassifier(PitchClassifier, ABC):
         pass
 
     def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
-        self._corpus = corpus
         labels: List[IntLabel] = []
         for event in corpus.events:  # type: CorpusEvent
             # TODO: Handle or comment on KeyError, which technically should never occur

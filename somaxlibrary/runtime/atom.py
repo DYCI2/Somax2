@@ -14,10 +14,9 @@ from somaxlibrary.runtime.transforms import AbstractTransform
 
 
 class Atom(Parametric):
-    def __init__(self, name: str, weight: float, classifier: Type[AbstractClassifier],
+    def __init__(self, name: str, weight: float, classifier: AbstractClassifier,
                  activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
-                 corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]],
-                 classifier_parameters: Optional[Dict[str, Any]] = None):
+                 corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"[__init__ Creating atom '{name}'.")
@@ -25,10 +24,7 @@ class Atom(Parametric):
         self._weight: Parameter = Parameter(weight, 0.0, None, 'float', "Relative scaling of atom peaks.")
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this Atom.")
 
-        if classifier_parameters is not None:
-            self._classifier: AbstractClassifier = classifier(**classifier_parameters)
-        else:
-            self._classifier: AbstractClassifier = classifier()
+        self._classifier: AbstractClassifier = classifier
         self._activity_pattern: AbstractActivityPattern = activity_type()  # creates activity
         self._memory_space: AbstractMemorySpace = memory_type(transforms)
         self._corpus: Optional[Corpus] = corpus
@@ -48,19 +44,19 @@ class Atom(Parametric):
                                "parameters": parameters}
         return self.parameter_dict
 
-    def read(self, corpus: Corpus):
-        self.logger.debug(f"[read]: Reading corpus {corpus}.")
-        self._corpus = corpus
+    def read(self, corpus: Optional[Corpus] = None):
+        """ :raises RuntimeError """
+        if corpus is not None:
+            self.logger.debug(f"[read]: Reading corpus {corpus}.")
+            self._corpus = corpus
+        elif self._corpus is not None:
+            self.logger.debug(f"[read]: Re-reading corpus {corpus}.")
+        else:
+            raise RuntimeError(f"Atom {self.name} does not have a corpus.")
         self._classifier.cluster(corpus)
         labels: List[AbstractLabel] = self._classifier.classify_corpus(corpus)
         self._memory_space.model(corpus, labels)
         self._activity_pattern.corpus = corpus
-
-    # TODO: Legacy?
-    # set current weight of atom
-    def set_weight(self, weight: float):
-        self.logger.debug("[set_weight] Atom {} setting weight to {}.".format(self.name, weight))
-        self.weight = weight
 
     # influences the memory with incoming data
     def influence(self, influence: AbstractInfluence, time: float, **kwargs) -> int:
@@ -74,8 +70,9 @@ class Atom(Parametric):
         else:
             return 0
 
-    def set_classifier(self, **kwargs):
-        raise RuntimeError("Atom.set_classifier is not supported yet")  # TODO
+    def set_classifier(self, classifier: AbstractClassifier):
+        self._classifier = classifier
+        self.read()
 
     def set_activity_pattern(self, activity_pattern_class: Type[AbstractActivityPattern], corpus: Corpus):
         self._activity_pattern = activity_pattern_class(corpus)

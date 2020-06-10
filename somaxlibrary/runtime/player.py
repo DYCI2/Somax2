@@ -68,10 +68,9 @@ class Player(ScheduledMidiObject, Parametric):
             self.streamviews[streamview].create_streamview(path, weight, merge_actions)
         self._parse_parameters()
 
-    def create_atom(self, path: List[str], weight: float, classifier: Type[AbstractClassifier],
+    def create_atom(self, path: List[str], weight: float, classifier: AbstractClassifier,
                     activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
-                    corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]],
-                    classifier_parameters: Optional[Dict[str, Any]] = None):
+                    corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
         """raises: InvalidPath, KeyError, DuplicateKeyError"""
         self.logger.debug(f"[create_atom] Attempting to create atom at {path}...")
         self.corpus = corpus
@@ -80,7 +79,7 @@ class Player(ScheduledMidiObject, Parametric):
             raise InvalidPath(f"Cannot create an atom directly in Player.")
         else:
             self.streamviews[streamview].create_atom(path, weight, classifier, activity_type, memory_type,
-                                                     corpus, self_influenced, transforms, classifier_parameters)
+                                                     corpus, self_influenced, transforms)
         for transform_tuple in transforms:
             self.store_transform(transform_tuple)
         self._parse_parameters()
@@ -176,8 +175,9 @@ class Player(ScheduledMidiObject, Parametric):
             raise TypeError("Critical Implementation error in transforms. TODO")
         self.transforms[transform_hash] = transform
 
-    def set_classifier(self):
-        raise RuntimeError("Player.set_classifier is not supported yet.")  # TODO
+    def set_classifier(self, path: List[str], classifier: AbstractClassifier):
+        atom: Atom = self._get_atom(path)
+        atom.set_classifier(classifier)
 
     def set_activity_pattern(self, path: List[str], activity_pattern_class: Type[AbstractActivityPattern]):
         atom: Atom = self._get_atom(path)

@@ -4,7 +4,7 @@ import logging
 import logging.config
 import os
 import sys
-from typing import Any, Dict, Union, Type, Optional, Tuple
+from typing import Any, Dict, Union, Type, Optional, Tuple, List
 from importlib import resources
 
 from maxosc.maxosc import Caller
@@ -140,7 +140,7 @@ class SomaxServer(Caller):
         path_and_name: [str] = IOParser.parse_streamview_atom_path(path)
 
         try:
-            classifier: Type[AbstractClassifier] = AbstractClassifier.from_string(classifier)
+            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier)
         except IOError as e:
             self.logger.error(f"{str(e)} Did not create an atom.")
             return
@@ -229,8 +229,14 @@ class SomaxServer(Caller):
             self.logger.error(f"Could not add transform at path {path}. The parent streamview/player does not exist.")
         # TODO: parameter dict
 
-    def set_classifier(self):
-        raise RuntimeError("Player.set_classifier is not supported yet")  # TODO
+    def set_classifier(self, player: str, path: str, classifier_name: str, **kwargs):
+        try:
+            parsed_path: List[str] = IOParser.parse_streamview_atom_path(path)
+            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier_name, **kwargs)
+            self.players[player].set_classifier(parsed_path, classifier)
+        except KeyError as e:
+            self.logger.error(str(e))
+
 
     def set_activity_pattern(self, player: str, path: str, activity_pattern: str == ""):
         # TODO: Will return default if not found. Should fail instead

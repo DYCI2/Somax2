@@ -13,23 +13,19 @@ from somaxlibrary.runtime.label import AbstractLabel
 class AbstractClassifier(ABC):
 
     def __init__(self, **kwargs):
-        self._corpus: Optional[Corpus] = None
+        pass
 
     @staticmethod
-    def from_string(name: Optional[str]) -> Type['AbstractClassifier']:
+    def from_string(name: str, **kwargs) -> 'AbstractClassifier':
         """ :raises KeyError"""
         classes: Dict[str, Type[AbstractClassifier]]
         classes = {k.lower(): v for (k, v) in
-                   dict(inspect.getmembers(somaxlibrary.classification, lambda m: inspect.isclass(m) and
-                                                                                  not inspect.isabstract(m))).items()}
-        if not name:
-            raise IOError("No default classifier exists. Please provide a classifier name. "
-                          f"Valid options are: {', '.join(classes.keys())}")
-
+                   dict(inspect.getmembers(somaxlibrary.classification,
+                                           lambda m: inspect.isclass(m) and not inspect.isabstract(m))).items()}
         try:
-            return classes[name.lower()]
+            return classes[name.lower()](**kwargs)
         except KeyError:
-            raise IOError(f"No classifier with the name '{name}' exists. "
+            raise KeyError(f"No classifier with the name '{name}' exists. "
                           f"Valid options are: {', '.join(classes.keys())}")
 
     @abstractmethod
@@ -66,13 +62,3 @@ class AbstractClassifier(ABC):
     @abstractmethod
     def _influence_keywords(self) -> List[InfluenceKeyword]:
         pass
-
-    def recluster(self) -> None:
-        if self._corpus:
-            self.cluster(self._corpus)
-
-    def reclassify_corpus(self) -> None:
-        if self._corpus:
-            self.classify_corpus(self._corpus)
-
-
