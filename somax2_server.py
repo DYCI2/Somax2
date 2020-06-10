@@ -246,9 +246,17 @@ class SomaxServer(Caller):
     def read_corpus(self, player: str, filepath: str):
         # TODO: IO Error handling
         self.logger.debug(f"[read_corpus] called for player '{player}' and file '{filepath}'.")
-        self.logger.info(f"Reading corpus at '{filepath}' for player '{player}'...")
+        _, file_extension = os.path.splitext(filepath)
+        if file_extension == ".json":
+            self.logger.info(f"Reading corpus at '{filepath}' for player '{player}'...")
+            corpus: Corpus = Corpus.from_json(filepath)
+        # elif file_extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS + CorpusBuilder.MIDI_FILE_EXTENSIONS:
+        #     corpus: Corpus = self.builder.build(filepath)
+        else:
+            raise IOError(f"File path with extension {file_extension} is not supported.")
+
         try:
-            self.players[player].read_corpus(filepath)
+            self.players[player].load_corpus(corpus)
             self.logger.info(f"Corpus successfully loaded in player '{player}'.")
         except KeyError:
             self.logger.error(f"Could not load corpus. No player named '{player}' exists.")
