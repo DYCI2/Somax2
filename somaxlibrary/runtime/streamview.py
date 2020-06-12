@@ -108,6 +108,7 @@ class StreamView(Parametric):
         weight_sum: float = 0.0
         for atom in self.atoms.values():
             weight_sum += atom.weight if atom.is_enabled() else 0.0
+        assert weight_sum - 1.0 < 0.01, "Scaling of indivudual atoms is currently not supported"
         for atom in self.atoms.values():
             peaks: Peaks = atom.get_peaks()
             peaks.scores *= atom.weight / weight_sum

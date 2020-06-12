@@ -39,21 +39,6 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-64",
-					"linecount" : 2,
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 374.587435649935628, 861.0, 216.0, 35.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 374.0, 860.0, 323.0, 22.0 ],
-					"text" : "set_classifier player1 melodic::melodic PitchClassClassifier"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-76",
 					"linecount" : 7,
 					"maxclass" : "message",
@@ -3605,13 +3590,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-25", 0 ],
 					"source" : [ "obj-63", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-65", 0 ],
-					"source" : [ "obj-64", 0 ]
 				}
 
 			}
