@@ -8,20 +8,19 @@ import somaxlibrary.classification
 from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.runtime.influence import AbstractInfluence, InfluenceKeyword
 from somaxlibrary.runtime.label import AbstractLabel
+from somaxlibrary.utils.introspective import Introspective
 
 
-class AbstractClassifier(ABC):
+class AbstractClassifier(ABC, Introspective):
 
     def __init__(self, **kwargs):
         pass
 
-    @staticmethod
-    def from_string(name: str, **kwargs) -> 'AbstractClassifier':
+    @classmethod
+    def from_string(cls, name: str, **kwargs) -> 'AbstractClassifier':
         """ :raises KeyError"""
         classes: Dict[str, Type[AbstractClassifier]]
-        classes = {k.lower(): v for (k, v) in
-                   dict(inspect.getmembers(somaxlibrary.classification,
-                                           lambda m: inspect.isclass(m) and not inspect.isabstract(m))).items()}
+        classes = {k.lower(): v for (k, v) in cls._classes(somaxlibrary.classification).items()}
         try:
             return classes[name.lower()](**kwargs)
         except KeyError:

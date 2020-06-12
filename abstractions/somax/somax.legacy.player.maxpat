@@ -39,21 +39,6 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"bubble" : 1,
-					"id" : "obj-193",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 398.0, 212.0, 150.0, 37.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 356.5, 191.5, 170.0, 24.0 ],
-					"text" : "Mod12 not supported yet"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-204",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -181,13 +166,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-189",
-					"linecount" : 2,
+					"linecount" : 4,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 48.0, 351.0, 31.0, 35.0 ],
-					"text" : "hehe"
+					"patching_rect" : [ 48.0, 351.0, 31.0, 62.0 ],
+					"text" : "debussy_part"
 				}
 
 			}
@@ -731,8 +716,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 103.0, 1018.0, 266.0, 22.0 ],
-					"text" : "set_label #1 melodic::melodic MelodicLabel"
+					"patching_rect" : [ 103.0, 1018.0, 310.0, 22.0 ],
+					"text" : "set_classifier #1 melodic::melodic TopNoteClassifier"
 				}
 
 			}
@@ -743,8 +728,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 120.5, 989.0, 281.0, 22.0 ],
-					"text" : "set_label #1 melodic::melodic PitchClassLabel"
+					"patching_rect" : [ 120.5, 989.0, 323.0, 22.0 ],
+					"text" : "set_classifier #1 melodic::melodic PitchClassClassifier"
 				}
 
 			}
@@ -779,7 +764,6 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-147",
-					"ignoreclick" : 1,
 					"maxclass" : "toggle",
 					"numinlets" : 1,
 					"numoutlets" : 1,
@@ -806,7 +790,6 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-146",
-					"ignoreclick" : 1,
 					"maxclass" : "toggle",
 					"numinlets" : 1,
 					"numoutlets" : 1,
@@ -837,8 +820,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 120.5, 875.0, 221.0, 22.0 ],
-					"text" : "set_label #1 self::self MelodicLabel"
+					"patching_rect" : [ 103.0, 892.0, 265.0, 22.0 ],
+					"text" : "set_classifier #1 self::self TopNoteClassifier"
 				}
 
 			}
@@ -849,8 +832,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 162.0, 841.0, 236.0, 22.0 ],
-					"text" : "set_label #1 self::self PitchClassLabel"
+					"patching_rect" : [ 103.0, 868.0, 277.0, 22.0 ],
+					"text" : "set_classifier #1 self::self PitchClassClassifier"
 				}
 
 			}
@@ -1591,7 +1574,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 551.5, 660.0, 47.0, 55.0 ],
-					"size" : 7966,
+					"size" : 238,
 					"slidercolor" : [ 0.082352941176471, 0.345098039215686, 0.996078431372549, 0.53 ]
 				}
 
@@ -1606,7 +1589,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 477.5, 660.0, 47.0, 55.0 ],
-					"size" : 7966,
+					"size" : 238,
 					"slidercolor" : [ 0.729411764705882, 0.058823529411765, 0.058823529411765, 0.53 ]
 				}
 
@@ -1621,7 +1604,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 403.5, 660.0, 47.0, 55.0 ],
-					"size" : 7966,
+					"size" : 238,
 					"slidercolor" : [ 0.082352941176471, 0.682352941176471, 0.011764705882353, 0.501960784313725 ]
 				}
 
@@ -1662,7 +1645,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 326.5, 660.0, 47.0, 55.0 ],
-					"size" : 7966,
+					"size" : 238,
 					"slidercolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 
@@ -2029,7 +2012,7 @@
 					"patching_rect" : [ 645.499999999999886, 673.0, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 236.5, 276.0, 182.0, 19.0 ],
-					"size" : 7966.0
+					"size" : 238.0
 				}
 
 			}
@@ -2094,7 +2077,7 @@
 					"patching_rect" : [ 849.5, 613.0, 150.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 80.0, 139.5, 150.0, 20.0 ],
-					"text" : "hehe"
+					"text" : "debussy_part"
 				}
 
 			}
@@ -2119,7 +2102,7 @@
 					"patching_rect" : [ 1050.25, 613.0, 45.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 359.5, 299.0, 59.0, 20.0 ],
-					"text" : "7966"
+					"text" : "238"
 				}
 
 			}
@@ -2651,7 +2634,7 @@
 					"patching_rect" : [ 695.0, 640.0, 36.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 278.5, 297.0, 70.0, 24.0 ],
-					"text" : "135"
+					"text" : "37"
 				}
 
 			}
@@ -4704,15 +4687,32 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"newobj" : 				{
+				"default" : 				{
+					"fontsize" : [ 10.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"newobj" : 				{
 					"fontsize" : [ 10.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"message" : 				{
-					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -4723,32 +4723,15 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"default" : 				{
 					"fontface" : [ 1 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"toggle" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

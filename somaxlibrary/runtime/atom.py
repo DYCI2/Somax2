@@ -50,13 +50,15 @@ class Atom(Parametric):
             self.logger.debug(f"[read]: Reading corpus {corpus}.")
             self._corpus = corpus
         elif self._corpus is not None:
-            self.logger.debug(f"[read]: Re-reading corpus {corpus}.")
+            self.logger.debug(f"[read]: Re-reading corpus {self._corpus}.")
         else:
-            raise RuntimeError(f"Atom {self.name} does not have a corpus.")
-        self._classifier.cluster(corpus)
-        labels: List[AbstractLabel] = self._classifier.classify_corpus(corpus)
-        self._memory_space.model(corpus, labels)
-        self._activity_pattern.corpus = corpus
+            self.logger.debug(f"[read]: No corpus was provided and atom '{self.name}' does not have a corpus. "
+                              f"No action performed.")
+            return
+        self._classifier.cluster(self._corpus)
+        labels: List[AbstractLabel] = self._classifier.classify_corpus(self._corpus)
+        self._memory_space.model(self._corpus, labels)
+        self._activity_pattern.corpus = self._corpus
 
     # influences the memory with incoming data
     def influence(self, influence: AbstractInfluence, time: float, **kwargs) -> int:

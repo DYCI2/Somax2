@@ -42,6 +42,9 @@ class Corpus:
         self.fg_chromagram: Optional[Chromagram] = fg_chromagram
         self.bg_chromagram: Optional[Chromagram] = bg_chromagram
 
+    def __repr__(self):
+        return f"Corpus(name='{self.name}', ...)"
+
     @classmethod
     def from_json(cls, filepath: str) -> 'Corpus':
         """ Raises: IOError, KeyError (from AbstractTrait.from_json), AttributeError (from AbstractTrait.from_json)"""
