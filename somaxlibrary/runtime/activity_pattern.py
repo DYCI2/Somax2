@@ -156,4 +156,7 @@ class ManualActivityPattern(AbstractActivityPattern):
 
     def _calc_tau(self, n: int):
         """ n is the number of updates until peak decays below threshold"""
-        return -np.divide(n, np.log(self.extinction_threshold.value - 0.001))
+        # Since update_peaks is called twice per influence/new_event cycle, the number n is multiplied by two.
+        # As this ActivityPattern is designed for Manual Mode, it is assumed that for each influence call, there will
+        #   be an accompanying new_event call.
+        return -np.divide(2 * n, np.log(self.extinction_threshold.value - 0.001))
