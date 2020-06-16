@@ -237,7 +237,6 @@ class SomaxServer(Caller):
         except KeyError as e:
             self.logger.error(str(e))
 
-
     def set_activity_pattern(self, player: str, path: str, activity_pattern: str == ""):
         # TODO: Will return default if not found. Should fail instead
         self.logger.debug(f"[set_activity_pattern] called for player '{player}' with path '{path}' "
@@ -255,11 +254,17 @@ class SomaxServer(Caller):
         _, file_extension = os.path.splitext(filepath)
         if file_extension == ".json":
             self.logger.info(f"Reading corpus at '{filepath}' for player '{player}'...")
-            corpus: Corpus = Corpus.from_json(filepath)
+            try:
+                corpus: Corpus = Corpus.from_json(filepath)
+            except (KeyError, AttributeError, IOError) as e:
+                self.logger.error(f"The corpus could not be parsed - is the version correct? Error message: {str(e)}")
+                return
+
         # elif file_extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS + CorpusBuilder.MIDI_FILE_EXTENSIONS:
         #     corpus: Corpus = self.builder.build(filepath)
         else:
-            raise IOError(f"File path with extension {file_extension} is not supported.")
+            self.logger.error(f"File path with extension {file_extension} is not supported.")
+            return
 
         try:
             self.players[player].load_corpus(corpus)

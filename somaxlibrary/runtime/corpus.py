@@ -47,7 +47,7 @@ class Corpus:
 
     @classmethod
     def from_json(cls, filepath: str) -> 'Corpus':
-        """ Raises: IOError, KeyError (from AbstractTrait.from_json), AttributeError (from AbstractTrait.from_json)"""
+        """ Raises: IOError, KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)"""
         with open(filepath, 'r') as f:
             corpus_data: Dict[str, Any] = json.load(f)
         name: str = corpus_data["name"]
