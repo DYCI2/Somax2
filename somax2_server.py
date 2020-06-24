@@ -7,6 +7,7 @@ import sys
 from typing import Any, Dict, Union, Type, Optional, Tuple, List
 from importlib import resources
 
+from maxosc.maxformatter import MaxFormatter
 from maxosc.maxosc import Caller
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import AsyncIOOSCUDPServer
@@ -65,14 +66,7 @@ class SomaxServer(Caller):
         self.logger.info("SoMaxServer was successfully terminated.")
 
     def _process_osc(self, _address, *args):
-        # TODO: Move string formatting elsewhere
-        args_formatted: [str] = []
-        for arg in args:
-            if isinstance(arg, str) and " " in arg:
-                args_formatted.append("'" + arg + "'")
-            else:
-                args_formatted.append(str(arg))
-        args_str: str = " ".join([str(arg) for arg in args_formatted])
+        args_str: str = MaxFormatter.format_as_string(args)
         try:
             self.call(args_str)
         except Exception as e:
