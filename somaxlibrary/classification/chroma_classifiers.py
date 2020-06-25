@@ -80,10 +80,9 @@ class SomChromaClassifier(ChromaClassifier):
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
     def _label_from_chroma(self, chroma: np.ndarray) -> IntLabel:
-        # TODO: Test this: Drastically changed from previous implementation
-        max_val: float = np.max(chroma)
-        if max_val > 0:
-            chroma /= max_val
+        # max_val: float = np.max(chroma)
+        # if max_val > 0:
+        #     chroma /= max_val
         rms: np.ndarray = np.sqrt(np.sum(np.power(chroma - self._som_data, 2), axis=1))
         return IntLabel(self._som_classes[np.argmin(rms)])
 
@@ -103,9 +102,9 @@ class GmmClassifier(ChromaClassifier, ABC):
         labels: List[IntLabel] = []
         for event in corpus.events:  # type: CorpusEvent
             chroma: np.ndarray = event.get_trait(OnsetChroma).background.reshape(1, -1)
-            max_val: float = np.max(chroma)
-            if max_val > 0:
-                chroma /= max_val
+            # max_val: float = np.max(chroma)
+            # if max_val > 0:
+            #     chroma /= max_val
             labels.append(IntLabel(int(self.gmm.predict(chroma))))
         return labels
 
@@ -117,9 +116,9 @@ class GmmClassifier(ChromaClassifier, ABC):
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
-        max_val: float = np.max(chroma)
-        if max_val > 0:
-            chroma /= max_val
+        # max_val: float = np.max(chroma)
+        # if max_val > 0:
+        #     chroma /= max_val
         return IntLabel(int(self.gmm.predict(chroma)))
 
 

@@ -292,7 +292,7 @@ class SomaxServer(Caller):
     def start(self):
         self.clear_all()
         self.scheduler.start()
-        self.logger.info(f"Scheduler Started. Current tick is {self.scheduler.tick}.")
+        self.logger.info(f"Scheduler Started. Current tick is {self.scheduler.tick:.2f}.")
 
     def stop(self):
         """stops the scheduler and reset all players"""
@@ -418,6 +418,7 @@ class SomaxServer(Caller):
         self.logger.info(f"Building corpus from file(s) '{filepath}'...")
         spectrogram_filter: AbstractFilter = AbstractFilter.parse(filter_class)
         corpus: Corpus = self.builder.build(filepath, corpus_name, spectrogram_filter=spectrogram_filter, **kwargs)
+        self.logger.info(f"Successfully wrote corpus '{corpus.name}' to file '{filepath}'.")
 
         if output_folder is not None:
             try:
