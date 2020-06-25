@@ -1,7 +1,9 @@
-from typing import Optional, List
+import logging
+from typing import Optional, List, Iterator
 
 import mido
 import numpy as np
+from mido import MidiTrack, Message
 
 from .matrix_keys import MatrixKeys as Keys
 
@@ -84,6 +86,36 @@ class MidiParser:
             completed_notes.append(note)
 
         return completed_notes
+
+    @staticmethod
+    def _merge_track(tracks: List[MidiTrack]) -> MidiTrack:
+        """Returns a MidiTrack object with all messages from all tracks.
+
+            The messages are returned in playback order with delta times
+            as if they were all in one track.
+
+            This function was adapted directly from mido to handle files with uncaught 'type' meta message errors
+            """
+        messages = []
+        for track in tracks:
+            messages.extend(MidiParser._to_abstime(track))
+
+        messages.sort(key=lambda msg: msg.time)
+
+        return MidiTrack(mido.midifiles.tracks.fix_end_of_track(mido.midifiles.tracks._to_reltime(messages)))
+
+    @staticmethod
+    def _to_abstime(messages: MidiTrack) -> Iterator[Message]:
+        """Convert messages to absolute time.
+
+        This function was adapted directly from mido to handle files with uncaught 'type' meta message errors"""
+        now = 0
+        for msg in messages:
+            now += msg.time
+            try:
+                yield msg.copy(time=now)
+            except TypeError as e:
+                logging.getLogger(__name__).warning(f"Found invalid midi format: {repr(e)}. Error was ignored.")
 
     @staticmethod
     def _to_numpy(notes: List[_MidiNote], ticks_per_beat: int) -> np.ndarray:

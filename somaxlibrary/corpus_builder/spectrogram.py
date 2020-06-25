@@ -50,7 +50,9 @@ class Spectrogram:
             onset_idx: int = np.round(onsets_ms[i] / step_ms)
             columns: np.ndarray = np.arange(onset_idx, onset_idx + envelope.size).astype(int)
             # TODO: Optimize if necessary: can be done with addition of sparse matrices
-            spectrogram[np.ix_(note_spectrum, columns)] += amplitudes.reshape((-1, 1)) @ envelope.reshape((1, -1))
+            # spectrogram[np.ix_(note_spectrum, columns)] += amplitudes.reshape((-1, 1)) @ envelope.reshape((1, -1))
+
+            spectrogram[np.ix_(note_spectrum, columns)] = np.maximum(spectrogram[np.ix_(note_spectrum, columns)], amplitudes.reshape((-1, 1)) @ envelope.reshape((1, -1)))
 
         return cls(spectrogram, corpus_duration_ms, build_parameters)
 
