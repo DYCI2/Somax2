@@ -19,7 +19,8 @@ from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
 from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.runtime.corpus_event import CorpusEvent
-from somaxlibrary.runtime.exceptions import InvalidPath, DuplicateKeyError, InvalidJsonFormat, ParameterError
+from somaxlibrary.runtime.exceptions import InvalidPath, DuplicateKeyError, InvalidJsonFormat, ParameterError, \
+    InvalidCorpus
 from somaxlibrary.runtime.influence import KeywordInfluence, InfluenceKeyword
 from somaxlibrary.runtime.io_parser import IOParser
 from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
@@ -30,6 +31,7 @@ from somaxlibrary.scheduler.scheduled_object import TriggerMode
 from somaxlibrary.scheduler.realtime_scheduler import RealtimeScheduler
 from somaxlibrary.runtime.target import Target, SimpleOscTarget
 from somaxlibrary.runtime.transforms import AbstractTransform
+import somaxlibrary
 
 
 class SomaxServer(Caller):
@@ -39,7 +41,6 @@ class SomaxServer(Caller):
         self.logger = logging.getLogger(__name__)
         self.target: Target = SimpleOscTarget("/server", out_port, ip)  # TODO: Change to multiosctarget for distributed
         self.logger.addHandler(OscLogForwarder(self.target))
-        self.logger.info(f"Initializing SoMaxServer with input port {in_port} and ip '{ip}'.")
         self.players: Dict[str, Player] = dict()
         self.scheduler = RealtimeScheduler()
         self.builder = CorpusBuilder()
@@ -48,6 +49,8 @@ class SomaxServer(Caller):
         self.out_port: int = out_port
         self.server: AsyncIOOSCUDPServer = None
         self.io_parser: IOParser = IOParser()
+        self.logger.info(f"The Somax Server (version: {somaxlibrary.__version__}) was started "
+                         f"with input port {in_port} and ip {ip}.")
 
     ######################################################
     # INTERNAL/PRIVATE
@@ -249,9 +252,12 @@ class SomaxServer(Caller):
         if file_extension == ".json":
             self.logger.info(f"Reading corpus at '{filepath}' for player '{player}'...")
             try:
-                corpus: Corpus = Corpus.from_json(filepath)
-            except (KeyError, AttributeError, IOError) as e:
-                self.logger.error(f"The corpus could not be parsed - is the version correct? Error message: {str(e)}")
+                corpus = Corpus.from_json(filepath)
+            except IOError as e:
+                self.logger.error(f"The corpus could not be parsed. Error message: {str(e)}")
+                return
+            except InvalidCorpus as e:
+                self.logger.error(str(e))
                 return
 
         # elif file_extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS + CorpusBuilder.MIDI_FILE_EXTENSIONS:

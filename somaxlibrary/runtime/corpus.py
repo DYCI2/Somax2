@@ -2,18 +2,20 @@ import json
 import logging
 import os
 from enum import Enum
-from typing import List, Optional, Type, Dict, Any
+from typing import List, Optional, Type, Dict, Any, Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
 
 import settings
+import somaxlibrary
 from somaxlibrary.corpus_builder.chromagram import Chromagram
 from somaxlibrary.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somaxlibrary.corpus_builder.note_matrix import NoteMatrix
 from somaxlibrary.corpus_builder.spectrogram import Spectrogram
 from somaxlibrary.corpus_builder.traits import AbstractTrait
 from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.exceptions import InvalidCorpus
 
 
 class ContentType(Enum):
@@ -47,16 +49,28 @@ class Corpus:
 
     @classmethod
     def from_json(cls, filepath: str) -> 'Corpus':
-        """ Raises: IOError, KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)"""
-        with open(filepath, 'r') as f:
-            corpus_data: Dict[str, Any] = json.load(f)
-        name: str = corpus_data["name"]
-        content_type: ContentType = ContentType(corpus_data["content_type"])
-        version: str = corpus_data["version"]  # TODO
-        build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
-        events: List[CorpusEvent] = [CorpusEvent.decode(event_dict) for event_dict in corpus_data["events"]]
+        """ Raises: IOError, """
+        try:
+            with open(filepath, 'r') as f:
+                corpus_data: Dict[str, Any] = json.load(f)
+            name: str = corpus_data["name"]
+            content_type: ContentType = ContentType(corpus_data["content_type"])
+            version: str = corpus_data["version"]
+            build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
+            events: List[CorpusEvent] = [CorpusEvent.decode(event_dict) for event_dict in corpus_data["events"]]
+            if version != somaxlibrary.__version__:
+                logging.getLogger(__name__).warning(f"The loaded corpus was built with an old version of Somax. "
+                                                    f"While it may work, using it could result in a number of bugs."
+                                                    f" Recommended action: rebuild corpus.")
+            return cls(events, name, content_type, build_parameters)
 
-        return cls(events, name, content_type, build_parameters)
+        # KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)
+        except (KeyError, AttributeError) as e:
+            corpus_version: str = corpus_data.get("version")
+            system_version: str = somaxlibrary.__version__
+            raise InvalidCorpus(f"The Corpus at '{filepath}' has an invalid format and could not be loaded. "
+                                f"This corpus was built with version {corpus_version} while the current system version "
+                                f"is {system_version}. Try rebuilding the corpus.") from e
 
     def export(self, output_folder: str = settings.CORPUS_FOLDER, overwrite: bool = False,
                indentation: Optional[int] = None):
@@ -73,7 +87,7 @@ class Corpus:
     def encode(self) -> Dict[str, Any]:
         return {"name": self.name,
                 "content_type": self.content_type.value,
-                "version": "TODO",  # TODO
+                "version": somaxlibrary.__version__,
                 "build_parameters": self._build_parameters,
                 "length": self.length(),
                 "duration": self.duration(),
