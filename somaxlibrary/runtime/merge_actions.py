@@ -147,7 +147,6 @@ class NextStateMergeAction(AbstractMergeAction):
             last_event, _, _ = history.get_latest()
             next_event: CorpusEvent = corpus.event_at(last_event.state_index + 1)
             next_state_time: float = next_event.onset
-            self.logger.warning("Next state index indicates error in returned type")
             next_state_idx: np.ndarray = np.abs(peaks.times - next_state_time) < self._t_width.value
             peaks.scores[next_state_idx] *= self.factor.value
             return peaks

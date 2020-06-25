@@ -66,7 +66,7 @@ class SomaxServer(Caller):
         self.logger.info("SoMaxServer was successfully terminated.")
 
     def _process_osc(self, _address, *args):
-        args_str: str = MaxFormatter.format_as_string(args)
+        args_str: str = MaxFormatter.format_as_string(*args)
         try:
             self.call(args_str)
         except Exception as e:

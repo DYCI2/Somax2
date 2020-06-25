@@ -11,6 +11,11 @@ class Peaks:
         self.times: np.ndarray = times  # shape: 1d, dtype: float
         self.transform_hashes: np.ndarray = transform_hashes  # shape: 1d, dtype: int
 
+    def __repr__(self):
+        return f"{type(self).__name__}(scores=<{type(self.scores).__name__},shape={self.scores.shape}>," \
+               f"times=<{type(self.times).__name__},shape={self.times.shape}>," \
+               f"transform_hashes=<{type(self.transform_hashes).__name__},shape={self.transform_hashes.shape}>)"
+
     @classmethod
     def create_empty(cls):
         return cls(np.empty(0, dtype=np.float), np.empty(0, dtype=np.float), np.empty(0, dtype=np.int32))
