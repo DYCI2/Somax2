@@ -1,52 +1,48 @@
 import logging
-import os
 from copy import deepcopy
-from typing import Dict, Optional, Tuple, Type, List, Any
+from typing import Dict, Optional, Tuple, Type, List
 
+from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern
 from somaxlibrary.runtime.atom import Atom
-from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.runtime.corpus import Corpus
-from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
 from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.exceptions import DuplicateKeyError, TransformError
 from somaxlibrary.runtime.exceptions import InvalidPath, InvalidCorpus, InvalidConfiguration, InvalidLabelInput
 from somaxlibrary.runtime.improvisation_memory import ImprovisationMemory
 from somaxlibrary.runtime.influence import AbstractInfluence, CorpusInfluence
 from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
-from somaxlibrary.runtime.merge_actions import DistanceMergeAction, PhaseModulationMergeAction, AbstractMergeAction, \
-    NextStateMergeAction
+from somaxlibrary.runtime.merge_actions import AbstractMergeAction
 from somaxlibrary.runtime.parameter import Parametric
-from somaxlibrary.runtime.peak_selector import AbstractPeakSelector, MaxPeakSelector, DefaultPeakSelector
+from somaxlibrary.runtime.peak_selector import AbstractPeakSelector
 from somaxlibrary.runtime.peaks import Peaks
-from somaxlibrary.scheduler.scheduled_object import ScheduledMidiObject, TriggerMode
 from somaxlibrary.runtime.streamview import StreamView
 from somaxlibrary.runtime.target import Target
 from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
+from somaxlibrary.scheduler.scheduled_object import ScheduledMidiObject, TriggerMode
 
 
 class Player(ScheduledMidiObject, Parametric):
 
-    def __init__(self, name: str, triggering_mode: TriggerMode, target: Target):
+    def __init__(self, name: str, triggering_mode: TriggerMode, target: Target,
+                 merge_actions: Tuple[AbstractMergeAction, ...],
+                 corpus: Optional[Corpus], peak_selector: AbstractPeakSelector):
         super(Player, self).__init__(triggering_mode)
         self.logger = logging.getLogger(__name__)
         self.name: str = name  # name of the player
         self.target: Target = target
 
-        self.streamviews: Dict[str, StreamView] = dict()
-        self.merge_actions: Dict[str, AbstractMergeAction] = {}
-        self.corpus: Optional[Corpus] = None
-        self.peak_selectors: Dict[str, AbstractPeakSelector] = {}
+        self.streamviews: Dict[str, StreamView] = dict()  # TODO: Init param
+        self.merge_actions: Dict[str, AbstractMergeAction] = {}  # TODO: Init param
+        for merge_action in merge_actions:
+            self.add_merge_action(merge_action)
+
+        self.corpus: Optional[Corpus] = corpus
+        self.peak_selector: AbstractPeakSelector = peak_selector
         self.transforms: Dict[int, Tuple[AbstractTransform, ...]] = {}  # key: hash
 
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
         self.previous_peaks: Peaks = Peaks.create_empty()
-
-        # TODO: Temporary: Add as input arguments instead
-        for merge_action in [DistanceMergeAction, PhaseModulationMergeAction, NextStateMergeAction]:
-            self.add_merge_action(merge_action())
-        for peak_selector in [MaxPeakSelector(), DefaultPeakSelector()]:
-            self.add_peak_selector(peak_selector)
 
         self._parse_parameters()
 
@@ -54,7 +50,7 @@ class Player(ScheduledMidiObject, Parametric):
     # CREATION/DELETION STREAMVIEWS/ATOMS
     ######################################################
 
-    def create_streamview(self, path: List[str], weight: float, merge_actions: Tuple[Type[AbstractMergeAction], ...]):
+    def create_streamview(self, path: List[str], weight: float, merge_actions: Tuple[AbstractMergeAction, ...]):
         """creates streamview at target path"""
         self.logger.debug("[create_streamview] Creating streamview {} in player {} with merge_actions {}..."
                           .format(path, self.name, merge_actions))
@@ -69,8 +65,9 @@ class Player(ScheduledMidiObject, Parametric):
         self._parse_parameters()
 
     def create_atom(self, path: List[str], weight: float, classifier: AbstractClassifier,
-                    activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
-                    corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
+                    activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
+                    corpus: Optional[Corpus], self_influenced: bool,
+                    transforms: List[Tuple[Type[AbstractTransform], ...]]):
         """raises: InvalidPath, KeyError, DuplicateKeyError"""
         self.logger.debug(f"[create_atom] Attempting to create atom at {path}...")
         self.corpus = corpus
@@ -78,7 +75,7 @@ class Player(ScheduledMidiObject, Parametric):
         if not path:  # path is empty means no streamview path was given
             raise InvalidPath(f"Cannot create an atom directly in Player.")
         else:
-            self.streamviews[streamview].create_atom(path, weight, classifier, activity_type, memory_type,
+            self.streamviews[streamview].create_atom(path, weight, classifier, activity_pattern, memory_space,
                                                      corpus, self_influenced, transforms)
         for transform_tuple in transforms:
             self.store_transform(transform_tuple)
@@ -94,7 +91,7 @@ class Player(ScheduledMidiObject, Parametric):
     ######################################################
 
     def new_event(self, scheduler_time: float, **kwargs) -> CorpusEvent:
-        """ Raises: InvalidCorpus """
+        """ Raises: InvalidCorpus"""
         self.logger.debug("[new_event] Player {} attempting to create a new event at scheduler time '{}'."
                           .format(self.name, scheduler_time))
         if not self.corpus:
@@ -104,14 +101,15 @@ class Player(ScheduledMidiObject, Parametric):
         self.logger.debug("[new_event] Peaks were updated")
         peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus, **kwargs)
         self.logger.debug("[new_event] Merge finished")
-        event_and_transforms: Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]] = None
-        for peak_selector in self.peak_selectors.values():
-            event_and_transforms = peak_selector.decide(peaks, self.improvisation_memory, self.corpus, self.transforms,
-                                                        **kwargs)
-            if event_and_transforms:
-                break
-        if not event_and_transforms:
+        if self.peak_selector is None:
+            raise InvalidConfiguration("Could not produce any output as no Peak Selector was set.")
+
+        event_and_transforms = self.peak_selector.decide(peaks, self.improvisation_memory, self.corpus,
+                                                         self.transforms, **kwargs)
+        if event_and_transforms is None:
             # TODO: Ensure that this never happens so that this error message can be removed
+            #       (Update 2020-06-29): This behaviour should not raise an error - returning None is valid behaviour
+            #                            that should be handled accordingly. [v2.0.0-beta.3]
             raise InvalidConfiguration("All PeakSelectors failed. SoMax requires at least one default peak selector.")
 
         event: CorpusEvent = deepcopy(event_and_transforms[0])
@@ -160,13 +158,9 @@ class Player(ScheduledMidiObject, Parametric):
             self.merge_actions[name] = merge_action
             self._parse_parameters()
 
-    def add_peak_selector(self, peak_selector: AbstractPeakSelector, override: bool = False):
-        name: str = type(peak_selector).__name__
-        if name in self.merge_actions and not override:
-            raise DuplicateKeyError("A merge action of this type already exists.")
-        else:
-            self.peak_selectors[name] = peak_selector
-            self._parse_parameters()
+    def set_peak_selector(self, peak_selector: AbstractPeakSelector):
+        self.peak_selector = peak_selector
+        self._parse_parameters()
 
     def store_transform(self, transform: (AbstractTransform, ...)) -> None:
         transform_hash: int = hash(transform)
@@ -179,9 +173,9 @@ class Player(ScheduledMidiObject, Parametric):
         atom: Atom = self._get_atom(path)
         atom.set_classifier(classifier)
 
-    def set_activity_pattern(self, path: List[str], activity_pattern_class: Type[AbstractActivityPattern]):
+    def set_activity_pattern(self, path: List[str], activity_pattern_class: AbstractActivityPattern):
         atom: Atom = self._get_atom(path)
-        atom.set_activity_pattern(activity_pattern_class, self.corpus)
+        atom.set_activity_pattern(activity_pattern_class)
 
     def load_corpus(self, corpus: Corpus):
         self.corpus = corpus

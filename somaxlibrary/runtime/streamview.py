@@ -16,7 +16,8 @@ from somaxlibrary.runtime.transforms import AbstractTransform
 
 
 class StreamView(Parametric):
-    def __init__(self, name: str, weight: float = 1.0, merge_actions: Tuple[Callable, ...] = ()):
+    def __init__(self, name: str, weight: float = 1.0,
+                 merge_actions: Tuple[AbstractMergeAction, ...] = AbstractMergeAction.default_set()):
         super(StreamView, self).__init__()
         self.logger = logging.getLogger(__name__)
         self.logger.debug("[__init__] Creating streamview {} with weight {} and merge actions {}"
@@ -24,19 +25,19 @@ class StreamView(Parametric):
 
         self.name = name
         self._merge_actions: Dict[str, AbstractMergeAction] = {}
+        for merge_action in merge_actions:
+            self._add_merge_action(merge_action)
+
         self.atoms: Dict[str, Atom] = dict()
         self.streamviews: Dict[str, StreamView] = {}
         self._weight: Parameter = Parameter(weight, 0.0, None, 'float', "Relative scaling of streamview peaks.")
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this Streamview.")
         self._parse_parameters()
 
-        for merge_action in merge_actions:
-            self.add_merge_action(merge_action())
-
     def __repr__(self):
         return "Streamview(name={0},...)".format(self.name)
 
-    def add_merge_action(self, merge_action: AbstractMergeAction, override: bool = False):
+    def _add_merge_action(self, merge_action: AbstractMergeAction, override: bool = False):
         name: str = type(merge_action).__name__
         if name in self._merge_actions and not override:
             raise DuplicateKeyError("A merge action of this type already exists.")
@@ -62,8 +63,9 @@ class StreamView(Parametric):
             return self.atoms[target_name]
 
     def create_atom(self, path: List[str], weight: float, classifier: AbstractClassifier,
-                    activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
-                    corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
+                    activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
+                    corpus: Optional[Corpus], self_influenced: bool,
+                    transforms: List[Tuple[Type[AbstractTransform], ...]]):
         """Raises: KeyError, InvalidPath, DuplicateKeyError"""
         self.logger.debug("[create_atom] Attempting to create atom with path {}.".format(path))
 
@@ -72,13 +74,13 @@ class StreamView(Parametric):
         if new_atom_name in parent_streamview.atoms.keys():
             raise DuplicateKeyError(f"An atom with the name '{new_atom_name}' already exists in "
                                     f"streamview '{parent_streamview.name}'.")
-        parent_streamview.atoms[new_atom_name] = Atom(new_atom_name, weight, classifier, activity_type, memory_type,
-                                                      corpus, self_influenced, transforms,)
+        parent_streamview.atoms[new_atom_name] = Atom(new_atom_name, weight, classifier, activity_pattern, memory_space,
+                                                      corpus, self_influenced, transforms, )
 
     def delete_atom(self, name: str):
         del self.atoms[name]
 
-    def create_streamview(self, path: List[str], weight: float, merge_actions: Tuple[Type, ...]):
+    def create_streamview(self, path: List[str], weight: float, merge_actions: Tuple[AbstractMergeAction, ...]):
         """Raises: KeyError, InvalidPath, DuplicateKeyError"""
         self.logger.debug("[create_streamview] Attempting to create streamview with path {}.".format(path))
 

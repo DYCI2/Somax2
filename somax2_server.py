@@ -26,6 +26,7 @@ from somaxlibrary.runtime.io_parser import IOParser
 from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
 from somaxlibrary.runtime.merge_actions import AbstractMergeAction
 from somaxlibrary.runtime.osc_log_forwarder import OscLogForwarder
+from somaxlibrary.runtime.peak_selector import AbstractPeakSelector
 from somaxlibrary.runtime.player import Player
 from somaxlibrary.scheduler.scheduled_object import TriggerMode
 from somaxlibrary.scheduler.realtime_scheduler import RealtimeScheduler
@@ -88,21 +89,28 @@ class SomaxServer(Caller):
     # CREATION/DELETION PLAYER/STREAMVIEW/ATOM
     ######################################################
 
-    def new_player(self, name: str, port: int, ip: str = "", trig_mode: str = "", override: bool = False):
+    def create_player(self, name: str, port: int, ip: str = "", trigger_mode: str = "",
+                      merge_actions: Tuple[str] = ("",), peak_selector: str = "", override: bool = False):
         # TODO: Parse merge actions, peakselector
         if name in self.players:
             if not override:
                 self.logger.error(f"A player with the name '{name}' already exists.")
                 return
-            else:
-                self.delete_player(name)
-        address: str = self.io_parser.parse_osc_address(name)
-        ip: str = self.io_parser.parse_ip(ip)
-        trig_mode: TriggerMode = self.io_parser.parse_trigger_mode(trig_mode)
-        target: Target = SimpleOscTarget(address, port, ip)
-        self.players[name] = Player(name, trig_mode, target=target)
 
-        if trig_mode == TriggerMode.AUTOMATIC:
+        try:
+            address: str = self.io_parser.parse_osc_address(name)
+            ip: str = self.io_parser.parse_ip(ip)
+            trigger_mode: TriggerMode = TriggerMode.from_string(trigger_mode)
+            merge_actions: Tuple[AbstractMergeAction] = tuple(AbstractMergeAction.from_string(s) for s in merge_actions)
+            peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector)
+        except ValueError as e:
+            self.logger.error(f"{repr(e)}. No Player was created.")
+            return
+
+        target: Target = SimpleOscTarget(address, port, ip)
+        self.players[name] = Player(name, trigger_mode, target, merge_actions, None, peak_selector)
+
+        if trigger_mode == TriggerMode.AUTOMATIC:
             self.scheduler.add_trigger_event(self.players[name])
         self.logger.info(f"Created player '{name}' with port {port} and ip {ip}.")
 
@@ -116,11 +124,19 @@ class SomaxServer(Caller):
     # TODO: Clean up default arguments.
     # TODO: Rather player and path as one argument: player:s1:atom1, etc
     def create_streamview(self, player: str, path: str = "streamview", weight: float = 1.0,
-                          merge_actions=""):
+                          merge_actions: Tuple[str] = ()):
         self.logger.debug("[create_streamview] called for player {0} with name {1}, weight {2} and merge actions {3}."
                           .format(player, path, weight, merge_actions))
-        path_and_name: [str] = IOParser.parse_streamview_atom_path(path)
-        merge_actions: [AbstractMergeAction] = self.io_parser.parse_merge_actions(merge_actions)
+        path_and_name: List[str] = IOParser.parse_streamview_atom_path(path)
+        if not merge_actions:
+            merge_actions: Tuple[AbstractMergeAction, ...] = AbstractMergeAction.default_set()
+        else:
+            try:
+                merge_actions: Tuple[AbstractMergeAction, ...] = tuple(AbstractMergeAction.from_string(s)
+                                                                       for s in merge_actions)
+            except ValueError as e:
+                self.logger.error(f"{repr(e)}. No StreamView was created.")
+                return
 
         try:
             self.players[player].create_streamview(path_and_name, weight, merge_actions)
@@ -130,19 +146,19 @@ class SomaxServer(Caller):
         except DuplicateKeyError as e:
             self.logger.error(f"{str(e)} No streamview was created.")
 
-    def create_atom(self, player: str, path: str, weight: float = 1.0, classifier: str = "",
-                    activity_type: str = "", memory_type: str = "", self_influenced: bool = False,
+    def create_atom(self, player: str, path: str, weight: float = 1.0, classifier_type: str = "",
+                    activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
                     transforms: (str, ...) = (""), transform_parse_mode=""):
         self.logger.debug(f"[create_atom] called for player {player} with path {path}.")
         path_and_name: [str] = IOParser.parse_streamview_atom_path(path)
 
         try:
-            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier)
-        except IOError as e:
+            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier_type)
+            memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
+            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
+        except ValueError as e:
             self.logger.error(f"{str(e)} Did not create an atom.")
             return
-        activity_type: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_type)
-        memory_type: Type[AbstractMemorySpace] = self.io_parser.parse_memspace_type(memory_type)
 
         try:
             transforms: [(Type[AbstractTransform], ...)] = self.io_parser.parse_transforms(transforms,
@@ -151,7 +167,7 @@ class SomaxServer(Caller):
             self.logger.error(f"{str(e)} Setting Transforms to default.")
             transforms: [(Type[AbstractTransform], ...)] = IOParser.DEFAULT_TRANSFORMS
         try:
-            self.players[player].create_atom(path_and_name, weight, classifier, activity_type, memory_type, None,
+            self.players[player].create_atom(path_and_name, weight, classifier, activity_pattern, memory_space, None,
                                              self_influenced, transforms)
             self.logger.info(f"Created atom with path '{player + '::' + path}'")
             self.players[player]._parse_parameters()  # TODO: Not ideal
@@ -226,6 +242,17 @@ class SomaxServer(Caller):
             self.logger.error(f"Could not add transform at path {path}. The parent streamview/player does not exist.")
         # TODO: parameter dict
 
+    def set_peak_selector(self, player: str, peak_selector: str, **kwargs):
+        try:
+            peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
+        except ValueError as e:
+            self.logger.error(f"{repr(e)}. No Peak Selector was set.")
+            return
+        try:
+            self.players[player].set_peak_selector(peak_selector)
+        except KeyError as e:
+            self.logger.error(str(e))
+
     def set_classifier(self, player: str, path: str, classifier_name: str, **kwargs):
         try:
             parsed_path: List[str] = IOParser.parse_streamview_atom_path(path)
@@ -238,10 +265,15 @@ class SomaxServer(Caller):
         # TODO: Will return default if not found. Should fail instead
         self.logger.debug(f"[set_activity_pattern] called for player '{player}' with path '{path}' "
                           f"and new pattern '{activity_pattern}'.")
-        activity_class: Type[AbstractActivityPattern] = self.io_parser.parse_activity_type(activity_pattern)
+        try:
+            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
+        except ValueError as e:
+            self.logger.error(f"{repr(e)}. Did not set Activity Pattern.")
+            return
+
         path_as_list: [str] = self.io_parser.parse_streamview_atom_path(path)
         try:
-            self.players[player].set_activity_pattern(path_as_list, activity_class)
+            self.players[player].set_activity_pattern(path_as_list, activity_pattern)
         except KeyError:
             self.logger.error(f"Could not set activity pattern for atom at {path}.")
 
@@ -335,7 +367,11 @@ class SomaxServer(Caller):
 
     # TODO: Remove and change into generic set param
     def trigger_mode(self, player: str, mode: str):
-        trigger_mode: TriggerMode = self.io_parser.parse_trigger_mode(mode)
+        try:
+            trigger_mode: TriggerMode = TriggerMode.from_string(mode)
+        except ValueError as e:
+            self.logger.error(f"{repr(e)}. Did not set Trigger Mode.")
+            return
         try:
             previous_trigger_mode: TriggerMode = self.players[player].trigger_mode
             self.players[player].trigger_mode = trigger_mode

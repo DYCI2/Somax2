@@ -21,13 +21,13 @@ class AbstractPeakSelector(Parametric, Introspective):
         self.logger = logging.getLogger(__name__)
 
     @abstractmethod
-    def _decide_default(self, peaks: Peaks, influence_history: List[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]],
+    def _decide_default(self, peaks: Peaks, influence_history: ImprovisationMemory,
                         corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},
                         **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
         """ Default action to perform to select output """
 
     @abstractmethod
-    def _decide_fallback(self, peaks: Peaks, influence_history: List[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]],
+    def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory,
                          corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},
                          **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
         """ Action to perform if no valid peak exists after calling `_decide_default`"""
@@ -40,7 +40,7 @@ class AbstractPeakSelector(Parametric, Introspective):
     def from_string(cls, peak_selector: str, **kwargs) -> 'AbstractPeakSelector':
         return cls._from_string(peak_selector, **kwargs)
 
-    def decide(self, peaks: Peaks, influence_history: List[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]],
+    def decide(self, peaks: Peaks, influence_history: ImprovisationMemory,
                corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},
                **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
         output: Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]

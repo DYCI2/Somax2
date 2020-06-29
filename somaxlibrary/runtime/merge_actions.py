@@ -2,7 +2,7 @@ import inspect
 import logging
 import sys
 from abc import abstractmethod
-from typing import ClassVar, Dict, Union, List
+from typing import ClassVar, Dict, Union, List, Tuple
 
 import numpy as np
 from scipy import sparse
@@ -21,18 +21,22 @@ class AbstractMergeAction(Parametric, Introspective):
         super().__init__()
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this MergeAction.")
 
-    @classmethod
-    def default(cls, **_kwargs) -> 'Introspective':
-        raise ValueError(f"No default Merge Action exists.")
-
-    @classmethod
-    def from_string(cls, merge_action: str, **kwargs) -> 'Introspective':
-        return cls.from_string(merge_action, **kwargs)
-
     @abstractmethod
     def merge(self, peaks: Peaks, time: float, history: ImprovisationMemory = None, corpus: Corpus = None,
               **kwargs) -> Peaks:
-        raise NotImplementedError("AbstractMergeAction.peaks is abstract.")
+        """ """
+
+    @classmethod
+    def default(cls, **_kwargs) -> 'AbstractMergeAction':
+        raise ValueError(f"No default Merge Action exists.")
+
+    @classmethod
+    def default_set(cls, **_kwargs) -> Tuple['AbstractMergeAction']:
+        return (DistanceMergeAction(),)
+
+    @classmethod
+    def from_string(cls, merge_action: str, **kwargs) -> 'AbstractMergeAction':
+        return cls.from_string(merge_action, **kwargs)
 
     def is_enabled(self):
         return self.enabled.value
@@ -40,7 +44,6 @@ class AbstractMergeAction(Parametric, Introspective):
 
 class DistanceMergeAction(AbstractMergeAction):
 
-    # TODO: Clean up constructor
     def __init__(self, t_width: float = 0.09):
         super().__init__()
         self.logger = logging.getLogger(__name__)
@@ -72,7 +75,7 @@ class DistanceMergeAction(AbstractMergeAction):
             row_indices: np.ndarray = np.floor(times * inv_duration * num_rows).astype(np.int32)
             interp_matrix: sparse.coo_matrix = sparse.coo_matrix(
                 (np.ones(num_cols), (row_indices, np.arange(num_cols))),
-                shape=(num_rows + 1, num_cols))         # TODO: +1 Temporary solution to coo dimension errors. should probably not cause any behavioral differences
+                shape=(num_rows + 1, num_cols))
             interp_matrix: sparse.csc_matrix = interp_matrix.tocsc()
 
             interpolated_scores: np.ndarray = interp_matrix.dot(scores)

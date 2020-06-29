@@ -15,7 +15,7 @@ from somaxlibrary.runtime.transforms import AbstractTransform
 
 class Atom(Parametric):
     def __init__(self, name: str, weight: float, classifier: AbstractClassifier,
-                 activity_type: Type[AbstractActivityPattern], memory_type: Type[AbstractMemorySpace],
+                 activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
                  corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
         super().__init__()
         self.logger = logging.getLogger(__name__)
@@ -25,8 +25,9 @@ class Atom(Parametric):
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this Atom.")
 
         self._classifier: AbstractClassifier = classifier
-        self._activity_pattern: AbstractActivityPattern = activity_type()  # creates activity
-        self._memory_space: AbstractMemorySpace = memory_type(transforms)
+        self._memory_space: AbstractMemorySpace = memory_space
+        self._memory_space.add_transforms(transforms)
+        self._activity_pattern: AbstractActivityPattern = activity_pattern
         self._corpus: Optional[Corpus] = corpus
         self._self_influenced: Parameter = Parameter(self_influenced, 0, 1, 'bool',
                                                      "Whether new events creates by player should influence this atom or not.")
@@ -76,8 +77,8 @@ class Atom(Parametric):
         self._classifier = classifier
         self.read()
 
-    def set_activity_pattern(self, activity_pattern_class: Type[AbstractActivityPattern], corpus: Corpus):
-        self._activity_pattern = activity_pattern_class(corpus)
+    def set_activity_pattern(self, activity_pattern: AbstractActivityPattern):
+        self._activity_pattern = activity_pattern
 
     def _update_peaks_on_influence(self, time: float) -> None:
         self._activity_pattern.update_peaks_on_influence(time)
