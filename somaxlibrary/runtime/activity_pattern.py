@@ -2,7 +2,7 @@ import inspect
 import logging
 import sys
 from abc import abstractmethod
-from typing import Dict, Union, List, Type
+from typing import Dict, Union, List, Type, Optional, Any
 
 import numpy as np
 
@@ -11,37 +11,43 @@ from somaxlibrary.runtime.parameter import Parameter, ParamWithSetter
 from somaxlibrary.runtime.parameter import Parametric
 from somaxlibrary.runtime.peak_event import PeakEvent
 from somaxlibrary.runtime.peaks import Peaks
+from somaxlibrary.utils.introspective import Introspective
 
 
-class AbstractActivityPattern(Parametric):
+class AbstractActivityPattern(Parametric, Introspective):
     SCORE_IDX = 0
     TIME_IDX = 1
     TRANSFORM_IDX = 2
 
-    def __init__(self, corpus: Corpus = None):
+    def __init__(self, corpus: Optional[Corpus] = None):
         super(AbstractActivityPattern, self).__init__()
         self.logger = logging.getLogger(__name__)
         self._peaks: Peaks = Peaks.create_empty()
         self.corpus: Corpus = corpus
 
-    @abstractmethod
-    def insert(self, influences: List[PeakEvent]) -> None:
-        raise NotImplementedError("AbstractActivityPattern.insert is abstract.")
+    @classmethod
+    def default(cls, **_kwargs) -> 'AbstractActivityPattern':
+        return ClassicActivityPattern()
+
+    @classmethod
+    def from_string(cls, activity_pattern: str, **kwargs) -> 'AbstractActivityPattern':
+        return cls._from_string(activity_pattern, **kwargs)
 
     @abstractmethod
-    def update_peaks(self, new_time: float) -> None:
-        raise NotImplementedError("AbstractActivityPattern.update_peaks is abstract.")
+    def insert(self, influences: List[PeakEvent]) -> None:
+        """ """
+
+    @abstractmethod
+    def update_peaks_on_influence(self, new_time: float) -> None:
+        """ """
+
+    @abstractmethod
+    def update_peaks_on_new_event(self, new_time: float) -> None:
+        """ """
 
     @abstractmethod
     def clear(self) -> None:
-        raise NotImplementedError("AbstractActivityPattern.reset is abstract.")
-
-    @staticmethod
-    def classes() -> {str: Type}:
-        """Returns class objects for all non-abstract classes in this module."""
-        return dict(inspect.getmembers(sys.modules[__name__],
-                                       lambda member: inspect.isclass(member) and not inspect.isabstract(
-                                           member) and member.__module__ == __name__))
+        """ """
 
     @property
     def peaks(self) -> Peaks:
@@ -85,7 +91,13 @@ class ClassicActivityPattern(AbstractActivityPattern):
             transform_hashes.append(influence.transform_hash)
         self._peaks.append(scores, times, transform_hashes)
 
-    def update_peaks(self, new_time: float) -> None:
+    def update_peaks_on_influence(self, new_time: float) -> None:
+        self._update_peaks(new_time)
+
+    def update_peaks_on_new_event(self, new_time: float) -> None:
+        self._update_peaks(new_time)
+
+    def _update_peaks(self, new_time: float) -> None:
         self._peaks.scores *= np.exp(-np.divide(new_time - self.last_update_time, self.tau_mem_decay.value))
         self._peaks.times += new_time - self.last_update_time
         self.last_update_time = new_time
@@ -136,7 +148,7 @@ class ManualActivityPattern(AbstractActivityPattern):
         self._event_indices = np.concatenate((self._event_indices, new_event_indices))
         self._peaks.append(scores, times, transform_hashes)
 
-    def update_peaks(self, _new_time: float) -> None:
+    def update_peaks_on_influence(self, new_time: float) -> None:
         if not self._peaks.empty():
             self._peaks.scores *= np.exp(-np.divide(1, self.tau_mem_decay.value))
             self._peaks.times += [self.corpus.event_at(i).duration for i in self._event_indices]
@@ -147,6 +159,9 @@ class ManualActivityPattern(AbstractActivityPattern):
             self._peaks.remove(indices_to_remove)
             self._event_indices = np.delete(self._event_indices, indices_to_remove)
 
+    def update_peaks_on_new_event(self, new_time: float) -> None:
+        pass
+
     def clear(self) -> None:
         self._peaks = Peaks.create_empty()
         self._event_indices = np.zeros(0, dtype=np.int32)
@@ -156,7 +171,4 @@ class ManualActivityPattern(AbstractActivityPattern):
 
     def _calc_tau(self, n: int):
         """ n is the number of updates until peak decays below threshold"""
-        # Since update_peaks is called twice per influence/new_event cycle, the number n is multiplied by two.
-        # As this ActivityPattern is designed for Manual Mode, it is assumed that for each influence call, there will
-        #   be an accompanying new_event call.
-        return -np.divide(2 * n, np.log(self.extinction_threshold.value - 0.001))
+        return -np.divide(n, np.log(self.extinction_threshold.value - 0.001))

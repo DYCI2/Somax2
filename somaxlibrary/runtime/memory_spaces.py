@@ -3,7 +3,7 @@ import logging
 import sys
 from abc import abstractmethod
 from collections import deque
-from typing import Tuple, Dict, Union, Optional, List, Type
+from typing import Tuple, Dict, Union, Optional, List, Type, Any
 
 from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.runtime.corpus_event import CorpusEvent
@@ -15,11 +15,14 @@ from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
 
 
 # TODO: Abstract Influence type. Dependent on (determined by?) ActivityPattern. CUrrently hardcoded in NGram.
-class AbstractMemorySpace(Parametric):
+from somaxlibrary.utils.introspective import Introspective
+
+
+class AbstractMemorySpace(Parametric, Introspective):
     """ MemorySpaces determine how events are matched to labels """
 
-    def __init__(self, transforms: List[Tuple[Type[AbstractTransform], ...]], corpus: Optional[Corpus] = None,
-                 labels: Optional[List[AbstractLabel]] = None, **_kwargs):
+    def __init__(self, transforms: Optional[List[Tuple[Type[AbstractTransform], ...]]] = None,
+                 corpus: Optional[Corpus] = None, labels: Optional[List[AbstractLabel]] = None, **_kwargs):
         """ Note: kwargs can be used if additional information is need to construct the data structure.
             Note: labels are not classified in default constructor as additional parameters might need init before."""
         super(AbstractMemorySpace, self).__init__()
@@ -29,6 +32,14 @@ class AbstractMemorySpace(Parametric):
         self.add_transforms(transforms)
         self._corpus: Optional[Corpus] = corpus
         self._labels: Optional[List[AbstractLabel]] = labels
+
+    @classmethod
+    def default(cls, **_kwargs) -> 'AbstractMemorySpace':
+        return NGramMemorySpace()
+
+    @classmethod
+    def from_string(cls, memory_space: str, **kwargs) -> 'AbstractMemorySpace':
+        return cls.from_string(memory_space, **kwargs)
 
     @abstractmethod
     def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:
@@ -77,8 +88,9 @@ class AbstractMemorySpace(Parametric):
 
 
 class NGramMemorySpace(AbstractMemorySpace):
-    def __init__(self, transforms: List[Tuple[Type[AbstractTransform], ...]], corpus: Optional[Corpus] = None,
-                 labels: Optional[List[AbstractLabel]] = None, history_len: int = 3, **_kwargs):
+    def __init__(self, transforms: Optional[List[Tuple[Type[AbstractTransform], ...]]] = None,
+                 corpus: Optional[Corpus] = None, labels: Optional[List[AbstractLabel]] = None,
+                 history_len: int = 3, **_kwargs):
         super(NGramMemorySpace, self).__init__(transforms, corpus, labels, **_kwargs)
         self.logger.debug(f"[__init__] Initializing NGramMemorySpace with corpus {corpus} "
                           f"and history length {history_len}.")

@@ -66,7 +66,7 @@ class Atom(Parametric):
         label: AbstractLabel = self._classifier.classify_influence(influence)
         matched_events: List[PeakEvent] = self._memory_space.influence(label, time, **kwargs)
         if matched_events:
-            self.update_peaks(time)
+            self._update_peaks_on_influence(time)
             self._activity_pattern.insert(matched_events)  # we insert the events into the activity profile
             return len(matched_events)
         else:
@@ -79,8 +79,11 @@ class Atom(Parametric):
     def set_activity_pattern(self, activity_pattern_class: Type[AbstractActivityPattern], corpus: Corpus):
         self._activity_pattern = activity_pattern_class(corpus)
 
-    def update_peaks(self, time: float) -> None:
-        self._activity_pattern.update_peaks(time)
+    def _update_peaks_on_influence(self, time: float) -> None:
+        self._activity_pattern.update_peaks_on_influence(time)
+
+    def update_peaks_on_new_event(self, time: float) -> None:
+        self._activity_pattern.update_peaks_on_new_event(time)
 
     @property
     def weight(self) -> float:

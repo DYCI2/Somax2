@@ -141,7 +141,7 @@ class SomaxServer(Caller):
         except IOError as e:
             self.logger.error(f"{str(e)} Did not create an atom.")
             return
-        activity_type: Type[AbstractActivityPattern] = self.io_parser.parse_activity_type(activity_type)
+        activity_type: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_type)
         memory_type: Type[AbstractMemorySpace] = self.io_parser.parse_memspace_type(memory_type)
 
         try:

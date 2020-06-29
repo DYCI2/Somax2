@@ -39,6 +39,49 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-24",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1096.0, 304.0, 150.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 215.5, 339.0, 150.0, 20.0 ],
+					"text" : "TODO"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"id" : "obj-20",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1096.0, 252.5, 160.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 215.5, 292.0, 160.0, 20.0 ],
+					"text" : "Corpus name (Optional):"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-17",
+					"ignoreclick" : 1,
+					"keymode" : 1,
+					"maxclass" : "textedit",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "int", "", "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1096.0, 277.0, 160.0, 25.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 215.5, 316.5, 160.0, 25.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-16",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -518,11 +561,11 @@
 				"box" : 				{
 					"id" : "obj-66",
 					"maxclass" : "newobj",
-					"numinlets" : 8,
+					"numinlets" : 10,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 124.0, 647.0, 975.0, 22.0 ],
-					"text" : "join 8 @triggers 1 3 5 7"
+					"patching_rect" : [ 124.0, 647.0, 1099.0, 22.0 ],
+					"text" : "join 10 @triggers 1 3 5 7 9"
 				}
 
 			}
@@ -541,15 +584,15 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-62",
-					"linecount" : 4,
+					"linecount" : 8,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 278.0, 697.0, 215.0, 60.0 ],
+					"patching_rect" : [ 278.0, 697.0, 195.0, 114.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 4,
-					"presentation_rect" : [ 9.0, 245.0, 216.0, 60.0 ],
-					"text" : "build_corpus 0 fg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] bg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] overwrite= 0"
+					"presentation_linecount" : 8,
+					"presentation_rect" : [ 9.0, 245.0, 196.0, 114.0 ],
+					"text" : "build_corpus /Users/joakimborg/Desktop/somax1/SoMax_1.45_Max7/corpus/debussy.mid fg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] bg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] overwrite= 1"
 				}
 
 			}
@@ -1182,13 +1225,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-8",
-					"linecount" : 6,
+					"linecount" : 11,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 415.0, 430.0, 50.0, 89.0 ],
-					"text" : "/Users/joakimborg/MIDI/debussy_part.mid"
+					"patching_rect" : [ 415.0, 430.0, 50.0, 156.0 ],
+					"text" : "/Users/joakimborg/Desktop/somax1/SoMax_1.45_Max7/corpus/debussy.mid"
 				}
 
 			}
@@ -1202,7 +1245,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 12.75, 153.0, 281.5, 20.0 ],
 					"style" : "helpfile_label",
-					"text" : "drag and drop a file here..."
+					"text" : "debussy.mid"
 				}
 
 			}

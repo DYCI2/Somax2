@@ -89,11 +89,11 @@ class StreamView(Parametric):
                                     f"streamview {parent_streamview.name}.")
         parent_streamview.streamviews[new_streamview_name] = StreamView(new_streamview_name, weight, merge_actions)
 
-    def update_peaks(self, time: float) -> None:
+    def update_peaks_on_new_event(self, time: float) -> None:
         for streamview in self.streamviews.values():
-            streamview.update_peaks(time)
+            streamview.update_peaks_on_new_event(time)
         for atom in self.atoms.values():
-            atom.update_peaks(time)
+            atom.update_peaks_on_new_event(time)
 
     def merged_peaks(self, time: float, influence_history: List[CorpusEvent], corpus: Corpus, **kwargs) -> Peaks:
         # TODO: Crashes if streamview doesn't contain any atoms or streamviews

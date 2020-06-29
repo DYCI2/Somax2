@@ -1,6 +1,5 @@
-import inspect
 from abc import ABC, abstractmethod
-from typing import List, Optional, Type, Dict
+from typing import List
 
 import numpy as np
 
@@ -17,15 +16,13 @@ class AbstractClassifier(ABC, Introspective):
         pass
 
     @classmethod
+    def default(cls, **_kwargs) -> None:
+        raise ValueError(f"No default classifier exists.")
+
+    @classmethod
     def from_string(cls, name: str, **kwargs) -> 'AbstractClassifier':
-        """ :raises KeyError"""
-        classes: Dict[str, Type[AbstractClassifier]]
-        classes = {k.lower(): v for (k, v) in cls._classes(somaxlibrary.classification).items()}
-        try:
-            return classes[name.lower()](**kwargs)
-        except KeyError:
-            raise KeyError(f"No classifier with the name '{name}' exists. "
-                          f"Valid options are: {', '.join(classes.keys())}")
+        """ :raises ValueError"""
+        return cls._from_string(name, module=somaxlibrary.classification, **kwargs)
 
     @abstractmethod
     def cluster(self, corpus: Corpus) -> None:

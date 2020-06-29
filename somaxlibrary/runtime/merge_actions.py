@@ -12,31 +12,27 @@ from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.improvisation_memory import ImprovisationMemory
 from somaxlibrary.runtime.parameter import Parametric, Parameter
 from somaxlibrary.runtime.peaks import Peaks
+from somaxlibrary.utils.introspective import Introspective
 
 
-class AbstractMergeAction(Parametric):
+class AbstractMergeAction(Parametric, Introspective):
 
     def __init__(self):
         super().__init__()
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this MergeAction.")
 
+    @classmethod
+    def default(cls, **_kwargs) -> 'Introspective':
+        raise ValueError(f"No default Merge Action exists.")
+
+    @classmethod
+    def from_string(cls, merge_action: str, **kwargs) -> 'Introspective':
+        return cls.from_string(merge_action, **kwargs)
+
     @abstractmethod
     def merge(self, peaks: Peaks, time: float, history: ImprovisationMemory = None, corpus: Corpus = None,
               **kwargs) -> Peaks:
         raise NotImplementedError("AbstractMergeAction.peaks is abstract.")
-
-    @staticmethod
-    def classes() -> {str: ClassVar}:
-        return dict(inspect.getmembers(sys.modules[__name__],
-                                       lambda member: inspect.isclass(member) and not inspect.isabstract(
-                                           member) and member.__module__ == __name__))
-
-    def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
-        parameters: Dict = {}
-        for name, parameter in self._parse_parameters().items():
-            parameters[name] = parameter.update_parameter_dict()
-        self.parameter_dict = {"parameters": parameters}
-        return self.parameter_dict
 
     def is_enabled(self):
         return self.enabled.value
@@ -45,17 +41,15 @@ class AbstractMergeAction(Parametric):
 class DistanceMergeAction(AbstractMergeAction):
 
     # TODO: Clean up constructor
-    def __init__(self, t_width: float = 0.09, transform_merge_mode='OR'):
+    def __init__(self, t_width: float = 0.09):
         super().__init__()
         self.logger = logging.getLogger(__name__)
-        self.logger.debug("[__init__] Creating DistanceMergeAction with width {} and merge mode {}."
-                          .format(t_width, transform_merge_mode))
+        self.logger.debug(f"[__init__] Creating DistanceMergeAction with width {t_width}.")
         self._t_width: Parameter = Parameter(t_width, 0.0, None, 'float', "Very unclear parameter")  # TODO
-        self.transform_merge_mode = transform_merge_mode  # can 'AND' or 'OR'   # TODO Merge modes. Make parametric
         self._parse_parameters()
 
     def __repr__(self):
-        return f"DistanceMergeAction(t_width={self.t_width}, merge_mode={self.transform_merge_mode})"
+        return f"{type(self).__name__}(_t_width={self.t_width})"
 
     def merge(self, peaks: Peaks, _time: float, _history: ImprovisationMemory = None, corpus: Corpus = None,
               **_kwargs) -> Peaks:

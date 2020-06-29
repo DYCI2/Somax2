@@ -100,7 +100,7 @@ class Player(ScheduledMidiObject, Parametric):
         if not self.corpus:
             raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
 
-        self._update_peaks(scheduler_time)
+        self._update_peaks_on_new_event(scheduler_time)
         self.logger.debug("[new_event] Peaks were updated")
         peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus, **kwargs)
         self.logger.debug("[new_event] Merge finished")
@@ -234,9 +234,9 @@ class Player(ScheduledMidiObject, Parametric):
                 atoms.append(atom)
         return atoms
 
-    def _update_peaks(self, time: float) -> None:
+    def _update_peaks_on_new_event(self, time: float) -> None:
         for streamview in self.streamviews.values():
-            streamview.update_peaks(time)
+            streamview.update_peaks_on_new_event(time)
 
     def _influence_self(self, event: CorpusEvent, time: float) -> None:
         atoms: List[Atom] = self._self_atoms()

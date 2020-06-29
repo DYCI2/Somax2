@@ -30,6 +30,14 @@ class AbstractFilter(ABC, Introspective):
     def build_parameters(self) -> Dict[str, Any]:
         """ TODO """
 
+    @classmethod
+    def from_string(cls, class_name: str, **kwargs) -> 'AbstractFilter':
+        return cls._from_string(class_name, **kwargs)
+
+    @classmethod
+    def default(cls, **kwargs) -> 'AbstractFilter':
+        return LeakyIntegrator(**kwargs)
+
     @staticmethod
     def parse(filter_class: str, **kwargs) -> 'AbstractFilter':
         classes: Dict[str, Type[AbstractFilter]] = AbstractFilter._classes()
@@ -47,7 +55,7 @@ class NoFilter(AbstractFilter):
     def __init__(self):
         super().__init__(decay_length_ms=0.0)
 
-    def filter_midi(self, vec: np.ndarray, **kwargs) -> np.ndarray:
+    def filter_midi(self, vec: np.ndarray, **_kwargs) -> np.ndarray:
         return vec
 
     def filter_audio(self, **kwargs):

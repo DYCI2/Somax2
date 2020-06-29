@@ -11,12 +11,6 @@ from somaxlibrary.scheduler.scheduled_object import TriggerMode
 
 class IOParser:
     DEFAULT_IP = "127.0.0.1"
-    DEFAULT_ACTIVITY_TYPE: ClassVar = ClassicActivityPattern
-    DEFAULT_MERGE_ACTIONS: (ClassVar, ...) = (DistanceMergeAction,)  # Only for StreamView!!
-    DEFAULT_TRANSFORMS: [(ClassVar, ...)] = [(NoTransform(),)]  # objects, not classes
-    DEFAULT_TRIGGER = TriggerMode.AUTOMATIC
-    DEFAULT_MEMORY_TYPE: ClassVar = NGramMemorySpace
-
     PARSE_DEFAULT = "default"
     PARSE_COMBINATIONS = "combinations"
 
@@ -35,36 +29,6 @@ class IOParser:
             except KeyError:
                 self.logger.warning(f"Could not parse '{parent_class}' from string '{to_parse}'. Setting to default.")
                 return value_if_invalid
-
-    def parse_merge_actions(self, merge_actions: str) -> (ClassVar[AbstractMergeAction], ...):
-        if not merge_actions:
-            return self.DEFAULT_MERGE_ACTIONS
-        else:
-            valid_merge_actions_classes: {str: ClassVar} = AbstractMergeAction.classes()
-            try:
-                return tuple(IOParser._parse_list_from_dict(merge_actions, valid_merge_actions_classes))
-            except KeyError:
-                self.logger.warning(f"Could not parse merge actions from string '{merge_actions}'. Setting to default.")
-            return self.DEFAULT_MERGE_ACTIONS
-
-    def parse_activity_type(self, activity_type: str) -> ClassVar[AbstractActivityPattern]:
-        return self._parse_single(activity_type, AbstractActivityPattern, self.DEFAULT_ACTIVITY_TYPE)
-
-    def parse_classifier_type(self, classifier: str) -> Type[AbstractClassifier]:
-        raise NotImplementedError("IOParser.parse_classifier_type is not supported yet.")
-
-    def parse_memspace_type(self, memspace: str) -> ClassVar[AbstractMemorySpace]:
-        return self._parse_single(memspace, AbstractMemorySpace, self.DEFAULT_MEMORY_TYPE)
-
-    def parse_trigger_mode(self, trigger_mode: str) -> TriggerMode:
-        if not trigger_mode:
-            return self.DEFAULT_TRIGGER
-        else:
-            try:
-                return TriggerMode(trigger_mode.lower())
-            except ValueError:
-                self.logger.warning(f"Could not parse '{trigger_mode}' as a trigger mode. Setting to default.")
-                return TriggerMode(self.DEFAULT_TRIGGER)
 
     @staticmethod
     def parse_osc_address(string: str) -> str:

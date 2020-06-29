@@ -1,3 +1,4 @@
+import logging
 from enum import Enum
 from typing import List
 
@@ -5,9 +6,22 @@ from somaxlibrary.runtime.corpus_event import Note
 from somaxlibrary.runtime.parameter import Parametric
 
 
-class TriggerMode(str, Enum):
+class TriggerMode(Enum):
     MANUAL = "manual"
     AUTOMATIC = "automatic"
+
+    @classmethod
+    def default(cls) -> 'TriggerMode':
+        return cls.MANUAL
+
+    @classmethod
+    def from_string(cls, trigger_mode: str) -> 'TriggerMode':
+        try:
+            return TriggerMode(trigger_mode)
+        except ValueError:
+            logging.getLogger(__name__).warning(f"No class named '{trigger_mode} exists for the "
+                                                f"{cls.__module__} module. Using default.")
+            return cls.default()
 
 
 class ScheduledObject(Parametric):
