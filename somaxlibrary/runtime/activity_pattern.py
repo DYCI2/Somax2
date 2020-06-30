@@ -51,8 +51,8 @@ class AbstractActivityPattern(Parametric, Introspective):
 
     @property
     def peaks(self) -> Peaks:
-        """ Returns the activity pattern's peaks (actual instance, not copy)"""
-        return self._peaks
+        """ Returns a shallow copy the activity pattern's peaks (copy of scores but references to times and hashes)"""
+        return Peaks.optimized_copy(self._peaks)
 
     def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
         parameters: Dict = {}

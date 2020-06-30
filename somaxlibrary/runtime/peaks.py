@@ -21,6 +21,10 @@ class Peaks:
         return cls(np.empty(0, dtype=np.float), np.empty(0, dtype=np.float), np.empty(0, dtype=np.int32))
 
     @classmethod
+    def optimized_copy(cls, other: 'Peaks') -> 'Peaks':
+        return cls(np.copy(other.scores), other.times, other.transform_hashes)
+
+    @classmethod
     def concatenate(cls, peaks: List['Peaks']):
         scores: np.ndarray = np.concatenate([peak.scores for peak in peaks])
         times: np.ndarray = np.concatenate([peak.times for peak in peaks])
@@ -37,6 +41,9 @@ class Peaks:
         self.scores = np.delete(self.scores, indices)
         self.times = np.delete(self.times, indices)
         self.transform_hashes = np.delete(self.transform_hashes, indices)
+
+    def scale(self, factor: float) -> None:
+        self.scores *= factor
 
     def size(self) -> int:
         return self.scores.size

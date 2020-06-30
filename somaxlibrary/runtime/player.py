@@ -1,3 +1,4 @@
+import copy
 import logging
 from copy import deepcopy
 from typing import Dict, Optional, Tuple, Type, List
@@ -16,120 +17,76 @@ from somaxlibrary.runtime.merge_actions import AbstractMergeAction
 from somaxlibrary.runtime.parameter import Parametric
 from somaxlibrary.runtime.peak_selector import AbstractPeakSelector
 from somaxlibrary.runtime.peaks import Peaks
-from somaxlibrary.runtime.streamview import StreamView
+from somaxlibrary.runtime.scale_actions import AbstractScaleAction
+from somaxlibrary.runtime.streamview import Streamview
 from somaxlibrary.runtime.target import Target
 from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
 from somaxlibrary.scheduler.scheduled_object import ScheduledMidiObject, TriggerMode
 
 
-class Player(ScheduledMidiObject, Parametric):
+class Player(Streamview, ScheduledMidiObject):
+    """ Raises: DuplicateKeyError (from add_scale_actions """
 
-    def __init__(self, name: str, triggering_mode: TriggerMode, target: Target,
-                 merge_actions: Tuple[AbstractMergeAction, ...],
-                 corpus: Optional[Corpus], peak_selector: AbstractPeakSelector):
-        super(Player, self).__init__(triggering_mode)
+    def __init__(self, name: str, target: Target,
+                 weight: float = 1.0, trigger_mode: TriggerMode = TriggerMode.default(),
+                 peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
+                 merge_action: AbstractMergeAction = AbstractMergeAction.default(),
+                 corpus: Optional[Corpus] = None,
+                 scale_actions: List[AbstractScaleAction] = AbstractScaleAction.default_set()):
+        Streamview.__init__(self, name=name, weight=weight, merge_action=merge_action)
+        ScheduledMidiObject.__init__(self, trigger_mode=trigger_mode)
         self.logger = logging.getLogger(__name__)
-        self.name: str = name  # name of the player
         self.target: Target = target
-
-        self.streamviews: Dict[str, StreamView] = dict()  # TODO: Init param
-        self.merge_actions: Dict[str, AbstractMergeAction] = {}  # TODO: Init param
-        for merge_action in merge_actions:
-            self.add_merge_action(merge_action)
-
-        self.corpus: Optional[Corpus] = corpus
         self.peak_selector: AbstractPeakSelector = peak_selector
-        self.transforms: Dict[int, Tuple[AbstractTransform, ...]] = {}  # key: hash
+        self.corpus: Optional[Corpus] = corpus
+        self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
+        for scale_action in scale_actions:
+            self.add_scale_action(scale_action)
 
+        self.transforms: Dict[int, Tuple[AbstractTransform, ...]] = {}  # key: hash  TODO
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
         self.previous_peaks: Peaks = Peaks.create_empty()
 
         self._parse_parameters()
 
-    ######################################################
-    # CREATION/DELETION STREAMVIEWS/ATOMS
-    ######################################################
-
-    def create_streamview(self, path: List[str], weight: float, merge_actions: Tuple[AbstractMergeAction, ...]):
-        """creates streamview at target path"""
-        self.logger.debug("[create_streamview] Creating streamview {} in player {} with merge_actions {}..."
-                          .format(path, self.name, merge_actions))
-        streamview: str = path.pop(0)
-        if not path:
-            if streamview in self.streamviews.keys():
-                raise DuplicateKeyError(f"A streamview '{streamview}' already exists in player '{self.name}'.")
-            else:
-                self.streamviews[streamview] = StreamView(name=streamview, weight=weight, merge_actions=merge_actions)
-        else:
-            self.streamviews[streamview].create_streamview(path, weight, merge_actions)
-        self._parse_parameters()
-
-    def create_atom(self, path: List[str], weight: float, classifier: AbstractClassifier,
-                    activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
-                    corpus: Optional[Corpus], self_influenced: bool,
-                    transforms: List[Tuple[Type[AbstractTransform], ...]]):
-        """raises: InvalidPath, KeyError, DuplicateKeyError"""
-        self.logger.debug(f"[create_atom] Attempting to create atom at {path}...")
-        self.corpus = corpus
-        streamview: str = path.pop(0)
-        if not path:  # path is empty means no streamview path was given
-            raise InvalidPath(f"Cannot create an atom directly in Player.")
-        else:
-            self.streamviews[streamview].create_atom(path, weight, classifier, activity_pattern, memory_space,
-                                                     corpus, self_influenced, transforms)
-        for transform_tuple in transforms:
-            self.store_transform(transform_tuple)
-        self._parse_parameters()
-
-    def delete_atom(self, path: List[str]):
-        atom_name: str = path.pop(-1)
-        streamview: StreamView = self._get_streamview(path)
-        streamview.delete_atom(atom_name)
+    def __repr__(self):
+        return f"{type(self).__name__}(name={self.name}, ...)"
 
     ######################################################
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def new_event(self, scheduler_time: float, **kwargs) -> CorpusEvent:
-        """ Raises: InvalidCorpus"""
-        self.logger.debug("[new_event] Player {} attempting to create a new event at scheduler time '{}'."
-                          .format(self.name, scheduler_time))
+    def new_event(self, scheduler_time: float) -> Optional[CorpusEvent]:
+        self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
+                          f"at scheduler time '{scheduler_time}'.")
         if not self.corpus:
             raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
 
         self._update_peaks_on_new_event(scheduler_time)
-        self.logger.debug("[new_event] Peaks were updated")
-        peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus, **kwargs)
-        self.logger.debug("[new_event] Merge finished")
-        if self.peak_selector is None:
-            raise InvalidConfiguration("Could not produce any output as no Peak Selector was set.")
+        peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus)
+        peaks = self._scaled_peaks(peaks, scheduler_time, self.improvisation_memory, self.corpus)
 
-        event_and_transforms = self.peak_selector.decide(peaks, self.improvisation_memory, self.corpus,
-                                                         self.transforms, **kwargs)
-        if event_and_transforms is None:
-            # TODO: Ensure that this never happens so that this error message can be removed
-            #       (Update 2020-06-29): This behaviour should not raise an error - returning None is valid behaviour
-            #                            that should be handled accordingly. [v2.0.0-beta.3]
-            raise InvalidConfiguration("All PeakSelectors failed. SoMax requires at least one default peak selector.")
+        event_and_transforms = self.peak_selector.decide(peaks, self.improvisation_memory, self.corpus, self.transforms)
+        event: Optional[CorpusEvent] = copy.deepcopy(event_and_transforms[0])
+        if event is None:
+            return event
 
-        event: CorpusEvent = deepcopy(event_and_transforms[0])
-        # transforms: Tuple[AbstractTransform, ...] = event_and_transforms[1] # TODO: Transforms removed until update
+        # TODO (v2.2): Handle transforms
+        # transforms: Tuple[AbstractTransform, ...] = event_and_transforms[1]
         transforms: Tuple[AbstractTransform, ...] = (NoTransform(),)
-        self.improvisation_memory.append(event, scheduler_time, transforms)
-
         # for transform in transforms: # TODO: Transforms removed until update
         #     event = transform.transform(event) # TODO: Transforms removed until update
+        self.improvisation_memory.append(event, scheduler_time, transforms)
 
-        self._influence_self(event, scheduler_time)
-        self.logger.debug(f"[new_event] Player {self.name} successfully created new event.")
+        self.feedback(event, scheduler_time)
         return event
 
     def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
-        """ Raises: InvalidLabelInput, KeyError
+        """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError
             Return values are only for gathering statistics (Evaluator, etc.) and not used in runtime."""
         num_generated_peaks: Dict[Atom, int] = {}
         if not path:
-            for atom in self.all_atoms():
+            for atom in self._direct_influenced_atoms():
                 try:
                     num_peaks: int = atom.influence(influence, time, **kwargs)
                     num_generated_peaks[atom] = num_peaks
@@ -137,134 +94,67 @@ class Player(ScheduledMidiObject, Parametric):
                     # Ignore atom if label doesn't match
                     continue
         else:
-            try:
-                atom: Atom = self._get_atom(path)
-                num_peaks: int = atom.influence(influence, time, **kwargs)
-                num_generated_peaks[atom] = num_peaks
-            except InvalidLabelInput:
-                # Ignore atom if label doesn't match
-                pass
+            atom: Atom = self._get_atom(path)
+            num_peaks: int = atom.influence(influence, time, **kwargs)
+            num_generated_peaks[atom] = num_peaks
         return num_generated_peaks
 
     ######################################################
     # MODIFY STATE
     ######################################################
 
-    def add_merge_action(self, merge_action: AbstractMergeAction, override: bool = False):
-        name: str = type(merge_action).__name__
-        if name in self.merge_actions and not override:
-            raise DuplicateKeyError("A merge action of this type already exists.")
-        else:
-            self.merge_actions[name] = merge_action
-            self._parse_parameters()
-
-    def set_peak_selector(self, peak_selector: AbstractPeakSelector):
-        self.peak_selector = peak_selector
-        self._parse_parameters()
-
-    def store_transform(self, transform: (AbstractTransform, ...)) -> None:
-        transform_hash: int = hash(transform)
-        if transform_hash in self.transforms and self.transforms[transform_hash] != transform:
-            # TODO
-            raise TypeError("Critical Implementation error in transforms. TODO")
-        self.transforms[transform_hash] = transform
-
-    def set_classifier(self, path: List[str], classifier: AbstractClassifier):
-        atom: Atom = self._get_atom(path)
-        atom.set_classifier(classifier)
-
-    def set_activity_pattern(self, path: List[str], activity_pattern_class: AbstractActivityPattern):
-        atom: Atom = self._get_atom(path)
-        atom.set_activity_pattern(activity_pattern_class)
-
-    def load_corpus(self, corpus: Corpus):
-        self.corpus = corpus
-        for streamview in self.streamviews.values():
-            streamview.read(self.corpus)
-        self.target.send("corpus", [self.corpus.name, str(self.corpus.content_type), self.corpus.length()])
-
-    def add_transform(self, path: List[str], transform: (AbstractTransform, ...)) -> None:
-        """ raises TransformError, KeyError"""
-        if not path:
-            for atom in self.all_atoms():
-                try:
-                    atom.memory_space.add_transforms(transform)
-                except TransformError as e:
-                    self.logger.error(f"{str(e)}")
-        else:
-            self._get_atom(path).memory_space.add_transforms(transform)
+    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        self.peak_selector.feedback(feedback_event, time)
+        for scale_action in self.scale_actions.values():
+            scale_action.feedback(feedback_event, time)
+        Streamview.feedback(self, feedback_event, time)
 
     def clear(self):
         self.improvisation_memory = ImprovisationMemory()
         self.previous_peaks = Peaks.create_empty()
-        for streamview in self.streamviews.values():
-            streamview.clear()
+        for scale_action in self.scale_actions.values():
+            scale_action.clear()
+        Streamview.clear(self)
+
+    def set_corpus(self, corpus: Corpus) -> None:
+        self.corpus = corpus
+        Streamview.set_corpus(self, corpus)
+
+    def set_peak_selector(self, peak_selector: AbstractPeakSelector) -> None:
+        self.peak_selector = peak_selector
+
+    def add_scale_action(self, scale_action: AbstractScaleAction, override: bool = False):
+        """ Raises: DuplicateKeyError """
+        if type(scale_action) in self.scale_actions and not override:
+            raise DuplicateKeyError(f"A Scale Action of type '{type(scale_action).__name__}' already exists."
+                                    f"To override: use 'override=True'.")
+        else:
+            self.scale_actions[type(scale_action)] = scale_action
+
+    def remove_scale_action(self, scale_action_type: Type[AbstractScaleAction]):
+        """ Raises: KeyError """
 
     ######################################################
     # PRIVATE
     ######################################################
 
-    def _get_streamview(self, path: List[str]) -> StreamView:
-        streamview: str = path.pop(0)
-        return self.streamviews[streamview].get_streamview(path)
-
-    def _get_atom(self, path: List[str]) -> Atom:
-        streamview: str = path.pop(0)
-        return self.streamviews[streamview].get_atom(path)
-
-    def _self_atoms(self) -> [Atom]:
-        atoms: List[Atom] = []
-        for streamview in self.streamviews.values():
-            for atom in streamview.atoms.values():
-                if atom.self_influenced:
-                    atoms.append(atom)
-        return atoms
-
-    def all_atoms(self) -> List[Atom]:
-        # TODO: Not recursive -> doesn't handle nested streamviews
-        atoms: List[Atom] = []
-        for streamview in self.streamviews.values():
-            for atom in streamview.atoms.values():
-                atoms.append(atom)
-        return atoms
-
-    def _update_peaks_on_new_event(self, time: float) -> None:
-        for streamview in self.streamviews.values():
-            streamview.update_peaks_on_new_event(time)
-
-    def _influence_self(self, event: CorpusEvent, time: float) -> None:
-        atoms: List[Atom] = self._self_atoms()
-        influence: CorpusInfluence = CorpusInfluence(event)
-        for atom in atoms:
-            atom.influence(influence, time)
-
-    def _merged_peaks(self, time: float, history: ImprovisationMemory, corpus: Corpus, **kwargs) -> Peaks:
-        weight_sum: float = 0.0
-        for streamview in self.streamviews.values():
-            weight_sum += streamview.weight if streamview.is_enabled() else 0.0
-        peaks_list: List[Peaks] = []
-        for streamview in self.streamviews.values():
-            normalized_weight = streamview.weight / weight_sum
-            peaks: Peaks = streamview.merged_peaks(time, history, corpus, **kwargs)
-            peaks.scores *= normalized_weight
-            peaks_list.append(peaks)
-        all_peaks: Peaks = Peaks.concatenate(peaks_list)
-
-        for merge_action in self.merge_actions.values():
-            if merge_action.is_enabled():
-                all_peaks = merge_action.merge(all_peaks, time, history, corpus, **kwargs)
-        self.previous_peaks = all_peaks
-        return all_peaks
+    def _scaled_peaks(self, peaks: Peaks, scheduler_time: float, influence_history: ImprovisationMemory,
+                      corpus: Corpus, **kwargs):
+        corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
+        for scale_action in self.scale_actions.values():
+            peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, influence_history, corpus, **kwargs)
+        return peaks
 
     ######################################################
     # MAX INTERFACE INFORMATION
     ######################################################
 
     def send_peaks(self):
-        peak_group: str = self.name
-        self.target.send("num_peaks", [peak_group, self.previous_peaks.size()])
-        # TODO: Does not handle nested streamviews
-        for streamview in self.streamviews.values():
-            for atom in streamview.atoms.values():
-                peaks: Peaks = atom.get_peaks()
-                self.target.send("num_peaks", [atom.name, peaks.size()])
+        raise NotImplementedError("TODO")  # TODO
+        # peak_group: str = self.name
+        # self.target.send("num_peaks", [peak_group, self.previous_peaks.size()])
+        # # TODO: Does not handle nested streamviews
+        # for streamview in self.streamviews.values():
+        #     for atom in streamview.atoms.values():
+        #         peaks: Peaks = atom.get_peaks()
+        #         self.target.send("num_peaks", [atom.name, peaks.size()])

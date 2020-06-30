@@ -16,139 +16,181 @@ from somaxlibrary.runtime.peaks import Peaks
 from somaxlibrary.runtime.transforms import AbstractTransform
 
 
-class StreamView(Parametric):
+class Streamview(Parametric):
     def __init__(self, name: str, weight: float = 1.0,
                  merge_action: AbstractMergeAction = AbstractMergeAction.default()):
-        super(StreamView, self).__init__()
+        super().__init__()
         self.logger = logging.getLogger(__name__)
-        self.logger.debug(f"[__init__] Creating Streamview with name '{name}', weight {weight}"
-                          f"and Merge Action {type(merge_action).__name__}.")
-
-        self.name = name
+        self.name: str = name
         self.merge_action: AbstractMergeAction = merge_action
 
-        self.atoms: Dict[str, Atom] = dict()
-        self.streamviews: Dict[str, StreamView] = {}
+        self.atoms: Dict[str, Atom] = {}
+        self.streamviews: Dict[str, Streamview] = {}
+
         self._weight: Parameter = Parameter(weight, 0.0, None, 'float', "Relative scaling of streamview peaks.")
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this Streamview.")
         self._parse_parameters()
 
     def __repr__(self):
-        return "Streamview(name={0},...)".format(self.name)
+        return f"{type(self).__name__}(name={self.name}, ...)"
 
-    def feedback(self, feedback_event: CorpusEvent, time: float):
+    ######################################################
+    # MAIN RUNTIME FUNCTIONS
+    ######################################################
+
+    def _update_peaks_on_new_event(self, time: float) -> None:
+        for streamview in self.streamviews.values():
+            streamview._update_peaks_on_new_event(time)
+        for atom in self.atoms.values():
+            atom.update_peaks_on_new_event(time)
+
+    def _merged_peaks(self, time: float, history: ImprovisationMemory, corpus: Corpus, **kwargs) -> Peaks:
+        weight_sum: float = 0.0
+        for streamview in self.streamviews.values():
+            weight_sum += streamview.weight if streamview.is_enabled() else 0.0
+        for atom in self.atoms.values():
+            weight_sum += atom.weight if atom.is_enabled() else 0.0
+        if weight_sum < 1e-6:
+            self.logger.warning(f"Weights are invalid. Setting weight to 1.0 in Streamview '{self.name}'.")
+            weight_sum = 1.0
+
+        peaks_list: List[Peaks] = []
+        for streamview in self.streamviews.values():
+            peaks: Peaks = streamview._merged_peaks(time, history, corpus, **kwargs)
+            peaks.scale(streamview.weight / weight_sum)
+            peaks_list.append(peaks)
+        for atom in self.atoms.values():
+            peaks: Peaks = atom.get_peaks()
+            peaks.scale(atom.weight / weight_sum)
+            peaks_list.append(peaks)
+
+        all_peaks: Peaks = Peaks.concatenate(peaks_list)
+        return self.merge_action.merge(all_peaks, time, history, corpus, **kwargs)
+
+    ######################################################
+    # MODIFY STATE
+    ######################################################
+
+    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        self.merge_action.feedback(feedback_event, time)
         for streamview in self.streamviews.values():
             streamview.feedback(feedback_event, time)
         for atom in self.atoms.values():
             atom.feedback(feedback_event, time)
 
-    # TODO DELETE/Change to set_merge_action
-    def _add_merge_action(self, merge_action: AbstractMergeAction, override: bool = False):
-        name: str = type(merge_action).__name__
-        if name in self._merge_actions and not override:
-            raise DuplicateKeyError("A merge action of this type already exists.")
-        else:
-            self._merge_actions[name] = merge_action
+    def clear(self) -> None:
+        self.merge_action.clear()
+        for streamview in self.streamviews.values():
+            streamview.clear()
+        for atom in self.atoms.values():
+            atom.clear()
 
-    def get_streamview(self, path: List[str]) -> 'StreamView':
-        """ Raises: KeyError. Technically also IndexError, but should not occur if input is well-formatted (expected)"""
-        if not path:
-            return self
-        target_name: str = path.pop(0)
-        if path:  # Path is not empty: descend recursively
-            return self.streamviews[target_name].get_streamview(path)
+    def create_streamview(self, path: List[str], weight: float, merge_action: AbstractMergeAction,
+                          override: bool = False) -> None:
+        """ Raises KeyError, IndexError, DuplicateKeyError """
+        new_streamview_name: str = path.pop(-1)  # raises: IndexError
+        parent_streamview: Streamview = self._get_streamview(path)  # raises: KeyError, IndexError
+        if new_streamview_name in parent_streamview.streamviews.keys() and not override:
+            raise DuplicateKeyError(f"A Streamview with name '{new_streamview_name}' already exists."
+                                    f"To override: use 'override=True'.")
         else:
-            return self.streamviews[target_name]
+            parent_streamview.streamviews[new_streamview_name] = Streamview(new_streamview_name, weight, merge_action)
 
-    def get_atom(self, path: List[str]) -> Atom:
-        """ Raises: KeyError. Technically also IndexError, but should not occur if input is well-formatted (expected)"""
-        target_name: str = path.pop(0)
-        if path:  # Path is not empty: descend recursively
-            return self.streamviews[target_name].get_atom(path)
-        else:
-            return self.atoms[target_name]
-
-    def create_atom(self, path: List[str], weight: float, classifier: AbstractClassifier,
+    def create_atom(self, path: List[str], weight: float, self_influenced: bool, classifier: AbstractClassifier,
                     activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
-                    corpus: Optional[Corpus], self_influenced: bool,
-                    transforms: List[Tuple[Type[AbstractTransform], ...]]):
-        """Raises: KeyError, InvalidPath, DuplicateKeyError"""
-        self.logger.debug("[create_atom] Attempting to create atom with path {}.".format(path))
+                    corpus: Optional[Corpus] = None, transforms: None = None, override: bool = False) -> None:
+        """ Raises KeyError, IndexError, DuplicateKeyError """
+        new_atom_name: str = path.pop(-1)  # raise: IndexError
+        parent_streamview: Streamview = self._get_streamview(path)  # raises: KeyError, IndexError
+        if new_atom_name in parent_streamview.atoms.keys() and not override:
+            raise DuplicateKeyError(f"An Atom with name '{new_atom_name}' already exists."
+                                    f"To override: use 'override=True'.")
+        else:
+            self.atoms[new_atom_name] = Atom(new_atom_name, weight, classifier, activity_pattern, memory_space,
+                                             corpus, self_influenced, transforms)
 
-        new_atom_name: str = path.pop(-1)
-        parent_streamview: 'StreamView' = self.get_streamview(path)
-        if new_atom_name in parent_streamview.atoms.keys():
-            raise DuplicateKeyError(f"An atom with the name '{new_atom_name}' already exists in "
-                                    f"streamview '{parent_streamview.name}'.")
-        parent_streamview.atoms[new_atom_name] = Atom(new_atom_name, weight, classifier, activity_pattern, memory_space,
-                                                      corpus, self_influenced, transforms, )
+    def delete_atom(self, path: List[str]) -> None:
+        """ Raises: KeyError, IndexError """
+        atom_name: str = path.pop(-1)  # raises: IndexError
+        parent_streamview: Streamview = self._get_streamview(path)  # raises: KeyError, IndexError
+        del parent_streamview.atoms[atom_name]  # raises KeyError
 
-    def delete_atom(self, name: str):
-        del self.atoms[name]
+    def delete_streamview(self, path: List[str]) -> None:
+        """ Raises: KeyError, IndexError """
+        streamview_name: str = path.pop(-1)  # raises: IndexError
+        parent_streamview: Streamview = self._get_streamview(path)  # raises: KeyError, IndexError
+        del parent_streamview.streamviews[streamview_name]  # raises KeyError
 
-    def create_streamview(self, path: List[str], weight: float, merge_actions: Tuple[AbstractMergeAction, ...]):
-        """Raises: KeyError, InvalidPath, DuplicateKeyError"""
-        self.logger.debug("[create_streamview] Attempting to create streamview with path {}.".format(path))
+    def set_merge_action(self, path: List[str], merge_action: AbstractMergeAction) -> None:
+        """ Raises: KeyError, IndexError """
+        streamview: Streamview = self._get_streamview(path)  # raises: KeyError, IndexError
+        streamview.merge_action = merge_action
 
-        new_streamview_name: str = path.pop(-1)
-        parent_streamview: 'StreamView' = self.get_streamview(path)
-        if new_streamview_name in parent_streamview.streamviews.keys():
-            raise DuplicateKeyError(f"A streamview with the name {new_streamview_name} already exists in "
-                                    f"streamview {parent_streamview.name}.")
-        parent_streamview.streamviews[new_streamview_name] = StreamView(new_streamview_name, weight, merge_actions)
+    def set_classifier(self, path: List[str], classifier: AbstractClassifier) -> None:
+        """ Raises: KeyError, IndexError """
+        atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
+        atom.set_classifier(classifier)
 
-    def update_peaks_on_new_event(self, time: float) -> None:
+    def set_memory_space(self, path: List[str], memory_space: AbstractMemorySpace) -> None:
+        """ Raises: KeyError, IndexError """
+        atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
+        atom.set_memory_space(memory_space)
+
+    def set_activity_pattern(self, path: List[str], activity_pattern: AbstractActivityPattern) -> None:
+        """ Raises: KeyError, IndexError """
+        atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
+        atom.set_activity_pattern(activity_pattern)
+
+    def set_corpus(self, corpus: Corpus) -> None:
         for streamview in self.streamviews.values():
-            streamview.update_peaks_on_new_event(time)
-        for atom in self.atoms.values():
-            atom.update_peaks_on_new_event(time)
-
-    # TODO: (2020-06-30) Update for new singular MergeAction
-    def merged_peaks(self, time: float, influence_history: ImprovisationMemory, corpus: Corpus, **kwargs) -> Peaks:
-        # TODO: Crashes if streamview doesn't contain any atoms or streamviews
-        peaks_list: List[Peaks] = []
-        # TODO: Does not account for nested streamview weights
-        # Peaks from child streamviews
-        for streamview in self.streamviews.values():
-            peaks_list.append(streamview.merged_peaks(time, influence_history, corpus, **kwargs))
-
-        # TODO: Code duplication from player
-        # Peaks from atoms
-        weight_sum: float = 0.0
-        for atom in self.atoms.values():
-            weight_sum += atom.weight if atom.is_enabled() else 0.0
-        assert weight_sum - 1.0 < 0.01, "Scaling of indivudual atoms is currently not supported"
-        for atom in self.atoms.values():
-            peaks: Peaks = atom.get_peaks()
-            peaks.scores *= atom.weight / weight_sum
-            peaks_list.append(peaks)
-
-        all_peaks: Peaks = Peaks.concatenate(peaks_list)
-
-        # Apply merge actions on this level and return
-        for merge_action in self._merge_actions.values():
-            if merge_action.is_enabled():
-                all_peaks = merge_action.merge(all_peaks, time, influence_history, corpus, **kwargs)
-        return all_peaks
-
-    def read(self, corpus: Corpus):
-        self.logger.debug(f"[read] Init read in streamview {self.name} with corpus {corpus}")
+            streamview.set_corpus(corpus)
         for atom in self.atoms.values():
             atom.read(corpus)
 
+    def is_enabled(self) -> bool:
+        return self.enabled.value
+
     @property
-    def weight(self) -> float:
+    def weight(self):
         return self._weight.value
 
     @weight.setter
     def weight(self, value: float):
         self._weight.value = value
 
-    def is_enabled(self):
-        return self.enabled.value
+    ######################################################
+    # PRIVATE
+    ######################################################
 
-    def clear(self):
+    def _get_streamview(self, path: List[str]) -> 'Streamview':
+        """ Raises: KeyError, IndexError"""
+        if not path:
+            return self
+        target_name: str = path.pop(0)
+        if path:  # Path is not empty: descend recursively
+            return self.streamviews[target_name]._get_streamview(path)
+        else:
+            return self.streamviews[target_name]
+
+    def _get_atom(self, path: List[str]) -> Atom:
+        """ Raises: KeyError, IndexError"""
+        target_name: str = path.pop(0)
+        if path:  # Path is not empty: descend recursively
+            return self.streamviews[target_name]._get_atom(path)
+        else:
+            return self.atoms[target_name]
+
+    def _direct_influenced_atoms(self) -> List[Atom]:
+        return [atom for atom in self._all_atoms() if not atom.self_influenced]
+
+    def _self_influenced_atoms(self) -> List[Atom]:
+        return [atom for atom in self._all_atoms() if atom.self_influenced]
+
+    def _all_atoms(self) -> List[Atom]:
+        return self._gather_atoms([])
+
+    def _gather_atoms(self, atoms: List[Atom]) -> List[Atom]:
         for streamview in self.streamviews.values():
-            streamview.clear()
-        for atom in self.atoms.values():
-            atom.clear()
+            atoms = streamview._gather_atoms(atoms)
+        atoms.extend(self.atoms.values())
+        return atoms

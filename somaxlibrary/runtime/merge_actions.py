@@ -17,7 +17,6 @@ class AbstractMergeAction(Parametric, Introspective, ABC):
 
     def __init__(self):
         super().__init__()
-        self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this MergeAction.")
 
     @abstractmethod
     def merge(self, peaks: Peaks, time: float, history: ImprovisationMemory = None, corpus: Corpus = None,
@@ -35,9 +34,6 @@ class AbstractMergeAction(Parametric, Introspective, ABC):
     @classmethod
     def from_string(cls, merge_action: str, **kwargs) -> 'AbstractMergeAction':
         return cls.from_string(merge_action, **kwargs)
-
-    def is_enabled(self):
-        return self.enabled.value
 
 
 class DistanceMergeAction(AbstractMergeAction):

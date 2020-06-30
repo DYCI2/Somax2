@@ -32,6 +32,10 @@ class AbstractPeakSelector(Parametric, Introspective):
                          **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
         """ Action to perform if no valid peak exists after calling `_decide_default`"""
 
+    @abstractmethod
+    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        """ """
+
     @classmethod
     def default(cls, **kwargs) -> 'AbstractPeakSelector':
         return MaxPeakSelector()
