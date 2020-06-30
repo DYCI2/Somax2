@@ -64,7 +64,7 @@ class MaxPeakSelector(AbstractPeakSelector):
         max_peaks_idx: List[int] = np.argwhere(peaks.scores == max_peak_value)
         peak_idx: int = random.choice(max_peaks_idx)
         transform_hash: int = int(peaks.transform_hashes[peak_idx])
-        return corpus.event_closest(peaks.times[peak_idx]), transform_dict[transform_hash]
+        return corpus.event_around(peaks.times[peak_idx]), transform_dict[transform_hash]
 
     def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory,
                          corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},

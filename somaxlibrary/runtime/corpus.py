@@ -35,11 +35,13 @@ class Corpus:
                  bg_chromagram: Optional[Chromagram] = None):
         self.logger = logging.getLogger(__name__)
         self.events: List[CorpusEvent] = events
-        self.onsets: np.ndarray = np.array([e.onset for e in self.events])
+        # self.onsets: np.ndarray = np.array([e.onset for e in self.events])    # TODO: Remove (?)
         self.name: str = name
         self.content_type: ContentType = content_type
-        self._build_parameters: dict = build_parameters
-        self._index_map: np.ndarray = Corpus._create_index_map(self.events, self.duration())
+        self._build_parameters: Dict[str, Any] = build_parameters
+        self._index_map: np.ndarray
+        self._grid_size: int
+        self._index_map, self._grid_size = Corpus._create_index_map(self.events, self.duration())
 
         # These parameters will not be stored when exported and will thus not exist in json-parsed corpora
         self.fg_spectrogram: Optional[Spectrogram] = fg_spectrogram
@@ -113,12 +115,14 @@ class Corpus:
     def event_at(self, index: int) -> CorpusEvent:
         return self.events[index]
 
-    def event_closest(self, time: float) -> CorpusEvent:
-        idx: int = int(np.searchsorted(self.onsets, time))
-        if idx > 0 and (idx == self.length() or np.abs(time - self.onsets[idx - 1]) < np.abs(time - self.onsets[idx])):
-            return self.events[idx - 1]
-        else:
-            return self.events[idx]
+    def event_around(self, time: float) -> CorpusEvent:
+        index: int = self._index_map[int(np.floor(time * self._grid_size))]
+        return self.event_at(index)
+
+    def events_around(self, times: np.ndarray) -> List[CorpusEvent]:
+        indices: np.ndarray = self._index_map[int(np.floor(times * self._grid_size))]
+        events: List[CorpusEvent] = [self.event_at(index) for index in indices]
+        return events
 
     def to_note_matrix(self) -> NoteMatrix:
         note_data: List[List[float]] = [[] for _ in range(8)]
@@ -160,12 +164,11 @@ class Corpus:
         plt.show()
 
     @staticmethod
-    def _create_index_map(events: List[CorpusEvent], corpus_duration_ticks: float) -> np.ndarray:
+    def _create_index_map(events: List[CorpusEvent], corpus_duration_ticks: float) -> Tuple[np.ndarray, float]:
         grid_size: float = Corpus.INDEX_MAP_SIZE / corpus_duration_ticks
-        index_map: np.ndarray = np.empty(Corpus.INDEX_MAP_SIZE)
+        index_map: np.ndarray = np.empty(Corpus.INDEX_MAP_SIZE, dtype=int)
         for event in events:
             start_index: int = int(np.floor(event.onset * grid_size))
             end_index: int = int(np.floor((event.onset + event.duration) * grid_size))
-            print(f"start: {start_index}, end: {end_index}, state: {event.state_index}")
             index_map[start_index:end_index] = event.state_index
-        return index_map
+        return index_map, grid_size
