@@ -7,7 +7,7 @@ import numpy as np
 from somaxlibrary.utils.introspective import Introspective
 
 
-class AbstractFilter(ABC, Introspective):
+class AbstractFilter(Introspective, ABC):
     DEFAULT = "default"
     _DEFAULT_FILTER = "LeakyIntegrator"
 

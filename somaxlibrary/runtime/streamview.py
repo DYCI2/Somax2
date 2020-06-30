@@ -18,16 +18,14 @@ from somaxlibrary.runtime.transforms import AbstractTransform
 
 class StreamView(Parametric):
     def __init__(self, name: str, weight: float = 1.0,
-                 merge_actions: Tuple[AbstractMergeAction, ...] = AbstractMergeAction.default_set()):
+                 merge_action: AbstractMergeAction = AbstractMergeAction.default()):
         super(StreamView, self).__init__()
         self.logger = logging.getLogger(__name__)
-        self.logger.debug("[__init__] Creating streamview {} with weight {} and merge actions {}"
-                          .format(name, weight, merge_actions))
+        self.logger.debug(f"[__init__] Creating Streamview with name '{name}', weight {weight}"
+                          f"and Merge Action {type(merge_action).__name__}.")
 
         self.name = name
-        self._merge_actions: Dict[str, AbstractMergeAction] = {}
-        for merge_action in merge_actions:
-            self._add_merge_action(merge_action)
+        self.merge_action: AbstractMergeAction = merge_action
 
         self.atoms: Dict[str, Atom] = dict()
         self.streamviews: Dict[str, StreamView] = {}
@@ -38,6 +36,7 @@ class StreamView(Parametric):
     def __repr__(self):
         return "Streamview(name={0},...)".format(self.name)
 
+    # TODO DELETE/Change to set_merge_action
     def _add_merge_action(self, merge_action: AbstractMergeAction, override: bool = False):
         name: str = type(merge_action).__name__
         if name in self._merge_actions and not override:
@@ -98,6 +97,7 @@ class StreamView(Parametric):
         for atom in self.atoms.values():
             atom.update_peaks_on_new_event(time)
 
+    # TODO: (2020-06-30) Update for new singular MergeAction
     def merged_peaks(self, time: float, influence_history: ImprovisationMemory, corpus: Corpus, **kwargs) -> Peaks:
         # TODO: Crashes if streamview doesn't contain any atoms or streamviews
         peaks_list: List[Peaks] = []

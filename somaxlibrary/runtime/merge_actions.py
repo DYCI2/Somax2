@@ -1,7 +1,7 @@
 import inspect
 import logging
 import sys
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 from typing import ClassVar, Dict, Union, List, Tuple
 
 import numpy as np
@@ -15,7 +15,7 @@ from somaxlibrary.runtime.peaks import Peaks
 from somaxlibrary.utils.introspective import Introspective
 
 
-class AbstractMergeAction(Parametric, Introspective):
+class AbstractMergeAction(Parametric, Introspective, ABC):
 
     def __init__(self):
         super().__init__()
@@ -28,11 +28,7 @@ class AbstractMergeAction(Parametric, Introspective):
 
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractMergeAction':
-        raise ValueError(f"No default Merge Action exists.")
-
-    @classmethod
-    def default_set(cls, **_kwargs) -> Tuple['AbstractMergeAction']:
-        return (DistanceMergeAction(),)
+        return DistanceMergeAction()
 
     @classmethod
     def from_string(cls, merge_action: str, **kwargs) -> 'AbstractMergeAction':
@@ -103,49 +99,3 @@ class DistanceMergeAction(AbstractMergeAction):
         self._t_width.value = value
 
 
-class PhaseModulationMergeAction(AbstractMergeAction):
-    DEFAULT_SELECTIVITY = 3.0
-
-    def __init__(self, selectivity=DEFAULT_SELECTIVITY):
-        super().__init__()
-        self.logger = logging.getLogger(__name__)
-        self.logger.debug("[__init__] Creating PhaseMergeAction with selectivity {}".format(selectivity))
-        self._selectivity: Parameter = Parameter(selectivity, None, None, 'float', "Very unclear parameter.")  # TODO
-        self._parse_parameters()
-
-    def merge(self, peaks: Peaks, time: float, _history: ImprovisationMemory = None, _corpus: Corpus = None,
-              **_kwargs) -> Peaks:
-        peaks.scores *= np.exp(self.selectivity * (np.cos(2 * np.pi * (time - peaks.times)) - 1))
-        return peaks
-
-    @property
-    def selectivity(self):
-        return self._selectivity.value
-
-    @selectivity.setter
-    def selectivity(self, value):
-        self._selectivity.value = value
-
-
-class NextStateMergeAction(AbstractMergeAction):
-
-    def __init__(self, factor: float = 1.5, t_width: float = 0.5):
-        """ t_width in bars """
-        super().__init__()
-        self.logger = logging.getLogger(__name__)
-        self.logger.debug("[__init__] Creating NextStateMergeAction with width {} and merge mode {}.")
-        self.factor: Parameter = Parameter(factor, 0.0, None, 'float',
-                                           "Scaling factor for peaks close to previous output.")
-        self._t_width: Parameter = Parameter(t_width, 0.0, None, 'float', "Very unclear parameter")  # TODO
-
-    def merge(self, peaks: Peaks, time: float, history: ImprovisationMemory = None, corpus: Corpus = None,
-              **kwargs) -> Peaks:
-        try:
-            last_event, _, _ = history.get_latest()
-            next_event: CorpusEvent = corpus.event_at(last_event.state_index + 1)
-            next_state_time: float = next_event.onset
-            next_state_idx: np.ndarray = np.abs(peaks.times - next_state_time) < self._t_width.value
-            peaks.scores[next_state_idx] *= self.factor.value
-            return peaks
-        except IndexError:  # Thrown if history is empty
-            return peaks

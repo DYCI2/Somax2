@@ -27,16 +27,19 @@ class ContentType(Enum):
 
 
 class Corpus:
+    INDEX_MAP_SIZE = 1_000_000
+
     def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
                  build_parameters: Dict[str, Any], fg_spectrogram: Optional[Spectrogram] = None,
                  bg_spectrogram: Optional[Spectrogram] = None, fg_chromagram: Optional[Chromagram] = None,
                  bg_chromagram: Optional[Chromagram] = None):
+        self.logger = logging.getLogger(__name__)
         self.events: List[CorpusEvent] = events
         self.onsets: np.ndarray = np.array([e.onset for e in self.events])
         self.name: str = name
         self.content_type: ContentType = content_type
-        self._build_parameters: dict = build_parameters  # TODO: Including version
-        self.logger = logging.getLogger(__name__)
+        self._build_parameters: dict = build_parameters
+        self._index_map: np.ndarray = Corpus._create_index_map(self.events, self.duration())
 
         # These parameters will not be stored when exported and will thus not exist in json-parsed corpora
         self.fg_spectrogram: Optional[Spectrogram] = fg_spectrogram
@@ -155,3 +158,14 @@ class Corpus:
             _, axes = plt.subplots(2, 1, gridspec_kw={'height_ratios': [1, 5]})
             self.to_note_matrix().plot(axes=(axes[0], axes[1]))
         plt.show()
+
+    @staticmethod
+    def _create_index_map(events: List[CorpusEvent], corpus_duration_ticks: float) -> np.ndarray:
+        grid_size: float = Corpus.INDEX_MAP_SIZE / corpus_duration_ticks
+        index_map: np.ndarray = np.empty(Corpus.INDEX_MAP_SIZE)
+        for event in events:
+            start_index: int = int(np.floor(event.onset * grid_size))
+            end_index: int = int(np.floor((event.onset + event.duration) * grid_size))
+            print(f"start: {start_index}, end: {end_index}, state: {event.state_index}")
+            index_map[start_index:end_index] = event.state_index
+        return index_map
