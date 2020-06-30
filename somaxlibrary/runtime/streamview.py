@@ -7,6 +7,7 @@ from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.exceptions import DuplicateKeyError
+from somaxlibrary.runtime.improvisation_memory import ImprovisationMemory
 from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
 from somaxlibrary.runtime.merge_actions import AbstractMergeAction
 from somaxlibrary.runtime.parameter import Parameter
@@ -97,7 +98,7 @@ class StreamView(Parametric):
         for atom in self.atoms.values():
             atom.update_peaks_on_new_event(time)
 
-    def merged_peaks(self, time: float, influence_history: List[CorpusEvent], corpus: Corpus, **kwargs) -> Peaks:
+    def merged_peaks(self, time: float, influence_history: ImprovisationMemory, corpus: Corpus, **kwargs) -> Peaks:
         # TODO: Crashes if streamview doesn't contain any atoms or streamviews
         peaks_list: List[Peaks] = []
         # TODO: Does not account for nested streamview weights
