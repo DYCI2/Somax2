@@ -36,6 +36,12 @@ class StreamView(Parametric):
     def __repr__(self):
         return "Streamview(name={0},...)".format(self.name)
 
+    def feedback(self, feedback_event: CorpusEvent, time: float):
+        for streamview in self.streamviews.values():
+            streamview.feedback(feedback_event, time)
+        for atom in self.atoms.values():
+            atom.feedback(feedback_event, time)
+
     # TODO DELETE/Change to set_merge_action
     def _add_merge_action(self, merge_action: AbstractMergeAction, override: bool = False):
         name: str = type(merge_action).__name__

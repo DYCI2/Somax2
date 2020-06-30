@@ -4,7 +4,8 @@ from typing import Dict, Union, Type, List, Tuple, Optional, Any
 from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.runtime.corpus import Corpus
-from somaxlibrary.runtime.influence import AbstractInfluence
+from somaxlibrary.runtime.corpus_event import CorpusEvent
+from somaxlibrary.runtime.influence import AbstractInfluence, FeedbackInfluence, CorpusInfluence
 from somaxlibrary.runtime.label import AbstractLabel
 from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
 from somaxlibrary.runtime.parameter import Parametric, Parameter
@@ -72,6 +73,11 @@ class Atom(Parametric):
             return len(matched_events)
         else:
             return 0
+
+    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        if self.self_influenced:
+            self.influence(CorpusInfluence(feedback_event), time)
+
 
     def set_classifier(self, classifier: AbstractClassifier):
         self._classifier = classifier

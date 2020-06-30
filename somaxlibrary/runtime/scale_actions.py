@@ -22,6 +22,10 @@ class AbstractScaleAction(Parametric, Introspective, ABC):
               history: ImprovisationMemory = None, corpus: Corpus = None, **kwargs) -> Peaks:
         """ """
 
+    @abstractmethod
+    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        """ """
+
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractScaleAction':
         raise ValueError(f"No default Merge Action exists.")
@@ -52,6 +56,9 @@ class PhaseModulationScaleAction(AbstractScaleAction):
               _history: ImprovisationMemory = None, _corpus: Corpus = None, **_kwargs) -> Peaks:
         peaks.scores *= np.exp(self.selectivity * (np.cos(2 * np.pi * (time - peaks.times)) - 1))
         return peaks
+
+    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        pass
 
     @property
     def selectivity(self):
@@ -84,3 +91,6 @@ class NextStateScaleAction(AbstractScaleAction):
             return peaks
         except IndexError:  # Thrown if history is empty
             return peaks
+
+    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        raise NotImplementedError("TODO")

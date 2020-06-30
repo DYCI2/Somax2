@@ -1,8 +1,6 @@
-import inspect
 import logging
-import sys
 from abc import abstractmethod, ABC
-from typing import ClassVar, Dict, Union, List, Tuple
+from typing import List
 
 import numpy as np
 from scipy import sparse
@@ -24,6 +22,10 @@ class AbstractMergeAction(Parametric, Introspective, ABC):
     @abstractmethod
     def merge(self, peaks: Peaks, time: float, history: ImprovisationMemory = None, corpus: Corpus = None,
               **kwargs) -> Peaks:
+        """ """
+
+    @abstractmethod
+    def feedback(self, feedback_event: CorpusEvent, time: float):
         """ """
 
     @classmethod
@@ -89,6 +91,9 @@ class DistanceMergeAction(AbstractMergeAction):
         merged_peaks: Peaks = Peaks.concatenate(peaks_list)
         self.logger.debug(f"[merge] Merge successful. Number of peaks after merge: {merged_peaks.size()}.")
         return merged_peaks
+
+    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        pass
 
     @property
     def t_width(self):

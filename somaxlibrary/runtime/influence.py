@@ -23,3 +23,9 @@ class KeywordInfluence(AbstractInfluence):
     def __init__(self, keyword: InfluenceKeyword, influence_data: Any):
         self.keyword: InfluenceKeyword = keyword
         self.influence_data: Any = influence_data
+
+
+class FeedbackInfluence(CorpusInfluence):
+    def __init__(self, corpus_event: CorpusEvent, time: float):
+        super().__init__(corpus_event)
+        self.time: float = time
