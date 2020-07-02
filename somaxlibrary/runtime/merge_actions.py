@@ -24,7 +24,11 @@ class AbstractMergeAction(Parametric, Introspective, ABC):
         """ """
 
     @abstractmethod
-    def feedback(self, feedback_event: CorpusEvent, time: float):
+    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        """ """
+
+    @abstractmethod
+    def clear(self) -> None:
         """ """
 
     @classmethod
@@ -89,6 +93,9 @@ class DistanceMergeAction(AbstractMergeAction):
         return merged_peaks
 
     def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        pass
+
+    def clear(self) -> None:
         pass
 
     @property

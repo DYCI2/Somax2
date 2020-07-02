@@ -1,25 +1,20 @@
 import copy
 import logging
-from copy import deepcopy
 from typing import Dict, Optional, Tuple, Type, List
 
-from somaxlibrary.classification.classifier import AbstractClassifier
-from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern
 from somaxlibrary.runtime.atom import Atom
 from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.runtime.corpus_event import CorpusEvent
-from somaxlibrary.runtime.exceptions import DuplicateKeyError, TransformError
-from somaxlibrary.runtime.exceptions import InvalidPath, InvalidCorpus, InvalidConfiguration, InvalidLabelInput
+from somaxlibrary.runtime.exceptions import DuplicateKeyError
+from somaxlibrary.runtime.exceptions import InvalidCorpus, InvalidLabelInput
 from somaxlibrary.runtime.improvisation_memory import ImprovisationMemory
-from somaxlibrary.runtime.influence import AbstractInfluence, CorpusInfluence
-from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
+from somaxlibrary.runtime.influence import AbstractInfluence
 from somaxlibrary.runtime.merge_actions import AbstractMergeAction
-from somaxlibrary.runtime.parameter import Parametric
 from somaxlibrary.runtime.peak_selector import AbstractPeakSelector
 from somaxlibrary.runtime.peaks import Peaks
 from somaxlibrary.runtime.scale_actions import AbstractScaleAction
 from somaxlibrary.runtime.streamview import Streamview
-from somaxlibrary.runtime.target import Target
+from somaxlibrary.runtime.target import Target, SendProtocol
 from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
 from somaxlibrary.scheduler.scheduled_object import ScheduledMidiObject, TriggerMode
 
@@ -133,6 +128,13 @@ class Player(Streamview, ScheduledMidiObject):
 
     def remove_scale_action(self, scale_action_type: Type[AbstractScaleAction]):
         """ Raises: KeyError """
+        del self.scale_actions[scale_action_type]
+
+    def add_transform(self, transform):
+        raise NotImplementedError("Transforms are not supported yet")  # TODO
+
+    def remove_transform(self, transform):
+        raise NotImplementedError("Transforms are not supported yet")  # TODO
 
     ######################################################
     # PRIVATE
@@ -150,11 +152,8 @@ class Player(Streamview, ScheduledMidiObject):
     ######################################################
 
     def send_peaks(self):
-        raise NotImplementedError("TODO")  # TODO
-        # peak_group: str = self.name
-        # self.target.send("num_peaks", [peak_group, self.previous_peaks.size()])
-        # # TODO: Does not handle nested streamviews
-        # for streamview in self.streamviews.values():
-        #     for atom in streamview.atoms.values():
-        #         peaks: Peaks = atom.get_peaks()
-        #         self.target.send("num_peaks", [atom.name, peaks.size()])
+        peak_group: str = self.name
+        self.target.send(SendProtocol.NUM_PEAKS.value, [peak_group, self.previous_peaks.size()])
+        for atom in self._all_atoms():
+            peaks: Peaks = atom.get_peaks()
+            self.target.send(SendProtocol.NUM_PEAKS.value, [atom.name, peaks.size()])

@@ -78,9 +78,12 @@ class Atom(Parametric):
         if self.self_influenced:
             self.influence(CorpusInfluence(feedback_event), time)
 
-
-    def set_classifier(self, classifier: AbstractClassifier):
+    def set_classifier(self, classifier: AbstractClassifier) -> None:
         self._classifier = classifier
+        self.read()
+
+    def set_memory_space(self, memory_space: AbstractMemorySpace) -> None:
+        self._memory_space = memory_space
         self.read()
 
     def set_activity_pattern(self, activity_pattern: AbstractActivityPattern):

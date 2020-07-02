@@ -26,6 +26,10 @@ class AbstractScaleAction(Parametric, Introspective, ABC):
     def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
         """ """
 
+    @abstractmethod
+    def clear(self) -> None:
+        """ """
+
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractScaleAction':
         raise ValueError(f"No default Merge Action exists.")
@@ -58,6 +62,9 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         return peaks
 
     def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        pass
+
+    def clear(self) -> None:
         pass
 
     @property
@@ -94,3 +101,8 @@ class NextStateScaleAction(AbstractScaleAction):
 
     def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
         raise NotImplementedError("TODO")
+
+    def clear(self) -> None:
+        raise NotImplementedError("TODO")
+
+

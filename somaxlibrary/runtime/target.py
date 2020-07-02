@@ -1,8 +1,12 @@
 import logging
 from abc import ABC, abstractmethod
+from enum import Enum
 from typing import Any, Callable, Dict, Tuple, List
 
 from maxosc.sender import Sender, SendFormat, MaxFormatter
+
+class SendProtocol(Enum):
+    NUM_PEAKS = "num_peaks"
 
 
 class Target(ABC):
