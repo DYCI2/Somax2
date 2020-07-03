@@ -20,6 +20,7 @@ from somaxlibrary.runtime.corpus_event import Note, CorpusEvent
 class CorpusBuilder:
     MIDI_FILE_EXTENSIONS = [".mid", ".midi"]
     AUDIO_FILE_EXTENSIONS = []
+    CORPUS_FILE_EXTENSIONS = [".json"]
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
@@ -29,6 +30,7 @@ class CorpusBuilder:
               background_channels: Tuple[int] = tuple(range(1, 17)),
               spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
               **kwargs) -> Corpus:
+        """ :raises TODO!!! """
         # TODO: Handle folders
         if os.path.isdir(filepath):
             raise NotImplementedError("Building corpora from folders is not supported yet.")
@@ -42,7 +44,7 @@ class CorpusBuilder:
                 corpus: Corpus = self._build_audio(filepath, name, foreground_channels, background_channels,
                                                    spectrogram_filter, **kwargs)
             else:
-                raise IOError("Invalid file. Valid extensions are {}.".format(
+                raise IOError("Invalid file format. Valid extensions are {}.".format(
                     "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
         return corpus
 

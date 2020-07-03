@@ -24,6 +24,9 @@ class AbstractTransform(ABC):
         """Notes: Strictly not needed in current implementation, but should always be implemented when __hash__ is"""
         raise NotImplementedError("AbstractTransform.__eq__ is abstract.")
 
+    def from_string(self):
+        return None  # TODO
+
     # TODO: Must get this data from elsewhere, for example Classifier. Possibly at init even
     # @staticmethod
     # @abstractmethod

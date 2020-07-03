@@ -9,13 +9,13 @@ from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.corpus_builder.traits import TopNote, VirtualFundamental
 from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.exceptions import InvalidLabelInput
-from somaxlibrary.runtime.influence import AbstractInfluence, KeywordInfluence, CorpusInfluence, InfluenceKeyword
+from somaxlibrary.runtime.influence import AbstractInfluence, KeywordInfluence, CorpusInfluence, InfluenceType
 from somaxlibrary.runtime.label import IntLabel
 
 
 class PitchClassifier(AbstractClassifier, ABC):
-    def _influence_keywords(self) -> List[InfluenceKeyword]:
-        return [InfluenceKeyword.PITCH]
+    def _influence_keywords(self) -> List[InfluenceType]:
+        return [InfluenceType.PITCH]
 
 
 class BasicPitchClassifier(PitchClassifier, ABC):

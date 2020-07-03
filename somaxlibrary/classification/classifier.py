@@ -5,7 +5,7 @@ import numpy as np
 
 import somaxlibrary.classification
 from somaxlibrary.runtime.corpus import Corpus
-from somaxlibrary.runtime.influence import AbstractInfluence, InfluenceKeyword
+from somaxlibrary.runtime.influence import AbstractInfluence, InfluenceType
 from somaxlibrary.runtime.label import AbstractLabel
 from somaxlibrary.utils.introspective import Introspective
 
@@ -56,5 +56,5 @@ class AbstractClassifier(ABC, Introspective):
         pass
 
     @abstractmethod
-    def _influence_keywords(self) -> List[InfluenceKeyword]:
+    def _influence_keywords(self) -> List[InfluenceType]:
         pass

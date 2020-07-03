@@ -15,6 +15,9 @@ from somaxlibrary.runtime.transforms import AbstractTransform
 
 
 class Atom(Parametric):
+
+    DEFAULT_WEIGHT = 1.0
+
     def __init__(self, name: str, weight: float, classifier: AbstractClassifier,
                  activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
                  corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):

@@ -23,12 +23,12 @@ class Player(Streamview, ScheduledMidiObject):
     """ Raises: DuplicateKeyError (from add_scale_actions """
 
     def __init__(self, name: str, target: Target,
-                 weight: float = 1.0, trigger_mode: TriggerMode = TriggerMode.default(),
+                 trigger_mode: TriggerMode = TriggerMode.default(),
                  peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
                  merge_action: AbstractMergeAction = AbstractMergeAction.default(),
                  corpus: Optional[Corpus] = None,
                  scale_actions: List[AbstractScaleAction] = AbstractScaleAction.default_set()):
-        Streamview.__init__(self, name=name, weight=weight, merge_action=merge_action)
+        Streamview.__init__(self, name=name, weight=Streamview.DEFAULT_WEIGHT, corpus=corpus, merge_action=merge_action)
         ScheduledMidiObject.__init__(self, trigger_mode=trigger_mode)
         self.logger = logging.getLogger(__name__)
         self.target: Target = target

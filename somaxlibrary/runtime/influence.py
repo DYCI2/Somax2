@@ -5,9 +5,14 @@ from typing import Any
 from somaxlibrary.runtime.corpus_event import CorpusEvent
 
 
-class InfluenceKeyword(Enum):
+class InfluenceType(Enum):
     PITCH = "pitch"
     CHROMA = "chroma"
+
+    @classmethod
+    def from_string(cls, influence_type: str):
+        """ :raises ValueError """
+        return InfluenceType(influence_type.lower())
 
 
 class AbstractInfluence(ABC):
@@ -20,8 +25,8 @@ class CorpusInfluence(AbstractInfluence):
 
 
 class KeywordInfluence(AbstractInfluence):
-    def __init__(self, keyword: InfluenceKeyword, influence_data: Any):
-        self.keyword: InfluenceKeyword = keyword
+    def __init__(self, keyword: InfluenceType, influence_data: Any):
+        self.keyword: InfluenceType = keyword
         self.influence_data: Any = influence_data
 
 

@@ -22,6 +22,9 @@ class Introspective(ABC):
     @classmethod
     def _from_string(cls, class_name: str, module: Optional[ModuleType] = None, **kwargs) -> 'Introspective':
         """ :raises ValueError if `default()` is not defined"""
+        if not class_name:
+            return cls.default(**kwargs)
+
         classes: Dict[str, Type[Any]] = cls._classes(module)
         try:
             return classes[class_name.lower()](**kwargs)

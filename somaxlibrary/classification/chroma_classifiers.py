@@ -12,7 +12,7 @@ from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.corpus_builder.traits import OnsetChroma
 from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.exceptions import InvalidLabelInput
-from somaxlibrary.runtime.influence import AbstractInfluence, CorpusInfluence, KeywordInfluence, InfluenceKeyword
+from somaxlibrary.runtime.influence import AbstractInfluence, CorpusInfluence, KeywordInfluence, InfluenceType
 from somaxlibrary.runtime.label import AbstractLabel, IntLabel
 
 
@@ -21,8 +21,8 @@ from somaxlibrary.runtime.label import AbstractLabel, IntLabel
 
 # TODO: Normalization. Normalization has been removed for now, but should be thoroughly tested.
 class ChromaClassifier(AbstractClassifier, ABC):
-    def _influence_keywords(self) -> List[InfluenceKeyword]:
-        return [InfluenceKeyword.CHROMA]
+    def _influence_keywords(self) -> List[InfluenceType]:
+        return [InfluenceType.CHROMA]
 
     @classmethod
     def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:

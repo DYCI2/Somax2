@@ -54,7 +54,7 @@ class Corpus:
 
     @classmethod
     def from_json(cls, filepath: str) -> 'Corpus':
-        """ Raises: IOError, """
+        """ Raises: IOError, InvalidCorpus"""
         try:
             with open(filepath, 'r') as f:
                 corpus_data: Dict[str, Any] = json.load(f)
