@@ -6,15 +6,22 @@ from typing import Any, Callable, Dict, Tuple, List
 from maxosc.sender import Sender, SendFormat, MaxFormatter
 
 
-class SendProtocol(Enum):
-    NUM_PEAKS = "num_peaks"
+class SendProtocol:
+    PLAYER_NUM_PEAKS = "num_peaks"
+    PLAYER_SINGLE_PARAMETER = "param"
+    PLAYER_ALL_CORPORA = "corpus_info"
+    ALL_PLAYER_NAMES = "player_name"
 
+    SCHEDULER_CURRENT_TIME = "time"
+    SCHEDULER_CURRENT_TEMPO = "tempo"
+    SCHEDULER_TEMPO_MASTER = "tempo_master"
 
-class ReceiveProtocol(Enum):
-    pass
+    SERVER_DEBUG_POLL = "poll_server"
 
 
 class Target(ABC):
+    WRAPPED_BANG = ["bang"]
+
     @abstractmethod
     def send(self, keyword: str, content: Any, **kwargs):
         raise NotImplementedError("Target.send is abstract.")

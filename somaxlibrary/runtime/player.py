@@ -153,7 +153,7 @@ class Player(Streamview, ScheduledMidiObject):
 
     def send_peaks(self):
         peak_group: str = self.name
-        self.target.send(SendProtocol.NUM_PEAKS.value, [peak_group, self.previous_peaks.size()])
+        self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [peak_group, self.previous_peaks.size()])
         for atom in self._all_atoms():
             peaks: Peaks = atom.get_peaks()
-            self.target.send(SendProtocol.NUM_PEAKS.value, [atom.name, peaks.size()])
+            self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [atom.name, peaks.size()])

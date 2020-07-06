@@ -1,11 +1,11 @@
 import argparse
 import asyncio
+import ipaddress
 import logging
 import logging.config
 import os
 import sys
-from typing import Any, Dict, Union, Type, Optional, Tuple, List
-from importlib import resources
+from typing import Any, Dict, Union, Optional, Tuple, List
 
 from maxosc.maxformatter import MaxFormatter
 from maxosc.maxosc import Caller
@@ -13,14 +13,14 @@ from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import AsyncIOOSCUDPServer
 
 import settings
-from somaxlibrary.corpus_builder.abstractfilter import AbstractFilter
-from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern
+import somaxlibrary
 from somaxlibrary.classification.classifier import AbstractClassifier
+from somaxlibrary.corpus_builder.abstractfilter import AbstractFilter
 from somaxlibrary.corpus_builder.corpus_builder import CorpusBuilder
+from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern
 from somaxlibrary.runtime.atom import Atom
 from somaxlibrary.runtime.corpus import Corpus
-from somaxlibrary.runtime.corpus_event import CorpusEvent
-from somaxlibrary.runtime.exceptions import InvalidPath, DuplicateKeyError, InvalidJsonFormat, ParameterError, \
+from somaxlibrary.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput
 from somaxlibrary.runtime.influence import KeywordInfluence, InfluenceType
 from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
@@ -30,12 +30,9 @@ from somaxlibrary.runtime.peak_selector import AbstractPeakSelector
 from somaxlibrary.runtime.player import Player
 from somaxlibrary.runtime.scale_actions import AbstractScaleAction
 from somaxlibrary.runtime.streamview import Streamview
-from somaxlibrary.scheduler.scheduled_object import TriggerMode
+from somaxlibrary.runtime.target import Target, SimpleOscTarget, SendProtocol
 from somaxlibrary.scheduler.realtime_scheduler import RealtimeScheduler
-from somaxlibrary.runtime.target import Target, SimpleOscTarget
-from somaxlibrary.runtime.transforms import AbstractTransform
-import somaxlibrary
-from somaxlibrary.utils.introspective import Introspective
+from somaxlibrary.scheduler.scheduled_object import TriggerMode
 
 
 class SomaxStringDispatcher:
@@ -186,7 +183,7 @@ class SomaxStringDispatcher:
             self.players[player].set_classifier(path_and_name, classifier)
             self.logger.debug(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
                               f"for player '{player}.")
-        except (KeyError, ValueError) as e:
+        except (AssertionError, KeyError, ValueError) as e:
             self.logger.error(f"{str(e)} No Classifier was set.")
 
     def set_activity_pattern(self, player: str, path: str, activity_pattern: str, **kwargs):
@@ -196,7 +193,7 @@ class SomaxStringDispatcher:
             self.players[player].set_activity_pattern(path_and_name, activity_pattern)
             self.logger.debug(f"[set_acitivity_pattern] Activity Pattern set to {type(activity_pattern).__name__} "
                               f"for player '{player}.")
-        except (KeyError, ValueError) as e:
+        except (AssertionError, KeyError, ValueError) as e:
             self.logger.error(f"{str(e)} No Activity Pattern was set.")
 
     def read_corpus(self, player: str, filepath: str):
@@ -223,9 +220,9 @@ class SomaxStringDispatcher:
         self.logger.debug(f"[set_param] Setting parameter for player '{player}' at '{path}' "
                           f"to {value} (type={type(value)}).")
         try:
-            path_and_name: List[str]=self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._parse_streamview_atom_path(path)
             self.players[player].set_param(path_and_name, value)
-        except (KeyError, IndexError, ParameterError) as e:
+        except (AssertionError, KeyError, IndexError, ParameterError) as e:
             self.logger.error(f"{str(e)} Could not set Parameter.")
 
     ######################################################
@@ -238,8 +235,7 @@ class SomaxStringDispatcher:
         self.logger.info(f"Scheduler Started. Current tick is {self.scheduler.tick:.2f}.")
 
     def stop(self):
-        """stops the scheduler and reset all players"""
-        # TODO: IO Error handling
+        """ Stops the scheduler and resets the state of all players """
         self.clear_all()
         self.scheduler.stop()
         self.logger.info("Scheduler was stopped.")
@@ -249,34 +245,34 @@ class SomaxStringDispatcher:
             self.scheduler.flush_held(player)
             player.clear()
 
-    def get_time(self):
-        self.target.send("time", self.scheduler.tick)
+    def set_tempo(self, tempo: Union[float, int]):
+        if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
+            self.scheduler.add_tempo_event(self.scheduler.tick, tempo)
+        else:
+            self.logger.error(f"Tempo must be a single value larger than zero. Did not set tempo.")
 
-    def get_tempo(self):
-        self.target.send("tempo", self.scheduler.tempo)
-
-    def set_tempo(self, tempo: float):
-        # TODO: Error checking
-        self.scheduler.add_tempo_event(self.scheduler.tick, tempo)
-
-    def set_tempo_master(self, player: Union[str, None]):
+    def _set_tempo_master(self, player: Optional[str]) -> bool:
+        """ :returns whether the scheduler has a tempo master after operation """
         try:
             self.scheduler.tempo_master = self.players[player]
             self.logger.debug(f"[set_tempo_master] Tempo master set to '{player}'.")
-            self.target.send("tempo_master", True)
+            return True
         except KeyError:
             if player is None:
                 self.scheduler.tempo_master = None
-                self.target.send("tempo_master", False)
+                self.logger.debug(f"[set_tempo_master] Tempo master set to '{player}'.")
+                return False
             else:
-                self.logger.error(f"No player named '{player}' exists.")
-                self.target.send("tempo_master", False)
+                self.logger.error(f"No player named '{player}' exists. No tempo master was set.")
+                return self.scheduler.tempo_master is not None
 
     ######################################################
-    # EVENTS METHODS
+    # SCHEDULING STATE-RELATED PARAMETERS
     ######################################################
 
-    # TODO: Remove and change into generic set param
+    # TODO: Remove and change into generic set scheduling param
+    # TODO: Should also generalize Scheduler.add_trigger_event or some other aspect so that the last lines
+    #       of this function are handled by scheduler, not at parsing time
     def trigger_mode(self, player: str, mode: str):
         try:
             trigger_mode: TriggerMode = TriggerMode.from_string(mode)
@@ -286,13 +282,11 @@ class SomaxStringDispatcher:
         try:
             previous_trigger_mode: TriggerMode = self.players[player].trigger_mode
             self.players[player].trigger_mode = trigger_mode
-            self.players[player]._parse_parameters()  # TODO: Definitely not ideal
             self.scheduler.flush_held(self.players[player])
-            # self.players[player].update_parameter_dict()
         except KeyError:
-            self.logger.error(f"Could not set mode. No player named '{player}' exists.")
+            self.logger.error(f"No player named '{player}' exists. Could not set mode.")
             return
-        if previous_trigger_mode != trigger_mode and trigger_mode == TriggerMode.AUTOMATIC:
+        if trigger_mode == TriggerMode.AUTOMATIC and previous_trigger_mode != trigger_mode:
             self.scheduler.add_trigger_event(self.players[player])
         self.logger.debug(f"[trigger_mode]: Trigger mode set to '{trigger_mode}' for player '{player}'.")
 
@@ -303,7 +297,7 @@ class SomaxStringDispatcher:
             self.scheduler.flush_held(p)
             self.logger.debug(f"Held notes mode set to {enable} for player '{player}'.")
         except KeyError:
-            self.logger.error(f"Could not set mode. No player named '{player}' exists.")
+            self.logger.error(f"No player named '{player}' exists. Could not set mode.")
 
     def simultaneous_onset_mode(self, player: str, enable: bool):
         try:
@@ -312,47 +306,7 @@ class SomaxStringDispatcher:
             self.scheduler.flush_held(p)
             self.logger.debug(f"Simultaneous onset mode set to {enable} for player '{player}'.")
         except KeyError:
-            self.logger.error(f"Could not set mode. No player named '{player}' exists.")
-
-    ######################################################
-    # MAX INTERFACE INFORMATION
-    ######################################################
-
-    def parameter_dict(self):
-        self.logger.debug(f"[parameter_dict] creating parameter_dict.")
-        parameter_dict: Dict[str, Dict[str, ...]] = {}
-        for name, player in self.players.items():
-            parameter_dict[name] = player.max_representation()
-        self.target.send_dict(parameter_dict)
-
-    def get_corpus_files(self):
-        filepath: str = os.path.join(os.path.dirname(__file__), "Corpus")
-        for file in os.listdir(filepath):
-            if file.endswith(".json"):
-                corpus_name, _ = os.path.splitext(file)
-                self.target.send("corpus_info", (corpus_name, os.path.join(filepath, file)))
-        self.target.send("corpus_info", ["bang"])
-
-    def get_player_names(self):
-        for player_name in self.players.keys():
-            self.target.send("player_name", [player_name])
-
-    def get_peaks(self, player: str):
-        # TODO: IO Error handling
-        try:
-            self.players[player].send_peaks()
-        except KeyError:
-            return
-
-    def get_param(self, path: str):
-        path_parsed: [str] = IOParser.parse_streamview_atom_path(path)
-        try:
-            player: str = path_parsed.pop(0)
-            self.target.send("param", [path, self.players[player].get_param(path_parsed).value])
-        except (IndexError, KeyError):
-            self.logger.error(f"Invalid path")  # TODO Proper message
-        except ParameterError as e:
-            self.logger.error(str(e))
+            self.logger.error(f"No player named '{player}' exists. Could not set mode.")
 
     ######################################################
     # CORPUS METHODS
@@ -366,32 +320,18 @@ class SomaxStringDispatcher:
             spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
             corpus: Corpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
                                                    spectrogram_filter=spectrogram_filter, **kwargs)
-            self.logger.info(f"Successfully wrote corpus '{corpus.name}' to file '{filepath}'.")
+            self.logger.debug(f"[build_corpus]: Successfully built '{corpus.name}' from file '{filepath}'.")
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
             return
 
         if output_folder is not None:
-            self.logger.info(f"Exporting corpus '{corpus.name}' to path '{output_folder}'...")
+            self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{output_folder}'...")
             try:
-                corpus.export(output_folder, overwrite=overwrite)
+                output_filepath: str = corpus.export(output_folder, overwrite=overwrite)
+                self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
-
-    ######################################################
-    # DEBUGGING
-    ######################################################
-
-    def _debug_state(self, player: str, state_index: int):
-        event: CorpusEvent = self.players[player].corpus.event_at(state_index)
-        self.scheduler.add_corpus_event(self.players[player], self.scheduler.tick, event)
-
-    @staticmethod
-    def _osc_callback(self):
-        pass  # TODO: implement
-
-    def poll_server(self):
-        self.target.send("poll_server", ["bang"])
 
     ######################################################
     # PRIVATE
@@ -408,17 +348,18 @@ class SomaxStringDispatcher:
         else:
             return [path]
 
-    @staticmethod
-    def _parse_ip(ip: str) -> str:
-        # TODO: Real format checking
-        if ip:
+    def _parse_ip(self, ip: str) -> str:
+        try:
+            ipaddress.ip_address(ip)
             return ip
-        return SomaxStringDispatcher.IP_LOCALHOST
+        except ValueError as e:
+            self.logger.error(f"{str(e)}. Setting ip to {SomaxStringDispatcher.IP_LOCALHOST}.")
+            return SomaxStringDispatcher.IP_LOCALHOST
 
-    @staticmethod
-    def _parse_osc_address(string: str) -> str:
-        # TODO: Naive parsing
+    def _parse_osc_address(self, string: str) -> str:
+        """ Naive parsing of OSC addresses """
         if not string.startswith("/"):
+            self.logger.warning(f"OSC address must begin with '/'. Setting OSC address to '/{string}'.")
             return f"/{string}"
         return string
 
@@ -428,10 +369,9 @@ class SomaxServer(Caller, SomaxStringDispatcher):
     DEFAULT_SEND_PORT = 1235
     SERVER_ADDRESS = "/server"
 
-    def __init__(self, recv_port: int, send_port: int, ip: str = IOParser.DEFAULT_IP):
+    def __init__(self, recv_port: int, send_port: int, ip: str = SomaxStringDispatcher.IP_LOCALHOST):
         super(SomaxServer, self).__init__(parse_parenthesis_as_list=False, discard_duplicate_args=False)
         self.logger = logging.getLogger(__name__)
-        # TODO: Change to multiosctarget for distributed
         self.target: Target = SimpleOscTarget(self.SERVER_ADDRESS, send_port, ip)
         self.logger.addHandler(OscLogForwarder(self.target))
 
@@ -465,6 +405,64 @@ class SomaxServer(Caller, SomaxStringDispatcher):
 
     def __unmatched_osc(self, address: str, *_args, **_kwargs) -> None:
         self.logger.info("The address {} does not exist.".format(address))
+
+    ######################################################
+    # MAX GETTERS
+    ######################################################
+
+    def get_time(self):
+        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, self.scheduler.tick)
+
+    def get_tempo(self):
+        self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, self.scheduler.tempo)
+
+    def parameter_dict(self):
+        self.logger.debug(f"[parameter_dict] Creating parameter_dict.")
+        parameter_dict: Dict[str, Dict[str, ...]] = {}  # Note: recursive depth
+        for name, player in self.players.items():
+            parameter_dict[name] = player.max_representation()
+        self.target.send_dict(parameter_dict)
+
+    def get_corpus_files(self):
+        filepath: str = os.path.join(os.path.dirname(__file__), settings.CORPUS_FOLDER)
+        for file in os.listdir(filepath):
+            if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
+                corpus_name, _ = os.path.splitext(file)
+                self.target.send(SendProtocol.PLAYER_ALL_CORPORA, (corpus_name, os.path.join(filepath, file)))
+        self.target.send(SendProtocol.PLAYER_ALL_CORPORA, Target.WRAPPED_BANG)
+
+    def get_player_names(self):
+        for player_name in self.players.keys():
+            self.target.send(SendProtocol.ALL_PLAYER_NAMES, [player_name])
+
+    def get_peaks(self, player: str):
+        try:
+            self.players[player].send_peaks()
+        except KeyError:
+            self.logger.error(f"No player named '{player}' exists.")
+
+    def get_param(self, player: str, path: str):
+        try:
+            parameter_path: List[str] = self._parse_streamview_atom_path(path)
+            self.target.send(SendProtocol.PLAYER_SINGLE_PARAMETER,
+                             [path, self.players[player].get_param(parameter_path).value])
+        except (IndexError, KeyError):
+            self.logger.error(f"Could not get parameter at given path.")
+        except (ParameterError, AssertionError) as e:
+            self.logger.error(str(e))
+
+    def debug_poll_server(self):
+        """ Returns a bang when called. Used to debug whether server is running """
+        self.target.send(SendProtocol.SERVER_DEBUG_POLL, Target.WRAPPED_BANG)
+
+    ######################################################
+    # MAX SETTERS WITH RETURN VALUES
+    ######################################################
+
+    def set_tempo_master(self, player: Optional[str]):
+        """ :returns whether the scheduler has a tempo master after operation """
+        has_tempo_master: bool = self._set_tempo_master(player)
+        self.target.send(SendProtocol.SCHEDULER_TEMPO_MASTER, has_tempo_master)
 
 
 if __name__ == "__main__":

@@ -78,7 +78,7 @@ class Corpus:
                                 f"is {system_version}. Try rebuilding the corpus.") from e
 
     def export(self, output_folder: str = settings.CORPUS_FOLDER, overwrite: bool = False,
-               indentation: Optional[int] = None):
+               indentation: Optional[int] = None) -> str:
         """ Raises IOError"""
         filepath = os.path.join(output_folder, self.name + ".json")
         if os.path.exists(filepath) and not overwrite:
