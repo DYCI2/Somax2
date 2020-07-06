@@ -8,7 +8,7 @@ import numpy as np
 from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.improvisation_memory import ImprovisationMemory
-from somaxlibrary.runtime.parameter import Parametric
+from somaxlibrary.runtime.parameter import Parametric, Parameter
 from somaxlibrary.runtime.peaks import Peaks
 from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
 from somaxlibrary.utils.introspective import Introspective
@@ -80,3 +80,42 @@ class MaxPeakSelector(AbstractPeakSelector):
             return corpus.event_at(next_state_idx), last_transform
         except IndexError:
             return corpus.event_at(0), (NoTransform(),)
+
+    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        pass
+
+
+class ThresholdPeakSelector(AbstractPeakSelector):
+    DEFAULT_THRESHOLD = 0.1
+
+    def __init__(self, threshold: float = DEFAULT_THRESHOLD, **kwargs):
+        super().__init__(**kwargs)
+        self._threshold: Parameter = Parameter(threshold, 0, None, "float", "TODOOO")
+
+    def _decide_default(self, peaks: Peaks, influence_history: ImprovisationMemory, corpus: Corpus,
+                        transform_dict: {int: Tuple[AbstractTransform, ...]},
+                        **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
+        self.logger.debug("[decide] _decide_default called.")
+        if peaks.empty():
+            return None
+        max_peak_value: float = np.max(peaks.scores)
+        if max_peak_value < self.threshold:
+            return None
+        else:
+            max_peaks_idx: List[int] = np.argwhere(peaks.scores == max_peak_value)
+            peak_idx: int = random.choice(max_peaks_idx)
+            transform_hash: int = int(peaks.transform_hashes[peak_idx])
+            return corpus.event_around(peaks.times[peak_idx]), transform_dict[transform_hash]
+
+    def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory, corpus: Corpus,
+                         transform_dict: {int: Tuple[AbstractTransform, ...]},
+                         **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
+        return None
+
+    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+        pass
+
+    @property
+    def threshold(self):
+        return self.threshold.value
+

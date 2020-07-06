@@ -20,7 +20,6 @@ from somaxlibrary.scheduler.scheduled_object import ScheduledMidiObject, Trigger
 
 
 class Player(Streamview, ScheduledMidiObject):
-    """ Raises: DuplicateKeyError (from add_scale_actions """
 
     def __init__(self, name: str, target: Target,
                  trigger_mode: TriggerMode = TriggerMode.default(),
@@ -73,7 +72,7 @@ class Player(Streamview, ScheduledMidiObject):
         #     event = transform.transform(event) # TODO: Transforms removed until update
         self.improvisation_memory.append(event, scheduler_time, transforms)
 
-        self.feedback(event, scheduler_time)
+        self._feedback(event, scheduler_time)
         return event
 
     def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
@@ -98,11 +97,11 @@ class Player(Streamview, ScheduledMidiObject):
     # MODIFY STATE
     ######################################################
 
-    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+    def _feedback(self, feedback_event: CorpusEvent, time: float) -> None:
         self.peak_selector.feedback(feedback_event, time)
         for scale_action in self.scale_actions.values():
             scale_action.feedback(feedback_event, time)
-        Streamview.feedback(self, feedback_event, time)
+        self.feedback(feedback_event, time)
 
     def clear(self):
         self.improvisation_memory = ImprovisationMemory()
