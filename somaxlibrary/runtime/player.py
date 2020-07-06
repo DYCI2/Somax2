@@ -59,7 +59,7 @@ class Player(Streamview, ScheduledMidiObject):
 
         self._update_peaks_on_new_event(scheduler_time)
         peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus)
-        peaks = self._scaled_peaks(peaks, scheduler_time, self.improvisation_memory, self.corpus)
+        peaks = self._scale_peaks(peaks, scheduler_time, self.improvisation_memory, self.corpus)
 
         event_and_transforms = self.peak_selector.decide(peaks, self.improvisation_memory, self.corpus, self.transforms)
         event: Optional[CorpusEvent] = copy.deepcopy(event_and_transforms[0])
@@ -140,8 +140,8 @@ class Player(Streamview, ScheduledMidiObject):
     # PRIVATE
     ######################################################
 
-    def _scaled_peaks(self, peaks: Peaks, scheduler_time: float, influence_history: ImprovisationMemory,
-                      corpus: Corpus, **kwargs):
+    def _scale_peaks(self, peaks: Peaks, scheduler_time: float, influence_history: ImprovisationMemory,
+                     corpus: Corpus, **kwargs):
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
         for scale_action in self.scale_actions.values():
             peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, influence_history, corpus, **kwargs)

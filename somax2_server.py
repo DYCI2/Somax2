@@ -357,7 +357,6 @@ class SomaxStringDispatcher:
             return SomaxStringDispatcher.IP_LOCALHOST
 
     def _parse_osc_address(self, string: str) -> str:
-        """ Naive parsing of OSC addresses """
         if not string.startswith("/"):
             self.logger.warning(f"OSC address must begin with '/'. Setting OSC address to '/{string}'.")
             return f"/{string}"
