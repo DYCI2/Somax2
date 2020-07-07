@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1492.0, 788.0 ],
+		"rect" : [ 34.0, 79.0, 1372.0, 730.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -2041,7 +2041,7 @@
 					"outlettype" : [ "float" ],
 					"patching_rect" : [ 628.166666666666515, 216.0, 80.0, 13.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 664.0, 94.896678966789636, 104.0, 21.0 ]
+					"presentation_rect" : [ 663.965411840411889, 94.896678966789636, 104.0, 21.0 ]
 				}
 
 			}
@@ -2055,7 +2055,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 400.0, 38.896678966789636, 213.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 436.0, 1.0, 377.0, 24.0 ],
+					"presentation_rect" : [ 435.965411840411889, 1.0, 377.0, 24.0 ],
 					"text" : "Audio Input",
 					"textjustification" : 1
 				}
@@ -2119,7 +2119,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 780.0, 129.896678966789636, 150.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 611.465411840411889, 95.896678966789636, 151.534588159588111, 20.0 ],
+					"presentation_rect" : [ 611.430823680823778, 95.896678966789636, 151.534588159588111, 20.0 ],
 					"text" : "Output"
 				}
 
@@ -2134,7 +2134,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 754.0, 127.896678966789636, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 585.465411840411889, 93.896678966789636, 22.0, 22.0 ]
+					"presentation_rect" : [ 585.430823680823778, 93.896678966789636, 22.0, 22.0 ]
 				}
 
 			}
@@ -2146,7 +2146,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 780.0, 69.896678966789636, 146.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 462.0, 94.896678966789636, 117.0, 20.0 ],
+					"presentation_rect" : [ 461.965411840411889, 94.896678966789636, 117.0, 20.0 ],
 					"text" : "Enable Microphone"
 				}
 
@@ -2161,7 +2161,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 754.0, 67.896678966789636, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 436.0, 92.896678966789636, 22.0, 22.0 ]
+					"presentation_rect" : [ 435.965411840411889, 92.896678966789636, 22.0, 22.0 ]
 				}
 
 			}
@@ -2200,7 +2200,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 561.666666666666515, 127.896678966789636, 41.0, 10.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 436.0, 76.24083296678964, 332.0, 14.655845999999997 ]
+					"presentation_rect" : [ 435.965411840411889, 76.24083296678964, 332.0, 14.655845999999997 ]
 				}
 
 			}
@@ -2212,7 +2212,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 559.666666666666515, 200.0, 45.0, 45.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 773.344154000000003, 76.24083296678964, 39.655845999999997, 39.655845999999997 ]
+					"presentation_rect" : [ 773.309565840411892, 76.24083296678964, 39.655845999999997, 39.655845999999997 ]
 				}
 
 			}
@@ -2220,32 +2220,7 @@
 				"box" : 				{
 					"clipheight" : 29.0,
 					"data" : 					{
-						"clips" : [ 							{
-								"absolutepath" : "/Users/joakimborg/Music/Monophonic/Sax_gentle cat_Slow.wav",
-								"filename" : "Sax_gentle cat_Slow.wav",
-								"filekind" : "audiofile",
-								"selection" : [ 0.791540785498489, 1.0 ],
-								"loop" : 0,
-								"content_state" : 								{
-									"originallength" : [ 0.0, "ticks" ],
-									"originaltempo" : [ 120.0 ],
-									"pitchshift" : [ 1.0 ],
-									"basictuning" : [ 440 ],
-									"speed" : [ 1.0 ],
-									"formant" : [ 1.0 ],
-									"play" : [ 0 ],
-									"pitchcorrection" : [ 0 ],
-									"followglobaltempo" : [ 0 ],
-									"originallengthms" : [ 0.0 ],
-									"quality" : [ "basic" ],
-									"timestretch" : [ 0 ],
-									"mode" : [ "basic" ],
-									"formantcorrection" : [ 0 ],
-									"slurtime" : [ 0.0 ]
-								}
-
-							}
- ]
+						"clips" : [  ]
 					}
 ,
 					"id" : "obj-42",
@@ -2255,7 +2230,7 @@
 					"outlettype" : [ "signal", "signal", "signal", "", "dictionary" ],
 					"patching_rect" : [ 488.666666666666515, 64.896678966789636, 150.0, 30.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 436.0, 26.74083296678964, 377.0, 43.955719557195607 ]
+					"presentation_rect" : [ 435.965411840411889, 26.74083296678964, 377.0, 43.955719557195607 ]
 				}
 
 			}
@@ -2720,7 +2695,7 @@
 					"numoutlets" : 5,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "", "", "", "" ],
-					"patching_rect" : [ 123.0, 992.5, 266.999999999999886, 145.0 ],
+					"patching_rect" : [ 127.500000000000057, 1019.0, 266.999999999999886, 145.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 3.0, 439.0, 533.0, 321.5 ],
 					"viewvisibility" : 1
@@ -2982,7 +2957,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 456.0, 283.5, 377.0, 227.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 436.0, 119.5, 377.0, 227.0 ],
+					"presentation_rect" : [ 435.965411840411889, 119.5, 377.0, 227.0 ],
 					"varname" : "somax.audioinfluencer",
 					"viewvisibility" : 1
 				}
@@ -3742,7 +3717,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-65", 0 ],
-					"midpoints" : [ 132.5, 1409.5, 47.5, 1409.5, 47.5, 703.5, 108.5, 703.5 ],
+					"midpoints" : [ 137.000000000000057, 1409.5, 47.5, 1409.5, 47.5, 703.5, 108.5, 703.5 ],
 					"source" : [ "obj-9", 0 ]
 				}
 
@@ -3883,13 +3858,6 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "Sax_gentle cat_Slow.wav",
-				"bootpath" : "~/Music/Monophonic",
-				"patcherrelativepath" : "../../../../Music/Monophonic",
-				"type" : "WAVE",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "yin~.mxo",
 				"type" : "iLaX"
 			}
@@ -3922,9 +3890,9 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3935,20 +3903,19 @@
 						"autogradient" : 0
 					}
 ,
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"message" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3958,14 +3925,15 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-
-				}
 ,
-				"toggle" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
