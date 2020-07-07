@@ -103,7 +103,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 487.037452599836001, 115.27791303396225, 71.0, 22.0 ],
+					"patching_rect" : [ 545.537452599836001, 116.5, 71.0, 22.0 ],
 					"text" : "r #0_device"
 				}
 
@@ -585,7 +585,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 266.5, 213.0, 29.5, 22.0 ],
+					"patching_rect" : [ 266.5, 216.0, 29.5, 22.0 ],
 					"text" : "0"
 				}
 
@@ -609,7 +609,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "" ],
-					"patching_rect" : [ 297.5, 213.0, 50.75, 22.0 ],
+					"patching_rect" : [ 297.5, 216.0, 50.75, 22.0 ],
 					"text" : "t 1 l"
 				}
 
@@ -621,8 +621,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 266.5, 184.77791303396225, 50.0, 22.0 ],
-					"text" : "sel Inlet"
+					"patching_rect" : [ 266.5, 184.77791303396225, 114.0, 22.0 ],
+					"text" : "sel \"Inlet (External)\""
 				}
 
 			}
@@ -671,8 +671,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 266.5, 115.27791303396225, 75.0, 22.0 ],
-					"text" : "append Inlet"
+					"patching_rect" : [ 266.5, 115.27791303396225, 138.0, 22.0 ],
+					"text" : "append \"Inlet (External)\""
 				}
 
 			}
@@ -683,7 +683,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "bang" ],
-					"patching_rect" : [ 266.5, 74.0, 101.0, 22.0 ],
+					"patching_rect" : [ 266.5, 74.0, 159.5, 22.0 ],
 					"text" : "t b b"
 				}
 
@@ -853,7 +853,7 @@
 					"bgfillcolor_type" : "color",
 					"fontface" : 1,
 					"id" : "obj-204",
-					"items" : [ "AU DLS Synth 1", ",", "IAC IAC1", ",", "IAC IAC2", ",", "IAC IAC3", ",", "IAC IAC4", ",", "from Max 1", ",", "from Max 2", ",", "Inlet" ],
+					"items" : [ "AU DLS Synth 1", ",", "IAC IAC1", ",", "IAC IAC2", ",", "IAC IAC3", ",", "IAC IAC4", ",", "from Max 1", ",", "from Max 2", ",", "Inlet (External)" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -953,7 +953,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 329.25, 277.0, 64.0, 22.0 ],
+					"patching_rect" : [ 329.25, 280.0, 64.0, 22.0 ],
 					"text" : "pack 0 0 0"
 				}
 
@@ -1003,7 +1003,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 348.5, 105.27791303396225, 131.0, 35.0 ],
+					"patching_rect" : [ 407.0, 106.5, 131.0, 35.0 ],
 					"text" : "midiinfo @autopollcontrollers 1"
 				}
 
@@ -1018,7 +1018,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "int", "int" ],
-					"patching_rect" : [ 329.25, 244.0, 64.0, 23.0 ],
+					"patching_rect" : [ 329.25, 247.0, 64.0, 23.0 ],
 					"text" : "notein"
 				}
 
@@ -1232,7 +1232,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-204", 0 ],
-					"midpoints" : [ 496.537452599836001, 143.5, 276.0, 143.5 ],
+					"midpoints" : [ 555.037452599836001, 143.5, 276.0, 143.5 ],
 					"source" : [ "obj-146", 0 ]
 				}
 
@@ -1363,7 +1363,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-204", 0 ],
-					"midpoints" : [ 358.0, 146.638956516981125, 276.0, 146.638956516981125 ],
+					"midpoints" : [ 416.5, 146.638956516981125, 276.0, 146.638956516981125 ],
 					"source" : [ "obj-6", 0 ]
 				}
 
@@ -1476,6 +1476,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-99", 0 ],
+					"midpoints" : [ 371.0, 210.888956516981125, 307.0, 210.888956516981125 ],
 					"source" : [ "obj-98", 1 ]
 				}
 
