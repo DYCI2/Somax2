@@ -1819,7 +1819,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 438.0, 228.0, 50.0, 22.0 ],
+					"patching_rect" : [ 438.0, 207.0, 50.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1224.5, 369.75, 35.0, 22.0 ]
 				}
@@ -1832,7 +1832,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 429.0, 262.0, 59.0, 22.0 ],
+					"patching_rect" : [ 429.0, 241.0, 59.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1153.5, 369.75, 62.0, 22.0 ],
 					"text" : "pgmout 2"
@@ -1847,7 +1847,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 368.0, 228.0, 50.0, 22.0 ],
+					"patching_rect" : [ 368.0, 207.0, 50.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1224.5, 345.75, 35.0, 22.0 ]
 				}
@@ -1860,7 +1860,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 368.0, 262.0, 59.0, 22.0 ],
+					"patching_rect" : [ 368.0, 241.0, 59.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1153.5, 345.75, 62.0, 22.0 ],
 					"text" : "pgmout 1"
@@ -2273,7 +2273,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 362.0, 206.0, 84.0, 33.0 ],
+					"patching_rect" : [ 362.0, 185.0, 84.0, 33.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 3.0, 94.896678966789636, 106.0, 20.0 ],
 					"text" : "Output Channel:"
@@ -2929,7 +2929,7 @@
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
 					"name" : "somax.midiinfluencer.maxpat",
-					"numinlets" : 5,
+					"numinlets" : 3,
 					"numoutlets" : 3,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "bang", "int", "" ],
@@ -3889,33 +3889,17 @@
 		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontface" : [ 1 ]
-				}
-,
 				"newobj" : 				{
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ]
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3925,8 +3909,24 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
+
+				}
 ,
-					"fontface" : [ 1 ]
+				"default" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+
 				}
 ,
 				"button" : 				{
