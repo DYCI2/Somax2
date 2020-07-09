@@ -39,6 +39,19 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-18",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 486.0, 402.0, 100.0, 22.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 486.0, 402.0, 100.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-46",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -1241,7 +1254,7 @@
 				"box" : 				{
 					"comment" : "(list) Parameters",
 					"id" : "obj-194",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1458,7 +1471,7 @@
 					"patching_rect" : [ 871.0, 361.333333333333371, 97.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 12.541717500000004, 201.462494500000048, 311.0, 18.0 ],
-					"text" : "Pitch Channnels",
+					"text" : "Pitch Channels",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -3060,7 +3073,7 @@
 				"box" : 				{
 					"comment" : "(bang) Influence onset",
 					"id" : "obj-55",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3072,7 +3085,7 @@
 				"box" : 				{
 					"comment" : "(list) Continous chroma output",
 					"id" : "obj-54",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3084,7 +3097,7 @@
 				"box" : 				{
 					"comment" : "(int) Pitch influence",
 					"id" : "obj-53",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3109,7 +3122,7 @@
 				"box" : 				{
 					"comment" : "(bang) External trigger",
 					"id" : "obj-51",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -4186,7 +4199,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 37.541564999999991, 721.0, 65.541564999999991, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 14.541717500000004, 402.14166299999988, 159.0, 22.0 ],
+					"presentation_rect" : [ 15.541717500000004, 403.14166299999988, 159.0, 22.0 ],
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -4595,7 +4608,7 @@
 				"box" : 				{
 					"comment" : "(list) Midi data [nn, vel, ch]",
 					"id" : "obj-4",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -5752,10 +5765,27 @@
 
 			}
  ],
-		"boxgroups" : [ 			{
-				"boxes" : [ "obj-123", "obj-121", "obj-131", "obj-133", "obj-139", "obj-141", "obj-118", "obj-129", "obj-137", "obj-143", "obj-145", "obj-146", "obj-117", "obj-125", "obj-135", "obj-142", "obj-2", "obj-165", "obj-149" ]
+		"dependency_cache" : [ 			{
+				"name" : "midi2chroma.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/abstractions/other",
+				"patcherrelativepath" : "../other",
+				"type" : "JSON",
+				"implicit" : 1
 			}
 , 			{
+				"name" : "computeMemoryPitchClass.js",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/abstractions/js",
+				"patcherrelativepath" : "../js",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "bc.virfun.mxo",
+				"type" : "iLaX"
+			}
+ ],
+		"autosave" : 0,
+		"boxgroups" : [ 			{
 				"boxes" : [ "obj-91", "obj-48", "obj-50", "obj-56", "obj-57", "obj-58", "obj-60", "obj-61", "obj-62", "obj-63", "obj-69", "obj-70", "obj-73", "obj-80", "obj-88", "obj-90", "obj-1", "obj-167", "obj-168" ]
 			}
 , 			{
@@ -5773,20 +5803,23 @@
 , 			{
 				"boxes" : [ "obj-170", "obj-171", "obj-94", "obj-93", "obj-101", "obj-100", "obj-99", "obj-98", "obj-97", "obj-96", "obj-107", "obj-104", "obj-103", "obj-102", "obj-114", "obj-111", "obj-110", "obj-108", "obj-3" ]
 			}
+, 			{
+				"boxes" : [ "obj-123", "obj-121", "obj-131", "obj-133", "obj-139", "obj-141", "obj-118", "obj-129", "obj-137", "obj-143", "obj-145", "obj-146", "obj-117", "obj-125", "obj-135", "obj-142", "obj-2", "obj-165", "obj-149" ]
+			}
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"newobj" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"message" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -5800,10 +5833,10 @@
 				}
 ,
 				"default" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -5816,11 +5849,11 @@
 
 				}
 ,
-				"button" : 				{
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
-				"toggle" : 				{
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
