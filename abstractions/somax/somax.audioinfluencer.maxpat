@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 838.0, 730.0 ],
+		"rect" : [ 34.0, 78.0, 1372.0, 730.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -1139,7 +1139,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1697.0, 42.261108000000036, 134.0, 20.0 ],
+					"patching_rect" : [ 910.25, 484.0, 134.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 6.0, 175.261108000000036, 311.345443499999988, 118.137657162480878 ],
 					"proportion" : 0.5
@@ -1318,20 +1318,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1039.0, 236.460853038769528, 134.0, 20.0 ],
-					"proportion" : 0.5
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"id" : "obj-147",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 909.75, 482.0, 134.0, 20.0 ],
 					"proportion" : 0.5
 				}
 
@@ -2018,7 +2004,7 @@
 					}
 ,
 					"text" : "autopattr",
-					"varname" : "u308013266"
+					"varname" : "u577003180"
 				}
 
 			}
@@ -2568,7 +2554,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 661.333333333333371, 18.460853038769528, 30.0, 30.0 ]
 				}
 
@@ -3688,7 +3674,7 @@
 				"boxes" : [ "obj-162", "obj-163", "obj-5", "obj-184" ]
 			}
 , 			{
-				"boxes" : [ "obj-185", "obj-147", "obj-146", "obj-158", "obj-159", "obj-598", "obj-59", "obj-265", "obj-148", "obj-149", "obj-151", "obj-61", "obj-62", "obj-150", "obj-153", "obj-41", "obj-42", "obj-152", "obj-161", "obj-160", "obj-54", "obj-55", "obj-157", "obj-34", "obj-35", "obj-156" ]
+				"boxes" : [ "obj-185", "obj-146", "obj-158", "obj-159", "obj-598", "obj-59", "obj-265", "obj-148", "obj-149", "obj-151", "obj-61", "obj-62", "obj-150", "obj-153", "obj-41", "obj-42", "obj-152", "obj-161", "obj-160", "obj-54", "obj-55", "obj-157", "obj-34", "obj-35", "obj-156" ]
 			}
 , 			{
 				"boxes" : [ "obj-89", "obj-88", "obj-81", "obj-82", "obj-246", "obj-87", "obj-86", "obj-93", "obj-94", "obj-560", "obj-198", "obj-107", "obj-108", "obj-100", "obj-101", "obj-114", "obj-112", "obj-110", "obj-115", "obj-121", "obj-122", "obj-118", "obj-143" ]
