@@ -9,9 +9,10 @@ from maxosc.sender import Sender, SendFormat, MaxFormatter
 class SendProtocol:
     PLAYER_NUM_PEAKS = "num_peaks"
     PLAYER_SINGLE_PARAMETER = "param"
-    PLAYER_ALL_CORPORA = "corpus_info"
-    ALL_PLAYER_NAMES = "player_name"
+    PLAYER_CORPUS_FILES = "corpus_info"
+    PLAYER_NAME = "player_name"
 
+    SCHEDULER_RUNNING = "scheduler_running"
     SCHEDULER_CURRENT_TIME = "time"
     SCHEDULER_CURRENT_TEMPO = "tempo"
     SCHEDULER_TEMPO_MASTER = "tempo_master"

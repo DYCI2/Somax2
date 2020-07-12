@@ -12,4 +12,4 @@ class OscLogForwarder(Handler):
         self.setLevel(logging_level)
 
     def emit(self, record):
-        self.target.send(record.levelname, [self.format(record)])
+        self.target.send(record.levelname.lower(), [self.format(record)])

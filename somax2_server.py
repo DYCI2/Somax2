@@ -229,12 +229,12 @@ class SomaxStringDispatcher:
     # SCHEDULER
     ######################################################
 
-    def start(self):
+    def _start(self):
         self.clear_all()
         self.scheduler.start()
         self.logger.info(f"Scheduler Started. Current tick is {self.scheduler.tick:.2f}.")
 
-    def stop(self):
+    def _stop(self):
         """ Stops the scheduler and resets the state of all players """
         self.clear_all()
         self.scheduler.stop()
@@ -392,6 +392,7 @@ class SomaxServer(Caller, SomaxStringDispatcher):
         await self.scheduler.init_async_loop()  # Start scheduler and run until termination of application
         transport.close()
         self.logger.info("SoMaxServer was successfully terminated.")
+        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
 
     def __process_osc(self, _address, *args):
         args_str: str = MaxFormatter.format_as_string(*args)
@@ -427,12 +428,12 @@ class SomaxServer(Caller, SomaxStringDispatcher):
         for file in os.listdir(filepath):
             if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
                 corpus_name, _ = os.path.splitext(file)
-                self.target.send(SendProtocol.PLAYER_ALL_CORPORA, (corpus_name, os.path.join(filepath, file)))
-        self.target.send(SendProtocol.PLAYER_ALL_CORPORA, Target.WRAPPED_BANG)
+                self.target.send(SendProtocol.PLAYER_CORPUS_FILES, (corpus_name, os.path.join(filepath, file)))
+        self.target.send(SendProtocol.PLAYER_CORPUS_FILES, Target.WRAPPED_BANG)
 
     def get_player_names(self):
         for player_name in self.players.keys():
-            self.target.send(SendProtocol.ALL_PLAYER_NAMES, [player_name])
+            self.target.send(SendProtocol.PLAYER_NAME, [player_name])
 
     def get_peaks(self, player: str):
         try:
@@ -457,6 +458,14 @@ class SomaxServer(Caller, SomaxStringDispatcher):
     ######################################################
     # MAX SETTERS WITH RETURN VALUES
     ######################################################
+
+    def start(self):
+        self._start()
+        self.target.send(SendProtocol.SCHEDULER_RUNNING, True)
+
+    def stop(self):
+        self._stop()
+        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
 
     def set_tempo_master(self, player: Optional[str]):
         """ :returns whether the scheduler has a tempo master after operation """

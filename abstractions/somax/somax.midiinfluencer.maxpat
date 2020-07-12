@@ -224,7 +224,8 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 14.541717500000004, 343.462494499999934, 158.5, 22.0 ],
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"textjustification" : 1
+					"textjustification" : 1,
+					"varname" : "pitchfromchords"
 				}
 
 			}
@@ -1208,8 +1209,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 897.0, 102.116522386238159, 137.0, 22.0 ],
-					"text" : "s #0_pitchfromchords"
+					"patching_rect" : [ 897.0, 102.116522386238159, 152.0, 22.0 ],
+					"text" : "s #0_pitchfromchordssymb"
 				}
 
 			}
@@ -1220,8 +1221,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 745.0, 102.116522386238159, 105.0, 22.0 ],
-					"text" : "s #0_onsetfrom"
+					"patching_rect" : [ 745.0, 102.116522386238159, 120.0, 22.0 ],
+					"text" : "s #0_onsetfromsymb"
 				}
 
 			}
@@ -1241,7 +1242,7 @@
 				"box" : 				{
 					"comment" : "(list) Parameters",
 					"id" : "obj-194",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1383,8 +1384,8 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 393.75, 630.0, 135.0, 22.0 ],
-					"text" : "r #0_pitchfromchords"
+					"patching_rect" : [ 393.75, 630.0, 150.0, 22.0 ],
+					"text" : "r #0_pitchfromchordssymb"
 				}
 
 			}
@@ -1396,8 +1397,8 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 18.812347499999987, 631.0, 103.0, 22.0 ],
-					"text" : "r #0_onsetfrom"
+					"patching_rect" : [ 18.812347499999987, 631.0, 118.0, 22.0 ],
+					"text" : "r #0_onsetfromsymb"
 				}
 
 			}
@@ -1518,6 +1519,7 @@
 			}
 , 			{
 				"box" : 				{
+					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
 					"id" : "obj-162",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -3060,7 +3062,7 @@
 				"box" : 				{
 					"comment" : "(bang) Influence onset",
 					"id" : "obj-55",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3072,7 +3074,7 @@
 				"box" : 				{
 					"comment" : "(list) Continous chroma output",
 					"id" : "obj-54",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3084,7 +3086,7 @@
 				"box" : 				{
 					"comment" : "(int) Pitch influence",
 					"id" : "obj-53",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3109,7 +3111,7 @@
 				"box" : 				{
 					"comment" : "(bang) External trigger",
 					"id" : "obj-51",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -3183,6 +3185,7 @@
 			}
 , 			{
 				"box" : 				{
+					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-36",
@@ -3569,6 +3572,7 @@
 			}
 , 			{
 				"box" : 				{
+					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-35",
@@ -4188,7 +4192,8 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 15.541717500000004, 403.14166299999988, 159.0, 22.0 ],
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"textjustification" : 1
+					"textjustification" : 1,
+					"varname" : "onsetfrom"
 				}
 
 			}
@@ -4207,6 +4212,7 @@
 			}
 , 			{
 				"box" : 				{
+					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-11",
@@ -4595,7 +4601,7 @@
 				"box" : 				{
 					"comment" : "(list) Midi data [nn, vel, ch]",
 					"id" : "obj-4",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -5752,6 +5758,26 @@
 
 			}
  ],
+		"dependency_cache" : [ 			{
+				"name" : "midi2chroma.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/abstractions/other",
+				"patcherrelativepath" : "../other",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "computeMemoryPitchClass.js",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/abstractions/js",
+				"patcherrelativepath" : "../js",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "bc.virfun.mxo",
+				"type" : "iLaX"
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-91", "obj-48", "obj-50", "obj-56", "obj-57", "obj-58", "obj-60", "obj-61", "obj-62", "obj-63", "obj-69", "obj-70", "obj-73", "obj-80", "obj-88", "obj-90", "obj-1", "obj-167", "obj-168" ]
 			}
@@ -5776,52 +5802,52 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ]
-				}
-,
-				"message" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-
-				}
-,
-				"default" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-
-				}
-,
 				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
+				"newobj" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"fontface" : [ 1 ]
+				}
+,
 				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"default" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontface" : [ 1 ]
+				}
+,
+				"message" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontface" : [ 1 ]
 				}
 ,
 				"parentstyle" : "",
