@@ -39,6 +39,43 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 14.0,
+					"id" : "obj-858",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 156.0, 471.0, 291.0, 22.0 ],
+					"text" : "Thispatcher generation area (above line)"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"border" : 5.0,
+					"id" : "obj-856",
+					"linecolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"maxclass" : "live.line",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 156.0, 464.0, 1217.0, 5.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"border" : 5.0,
+					"id" : "obj-855",
+					"linecolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"maxclass" : "live.line",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 154.0, 8.0, 6.0, 461.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"color" : [ 0.980525732040405, 0.526075959205627, 0.0, 1.0 ],
 					"id" : "obj-246",
 					"maxclass" : "newobj",
