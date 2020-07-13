@@ -245,9 +245,16 @@ class SomaxStringDispatcher:
             self.scheduler.flush_held(player)
             player.clear()
 
-    def set_tempo(self, tempo: Union[float, int]):
+    def _set_tempo(self, tempo: Union[float, int]):
+        if self.scheduler.tempo_master is not None:
+            self.logger.error(f"Could not set tempo. Scheduler currently receives its tempo "
+                              f"from player '{self.scheduler.tempo_master.name}'.")
+            return
         if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
-            self.scheduler.add_tempo_event(self.scheduler.tick, tempo)
+            if self.scheduler.running:
+                self.scheduler.add_tempo_event(self.scheduler.tick, tempo)
+            else:
+                self.scheduler.tempo = tempo
         else:
             self.logger.error(f"Tempo must be a single value larger than zero. Did not set tempo.")
 
@@ -391,8 +398,10 @@ class SomaxServer(Caller, SomaxStringDispatcher):
         transport, protocol = await self.server.create_serve_endpoint()
         await self.scheduler.init_async_loop()  # Start scheduler and run until termination of application
         transport.close()
+
+    def exit(self):
         self.logger.info("SoMaxServer was successfully terminated.")
-        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
+        self.target.send(SendProtocol.SCHEDULER_RESET_UI, Target.WRAPPED_BANG)
 
     def __process_osc(self, _address, *args):
         args_str: str = MaxFormatter.format_as_string(*args)
@@ -467,10 +476,14 @@ class SomaxServer(Caller, SomaxStringDispatcher):
         self._stop()
         self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
 
+    def set_tempo(self, tempo: Union[int, float]):
+        self._set_tempo(tempo)
+        self.get_tempo()  # send tempo to server
+
     def set_tempo_master(self, player: Optional[str]):
         """ :returns whether the scheduler has a tempo master after operation """
         has_tempo_master: bool = self._set_tempo_master(player)
-        self.target.send(SendProtocol.SCHEDULER_TEMPO_MASTER, has_tempo_master)
+        self.target.send(SendProtocol.SCHEDULER_HAS_TEMPO_MASTER, has_tempo_master)
 
 
 if __name__ == "__main__":
@@ -496,5 +509,5 @@ if __name__ == "__main__":
     try:
         asyncio.run(run())
     except KeyboardInterrupt:
-        somax_server.logger.info("SoMaxServer Terminated.")
+        somax_server.exit()
         sys.exit(1)
