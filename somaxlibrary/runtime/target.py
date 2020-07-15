@@ -12,6 +12,7 @@ class SendProtocol:
     PLAYER_CORPUS_FILES = "corpus_info"
     PLAYER_NAME = "player_name"
 
+
     SCHEDULER_RUNNING = "scheduler_running"
     SCHEDULER_CURRENT_TIME = "time"
     SCHEDULER_CURRENT_TEMPO = "tempo"
@@ -20,6 +21,8 @@ class SendProtocol:
     SCHEDULER_RESET_UI = "reset"
 
     SERVER_DEBUG_POLL = "poll_server"
+    SERVER_STATUS = "server_status"
+
 
 
 class Target(ABC):

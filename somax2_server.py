@@ -460,9 +460,15 @@ class SomaxServer(Caller, SomaxStringDispatcher):
         except (ParameterError, AssertionError) as e:
             self.logger.error(str(e))
 
-    def debug_poll_server(self):
-        """ Returns a bang when called. Used to debug whether server is running """
-        self.target.send(SendProtocol.SERVER_DEBUG_POLL, Target.WRAPPED_BANG)
+    def server_status(self, players: Optional[List[str]]):
+        if players is None:
+            all_players_exist: bool = True
+        else:
+            try:
+                all_players_exist = all([self.players[p] is not None for p in players])
+            except KeyError:
+                all_players_exist = False
+        self.target.send(SendProtocol.SERVER_STATUS, [all_players_exist, self.scheduler.running])
 
     ######################################################
     # MAX SETTERS WITH RETURN VALUES

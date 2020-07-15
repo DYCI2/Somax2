@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1006.0, 730.0 ],
+		"rect" : [ 34.0, 79.0, 1006.0, 730.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -134,22 +134,6 @@
 					"presentation_rect" : [ 185.034919551456142, 196.0, 62.465080448543858, 22.0 ],
 					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"varname" : "sendport"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"id" : "obj-66",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 243.0, 501.0, 97.0, 26.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 178.430160897087717, 194.0, 69.069839102912283, 26.0 ],
-					"proportion" : 0.5
 				}
 
 			}
@@ -1659,7 +1643,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1452.75, 56.439567114741294, 59.5, 22.0 ],
 					"restore" : 					{
-						"pollinterval" : [ 200 ],
+						"pollinterval" : [ 50 ],
 						"recvport" : [ 444 ],
 						"reloadplayernames" : [ 0.0 ],
 						"sendport" : [ 8885 ],
@@ -1667,7 +1651,7 @@
 					}
 ,
 					"text" : "autopattr",
-					"varname" : "u896009554"
+					"varname" : "u503012056"
 				}
 
 			}
@@ -2259,6 +2243,22 @@
 					"patching_rect" : [ 137.0, 941.758865248227039, 40.0, 20.241134751772961 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 234.0, 56.625, 94.5, 29.0 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"id" : "obj-66",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 159.0, 598.283750000000055, 60.0, 24.716249999999945 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 178.430160897087717, 194.0, 69.069839102912283, 26.0 ],
 					"proportion" : 0.5
 				}
 
