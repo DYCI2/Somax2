@@ -12,7 +12,7 @@
 		"classnamespace" : "box",
 		"rect" : [ 34.0, 79.0, 1006.0, 730.0 ],
 		"bglocked" : 0,
-		"openinpresentation" : 0,
+		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
 		"default_fontface" : 0,
 		"default_fontname" : "Arial",
@@ -47,7 +47,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 347.5, 588.0, 45.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 277.0, 567.000000000000114, 45.0, 18.0 ],
+					"presentation_rect" : [ 0.0, 4.000000000000114, 45.0, 18.0 ],
 					"text" : "Status",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -278,7 +278,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 416.0, 627.960344827586255, 60.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 320.0, 565.000000000000227, 147.661309974726919, 22.0 ],
+					"presentation_rect" : [ 43.0, 2.000000000000227, 147.661309974726919, 22.0 ],
 					"text" : "OFFLINE",
 					"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ],
 					"textjustification" : 1
@@ -551,7 +551,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 416.0, 665.920689655172396, 126.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 320.0, 565.000000000000227, 147.661309974726919, 22.0 ],
+					"presentation_rect" : [ 43.0, 2.000000000000227, 147.661309974726919, 22.0 ],
 					"text" : "PLAYER(S) MISSING",
 					"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ],
 					"textjustification" : 1
@@ -590,7 +590,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 416.0, 703.88103448275865, 51.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 320.0, 565.000000000000227, 148.0, 22.0 ],
+					"presentation_rect" : [ 43.0, 2.000000000000227, 148.0, 22.0 ],
 					"text" : "READY",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
@@ -618,7 +618,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 416.0, 741.841379310344792, 64.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 320.0, 565.000000000000227, 147.661309974726919, 22.0 ],
+					"presentation_rect" : [ 43.0, 2.000000000000227, 147.661309974726919, 22.0 ],
 					"text" : "RUNNING",
 					"textcolor" : [ 0.481437705647327, 0.846666309931507, 0.361908344245232, 1.0 ],
 					"textjustification" : 1
@@ -636,7 +636,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 339.0, 579.460344827586141, 62.0, 35.079310344827718 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 277.0, 563.000000000000114, 194.661309974726919, 26.0 ],
+					"presentation_rect" : [ 0.0, 0.000000000000114, 194.661309974726919, 26.0 ],
 					"proportion" : 0.5
 				}
 

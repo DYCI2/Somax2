@@ -58,13 +58,15 @@ class Streamview(Parametric):
 
         peaks_list: List[Peaks] = []
         for streamview in self.streamviews.values():
-            peaks: Peaks = streamview._merged_peaks(time, history, corpus, **kwargs)
-            peaks.scale(streamview.weight / weight_sum)
-            peaks_list.append(peaks)
+            if streamview.is_enabled():
+                peaks: Peaks = streamview._merged_peaks(time, history, corpus, **kwargs)
+                peaks.scale(streamview.weight / weight_sum)
+                peaks_list.append(peaks)
         for atom in self.atoms.values():
-            peaks: Peaks = atom.get_peaks()
-            peaks.scale(atom.weight / weight_sum)
-            peaks_list.append(peaks)
+            if atom.is_enabled():
+                peaks: Peaks = atom.get_peaks()
+                peaks.scale(atom.weight / weight_sum)
+                peaks_list.append(peaks)
 
         all_peaks: Peaks = Peaks.concatenate(peaks_list)
         return self.merge_action.merge(all_peaks, time, history, corpus, **kwargs)

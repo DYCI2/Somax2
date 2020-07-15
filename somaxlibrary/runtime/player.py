@@ -143,7 +143,9 @@ class Player(Streamview, ScheduledMidiObject):
                      corpus: Corpus, **kwargs):
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
         for scale_action in self.scale_actions.values():
-            peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, influence_history, corpus, **kwargs)
+            if scale_action.is_enabled():
+                peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, influence_history,
+                                           corpus, **kwargs)
         return peaks
 
     ######################################################

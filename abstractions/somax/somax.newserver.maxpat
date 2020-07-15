@@ -1290,14 +1290,14 @@
 					"numinlets" : 2,
 					"numoutlets" : 4,
 					"outlettype" : [ "dictionary", "", "", "" ],
-					"patching_rect" : [ 559.125, 1034.517730496454078, 85.0, 22.0 ],
+					"patching_rect" : [ 559.125, 1034.517730496454078, 105.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 0,
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
 					}
 ,
-					"text" : "dict paramDict"
+					"text" : "dict #0_paramDict"
 				}
 
 			}
@@ -1366,7 +1366,7 @@
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 45.0, 1064.27659574468089, 30.0, 30.0 ]
+					"patching_rect" : [ 32.0, 1064.27659574468089, 30.0, 30.0 ]
 				}
 
 			}
@@ -1651,7 +1651,7 @@
 					}
 ,
 					"text" : "autopattr",
-					"varname" : "u503012056"
+					"varname" : "u566011275"
 				}
 
 			}
@@ -2974,7 +2974,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-98", 0 ],
-					"midpoints" : [ 1301.5, 921.5, 54.5, 921.5 ],
+					"midpoints" : [ 1301.5, 921.5, 41.5, 921.5 ],
 					"source" : [ "obj-74", 8 ]
 				}
 
@@ -3194,17 +3194,11 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"message" : 				{
+				"default" : 				{
 					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3217,9 +3211,15 @@
 
 				}
 ,
-				"default" : 				{
+				"newobj" : 				{
 					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"message" : 				{
+					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{

@@ -67,12 +67,12 @@ class ClassicActivityPattern(AbstractActivityPattern):
 
     DEFAULT_T = 4.6
 
-    def __init__(self, corpus: Corpus = None):
+    def __init__(self, corpus: Corpus = None, tau_mem_decay: float = DEFAULT_T):
         super().__init__(corpus)
         self.logger.debug("[__init__]: ClassicActivityPattern initialized.")
         self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
         # TODO: tau shouldn't be the parameter: t should
-        self.tau_mem_decay: Parameter = ParamWithSetter(self._calc_tau(self.DEFAULT_T), 0, None, "float",
+        self.tau_mem_decay: Parameter = ParamWithSetter(self._calc_tau(tau_mem_decay), 0, None, "float",
                                                         "Number of updates until peak is decayed below threshold.",
                                                         self._set_tau)
         self.default_score: Parameter = Parameter(1.0, None, None, 'float', "Value of a new peaks upon creation.")
@@ -126,7 +126,6 @@ class ManualActivityPattern(AbstractActivityPattern):
         super().__init__(corpus)
         self.logger.debug("[__init__]: ManualActivityPattern initialized.")
         self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
-        # TODO: tau shouldn't be the parameter: n should
         self.tau_mem_decay: Parameter = ParamWithSetter(self._calc_tau(self.DEFAULT_N), 1, None, "int",
                                                         "Number of updates until peak is decayed below threshold.",
                                                         self._set_tau)
