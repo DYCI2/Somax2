@@ -176,17 +176,17 @@ class SomaxStringDispatcher:
         except (ValueError, KeyError) as e:
             self.logger.error(f"{str(e)} No Peak Selector was set.")
 
-    def set_classifier(self, player: str, path: str, classifier_name: str, **kwargs):
+    def set_classifier(self, player: str, path: str, classifier: str, **kwargs):
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
-            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier_name, **kwargs)
+            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             self.players[player].set_classifier(path_and_name, classifier)
             self.logger.debug(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
                               f"for player '{player}.")
         except (AssertionError, KeyError, ValueError) as e:
             self.logger.error(f"{str(e)} No Classifier was set.")
 
-    def set_activity_pattern(self, player: str, path: str, activity_pattern: str, **kwargs):
+    def cset_activity_pattern(self, player: str, path: str, activity_pattern: str, **kwargs):
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)
