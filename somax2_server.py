@@ -434,11 +434,15 @@ class SomaxServer(Caller, SomaxStringDispatcher):
 
     def get_corpus_files(self):
         filepath: str = os.path.join(os.path.dirname(__file__), settings.CORPUS_FOLDER)
+        corpora: List[Tuple[str, str]] = []
         for file in os.listdir(filepath):
             if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
-                corpus_name, _ = os.path.splitext(file)
-                self.target.send(SendProtocol.PLAYER_CORPUS_FILES, (corpus_name, os.path.join(filepath, file)))
-        self.target.send(SendProtocol.PLAYER_CORPUS_FILES, Target.WRAPPED_BANG)
+                corpus_name, _ = os.path.splitext(file) # TODO: Not the corpus name that's specified in the json
+                corpora.append((corpus_name, os.path.join(filepath, file)))
+        for player in self.players.values():
+            player.send_corpora(corpora)
+
+
 
     def get_player_names(self):
         for player_name in self.players.keys():

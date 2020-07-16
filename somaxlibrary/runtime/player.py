@@ -157,3 +157,9 @@ class Player(Streamview, ScheduledMidiObject):
         for atom in self._all_atoms():
             peaks: Peaks = atom.get_peaks()
             self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [atom.name, peaks.size()])
+
+    def send_corpora(self, corpus_names_and_paths: List[Tuple[str, str]]):
+        for corpus in corpus_names_and_paths:
+            self.target.send(SendProtocol.PLAYER_CORPUS_FILES, corpus)
+        self.target.send(SendProtocol.PLAYER_CORPUS_FILES, Target.WRAPPED_BANG)
+
