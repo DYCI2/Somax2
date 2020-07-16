@@ -186,7 +186,7 @@ class SomaxStringDispatcher:
         except (AssertionError, KeyError, ValueError) as e:
             self.logger.error(f"{str(e)} No Classifier was set.")
 
-    def cset_activity_pattern(self, player: str, path: str, activity_pattern: str, **kwargs):
+    def set_activity_pattern(self, player: str, path: str, activity_pattern: str, **kwargs):
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)

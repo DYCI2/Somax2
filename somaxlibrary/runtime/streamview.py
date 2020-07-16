@@ -53,7 +53,7 @@ class Streamview(Parametric):
         for atom in self.atoms.values():
             weight_sum += atom.weight if atom.is_enabled() else 0.0
         if weight_sum < 1e-6:
-            self.logger.warning(f"Weights are invalid. Setting weight to 1.0 in Streamview '{self.name}'.")
+            self.logger.warning(f"Weights are invalid. Setting weight to 1.0 in streamview '{self.name}'.")
             weight_sum = 1.0
 
         peaks_list: List[Peaks] = []
