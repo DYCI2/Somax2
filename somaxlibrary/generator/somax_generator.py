@@ -110,7 +110,7 @@ class SomaxGenerator(ABC):
                 self.scheduler.add_influence_event(self.player, event.onset, [], CorpusInfluence(event))
                 self.scheduler.add_tempo_event(event.onset, event.tempo)
                 # Add one trigger for each influence
-                if self._player.trigger_mode == TriggerMode.MANUAL:
+                if self._player.set_trigger_mode == TriggerMode.MANUAL:
                     self.scheduler.add_trigger_event(self.player, event.onset)
         # Add a single trigger at the beginning
         # TODO: This has been moved to OptimizedOfflineScheduler. Legacy code still there as it

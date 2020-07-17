@@ -280,7 +280,7 @@ class SomaxStringDispatcher:
     # TODO: Remove and change into generic set scheduling param
     # TODO: Should also generalize Scheduler.add_trigger_event or some other aspect so that the last lines
     #       of this function are handled by scheduler, not at parsing time
-    def trigger_mode(self, player: str, mode: str):
+    def set_trigger_mode(self, player: str, mode: str):
         try:
             trigger_mode: TriggerMode = TriggerMode.from_string(mode)
         except ValueError as e:
@@ -297,7 +297,7 @@ class SomaxStringDispatcher:
             self.scheduler.add_trigger_event(self.players[player])
         self.logger.debug(f"[trigger_mode]: Trigger mode set to '{trigger_mode}' for player '{player}'.")
 
-    def held_notes_mode(self, player: str, enable: bool):
+    def set_held_notes_mode(self, player: str, enable: bool):
         try:
             p: Player = self.players[player]
             p.hold_notes_artificially = enable
@@ -306,7 +306,7 @@ class SomaxStringDispatcher:
         except KeyError:
             self.logger.error(f"No player named '{player}' exists. Could not set mode.")
 
-    def simultaneous_onset_mode(self, player: str, enable: bool):
+    def set_onset_mode(self, player: str, enable: bool):
         try:
             p: Player = self.players[player]
             p.simultaneous_onsets = enable
