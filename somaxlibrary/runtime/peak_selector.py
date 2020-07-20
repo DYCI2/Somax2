@@ -95,7 +95,6 @@ class ThresholdPeakSelector(AbstractPeakSelector):
     def _decide_default(self, peaks: Peaks, influence_history: ImprovisationMemory, corpus: Corpus,
                         transform_dict: {int: Tuple[AbstractTransform, ...]},
                         **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
-        self.logger.debug("[decide] _decide_default called.")
         if peaks.empty():
             return None
         max_peak_value: float = np.max(peaks.scores)
