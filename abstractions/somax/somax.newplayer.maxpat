@@ -39,6 +39,19 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+					"id" : "obj-5",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1976.0, 99.0, 70.0, 22.0 ],
+					"text" : "loadmess 0"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-368",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -229,7 +242,7 @@
 				"box" : 				{
 					"comment" : "(unused - all input received over OSC)",
 					"id" : "obj-1",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -432,7 +445,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1811.833333333333258, 195.5, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 550.020064361963364, 41.362492114305496, 432.58333333333303, 471.600008189678249 ],
+					"presentation_rect" : [ 4.208333333333485, 43.362492114305439, 432.58333333333303, 471.600008189678249 ],
 					"proportion" : 0.5,
 					"rounded" : 0
 				}
@@ -1707,7 +1720,7 @@
 					"patching_rect" : [ 288.725552050473198, 121.0, 180.0, 27.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 12.41666666666697, 10.5, 417.206791099058364, 27.0 ],
-					"text" : "#1",
+					"text" : "Player",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -2119,7 +2132,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-388",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2425,7 +2438,7 @@
 				"box" : 				{
 					"comment" : "(list) Parameters",
 					"id" : "obj-236",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -2462,19 +2475,19 @@
 					"patching_rect" : [ 1670.75, 92.439567114741294, 56.0, 22.0 ],
 					"restore" : 					{
 						"continuity" : [ 1.5 ],
-						"decaybasis" : [ 1 ],
+						"decaybasis" : [ 0 ],
 						"disabled" : [ 0 ],
 						"harmonicbypass" : [ 0 ],
 						"harmonicngramorder" : [ 3 ],
 						"harmonincpeakdecay" : [ 4.6 ],
-						"heldnotesmode" : [ 1 ],
+						"heldnotesmode" : [ 0 ],
 						"ignorephase" : [ 0 ],
 						"melodicbypass" : [ 0 ],
 						"melodicmod12" : [ 0 ],
 						"melodicngramorder" : [ 3 ],
 						"melodicpeakdecay" : [ 4.6 ],
 						"outputthreshold" : [ 0.0 ],
-						"playingmode" : [ 1 ],
+						"playingmode" : [ 0 ],
 						"pollpeaks" : [ 1 ],
 						"port" : [ 1236 ],
 						"reinstantiate" : [ 0.0 ],
@@ -2482,11 +2495,11 @@
 						"selfmod12" : [ 0 ],
 						"selfngramorder" : [ 3 ],
 						"selfpeakdecay" : [ 4.6 ],
-						"simultaneousonsets" : [ 1 ]
+						"simultaneousonsets" : [ 0 ]
 					}
 ,
 					"text" : "autopattr",
-					"varname" : "u993002172"
+					"varname" : "u260008751"
 				}
 
 			}
@@ -3525,7 +3538,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1042.0, 1292.361470368357004, 93.0, 35.0 ],
+					"patching_rect" : [ 1042.0, 1292.361470368357004, 87.0, 35.0 ],
 					"text" : "s #0_to_server"
 				}
 
@@ -3790,7 +3803,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1215.0, 1292.361470368357004, 114.0, 35.0 ],
+					"patching_rect" : [ 1215.0, 1292.361470368357004, 108.0, 35.0 ],
 					"text" : "v #0_trigger_mode"
 				}
 
@@ -5599,7 +5612,7 @@
 				"box" : 				{
 					"comment" : "(list) info messages from server",
 					"id" : "obj-119",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -5725,7 +5738,7 @@
 				"box" : 				{
 					"comment" : "(list) midi note out ",
 					"id" : "obj-92",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -6155,7 +6168,7 @@
 				"box" : 				{
 					"comment" : "(list) messages to server",
 					"id" : "obj-9",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -8997,6 +9010,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-509", 0 ],
+					"source" : [ "obj-5", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-512", 0 ],
 					"source" : [ "obj-509", 0 ]
 				}
@@ -9397,6 +9417,30 @@
 
 			}
  ],
+		"dependency_cache" : [ 			{
+				"name" : "somax.atom.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/abstractions/somax",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpusview.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/abstractions/somax",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "OpenSoundControl.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "OSC-route.mxo",
+				"type" : "iLaX"
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-115", "obj-113" ]
 			}
