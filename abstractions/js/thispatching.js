@@ -36,6 +36,10 @@ function sendbox() {
     myPatcher.message(sendboxMessage)
 }
 
+function connect() {
+    myPatcher.message(["script", "connect"].concat(arrayfromargs(arguments)));
+}
+
 function createobjects() {
     var args = arrayfromargs(arguments);
     if (args.length < 17) {
@@ -104,7 +108,7 @@ function _connectObjects(baseNameFrom, baseNameTo, n, objectFromOffset, objectFr
         var outlet = outletOffset + outletIncrement * i;
         var inlet = inletOffset + inletIncrement * i;
 
-        post("script", "connect", nameFrom, outlet, nameTo, inlet, "\n");
+        // post("script", "connect", nameFrom, outlet, nameTo, inlet, "\n");
         myPatcher.message("script", "connect", nameFrom, outlet, nameTo, inlet);
     }
 
@@ -146,13 +150,14 @@ function _createObjects(basename, n, baseContent, xOffset, yOffset, xIncrement, 
         var obj;
         if (legacyFormat === 1) {
             var msg = ["script", "newdefault", name, xPos, yPos].concat(content)
+            post(msg, "\n")
             obj = myPatcher.message(msg)
-            post(obj, "\n")
-        } else {
+        }
+        else {
             var objectClass = content.slice(0, 1)
             content = content.slice(1).concat(["@varname", name])
             obj = myPatcher.newdefault(xPos, yPos, objectClass, content)
-            post("command ", xPos, yPos, objectClass, content, "\n")
+            // post("command ", xPos, yPos, objectClass, content, "\n")
 
         }
         if (bringToFront > 0) {
