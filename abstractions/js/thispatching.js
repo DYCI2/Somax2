@@ -114,7 +114,7 @@ function _connectObjects(baseNameFrom, baseNameTo, n, objectFromOffset, objectFr
 
 }
 
-
+// TODO: Should add offset + increment to number as well (useful when recreating only specific indices)
 function _createObjects(basename, n, baseContent, xOffset, yOffset, xIncrement, yIncrement, width, height, xPresentationOffset,
                         yPresentationOffset, xPresentationIncrement, yPresentationIncrement, presentationWidth,
                         presentationHeight, bringToFront, sendToBack, legacyFormat, iterargs) {
@@ -150,7 +150,6 @@ function _createObjects(basename, n, baseContent, xOffset, yOffset, xIncrement, 
         var obj;
         if (legacyFormat === 1) {
             var msg = ["script", "newdefault", name, xPos, yPos].concat(content)
-            post(msg, "\n")
             obj = myPatcher.message(msg)
         }
         else {

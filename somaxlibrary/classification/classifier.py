@@ -10,7 +10,7 @@ from somaxlibrary.runtime.label import AbstractLabel
 from somaxlibrary.utils.introspective import Introspective
 
 
-class AbstractClassifier(ABC, Introspective):
+class AbstractClassifier(Introspective, ABC):
 
     def __init__(self, **kwargs):
         pass
