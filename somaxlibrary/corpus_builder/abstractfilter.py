@@ -9,7 +9,7 @@ from somaxlibrary.utils.introspective import Introspective
 
 class AbstractFilter(Introspective, ABC):
     DEFAULT = "default"
-    _DEFAULT_FILTER = "LeakyIntegrator"
+    _DEFAULT_FILTER = "leakyintegrator"
 
     def __init__(self, decay_length_ms: float = 0.0, **_kwargs):
         """ decay_length_ms is the time until the envelope approaches 0 after an activation

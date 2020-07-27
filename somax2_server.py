@@ -39,7 +39,8 @@ class SomaxStringDispatcher:
     IP_LOCALHOST = "127.0.0.1"
     PATH_SEPARATOR = "::"
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.logger = logging.getLogger(__name__)
         self.players: Dict[str, Player] = dict()
         self.scheduler = RealtimeScheduler()
@@ -161,7 +162,7 @@ class SomaxStringDispatcher:
                 self.logger.debug(f"[influence_onset] Influence onset triggered for player '{player}'.")
                 self.scheduler.add_trigger_event(self.players[player])
         except KeyError:
-            self.logger.error(f"No player named '{player}' exists.")
+            self.logger.error(f" '{player}' exists.")
 
     ######################################################
     # MODIFY PLAYER/STREAMVIEW/ATOM STATE
@@ -370,7 +371,7 @@ class SomaxStringDispatcher:
         return string
 
 
-class SomaxServer(Caller, SomaxStringDispatcher):
+class SomaxServer(SomaxStringDispatcher, Caller):
     DEFAULT_RECV_PORT = 1234
     DEFAULT_SEND_PORT = 1235
     SERVER_ADDRESS = "/server"
@@ -452,7 +453,7 @@ class SomaxServer(Caller, SomaxStringDispatcher):
         try:
             self.players[player].send_peaks()
         except KeyError:
-            self.logger.error(f"No player named '{player}' exists.")
+            return
 
     def get_param(self, player: str, path: str):
         try:
