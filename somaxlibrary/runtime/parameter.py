@@ -10,14 +10,16 @@ Ranged = Union[MaxCompatible, None]
 
 class HasParameterDict(ABC):
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.parameter_dict: Dict[str, Union[Parametric, Parameter, Dict]] = {}
 
 
 class Parameter(HasParameterDict):
 
-    def __init__(self, default_value: MaxCompatible, min: Ranged, max: Ranged, type_str: str, description: str):
-        super(Parameter, self).__init__()
+    def __init__(self, default_value: MaxCompatible, min: Ranged, max: Ranged,
+                 type_str: str, description: str):
+        super().__init__()
         self.value: MaxCompatible = default_value
         self.scope: Tuple[Ranged, Ranged] = (min, max)
         self.type_str: str = type_str
@@ -45,11 +47,11 @@ class ParamWithSetter(Parameter):
 
 class Parametric(HasParameterDict):
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         """ Parameter dict is a dict of dicts (of dicts of ...). Note: only dicts (no lists).
             It should be updated using parameter_dict() whenever parameter info is changed
             (for example, upon creating a streamview, adding a mergeaction or deleting an atom) """
-        super(Parametric, self).__init__()
+        super(Parametric, self).__init__(**kwargs)
         self.parameter_dict: Dict[str, Union[Parametric, Parameter]] = {}
 
     def max_representation(self) -> Dict:

@@ -19,8 +19,8 @@ class Streamview(Parametric):
     DEFAULT_WEIGHT = 1.0
 
     def __init__(self, name: str, weight: float = DEFAULT_WEIGHT, corpus: Optional[Corpus] = None,
-                 merge_action: AbstractMergeAction = AbstractMergeAction.default()):
-        super().__init__()
+                 merge_action: AbstractMergeAction = AbstractMergeAction.default(), **kwargs):
+        super().__init__(**kwargs)
         self.logger = logging.getLogger(__name__)
         self.name: str = name
         self.merge_action: AbstractMergeAction = merge_action

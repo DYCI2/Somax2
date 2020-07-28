@@ -37,7 +37,7 @@ class AbstractMergeAction(Parametric, Introspective, ABC):
 
     @classmethod
     def from_string(cls, merge_action: str, **kwargs) -> 'AbstractMergeAction':
-        return cls.from_string(merge_action, **kwargs)
+        return cls._from_string(merge_action, **kwargs)
 
 
 class DistanceMergeAction(AbstractMergeAction):

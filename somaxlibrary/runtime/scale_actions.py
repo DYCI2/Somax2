@@ -40,7 +40,7 @@ class AbstractScaleAction(Parametric, Introspective, ABC):
 
     @classmethod
     def from_string(cls, scale_action: str, **kwargs) -> 'AbstractScaleAction':
-        return cls.from_string(scale_action, **kwargs)
+        return cls._from_string(scale_action, **kwargs)
 
     def is_enabled(self):
         return self.enabled.value

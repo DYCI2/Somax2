@@ -1,7 +1,7 @@
 import inspect
 import logging
 import sys
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 from collections import deque
 from typing import Tuple, Dict, Union, Optional, List, Type, Any
 
@@ -18,7 +18,7 @@ from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
 from somaxlibrary.utils.introspective import Introspective
 
 
-class AbstractMemorySpace(Parametric, Introspective):
+class AbstractMemorySpace(Parametric, Introspective, ABC):
     """ MemorySpaces determine how events are matched to labels """
 
     def __init__(self, transforms: Optional[List[Tuple[Type[AbstractTransform], ...]]] = None,

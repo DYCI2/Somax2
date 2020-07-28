@@ -1,4 +1,5 @@
 import logging
+from abc import ABC
 from enum import Enum
 from typing import List
 
@@ -24,16 +25,16 @@ class TriggerMode(Enum):
             return cls.default()
 
 
-class ScheduledObject(Parametric):
-    def __init__(self, trigger_mode: TriggerMode):
-        super(ScheduledObject, self).__init__()
+class ScheduledObject(ABC):
+    def __init__(self, trigger_mode: TriggerMode, **kwargs):
+        super(ScheduledObject, self).__init__(**kwargs)
         self.trigger_mode: trigger_mode = trigger_mode
 
 
 class ScheduledMidiObject(ScheduledObject):
     def __init__(self, trigger_mode: TriggerMode, hold_notes_artificially: bool = False,
-                 simultaneous_onsets: bool = False):
-        super(ScheduledMidiObject, self).__init__(trigger_mode)
+                 simultaneous_onsets: bool = False, **kwargs):
+        super().__init__(trigger_mode=trigger_mode, **kwargs)
         self.held_notes: List[Note] = []
         self.hold_notes_artificially: bool = hold_notes_artificially
         self.artificially_held_notes: List[Note] = []

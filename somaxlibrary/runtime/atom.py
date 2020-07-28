@@ -19,8 +19,8 @@ class Atom(Parametric):
     DEFAULT_WEIGHT = 1.0
 
     def __init__(self, name: str, weight: float, classifier: AbstractClassifier,
-                 activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
-                 corpus: Corpus, self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
+                 activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,corpus: Corpus,
+                 self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"[__init__ Creating atom '{name}'.")

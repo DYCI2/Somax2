@@ -26,9 +26,10 @@ class Player(Streamview, ScheduledMidiObject):
                  peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
                  merge_action: AbstractMergeAction = AbstractMergeAction.default(),
                  corpus: Optional[Corpus] = None,
-                 scale_actions: List[AbstractScaleAction] = AbstractScaleAction.default_set()):
-        Streamview.__init__(self, name=name, weight=Streamview.DEFAULT_WEIGHT, corpus=corpus, merge_action=merge_action)
-        ScheduledMidiObject.__init__(self, trigger_mode=trigger_mode)
+                 scale_actions: List[AbstractScaleAction] = AbstractScaleAction.default_set(),
+                 **kwargs):
+        super().__init__(name, corpus=corpus, merge_action=merge_action,
+                         trigger_mode=trigger_mode, **kwargs)
         self.logger = logging.getLogger(__name__)
         self.target: Target = target
         self.peak_selector: AbstractPeakSelector = peak_selector

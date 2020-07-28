@@ -1,6 +1,6 @@
 import logging
 import random
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 from typing import Tuple, Optional, List
 
 import numpy as np
@@ -14,7 +14,7 @@ from somaxlibrary.runtime.transforms import AbstractTransform, NoTransform
 from somaxlibrary.utils.introspective import Introspective
 
 
-class AbstractPeakSelector(Parametric, Introspective):
+class AbstractPeakSelector(Parametric, Introspective, ABC):
 
     def __init__(self, **kwargs):
         super(AbstractPeakSelector, self).__init__()

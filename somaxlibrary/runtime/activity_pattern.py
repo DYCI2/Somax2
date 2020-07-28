@@ -1,7 +1,7 @@
 import inspect
 import logging
 import sys
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 from typing import Dict, Union, List, Type, Optional, Any
 
 import numpy as np
@@ -14,7 +14,7 @@ from somaxlibrary.runtime.peaks import Peaks
 from somaxlibrary.utils.introspective import Introspective
 
 
-class AbstractActivityPattern(Parametric, Introspective):
+class AbstractActivityPattern(Parametric, Introspective, ABC):
     SCORE_IDX = 0
     TIME_IDX = 1
     TRANSFORM_IDX = 2
