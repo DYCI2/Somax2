@@ -84,8 +84,8 @@ class Parametric(HasParameterDict):
                 param_dict[name] = variable
             # Parse all Parameter and Parametric inside other dicts (for example MergeAction)
             if isinstance(variable, collections.abc.Mapping):
-                for name, item in variable.items():
+                for object_type, item in variable.items():
                     if isinstance(item, Parameter) or isinstance(item, Parametric):
                         item._parse_parameters()
-                        param_dict[name] = item
+                        param_dict[object_type.__name__] = item
         self.parameter_dict = param_dict

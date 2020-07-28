@@ -18,10 +18,10 @@ class TriggerMode(Enum):
     @classmethod
     def from_string(cls, trigger_mode: str) -> 'TriggerMode':
         try:
-            return TriggerMode(trigger_mode)
+            return TriggerMode(trigger_mode.lower())
         except ValueError:
             logging.getLogger(__name__).warning(f"No class named '{trigger_mode} exists for the "
-                                                f"{cls.__module__} module. Using default.")
+                                                f"{cls.__name__} module. Using default.")
             return cls.default()
 
 

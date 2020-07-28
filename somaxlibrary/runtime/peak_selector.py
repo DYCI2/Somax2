@@ -20,6 +20,9 @@ class AbstractPeakSelector(Parametric, Introspective, ABC):
         super(AbstractPeakSelector, self).__init__()
         self.logger = logging.getLogger(__name__)
 
+    def __repr__(self):
+        return f"{type(self).__name__}(...)"
+
     @abstractmethod
     def _decide_default(self, peaks: Peaks, influence_history: ImprovisationMemory,
                         corpus: Corpus, transform_dict: {int: Tuple[AbstractTransform, ...]},
@@ -116,5 +119,5 @@ class ThresholdPeakSelector(AbstractPeakSelector):
 
     @property
     def threshold(self):
-        return self.threshold.value
+        return self._threshold.value
 

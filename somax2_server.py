@@ -51,7 +51,7 @@ class SomaxStringDispatcher:
 
     def create_player(self, player_name: str, port: int, ip: str = "", trigger_mode: str = "",
                       peak_selector: str = "", merge_action: str = "", corpus: str = "",
-                      scale_actions: Tuple[str, ...] = ("",), override: bool = False, **kwargs):
+                      scale_actions: Tuple[str, ...] = ("",), override: bool = False):
         if player_name in self.players and not override:
             self.logger.error(f"A Player with the name '{player_name}' already exists on the Server. "
                               f"No action was performed. Use 'override=True' to override existing Player.")
@@ -61,10 +61,9 @@ class SomaxStringDispatcher:
             address: str = self._parse_osc_address(player_name)
             ip: str = self._parse_ip(ip)
             trigger_mode: TriggerMode = TriggerMode.from_string(trigger_mode)
-            merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action, **kwargs)
-            peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
-            scale_actions: List[AbstractScaleAction] = [AbstractScaleAction.from_string(s, **kwargs)
-                                                        for s in scale_actions]
+            merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
+            peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector)
+            scale_actions: List[AbstractScaleAction] = [AbstractScaleAction.from_string(s) for s in scale_actions]
         except ValueError as e:
             self.logger.error(f"{str(e)}. No Player was created.")
             return
@@ -73,7 +72,7 @@ class SomaxStringDispatcher:
         self.players[player_name] = Player(name=player_name, target=target, trigger_mode=trigger_mode,
                                            peak_selector=peak_selector, merge_action=merge_action,
                                            corpus=None,     # intentional - set after instantiation if provided
-                                           scale_actions=scale_actions, **kwargs)
+                                           scale_actions=scale_actions)
         self.logger.info(f"Created player '{player_name}' with port {port} and ip {ip}.")
 
         if trigger_mode == TriggerMode.AUTOMATIC:
@@ -91,10 +90,10 @@ class SomaxStringDispatcher:
             self.logger.error(f"A Player with the name '{name}' doesn't exist. No Player was deleted.")
 
     def create_streamview(self, player: str, path: str, weight: float = Streamview.DEFAULT_WEIGHT,
-                          merge_action: str = "", override: bool = False, **kwargs):
+                          merge_action: str = "", override: bool = False):
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
-            merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action, **kwargs)
+            merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
             self.players[player].create_streamview(path=path_and_name, weight=weight, merge_action=merge_action,
                                                    override=override)
             self.logger.info(f"Created Streamview at path '{path}'.")
@@ -111,12 +110,12 @@ class SomaxStringDispatcher:
 
     def create_atom(self, player: str, path: str = "", weight: float = Atom.DEFAULT_WEIGHT, classifier: str = "",
                     activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
-                    transforms: Tuple[str, ...] = ("",), override: bool = False, **kwargs):
+                    transforms: Tuple[str, ...] = ("",), override: bool = False):
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
-            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
-            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)
-            memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space, **kwargs)
+            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier)
+            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
+            memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
             self.players[player].create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
                                              classifier=classifier, activity_pattern=activity_pattern,
                                              memory_space=memory_space, transforms=None, override=override)

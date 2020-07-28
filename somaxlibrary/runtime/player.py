@@ -117,6 +117,7 @@ class Player(Streamview, ScheduledMidiObject):
 
     def set_peak_selector(self, peak_selector: AbstractPeakSelector) -> None:
         self.peak_selector = peak_selector
+        self._parse_parameters()
 
     def add_scale_action(self, scale_action: AbstractScaleAction, override: bool = False):
         """ Raises: DuplicateKeyError """
@@ -125,6 +126,7 @@ class Player(Streamview, ScheduledMidiObject):
                                     f"To override: use 'override=True'.")
         else:
             self.scale_actions[type(scale_action)] = scale_action
+            self._parse_parameters()
 
     def remove_scale_action(self, scale_action_type: Type[AbstractScaleAction]):
         """ Raises: KeyError """
