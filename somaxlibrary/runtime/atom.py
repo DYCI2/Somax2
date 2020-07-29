@@ -30,7 +30,8 @@ class Atom(Parametric):
 
         self._classifier: AbstractClassifier = classifier
         self._memory_space: AbstractMemorySpace = memory_space
-        self._memory_space.add_transforms(transforms)
+        if transforms is not None:
+            self._memory_space.add_transforms(transforms)
         self._activity_pattern: AbstractActivityPattern = activity_pattern
         self._corpus: Optional[Corpus] = corpus
         self._self_influenced: Parameter = Parameter(self_influenced, 0, 1, 'bool',

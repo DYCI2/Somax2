@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 960.0, 730.0 ],
+		"rect" : [ 34.0, 78.0, 1372.0, 730.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -55,6 +55,8 @@
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 150.0, 1092.0, 219.0, 354.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 637.584603340888407, 41.325000250000016, 219.0, 354.0 ],
 					"varname" : "somax.player.c",
 					"viewvisibility" : 1
 				}

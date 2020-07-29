@@ -144,6 +144,8 @@ class Player(Streamview, ScheduledMidiObject):
 
     def _scale_peaks(self, peaks: Peaks, scheduler_time: float, influence_history: ImprovisationMemory,
                      corpus: Corpus, **kwargs):
+        if peaks.empty():
+            return peaks
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled():

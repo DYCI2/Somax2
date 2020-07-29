@@ -120,7 +120,7 @@ class Corpus:
         return self.event_at(index)
 
     def events_around(self, times: np.ndarray) -> List[CorpusEvent]:
-        indices: np.ndarray = self._index_map[int(np.floor(times * self._grid_size))]
+        indices: np.ndarray = self._index_map[(np.floor(times * self._grid_size)).astype(int)]
         events: List[CorpusEvent] = [self.event_at(index) for index in indices]
         return events
 

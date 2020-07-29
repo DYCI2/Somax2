@@ -29,7 +29,9 @@ class AbstractMemorySpace(Parametric, Introspective, ABC):
         self.logger = logging.getLogger(__name__)
         # TODO: Should also check that they work for this label
         self.transforms: [(AbstractTransform, ...)] = []
-        self.add_transforms(transforms)
+        if transforms is not None:
+            # TODO: Warning: Transforms added twice - both in Atom and in Memspace
+            self.add_transforms(transforms)
         self._corpus: Optional[Corpus] = corpus
         self._labels: Optional[List[AbstractLabel]] = labels
 
@@ -39,7 +41,7 @@ class AbstractMemorySpace(Parametric, Introspective, ABC):
 
     @classmethod
     def from_string(cls, memory_space: str, **kwargs) -> 'AbstractMemorySpace':
-        return cls.from_string(memory_space, **kwargs)
+        return cls._from_string(memory_space, **kwargs)
 
     @abstractmethod
     def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:

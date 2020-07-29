@@ -184,7 +184,7 @@ class SomaxStringDispatcher:
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             self.players[player].set_classifier(path_and_name, classifier)
             self.logger.debug(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
-                              f"for player '{player}.")
+                              f"for player '{player}'.")
         except (AssertionError, KeyError, ValueError) as e:
             self.logger.error(f"{str(e)} No Classifier was set.")
 
@@ -199,7 +199,7 @@ class SomaxStringDispatcher:
             self.logger.error(f"{str(e)} No Activity Pattern was set.")
 
     def read_corpus(self, player: str, filepath: str):
-        self.logger.info(f"Reading Corpus at '{filepath}' for Player '{player}'.")
+        self.logger.info(f"Reading Corpus at '{filepath}' for Player '{player}'...")
         if not os.path.exists(filepath):
             self.logger.error(f"The file '{filepath}' does not exist. No Corpus was read.")
             return
