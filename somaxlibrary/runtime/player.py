@@ -74,6 +74,7 @@ class Player(Streamview, ScheduledMidiObject):
         self.improvisation_memory.append(event, scheduler_time, transforms)
 
         self._feedback(event, scheduler_time)
+        self.previous_peaks = peaks
         return event
 
     def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:

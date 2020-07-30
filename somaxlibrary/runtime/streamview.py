@@ -105,7 +105,7 @@ class Streamview(Parametric):
 
     def create_atom(self, path: List[str], weight: float, self_influenced: bool, classifier: AbstractClassifier,
                     activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
-                    transforms: None = None, override: bool = False) -> None:
+                    transforms: None = None, enabled: bool = True, override: bool = False) -> None:
         """ Raises KeyError, IndexError, DuplicateKeyError """
         new_atom_name: str = path.pop(-1)  # raise: IndexError
         parent_streamview: Streamview = self._get_streamview(path)  # raises: KeyError, IndexError
@@ -116,7 +116,7 @@ class Streamview(Parametric):
             self.atoms[new_atom_name] = Atom(name=new_atom_name, weight=weight, classifier=classifier,
                                              activity_pattern=activity_pattern, memory_space=memory_space,
                                              corpus=self.corpus, self_influenced=self_influenced,
-                                             transforms=transforms)
+                                             transforms=transforms, enabled=enabled)
             self._parse_parameters()
 
     def delete_atom(self, path: List[str]) -> None:

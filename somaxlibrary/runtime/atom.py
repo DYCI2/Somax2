@@ -8,7 +8,7 @@ from somaxlibrary.runtime.corpus_event import CorpusEvent
 from somaxlibrary.runtime.influence import AbstractInfluence, FeedbackInfluence, CorpusInfluence
 from somaxlibrary.runtime.label import AbstractLabel
 from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
-from somaxlibrary.runtime.parameter import Parametric, Parameter
+from somaxlibrary.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somaxlibrary.runtime.peak_event import PeakEvent
 from somaxlibrary.runtime.peaks import Peaks
 from somaxlibrary.runtime.transforms import AbstractTransform
@@ -19,23 +19,23 @@ class Atom(Parametric):
     DEFAULT_WEIGHT = 1.0
 
     def __init__(self, name: str, weight: float, classifier: AbstractClassifier,
-                 activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,corpus: Corpus,
-                 self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]]):
+                 activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace, corpus: Corpus,
+                 self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]], enabled: bool = True):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"[__init__ Creating atom '{name}'.")
         self.name = name
         self._weight: Parameter = Parameter(weight, 0.0, None, 'float', "Relative scaling of atom peaks.")
-        self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this Atom.")
+        self._enabled: Parameter = ParamWithSetter(enabled, False, True, "bool", "Enables this Atom.", self._set_enabled)
 
         self._classifier: AbstractClassifier = classifier
         self._memory_space: AbstractMemorySpace = memory_space
         if transforms is not None:
             self._memory_space.add_transforms(transforms)
         self._activity_pattern: AbstractActivityPattern = activity_pattern
-        self._corpus: Optional[Corpus] = corpus
         self._self_influenced: Parameter = Parameter(self_influenced, 0, 1, 'bool',
                                                      "Whether new events creates by player should influence this atom or not.")
+        self._corpus: Optional[Corpus] = corpus
         if corpus:
             self.read(corpus)
 
@@ -69,6 +69,8 @@ class Atom(Parametric):
     # influences the memory with incoming data
     def influence(self, influence: AbstractInfluence, time: float, **kwargs) -> int:
         """ Raises: InvalidLabelInput"""
+        if not self.is_enabled():
+            return 0
         label: AbstractLabel = self._classifier.classify_influence(influence)
         matched_events: List[PeakEvent] = self._memory_space.influence(label, time, **kwargs)
         if matched_events:
@@ -91,6 +93,7 @@ class Atom(Parametric):
         self.read()
 
     def set_activity_pattern(self, activity_pattern: AbstractActivityPattern):
+        activity_pattern.corpus = self._corpus
         self._activity_pattern = activity_pattern
 
     def _update_peaks_on_influence(self, time: float) -> None:
@@ -108,10 +111,6 @@ class Atom(Parametric):
         self._weight.value = value
 
     @property
-    def self_influenced(self) -> float:
-        return self._self_influenced.value
-
-    @property
     def classifier(self):
         return self._classifier
 
@@ -119,9 +118,17 @@ class Atom(Parametric):
     def memory_space(self):
         return self._memory_space
 
+    @property
+    def self_influenced(self) -> float:
+        return self._self_influenced.value
+
     @self_influenced.setter
     def self_influenced(self, self_influenced: bool):
         self._self_influenced.value = self_influenced
+
+    def _set_enabled(self, enabled: bool):
+        self._enabled.value = enabled
+        self.clear()
 
     def clear(self):
         self._activity_pattern.clear()
@@ -129,7 +136,7 @@ class Atom(Parametric):
         self._memory_space.clear()
 
     def is_enabled(self):
-        return self.enabled.value
+        return self._enabled.value
 
     def get_peaks(self) -> Peaks:
         return self._activity_pattern.peaks

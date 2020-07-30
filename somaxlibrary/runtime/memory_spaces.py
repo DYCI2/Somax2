@@ -110,7 +110,7 @@ class NGramMemorySpace(AbstractMemorySpace):
         return f"NGramMemorySpace with size {self._ngram_size.value}, and corpus {self._corpus}."  #
 
     def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:
-        self.logger.debug(f"[model] Modelling corpus '{corpus}'.")
+        self.logger.debug(f"[model] Modelling corpus '{corpus.name}'.")
         self._corpus = corpus
         self._labels = labels
         self._structured_data = {}

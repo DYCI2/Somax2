@@ -110,7 +110,7 @@ class SomaxStringDispatcher:
 
     def create_atom(self, player: str, path: str = "", weight: float = Atom.DEFAULT_WEIGHT, classifier: str = "",
                     activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
-                    transforms: Tuple[str, ...] = ("",), override: bool = False):
+                    transforms: Tuple[str, ...] = ("",), enabled: bool = True, override: bool = False):
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier)
@@ -118,7 +118,8 @@ class SomaxStringDispatcher:
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
             self.players[player].create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
                                              classifier=classifier, activity_pattern=activity_pattern,
-                                             memory_space=memory_space, transforms=None, override=override)
+                                             memory_space=memory_space, transforms=None, enabled=enabled,
+                                             override=override)
             self.players[player].send_atoms()
             self.logger.info(f"Created Atom at path '{path}'.")
         except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
@@ -228,7 +229,7 @@ class SomaxStringDispatcher:
         except (AssertionError, IndexError, ParameterError) as e:
             self.logger.error(f"{str(e)} Could not set Parameter.")
         except KeyError as e:
-            self.logger.error(f"The object {str(e)} does not exist.")
+            self.logger.error(f"Could not find {str(e)}. No Parameter was set.")
 
     ######################################################
     # SCHEDULER
