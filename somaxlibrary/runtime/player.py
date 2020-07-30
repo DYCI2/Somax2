@@ -114,6 +114,7 @@ class Player(Streamview, ScheduledMidiObject):
     def set_corpus(self, corpus: Corpus) -> None:
         self.corpus = corpus
         Streamview.set_corpus(self, corpus)
+        self.send_current_corpus_info()
 
     def set_peak_selector(self, peak_selector: AbstractPeakSelector) -> None:
         self.peak_selector = peak_selector
@@ -171,4 +172,8 @@ class Player(Streamview, ScheduledMidiObject):
     def send_atoms(self):
         atom_names: List[str] = [atom.name for atom in self._all_atoms()]
         self.target.send(SendProtocol.PLAYER_INSTANTIATED_ATOMS, atom_names)
+
+    def send_current_corpus_info(self):
+        self.target.send(SendProtocol.PLAYER_CORPUS, [self.corpus.name, self.corpus.content_type.value,
+                                                      self.corpus.length()])
 
