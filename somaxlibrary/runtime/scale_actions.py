@@ -91,7 +91,7 @@ class NextStateScaleAction(AbstractScaleAction):
             return peaks
         else:
             event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
-            is_matching: np.ndarray = event_indices == self._previous_output_index
+            is_matching: np.ndarray = event_indices == self._previous_output_index + 1
             peaks.scale(self.factor, is_matching)
             return peaks
 
