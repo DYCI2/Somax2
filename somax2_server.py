@@ -119,6 +119,7 @@ class SomaxStringDispatcher:
             self.players[player].create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
                                              classifier=classifier, activity_pattern=activity_pattern,
                                              memory_space=memory_space, transforms=None, override=override)
+            self.players[player].send_atoms()
             self.logger.info(f"Created Atom at path '{path}'.")
         except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)} No Atom was created.")
@@ -224,8 +225,10 @@ class SomaxStringDispatcher:
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             self.players[player].set_param(path_and_name, value)
-        except (AssertionError, KeyError, IndexError, ParameterError) as e:
+        except (AssertionError, IndexError, ParameterError) as e:
             self.logger.error(f"{str(e)} Could not set Parameter.")
+        except KeyError as e:
+            self.logger.error(f"The object {str(e)} does not exist.")
 
     ######################################################
     # SCHEDULER

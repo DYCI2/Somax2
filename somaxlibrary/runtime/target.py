@@ -11,6 +11,7 @@ class SendProtocol:
     PLAYER_SINGLE_PARAMETER = "param"
     PLAYER_CORPUS_FILES = "corpus_info"
     PLAYER_NAME = "player_name"
+    PLAYER_INSTANTIATED_ATOMS = "instantiated_atoms"
 
 
     SCHEDULER_RUNNING = "scheduler_running"

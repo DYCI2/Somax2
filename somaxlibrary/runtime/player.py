@@ -168,3 +168,7 @@ class Player(Streamview, ScheduledMidiObject):
             self.target.send(SendProtocol.PLAYER_CORPUS_FILES, corpus)
         self.target.send(SendProtocol.PLAYER_CORPUS_FILES, Target.WRAPPED_BANG)
 
+    def send_atoms(self):
+        atom_names: List[str] = [atom.name for atom in self._all_atoms()]
+        self.target.send(SendProtocol.PLAYER_INSTANTIATED_ATOMS, atom_names)
+
