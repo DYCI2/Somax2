@@ -87,6 +87,7 @@ class Corpus:
         else:
             with open(filepath, 'w') as f:
                 json.dump(self, f, indent=indentation, default=lambda o: o.encode())
+        return filepath
 
     def encode(self) -> Dict[str, Any]:
         return {"name": self.name,

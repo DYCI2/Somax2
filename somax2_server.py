@@ -71,7 +71,7 @@ class SomaxStringDispatcher:
         target: Target = SimpleOscTarget(address, port, ip)
         self.players[player_name] = Player(name=player_name, target=target, trigger_mode=trigger_mode,
                                            peak_selector=peak_selector, merge_action=merge_action,
-                                           corpus=None,     # intentional - set after instantiation if provided
+                                           corpus=None,  # intentional - set after instantiation if provided
                                            scale_actions=scale_actions)
         self.logger.info(f"Created player '{player_name}' with port {port} and ip {ip}.")
 
@@ -215,8 +215,20 @@ class SomaxStringDispatcher:
                 corpus: Corpus = Corpus.from_json(filepath)
             else:
                 corpus: Corpus = CorpusBuilder().build(filepath)
+
+            restart_server: bool = False
+            if self.scheduler.running:
+                self.scheduler.flush_held(self.players[player])
+                self.scheduler.stop()
+                self.reset_influences(player)
+                restart_server = True
+
             self.players[player].set_corpus(corpus)
             self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{player}'.")
+
+            if restart_server:
+                self.scheduler.start()
+
         except (KeyError, IOError, InvalidCorpus) as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was read.")
 
@@ -399,7 +411,7 @@ class SomaxServer(SomaxStringDispatcher, Caller):
         self.out_port: int = send_port
         self.server: Optional[AsyncIOOSCUDPServer] = None
         self.logger.info(f"Somax Server (version: {somaxlibrary.__version__}) was started "
-                         f"with input port {recv_port} and ip {ip}.")
+                         f"with input port {recv_port}, output port {send_port} and ip {ip}.")
 
     async def run(self) -> None:
         osc_dispatcher: Dispatcher = Dispatcher()
@@ -412,6 +424,7 @@ class SomaxServer(SomaxStringDispatcher, Caller):
         transport.close()
 
     def exit(self):
+        self.stop()
         self.clear_all()
         self.logger.info("SoMaxServer was successfully terminated.")
         self.target.send(SendProtocol.SCHEDULER_RESET_UI, Target.WRAPPED_BANG)
@@ -450,16 +463,14 @@ class SomaxServer(SomaxStringDispatcher, Caller):
         corpora: List[Tuple[str, str]] = []
         for file in os.listdir(filepath):
             if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
-                corpus_name, _ = os.path.splitext(file) # TODO: Not the corpus name that's specified in the json
+                corpus_name, _ = os.path.splitext(file)  # TODO: Not the corpus name that's specified in the json
                 corpora.append((corpus_name, os.path.join(filepath, file)))
         for player in self.players.values():
             player.send_corpora(corpora)
 
-
-
     def get_player_names(self):
         for player_name in self.players.keys():
-            self.target.send(SendProtocol.PLAYER_NAME, [player_name])
+            self.target.send(SendProtocol.ALL_PLAYER_NAMES, [player_name])
 
     def get_peaks(self, player: str):
         try:

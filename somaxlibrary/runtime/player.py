@@ -62,9 +62,10 @@ class Player(Streamview, ScheduledMidiObject):
         peaks = self._scale_peaks(peaks, scheduler_time, self.improvisation_memory, self.corpus)
 
         event_and_transforms = self.peak_selector.decide(peaks, self.improvisation_memory, self.corpus, self.transforms)
+
+        if event_and_transforms is None:
+            return None
         event: Optional[CorpusEvent] = copy.deepcopy(event_and_transforms[0])
-        if event is None:
-            return event
 
         # TODO (v2.2): Handle transforms
         # transforms: Tuple[AbstractTransform, ...] = event_and_transforms[1]

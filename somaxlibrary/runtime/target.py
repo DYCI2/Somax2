@@ -10,7 +10,7 @@ class SendProtocol:
     PLAYER_NUM_PEAKS = "num_peaks"
     PLAYER_SINGLE_PARAMETER = "param"
     PLAYER_CORPUS_FILES = "corpus_info"
-    PLAYER_NAME = "player_name"
+    ALL_PLAYER_NAMES = "player_names"
     PLAYER_INSTANTIATED_ATOMS = "instantiated_atoms"
     PLAYER_CORPUS = "corpus"
 
