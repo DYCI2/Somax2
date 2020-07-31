@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 795.0, 730.0 ],
+		"rect" : [ 34.0, 79.0, 1212.0, 830.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,64 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-46",
+					"linecount" : 4,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 498.0, 711.0, 150.0, 60.0 ],
+					"presentation" : 1,
+					"presentation_linecount" : 4,
+					"presentation_rect" : [ 484.384602805125724, 686.0, 150.0, 60.0 ],
+					"text" : "Don't forget to send refreshcorpora to all players on corpusbuilder done"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.505949437618256, 0.490759491920471, 0.133733153343201, 1.0 ],
+					"id" : "obj-43",
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 507.0, 709.0, 100.0, 35.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 358.584602364730245, 705.0, 119.0, 22.0 ],
+					"text" : "somax.corpusbuilder"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-38",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 323.0, 558.0, 95.0, 22.0 ],
+					"text" : "thispatcher front"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-31",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 349.0, 538.0, 100.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 228.0, 730.0, 100.0, 20.0 ],
+					"text" : "routing (TODO)"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-14",
 					"maxclass" : "gswitch2",
@@ -114,7 +172,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 150.0, 1092.0, 219.0, 354.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 651.584603340888407, 42.325000250000016, 219.0, 354.0 ],
+					"presentation_rect" : [ 651.584603340888407, 42.325000250000016, 219.0, 358.83258881842039 ],
 					"varname" : "somax.player.c",
 					"viewvisibility" : 1
 				}
@@ -343,7 +401,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-279",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -495,7 +552,7 @@
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 94.0, 1559.0, 241.0, 56.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 640.584603340888407, 381.125027250000016, 241.0, 65.0 ],
+					"presentation_rect" : [ 640.584603340888407, 400.157589068420407, 241.0, 65.0 ],
 					"viewvisibility" : 1
 				}
 
@@ -583,7 +640,7 @@
 				"box" : 				{
 					"id" : "obj-3",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
+					"numinlets" : 4,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 120.0, 478.59999700000003, 90.0, 22.0 ],
@@ -619,7 +676,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 371.0, 1559.0, 364.0, 34.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 517.684602817046425, 574.33406100000002, 364.0, 34.0 ],
+					"presentation_rect" : [ 517.684602817046425, 593.36662281842041, 364.0, 34.0 ],
 					"range" : 88,
 					"whitekeycolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ]
 				}
@@ -642,7 +699,7 @@
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 420.0, 1434.0, 247.0, 116.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 640.584603340888407, 452.5, 247.0, 116.0 ],
+					"presentation_rect" : [ 640.584603340888407, 471.53256181842039, 247.0, 116.0 ],
 					"varname" : "somax.midioutput[1]",
 					"viewvisibility" : 1
 				}
@@ -1091,7 +1148,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 505.784602293204671, 361.825000250000016, 43.0, 40.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 513.284602293204671, 546.125027250000016, 376.633331112695714, 69.482562021415674 ],
+					"presentation_rect" : [ 513.284602293204671, 565.157589068420407, 376.633331112695714, 69.482562021415674 ],
 					"proportion" : 0.5
 				}
 
@@ -1309,6 +1366,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-38", 0 ],
+					"source" : [ "obj-31", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-33", 1 ],
 					"source" : [ "obj-32", 0 ]
 				}
@@ -1342,6 +1406,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-26", 1 ],
 					"source" : [ "obj-36", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 3 ],
+					"source" : [ "obj-38", 0 ]
 				}
 
 			}
@@ -1542,13 +1613,6 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "Obama_original.aiff",
-				"bootpath" : "~/Music",
-				"patcherrelativepath" : "../../../../Music",
-				"type" : "AIFF",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "somax.midiinput.maxpat",
 				"bootpath" : "~/Documents/Max 8/Packages/Somax2/abstractions/somax",
 				"patcherrelativepath" : "./abstractions/somax",
@@ -1731,6 +1795,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "somax.corpusbuilder.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/abstractions/somax",
+				"patcherrelativepath" : "./abstractions/somax",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "bc.virfun.mxo",
 				"type" : "iLaX"
 			}
@@ -1805,24 +1876,24 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"newobj" : 				{
-					"fontface" : [ 1 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
-				"toggle" : 				{
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
-				"button" : 				{
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

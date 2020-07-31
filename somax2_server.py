@@ -231,6 +231,12 @@ class SomaxStringDispatcher:
         except KeyError as e:
             self.logger.error(f"Could not find {str(e)}. No Parameter was set.")
 
+    def reset_influences(self, player: str):
+        try:
+            self.players[player].clear()
+        except KeyError as e:
+            self.logger.error(f"Could not find {str(e)}. Influences were not reset.")
+
     ######################################################
     # SCHEDULER
     ######################################################
@@ -406,6 +412,7 @@ class SomaxServer(SomaxStringDispatcher, Caller):
         transport.close()
 
     def exit(self):
+        self.clear_all()
         self.logger.info("SoMaxServer was successfully terminated.")
         self.target.send(SendProtocol.SCHEDULER_RESET_UI, Target.WRAPPED_BANG)
 
