@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 994.0, 78.0, 480.0, 1030.0 ],
+		"rect" : [ 843.0, 78.0, 1753.0, 1270.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -152,12 +152,12 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1432.5, 137.460853038769528, 59.5, 22.0 ],
 					"restore" : 					{
-						"audiodevice" : [ 1 ],
+						"audiodevice" : [ 0 ],
 						"enabled" : [ 1 ]
 					}
 ,
 					"text" : "autopattr",
-					"varname" : "u473003889"
+					"varname" : "u613012155"
 				}
 
 			}
@@ -235,7 +235,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 70.75, 601.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 113.949999988079071, 244.400000952316276, 100.892028606609344 ],
+					"presentation_rect" : [ 0.0, 26.40000039339067, 244.400000952316276, 96.549999594688401 ],
 					"proportion" : 0.5
 				}
 
@@ -367,9 +367,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-299",
-					"ignoreclick" : 1,
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -511,7 +509,6 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
 					"id" : "obj-13",
 					"maxclass" : "meter~",
 					"numinlets" : 1,
@@ -634,6 +631,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-163",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -666,6 +664,7 @@
 			}
 , 			{
 				"box" : 				{
+					"hidden" : 1,
 					"id" : "obj-423",
 					"maxclass" : "meter~",
 					"numinlets" : 1,
@@ -727,14 +726,13 @@
 				"box" : 				{
 					"basictuning" : 440,
 					"channelcount" : 1,
-					"clipheight" : 29.0,
 					"color" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"data" : 					{
 						"clips" : [ 							{
 								"absolutepath" : "Macintosh HD:/Users/joakimborg/Music/Sax_gentle_cat_Slow.wav",
 								"filename" : "Sax_gentle_cat_Slow.wav",
 								"filekind" : "audiofile",
-								"id" : "u052003971",
+								"id" : "u009013218",
 								"loop" : 0,
 								"content_state" : 								{
 
@@ -746,9 +744,7 @@
 ,
 					"followglobaltempo" : 0,
 					"formantcorrection" : 0,
-					"hidden" : 1,
 					"id" : "obj-23",
-					"ignoreclick" : 1,
 					"maxclass" : "playlist~",
 					"mode" : "basic",
 					"numinlets" : 1,
@@ -757,7 +753,7 @@
 					"originaltempo" : 120.0,
 					"outlettype" : [ "signal", "signal", "", "dictionary" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 325.0, 420.0, 111.5, 30.0 ],
+					"patching_rect" : [ 325.0, 420.0, 111.5, 31.0 ],
 					"pitchcorrection" : 0,
 					"presentation" : 1,
 					"presentation_rect" : [ 6.541669934988022, 65.449999988079071, 227.694839281726217, 32.75 ],
@@ -1215,16 +1211,15 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"newobj" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ]
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
-				"default" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+				"message" : 				{
+					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1235,7 +1230,24 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ]
+					"fontface" : [ 1 ]
+				}
+,
+				"default" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"button" : 				{
@@ -1244,22 +1256,6 @@
 ,
 				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"message" : 				{
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontsize" : [ 10.0 ]
 				}
 ,
 				"parentstyle" : "",
