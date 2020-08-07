@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 843.0, 78.0, 1753.0, 1270.0 ],
+		"rect" : [ 34.0, 79.0, 955.0, 730.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -92,7 +92,7 @@
 				"box" : 				{
 					"comment" : "(list) Parameters",
 					"id" : "obj-18",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -153,11 +153,11 @@
 					"patching_rect" : [ 1432.5, 137.460853038769528, 59.5, 22.0 ],
 					"restore" : 					{
 						"audiodevice" : [ 0 ],
-						"enabled" : [ 1 ]
+						"enabled" : [ 0 ]
 					}
 ,
 					"text" : "autopattr",
-					"varname" : "u613012155"
+					"varname" : "u877010096"
 				}
 
 			}
@@ -226,7 +226,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-279",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -235,7 +234,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 70.75, 601.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 26.40000039339067, 244.400000952316276, 96.549999594688401 ],
+					"presentation_rect" : [ 0.0, 30.199999988079071, 244.400000952316276, 96.549999594688401 ],
 					"proportion" : 0.5
 				}
 
@@ -273,7 +272,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 411.5, 372.5, 86.0, 22.0 ],
+					"patching_rect" : [ 441.5, 366.0, 86.0, 22.0 ],
 					"text" : "r #0_playlist"
 				}
 
@@ -331,7 +330,7 @@
 				"box" : 				{
 					"comment" : "(signal) audio out",
 					"id" : "obj-35",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -358,7 +357,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 358.25, 366.0, 94.0, 22.0 ],
+					"patching_rect" : [ 342.5, 366.0, 94.0, 22.0 ],
 					"text" : "0, clear, append"
 				}
 
@@ -474,7 +473,7 @@
 					"comment" : "(list) Parameters",
 					"cool" : 1,
 					"id" : "obj-20",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -525,7 +524,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-12",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -673,7 +672,7 @@
 					"outlettype" : [ "float" ],
 					"patching_rect" : [ 527.75, 457.0, 61.0, 13.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 6.541669934988022, 65.449999988079071, 233.194839102912283, 31.0 ]
+					"presentation_rect" : [ 6.541669934988022, 74.449999988079071, 233.194839102912283, 31.0 ]
 				}
 
 			}
@@ -728,18 +727,7 @@
 					"channelcount" : 1,
 					"color" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"data" : 					{
-						"clips" : [ 							{
-								"absolutepath" : "Macintosh HD:/Users/joakimborg/Music/Sax_gentle_cat_Slow.wav",
-								"filename" : "Sax_gentle_cat_Slow.wav",
-								"filekind" : "audiofile",
-								"id" : "u009013218",
-								"loop" : 0,
-								"content_state" : 								{
-
-								}
-
-							}
- ]
+						"clips" : [  ]
 					}
 ,
 					"followglobaltempo" : 0,
@@ -756,7 +744,7 @@
 					"patching_rect" : [ 325.0, 420.0, 111.5, 31.0 ],
 					"pitchcorrection" : 0,
 					"presentation" : 1,
-					"presentation_rect" : [ 6.541669934988022, 65.449999988079071, 227.694839281726217, 32.75 ],
+					"presentation_rect" : [ 6.541669934988022, 74.449999988079071, 227.694839281726217, 32.75 ],
 					"quality" : "basic",
 					"selectioncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"timestretch" : [ 0 ]
@@ -774,7 +762,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 411.5, 321.25, 112.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 134.707023399209902, 73.199999988079071, 232.029485638690403, 32.0 ],
+					"presentation_rect" : [ 6.541669934988022, 74.449999988079071, 232.029485638690403, 32.0 ],
 					"proportion" : 0.5
 				}
 
@@ -799,7 +787,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
-					"border" : 1,
 					"bordercolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
 					"id" : "obj-463",
 					"maxclass" : "panel",
@@ -1208,6 +1195,7 @@
 
 			}
  ],
+		"dependency_cache" : [  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"newobj" : 				{
@@ -1236,6 +1224,7 @@
 				"default" : 				{
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1246,15 +1235,14 @@
 						"autogradient" : 0
 					}
 ,
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontface" : [ 1 ]
 				}
 ,
-				"button" : 				{
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
-				"toggle" : 				{
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

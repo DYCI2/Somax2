@@ -109,7 +109,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 127.0, 39.0, 150.0, 20.0 ],
+					"patching_rect" : [ 379.0, 42.0, 150.0, 20.0 ],
 					"text" : "Audio Influencer"
 				}
 
@@ -120,7 +120,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 374.0, 39.0, 150.0, 20.0 ],
+					"patching_rect" : [ 129.0, 43.0, 150.0, 20.0 ],
 					"text" : "Midi Influencer"
 				}
 
@@ -196,7 +196,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "bang" ],
-					"patching_rect" : [ 337.0, 111.0, 32.0, 22.0 ],
+					"patching_rect" : [ 92.0, 115.0, 32.0, 22.0 ],
 					"text" : "t b b",
 					"varname" : "tbb0[1]"
 				}
@@ -283,7 +283,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "bang" ],
-					"patching_rect" : [ 106.0, 123.0, 32.0, 22.0 ],
+					"patching_rect" : [ 358.0, 126.0, 32.0, 22.0 ],
 					"text" : "t b b",
 					"varname" : "tbb0"
 				}
@@ -309,7 +309,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 337.0, 83.0, 141.0, 22.0 ],
+					"patching_rect" : [ 92.0, 87.0, 141.0, 22.0 ],
 					"text" : "route onset chroma pitch",
 					"varname" : "route1"
 				}
@@ -322,7 +322,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 95.0, 84.0, 141.0, 22.0 ],
+					"patching_rect" : [ 347.0, 87.0, 141.0, 22.0 ],
 					"text" : "route onset chroma pitch",
 					"varname" : "route0"
 				}
@@ -345,12 +345,12 @@
 				"box" : 				{
 					"comment" : "(list) Influence from midi",
 					"id" : "obj-7",
-					"index" : 2,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 337.0, 35.0, 30.0, 30.0 ]
+					"patching_rect" : [ 92.0, 39.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -358,12 +358,12 @@
 				"box" : 				{
 					"comment" : "(list) Influence from audio",
 					"id" : "obj-6",
-					"index" : 1,
+					"index" : 2,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 95.0, 36.0, 30.0, 30.0 ]
+					"patching_rect" : [ 347.0, 39.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -602,7 +602,16 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
+				"newobj" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ]
+				}
+,
 				"message" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -613,12 +622,13 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"default" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -629,24 +639,14 @@
 						"autogradient" : 0
 					}
 ,
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"newobj" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
