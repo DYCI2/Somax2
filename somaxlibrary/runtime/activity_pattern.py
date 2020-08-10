@@ -147,7 +147,7 @@ class ManualActivityPattern(AbstractActivityPattern):
         self._event_indices = np.concatenate((self._event_indices, new_event_indices))
         self._peaks.append(scores, times, transform_hashes)
 
-    def update_peaks_on_influence(self, new_time: float) -> None:
+    def update_peaks_on_influence(self, _new_time: float) -> None:
         if not self._peaks.empty():
             self._peaks.scores *= np.exp(-np.divide(1, self.tau_mem_decay.value))
             self._peaks.times += [self.corpus.event_at(i).duration for i in self._event_indices]

@@ -1,11 +1,11 @@
 import logging
-from typing import Dict, Union, Type, List, Tuple, Optional, Any
+from typing import Dict, Union, Type, List, Tuple, Optional
 
 from somaxlibrary.runtime.activity_pattern import AbstractActivityPattern
 from somaxlibrary.classification.classifier import AbstractClassifier
 from somaxlibrary.runtime.corpus import Corpus
 from somaxlibrary.runtime.corpus_event import CorpusEvent
-from somaxlibrary.runtime.influence import AbstractInfluence, FeedbackInfluence, CorpusInfluence
+from somaxlibrary.runtime.influence import AbstractInfluence, CorpusInfluence
 from somaxlibrary.runtime.label import AbstractLabel
 from somaxlibrary.runtime.memory_spaces import AbstractMemorySpace
 from somaxlibrary.runtime.parameter import Parametric, Parameter, ParamWithSetter
@@ -71,10 +71,11 @@ class Atom(Parametric):
         """ Raises: InvalidLabelInput"""
         if not self.is_enabled():
             return 0
+
+        self._update_peaks_on_influence(time)
         label: AbstractLabel = self._classifier.classify_influence(influence)
         matched_events: List[PeakEvent] = self._memory_space.influence(label, time, **kwargs)
         if matched_events:
-            self._update_peaks_on_influence(time)
             self._activity_pattern.insert(matched_events)  # we insert the events into the activity profile
             return len(matched_events)
         else:
