@@ -74,6 +74,9 @@ class Atom(Parametric):
 
         self._update_peaks_on_influence(time)
         label: AbstractLabel = self._classifier.classify_influence(influence)
+        # TODO: Temp
+        if self.name == 'harmonic':
+            print(label.label, time)
         matched_events: List[PeakEvent] = self._memory_space.influence(label, time, **kwargs)
         if matched_events:
             self._activity_pattern.insert(matched_events)  # we insert the events into the activity profile
