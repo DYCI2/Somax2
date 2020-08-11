@@ -117,10 +117,10 @@ class ClassicActivityPattern(AbstractActivityPattern):
         return -np.divide(t, np.log(self.extinction_threshold.value - 0.001))
 
 
-class ManualActivityPattern(AbstractActivityPattern):
+class DiscreteActivityPattern(AbstractActivityPattern):
     """Decay: score = exp(-n/tau), where n is the number of update calls since creation"""
 
-    DEFAULT_N = 6
+    DEFAULT_N = 3
 
     def __init__(self, corpus: Corpus = None):
         super().__init__(corpus)
@@ -160,6 +160,67 @@ class ManualActivityPattern(AbstractActivityPattern):
 
     def update_peaks_on_new_event(self, new_time: float) -> None:
         pass
+
+    def clear(self) -> None:
+        self._peaks = Peaks.create_empty()
+        self._event_indices = np.zeros(0, dtype=np.int32)
+
+    def _set_tau(self, n: int):
+        self.tau_mem_decay.value = self._calc_tau(n)
+
+    def _calc_tau(self, n: int):
+        """ n is the number of updates until peak decays below threshold"""
+        return -np.divide(n, np.log(self.extinction_threshold.value - 0.001))
+
+class ManualActivityPattern(AbstractActivityPattern):
+    """Decay: score = exp(-n/tau), where n is the number of update calls after a threshold since creation"""
+
+    DEFAULT_N = 3
+    DEFAULT_THRESHOLD_TICKS = 0.025
+
+    def __init__(self, corpus: Corpus = None):
+        super().__init__(corpus)
+        self.logger.debug("[__init__]: ManualActivityPattern initialized.")
+        self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
+        self.tau_mem_decay: Parameter = ParamWithSetter(self._calc_tau(self.DEFAULT_N), 1, None, "int",
+                                                        "Number of updates until peak is decayed below threshold.",
+                                                        self._set_tau)
+        self.default_score: Parameter = Parameter(1.0, None, None, 'float', "Value of a new peaks upon creation.")
+        self._peaks: Peaks = Peaks.create_empty()
+        self.last_update_time: float = 0.0
+        self._event_indices: np.ndarray = np.zeros(0, dtype=np.int32)
+        self._parse_parameters()
+
+    def insert(self, influences: List[PeakEvent]) -> None:
+        self.logger.debug(f"[insert]: Inserting {len(influences)} influences.")
+        scores: List[float] = []
+        times: List[float] = []
+        transform_hashes: List[int] = []
+        for influence in influences:
+            times.append(influence.event.onset)
+            scores.append(self.default_score.value)
+            transform_hashes.append(influence.transform_hash)
+        new_event_indices: np.ndarray = np.array([i.event.state_index for i in influences], dtype=np.int32)
+        self._event_indices = np.concatenate((self._event_indices, new_event_indices))
+        self._peaks.append(scores, times, transform_hashes)
+
+    def _update_peaks(self, new_time: float) -> None:
+        if not self._peaks.empty() and new_time - self.last_update_time >= self.DEFAULT_THRESHOLD_TICKS:
+            self._peaks.scores *= np.exp(-np.divide(1, self.tau_mem_decay.value))
+            self._peaks.times += [self.corpus.event_at(i).duration for i in self._event_indices]
+            self._event_indices += 1
+            indices_to_remove: np.ndarray = np.where((self._peaks.scores <= self.extinction_threshold.value)
+                                                     | (self._peaks.times >= self.corpus.duration())
+                                                     | (self._event_indices >= self.corpus.length()))
+            self._peaks.remove(indices_to_remove)
+            self._event_indices = np.delete(self._event_indices, indices_to_remove)
+            self.last_update_time = new_time
+
+    def update_peaks_on_influence(self, new_time: float) -> None:
+        self._update_peaks(new_time)
+
+    def update_peaks_on_new_event(self, new_time: float) -> None:
+        self._update_peaks(new_time)
 
     def clear(self) -> None:
         self._peaks = Peaks.create_empty()
