@@ -106,7 +106,8 @@ class BaseScheduler(ABC):
             return
 
         if event is None:
-            self._requeue_trigger_event(trigger_event)
+            if player.trigger_mode == TriggerMode.AUTOMATIC:
+                self._requeue_trigger_event(trigger_event)
             return
 
         self._add_corpus_event(player, trigger_event.target_time, event)
