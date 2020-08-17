@@ -1,9 +1,0 @@
-matplotlib>=3.1.2
-numpy>=1.18.1
-scipy>=1.4.1
-librosa>=0.7.1
-maxosc>=0.0.2
-mido>=1.2.9
-scikit-learn>=0.22.1
-pandas>=0.25.3
-python-osc>=1.7.4
