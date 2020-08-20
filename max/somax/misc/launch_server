@@ -4,7 +4,7 @@
 EXECUTABLE="local"
 
 SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-BINARY_PATH="${SCRIPT_DIRECTORY}/bin/somax_server"
+BINARY_PATH="${SCRIPT_DIRECTORY}/somax_server/somax_server"
 LOCAL_PATH="${SCRIPT_DIRECTORY}/../../../python/somax/somax2_server.py"
 
 
