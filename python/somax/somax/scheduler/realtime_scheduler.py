@@ -49,6 +49,7 @@ class RealtimeScheduler(BaseScheduler):
         self.running = False
 
     def terminate(self):
+        self.stop()
         self.terminated = True
 
     def stop(self) -> None:

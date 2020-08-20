@@ -9,7 +9,6 @@ import os
 import sys
 from typing import Any, Dict, Union, Optional, Tuple, List
 from importlib import resources
-import log
 
 from maxosc.maxformatter import MaxFormatter
 from maxosc.maxosc import Caller
@@ -18,6 +17,7 @@ from pythonosc.osc_server import AsyncIOOSCUDPServer
 
 import somax
 from somax import settings
+import log
 from somax.classification import SomChromaClassifier
 from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
@@ -420,6 +420,7 @@ class SomaxServer(SomaxStringDispatcher, Caller):
                          f"with input port {recv_port}, output port {send_port} and ip {ip}.")
 
     async def run(self) -> None:
+        """ raises: OSError is server already is in use """
         osc_dispatcher: Dispatcher = Dispatcher()
         osc_dispatcher.map(self.SERVER_ADDRESS, self.__process_osc)
         osc_dispatcher.set_default_handler(self.__unmatched_osc)
@@ -430,9 +431,9 @@ class SomaxServer(SomaxStringDispatcher, Caller):
         transport.close()
 
     def exit(self):
-        self.stop()
+        self.scheduler.terminate()
         self.clear_all()
-        self.logger.info("SoMaxServer was successfully terminated.")
+        self.logger.info("Somax Server was successfully terminated.")
         self.target.send(SendProtocol.SCHEDULER_RESET_UI, Target.WRAPPED_BANG)
 
     def __process_osc(self, _address, *args):
@@ -535,10 +536,8 @@ if __name__ == "__main__":
     # TODO: Ip as input argument
 
     with resources.path(log, 'logging.ini') as path:
-        print(path.absolute())
         logging.config.fileConfig(path.absolute())
     #
-    print("loadin")
     SomChromaClassifier()
 
 
@@ -561,4 +560,8 @@ if __name__ == "__main__":
         asyncio.run(run())
     except KeyboardInterrupt:
         somax_server.exit()
-        sys.exit(1)
+        sys.exit(130)
+    except OSError as e:
+        logging.getLogger(__name__).error(f"Server could not be started. In most cases, this indicates that a server"
+                                          f"already is running on the OSC address. Error message: {repr(e)}.")
+        sys.exit(0)

@@ -2,7 +2,7 @@ PYLIBPATH = python/somax
 MAXLIBPATH = max/somax
 
 PYINSTALLER_PATH = pyinstaller
-PYINSTALLER_TARGET = $(PYLIBPATH)/somax/somax2_server.py
+PYINSTALLER_TARGET = $(PYLIBPATH)/somax2_server.py
 PYINSTALLER_TARGET_NAME = somax_server
 
 MAX_PYINSTALLER_LIBRARY = dist/max_pyinstaller_pkg

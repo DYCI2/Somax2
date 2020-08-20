@@ -54,7 +54,6 @@ class SomChromaClassifier(ChromaClassifier):
         super().__init__()
         with resources.path(tables, self.SOM_DATA_FILE) as path:
             self._som_data = np.loadtxt(path.absolute(), dtype=np.float32, delimiter=",")  # Shape: (N, 12)
-            print(path.absolute())
         with resources.path(tables, self.SOM_CLASS_FILE) as path:
             self._som_classes = np.loadtxt(path.absolute(), dtype=int, delimiter=",")  # Shape: (N, )
 
