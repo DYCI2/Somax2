@@ -40,6 +40,19 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-8",
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 214.888888888888886, 584.990384615384755, 80.0, 35.0 ],
+					"text" : "combine ' s ' @triggers 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
 					"id" : "obj-33",
 					"maxclass" : "newobj",
@@ -972,7 +985,7 @@
 					"patching_rect" : [ 990.0, 516.294871794871824, 171.0, 25.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 9.416666507720947, 209.5, 171.0, 20.5 ],
-					"text" : "franck_violin_sonata",
+					"text" : "_mozart_36_1",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -1028,7 +1041,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 214.888888888888886, 588.490384615384642, 57.0, 22.0 ],
+					"patching_rect" : [ 215.0, 559.349586925815174, 57.0, 22.0 ],
 					"text" : "tosymbol"
 				}
 
@@ -1179,15 +1192,15 @@
 				"box" : 				{
 					"bubbleusescolors" : 1,
 					"id" : "obj-62",
-					"linecount" : 4,
+					"linecount" : 7,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 176.0, 701.5, 222.0, 60.0 ],
+					"patching_rect" : [ 176.0, 701.5, 236.0, 100.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 4,
-					"presentation_rect" : [ 451.416666507720947, 41.0, 222.416717500000118, 60.0 ],
-					"text" : "0 0 0 [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] 0 [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] overwrite= 0 corpus_name= 0",
+					"presentation_linecount" : 7,
+					"presentation_rect" : [ 451.416666507720947, 41.0, 236.416717500000118, 100.0 ],
+					"text" : "build_corpus /Users/joakimborg/MIDI/mozart36/symphony_425_1_(c)ishii.mid fg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] bg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] overwrite= 0 corpus_name= _mozart_36_1",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -1779,15 +1792,15 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-30",
-					"linecount" : 2,
+					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 221.571426499999689, 370.840839925244381, 88.0, 33.0 ],
+					"patching_rect" : [ 221.571426499999689, 370.840839925244381, 88.0, 47.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 9.0, 59.0, 195.943816499999571, 20.0 ],
 					"style" : "helpfile_label",
-					"text" : "drag and drop a file here...",
+					"text" : "symphony_425_1_(c)ishii.mid",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -1842,7 +1855,7 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-66", 1 ],
+					"destination" : [ "obj-8", 1 ],
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -2204,6 +2217,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-66", 1 ],
+					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"order" : 1,
 					"source" : [ "obj-9", 0 ]
@@ -2230,8 +2250,9 @@
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
 					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2241,20 +2262,20 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-,
-					"fontsize" : [ 10.0 ]
+
 				}
 ,
 				"newobj" : 				{
 					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ]
 				}
 ,
 				"message" : 				{
 					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2264,15 +2285,14 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-,
-					"fontsize" : [ 10.0 ]
-				}
-,
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+
 				}
 ,
 				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
