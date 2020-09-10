@@ -169,7 +169,7 @@ class Corpus:
     @staticmethod
     def _create_index_map(events: List[CorpusEvent], corpus_duration_ticks: float) -> Tuple[np.ndarray, float]:
         grid_size: float = Corpus.INDEX_MAP_SIZE / corpus_duration_ticks
-        index_map: np.ndarray = np.empty(Corpus.INDEX_MAP_SIZE, dtype=int)
+        index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
         for event in events:
             start_index: int = int(np.floor(event.onset * grid_size))
             end_index: int = int(np.floor((event.onset + event.duration) * grid_size))
