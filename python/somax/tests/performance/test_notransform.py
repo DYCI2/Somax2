@@ -180,7 +180,7 @@ def test_nextstate_scaleaction_performance():
 
 
 def test_integration_performance():
-    num_iterations = 10
+    num_iterations = 1
     additional_peaks_per_layer = [10 ** i for i in range(0, 7)]  # 1 to 1_000_000 extra peaks
     # performance_conditiions = [0.001, 0.01, 0.1, 1.0]
     corpus: Corpus = Corpus.from_json("../../corpus/debussy.json")
@@ -191,17 +191,29 @@ def test_integration_performance():
     player.create_atom(["self"], 1.0, True, TopNoteClassifier(), ClassicActivityPattern(), NGramMemorySpace())
     player.set_corpus(corpus)
 
-    results: List[float] = []
-    num_peaks = 100
-    for event in corpus.events:
-        for atom in player.atoms.values():
-            atom._activity_pattern._peaks = Peaks(np.random.random(num_peaks), np.random.random(num_peaks) * duration,
-                                                  np.zeros(num_peaks))
-        start: float = timer()
-        player.influence([], CorpusInfluence(event), event.onset)
-        results.append(timer() - start)
-    player.clear()
-    avg_time: float = float(np.mean(results))
-    max_time: float = float(np.max(results))
-    print("Average time:", avg_time * 1e3, "ms")
-    print("Max time", max_time * 1e3, "ms")
+    for num_peaks in additional_peaks_per_layer:
+        influence_times: List[float] = []
+        new_event_times: List[float] = []
+        for _ in range(num_iterations):
+            for event in corpus.events:
+                for atom in player.atoms.values():
+                    atom._activity_pattern._peaks = Peaks(np.random.random(num_peaks), np.random.random(num_peaks) * duration,
+                                                          np.zeros(num_peaks))
+                start: float = timer()
+                player.influence([], CorpusInfluence(event), event.onset)
+                influence_times.append(timer() - start)
+                start = timer()
+                player.new_event(event.onset)
+                new_event_times.append(timer() - start)
+            player.clear()
+        avg_influence_time: float = float(np.mean(influence_times))
+        max_influence_time: float = float(np.max(influence_times))
+        avg_new_event_time: float = float(np.mean(new_event_times))
+        max_new_event_time: float = float(np.max(new_event_times))
+        print(f"# INTEGRATION TESTING WITH {num_peaks} ADDITIONAL PEAKS:")
+        print("    Average influence time:", avg_influence_time * 1e3, "ms")
+        print("    Max influence time", max_influence_time * 1e3, "ms")
+        print("    Average new event time:", avg_new_event_time * 1e3, "ms")
+        print("    Max new event time", max_new_event_time * 1e3, "ms")
+        print("    Average combined time:", np.mean(np.array(influence_times) + np.array(new_event_times)) * 1e3, "ms")
+        print("    Max combined time", np.max(np.array(influence_times) + np.array(new_event_times)) * 1e3, "ms")

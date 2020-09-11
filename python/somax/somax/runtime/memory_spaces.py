@@ -11,7 +11,7 @@ from somax.runtime.label import AbstractLabel
 from somax.runtime.parameter import Parameter, ParamWithSetter
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_event import PeakEvent, ClassicPeakEvent
-from somax.runtime.transforms import AbstractTransform, NoTransform
+from somax.runtime.legacy_transforms import AbstractTransform, NoTransform
 
 
 # TODO: Abstract Influence type. Dependent on (determined by?) ActivityPattern. CUrrently hardcoded in NGram.

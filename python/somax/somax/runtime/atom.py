@@ -11,7 +11,7 @@ from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.peak_event import PeakEvent
 from somax.runtime.peaks import Peaks
-from somax.runtime.transforms import AbstractTransform
+from somax.runtime.legacy_transforms import AbstractTransform
 
 
 class Atom(Parametric):

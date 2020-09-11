@@ -15,7 +15,7 @@ from somax.runtime.peaks import Peaks
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
-from somax.runtime.transforms import AbstractTransform, NoTransform
+from somax.runtime.legacy_transforms import AbstractTransform, NoTransform
 from somax.scheduler.scheduled_object import ScheduledMidiObject, TriggerMode
 
 

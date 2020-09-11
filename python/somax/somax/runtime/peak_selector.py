@@ -10,7 +10,7 @@ from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.peaks import Peaks
-from somax.runtime.transforms import AbstractTransform, NoTransform
+from somax.runtime.legacy_transforms import AbstractTransform, NoTransform
 from somax.utils.introspective import Introspective
 
 
