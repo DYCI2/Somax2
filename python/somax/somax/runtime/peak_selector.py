@@ -122,3 +122,22 @@ class ThresholdPeakSelector(AbstractPeakSelector):
     def threshold(self):
         return self._threshold.value
 
+
+class ProbabilisticPeakSelector(MaxPeakSelector):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.output_probability: Parameter = Parameter(1.0, 0.0, 1.0, "float", "Probability to trigger output")
+
+    def _decide_default(self, peaks: Peaks, influence_history: ImprovisationMemory, corpus: Corpus,
+                        transform_dict: {int: Tuple[AbstractTransform, ...]},
+                        **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
+        if random.random() > self.output_probability.value:
+            return super()._decide_default(peaks, influence_history, corpus, transform_dict, **kwargs)
+        else:
+            return None
+
+    def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory, corpus: Corpus,
+                         transform_dict: {int: Tuple[AbstractTransform, ...]},
+                         **kwargs) -> Optional[Tuple[CorpusEvent, Tuple[AbstractTransform, ...]]]:
+        return None

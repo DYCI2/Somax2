@@ -1,8 +1,8 @@
 import logging
-from typing import Dict, Union, Type, List, Tuple, Optional
+from typing import Dict, Union, List, Optional
 
-from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.classification.classifier import AbstractClassifier
+from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence
@@ -11,30 +11,29 @@ from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.peak_event import PeakEvent
 from somax.runtime.peaks import Peaks
-from somax.runtime.legacy_transforms import AbstractTransform
+from somax.runtime.transform_handler import TransformHandler
 
 
 class Atom(Parametric):
-
     DEFAULT_WEIGHT = 1.0
 
     def __init__(self, name: str, weight: float, classifier: AbstractClassifier,
                  activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace, corpus: Corpus,
-                 self_influenced: bool, transforms: List[Tuple[Type[AbstractTransform], ...]], enabled: bool = True):
+                 self_influenced: bool, enabled: bool = True):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"[__init__ Creating atom '{name}'.")
         self.name = name
         self._weight: Parameter = Parameter(weight, 0.0, None, 'float', "Relative scaling of atom peaks.")
-        self._enabled: Parameter = ParamWithSetter(enabled, False, True, "bool", "Enables this Atom.", self._set_enabled)
+        self._enabled: Parameter = ParamWithSetter(enabled, False, True, "bool", "Enables this Atom.",
+                                                   self._set_enabled)
 
         self._classifier: AbstractClassifier = classifier
         self._memory_space: AbstractMemorySpace = memory_space
-        if transforms is not None:
-            self._memory_space.add_transforms(transforms)
         self._activity_pattern: AbstractActivityPattern = activity_pattern
         self._self_influenced: Parameter = Parameter(self_influenced, 0, 1, 'bool',
                                                      "Whether new events creates by player should influence this atom or not.")
+
         self._corpus: Optional[Corpus] = corpus
         if corpus:
             self.read(corpus)
@@ -49,6 +48,10 @@ class Atom(Parametric):
                                "activity_pattern": self._activity_pattern.update_parameter_dict(),
                                "parameters": parameters}
         return self.parameter_dict
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        valid_hashes: List[int] = self._classifier.update_transforms(transform_handler)
+        self._memory_space.update_transforms(transform_handler, valid_hashes)
 
     def read(self, corpus: Optional[Corpus] = None):
         """ :raises RuntimeError """
@@ -68,7 +71,8 @@ class Atom(Parametric):
 
     # influences the memory with incoming data
     def influence(self, influence: AbstractInfluence, time: float, **kwargs) -> int:
-        """ Raises: InvalidLabelInput"""
+        """ :raises InvalidLabelInput
+            :returns Number of peaks generated """
         if not self.is_enabled():
             return 0
 

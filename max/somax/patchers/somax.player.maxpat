@@ -50,8 +50,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 180.08333333333303, 88.0, 43.0, 18.0 ],
 					"text" : "volatile",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
-					"textjustification" : 0
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
 			}
@@ -303,7 +302,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 2061.729166666668789, 1231.314358027862681, 133.0, 22.0 ],
+					"patching_rect" : [ 2061.729166666668789, 1231.314358027862681, 140.0, 22.0 ],
 					"text" : "reset_influences #1"
 				}
 
@@ -452,7 +451,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 209.139618500000552, 588.5, 304.0, 89.0 ],
-					"text" : "create_player player_name= Player ip= 127.0.0.1 override=True trigger_mode= Automatic peak_selector= MaxPeakSelector merge_action= DistanceMergeAction scale_actions= [PhaseModulationScaleAction NextStateScaleAction] port= 1236"
+					"text" : "create_player player_name= Player2 ip= 127.0.0.1 override=True trigger_mode= Automatic peak_selector= MaxPeakSelector merge_action= DistanceMergeAction scale_actions= [PhaseModulationScaleAction NextStateScaleAction] port= 1237"
 				}
 
 			}
@@ -575,11 +574,11 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1670.75, 92.439567114741294, 91.0, 35.0 ],
 					"restore" : 					{
-						"continuity" : [ 1.5 ],
+						"continuity" : [ 0.171474178409142 ],
 						"decaybasis" : [ 0 ],
 						"disabled" : [ 0 ],
 						"harmonicbypass" : [ 0 ],
-						"harmonicngramorder" : [ 3 ],
+						"harmonicngramorder" : [ 1 ],
 						"harmonincpeakdecay" : [ 4.6 ],
 						"heldnotesmode" : [ 0 ],
 						"ignorephase" : [ 0 ],
@@ -590,7 +589,7 @@
 						"outputthreshold" : [ 0.0 ],
 						"playingmode" : [ 0 ],
 						"pollpeaks" : [ 1 ],
-						"port" : [ 1236 ],
+						"port" : [ 1237 ],
 						"reinstantiate" : [ 0.0 ],
 						"resetinfluences" : [ 0.0 ],
 						"selfbypass" : [ 0 ],
@@ -601,7 +600,7 @@
 					}
 ,
 					"text" : "autopattr @autorestore 0",
-					"varname" : "u401002853"
+					"varname" : "u449006335"
 				}
 
 			}
@@ -809,33 +808,34 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 799.0, 932.0, 132.0, 49.0 ],
-					"text" : "set_param Player harmonic::_weight 0.33"
+					"patching_rect" : [ 799.0, 932.0, 402.0, 49.0 ],
+					"text" : "create_atom player= Player path= harmonic weight= 1. self_influenced= 0 classifier= SomChromaClassifier memory_space= NGramMemorySpace activity_pattern= ClassicActivityPattern enabled= s override= true"
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"id" : "obj-26",
-					"linecount" : 7,
+					"linecount" : 32,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 449.25, 957.0, 49.0, 102.0 ],
-					"text" : "set_param Player melodic::_weight 0.33"
+					"patching_rect" : [ 449.25, 957.0, 52.0, 437.0 ],
+					"text" : "create_atom player= Player path= melodic weight= 0.001 self_influenced= 0 classifier= TopNoteClassifier memory_space= NGramMemorySpace activity_pattern= ClassicActivityPattern enabled= s override= true"
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"id" : "obj-25",
+					"linecount" : 3,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 122.0, 890.0, 505.0, 22.0 ],
-					"text" : "set_param Player self::_weight 0.33"
+					"patching_rect" : [ 122.0, 890.0, 505.0, 49.0 ],
+					"text" : "create_atom player= Player2 path= self weight= 0.001 self_influenced= 1 classifier= TopNoteClassifier memory_space= NGramMemorySpace activity_pattern= ClassicActivityPattern enabled= s override= true"
 				}
 
 			}
@@ -2571,7 +2571,7 @@
 					"patching_rect" : [ 288.725552050473198, 121.0, 180.0, 27.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 12.41666666666697, 10.5, 417.206791099058364, 27.0 ],
-					"text" : "Player",
+					"text" : "Player2",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -2821,7 +2821,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1410.0, 1303.491967043968316, 260.0, 22.0 ],
+					"patching_rect" : [ 1410.0, 1303.491967043968316, 267.0, 22.0 ],
 					"text" : "set_param #1 peak_selector::_threshold $1"
 				}
 
@@ -4305,7 +4305,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1042.0, 1249.138529631642996, 140.0, 35.0 ],
+					"patching_rect" : [ 1042.0, 1249.138529631642996, 146.0, 35.0 ],
 					"text" : "prepend set_trigger_mode #1"
 				}
 
@@ -4364,7 +4364,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 33.0, 550.5, 397.0, 22.0 ],
+					"patching_rect" : [ 33.0, 550.5, 403.0, 22.0 ],
 					"text" : "prepend create_player player_name= #1 ip= #3 override=True"
 				}
 
@@ -5330,7 +5330,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1639.0, 2562.5, 101.0, 22.0 ],
+					"patching_rect" : [ 1639.0, 2562.5, 108.0, 22.0 ],
 					"text" : "get_peaks #1"
 				}
 
@@ -5387,7 +5387,7 @@
 					"numinlets" : 5,
 					"numoutlets" : 5,
 					"outlettype" : [ "", "", "", "", "" ],
-					"patching_rect" : [ 1164.599999999999909, 2190.5, 193.0, 22.0 ],
+					"patching_rect" : [ 1164.599999999999909, 2190.5, 199.0, 22.0 ],
 					"text" : "route #1 self melodic harmonic"
 				}
 
@@ -5713,13 +5713,13 @@
 					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-242",
-					"linecount" : 6,
+					"linecount" : 7,
 					"maxclass" : "newobj",
 					"numinlets" : 4,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 867.5, 816.0, 172.0, 89.0 ],
-					"text" : "somax.atom Player harmonic @selfinfluenced 0 @memoryspace NGramMemorySpace @classifier SomChromaClassifier"
+					"patching_rect" : [ 867.5, 816.0, 128.0, 102.0 ],
+					"text" : "somax.atom #1 harmonic @selfinfluenced 0 @memoryspace NGramMemorySpace @classifier SomChromaClassifier"
 				}
 
 			}
@@ -5728,13 +5728,12 @@
 					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-241",
-					"linecount" : 4,
 					"maxclass" : "newobj",
 					"numinlets" : 4,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 513.5, 816.0, 173.0, 62.0 ],
-					"text" : "somax.atom Player melodic @selfinfluenced 0 @memoryspace NGramMemorySpace"
+					"patching_rect" : [ 513.5, 816.0, 472.0, 22.0 ],
+					"text" : "somax.atom #1 melodic @selfinfluenced 0 @memoryspace NGramMemorySpace"
 				}
 
 			}
@@ -5987,7 +5986,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 777.5, 1235.638529631642996, 282.0, 22.0 ],
+					"patching_rect" : [ 777.5, 1235.638529631642996, 289.0, 22.0 ],
 					"text" : "set_param #1 NextStateScaleAction::_factor $1",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
@@ -6409,7 +6408,7 @@
 					"patching_rect" : [ 362.727848101265749, 2412.5, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 15.958333333333712, 457.962500303983688, 182.0, 14.5 ],
-					"size" : 3147.0
+					"size" : 7966.0
 				}
 
 			}
@@ -6696,7 +6695,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 781.200000000000045, 2562.5, 160.0, 22.0 ],
+					"patching_rect" : [ 781.200000000000045, 2562.5, 167.0, 22.0 ],
 					"text" : "prepend read_corpus #1"
 				}
 
@@ -10348,9 +10347,7 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
-					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -10361,18 +10358,19 @@
 						"autogradient" : 0
 					}
 ,
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontsize" : [ 10.0 ]
 				}
 ,
 				"newobj" : 				{
-					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontsize" : [ 10.0 ]
 				}
 ,
 				"message" : 				{
-					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -10384,6 +10382,7 @@
 						"autogradient" : 0
 					}
 ,
+					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ]
 				}
 ,

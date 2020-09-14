@@ -16,6 +16,7 @@ from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
 from somax.runtime.legacy_transforms import AbstractTransform, NoTransform
+from somax.runtime.transform_handler import TransformHandler
 from somax.scheduler.scheduled_object import ScheduledMidiObject, TriggerMode
 
 
@@ -28,7 +29,8 @@ class Player(Streamview, ScheduledMidiObject):
                  corpus: Optional[Corpus] = None,
                  scale_actions: List[AbstractScaleAction] = AbstractScaleAction.default_set(),
                  **kwargs):
-        super().__init__(name, corpus=corpus, merge_action=merge_action,
+        self.transform_handler: TransformHandler = TransformHandler()
+        super().__init__(name, transform_handler=self.transform_handler, corpus=corpus, merge_action=merge_action,
                          trigger_mode=trigger_mode, **kwargs)
         self.logger = logging.getLogger(__name__)
         self.target: Target = target
@@ -38,9 +40,9 @@ class Player(Streamview, ScheduledMidiObject):
         for scale_action in scale_actions:
             self.add_scale_action(scale_action)
 
-        self.transforms: Dict[int, Tuple[AbstractTransform, ...]] = {}  # key: hash  TODO
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
         self.previous_peaks: Peaks = Peaks.create_empty()
+        self.transform_handler: TransformHandler = TransformHandler()
 
         self._parse_parameters()
 
@@ -128,18 +130,23 @@ class Player(Streamview, ScheduledMidiObject):
             raise DuplicateKeyError(f"A Scale Action of type '{type(scale_action).__name__}' already exists."
                                     f"To override: use 'override=True'.")
         else:
+            scale_action.update_transforms(self.transform_handler)
             self.scale_actions[type(scale_action)] = scale_action
+
             self._parse_parameters()
 
     def remove_scale_action(self, scale_action_type: Type[AbstractScaleAction]):
         """ Raises: KeyError """
         del self.scale_actions[scale_action_type]
 
-    def add_transform(self, transform):
-        raise NotImplementedError("Transforms are not supported yet")  # TODO
+    def add_transform(self, transform: AbstractTransform):
+        """ :raises TransformError if a transform of the same instance with the same parameters already exists """
+        self.transform_handler.add(transform)
+        self._update_transforms()
 
-    def remove_transform(self, transform):
-        raise NotImplementedError("Transforms are not supported yet")  # TODO
+    def remove_transform(self, transform: AbstractTransform):
+        self.transform_handler.remove(transform)
+        self._update_transforms()
 
     ######################################################
     # PRIVATE
@@ -155,6 +162,12 @@ class Player(Streamview, ScheduledMidiObject):
                 peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, influence_history,
                                            corpus, **kwargs)
         return peaks
+
+    def _update_transforms(self):
+        for scale_action in self.scale_actions.values():
+            scale_action.update_transforms(self.transform_handler)
+        super().update_transforms()
+
 
     ######################################################
     # MAX INTERFACE INFORMATION
@@ -178,4 +191,3 @@ class Player(Streamview, ScheduledMidiObject):
     def send_current_corpus_info(self):
         self.target.send(SendProtocol.PLAYER_CORPUS, [self.corpus.name, self.corpus.content_type.value,
                                                       self.corpus.length()])
-

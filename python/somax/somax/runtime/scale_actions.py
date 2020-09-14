@@ -9,6 +9,7 @@ from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.peaks import Peaks
+from somax.runtime.transform_handler import TransformHandler
 from somax.utils.introspective import Introspective
 
 
@@ -29,6 +30,10 @@ class AbstractScaleAction(Parametric, Introspective, ABC):
     @abstractmethod
     def clear(self) -> None:
         """ """
+
+    @abstractmethod
+    def update_transforms(self, transform_handler: TransformHandler):
+        """ TODO """
 
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractScaleAction':

@@ -13,16 +13,19 @@ from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.parameter import Parameter
 from somax.runtime.parameter import Parametric
 from somax.runtime.peaks import Peaks
+from somax.runtime.transform_handler import TransformHandler
 
 
 class Streamview(Parametric):
     DEFAULT_WEIGHT = 1.0
 
-    def __init__(self, name: str, weight: float = DEFAULT_WEIGHT, corpus: Optional[Corpus] = None,
-                 merge_action: AbstractMergeAction = AbstractMergeAction.default(), **kwargs):
+    def __init__(self, name: str, transform_handler: TransformHandler, weight: float = DEFAULT_WEIGHT,
+                 corpus: Optional[Corpus] = None, merge_action: AbstractMergeAction = AbstractMergeAction.default(),
+                 **kwargs):
         super().__init__(**kwargs)
         self.logger = logging.getLogger(__name__)
         self.name: str = name
+        self.transform_handler: TransformHandler = transform_handler    # passed as reference
         self.merge_action: AbstractMergeAction = merge_action
         self.corpus: Optional[Corpus] = corpus
 
@@ -143,18 +146,21 @@ class Streamview(Parametric):
         """ Raises: KeyError, IndexError """
         atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
         atom.set_classifier(classifier)
+        atom.update_transforms(self.transform_handler)
         self._parse_parameters()
 
     def set_memory_space(self, path: List[str], memory_space: AbstractMemorySpace) -> None:
         """ Raises: KeyError, IndexError """
         atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
         atom.set_memory_space(memory_space)
+        atom.update_transforms(self.transform_handler)
         self._parse_parameters()
 
     def set_activity_pattern(self, path: List[str], activity_pattern: AbstractActivityPattern) -> None:
         """ Raises: KeyError, IndexError """
         atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
         atom.set_activity_pattern(activity_pattern)
+        atom.update_transforms(self.transform_handler)
         self._parse_parameters()
 
     def set_corpus(self, corpus: Corpus) -> None:
@@ -162,6 +168,12 @@ class Streamview(Parametric):
             streamview.set_corpus(corpus)
         for atom in self.atoms.values():
             atom.read(corpus)
+
+    def update_transforms(self):
+        for streamview in self.streamviews.values():
+            streamview.update_transforms()
+        for atom in self.atoms.values():
+            atom.update_transforms(self.transform_handler)
 
     def is_enabled(self) -> bool:
         return self.enabled.value

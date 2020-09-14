@@ -7,6 +7,7 @@ import somax.classification
 from somax.runtime.corpus import Corpus
 from somax.runtime.influence import AbstractInfluence, InfluenceType
 from somax.runtime.label import AbstractLabel
+from somax.runtime.transform_handler import TransformHandler
 from somax.utils.introspective import Introspective
 
 
@@ -41,6 +42,10 @@ class AbstractClassifier(Introspective, ABC):
         """ This function should reset any runtime state related to previous influences inside the classifier without
             unloading any data. If the classifier is stateless, leave this method blank."""
         pass
+
+    @abstractmethod
+    def update_transforms(self, transform_handler: TransformHandler):
+        """ TODO """
 
     @classmethod
     @abstractmethod

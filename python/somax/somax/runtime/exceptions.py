@@ -23,6 +23,11 @@ class TransformError(Exception):
         super(TransformError, self).__init__(error)
 
 
+class TransformInstantiationError(Exception):
+    def __init__(self, error):
+        super().__init__(error)
+
+
 class InvalidConfiguration(Exception):
     def __init__(self, error):
         super(InvalidConfiguration, self).__init__(error)

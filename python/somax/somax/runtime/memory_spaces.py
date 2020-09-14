@@ -12,26 +12,20 @@ from somax.runtime.parameter import Parameter, ParamWithSetter
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_event import PeakEvent, ClassicPeakEvent
 from somax.runtime.legacy_transforms import AbstractTransform, NoTransform
-
-
-# TODO: Abstract Influence type. Dependent on (determined by?) ActivityPattern. CUrrently hardcoded in NGram.
+from somax.runtime.transform_handler import TransformHandler
 from somax.utils.introspective import Introspective
 
 
 class AbstractMemorySpace(Parametric, Introspective, ABC):
     """ MemorySpaces determine how events are matched to labels """
 
-    def __init__(self, transforms: Optional[List[Tuple[Type[AbstractTransform], ...]]] = None,
-                 corpus: Optional[Corpus] = None, labels: Optional[List[AbstractLabel]] = None, **_kwargs):
+    def __init__(self, transform_handler: TransformHandler, corpus: Optional[Corpus] = None,
+                 labels: Optional[List[AbstractLabel]] = None, **_kwargs):
         """ Note: kwargs can be used if additional information is need to construct the data structure.
             Note: labels are not classified in default constructor as additional parameters might need init before."""
         super(AbstractMemorySpace, self).__init__()
         self.logger = logging.getLogger(__name__)
-        # TODO: Should also check that they work for this label
-        self.transforms: [(AbstractTransform, ...)] = []
-        if transforms is not None:
-            # TODO: Warning: Transforms added twice - both in Atom and in Memspace
-            self.add_transforms(transforms)
+        self.transform_handler: TransformHandler = transform_handler  # passed as a reference
         self._corpus: Optional[Corpus] = corpus
         self._labels: Optional[List[AbstractLabel]] = labels
 
@@ -61,6 +55,10 @@ class AbstractMemorySpace(Parametric, Introspective, ABC):
     @abstractmethod
     def clear(self) -> None:
         """ Reset the playing state of the Memory Space without removing its corpus memory. """
+
+    @abstractmethod
+    def update_transforms(self, transform_handler: TransformHandler, valid_hashes: List[int]):
+        """ TODO """
 
     def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
         parameters: Dict = {}
