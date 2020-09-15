@@ -1,6 +1,6 @@
 from abc import ABC
 from importlib import resources
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 import numpy as np
 from sklearn.mixture import GaussianMixture
@@ -31,23 +31,24 @@ class ChromaClassifier(AbstractClassifier, ABC):
         self._transforms = transform_handler.get_by_type(TransformType.CHROMA)
         return self._transforms
 
-    @classmethod
-    def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-        influence_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
-                                                  for event in influence_corpus.events])
-        max_per_col: np.ndarray = np.max(influence_chromas, axis=1)
-        max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
-        influence_chromas /= max_per_col[:, np.newaxis]
-
-        output_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
-                                               for event in output_corpus.events])
-        max_per_col: np.ndarray = np.max(output_chromas, axis=1)
-        max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
-        output_chromas /= max_per_col[:, np.newaxis]
-
-        diff: np.ndarray = EvaluationUtils.diff(influence_chromas, influence_corpus.onsets, output_chromas,
-                                                output_corpus.onsets)
-        return np.sqrt(np.sum(np.power(diff, 2), axis=1) / diff.shape[1])
+    # TODO: REMOVE
+    # @classmethod
+    # def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+    #     influence_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
+    #                                               for event in influence_corpus.events])
+    #     max_per_col: np.ndarray = np.max(influence_chromas, axis=1)
+    #     max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
+    #     influence_chromas /= max_per_col[:, np.newaxis]
+    #
+    #     output_chromas: np.ndarray = np.array([event.get_trait(OnsetChroma).background
+    #                                            for event in output_corpus.events])
+    #     max_per_col: np.ndarray = np.max(output_chromas, axis=1)
+    #     max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
+    #     output_chromas /= max_per_col[:, np.newaxis]
+    #
+    #     diff: np.ndarray = EvaluationUtils.diff(influence_chromas, influence_corpus.onsets, output_chromas,
+    #                                             output_corpus.onsets)
+    #     return np.sqrt(np.sum(np.power(diff, 2), axis=1) / diff.shape[1])
 
 
 class SomChromaClassifier(ChromaClassifier):
@@ -76,27 +77,29 @@ class SomChromaClassifier(ChromaClassifier):
             labels.append(self._label_from_chroma(event.get_trait(OnsetChroma).background))
         return labels
 
-    def classify_influence(self, influence: AbstractInfluence) -> List[AbstractLabel]:
+    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+        """ :raises TransformError if no transforms exist """
         if not self._transforms:  # transforms is empty
             raise TransformError(f"No transforms exist in classifier {self}")
         if isinstance(influence, KeywordInfluence) and influence.keyword in self._influence_keywords():
             # TODO: Potentially unsafe as type of influence data is unchecked
-            return [self._label_from_chroma(influence.influence_data, t) for t in self._transforms]
+            chroma: np.ndarray = influence.influence_data
+            return [((self._label_from_chroma(t.inverse(chroma, TransformType.CHROMA))), t)
+                    for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
             # TODO: Handle or comment on KeyError, which technically should never occur
-            return [self._label_from_chroma(influence.corpus_event.get_trait(OnsetChroma).background, t)
+            chroma: np.ndarray = influence.corpus_event.get_trait(OnsetChroma).background
+            return [(self._label_from_chroma(t.inverse(chroma, TransformType.CHROMA)), t)
                     for t in self._transforms]
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
-    def _label_from_chroma(self, chroma: np.ndarray, transform: Optional[AbstractTransform] = None) -> IntLabel:
-        if transform is not None:
-            chroma = transform.inverse(chroma, TransformType.CHROMA)
+    def _label_from_chroma(self, chroma: np.ndarray) -> IntLabel:
         # max_val: float = np.max(chroma)
         # if max_val > 0:
         #     chroma /= max_val
         rms: np.ndarray = np.sqrt(np.sum(np.power(chroma - self._som_data, 2), axis=1))
-        return IntLabel(self._som_classes[np.argmin(rms)], transform)
+        return IntLabel(self._som_classes[np.argmin(rms)])
 
     def clear(self) -> None:
         pass  # SomChromaClassifier is stateless

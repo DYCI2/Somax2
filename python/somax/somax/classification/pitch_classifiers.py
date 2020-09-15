@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 import numpy as np
 
@@ -9,7 +9,7 @@ from somax.corpus_builder.traits.pitch import TopNote, VirtualFundamental
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import InvalidLabelInput
 from somax.runtime.influence import AbstractInfluence, KeywordInfluence, CorpusInfluence, InfluenceType
-from somax.runtime.label import IntLabel
+from somax.runtime.label import IntLabel, AbstractLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, TransformType
 
@@ -34,13 +34,15 @@ class BasicPitchClassifier(PitchClassifier, ABC):
             labels.append(self._label_from_corpus_event(event))
         return labels
 
-    def classify_influence(self, influence: AbstractInfluence) -> List[IntLabel]:
+    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
         if isinstance(influence, KeywordInfluence) and influence.keyword in self._influence_keywords():
             # TODO: Potentially unsafe as type of influence data is unchecked
-            return [self._label_from_influence_data(pitch=influence.influence_data, t) for t in self._transforms]
+            return [(self._label_from_influence_data(influence.influence_data, t), t)
+                    for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
             # TODO: Handle or comment on KeyError, which technically should never occur
-            return [self._label_from_corpus_event(influence.corpus_event, t) for t in self._transforms]
+            return [(self._label_from_corpus_event(influence.corpus_event, t), t)
+                    for t in self._transforms]
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
@@ -62,15 +64,16 @@ class BasicPitchClassifier(PitchClassifier, ABC):
     def _trait_from_corpus_event(event: CorpusEvent) -> int:
         pass
 
-    @classmethod
-    def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-        """ rms: 1 when two pitches are not the same, 0 otherwise. """
-        influence_pitches: np.ndarray = np.array([cls._trait_from_corpus_event(event)
-                                                  for event in influence_corpus.events], dtype=int)
-        output_pitches: np.ndarray = np.array([cls._trait_from_corpus_event(event)
-                                               for event in output_corpus.events], dtype=int)
-        return np.not_equal(EvaluationUtils.diff(influence_pitches, influence_corpus.onsets, output_pitches,
-                                                 output_corpus.onsets), 0).astype(int)
+    # TODO: REMOVE
+    # @classmethod
+    # def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+    #     """ rms: 1 when two pitches are not the same, 0 otherwise. """
+    #     influence_pitches: np.ndarray = np.array([cls._trait_from_corpus_event(event)
+    #                                               for event in influence_corpus.events], dtype=int)
+    #     output_pitches: np.ndarray = np.array([cls._trait_from_corpus_event(event)
+    #                                            for event in output_corpus.events], dtype=int)
+    #     return np.not_equal(EvaluationUtils.diff(influence_pitches, influence_corpus.onsets, output_pitches,
+    #                                              output_corpus.onsets), 0).astype(int)
 
 
 class TopNoteClassifier(BasicPitchClassifier):
@@ -81,12 +84,12 @@ class TopNoteClassifier(BasicPitchClassifier):
     @staticmethod
     def _label_from_corpus_event(event: CorpusEvent, transform: Optional[AbstractTransform] = None) -> IntLabel:
         inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote).pitch, TransformType.PITCH)
-        return IntLabel(inverse_transformed_label, transform)
+        return IntLabel(inverse_transformed_label)
 
     @staticmethod
     def _label_from_influence_data(pitch: int, transform: Optional[AbstractTransform] = None) -> IntLabel:
         inverse_transformed_label: int = transform.inverse(pitch, TransformType.PITCH)
-        return IntLabel(inverse_transformed_label, transform)
+        return IntLabel(inverse_transformed_label)
 
     @staticmethod
     def _trait_from_corpus_event(event: CorpusEvent) -> int:
@@ -106,12 +109,12 @@ class PitchClassClassifier(BasicPitchClassifier):
     def _label_from_corpus_event(event: CorpusEvent, transform: Optional[AbstractTransform] = None) -> IntLabel:
         inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote).pitch % 12,
                                                            TransformType.PITCH_CLASS)
-        return IntLabel(inverse_transformed_label, transform)
+        return IntLabel(inverse_transformed_label)
 
     @staticmethod
     def _label_from_influence_data(pitch: int, transform: Optional[AbstractTransform] = None) -> IntLabel:
         inverse_transformed_label: int = transform.inverse(pitch % 12, TransformType.PITCH_CLASS)
-        return IntLabel(inverse_transformed_label, transform)
+        return IntLabel(inverse_transformed_label)
 
     @staticmethod
     def _trait_from_corpus_event(event: CorpusEvent) -> int:

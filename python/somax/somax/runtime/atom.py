@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, Union, List, Optional
+from typing import Dict, Union, List, Optional, Tuple
 
 from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
@@ -65,7 +65,7 @@ class Atom(Parametric):
             return 0
 
         self._update_peaks_on_influence(time)
-        label: List[AbstractLabel] = self._classifier.classify_influence(influence)
+        label: List[Tuple[AbstractLabel, AbstractTransform]] = self._classifier.classify_influence(influence)
         matched_events: List[PeakEvent] = self._memory_space.influence(label, time, **kwargs)
         if matched_events:
             self._activity_pattern.insert(matched_events)  # we insert the events into the activity profile

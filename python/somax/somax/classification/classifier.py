@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Tuple
 
 import numpy as np
 
@@ -36,7 +36,7 @@ class AbstractClassifier(Introspective, ABC):
         pass
 
     @abstractmethod
-    def classify_influence(self, influence: AbstractInfluence) -> List[AbstractLabel]:
+    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
         """ :returns List of inverse transformed labels of the same length as number of `AbstractTransforms`
                      applied in atom. """
         pass
@@ -51,18 +51,19 @@ class AbstractClassifier(Introspective, ABC):
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :returns list of for the classifier valid `AbstractTransform`s selected from `transform_handler`. """
 
-    @classmethod
-    @abstractmethod
-    def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-        """ The rms method is not strictly necessary to implement - it's only used for offline performance analysis.
-            To leave it unimplemented, simply define it as
-            ```
-                @staticmethod
-                def rms(influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-                    raise NotImplementedError(f"{self.__class__}.rms is not implemented")
-            ```
-        """
-        pass
+    # TODO: REMOVE
+    # @classmethod
+    # @abstractmethod
+    # def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+    #     """ The rms method is not strictly necessary to implement - it's only used for offline performance analysis.
+    #         To leave it unimplemented, simply define it as
+    #         ```
+    #             @staticmethod
+    #             def rms(influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
+    #                 raise NotImplementedError(f"{self.__class__}.rms is not implemented")
+    #         ```
+    #     """
+    #     pass
 
     @abstractmethod
     def _influence_keywords(self) -> List[InfluenceType]:
