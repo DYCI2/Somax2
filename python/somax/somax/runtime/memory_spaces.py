@@ -57,8 +57,8 @@ class AbstractMemorySpace(Parametric, Introspective, ABC):
         """ Reset the playing state of the Memory Space without removing its corpus memory. """
 
     @abstractmethod
-    def update_transforms(self, transform_handler: TransformHandler, valid_hashes: List[int]):
-        """ TODO """
+    def update_transforms(self, transform_handler: TransformHandler, valid_transforms: List[AbstractTransform]):
+        """ """
 
     def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
         parameters: Dict = {}

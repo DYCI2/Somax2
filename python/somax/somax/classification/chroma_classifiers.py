@@ -10,18 +10,26 @@ from somax.classification.classifier import AbstractClassifier
 from somax.runtime.corpus import Corpus
 from somax.corpus_builder.traits.chroma import OnsetChroma
 from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.exceptions import InvalidLabelInput
+from somax.runtime.exceptions import InvalidLabelInput, TransformError
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence, KeywordInfluence, InfluenceType
 from somax.runtime.label import AbstractLabel, IntLabel
-
 
 # TODO: This class needs a lot of optimization. A larger corpus will mean higher computation time to a
 #  point where classification of an influence might not be real-time anymore.
 
 # TODO: Normalization. Normalization has been removed for now, but should be thoroughly tested.
+from somax.runtime.transform_handler import TransformHandler
+from somax.runtime.transforms import AbstractTransform, TransformType
+
+
 class ChromaClassifier(AbstractClassifier, ABC):
+
     def _influence_keywords(self) -> List[InfluenceType]:
         return [InfluenceType.CHROMA]
+
+    def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
+        self._transforms = transform_handler.get_by_type(TransformType.CHROMA)
+        return self._transforms
 
     @classmethod
     def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
@@ -68,22 +76,27 @@ class SomChromaClassifier(ChromaClassifier):
             labels.append(self._label_from_chroma(event.get_trait(OnsetChroma).background))
         return labels
 
-    def classify_influence(self, influence: AbstractInfluence) -> AbstractLabel:
+    def classify_influence(self, influence: AbstractInfluence) -> List[AbstractLabel]:
+        if not self._transforms:  # transforms is empty
+            raise TransformError(f"No transforms exist in classifier {self}")
         if isinstance(influence, KeywordInfluence) and influence.keyword in self._influence_keywords():
             # TODO: Potentially unsafe as type of influence data is unchecked
-            return self._label_from_chroma(influence.influence_data)
+            return [self._label_from_chroma(influence.influence_data, t) for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
             # TODO: Handle or comment on KeyError, which technically should never occur
-            return self._label_from_chroma(influence.corpus_event.get_trait(OnsetChroma).background)
+            return [self._label_from_chroma(influence.corpus_event.get_trait(OnsetChroma).background, t)
+                    for t in self._transforms]
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
-    def _label_from_chroma(self, chroma: np.ndarray) -> IntLabel:
+    def _label_from_chroma(self, chroma: np.ndarray, transform: Optional[AbstractTransform] = None) -> IntLabel:
+        if transform is not None:
+            chroma = transform.inverse(chroma, TransformType.CHROMA)
         # max_val: float = np.max(chroma)
         # if max_val > 0:
         #     chroma /= max_val
         rms: np.ndarray = np.sqrt(np.sum(np.power(chroma - self._som_data, 2), axis=1))
-        return IntLabel(self._som_classes[np.argmin(rms)])
+        return IntLabel(self._som_classes[np.argmin(rms)], transform)
 
     def clear(self) -> None:
         pass  # SomChromaClassifier is stateless
@@ -95,6 +108,7 @@ class GmmClassifier(ChromaClassifier, ABC):
         self.num_components: int = num_components
         self.max_iter: int = max_iter
         self.gmm: Optional[GaussianMixture] = None
+        raise NotImplementedError("This class is missing important architectural updates and should not be used.")
 
     def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
         self._corpus = corpus
@@ -119,7 +133,6 @@ class GmmClassifier(ChromaClassifier, ABC):
         # if max_val > 0:
         #     chroma /= max_val
         return IntLabel(int(self.gmm.predict(chroma)))
-
 
     def clear(self) -> None:
         pass  # GmmClassifier is stateless

@@ -12,6 +12,7 @@ from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.peak_event import PeakEvent
 from somax.runtime.peaks import Peaks
 from somax.runtime.transform_handler import TransformHandler
+from somax.runtime.transforms import AbstractTransform
 
 
 class Atom(Parametric):
@@ -40,19 +41,6 @@ class Atom(Parametric):
 
         self._parse_parameters()
 
-    def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
-        parameters = {}
-        for name, parameter in self._parse_parameters().items():
-            parameters[name] = parameter.update_parameter_dict()
-        self.parameter_dict = {"memory_space": self._memory_space.update_parameter_dict(),
-                               "activity_pattern": self._activity_pattern.update_parameter_dict(),
-                               "parameters": parameters}
-        return self.parameter_dict
-
-    def update_transforms(self, transform_handler: TransformHandler):
-        valid_hashes: List[int] = self._classifier.update_transforms(transform_handler)
-        self._memory_space.update_transforms(transform_handler, valid_hashes)
-
     def read(self, corpus: Optional[Corpus] = None):
         """ :raises RuntimeError """
         if corpus is not None:
@@ -77,13 +65,19 @@ class Atom(Parametric):
             return 0
 
         self._update_peaks_on_influence(time)
-        label: AbstractLabel = self._classifier.classify_influence(influence)
+        label: List[AbstractLabel] = self._classifier.classify_influence(influence)
         matched_events: List[PeakEvent] = self._memory_space.influence(label, time, **kwargs)
         if matched_events:
             self._activity_pattern.insert(matched_events)  # we insert the events into the activity profile
             return len(matched_events)
         else:
             return 0
+
+    def _update_peaks_on_influence(self, time: float) -> None:
+        self._activity_pattern.update_peaks_on_influence(time)
+
+    def update_peaks_on_new_event(self, time: float) -> None:
+        self._activity_pattern.update_peaks_on_new_event(time)
 
     def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
         if self.self_influenced:
@@ -101,11 +95,18 @@ class Atom(Parametric):
         activity_pattern.corpus = self._corpus
         self._activity_pattern = activity_pattern
 
-    def _update_peaks_on_influence(self, time: float) -> None:
-        self._activity_pattern.update_peaks_on_influence(time)
+    def update_transforms(self, transform_handler: TransformHandler):
+        valid_transforms: List[AbstractTransform] = self._classifier.update_transforms(transform_handler)
+        self._memory_space.update_transforms(transform_handler, valid_transforms)
 
-    def update_peaks_on_new_event(self, time: float) -> None:
-        self._activity_pattern.update_peaks_on_new_event(time)
+    def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
+        parameters = {}
+        for name, parameter in self._parse_parameters().items():
+            parameters[name] = parameter.update_parameter_dict()
+        self.parameter_dict = {"memory_space": self._memory_space.update_parameter_dict(),
+                               "activity_pattern": self._activity_pattern.update_parameter_dict(),
+                               "parameters": parameters}
+        return self.parameter_dict
 
     @property
     def weight(self) -> float:

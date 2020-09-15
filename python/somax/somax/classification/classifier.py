@@ -8,13 +8,14 @@ from somax.runtime.corpus import Corpus
 from somax.runtime.influence import AbstractInfluence, InfluenceType
 from somax.runtime.label import AbstractLabel
 from somax.runtime.transform_handler import TransformHandler
+from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import Introspective
 
 
 class AbstractClassifier(Introspective, ABC):
 
     def __init__(self, **kwargs):
-        pass
+        self._transforms: List[AbstractTransform] = []
 
     @classmethod
     def default(cls, **_kwargs) -> None:
@@ -31,10 +32,13 @@ class AbstractClassifier(Introspective, ABC):
 
     @abstractmethod
     def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
+        """ :returns List of untransformed labels of the same length as the corpus. """
         pass
 
     @abstractmethod
-    def classify_influence(self, influence: AbstractInfluence) -> AbstractLabel:
+    def classify_influence(self, influence: AbstractInfluence) -> List[AbstractLabel]:
+        """ :returns List of inverse transformed labels of the same length as number of `AbstractTransforms`
+                     applied in atom. """
         pass
 
     @abstractmethod
@@ -44,8 +48,8 @@ class AbstractClassifier(Introspective, ABC):
         pass
 
     @abstractmethod
-    def update_transforms(self, transform_handler: TransformHandler):
-        """ TODO """
+    def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
+        """ :returns list of for the classifier valid `AbstractTransform`s selected from `transform_handler`. """
 
     @classmethod
     @abstractmethod

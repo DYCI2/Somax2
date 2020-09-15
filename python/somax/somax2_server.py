@@ -36,6 +36,7 @@ from somax.runtime.player import Player
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SimpleOscTarget, SendProtocol
+from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.realtime_scheduler import RealtimeScheduler
 from somax.scheduler.scheduled_object import TriggerMode
 
@@ -115,7 +116,7 @@ class SomaxStringDispatcher:
 
     def create_atom(self, player: str, path: str = "", weight: float = Atom.DEFAULT_WEIGHT, classifier: str = "",
                     activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
-                    transforms: Tuple[str, ...] = ("",), enabled: bool = True, override: bool = False):
+                    enabled: bool = True, override: bool = False):
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier)
@@ -123,7 +124,7 @@ class SomaxStringDispatcher:
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
             self.players[player].create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
                                              classifier=classifier, activity_pattern=activity_pattern,
-                                             memory_space=memory_space, transforms=None, enabled=enabled,
+                                             memory_space=memory_space, enabled=enabled,
                                              override=override)
             self.players[player].send_atoms()
             self.logger.info(f"Created Atom at path '{path}'.")
@@ -204,6 +205,22 @@ class SomaxStringDispatcher:
                               f"for player '{player}.")
         except (AssertionError, KeyError, ValueError) as e:
             self.logger.error(f"{str(e)} No Activity Pattern was set.")
+
+    def add_transform(self, player: str, transform: str, **kwargs):
+        try:
+            transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)
+            self.players[player].add_transform(transform)
+            self.logger.debug(f"[add_transform] Added transform {transform} for player '{player}'.")
+        except KeyError as e:
+            self.logger.error(f"{str(e)} No transform was added.")
+
+    def remove_transform(self, player: str, transform: str, **kwargs):
+        try:
+            transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)
+            self.players[player].remove_transform(transform)
+            self.logger.debug(f"[add_transform] removed transform {transform} for player '{player}'.")
+        except (KeyError, IndexError) as e:
+            self.logger.error(f"{str(e)} Could not remove transform.")
 
     def read_corpus(self, player: str, filepath: str, volatile: bool = False):
         self.logger.info(f"Reading Corpus at '{filepath}' for Player '{player}'...")
@@ -539,7 +556,6 @@ if __name__ == "__main__":
         logging.config.fileConfig(path.absolute())
     #
     SomChromaClassifier()
-
 
     # log_file_path = path.join(path.dirname(path.abspath(__file__)), 'log/logging.ini')
     # print(log_file_path)

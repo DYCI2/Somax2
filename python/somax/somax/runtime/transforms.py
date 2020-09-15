@@ -45,7 +45,7 @@ class AbstractTransform(Introspective, ABC):
         return NoTransform()
 
     @classmethod
-    def from_string(cls, transform: str, **kwargs) -> 'Introspective':
+    def from_string(cls, transform: str, **kwargs) -> 'AbstractTransform':
         try:
             return cls._from_string(transform, **kwargs)
         except TransformInstantiationError:
@@ -78,8 +78,7 @@ class TransposeTransform(AbstractTransform):
     def __init__(self, semitones: int):
         super().__init__()
         if semitones == 0:
-            raise TransformInstantiationError("A transposition of 0 semitones is equivalent to the NoTransform class. "
-                                              "No transform was added")
+            raise TransformInstantiationError("A transposition of 0 semitones is equivalent to the NoTransform class")
         self.semitones = semitones
 
     def __eq__(self, other):
