@@ -10,7 +10,7 @@ from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.peaks import Peaks
-from somax.runtime.legacy_transforms import AbstractTransform, NoTransform
+from somax.runtime.transforms import AbstractTransform, NoTransform
 from somax.runtime.transform_handler import TransformHandler
 from somax.utils.introspective import Introspective
 
@@ -36,7 +36,7 @@ class AbstractPeakSelector(Parametric, Introspective, ABC):
         """ Action to perform if no valid peak exists after calling `_decide_default`"""
 
     @abstractmethod
-    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
         """ """
 
     @classmethod
@@ -84,7 +84,7 @@ class MaxPeakSelector(AbstractPeakSelector):
             # If memory is empty: play the first event in the corpus
             return corpus.event_at(0), NoTransform()
 
-    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
         pass
 
 
@@ -114,7 +114,7 @@ class ThresholdPeakSelector(AbstractPeakSelector):
                          **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         return None
 
-    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+    def feedback(self, _feedback_event: CorpusEvent, _time: float, _applied_transform: AbstractTransform) -> None:
         pass
 
     @property

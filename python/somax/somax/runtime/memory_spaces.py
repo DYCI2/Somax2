@@ -11,7 +11,7 @@ from somax.runtime.label import AbstractLabel
 from somax.runtime.parameter import Parameter, ParamWithSetter
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_event import PeakEvent, ClassicPeakEvent
-from somax.runtime.legacy_transforms import AbstractTransform, NoTransform
+from somax.runtime.transforms import AbstractTransform
 from somax.runtime.transform_handler import TransformHandler
 from somax.utils.introspective import Introspective
 

@@ -26,7 +26,7 @@ class AbstractScaleAction(Parametric, Introspective, ABC):
         """ """
 
     @abstractmethod
-    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
         """ """
 
     @abstractmethod
@@ -39,7 +39,7 @@ class AbstractScaleAction(Parametric, Introspective, ABC):
 
     @classmethod
     def default_set(cls, **_kwargs) -> Tuple['AbstractScaleAction']:
-        return (PhaseModulationScaleAction(),)
+        return PhaseModulationScaleAction(),
 
     @classmethod
     def from_string(cls, scale_action: str, **kwargs) -> 'AbstractScaleAction':
@@ -65,7 +65,7 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         peaks.scores *= np.exp(self.selectivity * (np.cos(2 * np.pi * (time - peaks.times)) - 1))
         return peaks
 
-    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+    def feedback(self, _feedback_event: CorpusEvent, _time: float, _applied_transform: AbstractTransform) -> None:
         pass
 
     def clear(self) -> None:
@@ -100,7 +100,7 @@ class NextStateScaleAction(AbstractScaleAction):
             peaks.scale(self.factor, is_matching)
             return peaks
 
-    def feedback(self, feedback_event: CorpusEvent, _time: float) -> None:
+    def feedback(self, feedback_event: CorpusEvent, _time: float, _applied_transform: AbstractTransform) -> None:
         self._previous_output_index = feedback_event.state_index
 
     def clear(self) -> None:

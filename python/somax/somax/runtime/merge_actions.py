@@ -10,6 +10,7 @@ from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.peaks import Peaks
+from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import Introspective
 
 
@@ -24,7 +25,7 @@ class AbstractMergeAction(Parametric, Introspective, ABC):
         """ """
 
     @abstractmethod
-    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
         """ """
 
     @abstractmethod
@@ -92,7 +93,7 @@ class DistanceMergeAction(AbstractMergeAction):
         self.logger.debug(f"[merge] Merge successful. Number of peaks after merge: {merged_peaks.size()}.")
         return merged_peaks
 
-    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
         pass
 
     def clear(self) -> None:

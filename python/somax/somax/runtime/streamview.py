@@ -14,6 +14,7 @@ from somax.runtime.parameter import Parameter
 from somax.runtime.parameter import Parametric
 from somax.runtime.peaks import Peaks
 from somax.runtime.transform_handler import TransformHandler
+from somax.runtime.transforms import AbstractTransform
 
 
 class Streamview(Parametric):
@@ -78,12 +79,12 @@ class Streamview(Parametric):
     # MODIFY STATE
     ######################################################
 
-    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
-        self.merge_action.feedback(feedback_event, time)
+    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+        self.merge_action.feedback(feedback_event, time, applied_transform)
         for streamview in self.streamviews.values():
-            streamview.feedback(feedback_event, time)
+            streamview.feedback(feedback_event, time, applied_transform)
         for atom in self.atoms.values():
-            atom.feedback(feedback_event, time)
+            atom.feedback(feedback_event, time, applied_transform)
 
     def clear(self) -> None:
         self.merge_action.clear()

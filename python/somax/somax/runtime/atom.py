@@ -79,7 +79,7 @@ class Atom(Parametric):
     def update_peaks_on_new_event(self, time: float) -> None:
         self._activity_pattern.update_peaks_on_new_event(time)
 
-    def feedback(self, feedback_event: CorpusEvent, time: float) -> None:
+    def feedback(self, feedback_event: CorpusEvent, time: float, _applied_transform: AbstractTransform) -> None:
         if self.self_influenced:
             self.influence(CorpusInfluence(feedback_event), time)
 

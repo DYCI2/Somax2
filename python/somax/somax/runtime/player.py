@@ -99,11 +99,11 @@ class Player(Streamview, ScheduledMidiObject):
     # MODIFY STATE
     ######################################################
 
-    def _feedback(self, feedback_event: CorpusEvent, time: float) -> None:
-        self.peak_selector.feedback(feedback_event, time)
+    def _feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+        self.peak_selector.feedback(feedback_event, time, applied_transform)
         for scale_action in self.scale_actions.values():
-            scale_action.feedback(feedback_event, time)
-        self.feedback(feedback_event, time)
+            scale_action.feedback(feedback_event, time, applied_transform)
+        self.feedback(feedback_event, time, applied_transform)
 
     def clear(self):
         self.improvisation_memory = ImprovisationMemory()
