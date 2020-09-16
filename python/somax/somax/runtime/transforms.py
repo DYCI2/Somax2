@@ -1,10 +1,13 @@
+import copy
 import logging
 from abc import ABC, abstractmethod
 from enum import Enum
-from typing import Any, List
+from typing import Any, List, Optional
 
 import numpy as np
 
+from somax.corpus_builder.traits import OnsetChroma
+from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import TransformError, TransformInstantiationError
 from somax.utils.introspective import Introspective
 
@@ -33,11 +36,11 @@ class AbstractTransform(Introspective, ABC):
         """"""
 
     @abstractmethod
-    def apply(self, value: Any, transform_type: TransformType, **kwargs) -> Any:
+    def apply(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
         """"""
 
     @abstractmethod
-    def inverse(self, value: Any, transform_type: TransformType, **kwargs) -> Any:
+    def inverse(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
         """"""
 
     @classmethod
@@ -67,10 +70,10 @@ class NoTransform(AbstractTransform):
     def valid_types() -> List[TransformType]:
         return list([enum for enum in TransformType])  # all types are valid
 
-    def apply(self, value: Any, transform_type: TransformType, **kwargs) -> Any:
+    def apply(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
         return value
 
-    def inverse(self, value: Any, transform_type: TransformType, **kwargs) -> Any:
+    def inverse(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
         return value
 
 
@@ -91,8 +94,14 @@ class TransposeTransform(AbstractTransform):
     def valid_types() -> List[TransformType]:
         return [TransformType.PITCH, TransformType.CHROMA]
 
-    def apply(self, value: Any, transform_type: TransformType, **_kwargs) -> Any:
-        if transform_type == TransformType.PITCH:
+    def apply(self, value: Any, transform_type: Optional[TransformType] = None, **_kwargs) -> Any:
+        if isinstance(value, CorpusEvent):
+            event: CorpusEvent = copy.deepcopy(value)
+            # TODO: Transforming traits not implemented
+            for note in event.notes:
+                note.pitch += self.semitones
+            return event
+        elif transform_type == TransformType.PITCH:
             return value + self.semitones
         elif transform_type == TransformType.PITCH_CLASS:
             return (value + self.semitones) % 12
@@ -103,7 +112,13 @@ class TransposeTransform(AbstractTransform):
         else:
             raise TransformError(f"Could not apply transform {type(self).__name__} with keyword {transform_type}")
 
-    def inverse(self, value: Any, transform_type: TransformType, **kwargs) -> Any:
+
+    def inverse(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
+        if isinstance(value, CorpusEvent):
+            event: CorpusEvent = copy.deepcopy(value)
+            # TODO: Transforming traits not implemented
+            for note in event.notes:
+                note.pitch -= self.semitones
         if transform_type == TransformType.PITCH:
             return value - self.semitones
         elif transform_type == TransformType.PITCH_CLASS:

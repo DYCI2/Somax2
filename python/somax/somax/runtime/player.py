@@ -15,9 +15,10 @@ from somax.runtime.peaks import Peaks
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
-from somax.runtime.legacy_transforms import AbstractTransform, NoTransform
+from somax.runtime.transforms import AbstractTransform
 from somax.runtime.transform_handler import TransformHandler
 from somax.scheduler.scheduled_object import ScheduledMidiObject, TriggerMode
+import numpy as np
 
 
 class Player(Streamview, ScheduledMidiObject):
@@ -63,20 +64,16 @@ class Player(Streamview, ScheduledMidiObject):
         peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus)
         peaks = self._scale_peaks(peaks, scheduler_time, self.improvisation_memory, self.corpus)
 
-        event_and_transforms = self.peak_selector.decide(peaks, self.improvisation_memory, self.corpus, self.transforms)
-
-        if event_and_transforms is None:
+        event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+        event_and_transform = self.peak_selector.decide(peaks, self.improvisation_memory,
+                                                        self.corpus, self.transform_handler)
+        if event_and_transform is None:
             return None
-        event: Optional[CorpusEvent] = copy.deepcopy(event_and_transforms[0])
+        event, transform = event_and_transform
+        event = transform.apply(event)      # returns deepcopy of transformed event
 
-        # TODO (v2.2): Handle transforms
-        # transforms: Tuple[AbstractTransform, ...] = event_and_transforms[1]
-        transforms: Tuple[AbstractTransform, ...] = (NoTransform(),)
-        # for transform in transforms: # TODO: Transforms removed until update
-        #     event = transform.transform(event) # TODO: Transforms removed until update
-        self.improvisation_memory.append(event, scheduler_time, transforms)
-
-        self._feedback(event, scheduler_time)
+        self.improvisation_memory.append(event, scheduler_time, transform)
+        self._feedback(event, scheduler_time, transform)
         self.previous_peaks = peaks
         return event
 
@@ -158,17 +155,18 @@ class Player(Streamview, ScheduledMidiObject):
         if peaks.empty():
             return peaks
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
+        corresponding_transforms: List[AbstractTransform] = [self.transform_handler.get_transform(t)
+                                                             for t in np.unique(peaks.transform_hashes)]
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled():
-                peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, influence_history,
-                                           corpus, **kwargs)
+                peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, corresponding_transforms,
+                                           influence_history, corpus, **kwargs)
         return peaks
 
     def _update_transforms(self):
         for scale_action in self.scale_actions.values():
             scale_action.update_transforms(self.transform_handler)
         super().update_transforms()
-
 
     ######################################################
     # MAX INTERFACE INFORMATION

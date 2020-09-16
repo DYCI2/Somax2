@@ -10,6 +10,7 @@ from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.peaks import Peaks
 from somax.runtime.transform_handler import TransformHandler
+from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import Introspective
 
 
@@ -20,7 +21,8 @@ class AbstractScaleAction(Parametric, Introspective, ABC):
 
     @abstractmethod
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              history: ImprovisationMemory = None, corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
+              corpus: Corpus = None, **kwargs) -> Peaks:
         """ """
 
     @abstractmethod
@@ -30,10 +32,6 @@ class AbstractScaleAction(Parametric, Introspective, ABC):
     @abstractmethod
     def clear(self) -> None:
         """ """
-
-    @abstractmethod
-    def update_transforms(self, transform_handler: TransformHandler):
-        """ TODO """
 
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractScaleAction':
@@ -62,7 +60,8 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         self._parse_parameters()
 
     def scale(self, peaks: Peaks, time: float, _corresponding_events: List[CorpusEvent],
-              _history: ImprovisationMemory = None, _corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
+              _corpus: Corpus = None, **_kwargs) -> Peaks:
         peaks.scores *= np.exp(self.selectivity * (np.cos(2 * np.pi * (time - peaks.times)) - 1))
         return peaks
 
@@ -87,11 +86,12 @@ class NextStateScaleAction(AbstractScaleAction):
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"[__init__] Creating {type(self).__name__} with factor {factor}.")
         self._factor: Parameter = Parameter(factor, 0.0, None, 'float',
-                                           "Scaling factor for peaks close to previous output.")
+                                            "Scaling factor for peaks close to previous output.")
         self._previous_output_index: Optional[int] = None
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              history: ImprovisationMemory = None, corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
+              corpus: Corpus = None, **_kwargs) -> Peaks:
         if self._previous_output_index is None:
             return peaks
         else:
