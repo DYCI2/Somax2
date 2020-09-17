@@ -15,7 +15,7 @@ from somax.utils.introspective import Introspective
 class AbstractClassifier(Introspective, ABC):
 
     def __init__(self, **kwargs):
-        self._transforms: List[AbstractTransform] = []
+        self._transforms: List[AbstractTransform] = [AbstractTransform.default()]
 
     @classmethod
     def default(cls, **_kwargs) -> None:

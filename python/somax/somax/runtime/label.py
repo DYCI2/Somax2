@@ -1,7 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Optional
-
-from somax.runtime.transforms import AbstractTransform, NoTransform
 
 
 class AbstractLabel(ABC):
@@ -24,5 +21,3 @@ class IntLabel(AbstractLabel):
 
     def __eq__(self, other: 'AbstractLabel'):
         return isinstance(other, IntLabel) and self.label == other.label
-
-

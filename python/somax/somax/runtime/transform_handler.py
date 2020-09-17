@@ -11,12 +11,17 @@ class TransformHandler:
 
     def add(self, transform: AbstractTransform):
         """ :raises TransformError if a transform of the same instance with the same parameters already exists """
-        if transform in self._transforms.values():
+        transform_hash: int = hash(transform)
+        if transform_hash in self._transforms:
             raise TransformError("A transform with the exact parameters given already exists")
-        self._transforms[hash(transform)] = transform
+        self._transforms[transform_hash] = transform
 
     def remove(self, transform: AbstractTransform):
-        """ :raises IndexError if key doesn't exist """
+        """ :raises IndexError if key doesn't exist
+                    TransformError if attempting to delete last transform
+        """
+        if len(self._transforms) <= 1:
+            raise TransformError("Cannot delete the last transform.")
         del self._transforms[hash(transform)]
 
     def get_transform(self, transform_hash: int) -> AbstractTransform:

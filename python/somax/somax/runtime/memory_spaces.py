@@ -74,23 +74,25 @@ class AbstractMemorySpace(Parametric, Introspective, ABC):
 
 class NGramMemorySpace(AbstractMemorySpace):
     def __init__(self, corpus: Optional[Corpus] = None, labels: Optional[List[AbstractLabel]] = None,
-                 history_len: int = 3, **_kwargs):
+                 history_len: int = 3, valid_transforms: Tuple[AbstractTransform] = (AbstractTransform.default(),),
+                 **_kwargs):
         super(NGramMemorySpace, self).__init__(corpus, labels, **_kwargs)
-        self.logger.debug(f"[__init__] Initializing NGramMemorySpace with corpus {corpus} "
-                          f"and history length {history_len}.")
+        self.logger.debug(f"[__init__] Initializing NGramMemorySpace with corpus {corpus}, "
+                          f"history length {history_len} and transform(s) .")
         self._structured_data: Dict[Tuple[int, ...], List[CorpusEvent]] = {}
         self._ngram_size: Parameter = ParamWithSetter(history_len, 1, None, 'int',
                                                       "Number of events to hard-match. (TODO)",
                                                       self.set_ngram_size)  # TODO
         # history per transform stored with transform hash as key
-        self._influence_history: Dict[int, deque[int]] = {}
+        self._influence_history: Dict[int, deque[int]] = {hash(t): deque([], self._ngram_size.value)
+                                                          for t in valid_transforms}
 
         if corpus and labels:
             self.model(corpus, labels)
         self._parse_parameters()
 
     def __repr__(self):
-        return f"NGramMemorySpace with size {self._ngram_size.value}, and corpus {self._corpus}."  #
+        return f"NGramMemorySpace(_ngram_size={self._ngram_size.value}, corpus={self._corpus}, ...)"  #
 
     def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:
         self.logger.debug(f"[model] Modelling corpus '{corpus.name}'.")
