@@ -211,7 +211,7 @@ def test_integration_performance():
     player.create_atom(["harmonic"], 1.0, False, SomChromaClassifier(), ClassicActivityPattern(), NGramMemorySpace())
     player.create_atom(["self"], 1.0, True, TopNoteClassifier(), ClassicActivityPattern(), NGramMemorySpace())
     player.set_corpus(corpus)
-    transform_hash: int = hash(NoTransform())
+    transform_id: int = player.transform_handler.get_id(NoTransform())
 
     for num_peaks in additional_peaks_per_layer:
         influence_times: List[float] = []
@@ -221,7 +221,7 @@ def test_integration_performance():
                 for atom in player.atoms.values():
                     atom._activity_pattern._peaks = Peaks(np.random.random(num_peaks),
                                                           np.random.random(num_peaks) * duration,
-                                                          np.ones(num_peaks, dtype=int) * transform_hash)
+                                                          np.ones(num_peaks, dtype=int) * transform_id)
                 start: float = timer()
                 player.influence([], CorpusInfluence(event), event.onset)
                 influence_times.append(timer() - start)
