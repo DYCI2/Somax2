@@ -30,6 +30,10 @@ class AbstractScaleAction(Parametric, Introspective, ABC):
         """ """
 
     @abstractmethod
+    def update_transforms(self, transform_handler: TransformHandler):
+        """ """
+
+    @abstractmethod
     def clear(self) -> None:
         """ """
 
@@ -68,6 +72,9 @@ class PhaseModulationScaleAction(AbstractScaleAction):
     def feedback(self, _feedback_event: CorpusEvent, _time: float, _applied_transform: AbstractTransform) -> None:
         pass
 
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
     def clear(self) -> None:
         pass
 
@@ -102,6 +109,9 @@ class NextStateScaleAction(AbstractScaleAction):
 
     def feedback(self, feedback_event: CorpusEvent, _time: float, _applied_transform: AbstractTransform) -> None:
         self._previous_output_index = feedback_event.state_index
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
 
     def clear(self) -> None:
         self._previous_output_index = None

@@ -113,6 +113,7 @@ class Player(Streamview, ScheduledMidiObject):
         Streamview.clear(self)
 
     def set_corpus(self, corpus: Corpus) -> None:
+        self._update_transforms()
         self.corpus = corpus
         Streamview.set_corpus(self, corpus)
         self.send_current_corpus_info()

@@ -28,7 +28,10 @@ class ChromaClassifier(AbstractClassifier, ABC):
         return [InfluenceType.CHROMA]
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
+        """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
         self._transforms = transform_handler.get_by_type(TransformType.CHROMA)
+        if not self._transforms:
+            raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
     # TODO: REMOVE

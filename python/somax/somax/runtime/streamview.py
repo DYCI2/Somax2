@@ -119,8 +119,7 @@ class Streamview(Parametric):
         else:
             self.atoms[new_atom_name] = Atom(name=new_atom_name, weight=weight, classifier=classifier,
                                              activity_pattern=activity_pattern, memory_space=memory_space,
-                                             corpus=self.corpus, self_influenced=self_influenced,
-                                             transforms=transforms, enabled=enabled)
+                                             corpus=self.corpus, self_influenced=self_influenced, enabled=enabled)
             self._parse_parameters()
 
     def delete_atom(self, path: List[str]) -> None:

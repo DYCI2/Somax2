@@ -6,7 +6,6 @@ from typing import Any, List, Optional
 
 import numpy as np
 
-from somax.corpus_builder.traits import OnsetChroma
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import TransformError, TransformInstantiationError
 from somax.utils.introspective import Introspective
@@ -24,11 +23,7 @@ class AbstractTransform(Introspective, ABC):
 
     @abstractmethod
     def __eq__(self, other):
-        """"""
-
-    @abstractmethod
-    def __hash__(self):
-        """"""
+        """ Used by TransformHandler to determine whether a transform already exists """
 
     @staticmethod
     @abstractmethod
@@ -63,9 +58,6 @@ class NoTransform(AbstractTransform):
     def __eq__(self, other):
         return type(self) == type(other)
 
-    def __hash__(self):
-        return hash(type(self))
-
     @staticmethod
     def valid_types() -> List[TransformType]:
         return list([enum for enum in TransformType])  # all types are valid
@@ -86,9 +78,6 @@ class TransposeTransform(AbstractTransform):
 
     def __eq__(self, other):
         return type(self) == type(other) and self.semitones == other.semitones
-
-    def __hash__(self):
-        return hash((type(self), self.semitones))
 
     @staticmethod
     def valid_types() -> List[TransformType]:
@@ -111,7 +100,6 @@ class TransposeTransform(AbstractTransform):
             return np.roll(value, self.semitones % 12, axis=1)
         else:
             raise TransformError(f"Could not apply transform {type(self).__name__} with keyword {transform_type}")
-
 
     def inverse(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
         if isinstance(value, CorpusEvent):

@@ -43,7 +43,9 @@ def test_topnote_classifier_performance():
 
 def test_somchroma_classifier_performance():
     num_iterations: int = 1
+    transform_handler: TransformHandler = TransformHandler()
     classifier: SomChromaClassifier = SomChromaClassifier()
+    classifier.update_transforms(transform_handler)
     corpus: Corpus = Corpus.from_json("../../corpus/debussy.json")
     classifier.classify_corpus(corpus)
     results: List[float] = []
@@ -82,11 +84,17 @@ def test_somchroma_classifier_performance():
 def test_ngram_lookup_performance():
     num_iterations = 100
     corpus: Corpus = Corpus.from_json("../../corpus/debussy.json")
+    transform_handler: TransformHandler = TransformHandler()
     classifier: TopNoteClassifier = TopNoteClassifier()
+    valid_transforms: List[AbstractTransform] = classifier.update_transforms(transform_handler)
+    memspace: NGramMemorySpace = NGramMemorySpace()
+
     labels: List[AbstractLabel] = classifier.classify_corpus(corpus)
+    memspace.update_transforms(transform_handler, valid_transforms)
+    memspace.model(corpus, labels)
     influences: List[List[Tuple[AbstractLabel, AbstractTransform]]] = [classifier.classify_influence(CorpusInfluence(e))
                                                                        for e in corpus.events]
-    memspace: NGramMemorySpace = NGramMemorySpace(corpus=corpus, labels=labels)
+
     results: List[float] = []
     for _ in range(num_iterations):
         start: float = timer()
@@ -134,12 +142,12 @@ def test_phasemod_scaleaction_performance():
     duration: float = corpus.duration()
     transform_handler: TransformHandler = TransformHandler()
     scale_action: PhaseModulationScaleAction = PhaseModulationScaleAction()
-    transform_hash: int = hash(NoTransform())
+    transform_id: int = transform_handler.get_id(NoTransform())
     for (i, num_peaks) in enumerate(num_peaks_counts):
         results: List[float] = []
         for _ in range(num_iterations):
             peaks: Peaks = Peaks(np.random.random(num_peaks), np.random.random(num_peaks) * (duration - 1),
-                                 np.ones(num_peaks, dtype=int) * transform_hash)
+                                 np.ones(num_peaks, dtype=int) * transform_id)
             time = float(np.random.random(1))
             start = timer()
             corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
@@ -167,12 +175,12 @@ def test_nextstate_scaleaction_performance():
     scale_action: NextStateScaleAction = NextStateScaleAction()
     transform_handler: TransformHandler = TransformHandler()
     transform: AbstractTransform = NoTransform()
-    transform_hash: int = hash(NoTransform())
+    transform_id: int = transform_handler.get_id(transform)
     for (i, num_peaks) in enumerate(num_peaks_counts):
         results: List[float] = []
         for _ in range(num_iterations):
             peaks: Peaks = Peaks(np.random.random(num_peaks), np.random.random(num_peaks) * duration,
-                                 np.ones(num_peaks, dtype=int) * transform_hash)
+                                 np.ones(num_peaks, dtype=int) * transform_id)
             time = float(np.random.random(1))
             scale_action.feedback(corpus.events[int(np.random.randint(0, corpus.length(), 1))], time, transform)
             start = timer()
@@ -194,7 +202,7 @@ def test_nextstate_scaleaction_performance():
 
 def test_integration_performance():
     num_iterations = 1
-    additional_peaks_per_layer = [10 ** i for i in range(0, 7)]  # 1 to 1_000_000 extra peaks
+    additional_peaks_per_layer = [10 ** i for i in range(0, 5)]  # 1 to 10_000 extra peaks
     # performance_conditiions = [0.001, 0.01, 0.1, 1.0]
     corpus: Corpus = Corpus.from_json("../../corpus/debussy.json")
     duration: float = corpus.duration()
@@ -203,6 +211,7 @@ def test_integration_performance():
     player.create_atom(["harmonic"], 1.0, False, SomChromaClassifier(), ClassicActivityPattern(), NGramMemorySpace())
     player.create_atom(["self"], 1.0, True, TopNoteClassifier(), ClassicActivityPattern(), NGramMemorySpace())
     player.set_corpus(corpus)
+    transform_hash: int = hash(NoTransform())
 
     for num_peaks in additional_peaks_per_layer:
         influence_times: List[float] = []
@@ -212,7 +221,7 @@ def test_integration_performance():
                 for atom in player.atoms.values():
                     atom._activity_pattern._peaks = Peaks(np.random.random(num_peaks),
                                                           np.random.random(num_peaks) * duration,
-                                                          np.zeros(num_peaks))
+                                                          np.ones(num_peaks, dtype=int) * transform_hash)
                 start: float = timer()
                 player.influence([], CorpusInfluence(event), event.onset)
                 influence_times.append(timer() - start)

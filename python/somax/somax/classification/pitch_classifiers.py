@@ -7,7 +7,7 @@ from somax.classification.classifier import AbstractClassifier
 from somax.runtime.corpus import Corpus
 from somax.corpus_builder.traits.pitch import TopNote, VirtualFundamental
 from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.exceptions import InvalidLabelInput
+from somax.runtime.exceptions import InvalidLabelInput, TransformError
 from somax.runtime.influence import AbstractInfluence, KeywordInfluence, CorpusInfluence, InfluenceType
 from somax.runtime.label import IntLabel, AbstractLabel
 from somax.runtime.transform_handler import TransformHandler
@@ -96,7 +96,10 @@ class TopNoteClassifier(BasicPitchClassifier):
         return event.get_trait(TopNote).pitch
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
+        """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
         self._transforms = transform_handler.get_by_type(TransformType.PITCH)
+        if not self._transforms:
+            raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
 
@@ -121,7 +124,10 @@ class PitchClassClassifier(BasicPitchClassifier):
         return event.get_trait(TopNote).pitch % 12
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
+        """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
         self._transforms = transform_handler.get_by_type(TransformType.PITCH_CLASS)
+        if not self._transforms:
+            raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
 
