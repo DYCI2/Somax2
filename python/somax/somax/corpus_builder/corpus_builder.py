@@ -11,7 +11,7 @@ from somax.corpus_builder.chromagram import Chromagram
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
-from somax.features.feature import AbstractFeature
+from somax.features.feature import CorpusFeature
 from somax.runtime.corpus import Corpus, ContentType
 from somax.runtime.corpus_event import Note, CorpusEvent
 
@@ -128,5 +128,7 @@ class CorpusBuilder:
         return Corpus(events, name, ContentType.MIDI, build_parameters=build_parameters)
 
     @staticmethod
-    def all_event_parameters() -> List[Tuple[str, Type[AbstractFeature]]]:
-        return inspect.getmembers(features, lambda m: inspect.isclass(m) and not inspect.isabstract(m))
+    def all_event_parameters() -> List[Tuple[str, Type[CorpusFeature]]]:
+        return inspect.getmembers(features, lambda m: inspect.isclass(m)
+                                                      and not inspect.isabstract(m)
+                                                      and issubclass(m, CorpusFeature))

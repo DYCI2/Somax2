@@ -2,6 +2,7 @@ from abc import ABC
 from enum import Enum
 from typing import Any
 
+from somax.features.feature import RuntimeFeature
 from somax.runtime.corpus_event import CorpusEvent
 
 
@@ -24,7 +25,17 @@ class CorpusInfluence(AbstractInfluence):
         self.corpus_event: CorpusEvent = corpus_event
 
 
-class KeywordInfluence(AbstractInfluence):
-    def __init__(self, keyword: InfluenceType, influence_data: Any):
-        self.keyword: InfluenceType = keyword
-        self.influence_data: Any = influence_data
+class FeatureInfluence(AbstractInfluence):
+    def __init__(self, feature: RuntimeFeature):
+        self.feature = feature
+
+    @classmethod
+    def from_keyword(cls, keyword: str, value: Any):
+        """ :raises ValueError if a feature matching the keyword doesn't exist """
+        return cls(RuntimeFeature.from_string(keyword, value))
+
+# TODO: REMOVE
+# class KeywordInfluence(AbstractInfluence):
+#     def __init__(self, keyword: InfluenceType, influence_data: Any):
+#         self.keyword: InfluenceType = keyword
+#         self.influence_data: Any = influence_data

@@ -4,10 +4,10 @@ from typing import Dict, Type, Any
 
 import numpy as np
 
-from somax.utils.introspective import Introspective
+from somax.utils.introspective import StringParsed
 
 
-class AbstractFilter(Introspective, ABC):
+class AbstractFilter(StringParsed, ABC):
     DEFAULT = "default"
     _DEFAULT_FILTER = "leakyintegrator"
 

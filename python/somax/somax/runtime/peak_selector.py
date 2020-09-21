@@ -12,10 +12,10 @@ from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.peaks import Peaks
 from somax.runtime.transforms import AbstractTransform, NoTransform
 from somax.runtime.transform_handler import TransformHandler
-from somax.utils.introspective import Introspective
+from somax.utils.introspective import StringParsed
 
 
-class AbstractPeakSelector(Parametric, Introspective, ABC):
+class AbstractPeakSelector(Parametric, StringParsed, ABC):
     def __init__(self, **kwargs):
         super(AbstractPeakSelector, self).__init__()
         self.logger = logging.getLogger(__name__)

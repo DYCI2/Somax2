@@ -9,10 +9,10 @@ from somax.runtime.parameter import Parameter, ParamWithSetter
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_event import PeakEvent
 from somax.runtime.peaks import Peaks
-from somax.utils.introspective import Introspective
+from somax.utils.introspective import StringParsed
 
 
-class AbstractActivityPattern(Parametric, Introspective, ABC):
+class AbstractActivityPattern(Parametric, StringParsed, ABC):
     SCORE_IDX = 0
     TIME_IDX = 1
     TRANSFORM_IDX = 2

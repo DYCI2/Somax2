@@ -1,7 +1,8 @@
-from typing import Dict, List
+from typing import Dict, List, Type
 
+from somax.features.feature import AbstractFeature
 from somax.runtime.exceptions import TransformError
-from somax.runtime.transforms import AbstractTransform, TransformType
+from somax.runtime.transforms import AbstractTransform
 
 
 class TransformHandler:
@@ -37,5 +38,5 @@ class TransformHandler:
             if v == transform:
                 return k
 
-    def get_by_type(self, transform_type: TransformType) -> List[AbstractTransform]:
-        return [t for t in self._transforms.values() if transform_type in t.valid_types()]
+    def get_by_feature(self, feature: Type[AbstractFeature]) -> List[AbstractTransform]:
+        return [t for t in self._transforms.values() if feature in t.valid_features()]

@@ -1,23 +1,19 @@
 import copy
 import logging
 from abc import ABC, abstractmethod
-from enum import Enum
-from typing import Any, List, Optional
+from typing import List, Type, Union
 
 import numpy as np
 
+from somax.features.chroma_features import OnsetChroma
+from somax.features.feature import AbstractFeature
+from somax.features.pitch_features import AbstractIntegerPitch
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import TransformError, TransformInstantiationError
-from somax.utils.introspective import Introspective
+from somax.utils.introspective import StringParsed
 
 
-class TransformType(Enum):
-    PITCH = 0
-    PITCH_CLASS = 1
-    CHROMA = 2
-
-
-class AbstractTransform(Introspective, ABC):
+class AbstractTransform(StringParsed, ABC):
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
@@ -27,15 +23,15 @@ class AbstractTransform(Introspective, ABC):
 
     @staticmethod
     @abstractmethod
-    def valid_types() -> List[TransformType]:
+    def valid_features() -> List[Type[AbstractFeature]]:
         """"""
 
     @abstractmethod
-    def apply(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
+    def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
         """"""
 
     @abstractmethod
-    def inverse(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
+    def inverse(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
         """"""
 
     @classmethod
@@ -59,20 +55,21 @@ class NoTransform(AbstractTransform):
         return type(self) == type(other)
 
     @staticmethod
-    def valid_types() -> List[TransformType]:
-        return list([enum for enum in TransformType])  # all types are valid
+    def valid_features() -> List[Type[AbstractFeature]]:
+        return AbstractFeature.classes()
 
-    def apply(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
-        return value
+    def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
+        return obj
 
-    def inverse(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
-        return value
+    def inverse(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
+        return obj
 
 
 class TransposeTransform(AbstractTransform):
     def __init__(self, semitones: int):
         super().__init__()
         if semitones == 0:
+            # if instantiated through `from_string`: this error is caught and returns a NoTransform object
             raise TransformInstantiationError("A transposition of 0 semitones is equivalent to the NoTransform class")
         self.semitones = semitones
 
@@ -80,40 +77,37 @@ class TransposeTransform(AbstractTransform):
         return type(self) == type(other) and self.semitones == other.semitones
 
     @staticmethod
-    def valid_types() -> List[TransformType]:
-        return [TransformType.PITCH, TransformType.CHROMA]
+    def valid_features() -> List[Type[AbstractFeature]]:
+        return [AbstractIntegerPitch]
 
-    def apply(self, value: Any, transform_type: Optional[TransformType] = None, **_kwargs) -> Any:
-        if isinstance(value, CorpusEvent):
-            event: CorpusEvent = copy.deepcopy(value)
+    def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
+        if isinstance(obj, CorpusEvent):
+            event: CorpusEvent = copy.deepcopy(obj)
             # TODO: Transforming features not implemented
             for note in event.notes:
                 note.pitch += self.semitones
             return event
-        elif transform_type == TransformType.PITCH:
-            return value + self.semitones
-        elif transform_type == TransformType.PITCH_CLASS:
-            return (value + self.semitones) % 12
-        elif transform_type == TransformType.CHROMA and value.ndim == 1:
-            return np.roll(value, self.semitones % 12)
-        elif transform_type == TransformType.CHROMA and value.ndim > 1:
-            return np.roll(value, self.semitones % 12, axis=1)
+        elif isinstance(obj, AbstractIntegerPitch):
+            pitch: int = obj.value() + self.semitones
+            return obj.__class__(value=pitch)
+        elif isinstance(obj, OnsetChroma):
+            chroma: np.ndarray = np.roll(obj.value(), self.semitones % 12)
+            return obj.__class__(value=chroma)
         else:
-            raise TransformError(f"Could not apply transform {type(self).__name__} with keyword {transform_type}")
+            raise TransformError(f"Could not apply transform {type(self).__name__} to object {obj}. "
+                                 f"Valid feature are {self.valid_features()}")
 
-    def inverse(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
-        if isinstance(value, CorpusEvent):
-            event: CorpusEvent = copy.deepcopy(value)
+    def inverse(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
+        if isinstance(obj, CorpusEvent):
+            event: CorpusEvent = copy.deepcopy(obj)
             # TODO: Transforming features not implemented
             for note in event.notes:
                 note.pitch -= self.semitones
-        if transform_type == TransformType.PITCH:
-            return value - self.semitones
-        elif transform_type == TransformType.PITCH_CLASS:
-            return (value - self.semitones) % 12
-        elif transform_type == TransformType.CHROMA and value.ndim == 1:
-            return np.roll(value, -(self.semitones % 12))
-        elif transform_type == TransformType.CHROMA and value.ndim > 1:
-            return np.roll(value, -(self.semitones % 12), axis=1)
-        else:
-            raise TransformError(f"Could not inverse transform {type(self).__name__} with keyword {transform_type}")
+        elif isinstance(obj, AbstractIntegerPitch):
+            pitch: int = obj.value() - self.semitones
+            return obj.__class__(value=pitch)
+        elif isinstance(obj, OnsetChroma):
+            chroma: np.ndarray = np.roll(obj.value(), -(self.semitones % 12))
+            return obj.__class__(value=chroma)
+        raise TransformError(f"Could not apply inverse transform {type(self).__name__} to object {obj}. "
+                             f"Valid feature are {self.valid_features()}")

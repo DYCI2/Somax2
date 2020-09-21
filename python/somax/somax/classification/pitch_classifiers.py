@@ -3,21 +3,18 @@ from typing import List, Tuple
 
 from somax.classification.classifier import AbstractClassifier
 from somax.features import TopNote
+from somax.features.feature import AbstractFeature
+from somax.features.pitch_features import RuntimeIntegerPitch, AbstractIntegerPitch
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import InvalidLabelInput, TransformError
-from somax.runtime.influence import AbstractInfluence, KeywordInfluence, CorpusInfluence, InfluenceType
+from somax.runtime.influence import AbstractInfluence, CorpusInfluence, FeatureInfluence
 from somax.runtime.label import IntLabel, AbstractLabel
 from somax.runtime.transform_handler import TransformHandler
-from somax.runtime.transforms import AbstractTransform, TransformType, NoTransform
+from somax.runtime.transforms import AbstractTransform, NoTransform
 
 
-class PitchClassifier(AbstractClassifier, ABC):
-    def _influence_keywords(self) -> List[InfluenceType]:
-        return [InfluenceType.PITCH]
-
-
-class BasicPitchClassifier(PitchClassifier, ABC):
+class BasicPitchClassifier(AbstractClassifier, ABC):
     def __init__(self):
         super().__init__()
 
@@ -28,19 +25,15 @@ class BasicPitchClassifier(PitchClassifier, ABC):
     def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
         labels: List[IntLabel] = []
         for event in corpus.events:  # type: CorpusEvent
-            # TODO: Handle or comment on KeyError, which technically should never occur
             labels.append(self._label_from_corpus_event(event, NoTransform()))
         return labels
 
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
-        if isinstance(influence, KeywordInfluence) and influence.keyword in self._influence_keywords():
-            # TODO: Potentially unsafe as type of influence data is unchecked
-            return [(self._label_from_influence_data(influence.influence_data, t), t)
-                    for t in self._transforms]
+        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, RuntimeIntegerPitch):
+            return [(self._label_from_feature(influence.feature, t), t) for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
             # TODO: Handle or comment on KeyError, which technically should never occur
-            return [(self._label_from_corpus_event(influence.corpus_event, t), t)
-                    for t in self._transforms]
+            return [(self._label_from_corpus_event(influence.corpus_event, t), t) for t in self._transforms]
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
@@ -54,7 +47,7 @@ class BasicPitchClassifier(PitchClassifier, ABC):
 
     @staticmethod
     @abstractmethod
-    def _label_from_influence_data(pitch: int, transform: AbstractTransform) -> IntLabel:
+    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
         pass
 
     @staticmethod
@@ -70,12 +63,12 @@ class TopNoteClassifier(BasicPitchClassifier):
 
     @staticmethod
     def _label_from_corpus_event(event: CorpusEvent, transform: AbstractTransform) -> IntLabel:
-        inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote).value(), TransformType.PITCH)
+        inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote)).value()
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
-    def _label_from_influence_data(pitch: int, transform: AbstractTransform) -> IntLabel:
-        inverse_transformed_label: int = transform.inverse(pitch, TransformType.PITCH)
+    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
+        inverse_transformed_label: int = transform.inverse(pitch).value()
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
@@ -84,7 +77,7 @@ class TopNoteClassifier(BasicPitchClassifier):
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
-        self._transforms = transform_handler.get_by_type(TransformType.PITCH)
+        self._transforms = transform_handler.get_by_feature(AbstractIntegerPitch)
         if not self._transforms:
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
@@ -97,13 +90,12 @@ class PitchClassClassifier(BasicPitchClassifier):
 
     @staticmethod
     def _label_from_corpus_event(event: CorpusEvent, transform: AbstractTransform) -> IntLabel:
-        inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote).value() % 12,
-                                                           TransformType.PITCH_CLASS)
+        inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote)).value() % 12
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
-    def _label_from_influence_data(pitch: int, transform: AbstractTransform) -> IntLabel:
-        inverse_transformed_label: int = transform.inverse(pitch % 12, TransformType.PITCH_CLASS)
+    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
+        inverse_transformed_label: int = transform.inverse(pitch).value() % 12
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
@@ -112,7 +104,7 @@ class PitchClassClassifier(BasicPitchClassifier):
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
-        self._transforms = transform_handler.get_by_type(TransformType.PITCH_CLASS)
+        self._transforms = transform_handler.get_by_feature(AbstractIntegerPitch)
         if not self._transforms:
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms

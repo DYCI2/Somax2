@@ -1,18 +1,17 @@
 from abc import ABC, abstractmethod
-from typing import List, Tuple
-
-import numpy as np
+from typing import List, Tuple, Type
 
 import somax.classification
+from somax.features.feature import AbstractFeature
 from somax.runtime.corpus import Corpus
-from somax.runtime.influence import AbstractInfluence, InfluenceType
+from somax.runtime.influence import AbstractInfluence
 from somax.runtime.label import AbstractLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
-from somax.utils.introspective import Introspective
+from somax.utils.introspective import StringParsed
 
 
-class AbstractClassifier(Introspective, ABC):
+class AbstractClassifier(StringParsed, ABC):
 
     def __init__(self, **kwargs):
         self._transforms: List[AbstractTransform] = []
@@ -64,7 +63,3 @@ class AbstractClassifier(Introspective, ABC):
     #         ```
     #     """
     #     pass
-
-    @abstractmethod
-    def _influence_keywords(self) -> List[InfluenceType]:
-        pass

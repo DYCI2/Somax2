@@ -16,7 +16,7 @@ from somax.corpus_builder.chromagram import Chromagram
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
-from somax.features.feature import AbstractFeature
+from somax.features.feature import CorpusFeature
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import InvalidCorpus
 
@@ -100,11 +100,10 @@ class Corpus:
                 "events": [event.encode() for event in self.events]
                 }
 
-    def analyze(self, event_parameter: Type[AbstractFeature], **kwargs):
+    def analyze(self, event_parameter: Type[CorpusFeature], **kwargs):
         for event in self.events:
-            parameter: AbstractFeature = event_parameter.analyze(event, self.fg_spectrogram, self.bg_spectrogram,
-                                                                 self.fg_chromagram, self.bg_chromagram,
-                                                                 **kwargs)
+            parameter: CorpusFeature = event_parameter.analyze(event, self.fg_spectrogram, self.bg_spectrogram,
+                                                               self.fg_chromagram, self.bg_chromagram, **kwargs)
             event.add_trait(parameter)
 
     def length(self) -> int:

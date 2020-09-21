@@ -7,17 +7,17 @@ import logging
 import logging.config
 import os
 import sys
-from typing import Any, Dict, Union, Optional, Tuple, List
 from importlib import resources
+from typing import Any, Dict, Union, Optional, Tuple, List
 
 from maxosc.maxformatter import MaxFormatter
 from maxosc.maxosc import Caller
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import AsyncIOOSCUDPServer
 
+import log
 import somax
 from somax import settings
-import log
 from somax.classification import SomChromaClassifier
 from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
@@ -27,7 +27,7 @@ from somax.runtime.atom import Atom
 from somax.runtime.corpus import Corpus
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput
-from somax.runtime.influence import KeywordInfluence, InfluenceType
+from somax.runtime.influence import FeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
@@ -143,16 +143,15 @@ class SomaxStringDispatcher:
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def influence(self, player: str, path: str, label_keyword: str, value: Any, **kwargs):
+    def influence(self, player: str, path: str, feature_keyword: str, value: Any, **kwargs):
         self.logger.debug(f"[influence] called for player '{player}' with path '{path}', "
-                          f"label keyword '{label_keyword}', value '{value}' and kwargs {kwargs}...")
+                          f"feature keyword '{feature_keyword}', value '{value}' and kwargs {kwargs}")
         if not self.scheduler.running:
             return
         try:
-            keyword: InfluenceType = InfluenceType.from_string(label_keyword)
-            influence: KeywordInfluence = KeywordInfluence(keyword, value)
-        except ValueError:
-            self.logger.error(f"Keyword '{label_keyword}' is not supported.")
+            influence: FeatureInfluence = FeatureInfluence.from_keyword(feature_keyword, value)
+        except ValueError as e:
+            self.logger.error(f"{str(e)}. No influence was computed.")
             return
 
         try:
@@ -171,7 +170,7 @@ class SomaxStringDispatcher:
                 self.logger.debug(f"[influence_onset] Influence onset triggered for player '{player}'.")
                 self.scheduler.add_trigger_event(self.players[player])
         except KeyError:
-            self.logger.error(f" '{player}' exists.")
+            self.logger.error(f"A player named '{player}' does not exist.")
 
     ######################################################
     # MODIFY PLAYER/STREAMVIEW/ATOM STATE

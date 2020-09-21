@@ -11,10 +11,10 @@ from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.peaks import Peaks
 from somax.runtime.transforms import AbstractTransform
-from somax.utils.introspective import Introspective
+from somax.utils.introspective import StringParsed
 
 
-class AbstractMergeAction(Parametric, Introspective, ABC):
+class AbstractMergeAction(Parametric, StringParsed, ABC):
 
     def __init__(self):
         super().__init__()

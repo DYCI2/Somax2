@@ -14,10 +14,10 @@ from somax.runtime.parameter import Parametric
 from somax.runtime.peak_event import PeakEvent, ClassicPeakEvent
 from somax.runtime.transforms import AbstractTransform
 from somax.runtime.transform_handler import TransformHandler
-from somax.utils.introspective import Introspective
+from somax.utils.introspective import StringParsed
 
 
-class AbstractMemorySpace(Parametric, Introspective, ABC):
+class AbstractMemorySpace(Parametric, StringParsed, ABC):
     """ MemorySpaces determine how events are matched to labels """
 
     def __init__(self, **_kwargs):

@@ -3,11 +3,11 @@ from typing import Optional, List, Dict, Type, Any
 
 import pandas as pd
 
-from somax.features.feature import AbstractFeature
+from somax.features.feature import CorpusFeature
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 
 """ Keys correspond to parent module names, ex. "pitch" or "chroma". """
-EventParameterDict = Dict[str, List[AbstractFeature]]
+EventParameterDict = Dict[str, List[CorpusFeature]]
 
 
 class Note:
@@ -74,7 +74,7 @@ class Note:
 class CorpusEvent:
     def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float,
                  duration: Optional[float] = None, absolute_duration: Optional[float] = None,
-                 notes: Optional[List[Note]] = None, traits: Optional[Dict[Type[AbstractFeature], AbstractFeature]] = None):
+                 notes: Optional[List[Note]] = None, traits: Optional[Dict[Type[CorpusFeature], CorpusFeature]] = None):
         self.logger = logging.getLogger(__name__)
         self.state_index: int = state_index
         self.tempo: float = tempo
@@ -85,7 +85,7 @@ class CorpusEvent:
         self.absolute_duration: Optional[float] = absolute_duration
 
         self.notes: List[Note] = notes if notes else []
-        self.traits: Dict[Type[AbstractFeature], AbstractFeature] = traits if traits else {}
+        self.traits: Dict[Type[CorpusFeature], CorpusFeature] = traits if traits else {}
 
         # self._labels = {}  # {ClassVar[AbstractLabel]: AbstractLabel}, precompiled for performance
 
@@ -99,7 +99,7 @@ class CorpusEvent:
                            duration=event_dict["duration"],
                            absolute_duration=event_dict["absolute_duration"],
                            notes=[Note.from_json(note_dict) for note_dict in event_dict["notes"]],
-                           traits=dict([AbstractFeature.from_json(k, v) for (k, v) in event_dict["features"].items()])
+                           traits=dict([CorpusFeature.from_json(k, v) for (k, v) in event_dict["features"].items()])
                            )
 
     @classmethod
@@ -123,10 +123,10 @@ class CorpusEvent:
         self.notes.extend([Note.relative_to(n, parent_onset, self.onset, parent_abs_onset, self.absolute_onset)
                            for n in notes])
 
-    def add_trait(self, trait: AbstractFeature):
+    def add_trait(self, trait: CorpusFeature):
         self.traits[type(trait)] = trait
 
-    def get_trait(self, trait_type: Type[AbstractFeature]) -> AbstractFeature:
+    def get_trait(self, trait_type: Type[CorpusFeature]) -> CorpusFeature:
         """Raises KeyError"""
         return self.traits[trait_type]
 
