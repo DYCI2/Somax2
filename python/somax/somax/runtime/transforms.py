@@ -86,7 +86,7 @@ class TransposeTransform(AbstractTransform):
     def apply(self, value: Any, transform_type: Optional[TransformType] = None, **_kwargs) -> Any:
         if isinstance(value, CorpusEvent):
             event: CorpusEvent = copy.deepcopy(value)
-            # TODO: Transforming traits not implemented
+            # TODO: Transforming features not implemented
             for note in event.notes:
                 note.pitch += self.semitones
             return event
@@ -104,7 +104,7 @@ class TransposeTransform(AbstractTransform):
     def inverse(self, value: Any, transform_type: Optional[TransformType] = None, **kwargs) -> Any:
         if isinstance(value, CorpusEvent):
             event: CorpusEvent = copy.deepcopy(value)
-            # TODO: Transforming traits not implemented
+            # TODO: Transforming features not implemented
             for note in event.notes:
                 note.pitch -= self.semitones
         if transform_type == TransformType.PITCH:

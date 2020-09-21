@@ -7,19 +7,20 @@ from sklearn.mixture import GaussianMixture
 
 from somax.classification import tables
 from somax.classification.classifier import AbstractClassifier
+from somax.features import BackgroundChroma
 from somax.runtime.corpus import Corpus
-from somax.corpus_builder.traits.chroma import OnsetChroma
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import InvalidLabelInput, TransformError
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence, KeywordInfluence, InfluenceType
 from somax.runtime.label import AbstractLabel, IntLabel
+from somax.runtime.transform_handler import TransformHandler
+from somax.runtime.transforms import AbstractTransform, TransformType
+
+
+# TODO: Normalization. Normalization has been removed for now, but should be thoroughly tested.
 
 # TODO: This class needs a lot of optimization. A larger corpus will mean higher computation time to a
 #  point where classification of an influence might not be real-time anymore.
-
-# TODO: Normalization. Normalization has been removed for now, but should be thoroughly tested.
-from somax.runtime.transform_handler import TransformHandler
-from somax.runtime.transforms import AbstractTransform, TransformType
 
 
 class ChromaClassifier(AbstractClassifier, ABC):
@@ -77,7 +78,7 @@ class SomChromaClassifier(ChromaClassifier):
         labels: List[IntLabel] = []
         for event in corpus.events:  # type: CorpusEvent
             # TODO: Handle or comment on KeyError, which technically should never occur
-            labels.append(self._label_from_chroma(event.get_trait(OnsetChroma).background))
+            labels.append(self._label_from_chroma(event.get_trait(BackgroundChroma).value()))
         return labels
 
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
@@ -91,7 +92,7 @@ class SomChromaClassifier(ChromaClassifier):
                     for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
             # TODO: Handle or comment on KeyError, which technically should never occur
-            chroma: np.ndarray = influence.corpus_event.get_trait(OnsetChroma).background
+            chroma: np.ndarray = influence.corpus_event.get_trait(BackgroundChroma).value()
             return [(self._label_from_chroma(t.inverse(chroma, TransformType.CHROMA)), t)
                     for t in self._transforms]
         else:
@@ -117,10 +118,9 @@ class GmmClassifier(ChromaClassifier, ABC):
         raise NotImplementedError("This class is missing important architectural updates and should not be used.")
 
     def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
-        self._corpus = corpus
         labels: List[IntLabel] = []
         for event in corpus.events:  # type: CorpusEvent
-            chroma: np.ndarray = event.get_trait(OnsetChroma).background.reshape(1, -1)
+            chroma: np.ndarray = event.get_trait(BackgroundChroma).value().reshape(1, -1)
             # max_val: float = np.max(chroma)
             # if max_val > 0:
             #     chroma /= max_val
@@ -131,7 +131,7 @@ class GmmClassifier(ChromaClassifier, ABC):
         if isinstance(influence, KeywordInfluence) and influence.keyword in self._influence_keywords():
             chroma: np.ndarray = influence.influence_data.reshape(1, -1)
         elif isinstance(influence, CorpusInfluence):
-            chroma: np.ndarray = influence.corpus_event.get_trait(OnsetChroma).background.reshape(1, -1)
+            chroma: np.ndarray = influence.corpus_event.get_trait(BackgroundChroma).value().reshape(1, -1)
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
@@ -159,7 +159,7 @@ class AbsoluteGmmClassifier(GmmClassifier):
 class RelativeGmmClassifier(GmmClassifier):
 
     def cluster(self, corpus: Corpus) -> None:
-        chromas: List[np.ndarray] = [event.get_trait(OnsetChroma).background for event in corpus.events]
+        chromas: List[np.ndarray] = [event.get_trait(BackgroundChroma).value() for event in corpus.events]
         gmm_data: np.ndarray = np.row_stack(chromas)
         max_per_col: np.ndarray = np.max(chromas, axis=1)
         max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error

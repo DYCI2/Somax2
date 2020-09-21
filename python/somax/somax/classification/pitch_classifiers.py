@@ -1,11 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional, Tuple
-
-import numpy as np
+from typing import List, Tuple
 
 from somax.classification.classifier import AbstractClassifier
+from somax.features import TopNote
 from somax.runtime.corpus import Corpus
-from somax.corpus_builder.traits.pitch import TopNote, VirtualFundamental
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import InvalidLabelInput, TransformError
 from somax.runtime.influence import AbstractInfluence, KeywordInfluence, CorpusInfluence, InfluenceType
@@ -64,17 +62,6 @@ class BasicPitchClassifier(PitchClassifier, ABC):
     def _trait_from_corpus_event(event: CorpusEvent) -> int:
         pass
 
-    # TODO: REMOVE
-    # @classmethod
-    # def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-    #     """ rms: 1 when two pitches are not the same, 0 otherwise. """
-    #     influence_pitches: np.ndarray = np.array([cls._trait_from_corpus_event(event)
-    #                                               for event in influence_corpus.events], dtype=int)
-    #     output_pitches: np.ndarray = np.array([cls._trait_from_corpus_event(event)
-    #                                            for event in output_corpus.events], dtype=int)
-    #     return np.not_equal(EvaluationUtils.diff(influence_pitches, influence_corpus.onsets, output_pitches,
-    #                                              output_corpus.onsets), 0).astype(int)
-
 
 class TopNoteClassifier(BasicPitchClassifier):
     """ Classifies an event to its corresponding midi number in range [0, 127].
@@ -83,7 +70,7 @@ class TopNoteClassifier(BasicPitchClassifier):
 
     @staticmethod
     def _label_from_corpus_event(event: CorpusEvent, transform: AbstractTransform) -> IntLabel:
-        inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote).pitch, TransformType.PITCH)
+        inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote).value(), TransformType.PITCH)
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
@@ -93,7 +80,7 @@ class TopNoteClassifier(BasicPitchClassifier):
 
     @staticmethod
     def _trait_from_corpus_event(event: CorpusEvent) -> int:
-        return event.get_trait(TopNote).pitch
+        return event.get_trait(TopNote).value()
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
@@ -110,7 +97,7 @@ class PitchClassClassifier(BasicPitchClassifier):
 
     @staticmethod
     def _label_from_corpus_event(event: CorpusEvent, transform: AbstractTransform) -> IntLabel:
-        inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote).pitch % 12,
+        inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote).value() % 12,
                                                            TransformType.PITCH_CLASS)
         return IntLabel(inverse_transformed_label)
 
@@ -121,7 +108,7 @@ class PitchClassClassifier(BasicPitchClassifier):
 
     @staticmethod
     def _trait_from_corpus_event(event: CorpusEvent) -> int:
-        return event.get_trait(TopNote).pitch % 12
+        return event.get_trait(TopNote).value() % 12
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
@@ -130,24 +117,24 @@ class PitchClassClassifier(BasicPitchClassifier):
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
-
-class VirtualFundamentalClassifier(BasicPitchClassifier):
-    """ Classifies an event to its corresponding virtual fundamental in range [0, 11].
-            Corpus: Uses EventParameter VirtualFundamental in range [128, 139]
-            Influence: Responds to keyword "pitch" in range [128, 139]. """
-
-    def __init__(self):
-        super().__init__()
-        raise NotImplementedError("This class is missing important architectural updates and should not be used.")
-
-    @staticmethod
-    def _label_from_corpus_event(event: CorpusEvent) -> IntLabel:
-        return IntLabel(event.get_trait(VirtualFundamental).pitch)
-
-    @staticmethod
-    def _label_from_influence_data(pitch: int) -> IntLabel:
-        return IntLabel(pitch)
-
-    @staticmethod
-    def _trait_from_corpus_event(event: CorpusEvent) -> int:
-        return event.get_trait(VirtualFundamental).pitch
+# TODO: Update if used
+# class VirtualFundamentalClassifier(BasicPitchClassifier):
+#     """ Classifies an event to its corresponding virtual fundamental in range [0, 11].
+#             Corpus: Uses EventParameter VirtualFundamental in range [128, 139]
+#             Influence: Responds to keyword "pitch" in range [128, 139]. """
+#
+#     def __init__(self):
+#         super().__init__()
+#         raise NotImplementedError("This class is missing important architectural updates and should not be used.")
+#
+#     @staticmethod
+#     def _label_from_corpus_event(event: CorpusEvent) -> IntLabel:
+#         return IntLabel(event.get_trait(VirtualFundamental).value())
+#
+#     @staticmethod
+#     def _label_from_influence_data(pitch: int) -> IntLabel:
+#         return IntLabel(pitch)
+#
+#     @staticmethod
+#     def _trait_from_corpus_event(event: CorpusEvent) -> int:
+#         return event.get_trait(VirtualFundamental).value()

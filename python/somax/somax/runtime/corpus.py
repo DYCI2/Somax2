@@ -16,7 +16,7 @@ from somax.corpus_builder.chromagram import Chromagram
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
-from somax.corpus_builder.traits.trait import AbstractTrait
+from somax.features.feature import AbstractFeature
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import InvalidCorpus
 
@@ -66,7 +66,7 @@ class Corpus:
                 raise InvalidCorpus(f"The loaded corpus was built with an old version of Somax. "
                                     f"While it may work, using it could result in a number of bugs."
                                     f" Recommended action: rebuild corpus."
-                                    f" (To load the corpus anyway: enable the 'volatile' flag)")
+                                    f" (To attempt to load the corpus anyway: enable the 'volatile' flag)")
             name: str = corpus_data["name"]
             content_type: ContentType = ContentType(corpus_data["content_type"])
 
@@ -100,11 +100,11 @@ class Corpus:
                 "events": [event.encode() for event in self.events]
                 }
 
-    def analyze(self, event_parameter: Type[AbstractTrait], **kwargs):
+    def analyze(self, event_parameter: Type[AbstractFeature], **kwargs):
         for event in self.events:
-            parameter: AbstractTrait = event_parameter.analyze(event, self.fg_spectrogram, self.bg_spectrogram,
-                                                               self.fg_chromagram, self.bg_chromagram,
-                                                               **kwargs)
+            parameter: AbstractFeature = event_parameter.analyze(event, self.fg_spectrogram, self.bg_spectrogram,
+                                                                 self.fg_chromagram, self.bg_chromagram,
+                                                                 **kwargs)
             event.add_trait(parameter)
 
     def length(self) -> int:

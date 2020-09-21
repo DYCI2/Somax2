@@ -6,7 +6,7 @@ from somax.corpus_builder.chromagram import Chromagram
 from somax.corpus_builder.spectrogram import Spectrogram
 
 
-class AbstractTrait(ABC):
+class AbstractFeature(ABC):
 
     @classmethod
     @abstractmethod
@@ -15,24 +15,25 @@ class AbstractTrait(ABC):
         # TODO: Add previous events as optional argument too
         pass
 
+    @classmethod
+    @abstractmethod
+    def decode(cls, trait_dict: Dict[str, Any]) -> 'AbstractFeature':
+        """ TODO docstring """
+
     @abstractmethod
     def encode(self) -> Dict[str, Any]:
         """ TODO docstring """
 
-    @classmethod
     @abstractmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'AbstractTrait':
-        """ TODO docstring """
+    def value(self) -> Any:
+        """ TODO: docstring """
 
     @staticmethod
-    def from_json(trait_key: str, trait_values: Dict[str, Any]) -> Tuple[Type['AbstractTrait'], 'AbstractTrait']:
+    def from_json(trait_key: str, trait_values: Dict[str, Any]) -> Tuple[Type['AbstractFeature'], 'AbstractFeature']:
         """ Raises: KeyError, AttributeError"""
         module_name, class_name = trait_key.rsplit(".", 1)
-        cls: Type[AbstractTrait] = getattr(importlib.import_module(module_name), class_name)
+        cls: Type[AbstractFeature] = getattr(importlib.import_module(module_name), class_name)
         return cls, cls.decode(trait_values)
 
     def name(self) -> str:
         return self.__class__.__name__
-
-    # def parameter_type(self) -> str:
-    #     return self.__class__.__module__.split(".")[-2]
