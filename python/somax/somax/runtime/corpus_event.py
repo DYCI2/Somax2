@@ -85,7 +85,7 @@ class CorpusEvent:
         self.absolute_duration: Optional[float] = absolute_duration
 
         self.notes: List[Note] = notes if notes else []
-        self.traits: Dict[Type[CorpusFeature], CorpusFeature] = traits if traits else {}
+        self.features: Dict[Type[CorpusFeature], CorpusFeature] = traits if traits else {}
 
         # self._labels = {}  # {ClassVar[AbstractLabel]: AbstractLabel}, precompiled for performance
 
@@ -123,12 +123,12 @@ class CorpusEvent:
         self.notes.extend([Note.relative_to(n, parent_onset, self.onset, parent_abs_onset, self.absolute_onset)
                            for n in notes])
 
-    def add_trait(self, trait: CorpusFeature):
-        self.traits[type(trait)] = trait
+    def set_feature(self, trait: CorpusFeature):
+        self.features[type(trait)] = trait
 
-    def get_trait(self, trait_type: Type[CorpusFeature]) -> CorpusFeature:
+    def get_feature(self, trait_type: Type[CorpusFeature]) -> CorpusFeature:
         """Raises KeyError"""
-        return self.traits[trait_type]
+        return self.features[trait_type]
 
     def held_to(self) -> [Note]:
         return [note for note in self.notes if note.onset < 0.0]
@@ -144,6 +144,6 @@ class CorpusEvent:
                 "duration": self.duration,
                 "absolute_duration": self.absolute_duration,
                 "notes": [note.encode() for note in self.notes],
-                "features": {cls.__module__ + "." + cls.__name__: obj for (cls, obj) in self.traits.items()}
+                "features": {cls.__module__ + "." + cls.__name__: obj for (cls, obj) in self.features.items()}
                 }
         # : Dict[Type[AbstractTrait], AbstractTrait] = event_parameters if event_parameters else {}

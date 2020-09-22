@@ -39,4 +39,10 @@ class TransformHandler:
                 return k
 
     def get_by_feature(self, feature: Type[AbstractFeature]) -> List[AbstractTransform]:
-        return [t for t in self._transforms.values() if feature in t.valid_features()]
+        transforms: List[AbstractTransform] = []
+        for transform in self._transforms.values():
+            for transform_feature in transform.valid_features():
+                if issubclass(feature, transform_feature):
+                    transforms.append(transform)
+        return transforms
+        # return [t for t in self._transforms.values() if feature in t.valid_features()]

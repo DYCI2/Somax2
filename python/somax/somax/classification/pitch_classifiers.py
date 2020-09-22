@@ -63,7 +63,7 @@ class TopNoteClassifier(BasicPitchClassifier):
 
     @staticmethod
     def _label_from_corpus_event(event: CorpusEvent, transform: AbstractTransform) -> IntLabel:
-        inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote)).value()
+        inverse_transformed_label: int = transform.inverse(event.get_feature(TopNote)).value()
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
@@ -73,7 +73,7 @@ class TopNoteClassifier(BasicPitchClassifier):
 
     @staticmethod
     def _trait_from_corpus_event(event: CorpusEvent) -> int:
-        return event.get_trait(TopNote).value()
+        return event.get_feature(TopNote).value()
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
@@ -90,7 +90,7 @@ class PitchClassClassifier(BasicPitchClassifier):
 
     @staticmethod
     def _label_from_corpus_event(event: CorpusEvent, transform: AbstractTransform) -> IntLabel:
-        inverse_transformed_label: int = transform.inverse(event.get_trait(TopNote)).value() % 12
+        inverse_transformed_label: int = transform.inverse(event.get_feature(TopNote)).value() % 12
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
@@ -100,7 +100,7 @@ class PitchClassClassifier(BasicPitchClassifier):
 
     @staticmethod
     def _trait_from_corpus_event(event: CorpusEvent) -> int:
-        return event.get_trait(TopNote).value() % 12
+        return event.get_feature(TopNote).value() % 12
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :raises TransformError if transform_handler doesn't contain any applicable transforms """

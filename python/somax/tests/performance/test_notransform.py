@@ -1,7 +1,6 @@
 from typing import List, Tuple
 
 from somax.classification import TopNoteClassifier, SomChromaClassifier
-from somax.classification.chroma_classifiers import AbsoluteGmmClassifier
 from somax.runtime.activity_pattern import ClassicActivityPattern
 from somax.runtime.corpus import Corpus
 from timeit import default_timer as timer

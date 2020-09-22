@@ -56,7 +56,7 @@ class NoTransform(AbstractTransform):
 
     @staticmethod
     def valid_features() -> List[Type[AbstractFeature]]:
-        return AbstractFeature.classes()
+        return AbstractFeature.classes(include_abstract=True)
 
     def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
         return obj
@@ -78,12 +78,16 @@ class TransposeTransform(AbstractTransform):
 
     @staticmethod
     def valid_features() -> List[Type[AbstractFeature]]:
-        return [AbstractIntegerPitch]
+        return [AbstractIntegerPitch, OnsetChroma]
 
     def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
         if isinstance(obj, CorpusEvent):
             event: CorpusEvent = copy.deepcopy(obj)
-            # TODO: Transforming features not implemented
+            for (key, feature) in event.features.items():
+                try:
+                    event.features[key] = self.apply(feature)
+                except TransformError:
+                    continue
             for note in event.notes:
                 note.pitch += self.semitones
             return event
@@ -100,7 +104,11 @@ class TransposeTransform(AbstractTransform):
     def inverse(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
         if isinstance(obj, CorpusEvent):
             event: CorpusEvent = copy.deepcopy(obj)
-            # TODO: Transforming features not implemented
+            for (key, feature) in event.features.items():
+                try:
+                    event.features[key] = self.inverse(feature)
+                except TransformError:
+                    continue
             for note in event.notes:
                 note.pitch -= self.semitones
         elif isinstance(obj, AbstractIntegerPitch):

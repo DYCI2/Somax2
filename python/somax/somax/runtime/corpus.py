@@ -104,7 +104,7 @@ class Corpus:
         for event in self.events:
             parameter: CorpusFeature = event_parameter.analyze(event, self.fg_spectrogram, self.bg_spectrogram,
                                                                self.fg_chromagram, self.bg_chromagram, **kwargs)
-            event.add_trait(parameter)
+            event.set_feature(parameter)
 
     def length(self) -> int:
         return len(self.events)

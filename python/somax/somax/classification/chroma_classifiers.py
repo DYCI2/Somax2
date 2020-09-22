@@ -7,7 +7,6 @@ import numpy as np
 from somax.classification import tables
 from somax.classification.classifier import AbstractClassifier
 from somax.features import BackgroundChroma
-from somax.features.chroma_features import OnsetChroma
 from somax.features.feature import RuntimeFeature, CorpusFeature
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
@@ -15,7 +14,7 @@ from somax.runtime.exceptions import InvalidLabelInput, TransformError
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence, FeatureInfluence
 from somax.runtime.label import AbstractLabel, IntLabel
 from somax.runtime.transform_handler import TransformHandler
-from somax.runtime.transforms import AbstractTransform, TransformType
+from somax.runtime.transforms import AbstractTransform
 
 
 # TODO: Normalization. Normalization has been removed for now, but should be thoroughly tested.
@@ -28,7 +27,7 @@ class ChromaClassifier(AbstractClassifier, ABC):
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
-        self._transforms = transform_handler.get_by_feature(OnsetChroma)
+        self._transforms = transform_handler.get_by_feature(BackgroundChroma)
         if not self._transforms:
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
@@ -56,7 +55,7 @@ class SomChromaClassifier(ChromaClassifier):
     def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
         labels: List[IntLabel] = []
         for event in corpus.events:  # type: CorpusEvent
-            labels.append(self._label_from_chroma(event.get_trait(BackgroundChroma).value()))
+            labels.append(self._label_from_chroma(event.get_feature(BackgroundChroma).value()))
         return labels
 
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
@@ -68,7 +67,7 @@ class SomChromaClassifier(ChromaClassifier):
             return [((self._label_from_chroma(t.inverse(chroma).value())), t)
                     for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
-            chroma: CorpusFeature = influence.corpus_event.get_trait(BackgroundChroma)
+            chroma: CorpusFeature = influence.corpus_event.get_feature(BackgroundChroma)
             return [(self._label_from_chroma(t.inverse(chroma).value()), t) for t in self._transforms]
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")

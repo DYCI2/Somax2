@@ -17,8 +17,8 @@ class AbstractFeature(Introspective, ABC):
         """ TODO: docstring """
 
     @classmethod
-    def classes(cls) -> List[Type['AbstractFeature']]:
-        return list(cls._classes(somax.features).values())
+    def classes(cls, include_abstract: bool = False) -> List[Type['AbstractFeature']]:
+        return list(cls._classes(somax.features, include_abstract=include_abstract).values())
 
     def name(self) -> str:
         return self.__class__.__name__
