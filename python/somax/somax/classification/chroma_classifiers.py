@@ -41,6 +41,8 @@ class SomChromaClassifier(ChromaClassifier):
     SOM_DATA_FILE = 'misc_hsom'  # Note: vectors in file are not normalized
     SOM_CLASS_FILE = 'misc_hsom_c'
 
+    USE_MULTIPROCESSING = True
+
     def __init__(self):
         super().__init__()
         with resources.path(tables, self.SOM_DATA_FILE) as path:
@@ -53,10 +55,18 @@ class SomChromaClassifier(ChromaClassifier):
         pass
 
     def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
-        labels: List[IntLabel] = []
-        for event in corpus.events:  # type: CorpusEvent
-            labels.append(self._label_from_chroma(event.get_feature(BackgroundChroma).value()))
+        if self.USE_MULTIPROCESSING:
+            import multiprocessing
+            with multiprocessing.Pool(processes=4) as pool:
+                labels: List[IntLabel] = pool.map(self._multiproc_compute_label, corpus.events)
+        else:
+            labels: List[IntLabel] = []
+            for event in corpus.events:  # type: CorpusEvent
+                labels.append(self._label_from_chroma(event.get_feature(BackgroundChroma).value()))
         return labels
+
+    def _multiproc_compute_label(self, e: CorpusEvent):
+        return self._label_from_chroma(e.get_feature(BackgroundChroma).value())
 
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
         """ :raises TransformError if no transforms exist """
