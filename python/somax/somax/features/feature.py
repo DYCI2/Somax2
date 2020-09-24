@@ -54,7 +54,7 @@ class RuntimeFeature(AbstractFeature, StringParsed, ABC):
     def from_string(cls, keyword: str, value: Any = None, **kwargs) -> 'RuntimeFeature':
         """ :raises ValueError if a feature matching the keyword doesn't exist """
         for feature in cls._classes(somax.features).values():  # type: Type[RuntimeFeature]
-            if feature.keyword() == keyword:
+            if issubclass(feature, RuntimeFeature) and feature.keyword() == keyword:
                 return feature(value)
         raise ValueError(f"No feature matches the keyword '{keyword}'")
 

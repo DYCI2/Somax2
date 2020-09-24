@@ -39,11 +39,15 @@ class StringParsed(Introspective, ABC):
     @abstractmethod
     def from_string(cls, class_name: str, **kwargs) -> 'StringParsed':
         """ Should call the protected _from_string() method
-            :raises Indirectly raises ValueError if `default()` is not defined. """
+            :raises Indirectly raises ValueError if `default()` is not defined.
+                    TypeError if not all positional arguments for the class' `__init__` are provided as **kwargs
+        """
 
     @classmethod
     def _from_string(cls, class_name: str, module: Optional[ModuleType] = None, **kwargs) -> 'StringParsed':
-        """ :raises ValueError if `default()` is not defined"""
+        """ :raises ValueError if `default()` is not defined
+                    TypeError if not all positional arguments for the class' `__init__` are provided as **kwargs
+        """
         if not class_name:
             return cls.default(**kwargs)
 

@@ -23,7 +23,7 @@ class TransformError(Exception):
         super(TransformError, self).__init__(error)
 
 
-class TransformInstantiationError(Exception):
+class TransformIdentityError(Exception):
     def __init__(self, error):
         super().__init__(error)
 

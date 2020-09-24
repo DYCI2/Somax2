@@ -27,7 +27,7 @@ class TransformHandler:
         elif transform not in self._transforms.values():
             raise TransformError("A transform with the given parameters does not exist")
         else:
-            self._transforms = {k: v for (k, v) in self._transforms if v != transform}
+            self._transforms = {k: v for (k, v) in self._transforms.items() if v != transform}
 
     def get_transform(self, transform_id: int) -> AbstractTransform:
         """ :raises IndexError if key doesn't exist """

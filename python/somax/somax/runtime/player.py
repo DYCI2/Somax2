@@ -143,7 +143,9 @@ class Player(Streamview, ScheduledMidiObject):
         self._update_transforms()
 
     def remove_transform(self, transform: AbstractTransform):
-        """ :raises IndexError if key doesn't exist """
+        """ :raises IndexError if key doesn't exist
+                    TransformError if attempting to delete last transform
+        """
         self.transform_handler.remove(transform)
         self._update_transforms()
 

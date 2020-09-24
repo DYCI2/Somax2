@@ -26,7 +26,7 @@ from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.atom import Atom
 from somax.runtime.corpus import Corpus
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
-    InvalidCorpus, InvalidLabelInput
+    InvalidCorpus, InvalidLabelInput, TransformError
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
@@ -210,16 +210,26 @@ class SomaxStringDispatcher:
             transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)
             self.players[player].add_transform(transform)
             self.logger.debug(f"[add_transform] Added transform {transform} for player '{player}'.")
-        except KeyError as e:
-            self.logger.error(f"{str(e)} No transform was added.")
+        except KeyError:
+            self.logger.error(f"No player with the name '{player}' exists. No transform was added.")
+        except TransformError as e:
+            self.logger.error(f"{str(e)}. No transform was added.")
+        except TypeError as e:
+            self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was added.")
 
     def remove_transform(self, player: str, transform: str, **kwargs):
         try:
             transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)
             self.players[player].remove_transform(transform)
-            self.logger.debug(f"[add_transform] removed transform {transform} for player '{player}'.")
-        except (KeyError, IndexError) as e:
-            self.logger.error(f"{str(e)} Could not remove transform.")
+            self.logger.info(f"Successfully removed transform {transform} from player '{player}'.")
+        except KeyError:
+            self.logger.error(f"No player with the name '{player}' exists. No transform was removed.")
+        except IndexError as e:
+            self.logger.error(f"{str(e)} No transform was removed.")
+        except TransformError as e:
+            self.logger.error(f"{str(e)}. No transform was removed.")
+        except TypeError as e:
+            self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was removed.")
 
     def read_corpus(self, player: str, filepath: str, volatile: bool = False):
         self.logger.info(f"Reading Corpus at '{filepath}' for Player '{player}'...")
@@ -421,6 +431,8 @@ class SomaxServer(SomaxStringDispatcher, Caller):
     DEFAULT_SEND_PORT = 1235
     SERVER_ADDRESS = "/server"
 
+    DEBUG = True
+
     def __init__(self, recv_port: int, send_port: int, ip: str = SomaxStringDispatcher.IP_LOCALHOST):
         super(SomaxServer, self).__init__(parse_parenthesis_as_list=False, discard_duplicate_args=False)
         self.logger = logging.getLogger(__name__)
@@ -459,7 +471,8 @@ class SomaxServer(SomaxStringDispatcher, Caller):
         except Exception as e:
             self.logger.error(e)
             self.logger.debug(repr(e))
-            raise
+            if self.DEBUG:
+                raise
 
     def __unmatched_osc(self, address: str, *_args, **_kwargs) -> None:
         self.logger.info("The address {} does not exist.".format(address))

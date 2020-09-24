@@ -9,7 +9,7 @@ from somax.features.chroma_features import OnsetChroma
 from somax.features.feature import AbstractFeature
 from somax.features.pitch_features import AbstractIntegerPitch
 from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.exceptions import TransformError, TransformInstantiationError
+from somax.runtime.exceptions import TransformError, TransformIdentityError
 from somax.utils.introspective import StringParsed
 
 
@@ -40,9 +40,10 @@ class AbstractTransform(StringParsed, ABC):
 
     @classmethod
     def from_string(cls, transform: str, **kwargs) -> 'AbstractTransform':
+        """ :raises TypeError if not all positional arguments for the transform's `__init__` are provided as **kwargs"""
         try:
             return cls._from_string(transform, **kwargs)
-        except TransformInstantiationError:
+        except TransformIdentityError:
             # Parameters given duplicates the NoTransform class
             return cls.default()
 
@@ -53,6 +54,9 @@ class NoTransform(AbstractTransform):
 
     def __eq__(self, other):
         return type(self) == type(other)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}()"
 
     @staticmethod
     def valid_features() -> List[Type[AbstractFeature]]:
@@ -70,11 +74,14 @@ class TransposeTransform(AbstractTransform):
         super().__init__()
         if semitones == 0:
             # if instantiated through `from_string`: this error is caught and returns a NoTransform object
-            raise TransformInstantiationError("A transposition of 0 semitones is equivalent to the NoTransform class")
+            raise TransformIdentityError("A transposition of 0 semitones is equivalent to the NoTransform class")
         self.semitones = semitones
 
     def __eq__(self, other):
         return type(self) == type(other) and self.semitones == other.semitones
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(semitones={self.semitones})"
 
     @staticmethod
     def valid_features() -> List[Type[AbstractFeature]]:
