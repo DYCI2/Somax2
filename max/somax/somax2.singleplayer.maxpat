@@ -1052,7 +1052,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 355.5, 592.0, 95.0, 22.0 ],
+					"patching_rect" : [ 355.5, 590.0, 95.0, 22.0 ],
 					"text" : "thispatcher front"
 				}
 
@@ -1071,7 +1071,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 793.88713906383532, 399.157589068420407, 84.0, 20.0 ],
 					"rounded" : 20.0,
-					"text" : "routing (TODO)",
+					"text" : "Routing",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -1095,7 +1095,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 203.5, 1097.086663568773474, 108.0, 60.0 ],
+					"patching_rect" : [ 203.5, 1097.086663568773474, 111.0, 60.0 ],
 					"text" : "Messages from Server to Player are communicated over OSC"
 				}
 
@@ -1119,7 +1119,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 4,
 					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
+					"outlettype" : [ "", "bang" ],
 					"patching_rect" : [ 152.0, 623.59999700000003, 222.5, 22.0 ],
 					"text" : "somax.mixer1p"
 				}
@@ -1197,9 +1197,9 @@
 					"maxclass" : "bpatcher",
 					"name" : "somax.serverio.compact.maxpat",
 					"numinlets" : 3,
-					"numoutlets" : 7,
+					"numoutlets" : 8,
 					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "", "float", "float", "dictionary", "int", "", "" ],
+					"outlettype" : [ "", "float", "float", "dictionary", "int", "", "", "bang" ],
 					"patching_rect" : [ 152.0, 921.33335018157959, 426.0, 164.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 264.084603340888407, 340.34508906842035, 426.0, 164.0 ],
@@ -1438,7 +1438,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-143", 0 ],
-					"midpoints" : [ 568.5, 1109.339219624999942, 568.5, 1109.339219624999942 ],
+					"midpoints" : [ 510.357142857142833, 1107.339219624999942, 568.5, 1107.339219624999942 ],
 					"order" : 2,
 					"source" : [ "obj-188", 6 ]
 				}
@@ -1447,7 +1447,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
-					"midpoints" : [ 568.5, 1110.339219624999942, 813.500023999999939, 1110.339219624999942 ],
+					"midpoints" : [ 510.357142857142833, 1107.339219624999942, 813.500023999999939, 1107.339219624999942 ],
 					"order" : 1,
 					"source" : [ "obj-188", 6 ]
 				}
@@ -1455,8 +1455,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-3", 2 ],
+					"source" : [ "obj-188", 7 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-83", 1 ],
-					"midpoints" : [ 568.5, 1110.839219624999942, 1031.000023999999939, 1110.839219624999942 ],
+					"midpoints" : [ 510.357142857142833, 1105.339219624999942, 1031.000023999999939, 1105.339219624999942 ],
 					"order" : 0,
 					"source" : [ "obj-188", 6 ]
 				}
@@ -2005,20 +2012,6 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.legacy.onsetrouter.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "./patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.legacy.melodicrouter.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "./patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "somax.corpusbuilder.maxpat",
 				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
@@ -2155,32 +2148,18 @@
 		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
-					"fontsize" : [ 10.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
 				"newobj" : 				{
-					"fontsize" : [ 10.0 ],
-					"fontface" : [ 1 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
-				"message" : 				{
+				"default" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2190,17 +2169,31 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
+
+				}
 ,
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				"message" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+
 				}
 ,
 				"parentstyle" : "",

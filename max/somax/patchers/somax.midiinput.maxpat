@@ -229,7 +229,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-279",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -238,7 +237,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 4.75, 337.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 6.666669934988022, 31.5, 244.400000952316276, 100.892028606609344 ],
+					"presentation_rect" : [ 0.750002451241016, 31.5, 250.316668436063281, 100.892028606609358 ],
 					"proportion" : 0.5
 				}
 
@@ -307,12 +306,12 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1383.5, 82.0, 59.5, 22.0 ],
 					"restore" : 					{
-						"enabled" : [ 1 ],
+						"enabled" : [ 0 ],
 						"flush" : [ 0.0 ]
 					}
 ,
 					"text" : "autopattr",
-					"varname" : "u591002315"
+					"varname" : "u615006902"
 				}
 
 			}
