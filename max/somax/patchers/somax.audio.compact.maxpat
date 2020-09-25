@@ -40,6 +40,28 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 10.0,
+					"id" : "obj-140",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 260.750000456969019, 286.459401198144292, 68.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 183.815420396851096, 26.825000250000016, 61.0, 20.0 ],
+					"rounded" : 20.0,
+					"text" : "Settings",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"texton" : "",
+					"textoncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"arrows" : 3,
 					"id" : "obj-49",
 					"justification" : 1,
@@ -346,7 +368,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 905.833333790302277, 696.967826697791338, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 4.469205657934936, 23.137499648502342, 253.0, 303.575000202995284 ],
+					"presentation_rect" : [ 4.469205657934936, 21.325000250000016, 253.0, 303.575000202995284 ],
 					"proportion" : 0.5
 				}
 
@@ -396,28 +418,6 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 745.833333790302049, 273.459401198144292, 61.0, 22.0 ],
 					"text" : "hidden $1"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 1,
-					"fontsize" : 10.0,
-					"id" : "obj-140",
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"outputmode" : 0,
-					"parameter_enable" : 0,
-					"patching_rect" : [ 260.750000456969019, 286.459401198144292, 68.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 183.815420396851096, 26.825000250000016, 61.0, 20.0 ],
-					"rounded" : 20.0,
-					"text" : "Settings",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
-					"texton" : "",
-					"textoncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
 			}
