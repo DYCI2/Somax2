@@ -159,7 +159,7 @@ class Player(Streamview, ScheduledMidiObject):
             return peaks
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
         corresponding_transforms: List[AbstractTransform] = [self.transform_handler.get_transform(t)
-                                                             for t in np.unique(peaks.transform_hashes)]
+                                                             for t in np.unique(peaks.transform_ids)]
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled():
                 peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, corresponding_transforms,

@@ -120,3 +120,40 @@ class NextStateScaleAction(AbstractScaleAction):
     def factor(self):
         return self._factor.value
 
+
+class BinaryTransformContinuityScaleAction(AbstractScaleAction):
+    def __init__(self, transform_handler: TransformHandler, factor: float = 0.5):
+        super().__init__()
+        self.logger = logging.getLogger(__name__)
+        self._factor: Parameter = Parameter(factor, 0.0, None, 'float',
+                                            "Scaling factor for peaks not matching previous transform")
+        self._previous_transform: Optional[AbstractTransform] = None
+        # This will always be set immediately after adding transform to player and the
+        # Optional case should never have to be handled
+        self._transform_handler: Optional[TransformHandler] = None
+
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
+              corpus: Corpus = None, **kwargs) -> Peaks:
+        if self._previous_transform is None or self._transform_handler:
+            return peaks
+        else:
+            peak_transform_ids: np.ndarray = np.array(peaks.transform_ids)
+            previous_transform_id: int = self._transform_handler.get_id(self._previous_transform)
+            not_matching: np.ndarray = peak_transform_ids != previous_transform_id
+            peaks.scale(self.factor, not_matching)
+            return peaks
+
+
+    def feedback(self, _feedback_event: CorpusEvent, _time: float, applied_transform: AbstractTransform) -> None:
+        self._previous_transform = applied_transform
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        self._transform_handler = transform_handler
+
+    def clear(self) -> None:
+        self._previous_transform = None
+
+    @property
+    def factor(self):
+        return self._factor.value

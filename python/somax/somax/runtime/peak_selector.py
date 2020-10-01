@@ -69,7 +69,7 @@ class MaxPeakSelector(AbstractPeakSelector):
         max_peak_value: float = np.max(peaks.scores)
         max_peaks_idx: List[int] = np.argwhere(peaks.scores == max_peak_value)
         peak_idx: int = random.choice(max_peaks_idx)
-        transform_hash: int = int(peaks.transform_hashes[peak_idx])
+        transform_hash: int = int(peaks.transform_ids[peak_idx])
         return corpus.event_around(peaks.times[peak_idx]), transform_handler.get_transform(transform_hash)
 
     def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory,
@@ -106,7 +106,7 @@ class ThresholdPeakSelector(AbstractPeakSelector):
         else:
             max_peaks_idx: List[int] = np.argwhere(peaks.scores == max_peak_value)
             peak_idx: int = random.choice(max_peaks_idx)
-            transform_hash: int = int(peaks.transform_hashes[peak_idx])
+            transform_hash: int = int(peaks.transform_ids[peak_idx])
             return corpus.event_around(peaks.times[peak_idx]), transform_handler.get_transform(transform_hash)
 
     def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory,
