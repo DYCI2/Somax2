@@ -112,10 +112,10 @@ class RealtimeScheduler(BaseScheduler):
 
     def _add_audio_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
         raise NotImplementedError
-        event: ScheduledEvent = ScheduledAudioEvent(trigger_time, player, corpus_event.absolute_time[0],
-                                                    corpus_event.absolute_time[1], corpus_event.state_index,
-                                                    corpus_event.tempo)
-        self.queue.append(event)
+        # event: ScheduledEvent = ScheduledAudioEvent(trigger_time, player, corpus_event.absolute_time[0],
+        #                                             corpus_event.absolute_time[1], corpus_event.state_index,
+        #                                             corpus_event.tempo)
+        # self.queue.append(event)
 
     def add_influence_event(self, player: Player, trigger_time: float, influence_path: str,
                             influence: AbstractInfluence):

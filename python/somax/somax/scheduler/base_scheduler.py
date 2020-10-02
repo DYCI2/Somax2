@@ -34,6 +34,10 @@ class BaseScheduler(ABC):
                                               self._tick)
         elif player.trigger_mode == TriggerMode.MANUAL and self.running:
             self._add_manual_trigger_event(player, trigger_time if trigger_time else self._tick)
+        elif player.trigger_mode == TriggerMode.ADAPTIVE:
+            self.delete_trigger(player)
+            self._add_automatic_trigger_event(player, self._tick - self._trigger_pretime * self.tempo / 60.0,
+                                              self._tick)
         else:
             self.logger.debug("[add_trigger_event] Could not add trigger.")
 
@@ -105,13 +109,14 @@ class BaseScheduler(ABC):
             return
 
         if event is None:
-            if player.trigger_mode == TriggerMode.AUTOMATIC:
+            if player.trigger_mode == TriggerMode.AUTOMATIC or player.trigger_mode == TriggerMode.ADAPTIVE:
                 self._requeue_trigger_event(trigger_event)
             return
 
         self._add_corpus_event(player, trigger_event.target_time, event)
 
-        if isinstance(trigger_event, AutomaticTriggerEvent) and player.trigger_mode == TriggerMode.AUTOMATIC:
+        if isinstance(trigger_event, AutomaticTriggerEvent) and (player.trigger_mode == TriggerMode.AUTOMATIC or
+                                                                 player.trigger_mode == TriggerMode.ADAPTIVE):
             if event.duration > 0:
                 next_trigger_time: float = trigger_event.trigger_time + event.duration
                 next_target_time: float = trigger_event.target_time + event.duration
