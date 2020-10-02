@@ -122,7 +122,7 @@ class NextStateScaleAction(AbstractScaleAction):
 
 
 class BinaryTransformContinuityScaleAction(AbstractScaleAction):
-    def __init__(self, transform_handler: TransformHandler, factor: float = 0.5):
+    def __init__(self, factor: float = 0.5):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self._factor: Parameter = Parameter(factor, 0.0, None, 'float',
