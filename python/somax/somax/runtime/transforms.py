@@ -69,6 +69,28 @@ class NoTransform(AbstractTransform):
         return obj
 
 
+class RedundantTransform(AbstractTransform):
+    """ Class for representing transforms removed by the user in the interface while peaks using the transform
+        may still exist in the runtime state. """
+
+    def __init__(self, contained_transform: AbstractTransform):
+        super().__init__()
+        self._contained_transform: AbstractTransform = contained_transform
+
+    def __eq__(self, other):
+        return False
+
+    @staticmethod
+    def valid_features() -> List[Type[AbstractFeature]]:
+        return []
+
+    def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
+        return self._contained_transform.apply(obj, **kwargs)
+
+    def inverse(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
+        return self._contained_transform.inverse(obj, **kwargs)
+
+
 class TransposeTransform(AbstractTransform):
     def __init__(self, semitones: int):
         super().__init__()

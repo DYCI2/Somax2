@@ -106,11 +106,13 @@ class Player(Streamview, ScheduledMidiObject):
         self.feedback(feedback_event, time, applied_transform)
 
     def clear(self):
+        """ Reset runtime state without modifying any parameters or settings """
         self.improvisation_memory = ImprovisationMemory()
         self.previous_peaks = Peaks.create_empty()
         for scale_action in self.scale_actions.values():
             scale_action.clear()
         Streamview.clear(self)
+        self.transform_handler.clear()
 
     def set_corpus(self, corpus: Corpus) -> None:
         self._update_transforms()
