@@ -54,7 +54,7 @@ class Player(Streamview, ScheduledMidiObject):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def new_event(self, scheduler_time: float) -> Optional[CorpusEvent]:
+    def new_event(self, scheduler_time: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
         if not self.corpus:
@@ -75,7 +75,7 @@ class Player(Streamview, ScheduledMidiObject):
         self.improvisation_memory.append(event, scheduler_time, transform)
         self._feedback(event, scheduler_time, transform)
         self.previous_peaks = peaks
-        return event
+        return event, transform
 
     def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
         """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError

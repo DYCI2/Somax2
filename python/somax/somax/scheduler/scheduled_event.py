@@ -5,6 +5,7 @@ from somax.runtime.atom import Atom
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.player import Player
+from somax.runtime.transforms import AbstractTransform
 
 
 class ScheduledEvent(ABC):
@@ -25,12 +26,14 @@ class ScheduledPlayerEvent(ScheduledEvent):
 
 
 class ScheduledMidiEvent(ScheduledPlayerEvent):
-    def __init__(self, trigger_time: float, player: Player, note: int, velocity: int, channel: int, state: int):
+    def __init__(self, trigger_time: float, player: Player, note: int, velocity: int, channel: int, state: int,
+                 applied_transform: Optional[AbstractTransform]):
         super(ScheduledMidiEvent, self).__init__(trigger_time, player)
         self.note: int = note
         self.velocity: int = velocity
         self.channel: int = channel
         self.state: int = state
+        self.applied_transform: Optional[AbstractTransform] = applied_transform
 
     def __repr__(self):
         return f"MidiEvent(trigger_time={self.trigger_time},player={self.player},note={self.note},velocity={self.velocity},channel={self.channel},state={self.state})"

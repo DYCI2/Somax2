@@ -1,11 +1,12 @@
 import logging
 from abc import abstractmethod, ABC
-from typing import Optional, Any, List
+from typing import Optional, Any, List, Tuple
 
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import InvalidCorpus
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.player import Player
+from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.scheduled_event import ScheduledEvent, ScheduledMidiEvent, ScheduledAudioEvent, \
     AutomaticTriggerEvent, TempoEvent, ManualTriggerEvent, AbstractTriggerEvent, ScheduledInfluenceEvent, \
     ScheduledCorpusEvent
@@ -47,12 +48,14 @@ class BaseScheduler(ABC):
         self.queue.append(TempoEvent(trigger_time, tempo))
 
     @abstractmethod
-    def _add_corpus_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
+    def _add_corpus_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent,
+                          applied_transform: AbstractTransform):
         """ Mandatory """
         pass
 
     @abstractmethod
-    def _add_midi_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
+    def _add_midi_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent,
+                        applied_transform: AbstractTransform):
         """ Not required to implement """
         pass
 
@@ -98,18 +101,21 @@ class BaseScheduler(ABC):
         # print(f"Trigger: target time={trigger_event.target_time}, scheduler_time={self._tick}") TODO Remove
         player: Player = trigger_event.player
         try:
-            event: CorpusEvent = player.new_event(trigger_event.target_time)
+            event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+            event_and_transform = player.new_event(trigger_event.target_time)
         except InvalidCorpus as e:
             self.logger.error(str(e))
             self._requeue_trigger_event(trigger_event)
             return
 
-        if event is None:
+        if event_and_transform is None:
             if player.trigger_mode == TriggerMode.AUTOMATIC:
                 self._requeue_trigger_event(trigger_event)
             return
 
-        self._add_corpus_event(player, trigger_event.target_time, event)
+        event: CorpusEvent = event_and_transform[0]
+        applied_transform: AbstractTransform = event_and_transform[1]
+        self._add_corpus_event(player, trigger_event.target_time, event, applied_transform)
 
         if isinstance(trigger_event, AutomaticTriggerEvent) and player.trigger_mode == TriggerMode.AUTOMATIC:
             if event.duration > 0:
