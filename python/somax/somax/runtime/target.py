@@ -41,7 +41,7 @@ class SimpleOscTarget(Target):
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"Creating new OscTarget with address '{address}', port '{port}' and ip '{ip}'.")
         self.address: str = address
-        self._client: Sender = Sender(ip, port, SendFormat.FLATTEN, "/warning")
+        self._client: Sender = Sender(ip, port, send_format=SendFormat.FLATTEN, warning_address="/warning")
         self._max_formatter: MaxFormatter = MaxFormatter()
 
     def send(self, keyword: str, content: Any, **_kwargs):

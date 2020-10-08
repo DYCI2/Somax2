@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1372.0, 731.0 ],
+		"rect" : [ 34.0, 79.0, 1372.0, 731.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -1163,6 +1163,29 @@
 			}
 , 			{
 				"box" : 				{
+					"bgmode" : 0,
+					"border" : 0,
+					"clickthrough" : 0,
+					"enablehscroll" : 0,
+					"enablevscroll" : 0,
+					"id" : "obj-188",
+					"lockeddragscroll" : 0,
+					"maxclass" : "bpatcher",
+					"name" : "somax.serverio.compact.maxpat",
+					"numinlets" : 3,
+					"numoutlets" : 8,
+					"offset" : [ 0.0, 0.0 ],
+					"outlettype" : [ "", "float", "float", "dictionary", "int", "", "", "bang" ],
+					"patching_rect" : [ 152.0, 921.33335018157959, 426.0, 164.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 264.084603340888407, 340.34508906842035, 426.0, 164.0 ],
+					"varname" : "somax.serverio.compact",
+					"viewvisibility" : 1
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"args" : [ "Player" ],
 					"bgmode" : 0,
 					"border" : 0,
@@ -1181,29 +1204,6 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 7.584603340888407, 8.650000500000033, 623.000000976158162, 610.849999499999967 ],
 					"varname" : "somax.playerio.compact",
-					"viewvisibility" : 1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgmode" : 0,
-					"border" : 0,
-					"clickthrough" : 0,
-					"enablehscroll" : 0,
-					"enablevscroll" : 0,
-					"id" : "obj-188",
-					"lockeddragscroll" : 0,
-					"maxclass" : "bpatcher",
-					"name" : "somax.serverio.compact.maxpat",
-					"numinlets" : 3,
-					"numoutlets" : 8,
-					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "", "float", "float", "dictionary", "int", "", "", "bang" ],
-					"patching_rect" : [ 152.0, 921.33335018157959, 426.0, 164.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 264.084603340888407, 340.34508906842035, 426.0, 164.0 ],
-					"varname" : "somax.serverio.compact",
 					"viewvisibility" : 1
 				}
 
@@ -1577,7 +1577,7 @@
 					"destination" : [ "obj-64", 0 ],
 					"source" : [ "obj-3", 0 ],
 					"watchpoint_flags" : 5,
-					"watchpoint_id" : 1
+					"watchpoint_id" : 11
 				}
 
 			}
@@ -1797,73 +1797,57 @@
  ],
 		"parameters" : 		{
 			"obj-140::obj-21" : [ "Gain[1]", "Gain", 0 ],
-			"obj-180::obj-49::obj-79::obj-1" : [ "live.text[24]", "live.text", 0 ],
-			"obj-180::obj-49::obj-79::obj-2" : [ "live.text[21]", "live.text", 0 ],
-			"obj-180::obj-49::obj-79::obj-3" : [ "live.text[26]", "live.text", 0 ],
-			"obj-180::obj-49::obj-87::obj-1" : [ "live.text[25]", "live.text", 0 ],
-			"obj-180::obj-49::obj-87::obj-2" : [ "live.text[28]", "live.text", 0 ],
-			"obj-180::obj-49::obj-87::obj-3" : [ "live.text[27]", "live.text", 0 ],
-			"obj-180::obj-49::obj-89::obj-1" : [ "live.text[29]", "live.text", 0 ],
-			"obj-180::obj-49::obj-89::obj-2" : [ "live.text[30]", "live.text", 0 ],
-			"obj-180::obj-49::obj-89::obj-3" : [ "live.text[22]", "live.text", 0 ],
-			"obj-180::obj-49::obj-91::obj-1" : [ "live.text[23]", "live.text", 0 ],
-			"obj-180::obj-49::obj-91::obj-2" : [ "live.text[32]", "live.text", 0 ],
-			"obj-180::obj-49::obj-91::obj-3" : [ "live.text[31]", "live.text", 0 ],
+			"obj-180::obj-49::obj-79::obj-1" : [ "live.text[3]", "live.text", 0 ],
+			"obj-180::obj-49::obj-79::obj-2" : [ "live.text[4]", "live.text", 0 ],
+			"obj-180::obj-49::obj-79::obj-3" : [ "live.text[5]", "live.text", 0 ],
+			"obj-180::obj-49::obj-87::obj-1" : [ "live.text[6]", "live.text", 0 ],
+			"obj-180::obj-49::obj-87::obj-2" : [ "live.text[8]", "live.text", 0 ],
+			"obj-180::obj-49::obj-87::obj-3" : [ "live.text[7]", "live.text", 0 ],
+			"obj-180::obj-49::obj-89::obj-1" : [ "live.text[9]", "live.text", 0 ],
+			"obj-180::obj-49::obj-89::obj-2" : [ "live.text[11]", "live.text", 0 ],
+			"obj-180::obj-49::obj-89::obj-3" : [ "live.text[10]", "live.text", 0 ],
+			"obj-180::obj-49::obj-91::obj-1" : [ "live.text[13]", "live.text", 0 ],
+			"obj-180::obj-49::obj-91::obj-2" : [ "live.text[12]", "live.text", 0 ],
+			"obj-180::obj-49::obj-91::obj-3" : [ "live.text[14]", "live.text", 0 ],
 			"parameterbanks" : 			{
 
 			}
 ,
 			"parameter_overrides" : 			{
-				"obj-140::obj-21" : 				{
-					"parameter_longname" : "Gain[1]"
-				}
-,
-				"obj-180::obj-49::obj-79::obj-1" : 				{
-					"parameter_longname" : "live.text[24]"
-				}
-,
-				"obj-180::obj-49::obj-79::obj-2" : 				{
-					"parameter_longname" : "live.text[21]"
-				}
-,
-				"obj-180::obj-49::obj-79::obj-3" : 				{
-					"parameter_longname" : "live.text[26]"
-				}
-,
 				"obj-180::obj-49::obj-87::obj-1" : 				{
-					"parameter_longname" : "live.text[25]"
+					"parameter_longname" : "live.text[6]"
 				}
 ,
 				"obj-180::obj-49::obj-87::obj-2" : 				{
-					"parameter_longname" : "live.text[28]"
+					"parameter_longname" : "live.text[8]"
 				}
 ,
 				"obj-180::obj-49::obj-87::obj-3" : 				{
-					"parameter_longname" : "live.text[27]"
+					"parameter_longname" : "live.text[7]"
 				}
 ,
 				"obj-180::obj-49::obj-89::obj-1" : 				{
-					"parameter_longname" : "live.text[29]"
+					"parameter_longname" : "live.text[9]"
 				}
 ,
 				"obj-180::obj-49::obj-89::obj-2" : 				{
-					"parameter_longname" : "live.text[30]"
+					"parameter_longname" : "live.text[11]"
 				}
 ,
 				"obj-180::obj-49::obj-89::obj-3" : 				{
-					"parameter_longname" : "live.text[22]"
+					"parameter_longname" : "live.text[10]"
 				}
 ,
 				"obj-180::obj-49::obj-91::obj-1" : 				{
-					"parameter_longname" : "live.text[23]"
+					"parameter_longname" : "live.text[13]"
 				}
 ,
 				"obj-180::obj-49::obj-91::obj-2" : 				{
-					"parameter_longname" : "live.text[32]"
+					"parameter_longname" : "live.text[12]"
 				}
 ,
 				"obj-180::obj-49::obj-91::obj-3" : 				{
-					"parameter_longname" : "live.text[31]"
+					"parameter_longname" : "live.text[14]"
 				}
 
 			}
@@ -1872,48 +1856,6 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "somax.serverio.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "./patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.server.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "./patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.server.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "./patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.serverstatus.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "./patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.beattracker.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "./patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.beattracker.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "./patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "somax.playerio.compact.maxpat",
 				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
@@ -1992,6 +1934,48 @@
 			}
 , 			{
 				"name" : "somax.midioutput.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.serverio.compact.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.server.compact.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.server.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.serverstatus.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.beattracker.compact.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.beattracker.maxpat",
 				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
@@ -2141,52 +2125,52 @@
 		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"message" : 				{
-					"fontface" : [ 1 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"default" : 				{
-					"fontface" : [ 1 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
 				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"default" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontface" : [ 1 ]
+				}
+,
+				"newobj" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ]
+				}
+,
+				"message" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontface" : [ 1 ]
 				}
 ,
 				"parentstyle" : "",
