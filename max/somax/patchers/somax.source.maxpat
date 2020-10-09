@@ -40,14 +40,26 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
-					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
-					"id" : "obj-24",
+					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
+					"id" : "obj-3",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 438.0, 74.0, 135.0, 22.0 ],
-					"text" : "patcherargs Source"
+					"numoutlets" : 0,
+					"patching_rect" : [ 67.0, 294.0, 49.0, 22.0 ],
+					"text" : "forward"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"comment" : "(str) Suggested name",
+					"id" : "obj-1",
+					"index" : 2,
+					"maxclass" : "inlet",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 149.0, 33.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -56,11 +68,11 @@
 					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
 					"id" : "obj-9",
 					"maxclass" : "newobj",
-					"numinlets" : 0,
+					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 149.0, 74.0, 214.0, 22.0 ],
-					"text" : "somax.uniquename somax.sources #1"
+					"patching_rect" : [ 149.0, 74.0, 197.0, 22.0 ],
+					"text" : "somax.uniquename somax.sources"
 				}
 
 			}
@@ -96,7 +108,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 148.666666666666686, 198.813333333333389, 132.0, 35.0 ],
+					"patching_rect" : [ 148.666666666666686, 198.813333333333389, 133.0, 35.0 ],
 					"text" : "combine source. name @triggers 1"
 				}
 
@@ -129,24 +141,12 @@
 				"box" : 				{
 					"comment" : "(any) Message to send",
 					"id" : "obj-31",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 67.0, 70.0, 30.0, 30.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
-					"id" : "obj-23",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 67.0, 298.0, 81.0, 22.0 ],
-					"text" : "send <None>"
+					"patching_rect" : [ 67.0, 33.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -166,7 +166,7 @@
 				"box" : 				{
 					"comment" : "(str) Name of source",
 					"id" : "obj-37",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -181,8 +181,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 148.666666666666686, 239.813333333333389, 72.0, 22.0 ],
-					"text" : "prepend set"
+					"patching_rect" : [ 148.666666666666686, 239.813333333333389, 82.0, 22.0 ],
+					"text" : "prepend send"
 				}
 
 			}
@@ -204,10 +204,10 @@
 					"id" : "obj-28",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 149.0, 107.661446615247428, 357.0, 22.0 ],
-					"text" : "t s s s s"
+					"numoutlets" : 5,
+					"outlettype" : [ "", "", "", "", "bang" ],
+					"patching_rect" : [ 149.0, 107.661446615247428, 469.666666666666629, 22.0 ],
+					"text" : "t s s s s b"
 				}
 
 			}
@@ -240,6 +240,13 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"destination" : [ "obj-9", 0 ],
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-29", 0 ],
 					"source" : [ "obj-22", 0 ]
 				}
@@ -249,6 +256,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-17", 0 ],
 					"source" : [ "obj-28", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-29", 0 ],
+					"source" : [ "obj-28", 4 ]
 				}
 
 			}
@@ -282,14 +296,14 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-23", 0 ],
+					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-31", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-23", 0 ],
+					"destination" : [ "obj-3", 0 ],
 					"midpoints" : [ 158.166666666666686, 279.406666666666695, 76.5, 279.406666666666695 ],
 					"source" : [ "obj-35", 0 ]
 				}
@@ -323,16 +337,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "somax.uniquename.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0
+ ]
 	}
 
 }

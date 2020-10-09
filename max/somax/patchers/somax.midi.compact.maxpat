@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 59.0, 104.0, 956.0, 578.0 ],
+		"rect" : [ 59.0, 104.0, 1280.0, 859.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,18 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 424.5, 121.0, 72.0, 22.0 ],
+					"text" : "prepend set"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-9",
 					"maxclass" : "newobj",
@@ -76,7 +88,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "(list) nn vel ch (if output set to external)",
+					"comment" : "(list) nn vel ch",
 					"id" : "obj-4",
 					"index" : 4,
 					"maxclass" : "outlet",
@@ -116,11 +128,11 @@
 				"box" : 				{
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 4,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 279.0, 85.0, 540.25, 22.0 ],
-					"text" : "route input influencer midioutput"
+					"numinlets" : 5,
+					"numoutlets" : 5,
+					"outlettype" : [ "", "", "", "", "" ],
+					"patching_rect" : [ 279.0, 85.0, 213.0, 22.0 ],
+					"text" : "route input influencer midioutput name"
 				}
 
 			}
@@ -150,6 +162,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-160",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -167,6 +180,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-161",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -292,6 +306,7 @@
 			}
 , 			{
 				"box" : 				{
+					"args" : [ "#1" ],
 					"bgmode" : 0,
 					"border" : 0,
 					"clickthrough" : 0,
@@ -355,7 +370,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "(list) External MIDI input (mode: 'Inlet')",
 					"id" : "obj-141",
 					"index" : 1,
 					"maxclass" : "inlet",
@@ -368,7 +383,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "(bang) Influence onset",
 					"id" : "obj-153",
 					"index" : 1,
 					"maxclass" : "outlet",
@@ -380,7 +395,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "(int) Pitch influence",
 					"id" : "obj-154",
 					"index" : 2,
 					"maxclass" : "outlet",
@@ -392,7 +407,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "(list) Continous chroma output",
 					"id" : "obj-156",
 					"index" : 3,
 					"maxclass" : "outlet",
@@ -406,7 +421,7 @@
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-14", 2 ],
-					"midpoints" : [ 462.25, 392.245087001231582, 282.5, 392.245087001231582 ],
+					"midpoints" : [ 337.0, 392.245087001231582, 282.5, 392.245087001231582 ],
 					"source" : [ "obj-1", 1 ]
 				}
 
@@ -422,6 +437,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-5", 1 ],
 					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-8", 0 ],
+					"source" : [ "obj-1", 3 ]
 				}
 
 			}
@@ -563,6 +585,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
 					"source" : [ "obj-7", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-62", 0 ],
+					"source" : [ "obj-8", 0 ]
 				}
 
 			}

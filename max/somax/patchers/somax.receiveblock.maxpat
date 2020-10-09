@@ -466,7 +466,7 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-1",
-					"items" : [ "<None>", ",", "Source" ],
+					"items" : [ "<None>", ",", "Player", ",", "AnotherName", ",", "MidiInfluencer", ",", "MidiInfluencer_1051", ",", "Player_1045", ",", "Source", ",", "AudioInfluencer", ",", "Source", ",", "AudioInfluencer_1003" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -787,7 +787,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
+					"destination" : [ "obj-3", 1 ],
 					"source" : [ "obj-6", 1 ]
 				}
 
