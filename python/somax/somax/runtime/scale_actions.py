@@ -3,7 +3,9 @@ from abc import ABC, abstractmethod
 from typing import List, Tuple, Optional
 
 import numpy as np
+import scipy.stats
 
+from somax.features.feature import CorpusFeature
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import ImprovisationMemory
@@ -120,3 +122,22 @@ class NextStateScaleAction(AbstractScaleAction):
     def factor(self):
         return self._factor.value
 
+
+class AbstractGaussianScale(AbstractScaleAction, ABC):
+    def __init__(self, mu: float = 0.0, sigma: float = 1.0):
+        super().__init__()
+        self._mu: Parameter = Parameter(mu, None, None, 'float', "Mean value of gaussian.")
+        self._sigma: Parameter = Parameter(sigma, None, None, 'float', "Standard deviation of gaussian")
+        self._distribution = scipy.stats.norm()
+
+    def _scale(self, peaks: Peaks, corresponding_features: np.ndarray) -> Peaks:
+        peaks.scores *= self._distribution.pdf(corresponding_features)
+        return peaks
+
+    @property
+    def mu(self):
+        return self._mu.value
+
+    @property
+    def sigma(self):
+        return self._sigma.value
