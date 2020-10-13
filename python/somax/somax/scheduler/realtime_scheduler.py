@@ -135,7 +135,7 @@ class RealtimeScheduler(BaseScheduler):
         player: Player = midi_event.player
         player.target.send("midi", [midi_event.note, midi_event.velocity, midi_event.channel])
         if midi_event.velocity > 0:
-            player.target.send("state", [midi_event.state, midi_event.applied_transform.rendered_value()])
+            player.target.send("state", [midi_event.state, midi_event.applied_transform.renderer_info()])
 
     def _process_audio_event(self, audio_event: ScheduledAudioEvent) -> None:
         player: Player = audio_event.player
