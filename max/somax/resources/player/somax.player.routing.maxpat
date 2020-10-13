@@ -494,7 +494,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"patching_rect" : [ 600.5, 212.5, 32.0, 22.0 ],
-					"text" : "+ 38"
+					"text" : "+ 28"
 				}
 
 			}
@@ -514,13 +514,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-159",
-					"linecount" : 4,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 656.5, 344.5, 262.0, 62.0 ],
-					"text" : "script newdefault $1 0 $2 bpatcher somax.player.routerblock @patching_rect 0 $2 247 40 @presentation 1 @presentation_rect 0 $2 247 40"
+					"patching_rect" : [ 656.5, 344.5, 750.0, 22.0 ],
+					"text" : "script newdefault $1 0 $2 bpatcher somax.player.routerblock @patching_rect 0 $2 247 40 @presentation 1 @presentation_rect 0 $2 247 28"
 				}
 
 			}
@@ -603,7 +602,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 302.0, 1035.0, 251.0, 22.0 ],
+					"patching_rect" : [ 302.0, 1035.0, 277.0, 22.0 ],
 					"text" : "prepend influence #1 harmonic chroma ["
 				}
 
@@ -720,7 +719,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 118.0, 835.0, 137.0, 22.0 ],
+					"patching_rect" : [ 118.0, 835.0, 163.0, 22.0 ],
 					"text" : "influence_onset #1"
 				}
 
@@ -1027,7 +1026,7 @@
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"id" : "obj-2",
+					"id" : "obj-6",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
 					"name" : "somax.player.routerblock.maxpat",
@@ -1037,8 +1036,8 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 0.0, 25.0, 247.0, 40.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 25.0, 247.0, 40.0 ],
-					"varname" : "recvbox0",
+					"presentation_rect" : [ 0.0, 25.0, 247.0, 28.0 ],
+					"varname" : "recvbox0[1]",
 					"viewvisibility" : 1
 				}
 
@@ -1114,34 +1113,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-173", 0 ],
 					"source" : [ "obj-172", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-285", 0 ],
-					"source" : [ "obj-2", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-650", 0 ],
-					"source" : [ "obj-2", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-651", 0 ],
-					"source" : [ "obj-2", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-89", 0 ],
-					"source" : [ "obj-2", 3 ]
 				}
 
 			}
@@ -1438,32 +1409,15 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ]
-				}
-,
 				"newobj" : 				{
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ]
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"message" : 				{
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1474,8 +1428,25 @@
 						"autogradient" : 0
 					}
 ,
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"default" : 				{
 					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ]
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"button" : 				{
