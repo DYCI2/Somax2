@@ -27,7 +27,7 @@ class AbstractTransform(StringParsed, ABC):
         """"""
 
     @abstractmethod
-    def rendered_value(self) -> Any:
+    def renderer_info(self) -> Any:
         """ Value sent to renderer describing how to apply the transform to the event if necessary """
 
     @abstractmethod
@@ -66,7 +66,7 @@ class NoTransform(AbstractTransform):
     def valid_features() -> List[Type[AbstractFeature]]:
         return AbstractFeature.classes(include_abstract=True)
 
-    def rendered_value(self) -> Any:
+    def renderer_info(self) -> Any:
         return None
 
     def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
@@ -91,7 +91,7 @@ class RedundantTransform(AbstractTransform):
     def valid_features() -> List[Type[AbstractFeature]]:
         return []
 
-    def rendered_value(self) -> Any:
+    def renderer_info(self) -> Any:
         return None
 
     def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
@@ -115,7 +115,7 @@ class TransposeTransform(AbstractTransform):
     def __repr__(self):
         return f"{self.__class__.__name__}(semitones={self.semitones})"
 
-    def rendered_value(self) -> Any:
+    def renderer_info(self) -> Any:
         return self.semitones
 
     @staticmethod

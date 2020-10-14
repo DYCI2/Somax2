@@ -151,7 +151,7 @@ def test_phasemod_scaleaction_performance():
             start = timer()
             corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
             corresponding_transforms: List[AbstractTransform] = [transform_handler.get_transform(t)
-                                                                 for t in np.unique(peaks.transform_hashes)]
+                                                                 for t in np.unique(peaks.transform_ids)]
             scale_action.scale(peaks, time, corresponding_events, corresponding_transforms)
             results.append(timer() - start)
         avg_scale_time: float = float(np.mean(results))
@@ -185,7 +185,7 @@ def test_nextstate_scaleaction_performance():
             start = timer()
             corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
             corresponding_transforms: List[AbstractTransform] = [transform_handler.get_transform(t)
-                                                                 for t in np.unique(peaks.transform_hashes)]
+                                                                 for t in np.unique(peaks.transform_ids)]
             scale_action.scale(peaks, time, corresponding_events, corresponding_transforms)
             results.append(timer() - start)
         avg_scale_time: float = float(np.mean(results))

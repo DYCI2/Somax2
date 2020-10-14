@@ -64,8 +64,8 @@ class DistanceMergeAction(AbstractMergeAction):
         num_rows: int = int(duration / self._t_width.value)
 
         peaks_list: List[Peaks] = []
-        for transform_hash in np.unique(peaks.transform_hashes):
-            indices: np.ndarray = np.argwhere(peaks.transform_hashes == transform_hash)
+        for transform_hash in np.unique(peaks.transform_ids):
+            indices: np.ndarray = np.argwhere(peaks.transform_ids == transform_hash)
             indices = indices.reshape((indices.size,))
             scores: np.ndarray = peaks.scores[indices]
             times: np.ndarray = peaks.times[indices]
