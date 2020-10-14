@@ -1,7 +1,7 @@
 import copy
 import logging
 from abc import ABC, abstractmethod
-from typing import List, Type, Union
+from typing import List, Type, Union, Any
 
 import numpy as np
 
@@ -25,6 +25,10 @@ class AbstractTransform(StringParsed, ABC):
     @abstractmethod
     def valid_features() -> List[Type[AbstractFeature]]:
         """"""
+
+    @abstractmethod
+    def rendered_value(self) -> Any:
+        """ Value sent to renderer describing how to apply the transform to the event if necessary """
 
     @abstractmethod
     def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
@@ -62,11 +66,39 @@ class NoTransform(AbstractTransform):
     def valid_features() -> List[Type[AbstractFeature]]:
         return AbstractFeature.classes(include_abstract=True)
 
+    def rendered_value(self) -> Any:
+        return None
+
     def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
         return obj
 
     def inverse(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
         return obj
+
+
+class RedundantTransform(AbstractTransform):
+    """ Class for representing transforms removed by the user in the interface while peaks using the transform
+        may still exist in the runtime state. """
+
+    def __init__(self, contained_transform: AbstractTransform):
+        super().__init__()
+        self._contained_transform: AbstractTransform = contained_transform
+
+    def __eq__(self, other):
+        return False
+
+    @staticmethod
+    def valid_features() -> List[Type[AbstractFeature]]:
+        return []
+
+    def rendered_value(self) -> Any:
+        return None
+
+    def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
+        return self._contained_transform.apply(obj, **kwargs)
+
+    def inverse(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
+        return self._contained_transform.inverse(obj, **kwargs)
 
 
 class TransposeTransform(AbstractTransform):
@@ -82,6 +114,9 @@ class TransposeTransform(AbstractTransform):
 
     def __repr__(self):
         return f"{self.__class__.__name__}(semitones={self.semitones})"
+
+    def rendered_value(self) -> Any:
+        return self.semitones
 
     @staticmethod
     def valid_features() -> List[Type[AbstractFeature]]:

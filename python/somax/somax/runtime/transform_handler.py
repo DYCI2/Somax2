@@ -2,7 +2,7 @@ from typing import Dict, List, Type
 
 from somax.features.feature import AbstractFeature
 from somax.runtime.exceptions import TransformError
-from somax.runtime.transforms import AbstractTransform
+from somax.runtime.transforms import AbstractTransform, RedundantTransform
 
 
 class TransformHandler:
@@ -22,12 +22,18 @@ class TransformHandler:
         """ :raises IndexError if key doesn't exist
                     TransformError if attempting to delete last transform
         """
-        if len(self._transforms) <= 1:
+        if self.num_transforms() <= 1:
             raise TransformError("Cannot delete the last transform")
         elif transform not in self._transforms.values():
             raise TransformError("A transform with the given parameters does not exist")
         else:
-            self._transforms = {k: v for (k, v) in self._transforms.items() if v != transform}
+            # self._transforms = {k: v for (k, v) in self._transforms.items() if v != transform}
+            for k, t in self._transforms.items():
+                if t == transform:
+                    self._transforms[k] = RedundantTransform(t)  # flag transform for deletion without removing it
+
+    def num_transforms(self) -> int:
+        return len([t for t in self._transforms.values() if not isinstance(t, RedundantTransform)])
 
     def get_transform(self, transform_id: int) -> AbstractTransform:
         """ :raises IndexError if key doesn't exist """
@@ -41,8 +47,12 @@ class TransformHandler:
     def get_by_feature(self, feature: Type[AbstractFeature]) -> List[AbstractTransform]:
         transforms: List[AbstractTransform] = []
         for transform in self._transforms.values():
-            for transform_feature in transform.valid_features():
-                if issubclass(feature, transform_feature):
-                    transforms.append(transform)
+            if not isinstance(transform, RedundantTransform):
+                for transform_feature in transform.valid_features():
+                    if issubclass(feature, transform_feature):
+                        transforms.append(transform)
         return transforms
         # return [t for t in self._transforms.values() if feature in t.valid_features()]
+
+    def clear(self):
+        self._transforms = {k: t for (k, t) in self._transforms.items() if not isinstance(t, RedundantTransform)}

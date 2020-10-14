@@ -54,7 +54,7 @@ class Player(Streamview, ScheduledMidiObject):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def new_event(self, scheduler_time: float) -> Optional[CorpusEvent]:
+    def new_event(self, scheduler_time: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
         if not self.corpus:
@@ -75,7 +75,7 @@ class Player(Streamview, ScheduledMidiObject):
         self.improvisation_memory.append(event, scheduler_time, transform)
         self._feedback(event, scheduler_time, transform)
         self.previous_peaks = peaks
-        return event
+        return event, transform
 
     def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
         """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError
@@ -106,11 +106,13 @@ class Player(Streamview, ScheduledMidiObject):
         self.feedback(feedback_event, time, applied_transform)
 
     def clear(self):
+        """ Reset runtime state without modifying any parameters or settings """
         self.improvisation_memory = ImprovisationMemory()
         self.previous_peaks = Peaks.create_empty()
         for scale_action in self.scale_actions.values():
             scale_action.clear()
         Streamview.clear(self)
+        self.transform_handler.clear()
 
     def set_corpus(self, corpus: Corpus) -> None:
         self._update_transforms()
@@ -159,7 +161,7 @@ class Player(Streamview, ScheduledMidiObject):
             return peaks
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
         corresponding_transforms: List[AbstractTransform] = [self.transform_handler.get_transform(t)
-                                                             for t in np.unique(peaks.transform_hashes)]
+                                                             for t in np.unique(peaks.transform_ids)]
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled():
                 peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, corresponding_transforms,
