@@ -9,7 +9,6 @@ from somax.runtime.corpus_event import Note
 class TriggerMode(Enum):
     MANUAL = "manual"
     AUTOMATIC = "automatic"
-    ADAPTIVE = "adaptive"
 
     @classmethod
     def default(cls) -> 'TriggerMode':

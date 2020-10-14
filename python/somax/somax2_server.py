@@ -83,8 +83,6 @@ class SomaxStringDispatcher:
 
         if trigger_mode == TriggerMode.AUTOMATIC:
             self.scheduler.add_trigger_event(self.players[player_name])
-        elif trigger_mode == TriggerMode.ADAPTIVE:
-            self.scheduler.add_trigger_event(self.players[player_name])
 
         if corpus:
             self.read_corpus(player_name, corpus)
@@ -92,9 +90,7 @@ class SomaxStringDispatcher:
     def delete_player(self, name: str):
         self.scheduler.delete_trigger(self.players[name])
         try:
-            player: Player = self.players[name]
             del self.players[name]
-            self.scheduler.delete_trigger(player)
             self.logger.info(f"Deleted Player '{name}'.")
         except KeyError:
             self.logger.error(f"A Player with the name '{name}' doesn't exist. No Player was deleted.")
@@ -170,8 +166,7 @@ class SomaxStringDispatcher:
         if not self.scheduler.running:
             return
         try:
-            if self.players[player].trigger_mode == TriggerMode.MANUAL or \
-                    self.players[player].trigger_mode == TriggerMode.ADAPTIVE:
+            if self.players[player].trigger_mode == TriggerMode.MANUAL:
                 self.logger.debug(f"[influence_onset] Influence onset triggered for player '{player}'.")
                 self.scheduler.add_trigger_event(self.players[player])
         except KeyError:
@@ -354,9 +349,7 @@ class SomaxStringDispatcher:
         except KeyError:
             self.logger.error(f"No player named '{player}' exists. Could not set mode.")
             return
-        if trigger_mode == TriggerMode.AUTOMATIC and previous_trigger_mode != TriggerMode.MANUAL:
-            self.scheduler.add_trigger_event(self.players[player])
-        elif trigger_mode == TriggerMode.ADAPTIVE and previous_trigger_mode != TriggerMode.MANUAL:
+        if trigger_mode == TriggerMode.AUTOMATIC and previous_trigger_mode != trigger_mode:
             self.scheduler.add_trigger_event(self.players[player])
         self.logger.debug(f"[trigger_mode]: Trigger mode set to '{trigger_mode}' for player '{player}'.")
 
