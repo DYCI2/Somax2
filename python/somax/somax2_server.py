@@ -91,8 +91,8 @@ class SomaxStringDispatcher:
             self.read_corpus(player_name, corpus)
 
     def delete_player(self, name: str):
-        self.scheduler.delete_trigger(self.players[name])
         try:
+            self.scheduler.delete_trigger(self.players[name])
             del self.players[name]
             self.logger.info(f"Deleted Player '{name}'.")
         except KeyError:

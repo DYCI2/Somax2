@@ -57,6 +57,8 @@ class Player(Streamview, ScheduledMidiObject):
     def new_event(self, scheduler_time: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
+        if not bool(self.enabled.value):
+            return None
         if not self.corpus:
             raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
 
@@ -80,6 +82,8 @@ class Player(Streamview, ScheduledMidiObject):
     def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
         """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError
             Return values are only for gathering statistics (Evaluator, etc.) and not used in runtime."""
+        if not bool(self.enabled.value):
+            return {}
         num_generated_peaks: Dict[Atom, int] = {}
         if not path:
             for atom in self._direct_influenced_atoms():
