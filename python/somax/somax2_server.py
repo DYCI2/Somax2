@@ -58,11 +58,6 @@ class SomaxStringDispatcher:
     def create_player(self, player_name: str, port: int, ip: str = "", trigger_mode: str = "",
                       peak_selector: str = "", merge_action: str = "", corpus: str = "",
                       scale_actions: Tuple[str, ...] = ("",), override: bool = False):
-        if player_name in self.players and not override:
-            self.logger.error(f"A Player with the name '{player_name}' already exists on the Server. "
-                              f"No action was performed. Use 'override=True' to override existing Player.")
-            return
-
         try:
             address: str = self._parse_osc_address(player_name)
             ip: str = self._parse_ip(ip)
@@ -73,6 +68,14 @@ class SomaxStringDispatcher:
         except ValueError as e:
             self.logger.error(f"{str(e)}. No Player was created.")
             return
+
+        if player_name in self.players:
+            if override:
+                self.delete_player(player_name)
+            else:
+                self.logger.error(f"A Player with the name '{player_name}' already exists on the Server. "
+                                  f"No action was performed. Use 'override=True' to override existing Player.")
+                return
 
         target: Target = SimpleOscTarget(address, port, ip)
         self.players[player_name] = Player(name=player_name, target=target, trigger_mode=trigger_mode,
@@ -250,7 +253,7 @@ class SomaxStringDispatcher:
             restart_server: bool = False
             if self.scheduler.running:
                 self.scheduler.flush_held(self.players[player])
-                self.scheduler.stop()
+                self.scheduler.pause()
                 self.reset_influences(player)
                 restart_server = True
 
