@@ -27,7 +27,7 @@ class ScheduledPlayerEvent(ScheduledEvent):
 
 class ScheduledMidiEvent(ScheduledPlayerEvent):
     def __init__(self, trigger_time: float, player: Player, note: int, velocity: int, channel: int, state: int,
-                 applied_transform: Optional[AbstractTransform]):
+                 applied_transform: Optional[AbstractTransform] = None):
         super(ScheduledMidiEvent, self).__init__(trigger_time, player)
         self.note: int = note
         self.velocity: int = velocity

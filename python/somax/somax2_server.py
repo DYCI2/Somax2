@@ -494,15 +494,18 @@ class SomaxServer(SomaxStringDispatcher, Caller):
             parameter_dict[name] = player.max_representation()
         self.target.send_dict(parameter_dict)
 
-    def get_corpus_files(self):
+    def get_corpus_files(self, player: str):
         filepath: str = os.path.join(os.path.dirname(__file__), settings.CORPUS_FOLDER)
         corpora: List[Tuple[str, str]] = []
         for file in os.listdir(filepath):
             if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
                 corpus_name, _ = os.path.splitext(file)  # TODO: Not the corpus name that's specified in the json
                 corpora.append((corpus_name, os.path.join(filepath, file)))
-        for player in self.players.values():
-            player.send_corpora(corpora)
+        try:
+            self.players[player].send_corpora(corpora)
+        except KeyError:
+            self.logger.error(f"No player named '{player}' exists. Could not get corpus files.")
+
 
     def get_player_names(self):
         for player_name in self.players.keys():

@@ -40,6 +40,18 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-17",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 348.0, 635.0, 25.0, 22.0 ],
+					"text" : "iter"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-18",
 					"maxclass" : "button",
 					"numinlets" : 1,
@@ -57,7 +69,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 288.5, 674.041538461538494, 153.0, 22.0 ],
+					"patching_rect" : [ 288.5, 708.041538461538494, 153.0, 22.0 ],
 					"text" : "t b s"
 				}
 
@@ -69,7 +81,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 422.5, 707.222051282051325, 82.0, 22.0 ],
+					"patching_rect" : [ 422.5, 741.222051282051325, 82.0, 22.0 ],
 					"text" : "prepend send"
 				}
 
@@ -81,7 +93,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 288.5, 740.402564102564156, 49.0, 22.0 ],
+					"patching_rect" : [ 288.5, 774.402564102564156, 49.0, 22.0 ],
 					"text" : "forward"
 				}
 
@@ -93,7 +105,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 288.5, 707.222051282051325, 127.0, 22.0 ],
+					"patching_rect" : [ 288.5, 741.222051282051325, 127.0, 22.0 ],
 					"text" : "params reinstantiate 1"
 				}
 
@@ -105,7 +117,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 288.5, 640.861025641025662, 167.0, 22.0 ],
+					"patching_rect" : [ 288.5, 674.861025641025662, 167.0, 22.0 ],
 					"text" : "combine target. p @triggers 1"
 				}
 
@@ -708,7 +720,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
-					"midpoints" : [ 432.0, 740.0, 298.0, 740.0 ],
+					"midpoints" : [ 432.0, 774.0, 298.0, 774.0 ],
 					"source" : [ "obj-14", 0 ]
 				}
 
@@ -724,6 +736,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-14", 0 ],
 					"source" : [ "obj-15", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-77", 1 ],
+					"midpoints" : [ 357.5, 665.430512820512831, 446.0, 665.430512820512831 ],
+					"source" : [ "obj-17", 0 ]
 				}
 
 			}
@@ -885,8 +905,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-77", 1 ],
-					"midpoints" : [ 357.333333333333371, 636.038461538461547, 446.0, 636.038461538461547 ],
+					"destination" : [ "obj-17", 0 ],
+					"midpoints" : [ 357.333333333333371, 636.038461538461547, 357.5, 636.038461538461547 ],
 					"source" : [ "obj-74", 2 ]
 				}
 
@@ -933,14 +953,13 @@
 				"name" : "dUG Yello 01-1",
 				"newobj" : 				{
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"message" : 				{
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -951,12 +970,12 @@
 						"autogradient" : 0
 					}
 ,
+					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ]
 				}
 ,
 				"default" : 				{
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -967,8 +986,9 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"button" : 				{
