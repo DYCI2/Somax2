@@ -40,6 +40,31 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"id" : "obj-102",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 832.125, 630.5, 115.0, 22.0 ],
+					"text" : "r #0_serverstatus"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
+					"id" : "obj-89",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1032.583333333333258, 142.318701344223882, 117.0, 22.0 ],
+					"text" : "s #0_serverstatus"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
 					"id" : "obj-72",
 					"maxclass" : "newobj",
@@ -172,7 +197,7 @@
 					"patching_rect" : [ 1667.0, 265.0, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 253.977781653350007, 292.0, 18.0, 18.0 ],
-					"varname" : "reloadplayernames[1]"
+					"varname" : "terminate"
 				}
 
 			}
@@ -1746,7 +1771,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 1017.25, 90.911797191255232, 67.0, 22.0 ],
+					"patching_rect" : [ 1085.416666666666742, 86.379134229482588, 67.0, 22.0 ],
 					"save" : [ "#N", "thispatcher", ";", "#Q", "end", ";" ],
 					"text" : "thispatcher"
 				}
@@ -1779,11 +1804,11 @@
 				"box" : 				{
 					"id" : "obj-96",
 					"maxclass" : "newobj",
-					"numinlets" : 6,
-					"numoutlets" : 6,
-					"outlettype" : [ "", "", "", "", "", "" ],
-					"patching_rect" : [ 821.25, 56.439567114741294, 264.0, 22.0 ],
-					"text" : "route ip tempo running tempomaster thispatcher"
+					"numinlets" : 7,
+					"numoutlets" : 7,
+					"outlettype" : [ "", "", "", "", "", "", "" ],
+					"patching_rect" : [ 821.25, 56.439567114741294, 333.0, 22.0 ],
+					"text" : "route ip tempo running tempomaster serverstatus thispatcher"
 				}
 
 			}
@@ -1809,7 +1834,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 1099.25, 90.911797191255232, 55.0, 22.0 ],
+					"patching_rect" : [ 1138.25, 114.911797191255232, 55.0, 22.0 ],
 					"text" : "pattrhub"
 				}
 
@@ -1855,13 +1880,13 @@
 						"pollinterval" : [ 50 ],
 						"recvport" : [ 1235 ],
 						"reloadplayernames" : [ 0.0 ],
-						"reloadplayernames[1]" : [ 0.0 ],
 						"sendport" : [ 1234 ],
-						"tempomaster" : [ 0 ]
+						"tempomaster" : [ 0 ],
+						"terminate" : [ 0.0 ]
 					}
 ,
 					"text" : "autopattr",
-					"varname" : "u758008979"
+					"varname" : "u809001213"
 				}
 
 			}
@@ -2431,6 +2456,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-28", 0 ],
 					"source" : [ "obj-10", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-35", 1 ],
+					"source" : [ "obj-102", 0 ]
 				}
 
 			}
@@ -3328,7 +3360,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-100", 0 ],
-					"source" : [ "obj-96", 5 ]
+					"source" : [ "obj-96", 6 ]
 				}
 
 			}
@@ -3362,8 +3394,15 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-93", 0 ],
+					"destination" : [ "obj-89", 0 ],
 					"source" : [ "obj-96", 4 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-93", 0 ],
+					"source" : [ "obj-96", 5 ]
 				}
 
 			}
