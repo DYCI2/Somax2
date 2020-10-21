@@ -4,7 +4,7 @@ from typing import List, Tuple
 from somax.classification.classifier import AbstractClassifier
 from somax.features import TopNote
 from somax.features.feature import AbstractFeature
-from somax.features.pitch_features import RuntimeIntegerPitch, AbstractIntegerPitch
+from somax.features.pitch_features import RuntimeIntegerPitch, AbstractIntegerPitch, VirtualFundamental, BassNote
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import InvalidLabelInput, TransformError
@@ -84,6 +84,7 @@ class TopNoteClassifier(BasicPitchClassifier):
 
 
 class PitchClassClassifier(BasicPitchClassifier):
+    # TODO: Clean up (lots of) code duplication
     """ Classifies an event to its corresponding pitch class (midi number % 12) in range [0, 11].
             Corpus: Uses EventParameter TopNote in range [0, 127]
             Influence: Responds to keyword "pitch" in range [0, 127]. """
@@ -109,24 +110,52 @@ class PitchClassClassifier(BasicPitchClassifier):
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
-# TODO: Update if used
-# class VirtualFundamentalClassifier(BasicPitchClassifier):
-#     """ Classifies an event to its corresponding virtual fundamental in range [0, 11].
-#             Corpus: Uses EventParameter VirtualFundamental in range [128, 139]
-#             Influence: Responds to keyword "pitch" in range [128, 139]. """
-#
-#     def __init__(self):
-#         super().__init__()
-#         raise NotImplementedError("This class is missing important architectural updates and should not be used.")
-#
-#     @staticmethod
-#     def _label_from_corpus_event(event: CorpusEvent) -> IntLabel:
-#         return IntLabel(event.get_trait(VirtualFundamental).value())
-#
-#     @staticmethod
-#     def _label_from_influence_data(pitch: int) -> IntLabel:
-#         return IntLabel(pitch)
-#
-#     @staticmethod
-#     def _trait_from_corpus_event(event: CorpusEvent) -> int:
-#         return event.get_trait(VirtualFundamental).value()
+
+class VirtualFundamentalClassifier(BasicPitchClassifier):
+    """ Classifies an event to its corresponding virtual fundamental in range [0, 11].
+            Corpus: Uses EventParameter VirtualFundamental in range [128, 139]
+            Influence: Responds to keyword "pitch" in range [128, 139]. """
+
+    @staticmethod
+    def _label_from_corpus_event(event: CorpusEvent, transform: AbstractTransform) -> IntLabel:
+        inverse_transformed_label: int = transform.inverse(event.get_feature(VirtualFundamental)).value() % 12
+        return IntLabel(inverse_transformed_label)
+
+    @staticmethod
+    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
+        inverse_transformed_label: int = transform.inverse(pitch).value() % 12
+        return IntLabel(inverse_transformed_label)
+
+    @staticmethod
+    def _trait_from_corpus_event(event: CorpusEvent) -> int:
+        return event.get_feature(VirtualFundamental).value() % 12
+
+    def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
+        """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
+        self._transforms = transform_handler.get_by_feature(AbstractIntegerPitch)
+        if not self._transforms:
+            raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
+        return self._transforms
+
+
+class BassNoteClassifier(BasicPitchClassifier):
+    @staticmethod
+    def _label_from_corpus_event(event: CorpusEvent, transform: AbstractTransform) -> IntLabel:
+        inverse_transformed_label: int = transform.inverse(event.get_feature(BassNote)).value()
+        return IntLabel(inverse_transformed_label)
+
+    @staticmethod
+    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
+        inverse_transformed_label: int = transform.inverse(pitch).value()
+        return IntLabel(inverse_transformed_label)
+
+    @staticmethod
+    def _trait_from_corpus_event(event: CorpusEvent) -> int:
+        return event.get_feature(BassNote).value()
+
+    def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
+        """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
+        self._transforms = transform_handler.get_by_feature(AbstractIntegerPitch)
+        if not self._transforms:
+            raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
+        return self._transforms

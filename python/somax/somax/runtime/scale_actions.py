@@ -4,7 +4,7 @@ from typing import List, Tuple, Optional
 
 import numpy as np
 
-from somax.features import MaxVelocity
+from somax.features import MaxVelocity, VerticalDensity
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import ImprovisationMemory
@@ -208,6 +208,25 @@ class MaxVelocityScaleAction(AbstractGaussianScale):
               _corpus: Corpus = None, **_kwargs) -> Peaks:
         velocities: np.ndarray = np.array([event.get_feature(MaxVelocity).value() for event in corresponding_events])
         return self._scale(peaks, velocities)
+
+    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+        pass
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        pass
+
+
+class VerticalDensityScaleAction(AbstractGaussianScale):
+    DEFAULT_VERTICAL_DENSITY = 4
+
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+              _corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
+              _corpus: Corpus = None, **_kwargs) -> Peaks:
+        densities: np.ndarray = np.array([event.get_feature(VerticalDensity).value() for event in corresponding_events])
+        return self._scale(peaks, densities)
 
     def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
         pass

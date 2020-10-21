@@ -1,5 +1,5 @@
-from .pitch_features import TopNote, AbstractIntegerPitch, RuntimeIntegerPitch
+from .pitch_features import TopNote, AbstractIntegerPitch, RuntimeIntegerPitch, VirtualFundamental, BassNote
 from .chroma_features import ForegroundChroma, BackgroundChroma, OnsetChroma
-from .energy_features import MaxVelocity
+from .energy_features import MaxVelocity, VerticalDensity
 
 
