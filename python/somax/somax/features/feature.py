@@ -5,8 +5,6 @@ from typing import Dict, Any, Type, Tuple, List
 
 import somax.features
 from somax import features
-from somax.corpus_builder.chromagram import Chromagram
-from somax.corpus_builder.spectrogram import Spectrogram
 from somax.utils.introspective import StringParsed, Introspective
 
 
@@ -27,12 +25,18 @@ class AbstractFeature(Introspective, ABC):
 
 
 class CorpusFeature(AbstractFeature, ABC):
+
     @classmethod
     @abstractmethod
-    def analyze(cls, event: 'CorpusEvent', fg_spectrogram: Spectrogram, bg_spectrogram: Spectrogram,
-                fg_chromagram: Chromagram, bg_chromagram: Chromagram, **kwargs):
-        # TODO: Add previous events as optional argument too
+    def analyze(cls, corpus: 'Corpus', **kwargs) -> 'Corpus':
         pass
+
+    # @classmethod
+    # @abstractmethod
+    # def analyze(cls, event: 'CorpusEvent', fg_spectrogram: Spectrogram, bg_spectrogram: Spectrogram,
+    #             fg_chromagram: Chromagram, bg_chromagram: Chromagram, **kwargs):
+    #     # TODO: Add previous events as optional argument too
+    #     pass
 
     @classmethod
     @abstractmethod

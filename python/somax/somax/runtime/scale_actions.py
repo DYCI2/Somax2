@@ -1,10 +1,12 @@
 import logging
 from abc import ABC, abstractmethod
+from collections import deque
 from typing import List, Tuple, Optional
 
 import numpy as np
 
 from somax.features import MaxVelocity, VerticalDensity
+from somax.features.spectral_features import OctaveBands
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import ImprovisationMemory
@@ -141,6 +143,40 @@ class NextStateScaleAction(AbstractScaleAction):
         return self._factor.value
 
 
+class StaticTabooScaleAction(AbstractScaleAction):
+    DEFAULT_TABOO_LENGTH = 10
+
+    def __init__(self, taboo_length: int):
+        super().__init__()
+        self.logger = logging.getLogger(__name__)
+        self._taboo_length: Parameter = Parameter(taboo_length, 1, None, 'int',
+                                                  "Number of events to pass before event can be played again")
+        self._taboo_indices: deque[int] = deque([], self.taboo_length)
+
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
+              corpus: Corpus = None, **kwargs) -> Peaks:
+        event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
+        matching_indices: np.ndarray = np.zeros(len(corresponding_events), dtype=bool)
+        for taboo_index in self._taboo_indices:
+            matching_indices += event_indices == taboo_index
+        peaks.scale(0, matching_indices)
+        return peaks
+
+    def feedback(self, feedback_event: CorpusEvent, _time: float, _applied_transform: AbstractTransform) -> None:
+        self._taboo_indices.append(feedback_event.state_index)
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        self._taboo_indices: deque[int] = deque([], self.taboo_length)
+
+    @property
+    def taboo_length(self):
+        return self._taboo_length.value
+
+
 class BinaryTransformContinuityScaleAction(AbstractScaleAction):
     def __init__(self, factor: float = 0.5):
         super().__init__()
@@ -261,3 +297,36 @@ class DurationScaleAction(AbstractGaussianScale):
 
     def clear(self) -> None:
         pass
+
+
+# TODO: Update so that it takes transforms into account
+class OctaveBandsScaleAction(AbstractScaleAction):
+    DEFAULT_BAND_DISTRIBUTION = np.ones(OctaveBands.NUM_BANDS, dtype=float)
+
+    def __init__(self):
+        super().__init__()
+        self._band_distribution: Parameter = Parameter(OctaveBandsScaleAction.DEFAULT_BAND_DISTRIBUTION, None, None,
+                                                       "list[11]", "TODO")  # TODO
+
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
+              corpus: Corpus = None, **kwargs) -> Peaks:
+        events_band_distribution: np.ndarray = np.array([event.get_feature(OctaveBands)
+                                                         for event in corresponding_events])
+        factor: np.ndarray = np.sqrt(np.sum(np.power(events_band_distribution - self._band_distribution, 2), axis=1))
+        print(factor)  # TODO: THIS SHOULD BE HERE UNTIL PROPERLY DEBUGGED
+        peaks.scale(factor)
+        return peaks
+
+    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+        pass
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass  # TODO: Handle transforms
+
+    def clear(self) -> None:
+        pass
+
+    @property
+    def band_distribution(self):
+        return self._band_distribution.value

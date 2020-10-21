@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 import numpy as np
 
@@ -42,8 +42,10 @@ class Peaks:
         self.times = np.delete(self.times, indices)
         self.transform_ids = np.delete(self.transform_ids, indices)
 
-    def scale(self, factor: float, index_map: Optional[np.ndarray] = None) -> None:
-        """ index_map: boolean array corresponding to the size of self.scores.
+    def scale(self, factor: Union[float, np.ndarray], index_map: Optional[np.ndarray] = None) -> None:
+        """ factor:    single value or np.ndarray of same shape as self.scores
+
+            index_map: boolean array corresponding to the size of self.scores.
                        Uniform scaling if no index map is provided"""
         if index_map is None:
             self.scores *= factor
