@@ -77,7 +77,7 @@ class CorpusBuilder:
         corpus.bg_chromagram = bg_chromagram
         self.logger.debug(f"Corpus {corpus} initialized from slicing note matrix.")
 
-        for _, event_param in CorpusBuilder.all_event_parameters():
+        for _, event_param in CorpusFeature.all_corpus_features():
             corpus.analyze(event_param, **kwargs)
 
         self.logger.debug(f"Analysis of Corpus {corpus} was completed.")
@@ -127,8 +127,3 @@ class CorpusBuilder:
 
         return Corpus(events, name, ContentType.MIDI, build_parameters=build_parameters)
 
-    @staticmethod
-    def all_event_parameters() -> List[Tuple[str, Type[CorpusFeature]]]:
-        return inspect.getmembers(features, lambda m: inspect.isclass(m)
-                                                      and not inspect.isabstract(m)
-                                                      and issubclass(m, CorpusFeature))

@@ -1,8 +1,10 @@
 import importlib
+import inspect
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Type, Tuple, List
 
 import somax.features
+from somax import features
 from somax.corpus_builder.chromagram import Chromagram
 from somax.corpus_builder.spectrogram import Spectrogram
 from somax.utils.introspective import StringParsed, Introspective
@@ -41,12 +43,22 @@ class CorpusFeature(AbstractFeature, ABC):
     def encode(self) -> Dict[str, Any]:
         """ TODO docstring """
 
+    @classmethod
+    def classpath(cls) -> str:
+        return cls.__module__ + "." + cls.__name__
+
     @staticmethod
-    def from_json(trait_key: str, trait_values: Dict[str, Any]) -> Tuple[Type['CorpusFeature'], 'CorpusFeature']:
+    def from_json(classpath: str, feature_kwargs: Dict[str, Any]) -> Tuple[Type['CorpusFeature'], 'CorpusFeature']:
         """ Raises: KeyError, AttributeError"""
-        module_name, class_name = trait_key.rsplit(".", 1)
+        module_name, class_name = classpath.rsplit(".", 1)
         cls: Type[CorpusFeature] = getattr(importlib.import_module(module_name), class_name)
-        return cls, cls.decode(trait_values)
+        return cls, cls.decode(feature_kwargs)
+
+    @staticmethod
+    def all_corpus_features() -> List[Tuple[str, Type['CorpusFeature']]]:
+        return inspect.getmembers(features, lambda m: inspect.isclass(m)
+                                                      and not inspect.isabstract(m)
+                                                      and issubclass(m, CorpusFeature))
 
 
 class RuntimeFeature(AbstractFeature, StringParsed, ABC):

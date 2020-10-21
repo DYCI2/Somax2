@@ -71,7 +71,9 @@ class Corpus:
             content_type: ContentType = ContentType(corpus_data["content_type"])
 
             build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
-            events: List[CorpusEvent] = [CorpusEvent.decode(event_dict) for event_dict in corpus_data["events"]]
+            features_dict: Dict[str, str] = corpus_data["features_dict"]
+            events: List[CorpusEvent] = [CorpusEvent.decode(event_dict, features_dict)
+                                         for event_dict in corpus_data["events"]]
             return cls(events, name, content_type, build_parameters)
 
         # KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)
@@ -91,13 +93,18 @@ class Corpus:
         return filepath
 
     def encode(self) -> Dict[str, Any]:
+        features: Dict[Type['CorpusFeature'], str] = {cls: name for (name, cls) in CorpusFeature.all_corpus_features()}
+        if len(set(features.keys())) < len(features.keys()):
+            self.logger.warning("Two features with the same name exist in the library. Built corpus may not be properly"
+                                " constructed. Ensure that no two CorpusFeatures in the library have the same name.")
         return {"name": self.name,
                 "content_type": self.content_type.value,
                 "version": somax.__version__,
                 "build_parameters": self._build_parameters,
+                "features_dict": {name: feature.classpath() for (feature, name) in features.items()},
                 "length": self.length(),
                 "duration": self.duration(),
-                "events": [event.encode() for event in self.events]
+                "events": [event.encode(features_dict=features) for event in self.events]
                 }
 
     def analyze(self, event_parameter: Type[CorpusFeature], **kwargs):

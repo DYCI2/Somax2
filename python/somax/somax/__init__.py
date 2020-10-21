@@ -1,3 +1,3 @@
 """Top-level package for Somax."""
 
-__version__ = '2.1b1'
+__version__ = '2.2b3'

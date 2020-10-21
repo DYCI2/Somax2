@@ -74,7 +74,7 @@ class Note:
 class CorpusEvent:
     def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float,
                  duration: Optional[float] = None, absolute_duration: Optional[float] = None,
-                 notes: Optional[List[Note]] = None, traits: Optional[Dict[Type[CorpusFeature], CorpusFeature]] = None):
+                 notes: Optional[List[Note]] = None, features: Optional[Dict[Type[CorpusFeature], CorpusFeature]] = None):
         self.logger = logging.getLogger(__name__)
         self.state_index: int = state_index
         self.tempo: float = tempo
@@ -85,12 +85,12 @@ class CorpusEvent:
         self.absolute_duration: Optional[float] = absolute_duration
 
         self.notes: List[Note] = notes if notes else []
-        self.features: Dict[Type[CorpusFeature], CorpusFeature] = traits if traits else {}
+        self.features: Dict[Type[CorpusFeature], CorpusFeature] = features if features else {}
 
         # self._labels = {}  # {ClassVar[AbstractLabel]: AbstractLabel}, precompiled for performance
 
     @classmethod
-    def decode(cls, event_dict: Dict[str, Any]) -> 'CorpusEvent':
+    def decode(cls, event_dict: Dict[str, Any], classpath_dict: Dict[str, str]) -> 'CorpusEvent':
         """ Raises: KeyError, AttributeError"""
         return CorpusEvent(state_index=event_dict["state_index"],
                            tempo=event_dict["tempo"],
@@ -99,7 +99,8 @@ class CorpusEvent:
                            duration=event_dict["duration"],
                            absolute_duration=event_dict["absolute_duration"],
                            notes=[Note.from_json(note_dict) for note_dict in event_dict["notes"]],
-                           traits=dict([CorpusFeature.from_json(k, v) for (k, v) in event_dict["features"].items()])
+                           features=dict([CorpusFeature.from_json(classpath_dict[k], v)
+                                          for (k, v) in event_dict["features"].items()])
                            )
 
     @classmethod
@@ -136,7 +137,7 @@ class CorpusEvent:
     def held_from(self) -> [Note]:
         return [note for note in self.notes if note.onset + note.duration > self.duration]
 
-    def encode(self) -> Dict[str, Any]:
+    def encode(self, features_dict: Dict[Type['CorpusFeature'], str]) -> Dict[str, Any]:
         return {"state_index": self.state_index,
                 "tempo": self.tempo,
                 "onset": self.onset,
@@ -144,6 +145,6 @@ class CorpusEvent:
                 "duration": self.duration,
                 "absolute_duration": self.absolute_duration,
                 "notes": [note.encode() for note in self.notes],
-                "features": {cls.__module__ + "." + cls.__name__: obj for (cls, obj) in self.features.items()}
+                "features": {features_dict[cls]: obj for (cls, obj) in self.features.items()}
                 }
         # : Dict[Type[AbstractTrait], AbstractTrait] = event_parameters if event_parameters else {}

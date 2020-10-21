@@ -39,7 +39,7 @@ class AbstractScaleAction(Parametric, StringParsed, ABC):
 
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractScaleAction':
-        raise ValueError(f"No default Merge Action exists.")
+        return NoScaleAction()
 
     @classmethod
     def default_set(cls, **_kwargs) -> Tuple['AbstractScaleAction']:
@@ -51,6 +51,25 @@ class AbstractScaleAction(Parametric, StringParsed, ABC):
 
     def is_enabled(self):
         return self.enabled.value
+
+
+class NoScaleAction(AbstractScaleAction):
+    def __init__(self):
+        super().__init__()
+
+    def scale(self, peaks: Peaks, _time: float, _corresponding_events: List[CorpusEvent],
+              _corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
+              _corpus: Corpus = None, **_kwargs) -> Peaks:
+        return peaks
+
+    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+        pass
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        pass
 
 
 class PhaseModulationScaleAction(AbstractScaleAction):
@@ -143,7 +162,6 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
             not_matching: np.ndarray = peak_transform_ids != previous_transform_id
             peaks.scale(self.factor, not_matching)
             return peaks
-
 
     def feedback(self, _feedback_event: CorpusEvent, _time: float, applied_transform: AbstractTransform) -> None:
         self._previous_transform = applied_transform

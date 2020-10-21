@@ -226,3 +226,8 @@ dmypy.json
 
 python/somax/corpus/_*.json
 python/somax/log/*.log
+tmp.py
+tmp2.py
+tmp3.py
+tmp4.py
+python/somax/temp
