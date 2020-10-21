@@ -124,12 +124,12 @@ class CorpusEvent:
         self.notes.extend([Note.relative_to(n, parent_onset, self.onset, parent_abs_onset, self.absolute_onset)
                            for n in notes])
 
-    def set_feature(self, trait: CorpusFeature):
-        self.features[type(trait)] = trait
+    def set_feature(self, feature: CorpusFeature):
+        self.features[type(feature)] = feature
 
-    def get_feature(self, trait_type: Type[CorpusFeature]) -> CorpusFeature:
+    def get_feature(self, feature_type: Type[CorpusFeature]) -> CorpusFeature:
         """Raises KeyError"""
-        return self.features[trait_type]
+        return self.features[feature_type]
 
     def held_to(self) -> [Note]:
         return [note for note in self.notes if note.onset < 0.0]

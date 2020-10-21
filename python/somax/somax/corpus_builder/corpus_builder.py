@@ -77,8 +77,8 @@ class CorpusBuilder:
         corpus.bg_chromagram = bg_chromagram
         self.logger.debug(f"Corpus {corpus} initialized from slicing note matrix.")
 
-        for _, event_param in CorpusFeature.all_corpus_features():
-            corpus.analyze(event_param, **kwargs)
+        for _, feature in CorpusFeature.all_corpus_features():
+            corpus = feature.analyze(corpus, **kwargs)
 
         self.logger.debug(f"Analysis of Corpus {corpus} was completed.")
 

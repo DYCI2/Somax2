@@ -222,11 +222,36 @@ class MaxVelocityScaleAction(AbstractGaussianScale):
 class VerticalDensityScaleAction(AbstractGaussianScale):
     DEFAULT_VERTICAL_DENSITY = 4
 
+    def __init__(self):
+        super().__init__(mu=VerticalDensityScaleAction.DEFAULT_VERTICAL_DENSITY)
+
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
               _corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
               _corpus: Corpus = None, **_kwargs) -> Peaks:
         densities: np.ndarray = np.array([event.get_feature(VerticalDensity).value() for event in corresponding_events])
         return self._scale(peaks, densities)
+
+    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+        pass
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        pass
+
+
+class DurationScaleAction(AbstractGaussianScale):
+    DEFAULT_DURATION = 1.0
+
+    def __init__(self):
+        super().__init__(mu=DurationScaleAction.DEFAULT_DURATION)
+
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
+              corpus: Corpus = None, **kwargs) -> Peaks:
+        durations: np.ndarray = np.array([event.duration for event in corresponding_events])
+        return self._scale(peaks, durations)
 
     def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
         pass

@@ -4,8 +4,8 @@ from typing import Dict, Any
 import numpy as np
 
 from somax.corpus_builder.chromagram import Chromagram
-from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature, RuntimeFeature
+from somax.runtime.corpus import Corpus
 
 
 class OnsetChroma(CorpusFeature, RuntimeFeature, ABC):
@@ -25,9 +25,16 @@ class OnsetChroma(CorpusFeature, RuntimeFeature, ABC):
 
 class BackgroundChroma(OnsetChroma):
     @classmethod
-    def analyze(cls, event: 'CorpusEvent', _fg_spectrogram: Spectrogram, _bg_spectrogram: Spectrogram,
-                _fg_chromagram: Chromagram, bg_chromagram: Chromagram, **_kwargs):
-        return cls(bg_chromagram.at(event.absolute_onset))
+    def analyze(cls, corpus: 'Corpus', **kwargs) -> 'Corpus':
+        bg_chromagram: Chromagram = corpus.bg_chromagram
+        for event in corpus.events:
+            event.set_feature(cls(bg_chromagram.at(event.absolute_onset)))
+        return corpus
+
+    # @classmethod
+    # def analyze(cls, event: 'CorpusEvent', _fg_spectrogram: Spectrogram, _bg_spectrogram: Spectrogram,
+    #             _fg_chromagram: Chromagram, bg_chromagram: Chromagram, **_kwargs):
+    #     return cls(bg_chromagram.at(event.absolute_onset))
 
     @staticmethod
     def keyword() -> str:
@@ -36,9 +43,16 @@ class BackgroundChroma(OnsetChroma):
 
 class ForegroundChroma(OnsetChroma):
     @classmethod
-    def analyze(cls, event: 'CorpusEvent', _fg_spectrogram: Spectrogram, _bg_spectrogram: Spectrogram,
-                fg_chromagram: Chromagram, _bg_chromagram: Chromagram, **_kwargs):
-        return cls(fg_chromagram.at(event.absolute_onset))
+    def analyze(cls, corpus: 'Corpus', **kwargs) -> 'Corpus':
+        fg_chromagram: Chromagram = corpus.fg_chromagram
+        for event in corpus.events:
+            event.set_feature(cls(fg_chromagram.at(event.absolute_onset)))
+        return corpus
+
+    # @classmethod
+    # def analyze(cls, event: 'CorpusEvent', _fg_spectrogram: Spectrogram, _bg_spectrogram: Spectrogram,
+    #             fg_chromagram: Chromagram, _bg_chromagram: Chromagram, **_kwargs):
+    #     return cls(fg_chromagram.at(event.absolute_onset))
 
     @staticmethod
     def keyword() -> str:
