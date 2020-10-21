@@ -4,6 +4,7 @@ from typing import List, Tuple, Optional
 
 import numpy as np
 
+from somax.features import MaxVelocity
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import ImprovisationMemory
@@ -175,3 +176,44 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
     @property
     def factor(self):
         return self._factor.value
+
+
+class AbstractGaussianScale(AbstractScaleAction, ABC):
+    def __init__(self, mu: float = 0.0, sigma: float = 1.0):
+        super().__init__()
+        self._mu: Parameter = Parameter(mu, None, None, 'float', "Mean value of gaussian.")
+        self._sigma: Parameter = Parameter(sigma, None, None, 'float', "Standard deviation of gaussian")
+
+    def _scale(self, peaks: Peaks, corresponding_features: np.ndarray) -> Peaks:
+        peaks.scores *= np.exp(-((corresponding_features - self.mu) ** 2 / (2 * self.sigma ** 2)))
+        return peaks
+
+    @property
+    def mu(self):
+        return self._mu.value
+
+    @property
+    def sigma(self):
+        return self._sigma.value
+
+
+class MaxVelocityScaleAction(AbstractGaussianScale):
+    DEFAULT_VELOCITY = 0.5
+
+    def __init__(self):
+        super().__init__(mu=MaxVelocityScaleAction.DEFAULT_VELOCITY)
+
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+              _corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
+              _corpus: Corpus = None, **_kwargs) -> Peaks:
+        velocities: np.ndarray = np.array([event.get_feature(MaxVelocity).value() for event in corresponding_events])
+        return self._scale(peaks, velocities)
+
+    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+        pass
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        pass
