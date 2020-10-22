@@ -142,6 +142,7 @@ class Player(Streamview, ScheduledMidiObject):
     def remove_scale_action(self, scale_action_type: Type[AbstractScaleAction]):
         """ Raises: KeyError """
         del self.scale_actions[scale_action_type]
+        del self.parameter_dict[scale_action_type.__name__]
 
     def add_transform(self, transform: AbstractTransform):
         """ :raises TransformError if a transform of the same instance with the same parameters already exists """

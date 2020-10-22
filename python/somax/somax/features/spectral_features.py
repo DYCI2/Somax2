@@ -16,7 +16,7 @@ class OctaveBands(CorpusFeature):
     def analyze(cls, corpus: 'Corpus', **kwargs) -> 'Corpus':
         for event in corpus.events:
             band_distribution: np.ndarray = np.zeros(OctaveBands.NUM_BANDS, dtype=float)
-            octaves: List[int] = [note.pitch // 12 for note in event.notes]
+            octaves: List[int] = [int(note.pitch // 12) for note in event.notes]
             for octave in octaves:
                 band_distribution[octave] += 1.0
             max_val: float = np.max(band_distribution)
@@ -30,7 +30,7 @@ class OctaveBands(CorpusFeature):
         return cls(value=trait_dict["band"])
 
     def encode(self) -> Dict[str, Any]:
-        return {"band": self._value}
+        return {"band": self._value.tolist()}
 
     def value(self) -> np.ndarray:
         return self._value

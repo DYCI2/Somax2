@@ -110,7 +110,9 @@ class PhaseModulationScaleAction(AbstractScaleAction):
 
 
 class NextStateScaleAction(AbstractScaleAction):
-    def __init__(self, factor: float = 1.5):
+    DEFAULT_FACTOR = 1.5
+
+    def __init__(self, factor: float = DEFAULT_FACTOR):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"[__init__] Creating {type(self).__name__} with factor {factor}.")
@@ -146,7 +148,7 @@ class NextStateScaleAction(AbstractScaleAction):
 class StaticTabooScaleAction(AbstractScaleAction):
     DEFAULT_TABOO_LENGTH = 10
 
-    def __init__(self, taboo_length: int):
+    def __init__(self, taboo_length: int = DEFAULT_TABOO_LENGTH):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self._taboo_length: Parameter = Parameter(taboo_length, 1, None, 'int',
@@ -174,11 +176,13 @@ class StaticTabooScaleAction(AbstractScaleAction):
 
     @property
     def taboo_length(self):
-        return self._taboo_length.value
+        return int(self._taboo_length.value)
 
 
 class BinaryTransformContinuityScaleAction(AbstractScaleAction):
-    def __init__(self, factor: float = 0.5):
+    DEFAULT_FACTOR = 0.5
+
+    def __init__(self, factor: float = DEFAULT_FACTOR):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self._factor: Parameter = Parameter(factor, 0.0, None, 'float',
@@ -236,8 +240,8 @@ class AbstractGaussianScale(AbstractScaleAction, ABC):
 class MaxVelocityScaleAction(AbstractGaussianScale):
     DEFAULT_VELOCITY = 0.5
 
-    def __init__(self):
-        super().__init__(mu=MaxVelocityScaleAction.DEFAULT_VELOCITY)
+    def __init__(self, mu: float = DEFAULT_VELOCITY):
+        super().__init__(mu=mu)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
               _corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
@@ -258,8 +262,8 @@ class MaxVelocityScaleAction(AbstractGaussianScale):
 class VerticalDensityScaleAction(AbstractGaussianScale):
     DEFAULT_VERTICAL_DENSITY = 4
 
-    def __init__(self):
-        super().__init__(mu=VerticalDensityScaleAction.DEFAULT_VERTICAL_DENSITY)
+    def __init__(self, mu: float = DEFAULT_VERTICAL_DENSITY):
+        super().__init__(mu=mu)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
               _corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
@@ -280,8 +284,8 @@ class VerticalDensityScaleAction(AbstractGaussianScale):
 class DurationScaleAction(AbstractGaussianScale):
     DEFAULT_DURATION = 1.0
 
-    def __init__(self):
-        super().__init__(mu=DurationScaleAction.DEFAULT_DURATION)
+    def __init__(self, mu: float = DEFAULT_DURATION):
+        super().__init__(mu=mu)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
               corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
@@ -311,10 +315,10 @@ class OctaveBandsScaleAction(AbstractScaleAction):
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
               corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
               corpus: Corpus = None, **kwargs) -> Peaks:
-        events_band_distribution: np.ndarray = np.array([event.get_feature(OctaveBands)
+        events_band_distribution: np.ndarray = np.array([event.get_feature(OctaveBands).value()
                                                          for event in corresponding_events])
-        factor: np.ndarray = np.sqrt(np.sum(np.power(events_band_distribution - self._band_distribution, 2), axis=1))
-        print(factor)  # TODO: THIS SHOULD BE HERE UNTIL PROPERLY DEBUGGED
+        factor: np.ndarray = np.sqrt(np.sum(np.power(events_band_distribution - self.band_distribution, 2), axis=1))
+        print(np.min(factor), np.max(factor), factor.shape)  # TODO: THIS SHOULD BE HERE UNTIL PROPERLY DEBUGGED
         peaks.scale(factor)
         return peaks
 

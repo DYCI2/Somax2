@@ -104,7 +104,7 @@ class ThresholdPeakSelector(AbstractPeakSelector):
         if max_peak_value < self.threshold:
             return None
         else:
-            max_peaks_idx: List[int] = np.argwhere(peaks.scores == max_peak_value)
+            max_peaks_idx: List[int] = np.argwhere(np.abs(peaks.scores - max_peak_value) < 0.001)
             peak_idx: int = random.choice(max_peaks_idx)
             transform_hash: int = int(peaks.transform_ids[peak_idx])
             return corpus.event_around(peaks.times[peak_idx]), transform_handler.get_transform(transform_hash)

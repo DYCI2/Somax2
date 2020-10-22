@@ -218,13 +218,13 @@ class SomaxStringDispatcher:
         except TransformError as e:
             self.logger.error(f"{str(e)}. No transform was added.")
         except TypeError as e:
-            self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was added.")
+            self.logger.error(
+                f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was added.")
 
     def remove_transform(self, player: str, transform: str, **kwargs):
         try:
             transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)
             self.players[player].remove_transform(transform)
-            self.logger.info(f"Successfully removed transform {transform} from player '{player}'.")
         except KeyError:
             self.logger.error(f"No player with the name '{player}' exists. No transform was removed.")
         except IndexError as e:
@@ -232,7 +232,28 @@ class SomaxStringDispatcher:
         except TransformError as e:
             self.logger.error(f"{str(e)}. No transform was removed.")
         except TypeError as e:
-            self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was removed.")
+            self.logger.error(
+                f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was removed.")
+
+    def add_scale_action(self, player: str, scale_action: str, override: bool = False, **kwargs):
+        try:
+            scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
+            self.players[player].add_scale_action(scale_action, override)
+            self.logger.info(f"Added scale action {repr(scale_action)}") # TODO:REMOVE TEMP
+        except KeyError:
+            self.logger.error(f"No player with the name '{player}' exists. No scale action was added.")
+        except ValueError as e:
+            self.logger.error(f"{str(e)}. No scale action was added.")
+        except DuplicateKeyError as e:
+            self.logger.error(f"{str(e)}. No scale action was added.")
+
+    def remove_scale_action(self, player: str, scale_action: str, **kwargs):
+        try:
+            scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
+            self.players[player].remove_scale_action(type(scale_action))
+            self.logger.info(f"Removed scale action {repr(scale_action)}")  # TODO:REMOVE TEMP
+        except KeyError as e:
+            self.logger.error(f"Could not remove scale action: {repr(e)}.")
 
     def read_corpus(self, player: str, filepath: str, volatile: bool = False):
         self.logger.info(f"Reading Corpus at '{filepath}' for Player '{player}'...")
@@ -268,8 +289,8 @@ class SomaxStringDispatcher:
             self.logger.error(f"{str(e)}. No Corpus was read.")
 
     def set_param(self, player: str, path: str, value: Any):
-        self.logger.debug(f"[set_param] Setting parameter for player '{player}' at '{path}' "
-                          f"to {value} (type={type(value)}).")
+        self.logger.debug(f"[set_param] Attempting to set parameter for player '{player}' at '{path}' "
+                          f"to {value} (type={type(value)})...")
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             self.players[player].set_param(path_and_name, value)
@@ -508,7 +529,6 @@ class SomaxServer(SomaxStringDispatcher, Caller):
             self.players[player].send_corpora(corpora)
         except KeyError:
             self.logger.error(f"No player named '{player}' exists. Could not get corpus files.")
-
 
     def get_player_names(self):
         for player_name in self.players.keys():
