@@ -1,6 +1,6 @@
 import logging
 from abc import abstractmethod, ABC
-from typing import List
+from typing import List, Optional
 
 import numpy as np
 from scipy import sparse
@@ -93,7 +93,7 @@ class DistanceMergeAction(AbstractMergeAction):
         self.logger.debug(f"[merge] Merge successful. Number of peaks after merge: {merged_peaks.size()}.")
         return merged_peaks
 
-    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float, applied_transform: AbstractTransform) -> None:
         pass
 
     def clear(self) -> None:

@@ -482,11 +482,12 @@ class SomaxServer(SomaxStringDispatcher, Caller):
         await self.scheduler.init_async_loop()  # Start scheduler and run until termination of application
         transport.close()
 
-    def exit(self):
+    def exit(self, print_exit_message: bool = True):
         self.scheduler.terminate()
         self.clear_all()
-        self.logger.info("Somax Server was successfully terminated.")
         self.target.send(SendProtocol.SCHEDULER_RESET_UI, Target.WRAPPED_BANG)
+        if print_exit_message:
+            self.logger.info("Somax Server was successfully terminated.")
 
     def __process_osc(self, _address, *args):
         args_str: str = MaxFormatter.format_as_string(*args)
@@ -619,3 +620,8 @@ if __name__ == "__main__":
         logging.getLogger(__name__).error(f"Server could not be started. In most cases, this indicates that a server"
                                           f"already is running on the OSC address. Error message: {repr(e)}.")
         sys.exit(0)
+    except Exception:
+        somax_server.exit(print_exit_message=False)
+        somax_server.logger.critical("Server terminated from an uncaught exception")
+        raise
+

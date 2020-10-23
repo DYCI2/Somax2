@@ -36,7 +36,8 @@ class AbstractPeakSelector(Parametric, StringParsed, ABC):
         """ Action to perform if no valid peak exists after calling `_decide_default`"""
 
     @abstractmethod
-    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
         """ """
 
     @classmethod
@@ -64,10 +65,11 @@ class MaxPeakSelector(AbstractPeakSelector):
                         corpus: Corpus, transform_handler: TransformHandler,
                         **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.logger.debug("[decide] _decide_default called.")
-        if peaks.empty():
+        if peaks.is_empty():
             return None
         max_peak_value: float = np.max(peaks.scores)
-        max_peaks_idx: List[int] = np.argwhere(peaks.scores == max_peak_value)
+        self.logger.debug(f"[decide_default] Max peak value is {max_peak_value}.")
+        max_peaks_idx: List[int] = np.argwhere(np.abs(peaks.scores - max_peak_value) < 0.001)
         peak_idx: int = random.choice(max_peaks_idx)
         transform_hash: int = int(peaks.transform_ids[peak_idx])
         return corpus.event_around(peaks.times[peak_idx]), transform_handler.get_transform(transform_hash)
@@ -84,7 +86,8 @@ class MaxPeakSelector(AbstractPeakSelector):
             # If memory is empty: play the first event in the corpus
             return corpus.event_at(0), NoTransform()
 
-    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
         pass
 
 
@@ -98,7 +101,7 @@ class ThresholdPeakSelector(AbstractPeakSelector):
     def _decide_default(self, peaks: Peaks, influence_history: ImprovisationMemory,
                         corpus: Corpus, transform_handler: TransformHandler,
                         **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
-        if peaks.empty():
+        if peaks.is_empty():
             return None
         max_peak_value: float = np.max(peaks.scores)
         if max_peak_value < self.threshold:
@@ -114,7 +117,8 @@ class ThresholdPeakSelector(AbstractPeakSelector):
                          **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         return None
 
-    def feedback(self, _feedback_event: CorpusEvent, _time: float, _applied_transform: AbstractTransform) -> None:
+    def feedback(self, _feedback_event: Optional[CorpusEvent], _time: float,
+                 _applied_transform: AbstractTransform) -> None:
         pass
 
     @property

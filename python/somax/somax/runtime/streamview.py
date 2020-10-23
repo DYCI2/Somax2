@@ -79,7 +79,7 @@ class Streamview(Parametric):
     # MODIFY STATE
     ######################################################
 
-    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float, applied_transform: AbstractTransform) -> None:
         self.merge_action.feedback(feedback_event, time, applied_transform)
         for streamview in self.streamviews.values():
             streamview.feedback(feedback_event, time, applied_transform)

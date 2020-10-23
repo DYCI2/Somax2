@@ -15,7 +15,7 @@ from somax.runtime.peaks import Peaks
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
-from somax.runtime.transforms import AbstractTransform
+from somax.runtime.transforms import AbstractTransform, NoTransform
 from somax.runtime.transform_handler import TransformHandler
 from somax.scheduler.scheduled_object import ScheduledMidiObject, TriggerMode
 import numpy as np
@@ -70,6 +70,7 @@ class Player(Streamview, ScheduledMidiObject):
         event_and_transform = self.peak_selector.decide(peaks, self.improvisation_memory,
                                                         self.corpus, self.transform_handler)
         if event_and_transform is None:
+            self._feedback(None, scheduler_time, NoTransform())
             return None
         event, transform = event_and_transform
         event = transform.apply(event)      # returns deepcopy of transformed event
@@ -103,7 +104,7 @@ class Player(Streamview, ScheduledMidiObject):
     # MODIFY STATE
     ######################################################
 
-    def _feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+    def _feedback(self, feedback_event: Optional[CorpusEvent], time: float, applied_transform: AbstractTransform) -> None:
         self.peak_selector.feedback(feedback_event, time, applied_transform)
         for scale_action in self.scale_actions.values():
             scale_action.feedback(feedback_event, time, applied_transform)
@@ -162,7 +163,7 @@ class Player(Streamview, ScheduledMidiObject):
 
     def _scale_peaks(self, peaks: Peaks, scheduler_time: float, influence_history: ImprovisationMemory,
                      corpus: Corpus, **kwargs):
-        if peaks.empty():
+        if peaks.is_empty():
             return peaks
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
         corresponding_transforms: List[AbstractTransform] = [self.transform_handler.get_transform(t)

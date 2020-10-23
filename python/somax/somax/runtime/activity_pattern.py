@@ -146,7 +146,7 @@ class DiscreteActivityPattern(AbstractActivityPattern):
         self._peaks.append(scores, times, transform_hashes)
 
     def update_peaks_on_influence(self, _new_time: float) -> None:
-        if not self._peaks.empty():
+        if not self._peaks.is_empty():
             self._peaks.scores *= np.exp(-np.divide(1, self.tau_mem_decay.value))
             self._peaks.times += [self.corpus.event_at(i).duration for i in self._event_indices]
             self._event_indices += 1
@@ -203,7 +203,7 @@ class ManualActivityPattern(AbstractActivityPattern):
         self._peaks.append(scores, times, transform_hashes)
 
     def _update_peaks(self, new_time: float) -> None:
-        if not self._peaks.empty() and new_time - self.last_update_time >= self.DEFAULT_THRESHOLD_TICKS:
+        if not self._peaks.is_empty() and new_time - self.last_update_time >= self.DEFAULT_THRESHOLD_TICKS:
             self._peaks.scores *= np.exp(-np.divide(1, self.tau_mem_decay.value))
             # self._peaks.times += [self.corpus.event_at(i).duration for i in self._event_indices]
             self._peaks.times = np.array([self.corpus.event_at((i + 1) % self.corpus.length()).onset

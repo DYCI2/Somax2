@@ -26,6 +26,8 @@ class Peaks:
 
     @classmethod
     def concatenate(cls, peaks: List['Peaks']):
+        if not peaks:
+            return Peaks.create_empty()
         scores: np.ndarray = np.concatenate([peak.scores for peak in peaks])
         times: np.ndarray = np.concatenate([peak.times for peak in peaks])
         transform_hashes: np.ndarray = np.concatenate([peak.transform_ids for peak in peaks])
@@ -60,7 +62,7 @@ class Peaks:
         self.times = self.times[indices]
         self.transform_ids = self.transform_ids[indices]
 
-    def empty(self) -> bool:
+    def is_empty(self) -> bool:
         return self.scores.size == 0
 
     def dump(self) -> (np.ndarray, np.ndarray, np.ndarray):
