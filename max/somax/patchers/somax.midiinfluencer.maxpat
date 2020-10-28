@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 5,
+			"revision" : 7,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 955.0, 730.0 ],
+		"rect" : [ 34.0, 79.0, 1457.0, 891.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,18 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-158",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "int", "int" ],
+					"patching_rect" : [ 664.527875999998514, 856.0, 57.0, 22.0 ],
+					"text" : "minimum"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-211",
 					"maxclass" : "newobj",
@@ -70,7 +82,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1310.5, 988.0, 32.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "start"
 				}
 
@@ -850,7 +861,7 @@
 					"bgfillcolor_type" : "color",
 					"fontface" : 1,
 					"id" : "obj-33",
-					"items" : [ "Virtual fundamental", ",", "Top note" ],
+					"items" : [ "Virtual fundamental", ",", "Top note", ",", "Bass note" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -2164,7 +2175,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 5,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3075,7 +3086,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 713.0, 856.0, 29.5, 22.0 ],
+					"patching_rect" : [ 750.25, 856.0, 29.5, 22.0 ],
 					"text" : "$1"
 				}
 
@@ -3537,7 +3548,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 5,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3925,7 +3936,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 5,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -4366,10 +4377,10 @@
 					"id" : "obj-25",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 410.5, 824.0, 251.0, 22.0 ],
-					"text" : "gate 2"
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 410.5, 824.0, 273.027875999998514, 22.0 ],
+					"text" : "gate 3"
 				}
 
 			}
@@ -4420,7 +4431,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
-					"patching_rect" : [ 642.5, 869.0, 61.0, 22.0 ],
+					"patching_rect" : [ 601.527875999998514, 856.0, 61.0, 22.0 ],
 					"text" : "maximum"
 				}
 
@@ -4566,7 +4577,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 5,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -5231,9 +5242,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-184", 0 ],
-					"source" : [ "obj-119", 0 ],
-					"watchpoint_flags" : 1,
-					"watchpoint_id" : 5
+					"source" : [ "obj-119", 0 ]
 				}
 
 			}
@@ -5263,7 +5272,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-173", 0 ],
-					"midpoints" : [ 652.0, 968.0, 420.0, 968.0 ],
+					"midpoints" : [ 611.027875999998514, 968.0, 420.0, 968.0 ],
 					"source" : [ "obj-14", 0 ]
 				}
 
@@ -5344,6 +5353,14 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-173", 0 ],
+					"midpoints" : [ 674.027875999998514, 969.0, 420.0, 969.0 ],
+					"source" : [ "obj-158", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-59", 0 ],
 					"midpoints" : [ 494.801892999998245, 467.474996333333308, 603.027875999998514, 467.474996333333308 ],
 					"order" : 1,
@@ -5363,7 +5380,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-173", 0 ],
-					"midpoints" : [ 722.5, 968.0, 420.0, 968.0 ],
+					"midpoints" : [ 759.75, 968.0, 420.0, 968.0 ],
 					"source" : [ "obj-16", 0 ]
 				}
 
@@ -5813,6 +5830,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-158", 0 ],
+					"source" : [ "obj-25", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-85", 0 ],
 					"source" : [ "obj-25", 0 ]
 				}
@@ -5975,9 +5999,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-54", 0 ],
-					"source" : [ "obj-47", 0 ],
-					"watchpoint_flags" : 5,
-					"watchpoint_id" : 7
+					"source" : [ "obj-47", 0 ]
 				}
 
 			}
@@ -6328,23 +6350,10 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"message" : 				{
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
 				"default" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -6355,24 +6364,37 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				"message" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontface" : [ 1 ]
 				}
 ,
 				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

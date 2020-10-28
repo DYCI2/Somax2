@@ -329,15 +329,15 @@ class OctaveBandsScaleAction(AbstractScaleAction):
 
     def __init__(self):
         super().__init__()
-        self._band_distribution: Parameter = Parameter(OctaveBandsScaleAction.DEFAULT_BAND_DISTRIBUTION, None, None,
-                                                       "list[11]", "TODO")  # TODO
+        self._band_distribution: Parameter = ParamWithSetter(OctaveBandsScaleAction.DEFAULT_BAND_DISTRIBUTION, None,
+                                                             None, "list[11]", "TODO", self._set_band_distribution)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
               corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
               corpus: Corpus = None, **kwargs) -> Peaks:
         events_band_distribution: np.ndarray = np.array([event.get_feature(OctaveBands).value()
                                                          for event in corresponding_events])
-        factor: np.ndarray = np.sqrt(np.sum(np.power(events_band_distribution - self.band_distribution, 2), axis=1))
+        factor: np.ndarray = 1 / np.sqrt(np.sum(np.power(events_band_distribution - self.band_distribution, 2), axis=1))
         print(np.min(factor), np.max(factor), factor.shape)  # TODO: THIS SHOULD BE HERE UNTIL PROPERLY DEBUGGED
         peaks.scale(factor)
         return peaks
@@ -355,3 +355,10 @@ class OctaveBandsScaleAction(AbstractScaleAction):
     @property
     def band_distribution(self):
         return self._band_distribution.value
+
+    def _set_band_distribution(self, band_distribution: List[float]):
+        band_distribution: np.ndarray = np.array(band_distribution, dtype=float)
+        max_val: float = np.max(band_distribution)
+        if max_val > 0:
+            band_distribution /= max_val
+        self._band_distribution.value = band_distribution

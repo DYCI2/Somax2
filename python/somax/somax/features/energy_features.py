@@ -37,7 +37,7 @@ class VerticalDensity(CorpusFeature):
     @classmethod
     def analyze(cls, corpus: 'Corpus', **kwargs) -> 'Corpus':
         for event in corpus.events:
-            event.set_feature(cls(value=len([event.notes])))
+            event.set_feature(cls(value=len(event.notes)))
         return corpus
 
     # @classmethod
