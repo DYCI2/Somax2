@@ -1,3 +1,4 @@
+import itertools
 import logging
 from abc import ABC, abstractmethod
 from collections import deque
@@ -148,6 +149,52 @@ class NextStateScaleAction(AbstractScaleAction):
     @property
     def factor(self):
         return self._factor.value
+
+
+class AutoJumpScaleAction(AbstractScaleAction):
+    DEFAULT_ACTIVATION_THRESHOLD = 2
+    DEFAULT_JUMP_THRESHOLD = 8
+
+    def __init__(self, activation_threshold: int = DEFAULT_ACTIVATION_THRESHOLD,
+                 jump_threshold: int = DEFAULT_JUMP_THRESHOLD):
+        super().__init__()
+        self._activation_threshold: Parameter = Parameter(activation_threshold, 1, None, "int", "TODO")
+        self._jump_threshold: Parameter = Parameter(jump_threshold, 1, None, "int", "TODO")
+
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
+              corpus: Corpus = None, **kwargs) -> Peaks:
+        event_indices: List[int] = [e[0].state_index for e in history.get_n_latest(self.jump_threshold)]
+        previous_index: int = event_indices[-1]
+        num_consecutive_events: int = len(list(itertools.takewhile(lambda a: a == 1, reversed(np.diff(event_indices)))))
+        if num_consecutive_events <= self.activation_threshold:
+            factor: float = 1.0
+        elif num_consecutive_events >= self.jump_threshold:
+            factor: float = 0.0
+        else:
+            factor: float = 0.5 ** (num_consecutive_events - self.activation_threshold)
+        event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
+        is_matching: np.ndarray = event_indices == previous_index + 1
+        peaks.scale(factor, is_matching)
+        return peaks
+
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
+        pass
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        self._previous_output_index: Optional[int] = None
+
+    @property
+    def activation_threshold(self):
+        return self._activation_threshold.value
+
+    @property
+    def jump_threshold(self):
+        return self._jump_threshold.value
 
 
 class StaticTabooScaleAction(AbstractScaleAction):
