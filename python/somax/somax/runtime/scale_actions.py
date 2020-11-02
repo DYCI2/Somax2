@@ -186,7 +186,7 @@ class AutoJumpScaleAction(AbstractScaleAction):
         pass
 
     def clear(self) -> None:
-        self._previous_output_index: Optional[int] = None
+        pass
 
     @property
     def activation_threshold(self):
@@ -195,6 +195,38 @@ class AutoJumpScaleAction(AbstractScaleAction):
     @property
     def jump_threshold(self):
         return self._jump_threshold.value
+
+
+class TempoConsistencyScaleAction(AbstractScaleAction):
+    DEFAULT_NUM_EVENTS: int = 5
+
+    def __init__(self, history_len: int = DEFAULT_NUM_EVENTS):
+        super().__init__()
+        self._history_len: Parameter = Parameter(history_len, 1, None, "int", "TODO")
+
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
+              corpus: Corpus = None, **kwargs) -> Peaks:
+        previous_tempi: np.ndarray = np.array([e[0].tempo for e in history.get_n_latest(self.history_len)])
+        mu: float = float(np.mean(previous_tempi))
+        sigma: float = float(np.std(previous_tempi))
+        peaks_tempi: np.ndarray = np.array([e.tempo for e in corresponding_events])
+        peaks *= np.exp(-((peaks_tempi - mu) ** 2 / (2 * sigma ** 2)))
+        return peaks
+
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
+        pass
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        pass
+
+    @property
+    def history_len(self):
+        return self._history_len.value
 
 
 class StaticTabooScaleAction(AbstractScaleAction):
