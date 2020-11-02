@@ -57,7 +57,21 @@ class AbstractPeakSelector(Parametric, StringParsed, ABC):
         return output
 
 
-class MaxPeakSelector(AbstractPeakSelector):
+class AbstractFallbackPeakSelector(AbstractPeakSelector, ABC):
+    def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory, corpus: Corpus,
+                         transform_handler: TransformHandler,
+                         **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+        self.logger.debug("[decide] _decide_fallback called.")
+        try:
+            last_event, _, last_transform = influence_history.get_latest()
+            next_state_idx: int = (last_event.state_index + 1) % corpus.length()
+            return corpus.event_at(next_state_idx), last_transform
+        except IndexError:
+            # If history is empty: play the first event in the corpus
+            return corpus.event_at(0), NoTransform()
+
+
+class MaxPeakSelector(AbstractFallbackPeakSelector):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -74,24 +88,12 @@ class MaxPeakSelector(AbstractPeakSelector):
         transform_hash: int = int(peaks.transform_ids[peak_idx])
         return corpus.event_around(peaks.times[peak_idx]), transform_handler.get_transform(transform_hash)
 
-    def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory,
-                         corpus: Corpus, transform_handler: TransformHandler,
-                         **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
-        self.logger.debug("[decide] _decide_fallback called.")
-        try:
-            last_event, _, last_transform = influence_history.get_latest()
-            next_state_idx: int = (last_event.state_index + 1) % corpus.length()
-            return corpus.event_at(next_state_idx), last_transform
-        except IndexError:
-            # If memory is empty: play the first event in the corpus
-            return corpus.event_at(0), NoTransform()
-
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
         pass
 
 
-class ThresholdPeakSelector(AbstractPeakSelector):
+class ThresholdPeakSelector(MaxPeakSelector):
     DEFAULT_THRESHOLD = 0.1
 
     def __init__(self, threshold: float = DEFAULT_THRESHOLD, **kwargs):
@@ -107,10 +109,7 @@ class ThresholdPeakSelector(AbstractPeakSelector):
         if max_peak_value < self.threshold:
             return None
         else:
-            max_peaks_idx: List[int] = np.argwhere(np.abs(peaks.scores - max_peak_value) < 0.001)
-            peak_idx: int = random.choice(max_peaks_idx)
-            transform_hash: int = int(peaks.transform_ids[peak_idx])
-            return corpus.event_around(peaks.times[peak_idx]), transform_handler.get_transform(transform_hash)
+            return super()._decide_default(peaks, influence_history, corpus, transform_handler)
 
     def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory,
                          corpus: Corpus, transform_handler: TransformHandler,
@@ -126,23 +125,53 @@ class ThresholdPeakSelector(AbstractPeakSelector):
         return self._threshold.value
 
 
-class ProbabilisticPeakSelector(AbstractPeakSelector):
+class ProbabilisticPeakSelector(AbstractFallbackPeakSelector):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
     def _decide_default(self, peaks: Peaks, influence_history: ImprovisationMemory,
                         corpus: Corpus, transform_handler: TransformHandler,
                         **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
-        pass
-
-    def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory,
-                         corpus: Corpus, transform_handler: TransformHandler,
-                         **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
-        pass
+        if peaks.is_empty():
+            return None
+        score_cumsum: np.ndarray = np.cumsum(peaks.scores)
+        max_value: float = score_cumsum[-1] - 1e-5  # slight offset to avoid an extremely rare case of a fp error
+        output_target_score: float = float(np.random.random(1) * max_value)
+        peak_idx: int = np.argwhere(score_cumsum > output_target_score)[0]
+        transform_hash: int = int(peaks.transform_ids[peak_idx])
+        return corpus.event_around(peaks.times[peak_idx]), transform_handler.get_transform(transform_hash)
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
         pass
+
+
+class ThresholdProbabilisticPeakSelector(ProbabilisticPeakSelector):
+    DEFAULT_THRESHOLD = 0.1
+
+    def __init__(self, threshold: float = DEFAULT_THRESHOLD, **kwargs):
+        super().__init__(**kwargs)
+        self._threshold: Parameter = Parameter(threshold, 0, None, "float", "TODOOO")
+
+    def _decide_default(self, peaks: Peaks, influence_history: ImprovisationMemory, corpus: Corpus,
+                        transform_handler: TransformHandler,
+                        **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+        if peaks.is_empty():
+            return None
+        max_peak_value: float = np.max(peaks.scores)
+        if max_peak_value < self.threshold:
+            return None
+        else:
+            return super()._decide_default(peaks, influence_history, corpus, transform_handler)
+
+    def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory, corpus: Corpus,
+                         transform_handler: TransformHandler,
+                         **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+        return super()._decide_fallback(peaks, influence_history, corpus, transform_handler, **kwargs)
+
+    @property
+    def threshold(self):
+        return self._threshold.value
 
 
 class SparsityProbabilisticPeakSelector(MaxPeakSelector):
