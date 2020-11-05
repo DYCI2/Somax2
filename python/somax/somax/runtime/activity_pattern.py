@@ -115,8 +115,8 @@ class ClassicActivityPattern(AbstractActivityPattern):
         return -np.divide(t, np.log(self.extinction_threshold.value - 0.001))
 
 
-class DiscreteActivityPattern(AbstractActivityPattern):
-    """Decay: score = exp(-n/tau), where n is the number of update calls since creation"""
+class FreezeActivityPattern(AbstractActivityPattern):
+    """Decay: score = exp(-n/tau), where n is the number of influences since creation"""
 
     DEFAULT_N = 3
 
@@ -171,7 +171,7 @@ class DiscreteActivityPattern(AbstractActivityPattern):
         return -np.divide(n, np.log(self.extinction_threshold.value - 0.001))
 
 class ManualActivityPattern(AbstractActivityPattern):
-    """Decay: score = exp(-n/tau), where n is the number of update calls after a threshold since creation"""
+    """Decay: score = exp(-n/tau), where n is the number of events generated since creation of peak (new_event calls)"""
 
     DEFAULT_N = 3
     DEFAULT_THRESHOLD_TICKS = 0.025
