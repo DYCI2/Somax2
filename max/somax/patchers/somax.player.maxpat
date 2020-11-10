@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 978.0, 729.0 ],
+		"rect" : [ 733.0, 78.0, 1153.0, 823.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -319,7 +319,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-873",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -338,7 +337,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-874",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -357,7 +355,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-875",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -2118,7 +2115,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 6477.227848101265408, 1282.814358027862909, 107.0, 22.0 ],
-					"text" : "expr $i1 + ($i2 * 2)"
+					"text" : "expr ($i1 * 2) + $i2"
 				}
 
 			}
@@ -2174,7 +2171,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 6913.0, 1158.597330863282878, 100.0, 20.0 ],
+					"patching_rect" : [ 6913.0, 1159.597330863282878, 100.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 996.938280717487487, 227.999999999999886, 69.0, 18.0 ],
 					"rounded" : 20.0,
@@ -2195,7 +2192,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 6854.0, 1137.467820986068546, 24.0, 24.0 ],
+					"patching_rect" : [ 6854.0, 1138.467820986068546, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1075.438280717487487, 227.999999999999886, 18.0, 18.0 ],
 					"varname" : "playingmode[1]"
@@ -2223,7 +2220,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 6913.0, 1112.838311108854214, 71.0, 18.0 ],
+					"patching_rect" : [ 6913.0, 1113.838311108854214, 71.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 886.08333333333303, 227.999999999999886, 87.66666666666606, 18.0 ],
 					"text" : "Output from:",
@@ -2240,7 +2237,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 6899.686181434599348, 1108.838311108854214, 95.0, 26.0 ],
+					"patching_rect" : [ 6899.686181434599348, 1109.838311108854214, 95.0, 26.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 884.08333333333303, 225.999999999999886, 215.688280717488396, 22.0 ],
 					"proportion" : 0.5
@@ -2348,7 +2345,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 3346.5, 1672.0, 138.541564999999991, 22.0 ],
+					"patching_rect" : [ 3346.5, 1673.0, 138.541564999999991, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 936.541717500000004, 124.375, 158.5, 22.0 ],
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -6254,23 +6251,23 @@
 						"autojumpenable" : [ 0 ],
 						"autojumpforcejump" : [ 8 ],
 						"chromaclassifier" : [ 0 ],
-						"continuity" : [ 1.5 ],
-						"decaybasis" : [ 0 ],
+						"continuity" : [ 0.892392670806036 ],
+						"decaybasis" : [ 1 ],
 						"durationenable" : [ 0 ],
 						"durationmu" : [ 1.0 ],
 						"durationsigma" : [ 1.0 ],
 						"enabled" : [ 1 ],
-						"freeze" : [ 1 ],
+						"freeze" : [ 0 ],
 						"gmmnumclusters[1]" : [ 100 ],
-						"harmonicbypass" : [ 0 ],
+						"harmonicbypass" : [ 1 ],
 						"harmonicngramorder" : [ 3 ],
 						"harmonicngramorder[1]" : [ 3 ],
 						"harmonincpeakdecay" : [ 4.6 ],
 						"harmonincpeakdecay[1]" : [ 4.6 ],
-						"heldnotesmode" : [ 0 ],
-						"ignorephase" : [ 0 ],
+						"heldnotesmode" : [ 1 ],
+						"ignorephase" : [ 1 ],
 						"melodicbypass" : [ 0 ],
-						"melodicmod12" : [ 0 ],
+						"melodicmod12" : [ 1 ],
 						"melodicngramorder" : [ 3 ],
 						"melodicpeakdecay" : [ 4.6 ],
 						"numnotesenable" : [ 0 ],
@@ -6279,21 +6276,21 @@
 						"octavebands" : [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ],
 						"octavebanndsenable" : [ 0 ],
 						"outputchannels" : [ 0, 0, 1, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 9, 0, 1, 10, 0, 1, 11, 0, 1, 12, 0, 1, 13, 0, 1, 14, 0, 1, 15, 0, 1 ],
-						"outputthreshold" : [ 0.0 ],
-						"pitchfromchords" : [ 0 ],
-						"pitchfromchords[1]" : [ 0 ],
-						"playingmode" : [ 0 ],
-						"playingmode[1]" : [ 0 ],
+						"outputthreshold" : [ 0.383396541303378 ],
+						"pitchfromchords" : [ 1 ],
+						"pitchfromchords[1]" : [ 1 ],
+						"playingmode" : [ 1 ],
+						"playingmode[1]" : [ 1 ],
 						"pollpeaks" : [ 1 ],
 						"port" : [ 1236 ],
 						"reinstantiate" : [ 0.0 ],
 						"resetinfluences" : [ 0.0 ],
-						"selfharmonicbypass" : [ 0 ],
+						"selfharmonicbypass" : [ 1 ],
 						"selfmelodicbypass" : [ 1 ],
 						"selfmod12" : [ 0 ],
 						"selfngramorder" : [ 3 ],
 						"selfpeakdecay" : [ 4.6 ],
-						"simultaneousonsets" : [ 0 ],
+						"simultaneousonsets" : [ 1 ],
 						"tabooduration" : [ 1 ],
 						"tabooenable" : [ 0 ],
 						"tempoconsistency" : [ 5 ],
@@ -6802,7 +6799,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-517",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -6821,7 +6817,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-518",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -6840,7 +6835,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-519",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -7841,6 +7835,7 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"gradient" : 1,
+					"hidden" : 1,
 					"id" : "obj-364",
 					"ignoreclick" : 1,
 					"maxclass" : "message",
@@ -11071,7 +11066,7 @@
 					"presentation_rect" : [ 252.269291099056545, 83.0, 240.91667095820344, 86.5 ],
 					"setminmax" : [ 0.001000000047497, 1.0 ],
 					"setstyle" : 1,
-					"size" : 4,
+					"size" : 3,
 					"slidercolor" : [ 0.481437705647327, 0.846666309931507, 0.361908344245232, 1.0 ],
 					"spacing" : 2
 				}
@@ -11933,7 +11928,7 @@
 					"patching_rect" : [ 775.727848101265863, 2412.5, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 15.958333333333712, 457.962500303983688, 182.0, 14.5 ],
-					"size" : 7966.0
+					"size" : 10.0
 				}
 
 			}
@@ -11965,7 +11960,7 @@
 					"patching_rect" : [ 727.0, 2322.5, 143.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 59.0, 406.0, 135.377322951765791, 18.0 ],
-					"text" : "--",
+					"text" : "MIDI",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -11981,7 +11976,7 @@
 					"patching_rect" : [ 727.0, 2295.5, 143.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 59.0, 388.0, 135.377322951765791, 18.0 ],
-					"text" : "--",
+					"text" : "_cscale_debug",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -11997,6 +11992,7 @@
 					"patching_rect" : [ 667.0, 2420.0, 44.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 137.377322951765791, 483.462500303983688, 57.0, 18.0 ],
+					"text" : "10",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -18739,11 +18735,15 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+				"newobj" : 				{
 					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"message" : 				{
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -18753,7 +18753,26 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-
+,
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"default" : 				{
+					"fontface" : [ 1 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"button" : 				{
@@ -18762,29 +18781,6 @@
 ,
 				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"newobj" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
-				}
-,
-				"message" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-
 				}
 ,
 				"parentstyle" : "",

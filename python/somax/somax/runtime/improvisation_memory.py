@@ -19,6 +19,7 @@ class ImprovisationMemory:
         return self._history[index]
 
     def get_n_latest(self, n: int) -> List[Tuple[CorpusEvent, float, AbstractTransform]]:
+        """ :returns n latest events in reverse order (index 0 is latest event)"""
         if len(self._history) < n:
             return list(self._history)
         else:

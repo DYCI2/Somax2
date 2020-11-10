@@ -164,9 +164,13 @@ class AutoJumpScaleAction(AbstractScaleAction):
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
               corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
               corpus: Corpus = None, **kwargs) -> Peaks:
-        event_indices: List[int] = [e[0].state_index for e in history.get_n_latest(self.jump_threshold)]
-        previous_index: int = event_indices[-1]
-        num_consecutive_events: int = len(list(itertools.takewhile(lambda a: a == 1, reversed(np.diff(event_indices)))))
+        event_indices: List[int] = [e[0].state_index for e in history.get_n_latest(self.jump_threshold + 1)]
+        if not event_indices:
+            return peaks
+        print("Event indices:", event_indices)
+        previous_index: int = event_indices[0]
+        num_consecutive_events: int = len(list(itertools.takewhile(lambda a: a == -1, np.diff(event_indices))))
+        print("Num consecutive:", num_consecutive_events)
         if num_consecutive_events <= self.activation_threshold:
             factor: float = 1.0
         elif num_consecutive_events >= self.jump_threshold:
@@ -175,6 +179,10 @@ class AutoJumpScaleAction(AbstractScaleAction):
             factor: float = 0.5 ** (num_consecutive_events - self.activation_threshold)
         event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         is_matching: np.ndarray = event_indices == previous_index + 1
+        if any(is_matching): print("Matches:", is_matching, "pointing to state", corresponding_events[[int(i) for i in list(np.argwhere(is_matching))][0]].state_index)
+        else: print("No match")
+        print("Factor:", factor)
+        print("-----")
         peaks.scale(factor, is_matching)
         return peaks
 

@@ -167,7 +167,7 @@ class ThresholdProbabilisticPeakSelector(ProbabilisticPeakSelector):
     def _decide_fallback(self, peaks: Peaks, influence_history: ImprovisationMemory, corpus: Corpus,
                          transform_handler: TransformHandler,
                          **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
-        return super()._decide_fallback(peaks, influence_history, corpus, transform_handler, **kwargs)
+        return None
 
     @property
     def threshold(self):

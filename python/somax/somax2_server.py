@@ -183,7 +183,7 @@ class SomaxStringDispatcher:
         try:
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
             self.players[player].set_peak_selector(peak_selector)
-            self.logger.debug(f"[set_peak_selector] Peak Selector set to {type(peak_selector).__name__} "
+            self.logger.info(f"[set_peak_selector] Peak Selector set to {type(peak_selector).__name__} "
                               f"for player '{player}.")
         except (ValueError, KeyError) as e:
             self.logger.error(f"{str(e)} No Peak Selector was set.")
@@ -193,8 +193,8 @@ class SomaxStringDispatcher:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             self.players[player].set_classifier(path_and_name, classifier)
-            self.logger.debug(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
-                              f"for player '{player}'.")
+            self.logger.info(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
+                             f"for player '{player}' at path '{path_and_name}'.")
         except (AssertionError, KeyError, ValueError) as e:
             self.logger.error(f"{str(e)} No Classifier was set.")
 
@@ -239,7 +239,7 @@ class SomaxStringDispatcher:
         try:
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
             self.players[player].add_scale_action(scale_action, override)
-            self.logger.info(f"Added scale action {repr(scale_action)}") # TODO:REMOVE TEMP
+            self.logger.info(f"Added scale action {repr(scale_action)}")  # TODO:REMOVE TEMP
         except KeyError:
             self.logger.error(f"No player with the name '{player}' exists. No scale action was added.")
         except ValueError as e:
@@ -624,4 +624,3 @@ if __name__ == "__main__":
         somax_server.exit(print_exit_message=False)
         somax_server.logger.critical("Server terminated from an uncaught exception")
         raise
-
