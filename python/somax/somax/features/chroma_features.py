@@ -1,5 +1,5 @@
 from abc import ABC
-from typing import Dict, Any
+from typing import Dict, Any, Union
 
 import numpy as np
 
@@ -9,8 +9,8 @@ from somax.runtime.corpus import Corpus
 
 
 class OnsetChroma(CorpusFeature, RuntimeFeature, ABC):
-    def __init__(self, value: np.ndarray):
-        super().__init__(value=value)
+    def __init__(self, value: Union[np.ndarray, list]):
+        super().__init__(value=np.array(value))
 
     @classmethod
     def decode(cls, trait_dict: Dict[str, Any]) -> 'OnsetChroma':

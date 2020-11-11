@@ -27,6 +27,7 @@ class AbstractClassifier(StringParsed, ABC):
 
     @abstractmethod
     def cluster(self, corpus: Corpus) -> None:
+        """ :raises InvalidCorpus if clustering fails."""
         pass
 
     @abstractmethod

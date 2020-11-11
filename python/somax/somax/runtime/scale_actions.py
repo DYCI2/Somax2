@@ -167,10 +167,8 @@ class AutoJumpScaleAction(AbstractScaleAction):
         event_indices: List[int] = [e[0].state_index for e in history.get_n_latest(self.jump_threshold + 1)]
         if not event_indices:
             return peaks
-        print("Event indices:", event_indices)
         previous_index: int = event_indices[0]
         num_consecutive_events: int = len(list(itertools.takewhile(lambda a: a == -1, np.diff(event_indices))))
-        print("Num consecutive:", num_consecutive_events)
         if num_consecutive_events <= self.activation_threshold:
             factor: float = 1.0
         elif num_consecutive_events >= self.jump_threshold:
@@ -179,10 +177,6 @@ class AutoJumpScaleAction(AbstractScaleAction):
             factor: float = 0.5 ** (num_consecutive_events - self.activation_threshold)
         event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         is_matching: np.ndarray = event_indices == previous_index + 1
-        if any(is_matching): print("Matches:", is_matching, "pointing to state", corresponding_events[[int(i) for i in list(np.argwhere(is_matching))][0]].state_index)
-        else: print("No match")
-        print("Factor:", factor)
-        print("-----")
         peaks.scale(factor, is_matching)
         return peaks
 
@@ -207,19 +201,22 @@ class AutoJumpScaleAction(AbstractScaleAction):
 
 class TempoConsistencyScaleAction(AbstractScaleAction):
     DEFAULT_NUM_EVENTS: int = 5
+    DEFAULT_SIGMA: float = 5.0
 
-    def __init__(self, history_len: int = DEFAULT_NUM_EVENTS):
+    def __init__(self, history_len: int = DEFAULT_NUM_EVENTS, sigma: float = DEFAULT_SIGMA):
         super().__init__()
         self._history_len: Parameter = Parameter(history_len, 1, None, "int", "TODO")
+        self._sigma: Parameter = Parameter(sigma, None, None, 'float', "Standard deviation of gaussian")
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
               corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
               corpus: Corpus = None, **kwargs) -> Peaks:
         previous_tempi: np.ndarray = np.array([e[0].tempo for e in history.get_n_latest(self.history_len)])
+        if previous_tempi.size == 0:
+            return peaks
         mu: float = float(np.mean(previous_tempi))
-        sigma: float = float(np.std(previous_tempi))
         peaks_tempi: np.ndarray = np.array([e.tempo for e in corresponding_events])
-        peaks *= np.exp(-((peaks_tempi - mu) ** 2 / (2 * sigma ** 2)))
+        peaks.scores *= np.exp(-((peaks_tempi - mu) ** 2 / (2 * self.sigma ** 2)))
         return peaks
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
@@ -235,6 +232,10 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
     @property
     def history_len(self):
         return self._history_len.value
+
+    @property
+    def sigma(self):
+        return self._sigma.value
 
 
 class StaticTabooScaleAction(AbstractScaleAction):

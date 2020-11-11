@@ -119,10 +119,10 @@ class SomaxStringDispatcher:
 
     def create_atom(self, player: str, path: str = "", weight: float = Atom.DEFAULT_WEIGHT, classifier: str = "",
                     activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
-                    enabled: bool = True, override: bool = False):
+                    enabled: bool = True, override: bool = False, **kwargs):
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
-            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier)
+            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
             self.players[player].create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
@@ -180,25 +180,34 @@ class SomaxStringDispatcher:
     ######################################################
 
     def set_peak_selector(self, player: str, peak_selector: str, **kwargs):
+        if player not in self.players:
+            self.logger.error(f"Player '{player}' does not exist. No classifier was set.")
+            return
         try:
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
             self.players[player].set_peak_selector(peak_selector)
             self.logger.info(f"[set_peak_selector] Peak Selector set to {type(peak_selector).__name__} "
-                              f"for player '{player}.")
+                             f"for player '{player}.")
         except (ValueError, KeyError) as e:
             self.logger.error(f"{str(e)} No Peak Selector was set.")
 
     def set_classifier(self, player: str, path: str, classifier: str, **kwargs):
+        if player not in self.players:
+            self.logger.error(f"Player '{player}' does not exist. No classifier was set.")
+            return
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             self.players[player].set_classifier(path_and_name, classifier)
             self.logger.info(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
-                             f"for player '{player}' at path '{path_and_name}'.")
-        except (AssertionError, KeyError, ValueError) as e:
+                             f"for player '{player}'.")
+        except (AssertionError, KeyError, ValueError, InvalidCorpus) as e:
             self.logger.error(f"{str(e)} No Classifier was set.")
 
     def set_activity_pattern(self, player: str, path: str, activity_pattern: str, **kwargs):
+        if player not in self.players:
+            self.logger.error(f"Player '{player}' does not exist. No classifier was set.")
+            return
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)

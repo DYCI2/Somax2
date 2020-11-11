@@ -102,7 +102,9 @@ class BaseScheduler(ABC):
         player: Player = trigger_event.player
         try:
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
-            event_and_transform = player.new_event(trigger_event.target_time)
+            # TODO: This was changed from `trigger_event.target_time` to `self.tick` to handle unexpected delays in scheduling
+            #       (for example while loading a corpus or changing a classifier)
+            event_and_transform = player.new_event(self.tick)
         except InvalidCorpus as e:
             self.logger.error(str(e))
             self._requeue_trigger_event(trigger_event)

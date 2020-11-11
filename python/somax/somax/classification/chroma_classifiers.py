@@ -11,7 +11,7 @@ from somax.features import BackgroundChroma
 from somax.features.feature import RuntimeFeature, CorpusFeature
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.exceptions import InvalidLabelInput, TransformError
+from somax.runtime.exceptions import InvalidLabelInput, TransformError, InvalidCorpus
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence, FeatureInfluence
 from somax.runtime.label import AbstractLabel, IntLabel
 from somax.runtime.transform_handler import TransformHandler
@@ -157,9 +157,20 @@ class AbsoluteGmmClassifier(GmmClassifier):
 class RelativeGmmClassifier(GmmClassifier):
 
     def cluster(self, corpus: Corpus) -> None:
+        """ :raises InvalidCorpus if number of events in corpus is lower than `self.num_components`."""
         chromas: List[np.ndarray] = [event.get_feature(BackgroundChroma).value() for event in corpus.events]
         gmm_data: np.ndarray = np.row_stack(chromas)
         max_per_col: np.ndarray = np.max(chromas, axis=1)
         max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
         chromas /= max_per_col[:, np.newaxis]
-        self.gmm = GaussianMixture(n_components=self.num_components, max_iter=self.max_iter).fit(gmm_data)
+        try:
+            self.gmm = GaussianMixture(n_components=self.num_components, max_iter=self.max_iter).fit(gmm_data)
+        except ValueError as e:
+            if self.num_components > corpus.length():
+                raise InvalidCorpus(f"{self.__class__.__name__} could not classify corpus '{str(corpus)}' since corpus "
+                                    f"length ({corpus.length()}) is lower than number of requested clusters "
+                                    f"({self.num_components}). "
+                                    f"Reduce the number of clusters or select another classifier")
+            else:
+                raise InvalidCorpus(f"Unknown error encountered in {self.__class__.__name__}. Error: {repr(e)}.")
+
