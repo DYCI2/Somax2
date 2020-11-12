@@ -213,7 +213,7 @@ class SomaxStringDispatcher:
         except KeyError:
             self.logger.error(f"No player with the name '{player}' exists. No transform was added.")
         except TransformError as e:
-            self.logger.error(f"{str(e)}. No transform was added.")
+            self.logger.debug(f"{str(e)}. No transform was added.")
         except TypeError as e:
             self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was added.")
 
@@ -221,13 +221,13 @@ class SomaxStringDispatcher:
         try:
             transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)
             self.players[player].remove_transform(transform)
-            self.logger.info(f"Successfully removed transform {transform} from player '{player}'.")
+            self.logger.debug(f"Successfully removed transform {transform} from player '{player}'.")
         except KeyError:
             self.logger.error(f"No player with the name '{player}' exists. No transform was removed.")
         except IndexError as e:
             self.logger.error(f"{str(e)} No transform was removed.")
         except TransformError as e:
-            self.logger.error(f"{str(e)}. No transform was removed.")
+            self.logger.debug(f"{str(e)}. No transform was removed.")
         except TypeError as e:
             self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was removed.")
 
