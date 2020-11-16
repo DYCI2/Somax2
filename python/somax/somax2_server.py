@@ -8,12 +8,11 @@ import logging.config
 import os
 import sys
 from importlib import resources
-from typing import Any, Dict, Union, Optional, Tuple, List
-
 from maxosc.maxformatter import MaxFormatter
 from maxosc.maxosc import Caller
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import AsyncIOOSCUDPServer
+from typing import Any, Dict, Union, Optional, Tuple, List
 
 import log
 import somax
@@ -215,7 +214,8 @@ class SomaxStringDispatcher:
         except TransformError as e:
             self.logger.debug(f"{str(e)}. No transform was added.")
         except TypeError as e:
-            self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was added.")
+            self.logger.error(
+                f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was added.")
 
     def remove_transform(self, player: str, transform: str, **kwargs):
         try:
@@ -229,7 +229,8 @@ class SomaxStringDispatcher:
         except TransformError as e:
             self.logger.debug(f"{str(e)}. No transform was removed.")
         except TypeError as e:
-            self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was removed.")
+            self.logger.error(
+                f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was removed.")
 
     def read_corpus(self, player: str, filepath: str, volatile: bool = False):
         self.logger.info(f"Reading Corpus at '{filepath}' for Player '{player}'...")
