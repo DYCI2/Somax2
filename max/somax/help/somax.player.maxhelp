@@ -120,7 +120,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 105.0, 1047.0, 711.0 ],
+						"rect" : [ 0.0, 26.0, 1047.0, 711.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -796,14 +796,14 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 9,
+									"linecount" : 8,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 187.0, 127.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 189.0, 114.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 7,
-									"presentation_rect" : [ 438.0, 208.5, 227.0, 100.0 ],
+									"presentation_rect" : [ 438.0, 208.5, 229.0, 100.0 ],
 									"text" : "jaksjkdaskdj akjdk asjkd ajk djaks jdkasjk jadkjsakdj lkdahgjkldf sjdls ajfkla fjds akljifew jasdlf jdkvlca eifa lsdjnkfl asjdkfljasdkf ljasdk lfj jaksjkdaskdj akjdk asjkd ajk djaks jdkasjk jadkjsakdj lkdahgjkldf sjdls ajfkla fjds akljifew jasdlf jdkvlca eifa lsdjnkfl asjdkfljasdkf ljasdk lfj",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -848,7 +848,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 386.0, 382.25390625, 48.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "oscport"
 								}
 
@@ -880,7 +879,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 386.0, 357.5, 74.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "reinstantiate"
 								}
 
@@ -912,7 +910,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 549.0, 159.5, 98.0, 22.0 ],
-									"presentation_linecount" : 3,
 									"text" : "transconsistency"
 								}
 
@@ -944,7 +941,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 549.0, 134.541015625, 63.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "decaytime"
 								}
 
@@ -976,7 +972,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 549.0, 109.720703125, 51.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "memlen"
 								}
 
@@ -1008,7 +1003,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 549.0, 85.25390625, 72.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "atommod12"
 								}
 
@@ -1040,7 +1034,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 549.0, 60.5, 70.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "atomweight"
 								}
 
@@ -1072,7 +1065,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 549.0, 35.5, 73.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "atombypass"
 								}
 
@@ -1104,7 +1096,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 386.0, 236.5, 73.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "activetransp"
 								}
 
@@ -1117,7 +1108,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 386.0, 209.5, 65.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "qualthresh"
 								}
 
@@ -1130,7 +1120,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 386.0, 184.5, 61.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "contfactor"
 								}
 
@@ -1143,7 +1132,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 386.0, 159.5, 69.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "decaybasis"
 								}
 
@@ -1168,7 +1156,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 386.0, 109.720703125, 49.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "notedur"
 								}
 
@@ -1181,7 +1168,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 386.0, 85.25390625, 51.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "igphase"
 								}
 
@@ -1225,7 +1211,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 386.0, 35.5, 46.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "volatile"
 								}
 
