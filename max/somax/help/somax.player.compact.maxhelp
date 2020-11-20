@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1372.0, 737.0 ],
+		"rect" : [ 34.0, 79.0, 1372.0, 737.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -120,7 +120,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1372.0, 711.0 ],
+						"rect" : [ 34.0, 105.0, 1372.0, 711.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -756,7 +756,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 410.0, 174.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "3",
+									"text" : "5",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -778,14 +778,14 @@
 , 							{
 								"box" : 								{
 									"fontface" : 1,
-									"fontsize" : 24.0,
+									"fontsize" : 18.0,
 									"id" : "obj-156",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 4.0, 162.0, 33.0 ],
+									"patching_rect" : [ 686.5, 4.0, 128.0, 27.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 438.0, 168.0, 227.0, 33.0 ],
+									"presentation_rect" : [ 438.0, 168.0, 180.0, 27.0 ],
 									"text" : "Title",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
