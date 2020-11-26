@@ -1444,7 +1444,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 104.0, 1054.0, 710.0 ],
+						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2010,15 +2010,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 2,
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 192.0, 33.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 192.0, 47.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
 									"presentation_rect" : [ 557.0, 214.352144469525967, 229.0, 33.0 ],
-									"text" : "Flushes any stuck notes in the chroma analysis without any input.",
+									"text" : "Flushes stuck notes in the chroma analysis without producing any output.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2638,7 +2638,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
+						"rect" : [ 34.0, 104.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,

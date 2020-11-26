@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1527.0, 1036.0 ],
+		"rect" : [ 34.0, 78.0, 1372.0, 736.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -325,7 +325,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 929.0, 229.0, 357.0, 261.0 ],
+									"patching_rect" : [ 929.0, 229.0, 359.0, 261.0 ],
 									"text" : "Make sure that        is enabled,       is set to «Inlet (External)» and that        is toggled on. You should now hear the notes being played and see the input being analyzed and visualized in multiple places in the Midi Influencer.\n\nIdeally, you should also notice that the player starts to «jump», finding sequences in the corpus matching your input and jumping to these instead of playing the corpus in a linear, unaltered manner. This discontinuity is visualized in        .\n\nIf this is not the case, try decreasing the red slider at        \nor toggle the «mod12» button - this should lead to more matches and therefore a higher probability of jumps. For more information on these parameters, once again see                 .\n\n\nOnce this is working, we're ready to move on to a more musical example of Somax interaction.                the scheduler and go to the final part of this introductory tutorial",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1474,7 +1474,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 0.0, 0.0, 899.0, 60.0 ],
+									"patching_rect" : [ 0.0, 0.0, 902.0, 60.0 ],
 									"text" : "This slide will present a brief introduction to how to interact with somax - the steps required to get some output from the Player and how to use the influencers to interact with the generated output.\n\nIt's divided into two parts: «Interaction I» describing how to start the server and produce output and «Interaction II» describing how to interact with the output"
 								}
 
@@ -1505,7 +1505,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1841.0, 229.0, 119.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "script $1 interaction2"
 				}
 
@@ -1518,7 +1517,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1711.0, 229.0, 119.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "script $1 interaction1"
 				}
 
@@ -2734,7 +2732,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 582.0, 12.0, 162.0, 52.0 ],
-					"presentation_linecount" : 5,
 					"text" : "click buttons to change info TODO UPDATE THIS TEXT",
 					"textjustification" : 1
 				}
@@ -3542,7 +3539,8 @@
 				"name" : "bc.virfun.mxo",
 				"type" : "iLaX"
 			}
- ]
+ ],
+		"autosave" : 0
 	}
 
 }

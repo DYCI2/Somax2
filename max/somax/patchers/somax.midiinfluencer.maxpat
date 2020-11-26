@@ -393,7 +393,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1132.902058478175604, 860.0, 24.0, 24.0 ],
+					"patching_rect" : [ 1132.902058478175604, 861.0, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 231.685533973177485, 253.833333045244217, 17.700000137090683, 17.700000137090683 ],
 					"varname" : "flush"
@@ -611,7 +611,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-153",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -1704,6 +1703,7 @@
 				"box" : 				{
 					"elementcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"id" : "obj-598",
+					"ignoreclick" : 1,
 					"knobcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"maxclass" : "slider",
 					"min" : 1.0,
@@ -3184,6 +3184,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"id" : "obj-59",
+					"ignoreclick" : 1,
 					"maxclass" : "number",
 					"maximum" : 200,
 					"minimum" : 1,
