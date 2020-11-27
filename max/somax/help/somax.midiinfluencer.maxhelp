@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1054.0, 736.0 ],
+		"rect" : [ 34.0, 79.0, 1054.0, 736.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -97,7 +97,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 15.0, 177.5, 174.0, 64.0 ],
-									"presentation_linecount" : 4,
 									"text" : "this keyboard sends MIDI data on channel one, triggering pitch and onset influences"
 								}
 
@@ -125,7 +124,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 490.0, 350.0, 210.0, 66.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Again, these parameters are also available in the main interface. See the «parameters» tab for more info."
 								}
 
@@ -152,7 +150,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 552.0, 305.356622998544367, 107.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "chromachannels 2"
 								}
 
@@ -165,7 +162,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 563.0, 330.53493449781655, 106.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "onsetchannels 1 2"
 								}
 
@@ -283,7 +279,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 89.0, 684.0, 60.0 ],
+									"patching_rect" : [ 10.0, 89.0, 688.0, 60.0 ],
 									"text" : "It's possible to use multiple MIDI sources and specify which ones should send harmonic, melodic and/or onset influences accordingly. This is also useful when combining audio influences and MIDI influences. For example, if a violinist and a pianist are interacting with the system and they want the chroma influences to be analyzed from MIDI input from the pianist, while pitch influences should be sent from the violinist's input, but both should be able to send onsets.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -510,7 +506,6 @@
 					}
 ,
 					"patching_rect" : [ 403.0, 15.0, 114.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -580,7 +575,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 741.0, 222.0, 210.0, 66.0 ],
-									"presentation_linecount" : 3,
 									"text" : "These parameters are of course also available in the main interface. See the «parameters» tab for more info."
 								}
 
@@ -593,7 +587,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 735.0, 330.0, 216.0, 127.0 ],
-									"presentation_linecount" : 5,
 									"text" : "Note that this parameter introduces latency to the system - we're effectively waiting 20 ms from our first input to see if any further messages are received. When using this in real-time, it's recommended to tune this parameter to a level where the delay isn't obtrusive while still working with your own way of performing",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -608,7 +601,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 238.0, 470.5, 187.0, 64.0 ],
-									"presentation_linecount" : 4,
 									"text" : "while everything looks fine in in the ui, the MIDI influencer actually sends three different messages, one for each note"
 								}
 
@@ -622,7 +614,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 676.0, 484.0, 173.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "...we only received a single message as intended"
 								}
 
@@ -687,8 +678,7 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 595.0, 474.0, 67.0, 57.0 ],
-									"text" : "pitch 69"
+									"patching_rect" : [ 595.0, 474.0, 67.0, 57.0 ]
 								}
 
 							}
@@ -739,8 +729,7 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 482.0, 474.0, 86.0, 57.0 ],
-									"text" : "onset bang"
+									"patching_rect" : [ 482.0, 474.0, 86.0, 57.0 ]
 								}
 
 							}
@@ -797,7 +786,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 512.0, 142.5, 222.0, 37.0 ],
-									"presentation_linecount" : 4,
 									"text" : "But if we trigger it with the onset threshold parameter set to 20 ms..."
 								}
 
@@ -842,15 +830,12 @@
 								"box" : 								{
 									"id" : "obj-40",
 									"ignoreclick" : 1,
-									"linecount" : 3,
 									"maxclass" : "textedit",
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 165.0, 474.0, 67.0, 57.0 ],
-									"presentation_linecount" : 2,
-									"text" : "pitch 62 pitch 66 pitch 69"
+									"patching_rect" : [ 165.0, 474.0, 67.0, 57.0 ]
 								}
 
 							}
@@ -896,14 +881,12 @@
 								"box" : 								{
 									"id" : "obj-34",
 									"ignoreclick" : 1,
-									"linecount" : 3,
 									"maxclass" : "textedit",
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 52.0, 474.0, 86.0, 57.0 ],
-									"text" : "onset bang onset bang onset bang"
+									"patching_rect" : [ 52.0, 474.0, 86.0, 57.0 ]
 								}
 
 							}
@@ -915,7 +898,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 52.0, 553.0, 706.0, 33.0 ],
-									"presentation_linecount" : 11,
 									"text" : "Note that this demonstration skipped over chroma entirely. This is because chroma segmentation is handled in a different module, but since it's based on the same onset influence, the same reasoning that was demonstrated here applies to chroma as well.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2014,7 +1996,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 192.0, 47.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 194.0, 47.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
 									"presentation_rect" : [ 557.0, 214.352144469525967, 229.0, 33.0 ],
@@ -2355,7 +2337,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
+						"rect" : [ 34.0, 105.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2404,7 +2386,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 502.5, 463.295711060948179, 331.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "The MIDI influencer can of course also be initialized as a normal max object without any visible user interface at all:",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2418,7 +2399,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 502.5, 308.0, 246.0, 74.0 ],
-									"presentation_linecount" : 10,
 									"text" : "The kslider in the compact interface is only displaying the pitch class of the pitch influence, but the output will always be the full range of MIDI pitches (or virtual fundamentals, if that setting is used).",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2431,8 +2411,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 753.5, 198.0, 143.0, 100.0 ],
-									"presentation_linecount" : 9,
+									"patching_rect" : [ 753.5, 198.0, 148.0, 100.0 ],
 									"text" : "The compact interface is just a wrapper around the main interface. No parameters are visible here, but all parameters are available by pressing the «Settings» button.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2448,8 +2427,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 597.5, 124.0, 224.0, 79.0 ],
-									"presentation_linecount" : 5,
+									"patching_rect" : [ 597.5, 124.0, 226.0, 79.0 ],
 									"text" : "Compact Interface: To create the object, (pressing N and) type:\n\nbpatcher somax.midiinfluencer.compact"
 								}
 
@@ -2465,7 +2443,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 244.0, 117.0, 176.0, 79.0 ],
-									"presentation_linecount" : 4,
 									"text" : "Main interface: To create the object, (pressing N and) type:\n\nbpatcher somax.midiinfluencer"
 								}
 
@@ -2524,12 +2501,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-3",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 89.0, 684.0, 33.0 ],
-									"text" : "Like most objects of the somax package, the MIDI influencer can be initialized in a number of ways depending on what interface the user prefers.",
+									"patching_rect" : [ 10.0, 89.0, 891.5, 20.0 ],
+									"text" : "Like most objects of the somax package, the MIDI influencer can be initialized in a number of ways depending on which type of interface the user prefers.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -2638,7 +2614,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 104.0, 1054.0, 710.0 ],
+						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2669,13 +2645,24 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-15",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 147.0, 340.0, 61.0, 20.0 ],
+									"text" : "onset",
+									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-22",
 									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 64.0, 573.0, 618.0, 47.0 ],
-									"presentation_linecount" : 15,
+									"patching_rect" : [ 64.0, 528.0, 618.0, 47.0 ],
 									"text" : "The pitch and chroma influences should in most cases be sent to a somax.player object where they are matched to the corpus to determine the most suitable output. The onset influence is used to trigger output (when a player is in Manual/Reactive mode) as well as segment the continuous stream of chroma messages.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2690,7 +2677,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 530.0, 143.5, 152.0, 51.0 ],
-									"presentation_linecount" : 3,
 									"text" : "The «Settings» button displays all the available options"
 								}
 
@@ -2703,7 +2689,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 64.0, 340.0, 144.0, 127.0 ],
-									"presentation_linecount" : 9,
 									"text" : "By default, an «onset influence» is sent each time a note on is received. This isn't always ideal for polyphonic input, for which a workaround is described in the «advanced» tab.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2729,7 +2714,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 64.0, 226.0, 144.0, 87.0 ],
-									"presentation_linecount" : 4,
 									"text" : "The pitch is by default selected as the top note in the received input, but there are a number of other options available  in the «Settings» dialog.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2755,7 +2739,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 512.0, 379.0, 170.0, 87.0 ],
-									"presentation_linecount" : 4,
 									"text" : "The changes in chroma are also not instantaneous but decays slowly once a note has been released. This behaviour can be turned of in the «Settings».",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2796,8 +2779,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 64.0, 159.0, 168.0, 51.0 ],
-									"text" : "press some keys on the polyphonic to see the behaviour of the influencer"
+									"patching_rect" : [ 49.0, 159.0, 189.0, 51.0 ],
+									"text" : "press some keys on the polyphonic keyboard to see the behaviour of the influencer"
 								}
 
 							}
@@ -2846,7 +2829,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 298.0, 479.0, 68.0, 22.0 ],
-									"text" : "pitch 47"
+									"text" : "pitch 55"
 								}
 
 							}
@@ -3225,8 +3208,7 @@
 				"name" : "bc.virfun.mxo",
 				"type" : "iLaX"
 			}
- ],
-		"autosave" : 0
+ ]
 	}
 
 }

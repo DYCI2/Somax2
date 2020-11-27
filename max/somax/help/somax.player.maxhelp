@@ -121,7 +121,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 105.0, 1047.0, 710.0 ],
+						"rect" : [ 0.0, 26.0, 1047.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -152,21 +152,37 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-2",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 167.0, 628.0, 684.0, 47.0 ],
+									"presentation" : 1,
+									"presentation_linecount" : 3,
+									"presentation_rect" : [ 113.0, 642.0, 565.0, 47.0 ],
+									"text" : "Note: Several parameters consist of both a slider and a number box that can be manipulated. As a general rule, sliders have a lower and upper bound specifying a reasonable range for the parameter. It is however in many cases possible to use the numbox to set the parameter to a value outside of this range.",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"bubble" : 1,
 									"bubblepoint" : 0.0,
 									"bubbleside" : 0,
 									"fontface" : 0,
 									"fontsize" : 10.0,
 									"id" : "obj-39",
-									"linecount" : 5,
+									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 21.0, 622.541015625, 75.0, 81.0 ],
+									"patching_rect" : [ 21.0, 622.541015625, 75.0, 70.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 2,
-									"presentation_rect" : [ 15.0, 628.0, 125.0, 48.0 ],
-									"text" : "Should absolutely not be manipulated in real-time!",
+									"presentation_linecount" : 3,
+									"presentation_rect" : [ 15.0, 628.0, 89.0, 59.0 ],
+									"text" : "Should absolutely not be used in real-time!",
 									"textjustification" : 1
 								}
 
@@ -871,7 +887,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 383.0, 205.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "10",
+									"text" : "17",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -901,7 +917,7 @@
 									"patching_rect" : [ 686.5, 10.5, 299.0, 27.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 407.0, 202.0, 244.0, 27.0 ],
-									"text" : "Active Transpositions",
+									"text" : "Reinstantiate",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -911,15 +927,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 38,
+									"linecount" : 14,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 195.0, 516.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 199.0, 194.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 28,
-									"presentation_rect" : [ 383.0, 235.5, 275.0, 382.0 ],
-									"text" : "The player can also look for matches in transposed versions of the corpus as well as the original, which can be very useful for short corpora or other situations when there are problems with a low amount of matches. Given a corpus in C major, enabling the '0' and '+1' transposition means that it will look for matches in the same corpus transposed to C# as well as the original in C. The transposition range is set to -5 semitones (transposition to G major given corpus in C major) up to +6 semitones (transposition to F# major given corpus in C major).\n\nAny set of transpositions may be enabled, with or without the original ('0'), as long as at least one transposition is active (trying to remove the last transposition will result in an error message). But do note that a large amount of enabled transposition may impact the computation time of the player and in worst case result in perceiveable latency.\n\nAlso note that while this parameter should be operable in real-time, it may in some cases require a couple of seconds of computation time for large corpora, so make sure to experiment thoroughly with this parameter before altering it during a performance.",
+									"presentation_linecount" : 11,
+									"presentation_rect" : [ 383.0, 235.5, 278.0, 154.0 ],
+									"text" : "Pressing this button will delete the player from the server and recreate it. This button is useful if you for some reason have to restart the server or for some reason run into issues where you have to restart the system.\n\nWARNING: This is not real-time compatible (it may pause the server for several seconds while reloading, thus interrupting any performance) and should only be used if something goes terribly wrong!",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2251,7 +2267,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1047.0, 710.0 ],
+						"rect" : [ 34.0, 105.0, 1047.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2281,18 +2297,6 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
-								"box" : 								{
-									"id" : "obj-9",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 39.0, 531.11238532110076, 150.0, 20.0 ],
-									"text" : "Note:",
-									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
-								}
-
-							}
-, 							{
 								"box" : 								{
 									"fontface" : 1,
 									"id" : "obj-16",
@@ -2457,6 +2461,7 @@
 									"fontsize" : 10.0,
 									"hint" : "",
 									"id" : "obj-30",
+									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
 									"maxclass" : "textbutton",
 									"numinlets" : 1,
@@ -2520,6 +2525,7 @@
 									"fontsize" : 10.0,
 									"hint" : "",
 									"id" : "obj-23",
+									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
 									"maxclass" : "textbutton",
 									"numinlets" : 1,
@@ -2554,6 +2560,7 @@
 									"fontsize" : 10.0,
 									"hint" : "",
 									"id" : "obj-93",
+									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
 									"maxclass" : "textbutton",
 									"numinlets" : 1,
@@ -2661,14 +2668,15 @@
 							}
 , 							{
 								"box" : 								{
+									"fontface" : 1,
 									"id" : "obj-13",
 									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 39.0, 531.11238532110076, 393.0, 47.0 ],
+									"patching_rect" : [ 39.0, 531.11238532110076, 424.0, 47.0 ],
 									"text" : "Note: the player exists on the server and will be immediately initialized when a corresponding object is created in Max. Therefore this help file only contains pictures of the ui to avoid creating additional players.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ]
 								}
 
 							}
@@ -2774,8 +2782,7 @@
 				"type" : "PNG",
 				"implicit" : 1
 			}
- ],
-		"autosave" : 0
+ ]
 	}
 
 }
