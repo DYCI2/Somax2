@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1527.0, 1035.0 ],
+		"rect" : [ 34.0, 78.0, 1372.0, 788.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -72,7 +72,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1527.0, 1009.0 ],
+						"rect" : [ 0.0, 26.0, 1372.0, 762.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -109,7 +109,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 400.0, 579.0, 84.0, 33.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Yin Minimum Frequency",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -178,7 +177,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 514.25, 556.0, 281.0, 74.0 ],
-									"presentation_linecount" : 5,
 									"text" : "Finally, load the file «anton.aif». For polyphonic content like this, the pitch estimation won't work properly no matter what settings are used. Fortunately, chroma and onset can still be used. See the «polyphonic/unpitched» tab for more info.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -238,8 +236,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 514.25, 420.5, 286.0, 114.0 ],
-									"presentation_linecount" : 9,
+									"patching_rect" : [ 514.25, 420.5, 287.0, 114.0 ],
 									"text" : "These settings are however much too high for content where the pitched component is less prominent. Load the audio file «cherokee.aif» and play it. With the settings from the previous example, we get no output at all.\n\nTry decreasing the value of the «Quality» back to around 0.8 and the «Yin Window» to around 30 ms.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -275,7 +272,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 856.5, 274.0, 74.0, 20.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Yin Window",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -289,7 +285,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 514.25, 272.5, 278.0, 127.0 ],
-									"presentation_linecount" : 9,
 									"text" : "Load the audio file «duduk.aif» and play it a few times. With the default settings, around 50 pitches are detected in this example. The longer notes with vibrato are perceived as multiple, separate pitches.\n\nIncrease the value of the «Quality» parameter even further (around 0.98), increase the «Yin Window» to around 40 ms and try again.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -421,7 +416,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 808.0, 299.5, 81.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "yinwindow $1"
 								}
 
@@ -445,8 +439,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 518.25, 132.5, 274.5, 127.0 ],
-									"presentation_linecount" : 17,
+									"patching_rect" : [ 518.25, 132.5, 278.0, 127.0 ],
 									"text" : "Load the audio file «vibes-a1.aif» and play it a few times. While there's only a single note in the audio file, the pitch estimator will sometimes incorrectly detect two notes.\n\nTry to increase the value of the «Quality» parameter slightly (0.85 would be a better value in this situation) and try again. This time, only a single pitch should be detected.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -843,7 +836,6 @@
 									"outlettype" : [ "", "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 155.0, 442.0, 165.0, 89.0 ],
-									"presentation_linecount" : 4,
 									"text" : "59 77 79 78 60 60 72 84 59 77 79 78 60 60 72 84"
 								}
 
@@ -1118,41 +1110,16 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"button" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"default" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontsize" : [ 10.0 ]
-								}
-,
-								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
 								"newobj" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1164,6 +1131,31 @@
 									}
 ,
 									"fontsize" : [ 10.0 ]
+								}
+,
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ]
+								}
+,
+								"button" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"toggle" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -1287,41 +1279,16 @@
 						"lines" : [  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"button" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"default" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontsize" : [ 10.0 ]
-								}
-,
-								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
 								"newobj" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1333,6 +1300,31 @@
 									}
 ,
 									"fontsize" : [ 10.0 ]
+								}
+,
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ]
+								}
+,
+								"button" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"toggle" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -1371,7 +1363,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1527.0, 1009.0 ],
+						"rect" : [ 0.0, 26.0, 1372.0, 762.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1663,7 +1655,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 463.0, 271.0, 150.0, 127.0 ],
+									"patching_rect" : [ 463.0, 271.0, 153.0, 127.0 ],
 									"text" : "Using the fourth outlet, the audio influencer will synthesize MIDI messages corresponding to the pitch estimation. Try for example with the «cherkoee.aif». This can be very useful when tuning the pitch estimator.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -1824,41 +1816,16 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"button" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"default" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontsize" : [ 10.0 ]
-								}
-,
-								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
 								"newobj" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1870,6 +1837,31 @@
 									}
 ,
 									"fontsize" : [ 10.0 ]
+								}
+,
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ]
+								}
+,
+								"button" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"toggle" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -1909,7 +1901,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1527.0, 1009.0 ],
+						"rect" : [ 0.0, 26.0, 1372.0, 762.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1947,7 +1939,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 740.0, 342.0, 145.0, 64.0 ],
-									"presentation_linecount" : 4,
 									"text" : "This menu is also available in the main interface («Settings» button)"
 								}
 
@@ -1960,7 +1951,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 669.0, 17.0, 216.0, 91.0 ],
+									"patching_rect" : [ 669.0, 17.0, 220.0, 91.0 ],
 									"text" : "Like the pitch detection, the onset detection algorithm has a number of parameters available for tuning in the main interface. For more documentation on these, see the bonk~ object's reference."
 								}
 
@@ -2022,7 +2013,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 525.5, 431.5, 254.0, 141.0 ],
-									"presentation_linecount" : 10,
 									"text" : "In some cases, for example with a noisy input such as «rainstick.aif», where there are no onsets or where the onsets don't make any sense musically, we can synchronize the output to an external beat by sending bangs to the second inlet.\n\nTo do this, set the umenu above to «Inlet (External)» and send pulses with the button below:",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2142,7 +2132,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 124.0, 553.0, 338.0, 60.0 ],
+									"patching_rect" : [ 124.0, 553.0, 339.0, 60.0 ],
 									"text" : "As mentioned on the first tab, onsets are used to trigger output from a target player as well as segment the continuous stream of chroma. Therefore it's important that the audio influencer generates onsets even for polyphonic content.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2318,41 +2308,16 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"button" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"default" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontsize" : [ 10.0 ]
-								}
-,
-								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
 								"newobj" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2364,6 +2329,31 @@
 									}
 ,
 									"fontsize" : [ 10.0 ]
+								}
+,
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ]
+								}
+,
+								"button" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"toggle" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -2403,7 +2393,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1527.0, 1009.0 ],
+						"rect" : [ 0.0, 26.0, 1372.0, 762.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2466,7 +2456,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 105.0, 1527.0, 1009.0 ],
+						"rect" : [ 0.0, 26.0, 1372.0, 762.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -4281,41 +4271,16 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"button" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"default" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontsize" : [ 10.0 ]
-								}
-,
-								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
 								"newobj" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -4327,6 +4292,31 @@
 									}
 ,
 									"fontsize" : [ 10.0 ]
+								}
+,
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ]
+								}
+,
+								"button" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"toggle" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -4366,7 +4356,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1527.0, 1009.0 ],
+						"rect" : [ 0.0, 26.0, 1372.0, 762.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -4403,7 +4393,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 484.5, 298.0, 247.0, 60.0 ],
-									"presentation_linecount" : 4,
 									"text" : "The kslider in the compact interface is only displaying the pitch class of the pitch influence, but the output will always be the full range of MIDI pitches.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -4420,7 +4409,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 609.0, 114.0, 237.0, 79.0 ],
-									"presentation_linecount" : 5,
 									"text" : "Compact Interface: To create the object, (pressing N and) type:\n\nbpatcher somax.audioinfluencer.compact"
 								}
 
@@ -4454,7 +4442,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 738.5, 186.0, 148.0, 100.0 ],
-									"presentation_linecount" : 7,
 									"text" : "The compact interface is just a wrapper around the main interface. No parameters are visible here, but all parameters are available by pressing the «Settings» button.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -4468,7 +4455,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 484.5, 420.295711060948179, 331.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "The audio influencer can of course also be initialized as a normal max object without any visible user interface at all:",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -4577,41 +4563,16 @@
 						"lines" : [  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"button" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"default" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontsize" : [ 10.0 ]
-								}
-,
-								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
 								"newobj" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -4623,6 +4584,31 @@
 									}
 ,
 									"fontsize" : [ 10.0 ]
+								}
+,
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ]
+								}
+,
+								"button" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"toggle" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -4662,7 +4648,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1527.0, 1009.0 ],
+						"rect" : [ 34.0, 104.0, 1372.0, 762.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -4698,8 +4684,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 55.0, 583.0, 683.0, 47.0 ],
-									"presentation_linecount" : 3,
+									"patching_rect" : [ 55.0, 583.0, 686.0, 47.0 ],
 									"text" : "The pitch and chroma influences should in most cases be sent to a somax.player object where they are matched to the corpus to determine the most suitable output. The onset influence is used to trigger output (when a player is in Manual/Reactive mode) as well as segment the continuous stream of chroma messages.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -4724,8 +4709,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 55.0, 458.0, 187.0, 114.0 ],
-									"presentation_linecount" : 8,
+									"patching_rect" : [ 55.0, 458.0, 191.0, 114.0 ],
 									"text" : "Onsets are by default detected through the pitch estimation (Yin), but can be set to use the bonk~ object (spectral envelope-based onset detection) or synchronize to an external bang received on the second inlet of the audio influencer.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -4750,8 +4734,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 568.0, 310.0, 170.0, 194.0 ],
-									"presentation_linecount" : 14,
+									"patching_rect" : [ 568.0, 310.0, 171.0, 194.0 ],
 									"text" : "The chroma analysis is based on the ircamdescriptor~ object, but the output is filtered to create a smooth envelope of the chroma. This way, a harmonic profile is created even for monophonic content by taking previously played notes into account. If this behaviour is unwanted (for example when working with polyphonic input), the filtering can be turned off in the «Settings dialogue» .",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -4776,8 +4759,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 55.0, 310.0, 176.0, 114.0 ],
-									"presentation_linecount" : 10,
+									"patching_rect" : [ 55.0, 310.0, 179.0, 114.0 ],
 									"text" : "The Yin algorithm is used to estimate the pitch of the input. A number of options are available in the «Settings» dialogue for tuning the algorithm to the input. Note that this algorithm doesn't work well with polyphonic material.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -4804,7 +4786,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 547.0, 167.5, 191.0, 37.0 ],
+									"patching_rect" : [ 547.0, 167.5, 193.0, 37.0 ],
 									"text" : "The «Settings» button displays all the available options"
 								}
 
@@ -5144,41 +5126,16 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"button" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"default" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontsize" : [ 10.0 ]
-								}
-,
-								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
 								"newobj" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -5190,6 +5147,31 @@
 									}
 ,
 									"fontsize" : [ 10.0 ]
+								}
+,
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ]
+								}
+,
+								"button" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"toggle" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
