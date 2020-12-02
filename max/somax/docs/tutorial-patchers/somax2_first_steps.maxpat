@@ -46,6 +46,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-14",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -165,7 +166,7 @@
 				"box" : 				{
 					"bgmode" : 0,
 					"border" : 0,
-					"clickthrough" : 0,
+					"clickthrough" : 1,
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
@@ -326,8 +327,8 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 799.0, 143.0, 150.0, 64.0 ],
-													"text" : "this is just a picture showing what the interface should look like"
+													"patching_rect" : [ 784.0, 143.0, 166.0, 64.0 ],
+													"text" : "this is just a picture showing what the interface should look like when the tutorial is started"
 												}
 
 											}
@@ -449,7 +450,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 926.5, 121.0, 291.0, 422.0 ],
+									"patching_rect" : [ 926.5, 121.0, 295.0, 422.0 ],
 									"text" : "Somax II is an application for musical improvisation and composition. It is based on a generative model using a process similar to concatenative synthesis to provide stylistically coherent improvisation, while in real-time listening to and adapting to a musician (or any other type of audio or MIDI source). The model is operating in the symbolic domain and is trained on a corpus of choice, consisting of one or mulitple MIDI files, from which it draws its material used for improvisation.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, you need to make sure to add the main Somax II folder to your File Path.\n\nThis is done by (in the menubar) clicking Options -> File Preferences..., then clicking the \"+\" button and finally \"choose\", navigating to the place where your Somax2 folder is. Make sure to restart Max once this step is done.\n\nIf the interface now looks like the button above, please go to the second tab:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -635,7 +636,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1140.5, 498.0, 45.0, 19.0 ],
+									"patching_rect" : [ 1140.5, 484.0, 45.0, 19.0 ],
 									"rounded" : 8.0,
 									"text" : "stop",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -681,7 +682,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1020.5, 444.0, 45.0, 19.0 ],
+									"patching_rect" : [ 1053.5, 450.0, 45.0, 19.0 ],
 									"rounded" : 8.0,
 									"text" : "help",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -727,7 +728,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1015.0, 363.352144469525911, 20.0, 20.0 ],
+									"patching_rect" : [ 1004.0, 363.352144469525911, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5.40",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -809,12 +810,12 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-214",
-									"linecount" : 23,
+									"linecount" : 22,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 929.0, 229.0, 301.0, 315.0 ],
-									"text" : "Make sure that        is enabled,       is set to «Inlet (External)» and that        is toggled on. You should now hear the notes being played and see the input being analyzed and visualized in multiple places in the Midi Influencer.\n\nIdeally, you should also notice that the player starts to «jump», finding sequences in the corpus matching your input and jumping to these instead of playing the corpus in a linear, unaltered manner. This discontinuity is visualized in        .\n\nIf this is not the case, try decreasing the red slider at        \nor toggle the «mod12» button - this should lead to more matches and therefore a higher probability of jumps. For more information on these parameters, once again see                 .\n\n\nOnce this is working, we're ready to move on to a more musical example of Somax interaction.                the scheduler and go to the final part of this introductory tutorial",
+									"patching_rect" : [ 929.0, 229.0, 313.0, 301.0 ],
+									"text" : "Make sure that        is enabled,       is set to «Inlet (External)» and that        is toggled on. You should now hear the notes being played and see the input being analyzed and visualized in multiple places in the Midi Influencer.\n\nIdeally, you should also notice that the player starts to «jump», finding sequences in the corpus matching your input and jumping to these instead of playing the corpus in a linear, unaltered manner. This discontinuity is visualized in        .\n\nIf this is not the case, try decreasing the red slider at        \nor toggle the «mod12» button - this should lead to more matches and therefore a higher probability of jumps. For more information on these parameters, once again see                 \n\n\nOnce this is working, we're ready to move on to a more musical example of Somax interaction.                the scheduler and go to the final part of this introductory tutorial",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2066,7 +2067,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-113",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -2131,7 +2131,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 59.0, 103.0, 820.0, 763.0 ],
+										"rect" : [ 59.0, 79.0, 576.0, 641.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -2168,7 +2168,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "jit_matrix" ],
-													"patching_rect" : [ 5.0, 3.0, 585.629139072847693, 635.820254311814665 ],
+													"patching_rect" : [ 5.0, 3.0, 466.900843464795287, 635.820254311814779 ],
 													"pic" : "tutorial_flow.png"
 												}
 
@@ -3938,6 +3938,27 @@
 			}
 , 			{
 				"name" : "somax.contextualbutton.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "abstraction_path.js",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/misc",
+				"patcherrelativepath" : "../../misc",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.delay.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midirecord.maxpat",
 				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",

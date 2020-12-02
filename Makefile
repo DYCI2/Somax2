@@ -7,6 +7,13 @@ PYINSTALLER_TARGET_NAME = somax_server
 
 MAX_PYINSTALLER_LIBRARY = dist/max_pyinstaller_pkg
 
+MAX_PYTHON_RELEASE_PATH = release
+MAX_PYTHON_RELEASE_FOLDER = $(MAX_PYTHON_RELEASE_PATH)/Somax2
+MAX_PYTHON_RELEASE_DMG = release_dmg
+LIB_BUILD_PATH=build/$(MAX_PYTHON_RELEASE_PATH)
+LIB_BUILD_FOLDER=build/$(MAX_PYTHON_RELEASE_FOLDER)
+
+
 MAX_STANDALONE_FOLDER = dist/standalone
 MAX_STANDALONE = ${MAX_STANDALONE_FOLDER}/Somax.app
 
@@ -57,6 +64,23 @@ max-standalone-dmg:
 		# --background "installer_background.png"
 	mv Somax-Installer.dmg "${MAX_STANDALONE_FOLDER}"
 	
+max-python-dmg:
+	if [ -d $(LIB_BUILD_PATH) ]; then rm -r $(LIB_BUILD_PATH); fi
+	mkdir -p $(LIB_BUILD_FOLDER)
+	cp -RP max python README.md somax2.maxpat tutorial.maxpat $(LIB_BUILD_FOLDER)
+	create-dmg \
+		--volname "Somax2" \
+		--window-pos 200 120 \
+		--window-size 800 400 \
+		--icon "Somax2" 200 190 \
+		--background "media/dmg_installer_background.png" \
+		"Somax2.dmg" \
+		$(LIB_BUILD_PATH)
+	mkdir -p dist/somax2-release/
+	cp -r Somax2.dmg dist/somax2-release
+
+
+
 clean:
 	rm -r dist
 	rm -r build
