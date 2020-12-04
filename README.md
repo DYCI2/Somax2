@@ -24,13 +24,14 @@ This project is under development. Documentation will be added continuously.
 * Install Python by following the steps in the downloaded installer
 
 ### Step 3: Install Python Requirements
-* Inside a terminal window, change directory (`cd`) to the `python/somax` folder inside the `somax2` folder 
+* From a Terminal app window, change directory (`cd`) to the `python/somax` folder inside the `somax2` folder 
 * Install the requirements with `pip3 install -r requirements.txt`
-
+ 
 For example, using the default Max folder, type :
 
-$ cd ~/Documents/Max\ 8/Packages/Somax2/python/somax
-$ pip3 install -r requirements.txt
+cd ~/Documents/Max\ 8/Packages/Somax2/python/somax
+
+pip3 install -r requirements.txt
 
 A number of packages should now be installing. If the installation terminates without any errors, somax and all of its dependencies will now be successfully installed
 
