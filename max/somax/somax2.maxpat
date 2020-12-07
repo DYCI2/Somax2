@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 903.0, 632.0 ],
+		"rect" : [ 34.0, 78.0, 901.0, 627.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,168 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+					"id" : "obj-83",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1447.083333790302277, 438.447490706319741, 116.0, 22.0 ],
+					"text" : "loadmess enabled 0"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 10.0,
+					"id" : "obj-180",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 736.5, 64.673327137546494, 68.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 180.584603340888407, 577.0, 61.0, 20.0 ],
+					"rounded" : 20.0,
+					"text" : "Help",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"texton" : "",
+					"textoncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 10.0,
+					"id" : "obj-179",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 666.5, 64.673327137546494, 68.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 481.484607489371683, 396.157589068420407, 69.0, 20.0 ],
+					"rounded" : 20.0,
+					"text" : "Help",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"texton" : "",
+					"textoncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-177",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 655.0, 170.0, 154.0, 22.0 ],
+					"text" : "load somax.player.maxhelp"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-176",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 623.0, 146.0, 155.0, 22.0 ],
+					"text" : "load somax.server.maxhelp"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 10.0,
+					"id" : "obj-149",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 599.0, 64.673327137546494, 68.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 707.379441491484386, 295.673327137546494, 61.0, 20.0 ],
+					"rounded" : 20.0,
+					"text" : "Help",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"texton" : "",
+					"textoncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-167",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 599.0, 121.5, 203.0, 22.0 ],
+					"text" : "load somax.audioinfluencer.maxhelp"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 10.0,
+					"id" : "obj-148",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 525.0, 64.673327137546494, 68.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 439.984607489371683, 296.225000702995317, 61.0, 20.0 ],
+					"rounded" : 20.0,
+					"text" : "Help",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"texton" : "",
+					"textoncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-146",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 525.0, 97.5, 195.0, 22.0 ],
+					"text" : "load somax.midiinfluencer.maxhelp"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+					"id" : "obj-124",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 525.0, 146.0, 51.0, 22.0 ],
+					"text" : "pcontrol"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"bgmode" : 0,
 					"border" : 0,
@@ -363,7 +525,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-158",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -699,7 +860,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-56",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1252,7 +1412,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-129",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1356,7 +1515,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-104",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1374,7 +1532,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-103",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1437,7 +1594,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-60",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -2870,6 +3026,27 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-124", 0 ],
+					"source" : [ "obj-146", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-146", 0 ],
+					"source" : [ "obj-148", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-167", 0 ],
+					"source" : [ "obj-149", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"color" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-22", 0 ],
 					"source" : [ "obj-15", 3 ]
@@ -2996,6 +3173,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-124", 0 ],
+					"source" : [ "obj-167", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-26", 1 ],
 					"midpoints" : [ 314.5, 963.33335018157959, 426.0, 963.33335018157959 ],
 					"source" : [ "obj-168", 0 ]
@@ -3027,6 +3211,34 @@
 				"patchline" : 				{
 					"destination" : [ "obj-26", 0 ],
 					"source" : [ "obj-175", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-124", 0 ],
+					"source" : [ "obj-176", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-124", 0 ],
+					"source" : [ "obj-177", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-176", 0 ],
+					"source" : [ "obj-179", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-177", 0 ],
+					"source" : [ "obj-180", 0 ]
 				}
 
 			}
@@ -3522,6 +3734,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-22", 1 ],
+					"source" : [ "obj-83", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-89", 0 ],
 					"source" : [ "obj-85", 0 ]
 				}
@@ -3590,54 +3809,54 @@
 			"obj-49::obj-79::obj-1" : [ "live.text[3]", "live.text", 0 ],
 			"obj-49::obj-79::obj-2" : [ "live.text[4]", "live.text", 0 ],
 			"obj-49::obj-79::obj-3" : [ "live.text[5]", "live.text", 0 ],
-			"obj-49::obj-87::obj-1" : [ "live.text[7]", "live.text", 0 ],
-			"obj-49::obj-87::obj-2" : [ "live.text[6]", "live.text", 0 ],
-			"obj-49::obj-87::obj-3" : [ "live.text[8]", "live.text", 0 ],
-			"obj-49::obj-89::obj-1" : [ "live.text[10]", "live.text", 0 ],
-			"obj-49::obj-89::obj-2" : [ "live.text[9]", "live.text", 0 ],
-			"obj-49::obj-89::obj-3" : [ "live.text[11]", "live.text", 0 ],
-			"obj-49::obj-91::obj-1" : [ "live.text[13]", "live.text", 0 ],
-			"obj-49::obj-91::obj-2" : [ "live.text[12]", "live.text", 0 ],
-			"obj-49::obj-91::obj-3" : [ "live.text[14]", "live.text", 0 ],
+			"obj-49::obj-87::obj-1" : [ "live.text[8]", "live.text", 0 ],
+			"obj-49::obj-87::obj-2" : [ "live.text[7]", "live.text", 0 ],
+			"obj-49::obj-87::obj-3" : [ "live.text[6]", "live.text", 0 ],
+			"obj-49::obj-89::obj-1" : [ "live.text[11]", "live.text", 0 ],
+			"obj-49::obj-89::obj-2" : [ "live.text[10]", "live.text", 0 ],
+			"obj-49::obj-89::obj-3" : [ "live.text[9]", "live.text", 0 ],
+			"obj-49::obj-91::obj-1" : [ "live.text[14]", "live.text", 0 ],
+			"obj-49::obj-91::obj-2" : [ "live.text[13]", "live.text", 0 ],
+			"obj-49::obj-91::obj-3" : [ "live.text[12]", "live.text", 0 ],
 			"parameterbanks" : 			{
 
 			}
 ,
 			"parameter_overrides" : 			{
 				"obj-49::obj-87::obj-1" : 				{
-					"parameter_longname" : "live.text[7]"
-				}
-,
-				"obj-49::obj-87::obj-2" : 				{
-					"parameter_longname" : "live.text[6]"
-				}
-,
-				"obj-49::obj-87::obj-3" : 				{
 					"parameter_longname" : "live.text[8]"
 				}
 ,
+				"obj-49::obj-87::obj-2" : 				{
+					"parameter_longname" : "live.text[7]"
+				}
+,
+				"obj-49::obj-87::obj-3" : 				{
+					"parameter_longname" : "live.text[6]"
+				}
+,
 				"obj-49::obj-89::obj-1" : 				{
-					"parameter_longname" : "live.text[10]"
-				}
-,
-				"obj-49::obj-89::obj-2" : 				{
-					"parameter_longname" : "live.text[9]"
-				}
-,
-				"obj-49::obj-89::obj-3" : 				{
 					"parameter_longname" : "live.text[11]"
 				}
 ,
+				"obj-49::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[10]"
+				}
+,
+				"obj-49::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[9]"
+				}
+,
 				"obj-49::obj-91::obj-1" : 				{
-					"parameter_longname" : "live.text[13]"
+					"parameter_longname" : "live.text[14]"
 				}
 ,
 				"obj-49::obj-91::obj-2" : 				{
-					"parameter_longname" : "live.text[12]"
+					"parameter_longname" : "live.text[13]"
 				}
 ,
 				"obj-49::obj-91::obj-3" : 				{
-					"parameter_longname" : "live.text[14]"
+					"parameter_longname" : "live.text[12]"
 				}
 
 			}
@@ -3647,259 +3866,259 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "somax.player.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.player.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.atom.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.corpusview.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "peakmeter.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.multistatebutton.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.server.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.server.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.serverstatus.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.audioinfluencer.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.audioinfluencer.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "OMax.yin+.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Yin+.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "sr.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "bc.autoname.js",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/externals",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/externals",
 				"patcherrelativepath" : "./externals",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "audio2chroma.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midioutput.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.audioinput.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midiinfluencer.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midiinfluencer.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "midi2chroma.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "computeMemoryPitchClass.js",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
 				"patcherrelativepath" : "./misc",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midiinput.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.mixer1p.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.legacy.harmonicrouter.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.legacy.onsetrouter.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.legacy.melodicrouter.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midioutput2.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.corpusbuilder.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "omnimidiflush.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.latency.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.beattracker.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.beattracker.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.contextualbutton.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "abstraction_path.js",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
 				"patcherrelativepath" : "./misc",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.delay.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midirecord.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
@@ -3933,7 +4152,6 @@
 				"type" : "iLaX"
 			}
  ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-72", "obj-9", "obj-67", "obj-68", "obj-65", "obj-150" ]
 			}
@@ -3998,11 +4216,11 @@
 					"fontsize" : [ 10.0 ]
 				}
 ,
-				"button" : 				{
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
-				"toggle" : 				{
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

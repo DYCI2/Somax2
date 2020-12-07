@@ -160,7 +160,7 @@
 									"patching_rect" : [ 167.0, 628.0, 684.0, 47.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
-									"presentation_rect" : [ 113.0, 642.0, 565.0, 47.0 ],
+									"presentation_rect" : [ 113.0, 642.0, 566.0, 47.0 ],
 									"text" : "Note: Several parameters consist of both a slider and a number box that can be manipulated. As a general rule, sliders have a lower and upper bound specifying a reasonable range for the parameter. It is however in many cases possible to use the numbox to set the parameter to a value outside of this range.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -181,7 +181,7 @@
 									"patching_rect" : [ 21.0, 622.541015625, 75.0, 70.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
-									"presentation_rect" : [ 15.0, 628.0, 89.0, 59.0 ],
+									"presentation_rect" : [ 15.0, 628.0, 92.0, 59.0 ],
 									"text" : "Should absolutely not be used in real-time!",
 									"textjustification" : 1
 								}
@@ -931,10 +931,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 199.0, 194.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 203.0, 194.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 11,
-									"presentation_rect" : [ 383.0, 235.5, 278.0, 154.0 ],
+									"presentation_rect" : [ 383.0, 235.5, 281.0, 154.0 ],
 									"text" : "Pressing this button will delete the player from the server and recreate it. This button is useful if you for some reason have to restart the server or for some reason run into issues where you have to restart the system.\n\nWARNING: This is not real-time compatible (it may pause the server for several seconds while reloading, thus interrupting any performance) and should only be used if something goes terribly wrong!",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2770,14 +2770,14 @@
 			}
 , 			{
 				"name" : "player_compact.png",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/media",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/media",
 				"patcherrelativepath" : "../media",
 				"type" : "PNG",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "playerui.png",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/media",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/media",
 				"patcherrelativepath" : "../media",
 				"type" : "PNG",
 				"implicit" : 1

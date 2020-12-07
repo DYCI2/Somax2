@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1372.0, 736.0 ],
+		"rect" : [ 34.0, 79.0, 1047.0, 736.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -46,7 +46,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-14",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -112,7 +111,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.5, 13.147855530474089, 299.0, 27.0 ],
-									"text" : "5. Musical Examples",
+									"text" : "5. Going Further",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -122,12 +121,12 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 2,
+									"linecount" : 21,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.5, 53.647855530474089, 299.0, 33.0 ],
-									"text" : "This tutorial (and many more) will be added in a future release of Somax II.",
+									"patching_rect" : [ 10.5, 53.647855530474089, 299.0, 288.0 ],
+									"text" : "This tutorial intended to give you a quick introduction to Somax and to serve as a starting point for both audio and MIDI-based interaction.\n\nThere are however a number of other aspects of the system to explore, for example connecting a MIDI keyboard, audio file or a sequencer (using an IAC bus) as an input, using multiple players who listen to each other, constructing your own corpora, experimenting with the tempo and beat tracker, and many other possibilies.\n\nIn the end, the quality of the output will always depend largely on how well the influencers and the player(s) are tuned with respect to the corpus and the input, so it's highly encouraged to experiment with the different parameters available. The help files («Help» buttons in each module) will provide a good starting point for going further, outline a few use cases as well as provide detailed descriptions about each individual parameter.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -189,7 +188,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 129.0, 640.0, 480.0 ],
+						"rect" : [ 34.0, 78.0, 1372.0, 736.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -446,11 +445,11 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 31,
+									"linecount" : 30,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 926.5, 121.0, 295.0, 422.0 ],
+									"patching_rect" : [ 926.5, 121.0, 305.0, 409.0 ],
 									"text" : "Somax II is an application for musical improvisation and composition. It is based on a generative model using a process similar to concatenative synthesis to provide stylistically coherent improvisation, while in real-time listening to and adapting to a musician (or any other type of audio or MIDI source). The model is operating in the symbolic domain and is trained on a corpus of choice, consisting of one or mulitple MIDI files, from which it draws its material used for improvisation.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, you need to make sure to add the main Somax II folder to your File Path.\n\nThis is done by (in the menubar) clicking Options -> File Preferences..., then clicking the \"+\" button and finally \"choose\", navigating to the place where your Somax2 folder is. Make sure to restart Max once this step is done.\n\nIf the interface now looks like the button above, please go to the second tab:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -608,6 +607,144 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-8",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 1147.0, 467.352144469525911, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "5.60",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-7",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 139.0, 218.352144469525911, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "5.60",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-222",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 1213.0, 400.0, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "5.50",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-221",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 1000.0, 374.352144469525911, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "5.40",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-2",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 1058.0, 179.352144469525911, 19.0, 19.0 ],
+									"rounded" : 60.0,
+									"text" : "4.2",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-10",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 537.0, 83.852144469525911, 19.0, 19.0 ],
+									"rounded" : 60.0,
+									"text" : "4.2",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-230",
@@ -617,28 +754,9 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1007.5, 583.0, 147.0, 19.0 ],
+									"patching_rect" : [ 1007.5, 533.0, 147.0, 19.0 ],
 									"rounded" : 8.0,
 									"text" : "continue to the next step -->",
-									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 1,
-									"fontsize" : 10.0,
-									"id" : "obj-227",
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 1140.5, 484.0, 45.0, 19.0 ],
-									"rounded" : 8.0,
-									"text" : "stop",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 								}
@@ -673,6 +791,22 @@
 							}
 , 							{
 								"box" : 								{
+									"fontface" : 0,
+									"fontsize" : 12.0,
+									"id" : "obj-6",
+									"linecount" : 15,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 929.0, 320.352144469525911, 306.0, 208.0 ],
+									"presentation_linecount" : 14,
+									"text" : "Ideally, you should also notice that the player starts to «jump», finding sequences in the corpus matching your input and jumping to these instead of playing the corpus in a linear, unaltered manner. This discontinuity is visualized in        .\n\nIf this is not the case, try decreasing the red slider at        \nwhich should lead to more matches and therefore a higher probability of jumps. For more information on these parameters, once again see               .\n\nA final step is to set the playing mode at        to «Continuous». In this mode, the player will regardless of input continuously generate output but jump in a similar manner as above when input is received.",
+									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-85",
@@ -682,57 +816,11 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1053.5, 450.0, 45.0, 19.0 ],
+									"patching_rect" : [ 1118.0, 443.352144469525911, 45.0, 19.0 ],
 									"rounded" : 8.0,
 									"text" : "help",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 8.0,
-									"hint" : "",
-									"id" : "obj-222",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 1215.0, 390.0, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "5.50",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 8.0,
-									"hint" : "",
-									"id" : "obj-221",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 1004.0, 363.352144469525911, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "5.40",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
 
 							}
@@ -751,7 +839,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1042.0, 241.0, 20.0, 20.0 ],
+									"patching_rect" : [ 1187.0, 191.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5.3",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -774,7 +862,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1099.0, 229.0, 20.0, 20.0 ],
+									"patching_rect" : [ 1012.5, 191.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5.2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -797,7 +885,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1015.0, 229.0, 20.0, 20.0 ],
+									"patching_rect" : [ 929.0, 192.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5.1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -810,12 +898,12 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-214",
-									"linecount" : 22,
+									"linecount" : 11,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 929.0, 229.0, 313.0, 301.0 ],
-									"text" : "Make sure that        is enabled,       is set to «Inlet (External)» and that        is toggled on. You should now hear the notes being played and see the input being analyzed and visualized in multiple places in the Midi Influencer.\n\nIdeally, you should also notice that the player starts to «jump», finding sequences in the corpus matching your input and jumping to these instead of playing the corpus in a linear, unaltered manner. This discontinuity is visualized in        .\n\nIf this is not the case, try decreasing the red slider at        \nor toggle the «mod12» button - this should lead to more matches and therefore a higher probability of jumps. For more information on these parameters, once again see                 \n\n\nOnce this is working, we're ready to move on to a more musical example of Somax interaction.                the scheduler and go to the final part of this introductory tutorial",
+									"patching_rect" : [ 1314.0, 633.0, 359.0, 154.0 ],
+									"text" : "Make sure that        is enabled,       is set to «Inlet (External)» and that        is toggled on. You should now hear the notes being played and see the input being analyzed and visualized in multiple places in the Midi Influencer.\n\n         \n\n\nOnce this is working, we're ready to move on to a more musical example of Somax interaction.                the scheduler and go to the final part of this introductory tutorial",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -880,7 +968,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 931.0, 142.352144469525911, 78.0, 12.0 ],
+									"patching_rect" : [ 1120.0, 168.352144469525911, 78.0, 12.0 ],
 									"rounded" : 8.0,
 									"text" : "Interaction I",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -893,12 +981,12 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-206",
-									"linecount" : 2,
+									"linecount" : 13,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 929.0, 124.352144469525911, 320.0, 33.0 ],
-									"text" : "While the system is running (from the previous steps in      \n                        ), play a few notes on the kslider below",
+									"patching_rect" : [ 929.0, 124.352144469525911, 312.0, 194.0 ],
+									"text" : "Next, we'll interact with the system using MIDI.\n\nFIrst of all, make sure that you've completed the steps in the previous tab (if not: go back to                          ). You can once again disable       and instead make sure that \n      is enabled,        set to «Inlet (External)» and        is enabled. Now, play a few notes on the keyboard below. You should be able to hear them, as well as the matching output from the player.\n\n\n\n\n",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -935,7 +1023,7 @@
 									"offset" : 60,
 									"outlettype" : [ "int", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 998.0, 162.0, 168.0, 53.0 ],
+									"patching_rect" : [ 992.0, 258.0, 168.0, 53.0 ],
 									"range" : 24
 								}
 
@@ -1064,8 +1152,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 929.0, 79.852144469525911, 146.0, 27.0 ],
-									"text" : "Step ",
+									"patching_rect" : [ 929.0, 79.852144469525911, 310.0, 27.0 ],
+									"text" : "Step      : Interact (MIDI)",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1167,6 +1255,20 @@
 								}
 
 							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+									"id" : "obj-3",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 1294.5, 602.352144469525911, 388.0, 314.295711060948179 ],
+									"proportion" : 0.5
+								}
+
+							}
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
@@ -1229,14 +1331,6 @@
 									"destination" : [ "obj-234", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-209", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-233", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-227", 1 ]
 								}
 
 							}
@@ -1338,7 +1432,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 129.0, 1145.0, 744.0 ],
+						"rect" : [ 34.0, 79.0, 1047.0, 736.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1367,6 +1461,261 @@
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.0,
+									"bubbleside" : 2,
+									"id" : "obj-16",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 165.875, 540.352144469525911, 151.25, 52.0 ],
+									"presentation_linecount" : 2,
+									"text" : "Make sure to use a valid midi device for the output"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-15",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 975.0, 624.352144469525911, 19.0, 19.0 ],
+									"rounded" : 60.0,
+									"text" : "4.50",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-14",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 537.0, 114.852144469525911, 19.0, 19.0 ],
+									"rounded" : 60.0,
+									"text" : "4.30",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 1.0,
+									"bubbleside" : 2,
+									"id" : "obj-13",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 541.75, 159.852144469525911, 239.25, 52.0 ],
+									"text" : "make sure to disable this to avoid feedback (if you're not using headphones)"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-9",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 775.0, 205.852144469525911, 19.0, 19.0 ],
+									"rounded" : 60.0,
+									"text" : "4.40",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-10",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 537.0, 83.852144469525911, 19.0, 19.0 ],
+									"rounded" : 60.0,
+									"text" : "4.2",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-11",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 786.0, 101.352144469525911, 19.0, 19.0 ],
+									"rounded" : 60.0,
+									"text" : "4.1",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-8",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 952.5, 608.852144469525911, 19.0, 19.0 ],
+									"rounded" : 60.0,
+									"text" : "4.4",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-7",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 272.0, 457.852144469525911, 19.0, 19.0 ],
+									"rounded" : 60.0,
+									"text" : "4.50",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-6",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 1024.0, 595.852144469525911, 19.0, 19.0 ],
+									"rounded" : 60.0,
+									"text" : "4.3",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-5",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 913.0, 595.852144469525911, 19.0, 19.0 ],
+									"rounded" : 60.0,
+									"text" : "4.2",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.0,
+									"bubbleside" : 2,
+									"fontface" : 0,
+									"id" : "obj-32",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 987.5, 5.0, 231.0, 79.0 ],
+									"text" : "If you've already started the server and have a terminal window running, this button will not be present and you can disregard this step.",
+									"textjustification" : 1
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"comment" : "",
 									"hidden" : 1,
@@ -1403,7 +1752,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 989.5, 665.0, 147.0, 19.0 ],
+									"patching_rect" : [ 989.5, 671.0, 147.0, 19.0 ],
 									"rounded" : 8.0,
 									"text" : "continue to the next step -->",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -1431,29 +1780,6 @@
 									"fontface" : 1,
 									"fontsize" : 8.0,
 									"hint" : "",
-									"id" : "obj-164",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 128.0, 215.852144469525911, 19.0, 19.0 ],
-									"rounded" : 60.0,
-									"text" : "4.1",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 8.0,
-									"hint" : "",
 									"id" : "obj-163",
 									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
@@ -1463,7 +1789,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1106.0, 622.852144469525911, 19.0, 19.0 ],
+									"patching_rect" : [ 1165.0, 582.852144469525911, 19.0, 19.0 ],
 									"rounded" : 60.0,
 									"text" : "4.1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1487,12 +1813,12 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-156",
-									"linecount" : 5,
+									"linecount" : 7,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 910.0, 581.852144469525911, 314.0, 74.0 ],
-									"text" : "Toggling «Run» will start the scheduler, and you should, assuming that you loaded a corpus in the previous step, hear the Player playing the corpus (unaltered). If not, make sure that the playing mode at         is set to «Continuous» and try again",
+									"patching_rect" : [ 910.0, 581.852144469525911, 305.0, 100.0 ],
+									"text" : "Finally, enable audio input by making sure that         and  \n      are enabled and        is set to «Audio Input», but disable       to avoid feedback and finally start the server by toggling       . Now, hum a few notes (or say a few words) and you should hear Somax providing accompaniment to your voice based on the corpus you selected!",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1528,8 +1854,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 910.0, 552.852144469525911, 146.0, 27.0 ],
-									"text" : "Step ",
+									"patching_rect" : [ 910.0, 552.852144469525911, 305.0, 27.0 ],
+									"text" : "Step      : Interact (microphone)",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1543,31 +1869,8 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 904.0, 547.704288939051821, 318.0, 111.295711060948179 ],
+									"patching_rect" : [ 904.0, 547.704288939051821, 320.0, 132.295711060948179 ],
 									"proportion" : 0.5
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-151",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 269.5, 457.852144469525911, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "4",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
 
 							}
@@ -1651,8 +1954,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 910.0, 434.852144469525911, 146.0, 27.0 ],
-									"text" : "Step ",
+									"patching_rect" : [ 910.0, 434.852144469525911, 287.0, 27.0 ],
+									"text" : "Step      : Load a corpus",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1776,8 +2079,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 910.0, 261.852144469525911, 146.0, 27.0 ],
-									"text" : "Step ",
+									"patching_rect" : [ 910.0, 261.852144469525911, 301.0, 27.0 ],
+									"text" : "Step      : Instantiating the player",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1840,7 +2143,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 910.0, 104.852144469525911, 310.0, 114.0 ],
-									"text" : "Press this button to start the Server. A terminal window will open (and should not be closed until the end of the session), displaying some text indicating that the server has been started. The same information will also be displayed in the Max Console. Note: The first time you start the server, mac OS may ask you for permissions to run this file. If everything works correctly, the status window of the server should now say",
+									"text" : "Press this button to start the server. A terminal window will open (and should not be closed until the end of the session), displaying some text indicating that the server has been started. The same information will also be displayed in the Max Console. Note: The first time you start the server, mac OS may ask you for permissions to run this file. If everything works correctly, the status window of the server should now say",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1876,8 +2179,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 910.0, 75.852144469525911, 146.0, 27.0 ],
-									"text" : "Step ",
+									"patching_rect" : [ 910.0, 75.852144469525911, 283.0, 27.0 ],
+									"text" : "Step      : Starting the server",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2067,6 +2370,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-113",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -2370,7 +2674,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 926.0, 513.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "3",
+									"text" : "4",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -3213,7 +3517,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 6.0, 56.0, 1225.0, 28.0 ],
 					"tabcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
-					"tabs" : [ "1. Introduction", "2. Module Overview", "3. Interaction I", "4. Interaction II", "5. Musical Example" ]
+					"tabs" : [ "1. Introduction", "2. Module Overview", "3. Interaction I", "4. Interaction II", "5. Going Further" ]
 				}
 
 			}
@@ -3578,7 +3882,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 1 ],
-					"midpoints" : [ 466.5, 467.0, 297.833333333333314, 467.0 ],
+					"midpoints" : [ 466.5, 466.0, 297.833333333333314, 466.0 ],
 					"source" : [ "obj-238", 3 ]
 				}
 
@@ -3700,301 +4004,301 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "somax2.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax",
+				"bootpath" : "~/MaxDev/Somax2/max/somax",
 				"patcherrelativepath" : "../..",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.player.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.player.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.atom.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.corpusview.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "peakmeter.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.multistatebutton.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.server.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.server.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.serverstatus.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.audioinfluencer.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.audioinfluencer.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "OMax.yin+.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Yin+.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "sr.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "bc.autoname.js",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/externals",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/externals",
 				"patcherrelativepath" : "../../externals",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "audio2chroma.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midioutput.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.audioinput.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midiinfluencer.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midiinfluencer.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "midi2chroma.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "computeMemoryPitchClass.js",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
 				"patcherrelativepath" : "../../misc",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midiinput.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.mixer1p.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.legacy.harmonicrouter.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.legacy.onsetrouter.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.legacy.melodicrouter.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midioutput2.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.corpusbuilder.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "omnimidiflush.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.latency.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.beattracker.compact.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.beattracker.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.contextualbutton.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "abstraction_path.js",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
 				"patcherrelativepath" : "../../misc",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.delay.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midirecord.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "tutorial_flow.png",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/media",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/media",
 				"patcherrelativepath" : "../../media",
 				"type" : "PNG",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "players_missing.png",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/media",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/media",
 				"patcherrelativepath" : "../../media",
 				"type" : "PNG",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "instantiate_players.png",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/media",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/media",
 				"patcherrelativepath" : "../../media",
 				"type" : "PNG",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "ready.png",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/media",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/media",
 				"patcherrelativepath" : "../../media",
 				"type" : "PNG",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "main_ui.png",
-				"bootpath" : "~/Documents/Max 8/Packages/Somax2/max/somax/media",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/media",
 				"patcherrelativepath" : "../../media",
 				"type" : "PNG",
 				"implicit" : 1

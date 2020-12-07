@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 441.0, 660.0 ],
+		"rect" : [ 0.0, 45.0, 440.0, 659.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -349,7 +349,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1567.0, 1554.384615384615245, 70.0, 22.0 ],
-					"text" : "loadmess 2"
+					"text" : "loadmess 1"
 				}
 
 			}
@@ -693,8 +693,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 2307.0, 1146.680180180180059, 163.0, 22.0 ],
-					"text" : "set 4 0 1, set 5 0 1, set 6 0 1,"
+					"patching_rect" : [ 2307.0, 1146.680180180180059, 55.0, 22.0 ],
+					"text" : "set 5 0 1"
 				}
 
 			}
@@ -1276,13 +1276,13 @@
 						"disabled" : [ 0 ],
 						"harmonicbypass" : [ 0 ],
 						"harmonicngramorder" : [ 2 ],
-						"harmonincpeakdecay" : [ 2.2 ],
+						"harmonincpeakdecay" : [ 2.6 ],
 						"heldnotesmode" : [ 1 ],
 						"ignorephase" : [ 1 ],
 						"melodicbypass" : [ 0 ],
 						"melodicmod12" : [ 0 ],
 						"melodicngramorder" : [ 3 ],
-						"melodicpeakdecay" : [ 2.2 ],
+						"melodicpeakdecay" : [ 2.6 ],
 						"outputthreshold" : [ 0.0 ],
 						"playingmode" : [ 1 ],
 						"pollpeaks" : [ 1 ],
@@ -1292,7 +1292,7 @@
 						"selfbypass" : [ 0 ],
 						"selfmod12" : [ 0 ],
 						"selfngramorder" : [ 3 ],
-						"selfpeakdecay" : [ 2.2 ],
+						"selfpeakdecay" : [ 2.6 ],
 						"simultaneousonsets" : [ 1 ],
 						"transpositionconsistency" : [ 1.0 ]
 					}
@@ -1518,7 +1518,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 449.25, 957.0, 568.0, 22.0 ],
-					"text" : "set_param Player melodic::_weight 0.33"
+					"text" : "set_param Player melodic::_weight 0.711133"
 				}
 
 			}
@@ -6083,8 +6083,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1938.0, 1586.384615384615245, 144.0, 22.0 ],
-					"text" : "loadmess 0.33 0.33 0.33"
+					"patching_rect" : [ 1938.0, 1586.384615384615245, 127.0, 22.0 ],
+					"text" : "loadmess 0.3 0.6 0.45"
 				}
 
 			}
@@ -6229,7 +6229,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 930.977848101265863, 1553.384615384615245, 80.0, 22.0 ],
-					"text" : "loadmess 2.2"
+					"text" : "loadmess 2.6"
 				}
 
 			}
@@ -6350,8 +6350,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 275.727848101265806, 1553.5, 75.0, 22.0 ],
-					"text" : "loadmess 0"
+					"patching_rect" : [ 275.727848101265806, 1553.5, 70.0, 22.0 ],
+					"text" : "loadmess 1"
 				}
 
 			}
@@ -11149,9 +11149,6 @@
 				"boxes" : [ "obj-377", "obj-378" ]
 			}
 , 			{
-				"boxes" : [ "obj-211", "obj-205", "obj-206", "obj-213", "obj-226", "obj-235", "obj-175", "obj-177", "obj-179", "obj-184", "obj-193", "obj-194", "obj-204", "obj-208", "obj-209", "obj-212", "obj-195", "obj-57", "obj-210", "obj-185", "obj-187", "obj-188" ]
-			}
-, 			{
 				"boxes" : [ "obj-442", "obj-441", "obj-439" ]
 			}
 , 			{
@@ -11192,6 +11189,9 @@
 			}
 , 			{
 				"boxes" : [ "obj-260", "obj-172", "obj-164", "obj-146", "obj-143", "obj-151", "obj-153", "obj-149", "obj-150", "obj-56", "obj-132", "obj-136" ]
+			}
+, 			{
+				"boxes" : [ "obj-211", "obj-205", "obj-206", "obj-213", "obj-226", "obj-235", "obj-175", "obj-177", "obj-179", "obj-184", "obj-193", "obj-194", "obj-204", "obj-208", "obj-209", "obj-212", "obj-195", "obj-57", "obj-210", "obj-185", "obj-187", "obj-188" ]
 			}
  ],
 		"styles" : [ 			{
@@ -11236,11 +11236,11 @@
 					"fontsize" : [ 10.0 ]
 				}
 ,
-				"button" : 				{
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
-				"toggle" : 				{
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
