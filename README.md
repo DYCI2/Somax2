@@ -10,6 +10,7 @@ This project is under development. Documentation will be added continuously.
 * macOS 10.14 or later (may work with earlier versions but has not been tested)
 * Max 7 or later
 * Python 3.7 or later
+* CNMAT Externals for Max (can be installed through the Max Package Manager)
 
 ## Installation
 
