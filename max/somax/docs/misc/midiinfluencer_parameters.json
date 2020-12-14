@@ -1,0 +1,30 @@
+{
+    "pitchchannels": {
+        "title": "Pitch Channels",
+        "description": "Use this to select which MIDI channels should be used for pitch analysis. An in-depth explanation of this parameter can be found in the «multiple source» tab"
+    },
+    "chromachannels": {
+        "title": "Chroma Channels",
+        "description": "Use this to select which MIDI channels should be used for chroma analysis. An in-depth explanation of this parameter can be found in the «multiple source» tab"
+    },
+    "onsetchannels": {
+        "title": "Onset Channels",
+        "description": "Use this to select which MIDI channels should be used for onset analysis. An in-depth explanation of this parameter can be found in the «multiple source» tab"
+    },
+    "pitchfromchords": {
+        "title": "Pitch Analysis",
+        "description": "If the «Onset Threshold» parameter is not bypassed, this parameter specifies which pitch analysis method should be used for polyphonic input. Note that it is recommended (but not required) to make sure that the receiving somax.player uses the same analysis method as the MIDI influencer."
+    },
+    "onsetfrom": {
+        "title": "Onset Analysis",
+        "description": "This parameter specifies how onset segmentation should be done by the MIDI influencer. By default, this is set to be triggered by each MIDI Note On message, but can also be changed to synchronize to an external pulse or input of some sort by sending bangs to the middle inlet of the MIDI influencer."
+    },
+    "threshold": {
+        "title": "Onset Threshold",
+        "description": "When bypassed, any MIDI Note On generates new pitch onset influences. This can sometimes be problematic for polyphonic MIDI input. By turning the bypassing off, the MIDI influencer will the number of milliseconds specified by this value for further input before analysing any received messages, thereby grouping the input into chords. This behaviour is further explained in the «polyphony» tab."
+    },
+    "flush": {
+        "title": "Flush",
+        "description": "Flushes stuck notes in the chroma analysis without producing any output."
+    }
+}

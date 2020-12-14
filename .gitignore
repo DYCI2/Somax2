@@ -11,6 +11,7 @@
 # Icon must end with two \r
 Icon
 
+
 # Thumbnails
 ._*
 
@@ -223,4 +224,5 @@ dmypy.json
 
 # End of https://www.gitignore.io/api/macos,python,pycharm+all
 
-*.log
+python/somax/corpus/_*.json
+python/somax/log/*.log
