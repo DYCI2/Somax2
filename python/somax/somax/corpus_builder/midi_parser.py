@@ -11,7 +11,7 @@ from .matrix_keys import MatrixKeys as Keys
 class _MidiNote:
     """ Temporary class used only while constructing the NoteMatrix"""
 
-    def __init__(self, note: int, vel: int, ch: int, onset_tick: int, onset_time: float, tempo: float,
+    def __init__(self, note: int, vel: int, ch: int, onset_tick: int, onset_time: float, tempo: float, bar: float,
                  end_tick: Optional[int] = None, end_time: Optional[float] = None):
         self.note: int = note
         self.vel: int = vel
@@ -19,6 +19,7 @@ class _MidiNote:
         self.onset_tick: int = onset_tick
         self.onset_time: float = onset_time
         self.tempo: float = tempo
+        self.bar: float = bar
         self.end_tick: Optional[int] = end_tick
         self.end_time: Optional[float] = end_time
 
@@ -48,7 +49,7 @@ class MidiParser:
         for nn, vel, ch, dur in zip(note_numbers, velocities, channels, durations_tick):
             quantized_duration_tick: int = round(dur * ppq)
             duration_sec: float = quantized_duration_tick / ppq * 60 / tempo
-            notes.append(_MidiNote(nn, vel, ch, onset_tick, onset_time, tempo,
+            notes.append(_MidiNote(nn, vel, ch, onset_tick, onset_time, tempo, 0,
                                    onset_tick + quantized_duration_tick, onset_time + duration_sec))
             onset_tick += quantized_duration_tick
             onset_time += duration_sec
@@ -62,15 +63,20 @@ class MidiParser:
         completed_notes: List[_MidiNote] = []
         current_tick: int = 0
         current_time: float = 0.0
+        current_bar: float = 1.0
+        current_bar_factor: int = 1
 
         for msg in mido.merge_tracks(midi_file.tracks):
             current_tick += msg.time
             current_time += mido.tick2second(msg.time, ticks_per_beat, mido.bpm2tempo(tempo_bpm))
+            current_bar += msg.time / ticks_per_beat * current_bar_factor
             if msg.type == 'set_tempo':
                 tempo_bpm = mido.tempo2bpm(msg.tempo)
+            if msg.type == 'time_signature':
+                current_bar_factor = msg.denominator / (4 * msg.numerator)
             elif msg.type == 'note_on' and msg.velocity > 0:
                 held_notes.append(_MidiNote(msg.note, msg.velocity, msg.channel, current_tick,
-                                            current_time, tempo_bpm))
+                                            current_time, tempo_bpm, current_bar))
             elif msg.type == 'note_off' or (msg.type == 'note_on' and msg.velocity == 0):
                 completed: List[_MidiNote] = [note for note in held_notes if note.matches(msg.note, msg.channel)]
                 for note in completed:
@@ -130,9 +136,10 @@ class MidiParser:
             absolute_duration: float = (note.end_time - note.onset_time) * 1000.0
             relative_onset: float = note.onset_tick / ticks_per_beat
             absolute_onset: float = note.onset_time * 1000.0
-            tempo_bpm = note.tempo
+            tempo_bpm: float = note.tempo
+            bar_number: float = note.bar
             note_matrix[i] = [note_number, velocity, channel, relative_onset, absolute_onset, relative_duration,
-                              absolute_duration, tempo_bpm]
+                              absolute_duration, tempo_bpm, bar_number]
 
         note_matrix = note_matrix[note_matrix[:, Keys.REL_ONSET.value].argsort()]
 

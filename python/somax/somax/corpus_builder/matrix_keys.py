@@ -10,3 +10,4 @@ class MatrixKeys(Enum):
     REL_DURATION = 5
     ABS_DURATION = 6
     TEMPO = 7
+    BAR_NUMBER = 8

@@ -41,7 +41,3 @@ class NoteMatrix:
     def split_by_channel(self, channels: Tuple[int]) -> 'NoteMatrix':
         mask = self.notes[Keys.CHANNEL].isin(channels)
         return NoteMatrix(self.notes.copy()[mask])
-
-
-if __name__ == '__main__':
-    pass

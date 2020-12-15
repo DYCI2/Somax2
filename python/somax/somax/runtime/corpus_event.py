@@ -12,7 +12,7 @@ EventParameterDict = Dict[str, List[CorpusFeature]]
 
 class Note:
     def __init__(self, pitch: int, velocity: int, channel: int, onset: float, duration: float,
-                 absolute_onset: float, absolute_duration: float):
+                 absolute_onset: float, absolute_duration: float, bar_number: float):
         self.logger = logging.getLogger(__name__)
         self.pitch: int = pitch
         self.velocity: int = velocity
@@ -21,6 +21,7 @@ class Note:
         self.duration: float = duration  # in ticks
         self.absolute_onset: float = absolute_onset  # in milliseconds in relation to CorpusEvent onset
         self.absolute_duration: float = absolute_duration  # in milliseconds
+        self.bar_number: float = bar_number  # as float where the beat in current bar is represented as the decimal part
 
     @classmethod
     def from_raw(cls, raw_note: pd.Series, parent_event_relative_onset: float, parent_event_absolute_onset: float):
@@ -30,7 +31,8 @@ class Note:
                    onset=raw_note[Keys.REL_ONSET] - parent_event_relative_onset,
                    duration=raw_note[Keys.REL_DURATION],
                    absolute_onset=raw_note[Keys.ABS_ONSET] - parent_event_absolute_onset,
-                   absolute_duration=raw_note[Keys.ABS_DURATION])
+                   absolute_duration=raw_note[Keys.ABS_DURATION],
+                   bar_number=raw_note[Keys.BAR_NUMBER])
 
     @classmethod
     def relative_to(cls, note: 'Note', old_parent_onset: float, new_parent_onset: float,
@@ -41,7 +43,8 @@ class Note:
                    onset=note.onset + old_parent_onset - new_parent_onset,
                    duration=note.duration,
                    absolute_onset=note.absolute_onset + old_parent_abs_onset - new_parent_abs_onset,
-                   absolute_duration=note.absolute_duration)
+                   absolute_duration=note.absolute_duration,
+                   bar_number=note.bar_number)  # TODO: Bar number
 
     @classmethod
     def from_json(cls, note_dict: Dict[str, Any]):
@@ -51,7 +54,8 @@ class Note:
                    onset=note_dict["onset"],
                    duration=note_dict["duration"],
                    absolute_onset=note_dict["absolute_onset"],
-                   absolute_duration=note_dict["absolute_duration"])
+                   absolute_duration=note_dict["absolute_duration"],
+                   bar_number=note_dict["bar"])
 
     def __repr__(self):
         return f"Note(pitch={self.pitch},velocity={self.velocity},channel={self.channel}," \
@@ -67,7 +71,8 @@ class Note:
                 "onset": self.onset,
                 "duration": self.duration,
                 "absolute_onset": self.absolute_onset,
-                "absolute_duration": self.absolute_duration
+                "absolute_duration": self.absolute_duration,
+                "bar": self.bar_number
                 }
 
 
