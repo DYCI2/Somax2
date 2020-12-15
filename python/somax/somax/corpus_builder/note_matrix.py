@@ -1,5 +1,6 @@
-from typing import Tuple
+from typing import Tuple, Optional
 
+import mido
 import numpy as np
 import pandas as pd
 
@@ -19,6 +20,9 @@ class NoteMatrix:
     def from_midi_file(cls, filepath: str) -> 'NoteMatrix':
         raw_matrix: np.ndarray = MidiParser.read_midi(filepath)
         return cls(raw_matrix)
+
+    def to_midi_file(self, time_signature: Tuple[int, int]) -> mido.MidiFile:
+        pass  # TODO
 
     @property
     def pitches(self) -> np.ndarray:

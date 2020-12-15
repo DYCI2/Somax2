@@ -137,13 +137,17 @@ class Corpus:
                 note_data[Keys.ABS_ONSET.value].append(note.absolute_onset + event.absolute_onset)
                 note_data[Keys.ABS_DURATION.value].append(note.absolute_duration)
                 note_data[Keys.TEMPO.value].append(event.tempo)
+                note_data[Keys.BAR_NUMBER.value].append(event.bar_number)
         note_matrix: np.ndarray = np.array(note_data).T
 
-        # Remove duplicates
-        note_matrix = note_matrix[np.lexsort((note_matrix[:, Keys.PITCH.value], note_matrix[:, Keys.REL_ONSET.value]))]
+        # Remove duplicates (e.g. held notes that exist in multiple slices)
+        note_matrix = note_matrix[np.lexsort((note_matrix[:, Keys.CHANNEL.value],
+                                              note_matrix[:, Keys.PITCH.value],
+                                              note_matrix[:, Keys.REL_ONSET.value]))]
         delta_ticks: np.ndarray = np.diff(note_matrix[:, Keys.REL_ONSET.value], prepend=np.inf)
         delta_pitch: np.ndarray = np.diff(note_matrix[:, Keys.PITCH.value], prepend=np.inf)
-        note_matrix = note_matrix[(delta_ticks > 0.001) | (delta_pitch > 0.001), :]
+        delta_channel: np.ndarray = np.diff(note_matrix[:, Keys.CHANNEL.value], prepend=np.inf)
+        note_matrix = note_matrix[(delta_ticks > 0.001) | (delta_pitch > 0.001) | (delta_channel > 0.001), :]
 
         return NoteMatrix(note_matrix)
 
