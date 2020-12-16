@@ -11,7 +11,7 @@ EventParameterDict = Dict[str, List[CorpusFeature]]
 
 
 class Note:
-    def __init__(self, pitch: int, velocity: int, channel: int, onset: float, duration: float,
+    def __init__(self, pitch: int, velocity: int, channel: int, onset: float, duration: float, track: str,
                  absolute_onset: float, absolute_duration: float):
         self.logger = logging.getLogger(__name__)
         self.pitch: int = pitch
@@ -19,6 +19,7 @@ class Note:
         self.channel: int = channel
         self.onset: float = onset  # in ticks in relation to CorpusEvent onset
         self.duration: float = duration  # in ticks
+        self.track: str = track     # name of MIDI track note originated from
         self.absolute_onset: float = absolute_onset  # in milliseconds in relation to CorpusEvent onset
         self.absolute_duration: float = absolute_duration  # in milliseconds
 
@@ -29,6 +30,7 @@ class Note:
                    channel=raw_note[Keys.CHANNEL],
                    onset=raw_note[Keys.REL_ONSET] - parent_event_relative_onset,
                    duration=raw_note[Keys.REL_DURATION],
+                   track=raw_note[Keys.TRACK_NAME],
                    absolute_onset=raw_note[Keys.ABS_ONSET] - parent_event_absolute_onset,
                    absolute_duration=raw_note[Keys.ABS_DURATION])
 
@@ -40,6 +42,7 @@ class Note:
                    channel=note.channel,
                    onset=note.onset + old_parent_onset - new_parent_onset,
                    duration=note.duration,
+                   track=note.track,
                    absolute_onset=note.absolute_onset + old_parent_abs_onset - new_parent_abs_onset,
                    absolute_duration=note.absolute_duration)
 
@@ -50,6 +53,7 @@ class Note:
                    channel=note_dict["channel"],
                    onset=note_dict["onset"],
                    duration=note_dict["duration"],
+                   track=note_dict["track"],
                    absolute_onset=note_dict["absolute_onset"],
                    absolute_duration=note_dict["absolute_duration"])
 
@@ -66,6 +70,7 @@ class Note:
                 "channel": self.channel,
                 "onset": self.onset,
                 "duration": self.duration,
+                "track": self.track,
                 "absolute_onset": self.absolute_onset,
                 "absolute_duration": self.absolute_duration,
                 }

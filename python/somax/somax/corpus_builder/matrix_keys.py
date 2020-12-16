@@ -11,3 +11,4 @@ class MatrixKeys(Enum):
     ABS_DURATION = 6
     TEMPO = 7
     BAR_NUMBER = 8
+    TRACK_NAME = 9
