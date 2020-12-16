@@ -103,7 +103,7 @@ class CorpusBuilder:
                    slice_tolerance_ms: float = 30.0, **_kwargs) -> Corpus:
         index: int = 0
         events: List[CorpusEvent] = [CorpusEvent.incomplete(index, note_matrix.notes.iloc[0])]
-        # TODO: Using iterrows will be very slow for large matrices. Subject to optimization
+        # TODO: [OPTIMIZATION]Using iterrows will be very slow for large matrices. Subject to optimization
         for i, note in note_matrix.notes.iloc[1:].iterrows():  # type: pd.Series
             # Finalize previous and create a new CorpusEvent
             if note[Keys.ABS_ONSET] > events[-1].absolute_onset + slice_tolerance_ms:

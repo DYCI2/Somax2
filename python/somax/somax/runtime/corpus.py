@@ -2,13 +2,14 @@ import json
 import logging
 import os
 from enum import Enum
-from typing import List, Optional, Type, Dict, Any, Tuple
+from typing import List, Optional, Type, Dict, Any, Tuple, Union
 
 from somax.settings import IMPORT_MATPLOTLIB
 
 if IMPORT_MATPLOTLIB:
     pass
 import numpy as np
+import pandas as pd
 
 from somax import settings
 import somax
@@ -126,7 +127,7 @@ class Corpus:
         return events
 
     def to_note_matrix(self) -> NoteMatrix:
-        note_data: List[List[float]] = [[] for _ in range(8)]
+        note_data: List[List[Union[int, float, str]]] = [[] for _ in range(len(Keys))]
         for event in self.events:
             for note in event.notes:
                 note_data[Keys.PITCH.value].append(note.pitch)
@@ -138,6 +139,7 @@ class Corpus:
                 note_data[Keys.ABS_DURATION.value].append(note.absolute_duration)
                 note_data[Keys.TEMPO.value].append(event.tempo)
                 note_data[Keys.BAR_NUMBER.value].append(event.bar_number)
+                note_data[Keys.TRACK_NAME.value].append(note.track)
         note_matrix: np.ndarray = np.array(note_data).T
 
         # Remove duplicates (e.g. held notes that exist in multiple slices)
@@ -149,7 +151,7 @@ class Corpus:
         delta_channel: np.ndarray = np.diff(note_matrix[:, Keys.CHANNEL.value], prepend=np.inf)
         note_matrix = note_matrix[(delta_ticks > 0.001) | (delta_pitch > 0.001) | (delta_channel > 0.001), :]
 
-        return NoteMatrix(note_matrix)
+        return NoteMatrix(pd.DataFrame(note_matrix, columns=[key for key in Keys]))
 
     # TODO: Removed for PyInstaller to exclude matplotlib
     # def plot(self):

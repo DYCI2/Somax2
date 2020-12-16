@@ -5,24 +5,26 @@ import numpy as np
 import pandas as pd
 
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
-from somax.corpus_builder.midi_parser import MidiParser
+from somax.corpus_builder.midi_parser import MidiParser, BarNumberAnnotation
 
 
 class NoteMatrix:
 
-    def __init__(self, raw_matrix: np.ndarray):
-        self.notes: pd.DataFrame = pd.DataFrame(raw_matrix, columns=[key for key in Keys])
+    def __init__(self, raw_matrix: pd.DataFrame):
+        self.notes: pd.DataFrame = raw_matrix
 
     def __len__(self) -> int:
         return len(self.notes)
 
     @classmethod
     def from_midi_file(cls, filepath: str) -> 'NoteMatrix':
-        raw_matrix: np.ndarray = MidiParser.read_midi(filepath)
+        raw_matrix: pd.DataFrame = MidiParser.read_midi(filepath)
         return cls(raw_matrix)
 
-    def to_midi_file(self, time_signature: Tuple[int, int]) -> mido.MidiFile:
-        pass  # TODO
+    def to_midi_file(self, title: str, initial_time_signature: Tuple[int, int], ticks_per_beat: int,
+                     annotations: BarNumberAnnotation):
+        return MidiParser.export_midi(self.notes, title=title, initial_time_signature=initial_time_signature,
+                                      ticks_per_beat=ticks_per_beat, annotations=annotations)
 
     @property
     def pitches(self) -> np.ndarray:

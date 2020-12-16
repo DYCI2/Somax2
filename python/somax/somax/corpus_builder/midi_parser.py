@@ -1,11 +1,32 @@
 import logging
+from enum import Enum
 from typing import Optional, List, Iterator, Any, Iterable
 
 import mido
 import numpy as np
-from mido import MidiTrack, Message, MetaMessage
+import pandas as pd
+from mido import MidiTrack, Message, MetaMessage, MidiFile
 
 from .matrix_keys import MatrixKeys as Keys
+
+
+class BarNumberAnnotation(Enum):
+    NONE = "none"
+    JUMPS = "jumps"
+    ALL = "all"
+
+    @classmethod
+    def default(cls) -> 'BarNumberAnnotation':
+        return cls.NONE
+
+    @classmethod
+    def from_string(cls, bar_num_annotation: str) -> 'BarNumberAnnotation':
+        try:
+            return BarNumberAnnotation(bar_num_annotation.lower())
+        except ValueError:
+            logging.getLogger(__name__).warning(f"No class named '{bar_num_annotation} exists for the "
+                                                f"{cls.__name__} module. Using default.")
+            return cls.default()
 
 
 class _MidiNote:
@@ -33,11 +54,20 @@ class MidiParser:
     _DEFAULT_TEMPO_BPM = 120
 
     @staticmethod
-    def read_midi(midi_file_path: str) -> np.ndarray:
+    def read_midi(midi_file_path: str) -> pd.DataFrame:
         midi_file: mido.MidiFile = mido.MidiFile(midi_file_path)
         notes: List[_MidiNote] = MidiParser._parse_notes(midi_file)
-        note_matrix: np.ndarray = MidiParser._to_numpy(notes, midi_file.ticks_per_beat)
+        note_matrix: pd.DataFrame = MidiParser._to_pandas(notes, midi_file.ticks_per_beat)
         return note_matrix
+
+    @staticmethod
+    def export_midi(note_matrix: pd.DataFrame, title: str, initial_time_signature: tuple[int, int], ticks_per_beat: int,
+                    annotations: BarNumberAnnotation):
+        midi_notes, duration = MidiParser._from_pandas(note_matrix, ticks_per_beat)  # type: list[_MidiNote], int
+        midi_tracks: list[MidiTrack] = MidiParser._serialize_notes(midi_notes, duration, title,
+                                                                   initial_time_signature=initial_time_signature,
+                                                                   annotations=annotations)
+        print(midi_tracks)
 
     @staticmethod
     def monophonic_from_text(note_numbers: np.ndarray, velocities: np.ndarray, channels: np.ndarray,
@@ -54,10 +84,10 @@ class MidiParser:
                                    onset_tick + quantized_duration_tick, onset_time + duration_sec))
             onset_tick += quantized_duration_tick
             onset_time += duration_sec
-        return MidiParser._to_numpy(notes, ppq)
+        return MidiParser._to_pandas(notes, ppq)
 
     @staticmethod
-    def _parse_notes(midi_file: mido.MidiFile) -> [_MidiNote]:
+    def _parse_notes(midi_file: mido.MidiFile) -> list[_MidiNote]:
         ticks_per_beat: int = midi_file.ticks_per_beat
         tempo_bpm: float = MidiParser._DEFAULT_TEMPO_BPM
         held_notes: List[_MidiNote] = []
@@ -95,33 +125,57 @@ class MidiParser:
         return completed_notes
 
     @staticmethod
+    def _serialize_notes(notes: list[_MidiNote], duration: int, title: str, initial_time_signature: tuple[int, int],
+                         annotations: BarNumberAnnotation, **kwargs) -> list[MidiTrack]:
+        meta_export_dict: str = "meta"
+        lyrics_dict: str = "lyrics"
+        messages: dict[str, list[Any]] = {
+            meta_export_dict: [
+                MetaMessage(type='track_name', name=title, time=0),
+                MetaMessage(type='time_signature',
+                            numerator=initial_time_signature[0],
+                            denominator=initial_time_signature[1],
+                            clocks_per_click=12,
+                            notated_32nd_notes_per_beat=8,
+                            time=0),
+            ],
+            lyrics_dict: []}
+
+        # Append notes in tick time since start (rather than delta time)
+        for note in notes:
+            if note.track not in messages:
+                messages[note.track] = [MetaMessage(type='track_name', name=note.track)]
+            messages[note.track].append(Message('note_on', note=note.note, velocity=note.vel, channel=note.ch,
+                                                time=note.onset_tick))
+            messages[note.track].append(Message('note_on', note=note.note, velocity=0, channel=note.ch,
+                                                time=note.end_tick))
+            messages[meta_export_dict].append(MetaMessage(type='set_tempo', tempo=mido.bpm2tempo(note.tempo),
+                                                          time=note.onset_tick))
+            messages[lyrics_dict].append(MetaMessage(type='lyrics', text=int(note.bar), time=note.onset_tick))
+
+        midi_tracks: List[MidiTrack] = []
+        for track in messages.keys():
+            messages[track].append(MetaMessage(type='end_of_track', time=duration))
+            messages[track].sort(key=lambda msg: msg.time)
+            messages[track] = MidiParser.__to_reltime(messages[track])
+            midi_tracks.append(MidiTrack(messages[track]))
+
+        return midi_tracks
+
+        # TODO: Annotations
+
+    @staticmethod
     def __merge_tracks(tracks: List[MidiTrack]) -> Iterator[tuple[Any, Optional[MidiTrack]]]:
         """This function was adapted directly from mido to handle files with uncaught 'type' meta message errors
             as well as append the original track to the sorted list
         """
-        messages_and_tracks: list[tuple[Message, MidiTrack]] = []
+        messages_and_tracks: list[tuple[Any, MidiTrack]] = []
         for track in tracks:
             messages_and_tracks.extend([(m, track) for m in MidiParser.__to_abstime(track)])
         messages_and_tracks.sort(key=lambda msg_and_track: msg_and_track[0].time)
 
-        return MidiParser.__fix_end_of_track(MidiParser.__to_reltime(messages_and_tracks))
-
-    @staticmethod
-    def __mido_adapted_merge_track(tracks: list[MidiTrack]) -> Iterator[tuple[Any, Optional[MidiTrack]]]:
-        """Returns a MidiTrack object with all messages from all tracks.
-
-            The messages are returned in playback order with delta times
-            as if they were all in one track.
-
-            This function was adapted directly from mido to handle files with uncaught 'type' meta message errors
-            """
-        messages = []
-        for track in tracks:
-            messages.extend(MidiParser.__to_abstime(track))
-
-        messages.sort(key=lambda msg: msg.time)
-
-        return MidiTrack(mido.midifiles.tracks.fix_end_of_track(MidiParser.__to_reltime(messages)))
+        messages, tracks = [list(e) for e in zip(*messages_and_tracks)]
+        return MidiParser.__fix_end_of_track(zip(MidiParser.__to_reltime(messages), tracks))
 
     @staticmethod
     def __fix_end_of_track(messages: Iterable[tuple[any, MidiTrack]]) -> Iterator[tuple[Any, Optional[MidiTrack]]]:
@@ -146,7 +200,7 @@ class MidiParser:
         yield MetaMessage('end_of_track', time=accum), None
 
     @staticmethod
-    def __to_abstime(messages: MidiTrack) -> Iterator[Message]:
+    def __to_abstime(messages: MidiTrack) -> Iterable[Any]:
         """Convert messages to absolute time.
 
         This function was adapted directly from mido to handle files with uncaught 'type' meta message errors"""
@@ -159,17 +213,17 @@ class MidiParser:
                 logging.getLogger(__name__).warning(f"Found invalid midi format: {repr(e)}. Error was ignored.")
 
     @staticmethod
-    def __to_reltime(messages: Iterable[tuple[Any, MidiTrack]]) -> Iterator[tuple[Any, Optional[MidiTrack]]]:
+    def __to_reltime(messages: Iterable[Any]) -> Iterable[Any]:
         """Convert messages to relative time.
             This function was adapted directly from mido to handle passing of track info when merging"""
         now = 0
-        for msg, track in messages:
+        for msg in messages:
             delta = msg.time - now
-            yield msg.copy(time=delta), track
+            yield msg.copy(time=delta)
             now = msg.time
 
     @staticmethod
-    def _to_numpy(notes: List[_MidiNote], ticks_per_beat: int) -> np.ndarray:
+    def _to_pandas(notes: List[_MidiNote], ticks_per_beat: int) -> pd.DataFrame:
         num_notes: int = len(notes)
         note_matrix: np.ndarray = np.zeros((num_notes, MidiParser._NUM_COLS), dtype=object)
 
@@ -189,4 +243,25 @@ class MidiParser:
 
         note_matrix = note_matrix[note_matrix[:, Keys.REL_ONSET.value].argsort()]
 
-        return note_matrix
+        return pd.DataFrame(note_matrix, columns=[key for key in Keys])
+
+    @staticmethod
+    def _from_pandas(notes_matrix: pd.DataFrame, ticks_per_beat: int) -> tuple[list[_MidiNote], float]:
+        duration: int = int(np.max(notes_matrix[Keys.REL_ONSET] + notes_matrix[Keys.REL_DURATION]) * ticks_per_beat)
+        notes: list[_MidiNote] = []
+
+        # TODO: [OPTIMIZATION] Use list comprehension and call code below as external function for optimization
+        for _, note in notes_matrix.iterrows():
+            note_number: int = int(note[Keys.PITCH])
+            velocity: int = int(note[Keys.VELOCITY])
+            channel: int = int(note[Keys.CHANNEL] - 1)
+            onset_tick: int = int(note[Keys.REL_ONSET] * ticks_per_beat)
+            onset_time: float = note[Keys.ABS_ONSET] * 0.001
+            tempo: float = note[Keys.TEMPO]
+            bar: float = note[Keys.BAR_NUMBER]
+            track: str = note[Keys.TRACK_NAME]
+            end_tick: int = int(note[Keys.REL_DURATION] * ticks_per_beat) + onset_tick
+            end_time: float = (note[Keys.ABS_DURATION] * 0.001) + onset_time
+            notes.append(_MidiNote(note_number, velocity, channel, onset_tick, onset_time, tempo, bar,
+                                   track, end_tick, end_time))
+        return notes, duration
