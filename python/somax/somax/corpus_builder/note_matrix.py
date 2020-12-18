@@ -21,9 +21,9 @@ class NoteMatrix:
         raw_matrix: pd.DataFrame = MidiParser.read_midi(filepath)
         return cls(raw_matrix)
 
-    def to_midi_file(self, title: str, initial_time_signature: Tuple[int, int], ticks_per_beat: int,
-                     annotations: BarNumberAnnotation):
-        return MidiParser.export_midi(self.notes, title=title, initial_time_signature=initial_time_signature,
+    def to_midi_file(self, title: str, filepath: str, initial_time_signature: Tuple[int, int], ticks_per_beat: int,
+                     annotations: BarNumberAnnotation) -> mido.MidiFile:
+        return MidiParser.export_midi(self.notes, filepath, title=title, initial_time_signature=initial_time_signature,
                                       ticks_per_beat=ticks_per_beat, annotations=annotations)
 
     @property

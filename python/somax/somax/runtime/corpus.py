@@ -140,18 +140,10 @@ class Corpus:
                 note_data[Keys.TEMPO.value].append(event.tempo)
                 note_data[Keys.BAR_NUMBER.value].append(event.bar_number)
                 note_data[Keys.TRACK_NAME.value].append(note.track)
-        note_matrix: np.ndarray = np.array(note_data).T
-
-        # Remove duplicates (e.g. held notes that exist in multiple slices)
-        note_matrix = note_matrix[np.lexsort((note_matrix[:, Keys.CHANNEL.value],
-                                              note_matrix[:, Keys.PITCH.value],
-                                              note_matrix[:, Keys.REL_ONSET.value]))]
-        delta_ticks: np.ndarray = np.diff(note_matrix[:, Keys.REL_ONSET.value], prepend=np.inf)
-        delta_pitch: np.ndarray = np.diff(note_matrix[:, Keys.PITCH.value], prepend=np.inf)
-        delta_channel: np.ndarray = np.diff(note_matrix[:, Keys.CHANNEL.value], prepend=np.inf)
-        note_matrix = note_matrix[(delta_ticks > 0.001) | (delta_pitch > 0.001) | (delta_channel > 0.001), :]
-
-        return NoteMatrix(pd.DataFrame(note_matrix, columns=[key for key in Keys]))
+        note_matrix: pd.DataFrame = pd.DataFrame(np.array(note_data, dtype=object).T, columns=[key for key in Keys])
+        note_matrix.sort_values([Keys.REL_ONSET, Keys.PITCH, Keys.CHANNEL], inplace=True)
+        note_matrix.drop_duplicates(subset=[Keys.PITCH, Keys.CHANNEL, Keys.REL_ONSET, Keys.REL_DURATION], inplace=True)
+        return NoteMatrix(note_matrix)
 
     # TODO: Removed for PyInstaller to exclude matplotlib
     # def plot(self):

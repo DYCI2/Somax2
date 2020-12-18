@@ -61,13 +61,20 @@ class MidiParser:
         return note_matrix
 
     @staticmethod
-    def export_midi(note_matrix: pd.DataFrame, title: str, initial_time_signature: tuple[int, int], ticks_per_beat: int,
+    def export_midi(note_matrix: pd.DataFrame, filepath: str, title: str, initial_time_signature: tuple[int, int], ticks_per_beat: int,
                     annotations: BarNumberAnnotation):
         midi_notes, duration = MidiParser._from_pandas(note_matrix, ticks_per_beat)  # type: list[_MidiNote], int
         midi_tracks: list[MidiTrack] = MidiParser._serialize_notes(midi_notes, duration, title,
                                                                    initial_time_signature=initial_time_signature,
                                                                    annotations=annotations)
-        print(midi_tracks)
+        midi_file: MidiFile = MidiFile(ticks_per_beat=ticks_per_beat)
+        for track in midi_tracks:
+            midi_file.tracks.append(track)
+
+        midi_file.save(filepath)
+        return midi_file
+
+
 
     @staticmethod
     def monophonic_from_text(note_numbers: np.ndarray, velocities: np.ndarray, channels: np.ndarray,
@@ -145,13 +152,29 @@ class MidiParser:
         for note in notes:
             if note.track not in messages:
                 messages[note.track] = [MetaMessage(type='track_name', name=note.track)]
+            # Note: All `time` fields are appended in absolute time (ticks since start of track, not delta time)
             messages[note.track].append(Message('note_on', note=note.note, velocity=note.vel, channel=note.ch,
                                                 time=note.onset_tick))
             messages[note.track].append(Message('note_on', note=note.note, velocity=0, channel=note.ch,
                                                 time=note.end_tick))
             messages[meta_export_dict].append(MetaMessage(type='set_tempo', tempo=mido.bpm2tempo(note.tempo),
                                                           time=note.onset_tick))
-            messages[lyrics_dict].append(MetaMessage(type='lyrics', text=int(note.bar), time=note.onset_tick))
+            messages[lyrics_dict].append(MetaMessage(type='lyrics', text=str(int(note.bar + 0.01)), time=note.onset_tick))
+
+        if annotations == BarNumberAnnotation.NONE:
+            del messages[lyrics_dict]
+        elif annotations == BarNumberAnnotation.JUMPS:
+            filtered_bar_numbers: List[MetaMessage] = []
+            prev_bar_number: int = -np.inf
+            for lyrics_meta in messages[lyrics_dict]:
+                cur_bar_number: int = int(lyrics_meta.text)
+                if np.abs(cur_bar_number - prev_bar_number) > 2:
+                    filtered_bar_numbers.append(lyrics_meta)
+                prev_bar_number = cur_bar_number
+            messages[lyrics_dict] = filtered_bar_numbers
+
+
+
 
         midi_tracks: List[MidiTrack] = []
         for track in messages.keys():
@@ -161,8 +184,6 @@ class MidiParser:
             midi_tracks.append(MidiTrack(messages[track]))
 
         return midi_tracks
-
-        # TODO: Annotations
 
     @staticmethod
     def __merge_tracks(tracks: List[MidiTrack]) -> Iterator[tuple[Any, Optional[MidiTrack]]]:
