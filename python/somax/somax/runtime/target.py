@@ -13,7 +13,7 @@ class SendProtocol:
     ALL_PLAYER_NAMES = "player_names"
     PLAYER_INSTANTIATED_ATOMS = "instantiated_atoms"
     PLAYER_CORPUS = "corpus"
-
+    PLAYER_RECORDED_CORPUS_LENGTH = "recorded_corpus"
 
     SCHEDULER_RUNNING = "scheduler_running"
     SCHEDULER_CURRENT_TIME = "time"

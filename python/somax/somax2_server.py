@@ -7,7 +7,10 @@ import logging
 import logging.config
 import os
 import sys
+from datetime import datetime
 from importlib import resources
+
+import mido
 from maxosc.maxformatter import MaxFormatter
 from maxosc.maxosc import Caller
 from pythonosc.dispatcher import Dispatcher
@@ -21,6 +24,8 @@ from somax.classification import SomChromaClassifier
 from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder
+from somax.corpus_builder.midi_parser import BarNumberAnnotation
+from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.atom import Atom
 from somax.runtime.corpus import Corpus
@@ -397,6 +402,46 @@ class SomaxStringDispatcher:
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
 
+    def export_runtime_corpus(self, player: str, corpus_name: Optional[str] = None, overwrite: bool = False):
+        try:
+            corpus: Corpus = self.players[player].export_runtime_corpus(corpus_name)
+        except KeyError as e:
+            self.logger.error(f"No player named '{player}' exists. Could not export corpus.")
+            return
+        try:
+            self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}'...")
+            corpus.export(overwrite=overwrite)
+        except IOError as e:
+            self.logger.error(f"{str(e)} Export of corpus failed.")
+
+    def export_runtime_corpus_as_midi(self, player: str, folder: str, filename: str, corpus_name: Optional[str] = None,
+                                      initial_time_signature: tuple[int, int] = (4, 4), ticks_per_beat: int = 480,
+                                      annotations: str = BarNumberAnnotation.NONE.value, overwrite: bool = False):
+        try:
+            corpus: Corpus = self.players[player].export_runtime_corpus(corpus_name)
+        except KeyError as e:
+            self.logger.error(f"No player named '{player}' exists. Could not export corpus.")
+            return
+
+        filepath = os.path.join(folder, filename)
+        if os.path.splitext(filepath)[-1] not in CorpusBuilder.MIDI_FILE_EXTENSIONS:
+            filepath += ".mid"
+        if os.path.exists(filepath) and not overwrite:
+            self.logger.error(f"The file '{filepath}' already exists. No corpus was exported. "
+                              f"To override, use 'overwrite= True'.")
+            return
+        if os.path.isdir(folder):
+            self.logger.error(f"The folder '{folder}' does not exist. No corpus was exported.")
+            return
+
+        name: str = corpus.name if corpus.name is not None else filename
+        bar_number_annotations: BarNumberAnnotation = BarNumberAnnotation.from_string(annotations)
+
+        note_matrix: NoteMatrix = corpus.to_note_matrix()
+        midi_file: mido.MidiFile = note_matrix.to_midi_file(name, filepath, initial_time_signature, ticks_per_beat,
+                                                            bar_number_annotations)
+        midi_file.save(filename=filepath)
+
     ######################################################
     # PRIVATE
     ######################################################
@@ -546,6 +591,9 @@ class SomaxServer(SomaxStringDispatcher, Caller):
     def stop(self):
         self._stop()
         self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
+
+    def pause(self):
+        self.scheduler.pause()  
 
     def set_tempo(self, tempo: Union[int, float]):
         self._set_tempo(tempo)

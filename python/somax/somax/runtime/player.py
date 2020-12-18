@@ -151,6 +151,9 @@ class Player(Streamview, ScheduledMidiObject):
         self.transform_handler.remove(transform)
         self._update_transforms()
 
+    def export_runtime_corpus(self, name: str) -> Corpus:
+        return self.improvisation_memory.export(name, self.corpus)
+
     ######################################################
     # PRIVATE
     ######################################################
@@ -182,6 +185,7 @@ class Player(Streamview, ScheduledMidiObject):
         for atom in self._all_atoms():
             peaks: Peaks = atom.get_peaks()
             self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [atom.name, peaks.size()])
+        self.target.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.improvisation_memory.length())
 
     def send_corpora(self, corpus_names_and_paths: List[Tuple[str, str]]):
         for corpus in corpus_names_and_paths:
