@@ -54,7 +54,7 @@ class Player(Streamview, ScheduledMidiObject):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def new_event(self, scheduler_time: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+    def new_event(self, scheduler_time: float, tempo: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
         if not self.corpus:
@@ -72,7 +72,9 @@ class Player(Streamview, ScheduledMidiObject):
         event, transform = event_and_transform
         event = transform.apply(event)      # returns deepcopy of transformed event
 
-        self.improvisation_memory.append(event, scheduler_time, transform)
+        self.improvisation_memory.append(event, scheduler_time, transform, tempo,
+                                         artificially_sustained=self.hold_notes_artificially,
+                                         simultaneous_onsets=self.simultaneous_onsets)
         self._feedback(event, scheduler_time, transform)
         self.previous_peaks = peaks
         return event, transform
@@ -152,6 +154,7 @@ class Player(Streamview, ScheduledMidiObject):
         self._update_transforms()
 
     def export_runtime_corpus(self, name: str) -> Corpus:
+        """ raises: InvalidCorpus if there's no data to export"""
         return self.improvisation_memory.export(name, self.corpus)
 
     ######################################################

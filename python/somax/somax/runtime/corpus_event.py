@@ -3,8 +3,9 @@ from typing import Optional, List, Dict, Type, Any
 
 import pandas as pd
 
-from somax.features.feature import CorpusFeature
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
+from somax.features.feature import CorpusFeature
+from somax.runtime.memory_state import MemoryState
 
 """ Keys correspond to parent module names, ex. "pitch" or "chroma". """
 EventParameterDict = Dict[str, List[CorpusFeature]]
@@ -19,7 +20,7 @@ class Note:
         self.channel: int = channel
         self.onset: float = onset  # in ticks in relation to CorpusEvent onset
         self.duration: float = duration  # in ticks
-        self.track: str = track     # name of MIDI track note originated from
+        self.track: str = track  # name of MIDI track note originated from
         self.absolute_onset: float = absolute_onset  # in milliseconds in relation to CorpusEvent onset
         self.absolute_duration: float = absolute_duration  # in milliseconds
 
@@ -75,6 +76,12 @@ class Note:
                 "absolute_duration": self.absolute_duration,
                 }
 
+    def is_held_from(self, parent_duration: float) -> bool:
+        return self.onset + self.duration > parent_duration
+
+    def is_held_to(self) -> bool:
+        return self.onset < 0.0
+
 
 class CorpusEvent:
     def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float, bar_number: float,
@@ -92,6 +99,7 @@ class CorpusEvent:
 
         self.notes: List[Note] = notes if notes else []
         self.features: Dict[Type[CorpusFeature], CorpusFeature] = traits if traits else {}
+        self.recorded_memory_state: Optional[MemoryState] = None
 
         # self._labels = {}  # {ClassVar[AbstractLabel]: AbstractLabel}, precompiled for performance
 
@@ -139,17 +147,17 @@ class CorpusEvent:
         return self.features[trait_type]
 
     def held_to(self) -> [Note]:
-        return [note for note in self.notes if note.onset < 0.0]
+        return [note for note in self.notes if note.is_held_to()]
 
     def held_from(self) -> [Note]:
-        return [note for note in self.notes if note.onset + note.duration > self.duration]
+        return [note for note in self.notes if note.is_held_from(self.duration)]
 
     def encode(self) -> Dict[str, Any]:
         return {"state_index": self.state_index,
                 "tempo": self.tempo,
                 "onset": self.onset,
                 "absolute_onset": self.absolute_onset,
-                "bar_number": self.bar_number,
+                "bar": self.bar_number,
                 "duration": self.duration,
                 "absolute_duration": self.absolute_duration,
                 "notes": [note.encode() for note in self.notes],

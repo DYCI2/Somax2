@@ -39,7 +39,7 @@ class AbstractScaleAction(Parametric, StringParsed, ABC):
 
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractScaleAction':
-        raise ValueError(f"No default Merge Action exists.")
+        raise ValueError(f"No default Merge Action exists")
 
     @classmethod
     def default_set(cls, **_kwargs) -> Tuple['AbstractScaleAction']:

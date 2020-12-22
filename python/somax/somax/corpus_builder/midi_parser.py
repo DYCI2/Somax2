@@ -61,7 +61,8 @@ class MidiParser:
         return note_matrix
 
     @staticmethod
-    def export_midi(note_matrix: pd.DataFrame, filepath: str, title: str, initial_time_signature: tuple[int, int], ticks_per_beat: int,
+    def export_midi(note_matrix: pd.DataFrame, filepath: str, title: str, initial_time_signature: tuple[int, int],
+                    ticks_per_beat: int,
                     annotations: BarNumberAnnotation):
         midi_notes, duration = MidiParser._from_pandas(note_matrix, ticks_per_beat)  # type: list[_MidiNote], int
         midi_tracks: list[MidiTrack] = MidiParser._serialize_notes(midi_notes, duration, title,
@@ -73,8 +74,6 @@ class MidiParser:
 
         midi_file.save(filepath)
         return midi_file
-
-
 
     @staticmethod
     def monophonic_from_text(note_numbers: np.ndarray, velocities: np.ndarray, channels: np.ndarray,
@@ -159,22 +158,28 @@ class MidiParser:
                                                 time=note.end_tick))
             messages[meta_export_dict].append(MetaMessage(type='set_tempo', tempo=mido.bpm2tempo(note.tempo),
                                                           time=note.onset_tick))
-            messages[lyrics_dict].append(MetaMessage(type='lyrics', text=str(int(note.bar + 0.01)), time=note.onset_tick))
-
+            messages[lyrics_dict].append(
+                MetaMessage(type='lyrics', text=str(int(note.bar + 0.01)), time=note.onset_tick))
         if annotations == BarNumberAnnotation.NONE:
             del messages[lyrics_dict]
-        elif annotations == BarNumberAnnotation.JUMPS:
+        else:
+            messages[lyrics_dict].sort(key=lambda msg: msg.time)
             filtered_bar_numbers: List[MetaMessage] = []
-            prev_bar_number: int = -np.inf
-            for lyrics_meta in messages[lyrics_dict]:
-                cur_bar_number: int = int(lyrics_meta.text)
-                if np.abs(cur_bar_number - prev_bar_number) > 2:
-                    filtered_bar_numbers.append(lyrics_meta)
-                prev_bar_number = cur_bar_number
+            if annotations == BarNumberAnnotation.JUMPS:
+                prev_bar_number: int = -np.inf
+                for lyrics_meta in messages[lyrics_dict]:
+                    cur_bar_number: int = int(lyrics_meta.text)
+                    if np.abs(cur_bar_number - prev_bar_number) > 2:
+                        filtered_bar_numbers.append(lyrics_meta)
+                    prev_bar_number = cur_bar_number
+
+            else:  # annotations == BarNumberAnnotation.ALL:
+                last_onset: float = -np.inf
+                for lyrics_meta in messages[lyrics_dict]:
+                    if lyrics_meta.time - last_onset > 0.0001:
+                        filtered_bar_numbers.append(lyrics_meta)
+                    last_onset = lyrics_meta.time
             messages[lyrics_dict] = filtered_bar_numbers
-
-
-
 
         midi_tracks: List[MidiTrack] = []
         for track in messages.keys():
