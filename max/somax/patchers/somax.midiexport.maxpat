@@ -76,7 +76,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 969.454545454545496, 451.038461538461547, 70.0, 22.0 ],
-					"text" : "loadmess 1"
+					"text" : "loadmess 0"
 				}
 
 			}
@@ -127,7 +127,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 399.454545454545496, 8.038461538461547, 18.0, 34.0 ],
 					"size" : 2,
-					"value" : 1
+					"value" : 0
 				}
 
 			}
@@ -336,7 +336,7 @@
 					"patching_rect" : [ 718.774354704545658, 274.0, 107.225645295454342, 29.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 8.360381499999676, 8.038461538461547, 168.416717500000118, 29.0 ],
-					"text" : "0",
+					"text" : "852",
 					"textjustification" : 1
 				}
 
@@ -544,6 +544,7 @@
 					"bubbletextmargin" : 6,
 					"fontface" : 1,
 					"fontsize" : 12.0,
+					"hidden" : 1,
 					"id" : "obj-79",
 					"linecount" : 3,
 					"maxclass" : "comment",
@@ -674,7 +675,6 @@
 			}
 , 			{
 				"box" : 				{
-					"active" : 0,
 					"fontface" : 1,
 					"fontsize" : 18.0,
 					"id" : "obj-55",
@@ -710,15 +710,15 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-51",
-					"linecount" : 9,
+					"linecount" : 10,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 98.0, 783.0, 130.0, 127.0 ],
+					"patching_rect" : [ 98.0, 783.0, 132.0, 141.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 4,
-					"presentation_rect" : [ 7.416666507720947, 255.0, 275.208282499999996, 60.0 ],
-					"text" : "export_runtime_corpus_as_midi player= Player folder= 0 filename= recorded_corpus initial_time_signature= [ 4 4 ] annotations= none overwrite= 0 use_original_tempo= 1",
+					"presentation_linecount" : 5,
+					"presentation_rect" : [ 7.416666507720947, 255.0, 275.208282499999996, 74.0 ],
+					"text" : "export_runtime_corpus_as_midi player= Player folder= '/Users/borg/Desktop/' filename= recorded_corpus initial_time_signature= [ 4 4 ] annotations= jumps overwrite= 1 use_original_tempo= 0",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -939,7 +939,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 248.511957507720695, 3.038461538461547, 18.0, 50.0 ],
 					"size" : 3,
-					"value" : 0
+					"value" : 1
 				}
 
 			}
@@ -1668,6 +1668,23 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
+				"default" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ]
+				}
+,
 				"newobj" : 				{
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
@@ -1675,26 +1692,8 @@
 					"fontsize" : [ 10.0 ]
 				}
 ,
-				"default" : 				{
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontsize" : [ 10.0 ]
-				}
-,
 				"message" : 				{
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1705,14 +1704,15 @@
 						"autogradient" : 0
 					}
 ,
+					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ]
-				}
-,
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
