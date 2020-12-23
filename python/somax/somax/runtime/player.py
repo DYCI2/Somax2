@@ -153,9 +153,9 @@ class Player(Streamview, ScheduledMidiObject):
         self.transform_handler.remove(transform)
         self._update_transforms()
 
-    def export_runtime_corpus(self, name: str) -> Corpus:
+    def export_runtime_corpus(self, name: str, **kwargs) -> Corpus:
         """ raises: InvalidCorpus if there's no data to export"""
-        return self.improvisation_memory.export(name, self.corpus)
+        return self.improvisation_memory.export(name, self.corpus, **kwargs)
 
     ######################################################
     # PRIVATE

@@ -35,14 +35,19 @@ class ImprovisationMemory:
     def length(self) -> int:
         return len(self._history)
 
-    def export(self, name: str, source_corpus: Corpus) -> Corpus:
-        """ raises: InvalidCorpus if there is no data to export"""
+    def export(self, name: str, source_corpus: Corpus, use_original_tempo: bool = False) -> Corpus:
+        """ raises: InvalidCorpus if there is no data to export
+            TODO: `use_original_corpus` is a temporary workaround to handle the tempo offset described
+                  in https://trello.com/c/vKfkisIV. Remove this once a proper solution is in place.
+        """
         if len(self._history) == 0:
             raise InvalidCorpus("The recorded history is empty")
         elapsed_abs_time: float = 0.0
         events: list[CorpusEvent] = []
         for event, memory_state in copy.deepcopy(self._history):  # type: CorpusEvent, MemoryState
             current_onset: float = memory_state.trigger_time
+            if use_original_tempo:
+                memory_state.tempo = event.tempo
             if len(events) > 0:
                 elapsed_time: float = current_onset - events[-1].onset
                 events[-1].duration = elapsed_time

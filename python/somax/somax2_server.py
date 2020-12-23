@@ -416,7 +416,8 @@ class SomaxStringDispatcher:
 
     def export_runtime_corpus_as_midi(self, player: str, folder: str, filename: str, corpus_name: Optional[str] = None,
                                       initial_time_signature: tuple[int, int] = (4, 4), ticks_per_beat: int = 480,
-                                      annotations: str = BarNumberAnnotation.NONE.value, overwrite: bool = False):
+                                      annotations: str = BarNumberAnnotation.NONE.value, overwrite: bool = False,
+                                      use_original_tempo: bool = False):
 
         filepath = os.path.join(folder, filename)
         if os.path.splitext(filepath)[-1] not in CorpusBuilder.MIDI_FILE_EXTENSIONS:
@@ -432,7 +433,8 @@ class SomaxStringDispatcher:
         name: str = corpus_name if corpus_name is not None else filename
 
         try:
-            corpus: Corpus = self.players[player].export_runtime_corpus(corpus_name)
+            corpus: Corpus = self.players[player].export_runtime_corpus(corpus_name,
+                                                                        use_original_tempo=use_original_tempo)
         except KeyError as e:
             self.logger.error(f"No player named '{player}' exists. Could not export corpus.")
             return
