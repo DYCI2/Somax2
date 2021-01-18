@@ -32,13 +32,17 @@ then
     if (($retval == 0 )) || (( $retval == 130 )); 
     then 
         exit 0; 
+    # Temporary modification while PyInstaller isn't working.
     else
-        echo -e "\033[1m[FATAL]: Could not run local installation of server. Attempting to launch pre-compiled binary...\033[0m"
-        run_binary
+        exit $retval;
+    # else
+    #     echo -e "\033[1m[FATAL]: Could not run local installation of server. Attempting to launch pre-compiled binary...\033[0m"
+    #     run_binary
     fi
 elif [ "$EXECUTABLE" = "binary" ]
 then
-    run_binary
+    # run_binary
+    echo -e "\033[1m[FATAL]: Option \"${EXECUTABLE}\" is currently not supported. Terminating application.\033[0m"
 else
     echo -e "\033[1m[FATAL]: Unknown option \"${EXECUTABLE}\". Ensure that \$EXECUTABLE is set to one of the valid options in file ${BASH_SOURCE[0]}.\033[0m"
     

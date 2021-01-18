@@ -8,12 +8,11 @@ import logging.config
 import os
 import sys
 from importlib import resources
-from typing import Any, Dict, Union, Optional, Tuple, List
-
 from maxosc.maxformatter import MaxFormatter
 from maxosc.maxosc import Caller
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import AsyncIOOSCUDPServer
+from typing import Any, Dict, Union, Optional, Tuple, List
 
 import log
 import somax
@@ -225,7 +224,7 @@ class SomaxStringDispatcher:
         except KeyError:
             self.logger.error(f"No player with the name '{player}' exists. No transform was added.")
         except TransformError as e:
-            self.logger.error(f"{str(e)}. No transform was added.")
+            self.logger.debug(f"{str(e)}. No transform was added.")
         except TypeError as e:
             self.logger.error(
                 f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was added.")
@@ -234,15 +233,15 @@ class SomaxStringDispatcher:
         try:
             transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)
             self.players[player].remove_transform(transform)
+            self.logger.debug(f"Successfully removed transform {transform} from player '{player}'.")
         except KeyError:
             self.logger.error(f"No player with the name '{player}' exists. No transform was removed.")
         except IndexError as e:
             self.logger.error(f"{str(e)} No transform was removed.")
         except TransformError as e:
-            self.logger.error(f"{str(e)}. No transform was removed.")
+            self.logger.debug(f"{str(e)}. No transform was removed.")
         except TypeError as e:
-            self.logger.error(
-                f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was removed.")
+            self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was removed.")
 
     def add_scale_action(self, player: str, scale_action: str, override: bool = False, **kwargs):
         try:

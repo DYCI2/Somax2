@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Assets</key>
+	<dict>
+		<key>03B7797D-7A99-4F02-8A9B-3765D5F8743A</key>
+		<dict>
+			<key>HREF</key>
+			<string>00015-template01.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:58Z</date>
+			<key>Size</key>
+			<integer>449674</integer>
+		</dict>
+		<key>0526AAB4-CBA6-4A43-9DA9-488DAA0A64B6</key>
+		<dict>
+			<key>HREF</key>
+			<string>00001-RuntimeMain.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:39Z</date>
+			<key>Size</key>
+			<integer>1829935</integer>
+		</dict>
+		<key>132DE4A8-91EF-467E-8B0B-7B4F065C6D43</key>
+		<dict>
+			<key>HREF</key>
+			<string>00016-Untitled.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:59Z</date>
+			<key>Size</key>
+			<integer>296279</integer>
+		</dict>
+		<key>1429A399-1F3E-4068-A20E-37272332F04E</key>
+		<dict>
+			<key>HREF</key>
+			<string>00013-ModelMemorySpace.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:55Z</date>
+			<key>Size</key>
+			<integer>326203</integer>
+		</dict>
+		<key>1A067EA3-1F49-4ED9-8CE3-7E87CF096E58</key>
+		<dict>
+			<key>HREF</key>
+			<string>00011-dyci2.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:53Z</date>
+			<key>Size</key>
+			<integer>864302</integer>
+		</dict>
+		<key>1BF0FF4D-D69D-43A7-BA09-13199A4871AC</key>
+		<dict>
+			<key>HREF</key>
+			<string>00012-QueryLabelTransform.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:54Z</date>
+			<key>Size</key>
+			<integer>829354</integer>
+		</dict>
+		<key>57BCD485-7F11-4B9F-9631-C67603983220</key>
+		<dict>
+			<key>HREF</key>
+			<string>00006-Influence.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:45Z</date>
+			<key>Size</key>
+			<integer>1655309</integer>
+		</dict>
+		<key>5DE157BA-581B-4CBE-9B71-26E7E2C567A9</key>
+		<dict>
+			<key>HREF</key>
+			<string>00010-Why%20continuous%20peaks.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:51Z</date>
+			<key>Size</key>
+			<integer>309616</integer>
+		</dict>
+		<key>64AC4625-E9B6-4675-ADF6-C3623E3C7C30</key>
+		<dict>
+			<key>HREF</key>
+			<string>00009-Evaluation.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:50Z</date>
+			<key>Size</key>
+			<integer>871938</integer>
+		</dict>
+		<key>AF547836-92EF-4860-8890-06F182396641</key>
+		<dict>
+			<key>HREF</key>
+			<string>00002-CorpusBuilder.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:40Z</date>
+			<key>Size</key>
+			<integer>1162062</integer>
+		</dict>
+		<key>BE497C0C-E1A8-4C34-B0D7-97F1AC063268</key>
+		<dict>
+			<key>HREF</key>
+			<string>00014-Transforms.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:57Z</date>
+			<key>Size</key>
+			<integer>1951471</integer>
+		</dict>
+		<key>BED1AA19-8AEF-4198-9BA2-2FC2B8DFF10F</key>
+		<dict>
+			<key>HREF</key>
+			<string>00003-Scheduler.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:41Z</date>
+			<key>Size</key>
+			<integer>875641</integer>
+		</dict>
+		<key>D87C885B-8A67-48DD-B6B0-87BDA7683135</key>
+		<dict>
+			<key>HREF</key>
+			<string>00005-template01.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:43Z</date>
+			<key>Size</key>
+			<integer>332099</integer>
+		</dict>
+		<key>E0AD7348-3AAD-43C5-8C07-D7726DCB04C7</key>
+		<dict>
+			<key>HREF</key>
+			<string>00008-Demo.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:49Z</date>
+			<key>Size</key>
+			<integer>1048516</integer>
+		</dict>
+		<key>F172690C-EF7D-4B0C-86D5-A710636694C6</key>
+		<dict>
+			<key>HREF</key>
+			<string>00007-Corpus.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:48Z</date>
+			<key>Size</key>
+			<integer>2312623</integer>
+		</dict>
+		<key>FB3AE833-2FCF-4F43-9817-212D660141F3</key>
+		<dict>
+			<key>HREF</key>
+			<string>00004-template01.png</string>
+			<key>Last Modified</key>
+			<date>2020-11-20T09:47:42Z</date>
+			<key>Size</key>
+			<integer>102353</integer>
+		</dict>
+	</dict>
+	<key>Settings</key>
+	<dict>
+		<key>Compression Factor</key>
+		<real>0.80000001192092896</real>
+		<key>Image Type</key>
+		<integer>1</integer>
+		<key>Max Width</key>
+		<integer>1024</integer>
+		<key>Scale Image to Max Width</key>
+		<false/>
+		<key>Use Idea Space Size</key>
+		<false/>
+	</dict>
+</dict>
+</plist>
