@@ -1,69 +1,22 @@
 import asyncio
 import time
-from typing import Optional, Any, List
+from abc import ABC
+from typing import Optional, Any, List, Type
 
 from somax.runtime.corpus import ContentType
 from somax.runtime.corpus_event import CorpusEvent, Note
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.player import Player
 from somax.runtime.transforms import AbstractTransform
-from somax.scheduler.scheduled_event import ScheduledEvent, AutomaticTriggerEvent, ScheduledMidiEvent, \
-    ScheduledAudioEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent
 from somax.scheduler.base_scheduler import BaseScheduler
+from somax.scheduler.scheduled_event import ScheduledEvent, AutomaticTriggerEvent, ScheduledMidiEvent, \
+    ScheduledAudioEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent, AbstractTriggerEvent
 
 
-class RealtimeScheduler(BaseScheduler):
-    DEFAULT_CALLBACK_INTERVAL: float = 0.001  # seconds
-
-    def __init__(self, tempo: float = 120.0, terminated: bool = False):
-        super().__init__(tempo)
-        self.terminated = terminated
-        self._last_callback_time: float = time.time()
-
-    async def init_async_loop(self, callback_interval: int = DEFAULT_CALLBACK_INTERVAL):
-        self.logger.debug(f"Scheduler initialized with callback interval {callback_interval}.")
-        while not self.terminated:
-            await asyncio.sleep(callback_interval)
-            self._callback()
-
-    def _callback(self):
-        if self.running:
-            self._update_tick()
-            self._process_internal_events()
-
-    def _update_tick(self):
-        if self.running:
-            t: float = time.time()
-            delta_time: float = t - self._last_callback_time
-            self._last_callback_time = t
-            self._tick += delta_time * self.tempo / 60.0
-
-    ######################################################
-    # REAL-TIME CONTROL
-    ######################################################
-
-    def start(self) -> None:
-        self._last_callback_time = time.time()
-        self.running = True
-
-    def pause(self) -> None:
-        self.running = False
-
-    def terminate(self):
-        self.stop()
-        self.terminated = True
-
-    def stop(self) -> None:
-        self.running = False
-        remamining_queue: List[ScheduledEvent] = self.queue[:]
-        self.queue = []
-        self._tick = 0
-        for event in remamining_queue[:]:
-            # Add new triggers for all existing automatically triggered
-            if isinstance(event, AutomaticTriggerEvent):
-                self.add_trigger_event(event.player)
-            if isinstance(event, ScheduledMidiEvent) and event.velocity == 0:
-                self._process_midi_event(event)
+class RealtimeScheduler(BaseScheduler, ABC):
+    def __init__(self, tempo: float = 120.0, running: bool = False,
+                 trigger_pretime: float = BaseScheduler.TRIGGER_PRETIME):
+        super().__init__(tempo=tempo, running=running, trigger_pretime=trigger_pretime)
 
     ######################################################
     # ADD (INTERNAL AND EXTERNAL)
@@ -145,3 +98,119 @@ class RealtimeScheduler(BaseScheduler):
 
     def _process_influence_event(self, influence_event: ScheduledInfluenceEvent):
         raise AttributeError(f"Queued Influence Events are not supported for class {self.__class__.__name__}.")
+
+
+class RealtimeMasterScheduler(RealtimeScheduler):
+    DEFAULT_CALLBACK_INTERVAL: float = 0.001  # seconds
+
+    def __init__(self, tempo: float = 120.0, terminated: bool = False):
+        super().__init__(tempo)
+        self.terminated = terminated
+        self._last_callback_time: float = time.time()
+
+    async def init_async_loop(self, callback_interval: int = DEFAULT_CALLBACK_INTERVAL):
+        self.logger.debug(f"Scheduler initialized with callback interval {callback_interval}.")
+        while not self.terminated:
+            await asyncio.sleep(callback_interval)
+            self._callback()
+
+    def _callback(self):
+        if self.running:
+            self._update_tick()
+            self._process_internal_events()
+
+    def _update_tick(self):
+        if self.running:
+            t: float = time.time()
+            delta_time: float = t - self._last_callback_time
+            self._last_callback_time = t
+            self._tick += delta_time * self.tempo / 60.0
+
+    ######################################################
+    # REAL-TIME CONTROL
+    ######################################################
+
+    def start(self) -> None:
+        self._last_callback_time = time.time()
+        self.running = True
+
+    def pause(self) -> None:
+        self.running = False
+
+    def terminate(self):
+        self.stop()
+        self.terminated = True
+
+    def stop(self) -> None:
+        self.running = False
+        remamining_queue: List[ScheduledEvent] = self.queue[:]
+        self.queue = []
+        self._tick = 0
+        for event in remamining_queue[:]:
+            # Add new triggers for all existing automatically triggered
+            if isinstance(event, AutomaticTriggerEvent):
+                self.add_trigger_event(event.player)
+            if isinstance(event, ScheduledMidiEvent) and event.velocity == 0:
+                self._process_midi_event(event)
+
+    def _add_audio_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
+        raise NotImplementedError
+
+
+class RealtimeSlaveScheduler(RealtimeScheduler):
+    def __init__(self, tempo: float = 120.0):
+        super().__init__(tempo=tempo, running=True)
+
+    def update(self, tick: float, tempo: float):
+        if abs(self.tick - tick) > 1.0:  # TODO: Arbitrarily chosen
+            self.tick = tick
+            self.tempo = tempo
+            self._cleanup()
+        else:
+            self.tick = tick
+            self.tempo = tempo
+        self._process_internal_events()
+
+    def _cleanup(self):
+        print("Cleaning stuff")
+        events = self.queue
+        self.queue = []
+        for event in events:
+            if isinstance(event, ScheduledMidiEvent) and event.velocity == 0:
+                self._process_midi_event(event)
+            elif isinstance(event, ScheduledAudioEvent):
+                self._process_audio_event(event)
+            elif isinstance(event, AbstractTriggerEvent):
+                self._slave_retrigger(event)
+            elif isinstance(event, ScheduledInfluenceEvent):
+                self._process_influence_event(event)
+            elif isinstance(event, ScheduledCorpusEvent):
+                self._process_corpus_event(event)
+
+    def _slave_retrigger(self, trigger_event: AbstractTriggerEvent):
+        # goal: maintain phase for retriggered event after scheduler has jumped
+        tick_integral, tick_fraction = divmod(self.tick, 1.0)
+        trigger_fraction = trigger_event.trigger_time % 1.0
+        if tick_fraction > trigger_fraction:
+            trigger_time: float = tick_integral + 1 + trigger_fraction
+        else:
+            trigger_time: float = tick_integral + trigger_fraction
+        target_time: float = trigger_time + (trigger_event.target_time - trigger_event.trigger_time)
+        player: Player = trigger_event.player
+        trigger_type: Type[AbstractTriggerEvent] = type(trigger_event)
+        self.queue.append(trigger_type(trigger_time, player, target_time))
+
+    def _update_tick(self) -> None:
+        pass
+
+    def pause(self):
+        pass
+
+    def start(self):
+        pass
+
+    def stop(self):
+        pass
+
+    def _add_audio_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
+        raise NotImplementedError

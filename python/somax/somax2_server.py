@@ -36,7 +36,7 @@ from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SimpleOscTarget, SendProtocol
 from somax.runtime.transforms import AbstractTransform
-from somax.scheduler.realtime_scheduler import RealtimeScheduler
+from somax.scheduler.realtime_scheduler import RealtimeSlaveScheduler, RealtimeMasterScheduler
 from somax.scheduler.scheduled_object import TriggerMode
 
 
@@ -48,7 +48,7 @@ class SomaxStringDispatcher:
         super().__init__(**kwargs)
         self.logger = logging.getLogger(__name__)
         self.players: Dict[str, Player] = dict()
-        self.scheduler = RealtimeScheduler()
+        self.scheduler = RealtimeMasterScheduler()
 
     ######################################################
     # CREATION/DELETION OF PLAYER/STREAMVIEW/ATOM
@@ -589,6 +589,17 @@ class SomaxServer(SomaxStringDispatcher, Caller):
         """ :returns whether the scheduler has a tempo master after operation """
         has_tempo_master: bool = self._set_tempo_master(player)
         self.target.send(SendProtocol.SCHEDULER_HAS_TEMPO_MASTER, has_tempo_master)
+
+    ######################################################
+    # EXPERIMENTAL
+    ######################################################
+
+    def slave_scheduler(self):
+        self.logger.info("Scheduler set to SlaveScheduler")
+        self.scheduler = RealtimeSlaveScheduler()
+
+    def update_tick(self, tick: float, tempo: float):
+        self.scheduler.update(tick, tempo)
 
 
 if __name__ == "__main__":
