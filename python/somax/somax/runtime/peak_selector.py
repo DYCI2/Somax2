@@ -82,7 +82,6 @@ class MaxPeakSelector(AbstractFallbackPeakSelector):
         if peaks.is_empty():
             return None
         max_peak_value: float = np.max(peaks.scores)
-        print("max peak value", max_peak_value)
         self.logger.debug(f"[decide_default] Max peak value is {max_peak_value}.")
         max_peaks_idx: List[int] = np.argwhere(np.abs(peaks.scores - max_peak_value) < 0.001)
         peak_idx: int = random.choice(max_peaks_idx)
