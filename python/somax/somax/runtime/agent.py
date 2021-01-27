@@ -52,6 +52,9 @@ class Agent:
         if corpus:
             self.player.read_corpus(corpus)
 
+    def terminate(self):
+        pass # TODO[MULTIP]: Implement so that it closes its thread!
+
 
 class OscAgent(Agent):
     def __init__(self, player: Player, scheduler: AgentScheduler, ip: str, recv_port: int, send_port: int,

@@ -5,8 +5,8 @@ from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.player import Player
 
-from somax.scheduler.scheduled_event import ScheduledEvent, ScheduledInfluenceEvent, ScheduledAudioEvent, \
-    ScheduledMidiEvent, ScheduledCorpusEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, ScheduledInfluenceEvent, AudioEvent, \
+    MidiEvent, ScheduledCorpusEvent
 from somax.scheduler.base_scheduler import BaseScheduler
 
 
@@ -54,10 +54,10 @@ class OfflineScheduler(BaseScheduler):
         """ No processing required as `next` already returns the events """
         pass
 
-    def _process_midi_event(self, midi_event: ScheduledMidiEvent):
+    def _process_midi_event(self, midi_event: MidiEvent):
         raise AttributeError(f"Midi Events are not supported for class {self.__class__.__name__}.")
 
-    def _process_audio_event(self, audio_event: ScheduledAudioEvent):
+    def _process_audio_event(self, audio_event: AudioEvent):
         raise AttributeError(f"Audio Events are not supported for class {self.__class__.__name__}.")
 
     def _process_influence_event(self, influence_event: ScheduledInfluenceEvent) -> None:

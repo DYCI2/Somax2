@@ -19,66 +19,61 @@ class TempoEvent(ScheduledEvent):
         self.tempo = tempo
 
 
-class ScheduledPlayerEvent(ScheduledEvent):
-    def __init__(self, trigger_time: float, player: Player):
-        super(ScheduledPlayerEvent, self).__init__(trigger_time)
-        self.player: Player = player
-
-
-class ScheduledMidiEvent(ScheduledPlayerEvent):
-    def __init__(self, trigger_time: float, player: Player, note: int, velocity: int, channel: int, state: int,
+class MidiEvent(ScheduledEvent):
+    def __init__(self, trigger_time: float, note: int, velocity: int, channel: int, state: Optional[int] = None,
                  applied_transform: Optional[AbstractTransform] = None):
-        super(ScheduledMidiEvent, self).__init__(trigger_time, player)
+        super(MidiEvent, self).__init__(trigger_time)
         self.note: int = note
         self.velocity: int = velocity
         self.channel: int = channel
-        self.state: int = state
+        self.state: Optional[int] = state
         self.applied_transform: Optional[AbstractTransform] = applied_transform
 
     def __repr__(self):
-        return f"MidiEvent(trigger_time={self.trigger_time},player={self.player},note={self.note},velocity={self.velocity},channel={self.channel},state={self.state})"
+        return f"MidiEvent(trigger_time={self.trigger_time},note={self.note},velocity={self.velocity}," \
+               f"channel={self.channel},state={self.state})"
 
 
-class ScheduledAudioEvent(ScheduledPlayerEvent):
-    def __init__(self, trigger_time: float, player: Player, onset: float, duration: float, state: int, tempo: float):
-        super(ScheduledAudioEvent, self).__init__(trigger_time, player)
+class AudioEvent(ScheduledEvent):
+    def __init__(self, trigger_time: float, onset: float, duration: float, state: int, tempo: float):
+        super(AudioEvent, self).__init__(trigger_time)
         self.onset: float = onset
         self.duration: float = duration
         self.state: int = state
         self.tempo: float = tempo
 
 
-class ScheduledCorpusEvent(ScheduledPlayerEvent):
-    def __init__(self, trigger_time: float, player: Player, corpus_event: CorpusEvent):
-        super().__init__(trigger_time, player)
+class ScheduledCorpusEvent(ScheduledEvent):
+    def __init__(self, trigger_time: float, corpus_event: CorpusEvent):
+        super().__init__(trigger_time)
         self.corpus_event: CorpusEvent = corpus_event
 
 
-class ScheduledInfluenceEvent(ScheduledPlayerEvent):
-    def __init__(self, trigger_time: float, player: Player, path: List[str], influence: AbstractInfluence):
-        super().__init__(trigger_time, player)
+class ScheduledInfluenceEvent(ScheduledEvent):
+    def __init__(self, trigger_time: float, path: List[str], influence: AbstractInfluence):
+        super().__init__(trigger_time)
         self.path = path
         self.influence = influence
         self.num_generated_peaks: Optional[Dict[Atom, int]] = None  # added to event after it's been processed
 
 
-class AbstractTriggerEvent(ScheduledPlayerEvent, ABC):
-    def __init__(self, trigger_time: float, player: Player, target_time: float):
-        super(AbstractTriggerEvent, self).__init__(trigger_time, player)
+class AbstractTriggerEvent(ScheduledEvent, ABC):
+    def __init__(self, trigger_time: float,  target_time: float):
+        super(AbstractTriggerEvent, self).__init__(trigger_time)
         self.target_time: float = target_time
 
 
 class AutomaticTriggerEvent(AbstractTriggerEvent):
-    def __init__(self, trigger_time: float, player: Player, target_time: float):
-        super().__init__(trigger_time, player, target_time)
+    def __init__(self, trigger_time: float,target_time: float):
+        super().__init__(trigger_time, target_time)
 
     def __repr__(self):
-        return f"AutomaticTriggerEvent(trigger_time={self.trigger_time},player={self.player},target_time={self.target_time}"
+        return f"AutomaticTriggerEvent(trigger_time={self.trigger_time},target_time={self.target_time}"
 
 
 class ManualTriggerEvent(AbstractTriggerEvent):
-    def __init__(self, trigger_time: float, player: Player):
-        super(ManualTriggerEvent, self).__init__(trigger_time, player, trigger_time)
+    def __init__(self, trigger_time: float):
+        super(ManualTriggerEvent, self).__init__(trigger_time,trigger_time)
 
 
 class OscEvent(ScheduledEvent):

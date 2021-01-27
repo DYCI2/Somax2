@@ -17,11 +17,11 @@ from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
 from somax.runtime.transforms import AbstractTransform, NoTransform
 from somax.runtime.transform_handler import TransformHandler
-from somax.scheduler.scheduled_object import ScheduledMidiObject, TriggerMode
+from somax.scheduler.scheduled_object import ScheduledMidiAgent, TriggerMode
 import numpy as np
 
 
-class Player(Streamview, ScheduledMidiObject):
+class Player(Streamview, ScheduledMidiAgent):
 
     def __init__(self, name: str,
                  trigger_mode: TriggerMode = TriggerMode.default(),
@@ -34,7 +34,6 @@ class Player(Streamview, ScheduledMidiObject):
         super().__init__(name, transform_handler=self._transform_handler, corpus=corpus, merge_action=merge_action,
                          trigger_mode=trigger_mode, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self.target: Target = target
         self.peak_selector: AbstractPeakSelector = peak_selector
         self.corpus: Optional[Corpus] = corpus
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}

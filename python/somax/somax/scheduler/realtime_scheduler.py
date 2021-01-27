@@ -9,8 +9,8 @@ from somax.runtime.influence import AbstractInfluence
 from somax.runtime.player import Player
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.base_scheduler import BaseScheduler
-from somax.scheduler.scheduled_event import ScheduledEvent, AutomaticTriggerEvent, ScheduledMidiEvent, \
-    ScheduledAudioEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent, AbstractTriggerEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, AutomaticTriggerEvent, MidiEvent, \
+    AudioEvent, ScheduledCorpusEvent, ScheduledInfluenceEvent, AbstractTriggerEvent
 
 
 class RealtimeScheduler(BaseScheduler, ABC):
@@ -45,26 +45,26 @@ class RealtimeScheduler(BaseScheduler, ABC):
         # Queue midi events for note ons/offs
         for note in player.artificially_held_notes:
             onset: float = trigger_time
-            self.queue.append(ScheduledMidiEvent(onset, player, note.pitch, 0, note.channel,
-                                                 corpus_event.state_index, applied_transform))
+            self.queue.append(MidiEvent(onset, player, note.pitch, 0, note.channel,
+                                        corpus_event.state_index, applied_transform))
         for note in note_offs_previous:
             onset: float = trigger_time
-            self.queue.append(ScheduledMidiEvent(onset, player, note.pitch, 0, note.channel,
-                                                 corpus_event.state_index, None))
+            self.queue.append(MidiEvent(onset, player, note.pitch, 0, note.channel,
+                                        corpus_event.state_index, None))
         for note in note_ons:
             if player.simultaneous_onsets:
                 onset: float = trigger_time
             else:
                 onset: float = trigger_time + max(0.0, note.onset)
-            self.queue.append(ScheduledMidiEvent(onset, player, note.pitch, note.velocity, note.channel,
-                                                 corpus_event.state_index, applied_transform))
+            self.queue.append(MidiEvent(onset, player, note.pitch, note.velocity, note.channel,
+                                        corpus_event.state_index, applied_transform))
         if player.hold_notes_artificially:
             player.artificially_held_notes = note_offs
         else:
             for note in note_offs:
                 onset: float = trigger_time + max(0.0, note.onset + note.duration)
-                self.queue.append(ScheduledMidiEvent(onset, player, note.pitch, 0, note.channel,
-                                                     corpus_event.state_index, None))
+                self.queue.append(MidiEvent(onset, player, note.pitch, 0, note.channel,
+                                            corpus_event.state_index, None))
 
     def _add_audio_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
         raise NotImplementedError
@@ -84,13 +84,13 @@ class RealtimeScheduler(BaseScheduler, ABC):
     def _process_corpus_event(self, corpus_event: ScheduledCorpusEvent) -> Optional[Any]:
         raise AttributeError(f"Queued Corpus Events are not supported for class {self.__class__.__name__}.")
 
-    def _process_midi_event(self, midi_event: ScheduledMidiEvent) -> None:
+    def _process_midi_event(self, midi_event: MidiEvent) -> None:
         player: Player = midi_event.player
         player.target.send("midi", [midi_event.note, midi_event.velocity, midi_event.channel])
         if midi_event.velocity > 0:
             player.target.send("state", [midi_event.state, midi_event.applied_transform.renderer_info()])
 
-    def _process_audio_event(self, audio_event: ScheduledAudioEvent) -> None:
+    def _process_audio_event(self, audio_event: AudioEvent) -> None:
         player: Player = audio_event.player
         tempo_factor: float = audio_event.tempo / self.tempo
         player.target.send("audio", [audio_event.onset, audio_event.duration, tempo_factor])
@@ -150,7 +150,7 @@ class RealtimeMasterScheduler(RealtimeScheduler):
             # Add new triggers for all existing automatically triggered
             if isinstance(event, AutomaticTriggerEvent):
                 self.add_trigger_event(event.player)
-            if isinstance(event, ScheduledMidiEvent) and event.velocity == 0:
+            if isinstance(event, MidiEvent) and event.velocity == 0:
                 self._process_midi_event(event)
 
     def _add_audio_event(self, player: Player, trigger_time: float, corpus_event: CorpusEvent):
@@ -176,9 +176,9 @@ class RealtimeSlaveScheduler(RealtimeScheduler):
         events = self.queue
         self.queue = []
         for event in events:
-            if isinstance(event, ScheduledMidiEvent) and event.velocity == 0:
+            if isinstance(event, MidiEvent) and event.velocity == 0:
                 self._process_midi_event(event)
-            elif isinstance(event, ScheduledAudioEvent):
+            elif isinstance(event, AudioEvent):
                 self._process_audio_event(event)
             elif isinstance(event, AbstractTriggerEvent):
                 self._slave_retrigger(event)
