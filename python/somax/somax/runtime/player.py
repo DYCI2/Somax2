@@ -23,15 +23,15 @@ import numpy as np
 
 class Player(Streamview, ScheduledMidiObject):
 
-    def __init__(self, name: str, target: Target,
+    def __init__(self, name: str,
                  trigger_mode: TriggerMode = TriggerMode.default(),
                  peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
                  merge_action: AbstractMergeAction = AbstractMergeAction.default(),
                  corpus: Optional[Corpus] = None,
                  scale_actions: List[AbstractScaleAction] = AbstractScaleAction.default_set(),
                  **kwargs):
-        self.transform_handler: TransformHandler = TransformHandler()
-        super().__init__(name, transform_handler=self.transform_handler, corpus=corpus, merge_action=merge_action,
+        self._transform_handler: TransformHandler = TransformHandler()
+        super().__init__(name, transform_handler=self._transform_handler, corpus=corpus, merge_action=merge_action,
                          trigger_mode=trigger_mode, **kwargs)
         self.logger = logging.getLogger(__name__)
         self.target: Target = target
@@ -43,7 +43,7 @@ class Player(Streamview, ScheduledMidiObject):
 
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
         self.previous_peaks: Peaks = Peaks.create_empty()
-        self.transform_handler: TransformHandler = TransformHandler()
+        self._transform_handler: TransformHandler = TransformHandler()
 
         self._parse_parameters()
 
@@ -68,7 +68,7 @@ class Player(Streamview, ScheduledMidiObject):
 
         event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
         event_and_transform = self.peak_selector.decide(peaks, self.improvisation_memory,
-                                                        self.corpus, self.transform_handler)
+                                                        self.corpus, self._transform_handler)
         if event_and_transform is None:
             self._feedback(None, scheduler_time, NoTransform())
             return None
@@ -117,12 +117,12 @@ class Player(Streamview, ScheduledMidiObject):
         for scale_action in self.scale_actions.values():
             scale_action.clear()
         Streamview.clear(self)
-        self.transform_handler.clear()
+        self._transform_handler.clear()
 
-    def set_corpus(self, corpus: Corpus) -> None:
+    def read_corpus(self, corpus: Corpus) -> None:
         self._update_transforms()
         self.corpus = corpus
-        Streamview.set_corpus(self, corpus)
+        Streamview.read_corpus(self, corpus)
         self.send_current_corpus_info()
 
     def set_peak_selector(self, peak_selector: AbstractPeakSelector) -> None:
@@ -135,7 +135,7 @@ class Player(Streamview, ScheduledMidiObject):
             raise DuplicateKeyError(f"A Scale Action of type '{type(scale_action).__name__}' already exists."
                                     f"To override: use 'override=True'.")
         else:
-            scale_action.update_transforms(self.transform_handler)
+            scale_action.update_transforms(self._transform_handler)
             self.scale_actions[type(scale_action)] = scale_action
 
             self._parse_parameters()
@@ -147,14 +147,14 @@ class Player(Streamview, ScheduledMidiObject):
 
     def add_transform(self, transform: AbstractTransform):
         """ :raises TransformError if a transform of the same instance with the same parameters already exists """
-        self.transform_handler.add(transform)
+        self._transform_handler.add(transform)
         self._update_transforms()
 
     def remove_transform(self, transform: AbstractTransform):
         """ :raises IndexError if key doesn't exist
                     TransformError if attempting to delete last transform
         """
-        self.transform_handler.remove(transform)
+        self._transform_handler.remove(transform)
         self._update_transforms()
 
     ######################################################
@@ -166,7 +166,7 @@ class Player(Streamview, ScheduledMidiObject):
         if peaks.is_empty():
             return peaks
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
-        corresponding_transforms: List[AbstractTransform] = [self.transform_handler.get_transform(t)
+        corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
                                                              for t in np.unique(peaks.transform_ids)]
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled():
@@ -176,28 +176,5 @@ class Player(Streamview, ScheduledMidiObject):
 
     def _update_transforms(self):
         for scale_action in self.scale_actions.values():
-            scale_action.update_transforms(self.transform_handler)
+            scale_action.update_transforms(self._transform_handler)
         super().update_transforms()
-
-    ######################################################
-    # MAX INTERFACE INFORMATION
-    ######################################################
-
-    def send_peaks(self):
-        self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [self.name, self.previous_peaks.size()])
-        for atom in self._all_atoms():
-            peaks: Peaks = atom.get_peaks()
-            self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [atom.name, peaks.size()])
-
-    def send_corpora(self, corpus_names_and_paths: List[Tuple[str, str]]):
-        for corpus in corpus_names_and_paths:
-            self.target.send(SendProtocol.PLAYER_CORPUS_FILES, corpus)
-        self.target.send(SendProtocol.PLAYER_CORPUS_FILES, Target.WRAPPED_BANG)
-
-    def send_atoms(self):
-        atom_names: List[str] = [atom.name for atom in self._all_atoms()]
-        self.target.send(SendProtocol.PLAYER_INSTANTIATED_ATOMS, atom_names)
-
-    def send_current_corpus_info(self):
-        self.target.send(SendProtocol.PLAYER_CORPUS, [self.corpus.name, self.corpus.content_type.value,
-                                                      self.corpus.length()])

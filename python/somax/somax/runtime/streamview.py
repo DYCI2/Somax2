@@ -26,9 +26,8 @@ class Streamview(Parametric):
         super().__init__(**kwargs)
         self.logger = logging.getLogger(__name__)
         self.name: str = name
-        self.transform_handler: TransformHandler = transform_handler    # passed as reference
+        self._transform_handler: TransformHandler = transform_handler  # passed as reference
         self.merge_action: AbstractMergeAction = merge_action
-        self.corpus: Optional[Corpus] = corpus
 
         self.atoms: Dict[str, Atom] = {}
         self.streamviews: Dict[str, Streamview] = {}
@@ -36,6 +35,8 @@ class Streamview(Parametric):
         self._weight: Parameter = Parameter(weight, 0.0, None, 'float', "Relative scaling of streamview peaks.")
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this Streamview.")
         self._parse_parameters()
+
+        self.read_corpus(corpus)
 
     def __repr__(self):
         return f"{type(self).__name__}(name={self.name}, ...)"
@@ -79,7 +80,8 @@ class Streamview(Parametric):
     # MODIFY STATE
     ######################################################
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float, applied_transform: AbstractTransform) -> None:
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
         self.merge_action.feedback(feedback_event, time, applied_transform)
         for streamview in self.streamviews.values():
             streamview.feedback(feedback_event, time, applied_transform)
@@ -146,34 +148,34 @@ class Streamview(Parametric):
         """ Raises: KeyError, IndexError """
         atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
         atom.set_classifier(classifier)
-        atom.update_transforms(self.transform_handler)
+        atom.update_transforms(self._transform_handler)
         self._parse_parameters()
 
     def set_memory_space(self, path: List[str], memory_space: AbstractMemorySpace) -> None:
         """ Raises: KeyError, IndexError """
         atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
         atom.set_memory_space(memory_space)
-        atom.update_transforms(self.transform_handler)
+        atom.update_transforms(self._transform_handler)
         self._parse_parameters()
 
     def set_activity_pattern(self, path: List[str], activity_pattern: AbstractActivityPattern) -> None:
         """ Raises: KeyError, IndexError """
         atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
         atom.set_activity_pattern(activity_pattern)
-        atom.update_transforms(self.transform_handler)
+        atom.update_transforms(self._transform_handler)
         self._parse_parameters()
 
-    def set_corpus(self, corpus: Corpus) -> None:
+    def read_corpus(self, corpus: Corpus) -> None:
         for streamview in self.streamviews.values():
-            streamview.set_corpus(corpus)
+            streamview.read_corpus(corpus)
         for atom in self.atoms.values():
-            atom.read(corpus)
+            atom.read_corpus(corpus)
 
     def update_transforms(self):
         for streamview in self.streamviews.values():
             streamview.update_transforms()
         for atom in self.atoms.values():
-            atom.update_transforms(self.transform_handler)
+            atom.update_transforms(self._transform_handler)
 
     def is_enabled(self) -> bool:
         return self.enabled.value

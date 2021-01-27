@@ -209,8 +209,8 @@ def test_integration_performance():
     player.create_atom(["melodic"], 1.0, False, TopNoteClassifier(), ClassicActivityPattern(), NGramMemorySpace())
     player.create_atom(["harmonic"], 1.0, False, SomChromaClassifier(), ClassicActivityPattern(), NGramMemorySpace())
     player.create_atom(["self"], 1.0, True, TopNoteClassifier(), ClassicActivityPattern(), NGramMemorySpace())
-    player.set_corpus(corpus)
-    transform_id: int = player.transform_handler.get_id(NoTransform())
+    player.read_corpus(corpus)
+    transform_id: int = player._transform_handler.get_id(NoTransform())
 
     for num_peaks in additional_peaks_per_layer:
         influence_times: List[float] = []

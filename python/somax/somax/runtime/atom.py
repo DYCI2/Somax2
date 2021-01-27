@@ -37,11 +37,11 @@ class Atom(Parametric):
 
         self._corpus: Optional[Corpus] = corpus
         if corpus:
-            self.read(corpus)
+            self.read_corpus(corpus)
 
         self._parse_parameters()
 
-    def read(self, corpus: Optional[Corpus] = None):
+    def read_corpus(self, corpus: Optional[Corpus] = None):
         """ :raises RuntimeError """
         if corpus is not None:
             self.logger.debug(f"[read]: Reading corpus {corpus}.")
@@ -85,11 +85,11 @@ class Atom(Parametric):
 
     def set_classifier(self, classifier: AbstractClassifier) -> None:
         self._classifier = classifier
-        self.read()
+        self.read_corpus()
 
     def set_memory_space(self, memory_space: AbstractMemorySpace) -> None:
         self._memory_space = memory_space
-        self.read()
+        self.read_corpus()
 
     def set_activity_pattern(self, activity_pattern: AbstractActivityPattern):
         activity_pattern.corpus = self._corpus

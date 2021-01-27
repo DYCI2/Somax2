@@ -29,8 +29,8 @@ def test_integration_transforms():
     player.add_transform(TransposeTransform(-1))
     player.add_transform(TransposeTransform(1))
 
-    player.set_corpus(corpus)
-    transform_id: int = player.transform_handler.get_id(NoTransform())
+    player.read_corpus(corpus)
+    transform_id: int = player._transform_handler.get_id(NoTransform())
 
     for num_peaks in additional_peaks_per_layer:
         influence_times: List[float] = []
