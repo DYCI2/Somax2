@@ -55,8 +55,13 @@ class Agent:
     def terminate(self):
         pass # TODO[MULTIP]: Implement so that it closes its thread!
 
+    def clear(self):
+        self.scheduler.flush_held()
+        self.player.clear()
+
 
 class OscAgent(Agent):
+    # TODO[MULTIP]: Need to handle osc_revport here aswell to see that it's not taken (and if it is, find a solution and forward that to Max (how?))
     def __init__(self, player: Player, scheduler: AgentScheduler, ip: str, recv_port: int, send_port: int,
                  corpus_filepath: Optional[str] = None):
         super().__init__(player=player, scheduler=scheduler)
@@ -255,7 +260,7 @@ class OscAgent(Agent):
             if self.scheduler.running:
                 self.scheduler.flush_held(self.players[player])
                 self.scheduler.pause()
-                self.reset_influences(player)
+                self.clear(player)
                 restart_server = True
 
             self.player.read_corpus(corpus)
@@ -279,11 +284,6 @@ class OscAgent(Agent):
         except KeyError as e:
             self.logger.error(f"Could not find {str(e)}. No Parameter was set.")
 
-    def reset_influences(self, player: str):
-        try:
-            self.player.clear()
-        except KeyError as e:
-            self.logger.error(f"Could not find {str(e)}. Influences were not reset.")
 
     ######################################################
     # SCHEDULER # TODO[MULTIP]: This entire section is TODO

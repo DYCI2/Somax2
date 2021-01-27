@@ -17,16 +17,16 @@ class AgentScheduler(BaseScheduler):
     TRIGGER_PRETIME: float = 0.01  # seconds
 
     def __init__(self, player: Player, tempo: float = 120.0, trigger_pretime: float = TRIGGER_PRETIME,
-                 tempo_master: bool = False):
+                 tempo_master: bool = False, initial_tick: float = 0.0):
         super().__init__(tempo=tempo)
         self.logger = logging.getLogger(__name__)
         self._player = player
-        self._tick: float = 0.0
+        self._tick: float = initial_tick
         self.queue: list[ScheduledEvent] = []
         self.tempo_master: bool = tempo_master
         self._trigger_pretime: float = trigger_pretime
 
-        self.master: multiprocessing.Queue = None   # TODO[MULTIP]: Channel for communicating back to master
+        self.master: multiprocessing.Queue = None  # TODO[MULTIP]: Channel for communicating back to master
 
     ######################################################
     # MAIN FUNCTIONS
@@ -34,6 +34,7 @@ class AgentScheduler(BaseScheduler):
 
     def update_tick(self, tick: float, tempo: float):
         self._update_tick(tick=tick, tempo=tempo)
+        # TODO: Should return MidiEvents (+ state information stuff for sending)
 
     def _update_tick(self, tick: float, tempo: float, **kwargs):
         pass  # TODO[MULTIP]: implement
@@ -44,8 +45,7 @@ class AgentScheduler(BaseScheduler):
 
     def add_trigger_event(self, trigger_time: Optional[float] = None):
         if self._player.trigger_mode == TriggerMode.AUTOMATIC and not self._has_trigger():
-            self._add_automatic_trigger_event(self._tick - self._trigger_pretime * self.tempo / 60.0,
-                                              self._tick)
+            self._add_automatic_trigger_event(self._tick - self._trigger_pretime * self.tempo / 60.0, self._tick)
         elif self._player.trigger_mode == TriggerMode.MANUAL and self.running:
             self._add_manual_trigger_event(trigger_time if trigger_time else self._tick)
         else:
@@ -84,13 +84,14 @@ class AgentScheduler(BaseScheduler):
                                         corpus_event.state_index, applied_transform))
         for note in note_offs_previous:
             onset: float = trigger_time
-            self.queue.append(MidiEvent(onset,note.pitch, 0, note.channel,corpus_event.state_index, None))
+            self.queue.append(MidiEvent(onset, note.pitch, 0, note.channel, corpus_event.state_index, None))
         for note in note_ons:
             if self._player.simultaneous_onsets:
                 onset: float = trigger_time
             else:
                 onset: float = trigger_time + max(0.0, note.onset)
-            self.queue.append(MidiEvent(onset, note.pitch, note.velocity, note.channel, corpus_event.state_index, applied_transform))
+            self.queue.append(
+                MidiEvent(onset, note.pitch, note.velocity, note.channel, corpus_event.state_index, applied_transform))
         if self._player.hold_notes_artificially:
             self._player.artificially_held_notes = note_offs
         else:
@@ -111,7 +112,7 @@ class AgentScheduler(BaseScheduler):
         # sort to ensure that influences/midi/tempo/etc. are handled before triggers if simultaneous
         events.sort(key=lambda e: isinstance(e, AbstractTriggerEvent))
         for event in events:
-            if isinstance(event, TempoEvent):
+            if isinstance(event, TempoEvent):  # TODO[MULTIP]: Shouldn't handle tempo events at all
                 self._process_tempo_event(event)
             if isinstance(event, MidiEvent):
                 self._process_midi_event(event)
@@ -126,7 +127,7 @@ class AgentScheduler(BaseScheduler):
         return events
 
     def _process_tempo_event(self, tempo_event: TempoEvent) -> None:
-        self.tempo = tempo_event.tempo
+        self.tempo = tempo_event.tempo  # TODO[MULTIP]: Shouldn't handle tempo events at all
 
     def _process_trigger_event(self, trigger_event: AbstractTriggerEvent) -> None:
         try:
@@ -182,13 +183,13 @@ class AgentScheduler(BaseScheduler):
     def delete_trigger(self):
         self.queue = [e for e in self.queue if not (isinstance(e, AutomaticTriggerEvent))]
 
-    def flush_held(self, player: Player):
-        for note in player.held_notes:
+    def flush_held(self):
+        for note in self._player.held_notes:
             self.queue.append(MidiEvent(self._tick, note.pitch, 0, note.channel))
-        for note in player.artificially_held_notes:
+        for note in self._player.artificially_held_notes:
             self.queue.append(MidiEvent(self._tick, note.pitch, 0, note.channel))
-        player.held_notes = []
-        player.artificially_held_notes = []
+        self._player.held_notes = []
+        self._player.artificially_held_notes = []
 
     def _requeue_trigger_event(self, trigger_event: AbstractTriggerEvent) -> None:
         next_trigger_time: float = trigger_event.trigger_time + 1
@@ -197,11 +198,8 @@ class AgentScheduler(BaseScheduler):
 
     def _has_trigger(self) -> bool:  # TODO: Unoptimized approach
         for event in self.queue:
-            try:
-                if isinstance(event, AutomaticTriggerEvent):
-                    return True
-            except AttributeError:
-                continue  # TODO: Handle?
+            if isinstance(event, AutomaticTriggerEvent):
+                return True
         return False
 
     def _sanity_check(self):

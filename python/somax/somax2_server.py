@@ -47,8 +47,8 @@ class Somax:
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.logger = logging.getLogger(__name__)
-        self.agents: Dict[str, Agent] = dict()
-        self.scheduler: MainScheduler = None  # TODO[MULTIP]: parse?
+        self.agents: Dict[str, OscAgent] = dict()
+        self.scheduler: MainScheduler = MainScheduler()  # TODO[MULTIP]: parse from input? Or just assume and change later?
 
     # TODO: create/delete agents separate from OSC parsing
 
@@ -68,11 +68,11 @@ class Somax:
         self.logger.info("Scheduler was stopped.")
 
     def clear_all(self):
-        for player in self.players.values():
-            self.scheduler.flush_held(player)
-            player.clear()
+        for agent in self.agents.values():
+            agent.clear()
 
     def _set_tempo(self, tempo: Union[float, int]):
+        # TODO[MULTIP]: Update to properly handle tempo according to structure of MainScheduler
         if self.scheduler.tempo_master is not None:
             self.logger.error(f"Could not set tempo. Scheduler currently receives its tempo "
                               f"from player '{self.scheduler.tempo_master.name}'.")
@@ -87,6 +87,7 @@ class Somax:
 
     def _set_tempo_master(self, player: Optional[str]) -> bool:
         """ :returns whether the scheduler has a tempo master after operation """
+        # TODO[MULTIP]: Update to properly handle tempo master according to structure of MainScheduler
         try:
             self.scheduler.tempo_master = self.players[player]
             self.logger.debug(f"[set_tempo_master] Tempo master set to '{player}'.")
@@ -133,7 +134,7 @@ class SomaxServer(Somax, Caller):
 
     DEBUG = True
 
-    def __init__(self, recv_port: int, send_port: int, ip: str = Somax.IP_LOCALHOST):
+    def __init__(self, recv_port: int, send_port: int, ip: str = StringDispatcher.IP_LOCALHOST):
         super(SomaxServer, self).__init__(parse_parenthesis_as_list=False, discard_duplicate_args=False)
         self.logger = logging.getLogger(__name__)
         self.target: Target = SimpleOscTarget(self.SERVER_ADDRESS, send_port, ip)
@@ -144,11 +145,12 @@ class SomaxServer(Somax, Caller):
         self.in_port: int = recv_port
         self.out_port: int = send_port
         self.server: Optional[AsyncIOOSCUDPServer] = None
-        self.logger.info(f"Somax Server (version: {somax.__version__}) was started "
+        self.logger.info(f"Somax server (version: {somax.__version__}) was started "
                          f"with input port {recv_port}, output port {send_port} and ip {ip}.")
 
     async def run(self) -> None:
         """ raises: OSError is server already is in use """
+        # TODO[MULTIP]: This is only for MainMasterScheduler. Need to handle this function accordingly for SlaveScheduler
         osc_dispatcher: Dispatcher = Dispatcher()
         osc_dispatcher.map(self.SERVER_ADDRESS, self.__process_osc)
         osc_dispatcher.set_default_handler(self.__unmatched_osc)
@@ -185,8 +187,9 @@ class SomaxServer(Somax, Caller):
     def create_agent(self, name: str, recv_port: int, send_port: int, ip: str = "", trigger_mode: str = "",
                      peak_selector: str = "", merge_action: str = "", corpus_filepath: str = "",
                      scale_actions: Tuple[str, ...] = ("",), override: bool = False):
+        # TODO[MULTIP]: Need to capture errors from osc_recvport here if taken
         try:
-            address: str = StringDispatcher.parse_osc_address(name)  # TODO: handle elsewhere
+            address: str = StringDispatcher.parse_osc_address(name)  # TODO[MULTIP]: handle elsewhere
             ip: str = StringDispatcher.parse_ip(ip)
             trigger_mode: TriggerMode = TriggerMode.from_string(trigger_mode)
             merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
@@ -207,7 +210,7 @@ class SomaxServer(Somax, Caller):
         player: Player = Player(name=name, trigger_mode=trigger_mode, peak_selector=peak_selector,
                                 merge_action=merge_action,
                                 scale_actions=scale_actions)
-        # TODO[MULTIP]. Also: Add this to MainScheduler (to share queue etc). + Initialize with current tick & tempo!!
+        # TODO[MULTIP]. Also: Add AgentScheduler to MainScheduler (to share queue etc). + Initialize with current tick & tempo!!
         scheduler: AgentScheduler = AgentScheduler()
         self.agents[name] = OscAgent(player=player, scheduler=scheduler, ip=ip, recv_port=recv_port,
                                      send_port=send_port, corpus_filepath=corpus_filepath)
@@ -217,8 +220,7 @@ class SomaxServer(Somax, Caller):
     def delete_agent(self, name: str):
         try:
             del self.agents[name]
-            self.scheduler.delete_trigger(
-                self.players[name])  # TODO[MULTIP]: delete scheduler's osc address, not trigger
+            self.scheduler.remove_agent(name)  # TODO[MULTIP]: delete scheduler's osc address, not trigger
             self.logger.info(f"Deleted agent '{name}'.")
         except KeyError:
             self.logger.error(f"An agent with the name '{name}' doesn't exist. No agent was deleted.")
@@ -234,7 +236,7 @@ class SomaxServer(Somax, Caller):
         self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, self.scheduler.tempo)
 
     def get_player_names(self):
-        for player_name in self.players.keys():
+        for player_name in self.agents.keys():
             self.target.send(SendProtocol.ALL_PLAYER_NAMES, [player_name])
 
     def server_status(self, agents: Optional[list[str]]):
@@ -263,8 +265,9 @@ class SomaxServer(Somax, Caller):
         self._set_tempo(tempo)
         self.get_tempo()  # send tempo to server
 
-    def set_tempo_master(self, player: Optional[str]):
+    def set_tempo_master(self, player_name: Optional[str]):
         """ :returns whether the scheduler has a tempo master after operation """
+        # TODO[MULTIP]: Handle tempo master according to strategy
         has_tempo_master: bool = self._set_tempo_master(player)
         self.target.send(SendProtocol.SCHEDULER_HAS_TEMPO_MASTER, has_tempo_master)
 
@@ -273,11 +276,11 @@ class SomaxServer(Somax, Caller):
     ######################################################
 
     def set_scheduling_mode(self):
-        pass  # TODO[MULTIP] Slave/master
+        pass  # TODO[MULTIP] Slave/master: How to handle this in combination with run()? Can we run() a master and then reinit as whatever?
 
-    # TODO[MULTIP] Slave/master
+    # TODO[MULTIP] Handle only for Slave appropriately
     def update_tick(self, tick: float, tempo: float):
-        self.scheduler.update(tick, tempo)
+        self.scheduler._update_tick(tick, tempo)
 
 
 if __name__ == "__main__":
@@ -304,6 +307,7 @@ if __name__ == "__main__":
     somax_server = SomaxServer(in_port, out_port)
 
 
+    # TODO[MULTIP]: Handle both Process and Async
     async def run():
         await asyncio.gather(somax_server.run())
 

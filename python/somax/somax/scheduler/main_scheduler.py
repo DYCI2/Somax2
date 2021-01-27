@@ -18,6 +18,17 @@ class MainScheduler(BaseScheduler, ABC):
     def _update_slaves(self):
         pass  # TODO[MULTIP]: send  tick + tempo through queue
 
+    def set_tempo(self, tempo: float):
+        # TODO[MULTIP]: Read from all bidirectional queues and set tempo from there
+        #   Actually, one solution could be to have a _single_ pipe on which it receives tempo info and that is passed
+        #   only to the tempo_master. The question is just how to pass this pipe to the Max UI...
+        pass
+
+    def remove_agent(self, name: str):
+        # TODO[MULTIP]: Remove agent's multiprocessing.Queue when removed from here
+        pass
+
+
     ######################################################
     # REAL-TIME CONTROL
     ######################################################
@@ -36,7 +47,7 @@ class MainScheduler(BaseScheduler, ABC):
         # TODO[MULTIP]: Send terminate to all slaves
 
 
-class MainMasterScheduler(MainScheduler, AsyncScheduler):
+class MasterMainScheduler(MainScheduler, AsyncScheduler):
     def __init__(self, tempo: float, *args, **kwargs):
         super().__init__(tempo=tempo, *args, **kwargs)
 
@@ -52,7 +63,7 @@ class MainMasterScheduler(MainScheduler, AsyncScheduler):
             self._update_slaves()
 
 
-class MainSlaveScheduler(MainScheduler):
+class SlaveMainScheduler(MainScheduler):
     def __init__(self, tempo: float, *args, **kwargs):
         super().__init__(tempo=tempo, *args, **kwargs)
 
@@ -63,5 +74,5 @@ class MainSlaveScheduler(MainScheduler):
         self._update_tick(tick=tick, tempo=tempo)
 
     def _update_tick(self, tick: float, tempo: float, **kwargs):
-        # TODO[MULTIP]: Handle everything here
+        # TODO[MULTIP]: Handle everything here. Be efficient. called every ms
         pass
