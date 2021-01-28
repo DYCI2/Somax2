@@ -1,23 +1,11 @@
-import argparse
-import asyncio
-import ipaddress
+import logging
 import logging
 import logging.config
 import os
-import sys
-from importlib import resources
-from maxosc.maxformatter import MaxFormatter
-from maxosc.maxosc import Caller
-from pythonosc.dispatcher import Dispatcher
-from pythonosc.osc_server import AsyncIOOSCUDPServer
-from typing import Any, Dict, Union, Optional, Tuple, List
+from typing import Any, Optional, List
 
-import log
-import somax
 from somax import settings
-from somax.classification import SomChromaClassifier
 from somax.classification.classifier import AbstractClassifier
-from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.atom import Atom
@@ -27,18 +15,17 @@ from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
-from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
-from somax.runtime.target import Target, SimpleOscTarget, SendProtocol
+from somax.runtime.target import Target, SendProtocol
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.agent_scheduler import AgentScheduler
-from somax.scheduler.main_scheduler import MainScheduler
 from somax.scheduler.scheduled_object import TriggerMode
 
 
+# TODO[MULTIP]: Inherit from Process
 class Agent:
     def __init__(self, player: Player, scheduler: AgentScheduler, corpus: Optional[Corpus] = None):
         self.logger = logging.getLogger(__name__)
@@ -47,25 +34,27 @@ class Agent:
 
         # TODO: Initialize Target + Caller
         if player.trigger_mode == TriggerMode.AUTOMATIC:
-            # TODO[MULTIP]: Handle with new scheduler. There should be no need to pass player name
-            self.scheduler.add_trigger_event(self.players[name])
-        if corpus:
+            self.scheduler.add_trigger_event()
+        if corpus:  # handle corpus object if passed
             self.player.read_corpus(corpus)
 
     def terminate(self):
-        pass # TODO[MULTIP]: Implement so that it closes its thread!
+        pass  # TODO[MULTIP]: Implement so that it closes its thread!
 
     def clear(self):
+        # TODO[MULTIP]: Handle return values from flush or call scheduler's update_tick after and handle return from that
         self.scheduler.flush_held()
         self.player.clear()
 
 
 class OscAgent(Agent):
     # TODO[MULTIP]: Need to handle osc_revport here aswell to see that it's not taken (and if it is, find a solution and forward that to Max (how?))
+
     def __init__(self, player: Player, scheduler: AgentScheduler, ip: str, recv_port: int, send_port: int,
                  corpus_filepath: Optional[str] = None):
         super().__init__(player=player, scheduler=scheduler)
-        if corpus_filepath:
+        self.target = None  # TODO[MULTIP]: Need Caller and Target!!!
+        if corpus_filepath:  # handle corpus filepath if passed
             self.read_corpus(corpus_filepath)
 
     ######################################################
@@ -94,12 +83,9 @@ class OscAgent(Agent):
     def influence_onset(self, player):
         if not self.scheduler.running:
             return
-        try:
-            if self.player.trigger_mode == TriggerMode.MANUAL:
-                self.logger.debug(f"[influence_onset] Influence onset triggered for player '{player}'.")
-                self.scheduler.add_trigger_event(self.players[player])
-        except KeyError:
-            self.logger.error(f"A player named '{player}' does not exist.")
+        if self.player.trigger_mode == TriggerMode.MANUAL:
+            self.logger.debug(f"[influence_onset] Influence onset triggered for player '{player}'.")
+            self.scheduler.add_trigger_event()
 
     ######################################################
     # CREATION/DELETION OF STREAMVIEW/ATOM
@@ -114,7 +100,7 @@ class OscAgent(Agent):
                                           override=override)
             self.logger.info(f"Created streamview at path '{path}'.")
         except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
-            self.logger.error(f"{str(e)}. No sjtreamview was created.")
+            self.logger.error(f"{str(e)}. No streamview was created.")
 
     def delete_streamview(self, path: str):
         try:
@@ -134,9 +120,8 @@ class OscAgent(Agent):
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
             self.player.create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
                                     classifier=classifier, activity_pattern=activity_pattern,
-                                    memory_space=memory_space, enabled=enabled,
-                                    override=override)
-            self.player.send_atoms()
+                                    memory_space=memory_space, enabled=enabled, override=override)
+            self.send_atoms()
             self.logger.info(f"Created atom at path '{path}'.")
         except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)} No atom was created.")
@@ -153,86 +138,70 @@ class OscAgent(Agent):
     # MODIFY PLAYER/STREAMVIEW/ATOM STATE
     ######################################################
 
-    def set_peak_selector(self, player: str, peak_selector: str, **kwargs):
-        if player not in self.players:
-            self.logger.error(f"Player '{player}' does not exist. No classifier was set.")
-            return
+    def set_peak_selector(self, peak_selector: str, **kwargs):
         try:
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
             self.player.set_peak_selector(peak_selector)
-            self.logger.info(f"[set_peak_selector] Peak Selector set to {type(peak_selector).__name__} "
-                             f"for player '{player}.")
+            self.logger.info(f"[set_peak_selector] Peak selector set to {type(peak_selector).__name__} "
+                             f"for player '{self.player.name}.")
         except (ValueError, KeyError) as e:
-            self.logger.error(f"{str(e)} No Peak Selector was set.")
+            self.logger.error(f"{str(e)} No peak selector was set.")
 
-    def set_classifier(self, player: str, path: str, classifier: str, **kwargs):
-        if player not in self.players:
-            self.logger.error(f"Player '{player}' does not exist. No classifier was set.")
-            return
+    def set_classifier(self, path: str, classifier: str, **kwargs):
         try:
-            path_and_name: List[str] = self._parse_streamview_atom_path(path)
+            path_and_name: list[str] = self._parse_streamview_atom_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             self.player.set_classifier(path_and_name, classifier)
             self.logger.info(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
-                             f"for player '{player}'.")
+                             f"for player '{self.player.name}'.")
         except (AssertionError, KeyError, ValueError, InvalidCorpus) as e:
-            self.logger.error(f"{str(e)} No Classifier was set.")
+            self.logger.error(f"{str(e)} No classifier was set.")
 
-    def set_activity_pattern(self, player: str, path: str, activity_pattern: str, **kwargs):
-        if player not in self.players:
-            self.logger.error(f"Player '{player}' does not exist. No classifier was set.")
-            return
+    def set_activity_pattern(self, path: str, activity_pattern: str, **kwargs):
         try:
-            path_and_name: List[str] = self._parse_streamview_atom_path(path)
-            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern,
-                                                                                            **kwargs)
+            path_and_name: list[str] = self._parse_streamview_atom_path(path)
+            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)
             self.player.set_activity_pattern(path_and_name, activity_pattern)
-            self.logger.debug(f"[set_acitivity_pattern] Activity Pattern set to {type(activity_pattern).__name__} "
-                              f"for player '{player}.")
+            self.logger.debug(f"[set_acitivity_pattern] Activity pattern set to {type(activity_pattern).__name__} "
+                              f"for player '{self.player.name}.")
         except (AssertionError, KeyError, ValueError) as e:
-            self.logger.error(f"{str(e)} No Activity Pattern was set.")
+            self.logger.error(f"{str(e)} No activity pattern was set.")
 
-    def add_transform(self, player: str, transform: str, **kwargs):
+    def add_transform(self, transform: str, **kwargs):
         try:
             transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)
             self.player.add_transform(transform)
-            self.logger.debug(f"[add_transform] Added transform {transform} for player '{player}'.")
-        except KeyError:
-            self.logger.error(f"No player with the name '{player}' exists. No transform was added.")
+            self.logger.debug(f"[add_transform] Added transform {transform} for player '{self.player.name}'.")
         except TransformError as e:
             self.logger.debug(f"{str(e)}. No transform was added.")
         except TypeError as e:
-            self.logger.error(
-                f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was added.")
+            self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'."
+                              f" No transform was added.")
 
-    def remove_transform(self, player: str, transform: str, **kwargs):
+    def remove_transform(self, transform: str, **kwargs):
         try:
             transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)
             self.player.remove_transform(transform)
-            self.logger.debug(f"Successfully removed transform {transform} from player '{player}'.")
-        except KeyError:
-            self.logger.error(f"No player with the name '{player}' exists. No transform was removed.")
+            self.logger.debug(f"Successfully removed transform {transform} from player '{self.player.name}'.")
         except IndexError as e:
             self.logger.error(f"{str(e)} No transform was removed.")
         except TransformError as e:
             self.logger.debug(f"{str(e)}. No transform was removed.")
         except TypeError as e:
-            self.logger.error(
-                f"{str(e)}. Please provide this argument on the form 'argname= value'. No transform was removed.")
+            self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. "
+                              f"No transform was removed.")
 
-    def add_scale_action(self, player: str, scale_action: str, override: bool = False, **kwargs):
+    def add_scale_action(self, scale_action: str, override: bool = False, **kwargs):
         try:
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
             self.player.add_scale_action(scale_action, override)
             self.logger.info(f"Added scale action {repr(scale_action)}")  # TODO:REMOVE TEMP
-        except KeyError:
-            self.logger.error(f"No player with the name '{player}' exists. No scale action was added.")
         except ValueError as e:
             self.logger.error(f"{str(e)}. No scale action was added.")
         except DuplicateKeyError as e:
             self.logger.error(f"{str(e)}. No scale action was added.")
 
-    def remove_scale_action(self, player: str, scale_action: str, **kwargs):
+    def remove_scale_action(self, scale_action: str, **kwargs):
         try:
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
             self.player.remove_scale_action(type(scale_action))
@@ -241,12 +210,9 @@ class OscAgent(Agent):
             self.logger.error(f"Could not remove scale action: {repr(e)}.")
 
     def read_corpus(self, filepath: str, volatile: bool = False):
-        self.logger.info(f"Reading Corpus at '{filepath}' for Player '{player}'...")
+        self.logger.info(f"Reading corpus at '{filepath}' for player '{self.player.name}'...")
         if not os.path.exists(filepath):
-            self.logger.error(f"The file '{filepath}' does not exist. No Corpus was read.")
-            return
-        if player not in self.players:
-            self.logger.error(f"Player '{player}' does not exist. No Corpus was read.")
+            self.logger.error(f"The file '{filepath}' does not exist. No corpus was read.")
             return
 
         try:
@@ -256,34 +222,33 @@ class OscAgent(Agent):
             else:
                 corpus: Corpus = CorpusBuilder().build(filepath)
 
+            # TODO[MULTIP]: Handle scheduler accordingly when setting corpus
             restart_server: bool = False
             if self.scheduler.running:
-                self.scheduler.flush_held(self.players[player])
+                self.scheduler.flush_held()  # TODO[MULTIP]: Return values to max if using that solution
                 self.scheduler.pause()
-                self.clear(player)
+                self.clear()
                 restart_server = True
 
             self.player.read_corpus(corpus)
-            self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{player}'.")
+            self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
 
             if restart_server:
                 self.scheduler.start()
 
-        # except (KeyError, IOError, InvalidCorpus) as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
         except (IOError, InvalidCorpus) as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
-            self.logger.error(f"{str(e)}. No Corpus was read.")
+            self.logger.error(f"{str(e)}. No corpus was read.")
 
-    def set_param(self, player: str, path: str, value: Any):
-        self.logger.debug(f"[set_param] Attempting to set parameter for player '{player}' at '{path}' "
+    def set_param(self, path: str, value: Any):
+        self.logger.debug(f"[set_param] Attempting to set parameter for player '{self.player.name}' at '{path}' "
                           f"to {value} (type={type(value)})...")
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             self.player.set_param(path_and_name, value)
         except (AssertionError, IndexError, ParameterError) as e:
-            self.logger.error(f"{str(e)} Could not set Parameter.")
+            self.logger.error(f"{str(e)} Could not set parameter.")
         except KeyError as e:
-            self.logger.error(f"Could not find {str(e)}. No Parameter was set.")
-
+            self.logger.error(f"Could not find {str(e)}. No parameter was set.")
 
     ######################################################
     # SCHEDULER # TODO[MULTIP]: This entire section is TODO
@@ -294,7 +259,7 @@ class OscAgent(Agent):
         pass
 
     def set_tempo_master(self, tempo_master: bool):
-        pass # TODO[MULTIP]:
+        pass  # TODO[MULTIP]:
 
     ######################################################
     # SCHEDULING STATE-RELATED PARAMETERS
@@ -303,51 +268,46 @@ class OscAgent(Agent):
     # TODO: Remove and change into generic set scheduling param
     # TODO: Should also generalize Scheduler.add_trigger_event or some other aspect so that the last lines
     #       of this function are handled by scheduler, not at parsing time
-    def set_trigger_mode(self, player: str, mode: str):
+
+    # TODO[MULTIP]: Move this function to AgentScheduler (or at least its mechanics - wrapper still needed here)
+    def set_trigger_mode(self, mode: str):
         try:
             trigger_mode: TriggerMode = TriggerMode.from_string(mode)
         except ValueError as e:
-            self.logger.error(f"{repr(e)}. Did not set Trigger Mode.")
+            self.logger.error(f"{repr(e)}. No trigger mode was set.")
             return
-        try:
-            previous_trigger_mode: TriggerMode = self.player.trigger_mode
-            self.player.trigger_mode = trigger_mode
-            self.scheduler.flush_held(self.players[player])
-        except KeyError:
-            self.logger.error(f"No player named '{player}' exists. Could not set mode.")
-            return
+        previous_trigger_mode: TriggerMode = self.player.trigger_mode
+        self.player.trigger_mode = trigger_mode
+        self.scheduler.flush_held()  # TODO[MULTP]: Handle return values
+
         if trigger_mode == TriggerMode.AUTOMATIC and previous_trigger_mode != trigger_mode:
-            self.scheduler.add_trigger_event(self.players[player])
-        self.logger.debug(f"[trigger_mode]: Trigger mode set to '{trigger_mode}' for player '{player}'.")
+            self.scheduler.add_trigger_event()
+        self.logger.debug(f"[trigger_mode]: Trigger mode set to '{trigger_mode}' for player '{self.player.name}'.")
 
-    def set_held_notes_mode(self, player: str, enable: bool):
-        try:
-            self.player.hold_notes_artificially = enable
-            self.scheduler.flush_held(p)
-            self.logger.debug(f"Held notes mode set to {enable} for player '{player}'.")
-        except KeyError:
-            self.logger.error(f"No player named '{player}' exists. Could not set mode.")
+    def set_held_notes_mode(self, enable: bool):
+        # TODO[MULTIP]: Move this function to AgentScheduler (wrapper still needed here)
+        self.player.hold_notes_artificially = enable
+        self.scheduler.flush_held()  # TODO[MULTIP] Handle return values
+        self.logger.debug(f"Held notes mode set to {enable} for player '{self.player.name}'.")
 
-    def set_onset_mode(self, player: str, enable: bool):
-        try:
-            self.player.simultaneous_onsets = enable
-            self.scheduler.flush_held(p)
-            self.logger.debug(f"Simultaneous onset mode set to {enable} for player '{player}'.")
-        except KeyError:
-            self.logger.error(f"No player named '{player}' exists. Could not set mode.")
+    def set_onset_mode(self, enable: bool):
+        # TODO[MULTIP]: Move this function to AgentScheduler (wrapper still needed here)
+        self.player.simultaneous_onsets = enable
+        self.scheduler.flush_held()  # TODO[MULTIP] Handle return values
+        self.logger.debug(f"Simultaneous onset mode set to {enable} for player '{self.player.name}'.")
 
     ######################################################
     # PRIVATE
     ######################################################
 
     @staticmethod
-    def _parse_streamview_atom_path(path: str) -> List[str]:
+    def _parse_streamview_atom_path(path: str) -> list[str]:
         """ :raises AssertionError if `path` is non-empty and not of type `str`. """
         assert isinstance(path, str), "Argument 'path' should be a string."
         if not path:
             return []
-        elif SomaxStringDispatcher.PATH_SEPARATOR in path:
-            return [s for s in path.split(SomaxStringDispatcher.PATH_SEPARATOR) if s]
+        elif settings.PATH_SEPARATOR in path:
+            return [s for s in path.split(settings.PATH_SEPARATOR) if s]
         else:
             return [path]
 
@@ -356,57 +316,45 @@ class OscAgent(Agent):
     ######################################################
 
     # TODO: can be single function with send_corpora
-    def get_corpus_files(self, player: str):
+    def get_corpus_files(self, ):
         filepath: str = os.path.join(os.path.dirname(__file__), settings.CORPUS_FOLDER)
-        corpora: List[Tuple[str, str]] = []
+        corpora: list[tuple[str, str]] = []
         for file in os.listdir(filepath):
             if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
                 corpus_name, _ = os.path.splitext(file)  # TODO: Not the corpus name that's specified in the json
                 corpora.append((corpus_name, os.path.join(filepath, file)))
-        try:
-            self.players[player].send_corpora(corpora)
-        except KeyError:
-            self.logger.error(f"No player named '{player}' exists. Could not get corpus files.")
+        self.send_corpora(corpora)
 
     # TODO: can be single function with send_peaks
-    def get_peaks(self, player: str):
-        try:
-            self.players[player].send_peaks()
-        except KeyError:
-            return
+    def get_peaks(self):
+        self.send_peaks()
 
-    def get_param(self, player: str, path: str):
+    def get_param(self, path: str):
         try:
-            parameter_path: List[str] = self._parse_streamview_atom_path(path)
-            self.target.send(SendProtocol.PLAYER_SINGLE_PARAMETER,
-                             [path, self.players[player].get_param(parameter_path).value])
+            parameter_path: list[str] = self._parse_streamview_atom_path(path)
+            self.target.send(SendProtocol.PLAYER_SINGLE_PARAMETER, [path, self.player.get_param(parameter_path).value])
         except (IndexError, KeyError):
             self.logger.error(f"Could not get parameter at given path.")
         except (ParameterError, AssertionError) as e:
             self.logger.error(str(e))
 
     def parameter_dict(self):
-        self.logger.debug(f"[parameter_dict] Creating parameter_dict.")
-        parameter_dict: Dict[str, Dict[str, ...]] = {}  # Note: recursive depth
-        for name, player in self.players.items():
-            parameter_dict[name] = player.max_representation()
-        self.target.send_dict(parameter_dict)
+        self.target.send_dict(self.player.max_representation())
 
     def send_peaks(self):
-        self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [self.name, self.previous_peaks.size()])
-        for atom in self._all_atoms():
-            peaks: Peaks = atom.get_peaks()
-            self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [atom.name, peaks.size()])
+        for name, count in self.player.get_peaks().items():
+            self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
 
-    def send_corpora(self, corpus_names_and_paths: List[Tuple[str, str]]):
+    def send_corpora(self, corpus_names_and_paths: list[tuple[str, str]]):
         for corpus in corpus_names_and_paths:
             self.target.send(SendProtocol.PLAYER_CORPUS_FILES, corpus)
         self.target.send(SendProtocol.PLAYER_CORPUS_FILES, Target.WRAPPED_BANG)
 
     def send_atoms(self):
-        atom_names: List[str] = [atom.name for atom in self._all_atoms()]
+        atom_names: list[str] = [atom.name for atom in self.player.all_atoms()]
         self.target.send(SendProtocol.PLAYER_INSTANTIATED_ATOMS, atom_names)
 
     def send_current_corpus_info(self):
-        self.target.send(SendProtocol.PLAYER_CORPUS, [self.corpus.name, self.corpus.content_type.value,
-                                                      self.corpus.length()])
+        corpus: Optional[Corpus] = self.player.corpus
+        if corpus is not None:
+            self.target.send(SendProtocol.PLAYER_CORPUS, [corpus.name, corpus.content_type.value, corpus.length()])

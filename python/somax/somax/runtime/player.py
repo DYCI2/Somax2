@@ -156,6 +156,14 @@ class Player(Streamview, ScheduledMidiAgent):
         self._transform_handler.remove(transform)
         self._update_transforms()
 
+    def get_peaks(self) -> dict[str, int]:
+        peaks_count: dict[str, int] = {self.name: self.previous_peaks.size()}
+        for atom in self.all_atoms():
+            peaks: Peaks = atom.get_peaks()
+            peaks_count[atom.name] = peaks.size()
+        return peaks_count
+
+
     ######################################################
     # PRIVATE
     ######################################################

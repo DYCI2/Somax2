@@ -307,7 +307,7 @@ if __name__ == "__main__":
     somax_server = SomaxServer(in_port, out_port)
 
 
-    # TODO[MULTIP]: Handle both Process and Async
+    # TODO[MULTIP]: Handle both Process and Asynco
     async def run():
         await asyncio.gather(somax_server.run())
 

@@ -211,12 +211,12 @@ class Streamview(Parametric):
             return self.atoms[target_name]
 
     def _direct_influenced_atoms(self) -> List[Atom]:
-        return [atom for atom in self._all_atoms() if not atom.self_influenced]
+        return [atom for atom in self.all_atoms() if not atom.self_influenced]
 
     def _self_influenced_atoms(self) -> List[Atom]:
-        return [atom for atom in self._all_atoms() if atom.self_influenced]
+        return [atom for atom in self.all_atoms() if atom.self_influenced]
 
-    def _all_atoms(self) -> List[Atom]:
+    def all_atoms(self) -> List[Atom]:
         return self.__gather_atoms([])
 
     def __gather_atoms(self, atoms: List[Atom]) -> List[Atom]:

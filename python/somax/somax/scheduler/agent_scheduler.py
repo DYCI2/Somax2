@@ -184,6 +184,8 @@ class AgentScheduler(BaseScheduler):
         self.queue = [e for e in self.queue if not (isinstance(e, AutomaticTriggerEvent))]
 
     def flush_held(self):
+        # TODO[MULTIP]: Not sure if this should queue the events (noteoffs) or just immediately return them.
+        #       Queueing like this will mean that flushing won't occur unless update tick is called
         for note in self._player.held_notes:
             self.queue.append(MidiEvent(self._tick, note.pitch, 0, note.channel))
         for note in self._player.artificially_held_notes:
