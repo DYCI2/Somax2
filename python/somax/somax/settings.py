@@ -7,6 +7,10 @@ PATH_SEPARATOR = "::"
 
 IMPORT_MATPLOTLIB = False
 
+DEBUG = True
+
 LOGGING_CONFIG = {
     # TODO
 }
+
+

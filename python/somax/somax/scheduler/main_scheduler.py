@@ -1,7 +1,7 @@
 import logging
 import multiprocessing
 import time
-from abc import ABC
+from abc import ABC, abstractmethod
 
 from somax.scheduler.base_scheduler import BaseScheduler, AsyncScheduler
 
@@ -14,6 +14,15 @@ class MainScheduler(BaseScheduler, ABC):
         self.terminated: bool = False
         self.agents: dict[str, multiprocessing.Queue] = {}
         self.tempo_master = None  # TODO[MULTIP]: How to handle this? Relation to self.agents, etc
+
+    @abstractmethod
+    def update_tick(self, **kwargs):
+        """ raises: RuntimeError if called on a MasterScheduler """
+        pass
+
+    @classmethod
+    def from_other(cls, other: 'MainScheduler', *args, **kwargs):
+        return cls(tempo=other.tempo, tick=other.tick, *args, **kwargs)
 
     def _update_slaves(self):
         pass  # TODO[MULTIP]: send  tick + tempo through queue
@@ -51,6 +60,10 @@ class MasterMainScheduler(MainScheduler, AsyncScheduler):
     def __init__(self, tempo: float, *args, **kwargs):
         super().__init__(tempo=tempo, *args, **kwargs)
 
+    def update_tick(self, **kwargs):
+        """ raises: RuntimeError """
+        raise RuntimeError("Updating tick manually for a master scheduler is not supported")
+
     def start(self) -> None:
         self._last_callback_time = time.time()
         self.running = True
@@ -70,7 +83,7 @@ class SlaveMainScheduler(MainScheduler):
     def start(self, **kwargs):
         pass  # TODO[MULTIP]: Send to slaves
 
-    def update_tick(self, tick: float, tempo: float):
+    def update_tick(self, tick: float, tempo: float, **kwargs):
         self._update_tick(tick=tick, tempo=tempo)
 
     def _update_tick(self, tick: float, tempo: float, **kwargs):

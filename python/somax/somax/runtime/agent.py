@@ -1,6 +1,7 @@
 import logging
 import logging
 import logging.config
+import multiprocessing
 import os
 from typing import Any, Optional, List
 
@@ -26,8 +27,10 @@ from somax.scheduler.scheduled_object import TriggerMode
 
 
 # TODO[MULTIP]: Inherit from Process
-class Agent:
-    def __init__(self, player: Player, scheduler: AgentScheduler, corpus: Optional[Corpus] = None):
+class Agent(multiprocessing.Process):
+    def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
+                 corpus: Optional[Corpus] = None, **kwargs):
+        super().__init__()
         self.logger = logging.getLogger(__name__)
         self.player: Player = player
         self.scheduler: AgentScheduler = scheduler
@@ -37,6 +40,10 @@ class Agent:
             self.scheduler.add_trigger_event()
         if corpus:  # handle corpus object if passed
             self.player.read_corpus(corpus)
+
+    def run(self):
+
+
 
     def terminate(self):
         pass  # TODO[MULTIP]: Implement so that it closes its thread!
@@ -50,9 +57,9 @@ class Agent:
 class OscAgent(Agent):
     # TODO[MULTIP]: Need to handle osc_revport here aswell to see that it's not taken (and if it is, find a solution and forward that to Max (how?))
 
-    def __init__(self, player: Player, scheduler: AgentScheduler, ip: str, recv_port: int, send_port: int,
-                 corpus_filepath: Optional[str] = None):
-        super().__init__(player=player, scheduler=scheduler)
+    def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
+                 ip: str, recv_port: int, send_port: int, corpus_filepath: Optional[str] = None, **kwargs):
+        super().__init__(player=player, scheduler=scheduler, **kwargs)
         self.target = None  # TODO[MULTIP]: Need Caller and Target!!!
         if corpus_filepath:  # handle corpus filepath if passed
             self.read_corpus(corpus_filepath)

@@ -2,14 +2,15 @@ import asyncio
 import logging
 import time
 from abc import abstractmethod, ABC
+from typing import Optional
 
 
 class BaseScheduler(ABC):
-    def __init__(self, tempo: float = 120.0, *args, **kwargs):
+    def __init__(self, tempo: float = 120.0, tick: float = 0.0, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.logger = logging.getLogger(__name__)
         self.tempo: float = tempo
-        self._tick: float = 0.0
+        self._tick: float = tick
         self.running: bool = False
 
     @abstractmethod
@@ -25,7 +26,7 @@ class BaseScheduler(ABC):
         pass
 
     @abstractmethod
-    def _update_tick(self, **kwargs):
+    def _update_tick(self, tick: Optional[float] = None, tempo: Optional[float] = None, **kwargs):
         pass
 
     @property
