@@ -25,38 +25,32 @@ class BaseScheduler(ABC):
     def stop(self, **kwargs):
         pass
 
-    @abstractmethod
-    def _update_tick(self, tick: Optional[float] = None, tempo: Optional[float] = None, **kwargs):
-        pass
-
     @property
-    def tick(self) -> float:
-        if self.running:
-            self._update_tick()
+    def tick(self):
         return self._tick
 
 
-class AsyncScheduler(BaseScheduler, ABC):
-    DEFAULT_CALLBACK_INTERVAL: float = 0.001  # seconds
+# class AsyncScheduler(BaseScheduler, ABC):
+#     DEFAULT_CALLBACK_INTERVAL: float = 0.001  # seconds
+#
+#     def __init__(self, tempo: float = 120.0, *args, **kwargs):
+#         super().__init__(tempo=tempo, *args, **kwargs)
+#         self._last_callback_time: float = time.time()
+#         self.terminated: bool = False
+#
+#     async def init_async_loop(self, callback_interval: int = DEFAULT_CALLBACK_INTERVAL):
+#         self.logger.debug(f"Scheduler initialized with callback interval {callback_interval}.")
+#         while not self.terminated:
+#             await asyncio.sleep(callback_interval)
+#             self._callback()
+#
+#     @abstractmethod
+#     def _callback(self):
+#         pass
 
-    def __init__(self, tempo: float = 120.0, *args, **kwargs):
-        super().__init__(tempo=tempo, *args, **kwargs)
-        self._last_callback_time: float = time.time()
-        self.terminated: bool = False
-
-    async def init_async_loop(self, callback_interval: int = DEFAULT_CALLBACK_INTERVAL):
-        self.logger.debug(f"Scheduler initialized with callback interval {callback_interval}.")
-        while not self.terminated:
-            await asyncio.sleep(callback_interval)
-            self._callback()
-
-    @abstractmethod
-    def _callback(self):
-        pass
-
-    def _update_tick(self):
-        if self.running:
-            t: float = time.time()
-            delta_time: float = t - self._last_callback_time
-            self._last_callback_time = t
-            self._tick += delta_time * self.tempo / 60.0
+    # def _update_tick(self, **_kwargs):
+    #     if self.running:
+    #         t: float = time.time()
+    #         delta_time: float = t - self._last_callback_time
+    #         self._last_callback_time = t
+    #         self._tick += delta_time * self.tempo / 60.0

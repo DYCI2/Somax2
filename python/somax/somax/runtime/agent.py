@@ -1,4 +1,4 @@
-import logging
+import asyncio
 import logging
 import logging.config
 import multiprocessing
@@ -9,6 +9,7 @@ from somax import settings
 from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.runtime.activity_pattern import AbstractActivityPattern
+from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.corpus import Corpus
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
@@ -18,51 +19,124 @@ from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
+from somax.runtime.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage, \
+    TempoSource
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.agent_scheduler import AgentScheduler
+from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiEvent
 from somax.scheduler.scheduled_object import TriggerMode
 
 
-# TODO[MULTIP]: Inherit from Process
+# TODO: Complete separation Agent/OscAgent where Agent can be initialized and used from the command line
+
 class Agent(multiprocessing.Process):
     def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 corpus: Optional[Corpus] = None, **kwargs):
+                 scheduler_tick: float, scheduler_tempo: float, corpus: Optional[Corpus] = None, **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.player: Player = player
-        self.scheduler: AgentScheduler = scheduler
+        self.recv_queue: multiprocessing.Queue = recv_queue
+        self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
+        self.scheduler: AgentScheduler = AgentScheduler(player=self.player, tempo=scheduler_tempo,
+                                                        initial_tick=scheduler_tick)
+        self._enabled: bool = True
+        self._terminated: bool = False
 
-        # TODO: Initialize Target + Caller
         if player.trigger_mode == TriggerMode.AUTOMATIC:
             self.scheduler.add_trigger_event()
         if corpus:  # handle corpus object if passed
             self.player.read_corpus(corpus)
 
-    def run(self):
-
-
-
     def terminate(self):
-        pass  # TODO[MULTIP]: Implement so that it closes its thread!
-
-    def clear(self):
-        # TODO[MULTIP]: Handle return values from flush or call scheduler's update_tick after and handle return from that
-        self.scheduler.flush_held()
-        self.player.clear()
+        self._terminated = True
 
 
-class OscAgent(Agent):
-    # TODO[MULTIP]: Need to handle osc_revport here aswell to see that it's not taken (and if it is, find a solution and forward that to Max (how?))
+class OscAgent(Agent, AsyncioOscObject):
 
     def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 ip: str, recv_port: int, send_port: int, corpus_filepath: Optional[str] = None, **kwargs):
-        super().__init__(player=player, scheduler=scheduler, **kwargs)
-        self.target = None  # TODO[MULTIP]: Need Caller and Target!!!
+                 scheduler_tick: float, scheduler_tempo: float, ip: str, recv_port: int, send_port: int, address: str,
+                 corpus_filepath: Optional[str] = None, **kwargs):
+        Agent.__init__(self, player=player, recv_queue=recv_queue, tempo_send_queue=tempo_send_queue,
+                       scheduler_tick=scheduler_tick, scheduler_tempo=scheduler_tempo, **kwargs)
+        AsyncioOscObject.__init__(self, recv_port=recv_port, send_port=send_port, ip=ip, address=address, **kwargs)
         if corpus_filepath:  # handle corpus filepath if passed
             self.read_corpus(corpus_filepath)
+
+    ######################################################
+    # ASYNCIO & MAIN LOOP(S)
+    ######################################################
+
+    def run(self):
+        asyncio.run(self._run())
+
+    async def _main_loop(self):
+        while not self._terminated:
+            while not self.recv_queue.empty():
+                message: ControlMessage = self.recv_queue.get()
+                if isinstance(message, TimeMessage):
+                    self._callback(tick=message.time.tick, tempo=message.time.tempo)
+                if isinstance(message, TempoMasterMessage):
+                    self.set_tempo_master(is_master=message.is_master)
+                if isinstance(message, ControlMessage):
+                    self._process_control_message(message.msg)
+            await asyncio.sleep(self.DEFAULT_CALLBACK_INTERVAL)
+
+    def _callback(self, tick: float, tempo: float):
+        if self._enabled:
+            events: list[ScheduledEvent] = self.scheduler.update_tick(tick=tick, tempo=tempo)
+            self._send_events(events)
+
+    def _process_control_message(self, message_type: PlayControl):
+        if message_type == PlayControl.START:
+            self.start_scheduler()
+        if message_type == PlayControl.PAUSE:
+            self.pause_scheduler()
+        if message_type == PlayControl.STOP:
+            self.stop_scheduler()
+        if message_type == PlayControl.CLEAR:
+            self.clear()
+        if message_type == PlayControl.TERMINATE:
+            self.terminate()
+
+    def _send_events(self, events: list[ScheduledEvent]):
+        for event in events:
+            if isinstance(event, TempoEvent):  # Only added to scheduler if tempo master
+                self.tempo_send_queue.put(TempoMessage(tempo=event.tempo, source=TempoSource.SLAVE))
+            if isinstance(event, MidiEvent):
+                self.target.send("midi", [event.note, event.velocity, event.channel])
+                if event.velocity > 0:
+                    self.target.send("state", [event.state, event.applied_transform.renderer_info()])
+
+    ######################################################
+    # SCHEDULER & PLAYBACK CONTROL
+    ######################################################
+
+    def start_scheduler(self):
+        self.scheduler.start()
+
+    def pause_scheduler(self):
+        self.scheduler.pause()
+
+    def stop_scheduler(self):
+        self.scheduler.stop()
+        self.clear()
+
+    def enabled(self, is_enabled):
+        self._enabled = is_enabled
+
+    def clear(self):
+        self.flush()
+        self.player.clear()
+
+    def flush(self):
+        events: list[ScheduledEvent] = self.scheduler.flush()
+        self._send_events(events)
+
+    def set_tempo_master(self, is_master: bool):
+        self.scheduler.is_tempo_master = is_master
 
     ######################################################
     # MAIN RUNTIME FUNCTIONS
@@ -85,7 +159,7 @@ class OscAgent(Agent):
             self.player.influence(path_and_name, influence, time, **kwargs)
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
-        self.logger.debug(f"[influence] Influence successfully terminated for player '{player}' with path '{path}'.")
+        self.logger.debug(f"[influence] Influence successfully completed for player '{player}' with path '{path}'.")
 
     def influence_onset(self, player):
         if not self.scheduler.running:
@@ -224,24 +298,22 @@ class OscAgent(Agent):
 
         try:
             _, file_extension = os.path.splitext(filepath)
-            if file_extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS:
-                corpus: Corpus = Corpus.from_json(filepath, volatile)
-            else:
-                corpus: Corpus = CorpusBuilder().build(filepath)
+            corpus: Corpus = Corpus.from_json(filepath, volatile)
 
             # TODO[MULTIP]: Handle scheduler accordingly when setting corpus
-            restart_server: bool = False
-            if self.scheduler.running:
-                self.scheduler.flush_held()  # TODO[MULTIP]: Return values to max if using that solution
-                self.scheduler.pause()
-                self.clear()
-                restart_server = True
+            self.clear()
+            # restart_server: bool = False
+            # if self.scheduler.running:
+            #     self.scheduler.flush_held()
+            #     self.scheduler.pause()
+            #     self.clear()
+            #     restart_server = True
 
             self.player.read_corpus(corpus)
             self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
 
-            if restart_server:
-                self.scheduler.start()
+            # if restart_server:
+            #     self.scheduler.start()
 
         except (IOError, InvalidCorpus) as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)}. No corpus was read.")
@@ -258,17 +330,6 @@ class OscAgent(Agent):
             self.logger.error(f"Could not find {str(e)}. No parameter was set.")
 
     ######################################################
-    # SCHEDULER # TODO[MULTIP]: This entire section is TODO
-    ######################################################
-
-    # TODO[MULTIP]: Not sure if this function should exist, but if so it should clear influences, reset tick, etc.
-    def stop_scheduler(self):
-        pass
-
-    def set_tempo_master(self, tempo_master: bool):
-        pass  # TODO[MULTIP]:
-
-    ######################################################
     # SCHEDULING STATE-RELATED PARAMETERS
     ######################################################
 
@@ -276,7 +337,6 @@ class OscAgent(Agent):
     # TODO: Should also generalize Scheduler.add_trigger_event or some other aspect so that the last lines
     #       of this function are handled by scheduler, not at parsing time
 
-    # TODO[MULTIP]: Move this function to AgentScheduler (or at least its mechanics - wrapper still needed here)
     def set_trigger_mode(self, mode: str):
         try:
             trigger_mode: TriggerMode = TriggerMode.from_string(mode)
@@ -285,22 +345,20 @@ class OscAgent(Agent):
             return
         previous_trigger_mode: TriggerMode = self.player.trigger_mode
         self.player.trigger_mode = trigger_mode
-        self.scheduler.flush_held()  # TODO[MULTP]: Handle return values
+        self.flush()
 
         if trigger_mode == TriggerMode.AUTOMATIC and previous_trigger_mode != trigger_mode:
             self.scheduler.add_trigger_event()
         self.logger.debug(f"[trigger_mode]: Trigger mode set to '{trigger_mode}' for player '{self.player.name}'.")
 
     def set_held_notes_mode(self, enable: bool):
-        # TODO[MULTIP]: Move this function to AgentScheduler (wrapper still needed here)
         self.player.hold_notes_artificially = enable
-        self.scheduler.flush_held()  # TODO[MULTIP] Handle return values
+        self.scheduler.flush()
         self.logger.debug(f"Held notes mode set to {enable} for player '{self.player.name}'.")
 
     def set_onset_mode(self, enable: bool):
-        # TODO[MULTIP]: Move this function to AgentScheduler (wrapper still needed here)
         self.player.simultaneous_onsets = enable
-        self.scheduler.flush_held()  # TODO[MULTIP] Handle return values
+        self.scheduler.flush()
         self.logger.debug(f"Simultaneous onset mode set to {enable} for player '{self.player.name}'.")
 
     ######################################################
@@ -323,7 +381,7 @@ class OscAgent(Agent):
     ######################################################
 
     # TODO: can be single function with send_corpora
-    def get_corpus_files(self, ):
+    def get_corpus_files(self):
         filepath: str = os.path.join(os.path.dirname(__file__), settings.CORPUS_FOLDER)
         corpora: list[tuple[str, str]] = []
         for file in os.listdir(filepath):

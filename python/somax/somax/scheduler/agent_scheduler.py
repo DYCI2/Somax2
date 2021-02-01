@@ -1,5 +1,4 @@
 import logging
-import multiprocessing
 from typing import Optional, Any
 
 from somax.runtime.corpus import ContentType
@@ -23,21 +22,24 @@ class AgentScheduler(BaseScheduler):
         self._player = player
         self._tick: float = initial_tick
         self.queue: list[ScheduledEvent] = []
-        self.tempo_master: bool = tempo_master
+        self.is_tempo_master: bool = tempo_master
         self._trigger_pretime: float = trigger_pretime
-
-        self.master: multiprocessing.Queue = None  # TODO[MULTIP]: Channel for communicating back to master
 
     ######################################################
     # MAIN FUNCTIONS
     ######################################################
 
-    def update_tick(self, tick: float, tempo: float):
-        self._update_tick(tick=tick, tempo=tempo)
-        # TODO: Should return MidiEvents (+ state information stuff for sending)
+    def update_tick(self, tick: float, tempo: float) -> list[ScheduledEvent]:
+        if self.running:
+            self._update_tick(tick=tick, tempo=tempo)
+            events: list[ScheduledEvent] = self._process_internal_events()
+            return events
+        else:
+            return []
 
-    def _update_tick(self, tick: float, tempo: float, **kwargs):
-        pass  # TODO[MULTIP]: implement
+    def _update_tick(self, tick: float, tempo: float, **_kwargs):
+        self._tick = tick
+        self._tempo = tempo
 
     ######################################################
     # ADD (INTERNAL AND EXTERNAL)
@@ -58,11 +60,10 @@ class AgentScheduler(BaseScheduler):
         self.queue.append(ManualTriggerEvent(trigger_time))
 
     def add_tempo_event(self, trigger_time: float, tempo: float):
-        # TODO[MULTIP]: Shouldn't be queued here but sent back to master
         self.queue.append(TempoEvent(trigger_time, tempo))
 
     def _add_corpus_event(self, trigger_time: float, corpus_event: CorpusEvent, applied_transform: AbstractTransform):
-        if self.tempo_master:
+        if self.is_tempo_master:
             self.add_tempo_event(trigger_time, corpus_event.tempo)
 
         if self._player.corpus.content_type == ContentType.AUDIO:
@@ -111,23 +112,21 @@ class AgentScheduler(BaseScheduler):
         self.queue = [e for e in self.queue if e.trigger_time > self._tick]
         # sort to ensure that influences/midi/tempo/etc. are handled before triggers if simultaneous
         events.sort(key=lambda e: isinstance(e, AbstractTriggerEvent))
+        target_events: list[ScheduledEvent] = []
         for event in events:
-            if isinstance(event, TempoEvent):  # TODO[MULTIP]: Shouldn't handle tempo events at all
-                self._process_tempo_event(event)
+            if isinstance(event, TempoEvent) and self.is_tempo_master:
+                target_events.append(event)
             if isinstance(event, MidiEvent):
-                self._process_midi_event(event)
+                target_events.append(event)
             elif isinstance(event, AudioEvent):
-                self._process_audio_event(event)
+                target_events.append(event)
             elif isinstance(event, AbstractTriggerEvent):
                 self._process_trigger_event(event)
             elif isinstance(event, ScheduledInfluenceEvent):
                 self._process_influence_event(event)
             elif isinstance(event, ScheduledCorpusEvent):
                 self._process_corpus_event(event)
-        return events
-
-    def _process_tempo_event(self, tempo_event: TempoEvent) -> None:
-        self.tempo = tempo_event.tempo  # TODO[MULTIP]: Shouldn't handle tempo events at all
+        return target_events
 
     def _process_trigger_event(self, trigger_event: AbstractTriggerEvent) -> None:
         try:
@@ -161,18 +160,6 @@ class AgentScheduler(BaseScheduler):
     def _process_corpus_event(self, corpus_event: ScheduledCorpusEvent) -> Optional[Any]:
         raise AttributeError(f"Queued Corpus Events are not supported for class {self.__class__.__name__}.")
 
-    def _process_midi_event(self, midi_event: MidiEvent) -> None:
-        # TODO[MULTIP]: This should return the generated events to the agent somehow so that they can be sent, not use player.target.send!!
-        self._player.target.send("midi", [midi_event.note, midi_event.velocity, midi_event.channel])
-        if midi_event.velocity > 0:
-            self._player.target.send("state", [midi_event.state, midi_event.applied_transform.renderer_info()])
-
-    def _process_audio_event(self, audio_event: AudioEvent) -> None:
-        # TODO[MULTIP]: This should return the generated events to the agent somehow so that they can be sent, not use player.target.send!!
-        tempo_factor: float = audio_event.tempo / self.tempo
-        self._player.target.send("audio", [audio_event.onset, audio_event.duration, tempo_factor])
-        self._player.target.send("state", audio_event.state)
-
     def _process_influence_event(self, influence_event: ScheduledInfluenceEvent):
         raise AttributeError(f"Queued Influence Events are not supported for class {self.__class__.__name__}.")
 
@@ -182,16 +169,6 @@ class AgentScheduler(BaseScheduler):
 
     def delete_trigger(self):
         self.queue = [e for e in self.queue if not (isinstance(e, AutomaticTriggerEvent))]
-
-    def flush_held(self):
-        # TODO[MULTIP]: Not sure if this should queue the events (noteoffs) or just immediately return them.
-        #       Queueing like this will mean that flushing won't occur unless update tick is called
-        for note in self._player.held_notes:
-            self.queue.append(MidiEvent(self._tick, note.pitch, 0, note.channel))
-        for note in self._player.artificially_held_notes:
-            self.queue.append(MidiEvent(self._tick, note.pitch, 0, note.channel))
-        self._player.held_notes = []
-        self._player.artificially_held_notes = []
 
     def _requeue_trigger_event(self, trigger_event: AbstractTriggerEvent) -> None:
         next_trigger_time: float = trigger_event.trigger_time + 1
@@ -212,19 +189,34 @@ class AgentScheduler(BaseScheduler):
     ######################################################
 
     def start(self, **kwargs):
-        pass  # TODO[MULTIP]: Implement
+        self.running = True
 
     def pause(self, **kwargs):
-        pass  # TODO[MULTIP]: Implement
-
-    def stop(self) -> None:
         self.running = False
+
+    def stop(self, **kwargs) -> list[ScheduledEvent]:
+        self.running = False
+        self._tick = 0
+        return self.flush()
+
+    def flush(self) -> list[ScheduledEvent]:
         remamining_queue: list[ScheduledEvent] = self.queue[:]
         self.queue = []
-        self._tick = 0
+        target_events: list[ScheduledEvent] = []
         for event in remamining_queue[:]:
             # Add new triggers for all existing automatically triggered
             if isinstance(event, AutomaticTriggerEvent):
                 self.add_trigger_event()
+            # output queued note offs
             if isinstance(event, MidiEvent) and event.velocity == 0:
-                self._process_midi_event(event)
+                target_events.append(event)
+
+        # handle held notes
+        for note in self._player.held_notes:
+            target_events.append(MidiEvent(self._tick, note.pitch, 0, note.channel))
+        for note in self._player.artificially_held_notes:
+            target_events.append(MidiEvent(self._tick, note.pitch, 0, note.channel))
+
+        self._player.held_notes = []
+        self._player.artificially_held_notes = []
+        return target_events

@@ -36,7 +36,8 @@ class Streamview(Parametric):
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this Streamview.")
         self._parse_parameters()
 
-        self.read_corpus(corpus)
+        if corpus is not None:
+            self.read_corpus(corpus)
 
     def __repr__(self):
         return f"{type(self).__name__}(name={self.name}, ...)"

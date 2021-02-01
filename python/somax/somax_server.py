@@ -5,7 +5,7 @@ import logging.config
 import multiprocessing
 import sys
 from importlib import resources
-from typing import Union, Optional, Tuple, List, Callable, Type
+from typing import Optional, Callable
 
 import log
 import somax
@@ -21,12 +21,11 @@ from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
 from somax.runtime.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, TempoMasterMessage, \
-    TempoMessage
+    TempoMessage, TempoSource
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.target import Target, SendProtocol
-from somax.scheduler.agent_scheduler import AgentScheduler
-from somax.scheduler.main_scheduler import MainScheduler, MasterMainScheduler, SlaveMainScheduler
 from somax.scheduler.scheduled_object import TriggerMode
+from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport, Time
 
 
 class Somax:
@@ -34,79 +33,49 @@ class Somax:
         super().__init__(*args, **kwargs)
         self.logger = logging.getLogger(__name__)
         self._agents: dict[str, tuple[Agent, multiprocessing.Queue]] = dict()
-        self._scheduler: MainScheduler = MainScheduler()
-        self._tempo_master_queue: multiprocessing.Queue = multiprocessing.Queue()
+        self._transport: Transport = MasterTransport()
+        self._tempo_master_queue: multiprocessing.Queue[TempoMessage] = multiprocessing.Queue()
         self._terminated: bool = False
 
     # TODO: create/delete agents separate from OSC parsing
 
-    def callback(self, tick: Optional[float] = None, tempo: Optional[float] = None) -> None:
-        while not self._tempo_master_queue.empty():
-            tempo = self._tempo_master_queue.get().tempo  # overwrite tempo if exists in queue
-            self.set_tempo(tempo)
-        tick, tempo = self._scheduler.update_tick(tick=tick, tempo=tempo)
-        self._send_to_all_agents(TimeMessage(tick=tick, tempo=tempo))
-
-    def add_agent(self, name: str, agent_class: Type[Agent], player: Player, override: bool = False, **kwargs):
-        if name in self._agents:
-            if override:
-                self.remove_agent(name)
-            else:
-                self.logger.error(f"An agent with the name '{name}' already exists on the server. "
-                                  f"No action was performed. Use 'override=True' to override existing agent.")
-                return
-
-        agent_queue: multiprocessing.Queue = multiprocessing.Queue()
-        agent: Agent = agent_class(player=player, recv_queue=agent_queue,
-                                   tempo_send_queue=self._tempo_master_queue, **kwargs)
-        self._agents[name] = agent, agent_queue
-        agent.start()
-
-    def remove_agent(self, agent_name: str):
-        pass # TODO[MULTIP]:
-
-
     ######################################################
-    # SCHEDULER
+    # TRANSPORT & PLAYBACK CONTROL
     ######################################################
 
-    def start(self):
-        # Note: removed self.clear_all()
-        self._scheduler.start()
+    def start_transport(self):
+        self._transport.start()
         self._send_to_all_agents(ControlMessage(PlayControl.START))
-        self.logger.info(f"Scheduler started. Current tick is {self._scheduler.tick:.2f}.")
+        self.logger.info(f"Transport started.")
 
-    def pause(self):
-        self._scheduler.pause()
+    def pause_transport(self):
+        self._transport.pause()
         self._send_to_all_agents(ControlMessage(PlayControl.PAUSE))
-        self.logger.info("Scheduler paused.")
+        self.logger.info("Transport paused.")
 
-    def stop(self):
-        """ Stops the scheduler and resets the state of all players """
+    def stop_transport(self):
+        """ Stops the transport and resets the state of all players """
         self.clear_all()
-        self._scheduler.stop()
+        self._transport.stop()
         self._send_to_all_agents(ControlMessage(PlayControl.STOP))
-        self.logger.info("Scheduler stopped.")
+        self.logger.info("Transport stopped.")
 
     def clear_all(self):
         self._send_to_all_agents(ControlMessage(PlayControl.CLEAR))
 
     def terminate(self):
         self.clear_all()
-        self._scheduler.terminate()
+        self._transport.terminate()
         self._send_to_all_agents(ControlMessage(PlayControl.TERMINATE))
         self._terminated = True
         [process.join() for process, _ in self._agents.values()]
         self._agents = {}
 
-    def _send_to_all_agents(self, message: ProcessMessage):
-        for _, queue in self._agents.values():
-            queue.put(message)
-
     def set_tempo(self, tempo: float):
-        self._scheduler.set_tempo(tempo)
+        self._transport.set_tempo(tempo)
 
     def set_tempo_master(self, tempo_master: Optional[str] = None):
+        """ Passing None to this function will set all Agents as tempo_master = False"""
         found: bool = False
         for name, (_, queue) in self._agents.items():
             if name == tempo_master:
@@ -115,7 +84,11 @@ class Somax:
             else:
                 queue.put(TempoMasterMessage(is_master=False))
         if tempo_master is not None and not found:
-            self.logger.info("TODOTODO warn not found")  # TODO[MULTIP]: Write proper warning
+            self.logger.info(f"An agent with the name '{tempo_master}' doesn't exist. No tempo master was set.")
+
+    def _send_to_all_agents(self, message: ProcessMessage):
+        for _, queue in self._agents.values():
+            queue.put(message)
 
     ######################################################
     # CORPUS METHODS
@@ -148,8 +121,6 @@ class SomaxServer(Somax, AsyncioOscObject):
     DEFAULT_SEND_PORT = 1235
     SERVER_ADDRESS = "/somax"
 
-    DEFAULT_CALLBACK_INTERVAL = 0.001
-
     DEBUG = True
 
     def __init__(self, recv_port: int, send_port: int, ip: str = AsyncioOscObject.IP_LOCALHOST,
@@ -164,40 +135,49 @@ class SomaxServer(Somax, AsyncioOscObject):
 
         self.loop: Callable = self.__master_loop
 
+    ######################################################
+    # ASYNCIO & MAIN LOOP(S)
+    ######################################################
+
+    async def run(self):
+        await self._run()
+
     async def _main_loop(self):
         while not self._terminated:
-            await self.loop()
+            await self.loop()  # self.loop is defined as either __master_loop or __slave_loop
 
     async def __master_loop(self):
         self.callback()
         await asyncio.sleep(self.DEFAULT_CALLBACK_INTERVAL)
 
     async def __slave_loop(self):
-        """ TODO[MULTIP]: Docstring (important)! """
+        """ Placeholder loop for Server using a slave transport. This loop will in itself do nothing but allow OSC
+            communication to continue without redeclaring the server. In slave mode, `callback` will be called
+            directly over OSC. """
         await asyncio.sleep(1)
+
+    def callback(self, tick: Optional[float] = None) -> None:
+        self._process_tempo_queue()
+        if self._transport.running:
+            try:
+                time: Time = self._transport.update_tick(tick=tick)
+                self._send_to_all_agents(TimeMessage(time=time))
+            except TypeError as e:
+                self.logger.error(f"{repr(e)}")
+
+    def _process_tempo_queue(self):
+        while not self._tempo_master_queue.empty():
+            tempo_message: TempoMessage = self._tempo_master_queue.get()
+            tempo = tempo_message.tempo  # overwriting parameter tempo
+            self.set_tempo(tempo, send_to_client=tempo_message.source == TempoSource.SLAVE)
 
     def set_scheduler(self, master: bool):
         if master:
             self.loop = self.__master_loop
-            self.scheduler = MasterMainScheduler.from_other(self.scheduler)
+            self._transport = MasterTransport.clone_from(self._transport)
         else:
             self.loop = self.__slave_loop
-            self.scheduler = SlaveMainScheduler.from_other(self.scheduler)
-
-    # TODO[MULTIP]: In progress
-    def set_tempo(self, tempo: float, send_to_client: bool = False):
-        if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
-            super().set_tempo(tempo)
-            if send_to_client:
-                self.target.send("TODOTODO to scheduler", tempo)  # TODO[MULTIP]: Tempo protocol
-        else:
-            self.logger.error(f"Tempo must be a single value larger than zero. Did not set tempo.")
-
-    def exit(self, print_exit_message: bool = True):
-        self.terminate()
-        self.target.send(SendProtocol.SCHEDULER_RESET_UI, Target.WRAPPED_BANG)
-        if print_exit_message:
-            self.logger.info("Somax Server was successfully terminated.")
+            self._transport = SlaveTransport.clone_from(self._transport)
 
     ######################################################
     # CREATION/DELETION OF AGENTS
@@ -205,31 +185,47 @@ class SomaxServer(Somax, AsyncioOscObject):
 
     def create_agent(self, name: str, recv_port: int, send_port: int, ip: str = "", trigger_mode: str = "",
                      peak_selector: str = "", merge_action: str = "", corpus_filepath: str = "",
-                     scale_actions: Tuple[str, ...] = ("",), override: bool = False):
-        # TODO[MULTIP]: Need to capture errors from osc_recvport here if taken
-        # TODO[MULTIP]: Start Process/Agent accordingly
+                     scale_actions: tuple[str, ...] = ("",), override: bool = False):
         try:
-            address: str = self.parse_osc_address(name)  # TODO[MULTIP]: handle elsewhere
+            address: str = self.parse_osc_address(name)
             ip: str = self.parse_ip(ip)
             trigger_mode: TriggerMode = TriggerMode.from_string(trigger_mode)
             merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector)
-            scale_actions: List[AbstractScaleAction] = [AbstractScaleAction.from_string(s) for s in scale_actions]
+            scale_actions: list[AbstractScaleAction] = [AbstractScaleAction.from_string(s) for s in scale_actions]
         except ValueError as e:
-            self.logger.error(f"{str(e)}. No Player was created.")
+            self.logger.error(f"{str(e)}. No agent was created.")
             return
 
         player: Player = Player(name=name, trigger_mode=trigger_mode, peak_selector=peak_selector,
                                 merge_action=merge_action,
                                 scale_actions=scale_actions)
-        self.add_agent(name, OscAgent, player, override=override, recv_port=recv_port,
-                       send_port=send_port, ip=ip, corpus_filepath=corpus_filepath)
-        self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port} and ip {ip}.")
+
+        if name in self._agents:
+            if override:
+                self.delete_agent(name)
+            else:
+                self.logger.info(f"An agent with the name '{name}' already exists on the server. "
+                                 f"No action was performed. Use 'override=True' to override existing agent.")
+                return
+        try:
+            agent_queue: multiprocessing.Queue = multiprocessing.Queue()
+            agent: OscAgent = OscAgent(player, recv_queue=agent_queue, tempo_send_queue=self._tempo_master_queue,
+                                       ip=ip, recv_port=recv_port, send_port=send_port, address=address,
+                                       corpus_filepath=corpus_filepath, scheduler_tick=self._transport.tick,
+                                       scheduler_tempo=self._transport.tempo)
+            agent.start()
+            self._agents[name] = agent, agent_queue
+            self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port}, ip {ip}.")
+        except OSError as e:
+            self.logger.error(f"{repr(e)}. No agent was created")
 
     def delete_agent(self, name: str):
         try:
+            agent, queue = self._agents[name]
+            queue.put(ControlMessage(PlayControl.TERMINATE))
+            agent.join()
             del self._agents[name]
-            self.scheduler.remove_agent(name)  # TODO[MULTIP]: delete scheduler's queue
             self.logger.info(f"Deleted agent '{name}'.")
         except KeyError:
             self.logger.error(f"An agent with the name '{name}' doesn't exist. No agent was deleted.")
@@ -239,10 +235,7 @@ class SomaxServer(Somax, AsyncioOscObject):
     ######################################################
 
     def get_time(self):
-        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, self.scheduler.tick)
-
-    def get_tempo(self):
-        self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, self.scheduler.tempo)
+        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (self._transport.tick, self._transport.tempo))
 
     def get_player_names(self):
         for player_name in self._agents.keys():
@@ -256,25 +249,37 @@ class SomaxServer(Somax, AsyncioOscObject):
                 all_agents_exist = all([self._agents[agent_name] is not None for agent_name in agents])
             except KeyError:
                 all_agents_exist = False
-        self.target.send(SendProtocol.SERVER_STATUS, [all_agents_exist, self.scheduler.running])
+        self.target.send(SendProtocol.SERVER_STATUS, [all_agents_exist, self._transport.running])
 
     ######################################################
     # MAX SETTERS WITH RETURN VALUES
     ######################################################
 
-    def start(self):
-        super().start()
+    def start_transport(self):
+        super().start_transport()
         self.target.send(SendProtocol.SCHEDULER_RUNNING, True)
 
-    def stop(self):
-        super().stop()
+    def pause_transport(self):
+        super().pause_transport()
         self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
 
-    def update_tick(self, tick: float, tempo: float):
-        try:
-            self.scheduler.update_tick(tick, tempo)
-        except RuntimeError as e:
-            self.logger.error(str(e))
+    def stop(self):
+        super().stop_transport()
+        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
+
+    def set_tempo(self, tempo: float, send_to_client: bool = False):
+        if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
+            super().set_tempo(tempo)
+            if send_to_client:
+                self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, tempo)
+        else:
+            self.logger.error(f"Tempo must be a single value larger than zero. Did not set tempo.")
+
+    def exit(self, print_exit_message: bool = True):
+        self.terminate()
+        self.target.send(SendProtocol.SCHEDULER_RESET_UI, Target.WRAPPED_BANG)
+        if print_exit_message:
+            self.logger.info("Somax was successfully shut down.")
 
 
 if __name__ == "__main__":
@@ -287,13 +292,9 @@ if __name__ == "__main__":
 
     with resources.path(log, 'logging.ini') as path:
         logging.config.fileConfig(path.absolute())
-    #
+
+    # Called to enforce file io at start of program
     SomChromaClassifier()
-
-    # log_file_path = path.join(path.dirname(path.abspath(__file__)), 'log/logging.ini')
-    # print(log_file_path)
-
-    # logging.config.fileConfig('log/logging.ini', disable_existing_loggers=False)
 
     parsed_args = parser.parse_args()
     in_port = parsed_args.in_port
@@ -301,7 +302,6 @@ if __name__ == "__main__":
     somax_server = SomaxServer(in_port, out_port)
 
 
-    # TODO[MULTIP]: Handle both Process and Asynco
     async def run():
         await asyncio.gather(somax_server.run())
 
@@ -309,12 +309,12 @@ if __name__ == "__main__":
     try:
         asyncio.run(run())
     except KeyboardInterrupt:
-        somax_server.exit()
+        somax_server.terminate()
         sys.exit(130)
     except OSError as e:
         logging.getLogger(__name__).error(f"Server could not be started. In most cases, this indicates that a server"
                                           f"already is running on the OSC address. Error message: {repr(e)}.")
-        sys.exit(0)
+        sys.exit(e.errno)
     except Exception:
         somax_server.exit(print_exit_message=False)
         somax_server.logger.critical("Server terminated from an uncaught exception")

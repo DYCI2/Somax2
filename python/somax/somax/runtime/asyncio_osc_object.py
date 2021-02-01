@@ -19,6 +19,7 @@ from somax.runtime.target import Target, SimpleOscTarget
 
 class AsyncioOscObject(Caller, ABC):
     IP_LOCALHOST = "127.0.0.1"
+    DEFAULT_CALLBACK_INTERVAL = 0.001
 
     def __init__(self, recv_port: int, send_port: int, ip: str, address: str, debug: bool = settings.DEBUG):
         super().__init__(parse_parenthesis_as_list=False, discard_duplicate_args=False)
@@ -34,9 +35,6 @@ class AsyncioOscObject(Caller, ABC):
     @abstractmethod
     async def _main_loop(self):
         pass
-
-    def run(self):
-        self._run()
 
     async def _run(self):
         """ raises: OSError is server already is in use """

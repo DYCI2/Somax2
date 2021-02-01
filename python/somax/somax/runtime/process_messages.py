@@ -1,6 +1,8 @@
 from abc import ABC
 from enum import Enum
 
+from somax.scheduler.transport import Time
+
 
 class PlayControl(Enum):
     START = 0
@@ -10,24 +12,35 @@ class PlayControl(Enum):
     TERMINATE = 4
 
 
+class TempoSource(Enum):
+    OSC = 0
+    SLAVE = 1
+
+
 class ProcessMessage(ABC):
     pass
 
+
 class TempoMessage(ProcessMessage):
-    def __init__(self, tempo: float):
-        self.tempo = tempo
+    """ Message from Agent to Server """
+    def __init__(self, tempo: float, source: TempoSource):
+        self.tempo: float = tempo
+        self.source: TempoSource = source
+
 
 class TimeMessage(ProcessMessage):
-    def __init__(self, tick: float, tempo: float):
-        self.tick: float = tick
-        self.tempo: float = tempo
+    """ Message from Server to Agent """
+    def __init__(self, time: Time):
+        self.time: Time = time
 
 
 class TempoMasterMessage(ProcessMessage):
+    """ Message from Server to Agent """
     def __init__(self, is_master: bool):
         self.is_master = is_master
 
 
 class ControlMessage(ProcessMessage):
+    """ Message from Server to Agent """
     def __init__(self, msg: PlayControl):
         self.msg = msg

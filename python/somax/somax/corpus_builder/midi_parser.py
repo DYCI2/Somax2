@@ -113,7 +113,7 @@ class MidiParser:
         for msg in messages:
             now += msg.time
             try:
-                yield msg.copy(time=now)
+                yield msg.clone_from(time=now)
             except TypeError as e:
                 logging.getLogger(__name__).warning(f"Found invalid midi format: {repr(e)}. Error was ignored.")
 
