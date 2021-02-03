@@ -3,8 +3,10 @@ import logging
 import logging.config
 import multiprocessing
 import os
+from importlib import resources
 from typing import Any, Optional, List
 
+import log
 from somax import settings
 from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
@@ -17,6 +19,7 @@ from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
+from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
 from somax.runtime.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage, \
@@ -34,14 +37,14 @@ from somax.scheduler.scheduled_object import TriggerMode
 
 class Agent(multiprocessing.Process):
     def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 scheduler_tick: float, scheduler_tempo: float, corpus: Optional[Corpus] = None, **kwargs):
+                 scheduler_tick: float, scheduler_tempo: float, scheduler_running: bool, corpus: Optional[Corpus] = None, **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.player: Player = player
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
         self.scheduler: AgentScheduler = AgentScheduler(player=self.player, tempo=scheduler_tempo,
-                                                        initial_tick=scheduler_tick)
+                                                        initial_tick=scheduler_tick, running=scheduler_running)
         self._enabled: bool = True
         self._terminated: bool = False
 
@@ -57,11 +60,14 @@ class Agent(multiprocessing.Process):
 class OscAgent(Agent, AsyncioOscObject):
 
     def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 scheduler_tick: float, scheduler_tempo: float, ip: str, recv_port: int, send_port: int, address: str,
-                 corpus_filepath: Optional[str] = None, **kwargs):
+                 scheduler_tick: float, scheduler_tempo: float, scheduler_running: bool, ip: str, recv_port: int,
+                 send_port: int, address: str, corpus_filepath: Optional[str] = None, **kwargs):
         Agent.__init__(self, player=player, recv_queue=recv_queue, tempo_send_queue=tempo_send_queue,
-                       scheduler_tick=scheduler_tick, scheduler_tempo=scheduler_tempo, **kwargs)
+                       scheduler_tick=scheduler_tick, scheduler_tempo=scheduler_tempo,
+                       scheduler_running=scheduler_running, **kwargs)
         AsyncioOscObject.__init__(self, recv_port=recv_port, send_port=send_port, ip=ip, address=address, **kwargs)
+        self.logger = logging.getLogger(__name__)
+        self.logger.addHandler(OscLogForwarder(self.target))
         if corpus_filepath:  # handle corpus filepath if passed
             self.read_corpus(corpus_filepath)
 
@@ -70,7 +76,16 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     def run(self):
-        asyncio.run(self._run())
+        """ raises: OSError if OSC address already is taken """
+        try:
+            # TODO: must be handled in every thread. Handle this properly witihout logging.ini at some point
+            with resources.path(log, 'logging.ini') as path:
+                logging.config.fileConfig(path.absolute())
+            asyncio.run(self._run())
+        except OSError as e:
+            self.logger.critical(f"{str(e)}. Could not initialize the agent properly - "
+                                 f"please delete it and try with a different OSC receive port.")
+            self.terminate()
 
     async def _main_loop(self):
         while not self._terminated:
@@ -124,7 +139,15 @@ class OscAgent(Agent, AsyncioOscObject):
         self.scheduler.stop()
         self.clear()
 
+    def terminate(self):
+        super().terminate()
+        self.flush()
+
     def enabled(self, is_enabled):
+        if is_enabled:
+            self.logger.info(f"Agent {self.name} enabled")
+        else:
+            self.logger.info(f"Agent {self.name} disabled")
         self._enabled = is_enabled
 
     def clear(self):
@@ -142,8 +165,8 @@ class OscAgent(Agent, AsyncioOscObject):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def influence(self, player: str, path: str, feature_keyword: str, value: Any, **kwargs):
-        self.logger.debug(f"[influence] called for player '{player}' with path '{path}', "
+    def influence(self, path: str, feature_keyword: str, value: Any, **kwargs):
+        self.logger.debug(f"[influence] called for agent '{self.name}' with path '{path}', "
                           f"feature keyword '{feature_keyword}', value '{value}' and kwargs {kwargs}")
         if not self.scheduler.running:
             return
@@ -159,13 +182,13 @@ class OscAgent(Agent, AsyncioOscObject):
             self.player.influence(path_and_name, influence, time, **kwargs)
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
-        self.logger.debug(f"[influence] Influence successfully completed for player '{player}' with path '{path}'.")
+        self.logger.debug(f"[influence] Influence successfully completed for agent '{self.name}' with path '{path}'.")
 
-    def influence_onset(self, player):
+    def influence_onset(self):
         if not self.scheduler.running:
             return
         if self.player.trigger_mode == TriggerMode.MANUAL:
-            self.logger.debug(f"[influence_onset] Influence onset triggered for player '{player}'.")
+            self.logger.debug(f"[influence_onset] Influence onset triggered for agent '{self.name}'.")
             self.scheduler.add_trigger_event()
 
     ######################################################
@@ -291,6 +314,8 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"Could not remove scale action: {repr(e)}.")
 
     def read_corpus(self, filepath: str, volatile: bool = False):
+        print(self.logger)
+        self.logger.critical("Logger")
         self.logger.info(f"Reading corpus at '{filepath}' for player '{self.player.name}'...")
         if not os.path.exists(filepath):
             self.logger.error(f"The file '{filepath}' does not exist. No corpus was read.")
@@ -311,6 +336,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
             self.player.read_corpus(corpus)
             self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
+            self.send_current_corpus_info()
 
             # if restart_server:
             #     self.scheduler.start()
@@ -417,7 +443,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def send_atoms(self):
         atom_names: list[str] = [atom.name for atom in self.player.all_atoms()]
-        self.target.send(SendProtocol.PLAYER_INSTANTIATED_ATOMS, atom_names)
+        self.target.send(SendProtocol.INSTANTIATED_ATOMS, atom_names)
 
     def send_current_corpus_info(self):
         corpus: Optional[Corpus] = self.player.corpus

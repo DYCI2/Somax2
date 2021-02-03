@@ -6,12 +6,12 @@ from typing import Optional
 
 
 class BaseScheduler(ABC):
-    def __init__(self, tempo: float = 120.0, tick: float = 0.0, *args, **kwargs):
+    def __init__(self, tempo: float = 120.0, tick: float = 0.0, running: bool = False, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.logger = logging.getLogger(__name__)
         self.tempo: float = tempo
         self._tick: float = tick
-        self.running: bool = False
+        self.running: bool = running
 
     @abstractmethod
     def start(self, **kwargs):

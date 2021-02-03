@@ -5,12 +5,13 @@ EXECUTABLE="local"
 
 SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 BINARY_PATH="${SCRIPT_DIRECTORY}/somax_server/somax_server"
-LOCAL_PATH="${SCRIPT_DIRECTORY}/../../../python/somax/somax2_server.py"
+LOCAL_PATH="${SCRIPT_DIRECTORY}/../../../python/somax/somax_server.py"
 
 
 run_local() {
     echo -e "\033[1m[INFO]: Launching Somax server (local installation)...\033[0m"
-    "$LOCAL_PATH"
+    echo ${LOCAL_PATH}
+    "${LOCAL_PATH}"
 }
 
 run_binary() {
@@ -29,6 +30,7 @@ if [ "$EXECUTABLE" = "local" ]
 then
     run_local
     retval=$?
+    
     if (($retval == 0 )) || (( $retval == 130 )); 
     then 
         exit 0; 

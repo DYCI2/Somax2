@@ -14,7 +14,7 @@ from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import AsyncIOOSCUDPServer
 
 from somax import settings
-from somax.runtime.target import Target, SimpleOscTarget
+from somax.runtime.target import Target, SimpleOscTarget, SendProtocol
 
 
 class AsyncioOscObject(Caller, ABC):
@@ -44,6 +44,8 @@ class AsyncioOscObject(Caller, ABC):
         self.server: AsyncIOOSCUDPServer = AsyncIOOSCUDPServer((self.ip, self.recv_port),
                                                                osc_dispatcher, asyncio.get_event_loop())
         transport, protocol = await self.server.create_serve_endpoint()
+        self.target.send(SendProtocol.AGENT_INSTANTIATED, Target.WRAPPED_BANG)
+        print("Sendnsend")
         await self._main_loop()
         transport.close()
 

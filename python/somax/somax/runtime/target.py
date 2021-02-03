@@ -1,6 +1,5 @@
 import logging
 from abc import ABC, abstractmethod
-from enum import Enum
 from typing import Any, Callable, Dict, Tuple, List
 
 from maxosc.sender import Sender, SendFormat, MaxFormatter
@@ -11,20 +10,19 @@ class SendProtocol:
     PLAYER_SINGLE_PARAMETER = "param"
     PLAYER_CORPUS_FILES = "corpus_info"
     ALL_PLAYER_NAMES = "player_names"
-    PLAYER_INSTANTIATED_ATOMS = "instantiated_atoms"
+    AGENT_INSTANTIATED = "instantiated_agent"
+    INSTANTIATED_ATOMS = "instantiated_atoms"
     PLAYER_CORPUS = "corpus"
-
 
     SCHEDULER_RUNNING = "scheduler_running"
     SCHEDULER_CURRENT_TIME = "time"
-    SCHEDULER_CURRENT_TEMPO = "tempo"
+    SCHEDULER_CURRENT_TEMPO = "time"
     SCHEDULER_TEMPO_SET_SUCESS = "tempo_was_set"
     SCHEDULER_HAS_TEMPO_MASTER = "has_tempo_master"
     SCHEDULER_RESET_UI = "reset"
 
     SERVER_DEBUG_POLL = "poll_server"
     SERVER_STATUS = "server_status"
-
 
 
 class Target(ABC):

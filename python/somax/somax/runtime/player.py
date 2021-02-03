@@ -122,7 +122,6 @@ class Player(Streamview, ScheduledMidiAgent):
         self._update_transforms()
         self.corpus = corpus
         Streamview.read_corpus(self, corpus)
-        self.send_current_corpus_info()
 
     def set_peak_selector(self, peak_selector: AbstractPeakSelector) -> None:
         self.peak_selector = peak_selector

@@ -16,11 +16,10 @@ class AgentScheduler(BaseScheduler):
     TRIGGER_PRETIME: float = 0.01  # seconds
 
     def __init__(self, player: Player, tempo: float = 120.0, trigger_pretime: float = TRIGGER_PRETIME,
-                 tempo_master: bool = False, initial_tick: float = 0.0):
-        super().__init__(tempo=tempo)
+                 tempo_master: bool = False, initial_tick: float = 0.0, running: bool = False):
+        super().__init__(tempo=tempo, tick=initial_tick, running=running)
         self.logger = logging.getLogger(__name__)
         self._player = player
-        self._tick: float = initial_tick
         self.queue: list[ScheduledEvent] = []
         self.is_tempo_master: bool = tempo_master
         self._trigger_pretime: float = trigger_pretime

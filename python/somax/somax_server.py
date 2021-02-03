@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import argparse
 import asyncio
 import logging
@@ -140,7 +142,10 @@ class SomaxServer(Somax, AsyncioOscObject):
     ######################################################
 
     async def run(self):
-        await self._run()
+        try:
+            await self._run()
+        except OSError as e:
+            self.logger.critical(f"{repr(e)}. Terminating server")
 
     async def _main_loop(self):
         while not self._terminated:
@@ -208,17 +213,14 @@ class SomaxServer(Somax, AsyncioOscObject):
                 self.logger.info(f"An agent with the name '{name}' already exists on the server. "
                                  f"No action was performed. Use 'override=True' to override existing agent.")
                 return
-        try:
-            agent_queue: multiprocessing.Queue = multiprocessing.Queue()
-            agent: OscAgent = OscAgent(player, recv_queue=agent_queue, tempo_send_queue=self._tempo_master_queue,
-                                       ip=ip, recv_port=recv_port, send_port=send_port, address=address,
-                                       corpus_filepath=corpus_filepath, scheduler_tick=self._transport.tick,
-                                       scheduler_tempo=self._transport.tempo)
-            agent.start()
-            self._agents[name] = agent, agent_queue
-            self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port}, ip {ip}.")
-        except OSError as e:
-            self.logger.error(f"{repr(e)}. No agent was created")
+        agent_queue: multiprocessing.Queue = multiprocessing.Queue()
+        agent: OscAgent = OscAgent(player, recv_queue=agent_queue, tempo_send_queue=self._tempo_master_queue,
+                                   ip=ip, recv_port=recv_port, send_port=send_port, address=address,
+                                   corpus_filepath=corpus_filepath, scheduler_tick=self._transport.tick,
+                                   scheduler_tempo=self._transport.tempo, scheduler_running=self._transport.running)
+        agent.start()
+        self._agents[name] = agent, agent_queue
+        self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port}, ip {ip}.")
 
     def delete_agent(self, name: str):
         try:
@@ -235,7 +237,8 @@ class SomaxServer(Somax, AsyncioOscObject):
     ######################################################
 
     def get_time(self):
-        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (self._transport.tick, self._transport.tempo))
+        time: Time = self._transport.time()
+        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.tick, time.tempo))
 
     def get_player_names(self):
         for player_name in self._agents.keys():
@@ -263,7 +266,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         super().pause_transport()
         self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
 
-    def stop(self):
+    def stop_transport(self):
         super().stop_transport()
         self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
 
@@ -283,7 +286,7 @@ class SomaxServer(Somax, AsyncioOscObject):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Launch and manage a SoMaxServer')
+    parser = argparse.ArgumentParser(description='Launch and manage a Somax server')
     parser.add_argument('in_port', metavar='IN_PORT', type=int, nargs='?',
                         help='in port used by the server', default=SomaxServer.DEFAULT_RECV_PORT)
     parser.add_argument('out_port', metavar='OUT_PORT', type=int, nargs='?', default=SomaxServer.DEFAULT_SEND_PORT,
