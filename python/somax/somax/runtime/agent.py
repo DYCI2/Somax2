@@ -31,13 +31,14 @@ from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.agent_scheduler import AgentScheduler
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiEvent
 from somax.scheduler.scheduled_object import TriggerMode
-
-
 # TODO: Complete separation Agent/OscAgent where Agent can be initialized and used from the command line
+from somax.scheduler.transport import Time
+
 
 class Agent(multiprocessing.Process):
     def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 scheduler_tick: float, scheduler_tempo: float, scheduler_running: bool, corpus: Optional[Corpus] = None, **kwargs):
+                 scheduler_tick: float, scheduler_tempo: float, scheduler_running: bool,
+                 corpus: Optional[Corpus] = None, **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.player: Player = player
@@ -78,7 +79,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def run(self):
         """ raises: OSError if OSC address already is taken """
         try:
-            # TODO: must be handled in every thread. Handle this properly witihout logging.ini at some point
+            # TODO: must be handled in every thread. Handle this properly without logging.ini at some point
             with resources.path(log, 'logging.ini') as path:
                 logging.config.fileConfig(path.absolute())
             asyncio.run(self._run())
@@ -86,17 +87,23 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.critical(f"{str(e)}. Could not initialize the agent properly - "
                                  f"please delete it and try with a different OSC receive port.")
             self.terminate()
+        except KeyboardInterrupt:
+            self.logger.critical(f"Terminating agent '{self.player.name}' due to keyboard interrupt (SIGINT)")
+            self.terminate()
 
     async def _main_loop(self):
         while not self._terminated:
+            time: Optional[Time] = None
             while not self.recv_queue.empty():
                 message: ControlMessage = self.recv_queue.get()
                 if isinstance(message, TimeMessage):
-                    self._callback(tick=message.time.tick, tempo=message.time.tempo)
+                    time = message.time  # Only process last time message in queue
                 if isinstance(message, TempoMasterMessage):
                     self.set_tempo_master(is_master=message.is_master)
                 if isinstance(message, ControlMessage):
                     self._process_control_message(message.msg)
+            if time is not None:
+                self._callback(tick=time.tick, tempo=time.tempo)
             await asyncio.sleep(self.DEFAULT_CALLBACK_INTERVAL)
 
     def _callback(self, tick: float, tempo: float):
@@ -145,9 +152,10 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def enabled(self, is_enabled):
         if is_enabled:
-            self.logger.info(f"Agent {self.name} enabled")
+            self.logger.info(f"Agent {self.player.name} enabled")
         else:
-            self.logger.info(f"Agent {self.name} disabled")
+            self.logger.info(f"Agent {self.player.name} disabled")
+            self.flush()
         self._enabled = is_enabled
 
     def clear(self):
@@ -166,7 +174,7 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     def influence(self, path: str, feature_keyword: str, value: Any, **kwargs):
-        self.logger.debug(f"[influence] called for agent '{self.name}' with path '{path}', "
+        self.logger.debug(f"[influence] called for agent '{self.player.name}' with path '{path}', "
                           f"feature keyword '{feature_keyword}', value '{value}' and kwargs {kwargs}")
         if not self.scheduler.running:
             return
@@ -182,13 +190,13 @@ class OscAgent(Agent, AsyncioOscObject):
             self.player.influence(path_and_name, influence, time, **kwargs)
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
-        self.logger.debug(f"[influence] Influence successfully completed for agent '{self.name}' with path '{path}'.")
+        self.logger.debug(f"[influence] Influence successfully completed for agent '{self.player.name}' with path '{path}'.")
 
     def influence_onset(self):
         if not self.scheduler.running:
             return
         if self.player.trigger_mode == TriggerMode.MANUAL:
-            self.logger.debug(f"[influence_onset] Influence onset triggered for agent '{self.name}'.")
+            self.logger.debug(f"[influence_onset] Influence onset triggered for agent '{self.player.name}'.")
             self.scheduler.add_trigger_event()
 
     ######################################################
@@ -202,7 +210,7 @@ class OscAgent(Agent, AsyncioOscObject):
             merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
             self.player.create_streamview(path=path_and_name, weight=weight, merge_action=merge_action,
                                           override=override)
-            self.logger.info(f"Created streamview at path '{path}'.")
+            self.logger.info(f"Created streamview with path '{path}'.")
         except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)}. No streamview was created.")
 
@@ -210,7 +218,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             path_and_name: list[str] = self._parse_streamview_atom_path(path)
             self.player.delete_streamview(path_and_name)
-            self.logger.info(f"Deleted streamview at path '{path}'.")
+            self.logger.info(f"Deleted streamview with path '{path}'.")
         except (AssertionError, KeyError, IndexError) as e:
             self.logger.error(f"{str(e)} No streamview was deleted.")
 
@@ -226,7 +234,7 @@ class OscAgent(Agent, AsyncioOscObject):
                                     classifier=classifier, activity_pattern=activity_pattern,
                                     memory_space=memory_space, enabled=enabled, override=override)
             self.send_atoms()
-            self.logger.info(f"Created atom at path '{path}'.")
+            self.logger.info(f"Created atom with path '{path}'.")
         except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)} No atom was created.")
 
@@ -234,7 +242,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             path_and_name: list[str] = self._parse_streamview_atom_path(path)
             self.player.delete_atom(path_and_name)
-            self.logger.info(f"Deleted atom at path '{path}'.")
+            self.logger.info(f"Deleted atom with path '{path}'.")
         except (AssertionError, KeyError, IndexError) as e:
             self.logger.error(f"{str(e)} No atom was deleted.")
 
@@ -314,8 +322,6 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"Could not remove scale action: {repr(e)}.")
 
     def read_corpus(self, filepath: str, volatile: bool = False):
-        print(self.logger)
-        self.logger.critical("Logger")
         self.logger.info(f"Reading corpus at '{filepath}' for player '{self.player.name}'...")
         if not os.path.exists(filepath):
             self.logger.error(f"The file '{filepath}' does not exist. No corpus was read.")
@@ -379,12 +385,12 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def set_held_notes_mode(self, enable: bool):
         self.player.hold_notes_artificially = enable
-        self.scheduler.flush()
+        self.flush()
         self.logger.debug(f"Held notes mode set to {enable} for player '{self.player.name}'.")
 
     def set_onset_mode(self, enable: bool):
         self.player.simultaneous_onsets = enable
-        self.scheduler.flush()
+        self.flush()
         self.logger.debug(f"Simultaneous onset mode set to {enable} for player '{self.player.name}'.")
 
     ######################################################

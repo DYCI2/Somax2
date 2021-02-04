@@ -45,7 +45,6 @@ class AsyncioOscObject(Caller, ABC):
                                                                osc_dispatcher, asyncio.get_event_loop())
         transport, protocol = await self.server.create_serve_endpoint()
         self.target.send(SendProtocol.AGENT_INSTANTIATED, Target.WRAPPED_BANG)
-        print("Sendnsend")
         await self._main_loop()
         transport.close()
 

@@ -132,8 +132,9 @@ class AgentScheduler(BaseScheduler):
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
             # By default, target time should always be the time given by the trigger_event, but may occasionally use
             #   self.tick to handle unexpected delays in scheduling (for example while loading a corpus)
-            target_time: float = max(trigger_event.target_time, self.tick)
-            event_and_transform = self._player.new_event(target_time)
+            trigger_event.target_time= max(trigger_event.target_time, self.tick)
+            trigger_event.trigger_time = max(trigger_event.trigger_time, self.tick - self._trigger_pretime)
+            event_and_transform = self._player.new_event(trigger_event.target_time)
         except InvalidCorpus as e:
             self.logger.error(str(e))
             self._requeue_trigger_event(trigger_event)
