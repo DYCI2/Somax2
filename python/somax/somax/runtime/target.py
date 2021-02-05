@@ -21,7 +21,6 @@ class SendProtocol:
     SCHEDULER_HAS_TEMPO_MASTER = "has_tempo_master"
     SCHEDULER_RESET_UI = "reset"
 
-    SERVER_DEBUG_POLL = "poll_server"
     SERVER_STATUS = "server_status"
 
 

@@ -75,7 +75,6 @@ class AsyncioOscObject(Caller, ABC):
 
     def parse_osc_address(self, string: str) -> str:
         if not string.startswith("/"):
-            err = f"OSC address must begin with '/'. Setting OSC address to '/{string}'."
-            self.logger.warning(err)
+            self.logger.debug(f"OSC address must begin with '/'. Setting OSC address to '/{string}'.")
             return f"/{string}"
         return string

@@ -311,8 +311,8 @@ if __name__ == "__main__":
 
     try:
         asyncio.run(run())
-    except KeyboardInterrupt:
-        somax_server.terminate()
+    except KeyboardInterrupt as e:
+        somax_server.exit(print_exit_message=True)
         sys.exit(130)
     except OSError as e:
         logging.getLogger(__name__).error(f"Server could not be started. In most cases, this indicates that a server"
