@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1037.0, 79.0, 1365.0, 977.0 ],
+		"rect" : [ 34.0, 79.0, 2096.0, 1007.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -55,7 +55,7 @@
 					"outlettype" : [ "", "", "", "", "" ],
 					"patching_rect" : [ 429.0, 316.0, 298.0, 345.574140189969739 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 332.101258124093647, 369.0, 345.574140189969739 ],
+					"presentation_rect" : [ 0.0, 332.101258124093647, 369.0, 327.574140189969739 ],
 					"varname" : "somax.midi.io",
 					"viewvisibility" : 1
 				}
@@ -101,7 +101,7 @@
 					"outlettype" : [ "", "", "", "", "", "", "" ],
 					"patching_rect" : [ 770.0, 12.0, 568.0, 842.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 371.0, 0.0, 568.0, 848.0 ],
+					"presentation_rect" : [ 371.0, 0.0, 261.0, 853.0 ],
 					"varname" : "somax.player.io",
 					"viewvisibility" : 1
 				}
@@ -206,7 +206,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "Servirr.onset", "andBeaTTracker" ],
+					"args" : [ "Server", "BeatTracker" ],
 					"bgmode" : 0,
 					"border" : 0,
 					"clickthrough" : 0,
@@ -222,8 +222,8 @@
 					"outlettype" : [ "", "float", "float", "dictionary", "int", "", "" ],
 					"patching_rect" : [ 11.083333333333258, 6.0, 384.833333333333485, 205.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 663.0, 369.0, 205.0 ],
-					"varname" : "somax.server.io[1]",
+					"presentation_rect" : [ 0.0, 661.675398314063386, 369.0, 216.0 ],
+					"varname" : "somax.server.io",
 					"viewvisibility" : 1
 				}
 
@@ -515,6 +515,20 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "somax.player.routerblock.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/player",
+				"patcherrelativepath" : "./resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "thispatching.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
+				"patcherrelativepath" : "./misc",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "somax.player.compact.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
@@ -560,6 +574,13 @@
 				"name" : "somax.multistatebutton.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "kslider.compact.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -728,34 +749,16 @@
 		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-
-				}
-,
 				"newobj" : 				{
-					"fontsize" : [ 10.0 ],
+					"fontface" : [ 1 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ]
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"message" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -765,7 +768,25 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-
+,
+					"fontsize" : [ 10.0 ]
+				}
+,
+				"default" : 				{
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"button" : 				{

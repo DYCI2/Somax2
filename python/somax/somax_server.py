@@ -176,7 +176,7 @@ class SomaxServer(Somax, AsyncioOscObject):
             tempo = tempo_message.tempo  # overwriting parameter tempo
             self.set_tempo(tempo, send_to_client=tempo_message.source == TempoSource.SLAVE)
 
-    def set_scheduler(self, master: bool):
+    def set_transport_type(self, master: bool):
         if master:
             self.loop = self.__master_loop
             self._transport = MasterTransport.clone_from(self._transport)

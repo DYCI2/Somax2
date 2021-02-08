@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 2492.0, 1270.0 ],
+		"rect" : [ 34.0, 79.0, 2096.0, 1270.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,85 +40,27 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-33",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1438.639764237976124, 362.0, 119.0, 22.0 ],
-					"text" : "somax.player.routing"
+					"id" : "obj-15",
+					"linecolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
+					"maxclass" : "live.line",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 0.0, 719.0, 5.0, 100.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 0.0, 718.0, 233.0, 20.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-31",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1744.0, 335.0, 103.0, 22.0 ],
-					"text" : "somax.midioutput"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-29",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1564.0, 389.0, 121.0, 22.0 ],
-					"text" : "somax.midiinfluencer"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-28",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1564.0, 362.0, 169.0, 22.0 ],
-					"text" : "somax.midiinfluencer.compact"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-26",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1303.0, 388.0, 80.0, 22.0 ],
-					"text" : "somax.player"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-20",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1303.0, 362.0, 128.0, 22.0 ],
-					"text" : "somax.player.compact"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-17",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1303.0, 335.0, 126.0, 22.0 ],
-					"text" : "somax.player.wireless"
+					"id" : "obj-13",
+					"linecolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
+					"maxclass" : "live.line",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 404.0, 544.0, 5.0, 100.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 5.0, 649.0, 233.0, 20.0 ]
 				}
 
 			}
@@ -135,7 +77,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1118.0, 1140.663336431226753, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 678.0, 250.0, 118.733334243297463 ],
+					"presentation_rect" : [ 0.0, 718.0, 250.0, 118.733334243297463 ],
 					"proportion" : 0.5,
 					"varname" : "serveruidisable"
 				}
@@ -362,7 +304,7 @@
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 352.0, 1034.0, 247.0, 123.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 678.0, 250.0, 118.733334243297577 ],
+					"presentation_rect" : [ 0.0, 718.0, 250.0, 118.733334243297577 ],
 					"varname" : "somax.midioutput",
 					"viewvisibility" : 1
 				}
@@ -384,9 +326,9 @@
 					"numoutlets" : 7,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 352.0, 169.0, 584.0, 814.0 ],
+					"patching_rect" : [ 352.0, 169.0, 271.0, 726.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 584.0, 792.733334243297577 ],
+					"presentation_rect" : [ 0.0, 0.0, 263.0, 792.733334243297577 ],
 					"varname" : "somax.player.wireless",
 					"viewvisibility" : 1
 				}
@@ -404,7 +346,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1457.139764237976124, 128.0, 82.0, 77.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 250.0, 792.733334243297577 ],
+					"presentation_rect" : [ 0.0, 0.0, 250.0, 832.733334243297577 ],
 					"proportion" : 0.5
 				}
 
@@ -546,32 +488,15 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontsize" : [ 10.0 ]
-				}
-,
 				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
-					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -583,14 +508,31 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
-				"button" : 				{
+				"default" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontface" : [ 1 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

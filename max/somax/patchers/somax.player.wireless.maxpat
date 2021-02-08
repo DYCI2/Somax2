@@ -41,6 +41,7 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontface" : 1,
+					"fontlink" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-434",
 					"maxclass" : "textbutton",
@@ -48,10 +49,11 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 250.0, 42.596841145363214, 100.0, 20.0 ],
+					"patching_rect" : [ 250.0, 42.596841145363214, 67.4482421875, 19.171875 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 156.131419809127038, 228.532589068420748, 68.604244709015177, 20.0 ],
-					"rounded" : 20.0,
+					"presentation_rect" : [ 150.131419809127067, 289.532589068420748, 67.4482421875, 19.171875 ],
+					"rounded" : 8.0,
+					"spacing_x" : 10.0,
 					"text" : "Settings",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"texton" : "Continuous",
@@ -73,7 +75,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 657.0, 351.663336431226753, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 6.084603340888407, 153.825000250000016, 238.194881659111587, 520.999999750000029 ],
+					"presentation_rect" : [ 6.084603340888407, 191.325000124999917, 238.194881659111587, 526.499999875000185 ],
 					"proportion" : 0.5,
 					"varname" : "serveruidisable"
 				}
@@ -92,7 +94,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 423.0, 936.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 158.782480986380847, 250.532589068420748, 65.30212235450756, 17.0 ],
+					"presentation_rect" : [ 150.131419809127067, 310.704464068420748, 65.79296875, 13.171875 ],
 					"proportion" : 0.5,
 					"varname" : "latencydisable"
 				}
@@ -101,6 +103,7 @@
 , 			{
 				"box" : 				{
 					"fontface" : 1,
+					"fontlink" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-90",
 					"maxclass" : "textbutton",
@@ -109,10 +112,12 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 418.0, 980.0, 50.0, 20.0 ],
+					"patching_rect" : [ 418.0, 980.0, 65.79296875, 13.171875 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 157.782480986380847, 252.532589068420748, 65.30212235450756, 13.0 ],
-					"rounded" : 20.0,
+					"presentation_rect" : [ 150.131419809127067, 310.704464068420748, 65.79296875, 13.171875 ],
+					"rounded" : 8.0,
+					"spacing_x" : 10.0,
+					"spacing_y" : 1.0,
 					"text" : "Latency",
 					"texton" : "Latency",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -138,7 +143,7 @@
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 234.0, 639.0, 242.0, 68.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.584603, 607.825000000000045, 243.694882000000007, 67.0 ],
+					"presentation_rect" : [ 0.0, 650.825000000000045, 243.694882000000007, 67.0 ],
 					"varname" : "influencer",
 					"viewvisibility" : 1
 				}
@@ -162,7 +167,7 @@
 					"outlettype" : [ "", "", "", "", "", "" ],
 					"patching_rect" : [ 50.0, 150.0, 229.0, 431.5 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.487162, 177.824999999999989, 231.694882000000007, 428.0 ],
+					"presentation_rect" : [ 6.084603, 237.824999999999989, 231.694882000000007, 428.0 ],
 					"varname" : "player",
 					"viewvisibility" : 1
 				}
@@ -186,7 +191,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 591.0, 846.5, 574.0, 74.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 566.0, 151.824999999999989 ],
+					"presentation_rect" : [ 0.0, 27.0, 264.0, 208.824999999999989 ],
 					"varname" : "routing",
 					"viewvisibility" : 1
 				}
@@ -1124,20 +1129,20 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 103.0, 199.0, 509.0, 35.0 ],
-									"text" : "script newdefault routing bpatcher somax.player.routing @args $1 @patching_rect 591. 846.5 574. 74. @presentation 1 @presentation_rect 0. 0. 566. 151.825, script bringtofront routing"
+									"text" : "script newdefault routing bpatcher somax.player.routing @args $1 @patching_rect 591. 846.5 574. 74. @presentation 1 @presentation_rect 0. 27. 264. 208.825, script bringtofront routing"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"id" : "obj-35",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 50.0, 151.0, 568.0, 49.0 ],
-									"text" : "script newdefault influencer bpatcher somax.midiinfluencer.compact @args $1 @patching_rect 234. 639. 242. 68. @presentation 1 @presentation_rect 0.584603 607.825 243.694882 67., script bringtofront influencer"
+									"patching_rect" : [ 50.0, 151.0, 568.0, 35.0 ],
+									"text" : "script newdefault influencer bpatcher somax.midiinfluencer.compact @args $1 @patching_rect 234. 639. 242. 68. @presentation 1 @presentation_rect 0. 650.825 243.694882 67., script bringtofront influencer"
 								}
 
 							}
@@ -1150,7 +1155,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 103.0, 100.0, 524.0, 49.0 ],
-									"text" : "script newdefault player bpatcher somax.player.compact @args $1 $2 $3 $4 @patching_rect 50. 150. 229. 431.5 @presentation 1 @presentation_rect 7.487162 177.825 231.694882 428., script bringtofront player"
+									"text" : "script newdefault player bpatcher somax.player.compact @args $1 $2 $3 $4 @patching_rect 50. 150. 229. 431.5 @presentation 1 @presentation_rect 6.084603 237.825 231.694882 428., script bringtofront player"
 								}
 
 							}
@@ -1535,7 +1540,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 831.0, 251.0, 130.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 6.084603340888407, 153.825000250000016, 224.610235762023876, 22.0 ],
+					"presentation_rect" : [ 2.0, 3.0, 250.610235762023876, 22.0 ],
 					"text" : "Player",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -1567,7 +1572,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 820.055642438341238, 251.0, 148.582063325778279, 23.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 247.5, 678.849999499999967 ],
+					"presentation_rect" : [ 2.0, 3.0, 246.5, 714.825000000000045 ],
 					"proportion" : 0.5
 				}
 
@@ -2293,24 +2298,32 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontface" : [ 1 ],
+				"newobj" : 				{
 					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontface" : [ 1 ]
+				}
+,
+				"default" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2322,22 +2335,14 @@
 					}
 ,
 					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

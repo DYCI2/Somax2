@@ -16,6 +16,32 @@ function _getPatcher() {
     return patcher
 }
 
+function removeifexists() {
+    var args = arrayfromargs(arguments);
+    var name = args[0];
+    var regex = new RegExp("^" + name + "[0-9]+.*");
+    var obj = this.patcher.firstobject;
+    while (obj) {
+        next = obj.nextobject;
+        if (obj.varname.match(regex) != null) {
+            this.patcher.remove(this.patcher.getnamed(obj.varname));
+        }
+        obj = next;
+    }
+}
+
+// Returns (for bpatcher) the contained bpatchers full height [0] and its represented height [1] in the parent window
+function getheights() {
+        var height_in_parent = this.patcher.box.rect[3] - this.patcher.box.rect[1];
+        var patcher_height = 0;
+        var obj = this.patcher.firstobject;
+	    while (obj) {
+    	    patcher_height = Math.max(patcher_height, obj.rect[3]);
+    	    obj = obj.nextobject;
+	    }
+	    outlet(0, "heights", patcher_height, height_in_parent);
+}
+
 
 function test() {
     // this.patcher.newdefault(100, 100, "router", "4", "2", "@varname", "hehe")
