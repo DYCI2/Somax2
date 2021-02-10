@@ -59,10 +59,10 @@ class ImprovisationMemory:
         return Corpus(events, name, content_type=source_corpus.content_type,
                       build_parameters={"build_method": "runtime"})
 
-    # TODO: update for 2.2 merge
-    # def get_n_latest(self, n: int) -> List[Tuple[CorpusEvent, float, AbstractTransform]]:
-    #     """ :returns n latest events in reverse order (index 0 is latest event)"""
-    #     if len(self._history) < n:
-    #         return list(self._history)
-    #     else:
-    #         return [self._history[-i] for i in range(1, n + 1)]
+    def get_n_latest(self, n: int) -> list[tuple[CorpusEvent, float, AbstractTransform]]:
+        """ :returns n latest events in reverse order (index 0 is latest event)"""
+        if len(self._history) < n:
+            return [(v[0], v[1].trigger_time, v[1].applied_transform) for v in self._history]
+        else:
+            return [(self._history[-i][0], self._history[-i][1].trigger_time, self._history[-i][1].applied_transform)
+                    for i in range(1, n + 1)]

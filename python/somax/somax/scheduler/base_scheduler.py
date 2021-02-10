@@ -1,8 +1,5 @@
-import asyncio
 import logging
-import time
 from abc import abstractmethod, ABC
-from typing import Optional
 
 
 class BaseScheduler(ABC):

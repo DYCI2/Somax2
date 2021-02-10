@@ -4,7 +4,6 @@ from typing import Callable, Any, Dict, Optional, List
 from somax.runtime.atom import Atom
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.influence import AbstractInfluence
-from somax.runtime.player import Player
 from somax.runtime.transforms import AbstractTransform
 
 

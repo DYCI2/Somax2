@@ -125,7 +125,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def _send_events(self, events: list[ScheduledEvent]):
         for event in events:
             if isinstance(event, TempoEvent):  # Only added to scheduler if tempo master
-                self.tempo_send_queue.put(TempoMessage(tempo=event.tempo, source=TempoSource.SLAVE))
+                self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
             if isinstance(event, MidiEvent):
                 self.target.send("midi", [event.note, event.velocity, event.channel])
                 if event.velocity > 0:
@@ -151,9 +151,9 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def enabled(self, is_enabled):
         if is_enabled:
-            self.logger.info(f"Agent {self.player.name} enabled")
+            self.logger.info(f"Agent '{self.player.name}' enabled")
         else:
-            self.logger.info(f"Agent {self.player.name} disabled")
+            self.logger.info(f"Agent '{self.player.name}' disabled")
             self.flush()
         self._enabled = is_enabled
 
@@ -433,9 +433,6 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"Could not get parameter at given path.")
         except (ParameterError, AssertionError) as e:
             self.logger.error(str(e))
-
-    def parameter_dict(self):
-        self.target.send_dict(self.player.max_representation())
 
     def send_peaks(self):
         for name, count in self.player.get_peaks().items():

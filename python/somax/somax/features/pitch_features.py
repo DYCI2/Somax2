@@ -3,7 +3,6 @@ from typing import Dict, Any
 
 from somax.features import virfun
 from somax.features.feature import CorpusFeature, RuntimeFeature, AbstractFeature
-from somax.runtime.corpus import Corpus
 
 
 class AbstractIntegerPitch(AbstractFeature, ABC):

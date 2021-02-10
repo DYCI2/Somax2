@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import List, Tuple, Type
+from typing import List, Tuple
 
 import somax.classification
-from somax.features.feature import AbstractFeature
 from somax.runtime.corpus import Corpus
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.label import AbstractLabel

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1611.0, 880.0 ],
+		"rect" : [ 34.0, 79.0, 1348.0, 894.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -582,7 +582,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-158",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -979,7 +978,7 @@
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
 					"name" : "somax.contextualbutton.maxpat",
-					"numinlets" : 1,
+					"numinlets" : 2,
 					"numoutlets" : 2,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "bang" ],
@@ -1302,7 +1301,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-56",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1474,7 +1472,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-129",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1564,7 +1561,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-104",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1582,7 +1578,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-103",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1624,7 +1619,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-60",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -2736,7 +2730,7 @@
 					"order" : 0,
 					"source" : [ "obj-26", 5 ],
 					"watchpoint_flags" : 5,
-					"watchpoint_id" : 8
+					"watchpoint_id" : 15
 				}
 
 			}
@@ -3264,12 +3258,12 @@
 			"obj-180::obj-49::obj-79::obj-1" : [ "live.text[3]", "live.text", 0 ],
 			"obj-180::obj-49::obj-79::obj-2" : [ "live.text[4]", "live.text", 0 ],
 			"obj-180::obj-49::obj-79::obj-3" : [ "live.text[5]", "live.text", 0 ],
-			"obj-180::obj-49::obj-87::obj-1" : [ "live.text[7]", "live.text", 0 ],
-			"obj-180::obj-49::obj-87::obj-2" : [ "live.text[6]", "live.text", 0 ],
-			"obj-180::obj-49::obj-87::obj-3" : [ "live.text[8]", "live.text", 0 ],
-			"obj-180::obj-49::obj-89::obj-1" : [ "live.text[10]", "live.text", 0 ],
-			"obj-180::obj-49::obj-89::obj-2" : [ "live.text[9]", "live.text", 0 ],
-			"obj-180::obj-49::obj-89::obj-3" : [ "live.text[11]", "live.text", 0 ],
+			"obj-180::obj-49::obj-87::obj-1" : [ "live.text[8]", "live.text", 0 ],
+			"obj-180::obj-49::obj-87::obj-2" : [ "live.text[7]", "live.text", 0 ],
+			"obj-180::obj-49::obj-87::obj-3" : [ "live.text[6]", "live.text", 0 ],
+			"obj-180::obj-49::obj-89::obj-1" : [ "live.text[11]", "live.text", 0 ],
+			"obj-180::obj-49::obj-89::obj-2" : [ "live.text[10]", "live.text", 0 ],
+			"obj-180::obj-49::obj-89::obj-3" : [ "live.text[9]", "live.text", 0 ],
 			"obj-180::obj-49::obj-91::obj-1" : [ "live.text[14]", "live.text", 0 ],
 			"obj-180::obj-49::obj-91::obj-2" : [ "live.text[13]", "live.text", 0 ],
 			"obj-180::obj-49::obj-91::obj-3" : [ "live.text[12]", "live.text", 0 ],
@@ -3279,27 +3273,27 @@
 ,
 			"parameter_overrides" : 			{
 				"obj-180::obj-49::obj-87::obj-1" : 				{
-					"parameter_longname" : "live.text[7]"
-				}
-,
-				"obj-180::obj-49::obj-87::obj-2" : 				{
-					"parameter_longname" : "live.text[6]"
-				}
-,
-				"obj-180::obj-49::obj-87::obj-3" : 				{
 					"parameter_longname" : "live.text[8]"
 				}
 ,
+				"obj-180::obj-49::obj-87::obj-2" : 				{
+					"parameter_longname" : "live.text[7]"
+				}
+,
+				"obj-180::obj-49::obj-87::obj-3" : 				{
+					"parameter_longname" : "live.text[6]"
+				}
+,
 				"obj-180::obj-49::obj-89::obj-1" : 				{
-					"parameter_longname" : "live.text[10]"
+					"parameter_longname" : "live.text[11]"
 				}
 ,
 				"obj-180::obj-49::obj-89::obj-2" : 				{
-					"parameter_longname" : "live.text[9]"
+					"parameter_longname" : "live.text[10]"
 				}
 ,
 				"obj-180::obj-49::obj-89::obj-3" : 				{
-					"parameter_longname" : "live.text[11]"
+					"parameter_longname" : "live.text[9]"
 				}
 ,
 				"obj-180::obj-49::obj-91::obj-1" : 				{
@@ -3372,6 +3366,13 @@
 				"name" : "somax.multistatebutton.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "kslider.compact.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -3649,7 +3650,6 @@
 				"type" : "iLaX"
 			}
  ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-72", "obj-9", "obj-67", "obj-68", "obj-65", "obj-150" ]
 			}
@@ -3660,9 +3660,10 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3672,21 +3673,20 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-,
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+
 				}
 ,
 				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"message" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],

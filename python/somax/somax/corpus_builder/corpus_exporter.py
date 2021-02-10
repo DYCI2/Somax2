@@ -1,6 +1,5 @@
 from typing import Tuple
 
-from somax.corpus_builder.midi_parser import MidiParser
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.runtime.corpus import Corpus
 

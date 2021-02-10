@@ -1,4 +1,3 @@
-import copy
 import logging
 from typing import Dict, Optional, Tuple, Type, List
 
@@ -14,7 +13,6 @@ from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.peaks import Peaks
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
-from somax.runtime.target import Target, SendProtocol
 from somax.runtime.transforms import AbstractTransform, NoTransform
 from somax.runtime.transform_handler import TransformHandler
 from somax.scheduler.scheduled_object import ScheduledMidiAgent, TriggerMode

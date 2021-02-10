@@ -1,11 +1,9 @@
-import inspect
 import logging
 import os
-from typing import Tuple, List, Type, Optional, Dict, Any
+from typing import Tuple, List, Optional, Dict, Any
 
 import pandas as pd
 
-from somax import features
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.chromagram import Chromagram
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys

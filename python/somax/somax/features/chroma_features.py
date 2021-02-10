@@ -5,7 +5,6 @@ import numpy as np
 
 from somax.corpus_builder.chromagram import Chromagram
 from somax.features.feature import CorpusFeature, RuntimeFeature
-from somax.runtime.corpus import Corpus
 
 
 class OnsetChroma(CorpusFeature, RuntimeFeature, ABC):

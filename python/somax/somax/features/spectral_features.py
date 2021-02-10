@@ -3,7 +3,6 @@ from typing import Any, Dict, List
 import numpy as np
 
 from somax.features.feature import CorpusFeature
-from somax.runtime.corpus import Corpus
 
 
 class OctaveBands(CorpusFeature):

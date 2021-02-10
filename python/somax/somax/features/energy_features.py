@@ -1,7 +1,6 @@
 from typing import Any, Dict
 
 from somax.features.feature import CorpusFeature
-from somax.runtime.corpus import Corpus
 
 
 class MaxVelocity(CorpusFeature):

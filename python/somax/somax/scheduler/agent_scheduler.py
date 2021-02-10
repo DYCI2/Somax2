@@ -134,7 +134,7 @@ class AgentScheduler(BaseScheduler):
             #   self.tick to handle unexpected delays in scheduling (for example while loading a corpus)
             trigger_event.target_time= max(trigger_event.target_time, self.tick)
             trigger_event.trigger_time = max(trigger_event.trigger_time, self.tick - self._trigger_pretime)
-            event_and_transform = self._player.new_event(trigger_event.target_time)
+            event_and_transform = self._player.new_event(trigger_event.target_time, self._tempo)
         except InvalidCorpus as e:
             self.logger.error(str(e))
             self._requeue_trigger_event(trigger_event)
