@@ -18,9 +18,8 @@ class ProcessMessage(ABC):
 
 class TempoMessage(ProcessMessage):
     """ Message from Agent to Server """
-    def __init__(self, tempo: float, source: TempoSource):
+    def __init__(self, tempo: float):
         self.tempo: float = tempo
-        self.source: TempoSource = source
 
 
 class TimeMessage(ProcessMessage):

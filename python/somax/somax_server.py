@@ -23,7 +23,7 @@ from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
 from somax.runtime.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, TempoMasterMessage, \
-    TempoMessage, TempoSource
+    TempoMessage
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.target import Target, SendProtocol
 from somax.scheduler.scheduled_object import TriggerMode

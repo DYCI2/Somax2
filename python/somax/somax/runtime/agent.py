@@ -22,8 +22,7 @@ from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
-from somax.runtime.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage, \
-    TempoSource
+from somax.runtime.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
