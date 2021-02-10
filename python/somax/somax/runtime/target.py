@@ -16,7 +16,7 @@ class SendProtocol:
 
     SCHEDULER_RUNNING = "scheduler_running"
     SCHEDULER_CURRENT_TIME = "time"
-    SCHEDULER_CURRENT_TEMPO = "time"
+    SCHEDULER_CURRENT_TEMPO = "tempo"
     SCHEDULER_TEMPO_SET_SUCESS = "tempo_was_set"
     SCHEDULER_HAS_TEMPO_MASTER = "has_tempo_master"
     SCHEDULER_RESET_UI = "reset"

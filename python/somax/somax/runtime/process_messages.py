@@ -12,11 +12,6 @@ class PlayControl(Enum):
     TERMINATE = 4
 
 
-class TempoSource(Enum):
-    OSC = 0
-    SLAVE = 1
-
-
 class ProcessMessage(ABC):
     pass
 

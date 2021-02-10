@@ -47,20 +47,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 0.0, 719.0, 5.0, 100.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 718.0, 233.0, 20.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-13",
-					"linecolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
-					"maxclass" : "live.line",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 404.0, 544.0, 5.0, 100.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 649.0, 233.0, 20.0 ]
+					"presentation_rect" : [ 10.0, 754.0, 233.0, 20.0 ]
 				}
 
 			}
@@ -77,7 +64,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1118.0, 1140.663336431226753, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 718.0, 250.0, 118.733334243297463 ],
+					"presentation_rect" : [ 0.0, 758.0, 250.0, 118.733334243297463 ],
 					"proportion" : 0.5,
 					"varname" : "serveruidisable"
 				}
@@ -304,7 +291,7 @@
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 352.0, 1034.0, 247.0, 123.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 718.0, 250.0, 118.733334243297577 ],
+					"presentation_rect" : [ 0.0, 758.0, 250.0, 118.733334243297577 ],
 					"varname" : "somax.midioutput",
 					"viewvisibility" : 1
 				}
@@ -326,7 +313,7 @@
 					"numoutlets" : 7,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 352.0, 169.0, 271.0, 726.0 ],
+					"patching_rect" : [ 352.0, 169.0, 253.0, 754.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.0, 0.0, 263.0, 792.733334243297577 ],
 					"varname" : "somax.player.wireless",
@@ -346,7 +333,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1457.139764237976124, 128.0, 82.0, 77.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 250.0, 832.733334243297577 ],
+					"presentation_rect" : [ 0.0, 0.0, 255.0, 878.733334243297577 ],
 					"proportion" : 0.5
 				}
 
@@ -488,16 +475,7 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"newobj" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
 				"message" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -508,12 +486,12 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ]
+					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"default" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -525,14 +503,23 @@
 					}
 ,
 					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"newobj" : 				{
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

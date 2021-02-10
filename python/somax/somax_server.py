@@ -174,7 +174,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         while not self._tempo_master_queue.empty():
             tempo_message: TempoMessage = self._tempo_master_queue.get()
             tempo = tempo_message.tempo  # overwriting parameter tempo
-            self.set_tempo(tempo, send_to_client=tempo_message.source == TempoSource.SLAVE)
+            self.set_tempo(tempo)
 
     def set_transport_type(self, master: bool):
         if master:
@@ -270,11 +270,10 @@ class SomaxServer(Somax, AsyncioOscObject):
         super().stop_transport()
         self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
 
-    def set_tempo(self, tempo: float, send_to_client: bool = False):
+    def set_tempo(self, tempo: float):
         if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
             super().set_tempo(tempo)
-            if send_to_client:
-                self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, tempo)
+            self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, tempo)
         else:
             self.logger.error(f"Tempo must be a single value larger than zero. Did not set tempo.")
 

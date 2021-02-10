@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1082.0, 689.0 ],
+		"rect" : [ 34.0, 79.0, 2096.0, 1275.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -454,7 +454,7 @@
 					"bgfillcolor_type" : "color",
 					"fontface" : 1,
 					"id" : "obj-80",
-					"items" : [ "None", ",", "Player" ],
+					"items" : "None",
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -513,6 +513,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"id" : "obj-103",
+					"ignoreclick" : 1,
 					"maxclass" : "number",
 					"maximum" : 65535,
 					"minimum" : 0,
@@ -523,8 +524,8 @@
 					"patching_rect" : [ 105.5, 600.0, 51.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 185.034919551456142, 228.0, 62.465080448543858, 22.0 ],
-					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"varname" : "sendport"
+					"triangle" : 0,
+					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
 			}
@@ -532,6 +533,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"id" : "obj-105",
+					"ignoreclick" : 1,
 					"maxclass" : "number",
 					"maximum" : 65535,
 					"minimum" : 0,
@@ -542,6 +544,7 @@
 					"patching_rect" : [ 446.25, 597.283750000000055, 51.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 268.534919551456142, 228.0, 59.534919551456142, 22.0 ],
+					"triangle" : 0,
 					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"varname" : "recvport"
 				}
@@ -928,7 +931,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1441.416666666666515, 415.589237668161388, 136.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 115.0, 141.0, 205.5, 18.0 ],
+					"presentation_rect" : [ 115.0, 141.0, 132.5, 18.0 ],
 					"text" : "Set tempo from",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -2023,11 +2026,10 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1452.75, 56.439567114741294, 59.5, 22.0 ],
 					"restore" : 					{
-						"pollinterval" : [ 50 ],
+						"pollinterval" : [ 200 ],
 						"recvport" : [ 1235 ],
 						"reloadplayernames" : [ 0.0 ],
-						"sendport" : [ 1234 ],
-						"tempomaster" : [ 1 ],
+						"tempomaster" : [ 0 ],
 						"terminate" : [ 0.0 ]
 					}
 ,
@@ -2048,10 +2050,10 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1202.25, 90.911797191255232, 310.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 461, 322 ],
+						"client_rect" : [ 4, 44, 358, 172 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
-						"storage_rect" : [ 794, -709, 1244, -510 ]
+						"storage_rect" : [ 583, 69, 1034, 197 ]
 					}
 ,
 					"text" : "pattrstorage pattrstorage @savemode 2 @outputmode 1",
@@ -3623,31 +3625,15 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ]
-				}
-,
 				"newobj" : 				{
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ]
 				}
 ,
 				"message" : 				{
+					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -3659,7 +3645,23 @@
 						"autogradient" : 0
 					}
 ,
+					"fontsize" : [ 10.0 ]
+				}
+,
+				"default" : 				{
 					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
 					"fontsize" : [ 10.0 ]
 				}
 ,

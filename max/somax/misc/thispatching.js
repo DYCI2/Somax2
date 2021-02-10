@@ -19,7 +19,7 @@ function _getPatcher() {
 function removeifexists() {
     var args = arrayfromargs(arguments);
     var name = args[0];
-    var regex = new RegExp("^" + name + "[0-9]+.*");
+    var regex = new RegExp("^" + name + "[1-9]+[0-9]*.*");
     var obj = this.patcher.firstobject;
     while (obj) {
         next = obj.nextobject;
