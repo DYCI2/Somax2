@@ -3,15 +3,16 @@ from typing import Optional, List, Dict, Type, Any
 
 import pandas as pd
 
-from somax.features.feature import CorpusFeature
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
+from somax.features.feature import CorpusFeature
+from somax.runtime.memory_state import MemoryState
 
 """ Keys correspond to parent module names, ex. "pitch" or "chroma". """
 EventParameterDict = Dict[str, List[CorpusFeature]]
 
 
 class Note:
-    def __init__(self, pitch: int, velocity: int, channel: int, onset: float, duration: float,
+    def __init__(self, pitch: int, velocity: int, channel: int, onset: float, duration: float, track: str,
                  absolute_onset: float, absolute_duration: float):
         self.logger = logging.getLogger(__name__)
         self.pitch: int = pitch
@@ -19,6 +20,7 @@ class Note:
         self.channel: int = channel
         self.onset: float = onset  # in ticks in relation to CorpusEvent onset
         self.duration: float = duration  # in ticks
+        self.track: str = track  # name of MIDI track note originated from
         self.absolute_onset: float = absolute_onset  # in milliseconds in relation to CorpusEvent onset
         self.absolute_duration: float = absolute_duration  # in milliseconds
 
@@ -29,6 +31,7 @@ class Note:
                    channel=raw_note[Keys.CHANNEL],
                    onset=raw_note[Keys.REL_ONSET] - parent_event_relative_onset,
                    duration=raw_note[Keys.REL_DURATION],
+                   track=raw_note[Keys.TRACK_NAME],
                    absolute_onset=raw_note[Keys.ABS_ONSET] - parent_event_absolute_onset,
                    absolute_duration=raw_note[Keys.ABS_DURATION])
 
@@ -40,6 +43,7 @@ class Note:
                    channel=note.channel,
                    onset=note.onset + old_parent_onset - new_parent_onset,
                    duration=note.duration,
+                   track=note.track,
                    absolute_onset=note.absolute_onset + old_parent_abs_onset - new_parent_abs_onset,
                    absolute_duration=note.absolute_duration)
 
@@ -50,6 +54,7 @@ class Note:
                    channel=note_dict["channel"],
                    onset=note_dict["onset"],
                    duration=note_dict["duration"],
+                   track=note_dict["track"],
                    absolute_onset=note_dict["absolute_onset"],
                    absolute_duration=note_dict["absolute_duration"])
 
@@ -66,13 +71,20 @@ class Note:
                 "channel": self.channel,
                 "onset": self.onset,
                 "duration": self.duration,
+                "track": self.track,
                 "absolute_onset": self.absolute_onset,
-                "absolute_duration": self.absolute_duration
+                "absolute_duration": self.absolute_duration,
                 }
+
+    def is_held_from(self, parent_duration: float) -> bool:
+        return self.onset + self.duration > parent_duration
+
+    def is_held_to(self) -> bool:
+        return self.onset < 0.0
 
 
 class CorpusEvent:
-    def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float,
+    def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float, bar_number: float,
                  duration: Optional[float] = None, absolute_duration: Optional[float] = None,
                  notes: Optional[List[Note]] = None, features: Optional[Dict[Type[CorpusFeature], CorpusFeature]] = None):
         self.logger = logging.getLogger(__name__)
@@ -80,12 +92,14 @@ class CorpusEvent:
         self.tempo: float = tempo
         self.onset: float = onset
         self.absolute_onset: float = absolute_onset
+        self.bar_number: float = bar_number
 
         self.duration: Optional[float] = duration
         self.absolute_duration: Optional[float] = absolute_duration
 
         self.notes: List[Note] = notes if notes else []
         self.features: Dict[Type[CorpusFeature], CorpusFeature] = features if features else {}
+        self.recorded_memory_state: Optional[MemoryState] = None
 
         # self._labels = {}  # {ClassVar[AbstractLabel]: AbstractLabel}, precompiled for performance
 
@@ -98,6 +112,7 @@ class CorpusEvent:
                            absolute_onset=event_dict["absolute_onset"],
                            duration=event_dict["duration"],
                            absolute_duration=event_dict["absolute_duration"],
+                           bar_number=event_dict["bar"],
                            notes=[Note.from_json(note_dict) for note_dict in event_dict["notes"]],
                            features=dict([CorpusFeature.from_json(classpath_dict[k], v)
                                           for (k, v) in event_dict["features"].items()])
@@ -109,8 +124,9 @@ class CorpusEvent:
         pd.Series on the format specified in note_matrix.py"""
         event_onset: float = raw_note[Keys.REL_ONSET]
         event_absolute_onset: float = raw_note[Keys.ABS_ONSET]
+        bar_number: float = raw_note[Keys.BAR_NUMBER]
         notes: List[Note] = [Note.from_raw(raw_note, event_onset, event_absolute_onset)]
-        return cls(state_index, raw_note[Keys.TEMPO], event_onset, event_absolute_onset, notes=notes)
+        return cls(state_index, raw_note[Keys.TEMPO], event_onset, event_absolute_onset, bar_number, notes=notes)
 
     def set_duration(self, end: float, absolute_end: float):
         """ Completes a CorpusEvent constructed with the `incomplete` constructor. """
@@ -132,16 +148,17 @@ class CorpusEvent:
         return self.features[feature_type]
 
     def held_to(self) -> [Note]:
-        return [note for note in self.notes if note.onset < 0.0]
+        return [note for note in self.notes if note.is_held_to()]
 
     def held_from(self) -> [Note]:
-        return [note for note in self.notes if note.onset + note.duration > self.duration]
+        return [note for note in self.notes if note.is_held_from(self.duration)]
 
     def encode(self, features_dict: Dict[Type['CorpusFeature'], str]) -> Dict[str, Any]:
         return {"state_index": self.state_index,
                 "tempo": self.tempo,
                 "onset": self.onset,
                 "absolute_onset": self.absolute_onset,
+                "bar": self.bar_number,
                 "duration": self.duration,
                 "absolute_duration": self.absolute_duration,
                 "notes": [note.encode() for note in self.notes],

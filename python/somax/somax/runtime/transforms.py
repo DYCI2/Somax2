@@ -32,7 +32,7 @@ class AbstractTransform(StringParsed, ABC):
 
     @abstractmethod
     def apply(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
-        """"""
+        """ Note: Should return a deepcopy of the event """
 
     @abstractmethod
     def inverse(self, obj: Union[CorpusEvent, AbstractFeature], **kwargs) -> Union[CorpusEvent, AbstractFeature]:
