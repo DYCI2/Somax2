@@ -412,8 +412,8 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     # TODO: can be single function with send_corpora
-    def get_corpus_files(self):
-        filepath: str = os.path.join(os.path.dirname(__file__), settings.CORPUS_FOLDER)
+    def get_corpus_files(self, filepath: str):
+        # filepath: str = os.path.join(os.path.dirname(__file__), settings.CORPUS_FOLDER)
         corpora: List[Tuple[str, str]] = []
         for file in os.listdir(filepath):
             if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):

@@ -96,9 +96,8 @@ class Somax:
     # CORPUS METHODS
     ######################################################
 
-    def build_corpus(self, filepath: str, corpus_name: Optional[str] = None,
-                     output_folder: str = settings.CORPUS_FOLDER, overwrite: bool = False,
-                     filter_class: str = "", **kwargs):
+    def build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
+                     overwrite: bool = False, filter_class: str = "", **kwargs):
         self.logger.info(f"Building corpus from file(s) '{filepath}'...")
         try:
             spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)

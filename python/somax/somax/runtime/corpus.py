@@ -95,7 +95,7 @@ class Corpus:
         except (KeyError, AttributeError) as e:
             raise InvalidCorpus(f"The Corpus at '{filepath}' has an invalid format and could not be loaded") from e
 
-    def export(self, output_folder: str = settings.CORPUS_FOLDER, overwrite: bool = False,
+    def export(self, output_folder: str, overwrite: bool = False,
                indentation: Optional[int] = None) -> str:
         """ Raises IOError"""
         filepath = os.path.join(output_folder, self.name + ".json")
