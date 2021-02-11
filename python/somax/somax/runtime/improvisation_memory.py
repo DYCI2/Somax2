@@ -1,5 +1,5 @@
 import copy
-from typing import Tuple
+from typing import Tuple, List
 
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
@@ -11,7 +11,7 @@ from somax.runtime.transforms import AbstractTransform
 class ImprovisationMemory:
 
     def __init__(self):
-        self._history: list[Tuple[CorpusEvent, MemoryState]] = []
+        self._history: List[Tuple[CorpusEvent, MemoryState]] = []
 
     def append(self, event: CorpusEvent, trigger_time: float, transforms: AbstractTransform, tempo: float,
                artificially_sustained: bool, simultaneous_onsets: bool) -> None:
@@ -43,7 +43,7 @@ class ImprovisationMemory:
         if len(self._history) == 0:
             raise InvalidCorpus("The recorded history is empty")
         elapsed_abs_time: float = 0.0
-        events: list[CorpusEvent] = []
+        events: List[CorpusEvent] = []
         for event, memory_state in copy.deepcopy(self._history):  # type: CorpusEvent, MemoryState
             current_onset: float = memory_state.trigger_time
             if use_original_tempo:
@@ -59,7 +59,7 @@ class ImprovisationMemory:
         return Corpus(events, name, content_type=source_corpus.content_type,
                       build_parameters={"build_method": "runtime"})
 
-    def get_n_latest(self, n: int) -> list[tuple[CorpusEvent, float, AbstractTransform]]:
+    def get_n_latest(self, n: int) -> List[Tuple[CorpusEvent, float, AbstractTransform]]:
         """ :returns n latest events in reverse order (index 0 is latest event)"""
         if len(self._history) < n:
             return [(v[0], v[1].trigger_time, v[1].applied_transform) for v in self._history]

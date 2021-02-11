@@ -4,7 +4,7 @@ import logging.config
 import multiprocessing
 import os
 from importlib import resources
-from typing import Any, Optional, List
+from typing import Any, Optional, List, Tuple
 
 import log
 from somax import settings
@@ -107,7 +107,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def _callback(self, tick: float, tempo: float):
         if self._enabled:
-            events: list[ScheduledEvent] = self.scheduler.update_tick(tick=tick, tempo=tempo)
+            events: List[ScheduledEvent] = self.scheduler.update_tick(tick=tick, tempo=tempo)
             self._send_events(events)
 
     def _process_control_message(self, message_type: PlayControl):
@@ -122,7 +122,7 @@ class OscAgent(Agent, AsyncioOscObject):
         if message_type == PlayControl.TERMINATE:
             self.terminate()
 
-    def _send_events(self, events: list[ScheduledEvent]):
+    def _send_events(self, events: List[ScheduledEvent]):
         for event in events:
             if isinstance(event, TempoEvent):  # Only added to scheduler if tempo master
                 self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
@@ -162,7 +162,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.player.clear()
 
     def flush(self):
-        events: list[ScheduledEvent] = self.scheduler.flush()
+        events: List[ScheduledEvent] = self.scheduler.flush()
         self._send_events(events)
 
     def set_tempo_master(self, is_master: bool):
@@ -184,7 +184,7 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
         try:
-            path_and_name: list[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._parse_streamview_atom_path(path)
             time: float = self.scheduler.tick
             self.player.influence(path_and_name, influence, time, **kwargs)
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
@@ -205,7 +205,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def create_streamview(self, path: str, weight: float = Streamview.DEFAULT_WEIGHT,
                           merge_action: str = "", override: bool = False):
         try:
-            path_and_name: list[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._parse_streamview_atom_path(path)
             merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
             self.player.create_streamview(path=path_and_name, weight=weight, merge_action=merge_action,
                                           override=override)
@@ -215,7 +215,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def delete_streamview(self, path: str):
         try:
-            path_and_name: list[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._parse_streamview_atom_path(path)
             self.player.delete_streamview(path_and_name)
             self.logger.info(f"Deleted streamview with path '{path}'.")
         except (AssertionError, KeyError, IndexError) as e:
@@ -225,7 +225,7 @@ class OscAgent(Agent, AsyncioOscObject):
                     activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
                     enabled: bool = True, override: bool = False, **kwargs):
         try:
-            path_and_name: list[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._parse_streamview_atom_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
@@ -239,7 +239,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def delete_atom(self, path: str):
         try:
-            path_and_name: list[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._parse_streamview_atom_path(path)
             self.player.delete_atom(path_and_name)
             self.logger.info(f"Deleted atom with path '{path}'.")
         except (AssertionError, KeyError, IndexError) as e:
@@ -260,7 +260,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def set_classifier(self, path: str, classifier: str, **kwargs):
         try:
-            path_and_name: list[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._parse_streamview_atom_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             self.player.set_classifier(path_and_name, classifier)
             self.logger.info(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
@@ -270,7 +270,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def set_activity_pattern(self, path: str, activity_pattern: str, **kwargs):
         try:
-            path_and_name: list[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._parse_streamview_atom_path(path)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)
             self.player.set_activity_pattern(path_and_name, activity_pattern)
             self.logger.debug(f"[set_acitivity_pattern] Activity pattern set to {type(activity_pattern).__name__} "
@@ -397,7 +397,7 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     @staticmethod
-    def _parse_streamview_atom_path(path: str) -> list[str]:
+    def _parse_streamview_atom_path(path: str) -> List[str]:
         """ :raises AssertionError if `path` is non-empty and not of type `str`. """
         assert isinstance(path, str), "Argument 'path' should be a string."
         if not path:
@@ -414,7 +414,7 @@ class OscAgent(Agent, AsyncioOscObject):
     # TODO: can be single function with send_corpora
     def get_corpus_files(self):
         filepath: str = os.path.join(os.path.dirname(__file__), settings.CORPUS_FOLDER)
-        corpora: list[tuple[str, str]] = []
+        corpora: List[Tuple[str, str]] = []
         for file in os.listdir(filepath):
             if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
                 corpus_name, _ = os.path.splitext(file)  # TODO: Not the corpus name that's specified in the json
@@ -427,7 +427,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def get_param(self, path: str):
         try:
-            parameter_path: list[str] = self._parse_streamview_atom_path(path)
+            parameter_path: List[str] = self._parse_streamview_atom_path(path)
             self.target.send(SendProtocol.PLAYER_SINGLE_PARAMETER, [path, self.player.get_param(parameter_path).value])
         except (IndexError, KeyError):
             self.logger.error(f"Could not get parameter at given path.")
@@ -438,13 +438,13 @@ class OscAgent(Agent, AsyncioOscObject):
         for name, count in self.player.get_peaks().items():
             self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
 
-    def send_corpora(self, corpus_names_and_paths: list[tuple[str, str]]):
+    def send_corpora(self, corpus_names_and_paths: List[Tuple[str, str]]):
         for corpus in corpus_names_and_paths:
             self.target.send(SendProtocol.PLAYER_CORPUS_FILES, corpus)
         self.target.send(SendProtocol.PLAYER_CORPUS_FILES, Target.WRAPPED_BANG)
 
     def send_atoms(self):
-        atom_names: list[str] = [atom.name for atom in self.player.all_atoms()]
+        atom_names: List[str] = [atom.name for atom in self.player.all_atoms()]
         self.target.send(SendProtocol.INSTANTIATED_ATOMS, atom_names)
 
     def send_current_corpus_info(self):

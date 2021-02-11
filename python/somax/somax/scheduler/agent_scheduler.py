@@ -1,5 +1,5 @@
 import logging
-from typing import Optional, Any
+from typing import Optional, Any, List
 
 from somax.runtime.corpus import ContentType
 from somax.runtime.corpus_event import CorpusEvent, Note
@@ -20,7 +20,7 @@ class AgentScheduler(BaseScheduler):
         super().__init__(tempo=tempo, tick=initial_tick, running=running)
         self.logger = logging.getLogger(__name__)
         self._player = player
-        self.queue: list[ScheduledEvent] = []
+        self.queue: List[ScheduledEvent] = []
         self.is_tempo_master: bool = tempo_master
         self._trigger_pretime: float = trigger_pretime
 
@@ -28,10 +28,10 @@ class AgentScheduler(BaseScheduler):
     # MAIN FUNCTIONS
     ######################################################
 
-    def update_tick(self, tick: float, tempo: float) -> list[ScheduledEvent]:
+    def update_tick(self, tick: float, tempo: float) -> List[ScheduledEvent]:
         if self.running:
             self._update_tick(tick=tick, tempo=tempo)
-            events: list[ScheduledEvent] = self._process_internal_events()
+            events: List[ScheduledEvent] = self._process_internal_events()
             return events
         else:
             return []
@@ -72,9 +72,9 @@ class AgentScheduler(BaseScheduler):
 
     def _add_midi_event(self, trigger_time: float, corpus_event: CorpusEvent, applied_transform: AbstractTransform):
         # Handle held notes from previous state:
-        note_offs_previous: list[Note] = [n for n in self._player.held_notes if n not in corpus_event.held_to()]
-        note_ons: list[Note] = [n for n in corpus_event.notes if n not in self._player.held_notes]
-        note_offs: list[Note] = [n for n in corpus_event.notes if n not in corpus_event.held_from()]
+        note_offs_previous: List[Note] = [n for n in self._player.held_notes if n not in corpus_event.held_to()]
+        note_ons: List[Note] = [n for n in corpus_event.notes if n not in self._player.held_notes]
+        note_offs: List[Note] = [n for n in corpus_event.notes if n not in corpus_event.held_from()]
         self._player.held_notes = corpus_event.held_from()
 
         # Queue midi events for note ons/offs
@@ -106,12 +106,12 @@ class AgentScheduler(BaseScheduler):
     # PROCESS (INTERNAL)
     ######################################################
 
-    def _process_internal_events(self) -> list[ScheduledEvent]:
-        events: list[ScheduledEvent] = [e for e in self.queue if e.trigger_time <= self._tick]
+    def _process_internal_events(self) -> List[ScheduledEvent]:
+        events: List[ScheduledEvent] = [e for e in self.queue if e.trigger_time <= self._tick]
         self.queue = [e for e in self.queue if e.trigger_time > self._tick]
         # sort to ensure that influences/midi/tempo/etc. are handled before triggers if simultaneous
         events.sort(key=lambda e: isinstance(e, AbstractTriggerEvent))
-        target_events: list[ScheduledEvent] = []
+        target_events: List[ScheduledEvent] = []
         for event in events:
             if isinstance(event, TempoEvent) and self.is_tempo_master:
                 target_events.append(event)
@@ -132,7 +132,7 @@ class AgentScheduler(BaseScheduler):
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
             # By default, target time should always be the time given by the trigger_event, but may occasionally use
             #   self.tick to handle unexpected delays in scheduling (for example while loading a corpus)
-            trigger_event.target_time= max(trigger_event.target_time, self.tick)
+            trigger_event.target_time = max(trigger_event.target_time, self.tick)
             trigger_event.trigger_time = max(trigger_event.trigger_time, self.tick - self._trigger_pretime)
             event_and_transform = self._player.new_event(trigger_event.target_time, self._tempo)
         except InvalidCorpus as e:
@@ -194,15 +194,15 @@ class AgentScheduler(BaseScheduler):
     def pause(self, **kwargs):
         self.running = False
 
-    def stop(self, **kwargs) -> list[ScheduledEvent]:
+    def stop(self, **kwargs) -> List[ScheduledEvent]:
         self.running = False
         self._tick = 0
         return self.flush()
 
-    def flush(self) -> list[ScheduledEvent]:
-        remamining_queue: list[ScheduledEvent] = self.queue[:]
+    def flush(self) -> List[ScheduledEvent]:
+        remamining_queue: List[ScheduledEvent] = self.queue[:]
         self.queue = []
-        target_events: list[ScheduledEvent] = []
+        target_events: List[ScheduledEvent] = []
         for event in remamining_queue[:]:
             # Add new triggers for all existing automatically triggered
             if isinstance(event, AutomaticTriggerEvent):

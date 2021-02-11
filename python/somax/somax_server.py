@@ -7,7 +7,7 @@ import logging.config
 import multiprocessing
 import sys
 from importlib import resources
-from typing import Optional, Callable
+from typing import Optional, Callable, Tuple, List
 
 import log
 import somax
@@ -34,7 +34,7 @@ class Somax:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self._agents: dict[str, tuple[Agent, multiprocessing.Queue]] = dict()
+        self._agents: Dict[str, Tuple[Agent, multiprocessing.Queue]] = dict()
         self._transport: Transport = MasterTransport()
         self._tempo_master_queue: multiprocessing.Queue[TempoMessage] = multiprocessing.Queue()
         self._terminated: bool = False
@@ -190,14 +190,14 @@ class SomaxServer(Somax, AsyncioOscObject):
 
     def create_agent(self, name: str, recv_port: int, send_port: int, ip: str = "", trigger_mode: str = "",
                      peak_selector: str = "", merge_action: str = "", corpus_filepath: str = "",
-                     scale_actions: tuple[str, ...] = ("",), override: bool = False):
+                     scale_actions: Tuple[str, ...] = ("",), override: bool = False):
         try:
             address: str = self.parse_osc_address(name)
             ip: str = self.parse_ip(ip)
             trigger_mode: TriggerMode = TriggerMode.from_string(trigger_mode)
             merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector)
-            scale_actions: list[AbstractScaleAction] = [AbstractScaleAction.from_string(s) for s in scale_actions]
+            scale_actions: List[AbstractScaleAction] = [AbstractScaleAction.from_string(s) for s in scale_actions]
         except ValueError as e:
             self.logger.error(f"{str(e)}. No agent was created.")
             return
@@ -244,7 +244,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         for player_name in self._agents.keys():
             self.target.send(SendProtocol.ALL_PLAYER_NAMES, [player_name])
 
-    def server_status(self, agents: Optional[list[str]]):
+    def server_status(self, agents: Optional[List[str]]):
         if agents is None:
             all_agents_exist: bool = True
         else:

@@ -1,6 +1,6 @@
 import logging
 from enum import Enum
-from typing import Optional, List, Iterator, Any, Iterable
+from typing import Optional, List, Iterator, Any, Iterable, Tuple, Dict
 
 import mido
 import numpy as np
@@ -61,11 +61,11 @@ class MidiParser:
         return note_matrix
 
     @staticmethod
-    def export_midi(note_matrix: pd.DataFrame, filepath: str, title: str, initial_time_signature: tuple[int, int],
+    def export_midi(note_matrix: pd.DataFrame, filepath: str, title: str, initial_time_signature: Tuple[int, int],
                     ticks_per_beat: int,
                     annotations: BarNumberAnnotation):
-        midi_notes, duration = MidiParser._from_pandas(note_matrix, ticks_per_beat)  # type: list[_MidiNote], int
-        midi_tracks: list[MidiTrack] = MidiParser._serialize_notes(midi_notes, duration, title,
+        midi_notes, duration = MidiParser._from_pandas(note_matrix, ticks_per_beat)  # type: List[_MidiNote], int
+        midi_tracks: List[MidiTrack] = MidiParser._serialize_notes(midi_notes, duration, title,
                                                                    initial_time_signature=initial_time_signature,
                                                                    annotations=annotations)
         midi_file: MidiFile = MidiFile(ticks_per_beat=ticks_per_beat)
@@ -93,7 +93,7 @@ class MidiParser:
         return MidiParser._to_pandas(notes, ppq)
 
     @staticmethod
-    def _parse_notes(midi_file: mido.MidiFile) -> list[_MidiNote]:
+    def _parse_notes(midi_file: mido.MidiFile) -> List[_MidiNote]:
         ticks_per_beat: int = midi_file.ticks_per_beat
         tempo_bpm: float = MidiParser._DEFAULT_TEMPO_BPM
         held_notes: List[_MidiNote] = []
@@ -131,11 +131,11 @@ class MidiParser:
         return completed_notes
 
     @staticmethod
-    def _serialize_notes(notes: list[_MidiNote], duration: int, title: str, initial_time_signature: tuple[int, int],
-                         annotations: BarNumberAnnotation, **kwargs) -> list[MidiTrack]:
+    def _serialize_notes(notes: List[_MidiNote], duration: int, title: str, initial_time_signature: Tuple[int, int],
+                         annotations: BarNumberAnnotation, **kwargs) -> List[MidiTrack]:
         meta_export_dict: str = "meta"
         lyrics_dict: str = "lyrics"
-        messages: dict[str, list[Any]] = {
+        messages: Dict[str, List[Any]] = {
             meta_export_dict: [
                 MetaMessage(type='track_name', name=title, time=0),
                 MetaMessage(type='time_signature',
@@ -191,11 +191,11 @@ class MidiParser:
         return midi_tracks
 
     @staticmethod
-    def __merge_tracks(tracks: List[MidiTrack]) -> Iterator[tuple[Any, Optional[MidiTrack]]]:
+    def __merge_tracks(tracks: List[MidiTrack]) -> Iterator[Tuple[Any, Optional[MidiTrack]]]:
         """This function was adapted directly from mido to handle files with uncaught 'type' meta message errors
             as well as append the original track to the sorted list
         """
-        messages_and_tracks: list[tuple[Any, MidiTrack]] = []
+        messages_and_tracks: List[Tuple[Any, MidiTrack]] = []
         for track in tracks:
             messages_and_tracks.extend([(m, track) for m in MidiParser.__to_abstime(track)])
         messages_and_tracks.sort(key=lambda msg_and_track: msg_and_track[0].time)
@@ -204,7 +204,7 @@ class MidiParser:
         return MidiParser.__fix_end_of_track(zip(MidiParser.__to_reltime(messages), tracks))
 
     @staticmethod
-    def __fix_end_of_track(messages: Iterable[tuple[any, MidiTrack]]) -> Iterator[tuple[Any, Optional[MidiTrack]]]:
+    def __fix_end_of_track(messages: Iterable[Tuple[any, MidiTrack]]) -> Iterator[Tuple[Any, Optional[MidiTrack]]]:
         """Remove all end_of_track messages and add one at the end.
 
         This function was adapted directly from mido to handle passing of track info when merging"""
@@ -272,9 +272,9 @@ class MidiParser:
         return pd.DataFrame(note_matrix, columns=[key for key in Keys])
 
     @staticmethod
-    def _from_pandas(notes_matrix: pd.DataFrame, ticks_per_beat: int) -> tuple[list[_MidiNote], float]:
+    def _from_pandas(notes_matrix: pd.DataFrame, ticks_per_beat: int) -> Tuple[List[_MidiNote], float]:
         duration: int = int(np.max(notes_matrix[Keys.REL_ONSET] + notes_matrix[Keys.REL_DURATION]) * ticks_per_beat)
-        notes: list[_MidiNote] = []
+        notes: List[_MidiNote] = []
 
         # TODO: [OPTIMIZATION] Use list comprehension and call code below as external function for optimization
         for _, note in notes_matrix.iterrows():
