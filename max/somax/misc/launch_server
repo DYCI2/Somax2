@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # options: "local" (github repository) | "binary" (pyinstaller distribution)
-EXECUTABLE="local"
+EXECUTABLE="binary"
 
 SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-BINARY_PATH="${SCRIPT_DIRECTORY}/somax_server/somax_server"
+BINARY_PATH="${SCRIPT_DIRECTORY}/somax_server"
 LOCAL_PATH="${SCRIPT_DIRECTORY}/../../../python/somax/somax_server.py"
 
 
@@ -33,8 +33,7 @@ then
     
     if (($retval == 0 )) || (( $retval == 130 )); 
     then 
-        exit 0; 
-    # Temporary modification while PyInstaller isn't working.
+        exit $retval;
     else
         exit $retval;
     # else
@@ -43,8 +42,8 @@ then
     fi
 elif [ "$EXECUTABLE" = "binary" ]
 then
-    # run_binary
-    echo -e "\033[1m[FATAL]: Option \"${EXECUTABLE}\" is currently not supported. Terminating application.\033[0m"
+     run_binary
+#    echo -e "\033[1m[FATAL]: Option \"${EXECUTABLE}\" is currently not supported. Terminating application.\033[0m"
 else
     echo -e "\033[1m[FATAL]: Unknown option \"${EXECUTABLE}\". Ensure that \$EXECUTABLE is set to one of the valid options in file ${BASH_SOURCE[0]}.\033[0m"
     

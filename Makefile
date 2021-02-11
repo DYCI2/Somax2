@@ -2,7 +2,7 @@ PYLIBPATH = python/somax
 MAXLIBPATH = max/somax
 
 PYINSTALLER_PATH = pyinstaller
-PYINSTALLER_TARGET = $(PYLIBPATH)/somax2_server.py
+PYINSTALLER_TARGET = $(PYLIBPATH)/somax_server.py
 PYINSTALLER_TARGET_NAME = somax_server
 
 MAX_PYINSTALLER_LIBRARY = dist/max_pyinstaller_pkg
@@ -23,12 +23,15 @@ pyinstaller:
 	@echo "\033[1m####### Building server binary with pyinstaller ########\033[0m"
 	$(PYINSTALLER_PATH) $(PYINSTALLER_TARGET) \
 		--clean \
+		--noconfirm \
+		--onefile \
+		--noconsole \
 		--name $(PYINSTALLER_TARGET_NAME) \
 		--exclude-module matplotlib \
 		--add-data="$(PYLIBPATH)/somax/classification/tables:somax/classification/tables" \
-		--add-data="$(PYLIBPATH)/corpus:corpus" \
 		--add-data="$(PYLIBPATH)/log:log" \
-		--noconfirm
+		--hidden-import="sklearn.utils._weight_vector" \
+		--hidden-import="cmath"
 
 max-pyinstaller: pyinstaller
 	if [ -d $(MAX_PYINSTALLER_LIBRARY) ]; then rm -r $(MAX_PYINSTALLER_LIBRARY); fi
