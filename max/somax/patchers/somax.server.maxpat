@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 2096.0, 1275.0 ],
+		"rect" : [ 34.0, 79.0, 495.0, 449.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -66,7 +66,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-58",
-					"index" : 8,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -301,7 +301,7 @@
 				"box" : 				{
 					"comment" : "(string) serverstatus",
 					"id" : "obj-40",
-					"index" : 6,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -362,13 +362,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-23",
-					"linecount" : 2,
+					"linecount" : 3,
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "bang", "bang" ],
-					"patching_rect" : [ 1667.0, 310.0, 154.0, 35.0 ],
-					"text" : "dialog \"Do you really want to terminate the server?\""
+					"patching_rect" : [ 1667.0, 310.0, 149.0, 49.0 ],
+					"text" : "dialog \"Do you really want to terminate the server?\" @mode 2"
 				}
 
 			}
@@ -1477,7 +1477,7 @@
 				"box" : 				{
 					"comment" : "(1/0) whether server is running or not",
 					"id" : "obj-30",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1688,7 +1688,7 @@
 				"box" : 				{
 					"comment" : "parameters (dictionary or single)",
 					"id" : "obj-119",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1700,7 +1700,7 @@
 				"box" : 				{
 					"comment" : "(float) tempo",
 					"id" : "obj-107",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1733,7 +1733,7 @@
 				"box" : 				{
 					"comment" : "(float) time",
 					"id" : "obj-101",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1745,7 +1745,7 @@
 				"box" : 				{
 					"comment" : "(list) messages from server",
 					"id" : "obj-98",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1782,7 +1782,7 @@
 				"box" : 				{
 					"comment" : "(list) info messages from server",
 					"id" : "obj-151",
-					"index" : 7,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1992,7 +1992,7 @@
 				"box" : 				{
 					"comment" : "(list) Parameters",
 					"id" : "obj-174",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -2027,7 +2027,7 @@
 					"patching_rect" : [ 1452.75, 56.439567114741294, 59.5, 22.0 ],
 					"restore" : 					{
 						"pollinterval" : [ 50 ],
-						"recvport" : [ 1235 ],
+						"recvport" : [ 0 ],
 						"reloadplayernames" : [ 0.0 ],
 						"tempomaster" : [ 0 ],
 						"terminate" : [ 0.0 ]
@@ -2183,7 +2183,7 @@
 				"box" : 				{
 					"comment" : "(list) Messages to server",
 					"id" : "obj-29",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -3595,6 +3595,29 @@
 
 			}
  ],
+		"dependency_cache" : [ 			{
+				"name" : "somax.serverstatus.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/server",
+				"patcherrelativepath" : "../resources/server",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.serverstatus.ui.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/server",
+				"patcherrelativepath" : "../resources/server",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "OpenSoundControl.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "OSC-route.mxo",
+				"type" : "iLaX"
+			}
+ ],
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-44", "obj-46", "obj-43", "obj-41", "obj-24" ]
 			}
@@ -3625,7 +3648,15 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
+				"newobj" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
 				"message" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3637,11 +3668,11 @@
 					}
 ,
 					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ]
 				}
 ,
 				"default" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3652,10 +3683,9 @@
 						"autogradient" : 0
 					}
 ,
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
+					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"button" : 				{
@@ -3664,13 +3694,6 @@
 ,
 				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"newobj" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
 				}
 ,
 				"parentstyle" : "",

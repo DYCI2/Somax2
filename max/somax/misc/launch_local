@@ -1,0 +1,8 @@
+#!/bin/bash
+
+SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+LOCAL_PATH="${SCRIPT_DIRECTORY}/../../../python/somax/somax_server.py"
+
+
+eval `/usr/libexec/path_helper -s`  # Ensure that PATH variable is set correctly when run from inside max
+python3 ${LOCAL_PATH}
