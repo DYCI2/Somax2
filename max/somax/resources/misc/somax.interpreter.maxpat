@@ -10,9 +10,9 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 622.0, 138.0, 1484.0, 958.0 ],
+		"rect" : [ 1349.0, 1113.0, 692.0, 958.0 ],
 		"bglocked" : 0,
-		"openinpresentation" : 0,
+		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
 		"default_fontface" : 0,
 		"default_fontname" : "Arial",
@@ -45,7 +45,7 @@
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"id" : "obj-194",
+					"id" : "obj-37",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
 					"name" : "condalauncher.maxpat",
@@ -57,6 +57,80 @@
 					"presentation_rect" : [ 3.0, 40.0, 411.0, 69.0 ],
 					"varname" : "condalauncher",
 					"viewvisibility" : 1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-15",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 774.809523809523853, 105.0, 24.0, 24.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-13",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 988.0, 105.0, 139.0, 20.0 ],
+					"text" : "(above uses routepass)"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-5",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 890.809523809523853, 105.0, 98.0, 22.0 ],
+					"text" : "route thispatcher"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1103.0, 763.0, 170.0, 33.0 ],
+					"text" : "Don't delete: script-connected when set to \"Silent\""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.820717811584473, 0.0, 0.763403832912445, 1.0 ],
+					"id" : "obj-4",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 184.0, 99.0, 70.0, 22.0 ],
+					"text" : "loadmess 0"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.820717811584473, 0.0, 0.763403832912445, 1.0 ],
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 890.809523809523853, 140.0, 67.0, 22.0 ],
+					"save" : [ "#N", "thispatcher", ";", "#Q", "end", ";" ],
+					"text" : "thispatcher"
 				}
 
 			}
@@ -94,7 +168,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 580.666666666666742, 699.0, 129.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "script delete silentshell"
 				}
 
@@ -143,7 +216,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 515.0, 241.5, 168.0, 33.0 ],
+					"patching_rect" : [ 515.0, 241.5, 170.0, 33.0 ],
 					"text" : "Don't delete: script-connected when set to \"Other\""
 				}
 
@@ -185,14 +258,13 @@
 					"patching_rect" : [ 204.0, 165.0, 210.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 27.0, 24.0, 193.25, 20.0 ],
-					"text" : "Binary",
+					"text" : "Standalone",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"align" : 1,
 					"fontface" : 1,
 					"id" : "obj-117",
 					"maxclass" : "textbutton",
@@ -206,7 +278,6 @@
 					"presentation_rect" : [ 223.75, 5.0, 70.0, 23.0 ],
 					"rounded" : 8.0,
 					"text" : "Launch",
-					"textjustification" : 1,
 					"texton" : "Launch",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
@@ -252,7 +323,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-53",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -359,8 +430,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 184.0, 613.0, 384.0, 76.0 ],
-					"presentation_linecount" : 3,
+					"patching_rect" : [ 184.0, 613.0, 387.0, 76.0 ],
 					"text" : "script delete condalauncher, script newdefault condalauncher bpatcher condalauncher @patching_rect 369.5 312. 135. 61. @presentation 1 @presentation_rect 3. 40. 411. 69., script bringtofront condalauncher, script connect gate 2 condalauncher 0, script connect params 0 condalauncher 1, script sendbox reload bang"
 				}
 
@@ -382,11 +452,11 @@
 				"box" : 				{
 					"id" : "obj-7",
 					"maxclass" : "newobj",
-					"numinlets" : 8,
-					"numoutlets" : 8,
-					"outlettype" : [ "", "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 484.809523809523853, 73.0, 421.0, 22.0 ],
-					"text" : "routepass reload setdefault setbinary setconda setcustom launch launchsilent"
+					"numinlets" : 9,
+					"numoutlets" : 9,
+					"outlettype" : [ "", "", "", "", "", "", "", "", "" ],
+					"patching_rect" : [ 484.809523809523853, 73.0, 483.0, 22.0 ],
+					"text" : "routepass reload setdefault setbinary setconda setcustom launch launchsilent thispatcher"
 				}
 
 			}
@@ -683,27 +753,10 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 323.0, 331.0, 128.0, 128.0 ],
+					"patching_rect" : [ 890.809523809523853, 172.0, 77.0, 50.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.0, 0.0, 414.0, 109.0 ],
 					"proportion" : 0.5
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-192",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "bang" ],
-					"patching_rect" : [ 1030.0, 700.0, 100.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"shell" : "(default)"
-					}
-,
-					"text" : "shell",
-					"varname" : "silentshell"
 				}
 
 			}
@@ -756,6 +809,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-95", 0 ],
 					"source" : [ "obj-118", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-117", 0 ],
+					"midpoints" : [ 784.309523809523853, 214.5, 379.0, 214.5 ],
+					"source" : [ "obj-15", 0 ]
 				}
 
 			}
@@ -823,6 +884,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-96", 0 ],
+					"midpoints" : [ 600.666666666666742, 526.0, 986.166666666666742, 526.0 ],
 					"source" : [ "obj-171", 1 ]
 				}
 
@@ -837,22 +899,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-192", 0 ],
-					"source" : [ "obj-187", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-194", 1 ],
+					"destination" : [ "obj-37", 1 ],
 					"source" : [ "obj-19", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-188", 0 ],
-					"source" : [ "obj-192", 0 ]
 				}
 
 			}
@@ -911,6 +959,20 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-74", 0 ],
+					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"source" : [ "obj-5", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
 					"source" : [ "obj-53", 0 ]
 				}
@@ -957,8 +1019,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-117", 0 ],
-					"midpoints" : [ 781.452380952380963, 214.5, 379.0, 214.5 ],
+					"destination" : [ "obj-15", 0 ],
 					"source" : [ "obj-7", 5 ]
 				}
 
@@ -967,6 +1028,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-19", 0 ],
 					"source" : [ "obj-7", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
+					"source" : [ "obj-7", 7 ]
 				}
 
 			}
@@ -987,7 +1055,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-61", 0 ],
-					"midpoints" : [ 724.023809523809632, 99.5, 666.595238095238074, 99.5 ],
+					"midpoints" : [ 726.309523809523853, 99.5, 666.595238095238074, 99.5 ],
 					"source" : [ "obj-7", 4 ]
 				}
 
@@ -1002,7 +1070,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-64", 0 ],
-					"midpoints" : [ 838.880952380952408, 417.0, 590.166666666666742, 417.0 ],
+					"midpoints" : [ 842.309523809523853, 417.0, 590.166666666666742, 417.0 ],
 					"source" : [ "obj-7", 6 ]
 				}
 
@@ -1054,7 +1122,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-194", 0 ],
+					"destination" : [ "obj-37", 0 ],
 					"source" : [ "obj-94", 2 ]
 				}
 
@@ -1088,31 +1156,11 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "somax.relativepath.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
-				"patcherrelativepath" : "../../misc",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "shell.mxo",
-				"type" : "iLaX"
-			}
- ],
-		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -1127,19 +1175,11 @@
 					"fontface" : [ 1 ]
 				}
 ,
-				"toggle" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
 				"newobj" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ]
-				}
-,
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
@@ -1156,6 +1196,14 @@
 					}
 ,
 					"fontface" : [ 1 ]
+				}
+,
+				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"parentstyle" : "",

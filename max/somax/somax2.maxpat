@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1348.0, 894.0 ],
+		"rect" : [ 34.0, 93.0, 1348.0, 894.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -947,7 +947,7 @@
 					"outlettype" : [ "", "bang" ],
 					"patching_rect" : [ 559.0, 1176.345089068420293, 233.0, 69.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 648.12690501133261, 528.0, 233.0, 69.0 ],
+					"presentation_rect" : [ 648.12690501133261, 516.75, 233.0, 91.5 ],
 					"viewvisibility" : 1
 				}
 
@@ -1318,6 +1318,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-37",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1395,7 +1396,7 @@
 					"patching_rect" : [ 2208.0, 1204.0, 80.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 699.379441491484386, 369.532589068420748, 84.0, 20.0 ],
-					"rounded" : 20.0,
+					"rounded" : 8.0,
 					"text" : "Midiflush (all)",
 					"texton" : "Midiflish (all)",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -1525,7 +1526,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-104",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1543,7 +1543,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-103",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1585,7 +1584,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-60",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1674,7 +1672,7 @@
 					"patching_rect" : [ 23.0, 833.704806509005948, 86.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 699.379441491484386, 399.157589068420407, 84.0, 20.058680443420371 ],
-					"rounded" : 20.0,
+					"rounded" : 8.0,
 					"text" : "Corpus Builder",
 					"texton" : "Corpus Builder",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -1768,7 +1766,7 @@
 					"patching_rect" : [ 2624.0, 1014.678435040334307, 50.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 793.88713906383532, 369.532589068420748, 84.0, 20.0 ],
-					"rounded" : 20.0,
+					"rounded" : 8.0,
 					"text" : "Latency",
 					"texton" : "Latency",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -1836,7 +1834,7 @@
 					"patching_rect" : [ 355.5, 566.0, 100.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 793.88713906383532, 399.157589068420407, 84.0, 20.0 ],
-					"rounded" : 20.0,
+					"rounded" : 8.0,
 					"text" : "Routing",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
@@ -3288,6 +3286,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "pitch_classifiers.py",
+				"bootpath" : "~/MaxDev/Somax2/python/somax/somax/classification",
+				"patcherrelativepath" : "../../python/somax/somax/classification",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "somax.corpusview.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/player",
 				"patcherrelativepath" : "./resources/player",
@@ -3299,6 +3304,27 @@
 				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
 				"patcherrelativepath" : "./resources/misc",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "chroma_classifiers.py",
+				"bootpath" : "~/MaxDev/Somax2/python/somax/somax/classification",
+				"patcherrelativepath" : "../../python/somax/somax/classification",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.path.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "abstraction_path.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
+				"patcherrelativepath" : "./misc",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
@@ -3407,10 +3433,24 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
-				"patcherrelativepath" : "./misc",
-				"type" : "TEXT",
+				"name" : "somax.interpreter.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.relativepath.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "condalauncher.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
@@ -3580,6 +3620,10 @@
 				"type" : "iLaX"
 			}
 , 			{
+				"name" : "shell.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "yin~.mxo",
 				"type" : "iLaX"
 			}
@@ -3606,7 +3650,10 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"message" : 				{
+				"default" : 				{
+					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3617,12 +3664,19 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
-				"default" : 				{
+				"newobj" : 				{
+					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ]
+				}
+,
+				"message" : 				{
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3633,10 +3687,7 @@
 						"autogradient" : 0
 					}
 ,
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"button" : 				{
@@ -3645,13 +3696,6 @@
 ,
 				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"newobj" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
 				}
 ,
 				"parentstyle" : "",
