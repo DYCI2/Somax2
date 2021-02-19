@@ -8,7 +8,7 @@ from somax.runtime.player import Player
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.base_scheduler import BaseScheduler
 from somax.scheduler.scheduled_event import ScheduledEvent, AutomaticTriggerEvent, ManualTriggerEvent, TempoEvent, \
-    AbstractTriggerEvent, MidiEvent, AudioEvent, ScheduledInfluenceEvent, ScheduledCorpusEvent
+    AbstractTriggerEvent, MidiEvent, AudioEvent, ScheduledInfluenceEvent, ScheduledCorpusEvent, NewStateEvent
 from somax.scheduler.scheduled_object import TriggerMode
 
 
@@ -70,6 +70,8 @@ class AgentScheduler(BaseScheduler):
         elif self._player.corpus.content_type == ContentType.MIDI:
             self._add_midi_event(trigger_time, corpus_event, applied_transform)
 
+        self._add_new_state_event(trigger_time, corpus_event, applied_transform)
+
     def _add_midi_event(self, trigger_time: float, corpus_event: CorpusEvent, applied_transform: AbstractTransform):
         # Handle held notes from previous state:
         note_offs_previous: List[Note] = [n for n in self._player.held_notes if n not in corpus_event.held_to()]
@@ -102,6 +104,9 @@ class AgentScheduler(BaseScheduler):
     def _add_audio_event(self, trigger_time: float, corpus_event: CorpusEvent):
         raise NotImplementedError
 
+    def _add_new_state_event(self, trigger_time: float, corpus_event, applied_transform: AbstractTransform):
+        self.queue.append(NewStateEvent(trigger_time, corpus_event, applied_transform))
+
     ######################################################
     # PROCESS (INTERNAL)
     ######################################################
@@ -115,9 +120,11 @@ class AgentScheduler(BaseScheduler):
         for event in events:
             if isinstance(event, TempoEvent) and self.is_tempo_master:
                 target_events.append(event)
-            if isinstance(event, MidiEvent):
+            elif isinstance(event, MidiEvent):
                 target_events.append(event)
             elif isinstance(event, AudioEvent):
+                target_events.append(event)
+            elif isinstance(event, NewStateEvent):
                 target_events.append(event)
             elif isinstance(event, AbstractTriggerEvent):
                 self._process_trigger_event(event)

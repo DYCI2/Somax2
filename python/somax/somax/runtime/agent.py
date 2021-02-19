@@ -14,6 +14,7 @@ from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.corpus import Corpus
+from somax.runtime.corpus_event import Note
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError
 from somax.runtime.influence import FeatureInfluence
@@ -28,7 +29,7 @@ from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.agent_scheduler import AgentScheduler
-from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiEvent, NewStateEvent
 from somax.scheduler.scheduled_object import TriggerMode
 # TODO: Complete separation Agent/OscAgent where Agent can be initialized and used from the command line
 from somax.scheduler.transport import Time
@@ -127,9 +128,13 @@ class OscAgent(Agent, AsyncioOscObject):
             if isinstance(event, TempoEvent):  # Only added to scheduler if tempo master
                 self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
             if isinstance(event, MidiEvent):
-                self.target.send("midi", [event.note, event.velocity, event.channel])
-                if event.velocity > 0:
-                    self.target.send("state", [event.state, event.applied_transform.renderer_info()])
+                self.target.send(SendProtocol.SEND_MIDI_EVENT, [event.note, event.velocity, event.channel])
+            if isinstance(event, NewStateEvent):
+                self.target.send(SendProtocol.SEND_STATE_EVENT, [event.corpus_event.state_index,
+                                                                 event.applied_transform.renderer_info()])
+                notes: List[Tuple[int, int, int]] = [(n.pitch, n.velocity, n.channel) for n in event.corpus_event.notes]
+                # " ".join([f"{n[0]} {n[1]} {n[2]}" for n in notes])    # TODO: Remove if flatten works correctly
+                self.target.send(SendProtocol.SEND_STATE_ONSET, notes)
 
     ######################################################
     # SCHEDULER & PLAYBACK CONTROL

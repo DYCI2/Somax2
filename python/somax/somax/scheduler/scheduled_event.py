@@ -33,6 +33,15 @@ class MidiEvent(ScheduledEvent):
                f"channel={self.channel},state={self.state})"
 
 
+class NewStateEvent(ScheduledEvent):
+    """ Class used to send state information as well as a `chord` message to treat all note onsets in the slice as
+        simultaneous and thereby bypass quickthresh latency when re-influencing other player """
+    def __init__(self, trigger_time: float, corpus_event: CorpusEvent, applied_transform: AbstractTransform):
+        super().__init__(trigger_time=trigger_time)
+        self.corpus_event: CorpusEvent = corpus_event
+        self.applied_transform: AbstractTransform = applied_transform
+
+
 class AudioEvent(ScheduledEvent):
     def __init__(self, trigger_time: float, onset: float, duration: float, state: int, tempo: float):
         super(AudioEvent, self).__init__(trigger_time)
@@ -57,13 +66,13 @@ class ScheduledInfluenceEvent(ScheduledEvent):
 
 
 class AbstractTriggerEvent(ScheduledEvent, ABC):
-    def __init__(self, trigger_time: float,  target_time: float):
+    def __init__(self, trigger_time: float, target_time: float):
         super(AbstractTriggerEvent, self).__init__(trigger_time)
         self.target_time: float = target_time
 
 
 class AutomaticTriggerEvent(AbstractTriggerEvent):
-    def __init__(self, trigger_time: float,target_time: float):
+    def __init__(self, trigger_time: float, target_time: float):
         super().__init__(trigger_time, target_time)
 
     def __repr__(self):
@@ -72,7 +81,7 @@ class AutomaticTriggerEvent(AbstractTriggerEvent):
 
 class ManualTriggerEvent(AbstractTriggerEvent):
     def __init__(self, trigger_time: float):
-        super(ManualTriggerEvent, self).__init__(trigger_time,trigger_time)
+        super(ManualTriggerEvent, self).__init__(trigger_time, trigger_time)
 
 
 class OscEvent(ScheduledEvent):
