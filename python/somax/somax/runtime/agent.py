@@ -127,9 +127,9 @@ class OscAgent(Agent, AsyncioOscObject):
             if isinstance(event, TempoEvent):  # Only added to scheduler if tempo master
                 self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
             if isinstance(event, MidiEvent):
-                self.target.send("midi", [event.note, event.velocity, event.channel])
+                self.target.send(SendProtocol.MIDI_EVENT, [event.note, event.velocity, event.channel])
                 if event.velocity > 0:
-                    self.target.send("state", [event.state, event.applied_transform.renderer_info()])
+                    self.target.send(SendProtocol.STATE_EVENT, [event.state, event.applied_transform.renderer_info()])
 
     ######################################################
     # SCHEDULER & PLAYBACK CONTROL
