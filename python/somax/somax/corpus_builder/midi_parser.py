@@ -45,8 +45,8 @@ class _MidiNote:
         self.end_tick: Optional[int] = end_tick
         self.end_time: Optional[float] = end_time
 
-    def matches(self, note: int, ch: int) -> bool:
-        return self.note == note and self.ch == ch
+    def matches(self, note: int, ch: int, track: str) -> bool:
+        return self.note == note and self.ch == ch and self.track == track
 
 
 class MidiParser:
@@ -107,20 +107,26 @@ class MidiParser:
             current_tick += msg.time
             current_time += mido.tick2second(msg.time, ticks_per_beat, mido.bpm2tempo(tempo_bpm))
             current_bar += msg.time / ticks_per_beat * current_bar_factor
+            track_name: str = track.name if track else ""
             if msg.type == 'set_tempo':
                 tempo_bpm = mido.tempo2bpm(msg.tempo)
-            if msg.type == 'time_signature':
+            elif msg.type == 'time_signature':
                 current_bar_factor = msg.denominator / (4 * msg.numerator)
-            elif msg.type == 'note_on' and msg.velocity > 0:
-                held_notes.append(_MidiNote(msg.note, msg.velocity, msg.channel, current_tick,
-                                            current_time, tempo_bpm, current_bar, track.name if track else ""))
-            elif msg.type == 'note_off' or (msg.type == 'note_on' and msg.velocity == 0):
-                completed: List[_MidiNote] = [note for note in held_notes if note.matches(msg.note, msg.channel)]
+            elif msg.type == 'note_on' or msg.type == 'note_off':
+                # if the note is already held, complete the note regardless of whether the input is a note_on or
+                # note_off message. This is to avoid duplicate notes in a slice if re-triggered before its note_off
+                # See test case "keithjarrett_kolnconcert_Right.mid" bars 311 to 330 for an example of this.
+                completed: List[_MidiNote] = [note for note in held_notes
+                                              if note.matches(msg.note, msg.channel, track_name)]
                 for note in completed:
                     note.end_tick = current_tick
                     note.end_time = current_time
                 completed_notes.extend(completed)
-                held_notes = [note for note in held_notes if not note.matches(msg.note, msg.channel)]
+                held_notes = [note for note in held_notes if not note.matches(msg.note, msg.channel, track_name)]
+                if msg.type == 'note_on' and msg.velocity > 0:
+                    held_notes.append(_MidiNote(msg.note, msg.velocity, msg.channel, current_tick,
+                                                current_time, tempo_bpm, current_bar, track_name))
+                # elif msg.type == 'note_off' or (msg.type == 'note_on' and msg.velocity == 0):
 
         for note in held_notes:
             # If note ons still exist at end of midi file, generate note offs for all of them
