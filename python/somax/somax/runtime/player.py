@@ -35,12 +35,15 @@ class Player(Streamview, ScheduledMidiAgent):
         self.peak_selector: AbstractPeakSelector = peak_selector
         self.corpus: Optional[Corpus] = corpus
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
+
         for scale_action in scale_actions:
             self.add_scale_action(scale_action)
 
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
         self.previous_peaks: Peaks = Peaks.create_empty()
         self._transform_handler: TransformHandler = TransformHandler()
+
+        self._force_jump_index: Optional[int] = None
 
         self._parse_parameters()
 
@@ -59,13 +62,19 @@ class Player(Streamview, ScheduledMidiAgent):
         if not self.corpus:
             raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
 
-        self._update_peaks_on_new_event(scheduler_time)
-        peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus)
-        peaks = self._scale_peaks(peaks, scheduler_time, self.improvisation_memory, self.corpus)
+        if self._force_jump_index is not None:
+            self.clear()
+            event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+            event_and_transform = self._force_jump()
+        else:
+            self._update_peaks_on_new_event(scheduler_time)
+            peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus)
+            peaks = self._scale_peaks(peaks, scheduler_time, self.improvisation_memory, self.corpus)
 
-        event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
-        event_and_transform = self.peak_selector.decide(peaks, self.improvisation_memory,
-                                                        self.corpus, self._transform_handler)
+            event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+            event_and_transform = self.peak_selector.decide(peaks, self.improvisation_memory,
+                                                            self.corpus, self._transform_handler)
+            self.previous_peaks = peaks
         if event_and_transform is None:
             self._feedback(None, scheduler_time, NoTransform())
             return None
@@ -76,7 +85,6 @@ class Player(Streamview, ScheduledMidiAgent):
                                          artificially_sustained=self.hold_notes_artificially,
                                          simultaneous_onsets=self.simultaneous_onsets)
         self._feedback(event, scheduler_time, transform)
-        self.previous_peaks = peaks
         return event, transform
 
     def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
@@ -111,12 +119,17 @@ class Player(Streamview, ScheduledMidiAgent):
 
     def clear(self):
         """ Reset runtime state without modifying any parameters or settings """
-        self.improvisation_memory = ImprovisationMemory()
         self.previous_peaks = Peaks.create_empty()
         for scale_action in self.scale_actions.values():
             scale_action.clear()
         Streamview.clear(self)
         self._transform_handler.clear()
+
+    def clear_memory(self):
+        self.improvisation_memory = ImprovisationMemory()
+
+    def force_jump(self, index: int):
+        self._force_jump_index = index
 
     def read_corpus(self, corpus: Corpus) -> None:
         self._update_transforms()
@@ -170,6 +183,17 @@ class Player(Streamview, ScheduledMidiAgent):
     ######################################################
     # PRIVATE
     ######################################################
+
+    def _force_jump(self) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+        self.clear()
+        index: Optional[int] = self._force_jump_index
+        self._force_jump_index = None
+        try:
+            event: CorpusEvent = self.corpus.events[index]
+            return event, NoTransform()
+        except (IndexError, TypeError, AttributeError) as e:
+            self.logger.debug(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
+            return None
 
     def _scale_peaks(self, peaks: Peaks, scheduler_time: float, influence_history: ImprovisationMemory,
                      corpus: Corpus, **kwargs):
