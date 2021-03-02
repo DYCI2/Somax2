@@ -175,13 +175,16 @@ class SomaxServer(Somax, AsyncioOscObject):
             tempo = tempo_message.tempo  # overwriting parameter tempo
             self.set_tempo(tempo)
 
-    def set_transport_type(self, master: bool):
+    def set_transport_mode(self, master: bool):
         if master:
             self.loop = self.__master_loop
             self._transport = MasterTransport.clone_from(self._transport)
         else:
             self.loop = self.__slave_loop
             self._transport = SlaveTransport.clone_from(self._transport)
+        mode_str: str = "master" if master else "slave"
+        self.logger.info(f"Transport mode set to '{mode_str}'.")
+        self.target.send(SendProtocol.TRANSPORT_MODE, mode_str)
 
     ######################################################
     # CREATION/DELETION OF AGENTS
