@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 994.0, 78.0, 892.0, 1039.0 ],
+		"rect" : [ 34.0, 79.0, 1358.0, 1039.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -225,7 +225,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-168",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -565,7 +564,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 832.0, 794.0, 29.5, 22.0 ],
+					"patching_rect" : [ 832.0, 804.0, 29.5, 22.0 ],
 					"text" : "t l l"
 				}
 
@@ -2340,7 +2339,7 @@
 						"pollinterval" : [ 50 ],
 						"recvport" : [ 1235 ],
 						"reloadplayernames" : [ 0.0 ],
-						"slavemode" : [ 0 ],
+						"slavemode" : [ 1 ],
 						"tempomaster" : [ 0 ],
 						"terminate" : [ 0.0 ]
 					}
@@ -3647,7 +3646,9 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-45", 0 ],
-					"source" : [ "obj-35", 1 ]
+					"source" : [ "obj-35", 1 ],
+					"watchpoint_flags" : 5,
+					"watchpoint_id" : 5
 				}
 
 			}
