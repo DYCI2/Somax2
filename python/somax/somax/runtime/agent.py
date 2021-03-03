@@ -68,7 +68,6 @@ class OscAgent(Agent, AsyncioOscObject):
                        scheduler_running=scheduler_running, **kwargs)
         AsyncioOscObject.__init__(self, recv_port=recv_port, send_port=send_port, ip=ip, address=address, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(OscLogForwarder(self.target))
         if corpus_filepath:  # handle corpus filepath if passed
             self.read_corpus(corpus_filepath)
 
@@ -82,6 +81,7 @@ class OscAgent(Agent, AsyncioOscObject):
             # TODO: must be handled in every thread. Handle this properly without logging.ini at some point
             with resources.path(log, 'logging.ini') as path:
                 logging.config.fileConfig(path.absolute())
+            self.logger.addHandler(OscLogForwarder(self.target))
             asyncio.run(self._run())
         except OSError as e:
             self.logger.critical(f"{str(e)}. Could not initialize the agent properly - "

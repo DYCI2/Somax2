@@ -85,6 +85,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-53",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -797,18 +798,6 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
-									"id" : "obj-4",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 191.0, 345.0, 88.0, 22.0 ],
-									"text" : "player 5 print 0"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-20",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
@@ -935,17 +924,9 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-20", 0 ],
-									"midpoints" : [ 200.5, 370.0, 116.5, 370.0 ],
-									"source" : [ "obj-4", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-18", 0 ],
 									"midpoints" : [ 63.5, 153.5, 132.0, 153.5 ],
-									"order" : 3,
+									"order" : 2,
 									"source" : [ "obj-49", 0 ]
 								}
 
@@ -954,7 +935,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-21", 0 ],
 									"midpoints" : [ 63.5, 308.0, 173.5, 308.0 ],
-									"order" : 1,
+									"order" : 0,
 									"source" : [ "obj-49", 0 ]
 								}
 
@@ -963,7 +944,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-36", 0 ],
 									"midpoints" : [ 63.5, 85.5, 116.5, 85.5 ],
-									"order" : 4,
+									"order" : 3,
 									"source" : [ "obj-49", 0 ]
 								}
 
@@ -972,16 +953,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-37", 0 ],
 									"midpoints" : [ 63.5, 233.5, 153.5, 233.5 ],
-									"order" : 2,
-									"source" : [ "obj-49", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 0 ],
-									"midpoints" : [ 63.5, 340.5, 200.5, 340.5 ],
-									"order" : 0,
+									"order" : 1,
 									"source" : [ "obj-49", 0 ]
 								}
 
@@ -1050,30 +1022,6 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
-									"id" : "obj-3",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 103.0, 198.0, 227.0, 22.0 ],
-									"text" : "combine somax. playername @triggers 1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-2",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 103.0, 228.0, 215.0, 22.0 ],
-									"text" : "script newdefault print 266 451 print $1"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-35",
 									"linecount" : 2,
 									"maxclass" : "message",
@@ -1127,21 +1075,7 @@
 						"lines" : [ 							{
 								"patchline" : 								{
 									"destination" : [ "obj-44", 0 ],
-									"source" : [ "obj-2", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-44", 0 ],
 									"source" : [ "obj-24", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-2", 0 ],
-									"source" : [ "obj-3", 0 ]
 								}
 
 							}
@@ -1155,14 +1089,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-24", 0 ],
-									"order" : 1,
-									"source" : [ "obj-43", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-3", 1 ],
 									"order" : 0,
 									"source" : [ "obj-43", 0 ]
 								}
@@ -1171,7 +1097,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-35", 0 ],
-									"order" : 2,
+									"order" : 1,
 									"source" : [ "obj-43", 0 ]
 								}
 
@@ -1223,8 +1149,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1121.5, 307.0, 333.0, 22.0 ],
-					"text" : "script delete player, script delete influencer, script delete print"
+					"patching_rect" : [ 1121.5, 307.0, 235.0, 22.0 ],
+					"text" : "script delete player, script delete influencer"
 				}
 
 			}
@@ -1543,18 +1469,6 @@
 				}
 
 			}
-, 			{
-				"box" : 				{
-					"id" : "obj-2",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 266.0, 451.0, 108.0, 22.0 ],
-					"text" : "print somax.Player",
-					"varname" : "print"
-				}
-
-			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
@@ -1567,13 +1481,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
 					"source" : [ "obj-12", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-2", 0 ],
-					"source" : [ "obj-12", 5 ]
 				}
 
 			}
