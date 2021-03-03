@@ -309,18 +309,18 @@
 			"obj-7::obj-17::obj-39::obj-6::obj-64" : [ "chroma", "chroma", 0 ],
 			"obj-7::obj-17::obj-39::obj-6::obj-67" : [ "chromaonset", "chromaonset", 0 ],
 			"obj-7::obj-17::obj-39::obj-6::obj-9" : [ "mute", "mute", 0 ],
-			"obj-7::obj-1::obj-15::obj-79::obj-1" : [ "live.text[3]", "live.text", 0 ],
-			"obj-7::obj-1::obj-15::obj-79::obj-2" : [ "live.text[4]", "live.text", 0 ],
-			"obj-7::obj-1::obj-15::obj-79::obj-3" : [ "live.text[5]", "live.text", 0 ],
-			"obj-7::obj-1::obj-15::obj-87::obj-1" : [ "live.text[8]", "live.text", 0 ],
-			"obj-7::obj-1::obj-15::obj-87::obj-2" : [ "live.text[7]", "live.text", 0 ],
-			"obj-7::obj-1::obj-15::obj-87::obj-3" : [ "live.text[6]", "live.text", 0 ],
-			"obj-7::obj-1::obj-15::obj-89::obj-1" : [ "live.text[11]", "live.text", 0 ],
-			"obj-7::obj-1::obj-15::obj-89::obj-2" : [ "live.text[10]", "live.text", 0 ],
-			"obj-7::obj-1::obj-15::obj-89::obj-3" : [ "live.text[9]", "live.text", 0 ],
-			"obj-7::obj-1::obj-15::obj-91::obj-1" : [ "live.text[14]", "live.text", 0 ],
-			"obj-7::obj-1::obj-15::obj-91::obj-2" : [ "live.text[13]", "live.text", 0 ],
-			"obj-7::obj-1::obj-15::obj-91::obj-3" : [ "live.text[12]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-79::obj-1" : [ "live.text[3]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-79::obj-2" : [ "live.text[4]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-79::obj-3" : [ "live.text[5]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-87::obj-1" : [ "live.text[6]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-87::obj-2" : [ "live.text[8]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-87::obj-3" : [ "live.text[7]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-89::obj-1" : [ "live.text[9]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-89::obj-2" : [ "live.text[11]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-89::obj-3" : [ "live.text[10]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-91::obj-1" : [ "live.text[12]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-91::obj-2" : [ "live.text[13]", "live.text", 0 ],
+			"obj-7::obj-1::obj-12::obj-91::obj-3" : [ "live.text[14]", "live.text", 0 ],
 			"parameterbanks" : 			{
 
 			}
@@ -338,40 +338,40 @@
 					"parameter_unitstyle" : 10
 				}
 ,
-				"obj-7::obj-1::obj-15::obj-87::obj-1" : 				{
-					"parameter_longname" : "live.text[8]"
-				}
-,
-				"obj-7::obj-1::obj-15::obj-87::obj-2" : 				{
-					"parameter_longname" : "live.text[7]"
-				}
-,
-				"obj-7::obj-1::obj-15::obj-87::obj-3" : 				{
+				"obj-7::obj-1::obj-12::obj-87::obj-1" : 				{
 					"parameter_longname" : "live.text[6]"
 				}
 ,
-				"obj-7::obj-1::obj-15::obj-89::obj-1" : 				{
-					"parameter_longname" : "live.text[11]"
+				"obj-7::obj-1::obj-12::obj-87::obj-2" : 				{
+					"parameter_longname" : "live.text[8]"
 				}
 ,
-				"obj-7::obj-1::obj-15::obj-89::obj-2" : 				{
-					"parameter_longname" : "live.text[10]"
+				"obj-7::obj-1::obj-12::obj-87::obj-3" : 				{
+					"parameter_longname" : "live.text[7]"
 				}
 ,
-				"obj-7::obj-1::obj-15::obj-89::obj-3" : 				{
+				"obj-7::obj-1::obj-12::obj-89::obj-1" : 				{
 					"parameter_longname" : "live.text[9]"
 				}
 ,
-				"obj-7::obj-1::obj-15::obj-91::obj-1" : 				{
-					"parameter_longname" : "live.text[14]"
+				"obj-7::obj-1::obj-12::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[11]"
 				}
 ,
-				"obj-7::obj-1::obj-15::obj-91::obj-2" : 				{
+				"obj-7::obj-1::obj-12::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[10]"
+				}
+,
+				"obj-7::obj-1::obj-12::obj-91::obj-1" : 				{
+					"parameter_longname" : "live.text[12]"
+				}
+,
+				"obj-7::obj-1::obj-12::obj-91::obj-2" : 				{
 					"parameter_longname" : "live.text[13]"
 				}
 ,
-				"obj-7::obj-1::obj-15::obj-91::obj-3" : 				{
-					"parameter_longname" : "live.text[12]"
+				"obj-7::obj-1::obj-12::obj-91::obj-3" : 				{
+					"parameter_longname" : "live.text[14]"
 				}
 
 			}
@@ -527,6 +527,34 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "somax.midioutput.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.player.routing.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/player",
+				"patcherrelativepath" : "./resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.player.routerblock.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/player",
+				"patcherrelativepath" : "./resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "thispatching.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
+				"patcherrelativepath" : "./misc",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "somax.player.wireless.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
@@ -604,23 +632,44 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.midiinfluencer.compact.maxpat",
+				"name" : "somax.playerinfluencer.compact.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.midiinfluencer.maxpat",
+				"name" : "somax.playerinfluencer.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "midisplitbychannel.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "midipitchanalysis.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "midichromaanalysis.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "midi2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -633,37 +682,9 @@
 			}
 , 			{
 				"name" : "midi2chroma_nofilter.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
 				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.midioutput.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "./patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.player.routing.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/player",
-				"patcherrelativepath" : "./resources/player",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.player.routerblock.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/player",
-				"patcherrelativepath" : "./resources/player",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "thispatching.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
-				"patcherrelativepath" : "./misc",
-				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
@@ -703,15 +724,15 @@
 			}
 , 			{
 				"name" : "OMax.yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -731,8 +752,8 @@
 			}
 , 			{
 				"name" : "audio2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -759,6 +780,20 @@
 			}
 , 			{
 				"name" : "somax.midiinfluencer.wireless.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midiinfluencer.compact.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midiinfluencer.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",

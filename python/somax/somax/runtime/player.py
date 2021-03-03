@@ -67,7 +67,6 @@ class Player(Streamview, ScheduledMidiAgent):
             self.clear()
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self._force_jump()
-            print("Force jump", event_and_transform)
         else:
             self._update_peaks_on_new_event(scheduler_time)
             peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus)

@@ -224,10 +224,6 @@ dmypy.json
 
 # End of https://www.gitignore.io/api/macos,python,pycharm+all
 
-python/somax/corpus/_*.json
+python/somax/corpus/*.json
 python/somax/log/*.log
-tmp.py
-tmp2.py
-tmp3.py
-tmp4.py
 python/somax/temp
