@@ -1,6 +1,8 @@
 import logging
 from typing import Dict, Optional, Tuple, Type, List
 
+import numpy as np
+
 from somax.runtime.atom import Atom
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
@@ -13,10 +15,9 @@ from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.peaks import Peaks
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
-from somax.runtime.transforms import AbstractTransform, NoTransform
 from somax.runtime.transform_handler import TransformHandler
+from somax.runtime.transforms import AbstractTransform, NoTransform
 from somax.scheduler.scheduled_object import ScheduledMidiAgent, TriggerMode
-import numpy as np
 
 
 class Player(Streamview, ScheduledMidiAgent):
@@ -66,6 +67,7 @@ class Player(Streamview, ScheduledMidiAgent):
             self.clear()
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self._force_jump()
+            print("Force jump", event_and_transform)
         else:
             self._update_peaks_on_new_event(scheduler_time)
             peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus)
@@ -79,7 +81,7 @@ class Player(Streamview, ScheduledMidiAgent):
             self._feedback(None, scheduler_time, NoTransform())
             return None
         event, transform = event_and_transform
-        event = transform.apply(event)      # returns deepcopy of transformed event
+        event = transform.apply(event)  # returns deepcopy of transformed event
 
         self.improvisation_memory.append(event, scheduler_time, transform, tempo,
                                          artificially_sustained=self.hold_notes_artificially,
@@ -111,7 +113,8 @@ class Player(Streamview, ScheduledMidiAgent):
     # MODIFY STATE
     ######################################################
 
-    def _feedback(self, feedback_event: Optional[CorpusEvent], time: float, applied_transform: AbstractTransform) -> None:
+    def _feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                  applied_transform: AbstractTransform) -> None:
         self.peak_selector.feedback(feedback_event, time, applied_transform)
         for scale_action in self.scale_actions.values():
             scale_action.feedback(feedback_event, time, applied_transform)
@@ -179,7 +182,6 @@ class Player(Streamview, ScheduledMidiAgent):
             peaks_count[atom.name] = peaks.size()
         return peaks_count
 
-
     ######################################################
     # PRIVATE
     ######################################################
@@ -193,6 +195,7 @@ class Player(Streamview, ScheduledMidiAgent):
             return event, NoTransform()
         except (IndexError, TypeError, AttributeError) as e:
             self.logger.debug(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
+            print(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
             return None
 
     def _scale_peaks(self, peaks: Peaks, scheduler_time: float, influence_history: ImprovisationMemory,

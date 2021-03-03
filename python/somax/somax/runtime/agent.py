@@ -458,4 +458,7 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     def force_jump(self, index: int):
-        self.player.force_jump(index)
+        try:
+            self.player.force_jump(int(index))
+        except ValueError as e:
+            self.logger.info(f"{str(e)}")

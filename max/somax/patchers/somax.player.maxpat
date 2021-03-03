@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 8,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1047.0, 788.0 ],
+		"rect" : [ 34.0, 79.0, 2096.0, 1275.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -2100,18 +2100,17 @@
 					"color" : [ 0.980525732040405, 0.526075959205627, 0.0, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-822",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 4367.977848101266318, 1891.173305916217259, 133.0, 35.0 ],
+					"patching_rect" : [ 4367.977848101266318, 1891.173305916217259, 179.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 1,
 						"precision" : 6
 					}
 ,
-					"text" : "coll chroma_classifiers @embed 1"
+					"text" : "coll chroma_classes @embed 1"
 				}
 
 			}
@@ -2283,18 +2282,17 @@
 					"color" : [ 0.980525732040405, 0.526075959205627, 0.0, 1.0 ],
 					"fontface" : 0,
 					"id" : "obj-809",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 4712.977848101266318, 1891.173305916217259, 133.0, 35.0 ],
+					"patching_rect" : [ 4712.977848101266318, 1891.173305916217259, 179.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 1,
 						"precision" : 6
 					}
 ,
-					"text" : "coll chroma_classifiers @embed 1"
+					"text" : "coll chroma_classes @embed 1"
 				}
 
 			}
@@ -7010,7 +7008,7 @@
 						"autojumpforcejump" : [ 8 ],
 						"chromaclassifier" : [ 0 ],
 						"continuity" : [ 1.5 ],
-						"decaybasis" : [ 0 ],
+						"decaybasis" : [ 1 ],
 						"durationenable" : [ 0 ],
 						"durationmu" : [ 1.0 ],
 						"durationsigma" : [ 1.0 ],
@@ -7022,8 +7020,8 @@
 						"harmonicngramorder[1]" : [ 2 ],
 						"harmonincpeakdecay" : [ 2.6 ],
 						"harmonincpeakdecay[1]" : [ 2.6 ],
-						"heldnotesmode" : [ 0 ],
-						"ignorephase" : [ 0 ],
+						"heldnotesmode" : [ 1 ],
+						"ignorephase" : [ 1 ],
 						"melodicbypass" : [ 0 ],
 						"melodicmod12" : [ 1 ],
 						"melodicngramorder" : [ 3 ],
@@ -7037,7 +7035,7 @@
 						"outputchannels" : [ 0, 0, 1, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 9, 0, 1, 10, 0, 1, 11, 0, 1, 12, 0, 1, 13, 0, 1, 14, 0, 1, 15, 0, 1 ],
 						"outputfrom" : [ 0 ],
 						"outputthreshold" : [ 0.0 ],
-						"playingmode" : [ 0 ],
+						"playingmode" : [ 1 ],
 						"pollpeaks" : [ 1 ],
 						"reinstantiate" : [ 0.0 ],
 						"resetinfluences" : [ 0.0 ],
@@ -7047,7 +7045,7 @@
 						"selfngramorder" : [ 3 ],
 						"selfpeakdecay" : [ 2.6 ],
 						"selfpitchfromchords" : [ 0 ],
-						"simultaneousonsets" : [ 0 ],
+						"simultaneousonsets" : [ 1 ],
 						"tabooduration" : [ 1 ],
 						"tabooenable" : [ 0 ],
 						"tempoconsistencyenable" : [ 0 ],
@@ -7642,7 +7640,7 @@
 					"patching_rect" : [ 1729.077272727272657, 2342.0, 49.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 279.848049362055008, 544.5175204224754, 40.0, 18.0 ],
-					"text" : "158",
+					"text" : "0",
 					"textcolor" : [ 0.481437705647327, 0.846666309931507, 0.361908344245232, 1.0 ],
 					"textjustification" : 1
 				}
@@ -7693,7 +7691,7 @@
 					"patching_rect" : [ 1661.099999999999909, 2342.0, 49.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 227.691144912015943, 543.5175204224754, 39.0, 18.0 ],
-					"text" : "120",
+					"text" : "0",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -10667,13 +10665,13 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 3516.727848101265863, 1829.613722832059466, 177.0, 22.0 ],
+					"patching_rect" : [ 3516.727848101265863, 1829.613722832059466, 164.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 1,
 						"precision" : 6
 					}
 ,
-					"text" : "coll pitch_classifiers @embed 1"
+					"text" : "coll pitch_classes @embed 1"
 				}
 
 			}
@@ -10754,13 +10752,13 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 3304.727848101265863, 1829.613722832059466, 177.0, 22.0 ],
+					"patching_rect" : [ 3304.727848101265863, 1829.613722832059466, 164.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 1,
 						"precision" : 6
 					}
 ,
-					"text" : "coll pitch_classifiers @embed 1"
+					"text" : "coll pitch_classes @embed 1"
 				}
 
 			}
@@ -10880,13 +10878,13 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 3968.000000000000455, 1814.722940736714008, 177.0, 22.0 ],
+					"patching_rect" : [ 3968.000000000000455, 1814.722940736714008, 164.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 1,
 						"precision" : 6
 					}
 ,
-					"text" : "coll pitch_classifiers @embed 1"
+					"text" : "coll pitch_classes @embed 1"
 				}
 
 			}
@@ -10954,13 +10952,13 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 3762.455696202532181, 1814.722940736714008, 177.0, 22.0 ],
+					"patching_rect" : [ 3762.455696202532181, 1814.722940736714008, 164.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 1,
 						"precision" : 6
 					}
 ,
-					"text" : "coll pitch_classifiers @embed 1"
+					"text" : "coll pitch_classes @embed 1"
 				}
 
 			}
@@ -12546,7 +12544,7 @@
 					"patching_rect" : [ 788.0, 2324.5, 143.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 59.0, 474.555020118491711, 135.377322951765791, 18.0 ],
-					"text" : "MIDI",
+					"text" : "--",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -12562,7 +12560,7 @@
 					"patching_rect" : [ 788.0, 2297.5, 154.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 59.0, 456.555020118491711, 154.0, 18.0 ],
-					"text" : "keithjarrett_kolnconcert_Right",
+					"text" : "--",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -12578,7 +12576,6 @@
 					"patching_rect" : [ 728.0, 2422.0, 44.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 137.377322951765791, 552.0175204224754, 57.0, 18.0 ],
-					"text" : "4920",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -12692,7 +12689,6 @@
 					"patching_rect" : [ 639.0, 2409.5, 44.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 57.958333333333712, 549.0175204224754, 70.0, 24.0 ],
-					"text" : "685",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -19684,17 +19680,11 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"newobj" : 				{
-					"fontface" : [ 1 ],
+				"default" : 				{
+					"fontsize" : [ 10.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
-				}
-,
-				"message" : 				{
 					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -19707,11 +19697,17 @@
 
 				}
 ,
-				"default" : 				{
-					"fontface" : [ 1 ],
+				"newobj" : 				{
+					"fontsize" : [ 10.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ]
+				}
+,
+				"message" : 				{
 					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
