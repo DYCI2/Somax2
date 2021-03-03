@@ -57,8 +57,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 402.0, 57.53892618940219, 95.0, 22.0 ],
-					"text" : "thispatcher front"
+					"patching_rect" : [ 402.0, 57.53892618940219, 75.0, 22.0 ],
+					"text" : "openwindow"
 				}
 
 			}

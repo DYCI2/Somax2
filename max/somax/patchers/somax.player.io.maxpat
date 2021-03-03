@@ -40,6 +40,30 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontface" : 1,
+					"fontlink" : 1,
+					"fontsize" : 10.0,
+					"id" : "obj-434",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 480.0, 37.596841145363214, 67.4482421875, 19.171875 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 87.131419809127067, 765.532589068420748, 67.4482421875, 19.171875 ],
+					"rounded" : 8.0,
+					"spacing_x" : 10.0,
+					"text" : "Settings",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"texton" : "Continuous",
+					"textoncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"varname" : "settingsbutton"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"args" : [ "#1", "#2", "#3" ],
 					"bgmode" : 0,
 					"border" : 0,
@@ -223,37 +247,13 @@
 			}
 , 			{
 				"box" : 				{
-					"fontface" : 1,
-					"fontlink" : 1,
-					"fontsize" : 10.0,
-					"id" : "obj-434",
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 475.0, 32.596841145363214, 67.4482421875, 19.171875 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 86.131419809127067, 762.532589068420748, 67.4482421875, 19.171875 ],
-					"rounded" : 8.0,
-					"spacing_x" : 10.0,
-					"text" : "Settings",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
-					"texton" : "Continuous",
-					"textoncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
-					"varname" : "settingsbutton"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-16",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 480.0, 76.0, 150.0, 22.0 ],
-					"text" : "influencer thispatcher front"
+					"patching_rect" : [ 480.0, 76.0, 131.0, 22.0 ],
+					"text" : "influencer openwindow"
 				}
 
 			}
