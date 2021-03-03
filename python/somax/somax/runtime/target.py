@@ -15,6 +15,7 @@ class SendProtocol:
     PLAYER_CORPUS = "corpus"
 
     SCHEDULER_RUNNING = "scheduler_running"
+    TRANSPORT_MODE = "transport_mode"
     SCHEDULER_CURRENT_TIME = "time"
     SCHEDULER_CURRENT_TEMPO = "tempo"
     SCHEDULER_TEMPO_SET_SUCESS = "tempo_was_set"

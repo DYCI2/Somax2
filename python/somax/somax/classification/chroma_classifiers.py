@@ -112,9 +112,9 @@ class GmmClassifier(ChromaClassifier, ABC):
             labels: List[IntLabel] = []
             for event in corpus.events:  # type: CorpusEvent
                 chroma: np.ndarray = event.get_feature(BackgroundChroma).value().reshape(1, -1)
-                max_val: float = np.max(chroma)
-                if max_val > 0:
-                    chroma /= max_val
+                # max_val: float = np.max(chroma)
+                # if max_val > 0:
+                #     chroma /= max_val
                 labels.append(IntLabel(int(self.gmm.predict(chroma))))
         return labels
 
@@ -132,9 +132,9 @@ class GmmClassifier(ChromaClassifier, ABC):
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
-        max_val: float = np.max(chroma.value())
-        if max_val > 0:
-            chroma._value /= max_val
+        # max_val: float = np.max(chroma)
+        # if max_val > 0:
+        #     chroma /= max_val
         return [(IntLabel(int(self.gmm.predict(t.inverse(chroma).value().reshape(1, -1)))), t)
                 for t in self._transforms]
 

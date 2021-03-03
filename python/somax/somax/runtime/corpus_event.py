@@ -60,7 +60,7 @@ class Note:
 
     def __repr__(self):
         return f"Note(pitch={self.pitch},velocity={self.velocity},channel={self.channel}," \
-               f"onset={self.onset},dur={self.duration},..)."
+               f"onset={self.onset},duration={self.duration},..)."
 
     def __eq__(self, other):
         return self.pitch == other.pitch and self.channel == other.channel

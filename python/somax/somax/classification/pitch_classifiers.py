@@ -159,26 +159,3 @@ class BassNoteClassifier(BasicPitchClassifier):
         if not self._transforms:
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
-
-
-class BassNoteMod12Classifier(BasicPitchClassifier):
-    @staticmethod
-    def _label_from_corpus_event(event: CorpusEvent, transform: AbstractTransform) -> IntLabel:
-        inverse_transformed_label: int = transform.inverse(event.get_feature(BassNote)).value() % 12
-        return IntLabel(inverse_transformed_label)
-
-    @staticmethod
-    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
-        inverse_transformed_label: int = transform.inverse(pitch).value() % 12
-        return IntLabel(inverse_transformed_label)
-
-    @staticmethod
-    def _trait_from_corpus_event(event: CorpusEvent) -> int:
-        return event.get_feature(BassNote).value() % 12
-
-    def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
-        """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
-        self._transforms = transform_handler.get_by_feature(AbstractIntegerPitch)
-        if not self._transforms:
-            raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
-        return self._transforms

@@ -40,6 +40,17 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-2",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1098.5, 635.5, 50.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-32",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -60,11 +71,11 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1255.5, 365.0, 56.0, 22.0 ],
 					"restore" : 					{
-						"chroma" : [ 127 ],
-						"chromaonset" : [ 1 ],
-						"mute" : [ 1 ],
-						"onset" : [ 1 ],
-						"pitch" : [ 1 ]
+						"chroma" : [ 32 ],
+						"chromaonset" : [ 0 ],
+						"mute" : [ 0 ],
+						"onset" : [ 0 ],
+						"pitch" : [ 0 ]
 					}
 ,
 					"text" : "autopattr",
@@ -82,10 +93,10 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1069.5, 400.0, 242.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 4, 44, 358, 172 ],
+						"client_rect" : [ 4, 79, 358, 207 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
-						"storage_rect" : [ 583, 69, 1034, 197 ]
+						"storage_rect" : [ 583, 79, 1034, 207 ]
 					}
 ,
 					"text" : "pattrstorage @savemode 2 @outputmode 1",
@@ -109,6 +120,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-24",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -192,10 +204,21 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"parameter_enable" : 0,
+					"parameter_enable" : 1,
 					"patching_rect" : [ 673.573008849557482, 67.75, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 215.929415000000006, 6.75, 16.0, 16.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "off", "on" ],
+							"parameter_longname" : "mute",
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "mute",
+							"parameter_type" : 2
+						}
+
+					}
+,
 					"thickness" : 70.0,
 					"varname" : "mute"
 				}
@@ -378,10 +401,21 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"parameter_enable" : 0,
+					"parameter_enable" : 1,
 					"patching_rect" : [ 220.0, 180.75, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 189.625616000000008, 6.75, 16.0, 16.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "off", "on" ],
+							"parameter_longname" : "chromaonset",
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "chromaonset",
+							"parameter_type" : 2
+						}
+
+					}
+,
 					"thickness" : 70.0,
 					"varname" : "chromaonset"
 				}
@@ -409,10 +443,19 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"parameter_enable" : 0,
+					"parameter_enable" : 1,
 					"patching_rect" : [ 417.0, 151.0, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 169.833743999999996, 6.75, 16.0, 16.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_longname" : "chroma",
+							"parameter_shortname" : "chroma",
+							"parameter_type" : 0
+						}
+
+					}
+,
 					"thickness" : 100.0,
 					"varname" : "chroma"
 				}
@@ -462,10 +505,21 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"parameter_enable" : 0,
+					"parameter_enable" : 1,
 					"patching_rect" : [ 159.0, 180.75, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 152.041872000000012, 6.75, 16.0, 16.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "off", "on" ],
+							"parameter_longname" : "onset",
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "onset",
+							"parameter_type" : 2
+						}
+
+					}
+,
 					"thickness" : 70.0,
 					"varname" : "onset"
 				}
@@ -503,10 +557,21 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"parameter_enable" : 0,
+					"parameter_enable" : 1,
 					"patching_rect" : [ 10.0, 180.75, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 130.25, 6.75, 16.0, 16.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "off", "on" ],
+							"parameter_longname" : "pitch",
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "pitch",
+							"parameter_type" : 2
+						}
+
+					}
+,
 					"thickness" : 70.0,
 					"varname" : "pitch"
 				}
@@ -855,25 +920,11 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"toggle" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"newobj" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ]
-				}
-,
 				"default" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -883,13 +934,20 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
+
+				}
 ,
+				"newobj" : 				{
+					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ]
 				}
 ,
 				"message" : 				{
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -899,8 +957,15 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
+
+				}
 ,
-					"fontface" : [ 1 ]
+				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"parentstyle" : "",

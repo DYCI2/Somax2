@@ -165,6 +165,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def clear(self):
         self.flush()
         self.player.clear()
+        self.player.clear_memory()
 
     def flush(self):
         events: List[ScheduledEvent] = self.scheduler.flush()
@@ -456,3 +457,13 @@ class OscAgent(Agent, AsyncioOscObject):
         corpus: Optional[Corpus] = self.player.corpus
         if corpus is not None:
             self.target.send(SendProtocol.PLAYER_CORPUS, [corpus.name, corpus.content_type.value, corpus.length()])
+
+    ######################################################
+    # OTHER
+    ######################################################
+
+    def force_jump(self, index: int):
+        try:
+            self.player.force_jump(int(index))
+        except ValueError as e:
+            self.logger.info(f"{str(e)}")
