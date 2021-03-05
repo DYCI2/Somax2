@@ -61,7 +61,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 895.5, 202.0, 56.0, 22.0 ],
 					"restore" : 					{
-						"source" : [ "<None>" ]
+						"source" : [ "Server" ]
 					}
 ,
 					"text" : "autopattr",
@@ -492,7 +492,6 @@
 			}
 , 			{
 				"box" : 				{
-					"align" : 1,
 					"allowdrag" : 0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
 					"bgfillcolor_angle" : 270.0,
@@ -502,10 +501,11 @@
 					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"bgfillcolor_proportion" : 0.5,
 					"bgfillcolor_type" : "color",
-					"fontface" : 1,
-					"fontsize" : 10.0,
+					"fontface" : 0,
+					"fontname" : "Ableton Sans Medium",
+					"fontsize" : 9.5,
 					"id" : "obj-1",
-					"items" : [ "<None>", ",", "Server", ",", "Player", ",", "AudioInfluencer", ",", "MidiInfluencer" ],
+					"items" : [ "<None>", ",", "Server", ",", "Player", ",", "AudioInfluencer", ",", "MidiInfluencer", ",", "Player_6231" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -514,20 +514,19 @@
 					"patching_rect" : [ 177.5, 646.0, 189.0, 20.0 ],
 					"pattrmode" : 1,
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 120.0, 20.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 115.0, 20.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_enum" : [ "<None>", "Server", "Player", "AudioInfluencer", "MidiInfluencer" ],
+							"parameter_enum" : [ "<None>", "Server", "Player", "AudioInfluencer", "MidiInfluencer", "Player_6231" ],
 							"parameter_longname" : "source[1]",
-							"parameter_mmax" : 4,
+							"parameter_mmax" : 5,
 							"parameter_shortname" : "source",
 							"parameter_type" : 2
 						}
 
 					}
 ,
-					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"textjustification" : 1,
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "source"
 				}
 

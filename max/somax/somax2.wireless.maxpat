@@ -101,7 +101,7 @@
 					"outlettype" : [ "", "", "", "", "", "", "" ],
 					"patching_rect" : [ 770.0, 12.0, 257.0, 881.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 371.0, 0.0, 261.0, 877.675398314063386 ],
+					"presentation_rect" : [ 374.0, 0.0, 261.0, 877.675398314063386 ],
 					"varname" : "somax.player.io",
 					"viewvisibility" : 1
 				}
@@ -302,25 +302,30 @@
  ],
 		"parameters" : 		{
 			"obj-11::obj-21" : [ "Gain[1]", "Gain", 0 ],
-			"obj-69::obj-13::obj-1" : [ "source", "source", 0 ],
-			"obj-7::obj-17::obj-39::obj-6::obj-46::obj-1" : [ "source[1]", "source", 0 ],
-			"obj-7::obj-17::obj-39::obj-6::obj-54" : [ "pitch", "pitch", 0 ],
-			"obj-7::obj-17::obj-39::obj-6::obj-58" : [ "onset", "onset", 0 ],
-			"obj-7::obj-17::obj-39::obj-6::obj-64" : [ "chroma", "chroma", 0 ],
-			"obj-7::obj-17::obj-39::obj-6::obj-67" : [ "chromaonset", "chromaonset", 0 ],
-			"obj-7::obj-17::obj-39::obj-6::obj-9" : [ "mute", "mute", 0 ],
-			"obj-7::obj-1::obj-12::obj-79::obj-1" : [ "live.text[3]", "live.text", 0 ],
-			"obj-7::obj-1::obj-12::obj-79::obj-2" : [ "live.text[4]", "live.text", 0 ],
-			"obj-7::obj-1::obj-12::obj-79::obj-3" : [ "live.text[5]", "live.text", 0 ],
-			"obj-7::obj-1::obj-12::obj-87::obj-1" : [ "live.text[6]", "live.text", 0 ],
-			"obj-7::obj-1::obj-12::obj-87::obj-2" : [ "live.text[8]", "live.text", 0 ],
-			"obj-7::obj-1::obj-12::obj-87::obj-3" : [ "live.text[7]", "live.text", 0 ],
-			"obj-7::obj-1::obj-12::obj-89::obj-1" : [ "live.text[9]", "live.text", 0 ],
-			"obj-7::obj-1::obj-12::obj-89::obj-2" : [ "live.text[11]", "live.text", 0 ],
-			"obj-7::obj-1::obj-12::obj-89::obj-3" : [ "live.text[10]", "live.text", 0 ],
-			"obj-7::obj-1::obj-12::obj-91::obj-1" : [ "live.text[12]", "live.text", 0 ],
-			"obj-7::obj-1::obj-12::obj-91::obj-2" : [ "live.text[13]", "live.text", 0 ],
-			"obj-7::obj-1::obj-12::obj-91::obj-3" : [ "live.text[14]", "live.text", 0 ],
+			"obj-69::obj-13::obj-1" : [ "source[1]", "source", 0 ],
+			"obj-7::obj-17::obj-12" : [ "live.text", "live.text", 0 ],
+			"obj-7::obj-17::obj-30" : [ "live.numbox", "live.numbox", 0 ],
+			"obj-7::obj-17::obj-31" : [ "live.button", "live.button", 0 ],
+			"obj-7::obj-17::obj-35" : [ "live.text[1]", "live.text[1]", 0 ],
+			"obj-7::obj-17::obj-39::obj-6::obj-21" : [ "pitch enable", "pitch", 0 ],
+			"obj-7::obj-17::obj-39::obj-6::obj-28" : [ "onset enable", "onset", 0 ],
+			"obj-7::obj-17::obj-39::obj-6::obj-29" : [ "chromaonset enable", "chromaonset", 0 ],
+			"obj-7::obj-17::obj-39::obj-6::obj-30" : [ "chroma scaling factor", "chroma", 0 ],
+			"obj-7::obj-17::obj-39::obj-6::obj-31" : [ "mute", "mute", 0 ],
+			"obj-7::obj-17::obj-39::obj-6::obj-46::obj-1" : [ "source[2]", "source", 0 ],
+			"obj-7::obj-17::obj-42" : [ "live.text[15]", "live.text[1]", 0 ],
+			"obj-7::obj-1::obj-6::obj-79::obj-1" : [ "live.text[3]", "live.text", 0 ],
+			"obj-7::obj-1::obj-6::obj-79::obj-2" : [ "live.text[4]", "live.text", 0 ],
+			"obj-7::obj-1::obj-6::obj-79::obj-3" : [ "live.text[5]", "live.text", 0 ],
+			"obj-7::obj-1::obj-6::obj-87::obj-1" : [ "live.text[7]", "live.text", 0 ],
+			"obj-7::obj-1::obj-6::obj-87::obj-2" : [ "live.text[6]", "live.text", 0 ],
+			"obj-7::obj-1::obj-6::obj-87::obj-3" : [ "live.text[8]", "live.text", 0 ],
+			"obj-7::obj-1::obj-6::obj-89::obj-1" : [ "live.text[16]", "live.text", 0 ],
+			"obj-7::obj-1::obj-6::obj-89::obj-2" : [ "live.text[10]", "live.text", 0 ],
+			"obj-7::obj-1::obj-6::obj-89::obj-3" : [ "live.text[9]", "live.text", 0 ],
+			"obj-7::obj-1::obj-6::obj-91::obj-1" : [ "live.text[19]", "live.text", 0 ],
+			"obj-7::obj-1::obj-6::obj-91::obj-2" : [ "live.text[18]", "live.text", 0 ],
+			"obj-7::obj-1::obj-6::obj-91::obj-3" : [ "live.text[17]", "live.text", 0 ],
 			"parameterbanks" : 			{
 
 			}
@@ -338,40 +343,40 @@
 					"parameter_unitstyle" : 10
 				}
 ,
-				"obj-7::obj-1::obj-12::obj-87::obj-1" : 				{
-					"parameter_longname" : "live.text[6]"
-				}
-,
-				"obj-7::obj-1::obj-12::obj-87::obj-2" : 				{
-					"parameter_longname" : "live.text[8]"
-				}
-,
-				"obj-7::obj-1::obj-12::obj-87::obj-3" : 				{
+				"obj-7::obj-1::obj-6::obj-87::obj-1" : 				{
 					"parameter_longname" : "live.text[7]"
 				}
 ,
-				"obj-7::obj-1::obj-12::obj-89::obj-1" : 				{
-					"parameter_longname" : "live.text[9]"
+				"obj-7::obj-1::obj-6::obj-87::obj-2" : 				{
+					"parameter_longname" : "live.text[6]"
 				}
 ,
-				"obj-7::obj-1::obj-12::obj-89::obj-2" : 				{
-					"parameter_longname" : "live.text[11]"
+				"obj-7::obj-1::obj-6::obj-87::obj-3" : 				{
+					"parameter_longname" : "live.text[8]"
 				}
 ,
-				"obj-7::obj-1::obj-12::obj-89::obj-3" : 				{
+				"obj-7::obj-1::obj-6::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[16]"
+				}
+,
+				"obj-7::obj-1::obj-6::obj-89::obj-2" : 				{
 					"parameter_longname" : "live.text[10]"
 				}
 ,
-				"obj-7::obj-1::obj-12::obj-91::obj-1" : 				{
-					"parameter_longname" : "live.text[12]"
+				"obj-7::obj-1::obj-6::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[9]"
 				}
 ,
-				"obj-7::obj-1::obj-12::obj-91::obj-2" : 				{
-					"parameter_longname" : "live.text[13]"
+				"obj-7::obj-1::obj-6::obj-91::obj-1" : 				{
+					"parameter_longname" : "live.text[19]"
 				}
 ,
-				"obj-7::obj-1::obj-12::obj-91::obj-3" : 				{
-					"parameter_longname" : "live.text[14]"
+				"obj-7::obj-1::obj-6::obj-91::obj-2" : 				{
+					"parameter_longname" : "live.text[18]"
+				}
+,
+				"obj-7::obj-1::obj-6::obj-91::obj-3" : 				{
+					"parameter_longname" : "live.text[17]"
 				}
 
 			}
@@ -702,6 +707,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "Sax_gentle_cat_Slow.wav",
+				"bootpath" : "~/Music",
+				"patcherrelativepath" : "../../../../Music",
+				"type" : "WAVE",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "somax.audioinfluencer.wireless.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
@@ -828,13 +840,9 @@
 				"type" : "iLaX"
 			}
  ],
-		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -845,19 +853,20 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-
+,
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"newobj" : 				{
-					"fontsize" : [ 10.0 ],
+					"fontface" : [ 1 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ]
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"message" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -868,7 +877,9 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-
+,
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"button" : 				{
