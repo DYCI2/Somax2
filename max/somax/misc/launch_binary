@@ -3,4 +3,4 @@
 SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 BINARY_PATH="${SCRIPT_DIRECTORY}/somax_server"
 
-${BINARY_PATH}
+"${BINARY_PATH}"
