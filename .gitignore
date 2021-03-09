@@ -227,3 +227,4 @@ dmypy.json
 max/somax/corpus/*.json
 python/somax/log/*.log
 python/somax/temp
+max/somax/state/*.json
