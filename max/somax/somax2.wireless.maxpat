@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 8,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1040.0, 488.0 ],
+		"rect" : [ 34.0, 79.0, 1280.0, 926.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -305,6 +305,58 @@
 			"obj-69::obj-13::obj-1" : [ "source[1]", "source", 0 ],
 			"obj-7::obj-17::obj-39::obj-6::obj-30" : [ "chroma scaling factor", "chroma", 0 ],
 			"obj-7::obj-17::obj-39::obj-6::obj-46::obj-1" : [ "source[2]", "source", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-12" : [ "melodicmod12", "melodicmod12", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-120" : [ "melodicbypass", "melodicbypass", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-126" : [ "harmonicbypass", "harmonicbypass", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-134" : [ "continuity", "continuity", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-140" : [ "resetinfluences", "resetinfluences", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-144" : [ "harmonicngramorder", "harmonicngramorder", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-152" : [ "selfngramorder", "selfngramorder", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-154" : [ "melodicngramorder", "melodicngramorder", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-159" : [ "heldnotesmode", "heldnotesmode", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-163" : [ "ignorephase", "ignorephase", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-19" : [ "selfmod12", "selfmod12", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-202" : [ "simultaneousonsets", "simultaneousonsets", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-22" : [ "selfmelodicbypass", "selfmelodicbypass", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-228" : [ "button", "button", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-254" : [ "harmonincpeakdecay", "harmonincpeakdecay", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-255" : [ "melodicpeakdecay", "melodicpeakdecay", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-256" : [ "selfpeakdecay", "selfpeakdecay", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-295" : [ "playingmode", "playingmode", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-328" : [ "decaybasis", "decaybasis", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-349::obj-26" : [ "corpusname", "corpusname", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-352" : [ "outputthreshold", "outputthreshold", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-369" : [ "toggle", "toggle", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-4" : [ "reinstantiate", "reinstantiate", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-496" : [ "outputchannels", "outputchannels", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-501" : [ "experimental_scaling", "experimental_scaling", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-504" : [ "transpositionconsistency", "transpositionconsistency", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-570" : [ "__exp_melodicpitchfromchords", "__exp_melodicpitchfromchords", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-575" : [ "__exp_tempoconsistencysigma", "__exp_tempoconsistencysigma", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-600" : [ "__exp_tabooenable", "__exp_tabooenable", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-605" : [ "__exp_tabooduration", "__exp_tabooduration", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-622" : [ "__exp_velocityenable", "__exp_velocityenable", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-627" : [ "__exp_velocitymu", "__exp_velocitymu", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-630" : [ "__exp_chromaclassifier", "__exp_chromaclassifier", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-639" : [ "__exp_velocitysigma", "__exp_velocitysigma", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-642" : [ "__exp_numnotessigma", "__exp_numnotessigma", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-653" : [ "__exp_numnotesenable", "__exp_numnotesenable", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-656" : [ "__exp_numnotesmu", "__exp_numnotesmu", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-673" : [ "multislider", "multislider", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-675" : [ "__exp_freezemode", "__exp_freezemode", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-688" : [ "__exp_durationsigma", "__exp_durationsigma", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-702" : [ "__exp_durationmu", "__exp_durationmu", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-722" : [ "__exp_octavebandsenable", "__exp_octavebandsenable", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-733" : [ "__exp_octavebands", "__exp_octavebands", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-746" : [ "__exp_selfpitchfromchords", "__exp_selfpitchfromchords", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-757" : [ "gmmnumclusters", "gmmnumclusters", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-799" : [ "__exp_tempoconsistencyenable", "__exp_tempoconsistencyenable", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-802" : [ "__exp_tempoconsistencylen", "__exp_tempoconsistencylen", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-835" : [ "transpositions", "transpositions", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-860" : [ "harmonincpeakdecay[1]", "harmonincpeakdecay[1]", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-865" : [ "selfharmonicngramorder", "selfharmonicngramorder", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-870" : [ "selfharmonicbypass", "selfharmonicbypass", 0 ],
+			"obj-7::obj-1::obj-6::obj-5::obj-26" : [ "umenu[1]", "corpusname", 0 ],
 			"obj-7::obj-1::obj-6::obj-79::obj-1" : [ "live.text[3]", "live.text", 0 ],
 			"obj-7::obj-1::obj-6::obj-79::obj-2" : [ "live.text[4]", "live.text", 0 ],
 			"obj-7::obj-1::obj-6::obj-79::obj-3" : [ "live.text[5]", "live.text", 0 ],
@@ -334,6 +386,20 @@
 ,
 				"obj-7::obj-17::obj-39::obj-6::obj-46::obj-1" : 				{
 					"parameter_invisible" : 0,
+					"parameter_modmode" : 0,
+					"parameter_unitstyle" : 10
+				}
+,
+				"obj-7::obj-1::obj-6::obj-1::obj-349::obj-26" : 				{
+					"parameter_invisible" : 1,
+					"parameter_longname" : "corpusname",
+					"parameter_modmode" : 0,
+					"parameter_shortname" : "corpusname",
+					"parameter_unitstyle" : 10
+				}
+,
+				"obj-7::obj-1::obj-6::obj-5::obj-26" : 				{
+					"parameter_invisible" : 1,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
 				}
@@ -377,6 +443,19 @@
 			}
 ,
 			"inherited_shortname" : 1
+		}
+,
+		"parameter_map" : 		{
+			"key" : 			{
+				"button" : 				{
+					"srcname" : "0.modifiers.39.code.key",
+					"min" : 0.0,
+					"max" : 1.0,
+					"flags" : 1
+				}
+
+			}
+
 		}
 ,
 		"dependency_cache" : [ 			{
@@ -667,6 +746,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "pattrstorage4.json",
+				"bootpath" : "~/Desktop",
+				"patcherrelativepath" : "../../../../Desktop",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "peakmeter.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/player",
 				"patcherrelativepath" : "./resources/player",
@@ -831,34 +917,17 @@
 		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
 				"newobj" : 				{
 					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
 					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -871,11 +940,28 @@
 
 				}
 ,
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				"default" : 				{
+					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+
 				}
 ,
 				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

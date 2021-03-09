@@ -271,7 +271,7 @@ class OscAgent(Agent, AsyncioOscObject):
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             self.player.set_classifier(path_and_name, classifier)
             self.logger.info(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
-                             f"for player '{self.player.name}'.")
+                             f"for player '{self.player.name}' (path='{path}').")
         except (AssertionError, KeyError, ValueError, InvalidCorpus) as e:
             self.logger.error(f"{str(e)} No classifier was set.")
 

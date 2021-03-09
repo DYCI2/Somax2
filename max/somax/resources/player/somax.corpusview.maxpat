@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 5,
+			"revision" : 8,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -39,6 +39,25 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"color" : [ 0.820717811584473, 0.0, 0.763403832912445, 1.0 ],
+					"id" : "obj-9",
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "", "", "" ],
+					"patching_rect" : [ 469.0, 20.0, 91.0, 35.0 ],
+					"restore" : 					{
+						"corpusname" : [ "-- click to refresh --" ]
+					}
+,
+					"text" : "autopattr @autorestore 0",
+					"varname" : "u839003605"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-8",
 					"maxclass" : "newobj",
@@ -282,17 +301,31 @@
 					"bgfillcolor_type" : "color",
 					"fontface" : 1,
 					"id" : "obj-26",
-					"items" : [ "--", "click", "to", "refresh", "--", ",", "Scarbo", ",", "debussy", ",", "papae", ",", "satie-gymnopedie1", ",", "repeatednote", ",", "schoenberg_drei_klavierstucke_11", ",", "repeatednote-short" ],
+					"items" : [ "--", "click", "to", "refresh", "--", ",", "stravi99", ",", "carine_intuition", ",", "mozart36", ",", "debussy_part2", ",", "Scarbo", ",", "debussy", ",", "stravi", ",", "cscale", ",", "papae", ",", "keithjarrett_kolnconcert", ",", "debussy_part_modified", ",", "schoenberg_drei_klavierstucke_11", ",", "debussy_stringquartet", ",", "ligeti_lux_aeterna", ",", "gol", ",", "palestrina_missapapae", ",", "franck1", ",", "brahms3_1_and_2", ",", "keithjarrett_kolnconcert_Right" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
-					"parameter_enable" : 0,
+					"parameter_enable" : 1,
 					"patching_rect" : [ 39.16666666666606, 330.0, 100.0, 22.0 ],
+					"pattrmode" : 1,
 					"presentation" : 1,
 					"presentation_rect" : [ 2.41666666666697, 3.0, 207.354947384154457, 22.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "-- click to refresh --", "stravi99", "carine_intuition", "mozart36", "debussy_part2", "Scarbo", "debussy", "stravi", "cscale", "papae", "keithjarrett_kolnconcert", "debussy_part_modified", "schoenberg_drei_klavierstucke_11", "debussy_stringquartet", "ligeti_lux_aeterna", "gol", "palestrina_missapapae", "franck1", "brahms3_1_and_2", "keithjarrett_kolnconcert_Right" ],
+							"parameter_invisible" : 1,
+							"parameter_longname" : "corpusname",
+							"parameter_mmax" : 19,
+							"parameter_shortname" : "corpusname",
+							"parameter_type" : 2
+						}
+
+					}
+,
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"textjustification" : 1
+					"textjustification" : 1,
+					"varname" : "corpusname"
 				}
 
 			}
@@ -335,7 +368,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 84.0, 13.0, 30.0, 30.0 ]
 				}
 
@@ -348,7 +381,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 38.5, 13.0, 30.0, 30.0 ]
 				}
 
@@ -546,31 +579,15 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
 				"newobj" : 				{
+					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontface" : [ 1 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
+					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
@@ -582,8 +599,24 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
+
+				}
 ,
-					"fontface" : [ 1 ]
+				"default" : 				{
+					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+
 				}
 ,
 				"toggle" : 				{
