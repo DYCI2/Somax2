@@ -51,7 +51,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1241.57275390625, 383.0, 61.581050872802734, 13.371874999999999 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 144.131419809127067, 90.042187499999784, 65.581050872802734, 15.371875000000003 ],
+					"presentation_rect" : [ 144.131419809127067, 87.876339068420748, 71.1982421875, 15.371875000000003 ],
 					"rounded" : 8.0,
 					"spacing_y" : 1.1,
 					"text" : "save/load",
@@ -64,7 +64,6 @@
 , 			{
 				"box" : 				{
 					"fontface" : 1,
-					"fontlink" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-434",
 					"maxclass" : "textbutton",
@@ -74,7 +73,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 266.0, 42.596841145363214, 67.4482421875, 19.171875 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 144.131419809127067, 51.532589068420748, 67.4482421875, 19.171875 ],
+					"presentation_rect" : [ 144.131419809127067, 51.532589068420748, 71.1982421875, 19.171875 ],
 					"rounded" : 8.0,
 					"spacing_x" : 10.0,
 					"text" : "Settings",
@@ -108,7 +107,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-53",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -117,7 +115,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 641.0, 829.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 144.131419809127067, 72.704464068420748, 65.79296875, 13.171875 ],
+					"presentation_rect" : [ 144.131419809127067, 72.704464068420748, 71.1982421875, 13.171875 ],
 					"proportion" : 0.5,
 					"varname" : "latencydisable"
 				}
@@ -166,7 +164,7 @@
 					"outlettype" : [ "", "", "", "", "", "" ],
 					"patching_rect" : [ 50.0, 272.5, 235.0, 166.5 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 4.0, 0.0, 231.694882000000007, 428.0 ],
+					"presentation_rect" : [ 4.0, 0.0, 237.100155437500007, 428.0 ],
 					"varname" : "player",
 					"viewvisibility" : 1
 				}
