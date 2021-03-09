@@ -156,9 +156,9 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def enabled(self, is_enabled):
         if is_enabled:
-            self.logger.info(f"Agent '{self.player.name}' enabled")
+            self.logger.debug(f"Agent '{self.player.name}' enabled")
         else:
-            self.logger.info(f"Agent '{self.player.name}' disabled")
+            self.logger.debug(f"Agent '{self.player.name}' disabled")
             self.flush()
         self._enabled = is_enabled
 
@@ -239,7 +239,7 @@ class OscAgent(Agent, AsyncioOscObject):
                                     classifier=classifier, activity_pattern=activity_pattern,
                                     memory_space=memory_space, enabled=enabled, override=override)
             self.send_atoms()
-            self.logger.info(f"Created atom with path '{path}'.")
+            # self.logger.info(f"Created atom with path '{path}'.")
         except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)} No atom was created.")
 
@@ -255,12 +255,13 @@ class OscAgent(Agent, AsyncioOscObject):
     # MODIFY PLAYER/STREAMVIEW/ATOM STATE
     ######################################################
 
-    def set_peak_selector(self, peak_selector: str, **kwargs):
+    def set_peak_selector(self, peak_selector: str, verbose: bool = True, **kwargs):
         try:
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
             self.player.set_peak_selector(peak_selector)
-            self.logger.info(f"[set_peak_selector] Peak selector set to {type(peak_selector).__name__} "
-                             f"for player '{self.player.name}.")
+            if verbose:
+                self.logger.info(f"[set_peak_selector] Peak selector set to {type(peak_selector).__name__} "
+                                 f"for player '{self.player.name}.")
         except (ValueError, KeyError) as e:
             self.logger.error(f"{str(e)} No peak selector was set.")
 
@@ -308,23 +309,26 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. "
                               f"No transform was removed.")
 
-    def add_scale_action(self, scale_action: str, override: bool = False, **kwargs):
+    def add_scale_action(self, scale_action: str, override: bool = False, verbose: bool = True, **kwargs):
         try:
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
             self.player.add_scale_action(scale_action, override)
-            self.logger.info(f"Added scale action {repr(scale_action)}")  # TODO:REMOVE TEMP
+            if verbose:
+                self.logger.info(f"Added scale action {repr(scale_action)}")
         except ValueError as e:
             self.logger.error(f"{str(e)}. No scale action was added.")
         except DuplicateKeyError as e:
             self.logger.error(f"{str(e)}. No scale action was added.")
 
-    def remove_scale_action(self, scale_action: str, **kwargs):
+    def remove_scale_action(self, scale_action: str, verbose: bool = True, **kwargs):
         try:
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
             self.player.remove_scale_action(type(scale_action))
-            self.logger.info(f"Removed scale action {repr(scale_action)}")  # TODO:REMOVE TEMP
+            if verbose:
+                self.logger.info(f"Removed scale action {repr(scale_action)}")
         except KeyError as e:
-            self.logger.error(f"Could not remove scale action: {repr(e)}.")
+            if verbose:
+                self.logger.error(f"Could not remove scale action: {repr(e)}.")
 
     def read_corpus(self, filepath: str, volatile: bool = False):
         self.logger.info(f"Reading corpus at '{filepath}' for player '{self.player.name}'...")

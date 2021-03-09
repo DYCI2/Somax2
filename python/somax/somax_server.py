@@ -48,19 +48,19 @@ class Somax:
     def start_transport(self):
         self._transport.start()
         self._send_to_all_agents(ControlMessage(PlayControl.START))
-        self.logger.info(f"Transport started.")
+        # self.logger.info(f"Transport started.")
 
     def pause_transport(self):
         self._transport.pause()
         self._send_to_all_agents(ControlMessage(PlayControl.PAUSE))
-        self.logger.info("Transport paused.")
+        # self.logger.info("Transport paused.")
 
     def stop_transport(self):
         """ Stops the transport and resets the state of all players """
         self.clear_all()
         self._transport.stop()
         self._send_to_all_agents(ControlMessage(PlayControl.STOP))
-        self.logger.info("Transport stopped.")
+        # self.logger.info("Transport stopped.")
 
     def clear_all(self):
         self._send_to_all_agents(ControlMessage(PlayControl.CLEAR))
