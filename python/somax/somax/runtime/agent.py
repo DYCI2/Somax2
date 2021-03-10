@@ -6,15 +6,18 @@ import os
 from importlib import resources
 from typing import Any, Optional, List, Tuple
 
+import mido
+
 import log
 from somax import settings
 from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
+from somax.corpus_builder.midi_parser import BarNumberAnnotation
+from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import Note
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError
 from somax.runtime.influence import FeatureInfluence
@@ -195,7 +198,8 @@ class OscAgent(Agent, AsyncioOscObject):
             self.player.influence(path_and_name, influence, time, **kwargs)
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
-        self.logger.debug(f"[influence] Influence successfully completed for agent '{self.player.name}' with path '{path}'.")
+        self.logger.debug(
+            f"[influence] Influence successfully completed for agent '{self.player.name}' with path '{path}'.")
 
     def influence_onset(self):
         if not self.scheduler.running:
@@ -471,3 +475,35 @@ class OscAgent(Agent, AsyncioOscObject):
             self.player.force_jump(int(index))
         except ValueError as e:
             self.logger.info(f"{str(e)}")
+
+    def export_runtime_corpus(self, folder: str, filename: str, corpus_name: Optional[str] = None,
+                              initial_time_signature: tuple[int, int] = (4, 4), ticks_per_beat: int = 480,
+                              annotations: str = BarNumberAnnotation.NONE.value, overwrite: bool = False,
+                              use_original_tempo: bool = False):
+
+        filepath = os.path.join(folder, filename)
+        if os.path.splitext(filepath)[-1] not in CorpusBuilder.MIDI_FILE_EXTENSIONS:
+            filepath += ".mid"
+        if os.path.exists(filepath) and not overwrite:
+            self.logger.error(f"The file '{filepath}' already exists. No corpus was exported. "
+                              f"To override, use 'overwrite= True'.")
+            return
+        if not os.path.isdir(folder):
+            self.logger.error(f"The folder '{folder}' does not exist. No corpus was exported.")
+            return
+
+        name: str = corpus_name if corpus_name is not None else filename
+
+        try:
+            corpus: Corpus = self.player.export_runtime_corpus(corpus_name, use_original_tempo=use_original_tempo)
+        except InvalidCorpus as e:
+            self.logger.error(f"{str(e)}. No MIDI data was exported.")
+            return
+
+        bar_number_annotations: BarNumberAnnotation = BarNumberAnnotation.from_string(annotations)
+
+        note_matrix: NoteMatrix = corpus.to_note_matrix()
+        midi_file: mido.MidiFile = note_matrix.to_midi_file(name, filepath, initial_time_signature, ticks_per_beat,
+                                                            bar_number_annotations)
+        # midi_file.save(filename=filepath)
+        self.logger.info(f"The recorded corpus '{name}' was saved to '{filepath}'.")

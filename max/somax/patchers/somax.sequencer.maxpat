@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1036.0, 166.0, 1048.0, 791.0 ],
+		"rect" : [ 1036.0, 166.0, 788.0, 436.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -60,7 +60,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 819.5, 56.532589068420748, 142.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 820.0, 57.0, 92.0, 18.0 ],
+					"presentation_rect" : [ 670.0, 74.0, 92.0, 18.0 ],
 					"text" : "vertical zoom",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -90,7 +90,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1420.25, 54.0, 36.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 876.0, 36.0, 36.0, 22.0 ],
+					"presentation_rect" : [ 726.0, 53.0, 36.0, 22.0 ],
 					"text" : "Auto",
 					"textjustification" : 1
 				}
@@ -117,7 +117,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1333.0, 115.0, 55.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 832.0, 36.0, 42.0, 22.0 ],
+					"presentation_rect" : [ 682.0, 53.0, 42.0, 22.0 ],
 					"text" : "Auto"
 				}
 
@@ -147,7 +147,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1351.0, 54.0, 52.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 820.0, 36.0, 50.0, 22.0 ],
+					"presentation_rect" : [ 670.0, 53.0, 50.0, 22.0 ],
 					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -1000,6 +1000,8 @@
 								"default" : 								{
 									"fontsize" : [ 10.0 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1009,9 +1011,7 @@
 										"proportion" : 0.39,
 										"autogradient" : 0
 									}
-,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+
 								}
 ,
 								"newobj" : 								{
@@ -1024,6 +1024,7 @@
 								"message" : 								{
 									"fontsize" : [ 10.0 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1033,15 +1034,14 @@
 										"proportion" : 0.39,
 										"autogradient" : 0
 									}
-,
-									"fontface" : [ 1 ]
-								}
-,
-								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+
 								}
 ,
 								"button" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"toggle" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
@@ -4860,6 +4860,8 @@
 				"default" : 				{
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -4869,9 +4871,7 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-,
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+
 				}
 ,
 				"newobj" : 				{
@@ -4884,6 +4884,7 @@
 				"message" : 				{
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -4893,15 +4894,14 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-,
-					"fontface" : [ 1 ]
-				}
-,
-				"toggle" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+
 				}
 ,
 				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

@@ -7,7 +7,7 @@ import logging.config
 import multiprocessing
 import sys
 from importlib import resources
-from typing import Optional, Callable, Tuple, List
+from typing import Optional, Callable, Tuple, List, Dict
 
 import log
 import somax

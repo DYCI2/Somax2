@@ -40,6 +40,18 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"comment" : "(list) flushed notes [nn vel ch]",
+					"id" : "obj-3",
+					"index" : 2,
+					"maxclass" : "outlet",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 844.999999999999886, 447.264462809917347, 30.0, 30.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-37",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -232,7 +244,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "flush" ],
 					"patching_rect" : [ 15.0, 38.0, 30.0, 30.0 ]
 				}
 
@@ -633,8 +645,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-80", 0 ],
-					"midpoints" : [ 854.499999999999886, 441.816115702479351, 70.5, 441.816115702479351 ],
+					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-34", 0 ]
 				}
 
