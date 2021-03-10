@@ -40,6 +40,51 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-89",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 808.0, 219.5, 195.0, 22.0 ],
+					"text" : "load somax.midiinfluencer.maxhelp"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+					"id" : "obj-87",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 808.0, 247.0, 51.0, 22.0 ],
+					"text" : "pcontrol"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"id" : "obj-19",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 810.5, 190.0, 22.0, 22.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 218.194839102912283, 6.825000250000016, 18.0, 18.0 ],
+					"rounded" : 99.0,
+					"text" : "?",
+					"texton" : "?",
+					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-17",
 					"linecolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
 					"maxclass" : "live.line",
@@ -75,7 +120,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 279.0, 578.490173000000027, 85.729498175765457, 38.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.084603340888407, -0.174999749999984, 247.610235762023876, 22.0 ],
+					"presentation_rect" : [ 0.084603340888407, 4.825000250000016, 216.110235762023876, 22.0 ],
 					"text" : "MidiInfluencer",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -95,7 +140,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 905.583333790302277, 69.0, 116.0, 42.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 4.539721257663132, 1.825000250000016, 238.699999928474426, 18.0 ],
+					"presentation_rect" : [ 4.539721257663132, 6.825000250000016, 208.199999928474426, 18.0 ],
 					"proportion" : 0.5
 				}
 
@@ -112,7 +157,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 816.00000137090683, 65.0, 116.0, 42.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.539721257663132, -0.174999749999984, 242.699999928474426, 22.0 ],
+					"presentation_rect" : [ 1.539721257663132, 4.825000250000016, 214.655117845249151, 22.0 ],
 					"proportion" : 0.5
 				}
 
@@ -625,6 +670,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-89", 0 ],
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"source" : [ "obj-2", 0 ]
 				}
@@ -699,6 +751,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-87", 0 ],
+					"source" : [ "obj-89", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
 					"source" : [ "obj-9", 0 ]
 				}
@@ -717,6 +776,7 @@
 				"message" : 				{
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -726,13 +786,13 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-,
-					"fontface" : [ 1 ]
+
 				}
 ,
 				"default" : 				{
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -743,15 +803,14 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

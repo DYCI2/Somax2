@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1372.0, 788.0 ],
+		"rect" : [ 34.0, 79.0, 1372.0, 788.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,51 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-89",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1097.0, 50.0, 203.0, 22.0 ],
+					"text" : "load somax.audioinfluencer.maxhelp"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+					"id" : "obj-87",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1097.0, 77.5, 51.0, 22.0 ],
+					"text" : "pcontrol"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"id" : "obj-40",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1099.5, 20.5, 22.0, 22.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 337.469205657934936, 5.825000250000016, 18.0, 18.0 ],
+					"rounded" : 99.0,
+					"text" : "?",
+					"texton" : "?",
+					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
@@ -119,7 +164,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 697.0, 21.0, 98.0, 38.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 14.769205729460509, 3.825000250000016, 345.610235762023876, 22.0 ],
+					"presentation_rect" : [ 14.769205729460509, 3.825000250000016, 319.360235762023876, 22.0 ],
 					"text" : "AudioInfluencer",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -139,7 +184,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 890.583333790302277, 54.0, 116.0, 42.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 17.769205729460509, 5.825000250000016, 336.699999928474426, 18.0 ],
+					"presentation_rect" : [ 17.769205729460509, 5.825000250000016, 312.199999928474426, 18.0 ],
 					"proportion" : 0.5
 				}
 
@@ -156,7 +201,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 801.00000137090683, 50.0, 116.0, 42.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 14.769205729460509, 3.825000250000016, 340.699999928474426, 22.0 ],
+					"presentation_rect" : [ 14.769205729460509, 3.825000250000016, 319.360235762023876, 22.0 ],
 					"proportion" : 0.5
 				}
 
@@ -1327,6 +1372,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-89", 0 ],
+					"source" : [ "obj-40", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-14", 1 ],
 					"source" : [ "obj-42", 0 ]
 				}
@@ -1346,6 +1398,13 @@
 				}
 
 			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-87", 0 ],
+					"source" : [ "obj-89", 0 ]
+				}
+
+			}
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
@@ -1359,6 +1418,7 @@
 				"message" : 				{
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1368,13 +1428,13 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-,
-					"fontface" : [ 1 ]
+
 				}
 ,
 				"default" : 				{
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1385,15 +1445,14 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
