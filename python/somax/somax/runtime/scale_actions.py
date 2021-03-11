@@ -450,3 +450,31 @@ class OctaveBandsScaleAction(AbstractScaleAction):
         if max_val > 0:
             band_distribution /= max_val
         self._band_distribution.value = band_distribution
+
+
+class RegionMaskScaleAction(AbstractScaleAction):
+    def __init__(self):
+        super().__init__()
+        self._low_thresh: Parameter = Parameter(0, 0, 1.0, "float", "Fraction [0,1] marking start of region")
+        self._high_thresh: Parameter = Parameter(1.0, 0, 1.0, "float", "Fraction [0,1] marking end of region")
+
+    def scale(self, peaks: Peaks, _time: float, corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
+              corpus: Corpus = None, **_kwargs) -> Peaks:
+        # TODO: This could be optimized and stored if ScaleAction had direct access to Corpus
+        low_index: int = int(self._low_thresh.value * corpus.length())
+        high_index: int = int(self._high_thresh.value * corpus.length())
+        corresponding_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
+        mask: np.ndarray = ((low_index <= corresponding_indices) & (corresponding_indices <= high_index)).astype(int)
+        peaks.scale(mask)
+        return peaks
+
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
+        pass
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        pass

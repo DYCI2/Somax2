@@ -274,8 +274,8 @@ class OscAgent(Agent, AsyncioOscObject):
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             self.player.set_classifier(path_and_name, classifier)
-            self.logger.info(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
-                             f"for player '{self.player.name}' (path='{path}').")
+            self.logger.debug(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
+                              f"for player '{self.player.name}' (path='{path}').")
         except (AssertionError, KeyError, ValueError, InvalidCorpus) as e:
             self.logger.error(f"{str(e)} No classifier was set.")
 

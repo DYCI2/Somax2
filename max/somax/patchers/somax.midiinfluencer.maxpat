@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 8,
+			"revision" : 7,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1269.0, 866.0 ],
+		"rect" : [ 34.0, 78.0, 1040.0, 739.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,18 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-20",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "bang", "bang" ],
+					"patching_rect" : [ 311.541564999999991, 648.0, 32.0, 22.0 ],
+					"text" : "t b b"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-50",
 					"maxclass" : "newobj",
@@ -70,7 +82,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 422.541717500000004, 300.221870874999922, 97.0, 18.0 ],
+					"patching_rect" : [ 86.0, 888.0, 97.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 13.541717500000004, 276.333333045244217, 94.0, 18.0 ],
 					"text" : "Onset limiter (ms)",
@@ -232,7 +244,7 @@
 					"fontface" : 1,
 					"id" : "obj-209",
 					"maxclass" : "number",
-					"minimum" : 10,
+					"minimum" : 30,
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
@@ -251,7 +263,7 @@
 					"fontface" : 1,
 					"id" : "obj-212",
 					"maxclass" : "number",
-					"minimum" : 10,
+					"minimum" : 30,
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
@@ -405,7 +417,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -701,18 +713,6 @@
 					"outlettype" : [ "bang", "" ],
 					"patching_rect" : [ 193.527875999998514, 822.0, 34.0, 22.0 ],
 					"text" : "sel 0"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-74",
-					"maxclass" : "button",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 141.0, 607.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -1028,8 +1028,8 @@
 						"flush" : [ 0.0 ],
 						"onsetlimit" : [ 0 ],
 						"pitchfromchords" : [ "Top note" ],
-						"taudown" : [ 1000 ],
-						"tauup" : [ 400 ],
+						"taudown" : [ 500 ],
+						"tauup" : [ 100 ],
 						"threshbypass" : [ 1 ],
 						"threshold" : [ 20 ]
 					}
@@ -1242,7 +1242,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1969.152058478175604, 437.071770526881778, 83.0, 22.0 ],
-					"text" : "loadmess 400"
+					"text" : "loadmess 100"
 				}
 
 			}
@@ -1254,8 +1254,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1826.152058478175377, 433.0, 90.0, 22.0 ],
-					"text" : "loadmess 1000"
+					"patching_rect" : [ 1826.152058478175377, 433.0, 83.0, 22.0 ],
+					"text" : "loadmess 500"
 				}
 
 			}
@@ -1943,7 +1943,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 344.083129999999983, 652.0, 65.0, 18.0 ],
+					"patching_rect" : [ 344.083129999999983, 617.0, 65.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 16.362548999999944, 382.654164545243987, 85.358336999999892, 18.0 ],
 					"text" : "Onset",
@@ -2198,7 +2198,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3275,7 +3275,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 311.541564999999991, 649.0, 24.0, 24.0 ],
+					"patching_rect" : [ 311.541564999999991, 614.0, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 25.621925375000046, 309.573956670244172, 66.83958425000003, 66.83958425000003 ]
 				}
@@ -3505,7 +3505,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 344.083129999999983, 652.0, 65.0, 18.0 ],
+					"patching_rect" : [ 344.083129999999983, 617.0, 65.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 16.362549000000172, 302.333333045244217, 85.358336999999892, 81.320831499999997 ],
 					"proportion" : 0.5
@@ -3891,6 +3891,22 @@
 				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
 					"source" : [ "obj-194", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-18", 0 ],
+					"source" : [ "obj-20", 0 ],
+					"watchpoint_flags" : 5,
+					"watchpoint_id" : 11
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-245", 0 ],
+					"source" : [ "obj-20", 1 ]
 				}
 
 			}
@@ -4297,10 +4313,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-18", 0 ],
-					"source" : [ "obj-49", 0 ],
-					"watchpoint_flags" : 5,
-					"watchpoint_id" : 11
+					"destination" : [ "obj-20", 0 ],
+					"source" : [ "obj-49", 0 ]
 				}
 
 			}
@@ -4506,13 +4520,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-69", 1 ],
-					"source" : [ "obj-74", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-70", 0 ],
 					"source" : [ "obj-75", 0 ]
 				}
@@ -4594,15 +4601,7 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
 				"message" : 				{
-					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -4613,12 +4612,12 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"default" : 				{
-					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -4629,9 +4628,17 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
+					"fontface" : [ 1 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ]
+				}
+,
+				"newobj" : 				{
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"toggle" : 				{
