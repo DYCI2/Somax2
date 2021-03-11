@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 1,
+			"revision" : 8,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -37,15 +37,28 @@
 		"tags" : "",
 		"style" : "",
 		"subpatcher_template" : "",
+		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-7",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 337.0, 149.0, 107.0, 22.0 ],
+					"text" : "prepend bgfillcolor"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-9",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 26.600000560283661, 56.0, 65.0, 22.0 ],
-					"text" : "route color"
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 26.600000560283661, 56.0, 119.0, 22.0 ],
+					"text" : "route color bgfillcolor"
 				}
 
 			}
@@ -65,11 +78,11 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-12",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "int" ],
 					"patching_rect" : [ 26.766665577888489, 19.200000643730164, 30.0, 30.0 ]
 				}
 
@@ -131,11 +144,11 @@
 					"presentation_rect" : [ 19.10000500000001, 0.5, 12.0, 12.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "live.text",
 							"parameter_enum" : [ "val1", "val2" ],
-							"parameter_type" : 2,
-							"parameter_longname" : "live.text[3]",
-							"parameter_mmax" : 1
+							"parameter_longname" : "live.text[25]",
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "live.text",
+							"parameter_type" : 2
 						}
 
 					}
@@ -167,17 +180,18 @@
 					"presentation_rect" : [ 1.10000500000001, 0.5, 12.0, 12.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "live.text",
 							"parameter_enum" : [ "val1", "val2" ],
-							"parameter_type" : 2,
-							"parameter_longname" : "live.text[4]",
-							"parameter_mmax" : 1
+							"parameter_longname" : "live.text[23]",
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "live.text",
+							"parameter_type" : 2
 						}
 
 					}
 ,
 					"text" : "",
-					"texton" : ""
+					"texton" : "",
+					"varname" : "live.text"
 				}
 
 			}
@@ -202,17 +216,18 @@
 					"presentation_rect" : [ 10.10000500000001, 0.5, 12.0, 12.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_shortname" : "live.text",
 							"parameter_enum" : [ "val1", "val2" ],
-							"parameter_type" : 2,
-							"parameter_longname" : "live.text[5]",
-							"parameter_mmax" : 1
+							"parameter_longname" : "live.text[18]",
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "live.text",
+							"parameter_type" : 2
 						}
 
 					}
 ,
 					"text" : "",
-					"texton" : ""
+					"texton" : "",
+					"varname" : "live.text[1]"
 				}
 
 			}
@@ -280,6 +295,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"source" : [ "obj-7", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-8", 0 ]
 				}
@@ -289,7 +311,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
 					"order" : 2,
-					"source" : [ "obj-9", 1 ]
+					"source" : [ "obj-9", 2 ]
 				}
 
 			}
@@ -305,6 +327,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
 					"order" : 0,
+					"source" : [ "obj-9", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-7", 0 ],
 					"source" : [ "obj-9", 1 ]
 				}
 
@@ -313,23 +342,11 @@
 				"patchline" : 				{
 					"destination" : [ "obj-8", 0 ],
 					"order" : 1,
-					"source" : [ "obj-9", 1 ]
+					"source" : [ "obj-9", 2 ]
 				}
 
 			}
  ],
-		"parameters" : 		{
-			"obj-3" : [ "live.text[5]", "live.text", 0 ],
-			"obj-2" : [ "live.text[4]", "live.text", 0 ],
-			"obj-1" : [ "live.text[3]", "live.text", 0 ],
-			"parameterbanks" : 			{
-
-			}
-
-		}
-,
-		"dependency_cache" : [  ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-1", "obj-3", "obj-4", "obj-2" ]
 			}

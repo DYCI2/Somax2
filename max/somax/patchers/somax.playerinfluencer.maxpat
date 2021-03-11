@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 8,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1372.0, 739.0 ],
+		"rect" : [ 34.0, 79.0, 1047.0, 889.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,17 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-95",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1240.0, 209.0, 150.0, 20.0 ],
+					"text" : "o"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-94",
 					"maxclass" : "newobj",
@@ -406,7 +417,7 @@
 					"fontface" : 1,
 					"id" : "obj-63",
 					"maxclass" : "number",
-					"minimum" : 10,
+					"minimum" : 30,
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
@@ -418,6 +429,7 @@
 						"valueof" : 						{
 							"parameter_invisible" : 1,
 							"parameter_longname" : "tauup",
+							"parameter_mmin" : 30.0,
 							"parameter_shortname" : "tauup",
 							"parameter_type" : 3
 						}
@@ -435,7 +447,7 @@
 					"fontface" : 1,
 					"id" : "obj-64",
 					"maxclass" : "number",
-					"minimum" : 10,
+					"minimum" : 30,
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
@@ -447,6 +459,7 @@
 						"valueof" : 						{
 							"parameter_invisible" : 1,
 							"parameter_longname" : "taudown",
+							"parameter_mmin" : 30.0,
 							"parameter_shortname" : "taudown",
 							"parameter_type" : 3
 						}
@@ -591,7 +604,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1566.152058478175604, 429.071770526881778, 83.0, 22.0 ],
-					"text" : "loadmess 400"
+					"text" : "loadmess 100"
 				}
 
 			}
@@ -603,8 +616,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1423.152058478175377, 425.0, 90.0, 22.0 ],
-					"text" : "loadmess 1000"
+					"patching_rect" : [ 1423.152058478175377, 425.0, 83.0, 22.0 ],
+					"text" : "loadmess 500"
 				}
 
 			}
@@ -759,7 +772,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 8,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1161,8 +1174,8 @@
 						"flush" : [ 0.0 ],
 						"onsetlimit" : [ 0 ],
 						"pitchfromchords" : [ "Top note" ],
-						"taudown" : [ 1000 ],
-						"tauup" : [ 400 ]
+						"taudown" : [ 500 ],
+						"tauup" : [ 100 ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -2260,7 +2273,7 @@
 					"destination" : [ "obj-243", 0 ],
 					"source" : [ "obj-13", 0 ],
 					"watchpoint_flags" : 5,
-					"watchpoint_id" : 3
+					"watchpoint_id" : 38
 				}
 
 			}
@@ -2909,6 +2922,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-49", 0 ],
+					"source" : [ "obj-85", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-91", 1 ],
 					"source" : [ "obj-85", 1 ]
 				}
@@ -3099,7 +3119,17 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
+				"newobj" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
 				"message" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3109,13 +3139,13 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-,
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
+
 				}
 ,
 				"default" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3126,24 +3156,14 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
-				}
-,
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
-				}
-,
-				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

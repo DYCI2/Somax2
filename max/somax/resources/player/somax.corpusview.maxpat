@@ -40,6 +40,19 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"comment" : "(m4l) panel control",
+					"id" : "obj-10",
+					"index" : 0,
+					"maxclass" : "inlet",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 202.0, 13.0, 30.0, 30.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"color" : [ 0.820717811584473, 0.0, 0.763403832912445, 1.0 ],
 					"id" : "obj-9",
 					"linecount" : 2,
@@ -73,7 +86,7 @@
 				"box" : 				{
 					"comment" : "(symbol) associated symbol",
 					"id" : "obj-7",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -154,7 +167,7 @@
 				"box" : 				{
 					"comment" : "(bang) refresh",
 					"id" : "obj-2",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -291,17 +304,18 @@
 , 			{
 				"box" : 				{
 					"align" : 1,
-					"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+					"bgcolor" : [ 0.0, 0.0, 0.0, 0.0 ],
 					"bgfillcolor_angle" : 270.0,
 					"bgfillcolor_autogradient" : 0.0,
-					"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 0.0 ],
+					"bgfillcolor_color" : [ 0.0, 0.0, 0.0, 0.0 ],
 					"bgfillcolor_color1" : [ 0.301961, 0.301961, 0.301961, 1.0 ],
 					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"bgfillcolor_proportion" : 0.5,
 					"bgfillcolor_type" : "color",
 					"fontface" : 1,
+					"fontsize" : 12.0,
 					"id" : "obj-26",
-					"items" : [ "--", "click", "to", "refresh", "--", ",", "stravi99", ",", "carine_intuition", ",", "mozart36", ",", "debussy_part2", ",", "Scarbo", ",", "debussy", ",", "stravi", ",", "cscale", ",", "papae", ",", "keithjarrett_kolnconcert", ",", "debussy_part_modified", ",", "schoenberg_drei_klavierstucke_11", ",", "debussy_stringquartet", ",", "ligeti_lux_aeterna", ",", "gol", ",", "palestrina_missapapae", ",", "franck1", ",", "brahms3_1_and_2", ",", "keithjarrett_kolnconcert_Right" ],
+					"items" : [ "--", "click", "to", "refresh", "--" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -315,7 +329,7 @@
 						"valueof" : 						{
 							"parameter_enum" : [ "-- click to refresh --", "stravi99", "carine_intuition", "mozart36", "debussy_part2", "Scarbo", "debussy", "stravi", "cscale", "papae", "keithjarrett_kolnconcert", "debussy_part_modified", "schoenberg_drei_klavierstucke_11", "debussy_stringquartet", "ligeti_lux_aeterna", "gol", "palestrina_missapapae", "franck1", "brahms3_1_and_2", "keithjarrett_kolnconcert_Right" ],
 							"parameter_invisible" : 1,
-							"parameter_longname" : "corpusname",
+							"parameter_longname" : "corpusname[2]",
 							"parameter_mmax" : 19,
 							"parameter_shortname" : "corpusname",
 							"parameter_type" : 2
@@ -364,11 +378,11 @@
 					"comment" : "(list) messages from server",
 					"cool" : 1,
 					"id" : "obj-100",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 84.0, 13.0, 30.0, 30.0 ]
 				}
 
@@ -377,11 +391,11 @@
 				"box" : 				{
 					"comment" : "(symbol/int) select option",
 					"id" : "obj-110",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 38.5, 13.0, 30.0, 30.0 ]
 				}
 
@@ -390,7 +404,7 @@
 				"box" : 				{
 					"comment" : "(symbol) menu item text",
 					"id" : "obj-127",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -403,6 +417,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-16", 0 ],
+					"source" : [ "obj-10", 0 ]
 				}
 
 			}
@@ -573,6 +594,17 @@
 
 			}
  ],
+		"parameters" : 		{
+			"obj-26" : [ "corpusname[2]", "corpusname", 0 ],
+			"parameterbanks" : 			{
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [  ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-120", "obj-26", "obj-16" ]
 			}
@@ -581,15 +613,15 @@
 				"name" : "dUG Yello 01-1",
 				"newobj" : 				{
 					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
 					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -604,9 +636,8 @@
 ,
 				"default" : 				{
 					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -616,14 +647,15 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-
-				}
 ,
-				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
