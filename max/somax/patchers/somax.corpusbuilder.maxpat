@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 8,
+			"revision" : 7,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 275.0, 79.0, 742.0, 618.0 ],
+		"rect" : [ 275.0, 79.0, 702.0, 626.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,6 +40,63 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 10.0,
+					"id" : "obj-71",
+					"linecount" : 5,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 368.916666507720947, 231.5, 67.0, 62.0 ],
+					"presentation" : 1,
+					"presentation_linecount" : 2,
+					"presentation_rect" : [ 368.916666507720947, 231.5, 131.5, 29.0 ],
+					"text" : "Build non-blocking (with scheduler running)",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textjustification" : 1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-64",
+					"maxclass" : "toggle",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 92.0, 438.82706715008203, 24.0, 24.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 346.264608029545343, 234.82706715008203, 24.0, 24.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-54",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "bang", "bang", "" ],
+					"patching_rect" : [ 92.0, 471.667907075326525, 44.0, 22.0 ],
+					"text" : "sel 1 0"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-53",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 92.0, 505.827067150082087, 156.0, 22.0 ],
+					"text" : "multithreaded_build_corpus"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-8",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -63,7 +120,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1547,7 +1604,7 @@
 				"box" : 				{
 					"comment" : "(list) Parameters",
 					"id" : "obj-13",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1560,7 +1617,7 @@
 				"box" : 				{
 					"comment" : "(unused)",
 					"id" : "obj-3",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1600,7 +1657,7 @@
 					"patching_rect" : [ 990.0, 516.294871794871824, 171.0, 25.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 9.416666507720947, 209.5, 171.0, 20.5 ],
-					"text" : "debussy_part",
+					"text" : "Scarbo",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -1690,7 +1747,7 @@
 				"box" : 				{
 					"comment" : "build message (to server)",
 					"id" : "obj-115",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1795,15 +1852,15 @@
 				"box" : 				{
 					"bubbleusescolors" : 1,
 					"id" : "obj-62",
-					"linecount" : 13,
+					"linecount" : 21,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 176.0, 775.5, 84.0, 181.0 ],
+					"patching_rect" : [ 176.0, 775.5, 87.0, 288.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 7,
-					"presentation_rect" : [ 336.416666507720947, 31.0, 160.0, 100.0 ],
-					"text" : "build_corpus 0 fg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] bg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] overwrite= 0 corpus_name= 0 0",
+					"presentation_linecount" : 10,
+					"presentation_rect" : [ 336.416666507720947, 31.0, 164.0, 141.0 ],
+					"text" : "multithreaded_build_corpus /Users/joakimborg/MIDI/Scarbo.mid fg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] bg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] overwrite= 1 corpus_name= Scarbo output_folder= /Users/joakimborg/MaxDev/Somax2/max/somax/corpus",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -1834,7 +1891,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2114,7 +2171,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2402,7 +2459,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 9.0, 59.0, 195.943816499999571, 20.0 ],
 					"style" : "helpfile_label",
-					"text" : "drag and drop a file here...",
+					"text" : "Scarbo.mid",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -2450,6 +2507,38 @@
 					"patching_rect" : [ 1065.139618500000552, 543.333333333333371, 82.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 9.416666507720947, 208.5, 171.0, 23.0 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"id" : "obj-76",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 343.264608029545343, 229.5, 42.999999105930328, 19.5 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 346.264608029545343, 231.5, 154.152058478175604, 29.0 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
+					"id" : "obj-79",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 340.681274696212313, 220.5, 256.0, 124.119183136243464 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 340.681274696212313, 223.5, 164.416717341054095, 45.0 ],
 					"proportion" : 0.5
 				}
 
@@ -2793,6 +2882,27 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-66", 0 ],
+					"source" : [ "obj-53", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-53", 0 ],
+					"source" : [ "obj-54", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-70", 0 ],
+					"source" : [ "obj-54", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-27", 0 ],
 					"order" : 1,
 					"source" : [ "obj-55", 0 ]
@@ -2841,6 +2951,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-9", 0 ],
 					"source" : [ "obj-6", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-54", 0 ],
+					"source" : [ "obj-64", 0 ]
 				}
 
 			}
@@ -3050,22 +3167,6 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "somax.path.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
-				"patcherrelativepath" : "../misc",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-123", "obj-121", "obj-131", "obj-133", "obj-139", "obj-141", "obj-118", "obj-129", "obj-137", "obj-143", "obj-145", "obj-146", "obj-117", "obj-125", "obj-135", "obj-142", "obj-27", "obj-165", "obj-149" ]
 			}
@@ -3075,17 +3176,7 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
 				"message" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3095,13 +3186,13 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-
+,
+					"fontsize" : [ 10.0 ],
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"default" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3112,14 +3203,24 @@
 						"autogradient" : 0
 					}
 ,
+					"fontsize" : [ 10.0 ],
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"newobj" : 				{
+					"fontsize" : [ 10.0 ],
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

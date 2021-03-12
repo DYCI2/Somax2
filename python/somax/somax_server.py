@@ -14,7 +14,7 @@ import somax
 from somax import settings
 from somax.classification import SomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
-from somax.corpus_builder.corpus_builder import CorpusBuilder
+from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder
 from somax.runtime.agent import OscAgent, Agent
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.corpus import Corpus
@@ -35,6 +35,7 @@ class Somax:
         super().__init__(*args, **kwargs)
         self.logger = logging.getLogger(__name__)
         self._agents: Dict[str, Tuple[Agent, multiprocessing.Queue]] = dict()
+        self._corpus_builders: List[ThreadedCorpusBuilder] = []
         self._transport: Transport = MasterTransport()
         self._tempo_master_queue: multiprocessing.Queue[TempoMessage] = multiprocessing.Queue()
         self._terminated: bool = False
@@ -71,6 +72,7 @@ class Somax:
         self._send_to_all_agents(ControlMessage(PlayControl.TERMINATE))
         self._terminated = True
         [process.join() for process, _ in self._agents.values()]
+        [process.join() for process in self._corpus_builders]
         self._agents = {}
 
     def set_tempo(self, tempo: float):
@@ -115,6 +117,21 @@ class Somax:
                 self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
+
+    def multithreaded_build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
+                     overwrite: bool = False, filter_class: str = "", **kwargs):
+        self.logger.info(f"Building corpus from file(s) '{filepath}'...")
+        try:
+            spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
+        except ValueError as e:
+            self.logger.error(f"{str(e)} No Corpus was built.")
+            return
+        corpus_builder: ThreadedCorpusBuilder = ThreadedCorpusBuilder(filepath=filepath, corpus_name=corpus_name,
+                                                                      spectrogram_filter=spectrogram_filter,
+                                                                      output_folder=output_folder, overwrite=overwrite,
+                                                                      **kwargs)
+        corpus_builder.start()
+        self._corpus_builders.append(corpus_builder)
 
 
 class SomaxServer(Somax, AsyncioOscObject):
