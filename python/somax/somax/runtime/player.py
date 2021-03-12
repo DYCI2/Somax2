@@ -174,12 +174,12 @@ class Player(Streamview, ScheduledMidiAgent):
         """ raises: InvalidCorpus if there's no data to export"""
         return self.improvisation_memory.export(name, self.corpus, **kwargs)
 
-    def get_peaks(self) -> Dict[str, int]:
+    def get_peaks(self) -> Tuple[Dict[str, int], int]:
         peaks_count: Dict[str, int] = {self.name: self.previous_peaks.size()}
         for atom in self.all_atoms():
             peaks: Peaks = atom.get_peaks()
             peaks_count[atom.name] = peaks.size()
-        return peaks_count
+        return peaks_count, self.improvisation_memory.length()
 
     ######################################################
     # PRIVATE

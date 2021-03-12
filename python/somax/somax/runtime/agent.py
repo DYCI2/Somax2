@@ -449,8 +449,10 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(str(e))
 
     def send_peaks(self):
-        for name, count in self.player.get_peaks().items():
+        peaks_dict, num_recorded_events = self.player.get_peaks()
+        for name, count in peaks_dict.items():
             self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
+        self.target.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, num_recorded_events)
 
     def send_corpora(self, corpus_names_and_paths: List[Tuple[str, str]]):
         for corpus in corpus_names_and_paths:

@@ -13,6 +13,7 @@ class SendProtocol:
     AGENT_INSTANTIATED = "instantiated_agent"
     INSTANTIATED_ATOMS = "instantiated_atoms"
     PLAYER_CORPUS = "corpus"
+    PLAYER_RECORDED_CORPUS_LENGTH = "recorded_corpus"
 
     SCHEDULER_RUNNING = "scheduler_running"
     TRANSPORT_MODE = "transport_mode"
