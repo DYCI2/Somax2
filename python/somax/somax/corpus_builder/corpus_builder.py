@@ -13,6 +13,8 @@ from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
 from somax.runtime.corpus import Corpus, ContentType
 from somax.runtime.corpus_event import Note, CorpusEvent
+from somax.runtime.osc_log_forwarder import OscLogForwarder
+from somax.runtime.target import SimpleOscTarget
 
 
 # TODO: Simple prototype to test the idea of multithreaded corpusbuilding
@@ -21,7 +23,9 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
                  foreground_channels: Tuple[int] = tuple(range(1, 17)),
                  background_channels: Tuple[int] = tuple(range(1, 17)),
                  spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
-                 output_folder: Optional[str] = None, overwrite: bool = False, **kwargs):
+                 output_folder: Optional[str] = None, overwrite: bool = False,
+                 osc_address: Optional[str] = None, ip: Optional[str] = None,
+                 send_port: Optional[int] = None, **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.filepath = filepath
@@ -31,17 +35,24 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
         self.spectrogram_filter = spectrogram_filter
         self.output_folder = output_folder
         self.overwrite = overwrite
+        self.osc_address = osc_address
+        self.ip = ip
+        self.send_port = send_port
         self.kwargs = kwargs
 
     def run(self):
+        if not (self.osc_address is None or self.ip is None or self.send_port is None):
+            self.logger.addHandler(OscLogForwarder(SimpleOscTarget(address=self.osc_address,
+                                                                   port=self.send_port, ip=self.ip)))
+            print(self.logger)
+            self.logger.setLevel(logging.INFO)
+
         try:
             corpus: Corpus = CorpusBuilder().build(filepath=self.filepath, corpus_name=self.corpus_name,
                                                    spectrogram_filter=self.spectrogram_filter, **self.kwargs)
             self.logger.debug(f"[build_corpus]: Successfully built '{corpus.name}' from file '{self.filepath}'.")
-            print(f"[build_corpus]: Successfully built '{corpus.name}' from file '{self.filepath}'.")
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
-            print(f"{str(e)} No Corpus was built.")
             return
 
         if self.output_folder is not None:
@@ -49,10 +60,8 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
             try:
                 output_filepath: str = corpus.export(self.output_folder, overwrite=self.overwrite)
                 self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
-                print(f"Corpus was successfully written to file '{output_filepath}'.")
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
-                print(f"{str(e)} Export of corpus failed.")
 
 
 class CorpusBuilder:

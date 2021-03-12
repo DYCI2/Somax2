@@ -2,6 +2,7 @@
 
 import argparse
 import asyncio
+import copy
 import logging
 import logging.config
 import multiprocessing
@@ -11,7 +12,6 @@ from typing import Optional, Callable, Tuple, List, Dict
 
 import log
 import somax
-from somax import settings
 from somax.classification import SomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder
@@ -117,21 +117,6 @@ class Somax:
                 self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
-
-    def multithreaded_build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                     overwrite: bool = False, filter_class: str = "", **kwargs):
-        self.logger.info(f"Building corpus from file(s) '{filepath}'...")
-        try:
-            spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
-        except ValueError as e:
-            self.logger.error(f"{str(e)} No Corpus was built.")
-            return
-        corpus_builder: ThreadedCorpusBuilder = ThreadedCorpusBuilder(filepath=filepath, corpus_name=corpus_name,
-                                                                      spectrogram_filter=spectrogram_filter,
-                                                                      output_folder=output_folder, overwrite=overwrite,
-                                                                      **kwargs)
-        corpus_builder.start()
-        self._corpus_builders.append(corpus_builder)
 
 
 class SomaxServer(Somax, AsyncioOscObject):
@@ -301,6 +286,26 @@ class SomaxServer(Somax, AsyncioOscObject):
         self.target.send(SendProtocol.SCHEDULER_RESET_UI, Target.WRAPPED_BANG)
         if print_exit_message:
             self.logger.info("Somax was successfully shut down.")
+
+    ######################################################
+    # MISC.
+    ######################################################
+
+    def multithreaded_build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
+                                   overwrite: bool = False, filter_class: str = "", **kwargs):
+        self.logger.info(f"Building corpus from file(s) '{filepath}'...")
+        try:
+            spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
+        except ValueError as e:
+            self.logger.error(f"{str(e)} No Corpus was built.")
+            return
+        corpus_builder: ThreadedCorpusBuilder = ThreadedCorpusBuilder(filepath=filepath, corpus_name=corpus_name,
+                                                                      spectrogram_filter=spectrogram_filter,
+                                                                      output_folder=output_folder, overwrite=overwrite,
+                                                                      osc_address=self.address, ip=self.ip,
+                                                                      send_port=self.send_port, **kwargs)
+        corpus_builder.start()
+        self._corpus_builders.append(corpus_builder)
 
 
 if __name__ == "__main__":
