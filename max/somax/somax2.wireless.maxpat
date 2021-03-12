@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 755.0, 905.0 ],
+		"rect" : [ 34.0, 79.0, 1040.0, 739.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -101,7 +101,7 @@
 					"outlettype" : [ "", "", "", "", "", "", "" ],
 					"patching_rect" : [ 770.0, 12.0, 257.0, 881.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 374.0, 0.0, 261.0, 877.675398314063386 ],
+					"presentation_rect" : [ 371.0, 0.0, 261.0, 877.675398314063386 ],
 					"varname" : "somax.player.io",
 					"viewvisibility" : 1
 				}
@@ -306,8 +306,12 @@
 			"obj-43::obj-12::obj-10::obj-2::obj-261::obj-1" : [ "activechannels[4]", "activechannels", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-264::obj-1" : [ "activechannels[5]", "activechannels", 0 ],
 			"obj-69::obj-13::obj-1" : [ "source[1]", "source", 0 ],
+			"obj-7::obj-17::obj-39::obj-6::obj-21" : [ "onset", "onset", 0 ],
+			"obj-7::obj-17::obj-39::obj-6::obj-28" : [ "chromaonset", "chromaonset", 0 ],
+			"obj-7::obj-17::obj-39::obj-6::obj-29" : [ "enable", "enable", 0 ],
 			"obj-7::obj-17::obj-39::obj-6::obj-30" : [ "chroma scaling factor", "chroma", 0 ],
 			"obj-7::obj-17::obj-39::obj-6::obj-46::obj-1" : [ "source[2]", "source", 0 ],
+			"obj-7::obj-17::obj-39::obj-6::obj-9" : [ "pitch", "pitch", 0 ],
 			"obj-7::obj-1::obj-13::obj-2::obj-259::obj-1" : [ "activechannels[1]", "activechannels", 0 ],
 			"obj-7::obj-1::obj-13::obj-2::obj-261::obj-1" : [ "activechannels[2]", "activechannels", 0 ],
 			"obj-7::obj-1::obj-13::obj-2::obj-264::obj-1" : [ "activechannels", "activechannels", 0 ],
@@ -315,6 +319,7 @@
 			"obj-7::obj-1::obj-13::obj-2::obj-63" : [ "tauup", "tauup", 0 ],
 			"obj-7::obj-1::obj-13::obj-2::obj-64" : [ "taudown", "taudown", 0 ],
 			"obj-7::obj-1::obj-13::obj-2::obj-65" : [ "filterchroma", "filterchroma", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-1007" : [ "rslider", "rslider", 0 ],
 			"obj-7::obj-1::obj-6::obj-1::obj-12" : [ "melodicmod12", "melodicmod12", 0 ],
 			"obj-7::obj-1::obj-6::obj-1::obj-120" : [ "melodicbypass", "melodicbypass", 0 ],
 			"obj-7::obj-1::obj-6::obj-1::obj-126" : [ "harmonicbypass", "harmonicbypass", 0 ],
@@ -366,6 +371,7 @@
 			"obj-7::obj-1::obj-6::obj-1::obj-860" : [ "harmonincpeakdecay[1]", "harmonincpeakdecay[1]", 0 ],
 			"obj-7::obj-1::obj-6::obj-1::obj-865" : [ "selfharmonicngramorder", "selfharmonicngramorder", 0 ],
 			"obj-7::obj-1::obj-6::obj-1::obj-870" : [ "selfharmonicbypass", "selfharmonicbypass", 0 ],
+			"obj-7::obj-1::obj-6::obj-1::obj-998" : [ "__exp_regionmaskenable", "__exp_regionmaskenable", 0 ],
 			"obj-7::obj-1::obj-6::obj-5::obj-26" : [ "umenu[1]", "corpusname", 0 ],
 			"obj-7::obj-1::obj-6::obj-79::obj-1" : [ "live.text[3]", "live.text", 0 ],
 			"obj-7::obj-1::obj-6::obj-79::obj-2" : [ "live.text[4]", "live.text", 0 ],
@@ -412,6 +418,18 @@
 					"parameter_invisible" : 1,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-7::obj-1::obj-6::obj-79::obj-1" : 				{
+					"parameter_longname" : "live.text[3]"
+				}
+,
+				"obj-7::obj-1::obj-6::obj-79::obj-2" : 				{
+					"parameter_longname" : "live.text[4]"
+				}
+,
+				"obj-7::obj-1::obj-6::obj-79::obj-3" : 				{
+					"parameter_longname" : "live.text[5]"
 				}
 ,
 				"obj-7::obj-1::obj-6::obj-87::obj-1" : 				{
@@ -728,13 +746,6 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "factory_settings.json",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/state",
-				"patcherrelativepath" : "./state",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "somax.player.compact.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
@@ -927,7 +938,16 @@
 		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
+				"newobj" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ]
+				}
+,
 				"message" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -938,12 +958,13 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ]
 				}
 ,
 				"default" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -954,24 +975,14 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ]
-				}
-,
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
-				}
-,
-				"toggle" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
