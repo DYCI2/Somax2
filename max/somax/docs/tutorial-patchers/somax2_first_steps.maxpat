@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -46,6 +46,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-14",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -57,7 +58,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -125,7 +126,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.5, 53.647855530474089, 299.0, 288.0 ],
+									"patching_rect" : [ 10.5, 53.647855530474089, 302.0, 288.0 ],
 									"text" : "This tutorial intended to give you a quick introduction to Somax and to serve as a starting point for both audio and MIDI-based interaction.\n\nThere are however a number of other aspects of the system to explore, for example connecting a MIDI keyboard, audio file or a sequencer (using an IAC bus) as an input, using multiple players who listen to each other, constructing your own corpora, experimenting with the tempo and beat tracker, and many other possibilies.\n\nIn the end, the quality of the output will always depend largely on how well the influencers and the player(s) are tuned with respect to the corpus and the input, so it's highly encouraged to experiment with the different parameters available. The help files («Help» buttons in each module) will provide a good starting point for going further, outline a few use cases as well as provide detailed descriptions about each individual parameter.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -169,7 +170,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -182,7 +182,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -241,7 +241,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 7,
+											"revision" : 10,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -449,7 +449,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 926.5, 121.0, 305.0, 409.0 ],
+									"patching_rect" : [ 926.5, 121.0, 308.0, 409.0 ],
 									"text" : "Somax II is an application for musical improvisation and composition. It is based on a generative model using a process similar to concatenative synthesis to provide stylistically coherent improvisation, while in real-time listening to and adapting to a musician (or any other type of audio or MIDI source). The model is operating in the symbolic domain and is trained on a corpus of choice, consisting of one or mulitple MIDI files, from which it draws its material used for improvisation.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, you need to make sure to add the main Somax II folder to your File Path.\n\nThis is done by (in the menubar) clicking Options -> File Preferences..., then clicking the \"+\" button and finally \"choose\", navigating to the place where your Somax2 folder is. Make sure to restart Max once this step is done.\n\nIf the interface now looks like the button above, please go to the second tab:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -571,7 +571,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -798,8 +798,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 929.0, 320.352144469525911, 306.0, 208.0 ],
-									"presentation_linecount" : 14,
+									"patching_rect" : [ 929.0, 320.352144469525911, 313.0, 208.0 ],
 									"text" : "Ideally, you should also notice that the player starts to «jump», finding sequences in the corpus matching your input and jumping to these instead of playing the corpus in a linear, unaltered manner. This discontinuity is visualized in        .\n\nIf this is not the case, try decreasing the red slider at        \nwhich should lead to more matches and therefore a higher probability of jumps. For more information on these parameters, once again see               .\n\nA final step is to set the playing mode at        to «Continuous». In this mode, the player will regardless of input continuously generate output but jump in a similar manner as above when input is received.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -985,7 +984,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 929.0, 124.352144469525911, 312.0, 194.0 ],
+									"patching_rect" : [ 929.0, 124.352144469525911, 316.0, 194.0 ],
 									"text" : "Next, we'll interact with the system using MIDI.\n\nFIrst of all, make sure that you've completed the steps in the previous tab (if not: go back to                          ). You can once again disable       and instead make sure that \n      is enabled,        set to «Inlet (External)» and        is enabled. Now, play a few notes on the keyboard below. You should be able to hear them, as well as the matching output from the player.\n\n\n\n\n",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1426,7 +1425,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1471,7 +1470,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 165.875, 540.352144469525911, 151.25, 52.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Make sure to use a valid midi device for the output"
 								}
 
@@ -1817,7 +1815,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 910.0, 581.852144469525911, 305.0, 100.0 ],
+									"patching_rect" : [ 910.0, 581.852144469525911, 312.0, 100.0 ],
 									"text" : "Finally, enable audio input by making sure that         and  \n      are enabled and        is set to «Audio Input», but disable       to avoid feedback and finally start the server by toggling       . Now, hum a few notes (or say a few words) and you should hear Somax providing accompaniment to your voice based on the corpus you selected!",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2382,7 +2380,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2429,7 +2427,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 7,
+											"revision" : 10,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -3574,8 +3572,9 @@
 					"maxclass" : "bpatcher",
 					"name" : "somax2.maxpat",
 					"numinlets" : 4,
-					"numoutlets" : 0,
+					"numoutlets" : 2,
 					"offset" : [ 0.0, 0.0 ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ -5.0, 484.0, 899.0, 624.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 11.0, 147.0, 899.0, 624.0 ],
@@ -3943,58 +3942,118 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-1::obj-21" : [ "Gain", "Gain", 0 ],
-			"obj-1::obj-49::obj-79::obj-1" : [ "live.text[3]", "live.text", 0 ],
-			"obj-1::obj-49::obj-79::obj-2" : [ "live.text[4]", "live.text", 0 ],
-			"obj-1::obj-49::obj-79::obj-3" : [ "live.text[5]", "live.text", 0 ],
-			"obj-1::obj-49::obj-87::obj-1" : [ "live.text[8]", "live.text", 0 ],
-			"obj-1::obj-49::obj-87::obj-2" : [ "live.text[7]", "live.text", 0 ],
-			"obj-1::obj-49::obj-87::obj-3" : [ "live.text[6]", "live.text", 0 ],
-			"obj-1::obj-49::obj-89::obj-1" : [ "live.text[11]", "live.text", 0 ],
-			"obj-1::obj-49::obj-89::obj-2" : [ "live.text[10]", "live.text", 0 ],
-			"obj-1::obj-49::obj-89::obj-3" : [ "live.text[9]", "live.text", 0 ],
-			"obj-1::obj-49::obj-91::obj-1" : [ "live.text[13]", "live.text", 0 ],
-			"obj-1::obj-49::obj-91::obj-2" : [ "live.text[12]", "live.text", 0 ],
-			"obj-1::obj-49::obj-91::obj-3" : [ "live.text[14]", "live.text", 0 ],
+			"obj-1::obj-140::obj-21" : [ "Gain[1]", "Gain", 0 ],
+			"obj-1::obj-160::obj-12::obj-10::obj-2::obj-259::obj-1" : [ "activechannels[3]", "activechannels", 0 ],
+			"obj-1::obj-160::obj-12::obj-10::obj-2::obj-261::obj-1" : [ "activechannels[4]", "activechannels", 0 ],
+			"obj-1::obj-160::obj-12::obj-10::obj-2::obj-264::obj-1" : [ "activechannels[5]", "activechannels", 0 ],
+			"obj-1::obj-180::obj-17::obj-2::obj-259::obj-1" : [ "activechannels", "activechannels", 0 ],
+			"obj-1::obj-180::obj-17::obj-2::obj-261::obj-1" : [ "activechannels[1]", "activechannels", 0 ],
+			"obj-1::obj-180::obj-17::obj-2::obj-264::obj-1" : [ "activechannels[2]", "activechannels", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-1007" : [ "rslider", "rslider", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-12" : [ "melodicmod12", "melodicmod12", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-120" : [ "melodicbypass", "melodicbypass", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-126" : [ "harmonicbypass", "harmonicbypass", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-134" : [ "continuity", "continuity", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-140" : [ "resetinfluences", "resetinfluences", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-144" : [ "harmonicngramorder", "harmonicngramorder", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-152" : [ "selfngramorder", "selfngramorder", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-154" : [ "melodicngramorder", "melodicngramorder", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-159" : [ "heldnotesmode", "heldnotesmode", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-163" : [ "ignorephase", "ignorephase", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-19" : [ "selfmod12", "selfmod12", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-202" : [ "simultaneousonsets", "simultaneousonsets", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-22" : [ "selfmelodicbypass", "selfmelodicbypass", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-254" : [ "harmonincpeakdecay", "harmonincpeakdecay", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-255" : [ "melodicpeakdecay", "melodicpeakdecay", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-256" : [ "selfpeakdecay", "selfpeakdecay", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-295" : [ "playingmode", "playingmode", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-328" : [ "decaybasis", "decaybasis", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-349::obj-26" : [ "corpusname[2]", "corpusname", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-352" : [ "outputthreshold", "outputthreshold", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-369" : [ "toggle", "toggle", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-4" : [ "reinstantiate", "reinstantiate", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-496" : [ "outputchannels", "outputchannels", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-501" : [ "experimental_scaling", "experimental_scaling", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-504" : [ "transpositionconsistency", "transpositionconsistency", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-570" : [ "__exp_melodicpitchfromchords", "__exp_melodicpitchfromchords", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-575" : [ "__exp_tempoconsistencysigma", "__exp_tempoconsistencysigma", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-600" : [ "__exp_tabooenable", "__exp_tabooenable", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-605" : [ "__exp_tabooduration", "__exp_tabooduration", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-622" : [ "__exp_velocityenable", "__exp_velocityenable", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-627" : [ "__exp_velocitymu", "__exp_velocitymu", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-639" : [ "__exp_velocitysigma", "__exp_velocitysigma", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-642" : [ "__exp_numnotessigma", "__exp_numnotessigma", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-653" : [ "__exp_numnotesenable", "__exp_numnotesenable", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-656" : [ "__exp_numnotesmu", "__exp_numnotesmu", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-673" : [ "multislider", "multislider", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-675" : [ "__exp_freezemode", "__exp_freezemode", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-688" : [ "__exp_durationsigma", "__exp_durationsigma", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-702" : [ "__exp_durationmu", "__exp_durationmu", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-722" : [ "__exp_octavebandsenable", "__exp_octavebandsenable", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-733" : [ "__exp_octavebands", "__exp_octavebands", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-746" : [ "__exp_selfpitchfromchords", "__exp_selfpitchfromchords", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-763" : [ "__exp_autojumpforcejump", "__exp_autojumpforcejump", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-774" : [ "__exp_autojumpenable", "__exp_autojumpenable", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-777" : [ "__exp_autojumpactivate", "__exp_autojumpactivate", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-799" : [ "__exp_tempoconsistencyenable", "__exp_tempoconsistencyenable", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-802" : [ "__exp_tempoconsistencylen", "__exp_tempoconsistencylen", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-835" : [ "transpositions", "transpositions", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-860" : [ "harmonincpeakdecay[1]", "harmonincpeakdecay[1]", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-865" : [ "selfharmonicngramorder", "selfharmonicngramorder", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-870" : [ "selfharmonicbypass", "selfharmonicbypass", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-998" : [ "__exp_regionmaskenable", "__exp_regionmaskenable", 0 ],
+			"obj-1::obj-180::obj-49::obj-5::obj-26" : [ "corpusname[3]", "corpusname", 0 ],
+			"obj-1::obj-180::obj-49::obj-79::obj-1" : [ "live.text[25]", "live.text", 0 ],
+			"obj-1::obj-180::obj-49::obj-79::obj-2" : [ "live.text[23]", "live.text", 0 ],
+			"obj-1::obj-180::obj-49::obj-79::obj-3" : [ "live.text[18]", "live.text", 0 ],
+			"obj-1::obj-180::obj-49::obj-87::obj-1" : [ "live.text[1]", "live.text", 0 ],
+			"obj-1::obj-180::obj-49::obj-87::obj-2" : [ "live.text[3]", "live.text", 0 ],
+			"obj-1::obj-180::obj-49::obj-87::obj-3" : [ "live.text[2]", "live.text", 0 ],
+			"obj-1::obj-180::obj-49::obj-89::obj-1" : [ "live.text[6]", "live.text", 0 ],
+			"obj-1::obj-180::obj-49::obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],
+			"obj-1::obj-180::obj-49::obj-89::obj-3" : [ "live.text[4]", "live.text", 0 ],
+			"obj-1::obj-180::obj-49::obj-91::obj-1" : [ "live.text[7]", "live.text", 0 ],
+			"obj-1::obj-180::obj-49::obj-91::obj-2" : [ "live.text[9]", "live.text", 0 ],
+			"obj-1::obj-180::obj-49::obj-91::obj-3" : [ "live.text[8]", "live.text", 0 ],
 			"parameterbanks" : 			{
 
 			}
 ,
 			"parameter_overrides" : 			{
-				"obj-1::obj-49::obj-87::obj-1" : 				{
-					"parameter_longname" : "live.text[8]"
+				"obj-1::obj-180::obj-49::obj-87::obj-1" : 				{
+					"parameter_longname" : "live.text[1]"
 				}
 ,
-				"obj-1::obj-49::obj-87::obj-2" : 				{
-					"parameter_longname" : "live.text[7]"
+				"obj-1::obj-180::obj-49::obj-87::obj-2" : 				{
+					"parameter_longname" : "live.text[3]"
 				}
 ,
-				"obj-1::obj-49::obj-87::obj-3" : 				{
+				"obj-1::obj-180::obj-49::obj-87::obj-3" : 				{
+					"parameter_longname" : "live.text[2]"
+				}
+,
+				"obj-1::obj-180::obj-49::obj-89::obj-1" : 				{
 					"parameter_longname" : "live.text[6]"
 				}
 ,
-				"obj-1::obj-49::obj-89::obj-1" : 				{
-					"parameter_longname" : "live.text[11]"
+				"obj-1::obj-180::obj-49::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[5]"
 				}
 ,
-				"obj-1::obj-49::obj-89::obj-2" : 				{
-					"parameter_longname" : "live.text[10]"
+				"obj-1::obj-180::obj-49::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[4]"
 				}
 ,
-				"obj-1::obj-49::obj-89::obj-3" : 				{
+				"obj-1::obj-180::obj-49::obj-91::obj-1" : 				{
+					"parameter_longname" : "live.text[7]"
+				}
+,
+				"obj-1::obj-180::obj-49::obj-91::obj-2" : 				{
 					"parameter_longname" : "live.text[9]"
 				}
 ,
-				"obj-1::obj-49::obj-91::obj-1" : 				{
-					"parameter_longname" : "live.text[13]"
-				}
-,
-				"obj-1::obj-49::obj-91::obj-2" : 				{
-					"parameter_longname" : "live.text[12]"
-				}
-,
-				"obj-1::obj-49::obj-91::obj-3" : 				{
-					"parameter_longname" : "live.text[14]"
+				"obj-1::obj-180::obj-49::obj-91::obj-3" : 				{
+					"parameter_longname" : "live.text[8]"
 				}
 
 			}
@@ -4004,8 +4063,15 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "somax2.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax",
-				"patcherrelativepath" : "../..",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/docs/tutorial-patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.playerio.compact.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/legacy",
+				"patcherrelativepath" : "../../patchers/legacy",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4025,22 +4091,43 @@
 			}
 , 			{
 				"name" : "somax.atom.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../../patchers/resources/player",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.corpusview.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../../patchers/resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.path.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "abstraction_path.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
+				"patcherrelativepath" : "../../misc",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "heldnotes.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "peakmeter.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../../patchers/resources/player",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4052,23 +4139,135 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.server.compact.maxpat",
+				"name" : "kslider.compact.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midiinfluencer.compact.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.server.maxpat",
+				"name" : "somax.midiinfluencer.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.serverstatus.maxpat",
+				"name" : "midipitchanalysis.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "../../patchers/resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "midichromaanalysis.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "../../patchers/resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "midi2chroma.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "../../patchers/resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "computeMemoryPitchClass.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
+				"patcherrelativepath" : "../../misc",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "midi2chroma_nofilter.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "../../patchers/resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "midisplitbychannel.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "../../patchers/resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midioutput2.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/legacy",
+				"patcherrelativepath" : "../../patchers/legacy",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midioutput.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.mixer1p.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpusbuilder.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "omnimidiflush.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.latency.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.contextualbutton.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.interpreter.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.relativepath.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.audio.compact.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/legacy",
+				"patcherrelativepath" : "../../patchers/legacy",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4088,22 +4287,22 @@
 			}
 , 			{
 				"name" : "OMax.yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "../../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "../../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "sr.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4116,15 +4315,8 @@
 			}
 , 			{
 				"name" : "audio2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.midioutput.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "../../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4136,31 +4328,17 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.midiinfluencer.compact.maxpat",
+				"name" : "somax.delay.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.midiinfluencer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
+				"name" : "somax.midi.compact.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/legacy",
+				"patcherrelativepath" : "../../patchers/legacy",
 				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "midi2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "computeMemoryPitchClass.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
-				"patcherrelativepath" : "../../misc",
-				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
@@ -4171,58 +4349,51 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.mixer1p.maxpat",
+				"name" : "somax.midiinfluencer.wireless.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.legacy.harmonicrouter.maxpat",
+				"name" : "somax.source.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.legacy.onsetrouter.maxpat",
+				"name" : "somax.uniquename.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.server.compact.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.legacy.melodicrouter.maxpat",
+				"name" : "somax.server.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.midioutput2.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
+				"name" : "somax.serverstatus.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/server",
+				"patcherrelativepath" : "../../patchers/resources/server",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.corpusbuilder.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "omnimidiflush.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.latency.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
+				"name" : "somax.serverstatus.ui.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/server",
+				"patcherrelativepath" : "../../patchers/resources/server",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4241,30 +4412,16 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.contextualbutton.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
-				"patcherrelativepath" : "../../misc",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.delay.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "somax.midirecord.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4312,6 +4469,10 @@
 				"type" : "iLaX"
 			}
 , 			{
+				"name" : "bc.virfun.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "yin~.mxo",
 				"type" : "iLaX"
 			}
@@ -4325,10 +4486,6 @@
 			}
 , 			{
 				"name" : "bonk~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "bc.virfun.mxo",
 				"type" : "iLaX"
 			}
  ],
