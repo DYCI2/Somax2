@@ -26,5 +26,14 @@
     "flush": {
         "title": "Flush",
         "description": "Flushes stuck notes in the chroma analysis without producing any output."
+    },
+    "chromafiltering": {
+        "title": "Chroma Filtering",
+        "description": "A filter is by default applied to the generated chroma signal to smooth the changes over time. «Attack» controls the amount of time (in milliseconds) from when a midi note is registered until the corresponding chroma reaches its peak, and «Release» the time from when a midi note is released until it's chroma is completely decayed. This feature can also be fully bypassed by toggling «enable» off."
+    },
+    "onsetlimit": {
+        "title":"Onset Limiter",
+        "description": "The onset limiter controls the least amount of time that has to pass between two onsets for the second onset to be registered. If this is enabled, it will discard any onset received within that number of milliseconds since its last received onset."
     }
+
 }

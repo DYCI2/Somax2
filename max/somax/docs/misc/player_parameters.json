@@ -61,7 +61,7 @@
     },
     "transconsistency": {
         "title": "Transposition Consistency",
-        "description": "When using transpositions, the continuous transitions between different transpositions can in some cases (especially for tonal music due to the difference in function) make the generated result sound quite incoherent. This parameter can be used to attenuate other transpositions so that transitions between different tranpositions become less likely, thus only occuring if the match found in another transposition is much better than that of the current."
+        "description": "When using transpositions, the continuous transitions between different transpositions can in some cases (especially for tonal music due to the difference in function) make the generated result sound quite incoherent. This parameter can be used to attenuate other transpositions so that transitions between different tranpositions become less likely, thus only occuring if the match found in another transposition is much better than that of the current.\n\nRange: 1.0 (no attenuation = off) to 0.0 (full attenuation = enforce current transposition)"
     },
     "reinstantiate": {
         "title": "Reinstantiate",

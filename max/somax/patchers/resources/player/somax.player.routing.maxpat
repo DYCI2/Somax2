@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 8,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -184,10 +184,10 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1758.0, 262.5, 391.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 1365, 312, 2560, 813 ],
+						"client_rect" : [ 4, 79, 958, 616 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
-						"storage_rect" : [ 1583, 154, 2034, 282 ]
+						"storage_rect" : [ 583, 79, 1034, 207 ]
 					}
 ,
 					"text" : "pattrstorage @savemode 0 @outputmode 1 @greedy 1 @autorestore 0",
@@ -445,7 +445,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -777,10 +777,10 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1758.0, 262.5, 391.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 1365, 312, 2560, 813 ],
+						"client_rect" : [ 4, 79, 958, 616 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
-						"storage_rect" : [ 1583, 154, 2034, 282 ]
+						"storage_rect" : [ 583, 79, 1034, 207 ]
 					}
 ,
 					"text" : "pattrstorage @savemode 0 @outputmode 1 @greedy 1 @autorestore 0",
@@ -812,13 +812,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 102.0, 285.0, 112.0 ],
+						"rect" : [ 489.0, 197.0, 286.0, 154.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -847,20 +847,21 @@
 						"subpatcher_template" : "",
 						"helpsidebarclosed" : 1,
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-559",
-									"linecount" : 2,
+									"linecount" : 6,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.0, 73.0, 262.0, 29.0 ],
+									"patching_rect" : [ 5.0, 73.0, 262.0, 74.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 2,
-									"presentation_rect" : [ 5.0, 73.0, 262.0, 29.0 ],
-									"text" : "CO: Chroma onset. Determines when to segment the \n        chroma.",
+									"presentation_linecount" : 6,
+									"presentation_rect" : [ 5.0, 73.0, 271.0, 74.0 ],
+									"text" : "CO: Chroma onset. Determines when to segment the \n        chroma, using the same onset as above (O). \n        At least one chroma onset has to be enabled to \n        listen to chroma. When receiving chroma from \n        multiple sources, it is recommended to only \n        enable one CO.",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
 
@@ -927,7 +928,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 0.0, 0.0, 286.0, 117.75 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 0.0, 0.0, 286.0, 117.75 ],
+									"presentation_rect" : [ 0.0, 0.0, 286.0, 153.75 ],
 									"proportion" : 0.5,
 									"rounded" : 0
 								}
@@ -991,14 +992,15 @@
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"newobj" : 								{
-									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontsize" : [ 10.0 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1009,12 +1011,12 @@
 										"autogradient" : 0
 									}
 ,
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+									"fontface" : [ 1 ]
 								}
 ,
 								"default" : 								{
-									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1025,9 +1027,8 @@
 										"autogradient" : 0
 									}
 ,
-									"fontsize" : [ 10.0 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"toggle" : 								{
@@ -1416,7 +1417,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1689,14 +1690,15 @@
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"newobj" : 								{
-									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontsize" : [ 10.0 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1707,12 +1709,12 @@
 										"autogradient" : 0
 									}
 ,
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+									"fontface" : [ 1 ]
 								}
 ,
 								"default" : 								{
-									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1723,9 +1725,8 @@
 										"autogradient" : 0
 									}
 ,
-									"fontsize" : [ 10.0 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"toggle" : 								{
@@ -3145,14 +3146,15 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"newobj" : 				{
-					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
-					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3163,12 +3165,12 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"default" : 				{
-					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3179,9 +3181,8 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{

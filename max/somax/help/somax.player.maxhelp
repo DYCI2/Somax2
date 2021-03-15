@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -52,7 +52,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -95,7 +95,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 597.0, 419.668148148148191, 300.0, 47.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Do note that both names and OSC ports need to be unique, so if a given name or OSC port is taken, it will automatically be reassigned.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -110,7 +109,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 607.0, 361.781481481481535, 270.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "bpatcher somax.player.io @args <name> <sendport> <recvport>"
 								}
 
@@ -123,7 +121,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 597.0, 308.668148148148191, 300.0, 47.0 ],
-									"presentation_linecount" : 3,
 									"text" : "and if there for some reason is a need to change the OSC ports, this is controlled with the second and third argument, i.e. ",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -137,7 +134,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 607.0, 277.447407407407468, 270.0, 24.0 ],
-									"presentation_linecount" : 2,
 									"text" : "bpatcher somax.player.io @args <name>"
 								}
 
@@ -150,7 +146,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 597.0, 198.634074074074107, 300.0, 74.0 ],
-									"presentation_linecount" : 5,
 									"text" : "This will automatically create a player with a unique name (for wireless influence routing) and unique OSC ports for sending to and receving from the server. The name of the player can be set using the @args parameter of the bpatcher, i.e.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -189,7 +184,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 209.0, 622.380859375, 304.0, 51.0 ],
-									"presentation_linecount" : 5,
 									"text" : "An output module to route the MIDI output to any MIDI port (but the MIDI output is of course also available as a normal outlet of the bpatcher)"
 								}
 
@@ -201,8 +195,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 219.0, 250.0, 299.0, 74.0 ],
-									"presentation_linecount" : 3,
+									"patching_rect" : [ 219.0, 250.0, 300.0, 74.0 ],
 									"text" : "The bottom row indicates the pitch, onset and chroma influences received. For chroma, this will only be triggered when a «chroma onset» (CO) is received, so at least one CO must be enabled for the player to actually receive any chroma",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -218,7 +211,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 209.0, 520.0, 309.0, 64.0 ],
-									"presentation_linecount" : 6,
 									"text" : "An influencer, which will analyze the output from the and wirelessly sending it as influences, making it possible for multiple players to listen to each other's influences"
 								}
 
@@ -231,8 +223,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 209.0, 383.0, 309.0, 51.0 ],
-									"presentation_linecount" : 5,
+									"patching_rect" : [ 209.0, 383.0, 310.0, 51.0 ],
 									"text" : "The usual player.compact interface which handles all parameters and the connection to the server (as explained in the other tabs of this maxhelp)"
 								}
 
@@ -282,7 +273,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 89.0, 550.0, 47.0 ],
+									"patching_rect" : [ 10.0, 89.0, 553.0, 47.0 ],
 									"text" : "Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). \n\nThe somax.player.io adds a number of things to the somax.player:",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -308,32 +299,32 @@
 						"lines" : [  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"default" : 								{
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
-								}
-,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontface" : [ 1 ]
+								}
+,
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -345,14 +336,14 @@
 									}
 ,
 									"fontface" : [ 1 ],
-									"fontsize" : [ 10.0 ]
-								}
-,
-								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"toggle" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
@@ -387,7 +378,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -450,13 +441,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1047.0, 710.0 ],
+						"rect" : [ 34.0, 105.0, 1047.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1222,7 +1213,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 383.0, 205.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "17",
+									"text" : "15",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -1252,7 +1243,7 @@
 									"patching_rect" : [ 686.5, 10.5, 299.0, 27.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 407.0, 202.0, 244.0, 27.0 ],
-									"text" : "Reinstantiate",
+									"text" : "Layer Decay Time",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1262,15 +1253,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 14,
+									"linecount" : 9,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 205.0, 194.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 205.0, 127.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 11,
-									"presentation_rect" : [ 383.0, 235.5, 281.0, 154.0 ],
-									"text" : "Pressing this button will delete the player from the server and recreate it. This button is useful if you for some reason have to restart the server or for some reason run into issues where you have to restart the system.\n\nWARNING: This is not real-time compatible (it may pause the server for several seconds while reloading, thus interrupting any performance) and should only be used if something goes terribly wrong!",
+									"presentation_linecount" : 7,
+									"presentation_rect" : [ 383.0, 235.5, 281.0, 100.0 ],
+									"text" : "As briefly described under 'Decay Basis', matches from a previous time step has a degree of impact on the generation process for consecutive time steps. This parameter controls for how many events/how many beats (again, see 'Decay Basis' for more information) previous matches inpact the generation process.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2337,7 +2328,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2584,32 +2575,32 @@
 						"lines" : [  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"default" : 								{
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
-								}
-,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontface" : [ 1 ]
+								}
+,
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2621,14 +2612,14 @@
 									}
 ,
 									"fontface" : [ 1 ],
-									"fontsize" : [ 10.0 ]
-								}
-,
-								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"toggle" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
@@ -2663,13 +2654,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 105.0, 1047.0, 710.0 ],
+						"rect" : [ 0.0, 26.0, 1047.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
