@@ -36,6 +36,9 @@ pip3 install -r requirements.txt
 
 A number of packages should now be installing. If the installation terminates without any errors, somax and all of its dependencies will now be successfully installed
 
+### Step 4: Install Max requirements
+* If not already installed, make sure to go to the package manager inside Max and install CNMAT Externals
+
 ## Getting Started
 A good starting point is the file `tutorial.maxpat` in the root folder. This tutorial gives a brief introduction to the different modules of Somax II and introduces the first steps towards interacting with the model.
 

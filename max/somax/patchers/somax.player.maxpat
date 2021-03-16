@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 8,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 2492.0, 1275.0 ],
+		"rect" : [ 34.0, 79.0, 440.0, 770.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -21,7 +21,7 @@
 		"gridsnaponopen" : 1,
 		"objectsnaponopen" : 1,
 		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
+		"toolbarvisible" : 0,
 		"lefttoolbarpinned" : 0,
 		"toptoolbarpinned" : 0,
 		"righttoolbarpinned" : 0,
@@ -29,8 +29,8 @@
 		"toolbars_unpinned_last_save" : 0,
 		"tallnewobj" : 0,
 		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
+		"enablehscroll" : 0,
+		"enablevscroll" : 0,
 		"devicewidth" : 0.0,
 		"description" : "",
 		"digest" : "",
@@ -867,7 +867,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1184,7 +1184,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -9232,7 +9232,7 @@
 						"outputthreshold" : [ 0.0 ],
 						"playingmode" : [ 1 ],
 						"pollpeaks" : [ 1 ],
-						"reinstantiate" : [ 1.0 ],
+						"reinstantiate" : [ 0.0 ],
 						"resetinfluences" : [ 0.0 ],
 						"resetparams" : [ 0.0 ],
 						"selfharmonicngramorder" : [ 2 ],
@@ -10989,7 +10989,7 @@
 					"patching_rect" : [ 355.725552050473198, 123.0, 180.0, 27.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 12.41666666666697, 10.5, 401.10262443239094, 27.0 ],
-					"text" : "Player_2657",
+					"text" : "Player",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -22808,33 +22808,33 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"newobj" : 				{
-					"fontface" : [ 1 ],
+				"default" : 				{
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"newobj" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
-					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-
-				}
-,
-				"default" : 				{
 					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -22845,7 +22845,7 @@
 						"autogradient" : 0
 					}
 ,
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"button" : 				{

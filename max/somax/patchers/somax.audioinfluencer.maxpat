@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 685.0, 670.0 ],
+		"rect" : [ 34.0, 79.0, 450.0, 610.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -21,7 +21,7 @@
 		"gridsnaponopen" : 1,
 		"objectsnaponopen" : 1,
 		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
+		"toolbarvisible" : 0,
 		"lefttoolbarpinned" : 0,
 		"toptoolbarpinned" : 0,
 		"righttoolbarpinned" : 0,
@@ -29,8 +29,8 @@
 		"toolbars_unpinned_last_save" : 0,
 		"tallnewobj" : 0,
 		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
+		"enablehscroll" : 0,
+		"enablevscroll" : 0,
 		"devicewidth" : 0.0,
 		"description" : "",
 		"digest" : "",
@@ -2428,7 +2428,7 @@
 						"pitchsegmethod" : [ 0 ],
 						"yindownsample" : [ 1 ],
 						"yinlevel" : [ 50 ],
-						"yinminfreq" : [ 40 ],
+						"yinminfreq" : [ 50 ],
 						"yinprobability" : [ 0.75 ],
 						"yinquality" : [ 0.75 ],
 						"yinwindow" : [ 35 ]
@@ -2451,10 +2451,10 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1500.0, 101.933083115283466, 310.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 461, 322 ],
+						"client_rect" : [ 4, 79, 958, 616 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
-						"storage_rect" : [ 794, -709, 1244, -510 ]
+						"storage_rect" : [ 583, 79, 1034, 207 ]
 					}
 ,
 					"text" : "pattrstorage pattrstorage @savemode 2 @outputmode 1",
