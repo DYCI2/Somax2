@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -52,7 +52,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -115,7 +115,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -152,13 +152,26 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"bubble" : 1,
+									"id" : "obj-6",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 304.0, 144.5, 128.0, 37.0 ],
+									"text" : "click for more info about the server"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-12",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 342.5, 262.5, 71.0, 22.0 ],
+									"patching_rect" : [ 163.5, 199.5, 71.0, 22.0 ],
 									"text" : "fromsymbol"
 								}
 
@@ -174,7 +187,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 225.0, 203.0, 254.0, 46.0 ],
+									"patching_rect" : [ 46.0, 140.0, 254.0, 46.0 ],
 									"rounded" : 8.0,
 									"text" : "load somax.server.maxhelp",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -191,7 +204,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 342.5, 290.0, 51.0, 22.0 ],
+									"patching_rect" : [ 163.5, 227.0, 51.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 
@@ -215,7 +228,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 89.0, 684.0, 33.0 ],
-									"text" : "The somax.server object handles the communication with the server (written in Python) where all the players are stored. All the documentation for this module can be found in the somax.server maxhelp.",
+									"text" : "The somax.server object handles the communication with the server where all the players are. All the documentation for this module can be found in the somax.server maxhelp.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 

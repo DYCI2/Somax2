@@ -1,0 +1,2 @@
+# Yin~
+The source code for the yin~ external is available at https://github.com/Ircam-RnD/rta-lib under src/signal/rta_yin (as of 2021-03-16). License information is available at https://github.com/Ircam-RnD/rta-lib.

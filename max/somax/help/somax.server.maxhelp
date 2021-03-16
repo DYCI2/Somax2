@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -52,7 +52,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -94,9 +94,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 367.0, 205.5, 376.0, 194.0 ],
-									"presentation_linecount" : 14,
-									"text" : "To build a corpus:\n\n1. Make sure that the server is started and running\n2. Drop a MIDI file in the box above\n3. Select which MIDI channels of the corpus that should be used when comparing the corpus to incoming pitch and chroma influences respectively (you can read more about this in the pdf «A Gentle Introduction to Somax»\n4. Give the corpus a name\n5. Build it\n\nThe corpus will automatically be listed and available in player's interface.\n",
+									"patching_rect" : [ 367.0, 205.5, 377.0, 194.0 ],
+									"text" : "To build a corpus:\n\n1. Make sure that the server is started. \n2. Drop a MIDI file in the box above (or use «Read» to navigate)\n3. Select which MIDI channels of the corpus that should be used\n    when comparing the corpus to incoming pitch and chroma \n    influences respectively (you can read more about this in the pdf \n    «A Gentle Introduction to Somax»)\n4. Give the corpus a name\n5. Build it\n\nThe corpus will automatically be listed and available in player's interface.\n",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -143,7 +142,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 367.0, 137.0, 376.0, 60.0 ],
-									"presentation_linecount" : 2,
 									"text" : "The main generative agent of somax, the somax.player, generates output by using pre-existing MIDI files as a source. However, the player cannot operate directly on the MIDI file, a «Corpus» has to be constructed from the MIDI file. ",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -208,6 +206,7 @@
 								"name" : "dUG Yello 01-1",
 								"default" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -218,20 +217,20 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -242,7 +241,6 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
@@ -261,7 +259,6 @@
 					}
 ,
 					"patching_rect" : [ 75.0, 15.0, 102.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -285,7 +282,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -329,7 +326,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 570.0, 380.0, 261.0, 78.0 ],
-									"presentation_linecount" : 5,
 									"text" : "A number of convenient modules exists for recording MIDI, flushing all MIDI devices and building corpora. See the «corpus builder» tab for more info regarding the latter."
 								}
 
@@ -342,8 +338,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 570.0, 308.794429708222879, 261.0, 64.0 ],
-									"presentation_linecount" : 4,
+									"patching_rect" : [ 570.0, 308.794429708222879, 262.0, 64.0 ],
 									"text" : "The beat tracker is only visible if «Tempo Source» is set to an influencer. In that case, it will listen to the onsets of that particular influencer to set the tempo"
 								}
 
@@ -356,7 +351,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.5, 477.0, 684.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "If the tempo source is set to a somax.player, the tempo will be set from the corpus of the player.\nIf the tempo source is set to a somax.audioinfluencer or somax.midiinfluencer, the tempo will be set through the beat tracker",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -372,7 +366,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.5, 383.588859416445644, 201.5, 78.0 ],
-									"presentation_linecount" : 4,
 									"text" : "Set the tempo source of the server. By default this is set to <None>, which allows manual control of the tempo with the slider above. "
 								}
 
@@ -387,7 +380,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 9.0, 300.0, 199.0, 64.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Toggle run to start the server's transport. When not running, players will not produce any output"
 								}
 
@@ -402,7 +394,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 9.0, 218.0, 189.0, 51.0 ],
-									"presentation_linecount" : 2,
 									"text" : "The status window will display whether the server is ready, running, offline, etc."
 								}
 
@@ -415,8 +406,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 570.0, 247.0, 261.0, 51.0 ],
-									"text" : "The first step is to start the server. When the server is running, this button will not be visible"
+									"patching_rect" : [ 570.0, 247.0, 264.0, 51.0 ],
+									"text" : "The first step is to start the server. \nWhen the server is running, this button will not be visible"
 								}
 
 							}
@@ -444,7 +435,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
-									"patching_rect" : [ 204.0, 225.0, 378.0, 222.588859416445615 ],
+									"patching_rect" : [ 204.0, 225.0, 378.0, 223.548387096774206 ],
 									"pic" : "server_io.png"
 								}
 
@@ -457,7 +448,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 127.0, 684.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "When using the wireless architecture, one server object must always exist somewhere in the patcher. This module handles necessary communication with the server and adds means to control the server's transport (time and tempo). ",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -508,6 +498,7 @@
 								"name" : "dUG Yello 01-1",
 								"default" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -518,20 +509,20 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -542,7 +533,6 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
@@ -561,7 +551,6 @@
 					}
 ,
 					"patching_rect" : [ 195.0, 15.0, 62.0, 22.0 ],
-					"presentation_linecount" : 3,
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -586,7 +575,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -649,7 +638,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -705,7 +694,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 82.0, 324.0, 138.0, 22.0 ],
+									"patching_rect" : [ 82.0, 290.0, 138.0, 22.0 ],
 									"text" : "load somax2_first_steps"
 								}
 
@@ -719,7 +708,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 82.0, 363.5, 51.0, 22.0 ],
+									"patching_rect" : [ 82.0, 329.5, 51.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 
@@ -732,7 +721,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 344.0, 270.5, 150.0, 37.0 ],
+									"patching_rect" : [ 344.0, 236.5, 150.0, 37.0 ],
 									"text" : "Click here for a tutorial of the server in context"
 								}
 
@@ -748,7 +737,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 82.0, 266.0, 254.0, 46.0 ],
+									"patching_rect" : [ 82.0, 232.0, 254.0, 46.0 ],
 									"rounded" : 8.0,
 									"text" : "SOMAX II TUTORIAL",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -818,6 +807,7 @@
 								"name" : "dUG Yello 01-1",
 								"default" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -828,20 +818,20 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -852,7 +842,6 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,

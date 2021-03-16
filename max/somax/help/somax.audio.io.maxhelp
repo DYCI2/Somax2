@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 706.0, 456.0 ],
+		"rect" : [ 34.0, 79.0, 706.0, 456.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -52,7 +52,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -115,13 +115,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 104.0, 706.0, 430.0 ],
+						"rect" : [ 34.0, 105.0, 706.0, 430.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -154,12 +154,12 @@
 								"box" : 								{
 									"bubble" : 1,
 									"id" : "obj-14",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 490.0, 203.0, 182.0, 51.0 ],
-									"text" : "Click here to read more about the role of the audio influencer in Somax"
+									"patching_rect" : [ 309.0, 184.5, 182.0, 37.0 ],
+									"text" : "Click to read more about the audio influencer in Somax"
 								}
 
 							}
@@ -171,7 +171,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 342.5, 262.5, 71.0, 22.0 ],
+									"patching_rect" : [ 163.5, 239.5, 71.0, 22.0 ],
 									"text" : "fromsymbol"
 								}
 
@@ -187,7 +187,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 225.0, 203.0, 254.0, 46.0 ],
+									"patching_rect" : [ 46.0, 180.0, 254.0, 46.0 ],
 									"rounded" : 8.0,
 									"text" : "load somax.audioinfluencer.maxhelp",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -204,7 +204,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 342.5, 290.0, 51.0, 22.0 ],
+									"patching_rect" : [ 163.5, 267.0, 51.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 

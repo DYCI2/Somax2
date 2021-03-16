@@ -309,6 +309,7 @@ class SomaxServer(Somax, AsyncioOscObject):
 
 
 if __name__ == "__main__":
+    multiprocessing.freeze_support()    # Required for PyInstaller
     parser = argparse.ArgumentParser(description='Launch and manage a Somax server')
     parser.add_argument('in_port', metavar='IN_PORT', type=int, nargs='?',
                         help='in port used by the server', default=SomaxServer.DEFAULT_RECV_PORT)

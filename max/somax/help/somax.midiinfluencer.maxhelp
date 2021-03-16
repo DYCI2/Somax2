@@ -332,16 +332,33 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
 									"fontface" : [ 1 ],
+									"fontsize" : [ 10.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -352,31 +369,14 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ]
+									"fontsize" : [ 10.0 ]
 								}
 ,
-								"default" : 								{
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ],
+								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
@@ -812,16 +812,33 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
 									"fontface" : [ 1 ],
+									"fontsize" : [ 10.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -832,31 +849,14 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ]
+									"fontsize" : [ 10.0 ]
 								}
 ,
-								"default" : 								{
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ],
+								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
@@ -928,14 +928,17 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.2,
+									"bubbleside" : 2,
 									"fontface" : 1,
 									"id" : "obj-6",
 									"linecount" : 8,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 278.0, 142.5, 176.0, 114.0 ],
-									"text" : "Note: this behaviour was changed in 2.3: the right hand side behaviour is now the default. To toggle monophonic, no-latency mode, send this message (or toggle the «bypass» switch under «Onset Threshold»)"
+									"patching_rect" : [ 278.0, 131.0, 177.0, 133.0 ],
+									"text" : "Note: this behaviour was changed in version 2.3: the right hand side behaviour is now the default. To toggle monophonic, no-latency mode, send this message (or toggle the «bypass» switch under «Onset Threshold»)"
 								}
 
 							}
@@ -1681,16 +1684,33 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
 									"fontface" : [ 1 ],
+									"fontsize" : [ 10.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1701,31 +1721,14 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ]
+									"fontsize" : [ 10.0 ]
 								}
 ,
-								"default" : 								{
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ],
+								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
@@ -1829,7 +1832,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
+						"rect" : [ 34.0, 105.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1888,7 +1891,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 42.0, 417.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "5",
+									"text" : "6",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -1931,7 +1934,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 219.0, 356.541015625, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "8",
+									"text" : "7",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -1964,7 +1967,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 537.0, 415.5, 87.0, 22.0 ],
-									"presentation_linecount" : 4,
 									"text" : "chromafiltering"
 								}
 
@@ -2013,14 +2015,14 @@
 									"numinlets" : 2,
 									"numoutlets" : 4,
 									"outlettype" : [ "dictionary", "", "", "" ],
-									"patching_rect" : [ 678.5, 459.0, 215.0, 22.0 ],
+									"patching_rect" : [ 678.5, 459.0, 249.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"embed" : 0,
 										"parameter_enable" : 0,
 										"parameter_mappable" : 0
 									}
 ,
-									"text" : "dict params midiinfluencer_parameters"
+									"text" : "dict #0_params midiinfluencer_parameters"
 								}
 
 							}
@@ -2066,7 +2068,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 219.0, 415.75, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "7",
+									"text" : "8",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -2109,7 +2111,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 42.0, 371.25, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "6",
+									"text" : "5",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -2155,9 +2157,9 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 509.0, 286.5, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 38.0, 208.5, 20.0, 20.0 ],
+									"presentation_rect" : [ 42.0, 208.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "3",
+									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -2181,7 +2183,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 42.0, 284.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "2",
+									"text" : "3",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -2281,7 +2283,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 42.0, 245.5, 20.0, 21.0 ],
 									"rounded" : 60.0,
-									"text" : "1",
+									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -2343,7 +2345,7 @@
 									"outlettype" : [ "", "", "", "" ],
 									"patching_rect" : [ 10.0, 145.25390625, 457.0, 462.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 42.0, 163.0, 458.0, 465.0 ],
+									"presentation_rect" : [ 42.0, 163.0, 458.0, 478.0 ],
 									"varname" : "somax.midiinfluencer",
 									"viewvisibility" : 1
 								}
@@ -2424,7 +2426,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 529.0, 180.352144469525967, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "5",
+									"text" : "7",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -2448,14 +2450,13 @@
 									"fontface" : 1,
 									"fontsize" : 24.0,
 									"id" : "obj-156",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 4.0, 162.0, 60.0 ],
+									"patching_rect" : [ 686.5, 4.0, 162.0, 33.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 557.0, 173.852144469525967, 227.0, 33.0 ],
-									"text" : "Onset Limiter",
+									"text" : "Flush",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2465,15 +2466,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 8,
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 194.0, 114.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 197.0, 47.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 7,
-									"presentation_rect" : [ 557.0, 214.352144469525967, 229.0, 100.0 ],
-									"text" : "The onset limiter controls the least amount of time that has to pass between two onsets for the second onset to be registered. If this is enabled, it will discard any onset received within that number of milliseconds since its last received onset.",
+									"presentation_linecount" : 2,
+									"presentation_rect" : [ 557.0, 214.352144469525967, 229.0, 33.0 ],
+									"text" : "Flushes stuck notes in the chroma analysis without producing any output.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3029,16 +3030,33 @@
 						"lines" : [  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
 									"fontface" : [ 1 ],
+									"fontsize" : [ 10.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3049,31 +3067,14 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ]
+									"fontsize" : [ 10.0 ]
 								}
 ,
-								"default" : 								{
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ],
+								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
@@ -3114,7 +3115,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 105.0, 1054.0, 710.0 ],
+						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3162,7 +3163,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 64.0, 528.0, 618.0, 47.0 ],
+									"patching_rect" : [ 64.0, 535.0, 618.0, 47.0 ],
 									"text" : "The pitch and chroma influences should in most cases be sent to a somax.player object where they are matched to the corpus to determine the most suitable output. The onset influence is used to trigger output (when a player is in Manual/Reactive mode) as well as segment the continuous stream of chroma messages.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -3189,7 +3190,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 64.0, 340.0, 144.0, 127.0 ],
-									"text" : "By default, an «onset influence» is sent each time a note on is received. This isn't always ideal for polyphonic input, for which a workaround is described in the «advanced» tab.",
+									"text" : "By default, an «onset influence» is sent each time a note on is received. This isn't always ideal for polyphonic input, for which a workaround is described in the «polyphony» tab.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -3239,7 +3240,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 512.0, 379.0, 170.0, 87.0 ],
-									"text" : "The changes in chroma are also not instantaneous but decays slowly once a note has been released. This behaviour can be turned of in the «Settings».",
+									"text" : "The changes in chroma are also not instantaneous but decays slowly once a note has been released. This behaviour can be turned off in the «Settings».",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -3252,7 +3253,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 512.0, 226.0, 170.0, 141.0 ],
-									"text" : "For the chroma, a set of harmonics are created for each MIDI note before computing a pseudo-spectrogram for the MIDI input. The purpose of this is to create a smoother interaction between influence data from MIDI and audio repsectively",
+									"text" : "For the chroma, a set of harmonics are created for each MIDI note before computing a pseudo-spectrogram for the MIDI input. The purpose of this is to create a smoother interaction between influence data from MIDI and audio respectively",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -3311,13 +3312,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-17",
-									"linecount" : 2,
+									"linecount" : 3,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 371.0, 479.0, 108.0, 35.0 ],
-									"text" : "chroma 0 0 0 0 0 0 0 0 0 0 0 0"
+									"patching_rect" : [ 371.0, 479.0, 108.0, 49.0 ],
+									"text" : "chroma 1.625 0 0 0 0 0 0.25 0.25 0 0 0 1.625"
 								}
 
 							}
@@ -3329,7 +3330,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 298.0, 479.0, 68.0, 22.0 ],
-									"text" : "pitch 38"
+									"text" : "pitch 48"
 								}
 
 							}
@@ -3384,8 +3385,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 460.0, 190.0, 95.0, 22.0 ],
-									"text" : "thispatcher front"
+									"patching_rect" : [ 460.0, 190.0, 75.0, 22.0 ],
+									"text" : "openwindow"
 								}
 
 							}
@@ -3603,16 +3604,33 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
+								"default" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
 									"fontface" : [ 1 ],
+									"fontsize" : [ 10.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3623,31 +3641,14 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ]
+									"fontsize" : [ 10.0 ]
 								}
 ,
-								"default" : 								{
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ],
+								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,

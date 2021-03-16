@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 985.0, 739.0 ],
+		"rect" : [ 34.0, 79.0, 998.0, 778.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -52,13 +52,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 985.0, 713.0 ],
+						"rect" : [ 0.0, 26.0, 998.0, 752.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -334,6 +334,7 @@
 								"name" : "dUG Yello 01-1",
 								"default" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -344,20 +345,20 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -368,7 +369,6 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
@@ -425,13 +425,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 985.0, 713.0 ],
+						"rect" : [ 0.0, 26.0, 998.0, 752.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -866,7 +866,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 7,
+											"revision" : 10,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1188,14 +1188,14 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-34",
-									"linecount" : 6,
+									"linecount" : 2,
 									"maxclass" : "textedit",
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 155.0, 442.0, 165.0, 89.0 ],
-									"text" : "57 56 58 62 61 62 63 64 63 64 63 60 62 63 64 63 64 63 64 56 62 61 62 61 62 61 62 61 62 63 62 63 62 56 65 66 65 66 65 66 65 67 63 64 63 64 63"
+									"text" : "45 48 47 52 47 45 44 44 45 44 44 44"
 								}
 
 							}
@@ -1480,6 +1480,7 @@
 								"name" : "dUG Yello 01-1",
 								"default" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1490,20 +1491,20 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1514,7 +1515,6 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
@@ -1557,7 +1557,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1649,6 +1649,7 @@
 								"name" : "dUG Yello 01-1",
 								"default" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1659,20 +1660,20 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1683,7 +1684,6 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
@@ -1725,13 +1725,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 985.0, 713.0 ],
+						"rect" : [ 0.0, 26.0, 998.0, 752.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2195,6 +2195,7 @@
 								"name" : "dUG Yello 01-1",
 								"default" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2205,20 +2206,20 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2229,7 +2230,6 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
@@ -2272,13 +2272,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 985.0, 713.0 ],
+						"rect" : [ 0.0, 26.0, 998.0, 752.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2506,8 +2506,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 367.0, 193.5, 95.0, 22.0 ],
-									"text" : "thispatcher front"
+									"patching_rect" : [ 367.0, 193.5, 75.0, 22.0 ],
+									"text" : "openwindow"
 								}
 
 							}
@@ -2705,6 +2705,7 @@
 								"name" : "dUG Yello 01-1",
 								"default" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2715,20 +2716,20 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2739,7 +2740,6 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
@@ -2782,13 +2782,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 985.0, 713.0 ],
+						"rect" : [ 0.0, 26.0, 998.0, 752.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2845,13 +2845,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 985.0, 713.0 ],
+						"rect" : [ 34.0, 105.0, 998.0, 752.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2924,14 +2924,14 @@
 									"numinlets" : 2,
 									"numoutlets" : 4,
 									"outlettype" : [ "dictionary", "", "", "" ],
-									"patching_rect" : [ 693.5, 474.0, 223.0, 22.0 ],
+									"patching_rect" : [ 693.5, 474.0, 256.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"embed" : 0,
 										"parameter_enable" : 0,
 										"parameter_mappable" : 0
 									}
 ,
-									"text" : "dict params audioinfluencer_parameters"
+									"text" : "dict #0_params audioinfluencer_parameters"
 								}
 
 							}
@@ -3617,6 +3617,7 @@
 								"name" : "dUG Yello 01-1",
 								"default" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3627,20 +3628,20 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3651,7 +3652,6 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
@@ -3694,13 +3694,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 985.0, 713.0 ],
+						"rect" : [ 0.0, 26.0, 998.0, 752.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3922,6 +3922,7 @@
 								"name" : "dUG Yello 01-1",
 								"default" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3932,20 +3933,20 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3956,7 +3957,6 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
@@ -3999,13 +3999,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 105.0, 985.0, 713.0 ],
+						"rect" : [ 0.0, 26.0, 998.0, 752.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -4175,8 +4175,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 474.0, 207.0, 95.0, 22.0 ],
-									"text" : "thispatcher front"
+									"patching_rect" : [ 474.0, 207.0, 75.0, 22.0 ],
+									"text" : "openwindow"
 								}
 
 							}
@@ -4225,7 +4225,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 254.5, 464.509259259259238, 68.0, 22.0 ],
-									"text" : "pitch 63"
+									"text" : "pitch 44"
 								}
 
 							}
@@ -4485,6 +4485,7 @@
 								"name" : "dUG Yello 01-1",
 								"default" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -4495,20 +4496,20 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"newobj" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"message" : 								{
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -4519,7 +4520,6 @@
 										"autogradient" : 0
 									}
 ,
-									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ]
 								}
 ,
@@ -4630,22 +4630,22 @@
 			}
 , 			{
 				"name" : "OMax.yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/influencers",
-				"patcherrelativepath" : "../resources/influencers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/influencers",
-				"patcherrelativepath" : "../resources/influencers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "sr.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
-				"patcherrelativepath" : "../resources/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4658,8 +4658,8 @@
 			}
 , 			{
 				"name" : "audio2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/influencers",
-				"patcherrelativepath" : "../resources/influencers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4736,8 +4736,8 @@
 			}
 , 			{
 				"name" : "somax.uniquename.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
-				"patcherrelativepath" : "../resources/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4750,15 +4750,15 @@
 			}
 , 			{
 				"name" : "somax.player.routerblock.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/player",
-				"patcherrelativepath" : "../resources/player",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../patchers/resources/player",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.receiveblock.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/resources/misc",
-				"patcherrelativepath" : "../resources/misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}

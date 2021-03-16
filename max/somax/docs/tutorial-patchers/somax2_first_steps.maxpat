@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1047.0, 736.0 ],
+		"rect" : [ 181.0, 137.0, 1430.0, 812.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -122,11 +122,11 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 21,
+									"linecount" : 20,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.5, 53.647855530474089, 302.0, 288.0 ],
+									"patching_rect" : [ 10.5, 53.647855530474089, 305.0, 275.0 ],
 									"text" : "This tutorial intended to give you a quick introduction to Somax and to serve as a starting point for both audio and MIDI-based interaction.\n\nThere are however a number of other aspects of the system to explore, for example connecting a MIDI keyboard, audio file or a sequencer (using an IAC bus) as an input, using multiple players who listen to each other, constructing your own corpora, experimenting with the tempo and beat tracker, and many other possibilies.\n\nIn the end, the quality of the output will always depend largely on how well the influencers and the player(s) are tuned with respect to the corpus and the input, so it's highly encouraged to experiment with the different parameters available. The help files («Help» buttons in each module) will provide a good starting point for going further, outline a few use cases as well as provide detailed descriptions about each individual parameter.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -170,6 +170,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -188,7 +189,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 78.0, 1372.0, 736.0 ],
+						"rect" : [ 34.0, 79.0, 1372.0, 736.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -367,7 +368,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 1111.0, 491.5, 97.0, 22.0 ],
+									"patching_rect" : [ 1237.5, 442.5, 97.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -390,7 +391,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1000.25, 551.0, 128.0, 16.5 ],
+									"patching_rect" : [ 1000.25, 549.0, 128.0, 16.5 ],
 									"text" : "2. Module Overview",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -408,7 +409,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 934.5, 351.0, 43.0, 15.0 ],
+									"patching_rect" : [ 933.5, 336.0, 43.0, 15.0 ],
 									"text" : "this",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -422,7 +423,7 @@
 									"maxclass" : "live.line",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 926.5, 107.0, 299.0, 12.0 ]
+									"patching_rect" : [ 926.5, 105.0, 299.0, 12.0 ]
 								}
 
 							}
@@ -434,7 +435,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 926.5, 80.5, 299.0, 27.0 ],
+									"patching_rect" : [ 926.5, 78.5, 299.0, 27.0 ],
 									"text" : "1. Introduction to Somax II",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -449,8 +450,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 926.5, 121.0, 308.0, 409.0 ],
-									"text" : "Somax II is an application for musical improvisation and composition. It is based on a generative model using a process similar to concatenative synthesis to provide stylistically coherent improvisation, while in real-time listening to and adapting to a musician (or any other type of audio or MIDI source). The model is operating in the symbolic domain and is trained on a corpus of choice, consisting of one or mulitple MIDI files, from which it draws its material used for improvisation.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, you need to make sure to add the main Somax II folder to your File Path.\n\nThis is done by (in the menubar) clicking Options -> File Preferences..., then clicking the \"+\" button and finally \"choose\", navigating to the place where your Somax2 folder is. Make sure to restart Max once this step is done.\n\nIf the interface now looks like the button above, please go to the second tab:",
+									"patching_rect" : [ 926.5, 119.0, 308.0, 409.0 ],
+									"text" : "Somax II is an application for musical improvisation and composition. It is based on a generative model using a process similar to concatenative synthesis to provide stylistically coherent improvisation, while in real-time listening to and adapting to a musician (or any other type of audio or MIDI source). The model is operating in the symbolic domain and is trained on a corpus of choice, consisting of one or mulitple MIDI files, from which it draws its material used for improvisation.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, you need to make sure to add the main Somax II folder to your File Path.\n\nThis is done by (in the menubar) clicking Options -> File Preferences..., then clicking the \"+\" button and finally \"choose\", navigating to the place where your Somax2 folder is. Make sure to restart Max once this step is done.\n\nIf the interface now looks like in the image above, please go to the second tab:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -464,7 +465,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 916.0, 67.352144469525911, 319.5, 611.943566591422268 ],
+									"patching_rect" : [ 916.0, 65.352144469525911, 319.5, 611.943566591422268 ],
 									"proportion" : 0.5
 								}
 
@@ -478,7 +479,7 @@
 									"maxclass" : "outlet",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1000.25, 739.295714999999973, 30.0, 30.0 ]
+									"patching_rect" : [ 1000.25, 737.295714999999973, 30.0, 30.0 ]
 								}
 
 							}
@@ -901,7 +902,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1314.0, 633.0, 359.0, 154.0 ],
+									"patching_rect" : [ 1613.0, 801.0, 359.0, 154.0 ],
 									"text" : "Make sure that        is enabled,       is set to «Inlet (External)» and that        is toggled on. You should now hear the notes being played and see the input being analyzed and visualized in multiple places in the Midi Influencer.\n\n         \n\n\nOnce this is working, we're ready to move on to a more musical example of Somax interaction.                the scheduler and go to the final part of this introductory tutorial",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1263,7 +1264,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1294.5, 602.352144469525911, 388.0, 314.295711060948179 ],
+									"patching_rect" : [ 1593.5, 770.352144469525911, 388.0, 314.295711060948179 ],
 									"proportion" : 0.5
 								}
 
@@ -2368,7 +2369,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-113",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -4020,6 +4020,18 @@
 			}
 ,
 			"parameter_overrides" : 			{
+				"obj-1::obj-180::obj-49::obj-1::obj-349::obj-26" : 				{
+					"parameter_invisible" : 1,
+					"parameter_modmode" : 0,
+					"parameter_unitstyle" : 10
+				}
+,
+				"obj-1::obj-180::obj-49::obj-5::obj-26" : 				{
+					"parameter_invisible" : 1,
+					"parameter_modmode" : 0,
+					"parameter_unitstyle" : 10
+				}
+,
 				"obj-1::obj-180::obj-49::obj-87::obj-1" : 				{
 					"parameter_longname" : "live.text[1]"
 				}

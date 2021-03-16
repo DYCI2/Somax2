@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 970.0, 110.0, 1228.0, 829.0 ],
+		"rect" : [ 970.0, 110.0, 1049.0, 945.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -380,19 +380,19 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-865" : [ "selfharmonicngramorder", "selfharmonicngramorder", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-870" : [ "selfharmonicbypass", "selfharmonicbypass", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-998" : [ "__exp_regionmaskenable", "__exp_regionmaskenable", 0 ],
-			"obj-13::obj-1::obj-6::obj-5::obj-26" : [ "corpusname[4]", "corpusname", 0 ],
+			"obj-13::obj-1::obj-6::obj-5::obj-26" : [ "corpusname[7]", "corpusname", 0 ],
 			"obj-13::obj-1::obj-6::obj-79::obj-1" : [ "live.text[25]", "live.text", 0 ],
 			"obj-13::obj-1::obj-6::obj-79::obj-2" : [ "live.text[23]", "live.text", 0 ],
 			"obj-13::obj-1::obj-6::obj-79::obj-3" : [ "live.text[18]", "live.text", 0 ],
-			"obj-13::obj-1::obj-6::obj-87::obj-1" : [ "live.text[32]", "live.text", 0 ],
-			"obj-13::obj-1::obj-6::obj-87::obj-2" : [ "live.text[44]", "live.text", 0 ],
-			"obj-13::obj-1::obj-6::obj-87::obj-3" : [ "live.text[40]", "live.text", 0 ],
-			"obj-13::obj-1::obj-6::obj-89::obj-1" : [ "live.text[47]", "live.text", 0 ],
-			"obj-13::obj-1::obj-6::obj-89::obj-2" : [ "live.text[46]", "live.text", 0 ],
-			"obj-13::obj-1::obj-6::obj-89::obj-3" : [ "live.text[48]", "live.text", 0 ],
-			"obj-13::obj-1::obj-6::obj-91::obj-1" : [ "live.text[33]", "live.text", 0 ],
-			"obj-13::obj-1::obj-6::obj-91::obj-2" : [ "live.text[49]", "live.text", 0 ],
-			"obj-13::obj-1::obj-6::obj-91::obj-3" : [ "live.text[50]", "live.text", 0 ],
+			"obj-13::obj-1::obj-6::obj-87::obj-1" : [ "live.text[10]", "live.text", 0 ],
+			"obj-13::obj-1::obj-6::obj-87::obj-2" : [ "live.text[9]", "live.text", 0 ],
+			"obj-13::obj-1::obj-6::obj-87::obj-3" : [ "live.text[11]", "live.text", 0 ],
+			"obj-13::obj-1::obj-6::obj-89::obj-1" : [ "live.text[14]", "live.text", 0 ],
+			"obj-13::obj-1::obj-6::obj-89::obj-2" : [ "live.text[13]", "live.text", 0 ],
+			"obj-13::obj-1::obj-6::obj-89::obj-3" : [ "live.text[12]", "live.text", 0 ],
+			"obj-13::obj-1::obj-6::obj-91::obj-1" : [ "live.text[19]", "live.text", 0 ],
+			"obj-13::obj-1::obj-6::obj-91::obj-2" : [ "live.text[16]", "live.text", 0 ],
+			"obj-13::obj-1::obj-6::obj-91::obj-3" : [ "live.text[15]", "live.text", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-259::obj-1" : [ "activechannels[3]", "activechannels", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-261::obj-1" : [ "activechannels[4]", "activechannels", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-264::obj-1" : [ "activechannels[5]", "activechannels", 0 ],
@@ -421,39 +421,39 @@
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-87::obj-1" : 				{
-					"parameter_longname" : "live.text[32]"
+					"parameter_longname" : "live.text[10]"
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-87::obj-2" : 				{
-					"parameter_longname" : "live.text[44]"
+					"parameter_longname" : "live.text[9]"
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-87::obj-3" : 				{
-					"parameter_longname" : "live.text[40]"
+					"parameter_longname" : "live.text[11]"
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-89::obj-1" : 				{
-					"parameter_longname" : "live.text[47]"
+					"parameter_longname" : "live.text[14]"
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-89::obj-2" : 				{
-					"parameter_longname" : "live.text[46]"
+					"parameter_longname" : "live.text[13]"
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-89::obj-3" : 				{
-					"parameter_longname" : "live.text[48]"
+					"parameter_longname" : "live.text[12]"
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-91::obj-1" : 				{
-					"parameter_longname" : "live.text[33]"
+					"parameter_longname" : "live.text[19]"
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-91::obj-2" : 				{
-					"parameter_longname" : "live.text[49]"
+					"parameter_longname" : "live.text[16]"
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-91::obj-3" : 				{
-					"parameter_longname" : "live.text[50]"
+					"parameter_longname" : "live.text[15]"
 				}
 ,
 				"obj-69::obj-13::obj-1" : 				{
@@ -947,6 +947,8 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -957,13 +959,20 @@
 						"autogradient" : 0
 					}
 ,
+					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"newobj" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -974,16 +983,7 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"button" : 				{

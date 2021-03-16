@@ -1,7 +1,7 @@
 {
     "yin": {
         "title": "Pitch Estimation (Yin)",
-        "description": "The parameters in this box control various aspects of the pitch estimation. The analysis is based on the OMax.yin+ object and the full documentation of these parameters is available by clicking the button below. Note that the «Window» controls the latency of the pitch estimation. For more innformation of the pitch analysis in context, see the «monophonic» tab. The button in the right hand corner will blink each time a pitch is detected."
+        "description": "The parameters in this box control various aspects of the pitch estimation. The analysis is based on the OMax.yin+ object and the full documentation of these parameters is available by clicking the button below. Note that the «Window» controls the latency of the pitch estimation.\n\nFor more information of the pitch analysis in context, see the «monophonic» tab.\n\nThe button in the right hand corner will blink each time a pitch is detected."
     },
     "bonk": {
         "title": "Onset Detection (Bonk)",
