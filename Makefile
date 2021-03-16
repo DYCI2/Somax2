@@ -70,7 +70,8 @@ max-standalone-dmg:
 max-python-dmg:
 	if [ -d $(LIB_BUILD_PATH) ]; then rm -r $(LIB_BUILD_PATH); fi
 	mkdir -p $(LIB_BUILD_FOLDER)
-	cp -RP max python README.md somax2.maxpat tutorial.maxpat $(LIB_BUILD_FOLDER)
+	cp -RP max python README.md LICENSE somax2.maxpat tutorial.maxpat $(LIB_BUILD_FOLDER)
+	cp dist/$(PYINSTALLER_TARGET_NAME) $(LIB_BUILD_FOLDER)/max/somax/misc/
 	create-dmg \
 		--volname "Somax2" \
 		--window-pos 200 120 \
@@ -80,7 +81,7 @@ max-python-dmg:
 		"Somax2.dmg" \
 		$(LIB_BUILD_PATH)
 	mkdir -p dist/somax2-release/
-	cp -r Somax2.dmg dist/somax2-release
+	mv Somax2.dmg dist/somax2-release
 
 
 
