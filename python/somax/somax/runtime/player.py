@@ -93,6 +93,8 @@ class Player(Streamview, ScheduledMidiAgent):
             Return values are only for gathering statistics (Evaluator, etc.) and not used in runtime."""
         if not bool(self.enabled.value):
             return {}
+        if self.corpus is None:
+            raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
         num_generated_peaks: Dict[Atom, int] = {}
         if not path:
             for atom in self._direct_influenced_atoms():

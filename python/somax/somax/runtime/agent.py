@@ -198,8 +198,12 @@ class OscAgent(Agent, AsyncioOscObject):
             self.player.influence(path_and_name, influence, time, **kwargs)
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
-        self.logger.debug(
-            f"[influence] Influence successfully completed for agent '{self.player.name}' with path '{path}'.")
+            return
+        except InvalidCorpus as e:
+            self.logger.debug(repr(e))
+            return
+        self.logger.debug(f"[influence] Influence successfully completed for agent '{self.player.name}' "
+                          f"with path '{path}'.")
 
     def influence_onset(self):
         if not self.scheduler.running:
