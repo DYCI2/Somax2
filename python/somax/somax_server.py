@@ -320,6 +320,8 @@ if __name__ == "__main__":
     with resources.path(log, 'logging.ini') as path:
         logging.config.fileConfig(path.absolute())
 
+    logging.getLogger(__name__).info("Launching Somax...")
+
     # Called to enforce file io at start of program
     SomChromaClassifier()
 
