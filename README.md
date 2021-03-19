@@ -25,7 +25,7 @@ This project is under development. Documentation will be added continuously.
 * Install Python by following the steps in the downloaded installer
 
 ### Step 3: Install Python Requirements
-* From a Terminal app window, change directory (`cd`) to the `python/somax` folder inside the `somax2` folder 
+* From a Terminal app window, change directory (`cd`) to the `python/somax` folder inside the `Somax2` folder 
 * Install the requirements with `pip3 install -r requirements.txt`
  
 For example, using the default Max folder, type :
@@ -40,10 +40,26 @@ A number of packages should now be installing. If the installation terminates wi
 * If not already installed, make sure to go to the package manager inside Max and install CNMAT Externals
 
 ## Getting Started
-A good starting point is the file `tutorial.maxpat` in the root folder. This tutorial gives a brief introduction to the different modules of Somax II and introduces the first steps towards interacting with the model.
+A good starting point is the file `Introduction Somax.pdf`, which gives a brief overview of how the Somax interaction model works. For those who prefer a hands-on experience, it's also possible to jump directly into the tutorial, found in the file `tutorial.maxpat` in the root folder. This tutorial gives a brief introduction to the different modules of Somax II and introduces the first steps towards interacting with the model.
+
+**Note that the first time you launch Somax, depending on your security settings you may be presented with a number of dialogues asking you to give permission to a number of externals (shell, bonk, ircamdescriptor, bc.virfun and bc.yinstats) that Somax requires to be able to run. You may also be asked for permission the first time you launch the server (but this step is explained in the tutorial).**
 
 ## Resources
 
-Documentation will be added continuously, but for this early release there are two main places to look for information on the project and its usage:
-* **Max help files:** Individual help files for each Max object. Accessed by right-clicking (ctrl-click) the object (inside Max) and selecting "Open Help"
-* **Videos, Reports and Publications**: Can be found [here](http://repmus.ircam.fr/somax/home)
+* **Introduction to Somax:** The file `Introduction Somax.pdf` is intended as a starting point to give an understanding of how the interaction model of somax.
+* **Max help files:** Individual help files exists for each Max object, outlining how to use the object, its parametric controls as well as a number of use cases. The help files can be accessed by pressing the «?» button available in each of the objects or by right-clicking (ctrl-click) the object (inside Max) in the unlocked patcher and selecting "Open Help".
+* **Videos, Reports and Publications**: Can be found [here](http://repmus.ircam.fr/somax/home).
+* **Additional Corpora**: A number of pre-built corpora to use for experimentation are available initially. Further corpora can be found in `max/somax/corpus/Additional-Corpora.zip`. To use those in Somax, extract the archive and move the content of the extracted folder to the `max/somax/corpus/` folder.
+
+Further documentation will be added continuously
+
+## Credits
+Somax (c) Ircam 2012 - 2021  
+Somax is an original co-creative interaction concept by Gérard Assayag  
+Early java prototype by Olivier Delerue  
+Versions 0.1 to 1.3 by Laurent Bonnasse-Gahot  
+Versions 1.4 to 1.9  by Axel Chemla-Romeu-Santos  
+Version 2.0 and following by Joakim Borg  
+
+Original corpus creation: B. Borron & B. Magnien, (improvisation on ten jazz standards)  
+Original corpus creation: Carine Bonnefoy (Improvisation on Intuition by C. Bonnnefoy)
