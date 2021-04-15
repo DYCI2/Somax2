@@ -6,7 +6,7 @@ PYINSTALLER_TARGET = $(PY_LIB_PATH)/somax_server.py
 PYINSTALLER_TARGET_NAME = somax_server
 
 MAX_BUILD_PARENT_FOLDER = build/somax
-MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/somax
+MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/Somax2
 DMG_NAME = Somax2
 DMG_PATH = dist/$(DMG_NAME).dmg
 
@@ -45,11 +45,21 @@ max-package:
 		--volname "$(DMG_NAME)" \
 		--window-pos 200 120 \
 		--window-size 800 400 \
+		--icon-size 100 \
 		--icon "$(DMG_NAME)" 200 190 \
+		--hide-extension "$(DMG_NAME)" \
 		--background "media/dmg_installer_background.png" \
 		"$(DMG_PATH)" \
 		"$(MAX_BUILD_PARENT_FOLDER)"
 
+clean:
+	rm -rf build
+	rm -rf "$(PYINSTALLER_TARGET_NAME)".spec
+	rm -rf "dist/rw.$(DMG_NAME).dmg"
+	rm -rf "$(DMG_PATH)"
+
+clean-all: clean-build
+	rm -rf dist
 
 
 
@@ -105,7 +115,3 @@ max-package:
 
 
 
-clean:
-	rm -r dist
-	rm -r build
-	rm *.spec
