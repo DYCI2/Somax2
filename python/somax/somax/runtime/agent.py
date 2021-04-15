@@ -484,7 +484,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.info(f"{str(e)}")
 
     def export_runtime_corpus(self, folder: str, filename: str, corpus_name: Optional[str] = None,
-                              initial_time_signature: tuple[int, int] = (4, 4), ticks_per_beat: int = 480,
+                              initial_time_signature: Tuple[int, int] = (4, 4), ticks_per_beat: int = 480,
                               annotations: str = BarNumberAnnotation.NONE.value, overwrite: bool = False,
                               use_original_tempo: bool = False):
 
