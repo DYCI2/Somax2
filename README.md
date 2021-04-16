@@ -14,7 +14,7 @@ While the application can be used straight out of the box with little configurat
 
 ### Easy Installation
 This is the path recommended for most users, unless you explicitly want to modify the python code.
-* Go to [Releases](https://github.com/DYCI2/Somax2/releases) and download the latest version of Somax 2 (`Somax2-x-x.dmg`)
+* Go to [Releases](https://github.com/DYCI2/Somax2/releases) and download the latest version of Somax 2 (`Somax-v2_x_x.dmg`)
 * Copy the extracted `Somax2` folder  into the `Packages` folder in your Max folder (by default, this is `"~/Documents/Max 8/Packages"`)
 * Go to the Max Package Manager inside Max and install the «CNMAT Externals for Max» package
 * You're done! Now, have a look at the [Getting Started](#getting-started) section on where to go next!
