@@ -51,7 +51,7 @@ Somax (c) Ircam 2012 - 2021
 Somax is an original co-creative interaction concept by Gérard Assayag  
 Early java prototype by Olivier Delerue  
 Versions 0.1 to 1.3 by Laurent Bonnasse-Gahot  
-Versions 1.4 to 1.9  by Axel Chemla-Romeu-Santos  
+Versions 1.4 to 1.9 by Axel Chemla-Romeu-Santos  
 Version 2.0 and following by Joakim Borg  
 
 Original corpus creation: B. Borron & B. Magnien, (improvisation on ten jazz standards)  

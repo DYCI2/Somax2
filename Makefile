@@ -26,19 +26,19 @@ pyinstaller:
 		--hidden-import="sklearn.utils._weight_vector" \
 		--hidden-import="cmath"
 
-codesign:
-	cp "$(MAX_LIB_PATH)"/misc/launch_binary dist/"$(PYINSTALLER_TARGET_NAME)".app/Contents/MacOS
-	codesign --deep --timestamp -s "Developer ID Application: INST RECHER COORD ACOUST MUSICALE" --options=runtime --entitlements codesign/somax.entitlements dist/somax_server.app
+codesignature:
+	codesign --deep --timestamp -s "Developer ID Application: INST RECHER COORD ACOUST MUSICALE" --options=runtime --entitlements codesign/somax.entitlements dist/"$(PYINSTALLER_TARGET_NAME)".app
 	hdiutil create dist/Somax2.dmg -fs HFS+ -srcfolder dist/somax_server.app -ov
-	xcrun altool --notarize-app --primary-bundle-id "ircam.repmus.somax" -u "joakim.borg@ircam.fr" -p echo $(security find-generic-password -w -a $LOGNAME -s "somax_app_specific") --file dist/Somax2.dmg
+	xcrun altool --notarize-app --primary-bundle-id "ircam.repmus.somax" -u "joakim.borg@ircam.fr" -p $(security find-generic-password -w -a $LOGNAME -s "somax_app_specific") --file "(DMG_PATH)"
+	@echo "\033[1mNOTE: You will still have to do the final step manually once notarization has been approved:\n      xcrun stapler staple dist/somax_server.app\033[0m"
 
-max-package:
+max-package: clean
 	mkdir -p "$(MAX_BUILD_PARENT_FOLDER)"
 	cp -r "$(MAX_LIB_PATH)" "$(MAX_BUILD_PATH)"
 	# clean up local items
-	rm -r "$(MAX_BUILD_PATH)"/state/* || true
-	rm -r "$(MAX_BUILD_PATH)"/corpus/_* || true
-	rm "$(MAX_BUILD_PATH)/misc/launch_local" "$(MAX_BUILD_PATH)/misc/launch_binary"
+	rm -rf "$(MAX_BUILD_PATH)"/state/*
+	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
+	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
 	# copy binary (should already be codesigned with launch_binary moved inside)
 	cp -r "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
 	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
