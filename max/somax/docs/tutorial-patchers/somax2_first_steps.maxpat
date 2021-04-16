@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 181.0, 137.0, 1430.0, 812.0 ],
+		"rect" : [ 1087.0, 163.0, 1430.0, 812.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -46,7 +46,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-14",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -94,6 +93,36 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontface" : 0,
+									"fontsize" : 12.0,
+									"id" : "obj-6",
+									"linecount" : 17,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 10.5, 354.647855530474089, 285.0, 234.0 ],
+									"presentation_linecount" : 16,
+									"text" : "When you open the real «somax2» patcher, you will notice that it doesn't look exactly the same as in this tutorial. In this patcher, the four main modules have been moved around, and each player has a routing module attached to it. \n\nIn the real patcher, it's possible to duplicate any player or influencer by (unlocking the patcher and), selecting the object and pressing ⌘D (alternatively ⌥-drag the object). This way, it's possible to create multiple players and/or influencers listening to each other. To make a player p1 listen to a player (or infuencer) p2, simply select «p2» as the source in «p1»'s routing module. Here, it's also possible to which musical dimensions the player should listen to. Consult the somax.player help file for more information.",
+									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"id" : "obj-5",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 10.5, 335.647855530474089, 305.0, 20.0 ],
+									"text" : "A note on the user inteface:",
+									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-160",
 									"linecolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ],
 									"maxclass" : "live.line",
@@ -122,11 +151,11 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 20,
+									"linecount" : 19,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.5, 53.647855530474089, 305.0, 275.0 ],
+									"patching_rect" : [ 10.5, 53.647855530474089, 309.0, 261.0 ],
 									"text" : "This tutorial intended to give you a quick introduction to Somax and to serve as a starting point for both audio and MIDI-based interaction.\n\nThere are however a number of other aspects of the system to explore, for example connecting a MIDI keyboard, audio file or a sequencer (using an IAC bus) as an input, using multiple players who listen to each other, constructing your own corpora, experimenting with the tempo and beat tracker, and many other possibilies.\n\nIn the end, the quality of the output will always depend largely on how well the influencers and the player(s) are tuned with respect to the corpus and the input, so it's highly encouraged to experiment with the different parameters available. The help files («Help» buttons in each module) will provide a good starting point for going further, outline a few use cases as well as provide detailed descriptions about each individual parameter.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2369,6 +2398,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-113",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -4001,6 +4031,7 @@
 			"obj-1::obj-180::obj-49::obj-1::obj-860" : [ "harmonincpeakdecay[1]", "harmonincpeakdecay[1]", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-865" : [ "selfharmonicngramorder", "selfharmonicngramorder", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-870" : [ "selfharmonicbypass", "selfharmonicbypass", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-982" : [ "transpositions[1]", "transpositions", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-998" : [ "__exp_regionmaskenable", "__exp_regionmaskenable", 0 ],
 			"obj-1::obj-180::obj-49::obj-5::obj-26" : [ "corpusname[3]", "corpusname", 0 ],
 			"obj-1::obj-180::obj-49::obj-79::obj-1" : [ "live.text[25]", "live.text", 0 ],
@@ -4124,8 +4155,8 @@
 			}
 , 			{
 				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
-				"patcherrelativepath" : "../../misc",
+				"bootpath" : "~/Downloads/DYCI2Lib 2/Max_library/app",
+				"patcherrelativepath" : "../../../../../../Downloads/DYCI2Lib 2/Max_library/app",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
@@ -4194,8 +4225,8 @@
 			}
 , 			{
 				"name" : "computeMemoryPitchClass.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/misc",
-				"patcherrelativepath" : "../../misc",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
@@ -4277,6 +4308,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "somax.audio.compact.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/legacy",
 				"patcherrelativepath" : "../../patchers/legacy",
@@ -4320,8 +4358,8 @@
 			}
 , 			{
 				"name" : "bc.autoname.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/externals",
-				"patcherrelativepath" : "../../externals",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
@@ -4427,13 +4465,6 @@
 				"name" : "somax.midirecord.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.winresize.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "../../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}

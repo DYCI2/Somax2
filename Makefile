@@ -41,6 +41,7 @@ max-package:
 	rm "$(MAX_BUILD_PATH)/misc/launch_local" "$(MAX_BUILD_PATH)/misc/launch_binary"
 	# copy binary (should already be codesigned with launch_binary moved inside)
 	cp -r "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
+	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
 	create-dmg \
 		--volname "$(DMG_NAME)" \
 		--window-pos 200 120 \
@@ -58,7 +59,7 @@ clean:
 	rm -rf "dist/rw.$(DMG_NAME).dmg"
 	rm -rf "$(DMG_PATH)"
 
-clean-all: clean-build
+clean-all: clean
 	rm -rf dist
 
 
