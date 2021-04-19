@@ -47,12 +47,21 @@ A good starting point is the document `Introduction Somax.pdf`, which gives a br
 Further documentation will be added continuously.
 
 ## Credits
-Somax (c) Ircam 2012 - 2021  
-Somax is an original co-creative interaction concept by Gérard Assayag  
-Early java prototype by Olivier Delerue  
-Versions 0.1 to 1.3 by Laurent Bonnasse-Gahot  
-Versions 1.4 to 1.9 by Axel Chemla-Romeu-Santos  
-Version 2.0 and following by Joakim Borg  
+Somax 2 (c) Ircam 2012-2021
+
+Somax 2 is a renewed version of the Somax reactive co-improvisation paradigm by G. Assayag.
+Architecture, UI and code completely redesigned and written by Joakim Borg in Max and Python.
+
+Legacy:
+* Early Java prototype by Olivier Delerue: adding reactivity to OMax.
+* Versions 0.1 to 1.3 by Laurent Bonnasse-Gahot: conception of the reactive memory and  influence  dimensions model.
+* Versions 1.4 to 1.9  by Axel Chemla-Romeu-Santos: separation of the Python server and object oriented design.
+
+The Somax 2 project  is part of the ANR project MERCI (Mixed Musical Reality with Creative Instruments) and the ERC project REACH (Raising Co-creativity in Cyber-Human Musicianship).
+
+PI : Gérard Assayag
+Music Representation Team
+IRCAM STMS Lab (CNRS, Sorbonne University, Ministry of Culture).
 
 Original corpus creation: B. Borron & B. Magnien, (improvisation on ten jazz standards)  
 Original corpus creation: Carine Bonnefoy (Improvisation on Intuition by C. Bonnnefoy)
