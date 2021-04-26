@@ -33,7 +33,11 @@ If you want to modify the python code, you will need a manual installation. This
 * If not already installed, make sure to go to the package manager inside Max and install CNMAT Externals
 
 ## Getting Started
-A good starting point is the document `Introduction Somax.pdf`, which gives a brief overview of how the Somax interaction model works. For those who prefer a hands-on experience, it's also possible to jump directly into the tutorial, found in the file `tutorial.maxpat` in the root folder. This tutorial gives a brief introduction to the different modules of Somax II and introduces the first steps towards interacting with the model. 
+The main Somax application is the patch `somax2.maxpat`. You can open this patch from inside Max or by opening it directly from Finder. 
+
+It is recommended to first follow the interactive tutorial by opening the `tutorial.maxpat` patch. This tutorial gives a brief introduction to the different modules of Somax and introduces the first steps towards interacting with the model.
+
+A good starting point in understanding Somax is the document `Introduction Somax.pdf`, which gives a brief overview of how the Somax interaction model works.
 
 **Note that the first time you launch Somax, depending on your security settings you may be presented with a number of dialogues asking you to give permission to a number of externals (shell, bonk, ircamdescriptor, bc.virfun and bc.yinstats) that Somax requires to be able to run. You may also be asked for permission the first time you launch the server (but this step is explained in the tutorial).**
 
