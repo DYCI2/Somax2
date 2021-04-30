@@ -22,6 +22,7 @@ This is the path recommended for most users, unless you explicitly want to modif
 
 ### Manual Installation:
 If you want to modify the python code, you will need a manual installation. This assumes you already have python 3.7+ installed.
+
 #### Step 1: Install Somax
 * Clone the master branch of this repository or go to [Releases](https://github.com/DYCI2/Somax2/releases) and download the latest version of the Somax source code.
 * Add the `max/somax` folder to your Max path, either by symlinking it to `~/Documents/Max 8/Packages` or through Options -> File Preferences in Max. If the latter, make sure that the `subfolders` option is checked.
@@ -41,7 +42,7 @@ A good starting point in understanding Somax is the document `Introduction Somax
 
 **Note that the first time you launch Somax, depending on your security settings you may be presented with a number of dialogues asking you to give permission to a number of externals (shell, bonk, ircamdescriptor, bc.virfun and bc.yinstats) that Somax requires to be able to run. You may also be asked for permission the first time you launch the server (but this step is explained in the tutorial).**
 
-## Resources
+## Documentation and Resources
 
 * **Introduction to Somax:** The document `Introduction Somax.pdf` is intended as a starting point to give an understanding of how the interaction model of somax.
 * **Max help files:** The main documentation of Somax. Individual help files exists for each Max object, outlining how to use the object, its parametric controls as well as a number of use cases. The help files can be accessed by pressing the «?» button available in each of the objects or by right-clicking (ctrl-click) the object (inside Max) in the unlocked patcher and selecting "Open Help".
