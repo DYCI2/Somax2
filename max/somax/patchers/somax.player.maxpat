@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 451.0, 49.0, 440.0, 770.0 ],
+		"rect" : [ 450.0, 49.0, 440.0, 770.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -5318,7 +5318,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "float", "int", "int" ],
 					"patching_rect" : [ 6600.0, 969.0, 45.0, 22.0 ],
-					"text" : "t 0. 1 0"
+					"text" : "t 0. 1 2"
 				}
 
 			}
@@ -5372,7 +5372,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 6915.0, 1140.467820986068546, 24.0, 24.0 ],
+					"patching_rect" : [ 6915.0, 1141.467820986068546, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 705.520052615844634, 21.5, 18.0, 18.0 ],
 					"varname" : "__exp_outputfrom"
@@ -9275,7 +9275,7 @@
 						"outputthreshold" : [ 0.0 ],
 						"playingmode" : [ 1 ],
 						"pollpeaks" : [ 1 ],
-						"reinstantiate" : [ 1.0 ],
+						"reinstantiate" : [ 0.0 ],
 						"resetinfluences" : [ 0.0 ],
 						"resetparams" : [ 0.0 ],
 						"selfharmonicngramorder" : [ 2 ],
@@ -10718,6 +10718,7 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"gradient" : 1,
+					"hidden" : 1,
 					"id" : "obj-364",
 					"ignoreclick" : 1,
 					"maxclass" : "message",
@@ -11331,7 +11332,7 @@
 , 			{
 				"box" : 				{
 					"coll_data" : 					{
-						"count" : 2,
+						"count" : 4,
 						"data" : [ 							{
 								"key" : 0,
 								"value" : [ "MaxPeakSelector" ]
@@ -11339,6 +11340,14 @@
 , 							{
 								"key" : 1,
 								"value" : [ "ThresholdPeakSelector" ]
+							}
+, 							{
+								"key" : 2,
+								"value" : [ "ProbabilisticPeakSelector" ]
+							}
+, 							{
+								"key" : 3,
+								"value" : [ "ThresholdProbabilisticPeakSelector" ]
 							}
  ]
 					}
@@ -11417,7 +11426,7 @@
 , 			{
 				"box" : 				{
 					"coll_data" : 					{
-						"count" : 2,
+						"count" : 4,
 						"data" : [ 							{
 								"key" : 0,
 								"value" : [ "MaxPeakSelector" ]
@@ -11425,6 +11434,14 @@
 , 							{
 								"key" : 1,
 								"value" : [ "ThresholdPeakSelector" ]
+							}
+, 							{
+								"key" : 2,
+								"value" : [ "ProbabilisticPeakSelector" ]
+							}
+, 							{
+								"key" : 3,
+								"value" : [ "ThresholdProbabilisticPeakSelector" ]
 							}
  ]
 					}
@@ -19388,7 +19405,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-566", 0 ],
+					"order" : 0,
+					"source" : [ "obj-574", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-567", 0 ],
+					"order" : 1,
 					"source" : [ "obj-574", 0 ]
 				}
 
@@ -22876,6 +22902,8 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -22886,33 +22914,31 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"message" : 				{
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"newobj" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontsize" : [ 10.0 ]
+				}
+,
+				"message" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"button" : 				{
