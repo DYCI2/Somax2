@@ -17,10 +17,11 @@ pyinstaller:
 	$(PYINSTALLER_PATH) $(PYINSTALLER_TARGET) \
 		--clean \
 		--noconfirm \
-		--onefile \
+		--onedir \
 		--noconsole \
 		--name $(PYINSTALLER_TARGET_NAME) \
 		--exclude-module matplotlib \
+		--exclude-module PyQt5 \
 		--add-data="$(PY_LIB_PATH)/somax/classification/tables:somax/classification/tables" \
 		--add-data="$(PY_LIB_PATH)/log:log" \
 		--hidden-import="sklearn.utils._weight_vector" \
@@ -29,7 +30,7 @@ pyinstaller:
 codesignature:
 	codesign --deep --timestamp -s "Developer ID Application: INST RECHER COORD ACOUST MUSICALE" --options=runtime --entitlements codesign/somax.entitlements dist/"$(PYINSTALLER_TARGET_NAME)".app
 	hdiutil create dist/Somax2.dmg -fs HFS+ -srcfolder dist/somax_server.app -ov
-	xcrun altool --notarize-app --primary-bundle-id "ircam.repmus.somax" -u "joakim.borg@ircam.fr" -p $(security find-generic-password -w -a $LOGNAME -s "somax_app_specific") --file "(DMG_PATH)"
+	xcrun altool --notarize-app --primary-bundle-id "ircam.repmus.somax" -u "joakim.borg@ircam.fr" -p $(security find-generic-password -w -a $LOGNAME -s "somax_app_specific") --file "$(DMG_PATH)"
 	@echo "\033[1mNOTE: You will still have to do the final step manually once notarization has been approved:\n      xcrun stapler staple dist/somax_server.app\033[0m"
 
 max-package: clean
