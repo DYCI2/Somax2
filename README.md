@@ -5,10 +5,9 @@ While the application can be used straight out of the box with little configurat
 
 ## Requirements
 
-* macOS 10.15 or later (may work with earlier versions but has not been tested)
-* Max 7 or later
-* ~~Python 3.7 or later~~ (only needed for manual installation)
-* CNMAT Externals for Max (can be installed through the Max Package Manager)
+* macOS 10.13 or later 
+* Max 8
+* ~~Python 3.9 or later~~ (only needed for manual installation)
 
 ## Installation
 
@@ -16,22 +15,18 @@ While the application can be used straight out of the box with little configurat
 This is the path recommended for most users, unless you explicitly want to modify the python code.
 * Go to [Releases](https://github.com/DYCI2/Somax2/releases) and download the latest version of Somax 2 (`Somax-v2_x_x.dmg`)
 * Copy the extracted `Somax2` folder  into the `Packages` folder in your Max folder (by default, this is `"~/Documents/Max 8/Packages"`)
-* Go to the Max Package Manager inside Max and install the «CNMAT Externals for Max» package
-* You're done! Now, have a look at the [Getting Started](#getting-started) section on where to go next!
+* You're done! Now, have a look at the [Getting Started](#getting-started) section on where to go next
 
 
 ### Manual Installation:
-If you want to modify the python code, you will need a manual installation. This assumes you already have python 3.7+ installed.
+If you want to modify the python code, you will need a manual installation. This assumes you already have python 3.9+ installed.
 
 #### Step 1: Install Somax
 * Clone the master branch of this repository or go to [Releases](https://github.com/DYCI2/Somax2/releases) and download the latest version of the Somax source code.
-* Add the `max/somax` folder to your Max path, either by symlinking it to `~/Documents/Max 8/Packages` or through Options -> File Preferences in Max. If the latter, make sure that the `subfolders` option is checked.
+* Add the `max/somax` folder to your Max path through Options -> File Preferences in Max. Make sure that the `subfolders` option is checked.
 
 #### Step 2: Install Python Requirements 
 * From the root folder, install the requirements with `pip3 install -r python/somax/requirements.txt`
-
-#### Step 3: Install Max requirements
-* If not already installed, make sure to go to the package manager inside Max and install CNMAT Externals
 
 ## Getting Started
 The main Somax application is the patch `somax2.maxpat`. You can open this patch from inside Max or by opening it directly from Finder. 
@@ -40,12 +35,12 @@ It is recommended to first follow the interactive tutorial by opening the `tutor
 
 A good starting point in understanding Somax is the document `Introduction Somax.pdf`, which gives a brief overview of how the Somax interaction model works.
 
-**Note that the first time you launch Somax, depending on your security settings you may be presented with a number of dialogues asking you to give permission to a number of externals (shell, bonk, ircamdescriptor, bc.virfun and bc.yinstats) that Somax requires to be able to run. You may also be asked for permission the first time you launch the server (but this step is explained in the tutorial).**
+**Note that the first time you launch Somax, depending on your security settings you may be presented with a number of dialogues asking you to give permission to a number of externals (shell, bonk, ircamdescriptor, bc.virfun and bc.yinstats) that Somax requires to be able to run. You may also be asked for permission the first time you launch the server (this step is explained in the tutorial).**
 
 ## Documentation and Resources
 
-* **Introduction to Somax:** The document `Introduction Somax.pdf` is intended as a starting point to give an understanding of how the interaction model of somax.
-* **Max help files:** The main documentation of Somax. Individual help files exists for each Max object, outlining how to use the object, its parametric controls as well as a number of use cases. The help files can be accessed by pressing the «?» button available in each of the objects or by right-clicking (ctrl-click) the object (inside Max) in the unlocked patcher and selecting "Open Help".
+* **Introduction to Somax:** The document `Introduction Somax.pdf` is intended as a starting point to give an understanding of how the interaction model of somax works.
+* **Max Help Files:** The main documentation of Somax. Individual help files exists for each Max object, outlining how to use the object, its parametric controls as well as a number of use cases. The help files can be accessed by pressing the «?» button available in each of the objects or by right-clicking (ctrl-click) the object inside Max in the unlocked patcher and selecting "Open Help".
 * **Videos, Reports and Publications**: Can be found [here](http://repmus.ircam.fr/somax/home).
 * **Additional Corpora**: A number of pre-built corpora to use for experimentation are available initially. Further corpora can be found in `max/somax/corpus/Additional-Corpora.zip`. To use those in Somax, extract the archive and move the content of the extracted folder to the `max/somax/corpus/` folder.
 
@@ -59,10 +54,10 @@ Architecture, UI and code completely redesigned and written by Joakim Borg in Ma
 
 Legacy:
 * Early Java prototype by Olivier Delerue: adding reactivity to OMax.
-* Versions 0.1 to 1.3 by Laurent Bonnasse-Gahot: conception of the reactive memory and  influence  dimensions model.
-* Versions 1.4 to 1.9  by Axel Chemla-Romeu-Santos: separation of the Python server and object oriented design.
+* Versions 0.1 to 1.3 by Laurent Bonnasse-Gahot: conception of the reactive memory and influence dimensions model.
+* Versions 1.4 to 1.9 by Axel Chemla-Romeu-Santos: separation of the Python server and object oriented design.
 
-The Somax 2 project  is part of the ANR project MERCI (Mixed Musical Reality with Creative Instruments) and the ERC project REACH (Raising Co-creativity in Cyber-Human Musicianship).
+The Somax 2 project is part of the ANR project MERCI (Mixed Musical Reality with Creative Instruments) and the ERC project REACH (Raising Co-creativity in Cyber-Human Musicianship).
 
 PI : Gérard Assayag
 Music Representation Team
