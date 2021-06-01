@@ -1,5 +1,5 @@
 # Somax II
-Somax II is an application for musical improvisation and composition. It is implemented in [Max](https://cycling74.com/products/max/) and is based on a generative model using a process similar to concatenative synthesis to provide stylistically coherent improvisation, while in real-time listening to and adapting to a musician (or any other type of audio or MIDI source). The model is operating in the symbolic domain and is trained on a musical corpus, consisting of one or multiple MIDI files, from which it draws its material used for improvisation. The model can be used with little configuration to autonomously interact with a musician, but it also allows manual control of its generative process, effectively letting the model serve as an instrument that can be played in its own right.
+Somax 2 is an application for musical improvisation and composition. It is implemented in [Max](https://cycling74.com/products/max/) and is based on a generative model using a process similar to concatenative synthesis to provide stylistically coherent improvisation, while in real-time listening to and adapting to a musician (or any other type of audio or MIDI source). The model is operating in the symbolic domain and is trained on a musical corpus, consisting of one or multiple MIDI files, from which it draws its material used for improvisation. The model can be used with little configuration to autonomously interact with a musician, but it also allows manual control of its generative process, effectively letting the model serve as an instrument that can be played in its own right.
 
 While the application can be used straight out of the box with little configuration (see [Getting Started](#Getting-started)), it is also designed as a library, allowing the user to create custom models as well as set up networks of multiple models and sources that are listening to and interacting with each other.
 
@@ -23,10 +23,10 @@ If you want to modify the python code, you will need a manual installation. This
 
 #### Step 1: Install Somax
 * Clone the master branch of this repository or go to [Releases](https://github.com/DYCI2/Somax2/releases) and download the latest version of the Somax source code.
-* Add the `max/somax` folder to your Max path through Options -> File Preferences in Max. Make sure that the `subfolders` option is checked.
+* Add the `max/somax` subfolder of Somax2 to your Max path through Options -> File Preferences in Max. Make sure that the `subfolders` option is checked.
 
 #### Step 2: Install Python Requirements 
-* From the root folder, install the requirements with `pip3 install -r python/somax/requirements.txt`
+* In a terminal, cd to the `Somax2` root folder and install the requirements with `pip3 install -r python/somax/requirements.txt`
 
 ## Getting Started
 The main Somax application is the patch `somax2.maxpat`. You can open this patch from inside Max or by opening it directly from Finder. 
@@ -39,29 +39,25 @@ A good starting point in understanding Somax is the document `Introduction Somax
 
 ## Documentation and Resources
 
-* **Introduction to Somax:** The document `Introduction Somax.pdf` is intended as a starting point to give an understanding of how the interaction model of somax works.
+* **Introduction to Somax:** The document `Introduction Somax.pdf` is intended as a starting point to give an understanding of how the interaction model of Somax works.
 * **Max Help Files:** The main documentation of Somax. Individual help files exists for each Max object, outlining how to use the object, its parametric controls as well as a number of use cases. The help files can be accessed by pressing the «?» button available in each of the objects or by right-clicking (ctrl-click) the object inside Max in the unlocked patcher and selecting "Open Help".
 * **Videos, Reports and Publications**: Can be found [here](http://repmus.ircam.fr/somax/home).
-* **Additional Corpora**: A number of pre-built corpora to use for experimentation are available initially. Further corpora can be found in `max/somax/corpus/Additional-Corpora.zip`. To use those in Somax, extract the archive and move the content of the extracted folder to the `max/somax/corpus/` folder.
+* **Additional Corpora**: A number of pre-built corpora to use for experimentation are available initially. Further corpora can be found in `corpus/Additional-Corpora.zip`. To use those in Somax, extract the archive and move the content of the extracted folder to the `corpus/` folder.
 
 Further documentation will be added continuously.
 
 ## Credits
 Somax 2 (c) Ircam 2012-2021
 
-Somax 2 is a renewed version of the Somax reactive co-improvisation paradigm by G. Assayag.
-Architecture, UI and code completely redesigned and written by Joakim Borg in Max and Python.
+Somax 2 is a new version of the Somax reactive co-improvisation paradigm by G. Assayag, featuring a modular multithreaded implementation, multiple wireless interacting players, new UI design with tutorials and documentation, as well as a number of new interaction parameters. Written by Joakim Borg in Max and Python (2019-2021).
+
 
 Legacy:
-* Early Java prototype by Olivier Delerue: adding reactivity to OMax.
-* Versions 0.1 to 1.3 by Laurent Bonnasse-Gahot: conception of the reactive memory and influence dimensions model.
-* Versions 1.4 to 1.9 by Axel Chemla-Romeu-Santos: separation of the Python server and object oriented design.
+* Early Java prototype by Olivier Delerue: adding reactivity to OMax
+* Versions 0.1 to 1.3 by Laurent Bonnasse-Gahot (postdoc): external influence / reactive memory core cognitive model design
+* Versions 1.4 to 1.9 by Axel Chemla-Romeu-Santos: Python server, general object design, streamviews
 
-The Somax 2 project is part of the ANR project MERCI (Mixed Musical Reality with Creative Instruments) and the ERC project REACH (Raising Co-creativity in Cyber-Human Musicianship).
-
-PI : Gérard Assayag
-Music Representation Team
-IRCAM STMS Lab (CNRS, Sorbonne University, Ministry of Culture).
+The Somax 2 project is part of the ANR project MERCI (Mixed Musical Reality with Creative Instruments) ANR-19-CE33-0010, and the ERC project REACH (Raising Co-creativity in Cyber-Human Musicianship) ERC-ADG-19-883313. PI : Gérard Assayag, Music Representation Team, IRCAM STMS Lab (CNRS, Sorbonne University, Ministry of Culture).
 
 Original corpus creation: B. Borron & B. Magnien, (improvisation on ten jazz standards)  
 Original corpus creation: Carine Bonnefoy (Improvisation on Intuition by C. Bonnnefoy)

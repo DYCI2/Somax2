@@ -28,10 +28,18 @@ pyinstaller:
 		--hidden-import="cmath"
 
 codesignature:
-	codesign --deep --timestamp -s "Developer ID Application: INST RECHER COORD ACOUST MUSICALE" --options=runtime --entitlements codesign/somax.entitlements dist/"$(PYINSTALLER_TARGET_NAME)".app
+	# Note: sklearn/.dylibs/libomp.dylib is High Sierra only and required to sign since it's in a hidden folder
+	codesign --deep --timestamp -s "Developer ID Application: INST RECHER COORD ACOUST MUSICALE" \
+			--options=runtime  \
+			--entitlements codesign/somax.entitlements \
+			codesign/somax.entitlements dist/somax_server.app/Contents/Resources/sklearn/.dylibs/libomp.dylib \
+			dist/"$(PYINSTALLER_TARGET_NAME)".app
 	hdiutil create dist/Somax2.dmg -fs HFS+ -srcfolder dist/somax_server.app -ov
-	xcrun altool --notarize-app --primary-bundle-id "ircam.repmus.somax" -u "joakim.borg@ircam.fr" -p $(security find-generic-password -w -a $LOGNAME -s "somax_app_specific") --file "$(DMG_PATH)"
-	@echo "\033[1mNOTE: You will still have to do the final step manually once notarization has been approved:\n      xcrun stapler staple dist/somax_server.app\033[0m"
+	xcrun altool --notarize-app --primary-bundle-id "ircam.repmus.somax" \
+				 -u "joakim.borg@ircam.fr" \
+				 -p $$(security find-generic-password -w -a $$LOGNAME -s "somax_app_specific") \
+				 --file "$(DMG_PATH)"
+    @echo "\033[1mNOTE: You will still have to do the final step manually once notarization has been approved:\n      xcrun stapler staple dist/somax_server.app\033[0m"
 
 max-package: clean
 	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN CODESIGNED BEFORE CALLING THIS COMMAND. ORDER SHOULD BE:\n    make pyinstaller\n    make codesignature (+ stapler once finished)\n    make max-package\033[0m"
@@ -42,7 +50,7 @@ max-package: clean
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
 	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
 	# copy binary (should already be codesigned)
-	cp -r "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
+	cp -a "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
 	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
 	create-dmg \
 		--volname "$(DMG_NAME)" \
