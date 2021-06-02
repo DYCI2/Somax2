@@ -39,7 +39,7 @@ codesignature:
 				 -u "joakim.borg@ircam.fr" \
 				 -p $$(security find-generic-password -w -a $$LOGNAME -s "somax_app_specific") \
 				 --file "$(DMG_PATH)"
-    @echo "\033[1mNOTE: You will still have to do the final step manually once notarization has been approved:\n      xcrun stapler staple dist/somax_server.app\033[0m"
+	@echo "\033[1mNOTE: You will still have to do the final step manually once notarization has been approved:\n      xcrun stapler staple dist/somax_server.app\033[0m"
 
 max-package: clean
 	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN CODESIGNED BEFORE CALLING THIS COMMAND. ORDER SHOULD BE:\n    make pyinstaller\n    make codesignature (+ stapler once finished)\n    make max-package\033[0m"
