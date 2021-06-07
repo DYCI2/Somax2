@@ -25,7 +25,7 @@ If you want to modify the python code, you will need a manual installation. This
 
 #### Step 1: Install Somax
 
-* Clone the master branch of this repository or go to [Releases](https://github.com/DYCI2/Somax2/releases) and download the latest version of the Somax source code.
+* Clone the master branch of this [repository](https://github.com/DYCI2/Somax2) or go to [Releases](https://github.com/DYCI2/Somax2/releases) and download the latest version of the Somax source code.
 * Add the `max/somax` subfolder of Somax2 to your Max path through Options -> File Preferences in Max. Make sure that the `subfolders` option is checked.
 
 #### Step 2: Install Python Requirements 
