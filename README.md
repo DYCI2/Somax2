@@ -66,3 +66,7 @@ The Somax 2 project is part of the ANR project MERCI (Mixed Musical Reality with
 
 Original corpus creation: B. Borron & B. Magnien, (improvisation on ten jazz standards)  
 Original corpus creation: Carine Bonnefoy (Improvisation on Intuition by C. Bonnnefoy)
+
+## Contacting the team
+
+See [Ircam Project Page](https://www.stms-lab.fr/projects/pages/somax2/) and [Ircam Forum & discussion list] (https://forum.ircam.fr/projects/detail/somax-2/).
