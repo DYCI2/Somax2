@@ -69,4 +69,4 @@ Original corpus creation: Carine Bonnefoy (Improvisation on Intuition by C. Bonn
 
 ## Contacting the team
 
-See [Ircam Project Page](https://www.stms-lab.fr/projects/pages/somax2/) and [Ircam Forum & discussion list] (https://forum.ircam.fr/projects/detail/somax-2/).
+See [Ircam Project Page](https://www.stms-lab.fr/projects/pages/somax2/) and [Ircam Forum discussion list](https://forum.ircam.fr/projects/detail/somax-2/).
