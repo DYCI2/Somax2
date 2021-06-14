@@ -77,29 +77,60 @@ class CorpusBuilder:
               background_channels: Tuple[int] = tuple(range(1, 17)),
               spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
               **kwargs) -> Corpus:
-        """ :raises TODO!!! """
-        # TODO: Handle folders
+        """ :raises TODO!!!
+                    IOError if folder mixes audio and midi files"""
         if os.path.isdir(filepath):
-            raise NotImplementedError("Building corpora from folders is not supported yet.")
+            filepaths, content_type = self._folder_content(filepath)  # type: List[str], Optional[ContentType]
+            name: str = corpus_name if corpus_name is not None else os.path.basename(filepath)
         else:
-            filename, extension = os.path.splitext(filepath.split("/")[-1])
-            name = corpus_name if corpus_name is not None else filename
-            if extension in CorpusBuilder.MIDI_FILE_EXTENSIONS:
-                corpus: Corpus = self._build_midi(filepath, name, foreground_channels, background_channels,
-                                                  spectrogram_filter, **kwargs)
-            elif extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS:
-                corpus: Corpus = self._build_audio(filepath, name, foreground_channels, background_channels,
-                                                   spectrogram_filter, **kwargs)
-            else:
-                raise IOError("Invalid file format. Valid extensions are {}.".format(
-                    "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
+            content_type = self._parse_content_type(filepath)
+            filepaths = [filepath]
+            name = corpus_name if corpus_name is not None else os.path.splitext(os.path.basename(filepath))[0]
+
+        if content_type == ContentType.MIDI:
+            corpus: Corpus = self._build_midi(filepaths, name, foreground_channels, background_channels,
+                                              spectrogram_filter, **kwargs)
+        elif content_type == ContentType.AUDIO:
+            raise NotImplementedError("Building audio corpora is not supported yet")
+
+        else:
+            raise IOError("Could not parse the content type of the file/folder")
+
         return corpus
 
-    def _build_midi(self, filepath: str, name: str, foreground_channels: Tuple[int],
+    def _folder_content(self, filepath: str) -> Tuple[List[str], Optional[ContentType]]:
+        """ raises: IOError if folder mixes audio and midi files """
+        content_type: Optional[ContentType] = None
+        filepaths: List[str] = []
+        for file in os.listdir(filepath):
+            file_content_type: Optional[ContentType] = self._parse_content_type(file)
+            if file_content_type is None:
+                self.logger.warning(f"Ignoring file {file}: invalid type.")
+            elif (content_type is None or content_type == ContentType.MIDI) and file_content_type == ContentType.MIDI:
+                content_type = ContentType.MIDI
+                filepaths.append(os.path.join(filepath, file))
+            elif (content_type is None or content_type == ContentType.AUDIO) and file_content_type == ContentType.AUDIO:
+                content_type = ContentType.AUDIO
+                filepaths.append(os.path.join(filepath, file))
+            else:
+                raise IOError("Building corpus from mix of audio and midi files is not supported.")
+
+        return filepaths, content_type
+
+    def _parse_content_type(self, filepath: str) -> Optional[ContentType]:
+        _, extension = os.path.splitext(filepath.split("/")[-1])
+        if extension in self.MIDI_FILE_EXTENSIONS:
+            return ContentType.MIDI
+        elif extension in self.AUDIO_FILE_EXTENSIONS:
+            return ContentType.AUDIO
+        else:
+            return None
+
+    def _build_midi(self, filepaths: List[str], name: str, foreground_channels: Tuple[int],
                     background_channels: Tuple[int], spectrogram_filter: AbstractFilter, **kwargs) -> Corpus:
         # TODO: Option to plot note matrix, spectrograms, chromagrams and slices along the way!
         self.logger.debug(f"Building midi corpus {name}")
-        note_matrix: NoteMatrix = NoteMatrix.from_midi_file(filepath)
+        note_matrix: NoteMatrix = NoteMatrix.from_midi_files(filepaths)
         self.logger.debug(f"Note matrix {note_matrix} constructed.")
         fg_matrix: NoteMatrix = note_matrix.split_by_channel(foreground_channels)
         bg_matrix: NoteMatrix = note_matrix.split_by_channel(background_channels)
