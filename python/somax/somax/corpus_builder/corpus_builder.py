@@ -78,7 +78,7 @@ class CorpusBuilder:
               spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
               **kwargs) -> Corpus:
         """ :raises TODO!!!
-                    IOError if folder mixes audio and midi files"""
+                    IOError if folder mixes audio and midi files or folder is empty"""
         if os.path.isdir(filepath):
             filepaths, content_type = self._folder_content(filepath)  # type: List[str], Optional[ContentType]
             name: str = corpus_name if corpus_name is not None else os.path.basename(filepath)

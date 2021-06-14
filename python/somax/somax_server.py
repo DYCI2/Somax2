@@ -109,6 +109,9 @@ class Somax:
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
             return
+        except IOError as e:
+            self.logger.error(f"{str(e)} No Corpus was built.")
+            return
 
         if output_folder is not None:
             self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{output_folder}'...")
