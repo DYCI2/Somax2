@@ -21,6 +21,10 @@ class Peaks:
         return cls(np.empty(0, dtype=np.float), np.empty(0, dtype=np.float), np.empty(0, dtype=np.int32))
 
     @classmethod
+    def create_discrete(cls, length: int):
+        return cls(np.zeros(length, dtype=np.float), np.zeros(length, dtype=np.float), np.zeros(length, dtype=np.int32))
+
+    @classmethod
     def optimized_copy(cls, other: 'Peaks') -> 'Peaks':
         return cls(np.copy(other.scores), other.times, other.transform_ids)
 
@@ -67,3 +71,4 @@ class Peaks:
 
     def dump(self) -> (np.ndarray, np.ndarray, np.ndarray):
         return self.scores, self.times, self.transform_ids
+

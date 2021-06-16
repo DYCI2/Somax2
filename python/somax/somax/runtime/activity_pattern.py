@@ -21,7 +21,7 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
         super(AbstractActivityPattern, self).__init__()
         self.logger = logging.getLogger(__name__)
         self._peaks: Peaks = Peaks.create_empty()
-        self.corpus: Corpus = corpus
+        self._corpus: Corpus = corpus
 
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractActivityPattern':
@@ -51,6 +51,14 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
     def peaks(self) -> Peaks:
         """ Returns a shallow copy the activity pattern's peaks (copy of scores but references to times and hashes)"""
         return Peaks.optimized_copy(self._peaks)
+
+    @property
+    def corpus(self):
+        return self._corpus
+
+    @corpus.setter
+    def corpus(self, corpus: Corpus):
+        self._corpus = corpus
 
     def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
         parameters: Dict = {}
@@ -170,6 +178,7 @@ class FreezeActivityPattern(AbstractActivityPattern):
         """ n is the number of updates until peak decays below threshold"""
         return -np.divide(n, np.log(self.extinction_threshold.value - 0.001))
 
+
 class ManualActivityPattern(AbstractActivityPattern):
     """Decay: score = exp(-n/tau), where n is the number of events generated since creation of peak (new_event calls)"""
 
@@ -233,3 +242,39 @@ class ManualActivityPattern(AbstractActivityPattern):
     def _calc_tau(self, n: int):
         """ n is the number of updates until peak decays below threshold"""
         return -np.divide(n, np.log(self.extinction_threshold.value - 0.001))
+
+
+class DirectActivityPattern(AbstractActivityPattern):
+    def __init__(self, corpus: Optional[Corpus] = None):
+        super().__init__(corpus=corpus)
+        self.logger.debug("[__init__]: ManualActivityPattern initialized.")
+        self.default_score: Parameter = Parameter(1.0, None, None, 'float', "Value of a new peaks upon creation.")
+        self._peaks: Peaks = Peaks.create_empty()
+        self._parse_parameters()
+
+    def insert(self, influences: List[PeakEvent]) -> None:
+        peaks = Peaks.create_empty()
+        scores: List[float] = []
+        times: List[float] = []
+        transform_hashes: List[int] = []
+        for influence in influences:
+            times.append(influence.event.onset)
+            scores.append(self.default_score.value)
+            transform_hashes.append(influence.transform_hash)
+        peaks.append(scores, times, transform_hashes)
+        self._peaks = peaks
+
+    def update_peaks_on_influence(self, new_time: float) -> None:
+        pass
+
+    def update_peaks_on_new_event(self, new_time: float) -> None:
+        pass
+
+    def clear(self) -> None:
+        self._peaks = Peaks.create_empty()
+
+    @property
+    def peaks(self) -> Peaks:
+        return_peaks: Peaks = self._peaks
+        self._peaks = Peaks.create_empty()
+        return return_peaks

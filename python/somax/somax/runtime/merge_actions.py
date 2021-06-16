@@ -93,7 +93,8 @@ class DistanceMergeAction(AbstractMergeAction):
         self.logger.debug(f"[merge] Merge successful. Number of peaks after merge: {merged_peaks.size()}.")
         return merged_peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float, applied_transform: AbstractTransform) -> None:
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
         pass
 
     def clear(self) -> None:
@@ -106,5 +107,3 @@ class DistanceMergeAction(AbstractMergeAction):
     @t_width.setter
     def t_width(self, value):
         self._t_width.value = value
-
-
