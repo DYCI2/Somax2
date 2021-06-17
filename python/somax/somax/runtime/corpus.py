@@ -1,3 +1,4 @@
+import numpy as np
 import copy
 import json
 import logging
@@ -60,6 +61,7 @@ class Corpus:
         self._index_map: np.ndarray
         self._grid_size: int
         self._index_map, self._grid_size = Corpus._create_index_map(self.events, self.duration())
+        self._inverse_index_map: np.ndarray = np.array([e.onset for e in self.events])
 
         # These parameters will not be stored when exported and will thus not exist in json-parsed corpora
         self.fg_spectrogram: Optional[Spectrogram] = fg_spectrogram
@@ -149,6 +151,12 @@ class Corpus:
         indices: np.ndarray = self._index_map[(np.floor(times * self._grid_size)).astype(int)]
         events: List[CorpusEvent] = [self.event_at(index) for index in indices]
         return events
+
+    def time2index(self, times: np.ndarray) -> np.ndarray:
+        return self._index_map[(np.floor(times * self._grid_size)).astype(int)]
+
+    def index2time(self, indices: np.ndarray) -> np.ndarray:
+        return self._inverse_index_map[indices]
 
     def to_note_matrix(self) -> NoteMatrix:
         note_data: List[List[Union[int, float, str]]] = [[] for _ in range(len(Keys))]

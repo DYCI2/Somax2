@@ -107,3 +107,57 @@ class DistanceMergeAction(AbstractMergeAction):
     @t_width.setter
     def t_width(self, value):
         self._t_width.value = value
+
+
+class DiscreteMergeAction(AbstractMergeAction):
+    def __init__(self):
+        super().__init__()
+        self.logger = logging.getLogger(__name__)
+        self._parse_parameters()
+
+    def __repr__(self):
+        return f"{type(self).__name__}()"
+
+    def merge(self, peaks: Peaks, _time: float, _history: ImprovisationMemory = None, corpus: Corpus = None,
+              **_kwargs) -> Peaks:
+        if peaks.size() <= 1:
+            return peaks
+
+        num_rows: int = corpus.length()
+
+        peaks_list: List[Peaks] = []
+        for transform_hash in np.unique(peaks.transform_ids):
+            indices: np.ndarray = np.argwhere(peaks.transform_ids == transform_hash)
+            indices = indices.reshape((indices.size,))
+            scores: np.ndarray = peaks.scores[indices]
+            times: np.ndarray = peaks.times[indices]
+            num_cols: int = scores.size
+
+            row_indices: np.ndarray = corpus.time2index(times)
+
+            # Interpolation matrix from peak domain R^n to corpus index domain Z^U
+            interp_matrix: sparse.coo_matrix = sparse.coo_matrix(
+                (np.ones(num_cols), (row_indices, np.arange(num_cols))),
+                shape=(num_rows + 1, num_cols))
+            interp_matrix: sparse.csc_matrix = interp_matrix.tocsc()
+
+            interpolated_scores: np.ndarray = interp_matrix.dot(scores)
+
+            nonzero_indices: np.ndarray = interpolated_scores.nonzero()[0]
+
+            scores: np.ndarray = interpolated_scores[nonzero_indices]
+            times: np.ndarray = corpus.index2time(nonzero_indices)
+            transforms: np.ndarray = np.ones(nonzero_indices.size, dtype=np.int32) * transform_hash
+            # print("After merge:", scores.shape, times.shape, transforms.shape)
+
+            peaks_list.append(Peaks(scores, times, transforms))
+
+        merged_peaks: Peaks = Peaks.concatenate(peaks_list)
+        return merged_peaks
+
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
+        pass
+
+    def clear(self) -> None:
+        pass
