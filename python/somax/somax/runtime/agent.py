@@ -293,6 +293,16 @@ class OscAgent(Agent, AsyncioOscObject):
         except (AssertionError, KeyError, ValueError) as e:
             self.logger.error(f"{str(e)} No activity pattern was set.")
 
+    def set_merge_action(self, path: str, merge_action: str, **kwargs):
+        try:
+            path_and_name: List[str] = self._parse_streamview_atom_path(path)
+            merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action, **kwargs)
+            self.player.set_merge_action(path_and_name, merge_action)
+            self.logger.info(f"[set_merge_action] Merge action set to {type(merge_action).__name__} "
+                              f"for player '{self.player.name}'.")
+        except (AssertionError, KeyError, ValueError) as e:
+            self.logger.error(f"{str(e)} No merge action was set.")
+
     def add_transform(self, transform: str, **kwargs):
         try:
             transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)
