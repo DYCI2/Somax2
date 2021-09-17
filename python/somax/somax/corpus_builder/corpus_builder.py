@@ -1,8 +1,11 @@
 import logging
 import multiprocessing
 import os
+from enum import Enum
 from typing import Tuple, List, Optional, Dict, Any
 
+import librosa
+import numpy as np
 import pandas as pd
 
 from somax.corpus_builder.chroma_filter import AbstractFilter
@@ -15,6 +18,11 @@ from somax.runtime.corpus import Corpus, ContentType
 from somax.runtime.corpus_event import Note, CorpusEvent
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.target import SimpleOscTarget
+
+
+class AudioSegmentation(Enum):
+    ONSET = "onset",
+    INTERVAL = "interval"
 
 
 # TODO: Simple prototype to test the idea of multithreaded corpusbuilding
@@ -66,17 +74,13 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
 
 class CorpusBuilder:
     MIDI_FILE_EXTENSIONS = [".mid", ".midi"]
-    AUDIO_FILE_EXTENSIONS = []
+    AUDIO_FILE_EXTENSIONS = [".mp3", ".aif", ".aiff", ".wav", ".flac"]
     CORPUS_FILE_EXTENSIONS = [".json"]
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
-    def build(self, filepath: str, corpus_name: Optional[str] = None,
-              foreground_channels: Tuple[int] = tuple(range(1, 17)),
-              background_channels: Tuple[int] = tuple(range(1, 17)),
-              spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
-              **kwargs) -> Corpus:
+    def build(self, filepath: str, corpus_name: Optional[str] = None, **kwargs) -> Corpus:
         """ :raises TODO!!! """
         # TODO: Handle folders
         if os.path.isdir(filepath):
@@ -85,18 +89,19 @@ class CorpusBuilder:
             filename, extension = os.path.splitext(filepath.split("/")[-1])
             name = corpus_name if corpus_name is not None else filename
             if extension in CorpusBuilder.MIDI_FILE_EXTENSIONS:
-                corpus: Corpus = self._build_midi(filepath, name, foreground_channels, background_channels,
-                                                  spectrogram_filter, **kwargs)
+                corpus: Corpus = self._build_midi(filepath, name, **kwargs)
             elif extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS:
-                corpus: Corpus = self._build_audio(filepath, name, foreground_channels, background_channels,
-                                                   spectrogram_filter, **kwargs)
+                corpus: Corpus = self._build_audio(filepath, name, **kwargs)
             else:
                 raise IOError("Invalid file format. Valid extensions are {}.".format(
                     "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
         return corpus
 
-    def _build_midi(self, filepath: str, name: str, foreground_channels: Tuple[int],
-                    background_channels: Tuple[int], spectrogram_filter: AbstractFilter, **kwargs) -> Corpus:
+    def _build_midi(self, filepath: str, name: str,
+                    foreground_channels: Tuple[int] = tuple(range(1, 17)),
+                    background_channels: Tuple[int] = tuple(range(1, 17)),
+                    spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
+                    **kwargs) -> Corpus:
         # TODO: Option to plot note matrix, spectrograms, chromagrams and slices along the way!
         self.logger.debug(f"Building midi corpus {name}")
         note_matrix: NoteMatrix = NoteMatrix.from_midi_file(filepath)
@@ -146,6 +151,70 @@ class CorpusBuilder:
     #     for eventparam in eventparams:
     #         eventparam.classify(corpus, audio_stft_fg, bg, audio_chromagram_fg, bg)
     #     return corpus
+
+    def slice_audio(self, audio_signal: np.ndarray, sr: float, onset_channels: Optional[List[int]] = None,
+                    segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET,
+                    hop_length: int = 512, min_interval_s: float = 0.05, max_size_s: Optional[float] = None,
+                    off_threshold_db: float = -120.0, **kwargs):
+        # TODO: Handle invalid parameter ranges (those that throw errors - need to catch them accordingly)
+        y = self._parse_onset_signal(audio_signal=audio_signal, onset_channels=onset_channels)
+
+        if segmentation_mode == AudioSegmentation.ONSET:
+            onset_samples, onset_envelope = self._slice_audio_by_onset(y, sr, hop_length=hop_length,
+                                                                       pick_peak_wait_s=min_interval_s, **kwargs)
+        elif segmentation_mode == AudioSegmentation.INTERVAL:
+            raise NotImplementedError("Not implemented yet")
+        else:
+            raise ValueError("Invalid segmentation type")
+
+    def _compute_slice_durations(self, y: np.ndarray, sr: float, hop_length: float, onset_frames: np.ndarray,
+                                 min_interval_s: float = 0.05, max_size_s: Optional[float] = None,
+                                 off_threshold_db: float = -120.0, discard: bool = True, **kwargs):
+        rms_frames_db = 20 * np.log10(np.abs(librosa.feature.rms(y, hop_length=hop_length)))
+        eof = librosa.samples_to_frames(y.size, hop_length=hop_length)
+        durations = np.diff(np.block([onset_frames, eof]))
+        max_size_frames = librosa.time_to_frames(max_size_s, hop_length=hop_length)
+        durations[durations > max_size_frames] = max_size_frames
+        # TODO: FIND SILENCES EFFICIENTLY
+
+
+    def _slice_audio_by_onset(self, y: np.ndarray, sr: float, hop_length: int = 512,
+                              pick_peak_max_s: float = 0.4, pick_peak_mean_s: float = 0.4,
+                              pick_peak_delta_gain: float = 0.07, backtrack: bool = True,
+                              pick_peak_wait_s: float = 0.05) -> Tuple[np.ndarray, np.ndarray]:
+        """ y: shape(n,)
+        returns: onset_frames: shape(k,), k \in [0, \infty) where each val correspond to the frame
+                               (frame i corresponds to  sample i * hop_length)  of the onset start
+                 onset_envelope: shape(n // hop_length,) in sample rate sr // hop_length (i.e. frames)
+        """
+
+        peak_pick_parameters: Dict[str, float] = {"pre_max": pick_peak_max_s * sr // hop_length,
+                                                  "post_max": pick_peak_max_s * sr // hop_length + 1,
+                                                  "pre_avg": pick_peak_mean_s * sr // hop_length,
+                                                  "post_avg": pick_peak_mean_s * sr // hop_length + 1,
+                                                  "wait": pick_peak_wait_s * sr // hop_length,
+                                                  "delta": pick_peak_delta_gain}
+
+        onset_envelope: np.ndarray = librosa.onset.onset_strength(y, sr, hop_length=hop_length)
+        onset_frames: np.ndarray = librosa.onset.onset_detect(y, sr, hop_length=hop_length, backtrack=backtrack,
+                                                              normalize=True, onset_envelope=onset_envelope,
+                                                              **peak_pick_parameters)
+        return onset_frames, onset_envelope
+
+    def _slice_audio_by_interval(self):
+        pass
+
+    def _parse_onset_signal(self, audio_signal: np.ndarray, onset_channels: Optional[List[int]] = None):
+        """ raises: ValueError """
+        y = np.atleast_2d(audio_signal)
+        if onset_channels is not None:
+            if max(onset_channels) > y.shape[0]:
+                raise ValueError(f"Could not set requested onset channels (up to {max(onset_channels)}) "
+                                 f"since audio file only has {y.shape[0]}")
+            else:
+                return librosa.to_mono(y[onset_channels, :])
+        else:
+            return librosa.to_mono()
 
     def slice_midi(self, note_matrix: NoteMatrix, name: str, build_parameters: Dict[str, Any],
                    slice_tolerance_ms: float = 30.0, **_kwargs) -> Corpus:
