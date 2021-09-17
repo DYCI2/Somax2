@@ -52,10 +52,16 @@ class CorpusFeature(AbstractFeature, ABC):
         return cls.__module__ + "." + cls.__name__
 
     @staticmethod
-    def from_json(classpath: str, feature_kwargs: Dict[str, Any]) -> Tuple[Type['CorpusFeature'], 'CorpusFeature']:
+    def class_from_string(classpath: str) -> Type['CorpusFeature']:
         """ Raises: KeyError, AttributeError"""
         module_name, class_name = classpath.rsplit(".", 1)
         cls: Type[CorpusFeature] = getattr(importlib.import_module(module_name), class_name)
+        return cls
+
+    @staticmethod
+    def from_json(classpath: str, feature_kwargs: Dict[str, Any]) -> Tuple[Type['CorpusFeature'], 'CorpusFeature']:
+        """ Raises: KeyError, AttributeError"""
+        cls: Type[CorpusFeature] = CorpusFeature.class_from_string(classpath)
         return cls, cls.decode(feature_kwargs)
 
     @staticmethod

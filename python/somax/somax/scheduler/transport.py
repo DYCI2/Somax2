@@ -10,6 +10,7 @@ from somax.scheduler.base_scheduler import BaseScheduler
 @dataclass
 class Time:
     tick: float
+    time: float
     tempo: float
 
 

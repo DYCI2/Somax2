@@ -2,33 +2,60 @@ import copy
 import json
 import logging
 import os
-from enum import Enum
+from abc import ABC, abstractmethod
 from typing import List, Optional, Type, Dict, Any, Tuple, Union
 
+from somax.scheduler.transport import Time
 from somax.settings import IMPORT_MATPLOTLIB
+from somax.utils.introspective import StringParsed
 
 if IMPORT_MATPLOTLIB:
     pass
 import numpy as np
 import pandas as pd
 
-from somax import settings
 import somax
 from somax.corpus_builder.chromagram import Chromagram
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
-from somax.features.feature import CorpusFeature
+from somax.features.feature import CorpusFeature, AbstractFeature
 from somax.runtime.corpus_event import CorpusEvent, Note
 from somax.runtime.exceptions import InvalidCorpus
 
 
-class ContentType(Enum):
-    MIDI = "MIDI"
-    AUDIO = "Audio"
+class ContentType(StringParsed, ABC):
+    @abstractmethod
+    def encode(self) -> str:
+        """ string representation of class """
 
-    def encode(self):
-        return str(self)
+    @abstractmethod
+    def get_time_axis(self, time: Time) -> float:
+        """ Determines which type of time (tick/ms) should be used for scheduling objects of this type """
+
+    @classmethod
+    def default(cls, **kwargs) -> 'StringParsed':
+        raise ValueError(f"No {cls.__name__} was provided.")
+
+    @classmethod
+    def from_string(cls, class_name: str, **kwargs) -> 'ContentType':
+        return cls._from_string(class_name)
+
+
+class MidiContent(ContentType):
+    def encode(self) -> str:
+        return "MIDI"
+
+    def get_time_axis(self, time: Time) -> float:
+        return time.tick
+
+
+class AudioContent(ContentType):
+    def encode(self) -> str:
+        return "Audio"
+
+    def get_time_axis(self, time: Time) -> float:
+        return time.time
 
 
 class HeldObject:
@@ -44,22 +71,86 @@ class HeldObject:
         raise AttributeError(f"Cannot compare type '{type(other)}' with '{self.__class__}'")
 
 
-class Corpus:
+class Corpus(ABC):
     INDEX_MAP_SIZE = 1_000_000
 
     def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
-                 build_parameters: Dict[str, Any], fg_spectrogram: Optional[Spectrogram] = None,
-                 bg_spectrogram: Optional[Spectrogram] = None, fg_chromagram: Optional[Chromagram] = None,
-                 bg_chromagram: Optional[Chromagram] = None):
+                 feature_types: List[Type[AbstractFeature]], build_parameters: Dict[str, Any], **kwargs):
         self.logger = logging.getLogger(__name__)
         self.events: List[CorpusEvent] = events
-        # self.onsets: np.ndarray = np.array([e.onset for e in self.events])    # TODO: Remove (?)
         self.name: str = name
         self.content_type: ContentType = content_type
+        self.feature_types: List[Type[AbstractFeature]] = feature_types
         self._build_parameters: Dict[str, Any] = build_parameters
         self._index_map: np.ndarray
         self._grid_size: int
-        self._index_map, self._grid_size = Corpus._create_index_map(self.events, self.duration())
+        self._index_map, self._grid_size = self._create_index_map(self.events, self.duration())
+
+    @abstractmethod
+    def duration(self) -> float:
+        """ Return the duration of the corpus along its relevant time axis """
+
+    @classmethod
+    @abstractmethod
+    def from_json(cls, filepath: str, volatile: bool = False) -> 'Corpus':
+        """ Load corpus from JSON file
+            Raises: IOError, InvalidCorpus """
+
+    @abstractmethod
+    def encode(self) -> Dict[str, Any]:
+        """ Encode the corpus to a dictionary to allow JSON export """
+
+    @staticmethod
+    def _create_index_map(events: List[CorpusEvent], corpus_duration_ticks: float) -> Tuple[np.ndarray, float]:
+        grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / corpus_duration_ticks
+        index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
+        for event in events:
+            start_index: int = int(np.floor(event.onset * grid_size))
+            end_index: int = int(np.floor((event.onset + event.duration) * grid_size))
+            index_map[start_index:end_index] = event.state_index
+        return index_map, grid_size
+
+    def export(self, output_folder: str, overwrite: bool = False,
+               indentation: Optional[int] = None) -> str:
+        """ Raises IOError"""
+        filepath = os.path.join(output_folder, self.name + ".json")
+        if os.path.exists(filepath) and not overwrite:
+            raise IOError(f"Could not export corpus as file '{filepath}' already exists. "
+                          f"Set overwrite flag to True to overwrite existing.")
+        else:
+            with open(filepath, 'w') as f:
+                json.dump(self, f, indent=indentation, default=lambda o: o.encode())
+        return filepath
+
+    def has_feature(self, feature_type: Type[CorpusFeature]) -> bool:
+        return feature_type in self.feature_types
+
+    def event_at(self, index: int) -> CorpusEvent:
+        return self.events[index]
+
+    def event_around(self, time: float) -> CorpusEvent:
+        index: int = self._index_map[int(np.floor(time * self._grid_size))]
+        return self.event_at(index)
+
+    def events_around(self, times: np.ndarray) -> List[CorpusEvent]:
+        indices: np.ndarray = self._index_map[(np.floor(times * self._grid_size)).astype(int)]
+        events: List[CorpusEvent] = [self.event_at(index) for index in indices]
+        return events
+
+    def length(self) -> int:
+        """ Returns the number of events in the corpus """
+        return len(self.events)
+
+
+class MidiCorpus(Corpus):
+    def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
+                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any],
+                 fg_spectrogram: Optional[Spectrogram] = None,
+                 bg_spectrogram: Optional[Spectrogram] = None, fg_chromagram: Optional[Chromagram] = None,
+                 bg_chromagram: Optional[Chromagram] = None):
+        super().__init__(events=events, name=name, content_type=content_type,
+                         feature_types=feature_types, build_parameters=build_parameters)
+        self.logger = logging.getLogger(__name__)
 
         # These parameters will not be stored when exported and will thus not exist in json-parsed corpora
         self.fg_spectrogram: Optional[Spectrogram] = fg_spectrogram
@@ -83,29 +174,19 @@ class Corpus:
                                     f" Recommended action: rebuild corpus."
                                     f" (To attempt to load the corpus anyway: enable the 'volatile' flag)")
             name: str = corpus_data["name"]
-            content_type: ContentType = ContentType(corpus_data["content_type"])
+            content_type: ContentType = ContentType.from_string(corpus_data["content_type"])
 
             build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
             features_dict: Dict[str, str] = corpus_data["features_dict"]
             events: List[CorpusEvent] = [CorpusEvent.decode(event_dict, features_dict)
                                          for event_dict in corpus_data["events"]]
-            return cls(events, name, content_type, build_parameters)
+            features: List[Type[CorpusFeature]] = [CorpusFeature.class_from_string(p) for p in features_dict.values()]
+            return cls(events=events, name=name, content_type=content_type,
+                       features=features, build_parameters=build_parameters)
 
         # KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)
         except (KeyError, AttributeError) as e:
             raise InvalidCorpus(f"The Corpus at '{filepath}' has an invalid format and could not be loaded") from e
-
-    def export(self, output_folder: str, overwrite: bool = False,
-               indentation: Optional[int] = None) -> str:
-        """ Raises IOError"""
-        filepath = os.path.join(output_folder, self.name + ".json")
-        if os.path.exists(filepath) and not overwrite:
-            raise IOError(f"Could not export corpus as file '{filepath}' already exists. "
-                          f"Set overwrite flag to True to overwrite existing.")
-        else:
-            with open(filepath, 'w') as f:
-                json.dump(self, f, indent=indentation, default=lambda o: o.encode())
-        return filepath
 
     def encode(self) -> Dict[str, Any]:
         features: Dict[Type['CorpusFeature'], str] = {cls: name for (name, cls) in CorpusFeature.all_corpus_features()}
@@ -113,7 +194,7 @@ class Corpus:
             self.logger.warning("Two features with the same name exist in the library. Built corpus may not be properly"
                                 " constructed. Ensure that no two CorpusFeatures in the library have the same name.")
         return {"name": self.name,
-                "content_type": self.content_type.value,
+                "content_type": self.content_type.encode(),
                 "version": somax.__version__,
                 "build_parameters": self._build_parameters,
                 "features_dict": {name: feature.classpath() for (feature, name) in features.items()},
@@ -122,33 +203,11 @@ class Corpus:
                 "events": [event.encode(features_dict=features) for event in self.events]
                 }
 
-    # def analyze(self, event_parameter: Type[CorpusFeature], **kwargs):
-    #
-    #     for event in self.events:
-    #         parameter: CorpusFeature = event_parameter.analyze(event, self.fg_spectrogram, self.bg_spectrogram,
-    #                                                            self.fg_chromagram, self.bg_chromagram, **kwargs)
-    #         event.set_feature(parameter)
-
-    def length(self) -> int:
-        return len(self.events)
-
     def duration(self) -> float:
         if len(self.events) == 0:
             return 0.0
         last_event: CorpusEvent = self.events[-1]
         return last_event.onset + last_event.duration
-
-    def event_at(self, index: int) -> CorpusEvent:
-        return self.events[index]
-
-    def event_around(self, time: float) -> CorpusEvent:
-        index: int = self._index_map[int(np.floor(time * self._grid_size))]
-        return self.event_at(index)
-
-    def events_around(self, times: np.ndarray) -> List[CorpusEvent]:
-        indices: np.ndarray = self._index_map[(np.floor(times * self._grid_size)).astype(int)]
-        events: List[CorpusEvent] = [self.event_at(index) for index in indices]
-        return events
 
     def to_note_matrix(self) -> NoteMatrix:
         note_data: List[List[Union[int, float, str]]] = [[] for _ in range(len(Keys))]
@@ -243,12 +302,21 @@ class Corpus:
     #         self.to_note_matrix().plot(axes=(axes[0], axes[1]))
     #     plt.show()
 
-    @staticmethod
-    def _create_index_map(events: List[CorpusEvent], corpus_duration_ticks: float) -> Tuple[np.ndarray, float]:
-        grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / corpus_duration_ticks
-        index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
-        for event in events:
-            start_index: int = int(np.floor(event.onset * grid_size))
-            end_index: int = int(np.floor((event.onset + event.duration) * grid_size))
-            index_map[start_index:end_index] = event.state_index
-        return index_map, grid_size
+
+class AudioCorpus(Corpus):
+    def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
+                 feature_types: List[Type[AbstractFeature]], build_parameters: Dict[str, Any]):
+        super().__init__(events=events, name=name, content_type=content_type,
+                         feature_types=feature_types, build_parameters=build_parameters)
+
+    def duration(self) -> float:
+        if len(self.events) == 0:
+            return 0.0
+        return self.events[-1].onset + self.events[-1].duration
+
+    @classmethod
+    def from_json(cls, filepath: str, volatile: bool = False) -> 'Corpus':
+        pass
+
+    def encode(self) -> Dict[str, Any]:
+        pass
