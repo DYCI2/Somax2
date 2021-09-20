@@ -137,55 +137,103 @@ class CorpusBuilder:
 
         return corpus
 
-    def _build_audio(self, filepath: str, name: str, *args, **kwargs) -> Corpus:
-        pass
+    def _build_audio(self, filepath: str, name: str, foreground_channels: Optional[List[int]] = None,
+                     background_channels: Optional[List[int]] = None, onset_channels: Optional[List[int]] = None,
+                     segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET, **kwargs) -> Corpus:
+        """ raises: FileNotFoundError  if failed to load file
+                    RuntimeError if other issues are encountered in librosa
+                    ValueError if an invalid segmentation type is provided
+        """
+        y, sr = librosa.load(filepath, sr=None, mono=False)
+        onset_frames: np.ndarray
+        duration_frames: np.ndarray
+        onset_frames, duration_frames = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
+                                                          segmentation_mode=segmentation_mode, **kwargs)
+        foreground_data: np.ndarray = self._parse_channels(y, channels=foreground_channels)
+        background_data: np.ndarray = self._parse_channels(y, channels=background_channels)
 
-    # def build_audio(self):
-    #     build_parameters = {...}   # stored in corpus to know how corpus was constructed
-    #     audio_data: np.ndarray = AudioParser.read_audio()   # Handle multichannel files too! + meaningful visualization
-    #     audio_stft_fg, bg: np.ndarray = Stft.audio_stft()
-    #     audio_chromagram_fg, bg: np.ndarray = Chromagram.audio_chromagram()
-    #     corpus: Corpus = CorpusBuilder.slice_audio(audio_data, params)
-    #     note_matrix: NoteMatrix = PolyF0.estimate(audio_data)
-    #     corpus.populate(note_matrix)
-    #     for eventparam in eventparams:
-    #         eventparam.classify(corpus, audio_stft_fg, bg, audio_chromagram_fg, bg)
-    #     return corpus
+        foreground_spectrogram: np.ndarray = librosa.stft(foreground_data)
+        foreground_spectrogram: np.ndarray = librosa.stft(background_data)
+        foreground_chroma: np.ndarray
 
-    def slice_audio(self, audio_signal: np.ndarray, sr: float, onset_channels: Optional[List[int]] = None,
-                    segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET,
-                    hop_length: int = 512, min_interval_s: float = 0.05, max_size_s: Optional[float] = None,
-                    off_threshold_db: float = -120.0, **kwargs):
+
+        for _, feature in CorpusFeature.all_corpus_features():
+            pass
+
+
+    def test_audio_segmentation(self, filepath: str, **kwargs):
+        pass  # TODO
+
+    def _slice_audio(self, audio_signal: np.ndarray, sr: float, onset_channels: Optional[List[int]] = None,
+                     segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET,
+                     hop_length: int = 512, min_interval_s: float = 0.05, max_size_s: Optional[float] = None,
+                     off_threshold_db: Optional[float] = -120.0, discard_by_mean: bool = False, **kwargs):
         # TODO: Handle invalid parameter ranges (those that throw errors - need to catch them accordingly)
-        y = self._parse_onset_signal(audio_signal=audio_signal, onset_channels=onset_channels)
+        y = self._parse_channels(audio_signal=audio_signal, channels=onset_channels)
 
         if segmentation_mode == AudioSegmentation.ONSET:
-            onset_samples, onset_envelope = self._slice_audio_by_onset(y, sr, hop_length=hop_length,
-                                                                       pick_peak_wait_s=min_interval_s, **kwargs)
+            onset_frames = self._slice_audio_by_onset(y, sr, hop_length=hop_length,
+                                                      pick_peak_wait_s=min_interval_s, **kwargs)
+
         elif segmentation_mode == AudioSegmentation.INTERVAL:
-            raise NotImplementedError("Not implemented yet")
+            onset_frames = self._slice_audio_by_interval()
         else:
             raise ValueError("Invalid segmentation type")
 
-    def _compute_slice_durations(self, y: np.ndarray, sr: float, hop_length: float, onset_frames: np.ndarray,
-                                 min_interval_s: float = 0.05, max_size_s: Optional[float] = None,
-                                 off_threshold_db: float = -120.0, discard: bool = True, **kwargs):
-        rms_frames_db = 20 * np.log10(np.abs(librosa.feature.rms(y, hop_length=hop_length)))
+        onset_frames, frame_durations = self._compute_slice_durations(y, hop_length=hop_length,
+                                                                      onsets=onset_frames,
+                                                                      min_size_s=min_interval_s,
+                                                                      max_size_s=max_size_s,
+                                                                      off_threshold_db=off_threshold_db,
+                                                                      discard_by_mean=discard_by_mean)
+        # TODO: Note that they may be empty: handle this on return
+        return onset_frames, frame_durations
+
+    @staticmethod
+    def _compute_slice_durations(y: np.ndarray, hop_length: float, onsets: np.ndarray,
+                                 min_size_s: Optional[float] = None, max_size_s: Optional[float] = None,
+                                 off_threshold_db: Optional[float] = None, discard_by_mean: bool = True, **_kwargs):
+        """ y: mono signal [shape: (n,)]
+            onsets: onset frames """
+        rms_frames_db = 20 * np.log10(
+            np.abs(librosa.feature.rms(y, hop_length=hop_length)) + librosa.util.tiny(y)).reshape(-1)
         eof = librosa.samples_to_frames(y.size, hop_length=hop_length)
-        durations = np.diff(np.block([onset_frames, eof]))
-        max_size_frames = librosa.time_to_frames(max_size_s, hop_length=hop_length)
-        durations[durations > max_size_frames] = max_size_frames
-        # TODO: FIND SILENCES EFFICIENTLY
+        durations = np.diff(np.block([onsets, eof]))
 
+        if max_size_s is not None:
+            max_size_frames = librosa.time_to_frames(max_size_s, hop_length=hop_length)
+            durations[durations > max_size_frames] = max_size_frames
 
-    def _slice_audio_by_onset(self, y: np.ndarray, sr: float, hop_length: int = 512,
+        if off_threshold_db is not None:
+            for i in range(onsets.size):
+                segment_rms = rms_frames_db[onsets[i]:onsets[i] + durations[i]]
+                first_silent_frame = np.argmax(segment_rms < off_threshold_db)
+                # Only discard part of segment if mean of entire part to be discarded is below threshold
+                if discard_by_mean:
+                    if np.mean(segment_rms[first_silent_frame:]) < off_threshold_db:
+                        durations[i] = first_silent_frame
+                # Discard part of segment starting from frame below threshold
+                else:
+                    # `np.argmax(a < v)` will by default return 0 if it doesn't find any matches:
+                    # therefore the check that the condition indeed is fulfilled.
+                    durations[i] = first_silent_frame if segment_rms[first_silent_frame] < off_threshold_db else \
+                        durations[i]
+
+        if min_size_s is not None:
+            valid_frames_mask = durations > min_size_s
+            onsets = onsets[valid_frames_mask]
+            durations = durations[valid_frames_mask]
+
+        return onsets, durations
+
+    @staticmethod
+    def _slice_audio_by_onset(y: np.ndarray, sr: float, hop_length: int = 512,
                               pick_peak_max_s: float = 0.4, pick_peak_mean_s: float = 0.4,
                               pick_peak_delta_gain: float = 0.07, backtrack: bool = True,
-                              pick_peak_wait_s: float = 0.05) -> Tuple[np.ndarray, np.ndarray]:
+                              pick_peak_wait_s: float = 0.05) -> np.ndarray:
         """ y: shape(n,)
         returns: onset_frames: shape(k,), k \in [0, \infty) where each val correspond to the frame
                                (frame i corresponds to  sample i * hop_length)  of the onset start
-                 onset_envelope: shape(n // hop_length,) in sample rate sr // hop_length (i.e. frames)
         """
 
         peak_pick_parameters: Dict[str, float] = {"pre_max": pick_peak_max_s * sr // hop_length,
@@ -195,26 +243,29 @@ class CorpusBuilder:
                                                   "wait": pick_peak_wait_s * sr // hop_length,
                                                   "delta": pick_peak_delta_gain}
 
-        onset_envelope: np.ndarray = librosa.onset.onset_strength(y, sr, hop_length=hop_length)
         onset_frames: np.ndarray = librosa.onset.onset_detect(y, sr, hop_length=hop_length, backtrack=backtrack,
-                                                              normalize=True, onset_envelope=onset_envelope,
-                                                              **peak_pick_parameters)
-        return onset_frames, onset_envelope
+                                                              normalize=True, **peak_pick_parameters)
+        return onset_frames
 
     def _slice_audio_by_interval(self):
-        pass
+        raise NotImplementedError("Not implemented yet")
 
-    def _parse_onset_signal(self, audio_signal: np.ndarray, onset_channels: Optional[List[int]] = None):
+    def _parse_channels(self, audio_signal: np.ndarray, channels: Optional[List[int]] = None):
         """ raises: ValueError """
+        # TODO: Normalize signal
         y = np.atleast_2d(audio_signal)
-        if onset_channels is not None:
-            if max(onset_channels) > y.shape[0]:
-                raise ValueError(f"Could not set requested onset channels (up to {max(onset_channels)}) "
+
+        if channels is not None and len(channels) > 0:
+            if max(channels) > y.shape[0]:
+                raise ValueError(f"Could not set requested onset channels (up to {max(channels)}) "
                                  f"since audio file only has {y.shape[0]}")
+            elif len(channels) == 1:
+                # `librosa.to_mono` does not consider signals with shape (1, n) as valid audio signals.
+                return librosa.to_mono(y[channels, :].reshape(-1))
             else:
-                return librosa.to_mono(y[onset_channels, :])
+                return librosa.to_mono(y[channels, :])
         else:
-            return librosa.to_mono()
+            return librosa.to_mono(y)
 
     def slice_midi(self, note_matrix: NoteMatrix, name: str, build_parameters: Dict[str, Any],
                    slice_tolerance_ms: float = 30.0, **_kwargs) -> Corpus:

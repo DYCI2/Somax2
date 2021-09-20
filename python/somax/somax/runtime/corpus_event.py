@@ -99,13 +99,13 @@ class CorpusEvent(ABC):
     def encode(self, features_dict: Dict[Type['CorpusFeature'], str]) -> Dict[str, Any]:
         """ """
 
-    @abstractmethod
     @property
+    @abstractmethod
     def onset(self) -> float:
         """ """
 
-    @abstractmethod
     @property
+    @abstractmethod
     def duration(self) -> float:
         """ """
 
