@@ -5,16 +5,38 @@ from typing import Dict, Any, Type, Tuple, List
 
 import somax.features
 from somax import features
+from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
+from somax.features.feature_value import FeatureValue
+from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
+from somax.runtime.exceptions import FeatureError
 from somax.utils.introspective import StringParsed, Introspective
 
 
-class AbstractFeature(Introspective, ABC):
+class FeatureUtils:
+    @staticmethod
+    def is_valid_midi(events: List[CorpusEvent], metadata: Metadata) -> bool:
+        return all([isinstance(e, MidiCorpusEvent) for e in events]) and isinstance(metadata, MidiMetadata)
+
+    @staticmethod
+    def is_valid_audio(events: List[CorpusEvent], metadata: Metadata) -> bool:
+        return all([isinstance(e, AudioCorpusEvent) for e in events]) and isinstance(metadata, AudioMetadata)
+
+    @staticmethod
+    def assert_valid_midi(events: List[CorpusEvent], metadata: Metadata) -> None:
+        """ raises: FeatureError if not valid MIDI """
+        if not FeatureUtils.is_valid_midi(events, metadata):
+            raise FeatureError(f"Content is not valid MIDI content")
+
+    @staticmethod
+    def assert_valid_audio(events: List[CorpusEvent], metadata: Metadata) -> None:
+        """ raises: FeatureError if not valid audio """
+        if not FeatureUtils.is_valid_audio(events, metadata):
+            raise FeatureError(f"Content is not valid Audio content")
+
+
+class AbstractFeature(FeatureValue, Introspective, ABC):
     def __init__(self, value: Any):
         self._value = value
-
-    @abstractmethod
-    def value(self) -> Any:
-        """ TODO: docstring """
 
     @classmethod
     def classes(cls, include_abstract: bool = False) -> List[Type['AbstractFeature']]:
@@ -28,15 +50,9 @@ class CorpusFeature(AbstractFeature, ABC):
 
     @classmethod
     @abstractmethod
-    def analyze(cls, corpus: 'Corpus', **kwargs) -> 'Corpus':
+    def analyze(cls, events: CorpusEvent, metadata: Metadata) -> List[CorpusEvent]:
+        """ raises: FeatureError if type of events doesn't match type of metadata """
         pass
-
-    # @classmethod
-    # @abstractmethod
-    # def analyze(cls, event: 'CorpusEvent', fg_spectrogram: Spectrogram, bg_spectrogram: Spectrogram,
-    #             fg_chromagram: Chromagram, bg_chromagram: Chromagram, **kwargs):
-    #     # TODO: Add previous events as optional argument too
-    #     pass
 
     @classmethod
     @abstractmethod

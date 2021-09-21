@@ -5,11 +5,11 @@ from typing import Optional, List, Dict, Type, Any
 import pandas as pd
 
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
-from somax.features.feature import CorpusFeature
+from somax.features.feature_value import FeatureValue
 from somax.runtime.memory_state import MemoryState
 
 """ Keys correspond to parent module names, ex. "pitch" or "chroma". """
-EventParameterDict = Dict[str, List[CorpusFeature]]
+EventParameterDict = Dict[str, List[FeatureValue]]
 
 
 class Note:
@@ -85,10 +85,10 @@ class Note:
 
 
 class CorpusEvent(ABC):
-    def __init__(self, state_index: int, features: Optional[Dict[Type[CorpusFeature], CorpusFeature]] = None):
+    def __init__(self, state_index: int, features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None):
         self.logger = logging.getLogger(__name__)
         self.state_index: int = state_index
-        self.features: Dict[Type[CorpusFeature], CorpusFeature] = features if features else {}
+        self.features: Dict[Type[FeatureValue], FeatureValue] = features if features else {}
 
     @classmethod
     @abstractmethod
@@ -96,7 +96,7 @@ class CorpusEvent(ABC):
         """ Raises: KeyError, AttributeError"""
 
     @abstractmethod
-    def encode(self, features_dict: Dict[Type['CorpusFeature'], str]) -> Dict[str, Any]:
+    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
         """ """
 
     @property
@@ -113,11 +113,11 @@ class CorpusEvent(ABC):
     def renderer_info(self) -> str:
         """ """
 
-    def get_feature(self, feature_type: Type[CorpusFeature]) -> CorpusFeature:
+    def get_feature(self, feature_type: Type[FeatureValue]) -> FeatureValue:
         """Raises KeyError"""
         return self.features[feature_type]
 
-    def set_feature(self, feature: CorpusFeature):
+    def set_feature(self, feature: FeatureValue):
         """ Note! This call is strictly for constructing the corpus. Using it at runtime to edit an already loaded
                   corpus will not warrant well-defined behaviour """
         self.features[type(feature)] = feature
@@ -127,7 +127,7 @@ class MidiCorpusEvent(CorpusEvent):
     def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float, bar_number: float,
                  duration: Optional[float] = None, absolute_duration: Optional[float] = None,
                  notes: Optional[List[Note]] = None,
-                 features: Optional[Dict[Type[CorpusFeature], CorpusFeature]] = None):
+                 features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None):
         super().__init__(state_index=state_index, features=features)
         self.tempo: float = tempo
         self._relative_onset: float = onset
@@ -143,6 +143,7 @@ class MidiCorpusEvent(CorpusEvent):
     @classmethod
     def decode(cls, event_dict: Dict[str, Any], feature_dict: Dict[str, str]) -> 'CorpusEvent':
         """ Raises: KeyError, AttributeError"""
+        from somax.features.feature import CorpusFeature
         return MidiCorpusEvent(state_index=event_dict["state_index"],
                                tempo=event_dict["tempo"],
                                onset=event_dict["onset"],
@@ -188,7 +189,7 @@ class MidiCorpusEvent(CorpusEvent):
     def held_from(self) -> [Note]:
         return [note for note in self.notes if note.is_held_from(self._relative_duration)]
 
-    def encode(self, features_dict: Dict[Type['CorpusFeature'], str]) -> Dict[str, Any]:
+    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
         return {"state_index": self.state_index,
                 "tempo": self.tempo,
                 "onset": self._relative_onset,
@@ -204,7 +205,7 @@ class MidiCorpusEvent(CorpusEvent):
 
 class AudioCorpusEvent(CorpusEvent):
     def __init__(self, state_index: int, absolute_onset: float, absolute_duration: float,
-                 features: Optional[Dict[Type[CorpusFeature], CorpusFeature]] = None):
+                 features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None):
         super().__init__(state_index=state_index, features=features)
         self._absolute_onset: float = absolute_onset
         self._absolute_duration: float = absolute_duration
@@ -213,8 +214,8 @@ class AudioCorpusEvent(CorpusEvent):
     def decode(cls, event_dict: Dict[str, Any], feature_classpath_dict: Dict[str, str]) -> 'CorpusEvent':
         raise NotImplementedError("Not Implemented yet")  # TODO[Audio] once CorpusBuilder is done
 
-    def encode(self, features_dict: Dict[Type['CorpusFeature'], str]) -> Dict[str, Any]:
-        raise NotImplementedError("Not Implemented yet")  # TODO once CorpusBuilder is done
+    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
+        raise NotImplementedError("Not Implemented yet")  # TODO[Audio] once CorpusBuilder is done
 
     @property
     def onset(self) -> float:

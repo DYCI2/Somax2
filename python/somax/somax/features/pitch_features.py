@@ -1,8 +1,10 @@
 from abc import ABC
-from typing import Dict, Any
+from typing import Dict, Any, List
 
+from somax.corpus_builder.metadata import MidiMetadata
 from somax.features import virfun
-from somax.features.feature import CorpusFeature, RuntimeFeature, AbstractFeature
+from somax.features.feature import CorpusFeature, RuntimeFeature, AbstractFeature, FeatureUtils
+from somax.runtime.corpus_event import MidiCorpusEvent
 
 
 class AbstractIntegerPitch(AbstractFeature, ABC):
@@ -31,15 +33,12 @@ class TopNote(AbstractIntegerPitch, CorpusFeature):
         super().__init__(value=value)
 
     @classmethod
-    def analyze(cls, corpus: 'Corpus', **kwargs) -> 'Corpus':
-        for event in corpus.events:
+    def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
+        """ raises: FeatureError if invalid MIDI content """
+        FeatureUtils.assert_valid_midi(events, metadata)
+        for event in events:
             event.set_feature(cls(int(max([n.pitch for n in event.notes]))))
-        return corpus
-
-    # @classmethod
-    # def analyze(cls, event: 'CorpusEvent', _fg_spectrogram: Spectrogram, _bg_spectrogram: Spectrogram,
-    #             _fg_chromagram: Chromagram, _bg_chromagram: Chromagram, **_kwargs):
-    #     return cls(int(max([n.pitch for n in event.notes])))
+        return events
 
 
 class VirtualFundamental(AbstractIntegerPitch, CorpusFeature):
@@ -47,15 +46,12 @@ class VirtualFundamental(AbstractIntegerPitch, CorpusFeature):
         super().__init__(value=value)
 
     @classmethod
-    def analyze(cls, corpus: 'Corpus', **kwargs) -> 'Corpus':
-        for event in corpus.events:
+    def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
+        """ raises: FeatureError if invalid MIDI content """
+        FeatureUtils.assert_valid_midi(events, metadata)
+        for event in events:
             event.set_feature(cls(int(128 + (virfun.virfun([n.pitch for n in event.notes], 0.293) - 8) % 12)))
-        return corpus
-
-    # @classmethod
-    # def analyze(cls, event: 'CorpusEvent', _fg_spectrogram: Spectrogram, _bg_spectrogram: Spectrogram,
-    #             _fg_chromagram: Chromagram, _bg_chromagram: Chromagram, **_kwargs):
-    #     return cls(int(128 + (virfun.virfun([n.pitch for n in event.notes], 0.293) - 8) % 12))
+        return events
 
 
 class BassNote(AbstractIntegerPitch, CorpusFeature):
@@ -63,12 +59,9 @@ class BassNote(AbstractIntegerPitch, CorpusFeature):
         super().__init__(value=value)
 
     @classmethod
-    def analyze(cls, corpus: 'Corpus', **kwargs) -> 'Corpus':
-        for event in corpus.events:
+    def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
+        """ raises: FeatureError if invalid MIDI content """
+        FeatureUtils.assert_valid_midi(events, metadata)
+        for event in events:
             event.set_feature(cls(int(min([n.pitch for n in event.notes]))))
-        return corpus
-
-    # @classmethod
-    # def analyze(cls, event: 'CorpusEvent', fg_spectrogram: Spectrogram, bg_spectrogram: Spectrogram,
-    #             fg_chromagram: Chromagram, bg_chromagram: Chromagram, **kwargs):
-    #     return cls(int(min([n.pitch for n in event.notes])))
+        return events

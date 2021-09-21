@@ -41,3 +41,8 @@ class DuplicateKeyError(Exception):
 class ParameterError(Exception):
     def __init__(self, error):
         super(ParameterError, self).__init__(error)
+
+
+class FeatureError(Exception):
+    def __init__(self, error):
+        super(FeatureError, self).__init__(error)
