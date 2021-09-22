@@ -2,6 +2,7 @@ import logging
 import multiprocessing
 import os
 from enum import Enum
+from timeit import default_timer as timer
 from typing import Tuple, List, Optional, Dict, Any, Type
 
 import librosa
@@ -15,7 +16,8 @@ from somax.corpus_builder.metadata import AudioMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
-from somax.runtime.corpus import Corpus, ContentType, AudioContent, AudioCorpus
+from somax.runtime.content_type import ContentType, AudioContent
+from somax.runtime.corpus import Corpus, AudioCorpus
 from somax.runtime.corpus_event import Note, CorpusEvent, AudioCorpusEvent
 from somax.runtime.exceptions import FeatureError
 from somax.runtime.osc_log_forwarder import OscLogForwarder
@@ -147,14 +149,21 @@ class CorpusBuilder:
                     RuntimeError if other issues are encountered in librosa
                     ValueError if an invalid segmentation type is provided
         """
-        # TODO: Spectrogram filtering...
+        # TODO: Spectrogram filtering
+        start_time: float = timer()
+        self.logger.debug(f"[_build_audio]: ({0:.2f}) initializing building of audio corpus")
         y, sr = librosa.load(filepath, sr=None, mono=False)
+        self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) loaded file with sample rate {sr} "
+                          f"and {AudioMetadata.num_channels(y)} channels")
         onset_frames: np.ndarray
         duration_frames: np.ndarray
         onset_frames, duration_frames = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
                                                           segmentation_mode=segmentation_mode, **kwargs)
         onset_times: np.ndarray = librosa.frames_to_time(onset_frames, sr=sr, hop_length=hop_length)
         duration_times: np.ndarray = librosa.frames_to_time(duration_frames, sr=sr, hop_length=hop_length)
+
+        self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) segmented audio into "
+                          f"{onset_times.size} slices with average duration {np.mean(duration_times):.2f} seconds")
 
         events: List[AudioCorpusEvent]
         events = [AudioCorpusEvent(state_index=i, absolute_onset=onset, absolute_duration=duration) for
@@ -169,6 +178,8 @@ class CorpusBuilder:
                                                 foreground_data=foreground_data, background_data=background_data, sr=sr,
                                                 hop_length=hop_length, stft=stft)
 
+        self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) computed necessary metadata")
+
         used_features: List[Type[CorpusFeature]] = []
         for _, feature in CorpusFeature.all_corpus_features():  # type: Type[CorpusFeature]
             try:
@@ -176,6 +187,9 @@ class CorpusBuilder:
                 used_features.append(feature)
             except FeatureError as e:
                 self.logger.debug(repr(e))
+
+        self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed feature analysis "
+                          f"for {len(used_features)} features ({', '.join([f.__name__ for f in used_features])})")
 
         build_parameters: Dict[str, Any] = {"name": name,
                                             "onset_channels": onset_channels,
@@ -185,9 +199,14 @@ class CorpusBuilder:
                                             "hop_length": hop_length,
                                             **kwargs
                                             }
+        corpus: AudioCorpus = AudioCorpus(events=events, name=name, content_type=metadata.content_type,
+                                          feature_types=used_features,
+                                          build_parameters=build_parameters, sr=sr, filepath=filepath,
+                                          file_duration=metadata.duration)
 
-        return AudioCorpus(events=events, name=name, content_type=metadata.content_type, feature_types=used_features,
-                           build_parameters=build_parameters)
+        self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed construction of audio corpus.")
+
+        return corpus
 
     def test_audio_segmentation(self, filepath: str, **kwargs):
         pass  # TODO

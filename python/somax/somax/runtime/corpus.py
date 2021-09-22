@@ -5,9 +5,8 @@ import os
 from abc import ABC, abstractmethod
 from typing import List, Optional, Type, Dict, Any, Tuple, Union
 
-from somax.scheduler.transport import Time
+from somax.runtime.content_type import ContentType
 from somax.settings import IMPORT_MATPLOTLIB
-from somax.utils.introspective import StringParsed
 
 if IMPORT_MATPLOTLIB:
     pass
@@ -22,40 +21,6 @@ from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus
-
-
-class ContentType(StringParsed, ABC):
-    @abstractmethod
-    def encode(self) -> str:
-        """ string representation of class """
-
-    @abstractmethod
-    def get_time_axis(self, time: Time) -> float:
-        """ Determines which type of time (tick/ms) should be used for scheduling objects of this type """
-
-    @classmethod
-    def default(cls, **kwargs) -> 'StringParsed':
-        raise ValueError(f"No {cls.__name__} was provided.")
-
-    @classmethod
-    def from_string(cls, class_name: str, **kwargs) -> 'ContentType':
-        return cls._from_string(class_name)
-
-
-class MidiContent(ContentType):
-    def encode(self) -> str:
-        return "MIDI"
-
-    def get_time_axis(self, time: Time) -> float:
-        return time.tick
-
-
-class AudioContent(ContentType):
-    def encode(self) -> str:
-        return "Audio"
-
-    def get_time_axis(self, time: Time) -> float:
-        return time.time
 
 
 class HeldObject:

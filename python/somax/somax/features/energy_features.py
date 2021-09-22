@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Union
 from somax.corpus_builder.metadata import Metadata, MidiMetadata
 from somax.features.feature import CorpusFeature, FeatureUtils
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
+from somax.runtime.exceptions import FeatureError
 
 
 class MaxVelocity(CorpusFeature):
@@ -16,8 +17,11 @@ class MaxVelocity(CorpusFeature):
             for event in events:  # type: MidiCorpusEvent
                 event.set_feature(cls(value=max([note.velocity for note in event.notes]) / 128))
             return events
-        elif FeatureUtils.is_valid_audio(events, metadata):  # type: AudioCorpusEvent
-            raise NotImplementedError("Not Implemented yet!")
+        else:
+            raise FeatureError(f"Feature '{cls.__name__}' is not supported for content of type "
+                               f"{metadata.content_type.__class__.__name__}")
+        # elif FeatureUtils.is_valid_audio(events, metadata):  # type: AudioCorpusEvent
+        #     raise NotImplementedError("Not Implemented yet!")
 
     @classmethod
     def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
@@ -36,10 +40,12 @@ class VerticalDensity(CorpusFeature):
 
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
-        FeatureUtils.assert_valid_midi(events, metadata)
-        for event in events:
-            event.set_feature(cls(value=len(event.notes)))
-        return events
+        if FeatureUtils.is_valid_midi(events, metadata):
+            for event in events:
+                event.set_feature(cls(value=len(event.notes)))
+            return events
+        raise FeatureError(f"Feature '{cls.__name__}' does not support content of "
+                           f"type {metadata.content_type.__class__.__name__}")
 
     @classmethod
     def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':

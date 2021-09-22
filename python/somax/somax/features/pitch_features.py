@@ -5,6 +5,7 @@ from somax.corpus_builder.metadata import MidiMetadata
 from somax.features import virfun
 from somax.features.feature import CorpusFeature, RuntimeFeature, AbstractFeature, FeatureUtils
 from somax.runtime.corpus_event import MidiCorpusEvent
+from somax.runtime.exceptions import FeatureError
 
 
 class AbstractIntegerPitch(AbstractFeature, ABC):
@@ -35,10 +36,12 @@ class TopNote(AbstractIntegerPitch, CorpusFeature):
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
         """ raises: FeatureError if invalid MIDI content """
-        FeatureUtils.assert_valid_midi(events, metadata)
-        for event in events:
-            event.set_feature(cls(int(max([n.pitch for n in event.notes]))))
-        return events
+        if FeatureUtils.is_valid_midi(events, metadata):
+            for event in events:
+                event.set_feature(cls(int(max([n.pitch for n in event.notes]))))
+            return events
+        raise FeatureError(f"Feature '{cls.__name__}' does not support content of "
+                           f"type {metadata.content_type.__class__.__name__}")
 
 
 class VirtualFundamental(AbstractIntegerPitch, CorpusFeature):
@@ -48,10 +51,12 @@ class VirtualFundamental(AbstractIntegerPitch, CorpusFeature):
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
         """ raises: FeatureError if invalid MIDI content """
-        FeatureUtils.assert_valid_midi(events, metadata)
-        for event in events:
-            event.set_feature(cls(int(128 + (virfun.virfun([n.pitch for n in event.notes], 0.293) - 8) % 12)))
-        return events
+        if FeatureUtils.is_valid_midi(events, metadata):
+            for event in events:
+                event.set_feature(cls(int(128 + (virfun.virfun([n.pitch for n in event.notes], 0.293) - 8) % 12)))
+            return events
+        raise FeatureError(f"Feature '{cls.__name__}' does not support content of "
+                           f"type {metadata.content_type.__class__.__name__}")
 
 
 class BassNote(AbstractIntegerPitch, CorpusFeature):
@@ -61,7 +66,9 @@ class BassNote(AbstractIntegerPitch, CorpusFeature):
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
         """ raises: FeatureError if invalid MIDI content """
-        FeatureUtils.assert_valid_midi(events, metadata)
-        for event in events:
-            event.set_feature(cls(int(min([n.pitch for n in event.notes]))))
-        return events
+        if FeatureUtils.is_valid_midi(events, metadata):
+            for event in events:
+                event.set_feature(cls(int(min([n.pitch for n in event.notes]))))
+            return events
+        raise FeatureError(f"Feature '{cls.__name__}' does not support content of "
+                           f"type {metadata.content_type.__class__.__name__}")

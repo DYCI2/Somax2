@@ -3,7 +3,7 @@ from abc import ABC
 
 import numpy as np
 
-from somax.runtime.corpus import ContentType
+from somax.runtime.content_type import ContentType
 
 
 class Metadata(ABC):
@@ -13,7 +13,9 @@ class Metadata(ABC):
 
 
 class MidiMetadata(Metadata):
-    raise NotImplemented  # TODO
+    def __init__(self, filepath: str, content_type: ContentType):
+        super().__init__(filepath=filepath, content_type=content_type)
+        raise NotImplementedError("Not implemented yet")  # TODO
 
 
 class AudioMetadata(Metadata):

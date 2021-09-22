@@ -1,7 +1,7 @@
 import logging
 from typing import Optional, Any, List
 
-from somax.runtime.corpus import ContentType
+from somax.runtime.content_type import ContentType
 from somax.runtime.corpus_event import CorpusEvent, Note
 from somax.runtime.exceptions import InvalidCorpus
 from somax.runtime.player import Player

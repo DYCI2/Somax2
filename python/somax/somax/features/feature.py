@@ -21,18 +21,6 @@ class FeatureUtils:
     def is_valid_audio(events: List[CorpusEvent], metadata: Metadata) -> bool:
         return all([isinstance(e, AudioCorpusEvent) for e in events]) and isinstance(metadata, AudioMetadata)
 
-    @staticmethod
-    def assert_valid_midi(events: List[CorpusEvent], metadata: Metadata) -> None:
-        """ raises: FeatureError if not valid MIDI """
-        if not FeatureUtils.is_valid_midi(events, metadata):
-            raise FeatureError(f"Content is not valid MIDI content")
-
-    @staticmethod
-    def assert_valid_audio(events: List[CorpusEvent], metadata: Metadata) -> None:
-        """ raises: FeatureError if not valid audio """
-        if not FeatureUtils.is_valid_audio(events, metadata):
-            raise FeatureError(f"Content is not valid Audio content")
-
 
 class AbstractFeature(FeatureValue, Introspective, ABC):
     def __init__(self, value: Any):
