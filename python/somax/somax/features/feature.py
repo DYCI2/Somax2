@@ -50,7 +50,7 @@ class CorpusFeature(AbstractFeature, ABC):
 
     @classmethod
     @abstractmethod
-    def analyze(cls, events: CorpusEvent, metadata: Metadata) -> List[CorpusEvent]:
+    def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
         """ raises: FeatureError if type of events doesn't match type of metadata """
         pass
 

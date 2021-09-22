@@ -19,8 +19,8 @@ from somax.corpus_builder.chromagram import Chromagram
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
-from somax.features.feature import CorpusFeature, AbstractFeature
-from somax.runtime.corpus_event import CorpusEvent, Note
+from somax.features.feature import CorpusFeature
+from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus
 
 
@@ -75,12 +75,12 @@ class Corpus(ABC):
     INDEX_MAP_SIZE = 1_000_000
 
     def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
-                 feature_types: List[Type[AbstractFeature]], build_parameters: Dict[str, Any], **kwargs):
+                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any], **kwargs):
         self.logger = logging.getLogger(__name__)
         self.events: List[CorpusEvent] = events
         self.name: str = name
         self.content_type: ContentType = content_type
-        self.feature_types: List[Type[AbstractFeature]] = feature_types
+        self.feature_types: List[Type[CorpusFeature]] = feature_types
         self._build_parameters: Dict[str, Any] = build_parameters
         self._index_map: np.ndarray
         self._grid_size: int
@@ -304,12 +304,17 @@ class MidiCorpus(Corpus):
 
 
 class AudioCorpus(Corpus):
-    def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
-                 feature_types: List[Type[AbstractFeature]], build_parameters: Dict[str, Any]):
+    def __init__(self, events: List[AudioCorpusEvent], name: str, content_type: ContentType,
+                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any],
+                 sr: float, filepath: str, file_duration: float):
         super().__init__(events=events, name=name, content_type=content_type,
                          feature_types=feature_types, build_parameters=build_parameters)
+        self.sr: float = sr
+        self.filepath: str = filepath
+        self.file_duration: float = file_duration
 
     def duration(self) -> float:
+        """ Duration of corpus in seconds (may differ from duration of file depending on segmentation """
         if len(self.events) == 0:
             return 0.0
         return self.events[-1].onset + self.events[-1].duration

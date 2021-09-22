@@ -2,7 +2,7 @@ import logging
 import multiprocessing
 import os
 from enum import Enum
-from typing import Tuple, List, Optional, Dict, Any
+from typing import Tuple, List, Optional, Dict, Any, Type
 
 import librosa
 import numpy as np
@@ -11,11 +11,13 @@ import pandas as pd
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.chromagram import Chromagram
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
+from somax.corpus_builder.metadata import AudioMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
-from somax.runtime.corpus import Corpus, ContentType
-from somax.runtime.corpus_event import Note, CorpusEvent
+from somax.runtime.corpus import Corpus, ContentType, AudioContent, AudioCorpus
+from somax.runtime.corpus_event import Note, CorpusEvent, AudioCorpusEvent
+from somax.runtime.exceptions import FeatureError
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.target import SimpleOscTarget
 
@@ -139,27 +141,53 @@ class CorpusBuilder:
 
     def _build_audio(self, filepath: str, name: str, foreground_channels: Optional[List[int]] = None,
                      background_channels: Optional[List[int]] = None, onset_channels: Optional[List[int]] = None,
-                     segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET, **kwargs) -> Corpus:
+                     segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET, hop_length: int = 512,
+                     **kwargs) -> Corpus:
         """ raises: FileNotFoundError  if failed to load file
                     RuntimeError if other issues are encountered in librosa
                     ValueError if an invalid segmentation type is provided
         """
+        # TODO: Spectrogram filtering...
         y, sr = librosa.load(filepath, sr=None, mono=False)
         onset_frames: np.ndarray
         duration_frames: np.ndarray
         onset_frames, duration_frames = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
                                                           segmentation_mode=segmentation_mode, **kwargs)
+        onset_times: np.ndarray = librosa.frames_to_time(onset_frames, sr=sr, hop_length=hop_length)
+        duration_times: np.ndarray = librosa.frames_to_time(duration_frames, sr=sr, hop_length=hop_length)
+
+        events: List[AudioCorpusEvent]
+        events = [AudioCorpusEvent(state_index=i, absolute_onset=onset, absolute_duration=duration) for
+                  i, (onset, duration) in enumerate(zip(onset_times, duration_times))]
+
         foreground_data: np.ndarray = self._parse_channels(y, channels=foreground_channels)
         background_data: np.ndarray = self._parse_channels(y, channels=background_channels)
 
-        foreground_spectrogram: np.ndarray = librosa.stft(foreground_data)
-        foreground_spectrogram: np.ndarray = librosa.stft(background_data)
-        foreground_chroma: np.ndarray
+        stft: np.ndarray = librosa.stft(background_data)
 
+        metadata: AudioMetadata = AudioMetadata(filepath=filepath, content_type=AudioContent(), raw_data=y,
+                                                foreground_data=foreground_data, background_data=background_data, sr=sr,
+                                                hop_length=hop_length, stft=stft)
 
-        for _, feature in CorpusFeature.all_corpus_features():
-            pass
+        used_features: List[Type[CorpusFeature]] = []
+        for _, feature in CorpusFeature.all_corpus_features():  # type: Type[CorpusFeature]
+            try:
+                feature.analyze(events, metadata)
+                used_features.append(feature)
+            except FeatureError as e:
+                self.logger.debug(repr(e))
 
+        build_parameters: Dict[str, Any] = {"name": name,
+                                            "onset_channels": onset_channels,
+                                            "foreground_channels": foreground_channels,
+                                            "background_channels": background_channels,
+                                            "segmentation_mode": segmentation_mode,
+                                            "hop_length": hop_length,
+                                            **kwargs
+                                            }
+
+        return AudioCorpus(events=events, name=name, content_type=metadata.content_type, feature_types=used_features,
+                           build_parameters=build_parameters)
 
     def test_audio_segmentation(self, filepath: str, **kwargs):
         pass  # TODO
