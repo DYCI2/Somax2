@@ -27,7 +27,8 @@ from somax.runtime.process_messages import TimeMessage, ControlMessage, PlayCont
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.target import Target, SendProtocol
 from somax.scheduler.scheduled_object import TriggerMode
-from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport, Time
+from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport
+from somax.scheduler.base_scheduler import Time
 
 
 class Somax:

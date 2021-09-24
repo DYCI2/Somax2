@@ -2,12 +2,39 @@ import logging
 from abc import abstractmethod, ABC
 
 
+class Time:
+    BASE_TEMPO = 120.0
+
+    def __init__(self, tick: float, time: float, tempo: float):
+        self._tick: float = tick
+        self._time: float = time
+        self._tempo: float = tempo
+
+    @classmethod
+    def zero(cls, tempo: float = BASE_TEMPO):
+        return cls(0.0, 0.0, tempo)
+
+    @classmethod
+    def from(cls, other: 'Time', self._tick: Optional[float)
+
+    @property
+    def tick(self):
+        return self.tick
+
+    @property
+    def time(self):
+        return self.time
+
+    @property
+    def tempo(self):
+        return self.tempo
+
+
 class BaseScheduler(ABC):
-    def __init__(self, tempo: float = 120.0, tick: float = 0.0, running: bool = False, *args, **kwargs):
+    def __init__(self, time: Time = Time.zero(), running: bool = False, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self.tempo: float = tempo
-        self._tick: float = tick
+        self._time: Time = time
         self.running: bool = running
 
     @abstractmethod
@@ -23,31 +50,5 @@ class BaseScheduler(ABC):
         pass
 
     @property
-    def tick(self):
-        return self._tick
-
-
-# class AsyncScheduler(BaseScheduler, ABC):
-#     DEFAULT_CALLBACK_INTERVAL: float = 0.001  # seconds
-#
-#     def __init__(self, tempo: float = 120.0, *args, **kwargs):
-#         super().__init__(tempo=tempo, *args, **kwargs)
-#         self._last_callback_time: float = time.time()
-#         self.terminated: bool = False
-#
-#     async def init_async_loop(self, callback_interval: int = DEFAULT_CALLBACK_INTERVAL):
-#         self.logger.debug(f"Scheduler initialized with callback interval {callback_interval}.")
-#         while not self.terminated:
-#             await asyncio.sleep(callback_interval)
-#             self._callback()
-#
-#     @abstractmethod
-#     def _callback(self):
-#         pass
-
-    # def _update_tick(self, **_kwargs):
-    #     if self.running:
-    #         t: float = time.time()
-    #         delta_time: float = t - self._last_callback_time
-    #         self._last_callback_time = t
-    #         self._tick += delta_time * self.tempo / 60.0
+    def time(self) -> Time:
+        return self.time

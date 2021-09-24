@@ -35,7 +35,7 @@ from somax.scheduler.agent_scheduler import AgentScheduler
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiEvent, NewStateEvent
 from somax.scheduler.scheduled_object import TriggerMode
 # TODO: Complete separation Agent/OscAgent where Agent can be initialized and used from the command line
-from somax.scheduler.transport import Time
+from somax.scheduler.base_scheduler import Time
 
 
 class Agent(multiprocessing.Process):

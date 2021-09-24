@@ -19,7 +19,7 @@ class AgentScheduler(BaseScheduler):
                  tempo_master: bool = False, initial_tick: float = 0.0, running: bool = False):
         super().__init__(tempo=tempo, tick=initial_tick, running=running)
         self.logger = logging.getLogger(__name__)
-        self._player = player
+        self._player: Player = player
         self.queue: List[ScheduledEvent] = []
         self.is_tempo_master: bool = tempo_master
         self._trigger_pretime: float = trigger_pretime

@@ -1,34 +1,25 @@
 import logging
 import time
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
 from typing import Optional
 
-from somax.scheduler.base_scheduler import BaseScheduler
-
-
-@dataclass
-class Time:
-    tick: float
-    time: float
-    tempo: float
+from somax.scheduler.base_scheduler import BaseScheduler, Time
 
 
 class Transport(BaseScheduler, ABC):
-    BASE_TEMPO = 120.0
 
-    def __init__(self, tempo: float = BASE_TEMPO, *args, **kwargs):
-        super().__init__(tempo=tempo, *args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.logger = logging.getLogger(__name__)
 
     @abstractmethod
     def update_tick(self, **kwargs) -> Time:
-        """ raises: may raise TypeError for some subclasses"""
+        """ raises: TypeError for some subclasses if no value is provided"""
         pass
 
     @classmethod
     def clone_from(cls, other: 'Transport', *args, **kwargs):
-        return cls(tempo=other.tempo, tick=other._tick, *args, **kwargs)
+        return cls(tempo=other.tempo, time=other._time, *args, **kwargs)
 
     def set_tempo(self, tempo: float):
         self.tempo = tempo
@@ -37,7 +28,7 @@ class Transport(BaseScheduler, ABC):
         self.stop()
 
     def time(self) -> Time:
-        return Time(tick=self._tick, tempo=self.tempo)
+        return self._time
 
 
 class MasterTransport(Transport):
