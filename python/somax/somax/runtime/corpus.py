@@ -1,10 +1,16 @@
+import builtins
 import copy
+import gzip
 import json
 import logging
 import os
+import pickle
+import pickletools
+import sys
 from abc import ABC, abstractmethod
 from typing import List, Optional, Type, Dict, Any, Tuple, Union, TypeVar, Generic
 
+import librosa
 import numpy as np
 import pandas as pd
 
@@ -14,9 +20,26 @@ from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features.feature import CorpusFeature
 from somax.runtime.content_type import ContentType
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
-from somax.runtime.exceptions import InvalidCorpus
+from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch
 
 E = TypeVar('E', bound=CorpusEvent)
+
+
+class CorpusUnpickler(pickle.Unpickler):
+    safe_modules = ['logging', 'numpy.core.multiarray', 'numpy']
+    safe_builtins = ['range', 'complex', 'set', 'frozenset', 'slice']
+    safe_somax_modules = ['somax.runtime', 'somax.features', 'somax.corpus_builder']
+
+    @staticmethod
+    def valid_somax_module(module: str) -> bool:
+        return any(module.startswith(somax_module) for somax_module in CorpusUnpickler.safe_somax_modules)
+
+    def find_class(self, module: str, name: str) -> Any:
+        if module == 'builtins' and name in self.safe_builtins:
+            return getattr(builtins, name)
+        elif self.valid_somax_module(module) or module in self.safe_modules:
+            return getattr(sys.modules[module], name)
+        raise pickle.UnpicklingError(f"Module '{module}.{name}' is not supported")
 
 
 class HeldObject(Generic[E]):
@@ -58,7 +81,9 @@ class Corpus(Generic[E], ABC):
     @abstractmethod
     def from_json(cls, filepath: str, volatile: bool = False) -> 'Corpus':
         """ Load corpus from JSON file
-            Raises: IOError, InvalidCorpus """
+            Raises: IOError if file could not be found
+                    InvalidCorpus if fails to load corpus
+                    ExternalDataMismatch if additional resources could not successfully be located (audio files, ...)"""
 
     @abstractmethod
     def encode(self) -> Dict[str, Any]:
@@ -238,12 +263,13 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
 class AudioCorpus(Corpus):
     def __init__(self, events: List[AudioCorpusEvent], name: str, content_type: ContentType,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any],
-                 sr: float, filepath: str, file_duration: float):
+                 sr: int, filepath: str, file_duration: float, file_num_channels: int):
         super().__init__(events=events, name=name, content_type=content_type,
                          feature_types=feature_types, build_parameters=build_parameters)
-        self.sr: float = sr
+        self.sr: int = sr
         self.filepath: str = filepath
         self.file_duration: float = file_duration
+        self.num_channels: int = file_num_channels
 
     def duration(self) -> float:
         """ Duration of corpus in seconds (may differ from duration of file depending on segmentation """
@@ -252,8 +278,54 @@ class AudioCorpus(Corpus):
         return self.events[-1].onset + self.events[-1].duration
 
     @classmethod
-    def from_json(cls, filepath: str, volatile: bool = False) -> 'Corpus':
-        pass
+    def from_json(cls, filepath: str, volatile: bool = False) -> 'AudioCorpus':
+        # TODO: This should obviously not be named `from_json` as it uses a pickle
+        try:
+            with gzip.open(filepath, 'rb') as f:
+                corpus: AudioCorpus = CorpusUnpickler(f).load()
+
+                if not isinstance(corpus, cls):
+                    raise InvalidCorpus("Class of corpus is not valid")
+
+                cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.duration(), corpus.num_channels)
+        except pickle.UnpicklingError as e:
+            # Pickle tried to import module that was not supported
+            raise InvalidCorpus(e) from e
+        except ValueError as e:
+            raise ExternalDataMismatch(e) from e
+
+        return corpus
+
+    @staticmethod
+    def validate_audio_source(filepath: str, expected_sample_rate: int, expected_duration: float,
+                              expected_num_channels: int) -> None:
+        """ raises: IOError if file cannot be found
+                            ValueError if mismatch between file and expected data
+        """
+        audio, sample_rate = librosa.load(filepath, sr=None, mono=False)
+        if expected_sample_rate != sample_rate:
+            raise ValueError("Sample rate of file does not match corpus information")
+
+        if audio.ndim > 1 and expected_num_channels == 1 or audio.ndim > 1 and expected_num_channels != audio.shape[0]:
+            raise ValueError("Number of channels of file does not match corpus information")
+
+        num_samples: float = audio.size if audio.ndim == 1 else audio.shape[1]
+        if abs(expected_duration - num_samples / sample_rate) > 1.0:
+            raise ValueError("Duration of file does not match corpus information")
 
     def encode(self) -> Dict[str, Any]:
-        pass
+        # TODO: Separate so that `export` is the abstract interface rather than `encode`
+        # This function is only specifically for JSON encoding which currently isn't supported for audio corpora
+        raise NotImplementedError("Not implemented")
+
+    def export(self, output_folder: str, overwrite: bool = False, **kwargs) -> None:
+        """ raises: IOError if export fails """
+        filepath = os.path.join(output_folder, self.name + ".pickle")
+        if os.path.exists(filepath) and not overwrite:
+            raise IOError(f"Could not export corpus as file '{filepath}' already exists. "
+                          f"Set overwrite flag to True to overwrite existing.")
+        else:
+            with gzip.open(filepath, "wb") as f:
+                pickled = pickle.dumps(self)
+                optimized_pickle = pickletools.optimize(pickled)
+                f.write(optimized_pickle)

@@ -30,7 +30,7 @@ class AudioMetadata(Metadata):
         self.hop_length: int = hop_length
         self.stft: Spectrogram = stft
 
-        self.num_channels: int = AudioMetadata.num_channels(raw_data)
+        self.channels: int = AudioMetadata.num_channels(raw_data)
         self.duration: float = AudioMetadata.duration_s(raw_data, sr)
         self.file_format: str = AudioMetadata.file_format(filepath)
 

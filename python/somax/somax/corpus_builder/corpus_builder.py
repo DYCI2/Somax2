@@ -78,7 +78,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
 class CorpusBuilder:
     MIDI_FILE_EXTENSIONS = [".mid", ".midi"]
     AUDIO_FILE_EXTENSIONS = [".mp3", ".aif", ".aiff", ".wav", ".flac"]
-    CORPUS_FILE_EXTENSIONS = [".json"]
+    CORPUS_FILE_EXTENSIONS = [".json", ".pickle"]
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
@@ -210,7 +210,7 @@ class CorpusBuilder:
         corpus: AudioCorpus = AudioCorpus(events=events, name=name, content_type=metadata.content_type,
                                           feature_types=used_features,
                                           build_parameters=build_parameters, sr=sr, filepath=filepath,
-                                          file_duration=metadata.duration)
+                                          file_duration=metadata.duration, file_num_channels=metadata.channels)
 
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed construction of audio corpus")
 
@@ -320,6 +320,9 @@ class CorpusBuilder:
                 return librosa.to_mono(y[channels, :].reshape(-1))
             else:
                 return librosa.to_mono(y[channels, :])
+        elif y.ndim == 2 and y.shape[0] == 1:
+            # Already mono: again `librosa.to_mono` does not support this case
+            return y.reshape(-1)
         else:
             return librosa.to_mono(y)
 
