@@ -17,7 +17,7 @@ from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
 from somax.runtime.content_type import AudioContent, MidiContent
 from somax.runtime.corpus import Corpus, AudioCorpus, MidiCorpus
-from somax.runtime.corpus_event import Note, CorpusEvent, AudioCorpusEvent, MidiCorpusEvent
+from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.target import SimpleOscTarget
@@ -117,7 +117,14 @@ class CorpusBuilder:
         stft: Spectrogram = Spectrogram.from_midi(bg_matrix, spectrogram_filter, **kwargs)
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) MIDI-based STFT computed")
 
-        events: List[CorpusEvent] = self.slice_midi(note_matrix, build_parameters=build_parameters, **kwargs)
+        build_parameters: Dict[str, Any] = {"name": name,
+                                            "foreground_channels": foreground_channels,
+                                            "background_channels": background_channels,
+                                            "spectrogram_filter": spectrogram_filter.build_parameters,
+                                            "spectrogram_parameters": stft.build_parameters
+                                            }
+
+        events: List[MidiCorpusEvent] = self.slice_midi(note_matrix, build_parameters=build_parameters, **kwargs)
 
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) segmented MIDI into {len(events)} slices")
 
@@ -133,13 +140,6 @@ class CorpusBuilder:
 
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) completed feature analysis for "
                           f"{len(used_features)} features ({', '.join([f.__name__ for f in used_features])})")
-
-        build_parameters: Dict[str, Any] = {"name": name,
-                                            "foreground_channels": foreground_channels,
-                                            "background_channels": background_channels,
-                                            "spectrogram_filter": spectrogram_filter.build_parameters,
-                                            "spectrogram_parameters": stft.build_parameters
-                                            }
 
         corpus: MidiCorpus = MidiCorpus(events=events, name=name, content_type=metadata.content_type,
                                         feature_types=used_features, build_parameters=build_parameters)
@@ -287,7 +287,7 @@ class CorpusBuilder:
                               pick_peak_delta_gain: float = 0.07, backtrack: bool = True,
                               pick_peak_wait_s: float = 0.05) -> np.ndarray:
         """ y: shape(n,)
-        returns: onset_frames: shape(k,), k \in [0, \infty) where each val correspond to the frame
+        returns: onset_frames: shape(k,), k in [0, infty) where each val correspond to the frame
                                (frame i corresponds to  sample i * hop_length)  of the onset start
         """
 
@@ -305,7 +305,8 @@ class CorpusBuilder:
     def _slice_audio_by_interval(self):
         raise NotImplementedError("Not implemented yet")
 
-    def _parse_channels(self, audio_signal: np.ndarray, channels: Optional[List[int]] = None):
+    @staticmethod
+    def _parse_channels(audio_signal: np.ndarray, channels: Optional[List[int]] = None):
         """ raises: ValueError """
         # TODO: Normalize signal
         y = np.atleast_2d(audio_signal)
@@ -322,7 +323,8 @@ class CorpusBuilder:
         else:
             return librosa.to_mono(y)
 
-    def slice_midi(self, note_matrix: NoteMatrix, build_parameters: Dict[str, Any],
+    @staticmethod
+    def slice_midi(note_matrix: NoteMatrix, build_parameters: Dict[str, Any],
                    slice_tolerance_ms: float = 30.0, **_kwargs) -> List[MidiCorpusEvent]:
         index: int = 0
         events: List[MidiCorpusEvent] = [MidiCorpusEvent.incomplete(index, note_matrix.notes.iloc[0])]

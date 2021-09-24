@@ -3,28 +3,24 @@ import json
 import logging
 import os
 from abc import ABC, abstractmethod
-from typing import List, Optional, Type, Dict, Any, Tuple, Union
+from typing import List, Optional, Type, Dict, Any, Tuple, Union, TypeVar, Generic
 
-from somax.runtime.content_type import ContentType
-from somax.settings import IMPORT_MATPLOTLIB
-
-if IMPORT_MATPLOTLIB:
-    pass
 import numpy as np
 import pandas as pd
 
 import somax
-from somax.corpus_builder.midi_chromagram import MidiChromagram
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
-from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
-from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent
+from somax.runtime.content_type import ContentType
+from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus
 
+E = TypeVar('E', bound=CorpusEvent)
 
-class HeldObject:
-    def __init__(self, note: Note, event: CorpusEvent):
+
+class HeldObject(Generic[E]):
+    def __init__(self, note: Note, event: E):
         self.note = note
         self.event = event
 
@@ -36,20 +32,23 @@ class HeldObject:
         raise AttributeError(f"Cannot compare type '{type(other)}' with '{self.__class__}'")
 
 
-class Corpus(ABC):
+class Corpus(Generic[E], ABC):
     INDEX_MAP_SIZE = 1_000_000
 
-    def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
+    def __init__(self, events: List[E], name: str, content_type: ContentType,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any], **kwargs):
         self.logger = logging.getLogger(__name__)
-        self.events: List[CorpusEvent] = events
+        self.events: List[E] = events
         self.name: str = name
         self.content_type: ContentType = content_type
         self.feature_types: List[Type[CorpusFeature]] = feature_types
         self._build_parameters: Dict[str, Any] = build_parameters
         self._index_map: np.ndarray
         self._grid_size: int
-        self._index_map, self._grid_size = self._create_index_map(self.events, self.duration())
+        self._index_map, self._grid_size = self._create_index_map()
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(name='{self.name}', ...)"
 
     @abstractmethod
     def duration(self) -> float:
@@ -65,11 +64,10 @@ class Corpus(ABC):
     def encode(self) -> Dict[str, Any]:
         """ Encode the corpus to a dictionary to allow JSON export """
 
-    @staticmethod
-    def _create_index_map(events: List[CorpusEvent], corpus_duration_ticks: float) -> Tuple[np.ndarray, float]:
-        grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / corpus_duration_ticks
+    def _create_index_map(self) -> Tuple[np.ndarray, float]:
+        grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / self.duration()
         index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
-        for event in events:
+        for event in self.events:
             start_index: int = int(np.floor(event.onset * grid_size))
             end_index: int = int(np.floor((event.onset + event.duration) * grid_size))
             index_map[start_index:end_index] = event.state_index
@@ -90,16 +88,16 @@ class Corpus(ABC):
     def has_feature(self, feature_type: Type[CorpusFeature]) -> bool:
         return feature_type in self.feature_types
 
-    def event_at(self, index: int) -> CorpusEvent:
+    def event_at(self, index: int) -> E:
         return self.events[index]
 
-    def event_around(self, time: float) -> CorpusEvent:
+    def event_around(self, time: float) -> E:
         index: int = self._index_map[int(np.floor(time * self._grid_size))]
         return self.event_at(index)
 
-    def events_around(self, times: np.ndarray) -> List[CorpusEvent]:
+    def events_around(self, times: np.ndarray) -> List[E]:
         indices: np.ndarray = self._index_map[(np.floor(times * self._grid_size)).astype(int)]
-        events: List[CorpusEvent] = [self.event_at(index) for index in indices]
+        events: List[E] = [self.event_at(index) for index in indices]
         return events
 
     def length(self) -> int:
@@ -107,18 +105,15 @@ class Corpus(ABC):
         return len(self.events)
 
 
-class MidiCorpus(Corpus):
-    def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
+class MidiCorpus(Corpus[MidiCorpusEvent]):
+    def __init__(self, events: List[MidiCorpusEvent], name: str, content_type: ContentType,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any]):
         super().__init__(events=events, name=name, content_type=content_type,
                          feature_types=feature_types, build_parameters=build_parameters)
         self.logger = logging.getLogger(__name__)
 
-    def __repr__(self):
-        return f"Corpus(name='{self.name}', ...)"
-
     @classmethod
-    def from_json(cls, filepath: str, volatile: bool = False) -> 'Corpus':
+    def from_json(cls, filepath: str, volatile: bool = False) -> 'MidiCorpus':
         """ Raises: IOError, InvalidCorpus"""
         try:
             with open(filepath, 'r') as f:
@@ -126,19 +121,19 @@ class MidiCorpus(Corpus):
             version: str = corpus_data["version"]
             if version != somax.__version__ and not volatile:
                 raise InvalidCorpus(f"The loaded corpus was built with an old version of Somax. "
-                                    f"While it may work, using it could result in a number of bugs."
-                                    f" Recommended action: rebuild corpus."
-                                    f" (To attempt to load the corpus anyway: enable the 'volatile' flag)")
+                                    f"While it may work, using it could result in a number of bugs. "
+                                    f"Recommended action: rebuild corpus. "
+                                    f"(To attempt to load the corpus anyway: enable the 'volatile' flag)")
             name: str = corpus_data["name"]
             content_type: ContentType = ContentType.from_string(corpus_data["content_type"])
 
             build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
             features_dict: Dict[str, str] = corpus_data["features_dict"]
-            events: List[CorpusEvent] = [CorpusEvent.decode(event_dict, features_dict)
-                                         for event_dict in corpus_data["events"]]
+            events: List[MidiCorpusEvent] = [MidiCorpusEvent.decode(event_dict, features_dict)
+                                             for event_dict in corpus_data["events"]]
             features: List[Type[CorpusFeature]] = [CorpusFeature.class_from_string(p) for p in features_dict.values()]
             return cls(events=events, name=name, content_type=content_type,
-                       features=features, build_parameters=build_parameters)
+                       feature_types=features, build_parameters=build_parameters)
 
         # KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)
         except (KeyError, AttributeError) as e:
@@ -155,14 +150,14 @@ class MidiCorpus(Corpus):
                 "build_parameters": self._build_parameters,
                 "features_dict": {name: feature.classpath() for (feature, name) in features.items()},
                 "length": self.length(),
-                "duration": self.duration(),
+                "duration": self.duration,
                 "events": [event.encode(features_dict=features) for event in self.events]
                 }
 
     def duration(self) -> float:
         if len(self.events) == 0:
             return 0.0
-        last_event: CorpusEvent = self.events[-1]
+        last_event: MidiCorpusEvent = self.events[-1]
         return last_event.onset + last_event.duration
 
     def to_note_matrix(self) -> NoteMatrix:
@@ -200,11 +195,10 @@ class MidiCorpus(Corpus):
 
         note_matrix: pd.DataFrame = pd.DataFrame(np.array(note_data, dtype=object).T, columns=[key for key in Keys])
         note_matrix.sort_values([Keys.REL_ONSET, Keys.PITCH, Keys.CHANNEL], inplace=True)
-        # note_matrix.drop_duplicates(subset=[Keys.PITCH, Keys.CHANNEL, Keys.REL_ONSET, Keys.REL_DURATION], inplace=True)
         return NoteMatrix(note_matrix)
 
     @staticmethod
-    def _append_to_matrix(note: Note, event: CorpusEvent,
+    def _append_to_matrix(note: Note, event: MidiCorpusEvent,
                           matrix: List[List[Union[int, float, str]]]) -> List[List[Union[int, float, str]]]:
         matrix[Keys.PITCH.value].append(note.pitch)
         matrix[Keys.VELOCITY.value].append(note.velocity)
@@ -221,7 +215,7 @@ class MidiCorpus(Corpus):
         return matrix
 
     @staticmethod
-    def _adjust_in_time(note: Note, event: CorpusEvent):
+    def _adjust_in_time(note: Note, event: MidiCorpusEvent):
         positive_part_note_onset: float = max(0.0, note.onset)
         positive_part_note_abs_onset: float = max(0.0, note.absolute_onset)
         if event.recorded_memory_state is not None:
@@ -239,24 +233,6 @@ class MidiCorpus(Corpus):
         note.absolute_onset = event.absolute_onset + positive_part_note_onset
         note.absolute_duration = min(note.absolute_duration, event.absolute_duration)
         return note
-
-    # TODO: Removed for PyInstaller to exclude matplotlib
-    # def plot(self):
-    #     raise NotImplementedError("Plotting a corpus is currently not supported")
-    #     import matplotlib as mpl
-    #     mpl.use('Qt5Agg')
-    #     if all([v is not None for v in
-    #             [self.fg_spectrogram, self.bg_spectrogram, self.fg_chromagram, self.bg_chromagram]]):
-    #         _, axes = plt.subplots(6, 1, gridspec_kw={'height_ratios': [1, 5, 3, 3, 1, 1]})
-    #         self.fg_spectrogram.plot(axes[2])
-    #         self.bg_spectrogram.plot(axes[3])
-    #         self.fg_chromagram.plot(axes[4])
-    #         self.bg_chromagram.plot(axes[5])
-    #         self.to_note_matrix().plot(axes=(axes[0], axes[1]))
-    #     else:
-    #         _, axes = plt.subplots(2, 1, gridspec_kw={'height_ratios': [1, 5]})
-    #         self.to_note_matrix().plot(axes=(axes[0], axes[1]))
-    #     plt.show()
 
 
 class AudioCorpus(Corpus):

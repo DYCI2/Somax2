@@ -73,7 +73,7 @@ class Spectrogram:
         return cls(stft=stft, duration_ms=duration_ms, sample_rate=sample_rate, build_parameters=build_parameters)
 
     def at(self, onset_ms: float) -> np.ndarray:
-        return self.stft[:, np.floor(onset_ms * self.sample_rate)]
+        return self.stft[:, np.floor(onset_ms * self.sample_rate).astype(int)]
 
     @property
     def build_parameters(self) -> Dict[str, Any]:

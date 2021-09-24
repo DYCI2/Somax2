@@ -141,7 +141,7 @@ class MidiCorpusEvent(CorpusEvent):
         self.recorded_memory_state: Optional[MemoryState] = None
 
     @classmethod
-    def decode(cls, event_dict: Dict[str, Any], feature_dict: Dict[str, str]) -> 'CorpusEvent':
+    def decode(cls, event_dict: Dict[str, Any], feature_dict: Dict[str, str]) -> 'MidiCorpusEvent':
         """ Raises: KeyError, AttributeError"""
         from somax.features.feature import CorpusFeature
         return MidiCorpusEvent(state_index=event_dict["state_index"],

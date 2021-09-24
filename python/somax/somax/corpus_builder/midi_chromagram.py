@@ -21,7 +21,7 @@ class MidiChromagram:
         return cls(chromagram, spectrogram.duration_ms)
 
     def at(self, onset_ms: float) -> np.ndarray:
-        return self.chromagram[:, np.floor(onset_ms * self.sample_rate)]
+        return self.chromagram[:, np.floor(onset_ms * self.sample_rate).astype(int)]
 
     @property
     def build_parameters(self) -> Dict[str, Any]:
