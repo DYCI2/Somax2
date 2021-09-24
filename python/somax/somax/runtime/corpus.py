@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 
 import somax
-from somax.corpus_builder.chromagram import Chromagram
+from somax.corpus_builder.midi_chromagram import MidiChromagram
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
@@ -109,19 +109,10 @@ class Corpus(ABC):
 
 class MidiCorpus(Corpus):
     def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
-                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any],
-                 fg_spectrogram: Optional[Spectrogram] = None,
-                 bg_spectrogram: Optional[Spectrogram] = None, fg_chromagram: Optional[Chromagram] = None,
-                 bg_chromagram: Optional[Chromagram] = None):
+                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any]):
         super().__init__(events=events, name=name, content_type=content_type,
                          feature_types=feature_types, build_parameters=build_parameters)
         self.logger = logging.getLogger(__name__)
-
-        # These parameters will not be stored when exported and will thus not exist in json-parsed corpora
-        self.fg_spectrogram: Optional[Spectrogram] = fg_spectrogram
-        self.bg_spectrogram: Optional[Spectrogram] = bg_spectrogram
-        self.fg_chromagram: Optional[Chromagram] = fg_chromagram
-        self.bg_chromagram: Optional[Chromagram] = bg_chromagram
 
     def __repr__(self):
         return f"Corpus(name='{self.name}', ...)"

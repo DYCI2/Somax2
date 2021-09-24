@@ -10,15 +10,14 @@ import numpy as np
 import pandas as pd
 
 from somax.corpus_builder.chroma_filter import AbstractFilter
-from somax.corpus_builder.chromagram import Chromagram
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
-from somax.corpus_builder.metadata import AudioMetadata
+from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
-from somax.runtime.content_type import ContentType, AudioContent
-from somax.runtime.corpus import Corpus, AudioCorpus
-from somax.runtime.corpus_event import Note, CorpusEvent, AudioCorpusEvent
+from somax.runtime.content_type import AudioContent, MidiContent
+from somax.runtime.corpus import Corpus, AudioCorpus, MidiCorpus
+from somax.runtime.corpus_event import Note, CorpusEvent, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.target import SimpleOscTarget
@@ -106,38 +105,46 @@ class CorpusBuilder:
                     background_channels: Tuple[int] = tuple(range(1, 17)),
                     spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
                     **kwargs) -> Corpus:
-        # TODO: Option to plot note matrix, spectrograms, chromagrams and slices along the way!
-        self.logger.debug(f"Building midi corpus {name}")
+        # TODO: Foreground channels are not used for melodic classification... (might be a good thing)
+        # TODO: Onset channels are not supported as means of segmentation (might also be a good thing)
+        start_time: float = timer()
+        self.logger.debug(f"[_build_midi]: ({0:.2f}) building MIDI corpus '{name}'...")
         note_matrix: NoteMatrix = NoteMatrix.from_midi_file(filepath)
-        self.logger.debug(f"Note matrix {note_matrix} constructed.")
-        fg_matrix: NoteMatrix = note_matrix.split_by_channel(foreground_channels)
+        self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) note matrix with shape "
+                          f"{note_matrix.shape} constructed")
+
         bg_matrix: NoteMatrix = note_matrix.split_by_channel(background_channels)
-        fg_spectrogram: Spectrogram = Spectrogram.from_midi(fg_matrix, spectrogram_filter, **kwargs)
-        bg_spectrogram: Spectrogram = Spectrogram.from_midi(bg_matrix, spectrogram_filter, **kwargs)
-        self.logger.debug(f"Spectrograms {fg_spectrogram} and {bg_spectrogram} constructed.")
-        fg_chromagram: Chromagram = Chromagram.from_midi(fg_spectrogram, **kwargs)
-        bg_chromagram: Chromagram = Chromagram.from_midi(bg_spectrogram, **kwargs)
-        self.logger.debug(f"Chromagrams {fg_chromagram} and {bg_chromagram} constructed.")
+        stft: Spectrogram = Spectrogram.from_midi(bg_matrix, spectrogram_filter, **kwargs)
+        self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) MIDI-based STFT computed")
+
+        events: List[CorpusEvent] = self.slice_midi(note_matrix, build_parameters=build_parameters, **kwargs)
+
+        self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) segmented MIDI into {len(events)} slices")
+
+        metadata: MidiMetadata = MidiMetadata(filepath=filepath, content_type=MidiContent(), stft=stft)
+
+        used_features: List[Type[CorpusFeature]] = []
+        for _, feature in CorpusFeature.all_corpus_features():  # type Type[CorpusFeature]
+            try:
+                feature.analyze(events, metadata)
+                used_features.append(feature)
+            except FeatureError as e:
+                self.logger.debug(repr(e))
+
+        self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) completed feature analysis for "
+                          f"{len(used_features)} features ({', '.join([f.__name__ for f in used_features])})")
 
         build_parameters: Dict[str, Any] = {"name": name,
                                             "foreground_channels": foreground_channels,
                                             "background_channels": background_channels,
                                             "spectrogram_filter": spectrogram_filter.build_parameters,
-                                            "spectrogram_parameters": fg_spectrogram.build_parameters,
-                                            "chromagram_parameters": fg_chromagram.build_parameters
+                                            "spectrogram_parameters": stft.build_parameters
                                             }
 
-        corpus: Corpus = self.slice_midi(note_matrix, name, build_parameters=build_parameters, **kwargs)
-        corpus.fg_spectrogram = fg_spectrogram
-        corpus.bg_spectrogram = bg_spectrogram
-        corpus.fg_chromagram = fg_chromagram
-        corpus.bg_chromagram = bg_chromagram
-        self.logger.debug(f"Corpus {corpus} initialized from slicing note matrix.")
+        corpus: MidiCorpus = MidiCorpus(events=events, name=name, content_type=metadata.content_type,
+                                        feature_types=used_features, build_parameters=build_parameters)
 
-        for _, feature in CorpusFeature.all_corpus_features():
-            corpus = feature.analyze(corpus, **kwargs)
-
-        self.logger.debug(f"Analysis of Corpus {corpus} was completed.")
+        self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) completed construction of MIDI corpus")
 
         return corpus
 
@@ -151,7 +158,7 @@ class CorpusBuilder:
         """
         # TODO: Spectrogram filtering
         start_time: float = timer()
-        self.logger.debug(f"[_build_audio]: ({0:.2f}) initializing building of audio corpus")
+        self.logger.debug(f"[_build_audio]: ({0:.2f}) Building audio corpus '{name}'...")
         y, sr = librosa.load(filepath, sr=None, mono=False)
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) loaded file with sample rate {sr} "
                           f"and {AudioMetadata.num_channels(y)} channels")
@@ -172,7 +179,8 @@ class CorpusBuilder:
         foreground_data: np.ndarray = self._parse_channels(y, channels=foreground_channels)
         background_data: np.ndarray = self._parse_channels(y, channels=background_channels)
 
-        stft: np.ndarray = librosa.stft(background_data)
+        # TODO: Allow passing of stft parameters (win_length, n_fft, window function, ...)
+        stft: Spectrogram = Spectrogram.from_audio(background_data, sample_rate=sr, hop_length=hop_length, **kwargs)
 
         metadata: AudioMetadata = AudioMetadata(filepath=filepath, content_type=AudioContent(), raw_data=y,
                                                 foreground_data=foreground_data, background_data=background_data, sr=sr,
@@ -204,7 +212,7 @@ class CorpusBuilder:
                                           build_parameters=build_parameters, sr=sr, filepath=filepath,
                                           file_duration=metadata.duration)
 
-        self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed construction of audio corpus.")
+        self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed construction of audio corpus")
 
         return corpus
 
@@ -314,17 +322,17 @@ class CorpusBuilder:
         else:
             return librosa.to_mono(y)
 
-    def slice_midi(self, note_matrix: NoteMatrix, name: str, build_parameters: Dict[str, Any],
-                   slice_tolerance_ms: float = 30.0, **_kwargs) -> Corpus:
+    def slice_midi(self, note_matrix: NoteMatrix, build_parameters: Dict[str, Any],
+                   slice_tolerance_ms: float = 30.0, **_kwargs) -> List[MidiCorpusEvent]:
         index: int = 0
-        events: List[CorpusEvent] = [CorpusEvent.incomplete(index, note_matrix.notes.iloc[0])]
+        events: List[MidiCorpusEvent] = [MidiCorpusEvent.incomplete(index, note_matrix.notes.iloc[0])]
         # TODO: [OPTIMIZATION]Using iterrows will be very slow for large matrices. Subject to optimization
         for i, note in note_matrix.notes.iloc[1:].iterrows():  # type: pd.Series
             # Finalize previous and create a new CorpusEvent
             if note[Keys.ABS_ONSET] > events[-1].absolute_onset + slice_tolerance_ms:
                 events[-1].set_duration(end=note[Keys.REL_ONSET], absolute_end=note[Keys.ABS_ONSET])
                 index += 1
-                corpus_event: CorpusEvent = CorpusEvent.incomplete(index, note)
+                corpus_event: MidiCorpusEvent = MidiCorpusEvent.incomplete(index, note)
                 corpus_event.append_notes(events[-1].held_from(), events[-1].onset, events[-1].absolute_onset)
                 events.append(corpus_event)
             # Append to previous Corpus Event
@@ -340,4 +348,4 @@ class CorpusBuilder:
 
         build_parameters["slice_tolerance_ms"] = slice_tolerance_ms
 
-        return Corpus(events, name, ContentType.MIDI, build_parameters=build_parameters)
+        return events

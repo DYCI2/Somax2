@@ -3,7 +3,7 @@ from typing import Dict, Any, Union, List
 import librosa
 import numpy as np
 
-from somax.corpus_builder.chromagram import Chromagram
+from somax.corpus_builder.midi_chromagram import MidiChromagram
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
 from somax.features.feature import CorpusFeature, RuntimeFeature, FeatureUtils
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
@@ -36,7 +36,7 @@ class OnsetChroma(CorpusFeature, RuntimeFeature):
     def _analyze_midi(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata):
         # FIXME: the Chromagram class should be renamed MidiChromagram,
         #        be static and only return the chromagram as a np.ndarray
-        chromagram = Chromagram.from_midi(metadata.stft).chromagram
+        chromagram = MidiChromagram.from_midi(metadata.stft).chromagram
         for event in events:
             event.set_feature(cls(chromagram.at(event.absolute_onset)))
 

@@ -3,6 +3,7 @@ from abc import ABC
 
 import numpy as np
 
+from somax.corpus_builder.spectrogram import Spectrogram
 from somax.runtime.content_type import ContentType
 
 
@@ -13,21 +14,21 @@ class Metadata(ABC):
 
 
 class MidiMetadata(Metadata):
-    def __init__(self, filepath: str, content_type: ContentType):
+    def __init__(self, filepath: str, content_type: ContentType, stft: Spectrogram):
         super().__init__(filepath=filepath, content_type=content_type)
-        raise NotImplementedError("Not implemented yet")  # TODO
+        self.stft: Spectrogram = stft
 
 
 class AudioMetadata(Metadata):
     def __init__(self, filepath: str, content_type: ContentType, raw_data: np.ndarray, foreground_data: np.ndarray,
-                 background_data: np.ndarray, sr: float, hop_length: int, stft: np.ndarray):
+                 background_data: np.ndarray, sr: float, hop_length: int, stft: Spectrogram):
         super().__init__(filepath=filepath, content_type=content_type)
         self.raw_data: np.ndarray = raw_data
         self.foreground_data: np.ndarray = foreground_data
         self.background_data: np.ndarray = background_data
         self.sr: float = sr
         self.hop_length: int = hop_length
-        self.stft: np.ndarray = stft
+        self.stft: Spectrogram = stft
 
         self.num_channels: int = AudioMetadata.num_channels(raw_data)
         self.duration: float = AudioMetadata.duration_s(raw_data, sr)

@@ -166,9 +166,16 @@ class MidiCorpusEvent(CorpusEvent):
         notes: List[Note] = [Note.from_raw(raw_note, event_onset, event_absolute_onset)]
         return cls(state_index, raw_note[Keys.TEMPO], event_onset, event_absolute_onset, bar_number, notes=notes)
 
+    def set_duration(self, end: float, absolute_end: float):
+        """ Completes a CorpusEvent constructed with the `incomplete` constructor. """
+        self._relative_duration = end - self._relative_onset
+        self.absolute_duration = absolute_end - self.absolute_onset
+
+    @property
     def onset(self) -> float:
         return self._relative_onset
 
+    @property
     def duration(self) -> float:
         return self._relative_duration
 

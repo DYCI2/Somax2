@@ -27,6 +27,10 @@ class NoteMatrix:
                                       ticks_per_beat=ticks_per_beat, annotations=annotations)
 
     @property
+    def shape(self) -> Tuple[int, ...]:
+        return self.notes.shape
+
+    @property
     def pitches(self) -> np.ndarray:
         return self.notes[Keys.PITCH].to_numpy(copy=True)
 
