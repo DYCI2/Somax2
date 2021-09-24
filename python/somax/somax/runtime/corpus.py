@@ -299,10 +299,14 @@ class AudioCorpus(Corpus):
     @staticmethod
     def validate_audio_source(filepath: str, expected_sample_rate: int, expected_duration: float,
                               expected_num_channels: int) -> None:
-        """ raises: IOError if file cannot be found
+        """ raises: IOError if file cannot be found or other issue with loading audio file through librosa
                             ValueError if mismatch between file and expected data
         """
-        audio, sample_rate = librosa.load(filepath, sr=None, mono=False)
+        try:
+            audio, sample_rate = librosa.load(filepath, sr=None, mono=False)
+        except (FileNotFoundError, RuntimeError) as e:
+            raise IOError(e) from e
+
         if expected_sample_rate != sample_rate:
             raise ValueError("Sample rate of file does not match corpus information")
 

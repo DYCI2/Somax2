@@ -154,7 +154,7 @@ class CorpusBuilder:
                      **kwargs) -> Corpus:
         """ raises: FileNotFoundError  if failed to load file
                     RuntimeError if other issues are encountered in librosa
-                    ValueError if an invalid segmentation type is provided
+                    ValueError if an invalid segmentation mode is provided
         """
         # TODO: Spectrogram filtering
         start_time: float = timer()
@@ -216,8 +216,18 @@ class CorpusBuilder:
 
         return corpus
 
-    def test_audio_segmentation(self, filepath: str, **kwargs):
-        pass  # TODO
+    def test_audio_segmentation(self, filepath: str, onset_channels: Optional[List[int]] = None,
+                                segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET, hop_length: int = 512,
+                                **kwargs) -> Tuple[np.ndarray, np.ndarray]:
+        """ raises: FileNotFoundError if failed to load file
+                    ValueError if an invalid segmentation mode is provided
+            return: (onsets, durations) in seconds """
+        y, sr = librosa.load(filepath, sr=None, mono=False)
+        onset_frames, duration_frames = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
+                                                          segmentation_mode=segmentation_mode, **kwargs)
+        onset_times: np.ndarray = librosa.frames_to_time(onset_frames, sr=sr, hop_length=hop_length)
+        duration_times: np.ndarray = librosa.frames_to_time(duration_frames, sr=sr, hop_length=hop_length)
+        return onset_times, duration_times
 
     def _slice_audio(self, audio_signal: np.ndarray, sr: float, onset_channels: Optional[List[int]] = None,
                      segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET,
