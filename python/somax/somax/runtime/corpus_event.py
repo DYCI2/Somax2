@@ -219,10 +219,12 @@ class AudioCorpusEvent(CorpusEvent):
 
     @classmethod
     def decode(cls, event_dict: Dict[str, Any], feature_classpath_dict: Dict[str, str]) -> 'CorpusEvent':
-        raise NotImplementedError("Not Implemented yet")  # TODO[Audio] once CorpusBuilder is done
+        # TODO: Remove from interface once pickling has been made the norm
+        raise NotImplementedError("This function is not needed for pickling")
 
     def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
-        raise NotImplementedError("Not Implemented yet")  # TODO[Audio] once CorpusBuilder is done
+        # TODO: Remove from interface once pickling has been made the norm
+        raise NotImplementedError("This function is not needed for pickling")
 
     @property
     def onset(self) -> float:

@@ -104,9 +104,9 @@ class MidiParser:
         current_bar_factor: int = 1
 
         for msg, track in MidiParser.__merge_tracks(midi_file.tracks):
-            current_tick += msg.time
-            current_time += mido.tick2second(msg.time, ticks_per_beat, mido.bpm2tempo(tempo_bpm))
-            current_bar += msg.time / ticks_per_beat * current_bar_factor
+            current_tick += msg.second
+            current_time += mido.tick2second(msg.second, ticks_per_beat, mido.bpm2tempo(tempo_bpm))
+            current_bar += msg.second / ticks_per_beat * current_bar_factor
             track_name: str = track.name if track else ""
             if msg.type == 'set_tempo':
                 tempo_bpm = mido.tempo2bpm(msg.tempo)
@@ -169,7 +169,7 @@ class MidiParser:
         if annotations == BarNumberAnnotation.NONE:
             del messages[lyrics_dict]
         else:
-            messages[lyrics_dict].sort(key=lambda msg: msg.time)
+            messages[lyrics_dict].sort(key=lambda msg: msg.second)
             filtered_bar_numbers: List[MetaMessage] = []
             if annotations == BarNumberAnnotation.JUMPS:
                 prev_bar_number: int = -np.inf
@@ -182,15 +182,15 @@ class MidiParser:
             else:  # annotations == BarNumberAnnotation.ALL:
                 last_onset: float = -np.inf
                 for lyrics_meta in messages[lyrics_dict]:
-                    if lyrics_meta.time - last_onset > 0.0001:
+                    if lyrics_meta.second - last_onset > 0.0001:
                         filtered_bar_numbers.append(lyrics_meta)
-                    last_onset = lyrics_meta.time
+                    last_onset = lyrics_meta.second
             messages[lyrics_dict] = filtered_bar_numbers
 
         midi_tracks: List[MidiTrack] = []
         for track in messages.keys():
             messages[track].append(MetaMessage(type='end_of_track', time=duration))
-            messages[track].sort(key=lambda msg: msg.time)
+            messages[track].sort(key=lambda msg: msg.second)
             messages[track] = MidiParser.__to_reltime(messages[track])
             midi_tracks.append(MidiTrack(messages[track]))
 
@@ -204,7 +204,7 @@ class MidiParser:
         messages_and_tracks: List[Tuple[Any, MidiTrack]] = []
         for track in tracks:
             messages_and_tracks.extend([(m, track) for m in MidiParser.__to_abstime(track)])
-        messages_and_tracks.sort(key=lambda msg_and_track: msg_and_track[0].time)
+        messages_and_tracks.sort(key=lambda msg_and_track: msg_and_track[0].second)
 
         messages, tracks = [list(e) for e in zip(*messages_and_tracks)]
         return MidiParser.__fix_end_of_track(zip(MidiParser.__to_reltime(messages), tracks))
@@ -220,10 +220,10 @@ class MidiParser:
 
         for msg, track in messages:
             if msg.type == 'end_of_track':
-                accum += msg.time
+                accum += msg.second
             else:
                 if accum:
-                    delta = accum + msg.time
+                    delta = accum + msg.second
                     yield msg.copy(time=delta), track
                     accum = 0
                 else:
@@ -238,7 +238,7 @@ class MidiParser:
         This function was adapted directly from mido to handle files with uncaught 'type' meta message errors"""
         now = 0
         for msg in messages:
-            now += msg.time
+            now += msg.second
             try:
                 yield msg.copy(time=now)
             except TypeError as e:
@@ -250,9 +250,9 @@ class MidiParser:
             This function was adapted directly from mido to handle passing of track info when merging"""
         now = 0
         for msg in messages:
-            delta = msg.time - now
+            delta = msg.second - now
             yield msg.copy(time=delta)
-            now = msg.time
+            now = msg.second
 
     @staticmethod
     def _to_pandas(notes: List[_MidiNote], ticks_per_beat: int) -> pd.DataFrame:

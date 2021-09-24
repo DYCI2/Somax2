@@ -280,6 +280,8 @@ class AudioCorpus(Corpus):
     @classmethod
     def from_json(cls, filepath: str, volatile: bool = False) -> 'AudioCorpus':
         # TODO: This should obviously not be named `from_json` as it uses a pickle
+        # TODO: This should also have an optional `alternative_filepath` arg so that it's possible to pass
+        #       another filepath in case the location of the audio file has been changed
         try:
             with gzip.open(filepath, 'rb') as f:
                 corpus: AudioCorpus = CorpusUnpickler(f).load()

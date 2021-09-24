@@ -1,5 +1,5 @@
 import logging
-import time
+import time as system_time
 from abc import ABC, abstractmethod
 from typing import Optional
 
@@ -7,9 +7,8 @@ from somax.scheduler.base_scheduler import BaseScheduler, Time
 
 
 class Transport(BaseScheduler, ABC):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, initial_time: Time = Time.zero(), *args, **kwargs):
+        super().__init__(initial_time, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
 
     @abstractmethod
@@ -19,30 +18,31 @@ class Transport(BaseScheduler, ABC):
 
     @classmethod
     def clone_from(cls, other: 'Transport', *args, **kwargs):
-        return cls(tempo=other.tempo, time=other._time, *args, **kwargs)
+        return cls(time=other._time, *args, **kwargs)
 
     def set_tempo(self, tempo: float):
-        self.tempo = tempo
+        self._time = Time(self._time.tick, self._time.second, tempo)
 
     def terminate(self):
         self.stop()
 
+    @property
     def time(self) -> Time:
         return self._time
 
 
 class MasterTransport(Transport):
-    def __init__(self, tempo: float = Transport.BASE_TEMPO, *args, **kwargs):
-        super().__init__(tempo=tempo, *args, **kwargs)
-        self._last_callback_time: float = time.time()
+    def __init__(self, initial_time: Time = Time.zero(Time.BASE_TEMPO), *args, **kwargs):
+        super().__init__(initial_time, *args, **kwargs)
+        self._last_callback_time: float = system_time.time()
 
     def update_tick(self, **_kwargs) -> Time:
         if self.running:
             self._update_tick()
-        return self.time()
+        return self.time
 
     def start(self) -> None:
-        self._last_callback_time = time.time()
+        self._last_callback_time = system_time.time()
         self.running = True
         self._update_tick()
 
@@ -51,14 +51,14 @@ class MasterTransport(Transport):
 
     def stop(self) -> None:
         self.running = False
-        self._tick = 0.0
+        self._time = Time.zero(self.tempo)
 
     def _update_tick(self, **_kwargs):
         if self.running:
-            t: float = time.time()
+            t: float = system_time.time()
             delta_time: float = t - self._last_callback_time
             self._last_callback_time = t
-            self._tick += delta_time * self.tempo / 60.0
+            self._time = Time.updated(self._time, delta_time)
 
 
 class SlaveTransport(Transport):
@@ -74,9 +74,9 @@ class SlaveTransport(Transport):
     def stop(self, **kwargs):
         self.running = False
 
-    def update_tick(self, tick: Optional[float] = None) -> Time:
-        """ raises: TypeError if no tick value is provided """
-        if tick is None:
-            raise TypeError(f"A tick value must be provided for class {self.__class__.__name__}")
-        self._tick = tick
-        return Time(self.tick, self.tempo)
+    def update_tick(self, tick: Optional[float] = None, second: Optional[float] = None) -> Time:
+        """ raises: TypeError if tick and time values are not provided """
+        if tick is None or second is None:
+            raise TypeError(f"A tick value and a time value must be provided for class {self.__class__.__name__}")
+        self._time = Time(tick=tick, second=second, tempo=self.tempo)
+        return self._time

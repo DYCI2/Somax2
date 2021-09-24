@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from somax.scheduler.transport import Time
+from somax.scheduler.base_scheduler import Time
 from somax.utils.introspective import StringParsed
 
 
@@ -11,7 +11,7 @@ class ContentType(StringParsed, ABC):
 
     @abstractmethod
     def get_time_axis(self, time: Time) -> float:
-        """ Determines which type of time (tick/ms) should be used for scheduling objects of this type """
+        """ Determines which mode of time (tick/seconds) should be used for scheduling objects of this type """
 
     @classmethod
     def default(cls, **kwargs) -> 'StringParsed':
@@ -35,4 +35,4 @@ class AudioContent(ContentType):
         return "Audio"
 
     def get_time_axis(self, time: Time) -> float:
-        return time.time
+        return time.second

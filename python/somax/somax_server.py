@@ -242,7 +242,7 @@ class SomaxServer(Somax, AsyncioOscObject):
     ######################################################
 
     def get_time(self):
-        time: Time = self._transport.time()
+        time: Time = self._transport.second()
         self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.tick, time.tempo))
 
     def get_player_names(self):
