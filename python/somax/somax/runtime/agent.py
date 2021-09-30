@@ -32,7 +32,7 @@ from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
 from somax.runtime.transforms import AbstractTransform
-from somax.scheduler.agent_scheduler import AgentScheduler
+from somax.scheduler.agent_scheduler import AgentScheduler, SchedulingHandler
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiNoteEvent, NewStateEvent, RendererEvent, \
     TriggerEvent, AutomaticTriggerEvent, ScheduledCorpusEvent
 from somax.scheduler.scheduled_object import TriggerMode
@@ -42,20 +42,19 @@ from somax.scheduler.base_scheduler import Time
 
 class Agent(multiprocessing.Process):
     def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 scheduler_tick: float, scheduler_tempo: float, scheduler_running: bool,
+                 scheduler_time: Time, scheduler_running: bool,
                  corpus: Optional[Corpus] = None, **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.player: Player = player
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
-        self.scheduler: AgentScheduler = AgentScheduler(player=self.player, tempo=scheduler_tempo,
-                                                        initial_tick=scheduler_tick, running=scheduler_running)
+        self.scheduling_handler: SchedulingHandler = SchedulingHandler(time=scheduler_time, running=scheduler_running)
         self._enabled: bool = True
         self._terminated: bool = False
 
         if player.trigger_mode == TriggerMode.AUTOMATIC:
-            self.scheduler.add_trigger_event()
+            self.scheduling_handler.add_trigger_event()
         if corpus:  # handle corpus object if passed
             self.player.read_corpus(corpus)
 
@@ -113,7 +112,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def _callback(self, time: Time):
         if self._enabled:
-            events: List[ScheduledEvent] = self.scheduler.update_tick(time=time)
+            events: List[ScheduledEvent] = self.scheduling_handler.update_tick(time=time)
             for event in events:
                 if isinstance(event, TriggerEvent):
 
@@ -127,28 +126,28 @@ class OscAgent(Agent, AsyncioOscObject):
     def _trigger_received(self, trigger: TriggerEvent):
         try:
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
-            event_and_transform = self.player.new_event(trigger.target_time, self.scheduler.tempo)
+            event_and_transform = self.player.new_event(trigger.target_time, self.scheduling_handler.tempo)
         except InvalidCorpus as e:
             self.logger.error(str(e))
-            self.scheduler.requeue_trigger_event(trigger)
+            self.scheduling_handler.requeue_trigger_event(trigger)
             return
 
         if event_and_transform is None:
             if self.trigger_mode == TriggerMode.AUTOMATIC:
-                self.scheduler.requeue_trigger_event(trigger)
+                self.scheduling_handler.requeue_trigger_event(trigger)
             return
 
         event: CorpusEvent = event_and_transform[0]
         applied_transform: AbstractTransform = event_and_transform[1]
 
-        self.scheduler.add_event(ScheduledCorpusEvent(trigger.target_time, event, applied_transform)
+        self.scheduling_handler.add_event(ScheduledCorpusEvent(trigger.target_time, event, applied_transform)
 
         # TODO: This part can be generalized into an interface when improving the temporal aspects of Somax
         if isinstance(trigger, AutomaticTriggerEvent) and self.trigger_mode == TriggerMode.AUTOMATIC:
             if event.duration > 0:
                 next_trigger_time: float = trigger_event.trigger_time + event.duration
                 next_target_time: float = trigger_event.target_time + event.duration
-                self.scheduler.add_event_add_automatic_trigger_event(next_trigger_time, next_target_time)
+                self.scheduling_handler.add_event_add_automatic_trigger_event(next_trigger_time, next_target_time)
             else:
                 self._requeue_trigger_event(trigger_event)
 
@@ -182,13 +181,13 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     def start_scheduler(self):
-        self.scheduler.start()
+        self.scheduling_handler.start()
 
     def pause_scheduler(self):
-        self.scheduler.pause()
+        self.scheduling_handler.pause()
 
     def stop_scheduler(self):
-        self.scheduler.stop()
+        self.scheduling_handler.stop()
         self.clear()
 
     def terminate(self):
@@ -209,11 +208,11 @@ class OscAgent(Agent, AsyncioOscObject):
         self.player.clear_memory()
 
     def flush(self):
-        events: List[ScheduledEvent] = self.scheduler.flush()
+        events: List[ScheduledEvent] = self.scheduling_handler.flush()
         self._send_events(events)
 
     def set_tempo_master(self, is_master: bool):
-        self.scheduler.is_tempo_master = is_master
+        self.scheduling_handler.is_tempo_master = is_master
 
     ######################################################
     # MAIN RUNTIME FUNCTIONS
@@ -222,7 +221,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def influence(self, path: str, feature_keyword: str, value: Any, **kwargs):
         self.logger.debug(f"[influence] called for agent '{self.player.name}' with path '{path}', "
                           f"feature keyword '{feature_keyword}', value '{value}' and kwargs {kwargs}")
-        if not self.scheduler.running:
+        if not self.scheduling_handler.running:
             return
         try:
             influence: FeatureInfluence = FeatureInfluence.from_keyword(feature_keyword, value)
@@ -232,7 +231,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
-            time: float = self.scheduler.tick
+            time: float = self.scheduling_handler.tick
             self.player.influence(path_and_name, influence, time, **kwargs)
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
@@ -244,11 +243,11 @@ class OscAgent(Agent, AsyncioOscObject):
                           f"with path '{path}'.")
 
     def influence_onset(self):
-        if not self.scheduler.running:
+        if not self.scheduling_handler.running:
             return
         if self.player.trigger_mode == TriggerMode.MANUAL:
             self.logger.debug(f"[influence_onset] Influence onset triggered for agent '{self.player.name}'.")
-            self.scheduler.add_trigger_event()
+            self.scheduling_handler.add_trigger_event()
 
     ######################################################
     # CREATION/DELETION OF STREAMVIEW/ATOM
@@ -435,7 +434,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.flush()
 
         if trigger_mode == TriggerMode.AUTOMATIC and previous_trigger_mode != trigger_mode:
-            self.scheduler.add_trigger_event()
+            self.scheduling_handler.add_trigger_event()
         self.logger.debug(f"[trigger_mode]: Trigger mode set to '{trigger_mode}' for player '{self.player.name}'.")
 
     def set_held_notes_mode(self, enable: bool):
@@ -517,7 +516,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def force_jump(self, index: int):
         try:
             self.player.force_jump(int(index))
-            self.scheduler.flush()
+            self.scheduling_handler.flush()
         except ValueError as e:
             self.logger.info(f"{str(e)}")
 

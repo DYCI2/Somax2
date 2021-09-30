@@ -243,10 +243,10 @@ class Scheduler(BaseScheduler):
                 return True
         return False
 
-    def remove_by_type(self, event_type: Type[ScheduledEvent]) -> List[ScheduledEvent]:
-        removed_events: List[ScheduledEvent] = [e for e in self.queue if isinstance(e, event_type)]
-        self.queue = [e for e in self.queue if not isinstance(e, event_type)]
-        return removed_events
+    # def remove_by_type(self, event_type: Type[ScheduledEvent]) -> List[ScheduledEvent]:
+    #     removed_events: List[ScheduledEvent] = [e for e in self.queue if isinstance(e, event_type)]
+    #     self.queue = [e for e in self.queue if not isinstance(e, event_type)]
+    #     return removed_events
 
     def start(self, **_kwargs):
         self.running = True
