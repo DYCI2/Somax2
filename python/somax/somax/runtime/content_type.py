@@ -4,7 +4,7 @@ from somax.scheduler.base_scheduler import Time
 from somax.utils.introspective import StringParsed
 
 
-class ContentType(StringParsed, ABC):
+class SchedulingMode(StringParsed, ABC):
     @abstractmethod
     def encode(self) -> str:
         """ string representation of class """
@@ -18,21 +18,25 @@ class ContentType(StringParsed, ABC):
         raise ValueError(f"No {cls.__name__} was provided.")
 
     @classmethod
-    def from_string(cls, class_name: str, **kwargs) -> 'ContentType':
+    def from_string(cls, class_name: str, **kwargs) -> 'SchedulingMode':
         return cls._from_string(class_name)
 
 
-class MidiContent(ContentType):
+class RelativeScheduling(SchedulingMode):
+    """ Scheduling based on tick (i.e. beats, bars, ...) """
+
     def encode(self) -> str:
-        return "MIDI"
+        return "Relative"
 
     def get_time_axis(self, time: Time) -> float:
         return time.tick
 
 
-class AudioContent(ContentType):
+class AbsoluteScheduling(SchedulingMode):
+    """ Scheduling based on seconds """
+
     def encode(self) -> str:
-        return "Audio"
+        return "Absolute"
 
     def get_time_axis(self, time: Time) -> float:
         return time.second

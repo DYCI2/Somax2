@@ -24,18 +24,18 @@ class TriggerMode(Enum):
             return cls.default()
 
 
-class ScheduledAgent(ABC):
-    def __init__(self, trigger_mode: TriggerMode, **kwargs):
-        super(ScheduledAgent, self).__init__(**kwargs)
-        self.trigger_mode: trigger_mode = trigger_mode
-
-
-class ScheduledMidiAgent(ScheduledAgent):
-    def __init__(self, trigger_mode: TriggerMode, hold_notes_artificially: bool = False,
-                 simultaneous_onsets: bool = False, **kwargs):
-        super().__init__(trigger_mode=trigger_mode, **kwargs)
-        self.held_notes: List[Note] = []
-        self.hold_notes_artificially: bool = hold_notes_artificially
-        self.artificially_held_notes: List[Note] = []
-
-        self.simultaneous_onsets: bool = simultaneous_onsets
+# class ScheduledAgent(ABC):
+#     def __init__(self, trigger_mode: TriggerMode, **kwargs):
+#         super(ScheduledAgent, self).__init__(**kwargs)
+#         self.trigger_mode: trigger_mode = trigger_mode
+#
+#
+# class ScheduledMidiAgent(ScheduledAgent):
+#     def __init__(self, trigger_mode: TriggerMode, hold_notes_artificially: bool = False,
+#                  simultaneous_onsets: bool = False, **kwargs):
+#         super().__init__(trigger_mode=trigger_mode, **kwargs)
+#         self.held_notes: List[Note] = []
+#         self.hold_notes_artificially: bool = hold_notes_artificially
+#         self.artificially_held_notes: List[Note] = []
+#
+#         self.simultaneous_onsets: bool = simultaneous_onsets

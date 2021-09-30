@@ -1,8 +1,11 @@
 import logging
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict, Tuple, List
+from collections import Iterable
+from typing import Any, Callable, Dict, Tuple, List, Union
 
 from maxosc.sender import Sender, SendFormat, MaxFormatter
+
+from somax.scheduler.scheduled_event import RendererEvent, RendererMessage
 
 
 class SendProtocol:
@@ -36,6 +39,15 @@ class Target(ABC):
     @abstractmethod
     def send(self, keyword: str, content: Any, **kwargs):
         raise NotImplementedError("Target.send is abstract.")
+
+    @abstractmethod
+    def send_event(self, event: RendererEvent):
+        renderer_messages: Union[List[RendererMessage], RendererMessage] = event.render()
+        if isinstance(renderer_messages, Iterable):
+            for message in renderer_messages:  # type: RendererMessage
+                self.send(message.keyword, message.content)
+        else:
+            self.send(renderer_messages.keyword, renderer_messages.content)
 
 
 class SimpleOscTarget(Target):

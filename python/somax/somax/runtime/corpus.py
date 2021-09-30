@@ -18,7 +18,7 @@ import somax
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features.feature import CorpusFeature
-from somax.runtime.content_type import ContentType
+from somax.runtime.content_type import SchedulingMode
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch
 
@@ -58,12 +58,12 @@ class HeldObject(Generic[E]):
 class Corpus(Generic[E], ABC):
     INDEX_MAP_SIZE = 1_000_000
 
-    def __init__(self, events: List[E], name: str, content_type: ContentType,
+    def __init__(self, events: List[E], name: str, content_type: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any], **kwargs):
         self.logger = logging.getLogger(__name__)
         self.events: List[E] = events
         self.name: str = name
-        self.content_type: ContentType = content_type
+        self.content_type: SchedulingMode = content_type
         self.feature_types: List[Type[CorpusFeature]] = feature_types
         self._build_parameters: Dict[str, Any] = build_parameters
         self._index_map: np.ndarray
@@ -131,7 +131,7 @@ class Corpus(Generic[E], ABC):
 
 
 class MidiCorpus(Corpus[MidiCorpusEvent]):
-    def __init__(self, events: List[MidiCorpusEvent], name: str, content_type: ContentType,
+    def __init__(self, events: List[MidiCorpusEvent], name: str, content_type: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any]):
         super().__init__(events=events, name=name, content_type=content_type,
                          feature_types=feature_types, build_parameters=build_parameters)
@@ -150,7 +150,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
                                     f"Recommended action: rebuild corpus. "
                                     f"(To attempt to load the corpus anyway: enable the 'volatile' flag)")
             name: str = corpus_data["name"]
-            content_type: ContentType = ContentType.from_string(corpus_data["content_type"])
+            content_type: SchedulingMode = SchedulingMode.from_string(corpus_data["content_type"])
 
             build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
             features_dict: Dict[str, str] = corpus_data["features_dict"]
@@ -261,7 +261,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
 
 
 class AudioCorpus(Corpus):
-    def __init__(self, events: List[AudioCorpusEvent], name: str, content_type: ContentType,
+    def __init__(self, events: List[AudioCorpusEvent], name: str, content_type: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any],
                  sr: int, filepath: str, file_duration: float, file_num_channels: int):
         super().__init__(events=events, name=name, content_type=content_type,

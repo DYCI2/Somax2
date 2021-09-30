@@ -15,7 +15,7 @@ from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
-from somax.runtime.content_type import AudioContent, MidiContent
+from somax.runtime.content_type import AbsoluteScheduling, RelativeScheduling
 from somax.runtime.corpus import Corpus, AudioCorpus, MidiCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError
@@ -128,7 +128,7 @@ class CorpusBuilder:
 
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) segmented MIDI into {len(events)} slices")
 
-        metadata: MidiMetadata = MidiMetadata(filepath=filepath, content_type=MidiContent(), stft=stft)
+        metadata: MidiMetadata = MidiMetadata(filepath=filepath, content_type=RelativeScheduling(), stft=stft)
 
         used_features: List[Type[CorpusFeature]] = []
         for _, feature in CorpusFeature.all_corpus_features():  # type Type[CorpusFeature]
@@ -182,7 +182,7 @@ class CorpusBuilder:
         # TODO: Allow passing of stft parameters (win_length, n_fft, window function, ...)
         stft: Spectrogram = Spectrogram.from_audio(background_data, sample_rate=sr, hop_length=hop_length, **kwargs)
 
-        metadata: AudioMetadata = AudioMetadata(filepath=filepath, content_type=AudioContent(), raw_data=y,
+        metadata: AudioMetadata = AudioMetadata(filepath=filepath, content_type=AbsoluteScheduling(), raw_data=y,
                                                 foreground_data=foreground_data, background_data=background_data, sr=sr,
                                                 hop_length=hop_length, stft=stft)
 

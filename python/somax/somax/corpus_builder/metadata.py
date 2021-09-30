@@ -4,23 +4,23 @@ from abc import ABC
 import numpy as np
 
 from somax.corpus_builder.spectrogram import Spectrogram
-from somax.runtime.content_type import ContentType
+from somax.runtime.content_type import SchedulingMode
 
 
 class Metadata(ABC):
-    def __init__(self, filepath: str, content_type: ContentType):
+    def __init__(self, filepath: str, content_type: SchedulingMode):
         self.filename: str = filepath
-        self.content_type: ContentType = content_type
+        self.content_type: SchedulingMode = content_type
 
 
 class MidiMetadata(Metadata):
-    def __init__(self, filepath: str, content_type: ContentType, stft: Spectrogram):
+    def __init__(self, filepath: str, content_type: SchedulingMode, stft: Spectrogram):
         super().__init__(filepath=filepath, content_type=content_type)
         self.stft: Spectrogram = stft
 
 
 class AudioMetadata(Metadata):
-    def __init__(self, filepath: str, content_type: ContentType, raw_data: np.ndarray, foreground_data: np.ndarray,
+    def __init__(self, filepath: str, content_type: SchedulingMode, raw_data: np.ndarray, foreground_data: np.ndarray,
                  background_data: np.ndarray, sr: float, hop_length: int, stft: Spectrogram):
         super().__init__(filepath=filepath, content_type=content_type)
         self.raw_data: np.ndarray = raw_data

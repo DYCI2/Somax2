@@ -53,9 +53,5 @@ class BaseScheduler(ABC):
         pass
 
     @property
-    def time(self) -> Time:
-        return self.time
-
-    @property
     def tempo(self) -> float:
         return self._time.tempo

@@ -18,6 +18,7 @@ from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.corpus import Corpus
+from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError
 from somax.runtime.influence import FeatureInfluence
@@ -32,7 +33,8 @@ from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.agent_scheduler import AgentScheduler
-from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiEvent, NewStateEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiNoteEvent, NewStateEvent, RendererEvent, \
+    TriggerEvent, AutomaticTriggerEvent, ScheduledCorpusEvent
 from somax.scheduler.scheduled_object import TriggerMode
 # TODO: Complete separation Agent/OscAgent where Agent can be initialized and used from the command line
 from somax.scheduler.base_scheduler import Time
@@ -106,13 +108,49 @@ class OscAgent(Agent, AsyncioOscObject):
                 if isinstance(message, ControlMessage):
                     self._process_control_message(message.msg)
             if time is not None:
-                self._callback(tick=time.tick, tempo=time.tempo)
+                self._callback(time=time)
             await asyncio.sleep(self.DEFAULT_CALLBACK_INTERVAL)
 
-    def _callback(self, tick: float, tempo: float):
+    def _callback(self, time: Time):
         if self._enabled:
-            events: List[ScheduledEvent] = self.scheduler.update_tick(tick=tick, tempo=tempo)
-            self._send_events(events)
+            events: List[ScheduledEvent] = self.scheduler.update_tick(time=time)
+            for event in events:
+                if isinstance(event, TriggerEvent):
+
+
+                elif isinstance(event, TempoEvent) and self.tempo_master:
+                    self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
+                elif isinstance(event, RendererEvent):
+                    self.target.send_event(event)
+
+
+    def _trigger_received(self, trigger: TriggerEvent):
+        try:
+            event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
+            event_and_transform = self.player.new_event(trigger.target_time, self.scheduler.tempo)
+        except InvalidCorpus as e:
+            self.logger.error(str(e))
+            self.scheduler.requeue_trigger_event(trigger)
+            return
+
+        if event_and_transform is None:
+            if self.trigger_mode == TriggerMode.AUTOMATIC:
+                self.scheduler.requeue_trigger_event(trigger)
+            return
+
+        event: CorpusEvent = event_and_transform[0]
+        applied_transform: AbstractTransform = event_and_transform[1]
+
+        self.scheduler.add_event(ScheduledCorpusEvent(trigger.target_time, event, applied_transform)
+
+        # TODO: This part can be generalized into an interface when improving the temporal aspects of Somax
+        if isinstance(trigger, AutomaticTriggerEvent) and self.trigger_mode == TriggerMode.AUTOMATIC:
+            if event.duration > 0:
+                next_trigger_time: float = trigger_event.trigger_time + event.duration
+                next_target_time: float = trigger_event.target_time + event.duration
+                self.scheduler.add_event_add_automatic_trigger_event(next_trigger_time, next_target_time)
+            else:
+                self._requeue_trigger_event(trigger_event)
 
     def _process_control_message(self, message_type: PlayControl):
         if message_type == PlayControl.START:
@@ -130,7 +168,7 @@ class OscAgent(Agent, AsyncioOscObject):
         for event in events:
             if isinstance(event, TempoEvent):  # Only added to scheduler if tempo master
                 self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
-            if isinstance(event, MidiEvent):
+            if isinstance(event, MidiNoteEvent):
                 self.target.send(SendProtocol.SEND_MIDI_EVENT, [event.note, event.velocity, event.channel])
             if isinstance(event, NewStateEvent):
                 self.target.send(SendProtocol.SEND_STATE_EVENT, [event.corpus_event.state_index,
