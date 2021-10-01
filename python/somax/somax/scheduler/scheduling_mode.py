@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from somax.scheduler.base_scheduler import Time
+from somax.scheduler.time_object import Time
 from somax.utils.introspective import StringParsed
 
 
@@ -29,7 +29,7 @@ class RelativeScheduling(SchedulingMode):
         return "Relative"
 
     def get_time_axis(self, time: Time) -> float:
-        return time.tick
+        return time.ticks
 
 
 class AbsoluteScheduling(SchedulingMode):
@@ -39,4 +39,4 @@ class AbsoluteScheduling(SchedulingMode):
         return "Absolute"
 
     def get_time_axis(self, time: Time) -> float:
-        return time.second
+        return time.seconds

@@ -15,7 +15,7 @@ from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
-from somax.runtime.content_type import AbsoluteScheduling, RelativeScheduling
+from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduling
 from somax.runtime.corpus import Corpus, AudioCorpus, MidiCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError

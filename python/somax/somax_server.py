@@ -28,7 +28,7 @@ from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.target import Target, SendProtocol
 from somax.scheduler.scheduled_object import TriggerMode
 from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport
-from somax.scheduler.base_scheduler import Time
+from somax.scheduler.time_object import Time
 
 
 class Somax:
@@ -167,7 +167,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         self._process_tempo_queue()
         if self._transport.running:
             try:
-                time: Time = self._transport.update_tick(tick=tick)
+                time: Time = self._transport.update_time(tick=tick)
                 self._send_to_all_agents(TimeMessage(time=time))
             except TypeError as e:
                 self.logger.error(f"{repr(e)}")
@@ -221,7 +221,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         agent_queue: multiprocessing.Queue = multiprocessing.Queue()
         agent: OscAgent = OscAgent(player, recv_queue=agent_queue, tempo_send_queue=self._tempo_master_queue,
                                    ip=ip, recv_port=recv_port, send_port=send_port, address=address,
-                                   corpus_filepath=corpus_filepath, scheduler_tick=self._transport.tick,
+                                   corpus_filepath=corpus_filepath, scheduler_tick=self._transport.ticks,
                                    scheduler_tempo=self._transport.tempo, scheduler_running=self._transport.running)
         agent.start()
         self._agents[name] = agent, agent_queue
@@ -242,8 +242,8 @@ class SomaxServer(Somax, AsyncioOscObject):
     ######################################################
 
     def get_time(self):
-        time: Time = self._transport.second()
-        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.tick, time.tempo))
+        time: Time = self._transport.seconds()
+        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.tempo))
 
     def get_player_names(self):
         for player_name in self._agents.keys():

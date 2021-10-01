@@ -1,7 +1,7 @@
 from abc import ABC
 from enum import Enum
 
-from somax.scheduler.base_scheduler import Time
+from somax.scheduler.time_object import Time
 
 
 class PlayControl(Enum):

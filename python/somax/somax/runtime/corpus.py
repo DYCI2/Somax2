@@ -18,7 +18,7 @@ import somax
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features.feature import CorpusFeature
-from somax.runtime.content_type import SchedulingMode
+from somax.scheduler.scheduling_mode import SchedulingMode
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch
 

@@ -4,7 +4,7 @@ from abc import ABC
 import numpy as np
 
 from somax.corpus_builder.spectrogram import Spectrogram
-from somax.runtime.content_type import SchedulingMode
+from somax.scheduler.scheduling_mode import SchedulingMode
 
 
 class Metadata(ABC):
