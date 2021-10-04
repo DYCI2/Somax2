@@ -67,6 +67,10 @@ class AudioEvent(RendererEvent):
 
 class TriggerEvent(ScheduledEvent, ABC):
     def __init__(self, trigger_time: float, target_time: float):
+        """
+        Note: the `trigger_time` is the point in time when the `trigger` gets queued,
+              the `target_time` is the point in time when the event triggered from the trigger gets scheduled
+        """
         super(TriggerEvent, self).__init__(trigger_time)
         self.target_time: float = target_time
 

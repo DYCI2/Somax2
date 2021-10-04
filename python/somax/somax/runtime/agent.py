@@ -51,8 +51,9 @@ class Agent(multiprocessing.Process):
         self.is_tempo_master: bool = is_tempo_master
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
-        self.scheduling_handler: SchedulingHandler = scheduling_type(scheduer=Scheduler(Time()) tempo=scheduler_tempo,
-                                                                 initial_tick=scheduler_tick, running=scheduler_running)
+        # self.scheduling_handler: SchedulingHandler = scheduling_type(scheduer=Scheduler(Time()) tempo=scheduler_tempo,
+        #                                                          initial_tick=scheduler_tick, running=scheduler_running)
+        self.scheduling_handler: SchedulingHandler = scheduling_type()
         self._enabled: bool = True
         self._terminated: bool = False
 
@@ -113,19 +114,21 @@ class OscAgent(Agent, AsyncioOscObject):
             await asyncio.sleep(self.DEFAULT_CALLBACK_INTERVAL)
 
     def _callback(self, time: Time):
+        if time.time_skip_detected:
+            self.flush()
+
         if self._enabled:
-            events: List[ScheduledEvent] = self.scheduling_handler.update_tick(time=time)
+            events: List[ScheduledEvent] = self.scheduling_handler.update_time(time=time)
             for event in events:
                 if isinstance(event, TriggerEvent):
-
-
+                    self._trigger_output(trigger=event)
                 elif isinstance(event, TempoEvent) and self.tempo_master:
                     self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
                 elif isinstance(event, RendererEvent):
                     self.target.send_event(event)
 
 
-    def _trigger_received(self, trigger: TriggerEvent):
+    def _trigger_output(self, trigger: TriggerEvent):
         try:
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self.player.new_event(trigger.target_time, self.scheduling_handler.tempo)

@@ -79,6 +79,8 @@ class MasterTransport(Transport):
 
 
 class SlaveTransport(Transport):
+    TIME_SKIP_INTERVAL_S = 1.0
+
     def __init__(self, tempo: float, running: bool = False):
         super().__init__(initial_time=Time.zero(tempo=tempo), running=running)
 
@@ -91,9 +93,11 @@ class SlaveTransport(Transport):
     def stop(self):
         self.running = False
 
-    def update_time(self, tick: Optional[float] = None, second: Optional[float] = None) -> Time:
+    def update_time(self, ticks: Optional[float] = None, seconds: Optional[float] = None) -> Time:
         """ raises: TypeError if tick and time values are not provided """
-        if tick is None or second is None:
+        if ticks is None or seconds is None:
             raise TypeError(f"A tick value and a time value must be provided for class {self.__class__.__name__}")
-        self._time = Time(ticks=tick, seconds=second, tempo=self.tempo)
+
+        time_skip_occurred: bool = abs(self._time.seconds - seconds) > self.TIME_SKIP_INTERVAL_S
+        self._time = Time(ticks=ticks, seconds=seconds, tempo=self.tempo, time_skip_detected=time_skip_occurred)
         return self._time

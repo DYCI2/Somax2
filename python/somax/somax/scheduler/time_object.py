@@ -1,10 +1,14 @@
 class Time:
     BASE_TEMPO = 120.0
 
-    def __init__(self, ticks: float, seconds: float, tempo: float):
+    def __init__(self, ticks: float, seconds: float, tempo: float, time_skip_detected: bool = False):
+        """ Note: `time_skip` is used by certain `Transports` to indicate that more time than what can be considered
+                   normal has passed since the occurrence of the previous update. In most cases, this indicates that
+                   the user has manually jumped forward or backwards along the timeline """
         self._ticks: float = ticks
         self._seconds: float = seconds
         self._tempo: float = tempo
+        self._time_skip_detected: bool = time_skip_detected
 
     @classmethod
     def zero(cls, tempo: float = BASE_TEMPO) -> 'Time':
@@ -27,6 +31,10 @@ class Time:
     @property
     def tempo(self) -> float:
         return self._tempo
+
+    @property
+    def time_skip_detected(self) -> bool:
+        return self._time_skip_detected
 
 # TODO: Remove
 # class BaseScheduler(ABC):

@@ -167,7 +167,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         self._process_tempo_queue()
         if self._transport.running:
             try:
-                time: Time = self._transport.update_time(tick=tick)
+                time: Time = self._transport.update_time(ticks=tick)
                 self._send_to_all_agents(TimeMessage(time=time))
             except TypeError as e:
                 self.logger.error(f"{repr(e)}")
