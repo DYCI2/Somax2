@@ -53,11 +53,11 @@ class ImprovisationMemory:
         self._history: Queue[Tuple[CorpusEvent, MemoryState]] = Queue()
 
     def append(self, event: CorpusEvent, trigger_time: float, transforms: AbstractTransform, tempo: float,
-               artificially_sustained: bool, simultaneous_onsets: bool) -> None:
+               artificially_sustained: bool, aligned_onsets: bool) -> None:
         """ Note: Transform has already been applied to the event, which is a deepcopy of the original event
                   (see `Player.new_event()` for more info)"""
         self._history.append((event, MemoryState(trigger_time, transforms, tempo,
-                                                 artificially_sustained, simultaneous_onsets)))
+                                                 artificially_sustained, aligned_onsets)))
 
     def at(self, index: int) -> Tuple[CorpusEvent, float, AbstractTransform]:
         # TODO: Handle with memory state class
@@ -100,5 +100,5 @@ class ImprovisationMemory:
             event.absolute_onset = elapsed_abs_time
             event.recorded_memory_state = memory_state
             events.append(event)
-        return Corpus(events, name, content_type=source_corpus.content_type,
+        return Corpus(events, name, scheduling_mode=source_corpus.scheduling_mode,
                       build_parameters={"build_method": "runtime"})

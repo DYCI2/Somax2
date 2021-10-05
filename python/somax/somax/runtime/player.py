@@ -8,7 +8,6 @@ from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError
 from somax.runtime.exceptions import InvalidCorpus, InvalidLabelInput
-from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.peak_selector import AbstractPeakSelector
@@ -38,7 +37,6 @@ class Player(Streamview):
         for scale_action in scale_actions:
             self.add_scale_action(scale_action)
 
-        self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
         self.previous_peaks: Peaks = Peaks.create_empty()
         self._transform_handler: TransformHandler = TransformHandler()
 
@@ -79,9 +77,6 @@ class Player(Streamview):
         event, transform = event_and_transform
         event = transform.apply(event)  # returns deepcopy of transformed event
 
-        self.improvisation_memory.append(event, scheduler_time, transform, tempo,
-                                         artificially_sustained=self.hold_notes_artificially,
-                                         simultaneous_onsets=self.simultaneous_onsets)
         self._feedback(event, scheduler_time, transform)
         return event, transform
 
@@ -126,10 +121,8 @@ class Player(Streamview):
         Streamview.clear(self)
         self._transform_handler.clear()
 
-    def clear_memory(self):
-        self.improvisation_memory = ImprovisationMemory()
-
     def force_jump(self, index: int):
+        """ Forces the player to jump to the given state on the next call to `new_event`"""
         self._force_jump_index = index
 
     def read_corpus(self, corpus: Corpus) -> None:
@@ -169,16 +162,12 @@ class Player(Streamview):
         self._transform_handler.remove(transform)
         self._update_transforms()
 
-    def export_runtime_corpus(self, name: str, **kwargs) -> Corpus:
-        """ raises: InvalidCorpus if there's no data to export"""
-        return self.improvisation_memory.export(name, self.corpus, **kwargs)
-
-    def get_peaks(self) -> Tuple[Dict[str, int], int]:
+    def get_peaks(self) -> Dict[str, int]:
         peaks_count: Dict[str, int] = {self.name: self.previous_peaks.size()}
         for atom in self.all_atoms():
             peaks: Peaks = atom.get_peaks()
             peaks_count[atom.name] = peaks.size()
-        return peaks_count, self.improvisation_memory.length()
+        return peaks_count
 
     ######################################################
     # PRIVATE
@@ -196,8 +185,7 @@ class Player(Streamview):
             print(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
             return None
 
-    def _scale_peaks(self, peaks: Peaks, scheduler_time: float, influence_history: ImprovisationMemory,
-                     corpus: Corpus, **kwargs):
+    def _scale_peaks(self, peaks: Peaks, scheduler_time: float, corpus: Corpus, **kwargs):
         if peaks.is_empty():
             return peaks
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
@@ -206,7 +194,7 @@ class Player(Streamview):
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled():
                 peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, corresponding_transforms,
-                                           influence_history, corpus, **kwargs)
+                                           corpus, **kwargs)
         return peaks
 
     def _update_transforms(self):

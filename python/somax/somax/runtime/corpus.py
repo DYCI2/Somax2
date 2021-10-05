@@ -58,12 +58,12 @@ class HeldObject(Generic[E]):
 class Corpus(Generic[E], ABC):
     INDEX_MAP_SIZE = 1_000_000
 
-    def __init__(self, events: List[E], name: str, content_type: SchedulingMode,
+    def __init__(self, events: List[E], name: str, scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any], **kwargs):
         self.logger = logging.getLogger(__name__)
         self.events: List[E] = events
         self.name: str = name
-        self.content_type: SchedulingMode = content_type
+        self.scheduling_mode: SchedulingMode = scheduling_mode
         self.feature_types: List[Type[CorpusFeature]] = feature_types
         self._build_parameters: Dict[str, Any] = build_parameters
         self._index_map: np.ndarray
@@ -131,9 +131,9 @@ class Corpus(Generic[E], ABC):
 
 
 class MidiCorpus(Corpus[MidiCorpusEvent]):
-    def __init__(self, events: List[MidiCorpusEvent], name: str, content_type: SchedulingMode,
+    def __init__(self, events: List[MidiCorpusEvent], name: str, scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any]):
-        super().__init__(events=events, name=name, content_type=content_type,
+        super().__init__(events=events, name=name, scheduling_mode=scheduling_mode,
                          feature_types=feature_types, build_parameters=build_parameters)
         self.logger = logging.getLogger(__name__)
 
@@ -170,7 +170,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
             self.logger.warning("Two features with the same name exist in the library. Built corpus may not be properly"
                                 " constructed. Ensure that no two CorpusFeatures in the library have the same name.")
         return {"name": self.name,
-                "content_type": self.content_type.encode(),
+                "content_type": self.scheduling_mode.encode(),
                 "version": somax.__version__,
                 "build_parameters": self._build_parameters,
                 "features_dict": {name: feature.classpath() for (feature, name) in features.items()},
@@ -261,10 +261,10 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
 
 
 class AudioCorpus(Corpus):
-    def __init__(self, events: List[AudioCorpusEvent], name: str, content_type: SchedulingMode,
+    def __init__(self, events: List[AudioCorpusEvent], name: str, scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any],
                  sr: int, filepath: str, file_duration: float, file_num_channels: int):
-        super().__init__(events=events, name=name, content_type=content_type,
+        super().__init__(events=events, name=name, scheduling_mode=scheduling_mode,
                          feature_types=feature_types, build_parameters=build_parameters)
         self.sr: int = sr
         self.filepath: str = filepath

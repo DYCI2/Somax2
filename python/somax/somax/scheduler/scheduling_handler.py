@@ -2,83 +2,13 @@ from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple, Dict, Type
 
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
-from somax.runtime.exceptions import InvalidCorpus
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.midi_state_handler import MidiStateHandler
-from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, TriggerEvent, MidiNoteEvent, \
-    AudioEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, AudioEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
 from somax.utils.introspective import Introspective
-
-
-class ToAgent:
-    def __init__(self):
-        self.is_tempo_master: bool = is_tempo_master
-
-    def _process_internal_events(self) -> List[ScheduledEvent]:
-        # events: List[ScheduledEvent] = [e for e in self.queue if e.trigger_time <= self._tick]
-        # self.queue = [e for e in self.queue if e.trigger_time > self._tick]
-        # # sort to ensure that influences/midi/tempo/etc. are handled before triggers if simultaneous
-        # events.sort(key=lambda e: isinstance(e, TriggerEvent))
-        target_events: List[ScheduledEvent] = []
-        for event in events:
-            if isinstance(event, TempoEvent) and self.is_tempo_master:
-                target_events.append(event)
-            elif isinstance(event, MidiNoteEvent):
-                target_events.append(event)
-            elif isinstance(event, AudioEvent):
-                target_events.append(event)
-            elif isinstance(event, NewStateEvent):
-                target_events.append(event)
-            elif isinstance(event, TriggerEvent):
-                self._process_trigger_event(event)
-            elif isinstance(event, ScheduledInfluenceEvent):
-                self._process_influence_event(event)
-            elif isinstance(event, ScheduledCorpusEvent):
-                self._process_corpus_event(event)
-        return target_events
-
-    def _process_trigger_event(self, trigger_event: TriggerEvent) -> None:
-        try:
-            event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
-            # By default, target time should always be the time given by the trigger_event, but may occasionally use
-            #   self.tick to handle unexpected delays in scheduling (for example while loading a corpus)
-            trigger_event.target_time = max(trigger_event.target_time, self.tick)
-            trigger_event.trigger_time = max(trigger_event.trigger_time, self.tick - self._trigger_pretime)
-            event_and_transform = self._player.new_event(trigger_event.target_time, self._tempo)
-        except InvalidCorpus as e:
-            self.logger.error(str(e))
-            self._requeue_trigger_event(trigger_event)
-            return
-
-        if event_and_transform is None:
-            if self._player.trigger_mode == TriggerMode.AUTOMATIC:
-                self._requeue_trigger_event(trigger_event)
-            return
-
-        event: CorpusEvent = event_and_transform[0]
-        applied_transform: AbstractTransform = event_and_transform[1]
-        self._add_corpus_event(trigger_event.target_time, event, applied_transform)
-
-        if isinstance(trigger_event, AutomaticTriggerEvent) and self._player.trigger_mode == TriggerMode.AUTOMATIC:
-            if event.duration > 0:
-                next_trigger_time: float = trigger_event.trigger_time + event.duration
-                next_target_time: float = trigger_event.target_time + event.duration
-                self._add_automatic_trigger_event(next_trigger_time, next_target_time)
-            else:
-                self._requeue_trigger_event(trigger_event)
-
-    def flush(self):
-        events: List[ScheduledEvent] = MidiStateHandler.flush()
-        for event in events:
-            # Add new triggers for all existing automatically triggered
-            if isinstance(event, AutomaticTriggerEvent):
-                self.add_trigger_event()
-            # output queued note offs
-            if isinstance(event, MidiNoteEvent) and event.velocity == 0:
-                output_send_whatever(event)
 
 
 class SchedulingHandler(Introspective, ABC):
@@ -225,8 +155,24 @@ class SchedulingHandler(Introspective, ABC):
         return output_events
 
     @property
+    def time(self) -> float:
+        return self._scheduler.time
+
+    @property
+    def running(self) -> bool:
+        return self._scheduler.running
+
+    @property
     def tempo(self) -> float:
         return self._scheduler.tempo
+
+    @property
+    def artificially_sustained(self) -> bool:
+        return self.midi_handler.sustain_notes_artificially
+
+    @property
+    def aligned_onsets(self) -> bool:
+        return self.midi_handler.align_onsets
 
 
 class ManualSchedulingHandler(SchedulingHandler):
@@ -285,4 +231,4 @@ class AutomaticSchedulingHandler(SchedulingHandler):
 
     def _default_trigger(self) -> TriggerEvent:
         current_time: float = self._scheduler.time
-        return TriggerEvent(trigger_time=current_time - self._trigger_pretime(), target_time=current_time))
+        return TriggerEvent(trigger_time=current_time - self._trigger_pretime(), target_time=current_time)

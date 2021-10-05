@@ -7,7 +7,6 @@ from importlib import resources
 from typing import Any, Optional, List, Tuple, Type
 
 import mido
-from somax.scheduler.scheduled_object import TriggerMode
 
 import log
 from somax import settings
@@ -22,6 +21,7 @@ from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError
+from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
@@ -33,7 +33,8 @@ from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
 from somax.runtime.transforms import AbstractTransform
-from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiNoteEvent, RendererEvent, TriggerEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiNoteEvent, RendererEvent, TriggerEvent, \
+    MidiSliceOnsetEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
 from somax.scheduler.scheduling_mode import SchedulingMode
@@ -54,19 +55,19 @@ class Agent(multiprocessing.Process):
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
 
-        scheduling_mode: SchedulingMode = corpus.content_type if corpus is not None else SchedulingMode.default()
+        if corpus:  # handle corpus object if passed
+            self.player.read_corpus(corpus)
+
+        scheduling_mode: SchedulingMode = corpus.scheduling_mode if corpus is not None else SchedulingMode.default()
         scheduler: Scheduler = Scheduler(scheduling_mode.get_time_axis(transport_time), tempo=transport_time.tempo,
                                          running=scheduler_running)
 
         self.scheduling_handler: SchedulingHandler = scheduling_type(scheduling_mode=scheduling_mode,
                                                                      scheduler=scheduler)
+        self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
+
         self._enabled: bool = True
         self._terminated: bool = False
-
-        if player.trigger_mode == TriggerMode.AUTOMATIC:
-            self.scheduling_handler.add_trigger_event()
-        if corpus:  # handle corpus object if passed
-            self.player.read_corpus(corpus)
 
     def terminate(self):
         self._terminated = True
@@ -128,39 +129,37 @@ class OscAgent(Agent, AsyncioOscObject):
             for event in events:
                 if isinstance(event, TriggerEvent):
                     self._trigger_output(trigger=event)
-                elif isinstance(event, TempoEvent) and self.tempo_master:
+                elif isinstance(event, TempoEvent) and self.is_tempo_master:
                     self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
                 elif isinstance(event, RendererEvent):
                     self.target.send_event(event)
 
     def _trigger_output(self, trigger: TriggerEvent):
+        scheduling_time: float = trigger.target_time
+        scheduler_tempo: float = self.scheduling_handler.tempo
         try:
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
-            event_and_transform = self.player.new_event(trigger.target_time, self.scheduling_handler.tempo)
+            event_and_transform = self.player.new_event(scheduling_time, scheduler_tempo)
         except InvalidCorpus as e:
             self.logger.error(str(e))
-            self.scheduling_handler.requeue_trigger_event(trigger)
+            self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
             return
 
         if event_and_transform is None:
-            if self.trigger_mode == TriggerMode.AUTOMATIC:
-                self.scheduling_handler.requeue_trigger_event(trigger)
+            self.scheduling_handler.add_trigger_event(trigger)
             return
 
         event: CorpusEvent = event_and_transform[0]
         applied_transform: AbstractTransform = event_and_transform[1]
 
-        self.scheduling_handler.add_event(ScheduledCorpusEvent(trigger.target_time, event, applied_transform)
+        # TODO: When the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was
+        #       preserved here. This means that `None`s will never be added to the ImprovisationMemory and therefore
+        #       the timing could possibly deviate in the exported corpus from what was originally generated.
+        self.improvisation_memory.append(event, trigger.target_time, applied_transform, scheduler_tempo,
+                                         artificially_sustained=self.scheduling_handler.artificially_sustained,
+                                         aligned_onsets=self.scheduling_handler.aligned_onsets)
 
-        # TODO: This part can be generalized into an interface when improving the temporal aspects of Somax
-        if isinstance(trigger, AutomaticTriggerEvent) and self.trigger_mode == TriggerMode.AUTOMATIC:
-            if
-        event.duration > 0:
-        next_trigger_time: float = trigger_event.trigger_time + event.duration
-        next_target_time: float = trigger_event.target_time + event.duration
-        self.scheduling_handler.add_event_add_automatic_trigger_event(next_trigger_time, next_target_time)
-        else:
-        self._requeue_trigger_event(trigger_event)
+        self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
 
     def _process_control_message(self, message_type: PlayControl):
         if message_type == PlayControl.START:
@@ -180,10 +179,10 @@ class OscAgent(Agent, AsyncioOscObject):
                 self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
             if isinstance(event, MidiNoteEvent):
                 self.target.send(SendProtocol.SEND_MIDI_EVENT, [event.note, event.velocity, event.channel])
-            if isinstance(event, NewStateEvent):
-                self.target.send(SendProtocol.SEND_STATE_EVENT, [event.corpus_event.state_index,
+            if isinstance(event, MidiSliceOnsetEvent):
+                self.target.send(SendProtocol.SEND_STATE_EVENT, [event.event.state_index,
                                                                  event.applied_transform.renderer_info()])
-                notes: List[Tuple[int, int, int]] = [(n.pitch, n.velocity, n.channel) for n in event.corpus_event.notes]
+                notes: List[Tuple[int, int, int]] = [(n.pitch, n.velocity, n.channel) for n in event.event.notes]
                 # " ".join([f"{n[0]} {n[1]} {n[2]}" for n in notes])    # TODO: Remove if flatten works correctly
                 self.target.send(SendProtocol.SEND_STATE_ONSET, notes)
 
@@ -216,14 +215,14 @@ class OscAgent(Agent, AsyncioOscObject):
     def clear(self):
         self.flush()
         self.player.clear()
-        self.player.clear_memory()
+        self.clear_memory()
 
     def flush(self):
         events: List[ScheduledEvent] = self.scheduling_handler.flush()
         self._send_events(events)
 
     def set_tempo_master(self, is_master: bool):
-        self.scheduling_handler.is_tempo_master = is_master
+        self.is_tempo_master = is_master
 
     ######################################################
     # MAIN RUNTIME FUNCTIONS
@@ -242,7 +241,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
-            time: float = self.scheduling_handler.tick
+            time: float = self.scheduling_handler.time
             self.player.influence(path_and_name, influence, time, **kwargs)
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
@@ -254,11 +253,7 @@ class OscAgent(Agent, AsyncioOscObject):
                           f"with path '{path}'.")
 
     def influence_onset(self):
-        if not self.scheduling_handler.running:
-            return
-        if self.player.trigger_mode == TriggerMode.MANUAL:
-            self.logger.debug(f"[influence_onset] Influence onset triggered for agent '{self.player.name}'.")
-            self.scheduling_handler.add_trigger_event()
+        self.scheduling_handler.add_trigger_event()
 
     ######################################################
     # CREATION/DELETION OF STREAMVIEW/ATOM
@@ -395,15 +390,16 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             _, file_extension = os.path.splitext(filepath)
             corpus: Corpus = Corpus.from_json(filepath, volatile)
-
-            self.clear()
-
-            self.player.read_corpus(corpus)
-            self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
-            self.send_current_corpus_info()
-
         except (IOError, InvalidCorpus) as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)}. No corpus was read.")
+            return
+
+        self.clear()
+        self.scheduling_handler.set_scheduling_mode(corpus.scheduling_mode)
+
+        self.player.read_corpus(corpus)
+        self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
+        self.send_current_corpus_info()
 
     def set_param(self, path: str, value: Any):
         self.logger.debug(f"[set_param] Attempting to set parameter for player '{self.player.name}' at '{path}' "
@@ -438,12 +434,12 @@ class OscAgent(Agent, AsyncioOscObject):
                           f"'{self.scheduling_handler.__class__.__name__}'")
 
     def set_held_notes_mode(self, enable: bool):
-        self.player.hold_notes_artificially = enable
+        self.scheduling_handler.hold_notes_artificially = enable
         self.flush()
         self.logger.debug(f"Held notes mode set to {enable} for player '{self.player.name}'.")
 
     def set_onset_mode(self, enable: bool):
-        self.player.simultaneous_onsets = enable
+        self.scheduling_handler.simultaneous_onsets = enable
         self.flush()
         self.logger.debug(f"Simultaneous onset mode set to {enable} for player '{self.player.name}'.")
 
@@ -490,10 +486,10 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(str(e))
 
     def send_peaks(self):
-        peaks_dict, num_recorded_events = self.player.get_peaks()
+        peaks_dict = self.player.get_peaks()
         for name, count in peaks_dict.items():
             self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
-        self.target.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, num_recorded_events)
+        self.target.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.improvisation_memory.length())
 
     def send_corpora(self, corpus_names_and_paths: List[Tuple[str, str]]):
         for corpus in corpus_names_and_paths:
@@ -507,7 +503,8 @@ class OscAgent(Agent, AsyncioOscObject):
     def send_current_corpus_info(self):
         corpus: Optional[Corpus] = self.player.corpus
         if corpus is not None:
-            self.target.send(SendProtocol.PLAYER_CORPUS, [corpus.name, corpus.content_type.value, corpus.length()])
+            self.target.send(SendProtocol.PLAYER_CORPUS, [corpus.name, corpus.scheduling_mode.encode(),
+                                                          corpus.length()])
 
     ######################################################
     # OTHER
@@ -515,10 +512,13 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def force_jump(self, index: int):
         try:
-            self.player.force_jump(int(index))
             self.scheduling_handler.flush()
+            self.player.force_jump(int(index))
         except ValueError as e:
             self.logger.info(f"{str(e)}")
+
+    def clear_memory(self):
+        self.improvisation_memory = ImprovisationMemory()
 
     def export_runtime_corpus(self, folder: str, filename: str, corpus_name: Optional[str] = None,
                               initial_time_signature: Tuple[int, int] = (4, 4), ticks_per_beat: int = 480,
@@ -539,7 +539,8 @@ class OscAgent(Agent, AsyncioOscObject):
         name: str = corpus_name if corpus_name is not None else filename
 
         try:
-            corpus: Corpus = self.player.export_runtime_corpus(corpus_name, use_original_tempo=use_original_tempo)
+            corpus: Corpus = self.improvisation_memory.export(corpus_name, self.player.corpus,
+                                                              use_original_tempo=use_original_tempo)
         except InvalidCorpus as e:
             self.logger.error(f"{str(e)}. No MIDI data was exported.")
             return

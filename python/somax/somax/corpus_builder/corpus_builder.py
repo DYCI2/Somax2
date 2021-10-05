@@ -141,7 +141,7 @@ class CorpusBuilder:
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) completed feature analysis for "
                           f"{len(used_features)} features ({', '.join([f.__name__ for f in used_features])})")
 
-        corpus: MidiCorpus = MidiCorpus(events=events, name=name, content_type=metadata.content_type,
+        corpus: MidiCorpus = MidiCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
                                         feature_types=used_features, build_parameters=build_parameters)
 
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) completed construction of MIDI corpus")
@@ -207,7 +207,7 @@ class CorpusBuilder:
                                             "hop_length": hop_length,
                                             **kwargs
                                             }
-        corpus: AudioCorpus = AudioCorpus(events=events, name=name, content_type=metadata.content_type,
+        corpus: AudioCorpus = AudioCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
                                           feature_types=used_features,
                                           build_parameters=build_parameters, sr=sr, filepath=filepath,
                                           file_duration=metadata.duration, file_num_channels=metadata.channels)
