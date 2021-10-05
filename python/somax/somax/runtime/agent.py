@@ -7,6 +7,7 @@ from importlib import resources
 from typing import Any, Optional, List, Tuple, Type
 
 import mido
+from somax.scheduler.scheduled_object import TriggerMode
 
 import log
 from somax import settings
@@ -32,17 +33,18 @@ from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
 from somax.runtime.transforms import AbstractTransform
-from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
-from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiNoteEvent, RendererEvent, TriggerEvent
-from somax.scheduler.scheduled_object import TriggerMode
+from somax.scheduler.scheduler import Scheduler
+from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
+from somax.scheduler.scheduling_mode import SchedulingMode
 from somax.scheduler.time_object import Time
+
 
 # TODO: Complete separation Agent/OscAgent where Agent can be initialized and used from the command line
 
 class Agent(multiprocessing.Process):
     def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 scheduler_tick: float, scheduler_tempo: float, scheduler_running: bool,
+                 transport_time: Time, scheduler_running: bool,
                  corpus: Optional[Corpus] = None, is_tempo_master: bool = False,
                  scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler, **kwargs):
         super().__init__()
@@ -51,9 +53,13 @@ class Agent(multiprocessing.Process):
         self.is_tempo_master: bool = is_tempo_master
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
-        # self.scheduling_handler: SchedulingHandler = scheduling_type(scheduer=Scheduler(Time()) tempo=scheduler_tempo,
-        #                                                          initial_tick=scheduler_tick, running=scheduler_running)
-        self.scheduling_handler: SchedulingHandler = scheduling_type()
+
+        scheduling_mode: SchedulingMode = corpus.content_type if corpus is not None else SchedulingMode.default()
+        scheduler: Scheduler = Scheduler(scheduling_mode.get_time_axis(transport_time), tempo=transport_time.tempo,
+                                         running=scheduler_running)
+
+        self.scheduling_handler: SchedulingHandler = scheduling_type(scheduling_mode=scheduling_mode,
+                                                                     scheduler=scheduler)
         self._enabled: bool = True
         self._terminated: bool = False
 
@@ -127,7 +133,6 @@ class OscAgent(Agent, AsyncioOscObject):
                 elif isinstance(event, RendererEvent):
                     self.target.send_event(event)
 
-
     def _trigger_output(self, trigger: TriggerEvent):
         try:
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
@@ -149,12 +154,13 @@ class OscAgent(Agent, AsyncioOscObject):
 
         # TODO: This part can be generalized into an interface when improving the temporal aspects of Somax
         if isinstance(trigger, AutomaticTriggerEvent) and self.trigger_mode == TriggerMode.AUTOMATIC:
-            if event.duration > 0:
-                next_trigger_time: float = trigger_event.trigger_time + event.duration
-                next_target_time: float = trigger_event.target_time + event.duration
-                self.scheduling_handler.add_event_add_automatic_trigger_event(next_trigger_time, next_target_time)
-            else:
-                self._requeue_trigger_event(trigger_event)
+            if
+        event.duration > 0:
+        next_trigger_time: float = trigger_event.trigger_time + event.duration
+        next_target_time: float = trigger_event.target_time + event.duration
+        self.scheduling_handler.add_event_add_automatic_trigger_event(next_trigger_time, next_target_time)
+        else:
+        self._requeue_trigger_event(trigger_event)
 
     def _process_control_message(self, message_type: PlayControl):
         if message_type == PlayControl.START:
@@ -390,21 +396,11 @@ class OscAgent(Agent, AsyncioOscObject):
             _, file_extension = os.path.splitext(filepath)
             corpus: Corpus = Corpus.from_json(filepath, volatile)
 
-            # TODO[MULTIP]: Handle scheduler accordingly when setting corpus
             self.clear()
-            # restart_server: bool = False
-            # if self.scheduler.running:
-            #     self.scheduler.flush_held()
-            #     self.scheduler.pause()
-            #     self.clear()
-            #     restart_server = True
 
             self.player.read_corpus(corpus)
             self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
             self.send_current_corpus_info()
-
-            # if restart_server:
-            #     self.scheduler.start()
 
         except (IOError, InvalidCorpus) as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)}. No corpus was read.")
@@ -428,19 +424,18 @@ class OscAgent(Agent, AsyncioOscObject):
     # TODO: Should also generalize Scheduler.add_trigger_event or some other aspect so that the last lines
     #       of this function are handled by scheduler, not at parsing time
 
-    def set_trigger_mode(self, mode: str):
+    def set_scheduling_handler(self, handler_class: str):
         try:
-            trigger_mode: TriggerMode = TriggerMode.from_string(mode)
+            new_handler: SchedulingHandler = SchedulingHandler.from_string(class_name=handler_class,
+                                                                           previous_handler=self.scheduling_handler)
         except ValueError as e:
-            self.logger.error(f"{repr(e)}. No trigger mode was set.")
+            self.logger.error(f"{repr(e)}. No scheduling handler was set.")
             return
-        previous_trigger_mode: TriggerMode = self.player.trigger_mode
-        self.player.trigger_mode = trigger_mode
-        self.flush()
 
-        if trigger_mode == TriggerMode.AUTOMATIC and previous_trigger_mode != trigger_mode:
-            self.scheduling_handler.add_trigger_event()
-        self.logger.debug(f"[trigger_mode]: Trigger mode set to '{trigger_mode}' for player '{self.player.name}'.")
+        self.flush()
+        self.scheduling_handler = new_handler
+        self.logger.debug(f"[set_scheduling_handler] Scheduling handler set to "
+                          f"'{self.scheduling_handler.__class__.__name__}'")
 
     def set_held_notes_mode(self, enable: bool):
         self.player.hold_notes_artificially = enable
@@ -481,8 +476,8 @@ class OscAgent(Agent, AsyncioOscObject):
                 corpora.append((corpus_name, os.path.join(filepath, file)))
         self.send_corpora(corpora)
 
-    # TODO: can be single function with send_peaks
     def get_peaks(self):
+        """ This function is simply an alias for `send_peaks` to call from the max client side """
         self.send_peaks()
 
     def get_param(self, path: str):

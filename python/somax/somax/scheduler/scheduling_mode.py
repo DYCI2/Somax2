@@ -14,8 +14,8 @@ class SchedulingMode(StringParsed, ABC):
         """ Determines which mode of time (tick/seconds) should be used for scheduling objects of this type """
 
     @classmethod
-    def default(cls, **kwargs) -> 'StringParsed':
-        raise ValueError(f"No {cls.__name__} was provided.")
+    def default(cls, **kwargs) -> 'SchedulingMode':
+        return RelativeScheduling()
 
     @classmethod
     def from_string(cls, class_name: str, **kwargs) -> 'SchedulingMode':

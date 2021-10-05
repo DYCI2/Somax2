@@ -3,16 +3,17 @@ import logging
 import sys
 from abc import ABC, abstractmethod
 from types import ModuleType
-from typing import Dict, Type, Any, Optional
+from typing import Dict, Type, Any, Optional, TypeVar, Generic
+
+T = TypeVar('T')
 
 
-class Introspective:
-
+class Introspective(Generic[T]):
     @classmethod
-    def _classes(cls, module: Optional[ModuleType] = None, include_abstract: bool = False) -> Dict[str, Type[Any]]:
+    def _classes(cls, module: Optional[ModuleType] = None, include_abstract: bool = False) -> Dict[str, Type[T]]:
         """Returns class objects for all non-abstract classes in the inheriting module."""
         if module is None:
-            classes: Dict[str, Any] = dict(
+            classes: Dict[str, T] = dict(
                 inspect.getmembers(
                     sys.modules[cls.__module__],
                     lambda member: inspect.isclass(member)
@@ -29,7 +30,6 @@ class Introspective:
 
 
 class StringParsed(Introspective, ABC):
-
     @classmethod
     @abstractmethod
     def default(cls, **kwargs) -> 'StringParsed':

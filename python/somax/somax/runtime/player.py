@@ -17,21 +17,19 @@ from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.streamview import Streamview
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
-from somax.scheduler.scheduled_object import ScheduledMidiAgent, TriggerMode
 
 
-class Player(Streamview, ScheduledMidiAgent):
+class Player(Streamview):
 
     def __init__(self, name: str,
-                 trigger_mode: TriggerMode = TriggerMode.default(),
                  peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
                  merge_action: AbstractMergeAction = AbstractMergeAction.default(),
                  corpus: Optional[Corpus] = None,
                  scale_actions: List[AbstractScaleAction] = AbstractScaleAction.default_set(),
                  **kwargs):
         self._transform_handler: TransformHandler = TransformHandler()
-        super().__init__(name, transform_handler=self._transform_handler, corpus=corpus, merge_action=merge_action,
-                         trigger_mode=trigger_mode, **kwargs)
+        super().__init__(name, transform_handler=self._transform_handler, corpus=corpus,
+                         merge_action=merge_action, **kwargs)
         self.logger = logging.getLogger(__name__)
         self.peak_selector: AbstractPeakSelector = peak_selector
         self.corpus: Optional[Corpus] = corpus
@@ -69,12 +67,11 @@ class Player(Streamview, ScheduledMidiAgent):
             event_and_transform = self._force_jump()
         else:
             self._update_peaks_on_new_event(scheduler_time)
-            peaks: Peaks = self._merged_peaks(scheduler_time, self.improvisation_memory, self.corpus)
-            peaks = self._scale_peaks(peaks, scheduler_time, self.improvisation_memory, self.corpus)
+            peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
+            peaks = self._scale_peaks(peaks, scheduler_time, self.corpus)
 
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
-            event_and_transform = self.peak_selector.decide(peaks, self.improvisation_memory,
-                                                            self.corpus, self._transform_handler)
+            event_and_transform = self.peak_selector.decide(peaks, self.corpus, self._transform_handler)
             self.previous_peaks = peaks
         if event_and_transform is None:
             self._feedback(None, scheduler_time, NoTransform())

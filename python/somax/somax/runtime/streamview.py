@@ -7,7 +7,6 @@ from somax.runtime.atom import Atom
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError
-from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.parameter import Parameter
@@ -52,7 +51,7 @@ class Streamview(Parametric):
         for atom in self.atoms.values():
             atom.update_peaks_on_new_event(time)
 
-    def _merged_peaks(self, time: float, history: ImprovisationMemory, corpus: Corpus, **kwargs) -> Peaks:
+    def _merged_peaks(self, time: float, corpus: Corpus, **kwargs) -> Peaks:
         weight_sum: float = 0.0
         for streamview in self.streamviews.values():
             weight_sum += streamview.weight if streamview.is_enabled() else 0.0
@@ -65,7 +64,7 @@ class Streamview(Parametric):
         peaks_list: List[Peaks] = []
         for streamview in self.streamviews.values():
             if streamview.is_enabled():
-                peaks: Peaks = streamview._merged_peaks(time, history, corpus, **kwargs)
+                peaks: Peaks = streamview._merged_peaks(time, corpus, **kwargs)
                 peaks.scale(streamview.weight / weight_sum)
                 peaks_list.append(peaks)
         for atom in self.atoms.values():
@@ -75,7 +74,7 @@ class Streamview(Parametric):
                 peaks_list.append(peaks)
 
         all_peaks: Peaks = Peaks.concatenate(peaks_list)
-        return self.merge_action.merge(all_peaks, time, history, corpus, **kwargs)
+        return self.merge_action.merge(all_peaks, time, corpus, **kwargs)
 
     ######################################################
     # MODIFY STATE

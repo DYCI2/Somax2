@@ -7,7 +7,6 @@ from scipy import sparse
 
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.peaks import Peaks
 from somax.runtime.transforms import AbstractTransform
@@ -20,8 +19,7 @@ class AbstractMergeAction(Parametric, StringParsed, ABC):
         super().__init__()
 
     @abstractmethod
-    def merge(self, peaks: Peaks, time: float, history: ImprovisationMemory = None, corpus: Corpus = None,
-              **kwargs) -> Peaks:
+    def merge(self, peaks: Peaks, time: float, corpus: Corpus = None, **kwargs) -> Peaks:
         """ """
 
     @abstractmethod
@@ -53,8 +51,7 @@ class DistanceMergeAction(AbstractMergeAction):
     def __repr__(self):
         return f"{type(self).__name__}(_t_width={self.t_width})"
 
-    def merge(self, peaks: Peaks, _time: float, _history: ImprovisationMemory = None, corpus: Corpus = None,
-              **_kwargs) -> Peaks:
+    def merge(self, peaks: Peaks, _time: float, corpus: Corpus = None, **_kwargs) -> Peaks:
         if peaks.size() <= 1:
             return peaks
         self.logger.debug(f"[merge] Merging activity with {peaks.size()} peaks.")
@@ -93,7 +90,8 @@ class DistanceMergeAction(AbstractMergeAction):
         self.logger.debug(f"[merge] Merge successful. Number of peaks after merge: {merged_peaks.size()}.")
         return merged_peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float, applied_transform: AbstractTransform) -> None:
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
         pass
 
     def clear(self) -> None:
@@ -106,5 +104,3 @@ class DistanceMergeAction(AbstractMergeAction):
     @t_width.setter
     def t_width(self, value):
         self._t_width.value = value
-
-

@@ -3,18 +3,15 @@ import logging
 from typing import List, Type
 
 from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent
-from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling
 from somax.scheduler.time_object import Time
 
 
 class Scheduler:
-    def __init__(self, time: float = 0, tempo: float = Time.BASE_TEMPO, running: bool = False,
-                 scheduling_mode: SchedulingMode = RelativeScheduling()):
+    def __init__(self, time: float = 0, tempo: float = Time.BASE_TEMPO, running: bool = False):
         self.logger = logging.getLogger(__name__)
         self._time: float = time
         self._tempo: float = tempo
         self.running: bool = running
-        self.scheduling_mode: SchedulingMode = scheduling_mode
         self.queue: List[ScheduledEvent] = []
 
     def update_time(self, time: float, tempo: float) -> List[ScheduledEvent]:

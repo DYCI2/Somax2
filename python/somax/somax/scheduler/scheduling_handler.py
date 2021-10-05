@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, List, Tuple
+from typing import Optional, List, Tuple, Dict, Type
 
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus
@@ -10,6 +10,7 @@ from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, TriggerE
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
+from somax.utils.introspective import Introspective
 
 
 class ToAgent:
@@ -80,7 +81,7 @@ class ToAgent:
                 output_send_whatever(event)
 
 
-class SchedulingHandler(ABC):
+class SchedulingHandler(Introspective, ABC):
     TRIGGER_PRETIME: float = 0.01  # seconds
 
     def __init__(self, scheduling_mode: SchedulingMode, scheduler: Scheduler,
@@ -122,6 +123,7 @@ class SchedulingHandler(ABC):
                 handle this case in a particular manner. This function will be called instead of `_on_trigger_received`.
                 C.f. ManualSchedulingHandler and AutomaticSchedulingHandler"""
 
+    # Note: pseudo-abstract function, i.e. abstract with default definition
     def _handle_output(self, output_events: List[ScheduledEvent]) -> List[ScheduledEvent]:
         """ if the `SchedulingHandler` has need to queue messages to itself,
             this function can be overwritten to handle these messages.
@@ -131,7 +133,19 @@ class SchedulingHandler(ABC):
     @classmethod
     def new_from(cls, other: 'SchedulingHandler', **kwargs) -> 'SchedulingHandler':
         return cls(scheduling_mode=other.scheduling_mode, scheduler=other._scheduler,
-                   midi_handler=other.midi_handler, trigger_pretime=other.trigger_pretime(), **kwargs)
+                   midi_handler=other.midi_handler, trigger_pretime=other._trigger_pretime_value, **kwargs)
+
+    @classmethod
+    def from_string(cls, class_name: str, previous_handler: 'SchedulingHandler', **kwargs):
+        try:
+            candidate_classes: Dict[str, Type[SchedulingHandler]] = cls._classes()
+            handler: SchedulingHandler = candidate_classes[class_name.lower()].new_from(other=previous_handler,
+                                                                                        **kwargs)
+        except KeyError as e:
+            # To be consistent with any other `from_string` method, re-raises error as ValueError if name isn't found
+            raise ValueError from e
+
+        return handler
 
     def update_time(self, time: Time) -> List[ScheduledEvent]:
         time_value: float = self.scheduling_mode.get_time_axis(time=time)
@@ -168,6 +182,9 @@ class SchedulingHandler(ABC):
 
         self._on_corpus_event_received(trigger_time=trigger_time, event_and_transform=event_and_transform)
 
+    def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
+        self.scheduling_mode = scheduling_mode
+
     def _adjust_in_time(self, event: ScheduledEvent, increment: float = 0.0) -> ScheduledEvent:
         scheduler_time: float = self._scheduler.time
         if isinstance(event, TriggerEvent):
@@ -179,13 +196,13 @@ class SchedulingHandler(ABC):
         return event
 
     def _trigger_pretime(self) -> float:
-        if isinstance(self._scheduler.scheduling_mode, RelativeScheduling):
+        if isinstance(self.scheduling_mode, RelativeScheduling):
             return self._trigger_pretime_value * self._scheduler.tempo / 60.0
-        elif isinstance(self._scheduler.scheduling_mode, AbsoluteScheduling):
+        elif isinstance(self.scheduling_mode, AbsoluteScheduling):
             return self._trigger_pretime_value
         else:
             raise TypeError(f"Cannot compute trigger pre-time for scheduling "
-                            f"mode '{self._scheduler.scheduling_mode.__class__}'")
+                            f"mode '{self.scheduling_mode.__class__}'")
 
     def start(self) -> None:
         self._scheduler.start()
