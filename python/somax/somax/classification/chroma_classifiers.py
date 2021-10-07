@@ -25,13 +25,15 @@ from somax.runtime.transforms import AbstractTransform
 
 
 class ChromaClassifier(AbstractClassifier, ABC):
-
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :raises TransformError if transform_handler doesn't contain any applicable transforms """
         self._transforms = transform_handler.get_by_feature(BackgroundChroma)
         if not self._transforms:
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(BackgroundChroma)
 
 
 class SomChromaClassifier(ChromaClassifier):
@@ -173,4 +175,3 @@ class RelativeGmmClassifier(GmmClassifier):
                                     f"Reduce the number of clusters or select another classifier")
             else:
                 raise InvalidCorpus(f"Unknown error encountered in {self.__class__.__name__}. Error: {repr(e)}.")
-

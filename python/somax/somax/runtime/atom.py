@@ -3,6 +3,7 @@ from typing import Dict, Union, List, Optional, Tuple
 
 from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
+from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence
@@ -15,7 +16,7 @@ from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 
 
-class Atom(Parametric):
+class Atom(Parametric, ContentAware):
     DEFAULT_WEIGHT = 1.0
 
     def __init__(self, name: str, weight: float, classifier: AbstractClassifier,
@@ -107,6 +108,9 @@ class Atom(Parametric):
                                "activity_pattern": self._activity_pattern.update_parameter_dict(),
                                "parameters": parameters}
         return self.parameter_dict
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     @property
     def weight(self) -> float:

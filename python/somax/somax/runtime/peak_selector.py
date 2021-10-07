@@ -5,6 +5,7 @@ from typing import Tuple, Optional, List
 
 import numpy as np
 
+from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import FeedbackQueue
@@ -15,9 +16,9 @@ from somax.runtime.transforms import AbstractTransform, NoTransform
 from somax.utils.introspective import StringParsed
 
 
-class AbstractPeakSelector(Parametric, StringParsed, ABC):
+class AbstractPeakSelector(Parametric, ContentAware, StringParsed, ABC):
     def __init__(self, **kwargs):
-        super(AbstractPeakSelector, self).__init__()
+        super(AbstractPeakSelector, self).__init__(invalidate_parent=True)
         self.logger = logging.getLogger(__name__)
 
     def __repr__(self):
@@ -92,6 +93,9 @@ class MaxPeakSelector(AbstractFallbackPeakSelector):
                  applied_transform: AbstractTransform) -> None:
         pass
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
+
 
 class ThresholdPeakSelector(MaxPeakSelector):
     DEFAULT_THRESHOLD = 0.1
@@ -118,6 +122,9 @@ class ThresholdPeakSelector(MaxPeakSelector):
                  _applied_transform: AbstractTransform) -> None:
         pass
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
+
     @property
     def threshold(self):
         return self._threshold.value
@@ -142,6 +149,9 @@ class ProbabilisticPeakSelector(AbstractFallbackPeakSelector):
                  applied_transform: AbstractTransform) -> None:
         pass
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
+
 
 class ThresholdProbabilisticPeakSelector(ProbabilisticPeakSelector):
     DEFAULT_THRESHOLD = 0.1
@@ -164,6 +174,9 @@ class ThresholdProbabilisticPeakSelector(ProbabilisticPeakSelector):
                          **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         return None
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
+
     @property
     def threshold(self):
         return self._threshold.value
@@ -184,3 +197,6 @@ class SparsityProbabilisticPeakSelector(MaxPeakSelector):
     def _decide_fallback(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
                          **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         return None
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True

@@ -5,6 +5,7 @@ from typing import List, Optional
 import numpy as np
 from scipy import sparse
 
+from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.parameter import Parametric, Parameter
@@ -13,10 +14,10 @@ from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
 
 
-class AbstractMergeAction(Parametric, StringParsed, ABC):
+class AbstractMergeAction(Parametric, ContentAware, StringParsed, ABC):
 
     def __init__(self):
-        super().__init__()
+        super().__init__(invalidate_parent=True)
 
     @abstractmethod
     def merge(self, peaks: Peaks, time: float, corpus: Corpus = None, **kwargs) -> Peaks:
@@ -96,6 +97,9 @@ class DistanceMergeAction(AbstractMergeAction):
 
     def clear(self) -> None:
         pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     @property
     def t_width(self):

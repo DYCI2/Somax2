@@ -4,6 +4,7 @@ from typing import List, Dict, Optional
 from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.atom import Atom
+from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError
@@ -16,7 +17,7 @@ from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 
 
-class Streamview(Parametric):
+class Streamview(Parametric, ContentAware):
     DEFAULT_WEIGHT = 1.0
 
     def __init__(self, name: str, transform_handler: TransformHandler, weight: float = DEFAULT_WEIGHT,
@@ -191,6 +192,9 @@ class Streamview(Parametric):
     ######################################################
     # PRIVATE
     ######################################################
+
+    def _is_eligible_for(self, _corpus: Corpus) -> bool:
+        return True     # valid for all types of corpora
 
     def _get_streamview(self, path: List[str]) -> 'Streamview':
         """ Raises: KeyError, IndexError"""

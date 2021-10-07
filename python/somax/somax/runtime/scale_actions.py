@@ -8,7 +8,9 @@ import numpy as np
 
 from somax.features import MaxVelocity, VerticalDensity
 from somax.features.spectral_features import OctaveBands
-from somax.runtime.corpus import Corpus
+from somax.features.temporal_features import Tempo
+from somax.runtime.content_aware import ContentAware
+from somax.runtime.corpus import Corpus, MidiCorpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import FeedbackQueue
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
@@ -18,7 +20,7 @@ from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
 
 
-class AbstractScaleAction(Parametric, StringParsed, ABC):
+class AbstractScaleAction(Parametric, ContentAware, StringParsed, ABC):
     def __init__(self):
         super().__init__()
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this ScaleAction.")
@@ -75,6 +77,9 @@ class NoScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         pass
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True     # valid for all types of corpora
+
 
 class PhaseModulationScaleAction(AbstractScaleAction):
     DEFAULT_SELECTIVITY = 3.0
@@ -100,6 +105,10 @@ class PhaseModulationScaleAction(AbstractScaleAction):
 
     def clear(self) -> None:
         pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True     # valid for all types of corpora
+
 
     @property
     def selectivity(self):
@@ -141,6 +150,9 @@ class NextStateScaleAction(AbstractScaleAction):
 
     def clear(self) -> None:
         self._previous_output_index = None
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     @property
     def factor(self):
@@ -187,6 +199,9 @@ class AutoJumpScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         pass
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
+
     @property
     def activation_threshold(self):
         return self._activation_threshold.value
@@ -208,11 +223,12 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
               corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
-        previous_tempi: np.ndarray = np.array([e[0].tempo for e in self._history.get_n_last(self.history_len)])
+
+        previous_tempi: np.ndarray = np.array([e[0].get_feature(Tempo).value() for e in self._history.get_n_last(self.history_len)])
         if previous_tempi.size == 0:
             return peaks
         mu: float = float(np.mean(previous_tempi))
-        peaks_tempi: np.ndarray = np.array([e.tempo for e in corresponding_events])
+        peaks_tempi: np.ndarray = np.array([e.get_feature(Tempo).value() for e in corresponding_events])
         peaks.scores *= np.exp(-((peaks_tempi - mu) ** 2 / (2 * self.sigma ** 2)))
         return peaks
 
@@ -226,6 +242,9 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
 
     def clear(self) -> None:
         pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(Tempo)
 
     @property
     def history_len(self):
@@ -269,6 +288,9 @@ class StaticTabooScaleAction(AbstractScaleAction):
 
     def clear(self) -> None:
         self._taboo_indices: deque[int] = deque([], self.taboo_length)
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     @property
     def taboo_length(self) -> int:
@@ -314,6 +336,9 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         self._previous_transform = None
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
+
     @property
     def factor(self):
         return self._factor.value
@@ -356,6 +381,9 @@ class MaxVelocityScaleAction(AbstractGaussianScale):
     def update_transforms(self, transform_handler: TransformHandler):
         pass
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(MaxVelocity)
+
     def clear(self) -> None:
         pass
 
@@ -378,6 +406,9 @@ class VerticalDensityScaleAction(AbstractGaussianScale):
     def update_transforms(self, transform_handler: TransformHandler):
         pass
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(VerticalDensity)
+
     def clear(self) -> None:
         pass
 
@@ -399,6 +430,9 @@ class DurationScaleAction(AbstractGaussianScale):
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     def clear(self) -> None:
         pass
@@ -428,6 +462,9 @@ class OctaveBandsScaleAction(AbstractScaleAction):
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass  # TODO: Handle transforms
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(OctaveBands)
 
     def clear(self) -> None:
         pass
@@ -466,6 +503,9 @@ class RegionMaskScaleAction(AbstractScaleAction):
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     def clear(self) -> None:
         pass

@@ -82,6 +82,9 @@ class TopNoteClassifier(BasicPitchClassifier):
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(TopNote)
+
 
 class PitchClassClassifier(BasicPitchClassifier):
     # TODO: Clean up (lots of) code duplication
@@ -110,6 +113,9 @@ class PitchClassClassifier(BasicPitchClassifier):
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(TopNote)
+
 
 class VirtualFundamentalClassifier(BasicPitchClassifier):
     """ Classifies an event to its corresponding virtual fundamental in range [0, 11].
@@ -137,6 +143,9 @@ class VirtualFundamentalClassifier(BasicPitchClassifier):
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(VirtualFundamental)
+
 
 class BassNoteClassifier(BasicPitchClassifier):
     @staticmethod
@@ -160,6 +169,9 @@ class BassNoteClassifier(BasicPitchClassifier):
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(BassNote)
+
 
 class BassNoteMod12Classifier(BasicPitchClassifier):
     @staticmethod
@@ -182,3 +194,6 @@ class BassNoteMod12Classifier(BasicPitchClassifier):
         if not self._transforms:
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(BassNote)

@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List, Tuple
 
 import somax.classification
+from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.label import AbstractLabel
@@ -10,9 +11,9 @@ from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
 
 
-class AbstractClassifier(StringParsed, ABC):
-
+class AbstractClassifier(StringParsed, ContentAware, ABC):
     def __init__(self, **kwargs):
+        super().__init__(invalidate_parent=True, **kwargs)
         self._transforms: List[AbstractTransform] = []
 
     @classmethod

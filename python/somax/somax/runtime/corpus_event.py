@@ -6,6 +6,7 @@ import pandas as pd
 
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.features.feature_value import FeatureValue
+from somax.runtime.exceptions import FeatureError
 from somax.runtime.memory_state import MemoryState
 
 """ Keys correspond to parent module names, ex. "pitch" or "chroma". """
@@ -115,7 +116,11 @@ class CorpusEvent(ABC):
 
     def get_feature(self, feature_type: Type[FeatureValue]) -> FeatureValue:
         """Raises KeyError"""
-        return self.features[feature_type]
+        try:
+            return self.features[feature_type]
+        except ValueError as e:
+            raise FeatureError(f"Corpus does not have feature of type '{feature_type}'") from e
+
 
     def set_feature(self, feature: FeatureValue):
         """ Note! This call is strictly for constructing the corpus. Using it at runtime to edit an already loaded
