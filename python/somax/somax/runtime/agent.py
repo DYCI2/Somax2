@@ -24,13 +24,11 @@ from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
-from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
 from somax.runtime.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
 from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.streamview import Streamview
 from somax.runtime.target import Target, SendProtocol
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiNoteEvent, RendererEvent, TriggerEvent, \
@@ -256,27 +254,8 @@ class OscAgent(Agent, AsyncioOscObject):
         self.scheduling_handler.add_trigger_event()
 
     ######################################################
-    # CREATION/DELETION OF STREAMVIEW/ATOM
+    # CREATION/DELETION OF ATOM
     ######################################################
-
-    def create_streamview(self, path: str, weight: float = Streamview.DEFAULT_WEIGHT,
-                          merge_action: str = "", override: bool = False):
-        try:
-            path_and_name: List[str] = self._parse_streamview_atom_path(path)
-            merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
-            self.player.create_streamview(path=path_and_name, weight=weight, merge_action=merge_action,
-                                          override=override)
-            self.logger.info(f"Created streamview with path '{path}'.")
-        except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
-            self.logger.error(f"{str(e)}. No streamview was created.")
-
-    def delete_streamview(self, path: str):
-        try:
-            path_and_name: List[str] = self._parse_streamview_atom_path(path)
-            self.player.delete_streamview(path_and_name)
-            self.logger.info(f"Deleted streamview with path '{path}'.")
-        except (AssertionError, KeyError, IndexError) as e:
-            self.logger.error(f"{str(e)} No streamview was deleted.")
 
     def create_atom(self, path: str = "", weight: float = Atom.DEFAULT_WEIGHT, classifier: str = "",
                     activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
@@ -303,7 +282,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)} No atom was deleted.")
 
     ######################################################
-    # MODIFY PLAYER/STREAMVIEW/ATOM STATE
+    # MODIFY PLAYER/ATOM STATE
     ######################################################
 
     def set_peak_selector(self, peak_selector: str, verbose: bool = True, **kwargs):
