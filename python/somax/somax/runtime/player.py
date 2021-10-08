@@ -9,7 +9,7 @@ from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.exceptions import DuplicateKeyError
+from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch
 from somax.runtime.exceptions import InvalidCorpus, InvalidLabelInput
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
@@ -47,7 +47,8 @@ class Player(Parametric, ContentAware):
 
         self._force_jump_index: Optional[int] = None
 
-        self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this Player.")
+        self.enabled: Parameter = Parameter(default_value=True, min=False, max=True, type_str="bool",
+                                            description="Enables this Player.")
 
         self._parse_parameters()
         self.set_eligibility(self.corpus)
@@ -62,8 +63,14 @@ class Player(Parametric, ContentAware):
     def new_event(self, scheduler_time: float, tempo: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
-        if not bool(self.enabled.value):
+        if not self.is_enabled():
             return None
+
+        if not self.eligible:
+            raise ContentMismatch(f"Player '{self.name}' couldn't handle corpus of type '{type(self.corpus).__name__}"
+                                  f"due to incompatibility with the following class: "
+                                  f"'{self._invalidated_by.__class__.__name__}'")
+
         if not self.corpus:
             raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
 
@@ -79,6 +86,7 @@ class Player(Parametric, ContentAware):
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self.peak_selector.decide(peaks, self.corpus, self._transform_handler)
             self.previous_peaks = peaks
+
         if event_and_transform is None:
             self._feedback(None, scheduler_time, NoTransform())
             return None
@@ -91,10 +99,17 @@ class Player(Parametric, ContentAware):
     def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
         """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError
             Return values are only for gathering statistics (Evaluator, etc.) and not used in runtime."""
-        if not bool(self.enabled.value):
+        if not self.is_enabled():
             return {}
+
+        if not self.eligible:
+            raise ContentMismatch(f"Player '{self.name}' couldn't handle corpus of type '{type(self.corpus).__name__}"
+                                  f"due to incompatibility with the following class: "
+                                  f"'{self._invalidated_by.__class__.__name__}'")
+
         if self.corpus is None:
             raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
+
         num_generated_peaks: Dict[Atom, int] = {}
         if not path:
             for atom in self._direct_influenced_atoms():
@@ -117,14 +132,14 @@ class Player(Parametric, ContentAware):
     def _merged_peaks(self, time: float, corpus: Corpus, **kwargs) -> Peaks:
         weight_sum: float = 0.0
         for atom in self.atoms.values():
-            weight_sum += atom.weight if atom.is_enabled() else 0.0
+            weight_sum += atom.weight if atom.is_enabled_and_eligible() else 0.0
         if weight_sum < 1e-6:
             self.logger.warning(f"Weights are invalid. Setting weight to 1.0.")
             weight_sum = 1.0
 
         peaks_list: List[Peaks] = []
         for atom in self.atoms.values():
-            if atom.is_enabled():
+            if atom.is_enabled_and_eligible():
                 peaks: Peaks = atom.get_peaks()
                 peaks.scale(atom.weight / weight_sum)
                 peaks_list.append(peaks)
@@ -166,6 +181,7 @@ class Player(Parametric, ContentAware):
         self.corpus = corpus
         for atom in self.atoms.values():
             atom.read_corpus(corpus)
+        self.set_eligibility(self.corpus)
 
     def create_atom(self, path: List[str], weight: float, self_influenced: bool, classifier: AbstractClassifier,
                     activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
@@ -178,11 +194,12 @@ class Player(Parametric, ContentAware):
         if new_atom_name in self.atoms.keys() and not override:
             raise DuplicateKeyError(f"An Atom with name '{new_atom_name}' already exists."
                                     f"To override: use 'override=True'.")
-        else:
-            self.atoms[new_atom_name] = Atom(name=new_atom_name, weight=weight, classifier=classifier,
-                                             activity_pattern=activity_pattern, memory_space=memory_space,
-                                             corpus=self.corpus, self_influenced=self_influenced, enabled=enabled)
-            self._parse_parameters()
+
+        self.atoms[new_atom_name] = Atom(name=new_atom_name, weight=weight, classifier=classifier,
+                                         activity_pattern=activity_pattern, memory_space=memory_space,
+                                         corpus=self.corpus, self_influenced=self_influenced, enabled=enabled)
+        self._parse_parameters()
+        self.set_eligibility(self.corpus)
 
     def delete_atom(self, path: List[str]) -> None:
         """ Raises: KeyError, IndexError """
@@ -192,6 +209,7 @@ class Player(Parametric, ContentAware):
 
         del self.atoms[atom_name]  # raises KeyError
         self._parse_parameters()
+        self.set_eligibility(self.corpus)
 
     def set_peak_selector(self, peak_selector: AbstractPeakSelector) -> None:
         self.peak_selector = peak_selector
@@ -220,6 +238,7 @@ class Player(Parametric, ContentAware):
     def set_merge_action(self, merge_action: AbstractMergeAction) -> None:
         self.merge_action = merge_action
         self._parse_parameters()
+        self.set_eligibility(self.corpus)
 
     def set_classifier(self, path: List[str], classifier: AbstractClassifier) -> None:
         """ Raises: KeyError, IndexError """
@@ -227,6 +246,7 @@ class Player(Parametric, ContentAware):
         atom.set_classifier(classifier)
         atom.update_transforms(self._transform_handler)
         self._parse_parameters()
+        self.set_eligibility(self.corpus)
 
     def set_memory_space(self, path: List[str], memory_space: AbstractMemorySpace) -> None:
         """ Raises: KeyError, IndexError """
@@ -234,6 +254,7 @@ class Player(Parametric, ContentAware):
         atom.set_memory_space(memory_space)
         atom.update_transforms(self._transform_handler)
         self._parse_parameters()
+        self.set_eligibility(self.corpus)
 
     def set_activity_pattern(self, path: List[str], activity_pattern: AbstractActivityPattern) -> None:
         """ Raises: KeyError, IndexError """
@@ -241,6 +262,7 @@ class Player(Parametric, ContentAware):
         atom.set_activity_pattern(activity_pattern)
         atom.update_transforms(self._transform_handler)
         self._parse_parameters()
+        self.set_eligibility(self.corpus)
 
     def add_transform(self, transform: AbstractTransform):
         """ :raises TransformError if a transform of the same instance with the same parameters already exists """
@@ -308,7 +330,7 @@ class Player(Parametric, ContentAware):
         corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
                                                              for t in np.unique(peaks.transform_ids)]
         for scale_action in self.scale_actions.values():
-            if scale_action.is_enabled():
+            if scale_action.is_enabled_and_eligible():
                 peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, corresponding_transforms,
                                            corpus, **kwargs)
         return peaks

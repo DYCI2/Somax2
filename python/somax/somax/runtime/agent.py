@@ -17,6 +17,7 @@ from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
+from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
@@ -82,6 +83,8 @@ class OscAgent(Agent, AsyncioOscObject):
         self.logger = logging.getLogger(__name__)
         if corpus_filepath:  # handle corpus filepath if passed
             self.read_corpus(corpus_filepath)
+
+        self._send_eligibility()
 
     ######################################################
     # ASYNCIO & MAIN LOOP(S)
@@ -269,6 +272,7 @@ class OscAgent(Agent, AsyncioOscObject):
                                     classifier=classifier, activity_pattern=activity_pattern,
                                     memory_space=memory_space, enabled=enabled, override=override)
             self.send_atoms()
+            self._send_eligibility()
             # self.logger.info(f"Created atom with path '{path}'.")
         except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)} No atom was created.")
@@ -277,6 +281,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             self.player.delete_atom(path_and_name)
+            self._send_eligibility()
             self.logger.info(f"Deleted atom with path '{path}'.")
         except (AssertionError, KeyError, IndexError) as e:
             self.logger.error(f"{str(e)} No atom was deleted.")
@@ -289,6 +294,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
             self.player.set_peak_selector(peak_selector)
+            self._send_eligibility()
             if verbose:
                 self.logger.info(f"[set_peak_selector] Peak selector set to {type(peak_selector).__name__} "
                                  f"for player '{self.player.name}.")
@@ -300,6 +306,7 @@ class OscAgent(Agent, AsyncioOscObject):
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             self.player.set_classifier(path_and_name, classifier)
+            self._send_eligibility()
             self.logger.debug(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
                               f"for player '{self.player.name}' (path='{path}').")
         except (AssertionError, KeyError, ValueError, InvalidCorpus) as e:
@@ -310,6 +317,7 @@ class OscAgent(Agent, AsyncioOscObject):
             path_and_name: List[str] = self._parse_streamview_atom_path(path)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)
             self.player.set_activity_pattern(path_and_name, activity_pattern)
+            self._send_eligibility()
             self.logger.debug(f"[set_acitivity_pattern] Activity pattern set to {type(activity_pattern).__name__} "
                               f"for player '{self.player.name}.")
         except (AssertionError, KeyError, ValueError) as e:
@@ -343,6 +351,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
             self.player.add_scale_action(scale_action, override)
+            self._send_eligibility()
             if verbose:
                 self.logger.info(f"Added scale action {repr(scale_action)}")
         except ValueError as e:
@@ -354,6 +363,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
             self.player.remove_scale_action(type(scale_action))
+            self._send_eligibility()
             if verbose:
                 self.logger.info(f"Removed scale action {repr(scale_action)}")
         except KeyError as e:
@@ -377,8 +387,9 @@ class OscAgent(Agent, AsyncioOscObject):
         self.scheduling_handler.set_scheduling_mode(corpus.scheduling_mode)
 
         self.player.read_corpus(corpus)
-        self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
+        self._send_eligibility()
         self.send_current_corpus_info()
+        self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
 
     def set_param(self, path: str, value: Any):
         self.logger.debug(f"[set_param] Attempting to set parameter for player '{self.player.name}' at '{path}' "
@@ -484,6 +495,11 @@ class OscAgent(Agent, AsyncioOscObject):
         if corpus is not None:
             self.target.send(SendProtocol.PLAYER_CORPUS, [corpus.name, corpus.scheduling_mode.encode(),
                                                           corpus.length()])
+
+    def _send_eligibility(self):
+        eligiblity: List[Tuple[ContentAware, bool, Optional[ContentAware]]] = self.player.get_eligibility()
+        for obj, status, _ in eligiblity:
+            self.target.send(SendProtocol.ELIGIBLE, [obj, status])
 
     ######################################################
     # OTHER

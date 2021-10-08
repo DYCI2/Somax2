@@ -36,11 +36,12 @@ class Atom(Parametric, ContentAware):
         self._self_influenced: Parameter = Parameter(self_influenced, 0, 1, 'bool',
                                                      "Whether new events creates by player should influence this atom or not.")
 
-        self._corpus: Optional[Corpus] = corpus
+        self._corpus: Optional[Corpus] = None
         if corpus:
             self.read_corpus(corpus)
 
         self._parse_parameters()
+        self.set_eligibility(self._corpus)
 
     def read_corpus(self, corpus: Optional[Corpus] = None):
         """ :raises RuntimeError """
@@ -57,12 +58,13 @@ class Atom(Parametric, ContentAware):
         labels: List[AbstractLabel] = self._classifier.classify_corpus(self._corpus)
         self._memory_space.model(self._corpus, labels)
         self._activity_pattern.corpus = self._corpus
+        self.set_eligibility(self._corpus)
 
     # influences the memory with incoming data
     def influence(self, influence: AbstractInfluence, time: float, **kwargs) -> int:
         """ :raises InvalidLabelInput
             :returns Number of peaks generated """
-        if not self.is_enabled():
+        if not self.is_enabled_and_eligible():
             return 0
 
         self._update_peaks_on_influence(time)
@@ -145,8 +147,8 @@ class Atom(Parametric, ContentAware):
         self._classifier.clear()
         self._memory_space.clear()
 
-    def is_enabled(self):
-        return self._enabled.value
+    def is_enabled_and_eligible(self):
+        return self._enabled.value and self.eligible
 
     def get_peaks(self) -> Peaks:
         return self._activity_pattern.peaks

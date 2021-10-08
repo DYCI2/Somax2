@@ -23,9 +23,9 @@ class ExternalDataMismatch(Exception):
         super(ExternalDataMismatch, self).__init__(error)
 
 
-# class ContentMismatch(Exception):
-#     def __init__(self, error):
-#         super(ContentMismatch, self).__init__(error)
+class ContentMismatch(Exception):
+    def __init__(self, error):
+        super(ContentMismatch, self).__init__(error)
 
 
 class TransformError(Exception):

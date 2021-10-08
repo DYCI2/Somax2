@@ -55,8 +55,8 @@ class AbstractScaleAction(Parametric, ContentAware, StringParsed, ABC):
     def from_string(cls, scale_action: str, **kwargs) -> 'AbstractScaleAction':
         return cls._from_string(scale_action, **kwargs)
 
-    def is_enabled(self):
-        return self.enabled.value
+    def is_enabled_and_eligible(self):
+        return self.enabled.value and self.eligible
 
 
 class NoScaleAction(AbstractScaleAction):
