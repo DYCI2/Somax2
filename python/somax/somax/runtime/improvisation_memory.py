@@ -2,8 +2,8 @@ import copy
 from collections import deque
 from typing import Tuple, List, Optional, TypeVar, Generic
 
-from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.corpus import Corpus, MidiCorpus
+from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus
 from somax.runtime.memory_state import MemoryState
 from somax.runtime.transforms import AbstractTransform
@@ -79,26 +79,36 @@ class ImprovisationMemory:
     def length(self) -> int:
         return len(self._history)
 
-    def export(self, name: str, source_corpus: Corpus, use_original_tempo: bool = False) -> Corpus:
+    def export(self, name: str, source_corpus: Corpus, use_original_tempo: bool = False) -> MidiCorpus:
         """ raises: InvalidCorpus if there is no data to export
             TODO: `use_original_corpus` is a temporary workaround to handle the tempo offset described
                   in https://trello.com/c/vKfkisIV. Remove this once a proper solution is in place.
         """
         if len(self._history) == 0:
             raise InvalidCorpus("The recorded history is empty")
+
+        if not isinstance(source_corpus, MidiCorpus):
+            raise InvalidCorpus("Export is only supported for MIDI corpora")
+        else:
+            return self._export_midi_corpus(name=name, source_corpus=source_corpus,
+                                            use_original_tempo=use_original_tempo)
+
+    def _export_midi_corpus(self, name: str, source_corpus: MidiCorpus, use_original_tempo: bool = False) -> MidiCorpus:
         elapsed_abs_time: float = 0.0
-        events: List[CorpusEvent] = []
-        for event, memory_state in copy.deepcopy(self._history.dump()):  # type: CorpusEvent, MemoryState
+        events: List[MidiCorpusEvent] = []
+        for event, memory_state in copy.deepcopy(self._history.dump()):  # type: (MidiCorpusEvent, MemoryState)
             current_onset: float = memory_state.trigger_time
             if use_original_tempo:
                 memory_state.tempo = event.tempo
             if len(events) > 0:
                 elapsed_time: float = current_onset - events[-1].onset
-                events[-1].duration = elapsed_time
                 elapsed_abs_time += elapsed_time * 60 / memory_state.tempo
-            event.onset = current_onset
+                # TODO: Elapsed abs time is wrong here, but it's not used on export so not problematic right now
+                events[-1].set_duration(elapsed_time, elapsed_abs_time)
+
+            event.set_onset(current_onset)
             event.absolute_onset = elapsed_abs_time
             event.recorded_memory_state = memory_state
             events.append(event)
-        return Corpus(events, name, scheduling_mode=source_corpus.scheduling_mode,
-                      build_parameters={"build_method": "runtime"})
+        return MidiCorpus(events, name, scheduling_mode=source_corpus.scheduling_mode,
+                          feature_types=[], build_parameters={"build_method": "runtime"})

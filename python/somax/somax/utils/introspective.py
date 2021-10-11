@@ -5,15 +5,12 @@ from abc import ABC, abstractmethod
 from types import ModuleType
 from typing import Dict, Type, Any, Optional, TypeVar, Generic
 
-T = TypeVar('T')
-
-
-class Introspective(Generic[T]):
+class Introspective:
     @classmethod
-    def _classes(cls, module: Optional[ModuleType] = None, include_abstract: bool = False) -> Dict[str, Type[T]]:
+    def _classes(cls, module: Optional[ModuleType] = None, include_abstract: bool = False) -> Dict[str, Type[Any]]:
         """Returns class objects for all non-abstract classes in the inheriting module."""
         if module is None:
-            classes: Dict[str, T] = dict(
+            classes: Dict[str, Any] = dict(
                 inspect.getmembers(
                     sys.modules[cls.__module__],
                     lambda member: inspect.isclass(member)

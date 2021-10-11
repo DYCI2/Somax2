@@ -18,9 +18,9 @@ import somax
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features.feature import CorpusFeature
-from somax.scheduler.scheduling_mode import SchedulingMode
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch
+from somax.scheduler.scheduling_mode import SchedulingMode
 
 E = TypeVar('E', bound=CorpusEvent)
 
@@ -150,14 +150,14 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
                                     f"Recommended action: rebuild corpus. "
                                     f"(To attempt to load the corpus anyway: enable the 'volatile' flag)")
             name: str = corpus_data["name"]
-            content_type: SchedulingMode = SchedulingMode.from_string(corpus_data["content_type"])
+            scheduling_mode: SchedulingMode = SchedulingMode.from_string(corpus_data["content_type"])
 
             build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
             features_dict: Dict[str, str] = corpus_data["features_dict"]
             events: List[MidiCorpusEvent] = [MidiCorpusEvent.decode(event_dict, features_dict)
                                              for event_dict in corpus_data["events"]]
             features: List[Type[CorpusFeature]] = [CorpusFeature.class_from_string(p) for p in features_dict.values()]
-            return cls(events=events, name=name, content_type=content_type,
+            return cls(events=events, name=name, scheduling_mode=scheduling_mode,
                        feature_types=features, build_parameters=build_parameters)
 
         # KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)

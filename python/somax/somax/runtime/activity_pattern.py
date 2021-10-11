@@ -170,6 +170,7 @@ class FreezeActivityPattern(AbstractActivityPattern):
         """ n is the number of updates until peak decays below threshold"""
         return -np.divide(n, np.log(self.extinction_threshold.value - 0.001))
 
+
 class ManualActivityPattern(AbstractActivityPattern):
     """Decay: score = exp(-n/tau), where n is the number of events generated since creation of peak (new_event calls)"""
 

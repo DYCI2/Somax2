@@ -3,7 +3,7 @@ from typing import List, Tuple
 
 from somax.classification.classifier import AbstractClassifier
 from somax.features import TopNote
-from somax.features.feature import AbstractFeature
+from somax.features.feature_value import FeatureValue
 from somax.features.pitch_features import RuntimeIntegerPitch, AbstractIntegerPitch, VirtualFundamental, BassNote
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
@@ -47,7 +47,7 @@ class BasicPitchClassifier(AbstractClassifier, ABC):
 
     @staticmethod
     @abstractmethod
-    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
+    def _label_from_feature(pitch: FeatureValue, transform: AbstractTransform) -> IntLabel:
         pass
 
     @staticmethod
@@ -67,7 +67,7 @@ class TopNoteClassifier(BasicPitchClassifier):
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
-    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
+    def _label_from_feature(pitch: FeatureValue, transform: AbstractTransform) -> IntLabel:
         inverse_transformed_label: int = transform.inverse(pitch).value()
         return IntLabel(inverse_transformed_label)
 
@@ -98,7 +98,7 @@ class PitchClassClassifier(BasicPitchClassifier):
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
-    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
+    def _label_from_feature(pitch: FeatureValue, transform: AbstractTransform) -> IntLabel:
         inverse_transformed_label: int = transform.inverse(pitch).value() % 12
         return IntLabel(inverse_transformed_label)
 
@@ -128,7 +128,7 @@ class VirtualFundamentalClassifier(BasicPitchClassifier):
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
-    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
+    def _label_from_feature(pitch: FeatureValue, transform: AbstractTransform) -> IntLabel:
         inverse_transformed_label: int = transform.inverse(pitch).value() % 12
         return IntLabel(inverse_transformed_label)
 
@@ -154,7 +154,7 @@ class BassNoteClassifier(BasicPitchClassifier):
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
-    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
+    def _label_from_feature(pitch: FeatureValue, transform: AbstractTransform) -> IntLabel:
         inverse_transformed_label: int = transform.inverse(pitch).value()
         return IntLabel(inverse_transformed_label)
 
@@ -180,7 +180,7 @@ class BassNoteMod12Classifier(BasicPitchClassifier):
         return IntLabel(inverse_transformed_label)
 
     @staticmethod
-    def _label_from_feature(pitch: AbstractFeature, transform: AbstractTransform) -> IntLabel:
+    def _label_from_feature(pitch: FeatureValue, transform: AbstractTransform) -> IntLabel:
         inverse_transformed_label: int = transform.inverse(pitch).value() % 12
         return IntLabel(inverse_transformed_label)
 

@@ -1,6 +1,6 @@
-import collections
 import functools
 from abc import ABC
+from collections import abc
 from typing import TypeVar, Union, Dict, Any, Callable, List, Tuple
 
 # TODO: Poor type description
@@ -83,7 +83,7 @@ class Parametric(HasParameterDict):
                 variable._parse_parameters()
                 param_dict[name] = variable
             # Parse all Parameter and Parametric inside other dicts (for example MergeAction)
-            if isinstance(variable, collections.abc.Mapping):
+            if isinstance(variable, abc.Mapping):
                 for parent, item in variable.items():
                     if isinstance(item, Parameter) or isinstance(item, Parametric):
                         item._parse_parameters()

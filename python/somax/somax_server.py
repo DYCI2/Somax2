@@ -2,7 +2,6 @@
 
 import argparse
 import asyncio
-import copy
 import logging
 import logging.config
 import multiprocessing
@@ -22,11 +21,11 @@ from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
-from somax.runtime.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, TempoMasterMessage, \
+from somax.scheduler.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, TempoMasterMessage, \
     TempoMessage
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.target import Target, SendProtocol
-from somax.scheduler.scheduled_object import TriggerMode
+from somax.scheduler.scheduling_handler import SchedulingHandler
 from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport
 from somax.scheduler.time_object import Time
 
@@ -199,7 +198,8 @@ class SomaxServer(Somax, AsyncioOscObject):
         try:
             address: str = self.parse_osc_address(name)
             ip: str = self.parse_ip(ip)
-            trigger_mode: TriggerMode = TriggerMode.from_string(trigger_mode)
+
+            trigger_mode: TriggerMode = SchedulingHandler.from_string(trigger_mode)
             merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector)
             scale_actions: List[AbstractScaleAction] = [AbstractScaleAction.from_string(s) for s in scale_actions]
@@ -207,9 +207,8 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.error(f"{str(e)}. No agent was created.")
             return
 
-        player: Player = Player(name=name, trigger_mode=trigger_mode, peak_selector=peak_selector,
-                                merge_action=merge_action,
-                                scale_actions=scale_actions)
+        player: Player = Player(name=name, peak_selector=peak_selector,
+                                merge_action=merge_action,scale_actions=scale_actions)
 
         if name in self._agents:
             if override:

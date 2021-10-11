@@ -18,7 +18,7 @@ from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus
+from somax.runtime.corpus import Corpus, MidiCorpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError
@@ -28,7 +28,7 @@ from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
-from somax.runtime.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
+from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.target import Target, SendProtocol
 from somax.runtime.transforms import AbstractTransform
@@ -74,11 +74,12 @@ class Agent(multiprocessing.Process):
 
 class OscAgent(Agent, AsyncioOscObject):
     def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 scheduler_tick: float, scheduler_tempo: float, scheduler_running: bool, ip: str, recv_port: int,
+                 scheduler_tick: float, scheduler_tempo: float, scheduler_running: bool,
+                 scheduling_type: Type[SchedulingHandler], ip: str, recv_port: int,
                  send_port: int, address: str, corpus_filepath: Optional[str] = None, **kwargs):
         Agent.__init__(self, player=player, recv_queue=recv_queue, tempo_send_queue=tempo_send_queue,
                        scheduler_tick=scheduler_tick, scheduler_tempo=scheduler_tempo,
-                       scheduler_running=scheduler_running, **kwargs)
+                       scheduler_running=scheduler_running, scheduling_type=scheduling_type, **kwargs)
         AsyncioOscObject.__init__(self, recv_port=recv_port, send_port=send_port, ip=ip, address=address, **kwargs)
         self.logger = logging.getLogger(__name__)
         if corpus_filepath:  # handle corpus filepath if passed
@@ -534,8 +535,8 @@ class OscAgent(Agent, AsyncioOscObject):
         name: str = corpus_name if corpus_name is not None else filename
 
         try:
-            corpus: Corpus = self.improvisation_memory.export(corpus_name, self.player.corpus,
-                                                              use_original_tempo=use_original_tempo)
+            corpus: MidiCorpus = self.improvisation_memory.export(corpus_name, self.player.corpus,
+                                                                  use_original_tempo=use_original_tempo)
         except InvalidCorpus as e:
             self.logger.error(f"{str(e)}. No MIDI data was exported.")
             return

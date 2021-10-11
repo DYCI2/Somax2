@@ -60,7 +60,7 @@ class Player(Parametric, ContentAware):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def new_event(self, scheduler_time: float, tempo: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+    def new_event(self, scheduler_time: float, _tempo: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
         if not self.is_enabled():
@@ -185,7 +185,7 @@ class Player(Parametric, ContentAware):
 
     def create_atom(self, path: List[str], weight: float, self_influenced: bool, classifier: AbstractClassifier,
                     activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
-                    transforms: None = None, enabled: bool = True, override: bool = False) -> None:
+                    _transforms: None = None, enabled: bool = True, override: bool = False) -> None:
         """ Raises KeyError, IndexError, DuplicateKeyError """
         new_atom_name: str = path.pop(0)
         if len(path) > 0:

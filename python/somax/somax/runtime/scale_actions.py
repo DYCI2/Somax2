@@ -10,7 +10,7 @@ from somax.features import MaxVelocity, VerticalDensity
 from somax.features.spectral_features import OctaveBands
 from somax.features.temporal_features import Tempo
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus, MidiCorpus
+from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import FeedbackQueue
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
@@ -78,7 +78,7 @@ class NoScaleAction(AbstractScaleAction):
         pass
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return True     # valid for all types of corpora
+        return True  # valid for all types of corpora
 
 
 class PhaseModulationScaleAction(AbstractScaleAction):
@@ -107,8 +107,7 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         pass
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return True     # valid for all types of corpora
-
+        return True  # valid for all types of corpora
 
     @property
     def selectivity(self):
@@ -131,7 +130,7 @@ class NextStateScaleAction(AbstractScaleAction):
         self._previous_output_index: Optional[int] = None
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              _corresponding_transforms: List[AbstractTransform],  corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **_kwargs) -> Peaks:
         if self._previous_output_index is None:
             return peaks
         else:
@@ -224,7 +223,8 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
               corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
 
-        previous_tempi: np.ndarray = np.array([e[0].get_feature(Tempo).value() for e in self._history.get_n_last(self.history_len)])
+        previous_tempi: np.ndarray = np.array(
+            [e[0].get_feature(Tempo).value() for e in self._history.get_n_last(self.history_len)])
         if previous_tempi.size == 0:
             return peaks
         mu: float = float(np.mean(previous_tempi))

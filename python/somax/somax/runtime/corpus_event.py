@@ -121,7 +121,6 @@ class CorpusEvent(ABC):
         except ValueError as e:
             raise FeatureError(f"Corpus does not have feature of type '{feature_type}'") from e
 
-
     def set_feature(self, feature: FeatureValue):
         """ Note! This call is strictly for constructing the corpus. Using it at runtime to edit an already loaded
                   corpus will not warrant well-defined behaviour """
@@ -179,6 +178,10 @@ class MidiCorpusEvent(CorpusEvent):
     @property
     def onset(self) -> float:
         return self._relative_onset
+
+    def set_onset(self, onset: float):
+        # TODO: This shouldn't be settable - only added for corpus export in ImprovisationMemory. Find better solution
+        self._relative_onset = onset
 
     @property
     def duration(self) -> float:

@@ -45,7 +45,6 @@ class Target(ABC):
     def send(self, keyword: str, content: Any, **kwargs):
         raise NotImplementedError("Target.send is abstract.")
 
-    @abstractmethod
     def send_event(self, event: RendererEvent):
         renderer_messages: Union[List[RendererMessage], RendererMessage] = event.render()
         if isinstance(renderer_messages, Iterable):
@@ -56,7 +55,6 @@ class Target(ABC):
 
 
 class SimpleOscTarget(Target):
-
     def __init__(self, address: str, port: int, ip: str = "127.0.0.1"):
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"Creating new OscTarget with address '{address}', port '{port}' and ip '{ip}'.")
@@ -80,7 +78,6 @@ class NoTarget(Target):
 
 
 class CallableTarget(Target):
-
     def __init__(self, callback_func: Callable):
         self.callback_func: Callable = callback_func
 

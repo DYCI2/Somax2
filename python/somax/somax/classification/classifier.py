@@ -50,17 +50,3 @@ class AbstractClassifier(StringParsed, ContentAware, ABC):
     @abstractmethod
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :returns list of for the classifier valid `AbstractTransform`s selected from `transform_handler`. """
-
-    # TODO: REMOVE
-    # @classmethod
-    # @abstractmethod
-    # def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-    #     """ The rms method is not strictly necessary to implement - it's only used for offline performance analysis.
-    #         To leave it unimplemented, simply define it as
-    #         ```
-    #             @staticmethod
-    #             def rms(influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-    #                 raise NotImplementedError(f"{self.__class__}.rms is not implemented")
-    #         ```
-    #     """
-    #     pass

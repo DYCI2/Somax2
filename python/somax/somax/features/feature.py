@@ -8,7 +8,6 @@ from somax import features
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
 from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
-from somax.runtime.exceptions import FeatureError
 from somax.utils.introspective import StringParsed, Introspective
 
 
