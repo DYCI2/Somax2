@@ -290,7 +290,7 @@ class Player(Parametric, ContentAware):
     # PRIVATE
     ######################################################
 
-    def _is_eligible_for(self, _corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
         return True  # valid for all types of corpora
 
     # TODO: Legacy function from recursive Streamview structure: remove at some point

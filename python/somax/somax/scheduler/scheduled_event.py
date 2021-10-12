@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Any, Optional, List
+from typing import Any, Optional, List, Tuple
 
 from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent
+from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.transforms import AbstractTransform
 
 
@@ -38,7 +39,11 @@ class MidiSliceOnsetEvent(RendererEvent):
         self.applied_transform: AbstractTransform = applied_transform
 
     def render(self) -> List[RendererMessage]:
-        raise NotImplemented
+        notes: List[Tuple[int, int, int]] = [(n.pitch, n.velocity, n.channel) for n in self.event.notes]
+        return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
+                                content=[self.event.state_index, self.applied_transform.renderer_info()]),
+                RendererMessage(keyword=SendProtocol.SEND_STATE_ONSET,
+                                content=notes)]
 
 
 class MidiNoteEvent(RendererEvent):
@@ -52,7 +57,8 @@ class MidiNoteEvent(RendererEvent):
         self.applied_transform: Optional[AbstractTransform] = applied_transform
 
     def render(self) -> List[RendererMessage]:
-        raise NotImplementedError
+        return [RendererMessage(keyword=SendProtocol.SEND_MIDI_EVENT,
+                                content=[self.note, self.velocity, self.channel])]
 
 
 class AudioEvent(RendererEvent):

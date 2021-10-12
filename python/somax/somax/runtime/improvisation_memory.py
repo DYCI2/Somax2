@@ -22,19 +22,20 @@ class Queue(Generic[T]):
         self._history.append(item)
 
     def at(self, index: int) -> Optional[T]:
-        """ Get value by index from end of queue. Returns `None` if value does not exist """
-        try:
-            return self._history[-(index + 1)]
-        except IndexError:
-            return None
+        """ Get value by index from end of queue.
+        raises IndexError if value doesn't exist """
+        return self._history[-(index + 1)]
 
     def last(self) -> Optional[T]:
-        """ Get the value at the end of queue. Returns `None` if queue is empty """
+        """ Get the value at the end of queue.
+            raises IndexError if queue is empty
+         """
         return self.at(0)
 
     def get_n_last(self, n: int) -> List[T]:
-        """ Returns n latest events in reverse order (index 0 is latest event) if n events exist in the queue, else
-            returns the entire queue """
+        """ Returns n latest events in reverse order (index 0 is latest event) if n events exist in the queue,
+            else returns the entire queue.
+            raises IndexError if queue is empty """
         if len(self._history) < n:
             return list(reversed(self._history))
         else:

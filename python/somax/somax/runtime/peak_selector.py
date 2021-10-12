@@ -65,7 +65,8 @@ class AbstractFallbackPeakSelector(AbstractPeakSelector, ABC):
                          **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.logger.debug("[decide] _decide_fallback called.")
         try:
-            last_event, _, last_transform = self._history.last()
+            last_entry: Optional[Tuple[CorpusEvent, float, AbstractTransform]] = self._history.last()
+            last_event, _, last_transform = last_entry
             next_state_idx: int = (last_event.state_index + 1) % corpus.length()
             return corpus.event_at(next_state_idx), last_transform
         except IndexError:

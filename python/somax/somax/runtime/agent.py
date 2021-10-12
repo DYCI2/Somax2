@@ -30,7 +30,8 @@ from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
 from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
 from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.target import Target, SendProtocol
+from somax.runtime.target import Target
+from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiNoteEvent, RendererEvent, TriggerEvent, \
     MidiSliceOnsetEvent
@@ -74,12 +75,12 @@ class Agent(multiprocessing.Process):
 
 class OscAgent(Agent, AsyncioOscObject):
     def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 scheduler_tick: float, scheduler_tempo: float, scheduler_running: bool,
-                 scheduling_type: Type[SchedulingHandler], ip: str, recv_port: int,
-                 send_port: int, address: str, corpus_filepath: Optional[str] = None, **kwargs):
+                 transport_time: Time, scheduler_running: bool, scheduling_type: Type[SchedulingHandler],
+                 ip: str, recv_port: int, send_port: int, address: str,
+                 corpus_filepath: Optional[str] = None, **kwargs):
         Agent.__init__(self, player=player, recv_queue=recv_queue, tempo_send_queue=tempo_send_queue,
-                       scheduler_tick=scheduler_tick, scheduler_tempo=scheduler_tempo,
-                       scheduler_running=scheduler_running, scheduling_type=scheduling_type, **kwargs)
+                       transport_time=transport_time, scheduler_running=scheduler_running,
+                       scheduling_type=scheduling_type, **kwargs)
         AsyncioOscObject.__init__(self, recv_port=recv_port, send_port=send_port, ip=ip, address=address, **kwargs)
         self.logger = logging.getLogger(__name__)
         if corpus_filepath:  # handle corpus filepath if passed
@@ -379,7 +380,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
         try:
             _, file_extension = os.path.splitext(filepath)
-            corpus: Corpus = Corpus.from_json(filepath, volatile)
+            corpus: Corpus = MidiCorpus.from_json(filepath, volatile)
         except (IOError, InvalidCorpus) as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)}. No corpus was read.")
             return
@@ -407,21 +408,17 @@ class OscAgent(Agent, AsyncioOscObject):
     # SCHEDULING STATE-RELATED PARAMETERS
     ######################################################
 
-    # TODO: Remove and change into generic set scheduling param
-    # TODO: Should also generalize Scheduler.add_trigger_event or some other aspect so that the last lines
-    #       of this function are handled by scheduler, not at parsing time
-
     def set_scheduling_handler(self, handler_class: str):
         try:
-            new_handler: SchedulingHandler = SchedulingHandler.from_string(class_name=handler_class,
-                                                                           previous_handler=self.scheduling_handler)
+            handler_type: Type[SchedulingHandler] = SchedulingHandler.type_from_string(class_name=handler_class)
+            new_handler: SchedulingHandler = handler_type.new_from(other=self.scheduling_handler)
         except ValueError as e:
             self.logger.error(f"{repr(e)}. No scheduling handler was set.")
             return
 
         self.flush()
         self.scheduling_handler = new_handler
-        self.logger.debug(f"[set_scheduling_handler] Scheduling handler set to "
+        self.logger.info(f"[set_scheduling_handler] Scheduling handler set to "
                           f"'{self.scheduling_handler.__class__.__name__}'")
 
     def set_held_notes_mode(self, enable: bool):
@@ -500,7 +497,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def _send_eligibility(self):
         eligiblity: List[Tuple[ContentAware, bool, Optional[ContentAware]]] = self.player.get_eligibility()
         for obj, status, _ in eligiblity:
-            self.target.send(SendProtocol.ELIGIBLE, [obj, status])
+            self.target.send(SendProtocol.ELIGIBLE, [str(obj), status])
 
     ######################################################
     # OTHER

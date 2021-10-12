@@ -21,6 +21,7 @@ from somax.features.feature import CorpusFeature
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch
 from somax.scheduler.scheduling_mode import SchedulingMode
+from somax.utils.introspective import Introspective
 
 E = TypeVar('E', bound=CorpusEvent)
 
@@ -55,7 +56,7 @@ class HeldObject(Generic[E]):
         raise AttributeError(f"Cannot compare type '{type(other)}' with '{self.__class__}'")
 
 
-class Corpus(Generic[E], ABC):
+class Corpus(Generic[E], Introspective, ABC):
     INDEX_MAP_SIZE = 1_000_000
 
     def __init__(self, events: List[E], name: str, scheduling_mode: SchedulingMode,
@@ -175,7 +176,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
                 "build_parameters": self._build_parameters,
                 "features_dict": {name: feature.classpath() for (feature, name) in features.items()},
                 "length": self.length(),
-                "duration": self.duration,
+                "duration": self.duration(),
                 "events": [event.encode(features_dict=features) for event in self.events]
                 }
 

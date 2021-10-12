@@ -66,16 +66,13 @@ class SchedulingHandler(Introspective, ABC):
                    midi_handler=other.midi_handler, trigger_pretime=other._trigger_pretime_value, **kwargs)
 
     @classmethod
-    def from_string(cls, class_name: str, previous_handler: 'SchedulingHandler', **kwargs):
+    def type_from_string(cls, class_name: str):
         try:
             candidate_classes: Dict[str, Type[SchedulingHandler]] = cls._classes()
-            handler: SchedulingHandler = candidate_classes[class_name.lower()].new_from(other=previous_handler,
-                                                                                        **kwargs)
+            return candidate_classes[class_name.lower()]
         except KeyError as e:
             # To be consistent with any other `from_string` method, re-raises error as ValueError if name isn't found
             raise ValueError from e
-
-        return handler
 
     def update_time(self, time: Time) -> List[ScheduledEvent]:
         time_value: float = self.scheduling_mode.get_time_axis(time=time)

@@ -7,7 +7,7 @@ import logging.config
 import multiprocessing
 import sys
 from importlib import resources
-from typing import Optional, Callable, Tuple, List, Dict
+from typing import Optional, Callable, Tuple, List, Dict, Type
 
 import log
 import somax
@@ -21,13 +21,15 @@ from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
-from somax.scheduler.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, TempoMasterMessage, \
-    TempoMessage
 from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.target import Target, SendProtocol
+from somax.runtime.target import Target
+from somax.runtime.send_protocol import SendProtocol
+from somax.scheduler.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, \
+    TempoMasterMessage, \
+    TempoMessage
 from somax.scheduler.scheduling_handler import SchedulingHandler
-from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport
 from somax.scheduler.time_object import Time
+from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport
 
 
 class Somax:
@@ -192,14 +194,14 @@ class SomaxServer(Somax, AsyncioOscObject):
     # CREATION/DELETION OF AGENTS
     ######################################################
 
-    def create_agent(self, name: str, recv_port: int, send_port: int, ip: str = "", trigger_mode: str = "",
+    def create_agent(self, name: str, recv_port: int, send_port: int, ip: str = "", scheduling_type: str = "",
                      peak_selector: str = "", merge_action: str = "", corpus_filepath: str = "",
                      scale_actions: Tuple[str, ...] = ("",), override: bool = False):
         try:
             address: str = self.parse_osc_address(name)
             ip: str = self.parse_ip(ip)
 
-            trigger_mode: TriggerMode = SchedulingHandler.from_string(trigger_mode)
+            scheduling_type: Type[SchedulingHandler] = SchedulingHandler.type_from_string(scheduling_type)
             merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector)
             scale_actions: List[AbstractScaleAction] = [AbstractScaleAction.from_string(s) for s in scale_actions]
@@ -208,7 +210,7 @@ class SomaxServer(Somax, AsyncioOscObject):
             return
 
         player: Player = Player(name=name, peak_selector=peak_selector,
-                                merge_action=merge_action,scale_actions=scale_actions)
+                                merge_action=merge_action, scale_actions=scale_actions)
 
         if name in self._agents:
             if override:
@@ -217,11 +219,12 @@ class SomaxServer(Somax, AsyncioOscObject):
                 self.logger.info(f"An agent with the name '{name}' already exists on the server. "
                                  f"No action was performed. Use 'override=True' to override existing agent.")
                 return
+
         agent_queue: multiprocessing.Queue = multiprocessing.Queue()
         agent: OscAgent = OscAgent(player, recv_queue=agent_queue, tempo_send_queue=self._tempo_master_queue,
-                                   ip=ip, recv_port=recv_port, send_port=send_port, address=address,
-                                   corpus_filepath=corpus_filepath, scheduler_tick=self._transport.ticks,
-                                   scheduler_tempo=self._transport.tempo, scheduler_running=self._transport.running)
+                                   transport_time=self._transport.time, scheduler_running=self._transport.running,
+                                   scheduling_type=scheduling_type, ip=ip, recv_port=recv_port, send_port=send_port,
+                                   address=address, corpus_filepath=corpus_filepath)
         agent.start()
         self._agents[name] = agent, agent_queue
         self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port}, ip {ip}.")
@@ -241,8 +244,8 @@ class SomaxServer(Somax, AsyncioOscObject):
     ######################################################
 
     def get_time(self):
-        time: Time = self._transport.seconds()
-        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.tempo))
+        time: Time = self._transport.time
+        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.seconds, time.tempo))
 
     def get_player_names(self):
         for player_name in self._agents.keys():
@@ -309,7 +312,7 @@ class SomaxServer(Somax, AsyncioOscObject):
 
 
 if __name__ == "__main__":
-    multiprocessing.freeze_support()    # Required for PyInstaller
+    multiprocessing.freeze_support()  # Required for PyInstaller
     parser = argparse.ArgumentParser(description='Launch and manage a Somax server')
     parser.add_argument('in_port', metavar='IN_PORT', type=int, nargs='?',
                         help='in port used by the server', default=SomaxServer.DEFAULT_RECV_PORT)
