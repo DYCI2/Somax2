@@ -14,11 +14,11 @@ from somax.utils.introspective import Introspective
 class SchedulingHandler(Introspective, ABC):
     TRIGGER_PRETIME: float = 0.01  # seconds
 
-    def __init__(self, scheduling_mode: SchedulingMode, scheduler: Scheduler,
-                 midi_handler: MidiStateHandler = MidiStateHandler(),
+    def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
+                 running: bool = False, midi_handler: MidiStateHandler = MidiStateHandler(),
                  trigger_pretime: float = TRIGGER_PRETIME, **_kwargs):
         self.scheduling_mode: SchedulingMode = scheduling_mode
-        self._scheduler: Scheduler = scheduler
+        self._scheduler: Scheduler = Scheduler(time=time, tempo=tempo, running=running)
         self.midi_handler: MidiStateHandler = midi_handler
         self._trigger_pretime_value: float = trigger_pretime
 
@@ -62,8 +62,9 @@ class SchedulingHandler(Introspective, ABC):
 
     @classmethod
     def new_from(cls, other: 'SchedulingHandler', **kwargs) -> 'SchedulingHandler':
-        return cls(scheduling_mode=other.scheduling_mode, scheduler=other._scheduler,
-                   midi_handler=other.midi_handler, trigger_pretime=other._trigger_pretime_value, **kwargs)
+        return cls(scheduling_mode=other.scheduling_mode, time=other._scheduler.time, tempo=other._scheduler.tempo,
+                   running=other._scheduler.running, midi_handler=other.midi_handler,
+                   trigger_pretime=other._trigger_pretime_value, **kwargs)
 
     @classmethod
     def type_from_string(cls, class_name: str):
@@ -138,11 +139,15 @@ class SchedulingHandler(Introspective, ABC):
         self._scheduler.pause()
 
     def stop(self) -> List[ScheduledEvent]:
-        self._scheduler.stop()
-        return self.flush()
+        events: List[ScheduledEvent] = self._scheduler.stop()
+        return self.flush(events)
 
-    def flush(self) -> List[ScheduledEvent]:
-        flushed_events: List[ScheduledEvent] = self._scheduler.flush()
+    def flush(self, events: Optional[List[ScheduledEvent]] = None) -> List[ScheduledEvent]:
+        if events is not None:
+            flushed_events = events
+        else:
+            flushed_events: List[ScheduledEvent] = self._scheduler.flush()
+
         output_events: List[ScheduledEvent] = []
         triggers: Optional[List[TriggerEvent]] = self._handle_flushing([e for e in flushed_events
                                                                         if isinstance(e, TriggerEvent)])
@@ -193,10 +198,10 @@ class ManualSchedulingHandler(SchedulingHandler):
 
 
 class AutomaticSchedulingHandler(SchedulingHandler):
-    def __init__(self, scheduling_mode: SchedulingMode, scheduler: Scheduler,
-                 midi_handler: MidiStateHandler = MidiStateHandler(),
+    def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
+                 running: bool = False, midi_handler: MidiStateHandler = MidiStateHandler(),
                  trigger_pretime: float = SchedulingHandler.TRIGGER_PRETIME, **_kwargs):
-        super().__init__(scheduling_mode, scheduler, midi_handler, trigger_pretime, **_kwargs)
+        super().__init__(scheduling_mode, time, tempo, running, midi_handler, trigger_pretime, **_kwargs)
         self._scheduler.add_event(self._default_trigger())
 
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
@@ -214,12 +219,13 @@ class AutomaticSchedulingHandler(SchedulingHandler):
             # Note that `trigger_time` with respect to the `CorpusEvent` is the `target_time` of its trigger
             target_time: float = trigger_time + event_and_transform[0].duration
             next_trigger_time: float = target_time - self._trigger_pretime()
-            self._scheduler.add_event(TriggerEvent(trigger_time=next_trigger_time, target_time=target_time))
+            self._scheduler.add_event(self._adjust_in_time(TriggerEvent(trigger_time=next_trigger_time,
+                                                                        target_time=target_time)))
 
     def _handle_flushing(self, flushed_triggers: List[TriggerEvent]) -> Optional[List[TriggerEvent]]:
         # Reschedule trigger but do not output to agent. Technically, `flushed_triggers` should be of length 1 at most
-        for trigger in flushed_triggers:
-            self._reschedule(trigger)
+        if flushed_triggers:
+            self.add_trigger_event()
         return []
 
     def _reschedule(self, trigger_event: TriggerEvent) -> None:

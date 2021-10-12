@@ -196,7 +196,7 @@ class AutoJumpScaleAction(AbstractScaleAction):
         pass
 
     def clear(self) -> None:
-        pass
+        self._history = FeedbackQueue()
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
         return True
@@ -241,7 +241,7 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
         pass
 
     def clear(self) -> None:
-        pass
+        self._history = FeedbackQueue()
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
         return corpus.has_feature(Tempo)

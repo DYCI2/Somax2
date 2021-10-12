@@ -67,7 +67,7 @@ class NoTransform(AbstractTransform):
         return AbstractFeature.classes(include_abstract=True)
 
     def renderer_info(self) -> Any:
-        return None
+        return 0
 
     def apply(self, obj: Union[CorpusEvent, FeatureValue], **kwargs) -> Union[CorpusEvent, FeatureValue]:
         return obj

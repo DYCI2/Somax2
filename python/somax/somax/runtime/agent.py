@@ -28,14 +28,13 @@ from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
-from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
 from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.target import Target
 from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
+from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiNoteEvent, RendererEvent, TriggerEvent, \
     MidiSliceOnsetEvent
-from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
 from somax.scheduler.scheduling_mode import SchedulingMode
 from somax.scheduler.time_object import Time
@@ -59,11 +58,11 @@ class Agent(multiprocessing.Process):
             self.player.read_corpus(corpus)
 
         scheduling_mode: SchedulingMode = corpus.scheduling_mode if corpus is not None else SchedulingMode.default()
-        scheduler: Scheduler = Scheduler(scheduling_mode.get_time_axis(transport_time), tempo=transport_time.tempo,
-                                         running=scheduler_running)
 
         self.scheduling_handler: SchedulingHandler = scheduling_type(scheduling_mode=scheduling_mode,
-                                                                     scheduler=scheduler)
+                                                                     time=scheduling_mode.get_time_axis(transport_time),
+                                                                     tempo=transport_time.tempo,
+                                                                     running=scheduler_running)
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
 
         self._enabled: bool = True
@@ -200,7 +199,8 @@ class OscAgent(Agent, AsyncioOscObject):
         self.scheduling_handler.pause()
 
     def stop_scheduler(self):
-        self.scheduling_handler.stop()
+        events: List[ScheduledEvent] = self.scheduling_handler.stop()
+        self._send_events(events)
         self.clear()
 
     def terminate(self):
@@ -389,9 +389,11 @@ class OscAgent(Agent, AsyncioOscObject):
         self.scheduling_handler.set_scheduling_mode(corpus.scheduling_mode)
 
         self.player.read_corpus(corpus)
+        self.flush()
         self._send_eligibility()
         self.send_current_corpus_info()
         self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
+
 
     def set_param(self, path: str, value: Any):
         self.logger.debug(f"[set_param] Attempting to set parameter for player '{self.player.name}' at '{path}' "
@@ -419,7 +421,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.flush()
         self.scheduling_handler = new_handler
         self.logger.info(f"[set_scheduling_handler] Scheduling handler set to "
-                          f"'{self.scheduling_handler.__class__.__name__}'")
+                         f"'{self.scheduling_handler.__class__.__name__}'")
 
     def set_held_notes_mode(self, enable: bool):
         self.scheduling_handler.hold_notes_artificially = enable
@@ -505,7 +507,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def force_jump(self, index: int):
         try:
-            self.scheduling_handler.flush()
+            self.flush()
             self.player.force_jump(int(index))
         except ValueError as e:
             self.logger.info(f"{str(e)}")

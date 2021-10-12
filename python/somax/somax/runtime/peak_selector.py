@@ -39,6 +39,10 @@ class AbstractPeakSelector(Parametric, ContentAware, StringParsed, ABC):
                  applied_transform: AbstractTransform) -> None:
         """ """
 
+    @abstractmethod
+    def clear(self) -> None:
+        """ """
+
     @classmethod
     def default(cls, **kwargs) -> 'AbstractPeakSelector':
         return MaxPeakSelector()
@@ -73,6 +77,14 @@ class AbstractFallbackPeakSelector(AbstractPeakSelector, ABC):
             # If history is empty: play the first event in the corpus
             return corpus.event_at(0), NoTransform()
 
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
+        if feedback_event is not None:
+            self._history.append((feedback_event, time, applied_transform))
+
+    def clear(self) -> None:
+        self._history = FeedbackQueue()
+
 
 class MaxPeakSelector(AbstractFallbackPeakSelector):
     def __init__(self, **kwargs):
@@ -89,10 +101,6 @@ class MaxPeakSelector(AbstractFallbackPeakSelector):
         peak_idx: int = random.choice(max_peaks_idx)
         transform_hash: int = int(peaks.transform_ids[peak_idx])
         return corpus.event_around(peaks.times[peak_idx]), transform_handler.get_transform(transform_hash)
-
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
-                 applied_transform: AbstractTransform) -> None:
-        pass
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
         return True
@@ -119,10 +127,6 @@ class ThresholdPeakSelector(MaxPeakSelector):
                          **kwargs) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         return None
 
-    def feedback(self, _feedback_event: Optional[CorpusEvent], _time: float,
-                 _applied_transform: AbstractTransform) -> None:
-        pass
-
     def _is_eligible_for(self, corpus: Corpus) -> bool:
         return True
 
@@ -145,10 +149,6 @@ class ProbabilisticPeakSelector(AbstractFallbackPeakSelector):
         peak_idx: int = np.argwhere(score_cumsum > output_target_score)[0]
         transform_hash: int = int(peaks.transform_ids[peak_idx])
         return corpus.event_around(peaks.times[peak_idx]), transform_handler.get_transform(transform_hash)
-
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
-                 applied_transform: AbstractTransform) -> None:
-        pass
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
         return True

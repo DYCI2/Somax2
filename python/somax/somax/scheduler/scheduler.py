@@ -56,7 +56,7 @@ class Scheduler:
 
     def stop(self, **_kwargs) -> List[ScheduledEvent]:
         self.running = False
-        self._time = Time.zero(self.tempo)
+        self._time = 0.0
         return self.flush()
 
     def flush(self) -> List[ScheduledEvent]:

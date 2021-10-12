@@ -164,6 +164,7 @@ class Player(Parametric, ContentAware):
     def clear(self):
         """ Reset runtime state without modifying any parameters or settings """
         self.previous_peaks = Peaks.create_empty()
+        self.peak_selector.clear()
         for scale_action in self.scale_actions.values():
             scale_action.clear()
 
