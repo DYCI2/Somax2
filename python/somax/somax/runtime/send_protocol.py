@@ -26,3 +26,8 @@ class SendProtocol:
 
     # Server Info
     SERVER_STATUS = "server_status"
+
+    # Corpus
+    CORPUSBUILDER_AUDIO_SEGMENT = "audiocb seg"
+    CORPUSBUILDER_AUDIO_SEGMENTATION_DONE = "audiocb segdone"
+    CORPUSBUILDER_AUDIO_STATS = "audiocb stats"

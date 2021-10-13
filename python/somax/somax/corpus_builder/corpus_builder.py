@@ -3,7 +3,7 @@ import multiprocessing
 import os
 from enum import Enum
 from timeit import default_timer as timer
-from typing import Tuple, List, Optional, Dict, Any, Type
+from typing import Tuple, List, Optional, Dict, Any, Type, Union
 
 import librosa
 import numpy as np
@@ -15,17 +15,33 @@ from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
-from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduling
 from somax.runtime.corpus import Corpus, AudioCorpus, MidiCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
-from somax.runtime.exceptions import FeatureError
+from somax.runtime.exceptions import FeatureError, ParameterError
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.target import SimpleOscTarget
+from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduling
 
 
 class AudioSegmentation(Enum):
-    ONSET = "onset",
+    ONSET = "onset"
     INTERVAL = "interval"
+
+
+class SegmentationStatistics:
+    def __init__(self, source: np.ndarray, sr: float, hop_length: int, onset_frames: np.ndarray,
+                 duration_frames: np.ndarray):
+        self.audio_file_length_s: float = source.size / sr  # assumes souce is is mono
+        self.n_segments: int = onset_frames.size
+        duration_times: np.ndarray = librosa.frames_to_time(duration_frames, sr=sr, hop_length=hop_length)
+        self.min_segment_length: float = float(np.min(duration_times))
+        self.mean_segment_length: float = float(np.mean(duration_times))
+        self.max_segment_length: float = float(np.max(duration_times))
+        self.discarded_ratio: float = 1 - np.sum(duration_times) / self.audio_file_length_s  # assumes audio length > 0
+
+    def render(self) -> List[Union[int, float, str]]:
+        return [self.audio_file_length_s, self.n_segments, self.min_segment_length, self.mean_segment_length,
+                self.max_segment_length, self.discarded_ratio]
 
 
 # TODO: Simple prototype to test the idea of multithreaded corpusbuilding
@@ -155,6 +171,10 @@ class CorpusBuilder:
         """ raises: FileNotFoundError  if failed to load file
                     RuntimeError if other issues are encountered in librosa
                     ValueError if an invalid segmentation mode is provided
+                    audioread.NoBackendError if attempting to load certain file formats (mp3) without having the
+                                             relevant codecs installed.
+                                             see https://github.com/librosa/librosa#audioread-and-mp3-support for info
+                    ParameterError if no slices were detected
         """
         # TODO: Spectrogram filtering
         start_time: float = timer()
@@ -164,8 +184,8 @@ class CorpusBuilder:
                           f"and {AudioMetadata.num_channels(y)} channels")
         onset_frames: np.ndarray
         duration_frames: np.ndarray
-        onset_frames, duration_frames = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
-                                                          segmentation_mode=segmentation_mode, **kwargs)
+        onset_frames, duration_frames, stats = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
+                                                                 segmentation_mode=segmentation_mode, **kwargs)
         onset_times: np.ndarray = librosa.frames_to_time(onset_frames, sr=sr, hop_length=hop_length)
         duration_times: np.ndarray = librosa.frames_to_time(duration_frames, sr=sr, hop_length=hop_length)
 
@@ -218,21 +238,26 @@ class CorpusBuilder:
 
     def test_audio_segmentation(self, filepath: str, onset_channels: Optional[List[int]] = None,
                                 segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET, hop_length: int = 512,
-                                **kwargs) -> Tuple[np.ndarray, np.ndarray]:
+                                **kwargs) -> Tuple[np.ndarray, np.ndarray, SegmentationStatistics]:
         """ raises: FileNotFoundError if failed to load file
                     ValueError if an invalid segmentation mode is provided
+                    audioread.NoBackendError if attempting to load certain file formats (mp3) without having the
+                                             relevant codecs installed.
+                                             see https://github.com/librosa/librosa#audioread-and-mp3-support for info
+                    ParameterError if no slices were detected
             return: (onsets, durations) in seconds """
         y, sr = librosa.load(filepath, sr=None, mono=False)
-        onset_frames, duration_frames = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
-                                                          segmentation_mode=segmentation_mode, **kwargs)
+        onset_frames, duration_frames, stats = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
+                                                                 segmentation_mode=segmentation_mode, **kwargs)
         onset_times: np.ndarray = librosa.frames_to_time(onset_frames, sr=sr, hop_length=hop_length)
         duration_times: np.ndarray = librosa.frames_to_time(duration_frames, sr=sr, hop_length=hop_length)
-        return onset_times, duration_times
+        return onset_times, duration_times, stats
 
     def _slice_audio(self, audio_signal: np.ndarray, sr: float, onset_channels: Optional[List[int]] = None,
                      segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET,
                      hop_length: int = 512, min_interval_s: float = 0.05, max_size_s: Optional[float] = None,
-                     off_threshold_db: Optional[float] = -120.0, discard_by_mean: bool = False, **kwargs):
+                     off_threshold_db: Optional[float] = -120.0, discard_by_mean: bool = False,
+                     **kwargs) -> Tuple[np.ndarray, np.ndarray, SegmentationStatistics]:
         # TODO: Handle invalid parameter ranges (those that throw errors - need to catch them accordingly)
         y = self._parse_channels(audio_signal=audio_signal, channels=onset_channels)
 
@@ -251,13 +276,22 @@ class CorpusBuilder:
                                                                       max_size_s=max_size_s,
                                                                       off_threshold_db=off_threshold_db,
                                                                       discard_by_mean=discard_by_mean)
+
+        if onset_frames.size == 0:
+            raise ParameterError("Could not compute any frames")
+
+        statistics: SegmentationStatistics = SegmentationStatistics(y, sr=sr, hop_length=hop_length,
+                                                                    onset_frames=onset_frames,
+                                                                    duration_frames=frame_durations)
+
         # TODO: Note that they may be empty: handle this on return
-        return onset_frames, frame_durations
+        return onset_frames, frame_durations, statistics
 
     @staticmethod
     def _compute_slice_durations(y: np.ndarray, hop_length: float, onsets: np.ndarray,
                                  min_size_s: Optional[float] = None, max_size_s: Optional[float] = None,
-                                 off_threshold_db: Optional[float] = None, discard_by_mean: bool = True, **_kwargs):
+                                 off_threshold_db: Optional[float] = None, discard_by_mean: bool = True,
+                                 **_kwargs) -> Tuple[np.ndarray, np.ndarray]:
         """ y: mono signal [shape: (n,)]
             onsets: onset frames """
         rms_frames_db = 20 * np.log10(
@@ -316,7 +350,7 @@ class CorpusBuilder:
         raise NotImplementedError("Not implemented yet")
 
     @staticmethod
-    def _parse_channels(audio_signal: np.ndarray, channels: Optional[List[int]] = None):
+    def _parse_channels(audio_signal: np.ndarray, channels: Optional[List[int]] = None) -> np.ndarray:
         """ raises: ValueError """
         # TODO: Normalize signal
         y = np.atleast_2d(audio_signal)

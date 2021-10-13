@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 
 import argparse
 import asyncio
@@ -6,24 +6,28 @@ import logging
 import logging.config
 import multiprocessing
 import sys
+import warnings
 from importlib import resources
 from typing import Optional, Callable, Tuple, List, Dict, Type
+
+from audioread import NoBackendError
 
 import log
 import somax
 from somax.classification import SomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
-from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder
+from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
 from somax.runtime.agent import OscAgent, Agent
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.corpus import Corpus
+from somax.runtime.exceptions import ParameterError
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
 from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.target import Target
 from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.target import Target
 from somax.scheduler.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, \
     TempoMasterMessage, \
     TempoMessage
@@ -291,7 +295,7 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.info("Somax was successfully shut down.")
 
     ######################################################
-    # MISC.
+    # CORPUS
     ######################################################
 
     def multithreaded_build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
@@ -309,6 +313,37 @@ class SomaxServer(Somax, AsyncioOscObject):
                                                                       send_port=self.send_port, **kwargs)
         corpus_builder.start()
         self._corpus_builders.append(corpus_builder)
+
+    def test_audio_segmentation(self, filepath: str, segmentation_mode: str, hop_length: int = 512, **kwargs):
+        try:
+            segmentation: AudioSegmentation = AudioSegmentation(segmentation_mode.lower())
+        except ValueError:
+            self.logger.error(f"Invalid specification '{segmentation_mode}' for segmentation. "
+                              f"Valid values are: '{','.join(e for e in AudioSegmentation)}'.")
+            return
+        try:
+            # Suppress librosa UserWarning on mp3 files (handled properly below on NoBackendError)
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                onsets, durations, stats = CorpusBuilder().test_audio_segmentation(filepath,
+                                                                                   segmentation_mode=segmentation,
+                                                                                   hop_length=hop_length, **kwargs)
+        except (FileNotFoundError, ValueError) as e:
+            self.logger.error(f"{str(e)}. Could not perform segmentation.")
+            return
+        except NoBackendError:
+            self.logger.error(f"The file format of the provided file is not supported.")
+            return
+        except ParameterError as e:
+            self.logger.error(f"{str(e)}. Try retuning the parameters with respect to the current audio file")
+            return
+        finally:
+            self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_SEGMENTATION_DONE, Target.WRAPPED_BANG)
+
+        self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_STATS, stats.render())
+
+        for (onset, duration) in zip(onsets, durations):
+            self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_SEGMENT, [onset, onset + duration])
 
 
 if __name__ == "__main__":
