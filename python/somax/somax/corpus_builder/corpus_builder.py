@@ -27,6 +27,10 @@ class AudioSegmentation(Enum):
     ONSET = "onset"
     INTERVAL = "interval"
 
+    @classmethod
+    def from_string(cls, name: str) -> 'AudioSegmentation':
+        return cls(name.lower())
+
 
 class SegmentationStatistics:
     def __init__(self, source: np.ndarray, sr: float, hop_length: int, onset_frames: np.ndarray,
@@ -94,7 +98,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
 class CorpusBuilder:
     MIDI_FILE_EXTENSIONS = [".mid", ".midi"]
     AUDIO_FILE_EXTENSIONS = [".mp3", ".aif", ".aiff", ".wav", ".flac"]
-    CORPUS_FILE_EXTENSIONS = [".json", ".pickle"]
+    CORPUS_FILE_EXTENSIONS = [".json", ".gz", ".pickle"]
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
@@ -329,7 +333,7 @@ class CorpusBuilder:
     def _slice_audio_by_onset(y: np.ndarray, sr: float, hop_length: int = 512,
                               pick_peak_max_s: float = 0.4, pick_peak_mean_s: float = 0.4,
                               pick_peak_delta_gain: float = 0.07, backtrack: bool = True,
-                              pick_peak_wait_s: float = 0.05) -> np.ndarray:
+                              pick_peak_wait_s: float = 0.05, **_kwargs) -> np.ndarray:
         """ y: shape(n,)
         returns: onset_frames: shape(k,), k in [0, infty) where each val correspond to the frame
                                (frame i corresponds to  sample i * hop_length)  of the onset start

@@ -105,12 +105,16 @@ class Somax:
     ######################################################
 
     def build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                     overwrite: bool = False, filter_class: str = "", **kwargs):
+                     overwrite: bool = False, filter_class: str = "", segmentation_mode: Optional[str] = None,
+                     **kwargs):
         self.logger.info(f"Building corpus from file(s) '{filepath}'...")
         try:
             spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
+            segmentation: Optional[AudioSegmentation] = AudioSegmentation.from_string(
+                segmentation_mode) if segmentation_mode is not None else None
             corpus: Corpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
-                                                   spectrogram_filter=spectrogram_filter, **kwargs)
+                                                   spectrogram_filter=spectrogram_filter,
+                                                   segmentation_mode=segmentation, **kwargs)
             self.logger.debug(f"[build_corpus]: Successfully built '{corpus.name}' from file '{filepath}'.")
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
@@ -316,7 +320,7 @@ class SomaxServer(Somax, AsyncioOscObject):
 
     def test_audio_segmentation(self, filepath: str, segmentation_mode: str, hop_length: int = 512, **kwargs):
         try:
-            segmentation: AudioSegmentation = AudioSegmentation(segmentation_mode.lower())
+            segmentation: AudioSegmentation = AudioSegmentation.from_string(name=segmentation_mode)
         except ValueError:
             self.logger.error(f"Invalid specification '{segmentation_mode}' for segmentation. "
                               f"Valid values are: '{','.join(e for e in AudioSegmentation)}'.")

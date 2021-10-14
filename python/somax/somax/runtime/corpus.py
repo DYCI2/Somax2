@@ -102,12 +102,12 @@ class Corpus(Generic[E], Introspective, ABC):
     def export(self, output_folder: str, overwrite: bool = False,
                indentation: Optional[int] = None) -> str:
         """ Raises IOError"""
-        filepath = os.path.join(output_folder, self.name + ".json")
+        filepath = os.path.join(output_folder, self.name + ".gz")
         if os.path.exists(filepath) and not overwrite:
             raise IOError(f"Could not export corpus as file '{filepath}' already exists. "
                           f"Set overwrite flag to True to overwrite existing.")
         else:
-            with open(filepath, 'w') as f:
+            with gzip.open(filepath, 'wt', encoding='UTF-8') as f:
                 json.dump(self, f, indent=indentation, default=lambda o: o.encode())
         return filepath
 
@@ -142,7 +142,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
     def from_json(cls, filepath: str, volatile: bool = False) -> 'MidiCorpus':
         """ Raises: IOError, InvalidCorpus"""
         try:
-            with open(filepath, 'r') as f:
+            with gzip.open(filepath, 'rt', encoding='UTF-8') as f:
                 corpus_data: Dict[str, Any] = json.load(f)
             version: str = corpus_data["version"]
             if version != somax.__version__ and not volatile:
@@ -325,7 +325,7 @@ class AudioCorpus(Corpus):
         # This function is only specifically for JSON encoding which currently isn't supported for audio corpora
         raise NotImplementedError("Not implemented")
 
-    def export(self, output_folder: str, overwrite: bool = False, **kwargs) -> None:
+    def export(self, output_folder: str, overwrite: bool = False, **kwargs) -> str:
         """ raises: IOError if export fails """
         filepath = os.path.join(output_folder, self.name + ".pickle")
         if os.path.exists(filepath) and not overwrite:
@@ -336,3 +336,5 @@ class AudioCorpus(Corpus):
                 pickled = pickle.dumps(self)
                 optimized_pickle = pickletools.optimize(pickled)
                 f.write(optimized_pickle)
+
+        return filepath
