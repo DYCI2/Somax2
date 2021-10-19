@@ -41,10 +41,13 @@ class Atom(Parametric, ContentAware):
             self.read_corpus(corpus)
 
         self._parse_parameters()
-        self.set_eligibility(self._corpus)
 
     def read_corpus(self, corpus: Optional[Corpus] = None):
         """ :raises RuntimeError """
+        if not self.eligible:
+            print(f"Returning because '{self.name}' cannot read corpus of type")
+            return
+
         if corpus is not None:
             self.logger.debug(f"[read]: Reading corpus {corpus}.")
             self._corpus = corpus
@@ -54,11 +57,11 @@ class Atom(Parametric, ContentAware):
             self.logger.debug(f"[read]: No corpus was provided and atom '{self.name}' does not have a corpus. "
                               f"No action performed.")
             return
+
         self._classifier.cluster(self._corpus)
         labels: List[AbstractLabel] = self._classifier.classify_corpus(self._corpus)
         self._memory_space.model(self._corpus, labels)
         self._activity_pattern.corpus = self._corpus
-        self.set_eligibility(self._corpus)
 
     # influences the memory with incoming data
     def influence(self, influence: AbstractInfluence, time: float, **kwargs) -> int:
@@ -80,7 +83,8 @@ class Atom(Parametric, ContentAware):
         self._activity_pattern.update_peaks_on_influence(time)
 
     def update_peaks_on_new_event(self, time: float) -> None:
-        self._activity_pattern.update_peaks_on_new_event(time)
+        if self.is_enabled_and_eligible():
+            self._activity_pattern.update_peaks_on_new_event(time)
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float, _applied_transform: AbstractTransform) -> None:
         if self.self_influenced and feedback_event is not None:

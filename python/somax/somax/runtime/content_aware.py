@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from collections import abc
 from typing import Optional, List, Tuple
 
 from somax.runtime.corpus import Corpus
@@ -29,19 +30,33 @@ class ContentAware(ABC):
 
     def get_eligibility(self) -> List[Tuple['ContentAware', bool, Optional['ContentAware']]]:
         eligibility_data: List[Tuple['ContentAware', bool, Optional['ContentAware']]] = [self._format()]
-        for _, obj in self.__dict__.items():
-            if isinstance(obj, ContentAware):
-                eligibility_data.extend(obj.get_eligibility())
+        for _, child in self.__dict__.items():
+            if isinstance(child, ContentAware):
+                eligibility_data.extend(child.get_eligibility())
+            elif isinstance(child, abc.Mapping):
+                content_awares: List[ContentAware] = [o for o in child.values() if isinstance(o, ContentAware)]
+                for item in content_awares:
+                    eligibility_data.extend(item.get_eligibility())
         return eligibility_data
 
     def _format(self) -> Tuple['ContentAware', bool, Optional['ContentAware']]:
         return self, self._eligible, self._invalidated_by
 
-    def set_eligibility(self, corpus: Corpus):
+    def set_eligibility(self, corpus: Corpus) -> bool:
         self._invalidated_by = None
         self._eligible: bool = self._set_eligibility(corpus)
-        if self._eligible:
-            for _, obj in self.__dict__.items():
-                if isinstance(obj, ContentAware) and not obj._eligible and obj._invalidates_parent:
+        for _, child in self.__dict__.items():
+            if isinstance(child, ContentAware):
+                child_eligibility: bool = child.set_eligibility(corpus)
+                if not child_eligibility and child._invalidates_parent:
                     self._eligible = False
-                    self._invalidated_by = obj
+                    self._invalidated_by = child
+            elif isinstance(child, abc.Mapping):  # ex. Atoms
+                content_awares: List[ContentAware] = [o for o in child.values() if isinstance(o, ContentAware)]
+                for item in content_awares:
+                    res: bool = item.set_eligibility(corpus=corpus)
+                    if not res and item._invalidates_parent:
+                        self._eligible = False
+                        self._invalidated_by = child
+
+        return self._eligible

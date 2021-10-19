@@ -29,7 +29,7 @@ E = TypeVar('E', bound=CorpusEvent)
 class CorpusUnpickler(pickle.Unpickler):
     safe_modules = ['logging', 'numpy.core.multiarray', 'numpy']
     safe_builtins = ['range', 'complex', 'set', 'frozenset', 'slice']
-    safe_somax_modules = ['somax.runtime', 'somax.features', 'somax.corpus_builder']
+    safe_somax_modules = ['somax.runtime', 'somax.features', 'somax.corpus_builder', 'somax.scheduler']
 
     @staticmethod
     def valid_somax_module(module: str) -> bool:

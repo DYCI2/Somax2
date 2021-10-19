@@ -98,7 +98,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
 class CorpusBuilder:
     MIDI_FILE_EXTENSIONS = [".mid", ".midi"]
     AUDIO_FILE_EXTENSIONS = [".mp3", ".aif", ".aiff", ".wav", ".flac"]
-    CORPUS_FILE_EXTENSIONS = [".json", ".gz", ".pickle"]
+    CORPUS_FILE_EXTENSIONS = [".gz", ".pickle"]
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)

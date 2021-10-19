@@ -71,8 +71,8 @@ class AudioEvent(RendererEvent):
         return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
                                 content=[self.event.state_index, self.applied_transform.renderer_info()]),
                 RendererMessage(keyword=SendProtocol.SEND_AUDIO_EVENT,
-                                content=[self.event.onset,
-                                         self.event.onset + self.event.duration,
+                                content=[self.event.onset * 1000,
+                                         (self.event.onset + self.event.duration) * 1000,
                                          self.applied_transform.renderer_info()])]
 
 

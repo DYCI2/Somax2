@@ -53,6 +53,10 @@ class SchedulingHandler(Introspective, ABC):
                 handle this case in a particular manner. This function will be called instead of `_on_trigger_received`.
                 C.f. ManualSchedulingHandler and AutomaticSchedulingHandler"""
 
+    @abstractmethod
+    def renderer_info(self) -> str:
+        """ Returns the name of the schedulling mode as it should be represented in the front-end """
+
     # Note: pseudo-abstract function, i.e. abstract with default definition
     def _handle_output(self, output_events: List[ScheduledEvent]) -> List[ScheduledEvent]:
         """ if the `SchedulingHandler` has need to queue messages to itself,
@@ -196,6 +200,9 @@ class ManualSchedulingHandler(SchedulingHandler):
     def _reschedule(self, trigger_event: TriggerEvent) -> None:
         pass
 
+    def renderer_info(self) -> str:
+        return "manual"
+
 
 class AutomaticSchedulingHandler(SchedulingHandler):
     def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
@@ -235,3 +242,8 @@ class AutomaticSchedulingHandler(SchedulingHandler):
     def _default_trigger(self) -> TriggerEvent:
         current_time: float = self._scheduler.time
         return TriggerEvent(trigger_time=current_time - self._trigger_pretime(), target_time=current_time)
+
+    def renderer_info(self) -> str:
+        return "automatic"
+
+

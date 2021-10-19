@@ -21,7 +21,7 @@ from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
-    InvalidCorpus, InvalidLabelInput, TransformError
+    InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
@@ -377,14 +377,20 @@ class OscAgent(Agent, AsyncioOscObject):
 
         try:
             _, file_extension = os.path.splitext(filepath)
-            corpus: Corpus = MidiCorpus.from_json(filepath, volatile)
-        except (IOError, InvalidCorpus) as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
+            if file_extension == ".gz":
+                corpus: Corpus = MidiCorpus.from_json(filepath, volatile)
+            elif file_extension == ".pickle":
+                corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile)
+            else:
+                raise IOError(f"Invalid file extension '{file_extension}'")
+        except (IOError, InvalidCorpus, ExternalDataMismatch) as e:
             self.logger.error(f"{str(e)}. No corpus was read.")
             return
 
         self.clear()
         self.scheduling_handler.set_scheduling_mode(corpus.scheduling_mode)
 
+        self.player.set_eligibility(corpus)
         self.player.read_corpus(corpus)
         self.flush()
         self._send_eligibility()
@@ -416,8 +422,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
         self.flush()
         self.scheduling_handler = new_handler
-        self.logger.info(f"[set_scheduling_handler] Scheduling handler set to "
-                         f"'{self.scheduling_handler.__class__.__name__}'")
+        self.logger.info(f"Scheduling mode set to {self.scheduling_handler.renderer_info()}")
 
     def set_held_notes_mode(self, enable: bool):
         self.scheduling_handler.hold_notes_artificially = enable
@@ -495,6 +500,10 @@ class OscAgent(Agent, AsyncioOscObject):
                                                           corpus.filepath if isinstance(corpus, AudioCorpus) else None])
 
     def _send_eligibility(self):
+        corpus: Optional[Corpus] = self.player.corpus
+        if self.player.corpus is not None:
+            self.player.set_eligibility(corpus)
+
         eligiblity: List[Tuple[ContentAware, bool, Optional[ContentAware]]] = self.player.get_eligibility()
         for obj, status, _ in eligiblity:
             self.target.send(SendProtocol.ELIGIBLE, [str(obj), status])

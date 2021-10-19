@@ -51,7 +51,6 @@ class Player(Parametric, ContentAware):
                                             description="Enables this Player.")
 
         self._parse_parameters()
-        self.set_eligibility(self.corpus)
 
     def __repr__(self):
         return f"{type(self).__name__}(name={self.name}, ...)"
@@ -182,7 +181,6 @@ class Player(Parametric, ContentAware):
         self.corpus = corpus
         for atom in self.atoms.values():
             atom.read_corpus(corpus)
-        self.set_eligibility(self.corpus)
 
     def create_atom(self, path: List[str], weight: float, self_influenced: bool, classifier: AbstractClassifier,
                     activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
@@ -200,7 +198,6 @@ class Player(Parametric, ContentAware):
                                          activity_pattern=activity_pattern, memory_space=memory_space,
                                          corpus=self.corpus, self_influenced=self_influenced, enabled=enabled)
         self._parse_parameters()
-        self.set_eligibility(self.corpus)
 
     def delete_atom(self, path: List[str]) -> None:
         """ Raises: KeyError, IndexError """
@@ -210,12 +207,10 @@ class Player(Parametric, ContentAware):
 
         del self.atoms[atom_name]  # raises KeyError
         self._parse_parameters()
-        self.set_eligibility(self.corpus)
 
     def set_peak_selector(self, peak_selector: AbstractPeakSelector) -> None:
         self.peak_selector = peak_selector
         self._parse_parameters()
-        self.set_eligibility(self.corpus)
 
     def add_scale_action(self, scale_action: AbstractScaleAction, override: bool = False):
         """ Raises: DuplicateKeyError """
@@ -227,19 +222,16 @@ class Player(Parametric, ContentAware):
         self.scale_actions[type(scale_action)] = scale_action
 
         self._parse_parameters()
-        self.set_eligibility(self.corpus)
 
     def remove_scale_action(self, scale_action_type: Type[AbstractScaleAction]):
         """ Raises: KeyError """
         del self.scale_actions[scale_action_type]
         del self.parameter_dict[scale_action_type.__name__]
         self._parse_parameters()
-        self.set_eligibility(self.corpus)
 
     def set_merge_action(self, merge_action: AbstractMergeAction) -> None:
         self.merge_action = merge_action
         self._parse_parameters()
-        self.set_eligibility(self.corpus)
 
     def set_classifier(self, path: List[str], classifier: AbstractClassifier) -> None:
         """ Raises: KeyError, IndexError """
@@ -247,7 +239,6 @@ class Player(Parametric, ContentAware):
         atom.set_classifier(classifier)
         atom.update_transforms(self._transform_handler)
         self._parse_parameters()
-        self.set_eligibility(self.corpus)
 
     def set_memory_space(self, path: List[str], memory_space: AbstractMemorySpace) -> None:
         """ Raises: KeyError, IndexError """
@@ -255,7 +246,6 @@ class Player(Parametric, ContentAware):
         atom.set_memory_space(memory_space)
         atom.update_transforms(self._transform_handler)
         self._parse_parameters()
-        self.set_eligibility(self.corpus)
 
     def set_activity_pattern(self, path: List[str], activity_pattern: AbstractActivityPattern) -> None:
         """ Raises: KeyError, IndexError """
@@ -263,7 +253,6 @@ class Player(Parametric, ContentAware):
         atom.set_activity_pattern(activity_pattern)
         atom.update_transforms(self._transform_handler)
         self._parse_parameters()
-        self.set_eligibility(self.corpus)
 
     def add_transform(self, transform: AbstractTransform):
         """ :raises TransformError if a transform of the same instance with the same parameters already exists """
