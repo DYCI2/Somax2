@@ -116,7 +116,7 @@ class TransposeTransform(AbstractTransform):
         return f"{self.__class__.__name__}(semitones={self.semitones})"
 
     def renderer_info(self) -> Any:
-        return self.semitones
+        return self.semitones * 100
 
     @staticmethod
     def valid_features() -> List[Type[FeatureValue]]:

@@ -18,7 +18,7 @@ from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus, MidiCorpus
+from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError
@@ -33,8 +33,7 @@ from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
-from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiNoteEvent, RendererEvent, TriggerEvent, \
-    MidiSliceOnsetEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, RendererEvent, TriggerEvent
 from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
 from somax.scheduler.scheduling_mode import SchedulingMode
 from somax.scheduler.time_object import Time
@@ -176,17 +175,15 @@ class OscAgent(Agent, AsyncioOscObject):
             self.terminate()
 
     def _send_events(self, events: List[ScheduledEvent]):
+        """ raises RuntimeError if `events` contains an object that is not an instance of `TempoMessage`
+                   or `RendererEvent` """
         for event in events:
             if isinstance(event, TempoEvent) and self.is_tempo_master:
                 self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
-            if isinstance(event, MidiNoteEvent):
-                self.target.send(SendProtocol.SEND_MIDI_EVENT, [event.note, event.velocity, event.channel])
-            if isinstance(event, MidiSliceOnsetEvent):
-                self.target.send(SendProtocol.SEND_STATE_EVENT, [event.event.state_index,
-                                                                 event.applied_transform.renderer_info()])
-                notes: List[Tuple[int, int, int]] = [(n.pitch, n.velocity, n.channel) for n in event.event.notes]
-                # " ".join([f"{n[0]} {n[1]} {n[2]}" for n in notes])    # TODO: Remove if flatten works correctly
-                self.target.send(SendProtocol.SEND_STATE_ONSET, notes)
+            elif isinstance(event, RendererEvent):
+                self.target.send_event(event)
+            else:
+                raise RuntimeError(f"Invalid event type '{event.__class__}' encountered")
 
     ######################################################
     # SCHEDULER & PLAYBACK CONTROL
@@ -394,7 +391,6 @@ class OscAgent(Agent, AsyncioOscObject):
         self.send_current_corpus_info()
         self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
 
-
     def set_param(self, path: str, value: Any):
         self.logger.debug(f"[set_param] Attempting to set parameter for player '{self.player.name}' at '{path}' "
                           f"to {value} (type={type(value)})...")
@@ -493,8 +489,10 @@ class OscAgent(Agent, AsyncioOscObject):
     def send_current_corpus_info(self):
         corpus: Optional[Corpus] = self.player.corpus
         if corpus is not None:
-            self.target.send(SendProtocol.PLAYER_CORPUS, [corpus.name, corpus.scheduling_mode.encode(),
-                                                          corpus.length()])
+            self.target.send(SendProtocol.PLAYER_CORPUS, [corpus.name,
+                                                          corpus.__class__.__name__,
+                                                          corpus.length(),
+                                                          corpus.filepath if isinstance(corpus, AudioCorpus) else None])
 
     def _send_eligibility(self):
         eligiblity: List[Tuple[ContentAware, bool, Optional[ContentAware]]] = self.player.get_eligibility()

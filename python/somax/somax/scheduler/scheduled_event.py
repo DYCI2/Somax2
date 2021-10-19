@@ -68,7 +68,12 @@ class AudioEvent(RendererEvent):
         self.applied_transform: AbstractTransform = applied_transform
 
     def render(self) -> List[RendererMessage]:
-        raise NotImplementedError
+        return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
+                                content=[self.event.state_index, self.applied_transform.renderer_info()]),
+                RendererMessage(keyword=SendProtocol.SEND_AUDIO_EVENT,
+                                content=[self.event.onset,
+                                         self.event.onset + self.event.duration,
+                                         self.applied_transform.renderer_info()])]
 
 
 class TriggerEvent(ScheduledEvent, ABC):

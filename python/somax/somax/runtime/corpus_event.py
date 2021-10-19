@@ -110,10 +110,6 @@ class CorpusEvent(ABC):
     def duration(self) -> float:
         """ """
 
-    @abstractmethod
-    def renderer_info(self) -> str:
-        """ """
-
     def get_feature(self, feature_type: Type[FeatureValue]) -> FeatureValue:
         """Raises KeyError"""
         try:
@@ -187,9 +183,6 @@ class MidiCorpusEvent(CorpusEvent):
     def duration(self) -> float:
         return self._relative_duration
 
-    def renderer_info(self) -> str:
-        raise NotImplementedError("Not implemented yet")
-
     def append_raw(self, note: pd.Series) -> None:
         self.notes.append(Note.from_raw(note, self._relative_onset, self.absolute_onset))
 
@@ -241,6 +234,3 @@ class AudioCorpusEvent(CorpusEvent):
     @property
     def duration(self) -> float:
         return self._absolute_duration
-
-    def renderer_info(self) -> str:
-        raise NotImplementedError("Not implemented yet")  # TODO[Audio] During Scheduling

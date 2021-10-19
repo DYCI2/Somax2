@@ -23,6 +23,7 @@ class SendProtocol:
     SEND_MIDI_EVENT = "midi"
     SEND_STATE_EVENT = "state"
     SEND_STATE_ONSET = "state_onset"
+    SEND_AUDIO_EVENT = "audio"
 
     # Server Info
     SERVER_STATUS = "server_status"
