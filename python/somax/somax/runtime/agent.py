@@ -26,6 +26,7 @@ from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.osc_log_forwarder import OscLogForwarder
+from somax.runtime.parameter import Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
 from somax.runtime.scale_actions import AbstractScaleAction
@@ -240,7 +241,7 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
         try:
-            path_and_name: List[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._string_to_path(path)
             time: float = self.scheduling_handler.time
             self.player.influence(path_and_name, influence, time, **kwargs)
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
@@ -263,7 +264,7 @@ class OscAgent(Agent, AsyncioOscObject):
                     activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
                     enabled: bool = True, override: bool = False, **kwargs):
         try:
-            path_and_name: List[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._string_to_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
@@ -278,7 +279,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def delete_atom(self, path: str):
         try:
-            path_and_name: List[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._string_to_path(path)
             self.player.delete_atom(path_and_name)
             self._send_eligibility()
             self.logger.info(f"Deleted atom with path '{path}'.")
@@ -302,7 +303,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def set_classifier(self, path: str, classifier: str, **kwargs):
         try:
-            path_and_name: List[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._string_to_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             self.player.set_classifier(path_and_name, classifier)
             self._send_eligibility()
@@ -313,7 +314,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def set_activity_pattern(self, path: str, activity_pattern: str, **kwargs):
         try:
-            path_and_name: List[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._string_to_path(path)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)
             self.player.set_activity_pattern(path_and_name, activity_pattern)
             self._send_eligibility()
@@ -401,7 +402,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.logger.debug(f"[set_param] Attempting to set parameter for player '{self.player.name}' at '{path}' "
                           f"to {value} (type={type(value)})...")
         try:
-            path_and_name: List[str] = self._parse_streamview_atom_path(path)
+            path_and_name: List[str] = self._string_to_path(path)
             self.player.set_param(path_and_name, value)
         except (AssertionError, IndexError, ParameterError) as e:
             self.logger.error(f"{str(e)} Could not set parameter.")
@@ -439,7 +440,7 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     @staticmethod
-    def _parse_streamview_atom_path(path: str) -> List[str]:
+    def _string_to_path(path: str) -> List[str]:
         """ :raises AssertionError if `path` is non-empty and not of type `str`. """
         assert isinstance(path, str), "Argument 'path' should be a string."
         if not path:
@@ -448,6 +449,10 @@ class OscAgent(Agent, AsyncioOscObject):
             return [s for s in path.split(settings.PATH_SEPARATOR) if s]
         else:
             return [path]
+        
+    @staticmethod
+    def _path_to_string(path: List[str]) -> str:
+        return settings.PATH_SEPARATOR.join(path)
 
     ######################################################
     # MAX GETTERS
@@ -469,7 +474,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def get_param(self, path: str):
         try:
-            parameter_path: List[str] = self._parse_streamview_atom_path(path)
+            parameter_path: List[str] = self._string_to_path(path)
             self.target.send(SendProtocol.PLAYER_SINGLE_PARAMETER, [path, self.player.get_param(parameter_path).value])
         except (IndexError, KeyError):
             self.logger.error(f"Could not get parameter at given path.")
@@ -504,9 +509,22 @@ class OscAgent(Agent, AsyncioOscObject):
         if self.player.corpus is not None:
             self.player.set_eligibility(corpus)
 
-        eligiblity: List[Tuple[ContentAware, bool, Optional[ContentAware]]] = self.player.get_eligibility()
-        for obj, status, _ in eligiblity:
-            self.target.send(SendProtocol.ELIGIBLE, [str(obj), status])
+        for path in self.player.get_children_paths([]):
+            # Default all parameters to eligible
+            self.target.send(SendProtocol.ELIGIBLE, [self._path_to_string(path), True])
+
+        not_eligible: List[ContentAware] = [e[0] for e in self.player.get_eligibility() if not e[1]]
+        not_eligible: List[Parametric] = [e for e in not_eligible if isinstance(e, Parametric)]
+
+        paths: List[List[str]] = []
+        for ne in not_eligible:
+            ne_path: List[str] = self.player.get_parameter_path(target_obj=ne)
+            paths.extend(ne.get_children_paths(ne_path))
+        paths = [list(e) for e in set(tuple(e) for e in paths)]
+
+        for path in paths:
+            # Send not eligible status for ineligible parameters
+            self.target.send(SendProtocol.ELIGIBLE, [self._path_to_string(path), False])
 
     ######################################################
     # OTHER

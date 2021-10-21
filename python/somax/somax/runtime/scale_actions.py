@@ -10,7 +10,7 @@ from somax.features import MaxVelocity, VerticalDensity
 from somax.features.spectral_features import OctaveBands
 from somax.features.temporal_features import Tempo
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus
+from somax.runtime.corpus import Corpus, MidiCorpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import FeedbackQueue
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
@@ -88,7 +88,7 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.logger.debug("[__init__] Creating PhaseMergeAction with selectivity {}".format(selectivity))
-        self._selectivity: Parameter = Parameter(selectivity, None, None, 'float', "Very unclear parameter.")  # TODO
+        self._selectivity: Parameter = Parameter(selectivity, None, None, 'float', "Phase modulation")  # TODO
         self._parse_parameters()
 
     def scale(self, peaks: Peaks, time: float, _corresponding_events: List[CorpusEvent],
@@ -107,7 +107,7 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         pass
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return True  # valid for all types of corpora
+        return isinstance(corpus, MidiCorpus)
 
     @property
     def selectivity(self):

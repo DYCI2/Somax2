@@ -1,6 +1,7 @@
 import builtins
 import copy
 import gzip
+import importlib
 import json
 import logging
 import os
@@ -39,7 +40,11 @@ class CorpusUnpickler(pickle.Unpickler):
         if module == 'builtins' and name in self.safe_builtins:
             return getattr(builtins, name)
         elif self.valid_somax_module(module) or module in self.safe_modules:
-            return getattr(sys.modules[module], name)
+            try:
+                return getattr(sys.modules[module], name)
+            except KeyError:
+                importlib.import_module(module)
+                return getattr(sys.modules[module], name)
         raise pickle.UnpicklingError(f"Module '{module}.{name}' is not supported")
 
 

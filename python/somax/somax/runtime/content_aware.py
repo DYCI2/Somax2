@@ -29,6 +29,8 @@ class ContentAware(ABC):
         return self._eligible
 
     def get_eligibility(self) -> List[Tuple['ContentAware', bool, Optional['ContentAware']]]:
+        """ returns: flattened list of all eligibility objects on format
+            `object, eligibility_status, invalidated_by`"""
         eligibility_data: List[Tuple['ContentAware', bool, Optional['ContentAware']]] = [self._format()]
         for _, child in self.__dict__.items():
             if isinstance(child, ContentAware):
@@ -45,7 +47,7 @@ class ContentAware(ABC):
     def set_eligibility(self, corpus: Corpus) -> bool:
         self._invalidated_by = None
         self._eligible: bool = self._set_eligibility(corpus)
-        for _, child in self.__dict__.items():
+        for z, child in self.__dict__.items():
             if isinstance(child, ContentAware):
                 child_eligibility: bool = child.set_eligibility(corpus)
                 if not child_eligibility and child._invalidates_parent:
