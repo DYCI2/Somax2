@@ -8,7 +8,7 @@ class SendProtocol:
     INSTANTIATED_ATOMS = "instantiated_atoms"
     PLAYER_CORPUS = "corpus"
     PLAYER_RECORDED_CORPUS_LENGTH = "recorded_corpus"
-    ELIGIBLE = "eligible"
+    ELIGIBILITY = "eligibility"
 
     # Scheduling
     SCHEDULER_RUNNING = "scheduler_running"

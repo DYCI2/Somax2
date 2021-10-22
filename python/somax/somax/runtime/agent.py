@@ -511,20 +511,20 @@ class OscAgent(Agent, AsyncioOscObject):
 
         for path in self.player.get_children_paths([]):
             # Default all parameters to eligible
-            self.target.send(SendProtocol.ELIGIBLE, [self._path_to_string(path), True])
+            self.target.send(SendProtocol.ELIGIBILITY, [self._path_to_string(path), True])
 
         not_eligible: List[ContentAware] = [e[0] for e in self.player.get_eligibility() if not e[1]]
         not_eligible: List[Parametric] = [e for e in not_eligible if isinstance(e, Parametric)]
 
-        paths: List[List[str]] = []
+        ne_paths: List[List[str]] = []
         for ne in not_eligible:
             ne_path: List[str] = self.player.get_parameter_path(target_obj=ne)
-            paths.extend(ne.get_children_paths(ne_path))
-        paths = [list(e) for e in set(tuple(e) for e in paths)]
+            ne_paths.extend(ne.get_children_paths(ne_path))
+        ne_paths = [list(e) for e in set(tuple(e) for e in ne_paths)]
 
-        for path in paths:
+        for path in ne_paths:
             # Send not eligible status for ineligible parameters
-            self.target.send(SendProtocol.ELIGIBLE, [self._path_to_string(path), False])
+            self.target.send(SendProtocol.ELIGIBILITY, [self._path_to_string(path), False])
 
     ######################################################
     # OTHER
