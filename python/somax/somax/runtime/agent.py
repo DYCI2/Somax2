@@ -143,7 +143,7 @@ class OscAgent(Agent, AsyncioOscObject):
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self.player.new_event(scheduling_time, scheduler_tempo)
         except InvalidCorpus as e:
-            self.logger.error(str(e))
+            self.logger.debug(str(e))
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
             return
 
