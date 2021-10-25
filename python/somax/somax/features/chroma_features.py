@@ -1,22 +1,20 @@
+import warnings
+from abc import abstractmethod
 from typing import Dict, Any, Union, List
 
 import librosa
 import numpy as np
 
-from somax.corpus_builder.midi_chromagram import MidiChromagram
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
+from somax.corpus_builder.midi_chromagram import MidiChromagram
 from somax.features.feature import CorpusFeature, RuntimeFeature, FeatureUtils
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
-class OnsetChroma(CorpusFeature, RuntimeFeature):
-    def __init__(self, value: Union[np.ndarray, list]):
+class BaseChroma(CorpusFeature, RuntimeFeature):
+    def __init__(self, value: Union[np.ndarray, List[float]]):
         super().__init__(value=np.array(value))
-
-    @staticmethod
-    def keyword() -> str:
-        return "chroma"
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
@@ -33,6 +31,35 @@ class OnsetChroma(CorpusFeature, RuntimeFeature):
         return events
 
     @classmethod
+    def decode(cls, trait_dict: Dict[str, Any]) -> 'BaseChroma':
+        return cls(value=np.array(trait_dict[cls.keyword()]))
+
+    @classmethod
+    @abstractmethod
+    def _analyze_midi(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> None:
+        """ """
+
+    @classmethod
+    @abstractmethod
+    def _analyze_audio(cls, events: List[AudioCorpusEvent], metadata: AudioMetadata) -> None:
+        """ """
+
+    def encode(self) -> Dict[str, Any]:
+        return {self.keyword(): self._value.tolist()}
+
+    def value(self) -> Any:
+        return self._value
+
+
+class OnsetChroma(BaseChroma):
+    def __init__(self, value: Union[np.ndarray, List[float]]):
+        super().__init__(value=np.array(value))
+
+    @staticmethod
+    def keyword() -> str:
+        return "chroma"
+
+    @classmethod
     def _analyze_midi(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata):
         # FIXME: the Chromagram class should be renamed MidiChromagram,
         #        be static and only return the chromagram as a np.ndarray
@@ -43,17 +70,34 @@ class OnsetChroma(CorpusFeature, RuntimeFeature):
     @classmethod
     def _analyze_audio(cls, events: List[AudioCorpusEvent], metadata: AudioMetadata):
         # shape: (12, k) where k is measured in frames
-        chroma_cqt = librosa.feature.chroma_cqt(metadata.background_data, metadata.sr, hop_length=metadata.hop_length)
+        chroma = librosa.feature.chroma_stft(metadata.background_data, metadata.sr, hop_length=metadata.hop_length,
+                                             n_chroma=12, n_fft=8192)  # TODO: Pass as parameters
         for event in events:
-            onset_frame: float = librosa.time_to_frames(event.onset, hop_length=metadata.hop_length)
-            event.set_feature(cls(chroma_cqt[:, onset_frame]))
+            onset_frame: int = librosa.time_to_frames(event.onset, hop_length=metadata.hop_length)
+            event.set_feature(cls(chroma[:, onset_frame]))
+
+
+class MeanChroma(BaseChroma):
+    def __init__(self, value: Union[np.ndarray, List[float]]):
+        super().__init__(value=np.array(value))
+
+    @staticmethod
+    def keyword() -> str:
+        return "meanchroma"
 
     @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'OnsetChroma':
-        return cls(value=np.array(trait_dict["chroma"]))
+    def _analyze_midi(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> None:
+        raise NotImplementedError("Not implemented yet")
 
-    def encode(self) -> Dict[str, Any]:
-        return {"chroma": self._value.tolist()}
-
-    def value(self) -> np.ndarray:
-        return self._value
+    @classmethod
+    def _analyze_audio(cls, events: List[AudioCorpusEvent], metadata: AudioMetadata) -> None:
+        # shape: (12, k) where k is measured in frames
+        chroma = librosa.feature.chroma_stft(metadata.background_data, metadata.sr, hop_length=metadata.hop_length,
+                                             n_chroma=12, n_fft=8192)  # TODO: Parameters should be accessible
+        for event in events:
+            # TODO: For precision, this should probably interpolate the end/start
+            #  frames depending on how huge part of them are part of the frame
+            onset_frame: int = librosa.time_to_frames(event.onset, hop_length=metadata.hop_length)
+            end_frame: int = librosa.time_to_frames(event.onset + event.duration, hop_length=metadata.hop_length)
+            warnings.warn("This has not been tested yet - make sure that the mean really is the mean")
+            event.set_feature(cls(np.mean(chroma[:, onset_frame:end_frame], axis=1)))
