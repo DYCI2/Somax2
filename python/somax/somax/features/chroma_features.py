@@ -1,4 +1,3 @@
-import warnings
 from abc import abstractmethod
 from typing import Dict, Any, Union, List
 
@@ -95,10 +94,12 @@ class MeanChroma(BaseChroma):
         chroma = librosa.feature.chroma_stft(metadata.background_data, metadata.sr, hop_length=metadata.hop_length,
                                              n_chroma=12, n_fft=8192)  # TODO: Parameters should be accessible
         for event in events:
-            # TODO: For precision, this should probably interpolate the end/start
-            #  frames depending on how huge part of them are part of the frame
             onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
             end_frame: int = librosa.time_to_frames(event.onset + event.duration, sr=metadata.sr,
                                                     hop_length=metadata.hop_length)
-            warnings.warn("This has not been tested yet - make sure that the mean really is the mean")
-            event.set_feature(cls(np.mean(chroma[:, onset_frame:end_frame], axis=1)))
+            mean_chroma: np.ndarray = np.mean(chroma[:, onset_frame:end_frame], axis=1)
+            max_val: float = np.max(mean_chroma)
+            if max_val > 1e-6:
+                mean_chroma /= max_val
+
+            event.set_feature(cls(mean_chroma))
