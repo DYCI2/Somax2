@@ -73,7 +73,7 @@ class OnsetChroma(BaseChroma):
         chroma = librosa.feature.chroma_stft(metadata.background_data, metadata.sr, hop_length=metadata.hop_length,
                                              n_chroma=12, n_fft=8192)  # TODO: Pass as parameters
         for event in events:
-            onset_frame: int = librosa.time_to_frames(event.onset, hop_length=metadata.hop_length)
+            onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
             event.set_feature(cls(chroma[:, onset_frame]))
 
 
@@ -97,7 +97,8 @@ class MeanChroma(BaseChroma):
         for event in events:
             # TODO: For precision, this should probably interpolate the end/start
             #  frames depending on how huge part of them are part of the frame
-            onset_frame: int = librosa.time_to_frames(event.onset, hop_length=metadata.hop_length)
-            end_frame: int = librosa.time_to_frames(event.onset + event.duration, hop_length=metadata.hop_length)
+            onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
+            end_frame: int = librosa.time_to_frames(event.onset + event.duration, sr=metadata.sr,
+                                                    hop_length=metadata.hop_length)
             warnings.warn("This has not been tested yet - make sure that the mean really is the mean")
             event.set_feature(cls(np.mean(chroma[:, onset_frame:end_frame], axis=1)))

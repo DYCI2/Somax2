@@ -274,7 +274,7 @@ class CorpusBuilder:
         else:
             raise ValueError("Invalid segmentation type")
 
-        onset_frames, frame_durations = self._compute_slice_durations(y, hop_length=hop_length,
+        onset_frames, frame_durations = self._compute_slice_durations(y, sr, hop_length=hop_length,
                                                                       onsets=onset_frames,
                                                                       min_size_s=min_interval_s,
                                                                       max_size_s=max_size_s,
@@ -292,7 +292,7 @@ class CorpusBuilder:
         return onset_frames, frame_durations, statistics
 
     @staticmethod
-    def _compute_slice_durations(y: np.ndarray, hop_length: float, onsets: np.ndarray,
+    def _compute_slice_durations(y: np.ndarray, sr: float, hop_length: float, onsets: np.ndarray,
                                  min_size_s: Optional[float] = None, max_size_s: Optional[float] = None,
                                  off_threshold_db: Optional[float] = None, discard_by_mean: bool = True,
                                  **_kwargs) -> Tuple[np.ndarray, np.ndarray]:
@@ -304,7 +304,7 @@ class CorpusBuilder:
         durations = np.diff(np.block([onsets, eof]))
 
         if max_size_s is not None:
-            max_size_frames = librosa.time_to_frames(max_size_s, hop_length=hop_length)
+            max_size_frames = librosa.time_to_frames(max_size_s, sr=sr, hop_length=hop_length)
             durations[durations > max_size_frames] = max_size_frames
 
         if off_threshold_db is not None:
