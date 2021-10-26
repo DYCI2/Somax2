@@ -49,7 +49,7 @@ class MeanEnergyDb(CorpusFeature):
         elif FeatureUtils.is_valid_audio(events, metadata):
             metadata: AudioMetadata = metadata  # TODO: How do we cast this properly?
             # TODO: Parameters should not be hard-coded
-            rms: np.ndarray = librosa.power_to_db(librosa.feature.rms(y=metadata.raw_data,
+            rms: np.ndarray = librosa.power_to_db(librosa.feature.rms(y=metadata.foreground_data,
                                                                       frame_length=2048,
                                                                       hop_length=metadata.hop_length).reshape(-1) ** 2)
             for event in events:  # type: AudioCorpusEvent
