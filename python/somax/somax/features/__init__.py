@@ -1,5 +1,5 @@
 from .chroma_features import OnsetChroma, MeanChroma
-from .energy_features import MaxVelocity, MeanEnergyDb, VerticalDensity
+from .energy_features import MaxVelocity, MeanPowerDb, VerticalDensity
 from .pitch_features import TopNote, AbstractIntegerPitch, RuntimeIntegerPitch, VirtualFundamental, \
     BassNote, YinDiscretePitch
 from .spectral_features import OctaveBands

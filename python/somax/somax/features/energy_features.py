@@ -1,4 +1,4 @@
-import warnings
+import typing
 from typing import Any, Dict, List, Union
 
 import librosa
@@ -38,7 +38,7 @@ class MaxVelocity(CorpusFeature):
         return self._value
 
 
-class MeanEnergyDb(CorpusFeature):
+class MeanPowerDb(CorpusFeature):
     def __init__(self, value: float):
         super().__init__(value=value)
 
@@ -47,7 +47,7 @@ class MeanEnergyDb(CorpusFeature):
         if FeatureUtils.is_valid_midi(events, metadata):
             raise NotImplementedError("Not implemented yet")
         elif FeatureUtils.is_valid_audio(events, metadata):
-            metadata: AudioMetadata = metadata  # TODO: How do we cast this properly?
+            metadata: AudioMetadata = typing.cast(AudioMetadata, metadata)
             # TODO: Parameters should not be hard-coded
             rms: np.ndarray = librosa.power_to_db(librosa.feature.rms(y=metadata.foreground_data,
                                                                       frame_length=2048,
@@ -56,8 +56,9 @@ class MeanEnergyDb(CorpusFeature):
                 onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
                 end_frame: int = librosa.time_to_frames(event.onset + event.duration, sr=metadata.sr,
                                                         hop_length=metadata.hop_length)
-                warnings.warn("This has not been tested yet - make sure that it works")
                 event.set_feature(cls(float(np.mean(rms[onset_frame:end_frame]))))
+
+        return events
 
     @classmethod
     def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
