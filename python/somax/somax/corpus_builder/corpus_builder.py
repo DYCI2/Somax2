@@ -104,23 +104,54 @@ class CorpusBuilder:
         self.logger = logging.getLogger(__name__)
 
     def build(self, filepath: str, corpus_name: Optional[str] = None, **kwargs) -> Corpus:
-        """ :raises TODO!!! """
-        # TODO: Handle folders
+        """ :raises TODO!!!
+                    IOError if folder mixes audio and midi files or folder is empty"""
         if os.path.isdir(filepath):
-            raise NotImplementedError("Building corpora from folders is not supported yet.")
+            filepaths, content_type = self._folder_content(filepath)  # type: List[str], Optional[Type[Corpus]]
+            name: str = corpus_name if corpus_name is not None else os.path.basename(filepath)
         else:
-            filename, extension = os.path.splitext(filepath.split("/")[-1])
-            name = corpus_name if corpus_name is not None else filename
-            if extension in CorpusBuilder.MIDI_FILE_EXTENSIONS:
-                corpus: Corpus = self._build_midi(filepath, name, **kwargs)
-            elif extension in CorpusBuilder.AUDIO_FILE_EXTENSIONS:
-                corpus: Corpus = self._build_audio(filepath, name, **kwargs)
-            else:
-                raise IOError("Invalid file format. Valid extensions are {}.".format(
-                    "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
+            content_type = self._parse_content_type(filepath)
+            filepaths = [filepath]
+            name = corpus_name if corpus_name is not None else os.path.splitext(os.path.basename(filepath))[0]
+
+        if content_type == MidiCorpus:
+            corpus: Corpus = self._build_midi(filepaths, name, **kwargs)
+        elif content_type == AudioCorpus:
+            corpus: Corpus = self._build_audio(filepaths, name, **kwargs)
+        else:
+            raise IOError("Invalid file format. Valid extensions are {}.".format(
+                "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
         return corpus
 
-    def _build_midi(self, filepath: str, name: str,
+    def _folder_content(self, filepath: str) -> Tuple[List[str], Optional[Type[Corpus]]]:
+        """ raises: IOError if folder mixes audio and midi files """
+        content_type: Optional[Type[Corpus]] = None
+        filepaths: List[str] = []
+        for file in os.listdir(filepath):
+            file_content_type: Optional[Type[Corpus]] = self._parse_content_type(file)
+            if file_content_type is None:
+                self.logger.warning(f"Ignoring file {file}: invalid type.")
+            elif (content_type is None or content_type == MidiCorpus) and file_content_type == MidiCorpus:
+                content_type = MidiCorpus
+                filepaths.append(os.path.join(filepath, file))
+            elif (content_type is None or content_type == AudioCorpus) and file_content_type == AudioCorpus:
+                content_type = AudioCorpus
+                filepaths.append(os.path.join(filepath, file))
+            else:
+                raise IOError("Building corpus from mix of audio and midi files is not supported.")
+
+        return filepaths, content_type
+
+    def _parse_content_type(self, filepath: str) -> Optional[Type[Corpus]]:
+        _, extension = os.path.splitext(filepath.split("/")[-1])
+        if extension.lower() in self.MIDI_FILE_EXTENSIONS:
+            return MidiCorpus
+        elif extension.lower() in self.AUDIO_FILE_EXTENSIONS:
+            return AudioCorpus
+        else:
+            return None
+
+    def _build_midi(self, filepaths: List[str], name: str,
                     foreground_channels: Tuple[int] = tuple(range(1, 17)),
                     background_channels: Tuple[int] = tuple(range(1, 17)),
                     spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
@@ -129,7 +160,7 @@ class CorpusBuilder:
         # TODO: Onset channels are not supported as means of segmentation (might also be a good thing)
         start_time: float = timer()
         self.logger.debug(f"[_build_midi]: ({0:.2f}) building MIDI corpus '{name}'...")
-        note_matrix: NoteMatrix = NoteMatrix.from_midi_file(filepath)
+        note_matrix: NoteMatrix = NoteMatrix.from_midi_files(filepaths)
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) note matrix with shape "
                           f"{note_matrix.shape} constructed")
 
@@ -148,7 +179,8 @@ class CorpusBuilder:
 
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) segmented MIDI into {len(events)} slices")
 
-        metadata: MidiMetadata = MidiMetadata(filepath=filepath, content_type=RelativeScheduling(), stft=stft)
+        # TODO: Folder support - should not use filepaths[0]
+        metadata: MidiMetadata = MidiMetadata(filepath=filepaths[0], content_type=RelativeScheduling(), stft=stft)
 
         used_features: List[Type[CorpusFeature]] = []
         for _, feature in CorpusFeature.all_corpus_features():  # type Type[CorpusFeature]
@@ -168,7 +200,7 @@ class CorpusBuilder:
 
         return corpus
 
-    def _build_audio(self, filepath: str, name: str, foreground_channels: Optional[List[int]] = None,
+    def _build_audio(self, filepaths: List[str], name: str, foreground_channels: Optional[List[int]] = None,
                      background_channels: Optional[List[int]] = None, onset_channels: Optional[List[int]] = None,
                      segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET, hop_length: int = 512,
                      **kwargs) -> Corpus:
@@ -183,7 +215,11 @@ class CorpusBuilder:
         # TODO: Spectrogram filtering
         start_time: float = timer()
         self.logger.debug(f"[_build_audio]: ({0:.2f}) Building audio corpus '{name}'...")
-        y, sr = librosa.load(filepath, sr=None, mono=False)
+
+        if len(filepaths) > 1:  # Temporary: needed to support offline corpus building but not supported in UI
+            self.logger.warning("Loading multiple audio files is not supported yet in the UI")
+
+        y, sr = self._load_audio_files(filepaths)
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) loaded file with sample rate {sr} "
                           f"and {AudioMetadata.num_channels(y)} channels")
         onset_frames: np.ndarray
@@ -206,7 +242,8 @@ class CorpusBuilder:
         # TODO: Allow passing of stft parameters (win_length, n_fft, window function, ...)
         stft: Spectrogram = Spectrogram.from_audio(background_data, sample_rate=sr, hop_length=hop_length, **kwargs)
 
-        metadata: AudioMetadata = AudioMetadata(filepath=filepath, content_type=AbsoluteScheduling(), raw_data=y,
+        # TODO: Folder support - should not use filepaths[0]
+        metadata: AudioMetadata = AudioMetadata(filepath=filepaths[0], content_type=AbsoluteScheduling(), raw_data=y,
                                                 foreground_data=foreground_data, background_data=background_data, sr=sr,
                                                 hop_length=hop_length, stft=stft)
 
@@ -231,14 +268,36 @@ class CorpusBuilder:
                                             "hop_length": hop_length,
                                             **kwargs
                                             }
+
+        # TODO: Folder support - should not use filepaths[0]
         corpus: AudioCorpus = AudioCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
                                           feature_types=used_features,
-                                          build_parameters=build_parameters, sr=sr, filepath=filepath,
+                                          build_parameters=build_parameters, sr=sr, filepath=filepaths[0],
                                           file_duration=metadata.duration, file_num_channels=metadata.channels)
 
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed construction of audio corpus")
 
         return corpus
+
+    def _load_audio_files(self, filepaths: List[str]) -> Tuple[np.ndarray, int]:
+        content: List[np.ndarray] = []
+        sr: Optional[int] = None
+        for filepath in filepaths:
+            y, sr_y = librosa.load(filepath, sr=None, mono=False)
+            if sr is not None and sr_y != sr:
+                self.logger.warning(f"Ignoring file '{filepath}' since it has a different sample rate "
+                                    f"({sr_y} compared to previously used value {sr})")
+            else:
+                sr = sr_y
+                content.append(y)
+
+        try:
+            if all([c.ndim == 1 for c in content]):
+                return np.concatenate(content), sr
+            else:
+                return np.concatenate(content, axis=1), sr
+        except ValueError:
+            raise IOError("All files must have the same number of channels")
 
     def test_audio_segmentation(self, filepath: str, onset_channels: Optional[List[int]] = None,
                                 segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET, hop_length: int = 512,
@@ -250,6 +309,7 @@ class CorpusBuilder:
                                              see https://github.com/librosa/librosa#audioread-and-mp3-support for info
                     ParameterError if no slices were detected
             return: (onsets, durations) in seconds """
+        # TODO: Folder support
         y, sr = librosa.load(filepath, sr=None, mono=False)
         onset_frames, duration_frames, stats = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
                                                                  segmentation_mode=segmentation_mode, **kwargs)
