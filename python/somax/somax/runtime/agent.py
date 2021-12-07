@@ -192,18 +192,21 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def start_scheduler(self):
         self.scheduling_handler.start()
+        self.target.send(SendProtocol.SCHEDULER_RUNNING, True)
 
     def pause_scheduler(self):
         self.scheduling_handler.pause()
+        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
 
     def stop_scheduler(self):
         events: List[ScheduledEvent] = self.scheduling_handler.stop()
         self._send_events(events)
         self.clear()
+        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
 
     def terminate(self):
+        self.stop_scheduler()
         super().terminate()
-        self.flush()
 
     def enabled(self, is_enabled):
         if is_enabled:
