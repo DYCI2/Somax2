@@ -78,7 +78,7 @@ class BassNote(AbstractIntegerPitch, CorpusFeature):
                            f"type {metadata.content_type.__class__.__name__}")
 
 
-class YinDiscretePitch(CorpusFeature):
+class YinDiscretePitch(AbstractIntegerPitch, CorpusFeature):
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
         if not FeatureUtils.is_valid_audio(events, metadata):
