@@ -60,8 +60,6 @@ class OnsetChroma(BaseChroma):
 
     @classmethod
     def _analyze_midi(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata):
-        # FIXME: the Chromagram class should be renamed MidiChromagram,
-        #        be static and only return the chromagram as a np.ndarray
         chromagram: MidiChromagram = MidiChromagram.from_midi(metadata.stft)
         for event in events:
             event.set_feature(cls(chromagram.at(event.absolute_onset)))

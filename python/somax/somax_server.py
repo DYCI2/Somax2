@@ -14,7 +14,7 @@ from audioread import NoBackendError
 
 import log
 import somax
-from somax.classification import SomChromaClassifier
+from somax.classification.chroma_classifiers import OnsetSomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
 from somax.runtime.agent import OscAgent, Agent
@@ -363,7 +363,7 @@ if __name__ == "__main__":
         logging.config.fileConfig(path.absolute())
 
     # Called to enforce file io at start of program
-    SomChromaClassifier()
+    OnsetSomChromaClassifier()
 
     parsed_args = parser.parse_args()
     in_port = parsed_args.in_port
