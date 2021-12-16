@@ -1,5 +1,5 @@
 import typing
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List
 
 import librosa
 import numpy as np
@@ -10,62 +10,47 @@ from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpus
 from somax.runtime.exceptions import FeatureError
 
 
-class MaxVelocity(CorpusFeature):
-    def __init__(self, value: float):
-        super().__init__(value=value)
-
-    @classmethod
-    def analyze(cls, events: Union[List[AudioCorpusEvent], List[MidiCorpusEvent]],
-                metadata: Metadata) -> List[CorpusEvent]:
-        if FeatureUtils.is_valid_midi(events, metadata):
-            for event in events:  # type: MidiCorpusEvent
-                event.set_feature(cls(value=max([note.velocity for note in event.notes]) / 128))
-            return events
-        else:
-            raise FeatureError(f"Feature '{cls.__name__}' is not supported for content of type "
-                               f"{metadata.content_type.__class__.__name__}")
-        # elif FeatureUtils.is_valid_audio(events, metadata):  # type: AudioCorpusEvent
-        #     raise NotImplementedError("Not Implemented yet!")
-
-    @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=trait_dict["velocity"])
-
-    def encode(self) -> Dict[str, Any]:
-        return {"velocity": self._value}
-
-    def value(self) -> float:
-        return self._value
-
-
-class MeanPowerDb(CorpusFeature):
+class TotalEnergyDb(CorpusFeature):
     def __init__(self, value: float):
         super().__init__(value=value)
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
         if FeatureUtils.is_valid_midi(events, metadata):
-            raise NotImplementedError("Not implemented yet")
+            return cls._analyze_midi(events, metadata)
         elif FeatureUtils.is_valid_audio(events, metadata):
-            metadata: AudioMetadata = typing.cast(AudioMetadata, metadata)
-            # TODO: Parameters should not be hard-coded
-            rms: np.ndarray = librosa.power_to_db(librosa.feature.rms(y=metadata.foreground_data,
-                                                                      frame_length=2048,
-                                                                      hop_length=metadata.hop_length).reshape(-1) ** 2)
-            for event in events:  # type: AudioCorpusEvent
-                onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
-                end_frame: int = librosa.time_to_frames(event.onset + event.duration, sr=metadata.sr,
-                                                        hop_length=metadata.hop_length)
-                event.set_feature(cls(float(np.mean(rms[onset_frame:end_frame]))))
+            return cls._analyze_audio(events, metadata)
+        return events
+
+    @classmethod
+    def _analyze_audio(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
+        metadata: AudioMetadata = typing.cast(AudioMetadata, metadata)
+        # TODO: Parameters should not be hard-coded
+        rms: np.ndarray = librosa.power_to_db(librosa.feature.rms(y=metadata.foreground_data,
+                                                                  frame_length=2048,
+                                                                  hop_length=metadata.hop_length).reshape(-1) ** 2)
+        for event in events:  # type: AudioCorpusEvent
+            onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
+            end_frame: int = librosa.time_to_frames(event.onset + event.duration, sr=metadata.sr,
+                                                    hop_length=metadata.hop_length)
+            event.set_feature(cls(float(np.mean(rms[onset_frame:end_frame]))))
 
         return events
 
     @classmethod
+    def _analyze_midi(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
+        for event in events:  # type: MidiCorpusEvent
+            energy_lin: float = (max([note.velocity for note in event.notes]) / 128) ** 2
+            energy_db: float = float(librosa.power_to_db(np.array(energy_lin)))
+            event.set_feature(cls(value=energy_db))
+        return events
+
+    @classmethod
     def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=trait_dict["meanenergy"])
+        return cls(value=trait_dict["totalenergy"])
 
     def encode(self) -> Dict[str, Any]:
-        return {"meanenergy": self._value}
+        return {"totalenergy": self._value}
 
     def value(self) -> float:
         return self._value

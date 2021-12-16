@@ -137,6 +137,7 @@ class OscAgent(Agent, AsyncioOscObject):
                     self.target.send_event(event)
 
     def _trigger_output(self, trigger: TriggerEvent):
+        print(f"TRIGGER OUTPUT!!!!!! tar={trigger.target_time}, tri={trigger.trigger_time}, sched={self.scheduling_handler.time}")
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
@@ -148,7 +149,7 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
         if event_and_transform is None:
-            self.scheduling_handler.add_trigger_event(trigger)
+            self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
             return
 
         event: CorpusEvent = event_and_transform[0]
@@ -364,6 +365,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def remove_scale_action(self, scale_action: str, verbose: bool = True, **kwargs):
         try:
+            # TODO: Not ideal that it instantiates one to remove it, could we parse class without creating instance?
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
             self.player.remove_scale_action(type(scale_action))
             self._send_eligibility()

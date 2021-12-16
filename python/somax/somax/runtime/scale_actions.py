@@ -2,11 +2,12 @@ import itertools
 import logging
 from abc import ABC, abstractmethod
 from collections import deque
+from enum import Enum
 from typing import List, Tuple, Optional
 
 import numpy as np
 
-from somax.features import MaxVelocity, VerticalDensity
+from somax.features import VerticalDensity, TotalEnergyDb
 from somax.features.spectral_features import OctaveBands
 from somax.features.temporal_features import Tempo
 from somax.runtime.content_aware import ContentAware
@@ -363,29 +364,83 @@ class AbstractGaussianScale(AbstractScaleAction, ABC):
         return self._sigma.value
 
 
-class MaxVelocityScaleAction(AbstractGaussianScale):
-    DEFAULT_VELOCITY = 0.5
+class EnergyScaleAction(AbstractScaleAction):
+    DEFAULT_ENERGY = 0.0
+    DEFAULT_SIGMA = 3.0
+    DEFAULT_MA_LEN = 5
 
-    def __init__(self, mu: float = DEFAULT_VELOCITY):
-        super().__init__(mu=mu)
+    class ListeningMode(Enum):
+        MANUAL = 0
+        EXTERNAL = 1
+        FEEDBACK = 2
 
-    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+    def __init__(self, mu: float = DEFAULT_ENERGY, sigma: float = DEFAULT_SIGMA,
+                 listening_mode: ListeningMode = ListeningMode.MANUAL, moving_average_len: int = DEFAULT_MA_LEN):
+        super().__init__()
+        print("ENERGY SCALE ACTION INITED")
+        self.listen_to: Parameter = ParamWithSetter(listening_mode, 0, 2, "int",
+                                                    "listen to (manual=0, external=1, feedback=2)",
+                                                    self._set_listening_mode)
+        self.moving_average_len: Parameter = Parameter(moving_average_len, 1, None, "int",
+                                                       "num previous events to take into account if listening to input")
+
+        self.history: deque[float] = deque([], self.moving_average_len.value)
+        self._mu: Parameter = ParamWithSetter(mu, None, None, 'float', "Mean value of gaussian.", self._set_mu)
+        self._sigma: Parameter = Parameter(sigma, None, None, 'float', "Standard deviation of gaussian")
+
+    def scale(self, peaks: Peaks, _time: float, corresponding_events: List[CorpusEvent],
               _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
-        velocities: np.ndarray = np.array([event.get_feature(MaxVelocity).value() for event in corresponding_events])
-        return self._scale(peaks, velocities)
+        if self.mu is None:
+            print("NO SCALING: MU IS NONE")
+            return peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
-                 applied_transform: AbstractTransform) -> None:
-        pass
+        print(f"SCALING {peaks.size()} PEAKS")
+        velocities: np.ndarray = np.array([event.get_feature(TotalEnergyDb).value() for event in corresponding_events])
+        print(f"    before: {peaks.scores}")
+        peaks.scores *= np.exp(-((velocities - self.mu) ** 2 / (2 * self.sigma ** 2)))
+        print(f"    after: {peaks.scores}")
+        return peaks
+
+    def feedback(self, feedback_event: Optional[CorpusEvent], _time: float,
+                 _applied_transform: AbstractTransform) -> None:
+        if self.listen_to == self.ListeningMode.FEEDBACK and feedback_event is not None:
+            self.history.append(feedback_event.get_feature(TotalEnergyDb).value())
+            self._mu.value = np.mean(self.history)
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return corpus.has_feature(MaxVelocity)
+        return corpus.has_feature(TotalEnergyDb)
 
     def clear(self) -> None:
-        pass
+        print("CLEARING HISTORY")
+        self.history = deque([], self.moving_average_len.value)
+        self._mu.value = None
+
+    def _set_listening_mode(self, mode: int):
+        self.listen_to.value = self.ListeningMode(mode)
+        print(f"NEW LISTENING MODE = {self.listen_to}")
+
+    def _set_mu(self, mu: float):
+        if self.listen_to.value == self.ListeningMode.MANUAL:
+            print(f"MANUAL MODE: MU IS {mu}")
+            self._mu.value = mu
+        elif self.listen_to.value == self.ListeningMode.EXTERNAL:
+            self.history.append(mu)
+            self._mu.value = np.mean(self.history)
+            print(f"EXTERNAL MODE: MU IS {self.mu.value} (NEW ENTRY WAS {mu})")
+        else:
+            print("SET FAILED BECAUSE FEEDBACK MODE (DOES BELOW PRINT?)")
+            logging.info(f"Could not set mu because {self.__class__.__name__} is currently in feedback mode")
+
+    @property
+    def mu(self):
+        return self._mu.value
+
+    @property
+    def sigma(self):
+        return self._sigma.value
 
 
 class VerticalDensityScaleAction(AbstractGaussianScale):
