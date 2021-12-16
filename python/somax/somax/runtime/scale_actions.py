@@ -374,7 +374,7 @@ class EnergyScaleAction(AbstractScaleAction):
         EXTERNAL = 1
         FEEDBACK = 2
 
-    def __init__(self, mu: float = DEFAULT_ENERGY, sigma: float = DEFAULT_SIGMA,
+    def __init__(self, weight: float = 1.0, mu: float = DEFAULT_ENERGY, sigma: float = DEFAULT_SIGMA,
                  listening_mode: ListeningMode = ListeningMode.MANUAL, moving_average_len: int = DEFAULT_MA_LEN):
         super().__init__()
         print("ENERGY SCALE ACTION INITED")
@@ -383,10 +383,11 @@ class EnergyScaleAction(AbstractScaleAction):
                                                     self._set_listening_mode)
         self.moving_average_len: Parameter = Parameter(moving_average_len, 1, None, "int",
                                                        "num previous events to take into account if listening to input")
-
-        self.history: deque[float] = deque([], self.moving_average_len.value)
+        self._weight: Parameter = Parameter(weight, None, None, 'float', "Relative weight of filter")
         self._mu: Parameter = ParamWithSetter(mu, None, None, 'float', "Mean value of gaussian.", self._set_mu)
         self._sigma: Parameter = Parameter(sigma, None, None, 'float', "Standard deviation of gaussian")
+
+        self.history: deque[float] = deque([], self.moving_average_len.value)
 
     def scale(self, peaks: Peaks, _time: float, corresponding_events: List[CorpusEvent],
               _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
@@ -397,7 +398,7 @@ class EnergyScaleAction(AbstractScaleAction):
         print(f"SCALING {peaks.size()} PEAKS")
         velocities: np.ndarray = np.array([event.get_feature(TotalEnergyDb).value() for event in corresponding_events])
         print(f"    before: {peaks.scores}")
-        peaks.scores *= np.exp(-((velocities - self.mu) ** 2 / (2 * self.sigma ** 2)))
+        peaks.scores *= 1 - self._weight.value * (1 - np.exp(-((velocities - self.mu) ** 2 / (2 * self.sigma ** 2))))
         print(f"    after: {peaks.scores}")
         return peaks
 
