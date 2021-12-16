@@ -63,7 +63,10 @@ class BasicPitchClassifier(AbstractClassifier, ABC):
 
     def _label_from_feature(self, pitch: FeatureValue, transform: AbstractTransform) -> IntLabel:
         inverse_transformed_label: int = transform.inverse(pitch).value()
-        return IntLabel(inverse_transformed_label)
+        if self.mod12:
+            return IntLabel(inverse_transformed_label % 12)
+        else:
+            return IntLabel(inverse_transformed_label)
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :raises TransformError if transform_handler doesn't contain any applicable transforms """

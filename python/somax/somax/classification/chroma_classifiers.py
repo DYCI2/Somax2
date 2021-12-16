@@ -1,6 +1,6 @@
 from abc import ABC
 from importlib import resources
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Type
 
 import numpy as np
 from sklearn.mixture import GaussianMixture
@@ -8,6 +8,7 @@ from sklearn.mixture import GaussianMixture
 from somax.classification import tables
 from somax.classification.classifier import AbstractClassifier
 from somax.features import OnsetChroma
+from somax.features.chroma_features import BaseChroma, MeanChroma
 from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
@@ -36,7 +37,7 @@ class ChromaClassifier(AbstractClassifier, ABC):
         return corpus.has_feature(OnsetChroma)
 
 
-class SomChromaClassifier(ChromaClassifier):
+class BaseSomChromaClassifier(ChromaClassifier):
     """ Classifies an event according to its chroma based on a pre-computed self-organizing map.
                 Corpus:    Uses foreground chroma (12 non-normalized floats) of EventParameter OnsetChroma
                 Influence: Responds to keyword "chroma" followed by 12 non-normalized floats. """
@@ -46,8 +47,9 @@ class SomChromaClassifier(ChromaClassifier):
 
     USE_MULTIPROCESSING = True
 
-    def __init__(self):
+    def __init__(self, chroma_type: Type[BaseChroma]):
         super().__init__()
+        self.chroma_type: Type[BaseChroma] = chroma_type
         with resources.path(tables, self.SOM_DATA_FILE) as path:
             self._som_data = np.loadtxt(path.absolute(), dtype=np.float32, delimiter=",")  # Shape: (N, 12)
         with resources.path(tables, self.SOM_CLASS_FILE) as path:
@@ -65,22 +67,22 @@ class SomChromaClassifier(ChromaClassifier):
         else:
             labels: List[IntLabel] = []
             for event in corpus.events:  # type: CorpusEvent
-                labels.append(self._label_from_chroma(event.get_feature(OnsetChroma).value()))
+                labels.append(self._label_from_chroma(event.get_feature(self.chroma_type).value()))
         return labels
 
     def _multiproc_compute_label(self, e: CorpusEvent):
-        return self._label_from_chroma(e.get_feature(OnsetChroma).value())
+        return self._label_from_chroma(e.get_feature(self.chroma_type).value())
 
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
         """ :raises TransformError if no transforms exist """
         if not self._transforms:  # transforms is empty
             raise TransformError(f"No transforms exist in classifier {self}")
-        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, OnsetChroma):
+        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, BaseChroma):
             chroma: FeatureValue = influence.feature
             return [((self._label_from_chroma(t.inverse(chroma).value())), t)
                     for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
-            chroma: FeatureValue = influence.corpus_event.get_feature(OnsetChroma)
+            chroma: FeatureValue = influence.corpus_event.get_feature(self.chroma_type)
             return [(self._label_from_chroma(t.inverse(chroma).value()), t) for t in self._transforms]
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
@@ -94,6 +96,18 @@ class SomChromaClassifier(ChromaClassifier):
 
     def clear(self) -> None:
         pass  # SomChromaClassifier is stateless
+
+
+class OnsetSomChromaClassifier(BaseSomChromaClassifier):
+    def __init__(self):
+        super().__init__(chroma_type=OnsetChroma)
+        print(f"Initialized {self.__class__.__name__}")
+
+
+class MeanSomChromaClassifier(BaseSomChromaClassifier):
+    def __init__(self):
+        super().__init__(chroma_type=MeanChroma)
+        print(f"Initialized {self.__class__.__name__}")
 
 
 class GmmClassifier(ChromaClassifier, ABC):
