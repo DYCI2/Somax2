@@ -377,7 +377,6 @@ class EnergyScaleAction(AbstractScaleAction):
     def __init__(self, weight: float = 1.0, mu: float = DEFAULT_ENERGY, sigma: float = DEFAULT_SIGMA,
                  listening_mode: ListeningMode = ListeningMode.MANUAL, moving_average_len: int = DEFAULT_MA_LEN):
         super().__init__()
-        print("ENERGY SCALE ACTION INITED")
         self.listen_to: Parameter = ParamWithSetter(listening_mode, 0, 2, "int",
                                                     "listen to (manual=0, external=1, feedback=2)",
                                                     self._set_listening_mode)
@@ -392,19 +391,15 @@ class EnergyScaleAction(AbstractScaleAction):
     def scale(self, peaks: Peaks, _time: float, corresponding_events: List[CorpusEvent],
               _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
         if self.mu is None:
-            print("NO SCALING: MU IS NONE")
             return peaks
 
-        print(f"SCALING {peaks.size()} PEAKS")
         velocities: np.ndarray = np.array([event.get_feature(TotalEnergyDb).value() for event in corresponding_events])
-        print(f"    before: {peaks.scores}")
         peaks.scores *= 1 - self._weight.value * (1 - np.exp(-((velocities - self.mu) ** 2 / (2 * self.sigma ** 2))))
-        print(f"    after: {peaks.scores}")
         return peaks
 
     def feedback(self, feedback_event: Optional[CorpusEvent], _time: float,
                  _applied_transform: AbstractTransform) -> None:
-        if self.listen_to == self.ListeningMode.FEEDBACK and feedback_event is not None:
+        if self.listen_to.value == self.ListeningMode.FEEDBACK and feedback_event is not None:
             self.history.append(feedback_event.get_feature(TotalEnergyDb).value())
             self._mu.value = np.mean(self.history)
 
@@ -415,24 +410,19 @@ class EnergyScaleAction(AbstractScaleAction):
         return corpus.has_feature(TotalEnergyDb)
 
     def clear(self) -> None:
-        print("CLEARING HISTORY")
         self.history = deque([], self.moving_average_len.value)
         self._mu.value = None
 
     def _set_listening_mode(self, mode: int):
         self.listen_to.value = self.ListeningMode(mode)
-        print(f"NEW LISTENING MODE = {self.listen_to}")
 
     def _set_mu(self, mu: float):
         if self.listen_to.value == self.ListeningMode.MANUAL:
-            print(f"MANUAL MODE: MU IS {mu}")
             self._mu.value = mu
         elif self.listen_to.value == self.ListeningMode.EXTERNAL:
             self.history.append(mu)
             self._mu.value = np.mean(self.history)
-            print(f"EXTERNAL MODE: MU IS {self.mu.value} (NEW ENTRY WAS {mu})")
         else:
-            print("SET FAILED BECAUSE FEEDBACK MODE (DOES BELOW PRINT?)")
             logging.info(f"Could not set mu because {self.__class__.__name__} is currently in feedback mode")
 
     @property
