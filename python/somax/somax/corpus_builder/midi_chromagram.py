@@ -23,6 +23,11 @@ class MidiChromagram:
     def at(self, onset_ms: float) -> np.ndarray:
         return self.chromagram[:, np.floor(onset_ms * self.sample_rate).astype(int)]
 
+    def segment(self, start_ms: float, end_ms: float) -> np.ndarray:
+        start_sample: int = np.floor(start_ms * self.sample_rate).astype(int)
+        end_sample: int = np.floor(end_ms * self.sample_rate).astype(int)
+        return self.chromagram[:, start_sample:end_sample]
+
     @property
     def build_parameters(self) -> Dict[str, Any]:
         return {}

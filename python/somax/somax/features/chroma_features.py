@@ -60,6 +60,7 @@ class OnsetChroma(BaseChroma):
 
     @classmethod
     def _analyze_midi(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata):
+        # Note! Due to how the chromagram in MIDI is constructed from discrete onsets
         chromagram: MidiChromagram = MidiChromagram.from_midi(metadata.stft)
         for event in events:
             event.set_feature(cls(chromagram.at(event.absolute_onset)))
@@ -84,7 +85,16 @@ class MeanChroma(BaseChroma):
 
     @classmethod
     def _analyze_midi(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> None:
-        raise NotImplementedError("Not implemented yet")
+        # Note: Due to how the chromagram in MIDI is constructed from discrete onsets and new onsets will always create
+        #       a new segment, the chroma at the onset will always be the most meaningful piece of information and only
+        #       differ from a mean if some note is cut short in the middle of the segment. Therefore, we'll use the same
+        #       strategy as for the OnsetChroma even in the MeanChroma case.
+        # TODO: We should probably find a better strategy for this rather than duplicate the code -
+        #       it's unnecessary overhead to compute it twice
+        chromagram: MidiChromagram = MidiChromagram.from_midi(metadata.stft)
+        for event in events:
+            event.set_feature(cls(chromagram.at(event.absolute_onset)))
+
 
     @classmethod
     def _analyze_audio(cls, events: List[AudioCorpusEvent], metadata: AudioMetadata) -> None:
