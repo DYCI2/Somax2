@@ -2,7 +2,6 @@
 
 import argparse
 import asyncio
-import copy
 import logging
 import logging.config
 import multiprocessing
@@ -10,7 +9,7 @@ import sys
 from importlib import resources
 from typing import Optional, Callable, Tuple, List, Dict
 
-import log
+from somax import log
 import somax
 from somax.classification import SomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
