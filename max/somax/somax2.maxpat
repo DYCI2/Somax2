@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1043.0, 733.0 ],
+		"rect" : [ 34.0, 79.0, 1043.0, 733.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -228,7 +228,6 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-653" : [ "__exp_numnotesenable", "__exp_numnotesenable", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-656" : [ "__exp_numnotesmu", "__exp_numnotesmu", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-673" : [ "multislider", "multislider", 0 ],
-			"obj-13::obj-1::obj-6::obj-1::obj-675" : [ "__exp_freezemode", "__exp_freezemode", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-688" : [ "__exp_durationsigma", "__exp_durationsigma", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-702" : [ "__exp_durationmu", "__exp_durationmu", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-708" : [ "__exp_velocityweight", "__exp_velocityweight", 0 ],
@@ -261,6 +260,8 @@
 			"obj-13::obj-1::obj-6::obj-91::obj-3" : [ "live.text[7]", "live.text", 0 ],
 			"obj-13::obj-1::obj-78::obj-1::obj-192" : [ "live.numbox[1]", "live.numbox", 0 ],
 			"obj-13::obj-33::obj-1" : [ "mc.live.gain~[2]", "mc.live.gain~", 0 ],
+			"obj-13::obj-33::obj-14" : [ "live.dial", "live.dial", 0 ],
+			"obj-13::obj-33::obj-18" : [ "live.dial[1]", "live.dial", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-259::obj-1" : [ "activechannels[3]", "activechannels", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-261::obj-1" : [ "activechannels[4]", "activechannels", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-264::obj-1" : [ "activechannels[5]", "activechannels", 0 ],
@@ -329,7 +330,19 @@
 				}
 ,
 				"obj-13::obj-33::obj-1" : 				{
+					"parameter_initial" : 0.0,
+					"parameter_initial_enable" : 1,
 					"parameter_longname" : "mc.live.gain~[2]"
+				}
+,
+				"obj-13::obj-33::obj-14" : 				{
+					"parameter_initial" : 0,
+					"parameter_initial_enable" : 1
+				}
+,
+				"obj-13::obj-33::obj-18" : 				{
+					"parameter_initial" : 127,
+					"parameter_initial_enable" : 1
 				}
 ,
 				"obj-69::obj-13::obj-1" : 				{
@@ -798,6 +811,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "somax.pan2.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "yin~.mxo",
 				"type" : "iLaX"
 			}
@@ -822,8 +842,10 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
+					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -833,19 +855,18 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-,
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ]
+
 				}
 ,
 				"newobj" : 				{
+					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ]
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
+					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
 					"bgfillcolor" : 					{
@@ -857,8 +878,7 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-,
-					"fontsize" : [ 10.0 ]
+
 				}
 ,
 				"button" : 				{
