@@ -24,7 +24,7 @@ class SendProtocol:
     SEND_STATE_EVENT = "state"
     SEND_STATE_ONSET = "state_onset"
     SEND_AUDIO_EVENT = "audio"
-    SEND_AUDIO_OFF_EVENT = "audio_end"
+    SEND_AUDIO_OFF = "audio_off"
 
     # Server Info
     SERVER_STATUS = "server_status"

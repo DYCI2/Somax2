@@ -310,7 +310,6 @@ class Player(Parametric, ContentAware):
             return event, NoTransform()
         except (IndexError, TypeError, AttributeError) as e:
             self.logger.debug(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
-            print(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
             return None
 
     def _scale_peaks(self, peaks: Peaks, scheduler_time: float, corpus: Corpus, **kwargs):

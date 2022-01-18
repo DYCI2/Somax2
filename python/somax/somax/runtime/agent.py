@@ -137,7 +137,6 @@ class OscAgent(Agent, AsyncioOscObject):
                     self.target.send_event(event)
 
     def _trigger_output(self, trigger: TriggerEvent):
-        print(f"TRIGGER OUTPUT!!!!!! tar={trigger.target_time}, tri={trigger.trigger_time}, sched={self.scheduling_handler.time}")
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
@@ -440,6 +439,17 @@ class OscAgent(Agent, AsyncioOscObject):
         self.flush()
         self.logger.debug(f"Simultaneous onset mode set to {enable} for player '{self.player.name}'.")
 
+    def set_audio_continuity_mode(self, enable: bool):
+        self.scheduling_handler.audio_handler.play_continuously = enable
+        self.flush()    # TODO Not ideal for runtime: Should rather output flush ONLY IF mode changes from True to False
+
+    def set_audio_timeout(self, timeout: float):
+        if timeout < 0:
+            self.logger.error(f"Timeout must be a value greater than or equal to zero.")
+        else:
+            self.scheduling_handler.audio_handler.timeout = timeout
+            self.flush()    # TODO: Not ideal for runtime: Should output flush only if value is above current threshold
+
     ######################################################
     # PRIVATE
     ######################################################
@@ -454,7 +464,7 @@ class OscAgent(Agent, AsyncioOscObject):
             return [s for s in path.split(settings.PATH_SEPARATOR) if s]
         else:
             return [path]
-        
+
     @staticmethod
     def _path_to_string(path: List[str]) -> str:
         return settings.PATH_SEPARATOR.join(path)

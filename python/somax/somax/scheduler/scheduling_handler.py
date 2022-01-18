@@ -3,8 +3,9 @@ from typing import Optional, List, Tuple, Dict, Type
 
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
+from somax.scheduler.audio_state_handler import AudioStateHandler
 from somax.scheduler.midi_state_handler import MidiStateHandler
-from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, AudioEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
@@ -16,10 +17,12 @@ class SchedulingHandler(Introspective, ABC):
 
     def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
                  running: bool = False, midi_handler: MidiStateHandler = MidiStateHandler(),
+                 audio_handler: AudioStateHandler = AudioStateHandler(),
                  trigger_pretime: float = TRIGGER_PRETIME, **_kwargs):
         self.scheduling_mode: SchedulingMode = scheduling_mode
         self._scheduler: Scheduler = Scheduler(time=time, tempo=tempo, running=running)
         self.midi_handler: MidiStateHandler = midi_handler
+        self.audio_handler: AudioStateHandler = audio_handler
         self._trigger_pretime_value: float = trigger_pretime
 
     @abstractmethod
@@ -67,7 +70,7 @@ class SchedulingHandler(Introspective, ABC):
     @classmethod
     def new_from(cls, other: 'SchedulingHandler', **kwargs) -> 'SchedulingHandler':
         return cls(scheduling_mode=other.scheduling_mode, time=other._scheduler.time, tempo=other._scheduler.tempo,
-                   running=other._scheduler.running, midi_handler=other.midi_handler,
+                   running=other._scheduler.running, midi_handler=other.midi_handler, audio_handler=other.audio_handler,
                    trigger_pretime=other._trigger_pretime_value, **kwargs)
 
     @classmethod
@@ -83,6 +86,7 @@ class SchedulingHandler(Introspective, ABC):
         time_value: float = self.scheduling_mode.get_time_axis(time=time)
         tempo: float = time.tempo
         output_events: List[ScheduledEvent] = self._scheduler.update_time(time=time_value, tempo=tempo)
+        output_events.extend(self.audio_handler.poll(time_value))
         self._handle_output(output_events.copy())
         return output_events
 
@@ -106,9 +110,10 @@ class SchedulingHandler(Introspective, ABC):
                                                                                    applied_transform=applied_transform)
                 self._scheduler.add_events(scheduler_events)
             elif isinstance(event, AudioCorpusEvent):
-                self._scheduler.add_event(AudioEvent(trigger_time=trigger_time,
-                                                     corpus_event=event,
-                                                     applied_transform=applied_transform))
+                scheduler_events: List[ScheduledEvent] = self.audio_handler.add(trigger_time=trigger_time,
+                                                                                event=event,
+                                                                                applied_transform=applied_transform)
+                self._scheduler.add_events(scheduler_events)
             else:
                 raise TypeError(f"Scheduling event of type '{event.__class__}' is not supported")
 
@@ -158,6 +163,7 @@ class SchedulingHandler(Introspective, ABC):
         if triggers is not None:
             output_events.extend(triggers)
         output_events.extend(self.midi_handler.flush(flushed_events, self._scheduler.time))
+        output_events.extend(self.audio_handler.flush(self._scheduler.time))
         return output_events
 
     @property
@@ -207,8 +213,9 @@ class ManualSchedulingHandler(SchedulingHandler):
 class AutomaticSchedulingHandler(SchedulingHandler):
     def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
                  running: bool = False, midi_handler: MidiStateHandler = MidiStateHandler(),
+                 audio_handler: AudioStateHandler = AudioStateHandler(),
                  trigger_pretime: float = SchedulingHandler.TRIGGER_PRETIME, **_kwargs):
-        super().__init__(scheduling_mode, time, tempo, running, midi_handler, trigger_pretime, **_kwargs)
+        super().__init__(scheduling_mode, time, tempo, running, midi_handler, audio_handler, trigger_pretime, **_kwargs)
         self._scheduler.add_event(self._default_trigger())
 
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
@@ -245,5 +252,3 @@ class AutomaticSchedulingHandler(SchedulingHandler):
 
     def renderer_info(self) -> str:
         return "automatic"
-
-
