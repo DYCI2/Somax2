@@ -3,6 +3,7 @@ from typing import Any, Optional, List, Tuple
 
 from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
 
 
@@ -74,6 +75,14 @@ class AudioEvent(RendererEvent):
                                 content=[self.event.onset * 1000,
                                          (self.event.onset + self.event.duration) * 1000,
                                          self.applied_transform.renderer_info()])]
+
+
+class AudioOffEvent(RendererEvent):
+    def __init__(self, trigger_time: float):
+        super().__init__(trigger_time)
+
+    def render(self) -> List[RendererMessage]:
+        return [RendererMessage(keyword=SendProtocol.SEND_AUDIO_OFF_EVENT, content=Target.WRAPPED_BANG)]
 
 
 class TriggerEvent(ScheduledEvent, ABC):

@@ -22,6 +22,7 @@ class MidiStateHandler:
 
     def _compute_midi_events(self, trigger_time: float, corpus_event: MidiCorpusEvent,
                              applied_transform: AbstractTransform) -> List[ScheduledEvent]:
+        # Note! `trigger_time` is not strictly the same as current time in all cases
 
         output_events: List[ScheduledEvent] = [MidiSliceOnsetEvent(trigger_time, corpus_event, applied_transform)]
 
