@@ -56,6 +56,9 @@ class AudioStateHandler:
         return output
 
     def poll(self, current_time: float) -> List[ScheduledEvent]:
+        """ TODO: Docstring
+            Note that the AudioStateHandler will never output a note off while another segment is played so there's no
+            risk for scheduling conflicts"""
         if self._note_off_time is not None and current_time >= self._note_off_time:
             return self._clear(current_time)
 
