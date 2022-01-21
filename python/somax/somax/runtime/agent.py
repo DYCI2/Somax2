@@ -142,6 +142,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self.player.new_event(scheduling_time, scheduler_tempo)
+            self._send_output_statistics()
         except InvalidCorpus as e:
             self.logger.debug(str(e))
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
@@ -220,6 +221,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.flush()
         self.player.clear()
         self.clear_memory()
+        self.send_peaks()
 
     def flush(self):
         events: List[ScheduledEvent] = self.scheduling_handler.flush()
@@ -247,6 +249,7 @@ class OscAgent(Agent, AsyncioOscObject):
             path_and_name: List[str] = self._string_to_path(path)
             time: float = self.scheduling_handler.time
             self.player.influence(path_and_name, influence, time, **kwargs)
+            self.send_peaks()
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
             return
@@ -441,14 +444,14 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def set_audio_continuity_mode(self, enable: bool):
         self.scheduling_handler.audio_handler.play_continuously = enable
-        self.flush()    # TODO Not ideal for runtime: Should rather output flush ONLY IF mode changes from True to False
+        self.flush()  # TODO Not ideal for runtime: Should rather output flush ONLY IF mode changes from True to False
 
     def set_audio_timeout(self, timeout: float):
         if timeout < 0:
             self.logger.error(f"Timeout must be a value greater than or equal to zero.")
         else:
             self.scheduling_handler.audio_handler.timeout = timeout
-            self.flush()    # TODO: Not ideal for runtime: Should output flush only if value is above current threshold
+            self.flush()  # TODO: Not ideal for runtime: Should output flush only if value is above current threshold
 
     ######################################################
     # PRIVATE
@@ -497,7 +500,8 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(str(e))
 
     def send_peaks(self):
-        peaks_dict = self.player.get_peaks()
+        """ Gets the current state in each layer, not including the merged layer """
+        peaks_dict = self.player.get_peaks_statistics()
         for name, count in peaks_dict.items():
             self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
         self.target.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.improvisation_memory.length())
@@ -540,6 +544,9 @@ class OscAgent(Agent, AsyncioOscObject):
         for path in ne_paths:
             # Send not eligible status for ineligible parameters
             self.target.send(SendProtocol.ELIGIBILITY, [self._path_to_string(path), False])
+
+    def _send_output_statistics(self):
+        self.target.send(SendProtocol.PLAYER_OUTPUT_PEAKS, self.player.get_output_statistics())
 
     ######################################################
     # OTHER

@@ -1,6 +1,6 @@
 import logging
 from abc import abstractmethod, ABC
-from typing import Dict, Union, List, Optional
+from typing import Dict, Union, List, Optional, Tuple
 
 import numpy as np
 
@@ -47,10 +47,15 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
     def clear(self) -> None:
         """ """
 
-    @property
-    def peaks(self) -> Peaks:
-        """ Returns a shallow copy the activity pattern's peaks (copy of scores but references to times and hashes)"""
+    def pop_peaks(self) -> Peaks:
+        """ Returns a shallow copy the activity pattern's peaks (copy of scores but references to times and hashes)
+            Note: For certain activity patterns, may have side effects such as removing the peaks from the memory,
+                  do not use outside main runtime architecture. """
+
         return Peaks.optimized_copy(self._peaks)
+
+    def num_peaks(self) -> int:
+        return self._peaks.size()
 
     def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
         parameters: Dict = {}
@@ -190,7 +195,7 @@ class DirectActivityPattern(AbstractActivityPattern):
 
     def insert(self, influences: List[PeakEvent]) -> None:
         self._peaks = Peaks(scores=np.array([self.default_score.value for _ in range(len(influences))], dtype=np.float),
-                            times=np.array([influence.event.onset for influence in influences], dtypee=np.float),
+                            times=np.array([influence.event.onset for influence in influences], dtype=np.float),
                             transform_hashes=np.array([influence.transform_hash for influence in influences],
                                                       dtype=np.int32))
 
@@ -203,8 +208,7 @@ class DirectActivityPattern(AbstractActivityPattern):
     def clear(self) -> None:
         self._peaks = Peaks.create_empty()
 
-    @property
-    def peaks(self) -> Peaks:
+    def pop_peaks(self) -> Peaks:
         return_peaks: Peaks = self._peaks
         self._peaks = Peaks.create_empty()
         return return_peaks
@@ -212,8 +216,7 @@ class DirectActivityPattern(AbstractActivityPattern):
 
 # TODO: Rewrite into proper interfaces if this is considered useful after evaluation
 class SustainActivityPattern(DirectActivityPattern):
-    @property
-    def peaks(self) -> Peaks:
+    def pop_peaks(self) -> Peaks:
         """ Returns a shallow copy the activity pattern's peaks (copy of scores but references to times and hashes)"""
         return Peaks.optimized_copy(self._peaks)
 
@@ -239,7 +242,7 @@ class DecayActivityPattern(AbstractActivityPattern):
 
     def insert(self, influences: List[PeakEvent]) -> None:
         self._peaks = Peaks(scores=np.array([self.default_score.value for _ in range(len(influences))], dtype=np.float),
-                            times=np.array([influence.event.onset for influence in influences], dtypee=np.float),
+                            times=np.array([influence.event.onset for influence in influences], dtype=np.float),
                             transform_hashes=np.array([influence.transform_hash for influence in influences],
                                                       dtype=np.int32))
 

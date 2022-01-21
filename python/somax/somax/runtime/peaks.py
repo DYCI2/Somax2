@@ -57,6 +57,11 @@ class Peaks:
     def size(self) -> int:
         return self.scores.size
 
+    def max(self) -> float:
+        if self.is_empty():
+            return 0.0
+        return float(np.max(self.scores))
+
     def reorder(self, indices: np.ndarray):
         self.scores = self.scores[indices]
         self.times = self.times[indices]

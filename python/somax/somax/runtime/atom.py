@@ -154,5 +154,9 @@ class Atom(Parametric, ContentAware):
     def is_enabled_and_eligible(self):
         return self._enabled.value and self.eligible
 
-    def get_peaks(self) -> Peaks:
-        return self._activity_pattern.peaks
+    def pop_peaks(self) -> Peaks:
+        """ get peaks: May have side effects inside activity_pattern. """
+        return self._activity_pattern.pop_peaks()
+
+    def num_peaks(self) -> int:
+        return self._activity_pattern.num_peaks()

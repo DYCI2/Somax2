@@ -139,7 +139,7 @@ class Player(Parametric, ContentAware):
         peaks_list: List[Peaks] = []
         for atom in self.atoms.values():
             if atom.is_enabled_and_eligible():
-                peaks: Peaks = atom.get_peaks()
+                peaks: Peaks = atom.pop_peaks()
                 peaks.scale(atom.weight / weight_sum)
                 peaks_list.append(peaks)
 
@@ -266,12 +266,14 @@ class Player(Parametric, ContentAware):
         self._transform_handler.remove(transform)
         self._update_transforms()
 
-    def get_peaks(self) -> Dict[str, int]:
-        peaks_count: Dict[str, int] = {self.name: self.previous_peaks.size()}
+    def get_peaks_statistics(self) -> Dict[str, int]:
+        peaks_count: Dict[str, int] = {}
         for atom in self.all_atoms():
-            peaks: Peaks = atom.get_peaks()
-            peaks_count[atom.name] = peaks.size()
+            peaks_count[atom.name] = atom.num_peaks()
         return peaks_count
+
+    def get_output_statistics(self) -> Tuple[int, float]:
+        return self.previous_peaks.size(), self.previous_peaks.max()
 
     def is_enabled(self) -> bool:
         return self.enabled.value
