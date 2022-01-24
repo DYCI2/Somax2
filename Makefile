@@ -5,12 +5,17 @@ PYINSTALLER_PATH = pyinstaller
 PYINSTALLER_TARGET = $(PY_LIB_PATH)/somax_server.py
 PYINSTALLER_TARGET_NAME = somax_server
 
+VERSION = $$(python3 python/somax/somax/utils/get_version.py)
+
 MAX_BUILD_PARENT_FOLDER = build/somax
-MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/Somax2
-DMG_NAME = Somax2
+MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/Somax-$(VERSION)
+DMG_NAME = Somax-$(VERSION)
 DMG_PATH = dist/$(DMG_NAME).dmg
 
 
+
+testhehe:
+	@echo $(MAX_BUILD_PATH)
 
 pyinstaller:
 	@echo "\033[1m####### Building server binary with pyinstaller ########\033[0m"
