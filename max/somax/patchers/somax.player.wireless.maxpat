@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 10,
+			"revision" : 7,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -96,7 +96,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 825.75, 451.326672862453506, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 238.194881659111587, 480.499999875000128 ],
+					"presentation_rect" : [ 3.0, 0.0, 238.194881659111587, 430.499999875000128 ],
 					"proportion" : 0.5,
 					"varname" : "serveruidisable"
 				}
@@ -164,7 +164,7 @@
 					"outlettype" : [ "", "multichannelsignal", "", "", "", "", "" ],
 					"patching_rect" : [ 50.0, 272.5, 235.0, 166.5 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 4.0, 0.0, 231.694882000000007, 428.0 ],
+					"presentation_rect" : [ 4.0, 0.0, 231.694882000000007, 365.0 ],
 					"varname" : "player",
 					"viewvisibility" : 1
 				}
@@ -220,7 +220,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -347,7 +347,16 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
+								"newobj" : 								{
+									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"fontsize" : [ 10.0 ]
+								}
+,
 								"message" : 								{
+									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -358,12 +367,12 @@
 										"autogradient" : 0
 									}
 ,
-									"fontsize" : [ 10.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+									"fontsize" : [ 10.0 ]
 								}
 ,
 								"default" : 								{
+									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -374,17 +383,8 @@
 										"autogradient" : 0
 									}
 ,
-									"fontsize" : [ 10.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-								}
-,
-								"newobj" : 								{
-									"fontsize" : [ 10.0 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+									"fontsize" : [ 10.0 ]
 								}
 ,
 								"button" : 								{
@@ -478,9 +478,9 @@
 					"numoutlets" : 6,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "", "", "", "", "" ],
-					"patching_rect" : [ 663.625, 831.0, 241.75, 75.0 ],
+					"patching_rect" : [ 663.0, 834.5, 242.0, 68.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.0, 412.666665315628052, 241.75, 75.0 ],
+					"presentation_rect" : [ 1.0, 363.666665315628052, 241.75, 67.0 ],
 					"varname" : "audioinfluencer",
 					"viewvisibility" : 1
 				}
@@ -609,7 +609,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -834,7 +834,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 7,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1438,7 +1438,7 @@
 									"patching_rect" : [ 176.375, 225.259227263621824, 100.0, 19.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 5.416666507720947, 50.96435546875, 132.0, 18.5 ],
-									"text" : "Player-20220121",
+									"text" : "Player-20220124",
 									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textjustification" : 1
 								}
@@ -1793,7 +1793,16 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
+								"newobj" : 								{
+									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"fontsize" : [ 10.0 ]
+								}
+,
 								"message" : 								{
+									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1804,12 +1813,12 @@
 										"autogradient" : 0
 									}
 ,
-									"fontsize" : [ 10.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+									"fontsize" : [ 10.0 ]
 								}
 ,
 								"default" : 								{
+									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1820,17 +1829,8 @@
 										"autogradient" : 0
 									}
 ,
-									"fontsize" : [ 10.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-								}
-,
-								"newobj" : 								{
-									"fontsize" : [ 10.0 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+									"fontsize" : [ 10.0 ]
 								}
 ,
 								"button" : 								{
@@ -1941,7 +1941,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 356.0, 834.5, 242.0, 68.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 413.0, 241.694882000000007, 67.0 ],
+					"presentation_rect" : [ 0.0, 364.0, 241.694882000000007, 67.0 ],
 					"varname" : "influencer",
 					"viewvisibility" : 1
 				}
@@ -2196,7 +2196,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2520,7 +2520,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2711,7 +2711,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2761,13 +2761,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-24",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 70.5, 100.0, 524.0, 49.0 ],
-									"text" : "script newdefault player bpatcher somax.player.compact @args $1 $2 $3 $4 @patching_rect 50. 272.5 235. 166.5 @presentation 1 @presentation_rect 4 0 231.694882 428., script bringtofront player"
+									"patching_rect" : [ 70.5, 100.0, 557.0, 35.0 ],
+									"text" : "script newdefault player bpatcher somax.player.compact @args $1 $2 $3 $4 @patching_rect 50. 272.5 235. 166.5 @presentation 1 @presentation_rect 4 0 231.694882 365., script bringtofront player"
 								}
 
 							}
@@ -3361,7 +3361,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-78", 1 ],
-					"midpoints" : [ 255.5, 497.5, 784.5, 497.5 ],
+					"midpoints" : [ 255.5, 497.5, 784.0, 497.5 ],
 					"source" : [ "obj-21", 2 ]
 				}
 
@@ -3908,7 +3908,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"midpoints" : [ 851.325000000000045, 912.5, 588.5, 912.5 ],
+					"midpoints" : [ 850.899999999999977, 912.5, 588.5, 912.5 ],
 					"source" : [ "obj-78", 4 ]
 				}
 
@@ -3940,7 +3940,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
-					"midpoints" : [ 673.125, 960.0, 364.5, 960.0 ],
+					"midpoints" : [ 672.5, 960.0, 364.5, 960.0 ],
 					"order" : 1,
 					"source" : [ "obj-78", 0 ]
 				}
@@ -3949,7 +3949,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-8", 0 ],
-					"midpoints" : [ 717.674999999999955, 968.0, 438.833333333333314, 968.0 ],
+					"midpoints" : [ 717.100000000000023, 968.0, 438.833333333333314, 968.0 ],
 					"order" : 1,
 					"source" : [ "obj-78", 1 ]
 				}
@@ -3958,7 +3958,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-9", 0 ],
-					"midpoints" : [ 762.225000000000023, 976.0, 513.166666666666629, 976.0 ],
+					"midpoints" : [ 761.700000000000045, 976.0, 513.166666666666629, 976.0 ],
 					"order" : 1,
 					"source" : [ "obj-78", 2 ]
 				}
@@ -3982,7 +3982,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-78", 2 ],
-					"midpoints" : [ 688.0, 817.5, 895.875, 817.5 ],
+					"midpoints" : [ 688.0, 817.5, 895.5, 817.5 ],
 					"source" : [ "obj-80", 1 ]
 				}
 
@@ -4091,7 +4091,16 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
+				"newobj" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ]
+				}
+,
 				"message" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -4102,12 +4111,12 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"default" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -4118,17 +4127,8 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"newobj" : 				{
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"button" : 				{

@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 10,
+			"revision" : 7,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -81,7 +81,7 @@
 					"outlettype" : [ "", "multichannelsignal", "", "", "", "", "", "" ],
 					"patching_rect" : [ 401.0, 1.0, 270.0, 915.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 374.0, 0.0, 258.0, 882.0 ],
+					"presentation_rect" : [ 374.0, 0.0, 258.0, 743.0 ],
 					"varname" : "somax.player.io",
 					"viewvisibility" : 1
 				}
@@ -262,8 +262,8 @@
 			"obj-13::obj-1::obj-6::obj-91::obj-3" : [ "live.text[7]", "live.text", 0 ],
 			"obj-13::obj-1::obj-78::obj-1::obj-192" : [ "live.numbox[1]", "live.numbox", 0 ],
 			"obj-13::obj-33::obj-1" : [ "mc.live.gain~[2]", "mc.live.gain~", 0 ],
-			"obj-13::obj-33::obj-14" : [ "live.dial", "live.dial", 0 ],
-			"obj-13::obj-33::obj-18" : [ "live.dial[1]", "live.dial", 0 ],
+			"obj-13::obj-33::obj-13" : [ "live.numbox[3]", "live.numbox[3]", 0 ],
+			"obj-13::obj-33::obj-31" : [ "live.numbox[4]", "live.numbox[3]", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-259::obj-1" : [ "activechannels[3]", "activechannels", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-261::obj-1" : [ "activechannels[4]", "activechannels", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-264::obj-1" : [ "activechannels[5]", "activechannels", 0 ],
@@ -337,14 +337,15 @@
 					"parameter_longname" : "mc.live.gain~[2]"
 				}
 ,
-				"obj-13::obj-33::obj-14" : 				{
-					"parameter_initial" : 0,
-					"parameter_initial_enable" : 1
+				"obj-13::obj-33::obj-13" : 				{
+					"parameter_longname" : "live.numbox[3]",
+					"parameter_range" : [ -127.0, 127.0 ],
+					"parameter_shortname" : "live.numbox[3]",
+					"parameter_unitstyle" : 6
 				}
 ,
-				"obj-13::obj-33::obj-18" : 				{
-					"parameter_initial" : 127,
-					"parameter_initial_enable" : 1
+				"obj-13::obj-33::obj-31" : 				{
+					"parameter_longname" : "live.numbox[4]"
 				}
 ,
 				"obj-69::obj-13::obj-1" : 				{
@@ -485,8 +486,8 @@
 			}
 , 			{
 				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/chord_extraction_prediction_lib/Max_library/app",
-				"patcherrelativepath" : "../../../chord_extraction_prediction_lib/Max_library/app",
+				"bootpath" : "~/MaxDev/Dyci2Lib/Max_library/app",
+				"patcherrelativepath" : "../../../Dyci2Lib/Max_library/app",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
@@ -575,30 +576,30 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "OMax.Yin+.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/patchers",
-				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/patchers",
+				"name" : "OMax.yin+.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "OMax.Yin+core.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/patchers",
-				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/patchers",
+				"name" : "Yin+.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "sr.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/patchers",
-				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "bc.autoname.js",
-				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/javascript",
-				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/javascript",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "./javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
@@ -843,7 +844,16 @@
 		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
+				"newobj" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ]
+				}
+,
 				"message" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -854,12 +864,12 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"default" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -870,17 +880,8 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"newobj" : 				{
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"button" : 				{
