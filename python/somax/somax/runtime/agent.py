@@ -379,8 +379,10 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def read_corpus(self, filepath: str, volatile: bool = False):
         self.logger.info(f"Reading corpus at '{filepath}' for player '{self.player.name}'...")
+        self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
         if not os.path.exists(filepath):
             self.logger.error(f"The file '{filepath}' does not exist. No corpus was read.")
+            self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
 
         try:
@@ -390,9 +392,11 @@ class OscAgent(Agent, AsyncioOscObject):
             elif file_extension == ".pickle":
                 corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile)
             else:
+                self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
                 raise IOError(f"Invalid file extension '{file_extension}'")
-        except (IOError, InvalidCorpus, ExternalDataMismatch) as e:
+        except (IOError,  AttributeError, InvalidCorpus, ExternalDataMismatch) as e:
             self.logger.error(f"{str(e)}. No corpus was read.")
+            self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
 
         self.clear()
@@ -402,6 +406,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.player.read_corpus(corpus)
         self.flush()
         self._send_eligibility()
+        self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
         self.send_current_corpus_info()
         self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
 
@@ -484,6 +489,7 @@ class OscAgent(Agent, AsyncioOscObject):
             if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
                 corpus_name, _ = os.path.splitext(file)  # TODO: Not the corpus name that's specified in the json
                 corpora.append((corpus_name, os.path.join(filepath, file)))
+        corpora = sorted(corpora, key=lambda e: e[0])
         self.send_corpora(corpora)
 
     def get_peaks(self):

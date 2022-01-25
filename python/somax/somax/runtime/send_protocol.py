@@ -11,6 +11,8 @@ class SendProtocol:
     PLAYER_RECORDED_CORPUS_LENGTH = "recorded_corpus"
     ELIGIBILITY = "eligibility"
 
+    PLAYER_READING_CORPUS_STATUS = "reading_corpus_status"
+
     # Scheduling
     SCHEDULER_RUNNING = "scheduler_running"
     TRANSPORT_MODE = "transport_mode"

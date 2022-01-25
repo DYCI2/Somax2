@@ -14,9 +14,6 @@ DMG_PATH = dist/$(DMG_NAME).dmg
 
 
 
-testhehe:
-	@echo $(MAX_BUILD_PATH)
-
 pyinstaller:
 	@echo "\033[1m####### Building server binary with pyinstaller ########\033[0m"
 	$(PYINSTALLER_PATH) $(PYINSTALLER_TARGET) \
