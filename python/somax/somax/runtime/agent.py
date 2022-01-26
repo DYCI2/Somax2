@@ -123,9 +123,6 @@ class OscAgent(Agent, AsyncioOscObject):
             await asyncio.sleep(self.DEFAULT_CALLBACK_INTERVAL)
 
     def _callback(self, time: Time):
-        if time.time_skip_detected:
-            self.flush()
-
         if self._enabled:
             events: List[ScheduledEvent] = self.scheduling_handler.update_time(time=time)
             for event in events:
@@ -457,6 +454,13 @@ class OscAgent(Agent, AsyncioOscObject):
         else:
             self.scheduling_handler.audio_handler.timeout = timeout
             self.flush()  # TODO: Not ideal for runtime: Should output flush only if value is above current threshold
+
+    def set_time_stretch(self, factor: float) -> None:
+        if factor <= 0:
+            self.logger.error(f"Time stretch factor but be a value greater than zero")
+        else:
+            self.scheduling_handler.set_time_stretch_factor(factor)
+
 
     ######################################################
     # PRIVATE

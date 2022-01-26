@@ -18,12 +18,15 @@ class SchedulingHandler(Introspective, ABC):
     def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
                  running: bool = False, midi_handler: MidiStateHandler = MidiStateHandler(),
                  audio_handler: AudioStateHandler = AudioStateHandler(),
-                 trigger_pretime: float = TRIGGER_PRETIME, **_kwargs):
+                 trigger_pretime: float = TRIGGER_PRETIME, time_stretch: float = 1.0, **_kwargs):
         self.scheduling_mode: SchedulingMode = scheduling_mode
         self._scheduler: Scheduler = Scheduler(time=time, tempo=tempo, running=running)
         self.midi_handler: MidiStateHandler = midi_handler
         self.audio_handler: AudioStateHandler = audio_handler
         self._trigger_pretime_value: float = trigger_pretime
+        self._stretch_factor: float = time_stretch
+        self._previous_callback: float = time
+        self._previous_stretched_time: float = time
 
     @abstractmethod
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
@@ -71,7 +74,7 @@ class SchedulingHandler(Introspective, ABC):
     def new_from(cls, other: 'SchedulingHandler', **kwargs) -> 'SchedulingHandler':
         return cls(scheduling_mode=other.scheduling_mode, time=other._scheduler.time, tempo=other._scheduler.tempo,
                    running=other._scheduler.running, midi_handler=other.midi_handler, audio_handler=other.audio_handler,
-                   trigger_pretime=other._trigger_pretime_value, **kwargs)
+                   trigger_pretime=other._trigger_pretime_value, time_stretch=other._stretch_factor, **kwargs)
 
     @classmethod
     def type_from_string(cls, class_name: str):
@@ -83,12 +86,32 @@ class SchedulingHandler(Introspective, ABC):
             raise ValueError from e
 
     def update_time(self, time: Time) -> List[ScheduledEvent]:
+        output_events: List[ScheduledEvent] = []
         time_value: float = self.scheduling_mode.get_time_axis(time=time)
+
+        if time.time_skip_detected:
+            output_events.extend(self.handle_timeskip(time_value))
+
         tempo: float = time.tempo
-        output_events: List[ScheduledEvent] = self._scheduler.update_time(time=time_value, tempo=tempo)
-        output_events.extend(self.audio_handler.poll(time_value))
+        stretched_time = self.stretch_time(time_value)
+        output_events.extend(self._scheduler.update_time(time=stretched_time, tempo=tempo))
+        output_events.extend(self.audio_handler.poll(stretched_time))
         self._handle_output(output_events.copy())
+
         return output_events
+
+    def handle_timeskip(self, time: float) -> List[ScheduledEvent]:
+        output_events: List[ScheduledEvent] = self.flush()
+        self._previous_callback = time
+        self._previous_stretched_time = time
+        return output_events
+
+    def stretch_time(self, time: float) -> float:
+        stretched_time: float = self._previous_stretched_time + (time - self._previous_callback) * self._stretch_factor
+        self._previous_callback = time
+        self._previous_stretched_time = stretched_time
+        return stretched_time
+
 
     def add_trigger_event(self, trigger_event: Optional[TriggerEvent] = None, reschedule: bool = False) -> None:
         if trigger_event is not None and reschedule:
@@ -121,6 +144,9 @@ class SchedulingHandler(Introspective, ABC):
 
     def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
         self.scheduling_mode = scheduling_mode
+
+    def set_time_stretch_factor(self, factor: float) -> None:
+        self._stretch_factor = factor
 
     def _adjust_in_time(self, event: ScheduledEvent, increment: float = 0.0) -> ScheduledEvent:
         scheduler_time: float = self._scheduler.time
@@ -214,8 +240,9 @@ class AutomaticSchedulingHandler(SchedulingHandler):
     def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
                  running: bool = False, midi_handler: MidiStateHandler = MidiStateHandler(),
                  audio_handler: AudioStateHandler = AudioStateHandler(),
-                 trigger_pretime: float = SchedulingHandler.TRIGGER_PRETIME, **_kwargs):
-        super().__init__(scheduling_mode, time, tempo, running, midi_handler, audio_handler, trigger_pretime, **_kwargs)
+                 trigger_pretime: float = SchedulingHandler.TRIGGER_PRETIME, time_stretch: float = 1.0, **_kwargs):
+        super().__init__(scheduling_mode, time, tempo, running, midi_handler, audio_handler, trigger_pretime,
+                         time_stretch, **_kwargs)
         self._scheduler.add_event(self._default_trigger())
 
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
