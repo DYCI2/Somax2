@@ -86,6 +86,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.read_corpus(corpus_filepath)
 
         self._send_eligibility()
+        self.target.send(SendProtocol.SCHEDULER_RUNNING, True)
 
     ######################################################
     # ASYNCIO & MAIN LOOP(S)
