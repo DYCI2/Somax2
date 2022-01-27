@@ -27,7 +27,10 @@ pyinstaller:
 		--add-data="$(PY_LIB_PATH)/somax/classification/tables:somax/classification/tables" \
 		--add-data="$(PY_LIB_PATH)/log:log" \
 		--hidden-import="sklearn.utils._weight_vector" \
-		--hidden-import="cmath"
+		--hidden-import="sklearn.neighbors._typedefs" \
+		--hidden-import="sklearn.neighbors._quad_tree" \
+		--hidden-import="cmath" \
+		--collect-data="librosa"
 
 codesignature:
 	# Note: sklearn/.dylibs/libomp.dylib is High Sierra only and required to sign since it's in a hidden folder
