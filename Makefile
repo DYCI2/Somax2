@@ -30,7 +30,10 @@ pyinstaller:
 		--hidden-import="sklearn.neighbors._typedefs" \
 		--hidden-import="sklearn.neighbors._quad_tree" \
 		--hidden-import="cmath" \
-		--collect-data="librosa"
+		--collect-data="librosa" \
+		# Codesigning: Will most likely not run on High Sierra. Better strategy: Use PyInstaller 4.3 (before adhoc)
+		# --codesign-identity="<INSERT_IDENTITY_HERE: Can be found with 'security find-identity -v -p codesigning'>" \
+		# --osx-entitlements-file="codesign/somax.entitlements"
 
 codesignature:
 	# Note: sklearn/.dylibs/libomp.dylib is High Sierra only and required to sign since it's in a hidden folder
