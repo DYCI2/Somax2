@@ -41,7 +41,7 @@ class Somax:
         super().__init__(*args, **kwargs)
         self.logger = logging.getLogger(__name__)
         self._agents: Dict[str, Tuple[Agent, multiprocessing.Queue]] = dict()
-        self._corpus_builders: List[ThreadedCorpusBuilder] = []
+        self._corpus_builders: List[multiprocessing.Process] = []
         self._transport: Transport = MasterTransport()
         self._tempo_master_queue: multiprocessing.Queue[TempoMessage] = multiprocessing.Queue()
         self._terminated: bool = False
@@ -99,34 +99,6 @@ class Somax:
     def _send_to_all_agents(self, message: ProcessMessage):
         for _, queue in self._agents.values():
             queue.put(message)
-
-    ######################################################
-    # CORPUS METHODS
-    ######################################################
-
-    def build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                     overwrite: bool = False, filter_class: str = "", segmentation_mode: Optional[str] = None,
-                     **kwargs):
-        self.logger.info(f"Building corpus from file(s) '{filepath}'...")
-        try:
-            spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
-            segmentation: Optional[AudioSegmentation] = AudioSegmentation.from_string(
-                segmentation_mode) if segmentation_mode is not None else None
-            corpus: Corpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
-                                                   spectrogram_filter=spectrogram_filter,
-                                                   segmentation_mode=segmentation, **kwargs)
-            self.logger.debug(f"[build_corpus]: Successfully built '{corpus.name}' from file '{filepath}'.")
-        except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
-            self.logger.error(f"{str(e)} No Corpus was built.")
-            return
-
-        if output_folder is not None:
-            self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{output_folder}'...")
-            try:
-                output_filepath: str = corpus.export(output_folder, overwrite=overwrite)
-                self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
-            except (IOError, AttributeError, KeyError) as e:
-                self.logger.error(f"{str(e)} Export of corpus failed.")
 
 
 class SomaxServer(Somax, AsyncioOscObject):
@@ -302,19 +274,55 @@ class SomaxServer(Somax, AsyncioOscObject):
     # CORPUS
     ######################################################
 
-    def multithreaded_build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                                   overwrite: bool = False, filter_class: str = "", **kwargs):
+    def build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
+                     overwrite: bool = False, filter_class: str = "", segmentation_mode: Optional[str] = None,
+                     multithreaded: bool = False, **kwargs):
         self.logger.info(f"Building corpus from file(s) '{filepath}'...")
         try:
             spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
-        except ValueError as e:
+            segmentation: Optional[AudioSegmentation] = AudioSegmentation.from_string(
+                segmentation_mode) if segmentation_mode is not None else None
+
+        except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
+
+        if multithreaded:
+            self._build_multithreaded(filepath, output_folder, corpus_name, overwrite, spectrogram_filter,
+                                      segmentation, **kwargs)
+        else:
+            self._build(filepath, output_folder, corpus_name, overwrite, spectrogram_filter,
+                        segmentation, **kwargs)
+
+    # TODO: Remove once multithreaded corpus builder is stable enough
+    def _build(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
+               overwrite: bool = False, spectrogram_filter: AbstractFilter = AbstractFilter.default(),
+               segmentation_mode: Optional[AudioSegmentation] = None, **kwargs):
+        self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
+        corpus: Corpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
+                                               spectrogram_filter=spectrogram_filter,
+                                               segmentation_mode=segmentation_mode, **kwargs)
+        self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{output_folder}'...")
+
+        try:
+            output_filepath: str = corpus.export(output_folder, overwrite=overwrite)
+            self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
+        except (IOError, AttributeError, KeyError) as e:
+            self.logger.error(f"{str(e)} Export of corpus failed.")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+
+    def _build_multithreaded(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
+                             overwrite: bool = False, spectrogram_filter: AbstractFilter = AbstractFilter.default(),
+                             segmentation_mode: Optional[AudioSegmentation] = None, **kwargs):
         corpus_builder: ThreadedCorpusBuilder = ThreadedCorpusBuilder(filepath=filepath, corpus_name=corpus_name,
                                                                       spectrogram_filter=spectrogram_filter,
                                                                       output_folder=output_folder, overwrite=overwrite,
                                                                       osc_address=self.address, ip=self.ip,
-                                                                      send_port=self.send_port, **kwargs)
+                                                                      send_port=self.send_port,
+                                                                      segmentation_mode=segmentation_mode,
+                                                                      **kwargs)
         corpus_builder.start()
         self._corpus_builders.append(corpus_builder)
 

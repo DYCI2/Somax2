@@ -11,6 +11,8 @@ class SendProtocol:
     PLAYER_RECORDED_CORPUS_LENGTH = "recorded_corpus"
     ELIGIBILITY = "eligibility"
 
+    BUILDING_CORPUS_STATUS = "building_corpus_status"
+
     PLAYER_READING_CORPUS_STATUS = "reading_corpus_status"
 
     # Scheduling

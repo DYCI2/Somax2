@@ -392,6 +392,10 @@ class OscAgent(Agent, AsyncioOscObject):
             else:
                 self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
                 raise IOError(f"Invalid file extension '{file_extension}'")
+        except FileNotFoundError as e:
+            self.logger.error(f"{str(e)}. Please Make sure that the file exists or rebuild the corpus.")
+            self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
+            return
         except (IOError,  AttributeError, InvalidCorpus, ExternalDataMismatch) as e:
             self.logger.error(f"{str(e)}. No corpus was read.")
             self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")

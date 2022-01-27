@@ -296,11 +296,18 @@ class AudioCorpus(Corpus):
                     raise InvalidCorpus("Class of corpus is not valid")
 
                 cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.duration(), corpus.num_channels)
+
+        # Pickle tried to import module that was not supported
         except pickle.UnpicklingError as e:
-            # Pickle tried to import module that was not supported
             raise InvalidCorpus(e) from e
+
+        # Pickle tried to import class that doesn't exist or missing mandatory classes
         except ValueError as e:
             raise ExternalDataMismatch(e) from e
+
+        # Related audio file is missing
+        except OSError as e:
+            raise FileNotFoundError(e) from e
 
         return corpus
 
