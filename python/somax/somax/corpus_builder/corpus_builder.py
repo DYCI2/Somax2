@@ -2,6 +2,7 @@ import logging
 import logging.config
 import multiprocessing
 import os
+import warnings
 from enum import Enum
 from importlib import resources
 from timeit import default_timer as timer
@@ -88,6 +89,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
                 self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
+                self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
                 return
 
         self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
@@ -281,7 +283,9 @@ class CorpusBuilder:
         content: List[np.ndarray] = []
         sr: Optional[int] = None
         for filepath in filepaths:
-            y, sr_y = librosa.load(filepath, sr=None, mono=False)
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                y, sr_y = librosa.load(filepath, sr=None, mono=False)
             if sr is not None and sr_y != sr:
                 self.logger.warning(f"Ignoring file '{filepath}' since it has a different sample rate "
                                     f"({sr_y} compared to previously used value {sr})")
@@ -308,7 +312,9 @@ class CorpusBuilder:
                     ParameterError if no slices were detected
             return: (onsets, durations) in seconds """
         # TODO: Folder support
-        y, sr = librosa.load(filepath, sr=None, mono=False)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            y, sr = librosa.load(filepath, sr=None, mono=False)
         onset_frames, duration_frames, stats = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
                                                                  segmentation_mode=segmentation_mode, **kwargs)
         onset_times: np.ndarray = librosa.frames_to_time(onset_frames, sr=sr, hop_length=hop_length)
