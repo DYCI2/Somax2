@@ -101,13 +101,11 @@ class BaseSomChromaClassifier(ChromaClassifier):
 class OnsetSomChromaClassifier(BaseSomChromaClassifier):
     def __init__(self):
         super().__init__(chroma_type=OnsetChroma)
-        print(f"Initialized {self.__class__.__name__}")
 
 
 class MeanSomChromaClassifier(BaseSomChromaClassifier):
     def __init__(self):
         super().__init__(chroma_type=MeanChroma)
-        print(f"Initialized {self.__class__.__name__}")
 
 
 class GmmClassifier(ChromaClassifier, ABC):

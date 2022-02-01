@@ -496,9 +496,12 @@ class OscAgent(Agent, AsyncioOscObject):
         corpora: List[Tuple[str, str]] = []
         for file in os.listdir(filepath):
             if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
-                corpus_name, _ = os.path.splitext(file)  # TODO: Not the corpus name that's specified in the json
-                corpora.append((corpus_name, os.path.join(filepath, file)))
-        corpora = sorted(corpora, key=lambda e: e[0])
+                # TODO: Not the corpus name that's specified in the json.
+                # TODO 2: splitext won't always be a good way to get info whether it's midi or audio
+                corpus_name, ext = os.path.splitext(file)
+                corpus_type: str = "(M)" if ext == CorpusBuilder.MIDI_CORPUS_FILE_EXT else "(A)"
+                corpora.append((corpus_type + " " + corpus_name, os.path.join(filepath, file)))
+        corpora = sorted(corpora, key=lambda e: e[0].lower())
         self.send_corpora(corpora)
 
     def get_peaks(self):

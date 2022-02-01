@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1794.0, 1272.0 ],
+		"rect" : [ 34.0, 79.0, 1794.0, 772.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -53,7 +53,7 @@
 					"numoutlets" : 8,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "multichannelsignal", "", "", "", "", "", "" ],
-					"patching_rect" : [ 401.0, 1.0, 261.0, 747.0 ],
+					"patching_rect" : [ 383.0, 5.574140189969739, 258.0, 742.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 374.0, 0.0, 258.0, 743.0 ],
 					"varname" : "somax.player.io",
@@ -76,7 +76,7 @@
 					"numoutlets" : 5,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "", "", "", "" ],
-					"patching_rect" : [ 7.083333333333258, 348.0, 385.0, 335.574140189969739 ],
+					"patching_rect" : [ 7.083333333333258, 348.0, 371.0, 327.574140189969739 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.0, 332.101258124093647, 369.0, 327.574140189969739 ],
 					"varname" : "somax.midi.io",
@@ -99,7 +99,7 @@
 					"numoutlets" : 6,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "", "", "", "", "" ],
-					"patching_rect" : [ 7.083333333333258, 5.574140189969739, 381.0, 337.0 ],
+					"patching_rect" : [ 7.083333333333258, 5.574140189969739, 367.0, 330.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.0, 0.0, 381.0, 337.0 ],
 					"varname" : "somax.audio.io",
@@ -123,9 +123,9 @@
 					"numoutlets" : 7,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "float", "float", "dictionary", "int", "", "" ],
-					"patching_rect" : [ 7.083333333333258, 688.0, 381.0, 228.0 ],
+					"patching_rect" : [ 7.083333333333258, 688.0, 371.0, 228.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 661.675398314063386, 369.0, 216.0 ],
+					"presentation_rect" : [ 0.0, 661.675398314063386, 369.0, 227.0 ],
 					"varname" : "somax.server.io",
 					"viewvisibility" : 1
 				}
@@ -206,6 +206,7 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-866::obj-1011" : [ "continue", "continue", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-866::obj-33" : [ "pregain", "pregain", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-866::obj-814" : [ "timeout", "timeout", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-866::obj-98" : [ "live.text[26]", "live.text[26]", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-870" : [ "selfharmonicbypass", "selfharmonicbypass", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-982" : [ "transpositions[1]", "transpositions", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-998" : [ "__exp_regionmaskenable", "__exp_regionmaskenable", 0 ],
@@ -514,6 +515,13 @@
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "Sax_gentle_cat_Slow.wav",
+				"bootpath" : "~/Music",
+				"patcherrelativepath" : "../../../../Music",
+				"type" : "WAVE",
 				"implicit" : 1
 			}
 , 			{

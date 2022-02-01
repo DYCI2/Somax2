@@ -8,6 +8,7 @@ import os
 import pickle
 import pickletools
 import sys
+import warnings
 from abc import ABC, abstractmethod
 from typing import List, Optional, Type, Dict, Any, Tuple, Union, TypeVar, Generic
 
@@ -318,7 +319,9 @@ class AudioCorpus(Corpus):
                             ValueError if mismatch between file and expected data
         """
         try:
-            audio, sample_rate = librosa.load(filepath, sr=None, mono=False)
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                audio, sample_rate = librosa.load(filepath, sr=None, mono=False)
         except (FileNotFoundError, RuntimeError) as e:
             raise IOError(e) from e
 
