@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 10,
+			"revision" : 7,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -134,7 +134,6 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-11::obj-14::obj-1::obj-1::obj-172::obj-25" : [ "live.gain~", "live.gain~", 0 ],
 			"obj-11::obj-14::obj-1::obj-1::obj-192" : [ "live.numbox", "live.numbox", 0 ],
 			"obj-11::obj-21" : [ "Gain[1]", "Gain", 0 ],
 			"obj-13::obj-17::obj-39::obj-6::obj-21" : [ "onset", "onset", 0 ],
@@ -152,6 +151,8 @@
 			"obj-13::obj-1::obj-13::obj-2::obj-65" : [ "filterchroma", "filterchroma", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1007" : [ "rslider", "rslider", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1054" : [ "live.numbox[2]", "live.numbox", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1115" : [ "continuity[1]", "continuity", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1150" : [ "live.text", "live.text", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-12" : [ "melodicmod12", "melodicmod12", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-120" : [ "melodicbypass", "melodicbypass", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-126" : [ "harmonicbypass", "harmonicbypass", 0 ],
@@ -221,7 +222,6 @@
 			"obj-13::obj-1::obj-6::obj-91::obj-1" : [ "live.text[9]", "live.text", 0 ],
 			"obj-13::obj-1::obj-6::obj-91::obj-2" : [ "live.text[8]", "live.text", 0 ],
 			"obj-13::obj-1::obj-6::obj-91::obj-3" : [ "live.text[7]", "live.text", 0 ],
-			"obj-13::obj-1::obj-78::obj-1::obj-172::obj-25" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-13::obj-1::obj-78::obj-1::obj-192" : [ "live.numbox[1]", "live.numbox", 0 ],
 			"obj-13::obj-33::obj-1" : [ "mc.live.gain~[2]", "mc.live.gain~", 0 ],
 			"obj-13::obj-33::obj-13" : [ "live.numbox[3]", "live.numbox[3]", 0 ],
@@ -235,11 +235,6 @@
 			}
 ,
 			"parameter_overrides" : 			{
-				"obj-11::obj-14::obj-1::obj-1::obj-172::obj-25" : 				{
-					"parameter_longname" : "live.gain~",
-					"parameter_shortname" : "live.gain~"
-				}
-,
 				"obj-13::obj-17::obj-39::obj-6::obj-46::obj-1" : 				{
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
@@ -292,10 +287,6 @@
 ,
 				"obj-13::obj-1::obj-6::obj-91::obj-3" : 				{
 					"parameter_longname" : "live.text[7]"
-				}
-,
-				"obj-13::obj-1::obj-78::obj-1::obj-172::obj-25" : 				{
-					"parameter_longname" : "live.gain~[1]"
 				}
 ,
 				"obj-13::obj-1::obj-78::obj-1::obj-192" : 				{
@@ -457,8 +448,8 @@
 			}
 , 			{
 				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/chord_extraction_prediction_lib/Max_library/app",
-				"patcherrelativepath" : "../../../chord_extraction_prediction_lib/Max_library/app",
+				"bootpath" : "~/MaxDev/Dyci2Lib/Max_library/app",
+				"patcherrelativepath" : "../../../Dyci2Lib/Max_library/app",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
@@ -547,30 +538,30 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "OMax.Yin+.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/patchers",
-				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/patchers",
+				"name" : "OMax.yin+.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "OMax.Yin+core.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/patchers",
-				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/patchers",
+				"name" : "Yin+.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "sr.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/patchers",
-				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/patchers",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "bc.autoname.js",
-				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/javascript",
-				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/javascript",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "./javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
@@ -816,23 +807,10 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
 					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"message" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -842,17 +820,30 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-,
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+
 				}
 ,
 				"newobj" : 				{
 					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"message" : 				{
+					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+
 				}
 ,
 				"button" : 				{
