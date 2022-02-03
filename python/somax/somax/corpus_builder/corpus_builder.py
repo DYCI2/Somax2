@@ -328,7 +328,9 @@ class CorpusBuilder:
                      segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET,
                      hop_length: int = 512, min_interval_s: float = 0.05, max_size_s: Optional[float] = None,
                      off_threshold_db: Optional[float] = -120.0, discard_by_mean: bool = False,
+                     segmentation_interval_s: float = 1.0,
                      **kwargs) -> Tuple[np.ndarray, np.ndarray, SegmentationStatistics]:
+        """ segmentation_interval_s: Only used for when `segmentation_mode` is INTERVAL """
         # TODO: Handle invalid parameter ranges (those that throw errors - need to catch them accordingly)
         y = self._parse_channels(audio_signal=audio_signal, channels=onset_channels)
 
@@ -336,17 +338,19 @@ class CorpusBuilder:
             onset_frames = self._slice_audio_by_onset(y, sr, hop_length=hop_length,
                                                       pick_peak_wait_s=min_interval_s, **kwargs)
 
+            onset_frames, frame_durations = self._compute_slice_durations(y, sr, hop_length=hop_length,
+                                                                          onsets=onset_frames,
+                                                                          min_size_s=min_interval_s,
+                                                                          max_size_s=max_size_s,
+                                                                          off_threshold_db=off_threshold_db,
+                                                                          discard_by_mean=discard_by_mean)
+
         elif segmentation_mode == AudioSegmentation.INTERVAL:
-            onset_frames = self._slice_audio_by_interval()
+            onset_frames, frame_durations = self._slice_audio_by_interval(y, sr, hop_length=hop_length,
+                                                                          segmentation_interval_s=segmentation_interval_s,
+                                                                          **kwargs)
         else:
             raise ValueError("Invalid segmentation type")
-
-        onset_frames, frame_durations = self._compute_slice_durations(y, sr, hop_length=hop_length,
-                                                                      onsets=onset_frames,
-                                                                      min_size_s=min_interval_s,
-                                                                      max_size_s=max_size_s,
-                                                                      off_threshold_db=off_threshold_db,
-                                                                      discard_by_mean=discard_by_mean)
 
         if onset_frames.size == 0:
             raise ParameterError("Could not compute any frames")
@@ -417,8 +421,29 @@ class CorpusBuilder:
                                                               normalize=True, **peak_pick_parameters)
         return onset_frames
 
-    def _slice_audio_by_interval(self):
-        raise NotImplementedError("Not implemented yet")
+    def _slice_audio_by_interval(self, y: np.ndarray, sr: float, hop_length: int = 512,
+                                 segmentation_interval_s: float = 1.0, **kwargs) -> Tuple[np.ndarray, np.ndarray]:
+        interval_samples: int = librosa.time_to_samples(segmentation_interval_s, sr=sr)
+        total_samples: int = y.size  # y is monophonic
+        num_segments: int = np.ceil(total_samples / interval_samples)
+        onset_samples: np.ndarray = interval_samples * np.arange(num_segments)
+        onset_frames: np.ndarray = librosa.time_to_frames(onset_samples, sr=sr, hop_length=hop_length)
+
+        duration_samples: np.ndarray = interval_samples * np.ones_like(onset_frames)
+
+        # adjust duration of last fragment to end of file
+        remainder = total_samples % interval_samples
+
+        if remainder == 0:
+            # `total_samples` is divisible by `interval_samples`: ceil operation above was not needed
+            pass
+        else:
+            # `total_samples` is not divisible by `interval_samples`: last slice is shorter
+            duration_samples[-1] = remainder
+
+        duration_frames: np.ndarray = librosa.time_to_frames(duration_samples, sr=sr, hop_length=hop_length)
+
+        return onset_frames, duration_frames
 
     @staticmethod
     def _parse_channels(audio_signal: np.ndarray, channels: Optional[List[int]] = None) -> np.ndarray:

@@ -112,7 +112,6 @@ class SchedulingHandler(Introspective, ABC):
         self._previous_stretched_time = stretched_time
         return stretched_time
 
-
     def add_trigger_event(self, trigger_event: Optional[TriggerEvent] = None, reschedule: bool = False) -> None:
         if trigger_event is not None and reschedule:
             self._reschedule(trigger_event=trigger_event)
@@ -279,3 +278,39 @@ class AutomaticSchedulingHandler(SchedulingHandler):
 
     def renderer_info(self) -> str:
         return "automatic"
+
+
+class IndirectSchedulingHandler(SchedulingHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.next_possible_onset: Optional[float] = None
+
+    def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
+        if not self._scheduler.running:
+            return
+
+        if self._scheduler.has_by_type(TriggerEvent):
+            return
+
+        if self.next_possible_onset is not None:
+            onset_time: float = max(self.next_possible_onset, self._scheduler.time)
+        else:
+            onset_time: float = self._scheduler.time
+
+        self._scheduler.add_event(TriggerEvent(trigger_time=onset_time - self._trigger_pretime(),
+                                               target_time=onset_time))
+
+    def _on_corpus_event_received(self, trigger_time: float,
+                                  event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
+        if event_and_transform is not None:
+            self.next_possible_onset = self._scheduler.time + event_and_transform[0].duration
+
+    def _handle_flushing(self, flushed_triggers: List[TriggerEvent]) -> List[TriggerEvent]:
+        self.next_possible_onset = None
+        return []
+
+    def _reschedule(self, trigger_event: TriggerEvent) -> None:
+        pass
+
+    def renderer_info(self) -> str:
+        return "indirect"
