@@ -12,7 +12,7 @@ import librosa
 import numpy as np
 import pandas as pd
 
-import log
+from somax import log
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
@@ -421,13 +421,14 @@ class CorpusBuilder:
                                                               normalize=True, **peak_pick_parameters)
         return onset_frames
 
-    def _slice_audio_by_interval(self, y: np.ndarray, sr: float, hop_length: int = 512,
-                                 segmentation_interval_s: float = 1.0, **kwargs) -> Tuple[np.ndarray, np.ndarray]:
+    @staticmethod
+    def _slice_audio_by_interval(y: np.ndarray, sr: float, hop_length: int = 512,
+                                 segmentation_interval_s: float = 1.0, **_kwargs) -> Tuple[np.ndarray, np.ndarray]:
         interval_samples: int = librosa.time_to_samples(segmentation_interval_s, sr=sr)
         total_samples: int = y.size  # y is monophonic
         num_segments: int = np.ceil(total_samples / interval_samples)
         onset_samples: np.ndarray = interval_samples * np.arange(num_segments)
-        onset_frames: np.ndarray = librosa.time_to_frames(onset_samples, sr=sr, hop_length=hop_length)
+        onset_frames: np.ndarray = librosa.samples_to_frames(onset_samples, hop_length=hop_length)
 
         duration_samples: np.ndarray = interval_samples * np.ones_like(onset_frames)
 
@@ -441,7 +442,7 @@ class CorpusBuilder:
             # `total_samples` is not divisible by `interval_samples`: last slice is shorter
             duration_samples[-1] = remainder
 
-        duration_frames: np.ndarray = librosa.time_to_frames(duration_samples, sr=sr, hop_length=hop_length)
+        duration_frames: np.ndarray = librosa.samples_to_frames(duration_samples, hop_length=hop_length)
 
         return onset_frames, duration_frames
 

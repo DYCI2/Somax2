@@ -16,6 +16,8 @@ DMG_PATH = dist/$(DMG_NAME).dmg
 
 pyinstaller:
 	@echo "\033[1m####### Building server binary with pyinstaller ########\033[0m"
+	@echo "TODO: 'log' has been moved from python/somax/log to python/somax/somax/log. Fix this before continuing"
+	exit 1
 	$(PYINSTALLER_PATH) $(PYINSTALLER_TARGET) \
 		--clean \
 		--noconfirm \

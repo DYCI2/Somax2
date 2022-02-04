@@ -8,8 +8,7 @@ from typing import Any, Optional, List, Tuple, Type
 
 import mido
 
-import log
-from somax import settings
+from somax import settings, log
 from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation

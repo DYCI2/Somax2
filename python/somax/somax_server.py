@@ -12,7 +12,7 @@ from typing import Optional, Callable, Tuple, List, Dict, Type
 
 from audioread import NoBackendError
 
-import log
+from somax import log
 import somax
 from somax.classification.chroma_classifiers import OnsetSomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
