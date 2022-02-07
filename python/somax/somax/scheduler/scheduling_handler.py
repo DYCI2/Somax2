@@ -34,6 +34,7 @@ class SchedulingHandler(Introspective, ABC):
         #   (The names are parodical to make sure they don't stay in the code base for long)
         self._experimental_use_relative_tempo_scaling_for_audio: bool = exp_audio_relative_tempo_scaling
         self._experimental_previous_audio_events_tempo: Optional[float] = None
+        self._experimental_accumulated_stretch_factor: float = self._stretch_factor
 
     @abstractmethod
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
@@ -123,15 +124,15 @@ class SchedulingHandler(Introspective, ABC):
         if self._experimental_use_relative_tempo_scaling_for_audio and \
                 self._experimental_previous_audio_events_tempo is not None:
             experimental_ts_factor: float = tempo / self._experimental_previous_audio_events_tempo
-            print(f"Scale factor is {experimental_ts_factor}")
         else:
             experimental_ts_factor = 1.0
-            print(f"no scale factor")
 
+        self._experimental_accumulated_stretch_factor = self._stretch_factor * experimental_ts_factor
         # TODO: ========= End of experimental part
 
+        # TODO: Replace `self._experimental_accumulated_stretch_factor` with `self._stretch_factor`.
         stretched_time: float = (self._previous_stretched_time +
-                                 (time - self._previous_callback) * self._stretch_factor * experimental_ts_factor)
+                                 (time - self._previous_callback) * self._experimental_accumulated_stretch_factor)
         self._previous_callback = time
         self._previous_stretched_time = stretched_time
 
@@ -158,11 +159,13 @@ class SchedulingHandler(Introspective, ABC):
                 self._scheduler.add_events(scheduler_events)
             elif isinstance(event, AudioCorpusEvent):
                 # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
-                self._experimental_previous_audio_events_tempo = event.get_feature_safe(Tempo)
+                tempo: Optional[Tempo] = event.get_feature_safe(Tempo)
+                self._experimental_previous_audio_events_tempo = tempo.value() if tempo is not None else None
                 print(f"Added tempo event - new tempo is {self._experimental_previous_audio_events_tempo}")
                 scheduler_events: List[ScheduledEvent] = self.audio_handler.process(trigger_time=trigger_time,
                                                                                     event=event,
-                                                                                    applied_transform=applied_transform)
+                                                                                    applied_transform=applied_transform,
+                                                                                    time_stretch_factor=self._experimental_accumulated_stretch_factor)
                 self._scheduler.add_events(scheduler_events)
             else:
                 raise TypeError(f"Scheduling event of type '{event.__class__}' is not supported")
@@ -178,6 +181,8 @@ class SchedulingHandler(Introspective, ABC):
     # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
     def set_experimental_relative_tempo_scaling_for_audio_mode(self, enable: bool):
         self._experimental_use_relative_tempo_scaling_for_audio = enable
+        if not enable:
+            self._experimental_previous_audio_events_tempo = None
         print(f"Experimental relative tempo scaling for audio mode set to {enable}")
 
     def _adjust_in_time(self, event: ScheduledEvent, increment: float = 0.0) -> ScheduledEvent:
@@ -225,6 +230,7 @@ class SchedulingHandler(Introspective, ABC):
 
         # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
         self._experimental_previous_audio_events_tempo = None
+        self._experimental_accumulated_stretch_factor = self._stretch_factor
         return output_events
 
     @property

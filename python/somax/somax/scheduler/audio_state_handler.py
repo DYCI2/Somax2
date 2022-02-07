@@ -32,7 +32,7 @@ class AudioStateHandler:
         self.timeout: float = timeout  # seconds
 
     def process(self, trigger_time: float, event: AudioCorpusEvent,
-                applied_transform: AbstractTransform) -> List[ScheduledEvent]:
+                applied_transform: AbstractTransform, time_stretch_factor: float) -> List[ScheduledEvent]:
         output: List[ScheduledEvent] = []
 
         tempo: Optional[FeatureValue] = event.get_feature_safe(Tempo)
@@ -47,11 +47,13 @@ class AudioStateHandler:
                 self._currently_playing.transform == applied_transform and
                 abs(trigger_time - self._currently_playing.end_time) <= self._threshold_s):
             output.append(AudioContinueEvent(trigger_time=trigger_time, corpus_event=event,
-                                             applied_transform=applied_transform))
+                                             applied_transform=applied_transform,
+                                             time_stretch_factor=time_stretch_factor))
         else:
             output.append(AudioEvent(trigger_time=trigger_time,
                                      corpus_event=event,
-                                     applied_transform=applied_transform))
+                                     applied_transform=applied_transform,
+                                     time_stretch_factor=time_stretch_factor))
 
         self._currently_playing = AudioState(event, applied_transform, trigger_time + event.duration)
 
