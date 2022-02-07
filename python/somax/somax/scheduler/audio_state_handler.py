@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
+from somax.features import Tempo
+from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus_event import AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
-from somax.scheduler.scheduled_event import ScheduledEvent, AudioEvent, AudioOffEvent, AudioContinueEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, AudioEvent, AudioOffEvent, AudioContinueEvent, TempoEvent
 
 
 @dataclass
@@ -29,9 +31,14 @@ class AudioStateHandler:
         self._release: float = 0.1  # seconds
         self.timeout: float = timeout  # seconds
 
-    def add(self, trigger_time: float, event: AudioCorpusEvent,
-            applied_transform: AbstractTransform) -> List[ScheduledEvent]:
+    def process(self, trigger_time: float, event: AudioCorpusEvent,
+                applied_transform: AbstractTransform) -> List[ScheduledEvent]:
         output: List[ScheduledEvent] = []
+
+        tempo: Optional[FeatureValue] = event.get_feature_safe(Tempo)
+        if tempo is not None:
+            print(f"Appending tempo {tempo.value()}")
+            output.append(TempoEvent(trigger_time, tempo.value()))
 
         # Queue a new event -- unless the new event is immediately following the currently played event and
         #   triggered at the end of current event's duration

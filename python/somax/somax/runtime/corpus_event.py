@@ -117,6 +117,9 @@ class CorpusEvent(ABC):
         except ValueError as e:
             raise FeatureError(f"Corpus does not have feature of type '{feature_type}'") from e
 
+    def get_feature_safe(self, feature_type: Type[FeatureValue]) -> Optional[FeatureValue]:
+        return self.features.get(feature_type)
+
     def set_feature(self, feature: FeatureValue):
         """ Note! This call is strictly for constructing the corpus. Using it at runtime to edit an already loaded
                   corpus will not warrant well-defined behaviour """

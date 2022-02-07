@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple, Dict, Type
 
+from somax.features import Tempo
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
@@ -18,7 +19,8 @@ class SchedulingHandler(Introspective, ABC):
     def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
                  running: bool = False, midi_handler: MidiStateHandler = MidiStateHandler(),
                  audio_handler: AudioStateHandler = AudioStateHandler(),
-                 trigger_pretime: float = TRIGGER_PRETIME, time_stretch: float = 1.0, **_kwargs):
+                 trigger_pretime: float = TRIGGER_PRETIME, time_stretch: float = 1.0,
+                 exp_audio_relative_tempo_scaling: bool = False, **_kwargs):
         self.scheduling_mode: SchedulingMode = scheduling_mode
         self._scheduler: Scheduler = Scheduler(time=time, tempo=tempo, running=running)
         self.midi_handler: MidiStateHandler = midi_handler
@@ -27,6 +29,11 @@ class SchedulingHandler(Introspective, ABC):
         self._stretch_factor: float = time_stretch
         self._previous_callback: float = time
         self._previous_stretched_time: float = time
+
+        # TODO: Either remove this or integrate it in the architecture as relative time. Part of [[R7. Tempo/Pulse Seg]]
+        #   (The names are parodical to make sure they don't stay in the code base for long)
+        self._experimental_use_relative_tempo_scaling_for_audio: bool = exp_audio_relative_tempo_scaling
+        self._experimental_previous_audio_events_tempo: Optional[float] = None
 
     @abstractmethod
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
@@ -74,7 +81,8 @@ class SchedulingHandler(Introspective, ABC):
     def new_from(cls, other: 'SchedulingHandler', **kwargs) -> 'SchedulingHandler':
         return cls(scheduling_mode=other.scheduling_mode, time=other._scheduler.time, tempo=other._scheduler.tempo,
                    running=other._scheduler.running, midi_handler=other.midi_handler, audio_handler=other.audio_handler,
-                   trigger_pretime=other._trigger_pretime_value, time_stretch=other._stretch_factor, **kwargs)
+                   trigger_pretime=other._trigger_pretime_value, time_stretch=other._stretch_factor,
+                   exp_audio_relative_tempo_scaling=other._experimental_use_relative_tempo_scaling_for_audio, **kwargs)
 
     @classmethod
     def type_from_string(cls, class_name: str):
@@ -93,7 +101,7 @@ class SchedulingHandler(Introspective, ABC):
             output_events.extend(self.handle_timeskip(time_value))
 
         tempo: float = time.tempo
-        stretched_time = self.stretch_time(time_value)
+        stretched_time = self.stretch_time(time_value, tempo)
         output_events.extend(self._scheduler.update_time(time=stretched_time, tempo=tempo))
         output_events.extend(self.audio_handler.poll(stretched_time))
         self._handle_output(output_events.copy())
@@ -106,10 +114,27 @@ class SchedulingHandler(Introspective, ABC):
         self._previous_stretched_time = time
         return output_events
 
-    def stretch_time(self, time: float) -> float:
-        stretched_time: float = self._previous_stretched_time + (time - self._previous_callback) * self._stretch_factor
+    def stretch_time(self, time: float, tempo: float) -> float:
+        # TODO: This is a way to simulate the `Relative` mode for audio content without significant changes to the
+        #   architecture. Should this work well, it should be removed and fully integrated in the
+        #   AudioCorpus/AudioCorpusEvent using the Relative scheduling mode and corresponding
+        #   relative_onset/relative_dur. Part of [[R7. Tempo/Pulse Seg]].
+        #   ============= Start of experimental part
+        if self._experimental_use_relative_tempo_scaling_for_audio and \
+                self._experimental_previous_audio_events_tempo is not None:
+            experimental_ts_factor: float = tempo / self._experimental_previous_audio_events_tempo
+            print(f"Scale factor is {experimental_ts_factor}")
+        else:
+            experimental_ts_factor = 1.0
+            print(f"no scale factor")
+
+        # TODO: ========= End of experimental part
+
+        stretched_time: float = (self._previous_stretched_time +
+                                 (time - self._previous_callback) * self._stretch_factor * experimental_ts_factor)
         self._previous_callback = time
         self._previous_stretched_time = stretched_time
+
         return stretched_time
 
     def add_trigger_event(self, trigger_event: Optional[TriggerEvent] = None, reschedule: bool = False) -> None:
@@ -132,9 +157,12 @@ class SchedulingHandler(Introspective, ABC):
                                                                                    applied_transform=applied_transform)
                 self._scheduler.add_events(scheduler_events)
             elif isinstance(event, AudioCorpusEvent):
-                scheduler_events: List[ScheduledEvent] = self.audio_handler.add(trigger_time=trigger_time,
-                                                                                event=event,
-                                                                                applied_transform=applied_transform)
+                # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
+                self._experimental_previous_audio_events_tempo = event.get_feature_safe(Tempo)
+                print(f"Added tempo event - new tempo is {self._experimental_previous_audio_events_tempo}")
+                scheduler_events: List[ScheduledEvent] = self.audio_handler.process(trigger_time=trigger_time,
+                                                                                    event=event,
+                                                                                    applied_transform=applied_transform)
                 self._scheduler.add_events(scheduler_events)
             else:
                 raise TypeError(f"Scheduling event of type '{event.__class__}' is not supported")
@@ -146,6 +174,11 @@ class SchedulingHandler(Introspective, ABC):
 
     def set_time_stretch_factor(self, factor: float) -> None:
         self._stretch_factor = factor
+
+    # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
+    def set_experimental_relative_tempo_scaling_for_audio_mode(self, enable: bool):
+        self._experimental_use_relative_tempo_scaling_for_audio = enable
+        print(f"Experimental relative tempo scaling for audio mode set to {enable}")
 
     def _adjust_in_time(self, event: ScheduledEvent, increment: float = 0.0) -> ScheduledEvent:
         scheduler_time: float = self._scheduler.time
@@ -189,6 +222,9 @@ class SchedulingHandler(Introspective, ABC):
             output_events.extend(triggers)
         output_events.extend(self.midi_handler.flush(flushed_events, self._scheduler.time))
         output_events.extend(self.audio_handler.flush(self._scheduler.time))
+
+        # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
+        self._experimental_previous_audio_events_tempo = None
         return output_events
 
     @property
@@ -236,12 +272,8 @@ class ManualSchedulingHandler(SchedulingHandler):
 
 
 class AutomaticSchedulingHandler(SchedulingHandler):
-    def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
-                 running: bool = False, midi_handler: MidiStateHandler = MidiStateHandler(),
-                 audio_handler: AudioStateHandler = AudioStateHandler(),
-                 trigger_pretime: float = SchedulingHandler.TRIGGER_PRETIME, time_stretch: float = 1.0, **_kwargs):
-        super().__init__(scheduling_mode, time, tempo, running, midi_handler, audio_handler, trigger_pretime,
-                         time_stretch, **_kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self._scheduler.add_event(self._default_trigger())
 
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:

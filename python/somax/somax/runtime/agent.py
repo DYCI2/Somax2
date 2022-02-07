@@ -395,7 +395,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Please Make sure that the file exists or rebuild the corpus.")
             self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
-        except (IOError,  AttributeError, InvalidCorpus, ExternalDataMismatch) as e:
+        except (IOError, AttributeError, InvalidCorpus, ExternalDataMismatch) as e:
             self.logger.error(f"{str(e)}. No corpus was read.")
             self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
@@ -465,6 +465,8 @@ class OscAgent(Agent, AsyncioOscObject):
         else:
             self.scheduling_handler.set_time_stretch_factor(factor)
 
+    def set_experimental_relative_tempo_scaling_for_audio_mode(self, enable: bool) -> None:
+        self.scheduling_handler.set_experimental_relative_tempo_scaling_for_audio_mode(enable)
 
     ######################################################
     # PRIVATE

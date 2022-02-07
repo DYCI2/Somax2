@@ -21,7 +21,8 @@ class MidiMetadata(Metadata):
 
 class AudioMetadata(Metadata):
     def __init__(self, filepath: str, content_type: SchedulingMode, raw_data: np.ndarray, foreground_data: np.ndarray,
-                 background_data: np.ndarray, sr: float, hop_length: int, stft: Spectrogram):
+                 background_data: np.ndarray, sr: float, hop_length: int, stft: Spectrogram,
+                 estimated_initial_bpm: float, beat_tightness: float):
         super().__init__(filepath=filepath, content_type=content_type)
         self.raw_data: np.ndarray = raw_data
         self.foreground_data: np.ndarray = foreground_data
@@ -33,6 +34,11 @@ class AudioMetadata(Metadata):
         self.channels: int = AudioMetadata.num_channels(raw_data)
         self.duration: float = AudioMetadata.duration_s(raw_data, sr)
         self.file_format: str = AudioMetadata.file_format(filepath)
+
+        # TODO: This is not a good solution for passing these values: should beat be more closely integrated in the ar
+        #   architecture, it'll be necessary to change this.
+        self.estimated_initial_bpm: float = estimated_initial_bpm
+        self.beat_tightness: float = beat_tightness  # in [0, 100] %
 
     @staticmethod
     def num_channels(x: np.ndarray) -> int:

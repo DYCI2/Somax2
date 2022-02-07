@@ -206,6 +206,7 @@ class CorpusBuilder:
     def _build_audio(self, filepaths: List[str], name: str, foreground_channels: Optional[List[int]] = None,
                      background_channels: Optional[List[int]] = None, onset_channels: Optional[List[int]] = None,
                      segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET, hop_length: int = 512,
+                     estimated_initial_bpm: float = 120.0, beat_tightness: float = 100.0,
                      **kwargs) -> Corpus:
         """ raises: FileNotFoundError  if failed to load file
                     RuntimeError if other issues are encountered in librosa
@@ -219,7 +220,7 @@ class CorpusBuilder:
         start_time: float = timer()
         self.logger.debug(f"[_build_audio]: ({0:.2f}) Building audio corpus '{name}'...")
 
-        if len(filepaths) > 1:  # Temporary: needed to support offline corpus building but not supported in UI
+        if len(filepaths) > 1:  # TODO Temporary: needed to support offline corpus building but not supported in UI
             self.logger.warning("Loading multiple audio files is not supported yet in the UI")
 
         y, sr = self._load_audio_files(filepaths)
@@ -246,9 +247,16 @@ class CorpusBuilder:
         stft: Spectrogram = Spectrogram.from_audio(background_data, sample_rate=sr, hop_length=hop_length, **kwargs)
 
         # TODO: Folder support - should not use filepaths[0]
-        metadata: AudioMetadata = AudioMetadata(filepath=filepaths[0], content_type=AbsoluteScheduling(), raw_data=y,
-                                                foreground_data=foreground_data, background_data=background_data, sr=sr,
-                                                hop_length=hop_length, stft=stft)
+        metadata: AudioMetadata = AudioMetadata(filepath=filepaths[0],
+                                                content_type=AbsoluteScheduling(),
+                                                raw_data=y,
+                                                foreground_data=foreground_data,
+                                                background_data=background_data,
+                                                sr=sr,
+                                                hop_length=hop_length,
+                                                stft=stft,
+                                                estimated_initial_bpm=estimated_initial_bpm,
+                                                beat_tightness=beat_tightness)
 
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) computed necessary metadata")
 
