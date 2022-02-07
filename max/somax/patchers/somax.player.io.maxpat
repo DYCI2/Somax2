@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 2225.0, 1272.0 ],
+		"rect" : [ 34.0, 78.0, 1852.0, 1088.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,18 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-46",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 512.0, 123.0, 93.0, 22.0 ],
+					"text" : "influence_onset"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-51",
 					"maxclass" : "toggle",
@@ -223,6 +235,7 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
+									"hidden" : 1,
 									"id" : "obj-26",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -240,6 +253,7 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
+									"hidden" : 1,
 									"id" : "obj-32",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -285,6 +299,7 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+									"hidden" : 1,
 									"id" : "obj-27",
 									"ignoreclick" : 0,
 									"maxclass" : "panel",
@@ -1349,52 +1364,52 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"default" : 								{
-									"fontface" : [ 1 ],
-									"fontsize" : [ 10.0 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-
-								}
-,
-								"newobj" : 								{
-									"fontface" : [ 1 ],
-									"fontsize" : [ 10.0 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-								}
-,
-								"message" : 								{
-									"fontface" : [ 1 ],
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-
-								}
-,
 								"button" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
 								"toggle" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"default" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ]
+								}
+,
+								"newobj" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"fontsize" : [ 10.0 ]
+								}
+,
+								"message" : 								{
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -2386,7 +2401,7 @@
 					"destination" : [ "obj-1", 0 ],
 					"source" : [ "obj-17", 0 ],
 					"watchpoint_flags" : 5,
-					"watchpoint_id" : 2
+					"watchpoint_id" : 1
 				}
 
 			}
@@ -2408,6 +2423,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-89", 0 ],
 					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-46", 0 ],
+					"source" : [ "obj-2", 0 ]
 				}
 
 			}
@@ -2657,6 +2679,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"source" : [ "obj-46", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-45", 0 ],
 					"midpoints" : [ 119.5, 850.0, 33.0, 850.0 ],
 					"source" : [ "obj-49", 0 ]
@@ -2720,52 +2749,52 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-
-				}
-,
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"message" : 				{
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-
-				}
-,
 				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"default" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontsize" : [ 10.0 ]
+				}
+,
+				"newobj" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ]
+				}
+,
+				"message" : 				{
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontface" : [ 1 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"parentstyle" : "",

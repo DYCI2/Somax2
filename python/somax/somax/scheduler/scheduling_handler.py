@@ -161,7 +161,6 @@ class SchedulingHandler(Introspective, ABC):
                 # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
                 tempo: Optional[Tempo] = event.get_feature_safe(Tempo)
                 self._experimental_previous_audio_events_tempo = tempo.value() if tempo is not None else None
-                print(f"Added tempo event - new tempo is {self._experimental_previous_audio_events_tempo}")
                 scheduler_events: List[ScheduledEvent] = self.audio_handler.process(trigger_time=trigger_time,
                                                                                     event=event,
                                                                                     applied_transform=applied_transform,
@@ -183,7 +182,6 @@ class SchedulingHandler(Introspective, ABC):
         self._experimental_use_relative_tempo_scaling_for_audio = enable
         if not enable:
             self._experimental_previous_audio_events_tempo = None
-        print(f"Experimental relative tempo scaling for audio mode set to {enable}")
 
     def _adjust_in_time(self, event: ScheduledEvent, increment: float = 0.0) -> ScheduledEvent:
         scheduler_time: float = self._scheduler.time

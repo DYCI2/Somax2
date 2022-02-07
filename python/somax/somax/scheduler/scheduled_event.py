@@ -70,7 +70,6 @@ class AudioEvent(RendererEvent):
         self.time_stretch_factor: float = time_stretch_factor
 
     def render(self) -> List[RendererMessage]:
-        print(f"Sending event with scale factor {self.time_stretch_factor}")
         return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
                                 content=[self.event.state_index, self.applied_transform.renderer_info()]),
                 RendererMessage(keyword=SendProtocol.SEND_AUDIO_EVENT,
@@ -89,7 +88,6 @@ class AudioContinueEvent(RendererEvent):
         self.time_stretch_factor: float = time_stretch_factor
 
     def render(self) -> List[RendererMessage]:
-        print(f"Sending CONTINUE event with scale factor {self.time_stretch_factor}")
         return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
                                 content=[self.event.state_index,
                                          self.applied_transform.renderer_info()]),

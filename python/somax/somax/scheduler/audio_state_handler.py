@@ -37,7 +37,6 @@ class AudioStateHandler:
 
         tempo: Optional[FeatureValue] = event.get_feature_safe(Tempo)
         if tempo is not None:
-            print(f"Appending tempo {tempo.value()}")
             output.append(TempoEvent(trigger_time, tempo.value()))
 
         # Queue a new event -- unless the new event is immediately following the currently played event and
