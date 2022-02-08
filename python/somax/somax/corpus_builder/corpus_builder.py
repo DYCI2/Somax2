@@ -410,7 +410,8 @@ class CorpusBuilder:
 
     @staticmethod
     def _slice_audio_by_onset(y: np.ndarray, sr: float, hop_length: int = 512,
-                              pick_peak_max_s: float = 0.4, pick_peak_mean_s: float = 0.4,
+                              pick_peak_pre_max_s: float = 0.4, pick_peak_pre_mean_s: float = 0.4,
+                              pick_peak_post_max_s: float = 0.4, pick_peak_post_mean_s: float = 0.4,
                               pick_peak_delta_gain: float = 0.07, backtrack: bool = True,
                               pick_peak_wait_s: float = 0.05, **_kwargs) -> np.ndarray:
         """ y: shape(n,)
@@ -418,10 +419,10 @@ class CorpusBuilder:
                                (frame i corresponds to  sample i * hop_length)  of the onset start
         """
 
-        peak_pick_parameters: Dict[str, float] = {"pre_max": pick_peak_max_s * sr // hop_length,
-                                                  "post_max": pick_peak_max_s * sr // hop_length + 1,
-                                                  "pre_avg": pick_peak_mean_s * sr // hop_length,
-                                                  "post_avg": pick_peak_mean_s * sr // hop_length + 1,
+        peak_pick_parameters: Dict[str, float] = {"pre_max": pick_peak_pre_max_s * sr // hop_length,
+                                                  "post_max": pick_peak_post_max_s * sr // hop_length + 1,
+                                                  "pre_avg": pick_peak_pre_mean_s * sr // hop_length,
+                                                  "post_avg": pick_peak_post_mean_s * sr // hop_length + 1,
                                                   "wait": pick_peak_wait_s * sr // hop_length,
                                                   "delta": pick_peak_delta_gain}
 
