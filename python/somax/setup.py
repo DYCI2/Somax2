@@ -4,48 +4,34 @@
 
 from setuptools import setup, find_packages
 
-with open('README.rst') as readme_file:
+with open('README.md') as readme_file:
     readme = readme_file.read()
-
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
-
-requirements = [ ]
-
-setup_requirements = [ ]
-
-test_requirements = [ ]
 
 setup(
     author="Joakim Borg",
     author_email='joakim.borg@ircam.fr',
-    python_requires='>=3.5',
+    python_requires='>=3.7',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
-    description="Somax imprrovisation package",
-    entry_points={
-        'console_scripts': [
-            'somax=somax.cli:main',
-        ],
-    },
-    install_requires=requirements,
-    long_description=readme + '\n\n' + history,
+    description="Somax Library",
+    # TODO: Package requirements properly and update README (see https://stackoverflow.com/a/33685899)
+    install_requires=["numpy", "scipy", "maxosc", "mido", "scikit-learn", "pandas", "python-osc", "matplotlib"],
+    license="GNU General Public License v3",
+    long_description=readme,
+    long_description_content_type="text/markdown",
     include_package_data=True,
     keywords='somax',
     name='somax',
     packages=find_packages(include=['somax', 'somax.*']),
-    setup_requires=setup_requirements,
-    test_suite='tests',
-    tests_require=test_requirements,
-    url='https://github.com/jobor019/somax',
-    version='2.0.0a4',
+    url='https://github.com/DYCI2/Somax2',
+    version='0.1.2',
     zip_safe=False,
 )
