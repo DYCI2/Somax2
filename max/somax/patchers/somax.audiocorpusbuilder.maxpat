@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 560.0, 720.0 ],
+		"rect" : [ 34.0, 79.0, 1049.0, 733.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -673,6 +673,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-216",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -690,6 +691,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-185",
 					"linecount" : 2,
 					"maxclass" : "comment",
@@ -697,7 +699,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 551.306430447673847, 2710.998084492659927, 141.0, 29.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 137.050584123069484, 669.478919622405556, 144.0, 18.0 ],
+					"presentation_rect" : [ 137.550584123069484, 672.741874999999936, 144.0, 18.0 ],
 					"text" : "Audio output is not enabled!",
 					"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 				}
@@ -707,6 +709,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
+					"hidden" : 1,
 					"id" : "obj-193",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -714,7 +717,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 551.306430447673847, 2750.560865890404784, 57.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 130.967664914412779, 660.856652783750405, 156.16583841731341, 34.366800515965451 ],
+					"presentation_rect" : [ 131.467664914412808, 664.119608161344786, 156.16583841731341, 34.366800515965451 ],
 					"proportion" : 0.5
 				}
 
@@ -723,6 +726,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-195",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -731,7 +735,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 511.0, 2710.998084492659927, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 632.724505001513535, 439.533334456516286, 91.508829241784042 ],
+					"presentation_rect" : [ 7.5, 635.987460379107915, 439.533334456516286, 91.508829241784042 ],
 					"proportion" : 0.5
 				}
 
@@ -2672,11 +2676,17 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"default" : 								{
+								"newobj" : 								{
+									"fontsize" : [ 10.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+								}
+,
+								"message" : 								{
+									"fontsize" : [ 10.0 ],
 									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2689,17 +2699,11 @@
 
 								}
 ,
-								"newobj" : 								{
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
-								}
-,
-								"message" : 								{
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+								"default" : 								{
 									"fontsize" : [ 10.0 ],
+									"fontface" : [ 1 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3023,13 +3027,14 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-471",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 911.900000000000091, 1463.906698902106655, 139.0, 18.0 ],
+					"patching_rect" : [ 911.900000000000091, 1463.906698902106655, 86.0, 29.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 8.5, 692.483749999999873, 139.0, 18.0 ],
-					"text" : "Visual indicator length (ms)",
+					"presentation_rect" : [ 7.0, 691.483749999999873, 153.916717500000118, 18.0 ],
+					"text" : "Visual indicator duration (ms)",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -3557,8 +3562,8 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1262.5, 2481.978397691746068, 77.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 150.916717500000004, 663.483749999999873, 77.0, 18.0 ],
-					"text" : "Play durations",
+					"presentation_rect" : [ 150.916717500000004, 663.483749999999873, 65.0, 18.0 ],
+					"text" : "Play offsets",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -3785,6 +3790,7 @@
 			}
 , 			{
 				"box" : 				{
+					"checkedcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ],
 					"id" : "obj-306",
 					"maxclass" : "toggle",
 					"numinlets" : 1,
@@ -3811,6 +3817,7 @@
 			}
 , 			{
 				"box" : 				{
+					"checkedcolor" : [ 0.570194035947712, 1.0, 0.427450980392157, 1.0 ],
 					"id" : "obj-251",
 					"maxclass" : "toggle",
 					"numinlets" : 1,
@@ -3831,10 +3838,10 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 474.5, 2264.406581503511006, 92.0, 18.0 ],
+					"patching_rect" : [ 474.5, 2264.406581503511006, 80.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 28.5, 663.483749999999873, 92.0, 18.0 ],
-					"text" : "Display durations",
+					"presentation_rect" : [ 28.5, 663.483749999999873, 80.0, 18.0 ],
+					"text" : "Display offsets",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -3935,7 +3942,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 811.611111111111086, 760.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 149.099999999999966, 215.869122753860665, 73.0 ],
+					"presentation_rect" : [ 6.0, 149.099999999999966, 215.869122753860665, 73.0 ],
 					"proportion" : 0.5
 				}
 
@@ -5075,7 +5082,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 911.900000000000091, 1520.084198902106436, 48.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 151.211034529545714, 691.483749999999873, 47.0, 20.0 ]
+					"presentation_rect" : [ 164.636906992278909, 690.483749999999873, 47.0, 20.0 ]
 				}
 
 			}
@@ -5765,13 +5772,14 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-205",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2023.499999999999773, 1405.899999999999636, 106.0, 18.0 ],
+					"patching_rect" : [ 2023.499999999999773, 1405.899999999999636, 106.0, 29.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 354.0, 399.0, 106.0, 18.0 ],
-					"text" : "Seg. Max Length (s):",
+					"presentation_rect" : [ 348.0, 402.0, 114.0, 18.0 ],
+					"text" : "Seg. Max Duration (s):",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -5782,13 +5790,14 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-203",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2023.499999999999773, 1387.299999999999727, 112.0, 18.0 ],
+					"patching_rect" : [ 2023.499999999999773, 1387.299999999999727, 112.0, 29.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 169.636906992278909, 400.0, 112.0, 18.0 ],
-					"text" : "Seg. Mean Length (s):",
+					"presentation_rect" : [ 164.636906992278909, 400.0, 120.0, 18.0 ],
+					"text" : "Seg. Mean Duration (s):",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -5948,7 +5957,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-68",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -6115,7 +6123,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 2023.499999999999773, 1424.499999999999545, 76.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 354.0, 377.0, 76.0, 18.0 ],
+					"presentation_rect" : [ 348.0, 379.0, 76.0, 18.0 ],
 					"text" : "Discard Ratio:",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -6187,13 +6195,14 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-116",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2023.499999999999773, 1368.699999999999818, 104.0, 18.0 ],
+					"patching_rect" : [ 2023.499999999999773, 1368.699999999999818, 104.0, 29.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 9.0, 400.0, 104.0, 18.0 ],
-					"text" : "Seg. Min Length (s):",
+					"presentation_rect" : [ 9.0, 400.0, 112.0, 18.0 ],
+					"text" : "Seg. Min Duration (s):",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -6209,7 +6218,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 2024.214285714285552, 1350.099999999999909, 85.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 169.636906992278909, 378.0, 85.0, 18.0 ],
+					"presentation_rect" : [ 164.636906992278909, 378.0, 85.0, 18.0 ],
 					"text" : "Num Segments:",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -6221,13 +6230,14 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-108",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2024.214285714285552, 1331.5, 80.0, 18.0 ],
+					"patching_rect" : [ 2024.214285714285552, 1331.5, 80.0, 29.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 9.0, 378.0, 80.0, 18.0 ],
-					"text" : "File Length (s):",
+					"presentation_rect" : [ 9.0, 378.0, 88.0, 18.0 ],
+					"text" : "File Duration (s):",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -7029,10 +7039,10 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1456.5, 675.0, 121.0, 18.0 ],
+					"patching_rect" : [ 1456.5, 675.0, 126.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 9.0, 176.599999999999966, 118.0, 18.0 ],
-					"text" : "Limit Seg. Max Length:",
+					"presentation_rect" : [ 9.0, 176.599999999999966, 126.0, 18.0 ],
+					"text" : "Limit Seg. Max Duration:",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -8252,15 +8262,15 @@
 				"box" : 				{
 					"bubbleusescolors" : 1,
 					"id" : "obj-62",
-					"linecount" : 20,
+					"linecount" : 19,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 432.0, 700.0, 163.0, 275.0 ],
+					"patching_rect" : [ 432.0, 700.0, 168.0, 261.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 10,
 					"presentation_rect" : [ 603.416666507720947, 83.295823402721453, 327.0, 141.0 ],
-					"text" : "build_corpus 0 overwrite= 0 corpus_name= 0 output_folder= /Users/joakimborg/MaxDev/Somax2/max/somax/corpus multithreaded= 1 segmentation_mode=onset hop_length=512 min_interval_s=0.05 max_size_s=5. off_threshold_db=None discard_by_mean=0 pick_peak_pre_mean_s=0.4 pick_peak_pre_max_s=0.4 pick_peak_post_mean_s=0.4 pick_peak_post_max_s=0.4 pick_peak_delta_gain=0.07 segmentation_interval_s=0.5 estimated_initial_bpm=120",
+					"text" : "build_corpus 0 overwrite= 0 corpus_name= 0 output_folder= /Users/joakimborg/MaxDev/Somax2/max/somax/corpus multithreaded= 1 segmentation_mode=onset hop_length=512 min_interval_s=0.05 max_size_s=None off_threshold_db=None discard_by_mean=0 pick_peak_pre_mean_s=0.4 pick_peak_pre_max_s=0.4 pick_peak_post_mean_s=0.4 pick_peak_post_max_s=0.4 pick_peak_delta_gain=0.07 segmentation_interval_s=0.5 estimated_initial_bpm=120",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -11547,22 +11557,28 @@
 				"boxes" : [ "obj-1080", "obj-1068", "obj-1022", "obj-1121", "obj-74", "obj-1020", "obj-1015", "obj-1013" ]
 			}
 , 			{
-				"boxes" : [ "obj-306", "obj-199" ]
-			}
-, 			{
 				"boxes" : [ "obj-251", "obj-194" ]
 			}
 , 			{
 				"boxes" : [ "obj-185", "obj-193", "obj-195" ]
 			}
+, 			{
+				"boxes" : [ "obj-306", "obj-199" ]
+			}
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"default" : 				{
+				"newobj" : 				{
+					"fontsize" : [ 10.0 ],
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"message" : 				{
+					"fontsize" : [ 10.0 ],
 					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -11575,17 +11591,11 @@
 
 				}
 ,
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ]
-				}
-,
-				"message" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+				"default" : 				{
 					"fontsize" : [ 10.0 ],
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
