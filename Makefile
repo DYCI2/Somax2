@@ -16,8 +16,8 @@ DMG_PATH = dist/$(DMG_NAME).dmg
 
 pyinstaller:
 	@echo "\033[1m####### Building server binary with pyinstaller ########\033[0m"
-	@echo "TODO: 'log' has been moved from python/somax/log to python/somax/somax/log. Fix this before continuing"
-	exit 1
+	#echo "TODO: 'log' has been moved from python/somax/log to python/somax/somax/log. Fix this before continuing"
+	#exit 1
 	$(PYINSTALLER_PATH) $(PYINSTALLER_TARGET) \
 		--clean \
 		--noconfirm \
@@ -27,12 +27,13 @@ pyinstaller:
 		--exclude-module matplotlib \
 		--exclude-module PyQt5 \
 		--add-data="$(PY_LIB_PATH)/somax/classification/tables:somax/classification/tables" \
-		--add-data="$(PY_LIB_PATH)/log:log" \
+		--add-data="$(PY_LIB_PATH)/somax/log:somax/log" \
 		--hidden-import="sklearn.utils._weight_vector" \
 		--hidden-import="sklearn.neighbors._typedefs" \
 		--hidden-import="sklearn.neighbors._quad_tree" \
 		--hidden-import="cmath" \
-		--collect-data="librosa" \
+		--collect-data="librosa"
+
 		# Codesigning: Will most likely not run on High Sierra. Better strategy: Use PyInstaller 4.3 (before adhoc)
 		# --codesign-identity="<INSERT_IDENTITY_HERE: Can be found with 'security find-identity -v -p codesigning'>" \
 		# --osx-entitlements-file="codesign/somax.entitlements"
@@ -59,6 +60,10 @@ max-package: clean
 	rm -rf "$(MAX_BUILD_PATH)"/state/*
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
 	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
+	# create extras folder (note: symlinks are not windows-compatible)
+	mkdir -p "$(MAX_BUILD_PATH)/extras/somax"
+	ln -s "../../somax2.maxpat" "$(MAX_BUILD_PATH)/extras/somax"
+	ln -s "../../docs/tutorial-patchers/somax2_first_steps.maxpat" "$(MAX_BUILD_PATH)/extras/somax/tutorial.maxpat"
 	# copy binary (should already be codesigned)
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
 	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
@@ -68,7 +73,6 @@ max-package: clean
 		--window-size 800 400 \
 		--icon-size 100 \
 		--icon "$(DMG_NAME)" 200 190 \
-		--hide-extension "$(DMG_NAME)" \
 		--background "media/dmg_installer_background.png" \
 		"$(DMG_PATH)" \
 		"$(MAX_BUILD_PARENT_FOLDER)"
