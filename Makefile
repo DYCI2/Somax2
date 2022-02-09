@@ -80,13 +80,14 @@ max-package: clean
 
 windows:
 	@echo "\033[1m####### Building Windows package folder... ########\033[0m"
+	@echo "\\033[38;5;0;31mThis has not been updated for v2.4 and all the invalid symlinks should be manually removed\033[0m"
+	exit 1
 	mkdir -p "$(MAX_BUILD_PARENT_FOLDER)"
 	cp -r "$(MAX_LIB_PATH)" "$(MAX_BUILD_PATH)"
 	rm -rf "$(MAX_BUILD_PATH)"/state/*
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
 	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
 	cp "$(PYINSTALLER_TARGET)" "$(MAX_BUILD_PATH)"
-	cp -r "$(PY_LIB_PATH)/log" "$(MAX_BUILD_PATH)"
 	mkdir -p dist
 	cd "$(MAX_BUILD_PARENT_FOLDER)" && zip -r "Somax2.zip" "Somax2"
 	mv "$(MAX_BUILD_PARENT_FOLDER)/Somax2.zip" dist/

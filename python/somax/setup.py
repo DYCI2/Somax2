@@ -4,6 +4,8 @@
 
 from setuptools import setup, find_packages
 
+import somax
+
 with open('README.md') as readme_file:
     readme = readme_file.read()
 
@@ -23,7 +25,8 @@ setup(
     ],
     description="Somax Library",
     # TODO: Package requirements properly and update README (see https://stackoverflow.com/a/33685899)
-    install_requires=["numpy", "scipy", "maxosc", "mido", "scikit-learn", "pandas", "python-osc", "matplotlib"],
+    install_requires=["numpy", "scipy", "maxosc", "mido", "scikit-learn", "pandas", "python-osc", "matplotlib",
+                      "librosa", "pysoundfile", "audioread"],
     license="GNU General Public License v3",
     long_description=readme,
     long_description_content_type="text/markdown",
@@ -32,6 +35,6 @@ setup(
     name='somax',
     packages=find_packages(include=['somax', 'somax.*']),
     url='https://github.com/DYCI2/Somax2',
-    version='0.1.2',
+    version=somax.__version__,
     zip_safe=False,
 )
