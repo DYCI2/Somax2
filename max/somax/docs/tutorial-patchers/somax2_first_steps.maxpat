@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 10,
+			"revision" : 7,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1401.0, 802.0 ],
+		"rect" : [ 5.0, 79.0, 1401.0, 802.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -70,7 +70,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -167,7 +167,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.5, 53.647855530474089, 317.0, 261.0 ],
+									"patching_rect" : [ 10.5, 53.647855530474089, 318.0, 261.0 ],
 									"text" : "This tutorial intended to give you a quick introduction to Somax and to serve as a starting point for both audio and MIDI-based interaction.\n\nThere are however a number of other aspects of the system to explore, for example connecting a MIDI keyboard, audio file or a sequencer (using an IAC bus) as an input, using multiple players who listen to each other, constructing your own corpora, experimenting with the tempo and beat tracker, and many other possibilies.\n\nIn the end, the quality of the output will always depend largely on how well the influencers and the player(s) are tuned with respect to the corpus and the input, so it's highly encouraged to experiment with the different parameters available. The help files («Help» buttons in each module) will provide a good starting point for going further, outline a few use cases as well as provide detailed descriptions about each individual parameter.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -211,7 +211,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -224,7 +223,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -283,7 +282,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 7,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -487,12 +486,12 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 30,
+									"linecount" : 25,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 926.5, 119.0, 308.0, 409.0 ],
-									"text" : "Somax II is an application for musical improvisation and composition. It is based on a generative model using a process similar to concatenative synthesis to provide stylistically coherent improvisation, while in real-time listening to and adapting to a musician (or any other type of audio or MIDI source). The model is operating in the symbolic domain and is trained on a corpus of choice, consisting of one or mulitple MIDI files, from which it draws its material used for improvisation.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, you need to make sure to add the main Somax II folder to your File Path.\n\nThis is done by (in the menubar) clicking Options -> File Preferences..., then clicking the \"+\" button and finally \"choose\", navigating to the place where your Somax2 folder is. Make sure to restart Max once this step is done.\n\nIf the interface now looks like in the image above, please go to the second tab:",
+									"patching_rect" : [ 926.5, 119.0, 308.0, 342.0 ],
+									"text" : "Somax II is an application for musical improvisation and composition. It is based on a generative model using a process similar to concatenative synthesis to provide stylistically coherent improvisation, while in real-time listening to and adapting to a musician (or any other type of audio or MIDI source). The model is operating in the symbolic domain and is trained on a corpus of choice, consisting of one or mulitple MIDI files, from which it draws its material used for improvisation.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, make sure that the Somax folder really is in the Packages folder of Max.\n\n\nIf the interface now looks like in the image above, please continue to the second tab:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -613,7 +612,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1467,7 +1466,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2410,6 +2409,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-113",
 					"lockeddragscroll" : 0,
 					"maxclass" : "bpatcher",
@@ -2422,7 +2422,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2501,7 +2501,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 7,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -3657,13 +3657,13 @@
 					"numinlets" : 4,
 					"numoutlets" : 2,
 					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "", "" ],
+					"outlettype" : [ "", "multichannelsignal" ],
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 7,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -5108,7 +5108,7 @@
 									"numinlets" : 3,
 									"numoutlets" : 9,
 									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "", "", "", "", "", "", "", "", "" ],
+									"outlettype" : [ "", "multichannelsignal", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 152.0, 1176.345089068420293, 278.0, 615.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 7.584603340888407, 8.650000500000033, 623.000000976158162, 610.849999499999967 ],
@@ -6163,11 +6163,16 @@
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
-								"default" : 								{
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+								"newobj" : 								{
 									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"fontface" : [ 1 ]
+								}
+,
+								"default" : 								{
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -6177,20 +6182,14 @@
 										"proportion" : 0.39,
 										"autogradient" : 0
 									}
-
-								}
 ,
-								"newobj" : 								{
-									"fontface" : [ 1 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontface" : [ 1 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -6200,14 +6199,15 @@
 										"proportion" : 0.39,
 										"autogradient" : 0
 									}
-
-								}
 ,
-								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+									"fontface" : [ 1 ]
 								}
 ,
 								"button" : 								{
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"toggle" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 								}
 ,
@@ -6599,6 +6599,7 @@
 			}
  ],
 		"parameters" : 		{
+			"obj-1::obj-140::obj-15::obj-1::obj-192" : [ "live.numbox", "live.numbox", 0 ],
 			"obj-1::obj-140::obj-21" : [ "Gain[1]", "Gain", 0 ],
 			"obj-1::obj-160::obj-12::obj-10::obj-2::obj-259::obj-1" : [ "activechannels[3]", "activechannels", 0 ],
 			"obj-1::obj-160::obj-12::obj-10::obj-2::obj-261::obj-1" : [ "activechannels[4]", "activechannels", 0 ],
@@ -6607,6 +6608,11 @@
 			"obj-1::obj-180::obj-17::obj-2::obj-261::obj-1" : [ "activechannels[1]", "activechannels", 0 ],
 			"obj-1::obj-180::obj-17::obj-2::obj-264::obj-1" : [ "activechannels[2]", "activechannels", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-1007" : [ "rslider", "rslider", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-1024" : [ "__exp_regionmaskenable[1]", "__exp_regionmaskenable", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-1054" : [ "live.numbox[2]", "live.numbox", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-1115" : [ "continuity[1]", "continuity", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-1123" : [ "live.menu", "live.menu", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-1150" : [ "live.text", "live.text", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-12" : [ "melodicmod12", "melodicmod12", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-120" : [ "melodicbypass", "melodicbypass", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-126" : [ "harmonicbypass", "harmonicbypass", 0 ],
@@ -6643,9 +6649,9 @@
 			"obj-1::obj-180::obj-49::obj-1::obj-653" : [ "__exp_numnotesenable", "__exp_numnotesenable", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-656" : [ "__exp_numnotesmu", "__exp_numnotesmu", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-673" : [ "multislider", "multislider", 0 ],
-			"obj-1::obj-180::obj-49::obj-1::obj-675" : [ "__exp_freezemode", "__exp_freezemode", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-688" : [ "__exp_durationsigma", "__exp_durationsigma", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-702" : [ "__exp_durationmu", "__exp_durationmu", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-708" : [ "__exp_velocityweight", "__exp_velocityweight", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-722" : [ "__exp_octavebandsenable", "__exp_octavebandsenable", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-733" : [ "__exp_octavebands", "__exp_octavebands", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-746" : [ "__exp_selfpitchfromchords", "__exp_selfpitchfromchords", 0 ],
@@ -6657,6 +6663,10 @@
 			"obj-1::obj-180::obj-49::obj-1::obj-835" : [ "transpositions", "transpositions", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-860" : [ "harmonincpeakdecay[1]", "harmonincpeakdecay[1]", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-865" : [ "selfharmonicngramorder", "selfharmonicngramorder", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-866::obj-1011" : [ "continue", "continue", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-866::obj-33" : [ "pregain", "pregain", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-866::obj-814" : [ "timeout", "timeout", 0 ],
+			"obj-1::obj-180::obj-49::obj-1::obj-866::obj-98" : [ "live.text[26]", "live.text[26]", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-870" : [ "selfharmonicbypass", "selfharmonicbypass", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-982" : [ "transpositions[1]", "transpositions", 0 ],
 			"obj-1::obj-180::obj-49::obj-1::obj-998" : [ "__exp_regionmaskenable", "__exp_regionmaskenable", 0 ],
@@ -6775,8 +6785,8 @@
 			}
 , 			{
 				"name" : "abstraction_path.js",
-				"bootpath" : "~/Desktop/Dyci2Lib-Markeas-DEBUG/Max_library/app",
-				"patcherrelativepath" : "../../../../../../Desktop/Dyci2Lib-Markeas-DEBUG/Max_library/app",
+				"bootpath" : "~/MaxDev/Dyci2Lib/Max_library/app",
+				"patcherrelativepath" : "../../../../../Dyci2Lib/Max_library/app",
 				"type" : "TEXT",
 				"implicit" : 1
 			}

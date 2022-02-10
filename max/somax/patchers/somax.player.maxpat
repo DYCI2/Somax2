@@ -2742,6 +2742,22 @@
 						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
+									"fontface" : 0,
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-232",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 2240.25, 239.463917525773127, 57.5, 22.0 ],
+									"text" : "pattrhub"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-110",
 									"maxclass" : "multislider",
 									"numinlets" : 1,
@@ -3897,7 +3913,7 @@
 										"pregain" : [ 0.0 ],
 										"release" : [ 250.0 ],
 										"timeout" : [ 8000 ],
-										"tsmode" : [ "general" ]
+										"tsmode" : [ "efficient" ]
 									}
 ,
 									"text" : "autopattr @autorestore 0",
@@ -4554,7 +4570,7 @@
 										"formantcorrection" : 0,
 										"loopend" : [ 163002.630385487515014, "ms" ],
 										"loopstart" : [ 104207.59375, "ms" ],
-										"mode" : "general",
+										"mode" : "efficient",
 										"originallength" : [ 0.0, "ticks" ],
 										"originaltempo" : 119.999999999999986,
 										"phase" : [ 0.0, "ticks" ],
@@ -6696,6 +6712,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-232", 0 ],
+									"source" : [ "obj-5", 4 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-29", 0 ],
 									"source" : [ "obj-5", 3 ]
 								}
@@ -6955,14 +6978,13 @@
 								"name" : "dUG Yello 01-1",
 								"newobj" : 								{
 									"fontsize" : [ 10.0 ],
-									"fontface" : [ 1 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+									"fontface" : [ 1 ]
 								}
 ,
 								"message" : 								{
 									"fontsize" : [ 10.0 ],
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
@@ -6973,13 +6995,12 @@
 										"proportion" : 0.39,
 										"autogradient" : 0
 									}
-
+,
+									"fontface" : [ 1 ]
 								}
 ,
 								"default" : 								{
 									"fontsize" : [ 10.0 ],
-									"fontface" : [ 1 ],
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
@@ -6990,7 +7011,9 @@
 										"proportion" : 0.39,
 										"autogradient" : 0
 									}
-
+,
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"fontface" : [ 1 ]
 								}
 ,
 								"button" : 								{
@@ -15824,7 +15847,7 @@
 					}
 ,
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 952, 322 ],
+						"client_rect" : [ 67, 153, 461, 322 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -30705,14 +30728,13 @@
 				"name" : "dUG Yello 01-1",
 				"newobj" : 				{
 					"fontsize" : [ 10.0 ],
-					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"message" : 				{
 					"fontsize" : [ 10.0 ],
-					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -30723,13 +30745,12 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-
+,
+					"fontface" : [ 1 ]
 				}
 ,
 				"default" : 				{
 					"fontsize" : [ 10.0 ],
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -30740,7 +30761,9 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-
+,
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"button" : 				{
