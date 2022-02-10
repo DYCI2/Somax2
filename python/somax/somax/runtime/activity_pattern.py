@@ -164,7 +164,7 @@ class ManualActivityPattern(AbstractActivityPattern):
                                                      | (self._event_indices >= self.corpus.length()))
             self._peaks.remove(indices_to_remove)
             self._event_indices = np.delete(self._event_indices, indices_to_remove)
-            self.last_update_time = new_time
+        self.last_update_time = new_time
 
     def update_peaks_on_influence(self, new_time: float) -> None:
         self._update_peaks(new_time)

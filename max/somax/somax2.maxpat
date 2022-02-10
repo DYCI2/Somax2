@@ -227,8 +227,10 @@
 			"obj-13::obj-1::obj-6::obj-91::obj-3" : [ "live.text[7]", "live.text", 0 ],
 			"obj-13::obj-1::obj-78::obj-1::obj-192" : [ "live.numbox[1]", "live.numbox", 0 ],
 			"obj-13::obj-33::obj-1" : [ "mc.live.gain~[2]", "mc.live.gain~", 0 ],
-			"obj-13::obj-33::obj-13" : [ "live.numbox[3]", "live.numbox[3]", 0 ],
-			"obj-13::obj-33::obj-31" : [ "live.numbox[4]", "live.numbox[3]", 0 ],
+			"obj-13::obj-33::obj-44" : [ "live.dial[1]", "Width", 0 ],
+			"obj-13::obj-33::obj-46" : [ "live.dial", "Pan", 0 ],
+			"obj-13::obj-33::obj-8" : [ "live.numbox[5]", "live.numbox[5]", 0 ],
+			"obj-13::obj-33::obj-9" : [ "live.numbox[6]", "live.numbox[5]", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-259::obj-1" : [ "activechannels[3]", "activechannels", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-261::obj-1" : [ "activechannels[4]", "activechannels", 0 ],
 			"obj-43::obj-12::obj-10::obj-2::obj-264::obj-1" : [ "activechannels[5]", "activechannels", 0 ],
@@ -308,15 +310,9 @@
 					"parameter_longname" : "mc.live.gain~[2]"
 				}
 ,
-				"obj-13::obj-33::obj-13" : 				{
-					"parameter_longname" : "live.numbox[3]",
-					"parameter_range" : [ -127.0, 127.0 ],
-					"parameter_shortname" : "live.numbox[3]",
-					"parameter_unitstyle" : 6
-				}
-,
-				"obj-13::obj-33::obj-31" : 				{
-					"parameter_longname" : "live.numbox[4]"
+				"obj-13::obj-33::obj-44" : 				{
+					"parameter_initial" : 127,
+					"parameter_range" : [ 0.0, 127.0 ]
 				}
 ,
 				"obj-69::obj-13::obj-1" : 				{
@@ -849,15 +845,15 @@
 						"autogradient" : 0
 					}
 ,
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"newobj" : 				{
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"message" : 				{

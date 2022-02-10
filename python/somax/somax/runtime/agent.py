@@ -436,7 +436,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
         self.flush()
         self.scheduling_handler = new_handler
-        self.logger.info(f"Scheduling mode set to {self.scheduling_handler.renderer_info()}")
+        self.logger.debug(f"Scheduling mode set to {self.scheduling_handler.renderer_info()}")
 
     def set_held_notes_mode(self, enable: bool):
         self.scheduling_handler.hold_notes_artificially = enable
