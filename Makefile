@@ -30,11 +30,9 @@ pyinstaller:
 		--hidden-import="sklearn.neighbors._typedefs" \
 		--hidden-import="sklearn.neighbors._quad_tree" \
 		--hidden-import="cmath" \
-		--collect-data="librosa"
-
-		# Codesigning: Will most likely not run on High Sierra. Better strategy: Use PyInstaller 4.3 (before adhoc)
-		# --codesign-identity="<INSERT_IDENTITY_HERE: Can be found with 'security find-identity -v -p codesigning'>" \
-		# --osx-entitlements-file="codesign/somax.entitlements"
+		--collect-data="librosa" \
+		--codesign-identity="Developer ID Application: INST RECHER COORD ACOUST MUSICALE" \
+		--osx-entitlements-file="codesign/somax.entitlements"
 
 codesignature:
 	# Note: sklearn/.dylibs/libomp.dylib is High Sierra only and required to sign since it's in a hidden folder
@@ -49,9 +47,6 @@ codesignature:
 				 -p $$(security find-generic-password -w -a $$LOGNAME -s "somax_app_specific") \
 				 --file "$(DMG_PATH)"
 	@echo "\033[1mNOTE: You will still have to do the final step manually once notarization has been approved:\n      xcrun stapler staple dist/somax_server.app\033[0m"
-
-status:
-	xcrun altool --notarization-info 1441ae8a-ab76-41bf-afd7-29b3a0839a2f -u "joakim.borg@ircam.fr" -p $$(security find-generic-password -w -a $$LOGNAME -s "somax_app_specific")
 
 max-package: clean
 	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN CODESIGNED BEFORE CALLING THIS COMMAND. ORDER SHOULD BE:\n    make pyinstaller\n    make codesignature (+ stapler once finished)\n    make max-package\033[0m"
