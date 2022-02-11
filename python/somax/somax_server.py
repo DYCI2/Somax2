@@ -167,7 +167,7 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.loop = self.__slave_loop
             self._transport = SlaveTransport.clone_from(self._transport)
         mode_str: str = "master" if master else "slave"
-        self.logger.info(f"Transport mode set to '{mode_str}'.")
+        self.logger.debug(f"Transport mode set to '{mode_str}'.")
         self.target.send(SendProtocol.TRANSPORT_MODE, mode_str)
 
     ######################################################
