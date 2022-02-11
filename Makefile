@@ -16,8 +16,6 @@ DMG_PATH = dist/$(DMG_NAME).dmg
 
 pyinstaller:
 	@echo "\033[1m####### Building server binary with pyinstaller ########\033[0m"
-	#echo "TODO: 'log' has been moved from python/somax/log to python/somax/somax/log. Fix this before continuing"
-	#exit 1
 	$(PYINSTALLER_PATH) $(PYINSTALLER_TARGET) \
 		--clean \
 		--noconfirm \
@@ -51,6 +49,9 @@ codesignature:
 				 -p $$(security find-generic-password -w -a $$LOGNAME -s "somax_app_specific") \
 				 --file "$(DMG_PATH)"
 	@echo "\033[1mNOTE: You will still have to do the final step manually once notarization has been approved:\n      xcrun stapler staple dist/somax_server.app\033[0m"
+
+status:
+	xcrun altool --notarization-info 1441ae8a-ab76-41bf-afd7-29b3a0839a2f -u "joakim.borg@ircam.fr" -p $$(security find-generic-password -w -a $$LOGNAME -s "somax_app_specific")
 
 max-package: clean
 	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN CODESIGNED BEFORE CALLING THIS COMMAND. ORDER SHOULD BE:\n    make pyinstaller\n    make codesignature (+ stapler once finished)\n    make max-package\033[0m"
