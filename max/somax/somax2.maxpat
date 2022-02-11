@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1471.0, 772.0 ],
+		"rect" : [ 34.0, 79.0, 1372.0, 733.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -115,7 +115,7 @@
 					"outlettype" : [ "", "multichannelsignal", "", "", "", "", "", "" ],
 					"patching_rect" : [ 380.083333333333258, 5.574140189969739, 258.0, 742.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 374.0, 0.0, 258.0, 743.0 ],
+					"presentation_rect" : [ 374.0, 0.0, 258.0, 736.0 ],
 					"varname" : "somax.player.io",
 					"viewvisibility" : 1
 				}
@@ -185,7 +185,7 @@
 					"outlettype" : [ "", "float", "float", "dictionary", "int", "", "" ],
 					"patching_rect" : [ 7.083333333333258, 688.0, 371.0, 228.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 661.675398314063386, 369.0, 227.0 ],
+					"presentation_rect" : [ 640.0, 0.0, 369.0, 227.0 ],
 					"varname" : "somax.server.io",
 					"viewvisibility" : 1
 				}
@@ -695,8 +695,8 @@
 			}
 , 			{
 				"name" : "sr.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./patchers/resources/misc",
+				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/patchers",
+				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -942,14 +942,15 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"newobj" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
-				"default" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+				"message" : 				{
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -960,9 +961,24 @@
 						"autogradient" : 0
 					}
 ,
+					"fontsize" : [ 10.0 ]
+				}
+,
+				"default" : 				{
 					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
 					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"button" : 				{
@@ -971,22 +987,6 @@
 ,
 				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"message" : 				{
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
