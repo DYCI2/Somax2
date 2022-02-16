@@ -1,6 +1,6 @@
 import logging
 from abc import abstractmethod, ABC
-from typing import Dict, Union, List, Optional, Tuple
+from typing import Dict, Union, List, Optional
 
 import numpy as np
 
@@ -148,7 +148,7 @@ class ManualActivityPattern(AbstractActivityPattern):
             times.append(influence.event.onset)
             scores.append(self.default_score.value)
             transform_hashes.append(influence.transform_hash)
-        new_event_indices: np.ndarray = np.array([i.event.state_index for i in influences], dtype=np.int32)
+        new_event_indices: np.ndarray = np.array([i.event.index for i in influences], dtype=np.int32)
         self._event_indices = np.concatenate((self._event_indices, new_event_indices))
         self._peaks.append(scores, times, transform_hashes)
 

@@ -5,7 +5,7 @@ import numpy as np
 
 from somax.corpus_builder.metadata import MidiMetadata, AudioMetadata, Metadata
 from somax.features.feature import CorpusFeature, FeatureUtils
-from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent, CorpusEvent
+from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent, SomaxCorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
@@ -14,7 +14,7 @@ class Tempo(CorpusFeature):
         super().__init__(value=value)
 
     @classmethod
-    def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
+    def analyze(cls, events: List[SomaxCorpusEvent], metadata: Metadata) -> List[SomaxCorpusEvent]:
         if FeatureUtils.is_valid_midi(events, metadata):
             events: List[MidiCorpusEvent]
             metadata: MidiMetadata
@@ -55,7 +55,4 @@ class Tempo(CorpusFeature):
         return cls(value=trait_dict["tempo"])
 
     def encode(self) -> Dict[str, Any]:
-        return {"tempo": self._value}
-
-    def value(self) -> int:
-        return self._value
+        return {"tempo": self.value}

@@ -2,9 +2,9 @@ from abc import ABC, abstractmethod
 from typing import List, Tuple
 
 import somax.classification
+from merge.main.influence import Influence
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
-from somax.runtime.influence import AbstractInfluence
 from somax.runtime.label import AbstractLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
@@ -36,7 +36,7 @@ class AbstractClassifier(StringParsed, ContentAware, ABC):
         pass
 
     @abstractmethod
-    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+    def classify_influence(self, influence: Influence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
         """ :returns List of inverse transformed labels of the same length as number of `AbstractTransforms`
                      applied in atom. """
         pass

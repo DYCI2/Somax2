@@ -1,9 +1,8 @@
-from abc import ABC
 from enum import Enum
 from typing import Any
 
+from merge.main.influence import FeatureInfluence
 from somax.features.feature import RuntimeFeature
-from somax.runtime.corpus_event import CorpusEvent
 
 
 class InfluenceType(Enum):
@@ -16,18 +15,20 @@ class InfluenceType(Enum):
         return InfluenceType(influence_type.lower())
 
 
-class AbstractInfluence(ABC):
-    pass
+# Corresponds directly to merge.influence.Influence
+# class AbstractInfluence(ABC):
+#     pass
 
 
-class CorpusInfluence(AbstractInfluence):
-    def __init__(self, corpus_event: CorpusEvent):
-        self.corpus_event: CorpusEvent = corpus_event
+# Corresponds directly to merge.influence.CorpusInfluence
+# class CorpusInfluence(AbstractInfluence):
+#     def __init__(self, corpus_event: CorpusEvent):
+#         self.corpus_event: CorpusEvent = corpus_event
 
 
-class FeatureInfluence(AbstractInfluence):
+class SomaxFeatureInfluence(FeatureInfluence):
     def __init__(self, feature: RuntimeFeature):
-        self.feature = feature
+        super().__init__(feature)
 
     @classmethod
     def from_keyword(cls, keyword: str, value: Any):

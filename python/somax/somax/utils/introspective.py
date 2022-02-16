@@ -3,7 +3,8 @@ import logging
 import sys
 from abc import ABC, abstractmethod
 from types import ModuleType
-from typing import Dict, Type, Any, Optional, TypeVar, Generic
+from typing import Dict, Type, Any, Optional
+
 
 class Introspective:
     @classmethod

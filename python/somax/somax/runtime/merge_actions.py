@@ -7,7 +7,7 @@ from scipy import sparse
 
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.peaks import Peaks
 from somax.runtime.transforms import AbstractTransform
@@ -24,7 +24,7 @@ class AbstractMergeAction(Parametric, ContentAware, StringParsed, ABC):
         """ """
 
     @abstractmethod
-    def feedback(self, feedback_event: CorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
+    def feedback(self, feedback_event: SomaxCorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
         """ """
 
     @abstractmethod
@@ -91,7 +91,7 @@ class DistanceMergeAction(AbstractMergeAction):
         self.logger.debug(f"[merge] Merge successful. Number of peaks after merge: {merged_peaks.size()}.")
         return merged_peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
         pass
 

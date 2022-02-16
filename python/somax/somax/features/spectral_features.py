@@ -35,7 +35,5 @@ class OctaveBands(CorpusFeature):
         return cls(value=trait_dict["band"])
 
     def encode(self) -> Dict[str, Any]:
-        return {"band": self._value.tolist()}
+        return {"band": self.value.tolist()}
 
-    def value(self) -> np.ndarray:
-        return self._value

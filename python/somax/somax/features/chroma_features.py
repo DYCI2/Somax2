@@ -7,16 +7,16 @@ import numpy as np
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
 from somax.corpus_builder.midi_chromagram import MidiChromagram
 from somax.features.feature import CorpusFeature, RuntimeFeature, FeatureUtils
-from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
+from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
-class BaseChroma(CorpusFeature, RuntimeFeature):
+class BaseChroma(CorpusFeature[np.ndarray], RuntimeFeature[np.ndarray]):
     def __init__(self, value: Union[np.ndarray, List[float]]):
         super().__init__(value=np.array(value))
 
     @classmethod
-    def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
+    def analyze(cls, events: List[SomaxCorpusEvent], metadata: Metadata) -> List[SomaxCorpusEvent]:
         if FeatureUtils.is_valid_midi(events, metadata):
             events: List[MidiCorpusEvent]
             metadata: MidiMetadata
@@ -44,10 +44,8 @@ class BaseChroma(CorpusFeature, RuntimeFeature):
         """ """
 
     def encode(self) -> Dict[str, Any]:
-        return {self.keyword(): self._value.tolist()}
+        return {self.keyword(): self.value.tolist()}
 
-    def value(self) -> Any:
-        return self._value
 
 
 class OnsetChroma(BaseChroma):
@@ -94,7 +92,6 @@ class MeanChroma(BaseChroma):
         chromagram: MidiChromagram = MidiChromagram.from_midi(metadata.stft)
         for event in events:
             event.set_feature(cls(chromagram.at(event.absolute_onset)))
-
 
     @classmethod
     def _analyze_audio(cls, events: List[AudioCorpusEvent], metadata: AudioMetadata) -> None:

@@ -6,7 +6,7 @@ from collections import deque
 from typing import Tuple, Dict, Union, Optional, List, Type
 
 from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.exceptions import TransformError
 from somax.runtime.label import AbstractLabel
 from somax.runtime.parameter import Parameter, ParamWithSetter
@@ -78,7 +78,7 @@ class NGramMemorySpace(AbstractMemorySpace):
     def __init__(self, history_len: int = 3, **_kwargs):
         super(NGramMemorySpace, self).__init__(**_kwargs)
         self.logger.debug(f"[__init__] Initializing {self.__class__.__name__} with history length {history_len}.")
-        self._structured_data: Dict[Tuple[int, ...], List[CorpusEvent]] = {}
+        self._structured_data: Dict[Tuple[int, ...], List[SomaxCorpusEvent]] = {}
         self._ngram_size: Parameter = ParamWithSetter(history_len, 1, None, 'int',
                                                       "Number of events to hard-match. (TODO)",
                                                       self.set_ngram_size)  # TODO
@@ -103,7 +103,7 @@ class NGramMemorySpace(AbstractMemorySpace):
                 continue
             else:
                 key: Tuple[int, ...] = tuple(labels)
-                value: CorpusEvent = event
+                value: SomaxCorpusEvent = event
                 if key in self._structured_data:
                     self._structured_data[key].append(value)
                 else:
@@ -123,7 +123,7 @@ class NGramMemorySpace(AbstractMemorySpace):
             else:
                 key: Tuple[int, ...] = tuple(self._influence_history[transform_id])
                 try:
-                    matching_events: List[CorpusEvent] = self._structured_data[key]
+                    matching_events: List[SomaxCorpusEvent] = self._structured_data[key]
                     for event in matching_events:
                         matches.append(ClassicPeakEvent(event, transform_id))
                 except KeyError:  # no matches found

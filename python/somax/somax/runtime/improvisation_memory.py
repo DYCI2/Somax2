@@ -3,7 +3,7 @@ from collections import deque
 from typing import Tuple, List, Optional, TypeVar, Generic
 
 from somax.runtime.corpus import Corpus, MidiCorpus
-from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent
+from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus
 from somax.runtime.memory_state import MemoryState
 from somax.runtime.transforms import AbstractTransform
@@ -45,36 +45,36 @@ class Queue(Generic[T]):
         return list(self._history)
 
 
-class FeedbackQueue(Queue[Tuple[CorpusEvent, float, AbstractTransform]]):
+class FeedbackQueue(Queue[Tuple[SomaxCorpusEvent, float, AbstractTransform]]):
     pass
 
 
 class ImprovisationMemory:
     def __init__(self):
-        self._history: Queue[Tuple[CorpusEvent, MemoryState]] = Queue()
+        self._history: Queue[Tuple[SomaxCorpusEvent, MemoryState]] = Queue()
 
-    def append(self, event: CorpusEvent, trigger_time: float, transforms: AbstractTransform, tempo: float,
+    def append(self, event: SomaxCorpusEvent, trigger_time: float, transforms: AbstractTransform, tempo: float,
                artificially_sustained: bool, aligned_onsets: bool) -> None:
         """ Note: Transform has already been applied to the event, which is a deepcopy of the original event
                   (see `Player.new_event()` for more info)"""
         self._history.append((event, MemoryState(trigger_time, transforms, tempo,
                                                  artificially_sustained, aligned_onsets)))
 
-    def at(self, index: int) -> Tuple[CorpusEvent, float, AbstractTransform]:
+    def at(self, index: int) -> Tuple[SomaxCorpusEvent, float, AbstractTransform]:
         # TODO: Handle with memory state class
         """ raises: IndexError if index is out of range """
-        v: Tuple[CorpusEvent, MemoryState] = self._history.at(index)
+        v: Tuple[SomaxCorpusEvent, MemoryState] = self._history.at(index)
         return v[0], v[1].trigger_time, v[1].applied_transform
 
-    def last(self) -> Tuple[CorpusEvent, float, AbstractTransform]:
+    def last(self) -> Tuple[SomaxCorpusEvent, float, AbstractTransform]:
         """ raises: IndexError if history is empty """
         # TODO: Handle with memory state class
-        v: Tuple[CorpusEvent, MemoryState] = self._history.last()
+        v: Tuple[SomaxCorpusEvent, MemoryState] = self._history.last()
         return v[0], v[1].trigger_time, v[1].applied_transform
 
-    def get_n_latest(self, n: int) -> List[Tuple[CorpusEvent, float, AbstractTransform]]:
+    def get_n_latest(self, n: int) -> List[Tuple[SomaxCorpusEvent, float, AbstractTransform]]:
         """ :returns n latest events in reverse order (index 0 is latest event)"""
-        vs: List[Tuple[CorpusEvent, MemoryState]] = self._history.get_n_last(n)
+        vs: List[Tuple[SomaxCorpusEvent, MemoryState]] = self._history.get_n_last(n)
         return [(v[0], v[1].trigger_time, v[1].applied_transform) for v in vs]
 
     def length(self) -> int:

@@ -1,12 +1,12 @@
 import logging
 from typing import Dict, Union, List, Optional, Tuple
 
+from merge.main.influence import Influence, CorpusInfluence
 from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.influence import AbstractInfluence, CorpusInfluence
+from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.label import AbstractLabel
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
@@ -64,7 +64,7 @@ class Atom(Parametric, ContentAware):
         self._activity_pattern.corpus = self._corpus
 
     # influences the memory with incoming data
-    def influence(self, influence: AbstractInfluence, time: float, **kwargs) -> int:
+    def influence(self, influence: Influence, time: float, **kwargs) -> int:
         """ :raises InvalidLabelInput
             :returns Number of peaks generated """
         if not self.is_enabled_and_eligible():
@@ -86,7 +86,7 @@ class Atom(Parametric, ContentAware):
         if self.is_enabled_and_eligible():
             self._activity_pattern.update_peaks_on_new_event(time)
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float, _applied_transform: AbstractTransform) -> None:
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float, _applied_transform: AbstractTransform) -> None:
         if self.self_influenced and feedback_event is not None:
             self.influence(CorpusInfluence(feedback_event), time)
 

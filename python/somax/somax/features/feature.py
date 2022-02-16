@@ -4,26 +4,24 @@ from abc import ABC, abstractmethod
 from typing import Dict, Any, Type, Tuple, List
 
 import somax.features
+from merge.main.feature import Feature, T
 from somax import features
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
-from somax.features.feature_value import FeatureValue
-from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
+from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.utils.introspective import StringParsed, Introspective
 
 
 class FeatureUtils:
     @staticmethod
-    def is_valid_midi(events: List[CorpusEvent], metadata: Metadata) -> bool:
+    def is_valid_midi(events: List[SomaxCorpusEvent], metadata: Metadata) -> bool:
         return all([isinstance(e, MidiCorpusEvent) for e in events]) and isinstance(metadata, MidiMetadata)
 
     @staticmethod
-    def is_valid_audio(events: List[CorpusEvent], metadata: Metadata) -> bool:
+    def is_valid_audio(events: List[SomaxCorpusEvent], metadata: Metadata) -> bool:
         return all([isinstance(e, AudioCorpusEvent) for e in events]) and isinstance(metadata, AudioMetadata)
 
 
-class AbstractFeature(FeatureValue, Introspective, ABC):
-    def __init__(self, value: Any):
-        self._value = value
+class AbstractFeature(Feature[T], Introspective, ABC):
 
     @classmethod
     def classes(cls, include_abstract: bool = False) -> List[Type['AbstractFeature']]:
@@ -33,11 +31,11 @@ class AbstractFeature(FeatureValue, Introspective, ABC):
         return self.__class__.__name__
 
 
-class CorpusFeature(AbstractFeature, ABC):
+class CorpusFeature(AbstractFeature[T], ABC):
 
     @classmethod
     @abstractmethod
-    def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
+    def analyze(cls, events: List[SomaxCorpusEvent], metadata: Metadata) -> List[SomaxCorpusEvent]:
         """ raises: FeatureError if type of events doesn't match type of metadata """
         pass
 
@@ -74,7 +72,7 @@ class CorpusFeature(AbstractFeature, ABC):
                                                       and issubclass(m, CorpusFeature))
 
 
-class RuntimeFeature(AbstractFeature, StringParsed, ABC):
+class RuntimeFeature(AbstractFeature[T], StringParsed, ABC):
     @classmethod
     def from_string(cls, keyword: str, value: Any = None, **kwargs) -> 'RuntimeFeature':
         """ :raises ValueError if a feature matching the keyword doesn't exist """

@@ -8,23 +8,20 @@ import numpy as np
 from somax.corpus_builder.metadata import MidiMetadata, Metadata, AudioMetadata
 from somax.features import virfun
 from somax.features.feature import CorpusFeature, RuntimeFeature, AbstractFeature, FeatureUtils
-from somax.runtime.corpus_event import MidiCorpusEvent, CorpusEvent
+from somax.runtime.corpus_event import MidiCorpusEvent, SomaxCorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
-class AbstractIntegerPitch(AbstractFeature, ABC):
+class AbstractIntegerPitch(AbstractFeature[int], ABC):
     def __init__(self, value: int):
         super().__init__(value=value)
-
-    def value(self) -> int:
-        return self._value
 
     @classmethod
     def decode(cls, trait_dict: Dict[str, Any]) -> 'AbstractIntegerPitch':
         return cls(value=trait_dict["pitch"])
 
     def encode(self) -> Dict[str, Any]:
-        return {"pitch": self._value}
+        return {"pitch": self.value}
 
 
 class RuntimeIntegerPitch(AbstractIntegerPitch, RuntimeFeature):
@@ -33,7 +30,7 @@ class RuntimeIntegerPitch(AbstractIntegerPitch, RuntimeFeature):
         return "pitch"
 
 
-class TopNote(AbstractIntegerPitch, CorpusFeature):
+class TopNote(AbstractIntegerPitch, CorpusFeature[int]):
     def __init__(self, value: int):
         super().__init__(value=value)
 
@@ -48,7 +45,7 @@ class TopNote(AbstractIntegerPitch, CorpusFeature):
                            f"type {metadata.content_type.__class__.__name__}")
 
 
-class VirtualFundamental(AbstractIntegerPitch, CorpusFeature):
+class VirtualFundamental(AbstractIntegerPitch, CorpusFeature[int]):
     def __init__(self, value: int):
         super().__init__(value=value)
 
@@ -63,7 +60,7 @@ class VirtualFundamental(AbstractIntegerPitch, CorpusFeature):
                            f"type {metadata.content_type.__class__.__name__}")
 
 
-class BassNote(AbstractIntegerPitch, CorpusFeature):
+class BassNote(AbstractIntegerPitch, CorpusFeature[int]):
     def __init__(self, value: int):
         super().__init__(value=value)
 
@@ -78,9 +75,9 @@ class BassNote(AbstractIntegerPitch, CorpusFeature):
                            f"type {metadata.content_type.__class__.__name__}")
 
 
-class YinDiscretePitch(AbstractIntegerPitch, CorpusFeature):
+class YinDiscretePitch(AbstractIntegerPitch, CorpusFeature[int]):
     @classmethod
-    def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
+    def analyze(cls, events: List[SomaxCorpusEvent], metadata: Metadata) -> List[SomaxCorpusEvent]:
         if not FeatureUtils.is_valid_audio(events, metadata):
             raise FeatureError(f"Feature '{cls.__name__}' does not support content of "
                                f"type {metadata.content_type.__class__.__name__}")
@@ -105,7 +102,4 @@ class YinDiscretePitch(AbstractIntegerPitch, CorpusFeature):
         return cls(value=trait_dict["yinpitch"])
 
     def encode(self) -> Dict[str, Any]:
-        return {"yinpitch": self.value()}
-
-    def value(self) -> Any:
-        return self._value
+        return {"yinpitch": self.value}

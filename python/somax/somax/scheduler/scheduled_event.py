@@ -41,7 +41,7 @@ class MidiSliceOnsetEvent(RendererEvent):
     def render(self) -> List[RendererMessage]:
         notes: List[Tuple[int, int, int]] = [(n.pitch, n.velocity, n.channel) for n in self.event.notes]
         return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
-                                content=[self.event.state_index, self.applied_transform.renderer_info()]),
+                                content=[self.event.index, self.applied_transform.renderer_info()]),
                 RendererMessage(keyword=SendProtocol.SEND_STATE_ONSET,
                                 content=notes)]
 
@@ -71,7 +71,7 @@ class AudioEvent(RendererEvent):
 
     def render(self) -> List[RendererMessage]:
         return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
-                                content=[self.event.state_index, self.applied_transform.renderer_info()]),
+                                content=[self.event.index, self.applied_transform.renderer_info()]),
                 RendererMessage(keyword=SendProtocol.SEND_AUDIO_EVENT,
                                 content=[self.event.onset * 1000,
                                          (self.event.onset + self.event.duration) * 1000,
@@ -89,7 +89,7 @@ class AudioContinueEvent(RendererEvent):
 
     def render(self) -> List[RendererMessage]:
         return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
-                                content=[self.event.state_index,
+                                content=[self.event.index,
                                          self.applied_transform.renderer_info()]),
                 RendererMessage(keyword=SendProtocol.AUDIO_CONTINUATION_TIMESTRETCH,
                                 content=[self.time_stretch_factor])]

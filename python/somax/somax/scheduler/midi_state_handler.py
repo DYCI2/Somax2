@@ -36,25 +36,25 @@ class MidiStateHandler:
         for note in self.artificially_held_notes:
             onset: float = trigger_time
             output_events.append(MidiNoteEvent(onset, note.pitch, 0, note.channel,
-                                               corpus_event.state_index, applied_transform))
+                                               corpus_event.index, applied_transform))
         for note in note_offs_previous:
             onset: float = trigger_time
             output_events.append(MidiNoteEvent(onset, note.pitch, 0, note.channel,
-                                               corpus_event.state_index, None))
+                                               corpus_event.index, None))
         for note in note_ons:
             if self.align_onsets:
                 onset: float = trigger_time
             else:
                 onset: float = trigger_time + max(0.0, note.onset)
             output_events.append(MidiNoteEvent(onset, note.pitch, note.velocity, note.channel,
-                                               corpus_event.state_index, applied_transform))
+                                               corpus_event.index, applied_transform))
         if self.sustain_notes_artificially:
             self.artificially_held_notes = note_offs
         else:
             for note in note_offs:
                 onset: float = trigger_time + max(0.0, note.onset + note.duration)
                 output_events.append(
-                    MidiNoteEvent(onset, note.pitch, 0, note.channel, corpus_event.state_index, None))
+                    MidiNoteEvent(onset, note.pitch, 0, note.channel, corpus_event.index, None))
 
         return output_events
 

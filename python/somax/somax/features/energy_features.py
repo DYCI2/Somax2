@@ -6,7 +6,7 @@ import numpy as np
 
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
 from somax.features.feature import CorpusFeature, FeatureUtils
-from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
+from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
@@ -15,7 +15,7 @@ class TotalEnergyDb(CorpusFeature):
         super().__init__(value=value)
 
     @classmethod
-    def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
+    def analyze(cls, events: List[SomaxCorpusEvent], metadata: Metadata) -> List[SomaxCorpusEvent]:
         if FeatureUtils.is_valid_midi(events, metadata):
             return cls._analyze_midi(events, metadata)
         elif FeatureUtils.is_valid_audio(events, metadata):
@@ -23,7 +23,7 @@ class TotalEnergyDb(CorpusFeature):
         return events
 
     @classmethod
-    def _analyze_audio(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
+    def _analyze_audio(cls, events: List[SomaxCorpusEvent], metadata: Metadata) -> List[SomaxCorpusEvent]:
         metadata: AudioMetadata = typing.cast(AudioMetadata, metadata)
         # TODO: Parameters should not be hard-coded
         rms: np.ndarray = librosa.power_to_db(librosa.feature.rms(y=metadata.foreground_data,
@@ -38,7 +38,7 @@ class TotalEnergyDb(CorpusFeature):
         return events
 
     @classmethod
-    def _analyze_midi(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
+    def _analyze_midi(cls, events: List[SomaxCorpusEvent], metadata: Metadata) -> List[SomaxCorpusEvent]:
         for event in events:  # type: MidiCorpusEvent
             energy_lin: float = (max([note.velocity for note in event.notes]) / 128) ** 2
             energy_db: float = float(librosa.power_to_db(np.array(energy_lin)))
@@ -50,10 +50,7 @@ class TotalEnergyDb(CorpusFeature):
         return cls(value=trait_dict["totalenergy"])
 
     def encode(self) -> Dict[str, Any]:
-        return {"totalenergy": self._value}
-
-    def value(self) -> float:
-        return self._value
+        return {"totalenergy": self.value}
 
 
 class VerticalDensity(CorpusFeature):
@@ -74,7 +71,4 @@ class VerticalDensity(CorpusFeature):
         return cls(value=trait_dict["density"])
 
     def encode(self) -> Dict[str, Any]:
-        return {"density": self._value}
-
-    def value(self) -> Any:
-        return self._value
+        return {"density": self.value}

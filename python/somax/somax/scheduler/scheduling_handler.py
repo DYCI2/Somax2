@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple, Dict, Type
 
 from somax.features import Tempo
-from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
+from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
 from somax.scheduler.midi_state_handler import MidiStateHandler
@@ -45,7 +45,7 @@ class SchedulingHandler(Introspective, ABC):
 
     @abstractmethod
     def _on_corpus_event_received(self, trigger_time: float,
-                                  event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
+                                  event_and_transform: Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]) -> None:
         """
         TODO: Proper docstring
         This function is called whenever a corpus event is added to the scheduler (part of `add_corpus_event`)
@@ -145,13 +145,13 @@ class SchedulingHandler(Introspective, ABC):
             self._on_trigger_received(trigger_event=trigger_event)
 
     def add_corpus_event(self, trigger_time: float,
-                         event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
+                         event_and_transform: Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]) -> None:
         """ raises TypeError for `CorpusEvents` other than `MidiCorpusEvent` or `AudioCorpusEvent`
             Note: This function could be overloaded if the `SchedulingHandler` needs to store/handle state of received
                   `CorpusEvents`, but make sure to call `super().add_corpus_event` if overloading.
         """
         if event_and_transform is not None:
-            event, applied_transform = event_and_transform  # type: CorpusEvent, AbstractTransform
+            event, applied_transform = event_and_transform  # type: SomaxCorpusEvent, AbstractTransform
             if isinstance(event, MidiCorpusEvent):
                 scheduler_events: List[ScheduledEvent] = self.midi_handler.process(trigger_time=trigger_time,
                                                                                    event=event,
@@ -262,7 +262,7 @@ class ManualSchedulingHandler(SchedulingHandler):
                 self._scheduler.add_event(TriggerEvent(trigger_time=current_time, target_time=current_time))
 
     def _on_corpus_event_received(self, trigger_time: float,
-                                  event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
+                                  event_and_transform: Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]) -> None:
         pass
 
     def _handle_flushing(self, flushed_triggers: List[TriggerEvent]) -> Optional[List[TriggerEvent]]:
@@ -285,7 +285,7 @@ class AutomaticSchedulingHandler(SchedulingHandler):
             self._scheduler.add_event(self._default_trigger())
 
     def _on_corpus_event_received(self, trigger_time: float,
-                                  event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
+                                  event_and_transform: Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]) -> None:
         if self._scheduler.has_by_type(TriggerEvent):
             return
 
@@ -337,7 +337,7 @@ class IndirectSchedulingHandler(SchedulingHandler):
                                                target_time=onset_time))
 
     def _on_corpus_event_received(self, trigger_time: float,
-                                  event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
+                                  event_and_transform: Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]) -> None:
         if event_and_transform is not None:
             self.next_possible_onset = self._scheduler.time + event_and_transform[0].duration
 

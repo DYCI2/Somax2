@@ -18,11 +18,11 @@ from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
-from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch
 from somax.runtime.improvisation_memory import ImprovisationMemory
-from somax.runtime.influence import FeatureInfluence
+from somax.runtime.influence import SomaxFeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.parameter import Parametric
@@ -137,7 +137,7 @@ class OscAgent(Agent, AsyncioOscObject):
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
-            event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
+            event_and_transform: Optional[tuple[SomaxCorpusEvent, AbstractTransform]]
             event_and_transform = self.player.new_event(scheduling_time, scheduler_tempo)
             self._send_output_statistics()
         except InvalidCorpus as e:
@@ -149,7 +149,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
             return
 
-        event: CorpusEvent = event_and_transform[0]
+        event: SomaxCorpusEvent = event_and_transform[0]
         applied_transform: AbstractTransform = event_and_transform[1]
 
         # TODO: When the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was
@@ -237,7 +237,7 @@ class OscAgent(Agent, AsyncioOscObject):
         if not self.scheduling_handler.running:
             return
         try:
-            influence: FeatureInfluence = FeatureInfluence.from_keyword(feature_keyword, value)
+            influence: SomaxFeatureInfluence = SomaxFeatureInfluence.from_keyword(feature_keyword, value)
         except ValueError as e:
             self.logger.error(f"{str(e)}. No influence was computed.")
             return

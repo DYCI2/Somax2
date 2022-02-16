@@ -12,7 +12,7 @@ from somax.features.spectral_features import OctaveBands
 from somax.features.temporal_features import Tempo
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus
-from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.improvisation_memory import FeedbackQueue
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.peaks import Peaks
@@ -27,12 +27,12 @@ class AbstractScaleAction(Parametric, ContentAware, StringParsed, ABC):
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this ScaleAction.")
 
     @abstractmethod
-    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
               corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
         """ """
 
     @abstractmethod
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
         """ """
 
@@ -64,11 +64,11 @@ class NoScaleAction(AbstractScaleAction):
     def __init__(self):
         super().__init__()
 
-    def scale(self, peaks: Peaks, _time: float, _corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, _time: float, _corresponding_events: List[SomaxCorpusEvent],
               _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
         return peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
         pass
 
@@ -92,12 +92,12 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         self._selectivity: Parameter = Parameter(selectivity, None, None, 'float', "Phase modulation")  # TODO
         self._parse_parameters()
 
-    def scale(self, peaks: Peaks, time: float, _corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, time: float, _corresponding_events: List[SomaxCorpusEvent],
               _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
         peaks.scores *= np.exp(self.selectivity * (np.cos(2 * np.pi * (time - peaks.times)) - 1))
         return peaks
 
-    def feedback(self, _feedback_event: Optional[CorpusEvent], _time: float,
+    def feedback(self, _feedback_event: Optional[SomaxCorpusEvent], _time: float,
                  _applied_transform: AbstractTransform) -> None:
         pass
 
@@ -130,20 +130,20 @@ class NextStateScaleAction(AbstractScaleAction):
                                             "Scaling factor for peaks close to previous output.")
         self._previous_output_index: Optional[int] = None
 
-    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
               _corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **_kwargs) -> Peaks:
         if self._previous_output_index is None:
             return peaks
         else:
-            event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
+            event_indices: np.ndarray = np.array([e.index for e in corresponding_events], dtype=int)
             is_matching: np.ndarray = event_indices == self._previous_output_index + 1
             peaks.scale(self.factor, is_matching)
             return peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], _time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], _time: float,
                  _applied_transform: AbstractTransform) -> None:
         if feedback_event is not None:
-            self._previous_output_index = feedback_event.state_index
+            self._previous_output_index = feedback_event.index
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
@@ -170,9 +170,9 @@ class AutoJumpScaleAction(AbstractScaleAction):
         self._jump_threshold: Parameter = Parameter(jump_threshold, 1, None, "int", "TODO")
         self._history: FeedbackQueue = FeedbackQueue()
 
-    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
               corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
-        event_indices: List[int] = [e[0].state_index for e in self._history.get_n_last(self.jump_threshold + 1)]
+        event_indices: List[int] = [e[0].index for e in self._history.get_n_last(self.jump_threshold + 1)]
         if not event_indices:
             return peaks
         previous_index: int = event_indices[0]
@@ -183,12 +183,12 @@ class AutoJumpScaleAction(AbstractScaleAction):
             factor: float = 0.0
         else:
             factor: float = 0.5 ** (num_consecutive_events - self.activation_threshold)
-        event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
+        event_indices: np.ndarray = np.array([e.index for e in corresponding_events], dtype=int)
         is_matching: np.ndarray = event_indices == previous_index + 1
         peaks.scale(factor, is_matching)
         return peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
         if feedback_event is not None:
             self._history.append((feedback_event, time, applied_transform))
@@ -221,7 +221,7 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
         self._history: FeedbackQueue = FeedbackQueue(max_length=self._history_len.value)
         self._sigma: Parameter = Parameter(sigma, None, None, 'float', "Standard deviation of gaussian")
 
-    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
               corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
 
         previous_tempi: np.ndarray = np.array(
@@ -233,7 +233,7 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
         peaks.scores *= np.exp(-((peaks_tempi - mu) ** 2 / (2 * self.sigma ** 2)))
         return peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
         if feedback_event is not None:
             self._history.append((feedback_event, time, applied_transform))
@@ -268,19 +268,19 @@ class StaticTabooScaleAction(AbstractScaleAction):
 
         self._taboo_indices: deque[int] = deque([], self.taboo_length)
 
-    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
               corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
-        event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
+        event_indices: np.ndarray = np.array([e.index for e in corresponding_events], dtype=int)
         matching_indices: np.ndarray = np.zeros(len(corresponding_events), dtype=bool)
         for taboo_index in self._taboo_indices:
             matching_indices += event_indices == taboo_index
         peaks.scale(0, matching_indices)
         return peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], _time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], _time: float,
                  _applied_transform: AbstractTransform) -> None:
         if feedback_event is not None:
-            self._taboo_indices.append(feedback_event.state_index)
+            self._taboo_indices.append(feedback_event.index)
         else:
             self._taboo_indices.append(-1)
 
@@ -315,7 +315,7 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
         # Optional case should never have to be handled
         self._transform_handler: Optional[TransformHandler] = None
 
-    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
               corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
         if self._previous_transform is None or self._transform_handler:
             return peaks
@@ -326,7 +326,7 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
             peaks.scale(self.factor, not_matching)
             return peaks
 
-    def feedback(self, _feedback_event: Optional[CorpusEvent], _time: float,
+    def feedback(self, _feedback_event: Optional[SomaxCorpusEvent], _time: float,
                  applied_transform: AbstractTransform) -> None:
         if _feedback_event is not None:
             self._previous_transform = applied_transform
@@ -388,7 +388,7 @@ class EnergyScaleAction(AbstractScaleAction):
 
         self.history: deque[float] = deque([], self.moving_average_len.value)
 
-    def scale(self, peaks: Peaks, _time: float, corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, _time: float, corresponding_events: List[SomaxCorpusEvent],
               _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
         if self.mu is None:
             return peaks
@@ -397,7 +397,7 @@ class EnergyScaleAction(AbstractScaleAction):
         peaks.scores *= 1 - self._weight.value * (1 - np.exp(-((velocities - self.mu) ** 2 / (2 * self.sigma ** 2))))
         return peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], _time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], _time: float,
                  _applied_transform: AbstractTransform) -> None:
         if self.listen_to.value == self.ListeningMode.FEEDBACK and feedback_event is not None:
             self.history.append(feedback_event.get_feature(TotalEnergyDb).value())
@@ -440,12 +440,12 @@ class VerticalDensityScaleAction(AbstractGaussianScale):
     def __init__(self, mu: float = DEFAULT_VERTICAL_DENSITY):
         super().__init__(mu=mu)
 
-    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
               _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
         densities: np.ndarray = np.array([event.get_feature(VerticalDensity).value() for event in corresponding_events])
         return self._scale(peaks, densities)
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
         pass
 
@@ -465,12 +465,12 @@ class DurationScaleAction(AbstractGaussianScale):
     def __init__(self, mu: float = DEFAULT_DURATION):
         super().__init__(mu=mu)
 
-    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
               corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
         durations: np.ndarray = np.array([event.duration for event in corresponding_events])
         return self._scale(peaks, durations)
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
         pass
 
@@ -493,7 +493,7 @@ class OctaveBandsScaleAction(AbstractScaleAction):
         self._band_distribution: Parameter = ParamWithSetter(OctaveBandsScaleAction.DEFAULT_BAND_DISTRIBUTION, None,
                                                              None, "list[11]", "TODO", self._set_band_distribution)
 
-    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
               corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
         events_band_distribution: np.ndarray = np.array([event.get_feature(OctaveBands).value()
                                                          for event in corresponding_events])
@@ -502,7 +502,7 @@ class OctaveBandsScaleAction(AbstractScaleAction):
         peaks.scale(factor)
         return peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
         pass
 
@@ -533,17 +533,17 @@ class RegionMaskScaleAction(AbstractScaleAction):
         self._low_thresh: Parameter = Parameter(0, 0, 1.0, "float", "Fraction [0,1] marking start of region")
         self._high_thresh: Parameter = Parameter(1.0, 0, 1.0, "float", "Fraction [0,1] marking end of region")
 
-    def scale(self, peaks: Peaks, _time: float, corresponding_events: List[CorpusEvent],
+    def scale(self, peaks: Peaks, _time: float, corresponding_events: List[SomaxCorpusEvent],
               corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **_kwargs) -> Peaks:
         # TODO: This could be optimized and stored if ScaleAction had direct access to Corpus
         low_index: int = int(self._low_thresh.value * corpus.length())
         high_index: int = int(self._high_thresh.value * corpus.length())
-        corresponding_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
+        corresponding_indices: np.ndarray = np.array([e.index for e in corresponding_events], dtype=int)
         mask: np.ndarray = ((low_index <= corresponding_indices) & (corresponding_indices <= high_index)).astype(int)
         peaks.scale(mask)
         return peaks
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
         pass
 

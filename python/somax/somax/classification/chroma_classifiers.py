@@ -5,15 +5,16 @@ from typing import List, Tuple, Optional, Type
 import numpy as np
 from sklearn.mixture import GaussianMixture
 
+from merge.main.feature import Feature
+from merge.main.influence import Influence, CorpusInfluence
 from somax.classification import tables
 from somax.classification.classifier import AbstractClassifier
 from somax.features import OnsetChroma
 from somax.features.chroma_features import BaseChroma, MeanChroma
-from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.exceptions import InvalidLabelInput, TransformError, InvalidCorpus
-from somax.runtime.influence import AbstractInfluence, CorpusInfluence, FeatureInfluence
+from somax.runtime.influence import SomaxFeatureInfluence
 from somax.runtime.label import AbstractLabel, IntLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
@@ -66,23 +67,23 @@ class BaseSomChromaClassifier(ChromaClassifier):
                 labels: List[IntLabel] = pool.map(self._multiproc_compute_label, corpus.events)
         else:
             labels: List[IntLabel] = []
-            for event in corpus.events:  # type: CorpusEvent
+            for event in corpus.events:  # type: SomaxCorpusEvent
                 labels.append(self._label_from_chroma(event.get_feature(self.chroma_type).value()))
         return labels
 
-    def _multiproc_compute_label(self, e: CorpusEvent):
+    def _multiproc_compute_label(self, e: SomaxCorpusEvent):
         return self._label_from_chroma(e.get_feature(self.chroma_type).value())
 
-    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+    def classify_influence(self, influence: Influence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
         """ :raises TransformError if no transforms exist """
         if not self._transforms:  # transforms is empty
             raise TransformError(f"No transforms exist in classifier {self}")
-        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, BaseChroma):
-            chroma: FeatureValue = influence.feature
+        if isinstance(influence, SomaxFeatureInfluence) and isinstance(influence.value, BaseChroma):
+            chroma: Feature = influence.value
             return [((self._label_from_chroma(t.inverse(chroma).value())), t)
                     for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
-            chroma: FeatureValue = influence.corpus_event.get_feature(self.chroma_type)
+            chroma: Feature = influence.value.get_feature(self.chroma_type)
             return [(self._label_from_chroma(t.inverse(chroma).value()), t) for t in self._transforms]
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
@@ -124,7 +125,7 @@ class GmmClassifier(ChromaClassifier, ABC):
                 labels: List[IntLabel] = pool.map(self._multiproc_compute_label, corpus.events)
         else:
             labels: List[IntLabel] = []
-            for event in corpus.events:  # type: CorpusEvent
+            for event in corpus.events:  # type: SomaxCorpusEvent
                 chroma: np.ndarray = event.get_feature(OnsetChroma).value().reshape(1, -1)
                 # max_val: float = np.max(chroma)
                 # if max_val > 0:
@@ -132,17 +133,17 @@ class GmmClassifier(ChromaClassifier, ABC):
                 labels.append(IntLabel(int(self.gmm.predict(chroma))))
         return labels
 
-    def _multiproc_compute_label(self, e: CorpusEvent) -> IntLabel:
+    def _multiproc_compute_label(self, e: SomaxCorpusEvent) -> IntLabel:
         return IntLabel(int(self.gmm.predict(e.get_feature(OnsetChroma).value().reshape(1, -1))))
 
-    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+    def classify_influence(self, influence: Influence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
         """ :raises TransformError if no transforms exist """
         if not self._transforms:
             raise TransformError(f"No Transforms exist in classifier {self}")
-        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, OnsetChroma):
-            chroma: FeatureValue = influence.feature
+        if isinstance(influence, SomaxFeatureInfluence) and isinstance(influence.value, OnsetChroma):
+            chroma: Feature = influence.value
         elif isinstance(influence, CorpusInfluence):
-            chroma: FeatureValue = influence.corpus_event.get_feature(OnsetChroma)
+            chroma: Feature = influence.value.get_feature(OnsetChroma)
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 

@@ -3,15 +3,15 @@ from typing import Dict, Optional, Tuple, Type, List
 
 import numpy as np
 
+from merge.main.influence import Influence
 from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch
 from somax.runtime.exceptions import InvalidCorpus, InvalidLabelInput
-from somax.runtime.influence import AbstractInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.parameter import Parameter, Parametric
@@ -59,7 +59,7 @@ class Player(Parametric, ContentAware):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def new_event(self, scheduler_time: float, _tempo: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+    def new_event(self, scheduler_time: float, _tempo: float) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
         if not self.is_enabled():
@@ -75,14 +75,14 @@ class Player(Parametric, ContentAware):
 
         if self._force_jump_index is not None:
             self.clear()
-            event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+            event_and_transform: Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]
             event_and_transform = self._force_jump()
         else:
             self._update_peaks_on_new_event(scheduler_time)
             peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
             peaks = self._scale_peaks(peaks, scheduler_time, self.corpus)
 
-            event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+            event_and_transform: Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]
             event_and_transform = self.peak_selector.decide(peaks, self.corpus, self._transform_handler)
             self.previous_peaks = peaks
 
@@ -95,7 +95,7 @@ class Player(Parametric, ContentAware):
         self._feedback(event, scheduler_time, transform)
         return event, transform
 
-    def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
+    def influence(self, path: List[str], influence: Influence, time: float, **kwargs) -> Dict[Atom, int]:
         """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError
             Return values are only for gathering statistics (Evaluator, etc.) and not used in runtime."""
         if not self.is_enabled():
@@ -150,7 +150,7 @@ class Player(Parametric, ContentAware):
     # MODIFY STATE
     ######################################################
 
-    def _feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+    def _feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
                   applied_transform: AbstractTransform) -> None:
         self.peak_selector.feedback(feedback_event, time, applied_transform)
         self.merge_action.feedback(feedback_event, time, applied_transform)
@@ -303,12 +303,12 @@ class Player(Parametric, ContentAware):
     def all_atoms(self) -> List[Atom]:
         return list(self.atoms.values())
 
-    def _force_jump(self) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+    def _force_jump(self) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         self.clear()
         index: Optional[int] = self._force_jump_index
         self._force_jump_index = None
         try:
-            event: CorpusEvent = self.corpus.events[index]
+            event: SomaxCorpusEvent = self.corpus.events[index]
             return event, NoTransform()
         except (IndexError, TypeError, AttributeError) as e:
             self.logger.debug(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
@@ -317,7 +317,7 @@ class Player(Parametric, ContentAware):
     def _scale_peaks(self, peaks: Peaks, scheduler_time: float, corpus: Corpus, **kwargs):
         if peaks.is_empty():
             return peaks
-        corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
+        corresponding_events: List[SomaxCorpusEvent] = corpus.events_around(peaks.times)
         corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
                                                              for t in np.unique(peaks.transform_ids)]
         for scale_action in self.scale_actions.values():

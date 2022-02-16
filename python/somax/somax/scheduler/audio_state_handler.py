@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
+from merge.main.feature import Feature
 from somax.features import Tempo
-from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus_event import AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.scheduled_event import ScheduledEvent, AudioEvent, AudioOffEvent, AudioContinueEvent, TempoEvent
@@ -16,7 +16,7 @@ class AudioState:
 
     @property
     def index(self) -> int:
-        return self.event.state_index
+        return self.event.index
 
 
 class AudioStateHandler:
@@ -35,14 +35,14 @@ class AudioStateHandler:
                 applied_transform: AbstractTransform, time_stretch_factor: float) -> List[ScheduledEvent]:
         output: List[ScheduledEvent] = []
 
-        tempo: Optional[FeatureValue] = event.get_feature_safe(Tempo)
+        tempo: Optional[Feature] = event.get_feature_safe(Tempo)
         if tempo is not None:
             output.append(TempoEvent(trigger_time, tempo.value()))
 
         # Queue a new event -- unless the new event is immediately following the currently played event and
         #   triggered at the end of current event's duration
         if (self._currently_playing is not None and
-                self._currently_playing.index + 1 == event.state_index and
+                self._currently_playing.index + 1 == event.index and
                 self._currently_playing.transform == applied_transform and
                 abs(trigger_time - self._currently_playing.end_time) <= self._threshold_s):
             output.append(AudioContinueEvent(trigger_time=trigger_time, corpus_event=event,
