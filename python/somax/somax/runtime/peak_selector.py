@@ -6,7 +6,7 @@ from typing import Tuple, Optional, List
 import numpy as np
 
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus
+from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.improvisation_memory import FeedbackQueue
 from somax.runtime.parameter import Parametric, Parameter
@@ -25,12 +25,12 @@ class AbstractPeakSelector(Parametric, ContentAware, StringParsed, ABC):
         return f"{type(self).__name__}(...)"
 
     @abstractmethod
-    def _decide_default(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def _decide_default(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                         **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         """ Default action to perform to select output """
 
     @abstractmethod
-    def _decide_fallback(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def _decide_fallback(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                          **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         """ Action to perform if no valid peak exists after calling `_decide_default`"""
 
@@ -51,7 +51,7 @@ class AbstractPeakSelector(Parametric, ContentAware, StringParsed, ABC):
     def from_string(cls, peak_selector: str, **kwargs) -> 'AbstractPeakSelector':
         return cls._from_string(peak_selector, **kwargs)
 
-    def decide(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def decide(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         output: Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]
         output = self._decide_default(peaks, corpus, transform_handler, **kwargs)
@@ -65,7 +65,7 @@ class AbstractFallbackPeakSelector(AbstractPeakSelector, ABC):
         super().__init__(**kwargs)
         self._history: FeedbackQueue = FeedbackQueue()
 
-    def _decide_fallback(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def _decide_fallback(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                          **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         self.logger.debug("[decide] _decide_fallback called.")
         try:
@@ -90,7 +90,7 @@ class MaxPeakSelector(AbstractFallbackPeakSelector):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def _decide_default(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def _decide_default(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                         **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         self.logger.debug("[decide] _decide_default called.")
         if peaks.is_empty():
@@ -102,7 +102,7 @@ class MaxPeakSelector(AbstractFallbackPeakSelector):
         transform_hash: int = int(peaks.transform_ids[peak_idx])
         return corpus.event_around(peaks.times[peak_idx]), transform_handler.get_transform(transform_hash)
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
 
@@ -113,7 +113,7 @@ class ThresholdPeakSelector(MaxPeakSelector):
         super().__init__(**kwargs)
         self._threshold: Parameter = Parameter(threshold, 0, None, "float", "TODOOO")
 
-    def _decide_default(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def _decide_default(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                         **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         if peaks.is_empty():
             return None
@@ -123,11 +123,11 @@ class ThresholdPeakSelector(MaxPeakSelector):
         else:
             return super()._decide_default(peaks, corpus, transform_handler)
 
-    def _decide_fallback(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def _decide_fallback(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                          **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         return None
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
     @property
@@ -139,7 +139,7 @@ class ProbabilisticPeakSelector(AbstractFallbackPeakSelector):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def _decide_default(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def _decide_default(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                         **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         if peaks.is_empty():
             return None
@@ -150,7 +150,7 @@ class ProbabilisticPeakSelector(AbstractFallbackPeakSelector):
         transform_hash: int = int(peaks.transform_ids[peak_idx])
         return corpus.event_around(peaks.times[peak_idx]), transform_handler.get_transform(transform_hash)
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
 
@@ -161,7 +161,7 @@ class ThresholdProbabilisticPeakSelector(ProbabilisticPeakSelector):
         super().__init__(**kwargs)
         self._threshold: Parameter = Parameter(threshold, 0, None, "float", "TODOOO")
 
-    def _decide_default(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def _decide_default(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                         **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         if peaks.is_empty():
             return None
@@ -171,11 +171,11 @@ class ThresholdProbabilisticPeakSelector(ProbabilisticPeakSelector):
         else:
             return super()._decide_default(peaks, corpus, transform_handler)
 
-    def _decide_fallback(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def _decide_fallback(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                          **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         return None
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
     @property
@@ -188,16 +188,16 @@ class SparsityProbabilisticPeakSelector(MaxPeakSelector):
         super().__init__(**kwargs)
         self.output_probability: Parameter = Parameter(1.0, 0.0, 1.0, "float", "Probability to trigger output")
 
-    def _decide_default(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def _decide_default(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                         **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         if random.random() > self.output_probability.value:
             return super()._decide_default(peaks, corpus, transform_handler, **kwargs)
         else:
             return None
 
-    def _decide_fallback(self, peaks: Peaks, corpus: Corpus, transform_handler: TransformHandler,
+    def _decide_fallback(self, peaks: Peaks, corpus: SomaxCorpus, transform_handler: TransformHandler,
                          **kwargs) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
         return None
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True

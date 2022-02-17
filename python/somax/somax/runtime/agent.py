@@ -8,6 +8,7 @@ from typing import Any, Optional, List, Tuple, Type
 
 import mido
 
+from merge.main.exceptions import CorpusError, ResourceError
 from somax import settings, log
 from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
@@ -17,10 +18,9 @@ from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
+from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
-from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
-    InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch
+from somax.runtime.exceptions import DuplicateKeyError, ParameterError, InvalidLabelInput, TransformError
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.influence import SomaxFeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
@@ -44,7 +44,7 @@ from somax.scheduler.time_object import Time
 class Agent(multiprocessing.Process):
     def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
                  transport_time: Time, scheduler_running: bool,
-                 corpus: Optional[Corpus] = None, is_tempo_master: bool = False,
+                 corpus: Optional[SomaxCorpus] = None, is_tempo_master: bool = False,
                  scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler, **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
@@ -140,7 +140,7 @@ class OscAgent(Agent, AsyncioOscObject):
             event_and_transform: Optional[tuple[SomaxCorpusEvent, AbstractTransform]]
             event_and_transform = self.player.new_event(scheduling_time, scheduler_tempo)
             self._send_output_statistics()
-        except InvalidCorpus as e:
+        except CorpusError as e:
             self.logger.debug(str(e))
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
             return
@@ -250,7 +250,7 @@ class OscAgent(Agent, AsyncioOscObject):
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
             return
-        except InvalidCorpus as e:
+        except CorpusError as e:
             self.logger.debug(repr(e))
             return
         self.logger.debug(f"[influence] Influence successfully completed for agent '{self.player.name}' "
@@ -312,7 +312,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self._send_eligibility()
             self.logger.debug(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
                               f"for player '{self.player.name}' (path='{path}').")
-        except (AssertionError, KeyError, ValueError, InvalidCorpus) as e:
+        except (AssertionError, KeyError, ValueError, CorpusError) as e:
             self.logger.error(f"{str(e)} No classifier was set.")
 
     def set_activity_pattern(self, path: str, activity_pattern: str, **kwargs):
@@ -385,9 +385,9 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             _, file_extension = os.path.splitext(filepath)
             if file_extension == ".gz":
-                corpus: Corpus = MidiCorpus.from_json(filepath, volatile)
+                corpus: SomaxCorpus = MidiSomaxCorpus.load(filepath, volatile)
             elif file_extension == ".pickle":
-                corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile)
+                corpus: SomaxCorpus = AudioSomaxCorpus.load(filepath, volatile=volatile)
             else:
                 self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
                 raise IOError(f"Invalid file extension '{file_extension}'")
@@ -395,7 +395,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Please Make sure that the file exists or rebuild the corpus.")
             self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
-        except (IOError, AttributeError, InvalidCorpus, ExternalDataMismatch) as e:
+        except (IOError, AttributeError, CorpusError, ResourceError) as e:
             self.logger.error(f"{str(e)}. No corpus was read.")
             self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
@@ -535,15 +535,16 @@ class OscAgent(Agent, AsyncioOscObject):
         self.target.send(SendProtocol.INSTANTIATED_ATOMS, atom_names)
 
     def send_current_corpus_info(self):
-        corpus: Optional[Corpus] = self.player.corpus
+        corpus: Optional[SomaxCorpus] = self.player.corpus
         if corpus is not None:
-            self.target.send(SendProtocol.PLAYER_CORPUS, [corpus.name,
-                                                          corpus.__class__.__name__,
-                                                          corpus.length(),
-                                                          corpus.filepath if isinstance(corpus, AudioCorpus) else None])
+            self.target.send(SendProtocol.PLAYER_CORPUS,
+                             [corpus.name,
+                              corpus.__class__.__name__,
+                              corpus.length(),
+                              corpus.filepath if isinstance(corpus, AudioSomaxCorpus) else None])
 
     def _send_eligibility(self):
-        corpus: Optional[Corpus] = self.player.corpus
+        corpus: Optional[SomaxCorpus] = self.player.corpus
         if self.player.corpus is not None:
             self.player.set_eligibility(corpus)
 
@@ -600,9 +601,9 @@ class OscAgent(Agent, AsyncioOscObject):
         name: str = corpus_name if corpus_name is not None else filename
 
         try:
-            corpus: MidiCorpus = self.improvisation_memory.export(corpus_name, self.player.corpus,
-                                                                  use_original_tempo=use_original_tempo)
-        except InvalidCorpus as e:
+            corpus: MidiSomaxCorpus = self.improvisation_memory.export(corpus_name, self.player.corpus,
+                                                                       use_original_tempo=use_original_tempo)
+        except CorpusError as e:
             self.logger.error(f"{str(e)}. No MIDI data was exported.")
             return
 

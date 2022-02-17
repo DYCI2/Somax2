@@ -3,15 +3,16 @@ from typing import Dict, Optional, Tuple, Type, List
 
 import numpy as np
 
+from merge.main.exceptions import CorpusError
 from merge.main.influence import Influence
 from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus
+from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch
-from somax.runtime.exceptions import InvalidCorpus, InvalidLabelInput
+from somax.runtime.exceptions import InvalidLabelInput
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.parameter import Parameter, Parametric
@@ -26,14 +27,14 @@ class Player(Parametric, ContentAware):
     def __init__(self, name: str,
                  peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
                  merge_action: AbstractMergeAction = AbstractMergeAction.default(),
-                 corpus: Optional[Corpus] = None,
+                 corpus: Optional[SomaxCorpus] = None,
                  scale_actions: List[AbstractScaleAction] = AbstractScaleAction.default_set()):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.name: str = name
         self._transform_handler: TransformHandler = TransformHandler()
         self.peak_selector: AbstractPeakSelector = peak_selector
-        self.corpus: Optional[Corpus] = corpus
+        self.corpus: Optional[SomaxCorpus] = corpus
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
         self.merge_action: AbstractMergeAction = merge_action
 
@@ -71,7 +72,7 @@ class Player(Parametric, ContentAware):
                                   f"'{self._invalidated_by.__class__.__name__}'")
 
         if not self.corpus:
-            raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
+            raise CorpusError(f"No Corpus has been loaded in player '{self.name}'.")
 
         if self._force_jump_index is not None:
             self.clear()
@@ -107,7 +108,7 @@ class Player(Parametric, ContentAware):
                                   f"'{self._invalidated_by.__class__.__name__}'")
 
         if self.corpus is None:
-            raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
+            raise CorpusError(f"No Corpus has been loaded in player '{self.name}'.")
 
         num_generated_peaks: Dict[Atom, int] = {}
         if not path:
@@ -128,7 +129,7 @@ class Player(Parametric, ContentAware):
         for atom in self.atoms.values():
             atom.update_peaks_on_new_event(time)
 
-    def _merged_peaks(self, time: float, corpus: Corpus, **kwargs) -> Peaks:
+    def _merged_peaks(self, time: float, corpus: SomaxCorpus, **kwargs) -> Peaks:
         weight_sum: float = 0.0
         for atom in self.atoms.values():
             weight_sum += atom.weight if atom.is_enabled_and_eligible() else 0.0
@@ -176,7 +177,7 @@ class Player(Parametric, ContentAware):
         """ Forces the player to jump to the given state on the next call to `new_event`"""
         self._force_jump_index = index
 
-    def read_corpus(self, corpus: Corpus) -> None:
+    def read_corpus(self, corpus: SomaxCorpus) -> None:
         self._update_transforms()
         self.corpus = corpus
         for atom in self.atoms.values():
@@ -282,7 +283,7 @@ class Player(Parametric, ContentAware):
     # PRIVATE
     ######################################################
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True  # valid for all types of corpora
 
     # TODO: Legacy function from recursive Streamview structure: remove at some point
@@ -314,7 +315,7 @@ class Player(Parametric, ContentAware):
             self.logger.debug(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
             return None
 
-    def _scale_peaks(self, peaks: Peaks, scheduler_time: float, corpus: Corpus, **kwargs):
+    def _scale_peaks(self, peaks: Peaks, scheduler_time: float, corpus: SomaxCorpus, **kwargs):
         if peaks.is_empty():
             return peaks
         corresponding_events: List[SomaxCorpusEvent] = corpus.events_around(peaks.times)

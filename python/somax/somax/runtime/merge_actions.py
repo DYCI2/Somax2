@@ -6,7 +6,7 @@ import numpy as np
 from scipy import sparse
 
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus
+from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.peaks import Peaks
@@ -20,7 +20,7 @@ class AbstractMergeAction(Parametric, ContentAware, StringParsed, ABC):
         super().__init__(invalidate_parent=True)
 
     @abstractmethod
-    def merge(self, peaks: Peaks, time: float, corpus: Corpus = None, **kwargs) -> Peaks:
+    def merge(self, peaks: Peaks, time: float, corpus: SomaxCorpus = None, **kwargs) -> Peaks:
         """ """
 
     @abstractmethod
@@ -52,7 +52,7 @@ class DistanceMergeAction(AbstractMergeAction):
     def __repr__(self):
         return f"{type(self).__name__}(_t_width={self.t_width})"
 
-    def merge(self, peaks: Peaks, _time: float, corpus: Corpus = None, **_kwargs) -> Peaks:
+    def merge(self, peaks: Peaks, _time: float, corpus: SomaxCorpus = None, **_kwargs) -> Peaks:
         if peaks.size() <= 1:
             return peaks
         self.logger.debug(f"[merge] Merging activity with {peaks.size()} peaks.")
@@ -98,7 +98,7 @@ class DistanceMergeAction(AbstractMergeAction):
     def clear(self) -> None:
         pass
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
     @property

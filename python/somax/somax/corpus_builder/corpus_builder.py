@@ -19,7 +19,7 @@ from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
-from somax.runtime.corpus import Corpus, AudioCorpus, MidiCorpus
+from somax.runtime.corpus import SomaxCorpus, AudioSomaxCorpus, MidiSomaxCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError, ParameterError
 from somax.runtime.osc_log_forwarder import OscLogForwarder
@@ -75,7 +75,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
         self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
 
         try:
-            corpus: Corpus = CorpusBuilder().build(filepath=self.filepath, corpus_name=self.corpus_name, **self.kwargs)
+            corpus: SomaxCorpus = CorpusBuilder().build(filepath=self.filepath, corpus_name=self.corpus_name, **self.kwargs)
             self.logger.debug(f"[build_corpus]: Successfully built '{corpus.name}' from file '{self.filepath}'.")
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
@@ -106,51 +106,51 @@ class CorpusBuilder:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
-    def build(self, filepath: str, corpus_name: Optional[str] = None, **kwargs) -> Corpus:
+    def build(self, filepath: str, corpus_name: Optional[str] = None, **kwargs) -> SomaxCorpus:
         """ :raises TODO!!!
                     IOError if folder mixes audio and midi files or folder is empty"""
         if os.path.isdir(filepath):
-            filepaths, content_type = self._folder_content(filepath)  # type: List[str], Optional[Type[Corpus]]
+            filepaths, content_type = self._folder_content(filepath)  # type: List[str], Optional[Type[SomaxCorpus]]
             name: str = corpus_name if corpus_name is not None else os.path.basename(filepath)
         else:
             content_type = self._parse_content_type(filepath)
             filepaths = [filepath]
             name = corpus_name if corpus_name is not None else os.path.splitext(os.path.basename(filepath))[0]
 
-        if content_type == MidiCorpus:
-            corpus: Corpus = self._build_midi(filepaths, name, **kwargs)
-        elif content_type == AudioCorpus:
-            corpus: Corpus = self._build_audio(filepaths, name, **kwargs)
+        if content_type == MidiSomaxCorpus:
+            corpus: SomaxCorpus = self._build_midi(filepaths, name, **kwargs)
+        elif content_type == AudioSomaxCorpus:
+            corpus: SomaxCorpus = self._build_audio(filepaths, name, **kwargs)
         else:
             raise IOError("Invalid file format. Valid extensions are {}.".format(
                 "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
         return corpus
 
-    def _folder_content(self, filepath: str) -> Tuple[List[str], Optional[Type[Corpus]]]:
+    def _folder_content(self, filepath: str) -> Tuple[List[str], Optional[Type[SomaxCorpus]]]:
         """ raises: IOError if folder mixes audio and midi files """
-        content_type: Optional[Type[Corpus]] = None
+        content_type: Optional[Type[SomaxCorpus]] = None
         filepaths: List[str] = []
         for file in os.listdir(filepath):
-            file_content_type: Optional[Type[Corpus]] = self._parse_content_type(file)
+            file_content_type: Optional[Type[SomaxCorpus]] = self._parse_content_type(file)
             if file_content_type is None:
                 self.logger.warning(f"Ignoring file {file}: invalid type.")
-            elif (content_type is None or content_type == MidiCorpus) and file_content_type == MidiCorpus:
-                content_type = MidiCorpus
+            elif (content_type is None or content_type == MidiSomaxCorpus) and file_content_type == MidiSomaxCorpus:
+                content_type = MidiSomaxCorpus
                 filepaths.append(os.path.join(filepath, file))
-            elif (content_type is None or content_type == AudioCorpus) and file_content_type == AudioCorpus:
-                content_type = AudioCorpus
+            elif (content_type is None or content_type == AudioSomaxCorpus) and file_content_type == AudioSomaxCorpus:
+                content_type = AudioSomaxCorpus
                 filepaths.append(os.path.join(filepath, file))
             else:
                 raise IOError("Building corpus from mix of audio and midi files is not supported.")
 
         return filepaths, content_type
 
-    def _parse_content_type(self, filepath: str) -> Optional[Type[Corpus]]:
+    def _parse_content_type(self, filepath: str) -> Optional[Type[SomaxCorpus]]:
         _, extension = os.path.splitext(filepath.split("/")[-1])
         if extension.lower() in self.MIDI_FILE_EXTENSIONS:
-            return MidiCorpus
+            return MidiSomaxCorpus
         elif extension.lower() in self.AUDIO_FILE_EXTENSIONS:
-            return AudioCorpus
+            return AudioSomaxCorpus
         else:
             return None
 
@@ -158,7 +158,7 @@ class CorpusBuilder:
                     foreground_channels: Tuple[int] = tuple(range(1, 17)),
                     background_channels: Tuple[int] = tuple(range(1, 17)),
                     spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
-                    **kwargs) -> Corpus:
+                    **kwargs) -> SomaxCorpus:
         # TODO: Foreground channels are not used for melodic classification... (might be a good thing)
         # TODO: Onset channels are not supported as means of segmentation (might also be a good thing)
         start_time: float = timer()
@@ -196,8 +196,8 @@ class CorpusBuilder:
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) completed feature analysis for "
                           f"{len(used_features)} features ({', '.join([f.__name__ for f in used_features])})")
 
-        corpus: MidiCorpus = MidiCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
-                                        feature_types=used_features, build_parameters=build_parameters)
+        corpus: MidiSomaxCorpus = MidiSomaxCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
+                                                  feature_types=used_features, build_parameters=build_parameters)
 
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) completed construction of MIDI corpus")
 
@@ -207,7 +207,7 @@ class CorpusBuilder:
                      background_channels: Optional[List[int]] = None, onset_channels: Optional[List[int]] = None,
                      segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET, hop_length: int = 512,
                      estimated_initial_bpm: float = 120.0, beat_tightness: float = 100.0,
-                     **kwargs) -> Corpus:
+                     **kwargs) -> SomaxCorpus:
         """ raises: FileNotFoundError  if failed to load file
                     RuntimeError if other issues are encountered in librosa
                     ValueError if an invalid segmentation mode is provided
@@ -281,10 +281,10 @@ class CorpusBuilder:
                                             }
 
         # TODO: Folder support - should not use filepaths[0]
-        corpus: AudioCorpus = AudioCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
-                                          feature_types=used_features,
-                                          build_parameters=build_parameters, sr=sr, filepath=filepaths[0],
-                                          file_duration=metadata.duration, file_num_channels=metadata.channels)
+        corpus: AudioSomaxCorpus = AudioSomaxCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
+                                                    feature_types=used_features,
+                                                    build_parameters=build_parameters, sr=sr, filepath=filepaths[0],
+                                                    file_duration=metadata.duration, file_num_channels=metadata.channels)
 
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed construction of audio corpus")
 

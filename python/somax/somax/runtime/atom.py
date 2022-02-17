@@ -2,12 +2,12 @@ import logging
 from typing import Dict, Union, List, Optional, Tuple
 
 from merge.main.influence import Influence, CorpusInfluence
+from merge.main.label import Label
 from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus
+from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
-from somax.runtime.label import AbstractLabel
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.peak_event import PeakEvent
@@ -20,7 +20,7 @@ class Atom(Parametric, ContentAware):
     DEFAULT_WEIGHT = 1.0
 
     def __init__(self, name: str, weight: float, classifier: AbstractClassifier,
-                 activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace, corpus: Corpus,
+                 activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace, corpus: SomaxCorpus,
                  self_influenced: bool, enabled: bool = True):
         super().__init__()
         self.logger = logging.getLogger(__name__)
@@ -36,13 +36,13 @@ class Atom(Parametric, ContentAware):
         self._self_influenced: Parameter = Parameter(self_influenced, 0, 1, 'bool',
                                                      "Whether new events creates by player should influence this atom or not.")
 
-        self._corpus: Optional[Corpus] = None
+        self._corpus: Optional[SomaxCorpus] = None
         if corpus:
             self.read_corpus(corpus)
 
         self._parse_parameters()
 
-    def read_corpus(self, corpus: Optional[Corpus] = None):
+    def read_corpus(self, corpus: Optional[SomaxCorpus] = None):
         """ :raises RuntimeError """
         if not self.eligible:
             print(f"Returning because '{self.name}' cannot read corpus of type")
@@ -59,7 +59,7 @@ class Atom(Parametric, ContentAware):
             return
 
         self._classifier.cluster(self._corpus)
-        labels: List[AbstractLabel] = self._classifier.classify_corpus(self._corpus)
+        labels: List[Label] = self._classifier.classify_corpus(self._corpus)
         self._memory_space.model(self._corpus, labels)
         self._activity_pattern.corpus = self._corpus
 
@@ -71,7 +71,7 @@ class Atom(Parametric, ContentAware):
             return 0
 
         self._update_peaks_on_influence(time)
-        label: List[Tuple[AbstractLabel, AbstractTransform]] = self._classifier.classify_influence(influence)
+        label: List[Tuple[Label, AbstractTransform]] = self._classifier.classify_influence(influence)
         matched_events: List[PeakEvent] = self._memory_space.influence(label, time, **kwargs)
         if matched_events:
             self._activity_pattern.insert(matched_events)  # we insert the events into the activity profile
@@ -115,7 +115,7 @@ class Atom(Parametric, ContentAware):
                                "parameters": parameters}
         return self.parameter_dict
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
     @property

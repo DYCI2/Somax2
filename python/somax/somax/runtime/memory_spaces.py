@@ -5,10 +5,10 @@ from abc import abstractmethod, ABC
 from collections import deque
 from typing import Tuple, Dict, Union, Optional, List, Type
 
-from somax.runtime.corpus import Corpus
+from merge.main.label import Label
+from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.exceptions import TransformError
-from somax.runtime.label import AbstractLabel
 from somax.runtime.parameter import Parameter, ParamWithSetter
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_event import PeakEvent, ClassicPeakEvent
@@ -25,8 +25,8 @@ class AbstractMemorySpace(Parametric, StringParsed, ABC):
             Note: labels are not classified in default constructor as additional parameters might need init before."""
         super(AbstractMemorySpace, self).__init__()
         self.logger = logging.getLogger(__name__)
-        self._corpus: Optional[Corpus] = None
-        self._labels: Optional[List[AbstractLabel]] = None
+        self._corpus: Optional[SomaxCorpus] = None
+        self._labels: Optional[List[Label]] = None
         # Must be defined in `update_transforms`
         self._transform_handler: Optional[TransformHandler] = None
 
@@ -39,11 +39,11 @@ class AbstractMemorySpace(Parametric, StringParsed, ABC):
         return cls._from_string(memory_space, **kwargs)
 
     @abstractmethod
-    def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:
+    def model(self, corpus: SomaxCorpus, labels: List[Label], **_kwargs) -> None:
         pass
 
     @abstractmethod
-    def influence(self, labels: List[Tuple[AbstractLabel, AbstractTransform]], time: float,
+    def influence(self, labels: List[Tuple[Label, AbstractTransform]], time: float,
                   **kwargs) -> List[PeakEvent]:
         pass
 
@@ -89,7 +89,7 @@ class NGramMemorySpace(AbstractMemorySpace):
     def __repr__(self):
         return f"NGramMemorySpace(_ngram_size={self._ngram_size.value}, corpus={self._corpus}, ...)"  #
 
-    def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:
+    def model(self, corpus: SomaxCorpus, labels: List[Label], **_kwargs) -> None:
         if self._transform_handler is None:
             raise TransformError("update_transforms must be called before modelling a corpus")
         self.logger.debug(f"[model] Modelling corpus '{corpus.name}'.")
@@ -109,7 +109,7 @@ class NGramMemorySpace(AbstractMemorySpace):
                 else:
                     self._structured_data[key] = [value]
 
-    def influence(self, labels: List[Tuple[AbstractLabel, AbstractTransform]], time: float,
+    def influence(self, labels: List[Tuple[Label, AbstractTransform]], time: float,
                   **_kwargs) -> List[PeakEvent]:
         matches: List[PeakEvent] = []
         for (label, transform) in labels:

@@ -12,15 +12,16 @@ class InvalidLabelInput(Exception):
     def __init__(self, error):
         super(InvalidLabelInput, self).__init__(error)
 
+# Replaced by CorpusError
+# class InvalidCorpus(Exception):
+#     def __init__(self, error):
+#         super(InvalidCorpus, self).__init__(error)
 
-class InvalidCorpus(Exception):
-    def __init__(self, error):
-        super(InvalidCorpus, self).__init__(error)
 
-
-class ExternalDataMismatch(Exception):
-    def __init__(self, error):
-        super(ExternalDataMismatch, self).__init__(error)
+# Replaced by ResourceError
+# class ExternalDataMismatch(Exception):
+#     def __init__(self, error):
+#         super(ExternalDataMismatch, self).__init__(error)
 
 
 class ContentMismatch(Exception):

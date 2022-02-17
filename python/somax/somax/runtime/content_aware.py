@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from collections import abc
 from typing import Optional, List, Tuple
 
-from somax.runtime.corpus import Corpus
+from somax.runtime.corpus import SomaxCorpus
 
 
 class ContentAware(ABC):
@@ -13,10 +13,10 @@ class ContentAware(ABC):
         self._invalidated_by: Optional[ContentAware] = None
 
     @abstractmethod
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         """ raises: noexcept """
 
-    def _set_eligibility(self, corpus: Optional[Corpus]) -> bool:
+    def _set_eligibility(self, corpus: Optional[SomaxCorpus]) -> bool:
         if corpus is None:
             self._eligible = True
             return self._eligible
@@ -44,7 +44,7 @@ class ContentAware(ABC):
     def _format(self) -> Tuple['ContentAware', bool, Optional['ContentAware']]:
         return self, self._eligible, self._invalidated_by
 
-    def set_eligibility(self, corpus: Corpus) -> bool:
+    def set_eligibility(self, corpus: SomaxCorpus) -> bool:
         self._invalidated_by = None
         self._eligible: bool = self._set_eligibility(corpus)
         for z, child in self.__dict__.items():

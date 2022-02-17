@@ -3,16 +3,16 @@ from typing import List, Tuple, Type
 
 from merge.main.feature import Feature
 from merge.main.influence import Influence, CorpusInfluence
+from merge.main.label import IntLabel, Label
 from somax.classification.classifier import AbstractClassifier
 from somax.features import TopNote
 from somax.features.feature import CorpusFeature
 from somax.features.pitch_features import RuntimeIntegerPitch, AbstractIntegerPitch, VirtualFundamental, BassNote, \
     YinDiscretePitch
-from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
+from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidLabelInput, TransformError
 from somax.runtime.influence import SomaxFeatureInfluence
-from somax.runtime.label import IntLabel, AbstractLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
 
@@ -25,17 +25,17 @@ class BasicPitchClassifier(AbstractClassifier, ABC):
         self.audio_pitch_type: Type[CorpusFeature] = audio_pitch_type
         self.mod12: bool = mod12
 
-    def cluster(self, corpus: Corpus, **kwargs) -> None:
+    def cluster(self, corpus: SomaxCorpus, **kwargs) -> None:
         # No clustering required for class
         pass
 
-    def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
+    def classify_corpus(self, corpus: SomaxCorpus) -> List[IntLabel]:
         labels: List[IntLabel] = []
         for event in corpus.events:  # type: SomaxCorpusEvent
             labels.append(self._label_from_corpus_event(event, NoTransform()))
         return labels
 
-    def classify_influence(self, influence: Influence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+    def classify_influence(self, influence: Influence) -> List[Tuple[Label, AbstractTransform]]:
         if isinstance(influence, SomaxFeatureInfluence) and isinstance(influence.value, RuntimeIntegerPitch):
             return [(self._label_from_feature(influence.value, t), t) for t in self._transforms]
         elif isinstance(influence, CorpusInfluence) and isinstance(influence.value, SomaxCorpusEvent):
@@ -76,9 +76,9 @@ class BasicPitchClassifier(AbstractClassifier, ABC):
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return corpus.has_feature(self.midi_pitch_type) and isinstance(corpus, MidiCorpus) or \
-               corpus.has_feature(self.audio_pitch_type) and isinstance(corpus, AudioCorpus)
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
+        return corpus.has_feature(self.midi_pitch_type) and isinstance(corpus, MidiSomaxCorpus) or \
+               corpus.has_feature(self.audio_pitch_type) and isinstance(corpus, AudioSomaxCorpus)
 
 
 class TopNoteClassifier(BasicPitchClassifier):

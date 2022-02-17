@@ -4,7 +4,7 @@ from typing import Dict, Union, List, Optional
 
 import numpy as np
 
-from somax.runtime.corpus import Corpus
+from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.parameter import Parameter, ParamWithSetter
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_event import PeakEvent
@@ -17,11 +17,11 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
     TIME_IDX = 1
     TRANSFORM_IDX = 2
 
-    def __init__(self, corpus: Optional[Corpus] = None):
+    def __init__(self, corpus: Optional[SomaxCorpus] = None):
         super(AbstractActivityPattern, self).__init__()
         self.logger = logging.getLogger(__name__)
         self._peaks: Peaks = Peaks.create_empty()
-        self.corpus: Corpus = corpus
+        self.corpus: SomaxCorpus = corpus
 
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractActivityPattern':
@@ -70,7 +70,7 @@ class ClassicActivityPattern(AbstractActivityPattern):
 
     DEFAULT_T = 4.6
 
-    def __init__(self, corpus: Corpus = None, tau_mem_decay: float = DEFAULT_T):
+    def __init__(self, corpus: SomaxCorpus = None, tau_mem_decay: float = DEFAULT_T):
         super().__init__(corpus)
         self.logger.debug("[__init__]: ClassicActivityPattern initialized.")
         self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
@@ -126,7 +126,7 @@ class ManualActivityPattern(AbstractActivityPattern):
     DEFAULT_N = 3
     DEFAULT_THRESHOLD_TICKS = 0.025
 
-    def __init__(self, corpus: Corpus = None):
+    def __init__(self, corpus: SomaxCorpus = None):
         super().__init__(corpus)
         self.logger.debug("[__init__]: ManualActivityPattern initialized.")
         self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
@@ -186,7 +186,7 @@ class ManualActivityPattern(AbstractActivityPattern):
 
 
 class DirectActivityPattern(AbstractActivityPattern):
-    def __init__(self, corpus: Optional[Corpus] = None):
+    def __init__(self, corpus: Optional[SomaxCorpus] = None):
         super().__init__(corpus=corpus)
         self.logger.debug("[__init__]: ManualActivityPattern initialized.")
         self.default_score: Parameter = Parameter(1.0, None, None, 'float', "Value of a new peaks upon creation.")
@@ -227,7 +227,7 @@ class DecayActivityPattern(AbstractActivityPattern):
 
     DEFAULT_T = 4.6
 
-    def __init__(self, corpus: Corpus = None, tau_mem_decay: float = DEFAULT_T):
+    def __init__(self, corpus: SomaxCorpus = None, tau_mem_decay: float = DEFAULT_T):
         super().__init__(corpus)
         self.logger.debug("[__init__]: ClassicActivityPattern initialized.")
         self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")

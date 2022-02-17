@@ -19,7 +19,7 @@ from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
 from somax.runtime.agent import OscAgent, Agent
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
-from somax.runtime.corpus import Corpus
+from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.exceptions import ParameterError
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
@@ -300,9 +300,9 @@ class SomaxServer(Somax, AsyncioOscObject):
                overwrite: bool = False, spectrogram_filter: AbstractFilter = AbstractFilter.default(),
                segmentation_mode: Optional[AudioSegmentation] = None, **kwargs):
         self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
-        corpus: Corpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
-                                               spectrogram_filter=spectrogram_filter,
-                                               segmentation_mode=segmentation_mode, **kwargs)
+        corpus: SomaxCorpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
+                                                    spectrogram_filter=spectrogram_filter,
+                                                    segmentation_mode=segmentation_mode, **kwargs)
         self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{output_folder}'...")
 
         try:

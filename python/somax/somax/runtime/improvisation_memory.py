@@ -2,9 +2,9 @@ import copy
 from collections import deque
 from typing import Tuple, List, Optional, TypeVar, Generic
 
-from somax.runtime.corpus import Corpus, MidiCorpus
+from merge.main.exceptions import CorpusError
+from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent
-from somax.runtime.exceptions import InvalidCorpus
 from somax.runtime.memory_state import MemoryState
 from somax.runtime.transforms import AbstractTransform
 
@@ -80,21 +80,22 @@ class ImprovisationMemory:
     def length(self) -> int:
         return len(self._history)
 
-    def export(self, name: str, source_corpus: Corpus, use_original_tempo: bool = False) -> MidiCorpus:
+    def export(self, name: str, source_corpus: SomaxCorpus, use_original_tempo: bool = False) -> MidiSomaxCorpus:
         """ raises: InvalidCorpus if there is no data to export
             TODO: `use_original_corpus` is a temporary workaround to handle the tempo offset described
                   in https://trello.com/c/vKfkisIV. Remove this once a proper solution is in place.
         """
         if len(self._history) == 0:
-            raise InvalidCorpus("The recorded history is empty")
+            raise CorpusError("The recorded history is empty")
 
-        if not isinstance(source_corpus, MidiCorpus):
-            raise InvalidCorpus("Export is only supported for MIDI corpora")
+        if not isinstance(source_corpus, MidiSomaxCorpus):
+            raise CorpusError("Export is only supported for MIDI corpora")
         else:
             return self._export_midi_corpus(name=name, source_corpus=source_corpus,
                                             use_original_tempo=use_original_tempo)
 
-    def _export_midi_corpus(self, name: str, source_corpus: MidiCorpus, use_original_tempo: bool = False) -> MidiCorpus:
+    def _export_midi_corpus(self, name: str, source_corpus: MidiSomaxCorpus,
+                            use_original_tempo: bool = False) -> MidiSomaxCorpus:
         elapsed_abs_time: float = 0.0
         events: List[MidiCorpusEvent] = []
         for event, memory_state in copy.deepcopy(self._history.dump()):  # type: (MidiCorpusEvent, MemoryState)
@@ -111,5 +112,5 @@ class ImprovisationMemory:
             event.absolute_onset = elapsed_abs_time
             event.recorded_memory_state = memory_state
             events.append(event)
-        return MidiCorpus(events, name, scheduling_mode=source_corpus.scheduling_mode,
-                          feature_types=[], build_parameters={"build_method": "runtime"})
+        return MidiSomaxCorpus(events, name, scheduling_mode=source_corpus.scheduling_mode,
+                               feature_types=[], build_parameters={"build_method": "runtime"})

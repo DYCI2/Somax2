@@ -5,17 +5,18 @@ from typing import List, Tuple, Optional, Type
 import numpy as np
 from sklearn.mixture import GaussianMixture
 
+from merge.main.exceptions import ClassificationError
 from merge.main.feature import Feature
 from merge.main.influence import Influence, CorpusInfluence
+from merge.main.label import IntLabel
 from somax.classification import tables
 from somax.classification.classifier import AbstractClassifier
 from somax.features import OnsetChroma
 from somax.features.chroma_features import BaseChroma, MeanChroma
-from somax.runtime.corpus import Corpus
+from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
-from somax.runtime.exceptions import InvalidLabelInput, TransformError, InvalidCorpus
+from somax.runtime.exceptions import InvalidLabelInput, TransformError
 from somax.runtime.influence import SomaxFeatureInfluence
-from somax.runtime.label import AbstractLabel, IntLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 
@@ -34,7 +35,7 @@ class ChromaClassifier(AbstractClassifier, ABC):
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return corpus.has_feature(OnsetChroma)
 
 
@@ -56,11 +57,11 @@ class BaseSomChromaClassifier(ChromaClassifier):
         with resources.path(tables, self.SOM_CLASS_FILE) as path:
             self._som_classes = np.loadtxt(path.absolute(), dtype=int, delimiter=",")  # Shape: (N,)
 
-    def cluster(self, corpus: Corpus, **kwargs) -> None:
+    def cluster(self, corpus: SomaxCorpus, **kwargs) -> None:
         # No clustering required for class
         pass
 
-    def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
+    def classify_corpus(self, corpus: SomaxCorpus) -> List[IntLabel]:
         if self.USE_MULTIPROCESSING:
             import multiprocessing
             with multiprocessing.Pool(processes=4) as pool:
@@ -74,7 +75,7 @@ class BaseSomChromaClassifier(ChromaClassifier):
     def _multiproc_compute_label(self, e: SomaxCorpusEvent):
         return self._label_from_chroma(e.get_feature(self.chroma_type).value())
 
-    def classify_influence(self, influence: Influence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+    def classify_influence(self, influence: Influence) -> List[Tuple[IntLabel, AbstractTransform]]:
         """ :raises TransformError if no transforms exist """
         if not self._transforms:  # transforms is empty
             raise TransformError(f"No transforms exist in classifier {self}")
@@ -118,7 +119,7 @@ class GmmClassifier(ChromaClassifier, ABC):
         self.max_iter: int = max_iter
         self.gmm: Optional[GaussianMixture] = None
 
-    def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
+    def classify_corpus(self, corpus: SomaxCorpus) -> List[IntLabel]:
         if self.USE_MULTIPROCESSING:
             import multiprocessing
             with multiprocessing.Pool(processes=4) as pool:
@@ -136,7 +137,7 @@ class GmmClassifier(ChromaClassifier, ABC):
     def _multiproc_compute_label(self, e: SomaxCorpusEvent) -> IntLabel:
         return IntLabel(int(self.gmm.predict(e.get_feature(OnsetChroma).value().reshape(1, -1))))
 
-    def classify_influence(self, influence: Influence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+    def classify_influence(self, influence: Influence) -> List[Tuple[IntLabel, AbstractTransform]]:
         """ :raises TransformError if no transforms exist """
         if not self._transforms:
             raise TransformError(f"No Transforms exist in classifier {self}")
@@ -165,13 +166,13 @@ class AbsoluteGmmClassifier(GmmClassifier):
         with resources.path(tables, self.GMM_DATA_FILE) as p:
             self._gmm_data: np.ndarray = np.loadtxt(p.absolute(), dtype=np.float32, delimiter=",")  # Shape: (N, 12)
 
-    def cluster(self, _corpus: Corpus) -> None:
+    def cluster(self, _corpus: SomaxCorpus) -> None:
         self.gmm = GaussianMixture(n_components=self.num_components, max_iter=self.max_iter).fit(self._gmm_data)
 
 
 class RelativeGmmClassifier(GmmClassifier):
 
-    def cluster(self, corpus: Corpus) -> None:
+    def cluster(self, corpus: SomaxCorpus) -> None:
         """ :raises InvalidCorpus if number of events in corpus is lower than `self.num_components`."""
         chromas: List[np.ndarray] = [event.get_feature(OnsetChroma).value() for event in corpus.events]
         gmm_data: np.ndarray = np.row_stack(chromas)
@@ -182,9 +183,9 @@ class RelativeGmmClassifier(GmmClassifier):
             self.gmm = GaussianMixture(n_components=self.num_components, max_iter=self.max_iter).fit(gmm_data)
         except ValueError as e:
             if self.num_components > corpus.length():
-                raise InvalidCorpus(f"{self.__class__.__name__} could not classify corpus '{str(corpus)}' since corpus "
+                raise ClassificationError(f"{self.__class__.__name__} could not classify corpus '{str(corpus)}' since corpus "
                                     f"length ({corpus.length()}) is lower than number of requested clusters "
                                     f"({self.num_components}). "
                                     f"Reduce the number of clusters or select another classifier")
             else:
-                raise InvalidCorpus(f"Unknown error encountered in {self.__class__.__name__}. Error: {repr(e)}.")
+                raise ClassificationError(f"Unknown error encountered in {self.__class__.__name__}. Error: {repr(e)}.")

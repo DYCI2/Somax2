@@ -17,15 +17,16 @@ import numpy as np
 import pandas as pd
 
 import somax
+from merge.corpus import Corpus
+from merge.main.exceptions import CorpusError, ResourceError
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features.feature import CorpusFeature
 from somax.runtime.corpus_event import SomaxCorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
-from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch
 from somax.scheduler.scheduling_mode import SchedulingMode
 from somax.utils.introspective import Introspective
 
-E = TypeVar('E', bound=SomaxCorpusEvent)
+S = TypeVar('S', bound=SomaxCorpusEvent)
 
 
 class CorpusUnpickler(pickle.Unpickler):
@@ -49,8 +50,8 @@ class CorpusUnpickler(pickle.Unpickler):
         raise pickle.UnpicklingError(f"Module '{module}.{name}' is not supported")
 
 
-class HeldObject(Generic[E]):
-    def __init__(self, note: Note, event: E):
+class HeldObject(Generic[S]):
+    def __init__(self, note: Note, event: S):
         self.note = note
         self.event = event
 
@@ -62,16 +63,15 @@ class HeldObject(Generic[E]):
         raise AttributeError(f"Cannot compare type '{type(other)}' with '{self.__class__}'")
 
 
-class Corpus(Generic[E], Introspective, ABC):
+class SomaxCorpus(Corpus[S], Introspective, ABC):
     INDEX_MAP_SIZE = 1_000_000
 
-    def __init__(self, events: List[E], name: str, scheduling_mode: SchedulingMode,
+    def __init__(self, events: List[S], name: str, scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any], **kwargs):
+        super().__init__(events, feature_types)
         self.logger = logging.getLogger(__name__)
-        self.events: List[E] = events
         self.name: str = name
         self.scheduling_mode: SchedulingMode = scheduling_mode
-        self.feature_types: List[Type[CorpusFeature]] = feature_types
         self._build_parameters: Dict[str, Any] = build_parameters
         self._index_map: np.ndarray
         self._grid_size: int
@@ -84,21 +84,21 @@ class Corpus(Generic[E], Introspective, ABC):
     def duration(self) -> float:
         """ Return the duration of the corpus along its relevant time axis """
 
-    @classmethod
-    @abstractmethod
-    def from_json(cls, filepath: str, volatile: bool = False) -> 'Corpus':
-        """ Load corpus from JSON file
-            Raises: IOError if file could not be found
-                    InvalidCorpus if fails to load corpus
-                    ExternalDataMismatch if additional resources could not successfully be located (audio files, ...)"""
+    # @classmethod
+    # @abstractmethod
+    # def from_json(cls, filepath: str, volatile: bool = False) -> 'SomaxCorpus':
+    #     """ Load corpus from JSON file
+    #         Raises: IOError if file could not be found
+    #                 InvalidCorpus if fails to load corpus
+    #                 ExternalDataMismatch if additional resources could not successfully be located (audio files, ...)"""
 
     @abstractmethod
     def encode(self) -> Dict[str, Any]:
         """ Encode the corpus to a dictionary to allow JSON export """
 
     def _create_index_map(self) -> Tuple[np.ndarray, float]:
-        grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / self.duration()
-        index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
+        grid_size: float = (SomaxCorpus.INDEX_MAP_SIZE - 1) / self.duration()
+        index_map: np.ndarray = np.zeros(SomaxCorpus.INDEX_MAP_SIZE, dtype=int)
         for event in self.events:
             start_index: int = int(np.floor(event.onset * grid_size))
             end_index: int = int(np.floor((event.onset + event.duration) * grid_size))
@@ -120,16 +120,16 @@ class Corpus(Generic[E], Introspective, ABC):
     def has_feature(self, feature_type: Type[CorpusFeature]) -> bool:
         return feature_type in self.feature_types
 
-    def event_at(self, index: int) -> E:
+    def event_at(self, index: int) -> S:
         return self.events[index]
 
-    def event_around(self, time: float) -> E:
+    def event_around(self, time: float) -> S:
         index: int = self._index_map[int(np.floor(time * self._grid_size))]
         return self.event_at(index)
 
-    def events_around(self, times: np.ndarray) -> List[E]:
+    def events_around(self, times: np.ndarray) -> List[S]:
         indices: np.ndarray = self._index_map[(np.floor(times * self._grid_size)).astype(int)]
-        events: List[E] = [self.event_at(index) for index in indices]
+        events: List[S] = [self.event_at(index) for index in indices]
         return events
 
     def length(self) -> int:
@@ -137,7 +137,7 @@ class Corpus(Generic[E], Introspective, ABC):
         return len(self.events)
 
 
-class MidiCorpus(Corpus[MidiCorpusEvent]):
+class MidiSomaxCorpus(SomaxCorpus[MidiCorpusEvent]):
     def __init__(self, events: List[MidiCorpusEvent], name: str, scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any]):
         super().__init__(events=events, name=name, scheduling_mode=scheduling_mode,
@@ -145,17 +145,21 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
         self.logger = logging.getLogger(__name__)
 
     @classmethod
-    def from_json(cls, filepath: str, volatile: bool = False) -> 'MidiCorpus':
-        """ Raises: IOError, InvalidCorpus"""
+    def build(cls, *args, **kwargs) -> 'Corpus':
+        raise NotImplementedError("Not implemented")  # TODO[B6]
+
+    @classmethod
+    def load(cls, filepath: str, volatile: bool = False, **kwargs) -> 'MidiSomaxCorpus':
+        """ Raises: IOError, CorpusError"""
         try:
             with gzip.open(filepath, 'rt', encoding='UTF-8') as f:
                 corpus_data: Dict[str, Any] = json.load(f)
             version: str = corpus_data["version"]
             if version != somax.__version__ and not volatile:
-                raise InvalidCorpus(f"The loaded corpus was built with an old version of Somax. "
-                                    f"While it may work, using it could result in a number of bugs. "
-                                    f"Recommended action: rebuild corpus. "
-                                    f"(To attempt to load the corpus anyway: enable the 'volatile' flag)")
+                raise CorpusError(f"The loaded corpus was built with an old version of Somax. "
+                                  f"While it may work, using it could result in a number of bugs. "
+                                  f"Recommended action: rebuild corpus. "
+                                  f"(To attempt to load the corpus anyway: enable the 'volatile' flag)")
             name: str = corpus_data["name"]
             scheduling_mode: SchedulingMode = SchedulingMode.from_string(corpus_data["content_type"])
 
@@ -169,7 +173,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
 
         # KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)
         except (KeyError, AttributeError) as e:
-            raise InvalidCorpus(f"The Corpus at '{filepath}' has an invalid format and could not be loaded") from e
+            raise CorpusError(f"The Corpus at '{filepath}' has an invalid format and could not be loaded") from e
 
     def encode(self) -> Dict[str, Any]:
         features: Dict[Type['CorpusFeature'], str] = {cls: name for (name, cls) in CorpusFeature.all_corpus_features()}
@@ -267,7 +271,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
         return note
 
 
-class AudioCorpus(Corpus):
+class AudioSomaxCorpus(SomaxCorpus):
     def __init__(self, events: List[AudioCorpusEvent], name: str, scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any],
                  sr: int, filepath: str, file_duration: float, file_num_channels: int):
@@ -278,6 +282,10 @@ class AudioCorpus(Corpus):
         self.file_duration: float = file_duration
         self.num_channels: int = file_num_channels
 
+    @classmethod
+    def build(cls, *args, **kwargs) -> 'Corpus':
+        raise NotImplementedError("Not implemented")  # TODO[B6]
+
     def duration(self) -> float:
         """ Duration of corpus in seconds (may differ from duration of file depending on segmentation """
         if len(self.events) == 0:
@@ -285,30 +293,30 @@ class AudioCorpus(Corpus):
         return self.events[-1].onset + self.events[-1].duration
 
     @classmethod
-    def from_json(cls, filepath: str, volatile: bool = False) -> 'AudioCorpus':
+    def load(cls, filepath: str, volatile: bool = False, **kwargs) -> 'AudioSomaxCorpus':
         # TODO: This should obviously not be named `from_json` as it uses a pickle
         # TODO: This should also have an optional `alternative_filepath` arg so that it's possible to pass
         #       another filepath in case the location of the audio file has been changed
         try:
             with gzip.open(filepath, 'rb') as f:
-                corpus: AudioCorpus = CorpusUnpickler(f).load()
+                corpus: AudioSomaxCorpus = CorpusUnpickler(f).load()
 
                 if not isinstance(corpus, cls):
-                    raise InvalidCorpus("Class of corpus is not valid")
+                    raise CorpusError("Class of corpus is not valid")
 
                 cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.duration(), corpus.num_channels)
 
         # Pickle tried to import module that was not supported
         except pickle.UnpicklingError as e:
-            raise InvalidCorpus(e) from e
+            raise CorpusError(e) from e
 
         # Pickle tried to import class that doesn't exist or missing mandatory classes
         except ValueError as e:
-            raise ExternalDataMismatch(e) from e
+            raise CorpusError(e) from e
 
         # Related audio file is missing
         except OSError as e:
-            raise FileNotFoundError(e) from e
+            raise ResourceError(e) from e
 
         return corpus
 

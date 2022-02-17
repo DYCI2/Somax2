@@ -11,7 +11,7 @@ from somax.features import VerticalDensity, TotalEnergyDb
 from somax.features.spectral_features import OctaveBands
 from somax.features.temporal_features import Tempo
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus, MidiCorpus
+from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.improvisation_memory import FeedbackQueue
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
@@ -28,7 +28,7 @@ class AbstractScaleAction(Parametric, ContentAware, StringParsed, ABC):
 
     @abstractmethod
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: SomaxCorpus = None, **kwargs) -> Peaks:
         """ """
 
     @abstractmethod
@@ -65,7 +65,7 @@ class NoScaleAction(AbstractScaleAction):
         super().__init__()
 
     def scale(self, peaks: Peaks, _time: float, _corresponding_events: List[SomaxCorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], _corpus: SomaxCorpus = None, **_kwargs) -> Peaks:
         return peaks
 
     def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
@@ -78,7 +78,7 @@ class NoScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         pass
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True  # valid for all types of corpora
 
 
@@ -93,7 +93,7 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         self._parse_parameters()
 
     def scale(self, peaks: Peaks, time: float, _corresponding_events: List[SomaxCorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], _corpus: SomaxCorpus = None, **_kwargs) -> Peaks:
         peaks.scores *= np.exp(self.selectivity * (np.cos(2 * np.pi * (time - peaks.times)) - 1))
         return peaks
 
@@ -107,8 +107,8 @@ class PhaseModulationScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         pass
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return isinstance(corpus, MidiCorpus)
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
+        return isinstance(corpus, MidiSomaxCorpus)
 
     @property
     def selectivity(self):
@@ -131,7 +131,7 @@ class NextStateScaleAction(AbstractScaleAction):
         self._previous_output_index: Optional[int] = None
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], corpus: SomaxCorpus = None, **_kwargs) -> Peaks:
         if self._previous_output_index is None:
             return peaks
         else:
@@ -151,7 +151,7 @@ class NextStateScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         self._previous_output_index = None
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
     @property
@@ -171,7 +171,7 @@ class AutoJumpScaleAction(AbstractScaleAction):
         self._history: FeedbackQueue = FeedbackQueue()
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: SomaxCorpus = None, **kwargs) -> Peaks:
         event_indices: List[int] = [e[0].index for e in self._history.get_n_last(self.jump_threshold + 1)]
         if not event_indices:
             return peaks
@@ -199,7 +199,7 @@ class AutoJumpScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         self._history = FeedbackQueue()
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
     @property
@@ -222,7 +222,7 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
         self._sigma: Parameter = Parameter(sigma, None, None, 'float', "Standard deviation of gaussian")
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: SomaxCorpus = None, **kwargs) -> Peaks:
 
         previous_tempi: np.ndarray = np.array(
             [e[0].get_feature(Tempo).value() for e in self._history.get_n_last(self.history_len)])
@@ -244,7 +244,7 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         self._history = FeedbackQueue()
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return corpus.has_feature(Tempo)
 
     @property
@@ -269,7 +269,7 @@ class StaticTabooScaleAction(AbstractScaleAction):
         self._taboo_indices: deque[int] = deque([], self.taboo_length)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: SomaxCorpus = None, **kwargs) -> Peaks:
         event_indices: np.ndarray = np.array([e.index for e in corresponding_events], dtype=int)
         matching_indices: np.ndarray = np.zeros(len(corresponding_events), dtype=bool)
         for taboo_index in self._taboo_indices:
@@ -290,7 +290,7 @@ class StaticTabooScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         self._taboo_indices: deque[int] = deque([], self.taboo_length)
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
     @property
@@ -316,7 +316,7 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
         self._transform_handler: Optional[TransformHandler] = None
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: SomaxCorpus = None, **kwargs) -> Peaks:
         if self._previous_transform is None or self._transform_handler:
             return peaks
         else:
@@ -337,7 +337,7 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         self._previous_transform = None
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
     @property
@@ -389,7 +389,7 @@ class EnergyScaleAction(AbstractScaleAction):
         self.history: deque[float] = deque([], self.moving_average_len.value)
 
     def scale(self, peaks: Peaks, _time: float, corresponding_events: List[SomaxCorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], _corpus: SomaxCorpus = None, **_kwargs) -> Peaks:
         if self.mu is None:
             return peaks
 
@@ -406,7 +406,7 @@ class EnergyScaleAction(AbstractScaleAction):
     def update_transforms(self, transform_handler: TransformHandler):
         pass
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return corpus.has_feature(TotalEnergyDb)
 
     def clear(self) -> None:
@@ -441,7 +441,7 @@ class VerticalDensityScaleAction(AbstractGaussianScale):
         super().__init__(mu=mu)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], _corpus: SomaxCorpus = None, **_kwargs) -> Peaks:
         densities: np.ndarray = np.array([event.get_feature(VerticalDensity).value() for event in corresponding_events])
         return self._scale(peaks, densities)
 
@@ -452,7 +452,7 @@ class VerticalDensityScaleAction(AbstractGaussianScale):
     def update_transforms(self, transform_handler: TransformHandler):
         pass
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return corpus.has_feature(VerticalDensity)
 
     def clear(self) -> None:
@@ -466,7 +466,7 @@ class DurationScaleAction(AbstractGaussianScale):
         super().__init__(mu=mu)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: SomaxCorpus = None, **kwargs) -> Peaks:
         durations: np.ndarray = np.array([event.duration for event in corresponding_events])
         return self._scale(peaks, durations)
 
@@ -477,7 +477,7 @@ class DurationScaleAction(AbstractGaussianScale):
     def update_transforms(self, transform_handler: TransformHandler):
         pass
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
     def clear(self) -> None:
@@ -494,7 +494,7 @@ class OctaveBandsScaleAction(AbstractScaleAction):
                                                              None, "list[11]", "TODO", self._set_band_distribution)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: SomaxCorpus = None, **kwargs) -> Peaks:
         events_band_distribution: np.ndarray = np.array([event.get_feature(OctaveBands).value()
                                                          for event in corresponding_events])
         factor: np.ndarray = 1 / np.sqrt(np.sum(np.power(events_band_distribution - self.band_distribution, 2), axis=1))
@@ -509,7 +509,7 @@ class OctaveBandsScaleAction(AbstractScaleAction):
     def update_transforms(self, transform_handler: TransformHandler):
         pass  # TODO: Handle transforms
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return corpus.has_feature(OctaveBands)
 
     def clear(self) -> None:
@@ -534,7 +534,7 @@ class RegionMaskScaleAction(AbstractScaleAction):
         self._high_thresh: Parameter = Parameter(1.0, 0, 1.0, "float", "Fraction [0,1] marking end of region")
 
     def scale(self, peaks: Peaks, _time: float, corresponding_events: List[SomaxCorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **_kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: SomaxCorpus = None, **_kwargs) -> Peaks:
         # TODO: This could be optimized and stored if ScaleAction had direct access to Corpus
         low_index: int = int(self._low_thresh.value * corpus.length())
         high_index: int = int(self._high_thresh.value * corpus.length())
@@ -550,7 +550,7 @@ class RegionMaskScaleAction(AbstractScaleAction):
     def update_transforms(self, transform_handler: TransformHandler):
         pass
 
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
+    def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True
 
     def clear(self) -> None:
