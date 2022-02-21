@@ -16,7 +16,7 @@ from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
-from somax.runtime.atom import Atom
+from somax.runtime.somaxprospector import SomaxProspector
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
@@ -263,7 +263,7 @@ class OscAgent(Agent, AsyncioOscObject):
     # CREATION/DELETION OF ATOM
     ######################################################
 
-    def create_atom(self, path: str = "", weight: float = Atom.DEFAULT_WEIGHT, classifier: str = "",
+    def create_atom(self, path: str = "", weight: float = SomaxProspector.DEFAULT_WEIGHT, classifier: str = "",
                     activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
                     enabled: bool = True, override: bool = False, **kwargs):
         try:

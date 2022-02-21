@@ -1,4 +1,5 @@
 import logging
+import warnings
 from abc import abstractmethod, ABC
 from typing import Dict, Union, List, Optional
 
@@ -6,12 +7,12 @@ import numpy as np
 
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
+from merge.main.exceptions import CorpusError
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.parameter import Parameter, ParamWithSetter
 from somax.runtime.parameter import Parametric
 from somax.runtime.peaks import ContinuousCandidates
 from somax.runtime.transform_handler import TransformHandler
-from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
 
 
@@ -25,7 +26,6 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
         self.logger = logging.getLogger(__name__)
         self._candidates: Optional[Candidates] = None
         self.corpus: Optional[SomaxCorpus] = corpus
-        self.transform_handler: Optional[TransformHandler] = transform_handler
 
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractActivityPattern':
@@ -47,19 +47,17 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
     def update_peaks_on_new_event(self, new_time: float) -> None:
         """ """
 
-    @abstractmethod
-    def update_transforms(self, transform_handler: TransformHandler, valid_transforms: List[AbstractTransform]):
-        """ Note: Must define `self._transform_handler` as a reference to an object owned by a `Player` instance"""
-
-    @abstractmethod
     def read_corpus(self, corpus: SomaxCorpus) -> None:
-        # TODO[B2]: This is a complete mess and will never work: we need to handle this without a TransformHandler!
+        # TODO[B2]: This is a complete mess and should be removed once we have a common strategy for transforms
         self.corpus = corpus
-        self._candidates = ContinuousCandidates.create_empty(corpus, self.transform_handler)
+        self._candidates = ContinuousCandidates.create_empty(corpus)
 
     @abstractmethod
     def clear(self) -> None:
         """ """
+
+    def peek_candidates(self) -> Candidates:
+        return self._candidates
 
     def pop_peaks(self) -> Candidates:
         """ Returns a shallow copy the activity pattern's peaks (copy of scores but references to times and hashes)
@@ -87,26 +85,25 @@ class ClassicActivityPattern(AbstractActivityPattern):
     def __init__(self, corpus: SomaxCorpus = None, tau_mem_decay: float = DEFAULT_T):
         super().__init__(corpus)
         self.logger.debug("[__init__]: ClassicActivityPattern initialized.")
+
+        if corpus is not None:
+            self._candidates: ContinuousCandidates = ContinuousCandidates.create_empty(corpus)
+            self.corpus = corpus
+
         self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
         # TODO: tau shouldn't be the parameter: t should
         self.tau_mem_decay: Parameter = ParamWithSetter(self._calc_tau(tau_mem_decay), 0, None, "float",
                                                         "Number of updates until peak is decayed below threshold.",
                                                         self._set_tau)
-        self.default_score: Parameter = Parameter(1.0, None, None, 'float', "Value of a new peaks upon creation.")
-        self._peaks: Candidates = Peaks.create_empty()
+
         self.last_update_time: float = 0.0
         self._parse_parameters()
 
-    def insert(self, influences: List[PeakEvent]) -> None:
-        self.logger.debug(f"[insert]: Inserting {len(influences)} influences.")
-        scores: List[float] = []
-        times: List[float] = []
-        transform_hashes: List[int] = []
-        for influence in influences:
-            times.append(influence.event.onset)
-            scores.append(self.default_score.value)
-            transform_hashes.append(influence.transform_hash)
-        self._peaks.append(scores, times, transform_hashes)
+    def insert(self, candidates: List[Candidate]) -> None:
+        if self.corpus is None:
+            raise CorpusError("No corpus has been loaded yet")
+
+        self._candidates.add(candidates)
 
     def update_peaks_on_influence(self, new_time: float) -> None:
         self._update_peaks(new_time)
@@ -115,15 +112,18 @@ class ClassicActivityPattern(AbstractActivityPattern):
         self._update_peaks(new_time)
 
     def _update_peaks(self, new_time: float) -> None:
-        self._peaks.scores *= np.exp(-np.divide(new_time - self.last_update_time, self.tau_mem_decay.value))
-        self._peaks.times += new_time - self.last_update_time
+        self._candidates.scale(np.exp(-np.divide(new_time - self.last_update_time, self.tau_mem_decay.value)))
+        self._candidates.times += new_time - self.last_update_time
         self.last_update_time = new_time
-        indices_to_remove: np.ndarray = np.where((self._peaks.scores <= self.extinction_threshold.value)
-                                                 | (self._peaks.times >= self.corpus.duration()))
-        self._peaks.remove(indices_to_remove)
+        indices_to_remove: np.ndarray = np.where((self._candidates.scores <= self.extinction_threshold.value)
+                                                 | (self._candidates.times >= self.corpus.duration()))
+        self._candidates.remove(indices_to_remove)
 
     def clear(self) -> None:
-        self._peaks = Peaks.create_empty()
+        if self.corpus is not None:
+            self._candidates = ContinuousCandidates.create_empty(self.corpus)
+        else:
+            self._candidates = None
         self.last_update_time = 0.0
 
     def _set_tau(self, t: float):
@@ -142,43 +142,28 @@ class ManualActivityPattern(AbstractActivityPattern):
 
     def __init__(self, corpus: SomaxCorpus = None):
         super().__init__(corpus)
+        warnings.warn("This class does not use discrete peaks at the moment")
         self.logger.debug("[__init__]: ManualActivityPattern initialized.")
+
+        if corpus is not None:
+            self._candidates: ContinuousCandidates = ContinuousCandidates.create_empty(corpus)
+            self.corpus = corpus
+
         self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
         self.tau_mem_decay: Parameter = ParamWithSetter(self._calc_tau(self.DEFAULT_N), 1, None, "int",
                                                         "Number of updates until peak is decayed below threshold.",
                                                         self._set_tau)
-        self.default_score: Parameter = Parameter(1.0, None, None, 'float', "Value of a new peaks upon creation.")
-        self._peaks: Peaks = Peaks.create_empty()
         self.last_update_time: float = 0.0
         self._event_indices: np.ndarray = np.zeros(0, dtype=np.int32)
         self._parse_parameters()
 
-    def insert(self, influences: List[PeakEvent]) -> None:
-        self.logger.debug(f"[insert]: Inserting {len(influences)} influences.")
-        scores: List[float] = []
-        times: List[float] = []
-        transform_hashes: List[int] = []
-        for influence in influences:
-            times.append(influence.event.onset)
-            scores.append(self.default_score.value)
-            transform_hashes.append(influence.transform_hash)
-        new_event_indices: np.ndarray = np.array([i.event.index for i in influences], dtype=np.int32)
-        self._event_indices = np.concatenate((self._event_indices, new_event_indices))
-        self._peaks.append(scores, times, transform_hashes)
+    def insert(self, candidates: List[Candidate]) -> None:
+        if self.corpus is None:
+            raise CorpusError("No corpus has been loaded yet")
 
-    def _update_peaks(self, new_time: float) -> None:
-        if not self._peaks.is_empty() and new_time - self.last_update_time >= self.DEFAULT_THRESHOLD_TICKS:
-            self._peaks.scores *= np.exp(-np.divide(1, self.tau_mem_decay.value))
-            # self._peaks.times += [self.corpus.event_at(i).duration for i in self._event_indices]
-            self._peaks.times = np.array([self.corpus.event_at((i + 1) % self.corpus.length()).onset
-                                          for i in self._event_indices])
-            self._event_indices += 1
-            indices_to_remove: np.ndarray = np.where((self._peaks.scores <= self.extinction_threshold.value)
-                                                     | (self._peaks.times >= self.corpus.duration())
-                                                     | (self._event_indices >= self.corpus.length()))
-            self._peaks.remove(indices_to_remove)
-            self._event_indices = np.delete(self._event_indices, indices_to_remove)
-        self.last_update_time = new_time
+        self._candidates.add(candidates)
+        new_event_indices: np.ndarray = np.array([i.event.index for i in candidates], dtype=np.int32)
+        self._event_indices = np.concatenate((self._event_indices, new_event_indices))
 
     def update_peaks_on_influence(self, new_time: float) -> None:
         self._update_peaks(new_time)
@@ -186,8 +171,25 @@ class ManualActivityPattern(AbstractActivityPattern):
     def update_peaks_on_new_event(self, new_time: float) -> None:
         self._update_peaks(new_time)
 
+    def _update_peaks(self, new_time: float) -> None:
+        if not self._candidates.is_empty() and new_time - self.last_update_time >= self.DEFAULT_THRESHOLD_TICKS:
+            self._candidates.scores *= np.exp(-np.divide(1, self.tau_mem_decay.value))
+            # self._peaks.times += [self.corpus.event_at(i).duration for i in self._event_indices]
+            self._candidates.times = np.array([self.corpus.event_at((i + 1) % self.corpus.length()).onset
+                                               for i in self._event_indices])
+            self._event_indices += 1
+            indices_to_remove: np.ndarray = np.where((self._candidates.scores <= self.extinction_threshold.value)
+                                                     | (self._candidates.times >= self.corpus.duration())
+                                                     | (self._event_indices >= self.corpus.length()))
+            self._candidates.remove(indices_to_remove)
+            self._event_indices = np.delete(self._event_indices, indices_to_remove)
+        self.last_update_time = new_time
+
     def clear(self) -> None:
-        self._peaks = Peaks.create_empty()
+        if self.corpus is not None:
+            self._candidates = ContinuousCandidates.create_empty(self.corpus)
+        else:
+            self._candidates = None
         self._event_indices = np.zeros(0, dtype=np.int32)
         self.last_update_time = 0.0
 
@@ -198,84 +200,87 @@ class ManualActivityPattern(AbstractActivityPattern):
         """ n is the number of updates until peak decays below threshold"""
         return -np.divide(n, np.log(self.extinction_threshold.value - 0.001))
 
-
-class DirectActivityPattern(AbstractActivityPattern):
-    def __init__(self, corpus: Optional[SomaxCorpus] = None):
-        super().__init__(corpus=corpus)
-        self.logger.debug("[__init__]: ManualActivityPattern initialized.")
-        self.default_score: Parameter = Parameter(1.0, None, None, 'float', "Value of a new peaks upon creation.")
-        self._peaks: Peaks = Peaks.create_empty()
-        self._parse_parameters()
-
-    def insert(self, influences: List[PeakEvent]) -> None:
-        self._peaks = Peaks(scores=np.array([self.default_score.value for _ in range(len(influences))], dtype=np.float),
-                            times=np.array([influence.event.onset for influence in influences], dtype=np.float),
-                            transform_hashes=np.array([influence.transform_hash for influence in influences],
-                                                      dtype=np.int32))
-
-    def update_peaks_on_influence(self, new_time: float) -> None:
-        pass
-
-    def update_peaks_on_new_event(self, new_time: float) -> None:
-        pass
-
-    def clear(self) -> None:
-        self._peaks = Peaks.create_empty()
-
-    def pop_peaks(self) -> Peaks:
-        return_peaks: Peaks = self._peaks
-        self._peaks = Peaks.create_empty()
-        return return_peaks
-
-
-# TODO: Rewrite into proper interfaces if this is considered useful after evaluation
-class SustainActivityPattern(DirectActivityPattern):
-    def pop_peaks(self) -> Peaks:
-        """ Returns a shallow copy the activity pattern's peaks (copy of scores but references to times and hashes)"""
-        return Peaks.optimized_copy(self._peaks)
-
-
-# TODO: Rewrite into proper interfaces if this is considered useful after evaluation
-class DecayActivityPattern(AbstractActivityPattern):
-    """Decay: score = exp(-(Δt)/tau), where Δt is the time since creation in beats"""
-
-    DEFAULT_T = 4.6
-
-    def __init__(self, corpus: SomaxCorpus = None, tau_mem_decay: float = DEFAULT_T):
-        super().__init__(corpus)
-        self.logger.debug("[__init__]: ClassicActivityPattern initialized.")
-        self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
-        # TODO: tau shouldn't be the parameter: t should
-        self.tau_mem_decay: Parameter = ParamWithSetter(self._calc_tau(tau_mem_decay), 0, None, "float",
-                                                        "Number of updates until peak is decayed below threshold.",
-                                                        self._set_tau)
-        self.default_score: Parameter = Parameter(1.0, None, None, 'float', "Value of a new peaks upon creation.")
-        self._peaks: Peaks = Peaks.create_empty()
-        self.last_update_time: float = 0.0
-        self._parse_parameters()
-
-    def insert(self, influences: List[PeakEvent]) -> None:
-        self._peaks = Peaks(scores=np.array([self.default_score.value for _ in range(len(influences))], dtype=np.float),
-                            times=np.array([influence.event.onset for influence in influences], dtype=np.float),
-                            transform_hashes=np.array([influence.transform_hash for influence in influences],
-                                                      dtype=np.int32))
-
-    def update_peaks_on_influence(self, new_time: float) -> None:
-        self.last_update_time = new_time
-
-    def update_peaks_on_new_event(self, new_time: float) -> None:
-        self._peaks.scores *= np.exp(-np.divide(new_time - self.last_update_time, self.tau_mem_decay.value))
-        self.last_update_time = new_time
-        indices_to_remove: np.ndarray = np.where(self._peaks.scores <= self.extinction_threshold.value)
-        self._peaks.remove(indices_to_remove)
-
-    def clear(self) -> None:
-        self._peaks = Peaks.create_empty()
-        self.last_update_time = 0.0
-
-    def _set_tau(self, t: float):
-        self.tau_mem_decay.value = self._calc_tau(t)
-
-    def _calc_tau(self, t: float):
-        """ n is the number of updates until peak decays below threshold"""
-        return -np.divide(t, np.log(self.extinction_threshold.value - 0.001))
+# TODO[B3]: Update
+#
+# class DirectActivityPattern(AbstractActivityPattern):
+#     def __init__(self, corpus: Optional[SomaxCorpus] = None):
+#         super().__init__(corpus=corpus)
+#         self.logger.debug("[__init__]: ManualActivityPattern initialized.")
+#         self.default_score: Parameter = Parameter(1.0, None, None, 'float', "Value of a new peaks upon creation.")
+#         self._peaks: Peaks = Peaks.create_empty()
+#         self._parse_parameters()
+#
+#     def insert(self, influences: List[PeakEvent]) -> None:
+#         # TODO: Add check for if `influences` is empty
+#         self._peaks = Peaks(scores=np.array([self.default_score.value for _ in range(len(influences))], dtype=np.float),
+#                             times=np.array([influence.event.onset for influence in influences], dtype=np.float),
+#                             transform_hashes=np.array([influence.transform_hash for influence in influences],
+#                                                       dtype=np.int32))
+#
+#     def update_peaks_on_influence(self, new_time: float) -> None:
+#         pass
+#
+#     def update_peaks_on_new_event(self, new_time: float) -> None:
+#         pass
+#
+#     def clear(self) -> None:
+#         self._peaks = Peaks.create_empty()
+#
+#     def pop_peaks(self) -> Peaks:
+#         return_peaks: Peaks = self._peaks
+#         self._peaks = Peaks.create_empty()
+#         return return_peaks
+#
+#
+# # TODO: Rewrite into proper interfaces if this is considered useful after evaluation
+# class SustainActivityPattern(DirectActivityPattern):
+#     def pop_peaks(self) -> Peaks:
+#         """ Returns a shallow copy the activity pattern's peaks (copy of scores but references to times and hashes)"""
+#         return Peaks.optimized_copy(self._peaks)
+#
+#
+# # TODO: Rewrite into proper interfaces if this is considered useful after evaluation
+# class DecayActivityPattern(AbstractActivityPattern):
+#     """Decay: score = exp(-(Δt)/tau), where Δt is the time since creation in beats"""
+#
+#     DEFAULT_T = 4.6
+#
+#     def __init__(self, corpus: SomaxCorpus = None, tau_mem_decay: float = DEFAULT_T):
+#         super().__init__(corpus)
+#         self.logger.debug("[__init__]: ClassicActivityPattern initialized.")
+#         self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
+#         # TODO: tau shouldn't be the parameter: t should
+#         self.tau_mem_decay: Parameter = ParamWithSetter(self._calc_tau(tau_mem_decay), 0, None, "float",
+#                                                         "Number of updates until peak is decayed below threshold.",
+#                                                         self._set_tau)
+#         self.default_score: Parameter = Parameter(1.0, None, None, 'float', "Value of a new peaks upon creation.")
+#         self._peaks: Peaks = Peaks.create_empty()
+#         self.last_update_time: float = 0.0
+#         self._parse_parameters()
+#
+#     def insert(self, influences: List[PeakEvent]) -> None:
+#         # TODO: Add check for if `influences` is empty
+#         self._peaks = Peaks(scores=np.array([self.default_score.value for _ in range(len(influences))], dtype=np.float),
+#                             times=np.array([influence.event.onset for influence in influences], dtype=np.float),
+#                             transform_hashes=np.array([influence.transform_hash for influence in influences],
+#                                                       dtype=np.int32))
+#
+#     def update_peaks_on_influence(self, new_time: float) -> None:
+#         self.last_update_time = new_time
+#
+#     def update_peaks_on_new_event(self, new_time: float) -> None:
+#         self._peaks.scores *= np.exp(-np.divide(new_time - self.last_update_time, self.tau_mem_decay.value))
+#         self.last_update_time = new_time
+#         indices_to_remove: np.ndarray = np.where(self._peaks.scores <= self.extinction_threshold.value)
+#         self._peaks.remove(indices_to_remove)
+#
+#     def clear(self) -> None:
+#         self._peaks = Peaks.create_empty()
+#         self.last_update_time = 0.0
+#
+#     def _set_tau(self, t: float):
+#         self.tau_mem_decay.value = self._calc_tau(t)
+#
+#     def _calc_tau(self, t: float):
+#         """ n is the number of updates until peak decays below threshold"""
+#         return -np.divide(t, np.log(self.extinction_threshold.value - 0.001))

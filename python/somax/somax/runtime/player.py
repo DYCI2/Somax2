@@ -7,7 +7,7 @@ from merge.main.exceptions import CorpusError
 from merge.main.influence import Influence
 from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
-from somax.runtime.atom import Atom
+from somax.runtime.somaxprospector import SomaxProspector
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
@@ -38,7 +38,7 @@ class Player(Parametric, ContentAware):
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
         self.merge_action: AbstractMergeAction = merge_action
 
-        self.atoms: Dict[str, Atom] = {}
+        self.atoms: Dict[str, SomaxProspector] = {}
 
         for scale_action in scale_actions:
             self.add_scale_action(scale_action)
@@ -96,7 +96,7 @@ class Player(Parametric, ContentAware):
         self._feedback(event, scheduler_time, transform)
         return event, transform
 
-    def influence(self, path: List[str], influence: Influence, time: float, **kwargs) -> Dict[Atom, int]:
+    def influence(self, path: List[str], influence: Influence, time: float, **kwargs) -> Dict[SomaxProspector, int]:
         """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError
             Return values are only for gathering statistics (Evaluator, etc.) and not used in runtime."""
         if not self.is_enabled():
@@ -110,7 +110,7 @@ class Player(Parametric, ContentAware):
         if self.corpus is None:
             raise CorpusError(f"No Corpus has been loaded in player '{self.name}'.")
 
-        num_generated_peaks: Dict[Atom, int] = {}
+        num_generated_peaks: Dict[SomaxProspector, int] = {}
         if not path:
             for atom in self._direct_influenced_atoms():
                 try:
@@ -120,14 +120,14 @@ class Player(Parametric, ContentAware):
                     # Ignore atom if label doesn't match
                     continue
         else:
-            atom: Atom = self._get_atom(path)
+            atom: SomaxProspector = self._get_atom(path)
             num_peaks: int = atom.influence(influence, time, **kwargs)
             num_generated_peaks[atom] = num_peaks
         return num_generated_peaks
 
     def _update_peaks_on_new_event(self, time: float) -> None:
         for atom in self.atoms.values():
-            atom.update_peaks_on_new_event(time)
+            atom.update_time_on_new_event(time)
 
     def _merged_peaks(self, time: float, corpus: SomaxCorpus, **kwargs) -> Peaks:
         weight_sum: float = 0.0
@@ -195,9 +195,9 @@ class Player(Parametric, ContentAware):
             raise DuplicateKeyError(f"An Atom with name '{new_atom_name}' already exists."
                                     f"To override: use 'override=True'.")
 
-        self.atoms[new_atom_name] = Atom(name=new_atom_name, weight=weight, classifier=classifier,
-                                         activity_pattern=activity_pattern, memory_space=memory_space,
-                                         corpus=self.corpus, self_influenced=self_influenced, enabled=enabled)
+        self.atoms[new_atom_name] = SomaxProspector(name=new_atom_name, weight=weight, classifier=classifier,
+                                                    activity_pattern=activity_pattern, memory_space=memory_space,
+                                                    corpus=self.corpus, self_influenced=self_influenced, enabled=enabled)
         self._parse_parameters()
 
     def delete_atom(self, path: List[str]) -> None:
@@ -236,21 +236,21 @@ class Player(Parametric, ContentAware):
 
     def set_classifier(self, path: List[str], classifier: AbstractClassifier) -> None:
         """ Raises: KeyError, IndexError """
-        atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
+        atom: SomaxProspector = self._get_atom(path)  # raises: KeyError, IndexError
         atom.set_classifier(classifier)
         atom.update_transforms(self._transform_handler)
         self._parse_parameters()
 
     def set_memory_space(self, path: List[str], memory_space: AbstractMemorySpace) -> None:
         """ Raises: KeyError, IndexError """
-        atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
+        atom: SomaxProspector = self._get_atom(path)  # raises: KeyError, IndexError
         atom.set_memory_space(memory_space)
         atom.update_transforms(self._transform_handler)
         self._parse_parameters()
 
     def set_activity_pattern(self, path: List[str], activity_pattern: AbstractActivityPattern) -> None:
         """ Raises: KeyError, IndexError """
-        atom: Atom = self._get_atom(path)  # raises: KeyError, IndexError
+        atom: SomaxProspector = self._get_atom(path)  # raises: KeyError, IndexError
         atom.set_activity_pattern(activity_pattern)
         atom.update_transforms(self._transform_handler)
         self._parse_parameters()
@@ -287,7 +287,7 @@ class Player(Parametric, ContentAware):
         return True  # valid for all types of corpora
 
     # TODO: Legacy function from recursive Streamview structure: remove at some point
-    def _get_atom(self, path: List[str]) -> Atom:
+    def _get_atom(self, path: List[str]) -> SomaxProspector:
         """ Raises: KeyError, IndexError"""
         target_name: str = path.pop(0)
         if path:  # Path is not empty: descend recursively
@@ -295,13 +295,13 @@ class Player(Parametric, ContentAware):
         else:
             return self.atoms[target_name]
 
-    def _direct_influenced_atoms(self) -> List[Atom]:
+    def _direct_influenced_atoms(self) -> List[SomaxProspector]:
         return [atom for atom in self.all_atoms() if not atom.self_influenced]
 
-    def _self_influenced_atoms(self) -> List[Atom]:
+    def _self_influenced_atoms(self) -> List[SomaxProspector]:
         return [atom for atom in self.all_atoms() if atom.self_influenced]
 
-    def all_atoms(self) -> List[Atom]:
+    def all_atoms(self) -> List[SomaxProspector]:
         return list(self.atoms.values())
 
     def _force_jump(self) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:

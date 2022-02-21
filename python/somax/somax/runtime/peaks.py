@@ -11,17 +11,15 @@ from merge.main.feature import Feature
 from merge.stubs.transform import Transform
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
-from somax.runtime.transform_handler import TransformHandler
 
 
 class ContinuousCandidates(Candidates):
     def __init__(self, scores: np.ndarray, times: np.ndarray, transform_hashes: np.ndarray,
                  associated_corpus: SomaxCorpus):
         """ scores, times and transform_hashes should have the same sizes. """
-        super().__init__(associated_corpus)
-        self.scores: np.ndarray = scores  # shape: 1d, dtype: float
-        self.times: np.ndarray = times  # shape: 1d, dtype: float
-        self.transform_ids: np.ndarray = transform_hashes  # shape: 1d, dtype: int
+        self.scores: np.ndarray = scores  # shape=(N,), dtype=float
+        self.times: np.ndarray = times  # shape=(N,), dtype=float
+        self.transform_ids: np.ndarray = transform_hashes  # shape=(N,), dtype=int32
 
         self.associated_corpus: SomaxCorpus = associated_corpus
 
@@ -51,7 +49,7 @@ class ContinuousCandidates(Candidates):
     def add(self, candidates: List[Candidate], associated_corpus: Optional[SomaxCorpus] = None) -> None:
         """ # TODO: Proper docstring
             if `associated_corpus` is provided, it is assumed for all candidates and will bypass type checking """
-        if not candidates:
+        if len(candidates) == 0:
             return  # `candidates` is empty: nothing to add
 
         # Optimization: Bypass checking type of all `candidates`
@@ -133,6 +131,28 @@ class ContinuousCandidates(Candidates):
         return float(np.max(self.scores))
 
 
+# class DiscreteCandidates(Candidates):
+#     def __init__(self, scores: np.ndarray, indices: np.ndarray, transform_hashes: np.ndarray,
+#                  associated_corpus: SomaxCorpus):
+#         self.scores: np.ndarray = scores  # shape=(N,), dtype=float
+#         self.indices: np.ndarray = indices  # shape=(N,), dtype=int32
+#         self.transform_ids: np.ndarray = transform_hashes  # shape=(N,), dtype=int32
+#
+#         self.associated_corpus: SomaxCorpus = associated_corpus
+#
+#     @classmethod
+#     def create_empty(cls, associated_corpus: SomaxCorpus) -> 'DiscreteCandidates':
+#         return cls(np.empty(0, dtype=np.float),
+#                    np.empty(0, dtype=np.int32),
+#                    np.empty(0, dtype=np.int32),
+#                    associated_corpus)
+#
+#     @classmethod
+#     def copy(cls, other) -> 'Candidates':
+#         if not isinstance(other, DiscreteCandidates):
+#             raise TypeError(f"class '{other.__class__.__name__}' cannot be copied as '{cls.__name__}'.")
+#         return DiscreteCandidates(np.copy(other.scores), other.indices, other.transform_ids, other.associated_corpus)
+
 # class Peaks:
 #
 #     def __init__(self, scores: np.ndarray, times: np.ndarray, transform_hashes: np.ndarray):
@@ -146,61 +166,61 @@ class ContinuousCandidates(Candidates):
 #                f"times=<{type(self.times).__name__},shape={self.times.shape}>," \
 #                f"transform_hashes=<{type(self.transform_ids).__name__},shape={self.transform_ids.shape}>)"
 
-    # @classmethod
-    # def create_empty(cls):
-    #     return cls(np.empty(0, dtype=np.float), np.empty(0, dtype=np.float), np.empty(0, dtype=np.int32))
+# @classmethod
+# def create_empty(cls):
+#     return cls(np.empty(0, dtype=np.float), np.empty(0, dtype=np.float), np.empty(0, dtype=np.int32))
 
-    # TODO: Replaced with `copy`
-    # @classmethod
-    # def optimized_copy(cls, other: 'Peaks') -> 'Peaks':
-    #     return cls(np.copy(other.scores), other.times, other.transform_ids)
+# TODO: Replaced with `copy`
+# @classmethod
+# def optimized_copy(cls, other: 'Peaks') -> 'Peaks':
+#     return cls(np.copy(other.scores), other.times, other.transform_ids)
 
-    # @classmethod
-    # def concatenate(cls, peaks: List['Peaks'], associated_corpus: Corpus, transform_handler: TransformHandler):
-    #     if not peaks:
-    #         return Peaks.create_empty(associated_corpus, transform_handler)
-    #     scores: np.ndarray = np.concatenate([peak.scores for peak in peaks])
-    #     times: np.ndarray = np.concatenate([peak.times for peak in peaks])
-    #     transform_hashes: np.ndarray = np.concatenate([peak.transform_ids for peak in peaks])
-    #     return cls(scores, times, transform_hashes)
+# @classmethod
+# def concatenate(cls, peaks: List['Peaks'], associated_corpus: Corpus, transform_handler: TransformHandler):
+#     if not peaks:
+#         return Peaks.create_empty(associated_corpus, transform_handler)
+#     scores: np.ndarray = np.concatenate([peak.scores for peak in peaks])
+#     times: np.ndarray = np.concatenate([peak.times for peak in peaks])
+#     transform_hashes: np.ndarray = np.concatenate([peak.transform_ids for peak in peaks])
+#     return cls(scores, times, transform_hashes)
 
-    # TODO: Replaced with `add`
-    # def append(self, scores: List[float], times: List[float], transform_hashes: List[int]):
-    #     self.scores = np.concatenate((self.scores, scores))
-    #     self.times = np.concatenate((self.times, times))
-    #     self.transform_ids = np.concatenate((self.transform_ids, transform_hashes))
+# TODO: Replaced with `add`
+# def append(self, scores: List[float], times: List[float], transform_hashes: List[int]):
+#     self.scores = np.concatenate((self.scores, scores))
+#     self.times = np.concatenate((self.times, times))
+#     self.transform_ids = np.concatenate((self.transform_ids, transform_hashes))
 
-    # def remove(self, indices: np.ndarray):
-    #     """ mask: 1d boolean array with same size as scores/times/transforms """
-    #     self.scores = np.delete(self.scores, indices)
-    #     self.times = np.delete(self.times, indices)
-    #     self.transform_ids = np.delete(self.transform_ids, indices)
-    #
-    # def scale(self, factor: Union[float, np.ndarray], index_map: Optional[np.ndarray] = None) -> None:
-    #     """ factor:    single value or np.ndarray of same shape as self.scores
-    #
-    #         index_map: boolean array corresponding to the size of self.scores.
-    #                    Uniform scaling if no index map is provided"""
-    #     if index_map is None:
-    #         self.scores *= factor
-    #     else:
-    #         self.scores[index_map] *= factor
-    #
-    # def size(self) -> int:
-    #     return self.scores.size
-    #
-    # def max(self) -> float:
-    #     if self.is_empty():
-    #         return 0.0
-    #     return float(np.max(self.scores))
-    #
-    # def reorder(self, indices: np.ndarray):
-    #     self.scores = self.scores[indices]
-    #     self.times = self.times[indices]
-    #     self.transform_ids = self.transform_ids[indices]
-    #
-    # def is_empty(self) -> bool:
-    #     return self.scores.size == 0
-    #
-    # def dump(self) -> (np.ndarray, np.ndarray, np.ndarray):
-    #     return self.scores, self.times, self.transform_ids
+# def remove(self, indices: np.ndarray):
+#     """ mask: 1d boolean array with same size as scores/times/transforms """
+#     self.scores = np.delete(self.scores, indices)
+#     self.times = np.delete(self.times, indices)
+#     self.transform_ids = np.delete(self.transform_ids, indices)
+#
+# def scale(self, factor: Union[float, np.ndarray], index_map: Optional[np.ndarray] = None) -> None:
+#     """ factor:    single value or np.ndarray of same shape as self.scores
+#
+#         index_map: boolean array corresponding to the size of self.scores.
+#                    Uniform scaling if no index map is provided"""
+#     if index_map is None:
+#         self.scores *= factor
+#     else:
+#         self.scores[index_map] *= factor
+#
+# def size(self) -> int:
+#     return self.scores.size
+#
+# def max(self) -> float:
+#     if self.is_empty():
+#         return 0.0
+#     return float(np.max(self.scores))
+#
+# def reorder(self, indices: np.ndarray):
+#     self.scores = self.scores[indices]
+#     self.times = self.times[indices]
+#     self.transform_ids = self.transform_ids[indices]
+#
+# def is_empty(self) -> bool:
+#     return self.scores.size == 0
+#
+# def dump(self) -> (np.ndarray, np.ndarray, np.ndarray):
+#     return self.scores, self.times, self.transform_ids
