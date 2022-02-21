@@ -9,7 +9,6 @@ from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.parameter import Parametric, Parameter
-from somax.runtime.peaks import Peaks
 from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
 

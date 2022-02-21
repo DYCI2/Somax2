@@ -1,6 +1,8 @@
 import logging
 from typing import Dict, Union, List, Optional, Tuple
 
+from merge.main.candidate import Candidate
+from merge.main.candidates import Candidates
 from merge.main.influence import Influence, CorpusInfluence
 from merge.main.label import Label
 from somax.classification.classifier import AbstractClassifier
@@ -10,8 +12,6 @@ from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
-from somax.runtime.peak_event import PeakEvent
-from somax.runtime.peaks import Peaks
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 
@@ -61,7 +61,7 @@ class Atom(Parametric, ContentAware):
         self._classifier.cluster(self._corpus)
         labels: List[Label] = self._classifier.classify_corpus(self._corpus)
         self._memory_space.model(self._corpus, labels)
-        self._activity_pattern.corpus = self._corpus
+        self._activity_pattern.read_corpus(self._corpus)
 
     # influences the memory with incoming data
     def influence(self, influence: Influence, time: float, **kwargs) -> int:
@@ -72,7 +72,7 @@ class Atom(Parametric, ContentAware):
 
         self._update_peaks_on_influence(time)
         label: List[Tuple[Label, AbstractTransform]] = self._classifier.classify_influence(influence)
-        matched_events: List[PeakEvent] = self._memory_space.influence(label, time, **kwargs)
+        matched_events: List[Candidate] = self._memory_space.influence(label, time, **kwargs)
         if matched_events:
             self._activity_pattern.insert(matched_events)  # we insert the events into the activity profile
             return len(matched_events)
@@ -105,6 +105,7 @@ class Atom(Parametric, ContentAware):
     def update_transforms(self, transform_handler: TransformHandler):
         valid_transforms: List[AbstractTransform] = self._classifier.update_transforms(transform_handler)
         self._memory_space.update_transforms(transform_handler, valid_transforms)
+        self._activity_pattern.update_transforms(transform_handler, valid_transforms)
 
     def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
         parameters = {}
@@ -154,7 +155,7 @@ class Atom(Parametric, ContentAware):
     def is_enabled_and_eligible(self):
         return self._enabled.value and self.eligible
 
-    def pop_peaks(self) -> Peaks:
+    def pop_peaks(self) -> Candidates:
         """ get peaks: May have side effects inside activity_pattern. """
         return self._activity_pattern.pop_peaks()
 

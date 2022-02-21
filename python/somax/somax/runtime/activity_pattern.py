@@ -4,11 +4,14 @@ from typing import Dict, Union, List, Optional
 
 import numpy as np
 
+from merge.main.candidate import Candidate
+from merge.main.candidates import Candidates
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.parameter import Parameter, ParamWithSetter
 from somax.runtime.parameter import Parametric
-from somax.runtime.peak_event import PeakEvent
-from somax.runtime.peaks import Peaks
+from somax.runtime.peaks import ContinuousCandidates
+from somax.runtime.transform_handler import TransformHandler
+from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
 
 
@@ -17,11 +20,12 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
     TIME_IDX = 1
     TRANSFORM_IDX = 2
 
-    def __init__(self, corpus: Optional[SomaxCorpus] = None):
+    def __init__(self, corpus: Optional[SomaxCorpus] = None, transform_handler: Optional[TransformHandler] = None):
         super(AbstractActivityPattern, self).__init__()
         self.logger = logging.getLogger(__name__)
-        self._peaks: Peaks = Peaks.create_empty()
-        self.corpus: SomaxCorpus = corpus
+        self._candidates: Optional[Candidates] = None
+        self.corpus: Optional[SomaxCorpus] = corpus
+        self.transform_handler: Optional[TransformHandler] = transform_handler
 
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractActivityPattern':
@@ -32,7 +36,7 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
         return cls._from_string(activity_pattern, **kwargs)
 
     @abstractmethod
-    def insert(self, influences: List[PeakEvent]) -> None:
+    def insert(self, influences: List[Candidate]) -> None:
         """ """
 
     @abstractmethod
@@ -44,18 +48,28 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
         """ """
 
     @abstractmethod
+    def update_transforms(self, transform_handler: TransformHandler, valid_transforms: List[AbstractTransform]):
+        """ Note: Must define `self._transform_handler` as a reference to an object owned by a `Player` instance"""
+
+    @abstractmethod
+    def read_corpus(self, corpus: SomaxCorpus) -> None:
+        # TODO[B2]: This is a complete mess and will never work: we need to handle this without a TransformHandler!
+        self.corpus = corpus
+        self._candidates = ContinuousCandidates.create_empty(corpus, self.transform_handler)
+
+    @abstractmethod
     def clear(self) -> None:
         """ """
 
-    def pop_peaks(self) -> Peaks:
+    def pop_peaks(self) -> Candidates:
         """ Returns a shallow copy the activity pattern's peaks (copy of scores but references to times and hashes)
             Note: For certain activity patterns, may have side effects such as removing the peaks from the memory,
                   do not use outside main runtime architecture. """
 
-        return Peaks.optimized_copy(self._peaks)
+        return Candidates.copy(self._candidates)
 
     def num_peaks(self) -> int:
-        return self._peaks.size()
+        return self._candidates.size()
 
     def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
         parameters: Dict = {}
@@ -79,7 +93,7 @@ class ClassicActivityPattern(AbstractActivityPattern):
                                                         "Number of updates until peak is decayed below threshold.",
                                                         self._set_tau)
         self.default_score: Parameter = Parameter(1.0, None, None, 'float', "Value of a new peaks upon creation.")
-        self._peaks: Peaks = Peaks.create_empty()
+        self._peaks: Candidates = Peaks.create_empty()
         self.last_update_time: float = 0.0
         self._parse_parameters()
 

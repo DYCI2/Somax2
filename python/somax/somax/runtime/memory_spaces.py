@@ -5,13 +5,13 @@ from abc import abstractmethod, ABC
 from collections import deque
 from typing import Tuple, Dict, Union, Optional, List, Type
 
+from merge.main.candidate import Candidate
 from merge.main.label import Label
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.exceptions import TransformError
 from somax.runtime.parameter import Parameter, ParamWithSetter
 from somax.runtime.parameter import Parametric
-from somax.runtime.peak_event import PeakEvent, ClassicPeakEvent
 from somax.runtime.transforms import AbstractTransform
 from somax.runtime.transform_handler import TransformHandler
 from somax.utils.introspective import StringParsed
@@ -43,8 +43,7 @@ class AbstractMemorySpace(Parametric, StringParsed, ABC):
         pass
 
     @abstractmethod
-    def influence(self, labels: List[Tuple[Label, AbstractTransform]], time: float,
-                  **kwargs) -> List[PeakEvent]:
+    def influence(self, labels: List[Tuple[Label, AbstractTransform]], time: float, **kwargs) -> List[Candidate]:
         pass
 
     @staticmethod
@@ -109,9 +108,8 @@ class NGramMemorySpace(AbstractMemorySpace):
                 else:
                     self._structured_data[key] = [value]
 
-    def influence(self, labels: List[Tuple[Label, AbstractTransform]], time: float,
-                  **_kwargs) -> List[PeakEvent]:
-        matches: List[PeakEvent] = []
+    def influence(self, labels: List[Tuple[Label, AbstractTransform]], time: float, **_kwargs) -> List[Candidate]:
+        matches: List[Candidate] = []
         for (label, transform) in labels:
             label_value: int = hash(label)
             transform_id: int = self._transform_handler.get_id(transform)
@@ -125,7 +123,7 @@ class NGramMemorySpace(AbstractMemorySpace):
                 try:
                     matching_events: List[SomaxCorpusEvent] = self._structured_data[key]
                     for event in matching_events:
-                        matches.append(ClassicPeakEvent(event, transform_id))
+                        matches.append(Candidate(event, 1.0, transform_id, associated_corpus=self._corpus))
                 except KeyError:  # no matches found
                     continue
         return matches
