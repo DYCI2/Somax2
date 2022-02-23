@@ -23,6 +23,9 @@ class ContinuousCandidates(Candidates):
 
         self.associated_corpus: SomaxCorpus = associated_corpus
 
+        # pre-computed value for events associated with each candidate
+        self._events_around: Optional[List[SomaxCorpusEvent]] = None
+
     @classmethod
     def create_empty(cls, associated_corpus: SomaxCorpus) -> 'ContinuousCandidates':
         return cls(np.empty(0, dtype=np.float),
@@ -64,6 +67,7 @@ class ContinuousCandidates(Candidates):
                     raise CorpusError(f"Cannot add events from a different corpus to class "
                                       f"{self.__class__.__name__}")
 
+        self._reset_state()
         scores: np.ndarray = np.array([cand.score for cand in candidates])
         times: np.ndarray = np.array([typing.cast(SomaxCorpusEvent, cand.event).onset for cand in candidates])
 
@@ -129,6 +133,10 @@ class ContinuousCandidates(Candidates):
         if self.is_empty():
             return 0.0
         return float(np.max(self.scores))
+
+
+    def _reset_state(self) -> None:
+        self._events_around = None
 
 
 # class DiscreteCandidates(Candidates):

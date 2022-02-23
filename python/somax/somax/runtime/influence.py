@@ -28,7 +28,7 @@ class InfluenceType(Enum):
 
 class SomaxFeatureInfluence(FeatureInfluence):
     def __init__(self, feature: RuntimeFeature):
-        super().__init__(feature)
+        super().__init__(data=feature)
 
     @classmethod
     def from_keyword(cls, keyword: str, value: Any):

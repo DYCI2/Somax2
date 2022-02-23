@@ -4,8 +4,8 @@ from typing import Dict, Optional, Tuple, Type, List
 import numpy as np
 
 from merge.main.exceptions import CorpusError
+from merge.main.generator import Generator
 from merge.main.influence import Influence
-from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.somaxprospector import SomaxProspector
 from somax.runtime.content_aware import ContentAware
@@ -17,13 +17,12 @@ from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.parameter import Parameter, Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
-from somax.runtime.peaks import Peaks
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
 
 
-class Player(Parametric, ContentAware):
+class SomaxGenerator(Generator, Parametric, ContentAware):
     def __init__(self, name: str,
                  peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
                  merge_action: AbstractMergeAction = AbstractMergeAction.default(),

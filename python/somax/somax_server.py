@@ -24,7 +24,7 @@ from somax.runtime.exceptions import ParameterError
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
-from somax.runtime.player import Player
+from somax.runtime.player import SomaxGenerator
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.target import Target
@@ -189,8 +189,8 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.error(f"{str(e)}. No agent was created.")
             return
 
-        player: Player = Player(name=name, peak_selector=peak_selector,
-                                merge_action=merge_action, scale_actions=scale_actions)
+        player: SomaxGenerator = SomaxGenerator(name=name, peak_selector=peak_selector,
+                                                merge_action=merge_action, scale_actions=scale_actions)
 
         if name in self._agents:
             if override:

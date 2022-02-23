@@ -27,7 +27,7 @@ from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
-from somax.runtime.player import Player
+from somax.runtime.player import SomaxGenerator
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.target import Target
@@ -42,13 +42,13 @@ from somax.scheduler.time_object import Time
 # TODO: Complete separation Agent/OscAgent where Agent can be initialized and used from the command line
 
 class Agent(multiprocessing.Process):
-    def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
+    def __init__(self, player: SomaxGenerator, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
                  transport_time: Time, scheduler_running: bool,
                  corpus: Optional[SomaxCorpus] = None, is_tempo_master: bool = False,
                  scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler, **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
-        self.player: Player = player
+        self.player: SomaxGenerator = player
         self.is_tempo_master: bool = is_tempo_master
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
@@ -72,7 +72,7 @@ class Agent(multiprocessing.Process):
 
 
 class OscAgent(Agent, AsyncioOscObject):
-    def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
+    def __init__(self, player: SomaxGenerator, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
                  transport_time: Time, scheduler_running: bool, scheduling_type: Type[SchedulingHandler],
                  ip: str, recv_port: int, send_port: int, address: str,
                  corpus_filepath: Optional[str] = None, **kwargs):

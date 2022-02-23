@@ -1,30 +1,25 @@
 import logging
+import typing
 from abc import abstractmethod, ABC
 from typing import List, Optional
 
 import numpy as np
 from scipy import sparse
 
+from merge.main.candidates import Candidates
+from merge.main.exceptions import CandidatesError
+from merge.main.merge_handler import MergeHandler
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
-from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.parameter import Parametric, Parameter
-from somax.runtime.transforms import AbstractTransform
+from somax.runtime.peaks import ContinuousCandidates
 from somax.utils.introspective import StringParsed
 
 
-class AbstractMergeAction(Parametric, ContentAware, StringParsed, ABC):
+class AbstractMergeAction(MergeHandler, Parametric, ContentAware, StringParsed, ABC):
 
     def __init__(self):
         super().__init__(invalidate_parent=True)
-
-    @abstractmethod
-    def merge(self, peaks: Peaks, time: float, corpus: SomaxCorpus = None, **kwargs) -> Peaks:
-        """ """
-
-    @abstractmethod
-    def feedback(self, feedback_event: SomaxCorpusEvent, time: float, applied_transform: AbstractTransform) -> None:
-        """ """
 
     @abstractmethod
     def clear(self) -> None:
@@ -51,21 +46,36 @@ class DistanceMergeAction(AbstractMergeAction):
     def __repr__(self):
         return f"{type(self).__name__}(_t_width={self.t_width})"
 
-    def merge(self, peaks: Peaks, _time: float, corpus: SomaxCorpus = None, **_kwargs) -> Peaks:
-        if peaks.size() <= 1:
-            return peaks
-        self.logger.debug(f"[merge] Merging activity with {peaks.size()} peaks.")
+    def merge(self, candidates: List[Candidates]) -> Candidates:
+        corpus: Optional[SomaxCorpus] = None
+        for c in candidates:
+            if not isinstance(c, ContinuousCandidates):
+                raise CandidatesError(f"Class {self.__class__.__name__} only works with candidates of type "
+                                      f"{ContinuousCandidates.__name__}. Actual class was"
+                                      f"{c.__class__.__name__}.")
+
+            if corpus is not None and c.associated_corpus != corpus:
+                raise CandidatesError(f"Class {self.__class__.__name__} can only merge peaks when all candidates"
+                                      f"relate to the same corpus.")
+
+            corpus = c.associated_corpus
+
+        candidates: List[ContinuousCandidates] = typing.cast(List[ContinuousCandidates], candidates)
+        all_candidates: ContinuousCandidates = ContinuousCandidates.concatenate(candidates, corpus)
+
+        if all_candidates.size() <= 1:
+            return all_candidates
 
         duration: float = corpus.duration()
         inv_duration: float = 1 / duration
         num_rows: int = int(duration / self._t_width.value)
 
-        peaks_list: List[Peaks] = []
-        for transform_hash in np.unique(peaks.transform_ids):
-            indices: np.ndarray = np.argwhere(peaks.transform_ids == transform_hash)
+        candidates_list: List[ContinuousCandidates] = []
+        for transform_hash in np.unique(all_candidates.transform_ids):
+            indices: np.ndarray = np.argwhere(all_candidates.transform_ids == transform_hash)
             indices = indices.reshape((indices.size,))
-            scores: np.ndarray = peaks.scores[indices]
-            times: np.ndarray = peaks.times[indices]
+            scores: np.ndarray = all_candidates.scores[indices]
+            times: np.ndarray = all_candidates.times[indices]
             num_cols: int = scores.size
 
             row_indices: np.ndarray = np.floor(times * inv_duration * num_rows).astype(np.int32)
@@ -82,17 +92,15 @@ class DistanceMergeAction(AbstractMergeAction):
             scores: np.ndarray = interpolated_scores[peak_indices]
             times: np.ndarray = np.divide(interpolated_times[peak_indices], num_peaks_per_index[peak_indices])
             transforms: np.ndarray = np.ones(peak_indices.size, dtype=np.int32) * transform_hash
-            # print("After merge:", scores.shape, times.shape, transforms.shape)
 
-            peaks_list.append(Peaks(scores, times, transforms))
+            candidates_list.append(ContinuousCandidates(scores, times, transforms, corpus))
 
-        merged_peaks: Peaks = Peaks.concatenate(peaks_list)
+        merged_peaks: ContinuousCandidates = ContinuousCandidates.concatenate(candidates_list, corpus)
         self.logger.debug(f"[merge] Merge successful. Number of peaks after merge: {merged_peaks.size()}.")
         return merged_peaks
 
-    def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
-                 applied_transform: AbstractTransform) -> None:
-        pass
+    def feedback(self, event: Optional[Candidates], **kwargs) -> None:
+        """ """
 
     def clear(self) -> None:
         pass

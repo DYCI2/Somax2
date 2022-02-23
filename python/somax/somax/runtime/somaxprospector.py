@@ -6,6 +6,7 @@ from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.classifier import Classifier, Trainable
 from merge.main.corpus_event import CorpusEvent
+from merge.main.exceptions import QueryError
 from merge.main.feature import Feature
 from merge.main.influence import Influence, CorpusInfluence, FeatureInfluence, LabelInfluence
 from merge.main.label import Label
@@ -46,6 +47,7 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
             self.read_memory(corpus)
 
         self._parse_parameters()
+        raise NotImplementedError("Note: SomaxProspector.set_time_axis is not implemented, don't forget to handle this")
 
     def learn_event(self, event: CorpusEvent, **kwargs) -> None:
         raise NotImplementedError("This is not supported yet")
@@ -76,15 +78,22 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
         if not self.is_enabled_and_eligible():
             return
 
+        if len(influence) != 1: # Note: no need to handle case len == 0: pre-defined invariant for `Influence`
+            warnings.warn(f"{self.__class__.__name__} only handles the first element in "
+                          f"an {influence.__class__.__name__}, the rest will be ignored.")
+
         warnings.warn("Transforms is not supported yet")
         warnings.warn("Make sure that time really is updated before calling this!! - see")
 
         if isinstance(influence, CorpusInfluence):
-            label: Label = self._classifier.classify(influence.value.get_feature(self._feature_type))
+            label: Label = self._classifier.classify(influence.data[0].get_feature(self._feature_type))
         elif isinstance(influence, FeatureInfluence):
-            label: Label = self._classifier.classify(influence.value)
+            label: Label = self._classifier.classify(influence.data[0])
         elif isinstance(influence, LabelInfluence):
-            label: Label = influence.value
+            label: Label = influence.data[0]
+        else:
+            raise QueryError(f"{self.__class__.__name__} does not support influence of type "
+                             f"{influence.__class__.__name__}")
 
         matched_events: List[Candidate] = self._memory_space.influence([(label, NoTransform())], **kwargs)
         self._activity_pattern.insert(matched_events)
@@ -132,6 +141,11 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
 
     def update_time_on_influence(self, time: float) -> None:
         self._activity_pattern.update_peaks_on_influence(time)
+
+    def set_time_axis(self):
+        pass
+        # TODO[B3]: THis function will be needed to pass which dimension (relative/absolute)
+        #           should be used for candidate handling in the continuous case
 
     def update_time_on_new_event(self, time: float) -> None:
         if self.is_enabled_and_eligible():
