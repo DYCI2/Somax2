@@ -3,20 +3,25 @@ import logging
 import logging.config
 import multiprocessing
 import os
+import typing
+import warnings
+from abc import ABC
 from importlib import resources
 from typing import Any, Optional, List, Tuple, Type
 
 import mido
 
-from merge.main.exceptions import CorpusError, ResourceError
+from merge.main.candidate import Candidate
+from merge.main.classifier import Classifier
+from merge.main.exceptions import CorpusError, ResourceError, ConfigurationError
+from merge.main.generation_scheduler import GenerationScheduler
+from merge.main.query import Query, TriggerQuery, InfluenceQuery, FeatureQuery
 from somax import settings, log
-from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
-from somax.runtime.somaxprospector import SomaxProspector
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
@@ -30,6 +35,7 @@ from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import SomaxGenerator
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.somaxprospector import SomaxProspector
 from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
@@ -41,20 +47,23 @@ from somax.scheduler.time_object import Time
 
 # TODO: Complete separation Agent/OscAgent where Agent can be initialized and used from the command line
 
-class Agent(multiprocessing.Process):
-    def __init__(self, player: SomaxGenerator, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 transport_time: Time, scheduler_running: bool,
-                 corpus: Optional[SomaxCorpus] = None, is_tempo_master: bool = False,
+class Agent(GenerationScheduler, multiprocessing.Process, ABC):
+    def __init__(self, generator: SomaxGenerator,
+                 recv_queue: multiprocessing.Queue,
+                 tempo_send_queue: multiprocessing.Queue,
+                 transport_time: Time,
+                 scheduler_running: bool,
+                 corpus: Optional[SomaxCorpus] = None,
+                 is_tempo_master: bool = False,
                  scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler, **kwargs):
-        super().__init__()
+        super().__init__(generator=generator, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self.player: SomaxGenerator = player
         self.is_tempo_master: bool = is_tempo_master
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
 
         if corpus:  # handle corpus object if passed
-            self.player.read_corpus(corpus)
+            self.generator.read_memory(corpus)
 
         scheduling_mode: SchedulingMode = corpus.scheduling_mode if corpus is not None else SchedulingMode.default()
 
@@ -72,15 +81,29 @@ class Agent(multiprocessing.Process):
 
 
 class OscAgent(Agent, AsyncioOscObject):
-    def __init__(self, player: SomaxGenerator, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 transport_time: Time, scheduler_running: bool, scheduling_type: Type[SchedulingHandler],
+    def __init__(self, name: str,
+                 generator: SomaxGenerator,
+                 recv_queue: multiprocessing.Queue,
+                 tempo_send_queue: multiprocessing.Queue,
+                 transport_time: Time,
+                 scheduler_running: bool,
+                 scheduling_type: Type[SchedulingHandler],
                  ip: str, recv_port: int, send_port: int, address: str,
                  corpus_filepath: Optional[str] = None, **kwargs):
-        Agent.__init__(self, player=player, recv_queue=recv_queue, tempo_send_queue=tempo_send_queue,
+        Agent.__init__(self, generator=generator, recv_queue=recv_queue, tempo_send_queue=tempo_send_queue,
                        transport_time=transport_time, scheduler_running=scheduler_running,
                        scheduling_type=scheduling_type, **kwargs)
         AsyncioOscObject.__init__(self, recv_port=recv_port, send_port=send_port, ip=ip, address=address, **kwargs)
+
         self.logger = logging.getLogger(__name__)
+
+        if not isinstance(generator, SomaxGenerator):
+            raise ConfigurationError(f"class {self.__class__.__name__} only supports generators of type "
+                                     f"{SomaxGenerator.__name__}. Actual value was {generator.__class__.__name__}.")
+
+        self.generator: SomaxGenerator = generator
+        self.name: str = name
+
         if corpus_filepath:  # handle corpus filepath if passed
             self.read_corpus(corpus_filepath)
 
@@ -104,7 +127,7 @@ class OscAgent(Agent, AsyncioOscObject):
                                  f"please delete it and try with a different OSC receive port.")
             self.terminate()
         except KeyboardInterrupt:
-            self.logger.critical(f"Terminating agent '{self.player.name}' due to keyboard interrupt (SIGINT)")
+            self.logger.critical(f"Terminating agent '{self.name}' due to keyboard interrupt (SIGINT)")
             self.terminate()
 
     async def _main_loop(self):
@@ -137,29 +160,38 @@ class OscAgent(Agent, AsyncioOscObject):
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
-            event_and_transform: Optional[tuple[SomaxCorpusEvent, AbstractTransform]]
-            event_and_transform = self.player.new_event(scheduling_time, scheduler_tempo)
+            self.generator.update_time_on_trigger(scheduling_time)
+            output_list: List[Optional[Candidate]] = self.generator.process_query(TriggerQuery())
+            if len(output_list) == 0:
+                self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
+                return
+            elif len(output_list) > 1:
+                warnings.warn(f"Multiple events generated in {self.__class__.__name__}: only first one will be used.")
+
+            output: Optional[Candidate] = output_list[0]
             self._send_output_statistics()
         except CorpusError as e:
             self.logger.debug(str(e))
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
             return
 
-        if event_and_transform is None:
+        if output_list is None:
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
             return
 
-        event: SomaxCorpusEvent = event_and_transform[0]
-        applied_transform: AbstractTransform = event_and_transform[1]
+        event: SomaxCorpusEvent = typing.cast(SomaxCorpusEvent, output.event)
+        # TODO[B2]: This should not be applied, rather passed to scheduler
+        transform: AbstractTransform = output.transform
+        event = transform.apply(event)
 
         # TODO: When the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was
         #       preserved here. This means that `None`s will never be added to the ImprovisationMemory and therefore
         #       the timing could possibly deviate in the exported corpus from what was originally generated.
-        self.improvisation_memory.append(event, trigger.target_time, applied_transform, scheduler_tempo,
+        self.improvisation_memory.append(event, trigger.target_time, transform, scheduler_tempo,
                                          artificially_sustained=self.scheduling_handler.artificially_sustained,
                                          aligned_onsets=self.scheduling_handler.aligned_onsets)
 
-        self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
+        self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=(event, transform))
 
     def _process_control_message(self, message_type: PlayControl):
         if message_type == PlayControl.START:
@@ -208,15 +240,15 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def enabled(self, is_enabled):
         if is_enabled:
-            self.logger.debug(f"Agent '{self.player.name}' enabled")
+            self.logger.debug(f"Agent '{self.name}' enabled")
         else:
-            self.logger.debug(f"Agent '{self.player.name}' disabled")
+            self.logger.debug(f"Agent '{self.name}' disabled")
             self.flush()
         self._enabled = is_enabled
 
     def clear(self):
         self.flush()
-        self.player.clear()
+        self.generator.clear()
         self.clear_memory()
         self.send_peaks()
 
@@ -231,8 +263,19 @@ class OscAgent(Agent, AsyncioOscObject):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
+    def process_query(self, query: Query, **kwargs) -> None:
+        if isinstance(query, TriggerQuery):
+            if len(query) > 1:
+                warnings.warn(f"class {self.__class__.__name__} cannot trigger more than one event at a time. "
+                              f"Only one event will be triggered")
+            self.scheduling_handler.add_trigger_event()
+
+        elif isinstance(query, InfluenceQuery):
+            self.generator.update_time_on_influence(self.scheduling_handler.time)
+            self.generator.process_query(query, **kwargs)
+
     def influence(self, path: str, feature_keyword: str, value: Any, **kwargs):
-        self.logger.debug(f"[influence] called for agent '{self.player.name}' with path '{path}', "
+        self.logger.debug(f"[influence] called for agent '{self.name}' with path '{path}', "
                           f"feature keyword '{feature_keyword}', value '{value}' and kwargs {kwargs}")
         if not self.scheduling_handler.running:
             return
@@ -244,8 +287,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
         try:
             path_and_name: List[str] = self._string_to_path(path)
-            time: float = self.scheduling_handler.time
-            self.player.influence(path_and_name, influence, time, **kwargs)
+            self.process_query(FeatureQuery(influence.data, path=path_and_name))
             self.send_peaks()
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
@@ -253,41 +295,42 @@ class OscAgent(Agent, AsyncioOscObject):
         except CorpusError as e:
             self.logger.debug(repr(e))
             return
-        self.logger.debug(f"[influence] Influence successfully completed for agent '{self.player.name}' "
+        self.logger.debug(f"[influence] Influence successfully completed for agent '{self.name}' "
                           f"with path '{path}'.")
 
-    def influence_onset(self):
-        self.scheduling_handler.add_trigger_event()
+    def request_trigger_output(self):
+        self.process_query(TriggerQuery())
 
     ######################################################
     # CREATION/DELETION OF ATOM
     ######################################################
 
-    def create_atom(self, path: str = "", weight: float = SomaxProspector.DEFAULT_WEIGHT, classifier: str = "",
-                    activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
-                    enabled: bool = True, override: bool = False, **kwargs):
-        try:
-            path_and_name: List[str] = self._string_to_path(path)
-            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
-            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
-            memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
-            self.player.create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
-                                    classifier=classifier, activity_pattern=activity_pattern,
-                                    memory_space=memory_space, enabled=enabled, override=override)
-            self.send_atoms()
-            self._send_eligibility()
-            # self.logger.info(f"Created atom with path '{path}'.")
-        except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
-            self.logger.error(f"{str(e)} No atom was created.")
-
-    def delete_atom(self, path: str):
-        try:
-            path_and_name: List[str] = self._string_to_path(path)
-            self.player.delete_atom(path_and_name)
-            self._send_eligibility()
-            self.logger.info(f"Deleted atom with path '{path}'.")
-        except (AssertionError, KeyError, IndexError) as e:
-            self.logger.error(f"{str(e)} No atom was deleted.")
+    # TODO[C2]: Parsing
+    # def create_atom(self, path: str = "", weight: float = SomaxProspector.DEFAULT_WEIGHT, classifier: str = "",
+    #                 activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
+    #                 enabled: bool = True, override: bool = False, **kwargs):
+    #     try:
+    #         path_and_name: List[str] = self._string_to_path(path)
+    #         classifier: Classifier = AbstractClassifier.from_string(classifier, **kwargs)
+    #         activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
+    #         memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
+    #         self.player.create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
+    #                                 classifier=classifier, activity_pattern=activity_pattern,
+    #                                 memory_space=memory_space, enabled=enabled, override=override)
+    #         self.send_atoms()
+    #         self._send_eligibility()
+    #         # self.logger.info(f"Created atom with path '{path}'.")
+    #     except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
+    #         self.logger.error(f"{str(e)} No atom was created.")
+    #
+    # def delete_atom(self, path: str):
+    #     try:
+    #         path_and_name: List[str] = self._string_to_path(path)
+    #         self.player.delete_atom(path_and_name)
+    #         self._send_eligibility()
+    #         self.logger.info(f"Deleted atom with path '{path}'.")
+    #     except (AssertionError, KeyError, IndexError) as e:
+    #         self.logger.error(f"{str(e)} No atom was deleted.")
 
     ######################################################
     # MODIFY PLAYER/ATOM STATE

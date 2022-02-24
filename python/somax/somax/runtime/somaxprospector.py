@@ -8,9 +8,9 @@ from merge.main.classifier import Classifier, Trainable
 from merge.main.corpus_event import CorpusEvent
 from merge.main.exceptions import QueryError
 from merge.main.feature import Feature
-from merge.main.influence import Influence, CorpusInfluence, FeatureInfluence, LabelInfluence
 from merge.main.label import Label
 from merge.main.prospector import Prospector
+from merge.main.query import Query, CorpusQuery, FeatureQuery, LabelQuery
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
@@ -74,26 +74,26 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
         self._memory_space.model(self._corpus, labels)
         self._activity_pattern.read_corpus(self._corpus)
 
-    def process(self, influence: Influence, **kwargs) -> None:
+    def process(self, query: Query, **kwargs) -> None:
         if not self.is_enabled_and_eligible():
             return
 
-        if len(influence) != 1: # Note: no need to handle case len == 0: pre-defined invariant for `Influence`
+        if len(query) != 1:  # Note: no need to handle case len == 0: pre-defined invariant for `InfluenceQuery`
             warnings.warn(f"{self.__class__.__name__} only handles the first element in "
-                          f"an {influence.__class__.__name__}, the rest will be ignored.")
+                          f"object {query.__class__.__name__}, the rest will be ignored.")
 
         warnings.warn("Transforms is not supported yet")
         warnings.warn("Make sure that time really is updated before calling this!! - see")
 
-        if isinstance(influence, CorpusInfluence):
-            label: Label = self._classifier.classify(influence.data[0].get_feature(self._feature_type))
-        elif isinstance(influence, FeatureInfluence):
-            label: Label = self._classifier.classify(influence.data[0])
-        elif isinstance(influence, LabelInfluence):
-            label: Label = influence.data[0]
+        if isinstance(query, CorpusQuery):
+            label: Label = self._classifier.classify(query.data[0].get_feature(self._feature_type))
+        elif isinstance(query, FeatureQuery):
+            label: Label = self._classifier.classify(query.data[0])
+        elif isinstance(query, LabelQuery):
+            label: Label = query.data[0]
         else:
             raise QueryError(f"{self.__class__.__name__} does not support influence of type "
-                             f"{influence.__class__.__name__}")
+                             f"{query.__class__.__name__}")
 
         matched_events: List[Candidate] = self._memory_space.influence([(label, NoTransform())], **kwargs)
         self._activity_pattern.insert(matched_events)

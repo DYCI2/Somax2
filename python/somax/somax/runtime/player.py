@@ -6,12 +6,11 @@ import numpy as np
 
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
-from merge.main.exceptions import CorpusError
+from merge.main.exceptions import CorpusError, QueryError
 from merge.main.generator import Generator
-from merge.main.influence import TriggerInfluence
 from merge.main.jury import Jury
 from merge.main.merge_handler import MergeHandler
-from merge.main.query import Query
+from merge.main.query import Query, TriggerQuery, InfluenceQuery
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
@@ -66,11 +65,14 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
 
     def process_query(self, query: Query, **kwargs) -> List[Optional[Candidate]]:
         warnings.warn("Ensure that `update time` has been called before processing query")
-        if query.type() == TriggerInfluence:
+        if isinstance(query, TriggerQuery):
             return [self._new_event()]
-        else:
+        elif isinstance(query, InfluenceQuery):
             self._influence(query)
             return []
+        else:
+            raise QueryError(f"object {self.__class__.__name__} cannot handle queries of "
+                             f"type {query.__class__.__name__}")
 
     def _new_event(self) -> Optional[Candidate]:
         if not self.is_enabled():
@@ -104,7 +106,7 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         return output
 
     # def influence(self, path: List[str], influence: Influence, time: float, **kwargs) -> Dict[SomaxProspector, int]:
-    def _influence(self, query: Query, **kwargs) -> None:
+    def _influence(self, query: InfluenceQuery, **kwargs) -> None:
         """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError
             Return values are only for gathering statistics (Evaluator, etc.) and not used in runtime."""
         if not self.is_enabled():
