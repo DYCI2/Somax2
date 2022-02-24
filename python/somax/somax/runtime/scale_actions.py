@@ -1,6 +1,6 @@
 import logging
 from abc import ABC, abstractmethod
-from typing import List, Tuple, Optional
+from typing import Tuple, Optional
 
 import numpy as np
 
@@ -10,11 +10,9 @@ from merge.main.exceptions import FilterError
 from merge.main.post_filter import PostFilter
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus
-from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.peaks import ContinuousCandidates
 from somax.runtime.transform_handler import TransformHandler
-from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
 
 
@@ -41,6 +39,10 @@ class AbstractScaleAction(PostFilter, Parametric, ContentAware, StringParsed, AB
     def clear(self) -> None:
         """ """
 
+    @abstractmethod
+    def update_time(self, time: float) -> None:
+        """ """
+
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractScaleAction':
         return NoScaleAction()
@@ -57,6 +59,8 @@ class AbstractScaleAction(PostFilter, Parametric, ContentAware, StringParsed, AB
         return self.enabled.value and self.eligible
 
 
+
+
 class NoScaleAction(AbstractScaleAction):
     def __init__(self):
         super().__init__()
@@ -68,6 +72,9 @@ class NoScaleAction(AbstractScaleAction):
         pass
 
     def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def update_time(self, time: float) -> None:
         pass
 
     def clear(self) -> None:
@@ -88,7 +95,6 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         self._parse_parameters()
         self.time: Optional[float] = None
 
-
     def filter(self, candidates: Candidates) -> Candidates:
         if self.time is None:
             raise FilterError(f"No time value was provided to {self.__class__.__name__}")
@@ -101,12 +107,14 @@ class PhaseModulationScaleAction(AbstractScaleAction):
 
         return candidates
 
-
     def feedback(self, candidate: Optional[Candidate], **kwargs) -> None:
         pass
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
+
+    def update_time(self, time: float):
+        self.time = time
 
     def clear(self) -> None:
         self.time = None
@@ -150,6 +158,9 @@ class NextStateScaleAction(AbstractScaleAction):
             self._previous_output_index = None
 
     def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def update_time(self, time: float) -> None:
         pass
 
     def clear(self) -> None:

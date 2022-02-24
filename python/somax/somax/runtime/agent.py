@@ -296,7 +296,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def set_peak_selector(self, peak_selector: str, verbose: bool = True, **kwargs):
         try:
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
-            self.player.set_peak_selector(peak_selector)
+            self.player.set_jury(peak_selector)
             self._send_eligibility()
             if verbose:
                 self.logger.info(f"[set_peak_selector] Peak selector set to {type(peak_selector).__name__} "

@@ -189,8 +189,8 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.error(f"{str(e)}. No agent was created.")
             return
 
-        player: SomaxGenerator = SomaxGenerator(name=name, peak_selector=peak_selector,
-                                                merge_action=merge_action, scale_actions=scale_actions)
+        player: SomaxGenerator = SomaxGenerator(name=name, jury=peak_selector,
+                                                merge_handler=merge_action, post_filters=scale_actions)
 
         if name in self._agents:
             if override:

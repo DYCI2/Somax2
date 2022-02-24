@@ -116,6 +116,7 @@ class ContinuousCandidates(Candidates):
         self.scores = np.delete(self.scores, indices)
         self.times = np.delete(self.times, indices)
         self.transform_ids = np.delete(self.transform_ids, indices)
+        self._reset_state()
 
     def is_empty(self) -> bool:
         return self.scores.size == 0
@@ -134,10 +135,11 @@ class ContinuousCandidates(Candidates):
             return 0.0
         return float(np.max(self.scores))
 
-
     def _reset_state(self) -> None:
+        """ This must be called in all functions that alter the number of candidates (add/remove)
+            and/or their positions
+        """
         self._events_around = None
-
 
 # class DiscreteCandidates(Candidates):
 #     def __init__(self, scores: np.ndarray, indices: np.ndarray, transform_hashes: np.ndarray,

@@ -1,48 +1,53 @@
 import logging
+import warnings
 from typing import Dict, Optional, Tuple, Type, List
 
 import numpy as np
 
+from merge.main.candidate import Candidate
+from merge.main.candidates import Candidates
 from merge.main.exceptions import CorpusError
 from merge.main.generator import Generator
-from merge.main.influence import Influence
-from somax.runtime.activity_pattern import AbstractActivityPattern
-from somax.runtime.somaxprospector import SomaxProspector
+from merge.main.influence import TriggerInfluence
+from merge.main.jury import Jury
+from merge.main.merge_handler import MergeHandler
+from merge.main.query import Query
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch
 from somax.runtime.exceptions import InvalidLabelInput
-from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.parameter import Parameter, Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
+from somax.runtime.peaks import ContinuousCandidates
 from somax.runtime.scale_actions import AbstractScaleAction
+from somax.runtime.somaxprospector import SomaxProspector
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
 
 
 class SomaxGenerator(Generator, Parametric, ContentAware):
     def __init__(self, name: str,
-                 peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
-                 merge_action: AbstractMergeAction = AbstractMergeAction.default(),
+                 jury: Jury = AbstractPeakSelector.default(),
+                 merge_handler: MergeHandler = AbstractMergeAction.default(),
                  corpus: Optional[SomaxCorpus] = None,
-                 scale_actions: List[AbstractScaleAction] = AbstractScaleAction.default_set()):
-        super().__init__()
+                 post_filters: List[AbstractScaleAction] = AbstractScaleAction.default_set()):
+        super().__init__(merge_handler=merge_handler, post_filters=[], jury=jury)
+        warnings.warn("PostFilters are not being used at the moment")
         self.logger = logging.getLogger(__name__)
         self.name: str = name
         self._transform_handler: TransformHandler = TransformHandler()
-        self.peak_selector: AbstractPeakSelector = peak_selector
         self.corpus: Optional[SomaxCorpus] = corpus
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
-        self.merge_action: AbstractMergeAction = merge_action
+        self.merge_action: merge_handler = merge_handler
 
-        self.atoms: Dict[str, SomaxProspector] = {}
+        # self.atoms: Dict[str, SomaxProspector] = {}
 
-        for scale_action in scale_actions:
+        for scale_action in post_filters:
             self.add_scale_action(scale_action)
 
-        self.previous_peaks: Peaks = Peaks.create_empty()
+        self.previous_candidates: Candidates = ContinuousCandidates.create_empty(self.corpus)
         self._transform_handler: TransformHandler = TransformHandler()
 
         self._force_jump_index: Optional[int] = None
@@ -59,12 +64,19 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def new_event(self, scheduler_time: float, _tempo: float) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
-        self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
-                          f"at scheduler time '{scheduler_time}'.")
+    def process_query(self, query: Query, **kwargs) -> List[Optional[Candidate]]:
+        warnings.warn("Ensure that `update time` has been called before processing query")
+        if query.type() == TriggerInfluence:
+            return [self._new_event()]
+        else:
+            self._influence(query)
+            return []
+
+    def _new_event(self) -> Optional[Candidate]:
         if not self.is_enabled():
             return None
 
+        # TODO[B4]: Handle with generalised ContentException rather than somax-specific ContentMismatch
         if not self.eligible:
             raise ContentMismatch(f"Player '{self.name}' couldn't handle corpus of type '{type(self.corpus).__name__}"
                                   f"due to incompatibility with the following class: "
@@ -75,31 +87,28 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
 
         if self._force_jump_index is not None:
             self.clear()
-            event_and_transform: Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]
-            event_and_transform = self._force_jump()
+            output: Optional[Candidate] = self._force_jump()
         else:
-            self._update_peaks_on_new_event(scheduler_time)
-            peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
-            peaks = self._scale_peaks(peaks, scheduler_time, self.corpus)
+            # self._update_peaks_on_new_event(scheduler_time)
+            candidates: Candidates = self._merged_candidates()
+            candidates = self._scale_candidates(candidates)
 
-            event_and_transform: Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]
-            event_and_transform = self.peak_selector.decide(peaks, self.corpus, self._transform_handler)
-            self.previous_peaks = peaks
+            output = self._jury.decide(candidates)
+            self.previous_candidates = candidates
 
-        if event_and_transform is None:
-            self._feedback(None, scheduler_time, NoTransform())
+        if output is None:
+            self.feedback(None)
             return None
-        event, transform = event_and_transform
-        event = transform.apply(event)  # returns deepcopy of transformed event
 
-        self._feedback(event, scheduler_time, transform)
-        return event, transform
+        self.feedback(output)
+        return output
 
-    def influence(self, path: List[str], influence: Influence, time: float, **kwargs) -> Dict[SomaxProspector, int]:
+    # def influence(self, path: List[str], influence: Influence, time: float, **kwargs) -> Dict[SomaxProspector, int]:
+    def _influence(self, query: Query, **kwargs) -> None:
         """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError
             Return values are only for gathering statistics (Evaluator, etc.) and not used in runtime."""
         if not self.is_enabled():
-            return {}
+            return
 
         if not self.eligible:
             raise ContentMismatch(f"Player '{self.name}' couldn't handle corpus of type '{type(self.corpus).__name__}"
@@ -109,109 +118,81 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         if self.corpus is None:
             raise CorpusError(f"No Corpus has been loaded in player '{self.name}'.")
 
-        num_generated_peaks: Dict[SomaxProspector, int] = {}
-        if not path:
-            for atom in self._direct_influenced_atoms():
+        # TODO: Handle this with external function
+        # num_generated_peaks: Dict[SomaxProspector, int] = {}
+        if query.path is None:
+            for prospector in self._direct_influenced_prospectors():
                 try:
-                    num_peaks: int = atom.influence(influence, time, **kwargs)
-                    num_generated_peaks[atom] = num_peaks
+                    prospector.process(query.influence)
                 except InvalidLabelInput:
-                    # Ignore atom if label doesn't match
+                    # Ignore prospector if label doesn't match
                     continue
         else:
-            atom: SomaxProspector = self._get_atom(path)
-            num_peaks: int = atom.influence(influence, time, **kwargs)
-            num_generated_peaks[atom] = num_peaks
-        return num_generated_peaks
+            prospector: SomaxProspector = self.get_prospector(query.path)
+            prospector.process(query.influence)
 
-    def _update_peaks_on_new_event(self, time: float) -> None:
-        for atom in self.atoms.values():
-            atom.update_time_on_new_event(time)
+    def update_time_on_influence(self, time: float) -> None:
+        raise NotImplementedError("Not implemented yet")
 
-    def _merged_peaks(self, time: float, corpus: SomaxCorpus, **kwargs) -> Peaks:
+    def update_time_on_trigger(self, time: float) -> None:
+        for scale_action in self.scale_actions.values():
+            if isinstance(scale_action, AbstractScaleAction):
+                scale_action.update_time(time)
+        for prospector in self._prospectors:
+            if isinstance(prospector, SomaxProspector):
+                prospector.update_time_on_new_event(time)
+
+    def _merged_candidates(self) -> Candidates:
         weight_sum: float = 0.0
-        for atom in self.atoms.values():
-            weight_sum += atom.weight if atom.is_enabled_and_eligible() else 0.0
+        for prospector in self._prospectors:
+            weight_sum += prospector.weight if prospector.is_enabled_and_eligible() else 0.0
         if weight_sum < 1e-6:
             self.logger.warning(f"Weights are invalid. Setting weight to 1.0.")
             weight_sum = 1.0
 
-        peaks_list: List[Peaks] = []
-        for atom in self.atoms.values():
-            if atom.is_enabled_and_eligible():
-                peaks: Peaks = atom.pop_peaks()
-                peaks.scale(atom.weight / weight_sum)
-                peaks_list.append(peaks)
+        candidates_list: List[Candidates] = []
+        for prospector in self._prospectors:
+            if prospector.is_enabled_and_eligible():
+                candidates: Candidates = prospector.pop_candidates()
+                candidates.scale(prospector.weight / weight_sum)
+                candidates_list.append(candidates)
 
-        all_peaks: Peaks = Peaks.concatenate(peaks_list)
-        return self.merge_action.merge(all_peaks, time, corpus, **kwargs)
+        return self.merge_action.merge(candidates_list)
 
     ######################################################
     # MODIFY STATE
     ######################################################
 
-    def _feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
-                  applied_transform: AbstractTransform) -> None:
-        self.peak_selector.feedback(feedback_event, time, applied_transform)
-        self.merge_action.feedback(feedback_event, time, applied_transform)
-        for scale_action in self.scale_actions.values():
-            scale_action.feedback(feedback_event, time, applied_transform)
-
-        for atom in self.atoms.values():
-            atom.feedback(feedback_event, time, applied_transform)
-
-    def clear(self):
-        """ Reset runtime state without modifying any parameters or settings """
-        self.previous_peaks = Peaks.create_empty()
-        self.peak_selector.clear()
-        for scale_action in self.scale_actions.values():
-            scale_action.clear()
-
-        for atom in self.atoms.values():
-            atom.clear()
-
+    def _on_clear(self) -> None:
+        self.previous_candidates = ContinuousCandidates.create_empty(self.corpus)
         self._transform_handler.clear()
 
     def force_jump(self, index: int):
         """ Forces the player to jump to the given state on the next call to `new_event`"""
         self._force_jump_index = index
 
-    def read_corpus(self, corpus: SomaxCorpus) -> None:
+    def _on_read(self, corpus: SomaxCorpus, **kwargs) -> None:
         self._update_transforms()
         self.corpus = corpus
-        for atom in self.atoms.values():
-            atom.read_corpus(corpus)
 
-    def create_atom(self, path: List[str], weight: float, self_influenced: bool, classifier: AbstractClassifier,
-                    activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
-                    _transforms: None = None, enabled: bool = True, override: bool = False) -> None:
-        """ Raises KeyError, IndexError, DuplicateKeyError """
-        new_atom_name: str = path.pop(0)
-        if len(path) > 0:
-            raise IndexError("Invalid path specification")
-
-        if new_atom_name in self.atoms.keys() and not override:
-            raise DuplicateKeyError(f"An Atom with name '{new_atom_name}' already exists."
-                                    f"To override: use 'override=True'.")
-
-        self.atoms[new_atom_name] = SomaxProspector(name=new_atom_name, weight=weight, classifier=classifier,
-                                                    activity_pattern=activity_pattern, memory_space=memory_space,
-                                                    corpus=self.corpus, self_influenced=self_influenced, enabled=enabled)
+    def add_prospector(self, prospector: SomaxProspector) -> None:
+        self._prospectors.append(prospector)
         self._parse_parameters()
 
-    def delete_atom(self, path: List[str]) -> None:
-        """ Raises: KeyError, IndexError """
-        atom_name: str = path.pop(0)
-        if len(path) > 0:
-            raise IndexError("Invalid path specification")
+    # def delete_atom(self, path: List[str]) -> None:
+    #     """ Raises: KeyError, IndexError """
+    #     atom_name: str = path.pop(0)
+    #     if len(path) > 0:
+    #         raise IndexError("Invalid path specification")
+    #
+    #     del self.atoms[atom_name]  # raises KeyError
+    #     self._parse_parameters()
 
-        del self.atoms[atom_name]  # raises KeyError
+    def set_jury(self, jury: AbstractPeakSelector) -> None:
+        self._jury = jury
         self._parse_parameters()
 
-    def set_peak_selector(self, peak_selector: AbstractPeakSelector) -> None:
-        self.peak_selector = peak_selector
-        self._parse_parameters()
-
+    # TODO[B4]: Replace with add_post_filter
     def add_scale_action(self, scale_action: AbstractScaleAction, override: bool = False):
         """ Raises: DuplicateKeyError """
         if type(scale_action) in self.scale_actions and not override:
@@ -229,30 +210,31 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         del self.parameter_dict[scale_action_type.__name__]
         self._parse_parameters()
 
-    def set_merge_action(self, merge_action: AbstractMergeAction) -> None:
-        self.merge_action = merge_action
+    def set_merge_handler(self, merge_handler: AbstractMergeAction) -> None:
+        self._merge_handler = merge_handler
         self._parse_parameters()
 
-    def set_classifier(self, path: List[str], classifier: AbstractClassifier) -> None:
-        """ Raises: KeyError, IndexError """
-        atom: SomaxProspector = self._get_atom(path)  # raises: KeyError, IndexError
-        atom.set_classifier(classifier)
-        atom.update_transforms(self._transform_handler)
-        self._parse_parameters()
+    # TODO[B5]: Set classifier with feature type
+    # def set_classifier(self, path: List[str], classifier: AbstractClassifier) -> None:
+    #     """ Raises: KeyError, IndexError """
+    #     atom: SomaxProspector = self.get_prospector(path)  # raises: KeyError, IndexError
+    #     atom.set_classifier(classifier)
+    #     atom.update_transforms(self._transform_handler)
+    #     self._parse_parameters()
 
-    def set_memory_space(self, path: List[str], memory_space: AbstractMemorySpace) -> None:
-        """ Raises: KeyError, IndexError """
-        atom: SomaxProspector = self._get_atom(path)  # raises: KeyError, IndexError
-        atom.set_memory_space(memory_space)
-        atom.update_transforms(self._transform_handler)
-        self._parse_parameters()
+    # def set_memory_space(self, path: List[str], memory_space: AbstractMemorySpace) -> None:
+    #     """ Raises: KeyError, IndexError """
+    #     atom: SomaxProspector = self.get_prospector(path)  # raises: KeyError, IndexError
+    #     atom.set_memory_space(memory_space)
+    #     atom.update_transforms(self._transform_handler)
+    #     self._parse_parameters()
 
-    def set_activity_pattern(self, path: List[str], activity_pattern: AbstractActivityPattern) -> None:
-        """ Raises: KeyError, IndexError """
-        atom: SomaxProspector = self._get_atom(path)  # raises: KeyError, IndexError
-        atom.set_activity_pattern(activity_pattern)
-        atom.update_transforms(self._transform_handler)
-        self._parse_parameters()
+    # def set_activity_pattern(self, path: List[str], activity_pattern: AbstractActivityPattern) -> None:
+    #     """ Raises: KeyError, IndexError """
+    #     atom: SomaxProspector = self.get_prospector(path)  # raises: KeyError, IndexError
+    #     atom.set_activity_pattern(activity_pattern)
+    #     atom.update_transforms(self._transform_handler)
+    #     self._parse_parameters()
 
     def add_transform(self, transform: AbstractTransform):
         """ :raises TransformError if a transform of the same instance with the same parameters already exists """
@@ -268,12 +250,15 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
 
     def get_peaks_statistics(self) -> Dict[str, int]:
         peaks_count: Dict[str, int] = {}
-        for atom in self.all_atoms():
-            peaks_count[atom.name] = atom.num_peaks()
+        for prospector in self._prospectors:
+            peaks_count[prospector.name] = prospector.num_peaks()
         return peaks_count
 
     def get_output_statistics(self) -> Tuple[int, float]:
-        return self.previous_peaks.size(), self.previous_peaks.max()
+        num_candidates: int = self.previous_candidates.size()
+        scores: np.ndarray = self.previous_candidates.get_scores()
+        max_score: float = np.max(scores) if scores.size > 0 else 0.0
+        return num_candidates, max_score
 
     def is_enabled(self) -> bool:
         return self.enabled.value
@@ -286,49 +271,48 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         return True  # valid for all types of corpora
 
     # TODO: Legacy function from recursive Streamview structure: remove at some point
-    def _get_atom(self, path: List[str]) -> SomaxProspector:
+    def get_prospector(self, path: List[str]) -> SomaxProspector:
         """ Raises: KeyError, IndexError"""
         target_name: str = path.pop(0)
         if path:  # Path is not empty: descend recursively
             raise IndexError("Invalid path specification")
         else:
-            return self.atoms[target_name]
+            for prospector in self._prospectors:
+                if prospector.name == target_name:
+                    return prospector
 
-    def _direct_influenced_atoms(self) -> List[SomaxProspector]:
-        return [atom for atom in self.all_atoms() if not atom.self_influenced]
+    def _direct_influenced_prospectors(self) -> List[SomaxProspector]:
+        return [prospector for prospector in self._prospectors if not prospector.self_influenced]
 
-    def _self_influenced_atoms(self) -> List[SomaxProspector]:
-        return [atom for atom in self.all_atoms() if atom.self_influenced]
+    def _self_influenced_prospectors(self) -> List[SomaxProspector]:
+        return [prospector for prospector in self._prospectors if prospector.self_influenced]
 
-    def all_atoms(self) -> List[SomaxProspector]:
-        return list(self.atoms.values())
-
-    def _force_jump(self) -> Optional[Tuple[SomaxCorpusEvent, AbstractTransform]]:
+    def _force_jump(self) -> Optional[Candidate]:
         self.clear()
         index: Optional[int] = self._force_jump_index
         self._force_jump_index = None
         try:
             event: SomaxCorpusEvent = self.corpus.events[index]
-            return event, NoTransform()
+            return Candidate(event, 1.0, NoTransform(), self.corpus)
         except (IndexError, TypeError, AttributeError) as e:
             self.logger.debug(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
             return None
 
-    def _scale_peaks(self, peaks: Peaks, scheduler_time: float, corpus: SomaxCorpus, **kwargs):
-        if peaks.is_empty():
-            return peaks
-        corresponding_events: List[SomaxCorpusEvent] = corpus.events_around(peaks.times)
-        corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
-                                                             for t in np.unique(peaks.transform_ids)]
+    def _scale_candidates(self, candidates: Candidates):
+        if candidates.is_empty():
+            return candidates
+        # TODO[B2]: This has not been handled
+        # corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
+        #                                                      for t in np.unique(peaks.transform_ids)]
+        # TODO[B4]: Handle with Generator._post_filters
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled_and_eligible():
-                peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, corresponding_transforms,
-                                           corpus, **kwargs)
-        return peaks
+                candidates = scale_action.filter(candidates)
+        return candidates
 
     def _update_transforms(self):
         for scale_action in self.scale_actions.values():
             scale_action.update_transforms(self._transform_handler)
 
-        for atom in self.atoms.values():
-            atom.update_transforms(self._transform_handler)
+        for prospector in self._prospectors:
+            prospector.update_transforms(self._transform_handler)
