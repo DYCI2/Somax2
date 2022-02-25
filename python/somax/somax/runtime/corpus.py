@@ -7,6 +7,7 @@ import logging
 import os
 import pickle
 import pickletools
+import shutil
 import sys
 import warnings
 from abc import ABC, abstractmethod
@@ -23,6 +24,7 @@ from somax.features.feature import CorpusFeature
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch
 from somax.scheduler.scheduling_mode import SchedulingMode
+from somax.utils.get_version import VersionTools
 from somax.utils.introspective import Introspective
 
 E = TypeVar('E', bound=CorpusEvent)
@@ -106,7 +108,7 @@ class Corpus(Generic[E], Introspective, ABC):
         return index_map, grid_size
 
     def export(self, output_folder: str, overwrite: bool = False,
-               indentation: Optional[int] = None) -> str:
+               indentation: Optional[int] = None, **kwargs) -> str:
         """ Raises IOError"""
         filepath = os.path.join(output_folder, self.name + ".gz")
         if os.path.exists(filepath) and not overwrite:
@@ -151,7 +153,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
             with gzip.open(filepath, 'rt', encoding='UTF-8') as f:
                 corpus_data: Dict[str, Any] = json.load(f)
             version: str = corpus_data["version"]
-            if version != somax.__version__ and not volatile:
+            if not VersionTools.matches_current(version, pre_release=False) and not volatile:
                 raise InvalidCorpus(f"The loaded corpus was built with an old version of Somax. "
                                     f"While it may work, using it could result in a number of bugs. "
                                     f"Recommended action: rebuild corpus. "
@@ -340,16 +342,27 @@ class AudioCorpus(Corpus):
         # This function is only specifically for JSON encoding which currently isn't supported for audio corpora
         raise NotImplementedError("Not implemented")
 
-    def export(self, output_folder: str, overwrite: bool = False, **kwargs) -> str:
+    def export(self, output_folder: str, overwrite: bool = False, copy_resources: bool = False, **kwargs) -> str:
         """ raises: IOError if export fails """
         filepath = os.path.join(output_folder, self.name + ".pickle")
         if os.path.exists(filepath) and not overwrite:
             raise IOError(f"Could not export corpus as file '{filepath}' already exists. "
                           f"Set overwrite flag to True to overwrite existing.")
         else:
+            if copy_resources:
+                output_filepath: str = os.path.join(output_folder, os.path.basename(self.filepath))
+                if os.path.exists(output_filepath) and not overwrite:
+                    raise IOError(f"Could not export corpus as file '{filepath}' already exists. "
+                                  f"Set overwrite flag to True to overwrite existing.")
+                shutil.copy2(self.filepath, output_filepath)
+                self.logger.info(f"Audio file copied to '{output_filepath}'")
+                self.filepath = output_filepath
+
             with gzip.open(filepath, "wb") as f:
                 pickled = pickle.dumps(self)
                 optimized_pickle = pickletools.optimize(pickled)
                 f.write(optimized_pickle)
+
+
 
         return filepath

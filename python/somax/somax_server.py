@@ -275,7 +275,9 @@ class SomaxServer(Somax, AsyncioOscObject):
     ######################################################
 
     def build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                     overwrite: bool = False, filter_class: str = "", segmentation_mode: Optional[str] = None,
+                     overwrite: bool = False, copy_resources: bool = False,
+                     filter_class: str = "",
+                     segmentation_mode: Optional[str] = None,
                      multithreaded: bool = False, **kwargs):
         self.logger.info(f"Building corpus from file(s) '{filepath}'...")
         try:
@@ -289,16 +291,21 @@ class SomaxServer(Somax, AsyncioOscObject):
             return
 
         if multithreaded:
-            self._build_multithreaded(filepath, output_folder, corpus_name, overwrite, spectrogram_filter,
+            self._build_multithreaded(filepath, output_folder, corpus_name, overwrite, copy_resources, spectrogram_filter,
                                       segmentation, **kwargs)
         else:
-            self._build(filepath, output_folder, corpus_name, overwrite, spectrogram_filter,
+            self._build(filepath, output_folder, corpus_name, overwrite, copy_resources, spectrogram_filter,
                         segmentation, **kwargs)
 
     # TODO: Remove once multithreaded corpus builder is stable enough
-    def _build(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-               overwrite: bool = False, spectrogram_filter: AbstractFilter = AbstractFilter.default(),
-               segmentation_mode: Optional[AudioSegmentation] = None, **kwargs):
+    def _build(self, filepath: str,
+               output_folder: str,
+               corpus_name: Optional[str] = None,
+               overwrite: bool = False,
+               copy_resources: bool = False,
+               spectrogram_filter: AbstractFilter = AbstractFilter.default(),
+               segmentation_mode: Optional[AudioSegmentation] = None,
+               **kwargs):
         self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
         corpus: Corpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
                                                spectrogram_filter=spectrogram_filter,
@@ -306,7 +313,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{output_folder}'...")
 
         try:
-            output_filepath: str = corpus.export(output_folder, overwrite=overwrite)
+            output_filepath: str = corpus.export(output_folder, overwrite=overwrite, copy_resources=copy_resources)
             self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
             self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
         except (IOError, AttributeError, KeyError) as e:
@@ -314,11 +321,13 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
 
     def _build_multithreaded(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                             overwrite: bool = False, spectrogram_filter: AbstractFilter = AbstractFilter.default(),
+                             overwrite: bool = False, copy_resources: bool = False,
+                             spectrogram_filter: AbstractFilter = AbstractFilter.default(),
                              segmentation_mode: Optional[AudioSegmentation] = None, **kwargs):
         corpus_builder: ThreadedCorpusBuilder = ThreadedCorpusBuilder(filepath=filepath, corpus_name=corpus_name,
                                                                       spectrogram_filter=spectrogram_filter,
                                                                       output_folder=output_folder, overwrite=overwrite,
+                                                                      copy_resources=copy_resources,
                                                                       osc_address=self.address, ip=self.ip,
                                                                       send_port=self.send_port,
                                                                       segmentation_mode=segmentation_mode,

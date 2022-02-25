@@ -56,13 +56,14 @@ class SegmentationStatistics:
 # TODO: Simple prototype to test the idea of multithreaded corpusbuilding
 class ThreadedCorpusBuilder(multiprocessing.Process):
     def __init__(self, filepath: str, osc_address: str, ip: str, send_port: int, corpus_name: Optional[str] = None,
-                 output_folder: Optional[str] = None, overwrite: bool = False, **kwargs):
+                 output_folder: Optional[str] = None, overwrite: bool = False, copy_resources: bool = False, **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.filepath = filepath
         self.corpus_name = corpus_name
         self.output_folder = output_folder
         self.overwrite = overwrite
+        self.copy_resources: bool = copy_resources
         self.target = SimpleOscTarget(address=osc_address, port=send_port, ip=ip)
         self.kwargs = kwargs
 
@@ -78,14 +79,19 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
             corpus: Corpus = CorpusBuilder().build(filepath=self.filepath, corpus_name=self.corpus_name, **self.kwargs)
             self.logger.debug(f"[build_corpus]: Successfully built '{corpus.name}' from file '{self.filepath}'.")
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
-            self.logger.error(f"{str(e)} No Corpus was built.")
+            self.logger.error(f"{str(e)}. No corpus was built")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            return
+        except FileNotFoundError as e:
+            self.logger.error(f"{str(e)}. No corpus was built")
             self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
 
         if self.output_folder is not None:
             # self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{self.output_folder}'...")
             try:
-                output_filepath: str = corpus.export(self.output_folder, overwrite=self.overwrite)
+                output_filepath: str = corpus.export(self.output_folder, overwrite=self.overwrite,
+                                                     copy_resources=self.copy_resources)
                 self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
