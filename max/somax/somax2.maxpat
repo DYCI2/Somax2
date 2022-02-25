@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1181.0, 79.0, 1902.0, 873.0 ],
+		"rect" : [ -1747.0, 83.0, 1015.0, 738.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -243,6 +243,7 @@
 			}
  ],
 		"parameters" : 		{
+			"obj-11::obj-14::obj-1::obj-1::obj-172::obj-25" : [ "live.gain~", "live.gain~", 0 ],
 			"obj-11::obj-14::obj-1::obj-1::obj-192" : [ "live.numbox", "live.numbox", 0 ],
 			"obj-11::obj-21" : [ "Gain[1]", "Gain", 0 ],
 			"obj-13::obj-17::obj-39::obj-6::obj-21" : [ "onset", "onset", 0 ],
@@ -334,6 +335,7 @@
 			"obj-13::obj-1::obj-6::obj-91::obj-1" : [ "live.text[9]", "live.text", 0 ],
 			"obj-13::obj-1::obj-6::obj-91::obj-2" : [ "live.text[8]", "live.text", 0 ],
 			"obj-13::obj-1::obj-6::obj-91::obj-3" : [ "live.text[7]", "live.text", 0 ],
+			"obj-13::obj-1::obj-78::obj-1::obj-172::obj-25" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-13::obj-1::obj-78::obj-1::obj-192" : [ "live.numbox[1]", "live.numbox", 0 ],
 			"obj-13::obj-33::obj-1" : [ "mc.live.gain~[2]", "mc.live.gain~", 0 ],
 			"obj-13::obj-33::obj-44" : [ "live.dial[1]", "Width", 0 ],
@@ -407,6 +409,10 @@
 ,
 				"obj-13::obj-1::obj-6::obj-91::obj-3" : 				{
 					"parameter_longname" : "live.text[7]"
+				}
+,
+				"obj-13::obj-1::obj-78::obj-1::obj-172::obj-25" : 				{
+					"parameter_longname" : "live.gain~[1]"
 				}
 ,
 				"obj-13::obj-1::obj-78::obj-1::obj-192" : 				{
@@ -543,8 +549,8 @@
 			}
 , 			{
 				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/Dyci2Lib/Max_library/app",
-				"patcherrelativepath" : "../../../Dyci2Lib/Max_library/app",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "./javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
@@ -687,30 +693,30 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "OMax.yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./patchers/resources/influencers",
+				"name" : "OMax.Yin+.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/patchers",
+				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "Yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./patchers/resources/influencers",
+				"name" : "OMax.Yin+core.maxpat",
+				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/patchers",
+				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "sr.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./patchers/resources/misc",
+				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/patchers",
+				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "bc.autoname.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
-				"patcherrelativepath" : "./javascript",
+				"bootpath" : "~/Documents/Max 8/Packages/OMax4.6/javascript",
+				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/OMax4.6/javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
@@ -948,16 +954,7 @@
 		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"toggle" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
 				"default" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -968,15 +965,9 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
 					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"newobj" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"fontsize" : [ 10.0 ],
-					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
@@ -991,9 +982,24 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ],
 					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"newobj" : 				{
+					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
