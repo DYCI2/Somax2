@@ -64,7 +64,7 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
             Note: For certain activity patterns, may have side effects such as removing the peaks from the memory,
                   do not use outside main runtime architecture. """
 
-        return Candidates.copy(self._candidates)
+        return self._candidates.shallow_copy()
 
     def num_peaks(self) -> int:
         return self._candidates.size()

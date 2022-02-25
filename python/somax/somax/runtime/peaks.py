@@ -33,11 +33,8 @@ class ContinuousCandidates(Candidates):
                    np.empty(0, dtype=np.int32),
                    associated_corpus)
 
-    @classmethod
-    def copy(cls, other) -> 'Candidates':
-        if not isinstance(other, ContinuousCandidates):
-            raise TypeError(f"class '{other.__class__.__name__}' cannot be copied as '{cls.__name__}'.")
-        return ContinuousCandidates(np.copy(other.scores), other.times, other.transform_ids, other.associated_corpus)
+    def shallow_copy(self) -> 'Candidates':
+        return ContinuousCandidates(np.copy(self.scores), self.times, self.transform_ids, self.associated_corpus)
 
     @classmethod
     def concatenate(cls, candidates: List['ContinuousCandidates'], associated_corpus: SomaxCorpus):

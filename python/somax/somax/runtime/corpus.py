@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 
 import somax
-from merge.corpus import Corpus
+from merge.corpus import Corpus, E
 from merge.main.exceptions import CorpusError, ResourceError
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
@@ -174,6 +174,9 @@ class MidiSomaxCorpus(SomaxCorpus[MidiCorpusEvent]):
         # KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)
         except (KeyError, AttributeError) as e:
             raise CorpusError(f"The Corpus at '{filepath}' has an invalid format and could not be loaded") from e
+
+    def append(self, event: MidiCorpusEvent) -> None:
+        raise NotImplementedError("Not implemented")
 
     def encode(self) -> Dict[str, Any]:
         features: Dict[Type['CorpusFeature'], str] = {cls: name for (name, cls) in CorpusFeature.all_corpus_features()}
@@ -361,3 +364,6 @@ class AudioSomaxCorpus(SomaxCorpus):
                 f.write(optimized_pickle)
 
         return filepath
+
+    def append(self, event: AudioCorpusEvent) -> None:
+        raise NotImplementedError("Not implemented")
