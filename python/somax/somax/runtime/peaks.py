@@ -3,6 +3,7 @@ from typing import List, Optional, Union, Type
 
 import numpy as np
 
+from merge.corpus import Corpus
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.corpus_event import CorpusEvent
@@ -81,7 +82,10 @@ class ContinuousCandidates(Candidates):
 
     def get_candidate(self, index: int) -> Candidate:
         # TODO[B2]: Handle properly once shared strategy for transforms is implemented
-        return Candidate(self.associated_corpus.events[index], self.scores[index], self.transform_ids[index])
+        return Candidate(self.associated_corpus.events[index],
+                         self.scores[index],
+                         self.transform_ids[index],
+                         self.associated_corpus)
 
     def get_candidates(self) -> List[Candidate]:
         # TODO[B6]: Handle properly once shared strategy for corpora is implemented
@@ -91,7 +95,8 @@ class ContinuousCandidates(Candidates):
 
         events: List[CorpusEvent] = self.associated_corpus.events_around(self.times)
         # TODO[B2]: Handle properly once shared strategy for transforms is implemented
-        return [Candidate(e, s, t) for (e, s, t) in zip(events, self.scores, self.transform_ids)]
+        return [Candidate(e, s, t, self.associated_corpus)
+                for (e, s, t) in zip(events, self.scores, self.transform_ids)]
 
     def get_scores(self) -> np.ndarray:
         return self.scores
@@ -101,6 +106,9 @@ class ContinuousCandidates(Candidates):
 
     def get_transforms(self) -> List[Transform]:
         raise NotImplementedError("Not implemented yet")
+
+    def associated_corpora(self) -> List[Corpus]:
+        return [self.associated_corpus]
 
     def get_times(self) -> np.ndarray:
         return self.times

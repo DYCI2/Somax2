@@ -27,21 +27,25 @@ from somax.runtime.transforms import AbstractTransform, NoTransform
 
 
 class SomaxGenerator(Generator, Parametric, ContentAware):
-    def __init__(self, name: str,
+    def __init__(self,
+                 name: str,
                  jury: Jury = AbstractPeakSelector.default(),
                  merge_handler: MergeHandler = AbstractMergeAction.default(),
                  corpus: Optional[SomaxCorpus] = None,
-                 post_filters: List[AbstractScaleAction] = AbstractScaleAction.default_set()):
-        super().__init__(merge_handler=merge_handler, post_filters=[], jury=jury)
+                 post_filters: List[AbstractScaleAction] = AbstractScaleAction.default_set(),
+                 **kwargs):
+        super().__init__(**kwargs)
+        self.logger = logging.getLogger(__name__)
         warnings.warn("PostFilters are not being used at the moment")
         self.logger = logging.getLogger(__name__)
         self.name: str = name
         self._transform_handler: TransformHandler = TransformHandler()
         self.corpus: Optional[SomaxCorpus] = corpus
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
-        self.merge_action: merge_handler = merge_handler
+        self._merge_handler: MergeHandler = merge_handler
+        self._jury: Jury = jury
 
-        # self.atoms: Dict[str, SomaxProspector] = {}
+        self.atoms: Dict[str, SomaxProspector] = {}
 
         for scale_action in post_filters:
             self.add_scale_action(scale_action)
@@ -159,23 +163,43 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
                 candidates.scale(prospector.weight / weight_sum)
                 candidates_list.append(candidates)
 
-        return self.merge_action.merge(candidates_list)
+        return self._merge_handler.merge(candidates_list)
 
     ######################################################
     # MODIFY STATE
     ######################################################
 
-    def _on_clear(self) -> None:
+    def clear(self) -> None:
         self.previous_candidates = ContinuousCandidates.create_empty(self.corpus)
+        self._merge_handler.clear()
         self._transform_handler.clear()
+        self._jury.clear()
+
+        for post_filter in self._post_filters:
+            post_filter.clear()
+
+        for prospector in self._prospectors:
+            prospector.clear()
 
     def force_jump(self, index: int):
         """ Forces the player to jump to the given state on the next call to `new_event`"""
         self._force_jump_index = index
 
-    def _on_read(self, corpus: SomaxCorpus, **kwargs) -> None:
+    def read_memory(self, corpus: SomaxCorpus, **kwargs) -> None:
+        for prospector in self._prospectors:
+            prospector.read_memory(corpus, **kwargs)
         self._update_transforms()
         self.corpus = corpus
+
+    def feedback(self, event: Optional[Candidate], **kwargs) -> None:
+        self._jury.feedback(event, **kwargs)
+        self._merge_handler.feedback(event, **kwargs)
+
+        for post_filter in self._post_filters:
+            post_filter.feedback(event, **kwargs)
+
+        for prospector in self._prospectors:
+            prospector.feedback(event, **kwargs)
 
     def add_prospector(self, prospector: SomaxProspector) -> None:
         self._prospectors.append(prospector)
