@@ -40,7 +40,7 @@ class SomChromaClassifier(Classifier[Chroma12]):
             self._som_classes = np.loadtxt(path.absolute(), dtype=int, delimiter=",")  # Shape: (N,)
 
     def classify(self, feature: Chroma12) -> Label:
-        pass
+        return IntLabel(self._label_from_chroma(feature.value))
 
     def classify_multiple(self, features: List[Chroma12]) -> List[Label]:
         if self.USE_MULTIPROCESSING:
