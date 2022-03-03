@@ -27,6 +27,9 @@ class ContinuousCandidates(Candidates):
         # pre-computed value for events associated with each candidate
         self._events_around: Optional[List[SomaxCorpusEvent]] = None
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}(.., associated_corpus:'{self.associated_corpus.name}', N:{self.scores.size})"
+
     @classmethod
     def create_empty(cls, associated_corpus: SomaxCorpus) -> 'ContinuousCandidates':
         return cls(np.empty(0, dtype=np.float),
@@ -82,7 +85,7 @@ class ContinuousCandidates(Candidates):
 
     def get_candidate(self, index: int) -> Candidate:
         # TODO[B2]: Handle properly once shared strategy for transforms is implemented
-        return Candidate(self.associated_corpus.events[index],
+        return Candidate(self.associated_corpus.event_around(self.times[index]),
                          self.scores[index],
                          self.transform_ids[index],
                          self.associated_corpus)

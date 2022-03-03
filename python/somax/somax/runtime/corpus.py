@@ -99,10 +99,10 @@ class SomaxCorpus(Corpus[S], Introspective, ABC):
     def _create_index_map(self) -> Tuple[np.ndarray, float]:
         grid_size: float = (SomaxCorpus.INDEX_MAP_SIZE - 1) / self.duration()
         index_map: np.ndarray = np.zeros(SomaxCorpus.INDEX_MAP_SIZE, dtype=int)
-        for event in self.events:
+        for event in self.events:   # type: E
             start_index: int = int(np.floor(event.onset * grid_size))
             end_index: int = int(np.floor((event.onset + event.duration) * grid_size))
-            index_map[start_index:end_index] = event.state_index
+            index_map[start_index:end_index] = event.index
         return index_map, grid_size
 
     def export(self, output_folder: str, overwrite: bool = False,

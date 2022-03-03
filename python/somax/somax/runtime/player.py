@@ -6,6 +6,7 @@ import numpy as np
 
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
+from merge.main.corpus_event import CorpusEvent
 from merge.main.exceptions import CorpusError, QueryError
 from merge.main.generator import Generator
 from merge.main.jury import Jury
@@ -36,19 +37,18 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
                  **kwargs):
         super().__init__(**kwargs)
         self.logger = logging.getLogger(__name__)
-        warnings.warn("PostFilters are not being used at the moment")
         self.logger = logging.getLogger(__name__)
         self.name: str = name
         self._transform_handler: TransformHandler = TransformHandler()
         self.corpus: Optional[SomaxCorpus] = corpus
-        self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
+        self.post_filters: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
         self._merge_handler: MergeHandler = merge_handler
         self._jury: Jury = jury
 
-        self.atoms: Dict[str, SomaxProspector] = {}
+        self.prospectors: Dict[str, SomaxProspector] = {}
 
-        for scale_action in post_filters:
-            self.add_scale_action(scale_action)
+        for post_filter in post_filters:
+            self.add_post_filter(post_filter)
 
         self.previous_candidates: Candidates = ContinuousCandidates.create_empty(self.corpus)
         self._transform_handler: TransformHandler = TransformHandler()
@@ -77,6 +77,9 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         else:
             raise QueryError(f"object {self.__class__.__name__} cannot handle queries of "
                              f"type {query.__class__.__name__}")
+
+    def learn_event(self, event: CorpusEvent, **kwargs) -> None:
+        raise NotImplementedError("Not implemented yet")
 
     def _new_event(self) -> Optional[Candidate]:
         if not self.is_enabled():
@@ -124,40 +127,44 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         if self.corpus is None:
             raise CorpusError(f"No Corpus has been loaded in player '{self.name}'.")
 
+        if len(query) > 1:
+            warnings.warn(f"class {self.__class__.__name__} cannot handle queries with multiple elements. "
+                          f"All but first will be ignored")
+
         # TODO: Handle this with external function
         # num_generated_peaks: Dict[SomaxProspector, int] = {}
         if query.path is None:
             for prospector in self._direct_influenced_prospectors():
                 try:
-                    prospector.process(query.influence)
+                    prospector.process(query.content[0], **kwargs)
                 except InvalidLabelInput:
                     # Ignore prospector if label doesn't match
                     continue
         else:
             prospector: SomaxProspector = self.get_prospector(query.path)
-            prospector.process(query.influence)
+            prospector.process(query.content[0], **kwargs)
 
     def update_time_on_influence(self, time: float) -> None:
         raise NotImplementedError("Not implemented yet")
 
     def update_time_on_trigger(self, time: float) -> None:
-        for scale_action in self.scale_actions.values():
+        for scale_action in self.post_filters.values():
             if isinstance(scale_action, AbstractScaleAction):
                 scale_action.update_time(time)
-        for prospector in self._prospectors:
+        for prospector in self.prospectors.values():
             if isinstance(prospector, SomaxProspector):
                 prospector.update_time_on_new_event(time)
 
     def _merged_candidates(self) -> Candidates:
         weight_sum: float = 0.0
-        for prospector in self._prospectors:
+        for prospector in self.prospectors.values():
             weight_sum += prospector.weight if prospector.is_enabled_and_eligible() else 0.0
         if weight_sum < 1e-6:
             self.logger.warning(f"Weights are invalid. Setting weight to 1.0.")
             weight_sum = 1.0
 
         candidates_list: List[Candidates] = []
-        for prospector in self._prospectors:
+        for prospector in self.prospectors.values():
             if prospector.is_enabled_and_eligible():
                 candidates: Candidates = prospector.pop_candidates()
                 candidates.scale(prospector.weight / weight_sum)
@@ -175,10 +182,10 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         self._transform_handler.clear()
         self._jury.clear()
 
-        for post_filter in self._post_filters:
+        for post_filter in self.post_filters.values():
             post_filter.clear()
 
-        for prospector in self._prospectors:
+        for prospector in self.prospectors.values():
             prospector.clear()
 
     def force_jump(self, index: int):
@@ -186,7 +193,7 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         self._force_jump_index = index
 
     def read_memory(self, corpus: SomaxCorpus, **kwargs) -> None:
-        for prospector in self._prospectors:
+        for prospector in self.prospectors.values():
             prospector.read_memory(corpus, **kwargs)
         self._update_transforms()
         self.corpus = corpus
@@ -195,14 +202,19 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         self._jury.feedback(event, **kwargs)
         self._merge_handler.feedback(event, **kwargs)
 
-        for post_filter in self._post_filters:
+        for post_filter in self.post_filters.values():
             post_filter.feedback(event, **kwargs)
 
-        for prospector in self._prospectors:
+        for prospector in self.prospectors.values():
             prospector.feedback(event, **kwargs)
 
-    def add_prospector(self, prospector: SomaxProspector) -> None:
-        self._prospectors.append(prospector)
+    def add_prospector(self, prospector: SomaxProspector, override: bool = False) -> None:
+        name: str = prospector.name
+        if name in self.prospectors and not override:
+            raise DuplicateKeyError(f"A prospector with the name '{name}' already exists. "
+                                    f"To override: use 'override=True'.")
+
+        self.prospectors[name] = prospector
         self._parse_parameters()
 
     # def delete_atom(self, path: List[str]) -> None:
@@ -219,20 +231,20 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         self._parse_parameters()
 
     # TODO[B4]: Replace with add_post_filter
-    def add_scale_action(self, scale_action: AbstractScaleAction, override: bool = False):
+    def add_post_filter(self, scale_action: AbstractScaleAction, override: bool = False):
         """ Raises: DuplicateKeyError """
-        if type(scale_action) in self.scale_actions and not override:
+        if type(scale_action) in self.post_filters and not override:
             raise DuplicateKeyError(f"A Scale Action of type '{type(scale_action).__name__}' already exists."
                                     f"To override: use 'override=True'.")
 
         scale_action.update_transforms(self._transform_handler)
-        self.scale_actions[type(scale_action)] = scale_action
+        self.post_filters[type(scale_action)] = scale_action
 
         self._parse_parameters()
 
     def remove_scale_action(self, scale_action_type: Type[AbstractScaleAction]):
         """ Raises: KeyError """
-        del self.scale_actions[scale_action_type]
+        del self.post_filters[scale_action_type]
         del self.parameter_dict[scale_action_type.__name__]
         self._parse_parameters()
 
@@ -276,7 +288,7 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
 
     def get_peaks_statistics(self) -> Dict[str, int]:
         peaks_count: Dict[str, int] = {}
-        for prospector in self._prospectors:
+        for prospector in self.prospectors.values():
             peaks_count[prospector.name] = prospector.num_peaks()
         return peaks_count
 
@@ -303,15 +315,15 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         if path:  # Path is not empty: descend recursively
             raise IndexError("Invalid path specification")
         else:
-            for prospector in self._prospectors:
+            for prospector in self.prospectors.values():
                 if prospector.name == target_name:
                     return prospector
 
     def _direct_influenced_prospectors(self) -> List[SomaxProspector]:
-        return [prospector for prospector in self._prospectors if not prospector.self_influenced]
+        return [prospector for prospector in self.prospectors.values() if not prospector.self_influenced]
 
     def _self_influenced_prospectors(self) -> List[SomaxProspector]:
-        return [prospector for prospector in self._prospectors if prospector.self_influenced]
+        return [prospector for prospector in self.prospectors.values() if prospector.self_influenced]
 
     def _force_jump(self) -> Optional[Candidate]:
         self.clear()
@@ -331,14 +343,14 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         # corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
         #                                                      for t in np.unique(peaks.transform_ids)]
         # TODO[B4]: Handle with Generator._post_filters
-        for scale_action in self.scale_actions.values():
+        for scale_action in self.post_filters.values():
             if scale_action.is_enabled_and_eligible():
                 candidates = scale_action.filter(candidates)
         return candidates
 
     def _update_transforms(self):
-        for scale_action in self.scale_actions.values():
+        for scale_action in self.post_filters.values():
             scale_action.update_transforms(self._transform_handler)
 
-        for prospector in self._prospectors:
+        for prospector in self.prospectors.values():
             prospector.update_transforms(self._transform_handler)

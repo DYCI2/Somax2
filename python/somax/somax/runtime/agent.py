@@ -396,7 +396,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def add_scale_action(self, scale_action: str, override: bool = False, verbose: bool = True, **kwargs):
         try:
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
-            self.player.add_scale_action(scale_action, override)
+            self.player.add_post_filter(scale_action, override)
             self._send_eligibility()
             if verbose:
                 self.logger.info(f"Added scale action {repr(scale_action)}")

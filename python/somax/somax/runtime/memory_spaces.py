@@ -43,7 +43,7 @@ class AbstractMemorySpace(Parametric, StringParsed, ABC):
         pass
 
     @abstractmethod
-    def influence(self, labels: List[Tuple[Label, AbstractTransform]], time: float, **kwargs) -> List[Candidate]:
+    def influence(self, labels: List[Tuple[Label, AbstractTransform]], **kwargs) -> List[Candidate]:
         pass
 
     @staticmethod
@@ -97,7 +97,7 @@ class NGramMemorySpace(AbstractMemorySpace):
         self._structured_data = {}
         labels: deque[int] = deque([], self._ngram_size.value)
         for event, label in zip(self._corpus.events, self._labels):
-            labels.append(hash(label))
+            labels.append(label.value)
             if len(labels) < self._ngram_size.value:
                 continue
             else:
@@ -108,15 +108,15 @@ class NGramMemorySpace(AbstractMemorySpace):
                 else:
                     self._structured_data[key] = [value]
 
-    def influence(self, labels: List[Tuple[Label, AbstractTransform]], time: float, **_kwargs) -> List[Candidate]:
+    def influence(self, labels: List[Tuple[Label, AbstractTransform]], **_kwargs) -> List[Candidate]:
         matches: List[Candidate] = []
         for (label, transform) in labels:
-            label_value: int = hash(label)
+            label_value: int = label.value
             transform_id: int = self._transform_handler.get_id(transform)
             self.logger.debug(f"[influence] Influencing memory space {self} with label {label_value}.")
             self._influence_history[transform_id].append(label_value)
             if len(self._influence_history[transform_id]) < self._ngram_size.value:
-                # all deques will have the same length, hence if one is shorter than ngram size, all of them will be.
+                # all deques will have the same length, thus if one is shorter than ngram size, all of them will be.
                 return []
             else:
                 key: Tuple[int, ...] = tuple(self._influence_history[transform_id])

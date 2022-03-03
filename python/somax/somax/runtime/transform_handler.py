@@ -51,6 +51,7 @@ class TransformHandler:
                 for transform_feature in transform.valid_features():
                     if issubclass(feature, transform_feature):
                         transforms.append(transform)
+                        break
         return transforms
         # return [t for t in self._transforms.values() if feature in t.valid_features()]
 

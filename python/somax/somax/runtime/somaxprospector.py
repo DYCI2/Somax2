@@ -1,6 +1,7 @@
 import logging
+import typing
 import warnings
-from typing import Dict, Union, List, Optional, Type
+from typing import Dict, Union, List, Optional, Type, Tuple
 
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
@@ -8,24 +9,31 @@ from merge.main.classifier import Classifier, Trainable
 from merge.main.corpus_event import CorpusEvent
 from merge.main.exceptions import QueryError
 from merge.main.feature import Feature
+from merge.main.influence import Influence, CorpusInfluence, FeatureInfluence, LabelInfluence
 from merge.main.label import Label
 from merge.main.prospector import Prospector
-from merge.main.query import Query, CorpusQuery, FeatureQuery, LabelQuery
+from somax.features.feature import AbstractFeature
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.transform_handler import TransformHandler
-from somax.runtime.transforms import NoTransform
+from somax.runtime.transforms import NoTransform, AbstractTransform
 
 
 class SomaxProspector(Prospector, Parametric, ContentAware):
     DEFAULT_WEIGHT = 1.0
 
-    def __init__(self, name: str, weight: float, feature: Type[Feature], classifier: Classifier,
-                 activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace, corpus: SomaxCorpus,
-                 self_influenced: bool, enabled: bool = True):
+    def __init__(self, name: str,
+                 weight: float,
+                 feature: Type[Feature],
+                 classifier: Classifier,
+                 activity_pattern: AbstractActivityPattern,
+                 memory_space: AbstractMemorySpace,
+                 corpus: Optional[SomaxCorpus],
+                 self_influenced: bool,
+                 enabled: bool = True):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"[__init__ Creating atom '{name}'.")
@@ -42,12 +50,14 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
         self._self_influenced: Parameter = Parameter(self_influenced, 0, 1, 'bool',
                                                      "Whether new events creates by player should influence this atom or not.")
 
+        self.valid_transforms: List[AbstractTransform] = []
+
         self._corpus: Optional[SomaxCorpus] = None
         if corpus:
             self.read_memory(corpus)
 
         self._parse_parameters()
-        raise NotImplementedError("Note: SomaxProspector.set_time_axis is not implemented, don't forget to handle this")
+        warnings.warn("Note: SomaxProspector.set_time_axis is not implemented, don't forget to handle this")
 
     def learn_event(self, event: CorpusEvent, **kwargs) -> None:
         raise NotImplementedError("This is not supported yet")
@@ -74,28 +84,30 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
         self._memory_space.model(self._corpus, labels)
         self._activity_pattern.read_corpus(self._corpus)
 
-    def process(self, query: Query, **kwargs) -> None:
+    def process(self, influence: Influence, **kwargs) -> None:
         if not self.is_enabled_and_eligible():
             return
-
-        if len(query) != 1:  # Note: no need to handle case len == 0: pre-defined invariant for `InfluenceQuery`
-            warnings.warn(f"{self.__class__.__name__} only handles the first element in "
-                          f"object {query.__class__.__name__}, the rest will be ignored.")
 
         warnings.warn("Transforms is not supported yet")
         warnings.warn("Make sure that time really is updated before calling this!! - see")
 
-        if isinstance(query, CorpusQuery):
-            label: Label = self._classifier.classify(query.data[0].get_feature(self._feature_type))
-        elif isinstance(query, FeatureQuery):
-            label: Label = self._classifier.classify(query.data[0])
-        elif isinstance(query, LabelQuery):
-            label: Label = query.data[0]
-        else:
-            raise QueryError(f"{self.__class__.__name__} does not support influence of type "
-                             f"{query.__class__.__name__}")
+        # TODO[B2]: Fix loop, don't check condition on each elem
+        labels: List[Tuple[Label, AbstractTransform]] = []
+        for transform in self.valid_transforms:
+            if isinstance(influence, CorpusInfluence):
+                label: Label = self._classifier.classify(transform.inverse(
+                    influence.value.get_feature(self._feature_type)))
+            elif isinstance(influence, FeatureInfluence):
+                label: Label = self._classifier.classify(transform.inverse(influence.value))
+            # elif isinstance(influence, LabelInfluence):
+            #     # TODO[B2]: How to handle Label input with Transform? We can't nor should use transforms here
+            #     label: Label = influence.value
+            else:
+                raise QueryError(f"{self.__class__.__name__} does not support influence of type "
+                                 f"{influence.__class__.__name__}")
+            labels.append((label, transform))
 
-        matched_events: List[Candidate] = self._memory_space.influence([(label, NoTransform())], **kwargs)
+        matched_events: List[Candidate] = self._memory_space.influence(labels, **kwargs)
         self._activity_pattern.insert(matched_events)
 
     # # influences the memory with incoming data
@@ -164,10 +176,10 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
         self._update_state()
 
     def update_transforms(self, transform_handler: TransformHandler):
-        raise NotImplementedError("Transforms is not supported yet")
-        # valid_transforms: List[AbstractTransform] = self._classifier.update_transforms(transform_handler)
-        # self._memory_space.update_transforms(transform_handler, valid_transforms)
-        # self._activity_pattern.update_transforms(transform_handler, valid_transforms)
+        # TODO[B2]: Temporary cast: should not be handled this way
+        self.valid_transforms = transform_handler.get_by_feature(typing.cast(Type[AbstractFeature],
+                                                                             self._feature_type))
+        self._memory_space.update_transforms(transform_handler, self.valid_transforms)
 
     def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
         parameters = {}
