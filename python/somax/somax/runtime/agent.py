@@ -32,10 +32,10 @@ from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
-from somax.runtime.player import SomaxGenerator
+from somax.runtime.somax_generator import SomaxGenerator
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.send_protocol import SendProtocol
-from somax.runtime.somaxprospector import SomaxProspector
+from somax.runtime.somax_prospector import SomaxProspector
 from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
@@ -160,7 +160,7 @@ class OscAgent(Agent, AsyncioOscObject):
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
-            self.generator.update_time_on_trigger(scheduling_time)
+            self.generator.update_time(scheduling_time)
             output_list: List[Optional[Candidate]] = self.generator.process_query(TriggerQuery())
             if len(output_list) == 0:
                 self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
@@ -271,7 +271,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.scheduling_handler.add_trigger_event()
 
         elif isinstance(query, InfluenceQuery):
-            self.generator.update_time_on_influence(self.scheduling_handler.time)
+            self.generator.update_time(self.scheduling_handler.time)
             self.generator.process_query(query, **kwargs)
 
     def influence(self, path: str, feature_keyword: str, value: Any, **kwargs):

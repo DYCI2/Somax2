@@ -105,7 +105,7 @@ class ContinuousCandidates(Candidates):
         return self.scores
 
     def get_indices(self) -> np.ndarray:
-        return np.ndarray([e.index for e in self.associated_corpus.events_around(self.times)], dtype=np.int32)
+        return np.array([e.index for e in self.associated_corpus.events_around(self.times)], dtype=np.int32)
 
     def get_transforms(self) -> List[Transform]:
         raise NotImplementedError("Not implemented yet")

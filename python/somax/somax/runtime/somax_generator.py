@@ -20,9 +20,9 @@ from somax.runtime.exceptions import InvalidLabelInput
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.parameter import Parameter, Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
-from somax.runtime.peaks import ContinuousCandidates
+from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.somaxprospector import SomaxProspector
+from somax.runtime.somax_prospector import SomaxProspector
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
 
@@ -105,10 +105,6 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
             output = self._jury.decide(candidates)
             self.previous_candidates = candidates
 
-        if output is None:
-            self.feedback(None)
-            return None
-
         self.feedback(output)
         return output
 
@@ -144,16 +140,13 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
             prospector: SomaxProspector = self.get_prospector(query.path)
             prospector.process(query.content[0], **kwargs)
 
-    def update_time_on_influence(self, time: float) -> None:
-        raise NotImplementedError("Not implemented yet")
-
-    def update_time_on_trigger(self, time: float) -> None:
+    def update_time(self, time: float) -> None:
         for scale_action in self.post_filters.values():
             if isinstance(scale_action, AbstractScaleAction):
                 scale_action.update_time(time)
         for prospector in self.prospectors.values():
             if isinstance(prospector, SomaxProspector):
-                prospector.update_time_on_new_event(time)
+                prospector.update_time(time)
 
     def _merged_candidates(self) -> Candidates:
         weight_sum: float = 0.0
@@ -193,10 +186,10 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         self._force_jump_index = index
 
     def read_memory(self, corpus: SomaxCorpus, **kwargs) -> None:
-        for prospector in self.prospectors.values():
-            prospector.read_memory(corpus, **kwargs)
         self._update_transforms()
         self.corpus = corpus
+        for prospector in self.prospectors.values():
+            prospector.read_memory(corpus, **kwargs)
 
     def feedback(self, event: Optional[Candidate], **kwargs) -> None:
         self._jury.feedback(event, **kwargs)
@@ -286,11 +279,15 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
         self._transform_handler.remove(transform)
         self._update_transforms()
 
-    def get_peaks_statistics(self) -> Dict[str, int]:
-        peaks_count: Dict[str, int] = {}
-        for prospector in self.prospectors.values():
-            peaks_count[prospector.name] = prospector.num_peaks()
-        return peaks_count
+    def peek_candidates(self) -> Dict[SomaxProspector, Optional[Candidates]]:
+        return {prospector: prospector.peek_candidates() for prospector in self.prospectors.values()}
+
+    # TODO: Replaced with `peek_candidates`
+    # def get_peaks_statistics(self) -> Dict[str, int]:
+    #     peaks_count: Dict[str, int] = {}
+    #     for prospector in self.prospectors.values():
+    #         peaks_count[prospector.name] = prospector.num_peaks()
+    #     return peaks_count
 
     def get_output_statistics(self) -> Tuple[int, float]:
         num_candidates: int = self.previous_candidates.size()

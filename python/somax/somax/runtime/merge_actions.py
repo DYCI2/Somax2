@@ -12,7 +12,7 @@ from merge.main.merge_handler import MergeHandler
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.parameter import Parametric, Parameter
-from somax.runtime.peaks import ContinuousCandidates
+from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.utils.introspective import StringParsed
 
 

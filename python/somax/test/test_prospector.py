@@ -1,4 +1,6 @@
+import copy
 import typing
+from typing import Type
 from unittest import TestCase
 
 from merge.main.candidates import Candidates
@@ -13,8 +15,9 @@ from somax.features import TopNote, OnsetChroma
 from somax.runtime.activity_pattern import ClassicActivityPattern, AbstractActivityPattern, ManualActivityPattern
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.memory_spaces import NGramMemorySpace
-from somax.runtime.somaxprospector import SomaxProspector
+from somax.runtime.somax_prospector import SomaxProspector
 from somax.runtime.transform_handler import TransformHandler
+from somax.runtime.transforms import TransposeTransform, AbstractTransform
 
 
 class TestSomaxProspector(TestCase):
@@ -24,7 +27,7 @@ class TestSomaxProspector(TestCase):
                                                                      ClassicActivityPattern())
 
         for (i, event) in enumerate(corpus.events):  # type: int, CorpusEvent
-            prospector.update_time_on_influence(i)
+            prospector.update_time(i)
             prospector.process(CorpusInfluence(event))
             candidates: Candidates = prospector.pop_candidates()
             self.assertEqual(1, len(candidates))
@@ -37,7 +40,7 @@ class TestSomaxProspector(TestCase):
                                                                      ClassicActivityPattern())
 
         for (i, event) in enumerate(corpus.events):  # type: int, CorpusEvent
-            prospector.update_time_on_influence(i)
+            prospector.update_time(i)
             prospector.process(CorpusInfluence(event))
             candidates: Candidates = prospector.pop_candidates()
             self.assertEqual(2, len(candidates))
@@ -51,7 +54,7 @@ class TestSomaxProspector(TestCase):
                                                                      ClassicActivityPattern())
 
         for (i, event) in enumerate(corpus.events):  # type: int, CorpusEvent
-            prospector.update_time_on_influence(i)
+            prospector.update_time(i)
             prospector.process(CorpusInfluence(event))
             candidates: Candidates = prospector.pop_candidates()
             self.assertGreaterEqual(len(candidates), 2)
@@ -64,14 +67,35 @@ class TestSomaxProspector(TestCase):
                                                                      ClassicActivityPattern())
 
         for (i, event) in enumerate(influence_corpus.events):  # type: int, CorpusEvent
-            prospector.update_time_on_influence(i)
+            prospector.update_time(i)
             prospector.process(CorpusInfluence(event))
             candidates: Candidates = prospector.pop_candidates()
             self.assertEqual(len(candidates), 0)
 
+    def test_transforms(self):
+        source_corpus: SomaxCorpus = CorpusBuilder().build("data/cscale_two_octave.mid")
+        influence_corpus: SomaxCorpus = CorpusBuilder().build("data/csharp_scale_two_octave.mid")
+
+        prospector: SomaxProspector = self._create_direct_prospector(source_corpus, TopNote, IdentityClassifier(),
+                                                                     ClassicActivityPattern())
+
+        transform_handler: TransformHandler() = TransformHandler()
+        transform_handler.add(TransposeTransform(1))
+        prospector.update_transforms(transform_handler)
+
+        for (i, event) in enumerate(influence_corpus.events):  # type: int, CorpusEvent
+            prospector.update_time(i)
+            prospector.process(CorpusInfluence(event))
+            candidates: Candidates = prospector.pop_candidates()
+            self.assertTrue(1 <= len(candidates) <= 2)
+            for candidate in candidates.get_candidates():
+                transform: AbstractTransform = transform_handler.get_transform(candidate.transform)
+                feature: Feature = copy.deepcopy(candidate.event.get_feature(TopNote))
+                self.assertEqual(transform.apply(feature).value, event.get_feature(TopNote).value)
+
     def _create_direct_prospector(self,
                                   corpus: SomaxCorpus,
-                                  feature_type: typing.Type[Feature],
+                                  feature_type: Type[Feature],
                                   classifier: Classifier,
                                   activity_pattern: AbstractActivityPattern) -> SomaxProspector:
         prospector: SomaxProspector = SomaxProspector("p", 1.0, feature_type,

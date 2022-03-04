@@ -24,7 +24,7 @@ from somax.runtime.exceptions import ParameterError
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
-from somax.runtime.player import SomaxGenerator
+from somax.runtime.somax_generator import SomaxGenerator
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.target import Target

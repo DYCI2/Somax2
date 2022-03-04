@@ -9,7 +9,7 @@ from merge.main.classifier import Classifier, Trainable
 from merge.main.corpus_event import CorpusEvent
 from merge.main.exceptions import QueryError
 from merge.main.feature import Feature
-from merge.main.influence import Influence, CorpusInfluence, FeatureInfluence, LabelInfluence
+from merge.main.influence import Influence, CorpusInfluence, FeatureInfluence
 from merge.main.label import Label
 from merge.main.prospector import Prospector
 from somax.features.feature import AbstractFeature
@@ -19,7 +19,7 @@ from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.transform_handler import TransformHandler
-from somax.runtime.transforms import NoTransform, AbstractTransform
+from somax.runtime.transforms import AbstractTransform
 
 
 class SomaxProspector(Prospector, Parametric, ContentAware):
@@ -84,12 +84,11 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
         self._memory_space.model(self._corpus, labels)
         self._activity_pattern.read_corpus(self._corpus)
 
-    def process(self, influence: Influence, **kwargs) -> None:
+    def process(self, influence: Influence, self_influenced: bool = False, **kwargs) -> None:
         if not self.is_enabled_and_eligible():
             return
 
-        warnings.warn("Transforms is not supported yet")
-        warnings.warn("Make sure that time really is updated before calling this!! - see")
+        warnings.warn("Make sure that time really is updated before calling this!!")
 
         # TODO[B2]: Fix loop, don't check condition on each elem
         labels: List[Tuple[Label, AbstractTransform]] = []
@@ -108,7 +107,7 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
             labels.append((label, transform))
 
         matched_events: List[Candidate] = self._memory_space.influence(labels, **kwargs)
-        self._activity_pattern.insert(matched_events)
+        self._activity_pattern.insert(matched_events, self_influenced)
 
     # # influences the memory with incoming data
     # def influence(self, influence: Influence, time: float, **kwargs) -> int:
@@ -131,7 +130,7 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
 
     def pop_candidates(self, **kwargs) -> Candidates:
         """ get peaks: May have side effects inside activity_pattern. """
-        return self._activity_pattern.pop_peaks()
+        return self._activity_pattern.pop_candidates()
 
     def clear(self):
         self._activity_pattern.clear()
@@ -139,29 +138,22 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
         self._memory_space.clear()
 
     def feedback(self, event: Optional[Candidate], **kwargs) -> None:
-        warnings.warn("TODO: move the feedback behaviour to the SomaxGenerator instead!!")
-
-    # def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
-    #              _applied_transform: AbstractTransform) -> None:
-    #     # TODO[B1]: This needs to be handled in Generator._on_feedback
-    #     if self.self_influenced and feedback_event is not None:
-    #         self.influence(CorpusInfluence(feedback_event), time)
+        if self.self_influenced and event is not None:
+            self.process(CorpusInfluence(event.event), self_influenced=True)
 
     # ############################################# #
     # ###    CLASS-SPECIFIC PUBLIC FUNCTIONS    ### #
     # ############################################# #
 
-    def update_time_on_influence(self, time: float) -> None:
-        self._activity_pattern.update_peaks_on_influence(time)
-
     def set_time_axis(self):
-        pass
+        raise NotImplementedError("Not implemented")
         # TODO[B3]: THis function will be needed to pass which dimension (relative/absolute)
-        #           should be used for candidate handling in the continuous case
+        #           should be used for candidate handling in the continuous case.
+        #           Could be part of Temporal/TimeDependent interface
 
-    def update_time_on_new_event(self, time: float) -> None:
+    def update_time(self, time: float) -> None:
         if self.is_enabled_and_eligible():
-            self._activity_pattern.update_peaks_on_new_event(time)
+            self._activity_pattern.update_time(time)
 
     def set_classifier(self, classifier: Classifier) -> None:
         self._classifier = classifier

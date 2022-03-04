@@ -11,7 +11,7 @@ from merge.main.post_filter import PostFilter
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus
 from somax.runtime.parameter import Parametric, Parameter
-from somax.runtime.peaks import ContinuousCandidates
+from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.transform_handler import TransformHandler
 from somax.utils.introspective import StringParsed
 
