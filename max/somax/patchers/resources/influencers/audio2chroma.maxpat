@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -42,7 +42,7 @@
 				"box" : 				{
 					"comment" : "(any) ircamdescriptor parameters",
 					"id" : "obj-6",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -108,7 +108,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-4",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -121,7 +121,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-3",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -133,7 +133,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-2",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -156,13 +156,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
+						"rect" : [ 59.0, 104.0, 640.0, 480.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -199,7 +199,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 178.5, 219.0, 32.5, 20.0 ],
+									"patching_rect" : [ 178.5, 219.0, 32.5, 22.0 ],
 									"text" : "/ 1."
 								}
 
@@ -213,7 +213,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "bang", "", "bang" ],
-									"patching_rect" : [ 72.5, 100.0, 46.0, 20.0 ],
+									"patching_rect" : [ 72.5, 100.0, 46.0, 22.0 ],
 									"text" : "t b l b"
 								}
 
@@ -227,7 +227,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "int" ],
-									"patching_rect" : [ 178.5, 193.0, 59.0, 20.0 ],
+									"patching_rect" : [ 178.5, 193.0, 59.0, 22.0 ],
 									"text" : "minimum"
 								}
 
@@ -241,7 +241,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 246.5, 160.0, 32.0, 34.0 ],
+									"patching_rect" : [ 246.5, 160.0, 32.0, 33.0 ],
 									"text" : "tau (ms)"
 								}
 
@@ -255,7 +255,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 287.0, 135.0, 76.0, 18.0 ],
+									"patching_rect" : [ 287.0, 135.0, 76.0, 20.0 ],
 									"text" : "loadmess 300."
 								}
 
@@ -271,7 +271,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 233.0, 136.0, 50.0, 20.0 ]
+									"patching_rect" : [ 233.0, 136.0, 50.0, 22.0 ]
 								}
 
 							}
@@ -284,7 +284,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "" ],
-									"patching_rect" : [ 178.5, 161.0, 37.0, 20.0 ],
+									"patching_rect" : [ 178.5, 161.0, 37.0, 22.0 ],
 									"text" : "timer"
 								}
 
@@ -298,7 +298,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 114.0, 303.0, 52.0, 18.0 ],
+									"patching_rect" : [ 114.0, 303.0, 52.0, 20.0 ],
 									"text" : "loadbang"
 								}
 
@@ -313,7 +313,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 114.0, 326.0, 45.0, 32.0 ],
+									"patching_rect" : [ 114.0, 326.0, 45.0, 35.0 ],
 									"text" : "0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0."
 								}
 
@@ -339,7 +339,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 72.0, 336.5, 40.0, 20.0 ],
+									"patching_rect" : [ 72.0, 336.5, 40.0, 22.0 ],
 									"text" : "zl reg"
 								}
 
@@ -353,7 +353,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 72.0, 363.5, 201.0, 20.0 ],
+									"patching_rect" : [ 72.0, 363.5, 201.0, 22.0 ],
 									"text" : "vexpr (1 - $f2) * $f1 @scalarmode 1"
 								}
 
@@ -367,7 +367,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 143.0, 251.5, 175.0, 20.0 ],
+									"patching_rect" : [ 143.0, 251.5, 175.0, 22.0 ],
 									"text" : "vexpr $f2 * $f1 @scalarmode 1"
 								}
 
@@ -381,7 +381,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 72.0, 389.5, 90.0, 20.0 ],
+									"patching_rect" : [ 72.0, 389.5, 90.0, 22.0 ],
 									"text" : "vexpr $f1 + $f2"
 								}
 
@@ -656,7 +656,13 @@
 				}
 
 			}
- ]
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "ircamdescriptor~.mxo",
+				"type" : "iLaX"
+			}
+ ],
+		"autosave" : 0
 	}
 
 }

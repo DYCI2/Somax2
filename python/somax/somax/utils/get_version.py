@@ -29,6 +29,9 @@ class VersionTools:
         current: List[str] = VersionTools.decode(VersionTools.version())
         other: List[str] = VersionTools.decode(version)
 
+        if len(other) < 3:
+            return False    # Legacy version number
+
         if major and current[0] != other[0]:
             return False
         if minor and current[1] != other[1]:

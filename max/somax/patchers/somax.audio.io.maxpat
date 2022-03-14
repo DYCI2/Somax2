@@ -40,6 +40,30 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-57",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 265.583333790302277, 253.0, 29.5, 22.0 ],
+					"text" : "t l l"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-55",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 170.350000456969013, 279.459401198144292, 107.0, 22.0 ],
+					"text" : "routepass enabled"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
 					"hidden" : 1,
@@ -373,7 +397,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 260.750000456969019, 286.459401198144292, 55.4482421875, 19.171875 ],
+					"patching_rect" : [ 260.916667123635648, 305.74547525874209, 55.4482421875, 19.171875 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 184.815420396851096, 27.825000250000016, 55.4482421875, 19.171875 ],
 					"rounded" : 8.0,
@@ -435,7 +459,7 @@
 					"numoutlets" : 7,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 34.750000456969019, 342.173327137546494, 245.0, 74.673327137546494 ],
+					"patching_rect" : [ 34.916667123635648, 361.459401198144292, 245.0, 74.673327137546494 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 12.469205657934936, 148.775000476497667, 245.0, 74.673327137546494 ],
 					"varname" : "somax.audioinfluencer.wireless",
@@ -753,7 +777,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 260.750000456969019, 312.173327137546494, 75.0, 22.0 ],
+					"patching_rect" : [ 260.916667123635648, 331.459401198144292, 75.0, 22.0 ],
 					"text" : "openwindow"
 				}
 
@@ -1289,7 +1313,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-14", 2 ],
-					"midpoints" : [ 331.083333790302277, 340.586663568773247, 270.250000456969019, 340.586663568773247 ],
+					"midpoints" : [ 331.083333790302277, 340.586663568773247, 270.416667123635648, 340.586663568773247 ],
 					"source" : [ "obj-19", 1 ]
 				}
 
@@ -1467,18 +1491,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-23", 0 ],
-					"midpoints" : [ 274.583333790302277, 277.229700599072146, 377.833333790302277, 277.229700599072146 ],
-					"order" : 1,
-					"source" : [ "obj-4", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-30", 0 ],
-					"midpoints" : [ 274.583333790302277, 277.229700599072146, 520.999999543030981, 277.229700599072146 ],
-					"order" : 0,
+					"destination" : [ "obj-57", 0 ],
 					"source" : [ "obj-4", 1 ]
 				}
 
@@ -1569,6 +1582,38 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-14", 2 ],
+					"source" : [ "obj-55", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-23", 0 ],
+					"midpoints" : [ 285.583333790302277, 277.229700599072146, 377.833333790302277, 277.229700599072146 ],
+					"order" : 1,
+					"source" : [ "obj-57", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-30", 0 ],
+					"midpoints" : [ 285.583333790302277, 280.229700599072146, 520.999999543030981, 280.229700599072146 ],
+					"order" : 0,
+					"source" : [ "obj-57", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-55", 0 ],
+					"source" : [ "obj-57", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-19", 0 ],
 					"source" : [ "obj-6", 0 ]
 				}
@@ -1585,9 +1630,9 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"default" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1602,16 +1647,16 @@
 				}
 ,
 				"newobj" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"message" : 				{
-					"fontsize" : [ 10.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
