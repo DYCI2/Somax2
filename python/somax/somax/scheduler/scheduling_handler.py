@@ -251,6 +251,14 @@ class SchedulingHandler(Introspective, ABC):
     def aligned_onsets(self) -> bool:
         return self.midi_handler.align_onsets
 
+    def set_sustain_notes_mode(self, enabled: bool) -> None:
+        self.midi_handler.sustain_notes_artificially = enabled
+
+    def set_align_onset_mode(self, enabled: bool) -> None:
+        self.midi_handler.align_onsets = enabled
+
+
+
 
 class ManualSchedulingHandler(SchedulingHandler):
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:

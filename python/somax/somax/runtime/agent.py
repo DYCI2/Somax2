@@ -439,12 +439,12 @@ class OscAgent(Agent, AsyncioOscObject):
         self.logger.debug(f"Scheduling mode set to {self.scheduling_handler.renderer_info()}")
 
     def set_held_notes_mode(self, enable: bool):
-        self.scheduling_handler.hold_notes_artificially = enable
+        self.scheduling_handler.set_sustain_notes_mode(enable)
         self.flush()
         self.logger.debug(f"Held notes mode set to {enable} for player '{self.player.name}'.")
 
     def set_onset_mode(self, enable: bool):
-        self.scheduling_handler.simultaneous_onsets = enable
+        self.scheduling_handler.set_align_onset_mode(enable)
         self.flush()
         self.logger.debug(f"Simultaneous onset mode set to {enable} for player '{self.player.name}'.")
 
