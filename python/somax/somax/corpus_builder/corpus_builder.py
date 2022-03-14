@@ -136,7 +136,7 @@ class CorpusBuilder:
         """ raises: IOError if folder mixes audio and midi files """
         content_type: Optional[Type[Corpus]] = None
         filepaths: List[str] = []
-        for file in os.listdir(filepath):
+        for file in sorted(os.listdir(filepath)):
             file_content_type: Optional[Type[Corpus]] = self._parse_content_type(file)
             if file_content_type is None:
                 self.logger.warning(f"Ignoring file {file}: invalid type.")
