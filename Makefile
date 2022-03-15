@@ -24,24 +24,30 @@ pyinstaller:
 		--name $(PYINSTALLER_TARGET_NAME) \
 		--exclude-module matplotlib \
 		--exclude-module PyQt5 \
-		--add-data="$(PY_LIB_PATH)/somax/classification/tables:somax/classification/tables" \
-		--add-data="$(PY_LIB_PATH)/somax/log:somax/log" \
 		--hidden-import="sklearn.utils._weight_vector" \
 		--hidden-import="sklearn.neighbors._typedefs" \
 		--hidden-import="sklearn.neighbors._quad_tree" \
+		--hidden-import="sklearn.utils._typedefs" \
+		--hidden-import="sklearn.neighbors._ball_tree" \
+		--hidden-import="sklearn.neighbors._partition_nodes" \
+		--add-data="$(PY_LIB_PATH)/somax/classification/tables:somax/classification/tables" \
+		--add-data="$(PY_LIB_PATH)/somax/log:somax/log" \
 		--hidden-import="cmath" \
 		--collect-data="librosa" \
 		--codesign-identity="Developer ID Application: INST RECHER COORD ACOUST MUSICALE" \
 		--osx-entitlements-file="codesign/somax.entitlements"
 
 codesignature:
+	# Only the notiarization step is needed as of PyInstaller 4.10
 	# Note: sklearn/.dylibs/libomp.dylib is High Sierra only and required to sign since it's in a hidden folder
-	codesign --deep --timestamp -s "Developer ID Application: INST RECHER COORD ACOUST MUSICALE" \
-			--options=runtime  \
-			--entitlements codesign/somax.entitlements \
-			codesign/somax.entitlements dist/somax_server.app/Contents/Resources/sklearn/.dylibs/libomp.dylib \
-			dist/"$(PYINSTALLER_TARGET_NAME)".app
-	hdiutil create dist/Somax2.dmg -fs HFS+ -srcfolder dist/somax_server.app -ov
+	 codesign --deep --timestamp --force -s "Developer ID Application: INST RECHER COORD ACOUST MUSICALE" \
+				--options=runtime  \
+				--entitlements codesign/somax.entitlements \
+				codesign/somax.entitlements dist/somax_server.app/Contents/Resources/sklearn/.dylibs/libomp.dylib \
+				dist/"$(PYINSTALLER_TARGET_NAME)".app
+
+notarize:
+	hdiutil create "$(DMG_PATH)" -fs HFS+ -srcfolder dist/somax_server.app -ov
 	xcrun altool --notarize-app --primary-bundle-id "ircam.repmus.somax" \
 				 -u "joakim.borg@ircam.fr" \
 				 -p $$(security find-generic-password -w -a $$LOGNAME -s "somax_app_specific") \

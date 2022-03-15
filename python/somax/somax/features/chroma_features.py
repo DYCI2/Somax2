@@ -68,7 +68,7 @@ class OnsetChroma(BaseChroma):
     @classmethod
     def _analyze_audio(cls, events: List[AudioCorpusEvent], metadata: AudioMetadata):
         # shape: (12, k) where k is measured in frames
-        chroma = librosa.feature.chroma_stft(metadata.background_data, metadata.sr, hop_length=metadata.hop_length,
+        chroma = librosa.feature.chroma_stft(y=metadata.background_data, sr=metadata.sr, hop_length=metadata.hop_length,
                                              n_chroma=12, n_fft=8192)  # TODO: Pass as parameters
         for event in events:
             onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
@@ -99,8 +99,11 @@ class MeanChroma(BaseChroma):
     @classmethod
     def _analyze_audio(cls, events: List[AudioCorpusEvent], metadata: AudioMetadata) -> None:
         # shape: (12, k) where k is measured in frames
-        chroma = librosa.feature.chroma_stft(metadata.background_data, metadata.sr, hop_length=metadata.hop_length,
-                                             n_chroma=12, n_fft=8192)  # TODO: Parameters should be accessible
+        chroma = librosa.feature.chroma_stft(y=metadata.background_data,
+                                             sr=metadata.sr,
+                                             hop_length=metadata.hop_length,
+                                             n_chroma=12,
+                                             n_fft=8192)  # TODO: Parameters should be accessible
         for event in events:
             onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
             end_frame: int = librosa.time_to_frames(event.onset + event.duration, sr=metadata.sr,

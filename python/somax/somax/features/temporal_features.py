@@ -39,9 +39,10 @@ class Tempo(CorpusFeature):
         audio_data: np.ndarray = metadata.foreground_data
         sr: float = metadata.sr
         hop_length: int = metadata.hop_length
-        onset_envelope: np.ndarray = librosa.onset.onset_strength(metadata.foreground_data,
-                                                                  metadata.sr, hop_length=hop_length)
-        tempo, beats = librosa.beat.beat_track(audio_data, sr,
+        onset_envelope: np.ndarray = librosa.onset.onset_strength(y=metadata.foreground_data,
+                                                                  sr=metadata.sr, hop_length=hop_length)
+        tempo, beats = librosa.beat.beat_track(y=audio_data,
+                                               sr=sr,
                                                onset_envelope=onset_envelope,
                                                hop_length=hop_length,
                                                start_bpm=metadata.estimated_initial_bpm,

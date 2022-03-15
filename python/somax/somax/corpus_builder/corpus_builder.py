@@ -11,6 +11,7 @@ from typing import Tuple, List, Optional, Dict, Any, Type, Union
 import librosa
 import numpy as np
 import pandas as pd
+from audioread import NoBackendError
 
 from somax import log
 from somax.corpus_builder.chroma_filter import AbstractFilter
@@ -85,6 +86,9 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
         except FileNotFoundError as e:
             self.logger.error(f"{str(e)}. No corpus was built")
             self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            return
+        except NoBackendError:
+            self.logger.error(f"The file format of the provided file is not supported.")
             return
 
         if self.output_folder is not None:
@@ -394,7 +398,7 @@ class CorpusBuilder:
         """ y: mono signal [shape: (n,)]
             onsets: onset frames """
         rms_frames_db = 20 * np.log10(
-            np.abs(librosa.feature.rms(y, hop_length=hop_length)) + librosa.util.tiny(y)).reshape(-1)
+            np.abs(librosa.feature.rms(y=y, hop_length=hop_length)) + librosa.util.tiny(y)).reshape(-1)
         eof = librosa.samples_to_frames(y.size, hop_length=hop_length)
         durations = np.diff(np.block([onsets, eof]))
 
@@ -442,7 +446,7 @@ class CorpusBuilder:
                                                   "wait": pick_peak_wait_s * sr // hop_length,
                                                   "delta": pick_peak_delta_gain}
 
-        onset_frames: np.ndarray = librosa.onset.onset_detect(y, sr, hop_length=hop_length, backtrack=backtrack,
+        onset_frames: np.ndarray = librosa.onset.onset_detect(y=y, sr=sr, hop_length=hop_length, backtrack=backtrack,
                                                               normalize=True, **peak_pick_parameters)
         return onset_frames
 
