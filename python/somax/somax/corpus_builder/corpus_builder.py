@@ -209,10 +209,16 @@ class CorpusBuilder:
 
         return corpus
 
-    def _build_audio(self, filepaths: List[str], name: str, foreground_channels: Optional[List[int]] = None,
-                     background_channels: Optional[List[int]] = None, onset_channels: Optional[List[int]] = None,
-                     segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET, hop_length: int = 512,
-                     estimated_initial_bpm: float = 120.0, beat_tightness: float = 100.0,
+    def _build_audio(self,
+                     filepaths: List[str],
+                     name: str,
+                     foreground_channels: Optional[List[int]] = None,
+                     background_channels: Optional[List[int]] = None,
+                     onset_channels: Optional[List[int]] = None,
+                     segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET,
+                     hop_length: int = 512,
+                     estimated_initial_bpm: float = 120.0,
+                     beat_tightness: float = 100.0,
                      **kwargs) -> Corpus:
         """ raises: FileNotFoundError  if failed to load file
                     RuntimeError if other issues are encountered in librosa
@@ -234,8 +240,12 @@ class CorpusBuilder:
                           f"and {AudioMetadata.num_channels(y)} channels")
         onset_frames: np.ndarray
         duration_frames: np.ndarray
-        onset_frames, duration_frames, stats = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
-                                                                 segmentation_mode=segmentation_mode, **kwargs)
+        onset_frames, duration_frames, stats = self._slice_audio(audio_signal=y,
+                                                                 sr=sr,
+                                                                 onset_channels=onset_channels,
+                                                                 segmentation_mode=segmentation_mode,
+                                                                 hop_length=hop_length,
+                                                                 **kwargs)
         onset_times: np.ndarray = librosa.frames_to_time(onset_frames, sr=sr, hop_length=hop_length)
         duration_times: np.ndarray = librosa.frames_to_time(duration_frames, sr=sr, hop_length=hop_length)
 
