@@ -89,6 +89,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
             return
         except NoBackendError:
             self.logger.error(f"The file format of the provided file is not supported.")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
 
         if self.output_folder is not None:
