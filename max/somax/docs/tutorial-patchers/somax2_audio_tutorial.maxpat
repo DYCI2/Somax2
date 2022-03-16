@@ -10,9 +10,9 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 2225.0, 1275.0 ],
+		"rect" : [ 264.0, 221.0, 1132.0, 977.0 ],
 		"bglocked" : 0,
-		"openinpresentation" : 0,
+		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
 		"default_fontface" : 0,
 		"default_fontname" : "Arial",
@@ -698,9 +698,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1101.0, 812.5, 52.0, 64.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 2,
-									"presentation_rect" : [ 1072.228571428571513, 409.5, 100.0, 36.0 ],
 									"text" : ";\rmax maxwindow"
 								}
 
@@ -1465,7 +1462,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 79.0, 2225.0, 1275.0 ],
+						"rect" : [ 34.0, 79.0, 1112.0, 1275.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1494,6 +1491,92 @@
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"hint" : "",
+									"id" : "obj-11",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 331.75, 265.0, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 624.75, 342.0, 21.0, 21.0 ],
+									"rounded" : 60.0,
+									"text" : "4",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 4,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-12",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 488.47741935483873, 335.125, 373.0, 332.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 586.47741935483873, 333.1875, 49.04516129032254, 56.625 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 0,
+									"fontsize" : 12.162162162162161,
+									"id" : "obj-7",
+									"linecount" : 6,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 733.25, 738.0, 318.0, 88.0 ],
+									"presentation" : 1,
+									"presentation_linecount" : 6,
+									"presentation_rect" : [ 731.25, 723.0, 318.0, 88.0 ],
+									"text" : "Finally, try setting «Quality» to 0.5. Without this parameter, the Player will always play something, even if it's a poor match. By setting this parameter to 0.5, we will ensure consistency between the input and output, so that the Player will more strictly follow what you're playing, or if it can't match: not play anything at all.",
+									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"hint" : "",
+									"id" : "obj-10",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 708.75, 742.0, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 706.75, 727.0, 21.0, 21.0 ],
+									"rounded" : 60.0,
+									"text" : "4",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"comment" : "",
 									"id" : "obj-9",
@@ -1694,7 +1777,7 @@
 									"patching_rect" : [ 732.25, 641.0, 316.0, 34.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
-									"presentation_rect" : [ 731.25, 535.0, 316.25, 34.0 ],
+									"presentation_rect" : [ 731.25, 538.0, 316.25, 34.0 ],
 									"text" : "Select «Inlet (External)» as the input source to the MIDI influencer",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1717,7 +1800,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 707.75, 645.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 706.75, 539.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 706.75, 542.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1735,7 +1818,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1004.0, 751.0, 252.0, 53.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 751.178715404332706, 670.0, 252.0, 53.0 ],
+									"presentation_rect" : [ 751.178715404332706, 665.0, 252.0, 53.0 ],
 									"range" : 36
 								}
 
@@ -1838,7 +1921,7 @@
 									"patching_rect" : [ 730.75, 563.0, 316.0, 102.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 7,
-									"presentation_rect" : [ 731.25, 429.0, 316.25, 102.0 ],
+									"presentation_rect" : [ 731.25, 431.0, 316.25, 102.0 ],
 									"text" : "Select the «TutorialMidi» as source in the «Influence sources & routing» section of the Player. You can keep all the toggles on, they indicate that the Player should listen to the (P)itch (O)nset (C)hroma and (C)hroma_(O)nset  of the MIDI influencer, and will generally only be used when mixing input from multiple sources.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1854,7 +1937,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 943.25, 447.0, 231.0, 24.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 960.746676058638968, 317.0, 76.0, 24.0 ],
+									"presentation_rect" : [ 1036.25, 323.0, 76.0, 24.0 ],
 									"text" : "click this",
 									"textjustification" : 1
 								}
@@ -1863,16 +1946,16 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-148",
-									"linecount" : 3,
+									"linecount" : 7,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 784.678715404332706, 803.5, 159.0, 49.0 ],
+									"patching_rect" : [ 784.678715404332706, 803.5, 163.0, 102.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 2,
-									"presentation_rect" : [ 787.178715404332706, 310.0, 180.0, 35.0 ],
-									"text" : "playingmode 1, ignorephase 1, decaybasis 1, continuity 0.8"
+									"presentation_linecount" : 3,
+									"presentation_rect" : [ 711.178715404332706, 310.5, 332.0, 49.0 ],
+									"text" : "playingmode 1, ignorephase 1, decaybasis 1, continuity 0.8, outputthreshold 0., selfpeakdecay 1.5, melodicpeakdecay 1.5, harmonicpeakdecay 1.5, audiorenderer timeout 2500"
 								}
 
 							}
@@ -1906,8 +1989,8 @@
 									"patching_rect" : [ 730.5, 521.0, 316.0, 61.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 4,
-									"presentation_rect" : [ 706.75, 352.0, 340.75, 61.0 ],
-									"text" : "For this step, we'll use the MIDI influencer (through the kslider below) to influence the Player. In order to do so we need to return to what was described in the the first tab: the wireless paradigm.",
+									"presentation_rect" : [ 706.75, 364.0, 340.75, 61.0 ],
+									"text" : "For this step, we'll use the MIDI influencer (through the keyboard below) to influence the Player. In order to do so we need to return to what was described in the the first tab: the wireless paradigm.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1929,7 +2012,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 718.75, 565.5, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 706.75, 433.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 706.75, 435.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1977,7 +2060,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 624.0, 82.852144469525911, 319.5, 611.943566591422268 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 691.107430808665413, 220.852144469525911, 372.142569191334587, 579.147855530474089 ],
+									"presentation_rect" : [ 691.107430808665413, 220.852144469525911, 372.142569191334587, 590.147855530474089 ],
 									"proportion" : 0.5
 								}
 
@@ -2088,7 +2171,7 @@
 ,
 					"patching_rect" : [ 332.0, 418.0, 81.0, 80.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 4.0, 135.0, 1095.0, 813.0 ],
+					"presentation_rect" : [ 4.0, 135.0, 1120.0, 813.0 ],
 					"varname" : "interaction2",
 					"viewvisibility" : 1
 				}
@@ -2432,7 +2515,7 @@
 									"presentation" : 1,
 									"presentation_linecount" : 13,
 									"presentation_rect" : [ 311.5, 286.0, 343.25, 181.0 ],
-									"text" : "As can be seen, this patcher looks a bit different than the one previous tutorial. This is because it uses wireless communication (i.e. without patch cords) between the different objects in order to simplify dynamic routing of messages and creation of objects.\n\nWhen using the wireless paradigm, it's possible to create another player or another influencer by simply duplicating the object, which wasn't possible in the previous patch. This can be very useful if you in the future want to make your own patcher, but for now it won't make a huge difference.\n\nThere are however a couple of new things to be aware of:",
+									"text" : "As can be seen, this patcher looks a bit different than the one previous tutorial. This is because it uses wireless communication (i.e. without patch cords) between the different objects in order to simplify dynamic routing of messages and creation of objects.\n\nWhen using the wireless paradigm, it's possible to create another player or another influencer by simply duplicating the object, which wasn't possible in the previous patch. This can be very useful in the future if you want to make your own patcher, but won't for now make a huge difference.\n\nThere are however a couple of new things to be aware of:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2528,6 +2611,27 @@
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.2,
+									"bubbleside" : 0,
+									"fontface" : 0,
+									"fontsize" : 11.0,
+									"id" : "obj-1",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 218.25, 476.0, 204.0, 62.0 ],
+									"presentation" : 1,
+									"presentation_linecount" : 4,
+									"presentation_rect" : [ 219.45483870967746, 446.926072234762955, 146.301918047079312, 75.0 ],
+									"text" : "With these parameters, the Player may occasonally get stuck: use this slider to manually change the state",
+									"textjustification" : 1
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"comment" : "",
 									"id" : "obj-5",
@@ -2969,7 +3073,7 @@
 									"presentation" : 1,
 									"presentation_linecount" : 11,
 									"presentation_rect" : [ 366.5, 531.0, 321.0, 156.0 ],
-									"text" : "Then start the improvisation by enabling the audio (3.1) and running the server (3.2). \n\nYou should now hear the Player playing the audio file linearly. If you however change the «Continuity» parameter (3.3) to 0, you should notice how the player starts jumping in the content, recombining the slices in a non-linear manner. This parameter can be very useful to control the linearity of the improvisation, where a value below 1 will prioritize non-linearity and a value above 1 priorityize linearity",
+									"text" : "Then start the improvisation by enabling the audio (3.1) and running the server (3.2). \n\nYou should now hear the Player playing the audio file linearly. If you however change the «Continuity» parameter (3.3) to 0, you should notice how the player starts jumping in the content, recombining the slices in a non-linear manner. This parameter can be very useful to control the linearity of the improvisation, where a value below 1 will prioritize non-linearity and a value above 1 prioritize linearity",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3312,7 +3416,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 325.25, 1350.0, 103.5, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 691.107430808665413, 354.852144469525911, 372.142569191334587, 579.147855530474089 ],
+					"presentation_rect" : [ 687.928715404332706, 353.0, 384.321284595667294, 600.0 ],
 					"proportion" : 0.5
 				}
 
@@ -3368,7 +3472,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.89 ],
+					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
 					"hidden" : 1,
 					"id" : "obj-8",
 					"maxclass" : "panel",
@@ -3570,7 +3674,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 300.0, 284.0, 164.0, 49.0 ],
+					"patching_rect" : [ 300.0, 284.0, 165.0, 49.0 ],
 					"text" : "script $1 corpusbuilder2, script $1 audiocorpusbuilder, script $1 cbpanel"
 				}
 
@@ -3631,7 +3735,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 133.0, 284.0, 163.0, 49.0 ],
+					"patching_rect" : [ 133.0, 284.0, 165.0, 49.0 ],
 					"text" : "script $1 corpusbuilder1, script $1 audiocorpusbuilder, script $1 cbpanel"
 				}
 
@@ -4081,6 +4185,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-90", 0 ],
+					"source" : [ "obj-5", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
 					"source" : [ "obj-68", 0 ]
 				}
@@ -4238,6 +4349,18 @@
 			"parameter_overrides" : 			{
 				"obj-4::obj-17::obj-39::obj-6::obj-46::obj-1" : 				{
 					"parameter_invisible" : 0,
+					"parameter_modmode" : 0,
+					"parameter_unitstyle" : 10
+				}
+,
+				"obj-4::obj-1::obj-6::obj-1::obj-349::obj-26" : 				{
+					"parameter_invisible" : 1,
+					"parameter_modmode" : 0,
+					"parameter_unitstyle" : 10
+				}
+,
+				"obj-4::obj-1::obj-6::obj-5::obj-26" : 				{
+					"parameter_invisible" : 1,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
 				}
