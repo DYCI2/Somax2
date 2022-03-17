@@ -74,5 +74,29 @@
     "reset": {
         "title": "Reset Influences",
         "description": "In some corpora with specific settings, it is possible to reach a state where the player is getting stuck in a loop, repeating the same set of states over and over again. Pressing this button will reset the runtime state of the player (remove all previous matches) without altering any of the set parameters.\n\nThis is perfectly safe to use in real-time!"
+    },
+    "outputselection": {
+        "title": "Output Selection Mode",
+        "description": "Controls how the output is selected at each step. The «Deterministic» mode will always select the best match, which will result in high quality matches but may lack variation. The «Probabilistic» mode will select the output stochastically among the matches, which results in a more varied output but at the risk of occasionally playing rather poor matches."
+    },
+    "layerpeaksinfo": {
+        "title": "Matches (per layer)",
+        "description": "Number of matches found in each in each of the three layers (self/melodic/harmonic)"
+    },
+    "corpusstatus": {
+        "title": "Corpus Status",
+        "description": "Status indicator when loading corpus. If corpus failed to load: see Max Console for more information."
+    },
+    "stateinfoslider": {
+        "title": "State Slider",
+        "description": "Indicates the current state in the corpus that is being played. This slider can also be used to manually go to a specific point in the corpus."
+    },
+    "peaksandquality": {
+        "title": "Matches & Quality",
+        "description": "These two displays indicate the state of the player at the previously output event. The left one displays the number of unique matches in the corpus (after all layers have been merged), the right one indicates the quality of the best match."
+    },
+    "flush": {
+        "title": "Flush (MIDI)",
+        "description": "If the player is using a MIDI corpus, use this button to flush all notes."
     }
 }

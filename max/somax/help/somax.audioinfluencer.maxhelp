@@ -3474,7 +3474,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 511.0, 134.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "9",
+									"text" : "12",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -3498,13 +3498,14 @@
 									"fontface" : 1,
 									"fontsize" : 24.0,
 									"id" : "obj-156",
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 4.0, 162.0, 33.0 ],
+									"patching_rect" : [ 686.5, 4.0, 162.0, 60.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 539.0, 128.0, 295.0, 33.0 ],
-									"text" : "Gain (Yin)",
+									"text" : "Downsample (Yin)",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3514,12 +3515,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
+									"linecount" : 7,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 195.0, 20.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 195.0, 100.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 539.0, 168.5, 304.0, 20.0 ],
+									"presentation_linecount" : 4,
+									"presentation_rect" : [ 539.0, 168.5, 304.0, 60.0 ],
+									"text" : "Downsample factor for the Yin algorithm.\n\nA higher value will make the algorithm more CPU efficient at the cost of the quality of the estimation.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3702,7 +3706,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 549.0, 363.5, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 23.0, 342.0, 20.0, 20.0 ],
+									"presentation_rect" : [ 31.0, 285.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
