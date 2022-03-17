@@ -1,7 +1,7 @@
 {
     "audiofile": {
         "title": "Audio File",
-        "description": "Drop a the stereo or mono audio file (.aif, .flac, .mp3 or .wav) here to build a corpus, or use the «Read» button to select the audio file."
+        "description": "Drop a the stereo or mono audio file (.aif, .flac, .wav) here to build a corpus, or use the «Read» button to select the audio file.\n\nNote that .mp3 files may work on certain versions of MacOS."
     },
     "segmode": {
         "title": "Segmentation Mode",
@@ -21,7 +21,7 @@
     },
     "bpm": {
         "title": "Initial BPM",
-        "description": "Somax uses time stretching to adapt the tempo of the corpus to what is currently being played, and estimates the tempo of the audio file using a beat detection algorithm. In order to estimate the tempo correctly, it will however need an initial, approximate tempo estimation."
+        "description": "Somax uses time stretching to adapt the tempo of the corpus to what is currently being played, and estimates the tempo of the audio file using a beat detection algorithm. In order to estimate the tempo correctly, it will however need an initial, approximate tempo estimation.\n\nNote that this is only used when using beat-related time stretching in the Player. Providing this value is therefore not mandatory."
     },
     "discardsilent": {
         "title": "Discard Silent Segments",

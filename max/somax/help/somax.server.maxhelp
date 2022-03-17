@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 935.0, 627.0 ],
+						"rect" : [ 34.0, 105.0, 935.0, 627.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -95,7 +95,7 @@
 									"maxclass" : "live.line",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 512.0, 438.0, 216.75, 8.583333432674408 ]
+									"patching_rect" : [ 512.0, 426.0, 216.75, 8.583333432674408 ]
 								}
 
 							}
@@ -106,7 +106,7 @@
 									"maxclass" : "live.line",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 728.0, 310.0, 5.0, 132.166666775941849 ]
+									"patching_rect" : [ 728.0, 298.0, 5.0, 132.166666775941849 ]
 								}
 
 							}
@@ -117,7 +117,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 636.0, 286.0, 189.0, 20.0 ],
+									"patching_rect" : [ 636.0, 274.0, 189.0, 20.0 ],
 									"text" : "But not their related audio files!",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
@@ -131,7 +131,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 419.0, 490.0, 47.0 ],
+									"patching_rect" : [ 10.0, 407.0, 490.0, 47.0 ],
 									"text" : "Once again: it's currently not possible to move audio files related to an audio corpus from their original location. One way to circumvent this issue is to use the «Copy Audio File» option. This will copy the audio file to the current corpus folder.",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
@@ -145,7 +145,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 407.0, 324.0, 264.0, 51.0 ],
+									"patching_rect" : [ 407.0, 312.0, 264.0, 51.0 ],
 									"text" : "This is the module for setting the corpus folder, it's available in the corpus builders and in the server settings (and here)"
 								}
 
@@ -157,7 +157,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 243.0, 651.0, 47.0 ],
+									"patching_rect" : [ 10.0, 231.0, 651.0, 47.0 ],
 									"text" : "When setting the corpus folder in one of these locations, all corpus builders will export any corpora built during the current session to this folder, and any Player will list all the corpora available in this folder (after pressing the «Refresh» button).",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -178,7 +178,7 @@
 									"numoutlets" : 1,
 									"offset" : [ 0.0, 0.0 ],
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 72.0, 316.0, 342.0, 67.0 ],
+									"patching_rect" : [ 72.0, 304.0, 342.0, 67.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 42.696426500000229, 366.0, 320.28135515334975, 54.0 ],
 									"viewvisibility" : 1
@@ -205,7 +205,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 650.0, 231.0, 161.0, 51.0 ],
+									"patching_rect" : [ 650.0, 219.0, 161.0, 51.0 ],
 									"text" : "You can freely move corpora between folders: they are just files."
 								}
 
@@ -213,12 +213,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-1",
-									"linecount" : 7,
+									"linecount" : 6,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 129.0, 651.0, 100.0 ],
-									"text" : "By default, any built corpora is stored in the «corpus» folder of the Somax package. \n\nSometimes, it's however preferable to be able to specify your own folder for the corpus. This can be done in three places:\n\n- Server «Settings»\n- Audio Corpus Builder\n- MIDI Corpus Builder",
+									"patching_rect" : [ 10.0, 129.0, 651.0, 87.0 ],
+									"text" : "By default, any built corpora is stored in the «corpus» folder of the Somax package. \nSometimes, it's however preferable to be able to specify your own folder for the corpus. This can be done in three places:\n\n- Server «Settings»\n- Audio Corpus Builder\n- MIDI Corpus Builder",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -259,7 +259,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 68.0, 310.0, 346.0, 69.0 ],
+									"patching_rect" : [ 68.0, 298.0, 346.0, 69.0 ],
 									"proportion" : 0.5
 								}
 
@@ -273,31 +273,15 @@
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"newobj" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
-								}
-,
-								"message" : 								{
+									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ]
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"default" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -308,8 +292,8 @@
 										"autogradient" : 0
 									}
 ,
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"button" : 								{
@@ -318,6 +302,22 @@
 ,
 								"toggle" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"message" : 								{
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -1257,7 +1257,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 519.0, 149.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "14",
+									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -1281,14 +1281,13 @@
 									"fontface" : 1,
 									"fontsize" : 24.0,
 									"id" : "obj-156",
-									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 537.5, 146.0, 162.0, 87.0 ],
+									"patching_rect" : [ 537.5, 146.0, 162.0, 33.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 547.0, 143.0, 332.0, 33.0 ],
-									"text" : "Test Segmentation",
+									"text" : "Audio File",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1298,15 +1297,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 11,
+									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 537.5, 211.220703125, 198.0, 154.0 ],
+									"patching_rect" : [ 537.5, 211.220703125, 198.0, 60.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 6,
-									"presentation_rect" : [ 547.0, 183.5, 332.0, 87.0 ],
-									"text" : "The «Test Segmentation» button can be used to quickly check the segmentation parameters without building the entire corpus (which can be quite time consuming). This button provides a number of insights on how the segmentation will be done as well as both visualization and sonification of the onsets in context of the original audio file.",
+									"presentation_linecount" : 3,
+									"presentation_rect" : [ 547.0, 183.5, 332.0, 47.0 ],
+									"text" : "Drop a the stereo or mono audio file (.aif, .flac, .mp3 or .wav) here to build a corpus, or use the «Read» button to select the audio file.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2032,31 +2031,15 @@
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"newobj" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
-								}
-,
-								"message" : 								{
+									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ]
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"default" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2067,8 +2050,8 @@
 										"autogradient" : 0
 									}
 ,
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"button" : 								{
@@ -2077,6 +2060,22 @@
 ,
 								"toggle" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"message" : 								{
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -2154,7 +2153,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 801.0, 128.225806451612925, 129.0, 35.0 ],
-									"presentation_linecount" : 2,
 									"text" : "load somax2_audio_tutorial"
 								}
 
@@ -2390,31 +2388,15 @@
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"newobj" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
-								}
-,
-								"message" : 								{
+									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ]
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"default" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2425,8 +2407,8 @@
 										"autogradient" : 0
 									}
 ,
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"button" : 								{
@@ -2435,6 +2417,22 @@
 ,
 								"toggle" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"message" : 								{
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -2664,31 +2662,15 @@
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"newobj" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
-								}
-,
-								"message" : 								{
+									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ]
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"default" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2699,8 +2681,8 @@
 										"autogradient" : 0
 									}
 ,
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"button" : 								{
@@ -2709,6 +2691,22 @@
 ,
 								"toggle" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"message" : 								{
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -2846,13 +2844,14 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubblepoint" : 0.8,
 									"bubbleside" : 3,
 									"id" : "obj-17",
 									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 9.0, 218.0, 189.0, 51.0 ],
+									"patching_rect" : [ 10.0, 234.0, 189.0, 51.0 ],
 									"text" : "The status window will display whether the server is ready, running, offline, etc."
 								}
 
@@ -2956,31 +2955,15 @@
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"newobj" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
-								}
-,
-								"message" : 								{
+									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ]
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"default" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -2991,8 +2974,8 @@
 										"autogradient" : 0
 									}
 ,
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"button" : 								{
@@ -3001,6 +2984,22 @@
 ,
 								"toggle" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"message" : 								{
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -3103,7 +3102,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 105.0, 935.0, 627.0 ],
+						"rect" : [ 0.0, 26.0, 935.0, 627.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3153,7 +3152,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 21.0, 340.5, 692.0, 47.0 ],
-									"presentation_linecount" : 3,
 									"text" : "A few users have reported issues with the «Start Server» button on macOS when they have the Atom text editor installed. If you have problems with launching the server, you can always launch the server manually by simply opening the «somax_server.app» inside «Documents/Max 8/Packages/Somax-2.x.x/misc/»",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
@@ -3293,31 +3291,15 @@
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"newobj" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
-								}
-,
-								"message" : 								{
+									"fontface" : [ 1 ],
 									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-									"bgfillcolor" : 									{
-										"type" : "gradient",
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"angle" : 270.0,
-										"proportion" : 0.39,
-										"autogradient" : 0
-									}
-,
-									"fontface" : [ 1 ]
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"default" : 								{
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+									"fontface" : [ 1 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3328,8 +3310,8 @@
 										"autogradient" : 0
 									}
 ,
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ]
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"button" : 								{
@@ -3338,6 +3320,22 @@
 ,
 								"toggle" : 								{
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+								}
+,
+								"message" : 								{
+									"fontface" : [ 1 ],
+									"bgfillcolor" : 									{
+										"type" : "gradient",
+										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+										"angle" : 270.0,
+										"proportion" : 0.39,
+										"autogradient" : 0
+									}
+,
+									"fontsize" : [ 10.0 ],
+									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
