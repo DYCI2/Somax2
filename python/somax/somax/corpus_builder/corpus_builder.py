@@ -91,6 +91,10 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
             self.logger.error(f"The file format of the provided file is not supported.")
             self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
+        except IOError as e:
+            self.logger.error(f"{str(e)}. No corpus was built")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            return
 
         if self.output_folder is not None:
             # self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{self.output_folder}'...")
@@ -108,7 +112,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
 
 class CorpusBuilder:
     MIDI_FILE_EXTENSIONS = [".mid", ".midi"]
-    AUDIO_FILE_EXTENSIONS = [".mp3", ".aif", ".aiff", ".wav", ".flac"]
+    AUDIO_FILE_EXTENSIONS = [".mp3", ".aif", ".aiff", ".wav", ".flac"]  # .ogg doesn't work in python
 
     AUDIO_CORPUS_FILE_EXT = ".pickle"
     MIDI_CORPUS_FILE_EXT = ".gz"
