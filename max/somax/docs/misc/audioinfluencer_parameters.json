@@ -1,7 +1,7 @@
 {
     "yin": {
         "title": "Pitch Estimation (Yin)",
-        "description": "The parameters in this box control various aspects of the pitch estimation. The analysis is based on the OMax.yin+ object and the full documentation of these parameters is available by clicking the button below. Note that the «Window» controls the latency of the pitch estimation.\n\nFor more information of the pitch analysis in context, see the «monophonic» tab.\n\nThe button in the right hand corner will blink each time a pitch is detected."
+        "description": "The parameters in this box control various aspects of the pitch estimation. The analysis is based on the OMax.yin+ object, which adds a number of post-processing steps to the Yin algorithm.\n\nThe Yin algorithm detects continuously estimates the fundamental frequency (pitch) of the content, while the post-processing step estimates note onsets and durations from the continuous pitch contour. For more information of the pitch analysis in context, see the «monophonic» tab.\n\nThe button in the right hand corner will blink each time a pitch is detected."
     },
     "bonk": {
         "title": "Onset Detection (Bonk)",
@@ -22,6 +22,30 @@
     "chromadecayrate": {
         "title": "Chroma Decay Rate",
         "description": "This parameter acts as a low-pass filter on the chroma data. This can be useful for monophonic signals to simulate a harmonic contour over the previously played notes."
+    },
+    "yinquality": {
+        "title": "Quality (Yin)",
+        "description": "Each pitch estimated by the Yin algorithm has a quality (between 0 and 1) indicating how good the estimation is. The quality threshold will ignore any pitch estimation below this threshold in the post-processing.\n\nA higher value genrally results in fewer estimated onsets."
+    },
+    "yinwindow": {
+        "title": "Window (Yin)",
+        "description": "The window (in milliseconds) which the post-processing will use to estimate notes.\n\nA higher value generally means better estimations, but be aware that this parameter directly controls the latency of the pitch estimation (e.g., a window of 50 ms will add 50 ms between the perceived onset and the estimated onset)."
+    },
+    "yingain": {
+        "title": "Gain (Yin)",
+        "description": "Pre-gain (in dB) of audio signal before pitch estimation."
+    },
+    "yinprobability": {
+        "title": "Probability (Yin)",
+        "description": "Controls how stable (frequently occurring in the continuous pitch contour) a pitch must be in order to be considered a note in the post-processing stage.\n\nA higher value generally results in fewer (but better) detected onsets."
+    },
+    "yinminfreq": {
+        "title": "Min Frequency (Yin)",
+        "description": "The minimum frequency (in Hz) that the Yin algorithm can detect."
+    },
+    "yindownsample": {
+        "title": "Downsample (Yin)",
+        "description": "Downsample factor for the Yin algorithm.\n\nA higher value will make the algorithm more CPU efficient at the cost of the quality of the estimation."
     }
 
 }

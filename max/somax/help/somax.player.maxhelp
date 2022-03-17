@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -52,13 +52,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 105.0, 1047.0, 707.0 ],
+						"rect" : [ 0.0, 26.0, 1047.0, 707.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -98,7 +98,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 148.0, 621.5, 311.0, 79.0 ],
-									"presentation_linecount" : 4,
 									"text" : "In very fast-paced corpora with a lot of jumps, it is sometimes necessary to increase the number of voices. Make sure to restart the DAC for this change to take effect."
 								}
 
@@ -126,7 +125,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 233.0, 555.5, 410.0, 78.0 ],
-									"presentation_linecount" : 4,
 									"text" : "The «Timestretch Mode» controls the time stretching / pitch shifting algorithm used. «efficient» is recommended when using multiple agents or when performance is a concern. \n\n"
 								}
 
@@ -142,7 +140,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 657.5, 502.0, 311.0, 52.0 ],
-									"presentation_linecount" : 2,
 									"text" : "See the «timestretch» tab of the groove~ maxhelp for more info on the different timestretch modes"
 								}
 
@@ -202,7 +199,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 253.0, 507.0, 377.0, 47.0 ],
-									"presentation_linecount" : 2,
 									"text" : "When transpositions are active (see «Active Transpositions» in the «parameters» tab), the content of the slices will be pitch shifted according to the transposition. ",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -217,7 +213,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 237.0, 247.155419222903902, 410.0, 91.0 ],
-									"presentation_linecount" : 6,
 									"text" : "The «Mode» controls from where each segment should be played: \n(a) from slightly before the start of the segment so that the crossfade is completed at the start of the segment or\n(b) from the start of the segment, so that the first part of the segment, which will be more accurate timing-wise but may result in less clear attacks for certain corpora"
 								}
 
@@ -232,7 +227,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 237.0, 465.5, 410.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "«Crossfade slope» controls how abrupt the crossfade should be. Use 0.5 for equal-power crossfade."
 								}
 
@@ -246,8 +240,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 237.0, 385.5, 410.0, 78.0 ],
-									"presentation_linecount" : 8,
+									"patching_rect" : [ 237.0, 385.5, 412.0, 78.0 ],
 									"text" : "«Continue» determines what to do when the end of a segment has been reached if no new influence/trigger has been received. If this option is enabled, it will continue playing for the number of milliseconds specified by «Timeout» or until a new influence/trigger is received. If this option is disabled, it will stop playing immediately at the end of the segment"
 								}
 
@@ -262,7 +255,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 237.0, 344.5, 311.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "«Attack» and «Release» controls the crossfade time (in milliseconds) at the start and end of each segment"
 								}
 
@@ -278,7 +270,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 703.0, 330.0, 311.0, 66.0 ],
-									"presentation_linecount" : 3,
 									"text" : "At segment (b): audio is played from start of segment (green line) and crossfade gain (gray line) reaches its maximum after the start of the segment."
 								}
 
@@ -294,7 +285,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 710.0, 164.0, 311.0, 66.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Pre-segment (a): slice is played from slightly before the start of the segment (green line) and crossfade gain (gray line) reaches maximum at the start of the segment "
 								}
 
@@ -325,8 +315,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 185.0, 310.0, 66.0 ],
-									"presentation_linecount" : 3,
+									"patching_rect" : [ 10.0, 185.0, 313.0, 66.0 ],
 									"text" : "Pressing the «Renderer» button (only available when an audio corpus has been loaded) in the wireless interface will bring up the audio rendering settings"
 								}
 
@@ -365,7 +354,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 89.0, 553.0, 87.0 ],
+									"patching_rect" : [ 10.0, 89.0, 557.0, 87.0 ],
 									"text" : "When loading an audio corpus in a somax.player, there are a number of additional parameters available to control how the audio output is rendered. \n\nWhen the player jumps between two non-consecutive slices, it does so by crossfading the two slices of the audio file, so that they are sounding simultaneously for a short (but in most cases inaudible) period of time. The renderer window presents the user a number of options for controlling this behaviour.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -486,7 +475,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -966,7 +955,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1029,13 +1018,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1047.0, 707.0 ],
+						"rect" : [ 34.0, 105.0, 1047.0, 707.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1801,7 +1790,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 383.0, 205.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "15",
+									"text" : "9",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -1831,7 +1820,7 @@
 									"patching_rect" : [ 686.5, 10.5, 299.0, 27.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 407.0, 202.0, 244.0, 27.0 ],
-									"text" : "Layer Decay Time",
+									"text" : "Quality Threshold",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1841,15 +1830,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 9,
+									"linecount" : 36,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 208.0, 127.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 208.0, 489.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 7,
-									"presentation_rect" : [ 383.0, 235.5, 281.0, 100.0 ],
-									"text" : "As briefly described under 'Decay Basis', matches from a previous time step has a degree of impact on the generation process for consecutive time steps. This parameter controls for how many events/how many beats (again, see 'Decay Basis' for more information) previous matches inpact the generation process.",
+									"presentation_linecount" : 27,
+									"presentation_rect" : [ 383.0, 235.5, 281.0, 368.0 ],
+									"text" : "The «Quality Threshold» controls the consistency between the input (influences) and output (what the player plays), so that if there's no good match between the two, the system will not play anything at all.\n\nUnder the hood, each match found in the corpus is assigned a score (probability), which is further altered by all of the biasing parameters. The player will use this score to determine the best match and use that for its output. But even if the score is very low, or even if there are no matches at all, the player will by default output something. In some cases, having the system stay silent when there are no good matches may be a better choice, and is exactly what this parameter is for. This parameter sets a minimum score required for a match to qualify as output. For reference, a value of 0.01 will be sufficient to filter out all cases where there are no matches at all. A value of 0.1 will be sufficient to (assuming weights and other parameters are within common ranges) find rather good matches either harmonically or melodically, and a value of 1.0 (or larger) will generally remove everything but almost perfect replications of longer sections of the input, both harmonically and melodically.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2916,7 +2905,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3242,7 +3231,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3785,7 +3774,8 @@
 				"type" : "PNG",
 				"implicit" : 1
 			}
- ]
+ ],
+		"autosave" : 0
 	}
 
 }
