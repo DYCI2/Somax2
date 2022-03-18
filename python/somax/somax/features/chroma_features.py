@@ -114,7 +114,6 @@ class MeanChroma(BaseChroma):
             else:
                 mean_chroma: np.ndarray = np.mean(chroma[:, onset_frame:end_frame], axis=1)
 
-            print(onset_frame,end_frame, mean_chroma.shape)
             max_val: float = np.max(mean_chroma)
             if max_val > 1e-6:
                 mean_chroma /= max_val

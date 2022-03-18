@@ -126,6 +126,8 @@ class CorpusBuilder:
                     IOError if folder mixes audio and midi files or folder is empty"""
         if os.path.isdir(filepath):
             filepaths, content_type = self._folder_content(filepath)  # type: List[str], Optional[Type[Corpus]]
+            if content_type == AudioCorpus:
+                raise IOError("Building audio corpus from folder is not supported")
             name: str = corpus_name if corpus_name is not None else os.path.basename(filepath)
         else:
             content_type = self._parse_content_type(filepath)
@@ -137,7 +139,7 @@ class CorpusBuilder:
         elif content_type == AudioCorpus:
             corpus: Corpus = self._build_audio(filepaths, name, **kwargs)
         else:
-            raise IOError("Invalid file format. Valid extensions are {}.".format(
+            raise IOError("Invalid file format. Valid extensions are '{}'".format(
                 "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
         return corpus
 
