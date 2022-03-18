@@ -91,7 +91,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
             self.logger.error(f"The file format of the provided file is not supported.")
             self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
-        except IOError as e:
+        except (IOError, ParameterError) as e:
             self.logger.error(f"{str(e)}. No corpus was built")
             self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
@@ -353,8 +353,12 @@ class CorpusBuilder:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             y, sr = librosa.load(filepath, sr=None, mono=False)
-        onset_frames, duration_frames, stats = self._slice_audio(audio_signal=y, sr=sr, onset_channels=onset_channels,
-                                                                 segmentation_mode=segmentation_mode, **kwargs)
+        onset_frames, duration_frames, stats = self._slice_audio(audio_signal=y,
+                                                                 sr=sr,
+                                                                 onset_channels=onset_channels,
+                                                                 segmentation_mode=segmentation_mode,
+                                                                 hop_length=hop_length,
+                                                                 **kwargs)
         onset_times: np.ndarray = librosa.frames_to_time(onset_frames, sr=sr, hop_length=hop_length)
         duration_times: np.ndarray = librosa.frames_to_time(duration_frames, sr=sr, hop_length=hop_length)
         return onset_times, duration_times, stats
