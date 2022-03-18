@@ -33,7 +33,12 @@ class TotalEnergyDb(CorpusFeature):
             onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
             end_frame: int = librosa.time_to_frames(event.onset + event.duration, sr=metadata.sr,
                                                     hop_length=metadata.hop_length)
-            event.set_feature(cls(float(np.mean(rms[onset_frame:end_frame]))))
+            if end_frame - onset_frame == 0:
+                # May happen for frames of length 1 due to rare rounding errors in frame offset
+                mean_rms: float = rms[onset_frame]
+            else:
+                mean_rms: float = float(np.mean(rms[onset_frame:end_frame]))
+            event.set_feature(cls(mean_rms))
 
         return events
 

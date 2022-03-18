@@ -108,7 +108,13 @@ class MeanChroma(BaseChroma):
             onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
             end_frame: int = librosa.time_to_frames(event.onset + event.duration, sr=metadata.sr,
                                                     hop_length=metadata.hop_length)
-            mean_chroma: np.ndarray = np.mean(chroma[:, onset_frame:end_frame], axis=1)
+            if end_frame - onset_frame == 0:
+                # May happen for frames of length 1 due to rare rounding errors in frame offset
+                mean_chroma: np.ndarray = chroma[:, onset_frame]
+            else:
+                mean_chroma: np.ndarray = np.mean(chroma[:, onset_frame:end_frame], axis=1)
+
+            print(onset_frame,end_frame, mean_chroma.shape)
             max_val: float = np.max(mean_chroma)
             if max_val > 1e-6:
                 mean_chroma /= max_val
