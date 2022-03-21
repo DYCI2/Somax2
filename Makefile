@@ -12,6 +12,8 @@ MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/Somax-$(VERSION)
 DMG_NAME = Somax-$(VERSION)
 DMG_PATH = dist/$(DMG_NAME).dmg
 
+WIN_PKG = Somax-$(VERSION)
+
 
 
 pyinstaller:
@@ -85,19 +87,18 @@ max-package: clean
 
 windows:
 	@echo "\033[1m####### Building Windows package folder... ########\033[0m"
-	@echo "\\033[38;5;0;31mThis has not been updated for v2.4 and all the invalid symlinks should be manually removed\033[0m"
-	exit 1
 	mkdir -p "$(MAX_BUILD_PARENT_FOLDER)"
 	cp -r "$(MAX_LIB_PATH)" "$(MAX_BUILD_PATH)"
 	rm -rf "$(MAX_BUILD_PATH)"/state/*
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.pickle
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.json
+	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
+	rm -rf "$(MAX_BUILD_PATH)/tutorial*"
 	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
 	cp "$(PYINSTALLER_TARGET)" "$(MAX_BUILD_PATH)"
-	mkdir -p dist
-	cd "$(MAX_BUILD_PARENT_FOLDER)" && zip -r "Somax2.zip" "Somax2"
-	mv "$(MAX_BUILD_PARENT_FOLDER)/Somax2.zip" dist/
+	cd "$(MAX_BUILD_PARENT_FOLDER)" && zip -r "$(WIN_PKG).zip" "$(WIN_PKG)"
+	mv "$(MAX_BUILD_PARENT_FOLDER)/$(WIN_PKG).zip" dist/
 
 
 clean:

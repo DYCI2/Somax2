@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -39,6 +39,23 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontface" : 1,
+					"fontname" : "Arial",
+					"id" : "obj-31",
+					"maxclass" : "live.comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 185.128647956856526, 0.625, 161.0, 17.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 182.248078531277827, -0.375, 25.0, 17.0 ],
+					"text" : "i/o",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textjustification" : 1
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-49",
 					"maxclass" : "newobj",
@@ -351,7 +368,7 @@
 				"box" : 				{
 					"comment" : "(unused)",
 					"id" : "obj-8",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -364,7 +381,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-67",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -500,7 +517,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -847,7 +864,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-7",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -867,13 +884,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 489.0, 197.0, 286.0, 154.0 ],
+						"rect" : [ 489.0, 197.0, 338.0, 226.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -906,16 +923,32 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
-									"id" : "obj-559",
-									"linecount" : 6,
+									"id" : "obj-2",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.0, 73.0, 262.0, 74.0 ],
+									"patching_rect" : [ 5.0, 205.322490706319712, 336.0, 18.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 6,
-									"presentation_rect" : [ 5.0, 73.0, 271.0, 74.0 ],
-									"text" : "CO: Chroma onset. Determines when to segment the \n        chroma, using the same onset as above (O). \n        At least one chroma onset has to be enabled to \n        listen to chroma. When receiving chroma from \n        multiple sources, it is recommended to only \n        enable one CO.",
+									"presentation_rect" : [ 4.0, 180.0, 271.0, 18.0 ],
+									"text" : "i/o: enable / disable the influence source.",
+									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"id" : "obj-559",
+									"linecount" : 8,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 5.0, 101.50673791821562, 335.0, 96.0 ],
+									"presentation" : 1,
+									"presentation_linecount" : 10,
+									"presentation_rect" : [ 5.0, 73.0, 271.0, 118.0 ],
+									"text" : "CO: Chroma onset (on/off). Chromas are computed continuously from the source, but are delivered as a chroma influence only at each detected onset  (see Onset above) from the source, if this flag is on.  Note that if this flag is off, the chroma influence can still  be exerted, providing that at least one Chroma onset flag is On in some other source. If there is only one influence source, this flag should be on. In the case of several sources, it is recommended to only enable one main source as CO.",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
 
@@ -928,10 +961,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.0, 7.0, 207.0, 18.0 ],
+									"patching_rect" : [ 5.0, 7.0, 335.0, 18.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 5.0, 7.0, 207.0, 18.0 ],
-									"text" : "P: Pitch influences.",
+									"presentation_rect" : [ 5.0, 7.0, 271.0, 18.0 ],
+									"text" : "P: Pitch influence (on/off) exerted by the source.",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
 
@@ -945,11 +978,11 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.0, 47.0, 262.0, 29.0 ],
+									"patching_rect" : [ 5.0, 70.004491945477071, 335.0, 29.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 2,
-									"presentation_rect" : [ 5.0, 47.0, 262.0, 29.0 ],
-									"text" : "C: Chroma influences. Continuous data that will be  \n     segmented when receiving a chroma onset (CO).",
+									"presentation_linecount" : 3,
+									"presentation_rect" : [ 5.0, 47.0, 262.0, 40.0 ],
+									"text" : "C: Chroma influence level (0-1). One can choose the repective weight of chroma influence when there are several sources. ",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
 
@@ -959,13 +992,15 @@
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-556",
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.0, 27.0, 223.0, 18.0 ],
+									"patching_rect" : [ 5.0, 26.629879182156134, 335.0, 40.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 5.0, 27.0, 223.0, 18.0 ],
-									"text" : "O: Onset. Triggers output in Reactive mode.",
+									"presentation_linecount" : 3,
+									"presentation_rect" : [ 5.0, 27.0, 271.0, 40.0 ],
+									"text" : "O: Onset (on/off). Triggers new output in Reactive mode for every new onset of the source. Usually only one source should have this flag enabled. ",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
 
@@ -980,7 +1015,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 0.0, 0.0, 286.0, 117.75 ],
+									"patching_rect" : [ 0.0, 0.0, 341.0, 226.75 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 0.0, 0.0, 286.0, 153.75 ],
 									"proportion" : 0.5,
@@ -1046,15 +1081,15 @@
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"newobj" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontface" : [ 1 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1065,12 +1100,13 @@
 										"autogradient" : 0
 									}
 ,
-									"fontsize" : [ 10.0 ]
+									"fontface" : [ 1 ]
 								}
 ,
 								"default" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1081,8 +1117,7 @@
 										"autogradient" : 0
 									}
 ,
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontface" : [ 1 ]
 								}
 ,
 								"button" : 								{
@@ -1470,7 +1505,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 7,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1768,15 +1803,15 @@
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"newobj" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontface" : [ 1 ]
 								}
 ,
 								"message" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1787,12 +1822,13 @@
 										"autogradient" : 0
 									}
 ,
-									"fontsize" : [ 10.0 ]
+									"fontface" : [ 1 ]
 								}
 ,
 								"default" : 								{
-									"fontface" : [ 1 ],
 									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+									"fontsize" : [ 10.0 ],
+									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 									"bgfillcolor" : 									{
 										"type" : "gradient",
 										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -1803,8 +1839,7 @@
 										"autogradient" : 0
 									}
 ,
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontsize" : [ 10.0 ]
+									"fontface" : [ 1 ]
 								}
 ,
 								"button" : 								{
@@ -1858,7 +1893,7 @@
 				"box" : 				{
 					"comment" : "(list) Formatted messages to server",
 					"id" : "obj-3",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3260,6 +3295,43 @@
 
 			}
  ],
+		"parameters" : 		{
+			"obj-39::obj-6::obj-21" : [ "onset", "onset", 0 ],
+			"obj-39::obj-6::obj-28" : [ "chromaonset", "chromaonset", 0 ],
+			"obj-39::obj-6::obj-29" : [ "enable", "enable", 0 ],
+			"obj-39::obj-6::obj-30" : [ "chroma scaling factor", "chroma", 0 ],
+			"obj-39::obj-6::obj-46::obj-1" : [ "source[2]", "source", 0 ],
+			"obj-39::obj-6::obj-9" : [ "pitch", "pitch", 0 ],
+			"parameterbanks" : 			{
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "somax.player.routerblock.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.receiveblock.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "thispatching.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../../../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-13", "obj-17", "obj-62", "obj-64" ]
 			}
@@ -3267,15 +3339,15 @@
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"newobj" : 				{
-					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"message" : 				{
-					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3286,12 +3358,13 @@
 						"autogradient" : 0
 					}
 ,
-					"fontsize" : [ 10.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"default" : 				{
-					"fontface" : [ 1 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -3302,8 +3375,7 @@
 						"autogradient" : 0
 					}
 ,
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"fontsize" : [ 10.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"button" : 				{
