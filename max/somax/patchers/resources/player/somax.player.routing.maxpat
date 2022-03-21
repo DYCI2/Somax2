@@ -890,7 +890,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 489.0, 197.0, 338.0, 226.0 ],
+						"rect" : [ 489.0, 197.0, 337.0, 225.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -919,6 +919,7 @@
 						"subpatcher_template" : "",
 						"helpsidebarclosed" : 1,
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontface" : 1,
@@ -929,7 +930,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 5.0, 205.322490706319712, 336.0, 18.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 4.0, 180.0, 271.0, 18.0 ],
+									"presentation_rect" : [ 5.0, 205.322490706319712, 336.0, 18.0 ],
 									"text" : "i/o: enable / disable the influence source.",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
@@ -944,10 +945,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.0, 101.50673791821562, 335.0, 96.0 ],
+									"patching_rect" : [ 5.0, 101.50673791821562, 336.0, 96.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 10,
-									"presentation_rect" : [ 5.0, 73.0, 271.0, 118.0 ],
+									"presentation_linecount" : 8,
+									"presentation_rect" : [ 5.0, 101.50673791821562, 336.0, 96.0 ],
 									"text" : "CO: Chroma onset (on/off). Chromas are computed continuously from the source, but are delivered as a chroma influence only at each detected onset  (see Onset above) from the source, if this flag is on.  Note that if this flag is off, the chroma influence can still  be exerted, providing that at least one Chroma onset flag is On in some other source. If there is only one influence source, this flag should be on. In the case of several sources, it is recommended to only enable one main source as CO.",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
@@ -963,7 +964,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 5.0, 7.0, 335.0, 18.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 5.0, 7.0, 271.0, 18.0 ],
+									"presentation_rect" : [ 5.0, 7.0, 335.0, 18.0 ],
 									"text" : "P: Pitch influence (on/off) exerted by the source.",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
@@ -980,8 +981,8 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 5.0, 70.004491945477071, 335.0, 29.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 3,
-									"presentation_rect" : [ 5.0, 47.0, 262.0, 40.0 ],
+									"presentation_linecount" : 2,
+									"presentation_rect" : [ 5.0, 70.004491945477071, 335.0, 29.0 ],
 									"text" : "C: Chroma influence level (0-1). One can choose the repective weight of chroma influence when there are several sources. ",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
@@ -999,7 +1000,7 @@
 									"patching_rect" : [ 5.0, 26.629879182156134, 335.0, 40.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
-									"presentation_rect" : [ 5.0, 27.0, 271.0, 40.0 ],
+									"presentation_rect" : [ 5.0, 26.629879182156134, 335.0, 40.0 ],
 									"text" : "O: Onset (on/off). Triggers new output in Reactive mode for every new onset of the source. Usually only one source should have this flag enabled. ",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
@@ -1017,7 +1018,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 0.0, 0.0, 341.0, 226.75 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 0.0, 0.0, 286.0, 153.75 ],
+									"presentation_rect" : [ 0.0, 0.0, 341.0, 226.75 ],
 									"proportion" : 0.5,
 									"rounded" : 0
 								}
@@ -3303,6 +3304,15 @@
 			"obj-39::obj-6::obj-46::obj-1" : [ "source[2]", "source", 0 ],
 			"obj-39::obj-6::obj-9" : [ "pitch", "pitch", 0 ],
 			"parameterbanks" : 			{
+
+			}
+,
+			"parameter_overrides" : 			{
+				"obj-39::obj-6::obj-46::obj-1" : 				{
+					"parameter_invisible" : 0,
+					"parameter_modmode" : 0,
+					"parameter_unitstyle" : 10
+				}
 
 			}
 ,
