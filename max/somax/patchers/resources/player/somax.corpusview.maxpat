@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 8,
+			"revision" : 7,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -40,9 +40,29 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"bgcolor" : [ 0.196078431372549, 0.196078431372549, 0.196078431372549, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 10.0,
+					"id" : "obj-18",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 454.0, 377.0, 46.0, 13.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 2.260625302572748, 28.913793103448285, 43.0, 14.0 ],
+					"text" : "refresh",
+					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"comment" : "(m4l) panel control",
 					"id" : "obj-10",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -62,7 +82,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 469.0, 20.0, 91.0, 35.0 ],
 					"restore" : 					{
-						"corpusname" : [ "-- click to refresh --" ]
+						"corpusname" : [ "(M) Bach_Invention_1" ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -86,7 +106,7 @@
 				"box" : 				{
 					"comment" : "(symbol) associated symbol",
 					"id" : "obj-7",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -167,7 +187,7 @@
 				"box" : 				{
 					"comment" : "(bang) refresh",
 					"id" : "obj-2",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -210,7 +230,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 185.966666666666015, 334.0, 138.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 2.41666666666697, 25.5, 207.354947384154457, 18.0 ],
+					"presentation_rect" : [ 1.905677918418265, 27.913793103448278, 207.354947384154457, 18.0 ],
 					"text" : "Corpus",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -315,7 +335,7 @@
 					"fontface" : 1,
 					"fontsize" : 12.0,
 					"id" : "obj-26",
-					"items" : [ "--", "click", "to", "refresh", "--" ],
+					"items" : [ "--", "click", "to", "refresh", "--", ",", "(M) _bach_chorales", ",", "(M) Bach_Invention_1", ",", "(M) Carine_Intuition", ",", "(M) Debussy_Preludes", ",", "(M) Debussy_String_Quartet", ",", "(M) Dutilleux_Sonata3", ",", "(M) Ligeti_Etudes", ",", "(M) Palestrina_Missa_Papae", ",", "(M) Ten_Jazz_Standards" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -324,13 +344,13 @@
 					"patching_rect" : [ 39.16666666666606, 330.0, 100.0, 22.0 ],
 					"pattrmode" : 1,
 					"presentation" : 1,
-					"presentation_rect" : [ 2.41666666666697, 3.0, 207.354947384154457, 22.0 ],
+					"presentation_rect" : [ 1.905677918418265, 2.931034482758621, 207.354947384154457, 22.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_enum" : [ "-- click to refresh --", "stravi99", "carine_intuition", "mozart36", "debussy_part2", "Scarbo", "debussy", "stravi", "cscale", "papae", "keithjarrett_kolnconcert", "debussy_part_modified", "schoenberg_drei_klavierstucke_11", "debussy_stringquartet", "ligeti_lux_aeterna", "gol", "palestrina_missapapae", "franck1", "brahms3_1_and_2", "keithjarrett_kolnconcert_Right" ],
+							"parameter_enum" : [ "-- click to refresh --", "(M) _bach_chorales", "(M) Bach_Invention_1", "(M) Carine_Intuition", "(M) Debussy_Preludes", "(M) Debussy_String_Quartet", "(M) Dutilleux_Sonata3", "(M) Ligeti_Etudes", "(M) Palestrina_Missa_Papae", "(M) Ten_Jazz_Standards" ],
 							"parameter_invisible" : 1,
 							"parameter_longname" : "corpusname[2]",
-							"parameter_mmax" : 19,
+							"parameter_mmax" : 9,
 							"parameter_shortname" : "corpusname",
 							"parameter_type" : 2
 						}
@@ -378,11 +398,11 @@
 					"comment" : "(list) messages from server",
 					"cool" : 1,
 					"id" : "obj-100",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 84.0, 13.0, 30.0, 30.0 ]
 				}
 
@@ -391,11 +411,11 @@
 				"box" : 				{
 					"comment" : "(symbol/int) select option",
 					"id" : "obj-110",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 38.5, 13.0, 30.0, 30.0 ]
 				}
 
@@ -404,7 +424,7 @@
 				"box" : 				{
 					"comment" : "(symbol) menu item text",
 					"id" : "obj-127",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -471,6 +491,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"source" : [ "obj-18", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-25", 0 ],
 					"source" : [ "obj-22", 0 ]
 				}
@@ -480,6 +507,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-26", 0 ],
 					"midpoints" : [ 417.0, 314.0, 48.66666666666606, 314.0 ],
+					"order" : 1,
 					"source" : [ "obj-24", 1 ]
 				}
 
@@ -488,6 +516,15 @@
 				"patchline" : 				{
 					"destination" : [ "obj-32", 0 ],
 					"source" : [ "obj-24", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
+					"midpoints" : [ 417.0, 198.5, 93.5, 198.5 ],
+					"order" : 0,
+					"source" : [ "obj-24", 1 ]
 				}
 
 			}
@@ -594,34 +631,30 @@
 
 			}
  ],
-		"parameters" : 		{
-			"obj-26" : [ "corpusname[2]", "corpusname", 0 ],
-			"parameterbanks" : 			{
-
-			}
-,
-			"inherited_shortname" : 1
-		}
-,
-		"dependency_cache" : [  ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-120", "obj-26", "obj-16" ]
 			}
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"newobj" : 				{
+				"default" : 				{
+					"bgfillcolor" : 					{
+						"type" : "gradient",
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+,
 					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+					"fontsize" : [ 10.0 ]
 				}
 ,
 				"message" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -631,31 +664,24 @@
 						"proportion" : 0.39,
 						"autogradient" : 0
 					}
-
+,
+					"fontface" : [ 1 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"fontsize" : [ 10.0 ]
 				}
 ,
-				"default" : 				{
+				"newobj" : 				{
 					"fontface" : [ 1 ],
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
+					"fontsize" : [ 10.0 ]
+				}
 ,
+				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
-				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,

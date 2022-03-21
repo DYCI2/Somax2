@@ -2,15 +2,18 @@ import itertools
 import logging
 from abc import ABC, abstractmethod
 from collections import deque
+from enum import Enum
 from typing import List, Tuple, Optional
 
 import numpy as np
 
-from somax.features import MaxVelocity, VerticalDensity
+from somax.features import VerticalDensity, TotalEnergyDb
 from somax.features.spectral_features import OctaveBands
-from somax.runtime.corpus import Corpus
+from somax.features.temporal_features import Tempo
+from somax.runtime.content_aware import ContentAware
+from somax.runtime.corpus import Corpus, MidiCorpus
 from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.improvisation_memory import ImprovisationMemory
+from somax.runtime.improvisation_memory import FeedbackQueue
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.peaks import Peaks
 from somax.runtime.transform_handler import TransformHandler
@@ -18,15 +21,14 @@ from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
 
 
-class AbstractScaleAction(Parametric, StringParsed, ABC):
+class AbstractScaleAction(Parametric, ContentAware, StringParsed, ABC):
     def __init__(self):
         super().__init__()
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this ScaleAction.")
 
     @abstractmethod
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
-              corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
         """ """
 
     @abstractmethod
@@ -54,8 +56,8 @@ class AbstractScaleAction(Parametric, StringParsed, ABC):
     def from_string(cls, scale_action: str, **kwargs) -> 'AbstractScaleAction':
         return cls._from_string(scale_action, **kwargs)
 
-    def is_enabled(self):
-        return self.enabled.value
+    def is_enabled_and_eligible(self):
+        return self.enabled.value and self.eligible
 
 
 class NoScaleAction(AbstractScaleAction):
@@ -63,8 +65,7 @@ class NoScaleAction(AbstractScaleAction):
         super().__init__()
 
     def scale(self, peaks: Peaks, _time: float, _corresponding_events: List[CorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
-              _corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
         return peaks
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
@@ -77,6 +78,9 @@ class NoScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         pass
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True  # valid for all types of corpora
+
 
 class PhaseModulationScaleAction(AbstractScaleAction):
     DEFAULT_SELECTIVITY = 3.0
@@ -85,12 +89,11 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.logger.debug("[__init__] Creating PhaseMergeAction with selectivity {}".format(selectivity))
-        self._selectivity: Parameter = Parameter(selectivity, None, None, 'float', "Very unclear parameter.")  # TODO
+        self._selectivity: Parameter = Parameter(selectivity, None, None, 'float', "Phase modulation")  # TODO
         self._parse_parameters()
 
     def scale(self, peaks: Peaks, time: float, _corresponding_events: List[CorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
-              _corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
         peaks.scores *= np.exp(self.selectivity * (np.cos(2 * np.pi * (time - peaks.times)) - 1))
         return peaks
 
@@ -103,6 +106,9 @@ class PhaseModulationScaleAction(AbstractScaleAction):
 
     def clear(self) -> None:
         pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return isinstance(corpus, MidiCorpus)
 
     @property
     def selectivity(self):
@@ -125,8 +131,7 @@ class NextStateScaleAction(AbstractScaleAction):
         self._previous_output_index: Optional[int] = None
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
-              corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **_kwargs) -> Peaks:
         if self._previous_output_index is None:
             return peaks
         else:
@@ -146,6 +151,9 @@ class NextStateScaleAction(AbstractScaleAction):
     def clear(self) -> None:
         self._previous_output_index = None
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
+
     @property
     def factor(self):
         return self._factor.value
@@ -160,11 +168,11 @@ class AutoJumpScaleAction(AbstractScaleAction):
         super().__init__()
         self._activation_threshold: Parameter = Parameter(activation_threshold, 1, None, "int", "TODO")
         self._jump_threshold: Parameter = Parameter(jump_threshold, 1, None, "int", "TODO")
+        self._history: FeedbackQueue = FeedbackQueue()
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
-              corpus: Corpus = None, **kwargs) -> Peaks:
-        event_indices: List[int] = [e[0].state_index for e in history.get_n_latest(self.jump_threshold + 1)]
+              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+        event_indices: List[int] = [e[0].state_index for e in self._history.get_n_last(self.jump_threshold + 1)]
         if not event_indices:
             return peaks
         previous_index: int = event_indices[0]
@@ -182,13 +190,17 @@ class AutoJumpScaleAction(AbstractScaleAction):
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
-        pass
+        if feedback_event is not None:
+            self._history.append((feedback_event, time, applied_transform))
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
 
     def clear(self) -> None:
-        pass
+        self._history = FeedbackQueue()
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     @property
     def activation_threshold(self):
@@ -206,28 +218,34 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
     def __init__(self, history_len: int = DEFAULT_NUM_EVENTS, sigma: float = DEFAULT_SIGMA):
         super().__init__()
         self._history_len: Parameter = Parameter(history_len, 1, None, "int", "TODO")
+        self._history: FeedbackQueue = FeedbackQueue(max_length=self._history_len.value)
         self._sigma: Parameter = Parameter(sigma, None, None, 'float', "Standard deviation of gaussian")
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
-              corpus: Corpus = None, **kwargs) -> Peaks:
-        previous_tempi: np.ndarray = np.array([e[0].tempo for e in history.get_n_latest(self.history_len)])
+              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+
+        previous_tempi: np.ndarray = np.array(
+            [e[0].get_feature(Tempo).value() for e in self._history.get_n_last(self.history_len)])
         if previous_tempi.size == 0:
             return peaks
         mu: float = float(np.mean(previous_tempi))
-        peaks_tempi: np.ndarray = np.array([e.tempo for e in corresponding_events])
+        peaks_tempi: np.ndarray = np.array([e.get_feature(Tempo).value() for e in corresponding_events])
         peaks.scores *= np.exp(-((peaks_tempi - mu) ** 2 / (2 * self.sigma ** 2)))
         return peaks
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
-        pass
+        if feedback_event is not None:
+            self._history.append((feedback_event, time, applied_transform))
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
 
     def clear(self) -> None:
-        pass
+        self._history = FeedbackQueue()
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(Tempo)
 
     @property
     def history_len(self):
@@ -251,8 +269,7 @@ class StaticTabooScaleAction(AbstractScaleAction):
         self._taboo_indices: deque[int] = deque([], self.taboo_length)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
-              corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
         event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         matching_indices: np.ndarray = np.zeros(len(corresponding_events), dtype=bool)
         for taboo_index in self._taboo_indices:
@@ -272,6 +289,9 @@ class StaticTabooScaleAction(AbstractScaleAction):
 
     def clear(self) -> None:
         self._taboo_indices: deque[int] = deque([], self.taboo_length)
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     @property
     def taboo_length(self) -> int:
@@ -296,8 +316,7 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
         self._transform_handler: Optional[TransformHandler] = None
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
-              corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
         if self._previous_transform is None or self._transform_handler:
             return peaks
         else:
@@ -317,6 +336,9 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
 
     def clear(self) -> None:
         self._previous_transform = None
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     @property
     def factor(self):
@@ -342,27 +364,74 @@ class AbstractGaussianScale(AbstractScaleAction, ABC):
         return self._sigma.value
 
 
-class MaxVelocityScaleAction(AbstractGaussianScale):
-    DEFAULT_VELOCITY = 0.5
+class EnergyScaleAction(AbstractScaleAction):
+    DEFAULT_ENERGY = 0.0
+    DEFAULT_SIGMA = 3.0
+    DEFAULT_MA_LEN = 5
 
-    def __init__(self, mu: float = DEFAULT_VELOCITY):
-        super().__init__(mu=mu)
+    class ListeningMode(Enum):
+        MANUAL = 0
+        EXTERNAL = 1
+        FEEDBACK = 2
 
-    def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
-              _corpus: Corpus = None, **_kwargs) -> Peaks:
-        velocities: np.ndarray = np.array([event.get_feature(MaxVelocity).value() for event in corresponding_events])
-        return self._scale(peaks, velocities)
+    def __init__(self, weight: float = 1.0, mu: float = DEFAULT_ENERGY, sigma: float = DEFAULT_SIGMA,
+                 listening_mode: ListeningMode = ListeningMode.MANUAL, moving_average_len: int = DEFAULT_MA_LEN):
+        super().__init__()
+        self.listen_to: Parameter = ParamWithSetter(listening_mode, 0, 2, "int",
+                                                    "listen to (manual=0, external=1, feedback=2)",
+                                                    self._set_listening_mode)
+        self.moving_average_len: Parameter = Parameter(moving_average_len, 1, None, "int",
+                                                       "num previous events to take into account if listening to input")
+        self._weight: Parameter = Parameter(weight, None, None, 'float', "Relative weight of filter")
+        self._mu: Parameter = ParamWithSetter(mu, None, None, 'float', "Mean value of gaussian.", self._set_mu)
+        self._sigma: Parameter = Parameter(sigma, None, None, 'float', "Standard deviation of gaussian")
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
-                 applied_transform: AbstractTransform) -> None:
-        pass
+        self.history: deque[float] = deque([], self.moving_average_len.value)
+
+    def scale(self, peaks: Peaks, _time: float, corresponding_events: List[CorpusEvent],
+              _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
+        if self.mu is None:
+            return peaks
+
+        velocities: np.ndarray = np.array([event.get_feature(TotalEnergyDb).value() for event in corresponding_events])
+        peaks.scores *= 1 - self._weight.value * (1 - np.exp(-((velocities - self.mu) ** 2 / (2 * self.sigma ** 2))))
+        return peaks
+
+    def feedback(self, feedback_event: Optional[CorpusEvent], _time: float,
+                 _applied_transform: AbstractTransform) -> None:
+        if self.listen_to.value == self.ListeningMode.FEEDBACK and feedback_event is not None:
+            self.history.append(feedback_event.get_feature(TotalEnergyDb).value())
+            self._mu.value = np.mean(self.history)
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
 
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(TotalEnergyDb)
+
     def clear(self) -> None:
-        pass
+        self.history = deque([], self.moving_average_len.value)
+        self._mu.value = None
+
+    def _set_listening_mode(self, mode: int):
+        self.listen_to.value = self.ListeningMode(mode)
+
+    def _set_mu(self, mu: float):
+        if self.listen_to.value == self.ListeningMode.MANUAL:
+            self._mu.value = mu
+        elif self.listen_to.value == self.ListeningMode.EXTERNAL:
+            self.history.append(mu)
+            self._mu.value = np.mean(self.history)
+        else:
+            logging.info(f"Could not set mu because {self.__class__.__name__} is currently in feedback mode")
+
+    @property
+    def mu(self):
+        return self._mu.value
+
+    @property
+    def sigma(self):
+        return self._sigma.value
 
 
 class VerticalDensityScaleAction(AbstractGaussianScale):
@@ -372,8 +441,7 @@ class VerticalDensityScaleAction(AbstractGaussianScale):
         super().__init__(mu=mu)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
-              _corpus: Corpus = None, **_kwargs) -> Peaks:
+              _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
         densities: np.ndarray = np.array([event.get_feature(VerticalDensity).value() for event in corresponding_events])
         return self._scale(peaks, densities)
 
@@ -383,6 +451,9 @@ class VerticalDensityScaleAction(AbstractGaussianScale):
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(VerticalDensity)
 
     def clear(self) -> None:
         pass
@@ -395,8 +466,7 @@ class DurationScaleAction(AbstractGaussianScale):
         super().__init__(mu=mu)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
-              corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
         durations: np.ndarray = np.array([event.duration for event in corresponding_events])
         return self._scale(peaks, durations)
 
@@ -406,6 +476,9 @@ class DurationScaleAction(AbstractGaussianScale):
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     def clear(self) -> None:
         pass
@@ -421,8 +494,7 @@ class OctaveBandsScaleAction(AbstractScaleAction):
                                                              None, "list[11]", "TODO", self._set_band_distribution)
 
     def scale(self, peaks: Peaks, time: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], history: ImprovisationMemory = None,
-              corpus: Corpus = None, **kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
         events_band_distribution: np.ndarray = np.array([event.get_feature(OctaveBands).value()
                                                          for event in corresponding_events])
         factor: np.ndarray = 1 / np.sqrt(np.sum(np.power(events_band_distribution - self.band_distribution, 2), axis=1))
@@ -436,6 +508,9 @@ class OctaveBandsScaleAction(AbstractScaleAction):
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass  # TODO: Handle transforms
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(OctaveBands)
 
     def clear(self) -> None:
         pass
@@ -459,8 +534,7 @@ class RegionMaskScaleAction(AbstractScaleAction):
         self._high_thresh: Parameter = Parameter(1.0, 0, 1.0, "float", "Fraction [0,1] marking end of region")
 
     def scale(self, peaks: Peaks, _time: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], _history: ImprovisationMemory = None,
-              corpus: Corpus = None, **_kwargs) -> Peaks:
+              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **_kwargs) -> Peaks:
         # TODO: This could be optimized and stored if ScaleAction had direct access to Corpus
         low_index: int = int(self._low_thresh.value * corpus.length())
         high_index: int = int(self._high_thresh.value * corpus.length())
@@ -475,6 +549,9 @@ class RegionMaskScaleAction(AbstractScaleAction):
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     def clear(self) -> None:
         pass

@@ -5,10 +5,14 @@ PYINSTALLER_PATH = pyinstaller
 PYINSTALLER_TARGET = $(PY_LIB_PATH)/somax_server.py
 PYINSTALLER_TARGET_NAME = somax_server
 
+VERSION = $$(python3 python/somax/somax/utils/get_version.py)
+
 MAX_BUILD_PARENT_FOLDER = build/somax
-MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/Somax2
-DMG_NAME = Somax2
+MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/Somax-$(VERSION)
+DMG_NAME = Somax-$(VERSION)
 DMG_PATH = dist/$(DMG_NAME).dmg
+
+WIN_PKG = Somax-$(VERSION)
 
 
 
@@ -22,19 +26,30 @@ pyinstaller:
 		--name $(PYINSTALLER_TARGET_NAME) \
 		--exclude-module matplotlib \
 		--exclude-module PyQt5 \
-		--add-data="$(PY_LIB_PATH)/somax/classification/tables:somax/classification/tables" \
-		--add-data="$(PY_LIB_PATH)/log:log" \
 		--hidden-import="sklearn.utils._weight_vector" \
-		--hidden-import="cmath"
+		--hidden-import="sklearn.neighbors._typedefs" \
+		--hidden-import="sklearn.neighbors._quad_tree" \
+		--hidden-import="sklearn.utils._typedefs" \
+		--hidden-import="sklearn.neighbors._ball_tree" \
+		--hidden-import="sklearn.neighbors._partition_nodes" \
+		--add-data="$(PY_LIB_PATH)/somax/classification/tables:somax/classification/tables" \
+		--add-data="$(PY_LIB_PATH)/somax/log:somax/log" \
+		--hidden-import="cmath" \
+		--collect-data="librosa" \
+		--codesign-identity="Developer ID Application: INST RECHER COORD ACOUST MUSICALE" \
+		--osx-entitlements-file="codesign/somax.entitlements"
 
 codesignature:
+	# Only the notiarization step is needed as of PyInstaller 4.10
 	# Note: sklearn/.dylibs/libomp.dylib is High Sierra only and required to sign since it's in a hidden folder
-	codesign --deep --timestamp -s "Developer ID Application: INST RECHER COORD ACOUST MUSICALE" \
-			--options=runtime  \
-			--entitlements codesign/somax.entitlements \
-			codesign/somax.entitlements dist/somax_server.app/Contents/Resources/sklearn/.dylibs/libomp.dylib \
-			dist/"$(PYINSTALLER_TARGET_NAME)".app
-	hdiutil create dist/Somax2.dmg -fs HFS+ -srcfolder dist/somax_server.app -ov
+	 codesign --deep --timestamp --force -s "Developer ID Application: INST RECHER COORD ACOUST MUSICALE" \
+				--options=runtime  \
+				--entitlements codesign/somax.entitlements \
+				codesign/somax.entitlements dist/somax_server.app/Contents/Resources/sklearn/.dylibs/libomp.dylib \
+				dist/"$(PYINSTALLER_TARGET_NAME)".app
+
+notarize:
+	hdiutil create "$(DMG_PATH)" -fs HFS+ -srcfolder dist/somax_server.app -ov
 	xcrun altool --notarize-app --primary-bundle-id "ircam.repmus.somax" \
 				 -u "joakim.borg@ircam.fr" \
 				 -p $$(security find-generic-password -w -a $$LOGNAME -s "somax_app_specific") \
@@ -48,7 +63,14 @@ max-package: clean
 	# clean up local items
 	rm -rf "$(MAX_BUILD_PATH)"/state/*
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
+	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.pickle
+	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.json
 	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
+	# create extras folder (note: symlinks are not windows-compatible)
+	mkdir -p "$(MAX_BUILD_PATH)/extras/somax"
+	ln -s "../../somax2.maxpat" "$(MAX_BUILD_PATH)/extras/somax"
+	ln -s "../../docs/tutorial-patchers/somax2_first_steps.maxpat" "$(MAX_BUILD_PATH)/extras/somax/intro_tutorial.maxpat"
+	ln -s "../../docs/tutorial-patchers/somax2_audio_tutorial.maxpat" "$(MAX_BUILD_PATH)/extras/somax/audio_tutorial.maxpat"
 	# copy binary (should already be codesigned)
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
 	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
@@ -58,10 +80,26 @@ max-package: clean
 		--window-size 800 400 \
 		--icon-size 100 \
 		--icon "$(DMG_NAME)" 200 190 \
-		--hide-extension "$(DMG_NAME)" \
 		--background "media/dmg_installer_background.png" \
 		"$(DMG_PATH)" \
 		"$(MAX_BUILD_PARENT_FOLDER)"
+
+
+windows:
+	@echo "\033[1m####### Building Windows package folder... ########\033[0m"
+	mkdir -p "$(MAX_BUILD_PARENT_FOLDER)"
+	cp -r "$(MAX_LIB_PATH)" "$(MAX_BUILD_PATH)"
+	rm -rf "$(MAX_BUILD_PATH)"/state/*
+	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
+	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.pickle
+	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.json
+	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
+	rm -rf "$(MAX_BUILD_PATH)/tutorial*"
+	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
+	cp "$(PYINSTALLER_TARGET)" "$(MAX_BUILD_PATH)"
+	cd "$(MAX_BUILD_PARENT_FOLDER)" && zip -r "$(WIN_PKG).zip" "$(WIN_PKG)"
+	mv "$(MAX_BUILD_PARENT_FOLDER)/$(WIN_PKG).zip" dist/
+
 
 clean:
 	rm -rf build

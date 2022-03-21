@@ -1,7 +1,7 @@
 {
     "corpus": {
         "title": "Corpus",
-        "description": "The corpus is the source of material that the player uses to generate its output from. A corpus is built from one or more MIDI-files using the Corpus Builder module of the somax.server object.\n\nThe corpus that the player will use can be selected with this drop down menu. If a corpus is not available in the list after successfully built, select the '-- click to refresh --' option and the menu will be updated.\n\nThis parameter is also available with the same behaviour in the compact interface."
+        "description": "The corpus is the source of material that the player uses to generate its output from. A corpus is built from a single audio file or from one or more MIDI-files using the Corpus Builder module of the somax.server object.\n\nThe corpus that the player will use can be selected with this drop down menu. If a corpus is not available in the list after successfully built, select the '-- click to refresh --' option (or the «Refresh» button) and the menu will be updated.\n\nThis parameter is also available with the same behaviour in the compact interface."
     },
     "volatile": {
         "title": "Corpus Volatile Flag",
@@ -13,15 +13,15 @@
     },
     "igphase": {
         "title": "Ignore Phase",
-        "description": "If this parameter is set to 'False', the player will apply a weight to each potential output candidate (at each generation time step) based on where it occurs in the beat. More specifically, it compares its position in the original corpus to the current beat of the server tempo. For example, if the player at any point in time where the server currently is on the second quaver of a beat, finds two matches in the corpus - one occuring at the first quaver of any beat and the other one occuring at the second - the player will apply a negative bias to the former match, thus prioritizing the match occuring at a similar time as the server time.\n\nIf this parameter is set to 'True', this behaviour will be entirely bypassed.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'True' and the 'Continuous' mode sets this parameter to 'False'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters."
+        "description": "If this parameter is set to 'False', the player will apply a weight to each potential output candidate (at each generation time step) based on where it occurs in the beat. More specifically, it compares its position in the original corpus to the current beat of the server tempo. For example, if the player at any point in time where the server currently is on the second quaver of a beat, finds two matches in the corpus - one occuring at the first quaver of any beat and the other one occuring at the second - the player will apply a negative bias to the former match, thus prioritizing the match occuring at a similar time as the server time.\n\nIf this parameter is set to 'True', this behaviour will be entirely bypassed.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'True' and the 'Continuous' mode sets this parameter to 'False'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters.\n\nThis parameter is only available when the player has loaded a MIDI corpus."
     },
     "notedur": {
         "title": "Note Duration",
-        "description": "This parameter controls the durations of the generated output. If this parameter is set to 'As Original', the output will have the same duration as in the corpus (i.e. the original MIDI-file). If this parameter is set to 'Hold', Each output from its point of generation until the next point of generation. This can be used to sustain notes until the next onset is received while using the 'Manual' playing mode.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Hold' and the 'Continuous' mode sets this parameter to 'As Original'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters.  "
+        "description": "This parameter controls the durations of the generated output. If this parameter is set to 'As Original', the output will have the same duration as in the corpus (i.e. the original MIDI-file). If this parameter is set to 'Hold', Each output from its point of generation until the next point of generation. This can be used to sustain notes until the next onset is received while using the 'Manual' playing mode.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Hold' and the 'Continuous' mode sets this parameter to 'As Original'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters.\n\nThis parameter only applies to MIDI corpora."
     },
     "onsets": {
         "title": "Onsets",
-        "description": "Somax is able to reproduce and synthesize the precise timing-related expressivity of the original corpus by storing «almost simultaneous» notes as a single chord together with their internal temporal offset, thus preserving appogiaturas and performative timing-related aspects of the corpus. In some cases, especially when generating output note-by-note, this behaviour may be perceived as inexact. In these cases, setting this parameter to 'Synchronized' will make the player disregard all temporal offsets within a chord and play all the notes simultaneously.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Synchronized' and the 'Continuous' mode sets this parameter to 'As Original'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters."
+        "description": "Somax is able to reproduce and synthesize the precise timing-related expressivity of the original corpus by storing «almost simultaneous» notes as a single chord together with their internal temporal offset, thus preserving appogiaturas and performative timing-related aspects of the corpus. In some cases, especially when generating output note-by-note, this behaviour may be perceived as inexact. In these cases, setting this parameter to 'Synchronized' will make the player disregard all temporal offsets within a chord and play all the notes simultaneously.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Synchronized' and the 'Continuous' mode sets this parameter to 'As Original'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters.\n\nThis parameter only applies to MIDI corpora."
     },
     "decaybasis": {
         "title": "Decay Basis",
@@ -33,7 +33,7 @@
     },
     "qualthresh": {
         "title": "Quality Threshold",
-        "description": "Under the hood, each match found in the corpus is assigned a score (probability), which is further altered by all of the biasing parameters. The player will use this score to determine the best match and use that for its output. But even if the score is very low, or even if there are no matches at all, the player will by default output something. In some cases, having the system stay silent when there are no good matches may be a better choice, and is exactly what this parameter is for. This parameter sets a minimum score required for a match to qualify as output. For reference, a value of 0.01 will be sufficient to filter out all cases where there are no matches at all. A value of 0.1 will be sufficient to (assuming weights and other parameters are within common ranges) find rather good matches either harmonically or melodically, and a value of 1.0 (or larger) will generally remove everything but almost perfect replications of longer sections of the input, both harmonically and melodically."
+        "description": "The «Quality Threshold» controls the consistency between the input (influences) and output (what the player plays), so that if there's no good match between the two, the system will not play anything at all.\n\nUnder the hood, each match found in the corpus is assigned a score (probability), which is further altered by all of the biasing parameters. The player will use this score to determine the best match and use that for its output. But even if the score is very low, or even if there are no matches at all, the player will by default output something. In some cases, having the system stay silent when there are no good matches may be a better choice, and is exactly what this parameter is for. This parameter sets a minimum score required for a match to qualify as output. For reference, a value of 0.01 will be sufficient to filter out all cases where there are no matches at all. A value of 0.1 will be sufficient to (assuming weights and other parameters are within common ranges) find rather good matches either harmonically or melodically, and a value of 1.0 (or larger) will generally remove everything but almost perfect replications of longer sections of the input, both harmonically and melodically."
     },
     "activetransp": {
         "title": "Active Transpositions",
@@ -57,15 +57,15 @@
     },
     "decaytime": {
         "title": "Layer Decay Time",
-        "description": "As briefly described under 'Decay Basis', matches from a previous time step has a degree of impact on the generation process for consecutive time steps. This parameter controls for how many events/how many beats (again, see 'Decay Basis' for more information) previous matches inpact the generation process."
+        "description": "As briefly described under 'Decay Basis', matches from a previous time step has a degree of impact on the generation process for consecutive time steps. This parameter controls for how many events/how many beats previous matches inpact the generation process. Again, see 'Decay Basis' for more information."
     },
     "transconsistency": {
         "title": "Transposition Consistency",
-        "description": "When using transpositions, the continuous transitions between different transpositions can in some cases (especially for tonal music due to the difference in function) make the generated result sound quite incoherent. This parameter can be used to attenuate other transpositions so that transitions between different tranpositions become less likely, thus only occuring if the match found in another transposition is much better than that of the current.\n\nRange: 1.0 (no attenuation = off) to 0.0 (full attenuation = enforce current transposition)"
+        "description": "When using transpositions, the continuous transitions between different transpositions can in some cases make the generated result sound quite incoherent (especially for tonal music due to the difference in harmonic function). This parameter can be used to attenuate other transpositions so that transitions between different tranpositions become less likely, thus only occuring if the match found in another transposition is much better than that of the current.\n\nRange: 1.0 (no attenuation = off) to 0.0 (full attenuation = enforce current transposition)"
     },
     "reinstantiate": {
         "title": "Reinstantiate",
-        "description": "Pressing this button will delete the player from the server and recreate it. This button is useful if you for some reason have to restart the server or for some reason run into issues where you have to restart the system.\n\nWARNING: This is not real-time compatible (it may pause the server for several seconds while reloading, thus interrupting any performance) and should only be used if something goes terribly wrong!"
+        "description": "Pressing this button will delete the player from the server and recreate it. This button is useful if you for some reason have to restart the server or the player.\n\nWARNING: This is not real-time compatible (it may pause the server for several seconds while reloading, thus interrupting any performance) and should only be used if something goes terribly wrong!"
     },
     "oscport": {
         "title": "OSC Port",
@@ -74,5 +74,29 @@
     "reset": {
         "title": "Reset Influences",
         "description": "In some corpora with specific settings, it is possible to reach a state where the player is getting stuck in a loop, repeating the same set of states over and over again. Pressing this button will reset the runtime state of the player (remove all previous matches) without altering any of the set parameters.\n\nThis is perfectly safe to use in real-time!"
+    },
+    "outputselection": {
+        "title": "Output Selection Mode",
+        "description": "Controls how the output is selected at each step. The «Deterministic» mode will always select the best match, which will result in high quality matches but may lack variation. The «Probabilistic» mode will select the output stochastically among the matches, which results in a more varied output but at the risk of occasionally playing rather poor matches."
+    },
+    "layerpeaksinfo": {
+        "title": "Matches (per layer)",
+        "description": "Number of matches found in each in each of the three layers (self/melodic/harmonic) for the last influence."
+    },
+    "corpusstatus": {
+        "title": "Corpus Status",
+        "description": "Status indicator when loading corpus. If corpus fails to load: see the Max Console for more information."
+    },
+    "stateinfoslider": {
+        "title": "State Slider",
+        "description": "Indicates the index of the current state in the corpus that is being played. This slider can also be used to manually go to a specific point in the corpus."
+    },
+    "peaksandquality": {
+        "title": "Matches & Quality",
+        "description": "These two displays indicate the state of the player at the previously output event. The left one displays the number of unique matches in the corpus (after all layers have been merged), the right one indicates the quality of the best match."
+    },
+    "flush": {
+        "title": "Flush (MIDI)",
+        "description": "If the player is using a MIDI corpus, use this button to flush all notes."
     }
 }

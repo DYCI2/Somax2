@@ -1,0 +1,70 @@
+{
+    "audiofile": {
+        "title": "Audio File",
+        "description": "Drop a the stereo or mono audio file (.aif, .flac, .wav) here to build a corpus, or use the «Read» button to select the audio file.\n\nNote that .mp3 files may work on certain versions of MacOS."
+    },
+    "segmode": {
+        "title": "Segmentation Mode",
+        "description": "There are two segmentation modes:\n\nOnset: The audio file is segmented into slices by detecting onsets in the content. This is the default mode and there are a number of parameters to determine how onsets should be detected\n\nInterval: The content is segmented at fixed intervals set by the «Interval Duration» parameter."
+    },
+    "hoplength": {
+        "title": "Hop Length",
+        "description": "The number of samples between consecutive frames when detecting onsets. Only change this parameter if you know what you're doing."
+    },
+    "minsegdur": {
+        "title": "Minimum Segment Duration",
+        "description": "The minimum amount of time (in milliseconds) between two consecutive onsets. This parameter is useful to avoid too short slices."
+    },
+    "limseg": {
+        "title": "Segment Max Duration",
+        "description": "In some cases, there may be audio files with huge periods of silences between two consecutive onsets. When slices are too long, a somax player can sometimes seem unresponsive. To remedy this, these parameters can be used to set a maximum limit for a segment's duration, where any content between the limit and the next detected onset will be discarded."
+    },
+    "bpm": {
+        "title": "Initial BPM",
+        "description": "Somax uses time stretching to adapt the tempo of the corpus to what is currently being played, and estimates the tempo of the audio file using a beat detection algorithm. In order to estimate the tempo correctly, it will however need an initial, approximate tempo estimation.\n\nNote that this is only used when using beat-related time stretching in the Player. Providing this value is therefore not mandatory."
+    },
+    "discardsilent": {
+        "title": "Discard Silent Segments",
+        "description": "In order to avoid playing slices that are silent or almost silent, it's possible to discard segments with energy below a certain threshold. Enabling this option will discard the part below the given threshold up to the next onset. There are two modes determining when a segment should be discarded:\n\nFrame Value: If the average energy of a single frame (a frame normally consists of 512 samples, determined by «Hop Length») is below the threshold, discard everything up until the next onset.\n\nMean Value: Discard the last part of a slice if the mean value of that part is below the threshold."
+    },
+    "peakwindow": {
+        "title": "Peak Window",
+        "description": "This parameter controls the window over which each peak in the signal is evaluated in order to determine whether it's an onset or not. A smaller window will generally result in more detected onsets and therefore more slices.\n\nThe full behaviour of the algorithm is described here: https://librosa.org/doc/main/generated/librosa.util.peak_pick.html. By default, this parameter will set all four values described in the link (pre-max, post-max, pre-mean, post-mean) but it's possible to tune the parameters individually («advanced» toggle) to achieve optimal results."
+    },
+    "peakgain": {
+        "title": "Peak Gain",
+        "description": "This parameter controls how much a peak in the audio signal must differ (in amplitude) from its surrounding samples in order to be considered a peak.\n\nFor polyphonic content, a low value (~0.07) is a good solution to detect many peaks, while for monophonic content or content with clear onsets, a higher value (~0.3) can be used."
+    },
+    "intervaldur": {
+        "title": "Interval Duration",
+        "description": "If the segmentation mode is set to «Interval», this parameter controls the duration (in milliseconds) of the slices."
+    },
+    "reset": {
+        "title": "Reset to Default",
+        "description": "Use this button to reset all parameters to the default values."
+    },
+    "name": {
+        "title": "Name & Overwrite",
+        "description": "Specify the name of the corpus here. If a corpus with the same name already exists, use the «Overwrite» flag to overwrite it. This will not overwrite any audio data, only the corpus file."
+    },
+    "build": {
+        "title": "Build",
+        "description": "Use this button to build the corpus once the parameters result in a satisfactory segmentation. Once built, it will be available to load in any player."
+    },
+    "testseg": {
+        "title": "Test Segmentation",
+        "description": "The «Test Segmentation» button can be used to quickly check the segmentation parameters without building the entire corpus (which can be quite time consuming). This button provides a number of insights on how the segmentation will be done as well as both visualization and sonification of the onsets in context of the original audio file."
+    },
+    "segstats": {
+        "title": "Segmentation Statistics",
+        "description": "When using the «Test Segmentation» button, these fields provide info on the segmentation:\n\nFile Duration: Total duration of the file in seconds.\n\nNum Segments: Number of slices\n\nDiscard Ratio: Portion (between 0 and 1) of the corpus that was discarded because it was silent or beyond maximum slice duration.\n\nSegmentation minimum/maximum/mean duration: Duration of the shortest, longest and average slice."
+    },
+    "segvisual": {
+        "title": "Segmentation Visualization",
+        "description": "When using the «Test Segmentation» button, the corpus will be visualized here. Onsets are indicated by green vertical lines and offsets by red vertical lines. It's possible to zoom/scroll in the content, but be aware that sometimes, not all segments will be visible depending on the length of the file. To adjust this, it's possible to change the duration of the visual indicators using the «Visual indicator duration» field. Note that onsets will always occur on the first sample of the indicator, the rest are simply there to allow them to be visible when zoomed out."
+    },
+    "segplay": {
+        "title": "Segmentation Playback",
+        "description": "When using the «Test Segmentation» button, it's possible to play back the selected region to hear exactly where onsets are detected. Onsets are played as short clicks (at 1000 Hz, left channel), offsets as clicks (at 500 Hz, right channel). "
+    }
+}

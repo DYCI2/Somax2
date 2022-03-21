@@ -1,38 +1,58 @@
+import builtins
 import copy
+import gzip
+import importlib
 import json
 import logging
 import os
-from enum import Enum
-from typing import List, Optional, Type, Dict, Any, Tuple, Union
+import pickle
+import pickletools
+import shutil
+import sys
+import warnings
+from abc import ABC, abstractmethod
+from typing import List, Optional, Type, Dict, Any, Tuple, Union, TypeVar, Generic
 
-from somax.settings import IMPORT_MATPLOTLIB
-
-if IMPORT_MATPLOTLIB:
-    pass
+import librosa
 import numpy as np
 import pandas as pd
 
-from somax import settings
 import somax
-from somax.corpus_builder.chromagram import Chromagram
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
-from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features.feature import CorpusFeature
-from somax.runtime.corpus_event import CorpusEvent, Note
-from somax.runtime.exceptions import InvalidCorpus
+from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
+from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch
+from somax.scheduler.scheduling_mode import SchedulingMode
+from somax.utils.get_version import VersionTools
+from somax.utils.introspective import Introspective
+
+E = TypeVar('E', bound=CorpusEvent)
 
 
-class ContentType(Enum):
-    MIDI = "MIDI"
-    AUDIO = "Audio"
+class CorpusUnpickler(pickle.Unpickler):
+    safe_modules = ['logging', 'numpy.core.multiarray', 'numpy']
+    safe_builtins = ['range', 'complex', 'set', 'frozenset', 'slice']
+    safe_somax_modules = ['somax.runtime', 'somax.features', 'somax.corpus_builder', 'somax.scheduler']
 
-    def encode(self):
-        return str(self)
+    @staticmethod
+    def valid_somax_module(module: str) -> bool:
+        return any(module.startswith(somax_module) for somax_module in CorpusUnpickler.safe_somax_modules)
+
+    def find_class(self, module: str, name: str) -> Any:
+        if module == 'builtins' and name in self.safe_builtins:
+            return getattr(builtins, name)
+        elif self.valid_somax_module(module) or module in self.safe_modules:
+            try:
+                return getattr(sys.modules[module], name)
+            except KeyError:
+                importlib.import_module(module)
+                return getattr(sys.modules[module], name)
+        raise pickle.UnpicklingError(f"Module '{module}.{name}' is not supported")
 
 
-class HeldObject:
-    def __init__(self, note: Note, event: CorpusEvent):
+class HeldObject(Generic[E]):
+    def __init__(self, note: Note, event: E):
         self.note = note
         self.event = event
 
@@ -44,68 +64,114 @@ class HeldObject:
         raise AttributeError(f"Cannot compare type '{type(other)}' with '{self.__class__}'")
 
 
-class Corpus:
+class Corpus(Generic[E], Introspective, ABC):
     INDEX_MAP_SIZE = 1_000_000
 
-    def __init__(self, events: List[CorpusEvent], name: str, content_type: ContentType,
-                 build_parameters: Dict[str, Any], fg_spectrogram: Optional[Spectrogram] = None,
-                 bg_spectrogram: Optional[Spectrogram] = None, fg_chromagram: Optional[Chromagram] = None,
-                 bg_chromagram: Optional[Chromagram] = None):
+    def __init__(self, events: List[E], name: str, scheduling_mode: SchedulingMode,
+                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any], **kwargs):
         self.logger = logging.getLogger(__name__)
-        self.events: List[CorpusEvent] = events
-        # self.onsets: np.ndarray = np.array([e.onset for e in self.events])    # TODO: Remove (?)
+        self.events: List[E] = events
         self.name: str = name
-        self.content_type: ContentType = content_type
+        self.scheduling_mode: SchedulingMode = scheduling_mode
+        self.feature_types: List[Type[CorpusFeature]] = feature_types
         self._build_parameters: Dict[str, Any] = build_parameters
         self._index_map: np.ndarray
         self._grid_size: int
-        self._index_map, self._grid_size = Corpus._create_index_map(self.events, self.duration())
-
-        # These parameters will not be stored when exported and will thus not exist in json-parsed corpora
-        self.fg_spectrogram: Optional[Spectrogram] = fg_spectrogram
-        self.bg_spectrogram: Optional[Spectrogram] = bg_spectrogram
-        self.fg_chromagram: Optional[Chromagram] = fg_chromagram
-        self.bg_chromagram: Optional[Chromagram] = bg_chromagram
+        self._index_map, self._grid_size = self._create_index_map()
 
     def __repr__(self):
-        return f"Corpus(name='{self.name}', ...)"
+        return f"{self.__class__.__name__}(name='{self.name}', ...)"
+
+    @abstractmethod
+    def duration(self) -> float:
+        """ Return the duration of the corpus along its relevant time axis """
 
     @classmethod
+    @abstractmethod
     def from_json(cls, filepath: str, volatile: bool = False) -> 'Corpus':
-        """ Raises: IOError, InvalidCorpus"""
-        try:
-            with open(filepath, 'r') as f:
-                corpus_data: Dict[str, Any] = json.load(f)
-            version: str = corpus_data["version"]
-            if version != somax.__version__ and not volatile:
-                raise InvalidCorpus(f"The loaded corpus was built with an old version of Somax. "
-                                    f"While it may work, using it could result in a number of bugs."
-                                    f" Recommended action: rebuild corpus."
-                                    f" (To attempt to load the corpus anyway: enable the 'volatile' flag)")
-            name: str = corpus_data["name"]
-            content_type: ContentType = ContentType(corpus_data["content_type"])
+        """ Load corpus from JSON file
+            Raises: IOError if file could not be found
+                    InvalidCorpus if fails to load corpus
+                    ExternalDataMismatch if additional resources could not successfully be located (audio files, ...)"""
 
-            build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
-            features_dict: Dict[str, str] = corpus_data["features_dict"]
-            events: List[CorpusEvent] = [CorpusEvent.decode(event_dict, features_dict)
-                                         for event_dict in corpus_data["events"]]
-            return cls(events, name, content_type, build_parameters)
+    @abstractmethod
+    def encode(self) -> Dict[str, Any]:
+        """ Encode the corpus to a dictionary to allow JSON export """
 
-        # KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)
-        except (KeyError, AttributeError) as e:
-            raise InvalidCorpus(f"The Corpus at '{filepath}' has an invalid format and could not be loaded") from e
+    def _create_index_map(self) -> Tuple[np.ndarray, float]:
+        grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / self.duration()
+        index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
+        for event in self.events:
+            start_index: int = int(np.floor(event.onset * grid_size))
+            end_index: int = int(np.floor((event.onset + event.duration) * grid_size))
+            index_map[start_index:end_index] = event.state_index
+        return index_map, grid_size
 
     def export(self, output_folder: str, overwrite: bool = False,
-               indentation: Optional[int] = None) -> str:
+               indentation: Optional[int] = None, **kwargs) -> str:
         """ Raises IOError"""
-        filepath = os.path.join(output_folder, self.name + ".json")
+        filepath = os.path.join(output_folder, self.name + ".gz")
         if os.path.exists(filepath) and not overwrite:
             raise IOError(f"Could not export corpus as file '{filepath}' already exists. "
                           f"Set overwrite flag to True to overwrite existing.")
         else:
-            with open(filepath, 'w') as f:
+            with gzip.open(filepath, 'wt', encoding='UTF-8') as f:
                 json.dump(self, f, indent=indentation, default=lambda o: o.encode())
         return filepath
+
+    def has_feature(self, feature_type: Type[CorpusFeature]) -> bool:
+        return feature_type in self.feature_types
+
+    def event_at(self, index: int) -> E:
+        return self.events[index]
+
+    def event_around(self, time: float) -> E:
+        index: int = self._index_map[int(np.floor(time * self._grid_size))]
+        return self.event_at(index)
+
+    def events_around(self, times: np.ndarray) -> List[E]:
+        indices: np.ndarray = self._index_map[(np.floor(times * self._grid_size)).astype(int)]
+        events: List[E] = [self.event_at(index) for index in indices]
+        return events
+
+    def length(self) -> int:
+        """ Returns the number of events in the corpus """
+        return len(self.events)
+
+
+class MidiCorpus(Corpus[MidiCorpusEvent]):
+    def __init__(self, events: List[MidiCorpusEvent], name: str, scheduling_mode: SchedulingMode,
+                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any]):
+        super().__init__(events=events, name=name, scheduling_mode=scheduling_mode,
+                         feature_types=feature_types, build_parameters=build_parameters)
+        self.logger = logging.getLogger(__name__)
+
+    @classmethod
+    def from_json(cls, filepath: str, volatile: bool = False) -> 'MidiCorpus':
+        """ Raises: IOError, InvalidCorpus"""
+        try:
+            with gzip.open(filepath, 'rt', encoding='UTF-8') as f:
+                corpus_data: Dict[str, Any] = json.load(f)
+            version: str = corpus_data["version"]
+            if not VersionTools.matches_current(version, pre_release=False) and not volatile:
+                raise InvalidCorpus(f"The loaded corpus was built with an old version of Somax. "
+                                    f"While it may work, using it could result in a number of bugs. "
+                                    f"Recommended action: rebuild corpus. "
+                                    f"(To attempt to load the corpus anyway: enable the 'volatile' flag)")
+            name: str = corpus_data["name"]
+            scheduling_mode: SchedulingMode = SchedulingMode.from_string(corpus_data["content_type"])
+
+            build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
+            features_dict: Dict[str, str] = corpus_data["features_dict"]
+            events: List[MidiCorpusEvent] = [MidiCorpusEvent.decode(event_dict, features_dict)
+                                             for event_dict in corpus_data["events"]]
+            features: List[Type[CorpusFeature]] = [CorpusFeature.class_from_string(p) for p in features_dict.values()]
+            return cls(events=events, name=name, scheduling_mode=scheduling_mode,
+                       feature_types=features, build_parameters=build_parameters)
+
+        # KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)
+        except (KeyError, AttributeError) as e:
+            raise InvalidCorpus(f"The Corpus at '{filepath}' has an invalid format and could not be loaded") from e
 
     def encode(self) -> Dict[str, Any]:
         features: Dict[Type['CorpusFeature'], str] = {cls: name for (name, cls) in CorpusFeature.all_corpus_features()}
@@ -113,7 +179,7 @@ class Corpus:
             self.logger.warning("Two features with the same name exist in the library. Built corpus may not be properly"
                                 " constructed. Ensure that no two CorpusFeatures in the library have the same name.")
         return {"name": self.name,
-                "content_type": self.content_type.value,
+                "content_type": self.scheduling_mode.encode(),
                 "version": somax.__version__,
                 "build_parameters": self._build_parameters,
                 "features_dict": {name: feature.classpath() for (feature, name) in features.items()},
@@ -122,33 +188,11 @@ class Corpus:
                 "events": [event.encode(features_dict=features) for event in self.events]
                 }
 
-    # def analyze(self, event_parameter: Type[CorpusFeature], **kwargs):
-    #
-    #     for event in self.events:
-    #         parameter: CorpusFeature = event_parameter.analyze(event, self.fg_spectrogram, self.bg_spectrogram,
-    #                                                            self.fg_chromagram, self.bg_chromagram, **kwargs)
-    #         event.set_feature(parameter)
-
-    def length(self) -> int:
-        return len(self.events)
-
     def duration(self) -> float:
         if len(self.events) == 0:
             return 0.0
-        last_event: CorpusEvent = self.events[-1]
+        last_event: MidiCorpusEvent = self.events[-1]
         return last_event.onset + last_event.duration
-
-    def event_at(self, index: int) -> CorpusEvent:
-        return self.events[index]
-
-    def event_around(self, time: float) -> CorpusEvent:
-        index: int = self._index_map[int(np.floor(time * self._grid_size))]
-        return self.event_at(index)
-
-    def events_around(self, times: np.ndarray) -> List[CorpusEvent]:
-        indices: np.ndarray = self._index_map[(np.floor(times * self._grid_size)).astype(int)]
-        events: List[CorpusEvent] = [self.event_at(index) for index in indices]
-        return events
 
     def to_note_matrix(self) -> NoteMatrix:
         note_data: List[List[Union[int, float, str]]] = [[] for _ in range(len(Keys))]
@@ -185,11 +229,10 @@ class Corpus:
 
         note_matrix: pd.DataFrame = pd.DataFrame(np.array(note_data, dtype=object).T, columns=[key for key in Keys])
         note_matrix.sort_values([Keys.REL_ONSET, Keys.PITCH, Keys.CHANNEL], inplace=True)
-        # note_matrix.drop_duplicates(subset=[Keys.PITCH, Keys.CHANNEL, Keys.REL_ONSET, Keys.REL_DURATION], inplace=True)
         return NoteMatrix(note_matrix)
 
     @staticmethod
-    def _append_to_matrix(note: Note, event: CorpusEvent,
+    def _append_to_matrix(note: Note, event: MidiCorpusEvent,
                           matrix: List[List[Union[int, float, str]]]) -> List[List[Union[int, float, str]]]:
         matrix[Keys.PITCH.value].append(note.pitch)
         matrix[Keys.VELOCITY.value].append(note.velocity)
@@ -206,7 +249,7 @@ class Corpus:
         return matrix
 
     @staticmethod
-    def _adjust_in_time(note: Note, event: CorpusEvent):
+    def _adjust_in_time(note: Note, event: MidiCorpusEvent):
         positive_part_note_onset: float = max(0.0, note.onset)
         positive_part_note_abs_onset: float = max(0.0, note.absolute_onset)
         if event.recorded_memory_state is not None:
@@ -225,30 +268,101 @@ class Corpus:
         note.absolute_duration = min(note.absolute_duration, event.absolute_duration)
         return note
 
-    # TODO: Removed for PyInstaller to exclude matplotlib
-    # def plot(self):
-    #     raise NotImplementedError("Plotting a corpus is currently not supported")
-    #     import matplotlib as mpl
-    #     mpl.use('Qt5Agg')
-    #     if all([v is not None for v in
-    #             [self.fg_spectrogram, self.bg_spectrogram, self.fg_chromagram, self.bg_chromagram]]):
-    #         _, axes = plt.subplots(6, 1, gridspec_kw={'height_ratios': [1, 5, 3, 3, 1, 1]})
-    #         self.fg_spectrogram.plot(axes[2])
-    #         self.bg_spectrogram.plot(axes[3])
-    #         self.fg_chromagram.plot(axes[4])
-    #         self.bg_chromagram.plot(axes[5])
-    #         self.to_note_matrix().plot(axes=(axes[0], axes[1]))
-    #     else:
-    #         _, axes = plt.subplots(2, 1, gridspec_kw={'height_ratios': [1, 5]})
-    #         self.to_note_matrix().plot(axes=(axes[0], axes[1]))
-    #     plt.show()
+
+class AudioCorpus(Corpus):
+    def __init__(self, events: List[AudioCorpusEvent], name: str, scheduling_mode: SchedulingMode,
+                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any],
+                 sr: int, filepath: str, file_duration: float, file_num_channels: int):
+        super().__init__(events=events, name=name, scheduling_mode=scheduling_mode,
+                         feature_types=feature_types, build_parameters=build_parameters)
+        self.sr: int = sr
+        self.filepath: str = filepath
+        self.file_duration: float = file_duration
+        self.num_channels: int = file_num_channels
+
+    def duration(self) -> float:
+        """ Duration of corpus in seconds (may differ from duration of file depending on segmentation """
+        if len(self.events) == 0:
+            return 0.0
+        return self.events[-1].onset + self.events[-1].duration
+
+    @classmethod
+    def from_json(cls, filepath: str, volatile: bool = False) -> 'AudioCorpus':
+        # TODO: This should obviously not be named `from_json` as it uses a pickle
+        # TODO: This should also have an optional `alternative_filepath` arg so that it's possible to pass
+        #       another filepath in case the location of the audio file has been changed
+        try:
+            with gzip.open(filepath, 'rb') as f:
+                corpus: AudioCorpus = CorpusUnpickler(f).load()
+
+                if not isinstance(corpus, cls):
+                    raise InvalidCorpus("Class of corpus is not valid")
+
+                cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.duration(), corpus.num_channels)
+
+        # Pickle tried to import module that was not supported
+        except pickle.UnpicklingError as e:
+            raise InvalidCorpus(e) from e
+
+        # Pickle tried to import class that doesn't exist or missing mandatory classes
+        except ValueError as e:
+            raise ExternalDataMismatch(e) from e
+
+        # Related audio file is missing
+        except OSError as e:
+            raise FileNotFoundError(e) from e
+
+        return corpus
 
     @staticmethod
-    def _create_index_map(events: List[CorpusEvent], corpus_duration_ticks: float) -> Tuple[np.ndarray, float]:
-        grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / corpus_duration_ticks
-        index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
-        for event in events:
-            start_index: int = int(np.floor(event.onset * grid_size))
-            end_index: int = int(np.floor((event.onset + event.duration) * grid_size))
-            index_map[start_index:end_index] = event.state_index
-        return index_map, grid_size
+    def validate_audio_source(filepath: str, expected_sample_rate: int, expected_duration: float,
+                              expected_num_channels: int) -> None:
+        """ raises: IOError if file cannot be found or other issue with loading audio file through librosa
+                            ValueError if mismatch between file and expected data
+        """
+        try:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                audio, sample_rate = librosa.load(filepath, sr=None, mono=False)
+        except (FileNotFoundError, RuntimeError) as e:
+            raise IOError(e) from e
+
+        if expected_sample_rate != sample_rate:
+            raise ValueError("Sample rate of file does not match corpus information")
+
+        if audio.ndim > 1 and expected_num_channels == 1 or audio.ndim > 1 and expected_num_channels != audio.shape[0]:
+            raise ValueError("Number of channels of file does not match corpus information")
+
+        num_samples: float = audio.size if audio.ndim == 1 else audio.shape[1]
+        if abs(expected_duration - num_samples / sample_rate) > 1.0:
+            raise ValueError("Duration of file does not match corpus information")
+
+    def encode(self) -> Dict[str, Any]:
+        # TODO: Separate so that `export` is the abstract interface rather than `encode`
+        # This function is only specifically for JSON encoding which currently isn't supported for audio corpora
+        raise NotImplementedError("Not implemented")
+
+    def export(self, output_folder: str, overwrite: bool = False, copy_resources: bool = False, **kwargs) -> str:
+        """ raises: IOError if export fails """
+        filepath = os.path.join(output_folder, self.name + ".pickle")
+        if os.path.exists(filepath) and not overwrite:
+            raise IOError(f"Could not export corpus as file '{filepath}' already exists. "
+                          f"Set overwrite flag to True to overwrite existing.")
+        else:
+            if copy_resources:
+                output_filepath: str = os.path.join(output_folder, os.path.basename(self.filepath))
+                if os.path.exists(output_filepath) and not overwrite:
+                    raise IOError(f"Could not export corpus as file '{filepath}' already exists. "
+                                  f"Set overwrite flag to True to overwrite existing.")
+                shutil.copy2(self.filepath, output_filepath)
+                self.logger.info(f"Audio file copied to '{output_filepath}'")
+                self.filepath = output_filepath
+
+            with gzip.open(filepath, "wb") as f:
+                pickled = pickle.dumps(self)
+                optimized_pickle = pickletools.optimize(pickled)
+                f.write(optimized_pickle)
+
+
+
+        return filepath

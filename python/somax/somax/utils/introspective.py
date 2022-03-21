@@ -3,11 +3,9 @@ import logging
 import sys
 from abc import ABC, abstractmethod
 from types import ModuleType
-from typing import Dict, Type, Any, Optional
-
+from typing import Dict, Type, Any, Optional, TypeVar, Generic
 
 class Introspective:
-
     @classmethod
     def _classes(cls, module: Optional[ModuleType] = None, include_abstract: bool = False) -> Dict[str, Type[Any]]:
         """Returns class objects for all non-abstract classes in the inheriting module."""
@@ -29,7 +27,6 @@ class Introspective:
 
 
 class StringParsed(Introspective, ABC):
-
     @classmethod
     @abstractmethod
     def default(cls, **kwargs) -> 'StringParsed':

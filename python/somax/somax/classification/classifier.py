@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List, Tuple
 
 import somax.classification
+from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.label import AbstractLabel
@@ -10,9 +11,9 @@ from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
 
 
-class AbstractClassifier(StringParsed, ABC):
-
+class AbstractClassifier(StringParsed, ContentAware, ABC):
     def __init__(self, **kwargs):
+        super().__init__(invalidate_parent=True, **kwargs)
         self._transforms: List[AbstractTransform] = []
 
     @classmethod
@@ -49,17 +50,3 @@ class AbstractClassifier(StringParsed, ABC):
     @abstractmethod
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ :returns list of for the classifier valid `AbstractTransform`s selected from `transform_handler`. """
-
-    # TODO: REMOVE
-    # @classmethod
-    # @abstractmethod
-    # def rms(cls, influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-    #     """ The rms method is not strictly necessary to implement - it's only used for offline performance analysis.
-    #         To leave it unimplemented, simply define it as
-    #         ```
-    #             @staticmethod
-    #             def rms(influence_corpus: Corpus, output_corpus: Corpus) -> np.ndarray:
-    #                 raise NotImplementedError(f"{self.__class__}.rms is not implemented")
-    #         ```
-    #     """
-    #     pass

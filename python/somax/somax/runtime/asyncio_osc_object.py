@@ -14,7 +14,8 @@ from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import AsyncIOOSCUDPServer
 
 from somax import settings
-from somax.runtime.target import Target, SimpleOscTarget, SendProtocol
+from somax.runtime.target import Target, SimpleOscTarget
+from somax.runtime.send_protocol import SendProtocol
 
 
 class AsyncioOscObject(Caller, ABC):

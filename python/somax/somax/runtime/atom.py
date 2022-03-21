@@ -3,6 +3,7 @@ from typing import Dict, Union, List, Optional, Tuple
 
 from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
+from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence
@@ -15,7 +16,7 @@ from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 
 
-class Atom(Parametric):
+class Atom(Parametric, ContentAware):
     DEFAULT_WEIGHT = 1.0
 
     def __init__(self, name: str, weight: float, classifier: AbstractClassifier,
@@ -35,7 +36,7 @@ class Atom(Parametric):
         self._self_influenced: Parameter = Parameter(self_influenced, 0, 1, 'bool',
                                                      "Whether new events creates by player should influence this atom or not.")
 
-        self._corpus: Optional[Corpus] = corpus
+        self._corpus: Optional[Corpus] = None
         if corpus:
             self.read_corpus(corpus)
 
@@ -43,6 +44,10 @@ class Atom(Parametric):
 
     def read_corpus(self, corpus: Optional[Corpus] = None):
         """ :raises RuntimeError """
+        if not self.eligible:
+            print(f"Returning because '{self.name}' cannot read corpus of type")
+            return
+
         if corpus is not None:
             self.logger.debug(f"[read]: Reading corpus {corpus}.")
             self._corpus = corpus
@@ -52,6 +57,7 @@ class Atom(Parametric):
             self.logger.debug(f"[read]: No corpus was provided and atom '{self.name}' does not have a corpus. "
                               f"No action performed.")
             return
+
         self._classifier.cluster(self._corpus)
         labels: List[AbstractLabel] = self._classifier.classify_corpus(self._corpus)
         self._memory_space.model(self._corpus, labels)
@@ -61,7 +67,7 @@ class Atom(Parametric):
     def influence(self, influence: AbstractInfluence, time: float, **kwargs) -> int:
         """ :raises InvalidLabelInput
             :returns Number of peaks generated """
-        if not self.is_enabled():
+        if not self.is_enabled_and_eligible():
             return 0
 
         self._update_peaks_on_influence(time)
@@ -77,7 +83,8 @@ class Atom(Parametric):
         self._activity_pattern.update_peaks_on_influence(time)
 
     def update_peaks_on_new_event(self, time: float) -> None:
-        self._activity_pattern.update_peaks_on_new_event(time)
+        if self.is_enabled_and_eligible():
+            self._activity_pattern.update_peaks_on_new_event(time)
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float, _applied_transform: AbstractTransform) -> None:
         if self.self_influenced and feedback_event is not None:
@@ -107,6 +114,9 @@ class Atom(Parametric):
                                "activity_pattern": self._activity_pattern.update_parameter_dict(),
                                "parameters": parameters}
         return self.parameter_dict
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True
 
     @property
     def weight(self) -> float:
@@ -141,8 +151,12 @@ class Atom(Parametric):
         self._classifier.clear()
         self._memory_space.clear()
 
-    def is_enabled(self):
-        return self._enabled.value
+    def is_enabled_and_eligible(self):
+        return self._enabled.value and self.eligible
 
-    def get_peaks(self) -> Peaks:
-        return self._activity_pattern.peaks
+    def pop_peaks(self) -> Peaks:
+        """ get peaks: May have side effects inside activity_pattern. """
+        return self._activity_pattern.pop_peaks()
+
+    def num_peaks(self) -> int:
+        return self._activity_pattern.num_peaks()

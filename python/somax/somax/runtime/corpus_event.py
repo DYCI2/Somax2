@@ -1,14 +1,16 @@
 import logging
+from abc import abstractmethod, ABC
 from typing import Optional, List, Dict, Type, Any
 
 import pandas as pd
 
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
-from somax.features.feature import CorpusFeature
+from somax.features.feature_value import FeatureValue
+from somax.runtime.exceptions import FeatureError
 from somax.runtime.memory_state import MemoryState
 
 """ Keys correspond to parent module names, ex. "pitch" or "chroma". """
-EventParameterDict = Dict[str, List[CorpusFeature]]
+EventParameterDict = Dict[str, List[FeatureValue]]
 
 
 class Note:
@@ -83,43 +85,82 @@ class Note:
         return self.onset < 0.0
 
 
-class CorpusEvent:
-    def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float, bar_number: float,
-                 duration: Optional[float] = None, absolute_duration: Optional[float] = None,
-                 notes: Optional[List[Note]] = None, features: Optional[Dict[Type[CorpusFeature], CorpusFeature]] = None):
+class CorpusEvent(ABC):
+    def __init__(self, state_index: int, features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None):
         self.logger = logging.getLogger(__name__)
         self.state_index: int = state_index
+        self.features: Dict[Type[FeatureValue], FeatureValue] = features if features else {}
+
+    @classmethod
+    @abstractmethod
+    def decode(cls, event_dict: Dict[str, Any], feature_classpath_dict: Dict[str, str]) -> 'CorpusEvent':
+        """ Raises: KeyError, AttributeError"""
+
+    @abstractmethod
+    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
+        """ """
+
+    @property
+    @abstractmethod
+    def onset(self) -> float:
+        """ """
+
+    @property
+    @abstractmethod
+    def duration(self) -> float:
+        """ """
+
+    def get_feature(self, feature_type: Type[FeatureValue]) -> FeatureValue:
+        """Raises KeyError"""
+        try:
+            return self.features[feature_type]
+        except ValueError as e:
+            raise FeatureError(f"Corpus does not have feature of type '{feature_type}'") from e
+
+    def get_feature_safe(self, feature_type: Type[FeatureValue]) -> Optional[FeatureValue]:
+        return self.features.get(feature_type)
+
+    def set_feature(self, feature: FeatureValue):
+        """ Note! This call is strictly for constructing the corpus. Using it at runtime to edit an already loaded
+                  corpus will not warrant well-defined behaviour """
+        self.features[type(feature)] = feature
+
+
+class MidiCorpusEvent(CorpusEvent):
+    def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float, bar_number: float,
+                 duration: Optional[float] = None, absolute_duration: Optional[float] = None,
+                 notes: Optional[List[Note]] = None,
+                 features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None):
+        super().__init__(state_index=state_index, features=features)
         self.tempo: float = tempo
-        self.onset: float = onset
+        self._relative_onset: float = onset
         self.absolute_onset: float = absolute_onset
         self.bar_number: float = bar_number
 
-        self.duration: Optional[float] = duration
+        self._relative_duration: Optional[float] = duration
         self.absolute_duration: Optional[float] = absolute_duration
 
         self.notes: List[Note] = notes if notes else []
-        self.features: Dict[Type[CorpusFeature], CorpusFeature] = features if features else {}
         self.recorded_memory_state: Optional[MemoryState] = None
 
-        # self._labels = {}  # {ClassVar[AbstractLabel]: AbstractLabel}, precompiled for performance
-
     @classmethod
-    def decode(cls, event_dict: Dict[str, Any], classpath_dict: Dict[str, str]) -> 'CorpusEvent':
+    def decode(cls, event_dict: Dict[str, Any], feature_dict: Dict[str, str]) -> 'MidiCorpusEvent':
         """ Raises: KeyError, AttributeError"""
-        return CorpusEvent(state_index=event_dict["state_index"],
-                           tempo=event_dict["tempo"],
-                           onset=event_dict["onset"],
-                           absolute_onset=event_dict["absolute_onset"],
-                           duration=event_dict["duration"],
-                           absolute_duration=event_dict["absolute_duration"],
-                           bar_number=event_dict["bar"],
-                           notes=[Note.from_json(note_dict) for note_dict in event_dict["notes"]],
-                           features=dict([CorpusFeature.from_json(classpath_dict[k], v)
-                                          for (k, v) in event_dict["features"].items()])
-                           )
+        from somax.features.feature import CorpusFeature
+        return MidiCorpusEvent(state_index=event_dict["state_index"],
+                               tempo=event_dict["tempo"],
+                               onset=event_dict["onset"],
+                               absolute_onset=event_dict["absolute_onset"],
+                               duration=event_dict["duration"],
+                               absolute_duration=event_dict["absolute_duration"],
+                               bar_number=event_dict["bar"],
+                               notes=[Note.from_json(note_dict) for note_dict in event_dict["notes"]],
+                               features=dict([CorpusFeature.from_json(feature_dict[k], v)
+                                              for (k, v) in event_dict["features"].items()])
+                               )
 
     @classmethod
-    def incomplete(cls, state_index: int, raw_note: pd.Series) -> 'CorpusEvent':
+    def incomplete(cls, state_index: int, raw_note: pd.Series) -> 'MidiCorpusEvent':
         """ Create a new CorpusEvent containing a single note where the duration is unknown.
         pd.Series on the format specified in note_matrix.py"""
         event_onset: float = raw_note[Keys.REL_ONSET]
@@ -130,38 +171,69 @@ class CorpusEvent:
 
     def set_duration(self, end: float, absolute_end: float):
         """ Completes a CorpusEvent constructed with the `incomplete` constructor. """
-        self.duration = end - self.onset
+        self._relative_duration = end - self._relative_onset
         self.absolute_duration = absolute_end - self.absolute_onset
 
+    @property
+    def onset(self) -> float:
+        return self._relative_onset
+
+    def set_onset(self, onset: float):
+        # TODO: This shouldn't be settable - only added for corpus export in ImprovisationMemory. Find better solution
+        self._relative_onset = onset
+
+    @property
+    def duration(self) -> float:
+        return self._relative_duration
+
     def append_raw(self, note: pd.Series) -> None:
-        self.notes.append(Note.from_raw(note, self.onset, self.absolute_onset))
+        self.notes.append(Note.from_raw(note, self._relative_onset, self.absolute_onset))
 
     def append_notes(self, notes: List[Note], parent_onset: float, parent_abs_onset: float) -> None:
-        self.notes.extend([Note.relative_to(n, parent_onset, self.onset, parent_abs_onset, self.absolute_onset)
-                           for n in notes])
-
-    def set_feature(self, feature: CorpusFeature):
-        self.features[type(feature)] = feature
-
-    def get_feature(self, feature_type: Type[CorpusFeature]) -> CorpusFeature:
-        """Raises KeyError"""
-        return self.features[feature_type]
+        self.notes.extend(
+            [Note.relative_to(n, parent_onset, self._relative_onset, parent_abs_onset, self.absolute_onset)
+             for n in notes])
 
     def held_to(self) -> [Note]:
         return [note for note in self.notes if note.is_held_to()]
 
     def held_from(self) -> [Note]:
-        return [note for note in self.notes if note.is_held_from(self.duration)]
+        return [note for note in self.notes if note.is_held_from(self._relative_duration)]
 
-    def encode(self, features_dict: Dict[Type['CorpusFeature'], str]) -> Dict[str, Any]:
+    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
         return {"state_index": self.state_index,
                 "tempo": self.tempo,
-                "onset": self.onset,
+                "onset": self._relative_onset,
                 "absolute_onset": self.absolute_onset,
                 "bar": self.bar_number,
-                "duration": self.duration,
+                "duration": self._relative_duration,
                 "absolute_duration": self.absolute_duration,
                 "notes": [note.encode() for note in self.notes],
                 "features": {features_dict[cls]: obj for (cls, obj) in self.features.items()}
                 }
         # : Dict[Type[AbstractTrait], AbstractTrait] = event_parameters if event_parameters else {}
+
+
+class AudioCorpusEvent(CorpusEvent):
+    def __init__(self, state_index: int, absolute_onset: float, absolute_duration: float,
+                 features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None):
+        super().__init__(state_index=state_index, features=features)
+        self._absolute_onset: float = absolute_onset
+        self._absolute_duration: float = absolute_duration
+
+    @classmethod
+    def decode(cls, event_dict: Dict[str, Any], feature_classpath_dict: Dict[str, str]) -> 'CorpusEvent':
+        # TODO: Remove from interface once pickling has been made the norm
+        raise NotImplementedError("This function is not needed for pickling")
+
+    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
+        # TODO: Remove from interface once pickling has been made the norm
+        raise NotImplementedError("This function is not needed for pickling")
+
+    @property
+    def onset(self) -> float:
+        return self._absolute_onset
+
+    @property
+    def duration(self) -> float:
+        return self._absolute_duration

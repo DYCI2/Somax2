@@ -1,33 +1,11 @@
 import logging
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict, Tuple, List
+from collections import Iterable
+from typing import Any, Callable, Dict, Tuple, List, Union
 
 from maxosc.sender import Sender, SendFormat, MaxFormatter
 
-
-class SendProtocol:
-    PLAYER_NUM_PEAKS = "num_peaks"
-    PLAYER_SINGLE_PARAMETER = "param"
-    PLAYER_CORPUS_FILES = "corpus_info"
-    ALL_PLAYER_NAMES = "player_names"
-    AGENT_INSTANTIATED = "instantiated_agent"
-    INSTANTIATED_ATOMS = "instantiated_atoms"
-    PLAYER_CORPUS = "corpus"
-    PLAYER_RECORDED_CORPUS_LENGTH = "recorded_corpus"
-
-    SCHEDULER_RUNNING = "scheduler_running"
-    TRANSPORT_MODE = "transport_mode"
-    SCHEDULER_CURRENT_TIME = "time"
-    SCHEDULER_CURRENT_TEMPO = "tempo"
-    SCHEDULER_TEMPO_SET_SUCESS = "tempo_was_set"
-    SCHEDULER_HAS_TEMPO_MASTER = "has_tempo_master"
-    SCHEDULER_RESET_UI = "reset"
-
-    SEND_MIDI_EVENT = "midi"
-    SEND_STATE_EVENT = "state"
-    SEND_STATE_ONSET = "state_onset"
-
-    SERVER_STATUS = "server_status"
+from somax.scheduler.scheduled_event import RendererEvent, RendererMessage
 
 
 class Target(ABC):
@@ -37,9 +15,16 @@ class Target(ABC):
     def send(self, keyword: str, content: Any, **kwargs):
         raise NotImplementedError("Target.send is abstract.")
 
+    def send_event(self, event: RendererEvent):
+        renderer_messages: Union[List[RendererMessage], RendererMessage] = event.render()
+        if isinstance(renderer_messages, Iterable):
+            for message in renderer_messages:  # type: RendererMessage
+                self.send(message.keyword, message.content)
+        else:
+            self.send(renderer_messages.keyword, renderer_messages.content)
+
 
 class SimpleOscTarget(Target):
-
     def __init__(self, address: str, port: int, ip: str = "127.0.0.1"):
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"Creating new OscTarget with address '{address}', port '{port}' and ip '{ip}'.")
@@ -63,7 +48,6 @@ class NoTarget(Target):
 
 
 class CallableTarget(Target):
-
     def __init__(self, callback_func: Callable):
         self.callback_func: Callable = callback_func
 

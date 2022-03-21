@@ -33,9 +33,3 @@ class FeatureInfluence(AbstractInfluence):
     def from_keyword(cls, keyword: str, value: Any):
         """ :raises ValueError if a feature matching the keyword doesn't exist """
         return cls(RuntimeFeature.from_string(keyword, value))
-
-# TODO: REMOVE
-# class KeywordInfluence(AbstractInfluence):
-#     def __init__(self, keyword: InfluenceType, influence_data: Any):
-#         self.keyword: InfluenceType = keyword
-#         self.influence_data: Any = influence_data

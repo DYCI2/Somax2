@@ -1,33 +1,39 @@
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 
 import argparse
 import asyncio
-import copy
 import logging
 import logging.config
 import multiprocessing
 import sys
+import warnings
 from importlib import resources
-from typing import Optional, Callable, Tuple, List, Dict
+from typing import Optional, Callable, Tuple, List, Dict, Type
 
-import log
+from audioread import NoBackendError
+
+from somax import log
 import somax
-from somax.classification import SomChromaClassifier
+from somax.classification.chroma_classifiers import OnsetSomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
-from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder
+from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
 from somax.runtime.agent import OscAgent, Agent
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.corpus import Corpus
+from somax.runtime.exceptions import ParameterError
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
-from somax.runtime.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, TempoMasterMessage, \
-    TempoMessage
 from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.target import Target, SendProtocol
-from somax.scheduler.scheduled_object import TriggerMode
-from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport, Time
+from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.target import Target
+from somax.scheduler.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, \
+    TempoMasterMessage, \
+    TempoMessage
+from somax.scheduler.scheduling_handler import SchedulingHandler
+from somax.scheduler.time_object import Time
+from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport
 
 
 class Somax:
@@ -35,7 +41,7 @@ class Somax:
         super().__init__(*args, **kwargs)
         self.logger = logging.getLogger(__name__)
         self._agents: Dict[str, Tuple[Agent, multiprocessing.Queue]] = dict()
-        self._corpus_builders: List[ThreadedCorpusBuilder] = []
+        self._corpus_builders: List[multiprocessing.Process] = []
         self._transport: Transport = MasterTransport()
         self._tempo_master_queue: multiprocessing.Queue[TempoMessage] = multiprocessing.Queue()
         self._terminated: bool = False
@@ -94,30 +100,6 @@ class Somax:
         for _, queue in self._agents.values():
             queue.put(message)
 
-    ######################################################
-    # CORPUS METHODS
-    ######################################################
-
-    def build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                     overwrite: bool = False, filter_class: str = "", **kwargs):
-        self.logger.info(f"Building corpus from file(s) '{filepath}'...")
-        try:
-            spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
-            corpus: Corpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
-                                                   spectrogram_filter=spectrogram_filter, **kwargs)
-            self.logger.debug(f"[build_corpus]: Successfully built '{corpus.name}' from file '{filepath}'.")
-        except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
-            self.logger.error(f"{str(e)} No Corpus was built.")
-            return
-
-        if output_folder is not None:
-            self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{output_folder}'...")
-            try:
-                output_filepath: str = corpus.export(output_folder, overwrite=overwrite)
-                self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
-            except (IOError, AttributeError, KeyError) as e:
-                self.logger.error(f"{str(e)} Export of corpus failed.")
-
 
 class SomaxServer(Somax, AsyncioOscObject):
     DEFAULT_RECV_PORT = 1234
@@ -166,7 +148,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         self._process_tempo_queue()
         if self._transport.running:
             try:
-                time: Time = self._transport.update_tick(tick=tick)
+                time: Time = self._transport.update_time(ticks=tick)
                 self._send_to_all_agents(TimeMessage(time=time))
             except TypeError as e:
                 self.logger.error(f"{repr(e)}")
@@ -185,20 +167,21 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.loop = self.__slave_loop
             self._transport = SlaveTransport.clone_from(self._transport)
         mode_str: str = "master" if master else "slave"
-        self.logger.info(f"Transport mode set to '{mode_str}'.")
+        self.logger.debug(f"Transport mode set to '{mode_str}'.")
         self.target.send(SendProtocol.TRANSPORT_MODE, mode_str)
 
     ######################################################
     # CREATION/DELETION OF AGENTS
     ######################################################
 
-    def create_agent(self, name: str, recv_port: int, send_port: int, ip: str = "", trigger_mode: str = "",
+    def create_agent(self, name: str, recv_port: int, send_port: int, ip: str = "", scheduling_type: str = "",
                      peak_selector: str = "", merge_action: str = "", corpus_filepath: str = "",
                      scale_actions: Tuple[str, ...] = ("",), override: bool = False):
         try:
             address: str = self.parse_osc_address(name)
             ip: str = self.parse_ip(ip)
-            trigger_mode: TriggerMode = TriggerMode.from_string(trigger_mode)
+
+            scheduling_type: Type[SchedulingHandler] = SchedulingHandler.type_from_string(scheduling_type)
             merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector)
             scale_actions: List[AbstractScaleAction] = [AbstractScaleAction.from_string(s) for s in scale_actions]
@@ -206,9 +189,8 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.error(f"{str(e)}. No agent was created.")
             return
 
-        player: Player = Player(name=name, trigger_mode=trigger_mode, peak_selector=peak_selector,
-                                merge_action=merge_action,
-                                scale_actions=scale_actions)
+        player: Player = Player(name=name, peak_selector=peak_selector,
+                                merge_action=merge_action, scale_actions=scale_actions)
 
         if name in self._agents:
             if override:
@@ -217,11 +199,12 @@ class SomaxServer(Somax, AsyncioOscObject):
                 self.logger.info(f"An agent with the name '{name}' already exists on the server. "
                                  f"No action was performed. Use 'override=True' to override existing agent.")
                 return
+
         agent_queue: multiprocessing.Queue = multiprocessing.Queue()
         agent: OscAgent = OscAgent(player, recv_queue=agent_queue, tempo_send_queue=self._tempo_master_queue,
-                                   ip=ip, recv_port=recv_port, send_port=send_port, address=address,
-                                   corpus_filepath=corpus_filepath, scheduler_tick=self._transport.tick,
-                                   scheduler_tempo=self._transport.tempo, scheduler_running=self._transport.running)
+                                   transport_time=self._transport.time, scheduler_running=self._transport.running,
+                                   scheduling_type=scheduling_type, ip=ip, recv_port=recv_port, send_port=send_port,
+                                   address=address, corpus_filepath=corpus_filepath)
         agent.start()
         self._agents[name] = agent, agent_queue
         self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port}, ip {ip}.")
@@ -241,8 +224,8 @@ class SomaxServer(Somax, AsyncioOscObject):
     ######################################################
 
     def get_time(self):
-        time: Time = self._transport.time()
-        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.tick, time.tempo))
+        time: Time = self._transport.time
+        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.seconds, time.tempo))
 
     def get_player_names(self):
         for player_name in self._agents.keys():
@@ -288,28 +271,104 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.info("Somax was successfully shut down.")
 
     ######################################################
-    # MISC.
+    # CORPUS
     ######################################################
 
-    def multithreaded_build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                                   overwrite: bool = False, filter_class: str = "", **kwargs):
+    def build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
+                     overwrite: bool = False, copy_resources: bool = False,
+                     filter_class: str = "",
+                     segmentation_mode: Optional[str] = None,
+                     multithreaded: bool = False, **kwargs):
         self.logger.info(f"Building corpus from file(s) '{filepath}'...")
         try:
             spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
-        except ValueError as e:
+            segmentation: Optional[AudioSegmentation] = AudioSegmentation.from_string(
+                segmentation_mode) if segmentation_mode is not None else None
+
+        except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
+
+        if multithreaded:
+            self._build_multithreaded(filepath, output_folder, corpus_name, overwrite, copy_resources, spectrogram_filter,
+                                      segmentation, **kwargs)
+        else:
+            self._build(filepath, output_folder, corpus_name, overwrite, copy_resources, spectrogram_filter,
+                        segmentation, **kwargs)
+
+    # TODO: Remove once multithreaded corpus builder is stable enough
+    def _build(self, filepath: str,
+               output_folder: str,
+               corpus_name: Optional[str] = None,
+               overwrite: bool = False,
+               copy_resources: bool = False,
+               spectrogram_filter: AbstractFilter = AbstractFilter.default(),
+               segmentation_mode: Optional[AudioSegmentation] = None,
+               **kwargs):
+        self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
+        corpus: Corpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
+                                               spectrogram_filter=spectrogram_filter,
+                                               segmentation_mode=segmentation_mode, **kwargs)
+        self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{output_folder}'...")
+
+        try:
+            output_filepath: str = corpus.export(output_folder, overwrite=overwrite, copy_resources=copy_resources)
+            self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
+        except (IOError, AttributeError, KeyError) as e:
+            self.logger.error(f"{str(e)} Export of corpus failed.")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+
+    def _build_multithreaded(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
+                             overwrite: bool = False, copy_resources: bool = False,
+                             spectrogram_filter: AbstractFilter = AbstractFilter.default(),
+                             segmentation_mode: Optional[AudioSegmentation] = None, **kwargs):
         corpus_builder: ThreadedCorpusBuilder = ThreadedCorpusBuilder(filepath=filepath, corpus_name=corpus_name,
                                                                       spectrogram_filter=spectrogram_filter,
                                                                       output_folder=output_folder, overwrite=overwrite,
+                                                                      copy_resources=copy_resources,
                                                                       osc_address=self.address, ip=self.ip,
-                                                                      send_port=self.send_port, **kwargs)
+                                                                      send_port=self.send_port,
+                                                                      segmentation_mode=segmentation_mode,
+                                                                      **kwargs)
         corpus_builder.start()
         self._corpus_builders.append(corpus_builder)
 
+    def test_audio_segmentation(self, filepath: str, segmentation_mode: str, hop_length: int = 512, **kwargs):
+        try:
+            segmentation: AudioSegmentation = AudioSegmentation.from_string(name=segmentation_mode)
+        except ValueError:
+            self.logger.error(f"Invalid specification '{segmentation_mode}' for segmentation. "
+                              f"Valid values are: '{','.join(e for e in AudioSegmentation)}'.")
+            return
+        try:
+            # Suppress librosa UserWarning on mp3 files (handled properly below on NoBackendError)
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                onsets, durations, stats = CorpusBuilder().test_audio_segmentation(filepath,
+                                                                                   segmentation_mode=segmentation,
+                                                                                   hop_length=hop_length, **kwargs)
+        except (FileNotFoundError, ValueError) as e:
+            self.logger.error(f"{str(e)}. Could not perform segmentation.")
+            return
+        except NoBackendError:
+            self.logger.error(f"The file format of the provided file is not supported.")
+            return
+        except ParameterError as e:
+            self.logger.error(f"{str(e)}. Try retuning the parameters with respect to the current audio file")
+            return
+        finally:
+            self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_SEGMENTATION_DONE, Target.WRAPPED_BANG)
+
+        self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_STATS, stats.render())
+
+        for (onset, duration) in zip(onsets, durations):
+            self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_SEGMENT, [onset, onset + duration])
+
 
 if __name__ == "__main__":
-    multiprocessing.freeze_support()    # Required for PyInstaller
+    multiprocessing.freeze_support()  # Required for PyInstaller
     parser = argparse.ArgumentParser(description='Launch and manage a Somax server')
     parser.add_argument('in_port', metavar='IN_PORT', type=int, nargs='?',
                         help='in port used by the server', default=SomaxServer.DEFAULT_RECV_PORT)
@@ -321,7 +380,7 @@ if __name__ == "__main__":
         logging.config.fileConfig(path.absolute())
 
     # Called to enforce file io at start of program
-    SomChromaClassifier()
+    OnsetSomChromaClassifier()
 
     parsed_args = parser.parse_args()
     in_port = parsed_args.in_port

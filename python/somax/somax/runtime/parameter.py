@@ -1,7 +1,7 @@
-import collections
 import functools
 from abc import ABC
-from typing import TypeVar, Union, Dict, Any, Callable, List, Tuple
+from collections import abc
+from typing import TypeVar, Union, Dict, Any, Callable, List, Tuple, Optional
 
 # TODO: Poor type description
 MaxCompatible = TypeVar('MaxCompatible', int, float, bool)
@@ -83,7 +83,7 @@ class Parametric(HasParameterDict):
                 variable._parse_parameters()
                 param_dict[name] = variable
             # Parse all Parameter and Parametric inside other dicts (for example MergeAction)
-            if isinstance(variable, collections.abc.Mapping):
+            if isinstance(variable, abc.Mapping):
                 for parent, item in variable.items():
                     if isinstance(item, Parameter) or isinstance(item, Parametric):
                         item._parse_parameters()
@@ -92,3 +92,39 @@ class Parametric(HasParameterDict):
                         else:
                             param_dict[parent.__name__] = item
         self.parameter_dict = param_dict
+
+    def get_parameter_path(self, target_obj: HasParameterDict,
+                           parent_path: Optional[List[str]] = None) -> List[str]:
+        """ Temporary method to handle recursion through the Parametric hierarchy given an uneligible object returned
+            from the `ContentAware` hierarchy. This is needed because the identifier of a given `ContentAware` object
+            will in the front-end be given by its corresponding Parametric path. Returns **all** parameters below the
+            given (invalidated) object.
+            Obviously, this solution is not ideal, ContentAware and Parametric should really be merged into one
+            architecture, but will suffice for now. """
+        if parent_path is None:
+            parent_path = []
+
+        for name, obj in self.parameter_dict.items():
+            if obj == target_obj:
+                parent_path.insert(0, name)
+                return parent_path  # return to terminate search
+            elif isinstance(obj, Parametric):
+                parent_path = obj.get_parameter_path(target_obj=target_obj, parent_path=parent_path)
+                if parent_path:  # Found object in previous recursion
+                    parent_path.insert(0, name)
+                    return parent_path  # return to terminate search
+
+        return parent_path
+
+    def get_children_paths(self, parent_path: List[str],
+                           output_paths: Optional[List[List[str]]] = None) -> List[List[str]]:
+        if output_paths is None:
+            output_paths = []
+
+        for name, obj in self.parameter_dict.items():
+            if isinstance(obj, Parameter):
+                output_paths.append(parent_path + [name])
+            elif isinstance(obj, Parametric):
+                output_paths.extend(obj.get_children_paths(parent_path=parent_path + [name]))
+
+        return output_paths

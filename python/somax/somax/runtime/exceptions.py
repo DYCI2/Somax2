@@ -18,6 +18,16 @@ class InvalidCorpus(Exception):
         super(InvalidCorpus, self).__init__(error)
 
 
+class ExternalDataMismatch(Exception):
+    def __init__(self, error):
+        super(ExternalDataMismatch, self).__init__(error)
+
+
+class ContentMismatch(Exception):
+    def __init__(self, error):
+        super(ContentMismatch, self).__init__(error)
+
+
 class TransformError(Exception):
     def __init__(self, error):
         super(TransformError, self).__init__(error)
@@ -41,3 +51,8 @@ class DuplicateKeyError(Exception):
 class ParameterError(Exception):
     def __init__(self, error):
         super(ParameterError, self).__init__(error)
+
+
+class FeatureError(Exception):
+    def __init__(self, error):
+        super(FeatureError, self).__init__(error)
