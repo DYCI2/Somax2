@@ -37,7 +37,7 @@ If you want to modify the python code, you will need a manual installation. This
 ## Getting Started
 The main Somax application is the patch `somax2.maxpat`. You can open this patch from inside Max or directly from Finder. 
 
-It is recommended to first follow the interactive tutorial by opening the `tutorial.maxpat` patch. This tutorial gives a brief introduction to the different modules of Somax and introduces the first steps towards interacting with the model.
+It is recommended to first follow the interactive tutorial by opening the `tutorial_intro.maxpat` patch. This tutorial gives a brief introduction to the different modules of Somax and introduces the first steps towards interacting with the model. A second tutorial describing how to work with audio files in somax can be found in the same folder (`tutorial_audio.maxpat`). 
 
 A good starting point in understanding Somax is the document `Introduction Somax.pdf`, which gives a brief overview of how the Somax interaction model works.
 
@@ -48,14 +48,13 @@ A good starting point in understanding Somax is the document `Introduction Somax
 * **Introduction to Somax:** The document `Introduction Somax.pdf` is intended as a starting point to give an understanding of how the interaction model of Somax works.
 * **Max Help Files:** The main documentation of Somax. Individual help files exists for each Max object, outlining how to use the object, its parametric controls as well as a number of use cases. The help files can be accessed by pressing the «?» button available in each of the objects or by right-clicking (ctrl-click) the object inside Max in the unlocked patcher and selecting "Open Help".
 * **Videos, Reports and Publications**: Can be found [here](http://repmus.ircam.fr/somax/home).
-* **Additional Corpora**: A number of pre-built corpora to use for experimentation are available initially. Further corpora can be found in the `Somax2/corpus/Additional-Corpora.zip`. To use those in Somax 2, extract the archive and move the content of the extracted folder to the `Somax2/corpus/` folder.
 
 Further documentation will be added continuously.
 
 ## Credits
-Somax 2 (c) Ircam 2012-2021
+Somax 2 (c) Ircam 2012-2022
 
-Somax 2 is a new version of the Somax reactive co-improvisation paradigm by G. Assayag. Written by Joakim Borg in Max and Python (2019-2021), featuring a modular multithreaded implementation, multiple wireless interacting players, new UI design with tutorials and documentation, as well as a number of new interaction parameters. 
+Somax 2 is a new version of the Somax reactive co-improvisation paradigm by G. Assayag. Written by Joakim Borg in Max and Python (2019-2022), featuring a modular multithreaded implementation, multiple wireless interacting players, new UI design with tutorials and documentation, as well as a number of new interaction parameters. 
 
 
 Legacy:
