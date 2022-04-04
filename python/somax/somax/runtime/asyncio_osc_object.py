@@ -149,7 +149,7 @@ class StatusAsyncOscComm(AsyncioOscComm, ABC):
     async def _run_status_loop(self) -> None:
         while self.running:
             for address, obj in self.get_main_component().recurse():  # type: str, Component
-                self.status_sender.send(address, obj.ready)
+                self.status_sender.send(address + "/status", Status.READY if obj.ready else Status.INITIALIZING)
             await asyncio.sleep(self.status_send_interval)
 
         self.send_status_to_all(Status.TERMINATED)
