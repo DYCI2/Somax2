@@ -1,6 +1,7 @@
 import asyncio
 import ipaddress
 import logging
+import multiprocessing
 from abc import ABC, abstractmethod
 from enum import IntEnum
 from logging import Logger
@@ -18,7 +19,7 @@ from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.target import Target, SimpleOscTarget
 
 
-class AsyncioOscComm(Caller, ABC):
+class AsyncOsc(Caller, ABC):
     IP_LOCALHOST = "127.0.0.1"
     DEFAULT_CALLBACK_INTERVAL = 0.001
 
@@ -40,25 +41,45 @@ class AsyncioOscComm(Caller, ABC):
         self.server: Optional[AsyncIOOSCUDPServer] = None
 
         self._async_targets: List[Callable[[], Awaitable[None]]] = []
-        self._running: bool = False
+        self.__running: bool = False
+
+    @abstractmethod
+    def _on_start(self):
+        """ """
 
     @abstractmethod
     async def _main_loop(self):
         """ """
 
-    def add_async_target(self, func: Callable[[], Awaitable[None]]) -> None:
-        if not self.running:
-            self._async_targets.append(func)
-        else:
-            raise RuntimeError("Cannot add async target while already running")
+    @abstractmethod
+    def _on_stop(self):
+        """ """
 
     @property
     def running(self):
-        return self._running
+        """ Note: Should be used to control main loop """
+        return self.__running
 
-    async def _run(self):
+    def start(self) -> None:
+        """ Main function used to start the object. Function named for consistency with multiprocessing.Process """
+        if isinstance(self, multiprocessing.Process):
+            multiprocessing.Process.start(self)
+        else:
+            self.run()
+
+    def run(self) -> None:
+        """ Override this function if more complex error handling is needed.
+            Again, function is named for compatibility with multiprocessing.Process """
+        try:
+            asyncio.run(self._run())
+        except OSError as e:
+            self.logger.critical(f"{str(e)}. Could not run object")
+            self.stop()
+
+    async def _run(self) -> None:
         """ raises: OSError is server already is in use """
-        self._running = True
+        self.__running = True
+        self._on_start()
         osc_dispatcher: Dispatcher = Dispatcher()
         osc_dispatcher.map(self.address, self.__process_osc)
         osc_dispatcher.set_default_handler(self.__unmatched_osc)
@@ -68,6 +89,19 @@ class AsyncioOscComm(Caller, ABC):
         self.target.send(SendProtocol.AGENT_INSTANTIATED, Target.WRAPPED_BANG)
         await asyncio.gather(self._main_loop(), *[f() for f in self._async_targets])
         transport.close()
+
+    def stop(self) -> None:
+        """ terminate the object. define `_on_stop` for additional behaviour on stopping """
+        self._on_stop()
+        self.__running = False
+
+    def add_async_target(self, func: Callable[[], Awaitable[None]]) -> None:
+        """ Add additional async functions to call continuously running. Each function needs their own loop
+        and should utilize `self.running` ideally. See `AsyncWithStatus` below """
+        if not self.running:
+            self._async_targets.append(func)
+        else:
+            raise RuntimeError("Cannot add async target while already running")
 
     def __process_osc(self, _address, *args):
         args_str: str = MaxFormatter.format_as_string(*args)
@@ -88,9 +122,9 @@ class AsyncioOscComm(Caller, ABC):
             ipaddress.ip_address(ip)
             return ip
         except ValueError as e:
-            err = f"{str(e)}. Setting ip to {AsyncioOscComm.IP_LOCALHOST}."
+            err = f"{str(e)}. Setting ip to {AsyncOsc.IP_LOCALHOST}."
             logger.error(err)
-            return AsyncioOscComm.IP_LOCALHOST
+            return AsyncOsc.IP_LOCALHOST
 
     def parse_osc_address(self, string: str) -> str:
         if not string.startswith("/"):
@@ -124,7 +158,7 @@ class Status(IntEnum):
     TERMINATED = 9
 
 
-class StatusAsyncOscComm(AsyncioOscComm, ABC):
+class AsyncOscWithStatus(AsyncOsc, ABC):
     def __init__(self, recv_port: int,
                  send_port: int,
                  ip: str,
@@ -153,3 +187,19 @@ class StatusAsyncOscComm(AsyncioOscComm, ABC):
             await asyncio.sleep(self.status_send_interval)
 
         self.send_status_to_all(Status.TERMINATED)
+
+
+class AsyncOscMPC(AsyncOsc, multiprocessing.Process, ABC):
+    def __init__(self, *args, **kwargs):
+        # It's critical that multiprocessing.Process is initialized without any arguments
+        # and that `AsyncOscWithStatus` is declared first in the __mro__
+        AsyncOsc.__init__(*args, **kwargs)
+        multiprocessing.Process.__init__(self)
+
+
+class AsyncOscMPCWithStatus(AsyncOscWithStatus, multiprocessing.Process, ABC):
+    def __init__(self, *args, **kwargs):
+        # It's critical that multiprocessing.Process is initialized without any arguments
+        # and that `AsyncOscWithStatus` is declared first in the __mro__
+        AsyncOscWithStatus.__init__(self, *args, **kwargs)
+        multiprocessing.Process.__init__(self)

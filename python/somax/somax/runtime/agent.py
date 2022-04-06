@@ -21,7 +21,7 @@ from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.runtime.activity_pattern import AbstractActivityPattern
-from somax.runtime.asyncio_osc_object import AsyncioOscComm
+from somax.runtime.asyncio_osc_object import AsyncOsc
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
@@ -80,7 +80,7 @@ class Agent(GenerationScheduler, multiprocessing.Process, ABC):
         self._terminated = True
 
 
-class OscAgent(Agent, AsyncioOscComm):
+class OscAgent(Agent, AsyncOsc):
     def __init__(self, name: str,
                  generator: SomaxGenerator,
                  recv_queue: multiprocessing.Queue,
@@ -93,7 +93,7 @@ class OscAgent(Agent, AsyncioOscComm):
         Agent.__init__(self, generator=generator, recv_queue=recv_queue, tempo_send_queue=tempo_send_queue,
                        transport_time=transport_time, scheduler_running=scheduler_running,
                        scheduling_type=scheduling_type, **kwargs)
-        AsyncioOscComm.__init__(self, recv_port=recv_port, send_port=send_port, ip=ip, address=address, **kwargs)
+        AsyncOsc.__init__(self, recv_port=recv_port, send_port=send_port, ip=ip, address=address, **kwargs)
 
         self.logger = logging.getLogger(__name__)
 

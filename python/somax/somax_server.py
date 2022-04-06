@@ -18,7 +18,7 @@ from somax.classification.chroma_classifiers import OnsetSomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
 from somax.runtime.agent import OscAgent, Agent
-from somax.runtime.asyncio_osc_object import AsyncioOscComm
+from somax.runtime.asyncio_osc_object import AsyncOsc
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.exceptions import ParameterError
 from somax.runtime.merge_actions import AbstractMergeAction
@@ -101,14 +101,14 @@ class Somax:
             queue.put(message)
 
 
-class SomaxServer(Somax, AsyncioOscComm):
+class SomaxServer(Somax, AsyncOsc):
     DEFAULT_RECV_PORT = 1234
     DEFAULT_SEND_PORT = 1235
     SERVER_ADDRESS = "/somax"
 
     DEBUG = True
 
-    def __init__(self, recv_port: int, send_port: int, ip: str = AsyncioOscComm.IP_LOCALHOST,
+    def __init__(self, recv_port: int, send_port: int, ip: str = AsyncOsc.IP_LOCALHOST,
                  address: str = SERVER_ADDRESS, *args, **kwargs):
         super().__init__(recv_port=recv_port, send_port=send_port, ip=ip, address=address, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
