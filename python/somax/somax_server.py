@@ -5,6 +5,7 @@ import asyncio
 import logging
 import logging.config
 import multiprocessing
+import os.path
 import sys
 import warnings
 from importlib import resources
@@ -12,15 +13,15 @@ from typing import Optional, Callable, Tuple, List, Dict, Type
 
 from audioread import NoBackendError
 
-from somax import log
 import somax
+from somax import log
 from somax.classification.chroma_classifiers import OnsetSomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
 from somax.runtime.agent import OscAgent, Agent
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
-from somax.runtime.corpus import Corpus
-from somax.runtime.exceptions import ParameterError
+from somax.runtime.corpus import Corpus, AudioCorpus
+from somax.runtime.exceptions import ParameterError, InvalidCorpus, ExternalDataMismatch
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
@@ -291,11 +292,21 @@ class SomaxServer(Somax, AsyncioOscObject):
             return
 
         if multithreaded:
-            self._build_multithreaded(filepath, output_folder, corpus_name, overwrite, copy_resources, spectrogram_filter,
+            self._build_multithreaded(filepath, output_folder, corpus_name, overwrite, copy_resources,
+                                      spectrogram_filter,
                                       segmentation, **kwargs)
         else:
             self._build(filepath, output_folder, corpus_name, overwrite, copy_resources, spectrogram_filter,
                         segmentation, **kwargs)
+
+    def relocate_audio_corpus(self, corpus_filepath: str, new_audio_filepath: str):
+        try:
+            corpus: AudioCorpus = AudioCorpus.from_json(corpus_filepath, new_audio_path=new_audio_filepath)
+            corpus.export(os.path.dirname(corpus_filepath), overwrite=True)
+            self.target.send(SendProtocol.RELOCATE_AUDIO_CORPUS_STATUS, "success")
+        except (FileNotFoundError, IOError, AttributeError, InvalidCorpus, ExternalDataMismatch) as e:
+            self.logger.error(f"{str(e)}. Could not complete operation")
+            self.target.send(SendProtocol.RELOCATE_AUDIO_CORPUS_STATUS, "failed")
 
     # TODO: Remove once multithreaded corpus builder is stable enough
     def _build(self, filepath: str,

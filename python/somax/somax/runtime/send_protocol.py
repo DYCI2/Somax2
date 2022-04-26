@@ -12,6 +12,7 @@ class SendProtocol:
     ELIGIBILITY = "eligibility"
 
     BUILDING_CORPUS_STATUS = "building_corpus_status"
+    RELOCATE_AUDIO_CORPUS_STATUS = "relocate_audio_corpus_status"
 
     PLAYER_READING_CORPUS_STATUS = "reading_corpus_status"
 

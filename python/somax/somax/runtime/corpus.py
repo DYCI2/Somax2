@@ -287,10 +287,16 @@ class AudioCorpus(Corpus):
         return self.events[-1].onset + self.events[-1].duration
 
     @classmethod
-    def from_json(cls, filepath: str, volatile: bool = False) -> 'AudioCorpus':
+    def from_json(cls, filepath: str,
+                  volatile: bool = False,
+                  new_audio_path: Optional[str] = None) -> 'AudioCorpus':
+        """
+        TODO: Proper docstring
+        raises: InvalidCorpus
+                ExternalDataMismatch
+                FileNoteFound
+        """
         # TODO: This should obviously not be named `from_json` as it uses a pickle
-        # TODO: This should also have an optional `alternative_filepath` arg so that it's possible to pass
-        #       another filepath in case the location of the audio file has been changed
         try:
             with gzip.open(filepath, 'rb') as f:
                 corpus: AudioCorpus = CorpusUnpickler(f).load()
@@ -298,7 +304,17 @@ class AudioCorpus(Corpus):
                 if not isinstance(corpus, cls):
                     raise InvalidCorpus("Class of corpus is not valid")
 
-                cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.duration(), corpus.num_channels)
+                if new_audio_path:
+                    if os.path.isdir(new_audio_path):
+                        new_audio_filepath: str = os.path.join(new_audio_path, os.path.basename(corpus.filepath))
+                    else:
+                        new_audio_filepath: str = new_audio_path
+                    cls.validate_audio_source(new_audio_filepath, corpus.sr,
+                                              corpus.duration(), corpus.num_channels)
+                    corpus.filepath = new_audio_filepath
+
+                else:
+                    cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.duration(), corpus.num_channels)
 
         # Pickle tried to import module that was not supported
         except pickle.UnpicklingError as e:
@@ -317,7 +333,7 @@ class AudioCorpus(Corpus):
     @staticmethod
     def validate_audio_source(filepath: str, expected_sample_rate: int, expected_duration: float,
                               expected_num_channels: int) -> None:
-        """ raises: IOError if file cannot be found or other issue with loading audio file through librosa
+        """ raises: FileNotFoundError if file cannot be found or other issue with loading audio file through librosa
                             ValueError if mismatch between file and expected data
         """
         try:
@@ -325,7 +341,7 @@ class AudioCorpus(Corpus):
                 warnings.simplefilter("ignore")
                 audio, sample_rate = librosa.load(filepath, sr=None, mono=False)
         except (FileNotFoundError, RuntimeError) as e:
-            raise IOError(e) from e
+            raise FileNotFoundError(e) from e
 
         if expected_sample_rate != sample_rate:
             raise ValueError("Sample rate of file does not match corpus information")
@@ -362,7 +378,5 @@ class AudioCorpus(Corpus):
                 pickled = pickle.dumps(self)
                 optimized_pickle = pickletools.optimize(pickled)
                 f.write(optimized_pickle)
-
-
 
         return filepath

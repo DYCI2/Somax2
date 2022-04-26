@@ -374,7 +374,7 @@ class OscAgent(Agent, AsyncioOscObject):
             if verbose:
                 self.logger.error(f"Could not remove scale action: {repr(e)}.")
 
-    def read_corpus(self, filepath: str, volatile: bool = False):
+    def read_corpus(self, filepath: str, volatile: bool = False, alternative_audio_folder: str = ""):
         self.logger.info(f"Reading corpus at '{filepath}' for player '{self.player.name}'...")
         self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
         if not os.path.exists(filepath):
@@ -387,12 +387,24 @@ class OscAgent(Agent, AsyncioOscObject):
             if file_extension == ".gz":
                 corpus: Corpus = MidiCorpus.from_json(filepath, volatile)
             elif file_extension == ".pickle":
-                corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile)
+                try:
+                    # try loading corpus with its specified audio filepath
+                    corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile)
+                except FileNotFoundError as e:
+                    # if fails and alternative folder for audio file provided, try relocating audio file
+                    if alternative_audio_folder:
+                        self.logger.error(f"{str(e)}. Looking for audio file in '{alternative_audio_folder}'...")
+                        corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile,
+                                                               new_audio_path=alternative_audio_folder)
+                    else:
+                        raise
+
             else:
                 self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
                 raise IOError(f"Invalid file extension '{file_extension}'")
+
         except FileNotFoundError as e:
-            self.logger.error(f"{str(e)}. Please Make sure that the file exists or rebuild the corpus.")
+            self.logger.error(f"{str(e)}. Please make sure that the file exists or relocate the corpus.")
             self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
         except (IOError, AttributeError, InvalidCorpus, ExternalDataMismatch) as e:
