@@ -3,7 +3,8 @@ import logging
 import sys
 from abc import ABC, abstractmethod
 from types import ModuleType
-from typing import Dict, Type, Any, Optional, TypeVar, Generic
+from typing import Dict, Type, Any, Optional
+
 
 class Introspective:
     @classmethod
@@ -24,6 +25,11 @@ class Introspective:
             )
 
         return {k.lower(): v for (k, v) in classes.items()}
+
+    @classmethod
+    def parse_type(cls, type_name: str) -> Type[Any]:
+        """ raises: KeyError if not found """
+        return cls._classes()[type_name.lower()]
 
 
 class StringParsed(Introspective, ABC):

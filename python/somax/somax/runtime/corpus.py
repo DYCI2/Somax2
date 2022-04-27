@@ -295,6 +295,7 @@ class AudioCorpus(Corpus):
         raises: InvalidCorpus
                 ExternalDataMismatch
                 FileNoteFound
+                TypeError if pickle mismatch
         """
         # TODO: This should obviously not be named `from_json` as it uses a pickle
         try:

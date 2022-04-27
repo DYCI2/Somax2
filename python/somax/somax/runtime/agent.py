@@ -4,7 +4,7 @@ import logging.config
 import multiprocessing
 import os
 from importlib import resources
-from typing import Any, Optional, List, Tuple, Type
+from typing import Any, Optional, List, Tuple, Type, Dict
 
 import mido
 
@@ -13,12 +13,14 @@ from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
+from somax.features.feature import CorpusFeature
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
 from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch
 from somax.runtime.improvisation_memory import ImprovisationMemory
@@ -407,7 +409,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Please make sure that the file exists or relocate the corpus.")
             self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
-        except (IOError, AttributeError, InvalidCorpus, ExternalDataMismatch) as e:
+        except (IOError, AttributeError, TypeError, InvalidCorpus, ExternalDataMismatch) as e:
             self.logger.error(f"{str(e)}. No corpus was read.")
             self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
@@ -578,6 +580,20 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def _send_output_statistics(self):
         self.target.send(SendProtocol.PLAYER_OUTPUT_PEAKS, self.player.get_output_statistics())
+
+    def corpus_query(self, *args) -> None:
+        if self.player.corpus is None:
+            self.logger.error("No corpus loaded in player. Could not process query")
+            return
+
+        try:
+            responses: List[QueryResponse] = CorpusQueryManager.query(self.player.corpus, args)
+            for response in responses:
+                self.target.send(SendProtocol.PLAYER_CORPUS_QUERY, response.message)
+
+        except (SyntaxError, ValueError) as e:
+            self.logger.error(f"{str(e)}. Could not process query")
+            return
 
     ######################################################
     # OTHER

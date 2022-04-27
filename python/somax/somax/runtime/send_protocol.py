@@ -4,6 +4,7 @@ class SendProtocol:
     PLAYER_OUTPUT_PEAKS = "output_peaks"
     PLAYER_SINGLE_PARAMETER = "param"
     PLAYER_CORPUS_FILES = "corpus_info"
+    PLAYER_CORPUS_QUERY = "corpus_query"
     ALL_PLAYER_NAMES = "player_names"
     AGENT_INSTANTIATED = "instantiated_agent"
     INSTANTIATED_ATOMS = "instantiated_atoms"
