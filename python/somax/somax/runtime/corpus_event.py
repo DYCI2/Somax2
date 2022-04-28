@@ -127,6 +127,7 @@ class CorpusEvent(ABC):
 
 
 class MidiCorpusEvent(CorpusEvent):
+
     def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float, bar_number: float,
                  duration: Optional[float] = None, absolute_duration: Optional[float] = None,
                  notes: Optional[List[Note]] = None,
@@ -194,10 +195,26 @@ class MidiCorpusEvent(CorpusEvent):
             [Note.relative_to(n, parent_onset, self._relative_onset, parent_abs_onset, self.absolute_onset)
              for n in notes])
 
-    def held_to(self) -> [Note]:
+    def held_to(self) -> List[Note]:
         return [note for note in self.notes if note.is_held_to()]
 
-    def held_from(self) -> [Note]:
+    def notes_starting_at(self) -> List[Note]:
+        # TODO: (Maybe) reimplement with threshold (to handle round-off errors around 0)
+        return [note for note in self.notes if note.onset == 0.0]
+
+    def notes_starting_within(self) -> List[Note]:
+        # TODO: (Maybe) reimplement with threshold (to handle round-off errors around 0)
+        return [note for note in self.notes if note.onset > 0.0]
+
+    def notes_ending_within(self) -> List[Note]:
+        # TODO: (Maybe) reimplement with threshold (to handle round-off errors around 0)
+        return [note for note in self.notes if note.onset + note.duration < self.duration]
+
+    def notes_ending_at(self) -> List[Note]:
+        # TODO: (Maybe) reimplement with threshold (to handle round-off errors around 0)
+        return [note for note in self.notes if note.onset + note.duration == self.duration]
+
+    def held_from(self) -> List[Note]:
         return [note for note in self.notes if note.is_held_from(self._relative_duration)]
 
     def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:

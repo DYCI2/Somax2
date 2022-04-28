@@ -105,6 +105,7 @@ class SchedulingHandler(Introspective, ABC):
         stretched_time = self.stretch_time(time_value, tempo)
         output_events.extend(self._scheduler.update_time(time=stretched_time, tempo=tempo))
         output_events.extend(self.audio_handler.poll(stretched_time))
+        output_events.extend(self.midi_handler.poll(stretched_time))
         self._handle_output(output_events.copy())
 
         return output_events
@@ -161,10 +162,11 @@ class SchedulingHandler(Introspective, ABC):
                 # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
                 tempo: Optional[Tempo] = event.get_feature_safe(Tempo)
                 self._experimental_previous_audio_events_tempo = tempo.value() if tempo is not None else None
-                scheduler_events: List[ScheduledEvent] = self.audio_handler.process(trigger_time=trigger_time,
-                                                                                    event=event,
-                                                                                    applied_transform=applied_transform,
-                                                                                    time_stretch_factor=self._experimental_accumulated_stretch_factor)
+                scheduler_events: List[ScheduledEvent] = self.audio_handler.process(
+                    trigger_time=trigger_time,
+                    event=event,
+                    applied_transform=applied_transform,
+                    time_stretch_factor=self._experimental_accumulated_stretch_factor)
                 self._scheduler.add_events(scheduler_events)
             else:
                 raise TypeError(f"Scheduling event of type '{event.__class__}' is not supported")
@@ -249,15 +251,13 @@ class SchedulingHandler(Introspective, ABC):
 
     @property
     def aligned_onsets(self) -> bool:
-        return self.midi_handler.align_onsets
+        return self.midi_handler.align_note_ons
 
     def set_sustain_notes_mode(self, enabled: bool) -> None:
         self.midi_handler.sustain_notes_artificially = enabled
 
     def set_align_onset_mode(self, enabled: bool) -> None:
-        self.midi_handler.align_onsets = enabled
-
-
+        self.midi_handler.align_note_ons = enabled
 
 
 class ManualSchedulingHandler(SchedulingHandler):
