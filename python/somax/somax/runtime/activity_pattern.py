@@ -95,14 +95,17 @@ class ClassicActivityPattern(AbstractActivityPattern):
         self._peaks.append(scores, times, transform_hashes)
 
     def update_peaks_on_influence(self, new_time: float) -> None:
+        print(f"## influ time: {new_time}")
         self._update_peaks(new_time)
 
     def update_peaks_on_new_event(self, new_time: float) -> None:
+        print(f"-- event time: {new_time}")
         self._update_peaks(new_time)
 
     def _update_peaks(self, new_time: float) -> None:
-        self._peaks.scores *= np.exp(-np.divide(new_time - self.last_update_time, self.tau_mem_decay.value))
-        self._peaks.times += new_time - self.last_update_time
+        delta_time: float = max(0.0, new_time - self.last_update_time)  # Adjust for TRIGGER_PRETIME
+        self._peaks.scores *= np.exp(-np.divide(delta_time, self.tau_mem_decay.value))
+        self._peaks.times += delta_time
         self.last_update_time = new_time
         indices_to_remove: np.ndarray = np.where((self._peaks.scores <= self.extinction_threshold.value)
                                                  | (self._peaks.times >= self.corpus.duration()))
