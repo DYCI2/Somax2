@@ -5,7 +5,7 @@ from somax.features import Tempo
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
-from somax.scheduler.midi_state_handler import MidiStateHandler
+from somax.scheduler.midi_state_handler import MidiStateHandler, NoteOffMode
 from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
@@ -245,19 +245,18 @@ class SchedulingHandler(Introspective, ABC):
     def tempo(self) -> float:
         return self._scheduler.tempo
 
-    @property
-    def artificially_sustained(self) -> bool:
-        return self.midi_handler.sustain_notes_artificially
-
-    @property
-    def aligned_onsets(self) -> bool:
-        return self.midi_handler.align_note_ons
-
-    def set_sustain_notes_mode(self, enabled: bool) -> None:
-        self.midi_handler.sustain_notes_artificially = enabled
-
-    def set_align_onset_mode(self, enabled: bool) -> None:
+    # TODO[Post-merge]: Rewrite MidiStateHandler as a directly addressable Component
+    def set_align_note_ons(self, enabled: bool) -> None:
         self.midi_handler.align_note_ons = enabled
+
+    def set_align_note_offs(self, mode: NoteOffMode) -> None:
+        self.midi_handler.note_off_mode = mode
+
+    def set_artificial_ties(self, enabled: bool) -> None:
+        self.midi_handler.artificial_ties = enabled
+
+    def set_sustain_timeout(self, ticks: Optional[float]) -> None:
+        self.midi_handler.set_sustain_timeout(ticks, self._scheduler.time)
 
 
 class ManualSchedulingHandler(SchedulingHandler):

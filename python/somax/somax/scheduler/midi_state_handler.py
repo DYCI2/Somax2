@@ -1,3 +1,5 @@
+import logging
+from enum import Enum
 from typing import List, Optional
 
 from somax.runtime.corpus_event import Note, MidiCorpusEvent
@@ -5,21 +7,38 @@ from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiSliceOnsetEvent, MidiNoteEvent
 
 
+class NoteOffMode(Enum):
+    ORIGINAL = "original"
+    ALIGNED = "aligned"  # end of current slice
+    SUSTAINED = "sustained"  # start of next slice
+
+    @classmethod
+    def from_string(cls, name: str) -> 'NoteOffMode':
+        try:
+            return NoteOffMode(name.lower())
+        except ValueError:
+            logging.getLogger(__name__).warning(f"No class named '{name} exists for the "
+                                                f"{cls.__name__} module. Using default.")
+            return cls.default()
+
+    @classmethod
+    def default(cls) -> 'NoteOffMode':
+        return cls.ORIGINAL
+
+
 class MidiStateHandler:
     def __init__(self,
-                 sustain_notes_artificially: bool = False,
                  align_note_ons: bool = False,
-                 align_note_offs: bool = False,
+                 note_off_mode: NoteOffMode = NoteOffMode.default(),
                  artificial_ties: bool = False,
-                 sustain_timeout_ticks: float = 4.0
+                 sustain_timeout_ticks: Optional[float] = None
                  ):
-        self.sustain_notes_artificially: bool = sustain_notes_artificially
         self.align_note_ons: bool = align_note_ons
-        self.align_note_offs: bool = align_note_offs
+        self.note_off_mode: NoteOffMode = note_off_mode
         self.artificial_ties: bool = artificial_ties
-        self.sustain_timeout_ticks: float = sustain_timeout_ticks
+        self._sustain_timeout_ticks: Optional[float] = sustain_timeout_ticks  # None: sustain indefinitely
 
-        self.held_notes: List[Note] = []
+        self.prolonged_notes: List[Note] = []
         self.next_sustain_timeout: Optional[float] = None
 
     def process(self, trigger_time: float, event: MidiCorpusEvent,
@@ -54,26 +73,29 @@ class MidiStateHandler:
             starts_within = []
 
         # Move premature note offs to end of slice
-        if self.align_note_offs:
+        if self.note_off_mode == NoteOffMode.ALIGNED:
             ends_at.extend(ends_within)
             ends_within = []
+        elif self.note_off_mode == NoteOffMode.SUSTAINED:
+            prolongable_from.extend(ends_within)
+            prolongable_from.extend(ends_at)
+            ends_within = []
+            ends_at = []
 
-        # Make all notes ons at start and all note offs at end of slice prolongable
+        # Make all notes ons at start prolongable
         if self.artificial_ties:
             prolongable_to.extend(starts_at)
             starts_at = []
-            prolongable_from.extend(ends_at)
-            ends_at = []
 
         # note_offs_previous = held \ prolongable: Generate note offs at start of slice
         # non_prolonged_notes = prolongable \ held: Generate note ons at start of slice
         # prolongable ∩ held: Do nothing at start of slice
-        note_offs_previous: List[Note] = [n for n in self.held_notes if n not in prolongable_to]
-        non_prolonged_notes: List[Note] = [n for n in prolongable_to if n not in self.held_notes]
+        note_offs_previous: List[Note] = [n for n in self.prolonged_notes if n not in prolongable_to]
+        non_prolonged_notes: List[Note] = [n for n in prolongable_to if n not in self.prolonged_notes]
 
         note_ons: List[Note] = non_prolonged_notes + starts_at + starts_within
         note_offs: List[Note] = ends_within + ends_at
-        self.held_notes = prolongable_from
+        self.prolonged_notes = prolongable_from
 
         # Generate note offs at start of slice for previously held notes
         for note in note_offs_previous:
@@ -92,14 +114,17 @@ class MidiStateHandler:
 
         # Generate note offs at appropriate time for new notes
         for note in note_offs:
-            if self.align_note_offs:
+            if self.note_off_mode == NoteOffMode.ALIGNED:
                 offset: float = trigger_time + corpus_event.duration
             else:
                 offset: float = trigger_time + max(0.0, note.onset + note.duration)
 
             output_events.append(MidiNoteEvent(offset, note.pitch, 0, note.channel, corpus_event.state_index, None))
 
-        self.next_sustain_timeout = trigger_time + corpus_event.duration + self.sustain_timeout_ticks
+        # set timeout if defined
+        if self._sustain_timeout_ticks is not None:
+            self.next_sustain_timeout = trigger_time + corpus_event.duration + self._sustain_timeout_ticks
+
         return output_events
 
     def flush(self, flushed_events: List[ScheduledEvent], time: float) -> List[ScheduledEvent]:
@@ -116,9 +141,17 @@ class MidiStateHandler:
     def _clear(self, time: float) -> List[ScheduledEvent]:
         output: List[ScheduledEvent] = []
         # Output note offs for any current held notes
-        for note in self.held_notes:
+        for note in self.prolonged_notes:
             output.append(MidiNoteEvent(time, note.pitch, 0, note.channel))
 
-        self.held_notes = []
+        self.prolonged_notes = []
         self.next_sustain_timeout = None
         return output
+
+    def set_sustain_timeout(self, ticks: Optional[float], current_time: float) -> None:
+        if ticks is not None:
+            self.next_sustain_timeout = current_time + ticks
+        else:
+            self.next_sustain_timeout = None
+
+        self._sustain_timeout_ticks = ticks

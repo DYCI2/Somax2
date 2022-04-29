@@ -4,7 +4,7 @@ import logging.config
 import multiprocessing
 import os
 from importlib import resources
-from typing import Any, Optional, List, Tuple, Type, Dict
+from typing import Any, Optional, List, Tuple, Type
 
 import mido
 
@@ -13,7 +13,6 @@ from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
-from somax.features.feature import CorpusFeature
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
@@ -34,6 +33,7 @@ from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
+from somax.scheduler.midi_state_handler import NoteOffMode
 from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, RendererEvent, TriggerEvent
 from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
@@ -154,12 +154,13 @@ class OscAgent(Agent, AsyncioOscObject):
         event: CorpusEvent = event_and_transform[0]
         applied_transform: AbstractTransform = event_and_transform[1]
 
-        # TODO: When the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was
+        # TODO: No longer supported. Update for Corpus
+        #  Note that when the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was
         #       preserved here. This means that `None`s will never be added to the ImprovisationMemory and therefore
         #       the timing could possibly deviate in the exported corpus from what was originally generated.
-        self.improvisation_memory.append(event, trigger.target_time, applied_transform, scheduler_tempo,
-                                         artificially_sustained=self.scheduling_handler.artificially_sustained,
-                                         aligned_onsets=self.scheduling_handler.aligned_onsets)
+        # self.improvisation_memory.append(event, trigger.target_time, applied_transform, scheduler_tempo,
+        #                                  artificially_sustained=self.scheduling_handler.artificially_sustained,
+        #                                  aligned_onsets=self.scheduling_handler.aligned_onsets)
 
         self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
 
@@ -452,15 +453,32 @@ class OscAgent(Agent, AsyncioOscObject):
         self.scheduling_handler = new_handler
         self.logger.debug(f"Scheduling mode set to {self.scheduling_handler.renderer_info()}")
 
-    def set_held_notes_mode(self, enable: bool):
-        self.scheduling_handler.set_sustain_notes_mode(enable)
+    def set_align_note_ons(self, enable: bool):
+        self.scheduling_handler.set_align_note_ons(enable)
         self.flush()
-        self.logger.debug(f"Held notes mode set to {enable} for player '{self.player.name}'.")
+        self.logger.debug(f"Align note ons set to {enable} for player '{self.player.name}'.")
 
-    def set_onset_mode(self, enable: bool):
-        self.scheduling_handler.set_align_onset_mode(enable)
+    def set_align_note_offs(self, mode: str):
+        mode: NoteOffMode = NoteOffMode.from_string(mode)
+        self.scheduling_handler.set_align_note_offs(mode)
         self.flush()
-        self.logger.debug(f"Simultaneous onset mode set to {enable} for player '{self.player.name}'.")
+        self.logger.debug(f"Align note offs set to '{mode.value}' for player '{self.player.name}'.")
+
+    def set_artificial_ties(self, enable: bool):
+        self.scheduling_handler.set_artificial_ties(enable)
+        self.flush()
+        self.logger.debug(f"Artificial ties set to {enable} for player '{self.player.name}'.")
+
+    def set_sustain_timeout(self, ticks: Optional[float]):
+        if ticks is None:
+            self.scheduling_handler.set_sustain_timeout(ticks)
+            self.logger.debug(f"Sustain timeout disabled for player '{self.player.name}'.")
+        elif isinstance(ticks, int) or isinstance(ticks, float) and ticks >= 0.0:
+            self.scheduling_handler.set_sustain_timeout(ticks)
+            self.flush()
+            self.logger.debug(f"Sustain timeout set to {ticks} ticks for player '{self.player.name}'.")
+        else:
+            self.logger.error("Sustain timeout must be a non-negative number")
 
     def set_audio_continuity_mode(self, enable: bool):
         self.scheduling_handler.audio_handler.play_continuously = enable
@@ -537,7 +555,8 @@ class OscAgent(Agent, AsyncioOscObject):
         peaks_dict = self.player.get_peaks_statistics()
         for name, count in peaks_dict.items():
             self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
-        self.target.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.improvisation_memory.length())
+        # TODO: Update corpus export
+        # self.target.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.improvisation_memory.length())
 
     def send_corpora(self, corpus_names_and_paths: List[Tuple[str, str]]):
         for corpus in corpus_names_and_paths:
@@ -601,7 +620,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def force_jump(self, index: int):
         try:
-            self.flush()
+            # self.flush()
             self.player.force_jump(int(index))
         except ValueError as e:
             self.logger.info(f"{str(e)}")
@@ -613,6 +632,9 @@ class OscAgent(Agent, AsyncioOscObject):
                               initial_time_signature: Tuple[int, int] = (4, 4), ticks_per_beat: int = 480,
                               annotations: str = BarNumberAnnotation.NONE.value, overwrite: bool = False,
                               use_original_tempo: bool = False):
+        # TODO: Update for new architecture
+        self.logger.error("Exporting recorded corpus is currently not supported")
+        return
 
         filepath = os.path.join(folder, filename)
         if os.path.splitext(filepath)[-1] not in CorpusBuilder.MIDI_FILE_EXTENSIONS:
