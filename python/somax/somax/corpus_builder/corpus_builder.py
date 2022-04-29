@@ -91,7 +91,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
             self.logger.error(f"The file format of the provided file is not supported.")
             self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
-        except (IOError, ParameterError) as e:
+        except (IOError, ParameterError, librosa.util.exceptions.ParameterError) as e:
             self.logger.error(f"{str(e)}. No corpus was built")
             self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return

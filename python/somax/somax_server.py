@@ -11,6 +11,7 @@ import warnings
 from importlib import resources
 from typing import Optional, Callable, Tuple, List, Dict, Type
 
+import librosa.util.exceptions
 from audioread import NoBackendError
 
 import somax
@@ -366,7 +367,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         except NoBackendError:
             self.logger.error(f"The file format of the provided file is not supported.")
             return
-        except ParameterError as e:
+        except (ParameterError, librosa.util.exceptions.ParameterError) as e:
             self.logger.error(f"{str(e)}. Try retuning the parameters with respect to the current audio file")
             return
         finally:
