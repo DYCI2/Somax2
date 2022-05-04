@@ -95,11 +95,9 @@ class ClassicActivityPattern(AbstractActivityPattern):
         self._peaks.append(scores, times, transform_hashes)
 
     def update_peaks_on_influence(self, new_time: float) -> None:
-        print(f"## influ time: {new_time}")
         self._update_peaks(new_time)
 
     def update_peaks_on_new_event(self, new_time: float) -> None:
-        print(f"-- event time: {new_time}")
         self._update_peaks(new_time)
 
     def _update_peaks(self, new_time: float) -> None:
