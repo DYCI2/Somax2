@@ -311,11 +311,11 @@ class AudioCorpus(Corpus):
                     else:
                         new_audio_filepath: str = new_audio_path
                     cls.validate_audio_source(new_audio_filepath, corpus.sr,
-                                              corpus.duration(), corpus.num_channels)
+                                              corpus.file_duration, corpus.num_channels)
                     corpus.filepath = new_audio_filepath
 
                 else:
-                    cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.duration(), corpus.num_channels)
+                    cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.file_duration, corpus.num_channels)
 
         # Pickle tried to import module that was not supported
         except pickle.UnpicklingError as e:

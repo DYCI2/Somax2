@@ -433,7 +433,8 @@ class CorpusBuilder:
                         durations[i]
 
         if min_size_s is not None:
-            valid_frames_mask = durations > min_size_s
+            min_size_frames = librosa.time_to_frames(min_size_s, sr=sr, hop_length=hop_length)
+            valid_frames_mask = durations > min_size_frames
             onsets = onsets[valid_frames_mask]
             durations = durations[valid_frames_mask]
 
