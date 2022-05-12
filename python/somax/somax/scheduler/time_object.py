@@ -1,4 +1,8 @@
-class Time:
+from merge.stubs.timepoint import Timepoint
+
+
+# TODO: Migrate to merge architecture
+class Time(Timepoint):
     BASE_TEMPO = 120.0
 
     def __init__(self, ticks: float, seconds: float, tempo: float, time_skip_detected: bool = False):

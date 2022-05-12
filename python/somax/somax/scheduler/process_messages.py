@@ -1,6 +1,7 @@
 from abc import ABC
 from enum import Enum
 
+from merge.stubs.rendering import Message
 from somax.scheduler.time_object import Time
 
 
@@ -12,7 +13,7 @@ class PlayControl(Enum):
     TERMINATE = 4
 
 
-class ProcessMessage(ABC):
+class ProcessMessage(Message):
     pass
 
 
