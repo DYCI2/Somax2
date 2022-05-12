@@ -18,7 +18,7 @@ from somax.classification.chroma_classifiers import OnsetSomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
 from somax.runtime.agent import OscAgent, Agent
-from somax.runtime.asyncio_osc_object import AsyncOsc
+from somax.runtime.async_osc import AsyncOsc
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.exceptions import ParameterError
 from somax.runtime.merge_actions import AbstractMergeAction
