@@ -32,10 +32,10 @@ from somax.runtime.parameter import Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.send_protocol import SendProtocol
-from somax.runtime.somax_generator import SomaxGenerator
+from somax.runtime.generator import SomaxGenerator
 from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
-from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
+from somax.scheduler.process_messages import ControlSignal, TimeSignal, TempoMasterSignal, PlayControl, TempoSignal
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, RendererEvent, TriggerEvent
 from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
 from somax.scheduler.scheduling_mode import SchedulingMode
@@ -133,12 +133,12 @@ class OscAgent(Agent, AsyncOsc):
         while not self._terminated:
             time: Optional[Time] = None
             while not self.recv_queue.empty():
-                message: ControlMessage = self.recv_queue.get()
-                if isinstance(message, TimeMessage):
+                message: ControlSignal = self.recv_queue.get()
+                if isinstance(message, TimeSignal):
                     time = message.time  # Only process last time message in queue
-                if isinstance(message, TempoMasterMessage):
+                if isinstance(message, TempoMasterSignal):
                     self.set_tempo_master(is_master=message.is_master)
-                if isinstance(message, ControlMessage):
+                if isinstance(message, ControlSignal):
                     self._process_control_message(message.msg)
             if time is not None:
                 self._callback(time=time)
@@ -151,7 +151,7 @@ class OscAgent(Agent, AsyncOsc):
                 if isinstance(event, TriggerEvent):
                     self._trigger_output(trigger=event)
                 elif isinstance(event, TempoEvent) and self.is_tempo_master:
-                    self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
+                    self.tempo_send_queue.put(TempoSignal(tempo=event.tempo))
                 elif isinstance(event, RendererEvent):
                     self.target.send_event(event)
 
@@ -209,7 +209,7 @@ class OscAgent(Agent, AsyncOsc):
                    or `RendererEvent` """
         for event in events:
             if isinstance(event, TempoEvent) and self.is_tempo_master:
-                self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
+                self.tempo_send_queue.put(TempoSignal(tempo=event.tempo))
             elif isinstance(event, RendererEvent):
                 self.target.send_event(event)
             else:
@@ -305,31 +305,31 @@ class OscAgent(Agent, AsyncOsc):
     ######################################################
 
     # TODO[C2]: Parsing
-    # def create_atom(self, path: str = "", weight: float = SomaxProspector.DEFAULT_WEIGHT, classifier: str = "",
-    #                 activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
-    #                 enabled: bool = True, override: bool = False, **kwargs):
-    #     try:
-    #         path_and_name: List[str] = self._string_to_path(path)
-    #         classifier: Classifier = AbstractClassifier.from_string(classifier, **kwargs)
-    #         activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
-    #         memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
-    #         self.player.create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
-    #                                 classifier=classifier, activity_pattern=activity_pattern,
-    #                                 memory_space=memory_space, enabled=enabled, override=override)
-    #         self.send_atoms()
-    #         self._send_eligibility()
-    #         # self.logger.info(f"Created atom with path '{path}'.")
-    #     except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
-    #         self.logger.error(f"{str(e)} No atom was created.")
-    #
-    # def delete_atom(self, path: str):
-    #     try:
-    #         path_and_name: List[str] = self._string_to_path(path)
-    #         self.player.delete_atom(path_and_name)
-    #         self._send_eligibility()
-    #         self.logger.info(f"Deleted atom with path '{path}'.")
-    #     except (AssertionError, KeyError, IndexError) as e:
-    #         self.logger.error(f"{str(e)} No atom was deleted.")
+    def create_atom(self, path: str = "", weight: float = SomaxProspector.DEFAULT_WEIGHT, classifier: str = "",
+                    activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
+                    enabled: bool = True, override: bool = False, **kwargs):
+        try:
+            path_and_name: List[str] = self._string_to_path(path)
+            classifier: Classifier = AbstractClassifier.from_string(classifier, **kwargs)
+            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
+            memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
+            self.player.create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
+                                    classifier=classifier, activity_pattern=activity_pattern,
+                                    memory_space=memory_space, enabled=enabled, override=override)
+            self.send_atoms()
+            self._send_eligibility()
+            # self.logger.info(f"Created atom with path '{path}'.")
+        except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
+            self.logger.error(f"{str(e)} No atom was created.")
+
+    def delete_atom(self, path: str):
+        try:
+            path_and_name: List[str] = self._string_to_path(path)
+            self.player.delete_atom(path_and_name)
+            self._send_eligibility()
+            self.logger.info(f"Deleted atom with path '{path}'.")
+        except (AssertionError, KeyError, IndexError) as e:
+            self.logger.error(f"{str(e)} No atom was deleted.")
 
     ######################################################
     # MODIFY PLAYER/ATOM STATE

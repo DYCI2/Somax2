@@ -1,37 +1,34 @@
-import asyncio
 import logging
-import multiprocessing
 import typing
 import warnings
-from typing import Optional, Type, List
+from typing import Optional, Type, List, Tuple
 
-from merge.io.osc_status import AsyncOscMPCWithStatus
 from merge.main.candidate import Candidate
+from merge.main.corpus import Corpus
+from merge.main.corpus_event import CorpusEvent
 from merge.main.exceptions import ConfigurationError, CorpusError
 from merge.main.generation_scheduler import GenerationScheduler
-from merge.main.query import TriggerQuery
+from merge.main.query import TriggerQuery, Query, InfluenceQuery
 from merge.stubs.rendering import Message
 from merge.stubs.timepoint import Timepoint
+from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
+from somax.runtime.generator import SomaxGenerator
 from somax.runtime.improvisation_memory import ImprovisationMemory
-from somax.runtime.send_protocol import SendProtocol
-from somax.runtime.somax_generator import SomaxGenerator
 from somax.runtime.transforms import AbstractTransform
-from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, TempoMessage
-from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, TempoEvent, RendererEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent
 from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
 from somax.scheduler.scheduling_mode import SchedulingMode
 from somax.scheduler.time_object import Time
 
 
-class Agent(GenerationScheduler):
+class SomaxGenerationScheduler(GenerationScheduler):
     def __init__(self,
                  generator: SomaxGenerator,
                  corpus: Optional[SomaxCorpus] = None,
                  current_time: Timepoint = Timepoint.zero(),
                  scheduler_running: bool = True,
-                 is_tempo_master: bool = False,
                  scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler,
                  *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -42,12 +39,6 @@ class Agent(GenerationScheduler):
                                      f"{SomaxGenerator.__name__} (actual type: {generator.__class__.__name__}).")
 
         self.generator: SomaxGenerator = generator
-
-        self.is_tempo_master: bool = is_tempo_master
-
-        if corpus:  # handle corpus object if passed
-            self.generator.read_memory(corpus)
-
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
 
         scheduling_mode: SchedulingMode = corpus.scheduling_mode if corpus is not None else SchedulingMode.default()
@@ -56,7 +47,40 @@ class Agent(GenerationScheduler):
                                                                      tempo=current_time.tempo,
                                                                      running=scheduler_running)
 
+        if corpus:
+            self.read_memory(corpus)
+
+    def process_query(self, query: Query, **kwargs) -> None:
+        if isinstance(query, TriggerQuery):
+            if len(query) > 1:
+                warnings.warn(f"class {self.__class__.__name__} cannot trigger more than one event at a time. "
+                              f"Only one event will be triggered")
+            self.scheduling_handler.add_trigger_event()
+
+        elif isinstance(query, InfluenceQuery):
+            self.generator.update_time(self.scheduling_handler.time)
+            self.generator.process_query(query, **kwargs)
+
+    def read_memory(self, corpus: Corpus, **kwargs) -> None:
+        if not isinstance(corpus, SomaxCorpus):
+            raise ConfigurationError(f"cannot load corpus of type '{corpus.__class__.__name__}' "
+                                     f"in agent of type '{self.__class__.__name__}")
+
+        self.scheduling_handler.set_scheduling_mode(corpus.scheduling_mode)
+        self.generator.read_memory(corpus)
+
+    def learn_event(self, event: CorpusEvent, **kwargs) -> None:
+        raise NotImplementedError("Somax cannot learn individual events yet")
+
+    def clear(self) -> None:
+        self.generator.clear()
+        self.clear_memory()
+
+    def flush(self) -> List[ScheduledEvent]:
+        return self.scheduling_handler.flush()
+
     def update_time(self, time: Timepoint) -> List[Message]:
+        time = typing.cast(Time, time)
         events: List[ScheduledEvent] = self.scheduling_handler.update_time(time)
         output_events: List[ScheduledEvent] = []
         for event in events:
@@ -65,6 +89,10 @@ class Agent(GenerationScheduler):
             else:
                 output_events.append(event)
         return output_events
+
+    def set_scheduling_handler(self, handler_type: Type[SchedulingHandler]) -> None:
+        new_handler: SchedulingHandler = handler_type.new_from(other=self.scheduling_handler)
+        self.scheduling_handler = new_handler
 
     def _trigger_output(self, trigger: TriggerEvent):
         scheduling_time: float = trigger.target_time
@@ -79,7 +107,6 @@ class Agent(GenerationScheduler):
                 warnings.warn(f"Multiple events generated in {self.__class__.__name__}: only first one will be used.")
 
             output: Optional[Candidate] = output_list[0]
-            self._send_output_statistics()
         except CorpusError as e:
             self.logger.debug(str(e))
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
@@ -103,71 +130,43 @@ class Agent(GenerationScheduler):
 
         self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=(event, transform))
 
+    def clear_memory(self):
+        self.improvisation_memory = ImprovisationMemory()
 
+    def export_runtime_corpus(self, folder: str, filename: str, corpus_name: Optional[str] = None,
+                              initial_time_signature: Tuple[int, int] = (4, 4), ticks_per_beat: int = 480,
+                              annotations: str = BarNumberAnnotation.NONE.value, overwrite: bool = False,
+                              use_original_tempo: bool = False):
+        raise NotImplementedError("This is currently not supported")  # TODO: Update for post-merge support
 
-class OscAgent(Agent, AsyncOscMPCWithStatus):
-    def __init__(self,
-                 generator: SomaxGenerator,
-                 send_port: int,
-                 recv_port: int,
-                 ip: str,
-                 default_address: str,
-                 recv_queue: multiprocessing.Queue,
-                 tempo_send_queue: multiprocessing.Queue,
-                 corpus: Optional[SomaxCorpus] = None,
-                 current_time: Timepoint = Timepoint.zero(),
-                 scheduler_running: bool = True,
-                 is_tempo_master: bool = False,
-                 scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler,
-                 *args, **kwargs):
-        super().__init__(generator=generator,
-                         corpus=corpus,
-                         current_time=current_time,
-                         scheduler_running=scheduler_running,
-                         is_tempo_master=is_tempo_master,
-                         scheduling_type=scheduling_type,
-                         send_port=send_port,
-                         recv_port=recv_port,
-                         ip=ip,
-                         default_address=default_address,
-                         *args, **kwargs)
+        filepath = os.path.join(folder, filename)
+        if os.path.splitext(filepath)[-1] not in CorpusBuilder.MIDI_FILE_EXTENSIONS:
+            filepath += ".mid"
+        if os.path.exists(filepath) and not overwrite:
+            self.logger.error(f"The file '{filepath}' already exists. No corpus was exported. "
+                              f"To override, use 'overwrite= True'.")
+            return
+        if not os.path.isdir(folder):
+            self.logger.error(f"The folder '{folder}' does not exist. No corpus was exported.")
+            return
 
-        self.recv_queue: multiprocessing.Queue = recv_queue
-        self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
+        name: str = corpus_name if corpus_name is not None else filename
 
-        self._enabled: bool = True
-        self.__terminated: bool = False
+        try:
+            corpus: MidiSomaxCorpus = self.improvisation_memory.export(corpus_name, self.player.corpus,
+                                                                       use_original_tempo=use_original_tempo)
+        except CorpusError as e:
+            self.logger.error(f"{str(e)}. No MIDI data was exported.")
+            return
 
-        self.send(SendProtocol.SCHEDULER_RUNNING, True)
+        bar_number_annotations: BarNumberAnnotation = BarNumberAnnotation.from_string(annotations)
 
-    async def _main_loop(self):
-        while self.running:
-            time: Optional[Time] = None
-            while not self.recv_queue.empty():
-                message: ControlMessage = self.recv_queue.get()
-                if isinstance(message, TimeMessage):
-                    time = message.time  # Only process last time message in queue
-                if isinstance(message, TempoMasterMessage):
-                    self.set_tempo_master(is_master=message.is_master)
-                if isinstance(message, ControlMessage):
-                    self._process_control_message(message.msg)
-            if time is not None:
-                self._callback(time=time)
-            await asyncio.sleep(self.DEFAULT_CALLBACK_INTERVAL)
+        note_matrix: NoteMatrix = corpus.to_note_matrix()
+        midi_file: mido.MidiFile = note_matrix.to_midi_file(name, filepath, initial_time_signature, ticks_per_beat,
+                                                            bar_number_annotations)
+        # midi_file.save(filename=filepath)
+        self.logger.info(f"The recorded corpus '{name}' was saved to '{filepath}'.")
 
-    def _callback(self, time: Time):
-        if self._enabled:
-            # update_time handles triggers:
-            events: List[ScheduledEvent] = self.update_time(time)
-
-            # handle everything else:
-            for event in events:
-                if isinstance(event, TempoEvent) and self.is_tempo_master:
-                    self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
-                elif isinstance(event, RendererEvent):
-                    self.target.send_event(event)
-                else:
-                    warnings.warn(f"unknown message of type '{event.__class__.__name__}' encountered")
-
-
-
+    @property
+    def name(self) -> str:
+        return self.generator.name

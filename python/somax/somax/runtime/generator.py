@@ -22,7 +22,7 @@ from somax.runtime.parameter import Parameter, Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.somax_prospector import SomaxProspector
+from somax.runtime.prospector import SomaxProspector
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
 

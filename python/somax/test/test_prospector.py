@@ -15,7 +15,7 @@ from somax.features import TopNote, OnsetChroma
 from somax.runtime.activity_pattern import ClassicActivityPattern, AbstractActivityPattern, ManualActivityPattern
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.memory_spaces import NGramMemorySpace
-from somax.runtime.somax_prospector import SomaxProspector
+from somax.runtime.prospector import SomaxProspector
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import TransposeTransform, AbstractTransform
 

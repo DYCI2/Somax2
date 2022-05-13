@@ -23,7 +23,8 @@ class TempoEvent(ScheduledEvent):
         self.tempo = tempo
 
 
-class RendererEvent(ScheduledEvent, ABC):
+# TODO: Update with Renderable
+class RendererEvent(ScheduledEvent, Renderable, ABC):
     def __init__(self, trigger_time: float):
         super().__init__(trigger_time=trigger_time)
 

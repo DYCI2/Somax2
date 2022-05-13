@@ -13,8 +13,8 @@ from somax.features import TopNote, OnsetChroma
 from somax.runtime.activity_pattern import AbstractActivityPattern, ClassicActivityPattern, ManualActivityPattern
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.memory_spaces import NGramMemorySpace
-from somax.runtime.somax_generator import SomaxGenerator
-from somax.runtime.somax_prospector import SomaxProspector
+from somax.runtime.generator import SomaxGenerator
+from somax.runtime.prospector import SomaxProspector
 
 
 class TestSomaxGenerator(TestCase):

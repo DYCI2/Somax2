@@ -17,20 +17,20 @@ import somax
 from somax.classification.chroma_classifiers import OnsetSomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
-from somax.runtime.agent import OscAgent, Agent
+from somax.runtime.generation_scheduler import OscAgent, SomaxGenerationScheduler
 from somax.runtime.async_osc import AsyncOsc
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.exceptions import ParameterError
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
-from somax.runtime.somax_generator import SomaxGenerator
+from somax.runtime.generator import SomaxGenerator
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.target import Target
-from somax.scheduler.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, \
-    TempoMasterMessage, \
-    TempoMessage
+from somax.scheduler.process_messages import TimeSignal, ControlSignal, PlayControl, Signal, \
+    TempoMasterSignal, \
+    TempoSignal
 from somax.scheduler.scheduling_handler import SchedulingHandler
 from somax.scheduler.time_object import Time
 from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport
@@ -40,10 +40,10 @@ class Somax:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self._agents: Dict[str, Tuple[Agent, multiprocessing.Queue]] = dict()
+        self._agents: Dict[str, Tuple[SomaxGenerationScheduler, multiprocessing.Queue]] = dict()
         self._corpus_builders: List[multiprocessing.Process] = []
         self._transport: Transport = MasterTransport()
-        self._tempo_master_queue: multiprocessing.Queue[TempoMessage] = multiprocessing.Queue()
+        self._tempo_master_queue: multiprocessing.Queue[TempoSignal] = multiprocessing.Queue()
         self._terminated: bool = False
 
     # TODO: create/delete agents separate from OSC parsing
@@ -54,28 +54,28 @@ class Somax:
 
     def start_transport(self):
         self._transport.start()
-        self._send_to_all_agents(ControlMessage(PlayControl.START))
+        self._send_to_all_agents(ControlSignal(PlayControl.START))
         # self.logger.info(f"Transport started.")
 
     def pause_transport(self):
         self._transport.pause()
-        self._send_to_all_agents(ControlMessage(PlayControl.PAUSE))
+        self._send_to_all_agents(ControlSignal(PlayControl.PAUSE))
         # self.logger.info("Transport paused.")
 
     def stop_transport(self):
         """ Stops the transport and resets the state of all players """
         self.clear_all()
         self._transport.stop()
-        self._send_to_all_agents(ControlMessage(PlayControl.STOP))
+        self._send_to_all_agents(ControlSignal(PlayControl.STOP))
         # self.logger.info("Transport stopped.")
 
     def clear_all(self):
-        self._send_to_all_agents(ControlMessage(PlayControl.CLEAR))
+        self._send_to_all_agents(ControlSignal(PlayControl.CLEAR))
 
     def terminate(self):
         self.clear_all()
         self._transport.terminate()
-        self._send_to_all_agents(ControlMessage(PlayControl.TERMINATE))
+        self._send_to_all_agents(ControlSignal(PlayControl.TERMINATE))
         self._terminated = True
         [process.join() for process, _ in self._agents.values()]
         [process.join() for process in self._corpus_builders]
@@ -89,14 +89,14 @@ class Somax:
         found: bool = False
         for name, (_, queue) in self._agents.items():
             if name == tempo_master:
-                queue.put(TempoMasterMessage(is_master=True))
+                queue.put(TempoMasterSignal(is_master=True))
                 found = True
             else:
-                queue.put(TempoMasterMessage(is_master=False))
+                queue.put(TempoMasterSignal(is_master=False))
         if tempo_master is not None and not found:
             self.logger.info(f"An agent with the name '{tempo_master}' doesn't exist. No tempo master was set.")
 
-    def _send_to_all_agents(self, message: ProcessMessage):
+    def _send_to_all_agents(self, message: Signal):
         for _, queue in self._agents.values():
             queue.put(message)
 
@@ -149,13 +149,13 @@ class SomaxServer(Somax, AsyncOsc):
         if self._transport.running:
             try:
                 time: Time = self._transport.update_time(ticks=tick)
-                self._send_to_all_agents(TimeMessage(time=time))
+                self._send_to_all_agents(TimeSignal(time=time))
             except TypeError as e:
                 self.logger.error(f"{repr(e)}")
 
     def _process_tempo_queue(self):
         while not self._tempo_master_queue.empty():
-            tempo_message: TempoMessage = self._tempo_master_queue.get()
+            tempo_message: TempoSignal = self._tempo_master_queue.get()
             tempo = tempo_message.tempo  # overwriting parameter tempo
             self.set_tempo(tempo)
 
@@ -212,7 +212,7 @@ class SomaxServer(Somax, AsyncOsc):
     def delete_agent(self, name: str):
         try:
             agent, queue = self._agents[name]
-            queue.put(ControlMessage(PlayControl.TERMINATE))
+            queue.put(ControlSignal(PlayControl.TERMINATE))
             agent.join()
             del self._agents[name]
             self.logger.info(f"Deleted agent '{name}'.")
