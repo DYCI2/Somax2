@@ -458,7 +458,7 @@ class OscAgent(Agent, AsyncOsc):
                           f"to {value} (type={type(value)})...")
         try:
             path_and_name: List[str] = self._string_to_path(path)
-            self.player.set_param(path_and_name, value)
+            self.player.set_parameter(path_and_name, value)
         except (AssertionError, IndexError, ParameterError) as e:
             self.logger.error(f"{str(e)} Could not set parameter.")
         except KeyError as e:
@@ -624,35 +624,4 @@ class OscAgent(Agent, AsyncOsc):
     def clear_memory(self):
         self.improvisation_memory = ImprovisationMemory()
 
-    def export_runtime_corpus(self, folder: str, filename: str, corpus_name: Optional[str] = None,
-                              initial_time_signature: Tuple[int, int] = (4, 4), ticks_per_beat: int = 480,
-                              annotations: str = BarNumberAnnotation.NONE.value, overwrite: bool = False,
-                              use_original_tempo: bool = False):
 
-        filepath = os.path.join(folder, filename)
-        if os.path.splitext(filepath)[-1] not in CorpusBuilder.MIDI_FILE_EXTENSIONS:
-            filepath += ".mid"
-        if os.path.exists(filepath) and not overwrite:
-            self.logger.error(f"The file '{filepath}' already exists. No corpus was exported. "
-                              f"To override, use 'overwrite= True'.")
-            return
-        if not os.path.isdir(folder):
-            self.logger.error(f"The folder '{folder}' does not exist. No corpus was exported.")
-            return
-
-        name: str = corpus_name if corpus_name is not None else filename
-
-        try:
-            corpus: MidiSomaxCorpus = self.improvisation_memory.export(corpus_name, self.player.corpus,
-                                                                       use_original_tempo=use_original_tempo)
-        except CorpusError as e:
-            self.logger.error(f"{str(e)}. No MIDI data was exported.")
-            return
-
-        bar_number_annotations: BarNumberAnnotation = BarNumberAnnotation.from_string(annotations)
-
-        note_matrix: NoteMatrix = corpus.to_note_matrix()
-        midi_file: mido.MidiFile = note_matrix.to_midi_file(name, filepath, initial_time_signature, ticks_per_beat,
-                                                            bar_number_annotations)
-        # midi_file.save(filename=filepath)
-        self.logger.info(f"The recorded corpus '{name}' was saved to '{filepath}'.")

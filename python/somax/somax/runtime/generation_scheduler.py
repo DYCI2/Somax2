@@ -3,6 +3,7 @@ import typing
 import warnings
 from typing import Optional, Type, List, Tuple
 
+from merge.io.component import Component
 from merge.main.candidate import Candidate
 from merge.main.corpus import Corpus
 from merge.main.corpus_event import CorpusEvent
@@ -23,7 +24,7 @@ from somax.scheduler.scheduling_mode import SchedulingMode
 from somax.scheduler.time_object import Time
 
 
-class SomaxGenerationScheduler(GenerationScheduler):
+class SomaxGenerationScheduler(GenerationScheduler, Component):
     def __init__(self,
                  generator: SomaxGenerator,
                  corpus: Optional[SomaxCorpus] = None,

@@ -39,3 +39,7 @@ class SendProtocol:
     CORPUSBUILDER_AUDIO_SEGMENT = "audiocb seg"
     CORPUSBUILDER_AUDIO_SEGMENTATION_DONE = "audiocb segdone"
     CORPUSBUILDER_AUDIO_STATS = "audiocb stats"
+
+    BANG = "bang"
+
+
