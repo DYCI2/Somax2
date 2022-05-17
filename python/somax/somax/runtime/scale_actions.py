@@ -4,22 +4,26 @@ from typing import Tuple, Optional
 
 import numpy as np
 
+from merge.io.component import Component
+from merge.io.param_utils import MaxBool, MaxFloat, NumericRange
+from merge.io.parameter import Parameter
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.exceptions import FilterError
 from merge.main.post_filter import PostFilter
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus
-from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.transform_handler import TransformHandler
 from somax.utils.introspective import StringParsed
 
 
-class AbstractScaleAction(PostFilter, Parametric, ContentAware, StringParsed, ABC):
-    def __init__(self):
-        super().__init__()
-        self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this ScaleAction.")
+class AbstractScaleAction(PostFilter, Component, ContentAware, StringParsed, ABC):
+    def __init__(self, name: str, *args, **kwargs):
+        super().__init__(name=name, *args, **kwargs)
+        self.enabled: Parameter[bool] = Parameter(name="enabled",
+                                                  default_value=True,
+                                                  type_info=MaxBool())
 
     # @abstractmethod
     # def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
@@ -59,11 +63,9 @@ class AbstractScaleAction(PostFilter, Parametric, ContentAware, StringParsed, AB
         return self.enabled.value and self.eligible
 
 
-
-
 class NoScaleAction(AbstractScaleAction):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, name: str, *args, **kwargs):
+        super().__init__(name=name, *args, **kwargs)
 
     def filter(self, candidates: Candidates) -> Candidates:
         return candidates
@@ -87,12 +89,15 @@ class NoScaleAction(AbstractScaleAction):
 class PhaseModulationScaleAction(AbstractScaleAction):
     DEFAULT_SELECTIVITY = 3.0
 
-    def __init__(self, selectivity=DEFAULT_SELECTIVITY):
-        super().__init__()
+    def __init__(self, name: str, selectivity=DEFAULT_SELECTIVITY, *args, **kwargs):
+        super().__init__(name=name, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
         self.logger.debug("[__init__] Creating PhaseMergeAction with selectivity {}".format(selectivity))
-        self._selectivity: Parameter = Parameter(selectivity, None, None, 'float', "Phase modulation")  # TODO
-        self._parse_parameters()
+        self._selectivity: Parameter[float] = Parameter(name="selectivity",
+                                                        default_value=selectivity,
+                                                        type_info=MaxFloat(),
+                                                        param_range=NumericRange(0, None),
+                                                        description="phase modulation bias control factor")
         self.time: Optional[float] = None
 
     def filter(self, candidates: Candidates) -> Candidates:
@@ -134,12 +139,15 @@ class PhaseModulationScaleAction(AbstractScaleAction):
 class NextStateScaleAction(AbstractScaleAction):
     DEFAULT_FACTOR = 1.5
 
-    def __init__(self, factor: float = DEFAULT_FACTOR):
-        super().__init__()
+    def __init__(self, name: str, factor: float = DEFAULT_FACTOR, *args, **kwargs):
+        super().__init__(name=name, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"[__init__] Creating {type(self).__name__} with factor {factor}.")
-        self._factor: Parameter = Parameter(factor, 0.0, None, 'float',
-                                            "Scaling factor for peaks close to previous output.")
+        self._factor: Parameter[float] = Parameter(name="factor",
+                                                   default_value=factor,
+                                                   type_info=MaxFloat(),
+                                                   param_range=NumericRange(0.0, None),
+                                                   description="scale factor for peaks close to previous output.")
         self._previous_output_index: Optional[int] = None
 
     def filter(self, candidates: Candidates) -> Candidates:

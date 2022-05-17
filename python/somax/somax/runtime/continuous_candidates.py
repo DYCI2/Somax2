@@ -3,9 +3,9 @@ from typing import List, Optional, Union, Type
 
 import numpy as np
 
-from merge.corpus import Corpus
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
+from merge.main.corpus import Corpus
 from merge.main.corpus_event import CorpusEvent
 from merge.main.exceptions import CorpusError
 from merge.main.feature import Feature

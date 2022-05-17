@@ -6,20 +6,23 @@ from typing import List, Optional
 import numpy as np
 from scipy import sparse
 
+from merge.io.component import Component
+from merge.io.param_utils import NumericRange, MaxFloat
+from merge.io.parameter import Parameter
 from merge.main.candidates import Candidates
 from merge.main.exceptions import CandidatesError
 from merge.main.merge_handler import MergeHandler
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import SomaxCorpus
-from somax.runtime.parameter import Parametric, Parameter
 from somax.runtime.continuous_candidates import ContinuousCandidates
+from somax.runtime.corpus import SomaxCorpus
 from somax.utils.introspective import StringParsed
 
 
-class AbstractMergeAction(MergeHandler, Parametric, ContentAware, StringParsed, ABC):
+class AbstractMergeAction(MergeHandler, Component, ContentAware, StringParsed, ABC):
+    DEFAULT_MERGE_ACTION_NAME = "mergeaction"
 
-    def __init__(self):
-        super().__init__(invalidate_parent=True)
+    def __init__(self, name: str, *args, **kwargs):
+        super().__init__(name=name, invalidate_parent=True, *args, **kwargs)
 
     @abstractmethod
     def clear(self) -> None:
@@ -27,7 +30,7 @@ class AbstractMergeAction(MergeHandler, Parametric, ContentAware, StringParsed, 
 
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractMergeAction':
-        return DistanceMergeAction()
+        return DistanceMergeAction(name=AbstractMergeAction.DEFAULT_MERGE_ACTION_NAME)
 
     @classmethod
     def from_string(cls, merge_action: str, **kwargs) -> 'AbstractMergeAction':
@@ -36,12 +39,15 @@ class AbstractMergeAction(MergeHandler, Parametric, ContentAware, StringParsed, 
 
 class DistanceMergeAction(AbstractMergeAction):
 
-    def __init__(self, t_width: float = 0.09):
-        super().__init__()
+    def __init__(self, name: str, t_width: float = 0.09, *args, **kwargs):
+        super().__init__(name=name, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"[__init__] Creating DistanceMergeAction with width {t_width}.")
-        self._t_width: Parameter = Parameter(t_width, 0.0, None, 'float', "Very unclear parameter")  # TODO
-        self._parse_parameters()
+        self._t_width: Parameter[float] = Parameter(name="window",
+                                                    default_value=t_width,
+                                                    type_info=MaxFloat(),
+                                                    param_range=NumericRange(0, None),
+                                                    description="Window (in seconds) over which peaks are merged")
 
     def __repr__(self):
         return f"{type(self).__name__}(_t_width={self.t_width})"

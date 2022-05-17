@@ -3,27 +3,28 @@ import logging
 import sys
 from abc import abstractmethod, ABC
 from collections import deque
-from typing import Tuple, Dict, Union, Optional, List, Type
+from typing import Tuple, Dict, Optional, List, Type
 
+from merge.io.component import Component
+from merge.io.param_utils import MaxInt, NumericRange
+from merge.io.parameter import Parameter
 from merge.main.candidate import Candidate
+from merge.main.exceptions import TransformError
 from merge.main.label import Label
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
-from somax.runtime.exceptions import TransformError
-from somax.runtime.parameter import Parameter, ParamWithSetter
-from somax.runtime.parameter import Parametric
-from somax.runtime.transforms import AbstractTransform
 from somax.runtime.transform_handler import TransformHandler
+from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
 
 
-class AbstractMemorySpace(Parametric, StringParsed, ABC):
+class AbstractMemorySpace(Component, StringParsed, ABC):
     """ MemorySpaces determine how events are matched to labels """
 
-    def __init__(self, **_kwargs):
+    def __init__(self, name: str, *args, **kwargs):
         """ Note: kwargs can be used if additional information is need to construct the data structure.
             Note: labels are not classified in default constructor as additional parameters might need init before."""
-        super(AbstractMemorySpace, self).__init__()
+        super().__init__(name=name, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
         self._corpus: Optional[SomaxCorpus] = None
         self._labels: Optional[List[Label]] = None
@@ -61,13 +62,6 @@ class AbstractMemorySpace(Parametric, StringParsed, ABC):
     def update_transforms(self, transform_handler: TransformHandler, valid_transforms: List[AbstractTransform]):
         """ Note: Must define `self._transform_handler` as a reference to an object owned by a `Player` instance"""
 
-    def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
-        parameters: Dict = {}
-        for name, parameter in self._parse_parameters().items():
-            parameters[name] = parameter.update_parameter_dict()
-        self.parameter_dict = {"parameters": parameters}
-        return self.parameter_dict
-
     def _remodel(self) -> None:
         if self._corpus and self._labels:
             self.model(self._corpus, self._labels)
@@ -78,12 +72,15 @@ class NGramMemorySpace(AbstractMemorySpace):
         super(NGramMemorySpace, self).__init__(**_kwargs)
         self.logger.debug(f"[__init__] Initializing {self.__class__.__name__} with history length {history_len}.")
         self._structured_data: Dict[Tuple[int, ...], List[SomaxCorpusEvent]] = {}
-        self._ngram_size: Parameter = ParamWithSetter(history_len, 1, None, 'int',
-                                                      "Number of events to hard-match. (TODO)",
-                                                      self.set_ngram_size)  # TODO
+        self._ngram_size: Parameter[int] = Parameter(name="memorylength",
+                                                     default_value=history_len,
+                                                     type_info=MaxInt(),
+                                                     param_range=NumericRange(1, None),
+                                                     description="Number of consecutive events to match",
+                                                     on_parameter_change=self.set_ngram_size)
+
         # history per transform stored with transform id as key
         self._influence_history: Dict[int, deque[int]] = {}
-        self._parse_parameters()
 
     def __repr__(self):
         return f"NGramMemorySpace(_ngram_size={self._ngram_size.value}, corpus={self._corpus}, ...)"  #
@@ -91,6 +88,7 @@ class NGramMemorySpace(AbstractMemorySpace):
     def model(self, corpus: SomaxCorpus, labels: List[Label], **_kwargs) -> None:
         if self._transform_handler is None:
             raise TransformError("update_transforms must be called before modelling a corpus")
+
         self.logger.debug(f"[model] Modelling corpus '{corpus.name}'.")
         self._corpus = corpus
         self._labels = labels
@@ -128,7 +126,7 @@ class NGramMemorySpace(AbstractMemorySpace):
                     continue
         return matches
 
-    def set_ngram_size(self, new_size: int):
+    def set_ngram_size(self, new_size: int) -> None:
         self._ngram_size.value = new_size
         self._influence_history = {t: deque([], new_size) for t in self._influence_history.keys()}
         self._remodel()

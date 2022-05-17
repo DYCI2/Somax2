@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 
 import somax
-from merge.corpus import Corpus, E
+from merge.main.corpus import Corpus, E
 from merge.main.exceptions import CorpusError, ResourceError
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix

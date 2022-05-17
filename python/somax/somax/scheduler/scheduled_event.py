@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, Optional, List, Tuple
 
+from merge.stubs.rendering import Renderable
 from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.transforms import AbstractTransform

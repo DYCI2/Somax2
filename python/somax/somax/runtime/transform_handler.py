@@ -1,7 +1,7 @@
 from typing import Dict, List, Type
 
+from merge.main.exceptions import TransformError
 from somax.features.feature import AbstractFeature
-from somax.runtime.exceptions import TransformError
 from somax.runtime.transforms import AbstractTransform, RedundantTransform
 
 

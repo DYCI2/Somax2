@@ -408,7 +408,7 @@ class OscAgent(Agent, AsyncOsc):
         try:
             # TODO: Not ideal that it instantiates one to remove it, could we parse class without creating instance?
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
-            self.player.remove_scale_action(type(scale_action))
+            self.player.remove_post_filter(type(scale_action))
             self._send_eligibility()
             if verbose:
                 self.logger.info(f"Removed scale action {repr(scale_action)}")

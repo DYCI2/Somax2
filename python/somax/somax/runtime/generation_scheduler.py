@@ -1,7 +1,7 @@
 import logging
 import typing
 import warnings
-from typing import Optional, Type, List, Tuple
+from typing import Optional, Type, List, Tuple, Any
 
 from merge.io.component import Component
 from merge.main.candidate import Candidate
@@ -10,7 +10,6 @@ from merge.main.corpus_event import CorpusEvent
 from merge.main.exceptions import ConfigurationError, CorpusError
 from merge.main.generation_scheduler import GenerationScheduler
 from merge.main.query import TriggerQuery, Query, InfluenceQuery
-from merge.stubs.rendering import Message
 from merge.stubs.timepoint import Timepoint
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.runtime.corpus import SomaxCorpus
@@ -80,7 +79,7 @@ class SomaxGenerationScheduler(GenerationScheduler, Component):
     def flush(self) -> List[ScheduledEvent]:
         return self.scheduling_handler.flush()
 
-    def update_time(self, time: Timepoint) -> List[Message]:
+    def update_time(self, time: Timepoint) -> Any:
         time = typing.cast(Time, time)
         events: List[ScheduledEvent] = self.scheduling_handler.update_time(time)
         output_events: List[ScheduledEvent] = []

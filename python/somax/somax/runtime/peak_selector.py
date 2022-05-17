@@ -6,6 +6,9 @@ from typing import Optional, List
 
 import numpy as np
 
+from merge.io.component import Component
+from merge.io.param_utils import NumericRange, MaxFloat
+from merge.io.parameter import Parameter
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.corpus_event import CorpusEvent
@@ -13,17 +16,18 @@ from merge.main.jury import Jury
 from merge.main.queue import Queue
 from merge.stubs.transform import Transform
 from somax.runtime.content_aware import ContentAware
+from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
-from somax.runtime.parameter import Parametric, Parameter
-from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.transforms import NoTransform
 from somax.utils.introspective import StringParsed
 
 
-class AbstractPeakSelector(Jury, Parametric, ContentAware, StringParsed, ABC):
-    def __init__(self, **kwargs):
-        super(AbstractPeakSelector, self).__init__(invalidate_parent=True, **kwargs)
+class AbstractPeakSelector(Jury, Component, ContentAware, StringParsed, ABC):
+    PEAK_SELECTOR_NAME = "peakselector"
+
+    def __init__(self, name: str, *args, **kwargs):
+        super().__init__(name=name, invalidate_parent=True, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
 
     def __repr__(self):
@@ -43,7 +47,7 @@ class AbstractPeakSelector(Jury, Parametric, ContentAware, StringParsed, ABC):
 
     @classmethod
     def default(cls, **kwargs) -> 'AbstractPeakSelector':
-        return MaxPeakSelector()
+        return MaxPeakSelector(name=AbstractPeakSelector.PEAK_SELECTOR_NAME)
 
     @classmethod
     def from_string(cls, peak_selector: str, **kwargs) -> 'AbstractPeakSelector':
@@ -58,8 +62,8 @@ class AbstractPeakSelector(Jury, Parametric, ContentAware, StringParsed, ABC):
 
 
 class AbstractFallbackPeakSelector(AbstractPeakSelector, ABC):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, name: str, *args, **kwargs):
+        super().__init__(name=name, *args, **kwargs)
         self._history: Queue[Candidate] = Queue()
 
     def _decide_fallback(self, candidates: Candidates, **kwargs) -> Optional[Candidate]:
@@ -86,8 +90,8 @@ class AbstractFallbackPeakSelector(AbstractPeakSelector, ABC):
 
 
 class MaxPeakSelector(AbstractFallbackPeakSelector):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, name: str, *args, **kwargs):
+        super().__init__(name=name, *args, **kwargs)
 
     def _decide_default(self, candidates: Candidates, **kwargs) -> Optional[Candidate]:
         self.logger.debug("[decide] _decide_default called.")
@@ -106,9 +110,15 @@ class MaxPeakSelector(AbstractFallbackPeakSelector):
 class ThresholdPeakSelector(MaxPeakSelector):
     DEFAULT_THRESHOLD = 0.1
 
-    def __init__(self, threshold: float = DEFAULT_THRESHOLD, **kwargs):
-        super().__init__(**kwargs)
-        self._threshold: Parameter = Parameter(threshold, 0, None, "float", "TODOOO")
+    def __init__(self, name: str, threshold: float = DEFAULT_THRESHOLD, *args, **kwargs):
+        super().__init__(name=name, *args, **kwargs)
+        self._threshold: Parameter[float] = Parameter(name="threshold",
+                                                      default_value=threshold,
+                                                      type_info=MaxFloat(),
+                                                      param_range=NumericRange(0, None),
+                                                      description="minimum peak value required for output",
+                                                      check_range=True,
+                                                      check_type=True)
 
     def _decide_default(self, candidates: Candidates, **kwargs) -> Optional[Candidate]:
         if candidates.is_empty():
@@ -152,7 +162,13 @@ class ThresholdProbabilisticPeakSelector(ProbabilisticPeakSelector):
 
     def __init__(self, threshold: float = DEFAULT_THRESHOLD, **kwargs):
         super().__init__(**kwargs)
-        self._threshold: Parameter = Parameter(threshold, 0, None, "float", "TODOOO")
+        self._threshold: Parameter[float] = Parameter(name="threshold",
+                                                      default_value=threshold,
+                                                      type_info=MaxFloat(),
+                                                      param_range=NumericRange(0, None),
+                                                      description="minimum peak value required for output",
+                                                      check_range=True,
+                                                      check_type=True)
 
     def _decide_default(self, candidates: Candidates, **kwargs) -> Optional[Candidate]:
         if candidates.is_empty():

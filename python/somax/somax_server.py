@@ -12,107 +12,46 @@ from typing import Optional, Callable, Tuple, List, Dict, Type
 
 from audioread import NoBackendError
 
-from somax import log
 import somax
-from somax.classification.chroma_classifiers import OnsetSomChromaClassifier
+from merge.io.async_osc import AsyncOsc
+from somax import log
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
-from somax.runtime.generation_scheduler import OscAgent, SomaxGenerationScheduler
-from somax.runtime.async_osc import AsyncOsc
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.exceptions import ParameterError
-from somax.runtime.merge_actions import AbstractMergeAction
-from somax.runtime.osc_log_forwarder import OscLogForwarder
-from somax.runtime.peak_selector import AbstractPeakSelector
+from somax.runtime.generation_scheduler import SomaxGenerationScheduler
 from somax.runtime.generator import SomaxGenerator
+from somax.runtime.merge_actions import AbstractMergeAction
+from somax.runtime.osc_agent import SomaxOscAgent
+from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.send_protocol import SendProtocol
-from somax.runtime.target import Target
-from somax.scheduler.process_messages import TimeSignal, ControlSignal, PlayControl, Signal, \
-    TempoMasterSignal, \
-    TempoSignal
+from somax.scheduler.process_messages import TimeSignal, ControlSignal, PlayControl, \
+    Signal, TempoMasterSignal, TempoSignal
 from somax.scheduler.scheduling_handler import SchedulingHandler
 from somax.scheduler.time_object import Time
 from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport
 
 
-class Somax:
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.logger = logging.getLogger(__name__)
-        self._agents: Dict[str, Tuple[SomaxGenerationScheduler, multiprocessing.Queue]] = dict()
-        self._corpus_builders: List[multiprocessing.Process] = []
-        self._transport: Transport = MasterTransport()
-        self._tempo_master_queue: multiprocessing.Queue[TempoSignal] = multiprocessing.Queue()
-        self._terminated: bool = False
-
-    # TODO: create/delete agents separate from OSC parsing
-
-    ######################################################
-    # TRANSPORT & PLAYBACK CONTROL
-    ######################################################
-
-    def start_transport(self):
-        self._transport.start()
-        self._send_to_all_agents(ControlSignal(PlayControl.START))
-        # self.logger.info(f"Transport started.")
-
-    def pause_transport(self):
-        self._transport.pause()
-        self._send_to_all_agents(ControlSignal(PlayControl.PAUSE))
-        # self.logger.info("Transport paused.")
-
-    def stop_transport(self):
-        """ Stops the transport and resets the state of all players """
-        self.clear_all()
-        self._transport.stop()
-        self._send_to_all_agents(ControlSignal(PlayControl.STOP))
-        # self.logger.info("Transport stopped.")
-
-    def clear_all(self):
-        self._send_to_all_agents(ControlSignal(PlayControl.CLEAR))
-
-    def terminate(self):
-        self.clear_all()
-        self._transport.terminate()
-        self._send_to_all_agents(ControlSignal(PlayControl.TERMINATE))
-        self._terminated = True
-        [process.join() for process, _ in self._agents.values()]
-        [process.join() for process in self._corpus_builders]
-        self._agents = {}
-
-    def set_tempo(self, tempo: float):
-        self._transport.set_tempo(tempo)
-
-    def set_tempo_master(self, tempo_master: Optional[str] = None):
-        """ Passing None to this function will set all Agents as tempo_master = False"""
-        found: bool = False
-        for name, (_, queue) in self._agents.items():
-            if name == tempo_master:
-                queue.put(TempoMasterSignal(is_master=True))
-                found = True
-            else:
-                queue.put(TempoMasterSignal(is_master=False))
-        if tempo_master is not None and not found:
-            self.logger.info(f"An agent with the name '{tempo_master}' doesn't exist. No tempo master was set.")
-
-    def _send_to_all_agents(self, message: Signal):
-        for _, queue in self._agents.values():
-            queue.put(message)
-
-
-class SomaxServer(Somax, AsyncOsc):
+class SomaxServer(AsyncOsc):
     DEFAULT_RECV_PORT = 1234
     DEFAULT_SEND_PORT = 1235
     SERVER_ADDRESS = "/somax"
 
     DEBUG = True
 
-    def __init__(self, recv_port: int, send_port: int, ip: str = AsyncOsc.IP_LOCALHOST,
-                 address: str = SERVER_ADDRESS, *args, **kwargs):
-        super().__init__(recv_port=recv_port, send_port=send_port, ip=ip, address=address, *args, **kwargs)
+    def __init__(self, recv_port: int,
+                 send_port: int,
+                 ip: str = AsyncOsc.IP_LOCALHOST,
+                 address: str = SERVER_ADDRESS,
+                 *args, **kwargs):
+        super().__init__(recv_port=recv_port, send_port=send_port, ip=ip, default_address=address, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(OscLogForwarder(self.target))
+        self._agents: Dict[str, Tuple[SomaxGenerationScheduler, multiprocessing.Queue]] = dict()
+        self._corpus_builders: List[multiprocessing.Process] = []
+        self._transport: Transport = MasterTransport()
+        self._tempo_master_queue: multiprocessing.Queue[TempoSignal] = multiprocessing.Queue()
+        self._terminated: bool = False
 
         self.builder = CorpusBuilder()
         self.logger.info(f"Somax server (version: {somax.__version__}) was started "
@@ -123,12 +62,6 @@ class SomaxServer(Somax, AsyncOsc):
     ######################################################
     # ASYNCIO & MAIN LOOP(S)
     ######################################################
-
-    async def run(self):
-        try:
-            await self._run()
-        except OSError as e:
-            self.logger.critical(f"{repr(e)}. Terminating server")
 
     async def _main_loop(self):
         while not self._terminated:
@@ -159,26 +92,22 @@ class SomaxServer(Somax, AsyncOsc):
             tempo = tempo_message.tempo  # overwriting parameter tempo
             self.set_tempo(tempo)
 
-    def set_transport_mode(self, master: bool):
-        if master:
-            self.loop = self.__master_loop
-            self._transport = MasterTransport.clone_from(self._transport)
-        else:
-            self.loop = self.__slave_loop
-            self._transport = SlaveTransport.clone_from(self._transport)
-        mode_str: str = "master" if master else "slave"
-        self.logger.debug(f"Transport mode set to '{mode_str}'.")
-        self.target.send(SendProtocol.TRANSPORT_MODE, mode_str)
-
     ######################################################
     # CREATION/DELETION OF AGENTS
     ######################################################
 
-    def create_agent(self, name: str, recv_port: int, send_port: int, ip: str = "", scheduling_type: str = "",
-                     peak_selector: str = "", merge_action: str = "", corpus_filepath: str = "",
-                     scale_actions: Tuple[str, ...] = ("",), override: bool = False):
+    def create_agent(self, osc_address: str,
+                     name: str,
+                     recv_port: int,
+                     send_port: int,
+                     ip: str = "",
+                     scheduling_type: str = "",
+                     peak_selector: str = "",
+                     merge_action: str = "",
+                     corpus_filepath: str = "",
+                     scale_actions: Tuple[str, ...] = ("",),
+                     override: bool = False):
         try:
-            address: str = self.parse_osc_address(name)
             ip: str = self.parse_ip(ip)
 
             scheduling_type: Type[SchedulingHandler] = SchedulingHandler.type_from_string(scheduling_type)
@@ -201,15 +130,15 @@ class SomaxServer(Somax, AsyncOsc):
                 return
 
         agent_queue: multiprocessing.Queue = multiprocessing.Queue()
-        agent: OscAgent = OscAgent(player, recv_queue=agent_queue, tempo_send_queue=self._tempo_master_queue,
+        agent: SomaxOscAgent = SomaxOscAgent(player, recv_queue=agent_queue, tempo_send_queue=self._tempo_master_queue,
                                    transport_time=self._transport.time, scheduler_running=self._transport.running,
                                    scheduling_type=scheduling_type, ip=ip, recv_port=recv_port, send_port=send_port,
-                                   address=address, corpus_filepath=corpus_filepath)
+                                   address=osc_address, corpus_filepath=corpus_filepath)
         agent.start()
         self._agents[name] = agent, agent_queue
         self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port}, ip {ip}.")
 
-    def delete_agent(self, name: str):
+    def delete_agent(self, osc_address: str, name: str):
         try:
             agent, queue = self._agents[name]
             queue.put(ControlSignal(PlayControl.TERMINATE))
@@ -218,6 +147,66 @@ class SomaxServer(Somax, AsyncOsc):
             self.logger.info(f"Deleted agent '{name}'.")
         except KeyError:
             self.logger.error(f"An agent with the name '{name}' doesn't exist. No agent was deleted.")
+
+    ######################################################
+    # TRANSPORT & PLAYBACK CONTROL
+    ######################################################
+
+    def set_transport_mode(self, _address: str, master: bool):
+        if master:
+            self.loop = self.__master_loop
+            self._transport = MasterTransport.clone_from(self._transport)
+        else:
+            self.loop = self.__slave_loop
+            self._transport = SlaveTransport.clone_from(self._transport)
+        mode_str: str = "master" if master else "slave"
+        self.send(SendProtocol.TRANSPORT_MODE, mode_str)
+
+    def start_transport(self, _address: Optional[str] = None):
+        self._transport.start()
+        self._send_to_all_agents(ControlSignal(PlayControl.START))
+        self.send(SendProtocol.SCHEDULER_RUNNING, True)
+
+    def pause_transport(self, _address: Optional[str] = None):
+        self._transport.pause()
+        self._send_to_all_agents(ControlSignal(PlayControl.PAUSE))
+        self.send(SendProtocol.SCHEDULER_RUNNING, False)
+
+    def stop_transport(self, _address: Optional[str] = None):
+        """ Stops the transport and resets the state of all players """
+        self.clear_all()
+        self._transport.stop()
+        self._send_to_all_agents(ControlSignal(PlayControl.STOP))
+        self.send(SendProtocol.SCHEDULER_RUNNING, False)
+
+    def clear_all(self, _address: Optional[str] = None):
+        self._send_to_all_agents(ControlSignal(PlayControl.CLEAR))
+
+    def terminate(self, _address: Optional[str] = None):
+        self.clear_all()
+        self._transport.terminate()
+        self._send_to_all_agents(ControlSignal(PlayControl.TERMINATE))
+        self._terminated = True
+        [process.join() for process, _ in self._agents.values()]
+        [process.join() for process in self._corpus_builders]
+        self._agents = {}
+
+    def set_tempo(self, _address: str, tempo: float):
+        if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
+            self._set_tempo(tempo)
+            self.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, tempo)
+
+    def set_tempo_master(self, _address: str, tempo_master: Optional[str] = None):
+        """ Passing None to this function will set all Agents as tempo_master = False"""
+        found: bool = False
+        for name, (_, queue) in self._agents.items():
+            if name == tempo_master:
+                queue.put(TempoMasterSignal(is_master=True))
+                found = True
+            else:
+                queue.put(TempoMasterSignal(is_master=False))
+        if tempo_master is not None and not found:
+            self.logger.info(f"An agent with the name '{tempo_master}' doesn't exist. No tempo master was set.")
 
     ######################################################
     # MAX GETTERS
@@ -245,28 +234,9 @@ class SomaxServer(Somax, AsyncOsc):
     # MAX SETTERS WITH RETURN VALUES
     ######################################################
 
-    def start_transport(self):
-        super().start_transport()
-        self.target.send(SendProtocol.SCHEDULER_RUNNING, True)
-
-    def pause_transport(self):
-        super().pause_transport()
-        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
-
-    def stop_transport(self):
-        super().stop_transport()
-        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
-
-    def set_tempo(self, tempo: float):
-        if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
-            super().set_tempo(tempo)
-            self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, tempo)
-        else:
-            self.logger.error(f"Tempo must be a single value larger than zero. Did not set tempo.")
-
-    def exit(self, print_exit_message: bool = True):
+    def exit(self, _address: Optional[str] = None, print_exit_message: bool = True):
         self.terminate()
-        self.target.send(SendProtocol.SCHEDULER_RESET_UI, Target.WRAPPED_BANG)
+        self.send(SendProtocol.SCHEDULER_RESET_UI, SendProtocol.BANG)
         if print_exit_message:
             self.logger.info("Somax was successfully shut down.")
 
@@ -274,9 +244,15 @@ class SomaxServer(Somax, AsyncOsc):
     # CORPUS
     ######################################################
 
-    def build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                     overwrite: bool = False, filter_class: str = "", segmentation_mode: Optional[str] = None,
-                     multithreaded: bool = False, **kwargs):
+    def build_corpus(self, _address: str,
+                     filepath: str,
+                     output_folder: str,
+                     corpus_name: Optional[str] = None,
+                     overwrite: bool = False,
+                     filter_class: str = "",
+                     segmentation_mode: Optional[str] = None,
+                     multithreaded: bool = False,
+                     **kwargs):
         self.logger.info(f"Building corpus from file(s) '{filepath}'...")
         try:
             spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
@@ -285,7 +261,7 @@ class SomaxServer(Somax, AsyncOsc):
 
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
 
         if multithreaded:
@@ -299,7 +275,7 @@ class SomaxServer(Somax, AsyncOsc):
     def _build(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
                overwrite: bool = False, spectrogram_filter: AbstractFilter = AbstractFilter.default(),
                segmentation_mode: Optional[AudioSegmentation] = None, **kwargs):
-        self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
+        self.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
         corpus: SomaxCorpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
                                                     spectrogram_filter=spectrogram_filter,
                                                     segmentation_mode=segmentation_mode, **kwargs)
@@ -308,10 +284,10 @@ class SomaxServer(Somax, AsyncOsc):
         try:
             output_filepath: str = corpus.export(output_folder, overwrite=overwrite)
             self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
+            self.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
         except (IOError, AttributeError, KeyError) as e:
             self.logger.error(f"{str(e)} Export of corpus failed.")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
 
     def _build_multithreaded(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
                              overwrite: bool = False, spectrogram_filter: AbstractFilter = AbstractFilter.default(),
@@ -350,12 +326,23 @@ class SomaxServer(Somax, AsyncOsc):
             self.logger.error(f"{str(e)}. Try retuning the parameters with respect to the current audio file")
             return
         finally:
-            self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_SEGMENTATION_DONE, Target.WRAPPED_BANG)
+            self.send(SendProtocol.CORPUSBUILDER_AUDIO_SEGMENTATION_DONE, Target.WRAPPED_BANG)
 
-        self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_STATS, stats.render())
+        self.send(SendProtocol.CORPUSBUILDER_AUDIO_STATS, stats.render())
 
         for (onset, duration) in zip(onsets, durations):
-            self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_SEGMENT, [onset, onset + duration])
+            self.send(SendProtocol.CORPUSBUILDER_AUDIO_SEGMENT, [onset, onset + duration])
+
+    ######################################################
+    # PRIVATE
+    ######################################################
+
+    def _set_tempo(self, tempo: float) -> None:
+        self._transport.set_tempo(tempo)
+
+    def _send_to_all_agents(self, message: Signal):
+        for _, queue in self._agents.values():
+            queue.put(message)
 
 
 if __name__ == "__main__":
@@ -370,21 +357,13 @@ if __name__ == "__main__":
     with resources.path(log, 'logging.ini') as path:
         logging.config.fileConfig(path.absolute())
 
-    # Called to enforce file io at start of program
-    OnsetSomChromaClassifier()
-
     parsed_args = parser.parse_args()
     in_port = parsed_args.in_port
     out_port = parsed_args.out_port
-    somax_server = SomaxServer(in_port, out_port)
-
-
-    async def run():
-        await asyncio.gather(somax_server.run())
-
+    somax_server: SomaxServer = SomaxServer(in_port, out_port)
 
     try:
-        asyncio.run(run())
+        somax_server.start()
     except KeyboardInterrupt as e:
         somax_server.exit(print_exit_message=True)
         sys.exit(130)

@@ -12,6 +12,7 @@ import librosa
 import numpy as np
 import pandas as pd
 
+from merge.io.osc_sender import OscSender, OscLogForwarder
 from somax import log
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
@@ -22,9 +23,7 @@ from somax.features.feature import CorpusFeature
 from somax.runtime.corpus import SomaxCorpus, AudioSomaxCorpus, MidiSomaxCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError, ParameterError
-from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.send_protocol import SendProtocol
-from somax.runtime.target import SimpleOscTarget
 from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduling
 
 
@@ -55,31 +54,40 @@ class SegmentationStatistics:
 
 # TODO: Simple prototype to test the idea of multithreaded corpusbuilding
 class ThreadedCorpusBuilder(multiprocessing.Process):
-    def __init__(self, filepath: str, osc_address: str, ip: str, send_port: int, corpus_name: Optional[str] = None,
-                 output_folder: Optional[str] = None, overwrite: bool = False, **kwargs):
+    def __init__(self, filepath: str,
+                 osc_address: str,
+                 ip: str,
+                 send_port: int,
+                 corpus_name: Optional[str] = None,
+                 output_folder: Optional[str] = None,
+                 overwrite: bool = False,
+                 **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
-        self.filepath = filepath
-        self.corpus_name = corpus_name
-        self.output_folder = output_folder
-        self.overwrite = overwrite
-        self.target = SimpleOscTarget(address=osc_address, port=send_port, ip=ip)
+        self.filepath: str  = filepath
+        self.corpus_name: str = corpus_name
+        self.output_folder: str = output_folder
+        self.overwrite: bool = overwrite
+        self.osc_address: str = osc_address
+        self._sender: OscSender = OscSender(ip, send_port)
+
+        # Added in `run` since multiprocessing.Process.start() will override log configuration
+        self._log_forwarder: OscLogForwarder = OscLogForwarder(self._sender,
+                                                               osc_log_address=self.osc_address)
         self.kwargs = kwargs
 
     def run(self):
         # New config since it's a separate thread not stemming from root
-        with resources.path(log, 'logging.ini') as path:
-            logging.config.fileConfig(path.absolute())
-        self.logger.addHandler(OscLogForwarder(self.target))
+        self.logger.addHandler(self._log_forwarder)
 
-        self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
+        self._sender.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
 
         try:
             corpus: SomaxCorpus = CorpusBuilder().build(filepath=self.filepath, corpus_name=self.corpus_name, **self.kwargs)
             self.logger.debug(f"[build_corpus]: Successfully built '{corpus.name}' from file '{self.filepath}'.")
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self._sender.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
 
         if self.output_folder is not None:
@@ -89,10 +97,10 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
                 self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
-                self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+                self._sender.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
                 return
 
-        self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
+        self._sender.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
 
 
 class CorpusBuilder:

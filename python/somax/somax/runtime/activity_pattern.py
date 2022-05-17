@@ -1,27 +1,28 @@
 import logging
 import warnings
 from abc import abstractmethod, ABC
-from typing import Dict, Union, List, Optional
+from typing import List, Optional
 
 import numpy as np
 
+from merge.io.component import Component
+from merge.io.param_utils import MaxFloat, NumericRange, MaxInt
+from merge.io.parameter import Parameter
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.exceptions import CorpusError
 from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.corpus import SomaxCorpus
-from somax.runtime.parameter import Parameter, ParamWithSetter
-from somax.runtime.parameter import Parametric
 from somax.runtime.transform_handler import TransformHandler
 from somax.utils.introspective import StringParsed
 
 
-class AbstractActivityPattern(Parametric, StringParsed, ABC):
+class AbstractActivityPattern(Component, StringParsed, ABC):
     SCORE_IDX = 0
     TIME_IDX = 1
     TRANSFORM_IDX = 2
 
-    def __init__(self, corpus: Optional[SomaxCorpus] = None, transform_handler: Optional[TransformHandler] = None):
+    def __init__(self, corpus: Optional[SomaxCorpus] = None, _transform_handler: Optional[TransformHandler] = None):
         super(AbstractActivityPattern, self).__init__()
         self.logger = logging.getLogger(__name__)
         self._candidates: Optional[Candidates] = None
@@ -65,20 +66,13 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
     def num_peaks(self) -> int:
         return self._candidates.size()
 
-    def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
-        parameters: Dict = {}
-        for name, parameter in self._parse_parameters().items():
-            parameters[name] = parameter.update_parameter_dict()
-        self.parameter_dict = {"parameters": parameters}
-        return self.parameter_dict
-
 
 class ClassicActivityPattern(AbstractActivityPattern):
     """Decay: score = exp(-(Δt)/tau), where Δt is the time since creation in beats"""
 
-    DEFAULT_T = 4.6
+    DEFAULT_DECAY_TIME = 4.6
 
-    def __init__(self, corpus: SomaxCorpus = None, tau_mem_decay: float = DEFAULT_T):
+    def __init__(self, corpus: SomaxCorpus = None, decay_time: float = DEFAULT_DECAY_TIME):
         super().__init__(corpus)
         self.logger.debug("[__init__]: ClassicActivityPattern initialized.")
 
@@ -86,14 +80,21 @@ class ClassicActivityPattern(AbstractActivityPattern):
             self._candidates: ContinuousCandidates = ContinuousCandidates.create_empty(corpus)
             self.corpus = corpus
 
-        self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
-        # TODO: tau shouldn't be the parameter: t should
-        self.tau_mem_decay: Parameter = ParamWithSetter(self._calc_tau(tau_mem_decay), 0, None, "float",
-                                                        "Number of updates until peak is decayed below threshold.",
-                                                        self._set_tau)
+        self._extinction_threshold: Parameter[float] = Parameter(name="extinctionthreshold",
+                                                                 default_value=0.1,
+                                                                 type_info=MaxFloat(),
+                                                                 param_range=NumericRange(0, None),
+                                                                 description="score threshold below which peaks are removed")
+
+        self._decay_time: Parameter[float] = Parameter(name="decaytime",
+                                                       default_value=decay_time,
+                                                       type_info=MaxFloat(),
+                                                       param_range=NumericRange(0, None),
+                                                       description="Num steps until peak is decayed below threshold.",
+                                                       on_parameter_change=self._calc_tau)
+        self._tau = self._calc_tau(self._decay_time.value)
 
         self.last_update_time: float = 0.0
-        self._parse_parameters()
 
     def insert(self, candidates: List[Candidate], _self_influenced: bool = False, **kwargs) -> None:
         if self.corpus is None:
@@ -105,10 +106,10 @@ class ClassicActivityPattern(AbstractActivityPattern):
         self._update_peaks(new_time)
 
     def _update_peaks(self, new_time: float) -> None:
-        self._candidates.scale(np.exp(-np.divide(new_time - self.last_update_time, self.tau_mem_decay.value)))
+        self._candidates.scale(np.exp(-np.divide(new_time - self.last_update_time, self._tau)))
         self._candidates.times += new_time - self.last_update_time
         self.last_update_time = new_time
-        indices_to_remove: np.ndarray = np.where((self._candidates.scores <= self.extinction_threshold.value)
+        indices_to_remove: np.ndarray = np.where((self._candidates.scores <= self._extinction_threshold.value)
                                                  | (self._candidates.times >= self.corpus.duration()))
         self._candidates.remove(indices_to_remove)
 
@@ -119,12 +120,9 @@ class ClassicActivityPattern(AbstractActivityPattern):
             self._candidates = None
         self.last_update_time = 0.0
 
-    def _set_tau(self, t: float):
-        self.tau_mem_decay.value = self._calc_tau(t)
-
     def _calc_tau(self, t: float):
         """ n is the number of updates until peak decays below threshold"""
-        return -np.divide(t, np.log(self.extinction_threshold.value + 0.001))
+        return -np.divide(t, np.log(self._extinction_threshold.value + 0.001))
 
 
 class ManualActivityPattern(AbstractActivityPattern):
@@ -132,7 +130,7 @@ class ManualActivityPattern(AbstractActivityPattern):
 
     DEFAULT_N = 3
 
-    def __init__(self, corpus: SomaxCorpus = None):
+    def __init__(self, corpus: SomaxCorpus = None, decay_time: int = DEFAULT_N):
         super().__init__(corpus)
         warnings.warn("This class does not use discrete peaks at the moment")
         self.logger.debug("[__init__]: ManualActivityPattern initialized.")
@@ -141,12 +139,21 @@ class ManualActivityPattern(AbstractActivityPattern):
             self._candidates: ContinuousCandidates = ContinuousCandidates.create_empty(corpus)
             self.corpus = corpus
 
-        self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
-        self.tau_mem_decay: Parameter = ParamWithSetter(self._calc_tau(self.DEFAULT_N), 1, None, "int",
-                                                        "Number of updates until peak is decayed below threshold.",
-                                                        self._set_tau)
+        self._extinction_threshold: Parameter[float] = Parameter(name="extinctionthreshold",
+                                                                 default_value=0.1,
+                                                                 type_info=MaxFloat(),
+                                                                 param_range=NumericRange(0, None),
+                                                                 description="score threshold below which peaks are removed")
+
+        self._decay_time: Parameter[float] = Parameter(name="decaytime",
+                                                       default_value=decay_time,
+                                                       type_info=MaxInt(),
+                                                       param_range=NumericRange(0, None),
+                                                       description="Num steps until peak is decayed below threshold.",
+                                                       on_parameter_change=self._calc_tau)
+        self._tau = self._calc_tau(self._decay_time.value)
+
         self._event_indices: np.ndarray = np.zeros(0, dtype=np.int32)
-        self._parse_parameters()
 
     def insert(self, candidates: List[Candidate], self_influenced: bool = False, **kwargs) -> None:
         if self.corpus is None:
@@ -179,12 +186,12 @@ class ManualActivityPattern(AbstractActivityPattern):
 
     def _shift_and_decay_peaks(self) -> None:
         if not self._candidates.is_empty():
-            self._candidates.scores *= np.exp(-np.divide(1, self.tau_mem_decay.value))
+            self._candidates.scores *= np.exp(-np.divide(1, self._tau))
             # self._peaks.times += [self.corpus.event_at(i).duration for i in self._event_indices]
             self._candidates.times = np.array([self.corpus.event_at((i + 1) % self.corpus.length()).onset
                                                for i in self._event_indices])
             self._event_indices += 1
-            indices_to_remove: np.ndarray = np.where((self._candidates.scores <= self.extinction_threshold.value)
+            indices_to_remove: np.ndarray = np.where((self._candidates.scores <= self._extinction_threshold.value)
                                                      | (self._candidates.times >= self.corpus.duration())
                                                      | (self._event_indices >= self.corpus.length()))
             self._candidates.remove(indices_to_remove)
@@ -197,12 +204,9 @@ class ManualActivityPattern(AbstractActivityPattern):
             self._candidates = None
         self._event_indices = np.zeros(0, dtype=np.int32)
 
-    def _set_tau(self, n: int):
-        self.tau_mem_decay.value = self._calc_tau(n)
-
     def _calc_tau(self, n: int):
         """ n is the number of updates until peak decays below threshold"""
-        return -np.divide(n, np.log(self.extinction_threshold.value + 0.001))
+        return -np.divide(n, np.log(self._extinction_threshold.value + 0.001))
 
 # TODO[B3]: Update: Check ManualActivityPattern on how to handle time. For DecayActivityPattern, override pop_peaks!
 #

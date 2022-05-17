@@ -4,10 +4,13 @@ from typing import Dict, Optional, Tuple, Type, List
 
 import numpy as np
 
+from merge.io.component import Component
+from merge.io.param_utils import MaxBool
+from merge.io.parameter import Parameter
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.corpus_event import CorpusEvent
-from merge.main.exceptions import CorpusError, QueryError
+from merge.main.exceptions import CorpusError, QueryError, ComponentAddressError
 from merge.main.generator import Generator
 from merge.main.jury import Jury
 from merge.main.merge_handler import MergeHandler
@@ -15,10 +18,9 @@ from merge.main.query import Query, TriggerQuery, InfluenceQuery
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
-from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch
+from somax.runtime.exceptions import ContentMismatch
 from somax.runtime.exceptions import InvalidLabelInput
 from somax.runtime.merge_actions import AbstractMergeAction
-from somax.runtime.parameter import Parameter, Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.scale_actions import AbstractScaleAction
@@ -27,38 +29,38 @@ from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
 
 
-class SomaxGenerator(Generator, Parametric, ContentAware):
+class SomaxGenerator(Generator, ContentAware, Component):
     def __init__(self,
                  name: str,
                  jury: Jury = AbstractPeakSelector.default(),
                  merge_handler: MergeHandler = AbstractMergeAction.default(),
                  corpus: Optional[SomaxCorpus] = None,
-                 post_filters: List[AbstractScaleAction] = AbstractScaleAction.default_set(),
-                 **kwargs):
-        super().__init__(**kwargs)
+                 post_filters: Optional[List[AbstractScaleAction]] = None,
+                 *args, **kwargs):
+        super().__init__(name=name, search_lists=False, search_dictionary_values=True, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self.logger = logging.getLogger(__name__)
-        self.name: str = name
         self._transform_handler: TransformHandler = TransformHandler()
         self.corpus: Optional[SomaxCorpus] = corpus
-        self.post_filters: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
+
         self._merge_handler: MergeHandler = merge_handler
         self._jury: Jury = jury
 
         self.prospectors: Dict[str, SomaxProspector] = {}
 
-        for post_filter in post_filters:
-            self.add_post_filter(post_filter)
+        self.post_filters = {}
+        if post_filters is not None:
+            for post_filter in post_filters:
+                self.add_post_filter(post_filter, override=False)
 
         self.previous_candidates: Candidates = ContinuousCandidates.create_empty(self.corpus)
         self._transform_handler: TransformHandler = TransformHandler()
 
         self._force_jump_index: Optional[int] = None
 
-        self.enabled: Parameter = Parameter(default_value=True, min=False, max=True, type_str="bool",
-                                            description="Enables this Player.")
-
-        self._parse_parameters()
+        self.enabled: Parameter[bool] = Parameter(name="enabled",
+                                                  default_value=True,
+                                                  type_info=MaxBool(),
+                                                  description="enables this object")
 
     def __repr__(self):
         return f"{type(self).__name__}(name={self.name}, ...)"
@@ -202,48 +204,44 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
             prospector.feedback(event, **kwargs)
 
     def add_prospector(self, prospector: SomaxProspector, override: bool = False) -> None:
+        """ raises: ComponentAddressError if prospector exists and override is False """
+
         name: str = prospector.name
         if name in self.prospectors and not override:
-            raise DuplicateKeyError(f"A prospector with the name '{name}' already exists. "
-                                    f"To override: use 'override=True'.")
+            raise ComponentAddressError(f"A prospector with the name '{name}' already exists. "
+                                        f"To override: use 'override=True'.")
 
         self.prospectors[name] = prospector
-        self._parse_parameters()
 
-    # def delete_atom(self, path: List[str]) -> None:
-    #     """ Raises: KeyError, IndexError """
-    #     atom_name: str = path.pop(0)
-    #     if len(path) > 0:
-    #         raise IndexError("Invalid path specification")
-    #
-    #     del self.atoms[atom_name]  # raises KeyError
-    #     self._parse_parameters()
+    def remove_prospector(self, name: str) -> None:
+        """ Raises: ComponentAddressError if prospector doesn't exist """
+        if name not in self.prospectors:
+            raise ComponentAddressError(f"A prospector with the name '{name}' does not exist")
+
+        del self.prospectors[name]
 
     def set_jury(self, jury: AbstractPeakSelector) -> None:
         self._jury = jury
-        self._parse_parameters()
 
     # TODO[B4]: Replace with add_post_filter
-    def add_post_filter(self, scale_action: AbstractScaleAction, override: bool = False):
-        """ Raises: DuplicateKeyError """
-        if type(scale_action) in self.post_filters and not override:
-            raise DuplicateKeyError(f"A Scale Action of type '{type(scale_action).__name__}' already exists."
-                                    f"To override: use 'override=True'.")
+    def add_post_filter(self, post_filter: AbstractScaleAction, override: bool = False) -> None:
+        """ Raises: ComponentAddressError """
+        name: str = post_filter.name
+        if name in self.post_filters and not override:
+            raise ComponentAddressError(f"A filter with the name '{name}' already exists."
+                                        f"To override: use 'override=True'.")
 
-        scale_action.update_transforms(self._transform_handler)
-        self.post_filters[type(scale_action)] = scale_action
+        post_filter.update_transforms(self._transform_handler)
+        self.post_filters[name] = post_filter
 
-        self._parse_parameters()
+    def remove_post_filter(self, name: str) -> None:
+        if name not in self.post_filters:
+            raise ComponentAddressError(f"A filter with the name '{name}' does not exist")
 
-    def remove_scale_action(self, scale_action_type: Type[AbstractScaleAction]):
-        """ Raises: KeyError """
-        del self.post_filters[scale_action_type]
-        del self.parameter_dict[scale_action_type.__name__]
-        self._parse_parameters()
+        del self.post_filters[name]
 
     def set_merge_handler(self, merge_handler: AbstractMergeAction) -> None:
         self._merge_handler = merge_handler
-        self._parse_parameters()
 
     # TODO[B5]: Set classifier with feature type
     # def set_classifier(self, path: List[str], classifier: AbstractClassifier) -> None:
@@ -267,12 +265,12 @@ class SomaxGenerator(Generator, Parametric, ContentAware):
     #     atom.update_transforms(self._transform_handler)
     #     self._parse_parameters()
 
-    def add_transform(self, transform: AbstractTransform):
+    def add_transform(self, transform: AbstractTransform) -> None:
         """ :raises TransformError if a transform of the same instance with the same parameters already exists """
         self._transform_handler.add(transform)
         self._update_transforms()
 
-    def remove_transform(self, transform: AbstractTransform):
+    def remove_transform(self, transform: AbstractTransform) -> None:
         """ :raises IndexError if key doesn't exist
                     TransformError if attempting to delete last transform
         """

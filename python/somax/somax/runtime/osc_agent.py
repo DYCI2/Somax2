@@ -16,6 +16,7 @@ from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.generation_scheduler import SomaxGenerationScheduler
+from somax.runtime.generator import SomaxGenerator
 from somax.runtime.influence import SomaxFeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.peak_selector import AbstractPeakSelector
@@ -130,11 +131,11 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         self.send_current_corpus_info()
         self.logger.info(f"Corpus '{corpus.name}' successfully loaded in agent '{self._name}'.")
 
-    def set_parameter(self, address: str, value: Any) -> None:
-        raise NotImplementedError("THIS WILL NOT WORK, see https://trello.com/c/rKGJcng4")
+    def set_parameter(self, component_osc_address: str, parameter_address: str, value: Any) -> None:
         try:
-            path: List[str] = self.osc_address_to_path(address)
-            self.get_main_component().set_parameter(path, value)
+            component_path: List[str] = self.osc_address_to_path(component_osc_address)
+            parameter_path: List[str] = self.max_address_to_path(parameter_address)
+            self.get_main_component().set_parameter(component_path + parameter_path, value)
         except (ComponentAddressError, ParameterError, InputError) as e:
             self.logger.error(f"{str(e)} Could not set parameter.")
 
@@ -217,31 +218,37 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
     # CREATION / DELETION OF PROSPECTORS AND COMPONENTS
     #######################################################################################
 
-    def create_prospector(self, address: str, weight: float = SomaxProspector.DEFAULT_WEIGHT, classifier: str = "",
-                          activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
-                          enabled: bool = True, override: bool = False, **kwargs):
+    def create_prospector(self, prospector_osc_address: str,
+                          weight: float = SomaxProspector.DEFAULT_WEIGHT,
+                          classifier: str = "",
+                          activity_pattern: str = "",
+                          memory_space: str = "",
+                          self_influenced: bool = False,
+                          enabled: bool = True,
+                          override: bool = False,
+                          **kwargs):
         try:
-            path: List[str] = self.osc_address_to_path(address)
+            path: List[str] = self.osc_address_to_path(prospector_osc_address)
             classifier: Classifier = Classifier.from_string(classifier, **kwargs)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
-            self.generation_scheduler.generator.delete_prospector(path=path,
-                                                                  weight=weight,
-                                                                  self_influenced=self_influenced,
-                                                                  classifier=classifier,
-                                                                  activity_pattern=activity_pattern,
-                                                                  memory_space=memory_space,
-                                                                  enabled=enabled,
-                                                                  override=override)
+            self._generator.add_prospector(path=path,
+                                           weight=weight,
+                                           self_influenced=self_influenced,
+                                           classifier=classifier,
+                                           activity_pattern=activity_pattern,
+                                           memory_space=memory_space,
+                                           enabled=enabled,
+                                           override=override)
             self.send_atoms()
             self._send_eligibility()
             # self.logger.info(f"Created atom with path '{path}'.")
         except (AssertionError, ValueError, KeyError, IndexError, ComponentAddressError) as e:
             self.logger.error(f"{str(e)} No prospector was created.")
 
-    def delete_prospector(self, address: str):
+    def delete_prospector(self, prospector_osc_address: str):
         try:
-            path: List[str] = self.osc_address_to_path(address)
+            path: List[str] = self.osc_address_to_path(prospector_osc_address)
             self.generation_scheduler.generator.delete_prospector(path)
             self._send_eligibility()
             self.logger.info(f"Deleted prospector with path '{path}'.")
@@ -256,18 +263,18 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         except (ValueError, KeyError) as e:
             self.logger.error(f"{str(e)} No peak selector was set.")
 
-    def set_classifier(self, address: str, classifier: str, **kwargs):
+    def set_classifier(self, prospector_osc_address: str, classifier: str, **kwargs):
         try:
-            path: List[str] = self.osc_address_to_path(address)
+            path: List[str] = self.osc_address_to_path(prospector_osc_address)
             classifier: Classifier = Classifier.from_string(classifier, **kwargs)
             self.generation_scheduler.generator.set_classifier(path, classifier)
             self._send_eligibility()
         except (AssertionError, KeyError, ValueError, CorpusError) as e:
             self.logger.error(f"{str(e)} No classifier was set.")
 
-    def set_activity_pattern(self, address: str, activity_pattern: str, **kwargs):
+    def set_activity_pattern(self, prospector_osc_address: str, activity_pattern: str, **kwargs):
         try:
-            path: List[str] = self.osc_address_to_path(address)
+            path: List[str] = self.osc_address_to_path(prospector_osc_address)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)
             self.generation_scheduler.generator.set_activity_pattern(path, activity_pattern)
             self._send_eligibility()
@@ -313,7 +320,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         try:
             # TODO: Not ideal that it instantiates one to remove it, could we parse class without creating instance?
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
-            self.generation_scheduler.generator.remove_scale_action(type(scale_action))
+            self.generation_scheduler.generator.remove_post_filter(type(scale_action))
             self._send_eligibility()
         except KeyError as e:
             self.logger.error(f"Could not remove scale action: {repr(e)}.")
@@ -401,12 +408,13 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         """ This function is simply an alias for `send_peaks` to call from the max client side """
         self.send_peaks()
 
-    def get_parameter(self, address: str) -> None:
-        raise NotImplementedError("THIS WILL NOT WORK, see https://trello.com/c/rKGJcng4")
+    def get_parameter(self, component_osc_address: str, parameter_address: str) -> None:
         try:
-            parameter_path: List[str] = self.osc_address_to_path(address)
-            self.target.send(SendProtocol.PLAYER_SINGLE_PARAMETER,
-                             [path, self.player.get_param(parameter_path).value])
+            component_path: List[str] = self.osc_address_to_path(component_osc_address)
+            parameter_path: List[str] = self.max_address_to_path(parameter_address)
+            self.send(SendProtocol.PLAYER_SINGLE_PARAMETER,
+                      parameter_path,
+                      self.get_main_component().get_parameter(component_path + parameter_path).value)
         except (IndexError, KeyError):
             self.logger.error(f"Could not get parameter at given path.")
         except (ParameterError, AssertionError) as e:
@@ -422,7 +430,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
     def send_corpora(self, _address: str, corpus_names_and_paths: List[Tuple[str, str]]) -> None:
         for corpus in corpus_names_and_paths:
             self.send(SendProtocol.PLAYER_CORPUS_FILES, corpus)
-        self.send(SendProtocol.PLAYER_CORPUS_FILES, BANG)
+        self.send(SendProtocol.PLAYER_CORPUS_FILES, SendProtocol.BANG)
 
     def send_atoms(self, _address: Optional[str] = None):
         atom_names: List[str] = [atom.name for atom in self.generation_scheduler.generator.all_atoms()]
@@ -517,5 +525,5 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         return self.generation_scheduler.name
 
     @property
-    def _generator(self) -> Generator:
+    def _generator(self) -> SomaxGenerator:
         return self.generation_scheduler.generator

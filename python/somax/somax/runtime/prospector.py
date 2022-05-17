@@ -1,8 +1,11 @@
 import logging
 import typing
 import warnings
-from typing import Dict, Union, List, Optional, Type, Tuple
+from typing import List, Optional, Type, Tuple
 
+from merge.io.component import Component
+from merge.io.param_utils import MaxFloat, NumericRange, MaxBool
+from merge.io.parameter import Parameter
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.classifier import Classifier, Trainable
@@ -17,12 +20,11 @@ from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.memory_spaces import AbstractMemorySpace
-from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 
 
-class SomaxProspector(Prospector, Parametric, ContentAware):
+class SomaxProspector(Prospector, Component, ContentAware):
     DEFAULT_WEIGHT = 1.0
 
     def __init__(self, name: str,
@@ -33,22 +35,32 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
                  memory_space: AbstractMemorySpace,
                  corpus: Optional[SomaxCorpus],
                  self_influenced: bool,
-                 enabled: bool = True):
-        super().__init__()
+                 enabled: bool = True,
+                 *args, **kwargs):
+        super().__init__(name=name, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self.logger.debug(f"[__init__ Creating atom '{name}'.")
-        self.name = name
-        self._weight: Parameter = Parameter(weight, 0.0, None, 'float', "Relative scaling of atom peaks.")
-        self._enabled: Parameter = ParamWithSetter(enabled, False, True, "bool", "Enables this Atom.",
-                                                   self._set_enabled)
+        self._weight: Parameter[float] = Parameter(name="weight",
+                                                   default_value=weight,
+                                                   type_info=MaxFloat(),
+                                                   param_range=NumericRange(0, None),
+                                                   description="gain/attenuation of prospector peaks.")
+
+        self._enabled: Parameter[bool] = Parameter(name="enabled",
+                                                   default_value=enabled,
+                                                   type_info=MaxBool(),
+                                                   description="enable output from this prospector.",
+                                                   on_parameter_change=self._set_enabled)
 
         # TODO[B4]: Check that the given classifier is valid with the given feature
         self._feature_type: Type[Feature] = feature
         self._classifier: Classifier = classifier
         self._memory_space: AbstractMemorySpace = memory_space
         self._activity_pattern: AbstractActivityPattern = activity_pattern
-        self._self_influenced: Parameter = Parameter(self_influenced, 0, 1, 'bool',
-                                                     "Whether new events creates by player should influence this atom or not.")
+
+        self._self_influenced: Parameter[bool] = Parameter(name="selfinfluenced",
+                                                           default_value=self_influenced,
+                                                           type_info=MaxBool(),
+                                                           description="listen to feedback from output")
 
         self.valid_transforms: List[AbstractTransform] = []
 
@@ -56,7 +68,6 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
         if corpus:
             self.read_memory(corpus)
 
-        self._parse_parameters()
         warnings.warn("Note: SomaxProspector.set_time_axis is not implemented, don't forget to handle this")
 
     def learn_event(self, event: CorpusEvent, **kwargs) -> None:
@@ -172,15 +183,6 @@ class SomaxProspector(Prospector, Parametric, ContentAware):
         self.valid_transforms = transform_handler.get_by_feature(typing.cast(Type[AbstractFeature],
                                                                              self._feature_type))
         self._memory_space.update_transforms(transform_handler, self.valid_transforms)
-
-    def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
-        parameters = {}
-        for name, parameter in self._parse_parameters().items():
-            parameters[name] = parameter.update_parameter_dict()
-        self.parameter_dict = {"memory_space": self._memory_space.update_parameter_dict(),
-                               "activity_pattern": self._activity_pattern.update_parameter_dict(),
-                               "parameters": parameters}
-        return self.parameter_dict
 
     def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
         return True

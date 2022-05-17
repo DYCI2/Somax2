@@ -5,12 +5,13 @@ from typing import List, Type, Union, Any
 
 import numpy as np
 
+from merge.main.exceptions import TransformError
 from merge.main.feature import Feature
 from somax.features.chroma_features import OnsetChroma
 from somax.features.feature import AbstractFeature
 from somax.features.pitch_features import AbstractIntegerPitch
 from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent
-from somax.runtime.exceptions import TransformError, TransformIdentityError
+from somax.runtime.exceptions import TransformIdentityError
 from somax.utils.introspective import StringParsed
 
 
