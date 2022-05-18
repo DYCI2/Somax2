@@ -13,7 +13,9 @@ from typing import Optional, Callable, Tuple, List, Dict, Type
 from audioread import NoBackendError
 
 import somax
-from merge.io.async_osc import AsyncOsc
+from merge.io.async_osc import AsyncOsc, AsyncOscWithStatus
+from merge.io.component import Component
+from merge.io.osc_status import Status
 from somax import log
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
@@ -33,21 +35,34 @@ from somax.scheduler.time_object import Time
 from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport
 
 
-class SomaxServer(AsyncOsc):
+class SomaxServer(Component, AsyncOscWithStatus):
+    DEFAULT_IP = "127.0.0.1"
     DEFAULT_RECV_PORT = 1234
     DEFAULT_SEND_PORT = 1235
-    SERVER_ADDRESS = "/somax"
+    SERVER_NAME = "somax"
+    SERVER_ADDRESS = "/" + SERVER_NAME
+    STATUS_ADDRESS = SERVER_ADDRESS + "/status"
 
     DEBUG = True
 
-    def __init__(self, recv_port: int,
+    def __init__(self,
+                 recv_port: int,
                  send_port: int,
                  ip: str = AsyncOsc.IP_LOCALHOST,
                  address: str = SERVER_ADDRESS,
+                 status_address: str = STATUS_ADDRESS,
+                 name: str = SERVER_NAME,
+                 heartbeat_interval_s: float = 0.5,
                  *args, **kwargs):
-        super().__init__(recv_port=recv_port, send_port=send_port, ip=ip, default_address=address, *args, **kwargs)
+        super().__init__(name=name,
+                         recv_port=recv_port,
+                         send_port=send_port,
+                         ip=ip,
+                         default_address=address,
+                         status_interval_s=heartbeat_interval_s,
+                         *args, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self._agents: Dict[str, Tuple[SomaxGenerationScheduler, multiprocessing.Queue]] = dict()
+        self._agents: Dict[str, Tuple[SomaxOscAgent, multiprocessing.Queue]] = dict()
         self._corpus_builders: List[multiprocessing.Process] = []
         self._transport: Transport = MasterTransport()
         self._tempo_master_queue: multiprocessing.Queue[TempoSignal] = multiprocessing.Queue()
@@ -57,11 +72,20 @@ class SomaxServer(AsyncOsc):
         self.logger.info(f"Somax server (version: {somax.__version__}) was started "
                          f"with input port {recv_port}, output port {send_port} and ip {ip}.")
 
+        self.heartbeat_interval_s: float = heartbeat_interval_s
+
+        self.register_osc_component(address, status_address, self)
+
         self.loop: Callable = self.__master_loop
 
     ######################################################
     # ASYNCIO & MAIN LOOP(S)
     ######################################################
+
+    async def heartbeat(self) -> None:
+        while self.running:
+            self.send(self.status_address, Status.READY)
+            await asyncio.sleep(self.heartbeat_interval_s)
 
     async def _main_loop(self):
         while not self._terminated:
@@ -100,13 +124,22 @@ class SomaxServer(AsyncOsc):
                      name: str,
                      recv_port: int,
                      send_port: int,
-                     ip: str = "",
+                     status_address: str,
+                     ip: str = DEFAULT_IP,
                      scheduling_type: str = "",
                      peak_selector: str = "",
                      merge_action: str = "",
-                     corpus_filepath: str = "",
                      scale_actions: Tuple[str, ...] = ("",),
                      override: bool = False):
+
+        if name in self._agents:
+            if override:
+                self._delete_agent(name)
+            else:
+                self.logger.info(f"An agent with the name '{name}' already exists on the server. "
+                                 f"Use 'override=True' to override existing agent.")
+                return
+
         try:
             ip: str = self.parse_ip(ip)
 
@@ -118,35 +151,43 @@ class SomaxServer(AsyncOsc):
             self.logger.error(f"{str(e)}. No agent was created.")
             return
 
-        player: SomaxGenerator = SomaxGenerator(name=name, jury=peak_selector,
-                                                merge_handler=merge_action, post_filters=scale_actions)
+        generator: SomaxGenerator = SomaxGenerator(name=name,
+                                                   jury=peak_selector,
+                                                   merge_handler=merge_action,
+                                                   post_filters=scale_actions)
 
-        if name in self._agents:
-            if override:
-                self.delete_agent(name)
-            else:
-                self.logger.info(f"An agent with the name '{name}' already exists on the server. "
-                                 f"No action was performed. Use 'override=True' to override existing agent.")
-                return
+        gen_scheduler: SomaxGenerationScheduler = SomaxGenerationScheduler(generator,
+                                                                           current_time=self._transport.time,
+                                                                           scheduler_running=self._transport.running,
+                                                                           scheduling_type=scheduling_type)
 
         agent_queue: multiprocessing.Queue = multiprocessing.Queue()
-        agent: SomaxOscAgent = SomaxOscAgent(player, recv_queue=agent_queue, tempo_send_queue=self._tempo_master_queue,
-                                   transport_time=self._transport.time, scheduler_running=self._transport.running,
-                                   scheduling_type=scheduling_type, ip=ip, recv_port=recv_port, send_port=send_port,
-                                   address=osc_address, corpus_filepath=corpus_filepath)
+
+        agent: SomaxOscAgent = SomaxOscAgent(gen_scheduler,
+                                             send_port=send_port,
+                                             recv_port=recv_port,
+                                             ip=ip,
+                                             default_address=osc_address,
+                                             status_address=status_address,
+                                             recv_queue=agent_queue,
+                                             tempo_send_queue=self._tempo_master_queue)
         agent.start()
         self._agents[name] = agent, agent_queue
-        self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port}, ip {ip}.")
+        self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port} and ip {ip}.")
 
     def delete_agent(self, osc_address: str, name: str):
         try:
-            agent, queue = self._agents[name]
-            queue.put(ControlSignal(PlayControl.TERMINATE))
-            agent.join()
-            del self._agents[name]
+            self._delete_agent(osc_address)
             self.logger.info(f"Deleted agent '{name}'.")
         except KeyError:
             self.logger.error(f"An agent with the name '{name}' doesn't exist. No agent was deleted.")
+
+    def _delete_agent(self, name: str):
+        """ raises: KeyError if agent does not exist """
+        agent, queue = self._agents[name]
+        queue.put(ControlSignal(PlayControl.TERMINATE))
+        agent.join()
+        del self._agents[name]
 
     ######################################################
     # TRANSPORT & PLAYBACK CONTROL

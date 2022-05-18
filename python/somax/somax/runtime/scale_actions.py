@@ -49,11 +49,8 @@ class AbstractScaleAction(PostFilter, Component, ContentAware, StringParsed, ABC
 
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractScaleAction':
-        return NoScaleAction()
+        return NoScaleAction(name="identity")
 
-    @classmethod
-    def default_set(cls, **_kwargs) -> Tuple['AbstractScaleAction']:
-        return PhaseModulationScaleAction(),
 
     @classmethod
     def from_string(cls, scale_action: str, **kwargs) -> 'AbstractScaleAction':

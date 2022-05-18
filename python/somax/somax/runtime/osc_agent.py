@@ -5,12 +5,11 @@ import os
 import warnings
 from typing import Optional, Type, List, Any, Tuple
 
+from merge.io.async_osc import AsyncOscMPCWithStatus
 from merge.io.component import Component
-from merge.io.osc_status import AsyncOscMPCWithStatus
 from merge.main.classifier import Classifier
 from merge.main.exceptions import CorpusError, ResourceError, ComponentAddressError, TransformError, ParameterError, \
     InputError
-from merge.main.generator import Generator
 from merge.main.query import TriggerQuery, InfluenceQuery
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.runtime.activity_pattern import AbstractActivityPattern
@@ -37,24 +36,30 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                  recv_port: int,
                  ip: str,
                  default_address: str,
+                 status_address: str,
                  recv_queue: multiprocessing.Queue,
                  tempo_send_queue: multiprocessing.Queue,
                  is_tempo_master: bool = False,
                  log_to_osc: bool = True,
                  osc_log_address: Optional[str] = None,
                  osc_log_level: int = logging.INFO,
+                 status_interval_s: float = 0.5,
                  *args, **kwargs):
         super().__init__(agent=generation_scheduler,
                          send_port=send_port,
                          recv_port=recv_port,
                          ip=ip,
                          default_address=default_address,
+                         status_address=status_address,
+                         status_interval_s=status_interval_s,
                          log_to_osc=log_to_osc,
                          osc_log_address=osc_log_address,
                          osc_log_level=osc_log_level,
                          *args, **kwargs)
 
         self.generation_scheduler: SomaxGenerationScheduler = generation_scheduler
+        self.register_osc_component(default_address, status_address, self.generation_scheduler)
+
 
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
@@ -94,7 +99,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             self.logger.debug(repr(e))
             return
 
-    def read_memory(self, filepath: str, volatile: bool = False) -> None:
+    def read_memory(self, _address: str, filepath: str, volatile: bool = False) -> None:
         self.logger.info(f"Reading corpus at '{filepath}' for agent '{self._name}'...")
         self.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
         if not os.path.exists(filepath):
@@ -133,7 +138,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     def set_parameter(self, component_osc_address: str, parameter_address: str, value: Any) -> None:
         try:
-            component_path: List[str] = self.osc_address_to_path(component_osc_address)
+            component: Component = self.component_at(component_osc_address)
             parameter_path: List[str] = self.max_address_to_path(parameter_address)
             self.get_main_component().set_parameter(component_path + parameter_path, value)
         except (ComponentAddressError, ParameterError, InputError) as e:
@@ -219,6 +224,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
     #######################################################################################
 
     def create_prospector(self, prospector_osc_address: str,
+                          prospector_status_address: str,
                           weight: float = SomaxProspector.DEFAULT_WEIGHT,
                           classifier: str = "",
                           activity_pattern: str = "",
@@ -232,17 +238,22 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             classifier: Classifier = Classifier.from_string(classifier, **kwargs)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
-            self._generator.add_prospector(path=path,
-                                           weight=weight,
-                                           self_influenced=self_influenced,
-                                           classifier=classifier,
-                                           activity_pattern=activity_pattern,
-                                           memory_space=memory_space,
-                                           enabled=enabled,
-                                           override=override)
+
+            prospector: SomaxProspector = SomaxProspector(name=path[-1],
+                                                          weight=weight,
+                                                          classifier=classifier,
+                                                          activity_pattern=activity_pattern,
+                                                          memory_space=memory_space,
+                                                          self_influenced=self_influenced,
+                                                          enabled=enabled)
+            self._generator.add_prospector(prospector, override=override)
+            self.register_osc_component(prospector_osc_address,
+                                        prospector_status_address,
+                                        prospector,
+                                        override=override)
+
             self.send_atoms()
             self._send_eligibility()
-            # self.logger.info(f"Created atom with path '{path}'.")
         except (AssertionError, ValueError, KeyError, IndexError, ComponentAddressError) as e:
             self.logger.error(f"{str(e)} No prospector was created.")
 
@@ -250,6 +261,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         try:
             path: List[str] = self.osc_address_to_path(prospector_osc_address)
             self.generation_scheduler.generator.delete_prospector(path)
+            self.deregister_osc_component(prospector_osc_address)
             self._send_eligibility()
             self.logger.info(f"Deleted prospector with path '{path}'.")
         except (AssertionError, KeyError, IndexError) as e:
@@ -303,24 +315,26 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. "
                               f"No transform was removed.")
 
-    def add_scale_action(self, _address: str, scale_action: str, override: bool = False,
-                         verbose: bool = True, **kwargs):
+    def add_filter(self, osc_address: str, status_address: str, post_filter: str, override: bool = False,
+                   verbose: bool = True, **kwargs):
         try:
-            scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
-            self.generation_scheduler.generator.add_post_filter(scale_action, override)
+            post_filter: AbstractScaleAction = AbstractScaleAction.from_string(post_filter, **kwargs)
+            self.generation_scheduler.generator.add_post_filter(post_filter, override)
+            self.register_osc_component(osc_address, status_address, post_filter)
             self._send_eligibility()
             if verbose:
-                self.logger.info(f"Added scale action {repr(scale_action)}")
+                self.logger.info(f"Added scale action {repr(post_filter)}")
         except ValueError as e:
             self.logger.error(f"{str(e)}. No scale action was added.")
         except ComponentAddressError as e:
             self.logger.error(f"{str(e)}. No scale action was added.")
 
-    def remove_scale_action(self, _address: str, scale_action: str, **kwargs):
+    def remove_filter(self, osc_address: str, scale_action: str, **kwargs):
         try:
             # TODO: Not ideal that it instantiates one to remove it, could we parse class without creating instance?
             scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
             self.generation_scheduler.generator.remove_post_filter(type(scale_action))
+            self.deregister_osc_component(osc_address)
             self._send_eligibility()
         except KeyError as e:
             self.logger.error(f"Could not remove scale action: {repr(e)}.")

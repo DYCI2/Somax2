@@ -33,8 +33,8 @@ class SomaxProspector(Prospector, Component, ContentAware):
                  classifier: Classifier,
                  activity_pattern: AbstractActivityPattern,
                  memory_space: AbstractMemorySpace,
-                 corpus: Optional[SomaxCorpus],
-                 self_influenced: bool,
+                 corpus: Optional[SomaxCorpus] = None,
+                 self_influenced: bool = False,
                  enabled: bool = True,
                  *args, **kwargs):
         super().__init__(name=name, *args, **kwargs)
