@@ -25,13 +25,14 @@ from somax.scheduler.time_object import Time
 
 class SomaxGenerationScheduler(GenerationScheduler, Component):
     def __init__(self,
+                 name: str,
                  generator: SomaxGenerator,
                  corpus: Optional[SomaxCorpus] = None,
-                 current_time: Timepoint = Timepoint.zero(),
+                 current_time: Timepoint = Time.zero(),
                  scheduler_running: bool = True,
                  scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler,
                  *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(name=name, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
 
         if not isinstance(generator, SomaxGenerator):
@@ -166,7 +167,3 @@ class SomaxGenerationScheduler(GenerationScheduler, Component):
                                                             bar_number_annotations)
         # midi_file.save(filename=filepath)
         self.logger.info(f"The recorded corpus '{name}' was saved to '{filepath}'.")
-
-    @property
-    def name(self) -> str:
-        return self.generator.name

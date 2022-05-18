@@ -151,12 +151,13 @@ class SomaxServer(Component, AsyncOscWithStatus):
             self.logger.error(f"{str(e)}. No agent was created.")
             return
 
-        generator: SomaxGenerator = SomaxGenerator(name=name,
+        generator: SomaxGenerator = SomaxGenerator(name="generator",
                                                    jury=peak_selector,
                                                    merge_handler=merge_action,
                                                    post_filters=scale_actions)
 
-        gen_scheduler: SomaxGenerationScheduler = SomaxGenerationScheduler(generator,
+        gen_scheduler: SomaxGenerationScheduler = SomaxGenerationScheduler(name=name,
+                                                                           generator=generator,
                                                                            current_time=self._transport.time,
                                                                            scheduler_running=self._transport.running,
                                                                            scheduling_type=scheduling_type)

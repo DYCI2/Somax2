@@ -45,12 +45,10 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                  osc_log_level: int = logging.INFO,
                  status_interval_s: float = 0.5,
                  *args, **kwargs):
-        super().__init__(agent=generation_scheduler,
-                         send_port=send_port,
+        super().__init__(send_port=send_port,
                          recv_port=recv_port,
                          ip=ip,
                          default_address=default_address,
-                         status_address=status_address,
                          status_interval_s=status_interval_s,
                          log_to_osc=log_to_osc,
                          osc_log_address=osc_log_address,
@@ -533,10 +531,6 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     def clear_memory(self, _address: str) -> None:
         self.generation_scheduler.clear_memory()
-
-    @property
-    def _name(self) -> str:
-        return self.generation_scheduler.name
 
     @property
     def _generator(self) -> SomaxGenerator:
