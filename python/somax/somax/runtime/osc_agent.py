@@ -42,7 +42,6 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                  is_tempo_master: bool = False,
                  log_to_osc: bool = True,
                  osc_log_address: Optional[str] = None,
-                 osc_log_level: int = logging.INFO,
                  status_interval_s: float = 0.5,
                  *args, **kwargs):
         super().__init__(send_port=send_port,
@@ -50,9 +49,9 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                          ip=ip,
                          default_address=default_address,
                          status_interval_s=status_interval_s,
+                         capture_termination_exceptions=True,
                          log_to_osc=log_to_osc,
                          osc_log_address=osc_log_address,
-                         osc_log_level=osc_log_level,
                          *args, **kwargs)
 
         self.generation_scheduler: SomaxGenerationScheduler = generation_scheduler
@@ -186,7 +185,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         if control_signal.msg == PlayControl.CLEAR:
             self.clear()
         if control_signal.msg == PlayControl.TERMINATE:
-            self.terminate()
+            self.stop()
 
     def get_main_component(self) -> Component:
         return self.generation_scheduler
@@ -195,9 +194,9 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
     # SCHEDULING, LIFETIME AND PLAYBACK CONTROL
     #######################################################################################
 
-    def terminate(self) -> None:
-        self.stop_scheduler()
-        super().terminate()
+    # def terminate(self) -> None:
+    #     self.stop_scheduler()
+    #     super().terminate()
 
     def start_scheduler(self) -> None:
         self.generation_scheduler.scheduling_handler.start()
@@ -211,7 +210,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         events: List[ScheduledEvent] = self.generation_scheduler.scheduling_handler.stop()
         for event in events:
             self.send(event)
-        self.clear()
+        self.flush()
         self.send(SendProtocol.SCHEDULER_RUNNING, False)
 
     def set_tempo_master(self, is_master: bool):
@@ -434,10 +433,11 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     def send_peaks(self, _address: Optional[str] = None) -> None:
         """ Gets the current state in each layer, not including the merged layer """
-        peaks_dict = self.generation_scheduler.generator.get_peaks_statistics()
-        for name, count in peaks_dict.items():
-            self.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
-        self.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.generation_scheduler.improvisation_memory.length())
+        warnings.warn("Send peaks is not updated to current architecture!") # TODO
+        # peaks_dict = self.generation_scheduler.generator.get_peaks_statistics()
+        # for name, count in peaks_dict.items():
+        #     self.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
+        # self.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.generation_scheduler.improvisation_memory.length())
 
     def send_corpora(self, _address: str, corpus_names_and_paths: List[Tuple[str, str]]) -> None:
         for corpus in corpus_names_and_paths:

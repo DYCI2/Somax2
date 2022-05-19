@@ -39,7 +39,7 @@ class SomaxServer(Component, AsyncOscWithStatus):
     DEFAULT_IP = "127.0.0.1"
     DEFAULT_RECV_PORT = 1234
     DEFAULT_SEND_PORT = 1235
-    SERVER_NAME = "somax"
+    SERVER_NAME = "server"
     SERVER_ADDRESS = "/" + SERVER_NAME
     STATUS_ADDRESS = SERVER_ADDRESS + "/status"
 
@@ -52,27 +52,25 @@ class SomaxServer(Component, AsyncOscWithStatus):
                  address: str = SERVER_ADDRESS,
                  status_address: str = STATUS_ADDRESS,
                  name: str = SERVER_NAME,
-                 heartbeat_interval_s: float = 0.5,
+                 status_interval_s: float = 0.5,
                  *args, **kwargs):
         super().__init__(name=name,
                          recv_port=recv_port,
                          send_port=send_port,
                          ip=ip,
                          default_address=address,
-                         status_interval_s=heartbeat_interval_s,
+                         capture_termination_exceptions=False,
+                         status_interval_s=status_interval_s,
                          *args, **kwargs)
         self.logger = logging.getLogger(__name__)
         self._agents: Dict[str, Tuple[SomaxOscAgent, multiprocessing.Queue]] = dict()
         self._corpus_builders: List[multiprocessing.Process] = []
         self._transport: Transport = MasterTransport()
         self._tempo_master_queue: multiprocessing.Queue[TempoSignal] = multiprocessing.Queue()
-        self._terminated: bool = False
 
         self.builder = CorpusBuilder()
         self.logger.info(f"Somax server (version: {somax.__version__}) was started "
                          f"with input port {recv_port}, output port {send_port} and ip {ip}.")
-
-        self.heartbeat_interval_s: float = heartbeat_interval_s
 
         self.register_osc_component(address, status_address, self)
 
@@ -82,14 +80,10 @@ class SomaxServer(Component, AsyncOscWithStatus):
     # ASYNCIO & MAIN LOOP(S)
     ######################################################
 
-    async def heartbeat(self) -> None:
-        while self.running:
-            self.send(self.status_address, Status.READY)
-            await asyncio.sleep(self.heartbeat_interval_s)
-
     async def _main_loop(self):
-        while not self._terminated:
+        while self.running:
             await self.loop()  # self.loop is defined as either __master_loop or __slave_loop
+
 
     async def __master_loop(self):
         self.callback()
@@ -136,7 +130,7 @@ class SomaxServer(Component, AsyncOscWithStatus):
             if override:
                 self._delete_agent(name)
             else:
-                self.logger.info(f"An agent with the name '{name}' already exists on the server. "
+                self.logger.error(f"An agent with the name '{name}' already exists on the server. "
                                  f"Use 'override=True' to override existing agent.")
                 return
 
@@ -176,9 +170,9 @@ class SomaxServer(Component, AsyncOscWithStatus):
         self._agents[name] = agent, agent_queue
         self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port} and ip {ip}.")
 
-    def delete_agent(self, osc_address: str, name: str):
+    def delete_agent(self, _osc_address: str, name: str):
         try:
-            self._delete_agent(osc_address)
+            self._delete_agent(name)
             self.logger.info(f"Deleted agent '{name}'.")
         except KeyError:
             self.logger.error(f"An agent with the name '{name}' doesn't exist. No agent was deleted.")
@@ -191,8 +185,23 @@ class SomaxServer(Component, AsyncOscWithStatus):
         del self._agents[name]
 
     ######################################################
-    # TRANSPORT & PLAYBACK CONTROL
+    # GLOBAl & TRANSPORT & PLAYBACK CONTROL
     ######################################################
+
+    def exit(self, _address: Optional[str] = None, print_exit_message: bool = True):
+        self.terminate()
+        self.send(SendProtocol.SCHEDULER_RESET_UI, SendProtocol.BANG)
+        if print_exit_message:
+            self.logger.info("Somax was successfully shut down.")
+
+    def terminate(self):
+        self.clear_all()
+        self._transport.terminate()
+        self._send_to_all_agents(ControlSignal(PlayControl.TERMINATE))
+        [process.join() for process, _ in self._agents.values()]
+        [process.join() for process in self._corpus_builders]
+        self.stop()
+        self._agents = {}
 
     def set_transport_mode(self, _address: str, master: bool):
         if master:
@@ -224,15 +233,6 @@ class SomaxServer(Component, AsyncOscWithStatus):
     def clear_all(self, _address: Optional[str] = None):
         self._send_to_all_agents(ControlSignal(PlayControl.CLEAR))
 
-    def terminate(self, _address: Optional[str] = None):
-        self.clear_all()
-        self._transport.terminate()
-        self._send_to_all_agents(ControlSignal(PlayControl.TERMINATE))
-        self._terminated = True
-        [process.join() for process, _ in self._agents.values()]
-        [process.join() for process in self._corpus_builders]
-        self._agents = {}
-
     def set_tempo(self, _address: str, tempo: float):
         if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
             self._set_tempo(tempo)
@@ -248,7 +248,7 @@ class SomaxServer(Component, AsyncOscWithStatus):
             else:
                 queue.put(TempoMasterSignal(is_master=False))
         if tempo_master is not None and not found:
-            self.logger.info(f"An agent with the name '{tempo_master}' doesn't exist. No tempo master was set.")
+            self.logger.error(f"An agent with the name '{tempo_master}' doesn't exist. No tempo master was set.")
 
     ######################################################
     # MAX GETTERS
@@ -271,16 +271,6 @@ class SomaxServer(Component, AsyncOscWithStatus):
             except KeyError:
                 all_agents_exist = False
         self.target.send(SendProtocol.SERVER_STATUS, [all_agents_exist, self._transport.running])
-
-    ######################################################
-    # MAX SETTERS WITH RETURN VALUES
-    ######################################################
-
-    def exit(self, _address: Optional[str] = None, print_exit_message: bool = True):
-        self.terminate()
-        self.send(SendProtocol.SCHEDULER_RESET_UI, SendProtocol.BANG)
-        if print_exit_message:
-            self.logger.info("Somax was successfully shut down.")
 
     ######################################################
     # CORPUS
@@ -407,6 +397,7 @@ if __name__ == "__main__":
     try:
         somax_server.start()
     except KeyboardInterrupt as e:
+        somax_server.send_status_to_all(Status.TERMINATED)
         somax_server.exit(print_exit_message=True)
         sys.exit(130)
     except OSError as e:
