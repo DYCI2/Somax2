@@ -69,8 +69,6 @@ class SomaxServer(Component, AsyncOscWithStatus):
         self._tempo_master_queue: multiprocessing.Queue[TempoSignal] = multiprocessing.Queue()
 
         self.builder = CorpusBuilder()
-        self.logger.info(f"Somax server (version: {somax.__version__}) was started "
-                         f"with input port {recv_port}, output port {send_port} and ip {ip}.")
 
         self.register_osc_component(address, status_address, self)
 
@@ -81,9 +79,11 @@ class SomaxServer(Component, AsyncOscWithStatus):
     ######################################################
 
     async def _main_loop(self):
+        self.logger.info(f"Somax server (version: {somax.__version__}) started (recvport: {self.recv_port}, "
+                         f"sendport: {self.send_port}, ip: {self.ip}, address: {self.default_address}).")
+
         while self.running:
             await self.loop()  # self.loop is defined as either __master_loop or __slave_loop
-
 
     async def __master_loop(self):
         self.callback()
@@ -114,10 +114,12 @@ class SomaxServer(Component, AsyncOscWithStatus):
     # CREATION/DELETION OF AGENTS
     ######################################################
 
-    def create_agent(self, osc_address: str,
+    def create_agent(self,
+                     _server_address: str,
                      name: str,
                      recv_port: int,
                      send_port: int,
+                     osc_address: str,
                      status_address: str,
                      ip: str = DEFAULT_IP,
                      scheduling_type: str = "",
@@ -131,7 +133,7 @@ class SomaxServer(Component, AsyncOscWithStatus):
                 self._delete_agent(name)
             else:
                 self.logger.error(f"An agent with the name '{name}' already exists on the server. "
-                                 f"Use 'override=True' to override existing agent.")
+                                  f"Use 'override=True' to override existing agent.")
                 return
 
         try:
@@ -168,7 +170,8 @@ class SomaxServer(Component, AsyncOscWithStatus):
                                              tempo_send_queue=self._tempo_master_queue)
         agent.start()
         self._agents[name] = agent, agent_queue
-        self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port} and ip {ip}.")
+        self.logger.info(f"Created agent '{name}' (recvport: {recv_port}, sendport: {send_port}, "
+                         f"ip: {ip}, address: '{osc_address}').")
 
     def delete_agent(self, _osc_address: str, name: str):
         try:
@@ -386,8 +389,7 @@ if __name__ == "__main__":
                         help='out port used by the server')
     # TODO: Ip as input argument
 
-    with resources.path(log, 'logging.ini') as path:
-        logging.config.fileConfig(path.absolute())
+    logging.basicConfig(level=logging.INFO, format='[%(levelname)s]: %(message)s')
 
     parsed_args = parser.parse_args()
     in_port = parsed_args.in_port

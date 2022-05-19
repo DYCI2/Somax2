@@ -53,10 +53,10 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                          log_to_osc=log_to_osc,
                          osc_log_address=osc_log_address,
                          *args, **kwargs)
+        self.logger = logging.getLogger(__name__)
 
         self.generation_scheduler: SomaxGenerationScheduler = generation_scheduler
         self.register_osc_component(default_address, status_address, self.generation_scheduler)
-
 
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
@@ -146,6 +146,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
     #######################################################################################
 
     async def _main_loop(self) -> None:
+        self.default_log_config()
         while self.running:
             time: Optional[Time] = None
             while not self.recv_queue.empty():
@@ -220,7 +221,9 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
     # CREATION / DELETION OF PROSPECTORS AND COMPONENTS
     #######################################################################################
 
-    def create_prospector(self, prospector_osc_address: str,
+    def create_prospector(self,
+                          _agent_osc_address: str,
+                          osc_address: str,
                           prospector_status_address: str,
                           weight: float = SomaxProspector.DEFAULT_WEIGHT,
                           classifier: str = "",
@@ -231,7 +234,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                           override: bool = False,
                           **kwargs):
         try:
-            path: List[str] = self.osc_address_to_path(prospector_osc_address)
+            path: List[str] = self.osc_address_to_path(osc_address)
             classifier: Classifier = Classifier.from_string(classifier, **kwargs)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
@@ -244,7 +247,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                                                           self_influenced=self_influenced,
                                                           enabled=enabled)
             self._generator.add_prospector(prospector, override=override)
-            self.register_osc_component(prospector_osc_address,
+            self.register_osc_component(osc_address,
                                         prospector_status_address,
                                         prospector,
                                         override=override)
@@ -433,7 +436,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     def send_peaks(self, _address: Optional[str] = None) -> None:
         """ Gets the current state in each layer, not including the merged layer """
-        warnings.warn("Send peaks is not updated to current architecture!") # TODO
+        self.logger.warning("Send peaks is not updated to current architecture!") # TODO
         # peaks_dict = self.generation_scheduler.generator.get_peaks_statistics()
         # for name, count in peaks_dict.items():
         #     self.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
