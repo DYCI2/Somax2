@@ -3,7 +3,7 @@ from typing import Dict, Any
 import librosa
 import numpy as np
 
-from somax.corpus_builder.chroma_filter import AbstractFilter
+from somax.corpus_builder.chroma_filter import ChromaFilter
 from somax.corpus_builder.note_matrix import NoteMatrix
 
 
@@ -18,7 +18,7 @@ class Spectrogram:
         self._build_parameters: Dict[str, Any] = build_parameters
 
     @classmethod
-    def from_midi(cls, note_matrix: NoteMatrix, spectrogram_filter: AbstractFilter,
+    def from_midi(cls, note_matrix: NoteMatrix, spectrogram_filter: ChromaFilter,
                   spectrogram_max_num_harmonics: int = 10, spectrogram_harmonics_decay: float = 0.5,
                   spectrogram_hop_ms: float = 20.0, **_kwargs) -> 'Spectrogram':
         max_num_harmonics: int = spectrogram_max_num_harmonics

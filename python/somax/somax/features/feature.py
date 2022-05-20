@@ -4,11 +4,11 @@ from abc import ABC, abstractmethod
 from typing import Dict, Any, Type, Tuple, List
 
 import somax.features
+from merge.io.parsable import Parsable
 from merge.main.feature import Feature, T
 from somax import features
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
 from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent, AudioCorpusEvent
-from somax.utils.introspective import StringParsed, Introspective
 
 
 class FeatureUtils:
@@ -21,14 +21,8 @@ class FeatureUtils:
         return all([isinstance(e, AudioCorpusEvent) for e in events]) and isinstance(metadata, AudioMetadata)
 
 
-class AbstractFeature(Feature[T], Introspective, ABC):
-
-    @classmethod
-    def classes(cls, include_abstract: bool = False) -> List[Type['AbstractFeature']]:
-        return list(cls._classes(somax.features, include_abstract=include_abstract).values())
-
-    def name(self) -> str:
-        return self.__class__.__name__
+class AbstractFeature(Feature[T], Parsable, ABC):
+    pass
 
 
 class CorpusFeature(AbstractFeature[T], ABC):
@@ -72,7 +66,7 @@ class CorpusFeature(AbstractFeature[T], ABC):
                                                       and issubclass(m, CorpusFeature))
 
 
-class RuntimeFeature(AbstractFeature[T], StringParsed, ABC):
+class RuntimeFeature(AbstractFeature[T], ABC):
     @classmethod
     def from_string(cls, keyword: str, value: Any = None, **kwargs) -> 'RuntimeFeature':
         """ :raises ValueError if a feature matching the keyword doesn't exist """

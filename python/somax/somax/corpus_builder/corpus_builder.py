@@ -14,7 +14,7 @@ import pandas as pd
 
 from merge.io.osc_sender import OscSender, OscLogForwarder
 from somax import log
-from somax.corpus_builder.chroma_filter import AbstractFilter
+from somax.corpus_builder.chroma_filter import ChromaFilter
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
@@ -165,7 +165,7 @@ class CorpusBuilder:
     def _build_midi(self, filepaths: List[str], name: str,
                     foreground_channels: Tuple[int] = tuple(range(1, 17)),
                     background_channels: Tuple[int] = tuple(range(1, 17)),
-                    spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
+                    spectrogram_filter: ChromaFilter = ChromaFilter.parse(ChromaFilter.DEFAULT),
                     **kwargs) -> SomaxCorpus:
         # TODO: Foreground channels are not used for melodic classification... (might be a good thing)
         # TODO: Onset channels are not supported as means of segmentation (might also be a good thing)

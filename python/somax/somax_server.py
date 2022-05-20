@@ -17,7 +17,7 @@ from merge.io.async_osc import AsyncOsc, AsyncOscWithStatus
 from merge.io.component import Component
 from merge.io.osc_status import Status
 from somax import log
-from somax.corpus_builder.chroma_filter import AbstractFilter
+from somax.corpus_builder.chroma_filter import ChromaFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.exceptions import ParameterError
@@ -290,7 +290,7 @@ class SomaxServer(Component, AsyncOscWithStatus):
                      **kwargs):
         self.logger.info(f"Building corpus from file(s) '{filepath}'...")
         try:
-            spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
+            spectrogram_filter: ChromaFilter = ChromaFilter.from_string(filter_class)
             segmentation: Optional[AudioSegmentation] = AudioSegmentation.from_string(
                 segmentation_mode) if segmentation_mode is not None else None
 
@@ -308,7 +308,7 @@ class SomaxServer(Component, AsyncOscWithStatus):
 
     # TODO: Remove once multithreaded corpus builder is stable enough
     def _build(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-               overwrite: bool = False, spectrogram_filter: AbstractFilter = AbstractFilter.default(),
+               overwrite: bool = False, spectrogram_filter: ChromaFilter = ChromaFilter.default(),
                segmentation_mode: Optional[AudioSegmentation] = None, **kwargs):
         self.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
         corpus: SomaxCorpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
@@ -325,7 +325,7 @@ class SomaxServer(Component, AsyncOscWithStatus):
             self.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
 
     def _build_multithreaded(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                             overwrite: bool = False, spectrogram_filter: AbstractFilter = AbstractFilter.default(),
+                             overwrite: bool = False, spectrogram_filter: ChromaFilter = ChromaFilter.default(),
                              segmentation_mode: Optional[AudioSegmentation] = None, **kwargs):
         corpus_builder: ThreadedCorpusBuilder = ThreadedCorpusBuilder(filepath=filepath, corpus_name=corpus_name,
                                                                       spectrogram_filter=spectrogram_filter,

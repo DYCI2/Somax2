@@ -4,12 +4,11 @@ from typing import Dict, Type, Any
 
 import numpy as np
 
-from somax.utils.introspective import StringParsed
+from merge.io.parsable import Parsable
 
 
-class AbstractFilter(StringParsed, ABC):
+class ChromaFilter(Parsable, ABC):
     DEFAULT = "default"
-    _DEFAULT_FILTER = "leakyintegrator"
 
     def __init__(self, decay_length_ms: float = 0.0, **_kwargs):
         """ decay_length_ms is the time until the envelope approaches 0 after an activation
@@ -31,27 +30,17 @@ class AbstractFilter(StringParsed, ABC):
         """ TODO """
 
     @classmethod
-    def from_string(cls, class_name: str, **kwargs) -> 'AbstractFilter':
-        return cls._from_string(class_name, **kwargs)
+    def from_string(cls, class_name: str, include_abstract: bool = False) -> Type['ChromaFilter']:
+        if class_name == cls.DEFAULT:
+            return cls.default()
+        return super().from_string(class_name, include_abstract)
 
     @classmethod
-    def default(cls, **kwargs) -> 'AbstractFilter':
-        return LeakyIntegrator(**kwargs)
-
-    @staticmethod
-    def parse(filter_class: str, **kwargs) -> 'AbstractFilter':
-        classes: Dict[str, Type[AbstractFilter]] = AbstractFilter._classes()
-        if filter_class == AbstractFilter.DEFAULT:
-            return classes[AbstractFilter._DEFAULT_FILTER]()
-        try:
-            return classes[filter_class](**kwargs)
-        except KeyError:
-            logging.getLogger(__name__).warning(f"Could not find Filter class {filter_class}. "
-                                                f"Using default Filter ({AbstractFilter._DEFAULT_FILTER}) instead.")
-            return classes[AbstractFilter._DEFAULT_FILTER]()
+    def default(cls) -> Type['ChromaFilter']:
+        return LeakyIntegrator
 
 
-class NoFilter(AbstractFilter):
+class NoFilter(ChromaFilter):
     def __init__(self):
         super().__init__(decay_length_ms=0.0)
 
@@ -66,7 +55,7 @@ class NoFilter(AbstractFilter):
         return {"class": self.__class__.__name__}
 
 
-class LeakyIntegrator(AbstractFilter):
+class LeakyIntegrator(ChromaFilter):
     """Class for filtering 1d activation (binary) vectors with different coefficient for Attack and Release.
         Should be given a vector of ones (activation only), will concatenate release tail duration to vector, i.e.
         f: R^[1xM] -> R^[1x(M+K)] where K denotes activation tail
