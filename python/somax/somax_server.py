@@ -27,7 +27,7 @@ from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_agent import SomaxOscAgent
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.send_protocol import SendProtocol, DefaultNames
 from somax.scheduler.process_messages import TimeSignal, ControlSignal, PlayControl, \
     Signal, TempoMasterSignal, TempoSignal
 from somax.scheduler.scheduling_handler import SchedulingHandler
@@ -125,7 +125,6 @@ class SomaxServer(Component, AsyncOscWithStatus):
                      scheduling_type: str = "",
                      peak_selector: str = "",
                      merge_action: str = "",
-                     scale_actions: Tuple[str, ...] = ("",),
                      override: bool = False):
 
         if name in self._agents:
@@ -139,18 +138,16 @@ class SomaxServer(Component, AsyncOscWithStatus):
         try:
             ip: str = self.parse_ip(ip)
 
-            scheduling_type: Type[SchedulingHandler] = SchedulingHandler.type_from_string(scheduling_type)
-            merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
-            peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector)
-            scale_actions: List[AbstractScaleAction] = [AbstractScaleAction.from_string(s) for s in scale_actions]
+            scheduling_type: Type[SchedulingHandler] = SchedulingHandler.from_string(scheduling_type)
+            merge_action: Type[AbstractMergeAction] = AbstractMergeAction.from_string(merge_action)
+            peak_selector: Type[AbstractPeakSelector] = AbstractPeakSelector.from_string(peak_selector)
         except ValueError as e:
             self.logger.error(f"{str(e)}. No agent was created.")
             return
 
-        generator: SomaxGenerator = SomaxGenerator(name="generator",
-                                                   jury=peak_selector,
-                                                   merge_handler=merge_action,
-                                                   post_filters=scale_actions)
+        generator: SomaxGenerator = SomaxGenerator(name=DefaultNames.GENERATOR,
+                                                   jury=peak_selector(DefaultNames.OUTPUT_SELECTOR),
+                                                   merge_handler=merge_action(DefaultNames.MERGE_HANDLER))
 
         gen_scheduler: SomaxGenerationScheduler = SomaxGenerationScheduler(name=name,
                                                                            generator=generator,

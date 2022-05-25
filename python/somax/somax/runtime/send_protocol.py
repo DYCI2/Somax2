@@ -43,3 +43,13 @@ class SendProtocol:
     BANG = "bang"
 
 
+class DefaultNames:
+    GENERATOR = "generator"
+    OUTPUT_SELECTOR = "outputselector"
+    MERGE_HANDLER = "mergehandler"
+    CLASSIFIER = "classifier"
+    ACTIVITY_PATTERN = "navigator"
+    MEMORY_SPACE = "model"
+    FILTER = "filter"
+
+    WEIGHT = "weight"

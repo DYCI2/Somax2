@@ -42,7 +42,12 @@ class SomaxGenerationScheduler(GenerationScheduler, Component):
         self.generator: SomaxGenerator = generator
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
 
-        scheduling_mode: SchedulingMode = corpus.scheduling_mode if corpus is not None else SchedulingMode.default()
+        if corpus is not None:
+            scheduling_mode: SchedulingMode = corpus.scheduling_mode
+        else:
+            mode_type: Type[SchedulingMode] = SchedulingMode.default()
+            scheduling_mode = mode_type()
+
         self.scheduling_handler: SchedulingHandler = scheduling_type(scheduling_mode=scheduling_mode,
                                                                      time=scheduling_mode.get_time_axis(current_time),
                                                                      tempo=current_time.tempo,

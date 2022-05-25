@@ -18,7 +18,7 @@ from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.transform_handler import TransformHandler
 
 
-class AbstractScaleAction(PostFilter, Component, ContentAware, Parsable, ABC):
+class AbstractScaleAction(PostFilter, Component, ContentAware, Parsable['AbstractScaleAction'], ABC):
     def __init__(self, name: str, *args, **kwargs):
         super().__init__(name=name, *args, **kwargs)
         self.enabled: Parameter[bool] = Parameter(name="enabled",

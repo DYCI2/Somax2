@@ -8,10 +8,12 @@ from typing import Optional, Type, List, Any, Tuple
 from merge.io.async_osc import AsyncOscMPCWithStatus
 from merge.io.component import Component
 from merge.main.classifier import Classifier
+from merge.main.descriptor import Descriptor
 from merge.main.exceptions import CorpusError, ResourceError, ComponentAddressError, TransformError, ParameterError, \
     InputError
 from merge.main.query import TriggerQuery, InfluenceQuery
 from somax.corpus_builder.corpus_builder import CorpusBuilder
+from somax.features.feature import CorpusFeature
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.generation_scheduler import SomaxGenerationScheduler
@@ -223,9 +225,11 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     def create_prospector(self,
                           _agent_osc_address: str,
+                          name: str,
                           osc_address: str,
-                          prospector_status_address: str,
+                          status_address: str,
                           weight: float = SomaxProspector.DEFAULT_WEIGHT,
+                          descriptor: str = "",
                           classifier: str = "",
                           activity_pattern: str = "",
                           memory_space: str = "",
@@ -234,13 +238,14 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                           override: bool = False,
                           **kwargs):
         try:
-            path: List[str] = self.osc_address_to_path(osc_address)
+            descriptor: Type[Descriptor] = CorpusFeature.from_string(descriptor)
             classifier: Classifier = Classifier.from_string(classifier, **kwargs)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
 
-            prospector: SomaxProspector = SomaxProspector(name=path[-1],
+            prospector: SomaxProspector = SomaxProspector(name=name,
                                                           weight=weight,
+                                                          descriptor=descriptor,
                                                           classifier=classifier,
                                                           activity_pattern=activity_pattern,
                                                           memory_space=memory_space,
@@ -248,22 +253,20 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                                                           enabled=enabled)
             self._generator.add_prospector(prospector, override=override)
             self.register_osc_component(osc_address,
-                                        prospector_status_address,
+                                        status_address,
                                         prospector,
                                         override=override)
 
-            self.send_atoms()
-            self._send_eligibility()
+            # self._send_eligibility()
         except (AssertionError, ValueError, KeyError, IndexError, ComponentAddressError) as e:
             self.logger.error(f"{str(e)} No prospector was created.")
 
-    def delete_prospector(self, prospector_osc_address: str):
+    def delete_prospector(self, prospector_osc_address: str, name: str):
         try:
-            path: List[str] = self.osc_address_to_path(prospector_osc_address)
-            self.generation_scheduler.generator.delete_prospector(path)
+            self.generation_scheduler.generator.remove_prospector(name)
             self.deregister_osc_component(prospector_osc_address)
-            self._send_eligibility()
-            self.logger.info(f"Deleted prospector with path '{path}'.")
+            # self._send_eligibility()
+            self.logger.info(f"Deleted prospector '{name}'.")
         except (AssertionError, KeyError, IndexError) as e:
             self.logger.error(f"{str(e)} No prospector was deleted.")
 
@@ -271,9 +274,12 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         try:
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
             self.generation_scheduler.generator.set_jury(peak_selector)
-            self._send_eligibility()
+            # self._send_eligibility()
         except (ValueError, KeyError) as e:
             self.logger.error(f"{str(e)} No peak selector was set.")
+
+    def set_descriptor(self, prospector_osc_address: str, descriptor: str, **kwargs):
+        self.logger.error("This is not supported yet")
 
     def set_classifier(self, prospector_osc_address: str, classifier: str, **kwargs):
         try:
@@ -447,9 +453,6 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             self.send(SendProtocol.PLAYER_CORPUS_FILES, corpus)
         self.send(SendProtocol.PLAYER_CORPUS_FILES, SendProtocol.BANG)
 
-    def send_atoms(self, _address: Optional[str] = None):
-        atom_names: List[str] = [atom.name for atom in self.generation_scheduler.generator.all_atoms()]
-        self.send(SendProtocol.INSTANTIATED_ATOMS, atom_names)
 
     def send_current_corpus_info(self, _address: Optional[str] = None):
         corpus: Optional[SomaxCorpus] = self.generation_scheduler.generator.corpus

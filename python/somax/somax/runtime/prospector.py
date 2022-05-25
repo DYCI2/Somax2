@@ -29,7 +29,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
 
     def __init__(self, name: str,
                  weight: float,
-                 feature: Type[Descriptor],
+                 descriptor: Type[Descriptor],
                  classifier: Classifier,
                  activity_pattern: AbstractActivityPattern,
                  memory_space: AbstractMemorySpace,
@@ -52,7 +52,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
                                                    on_parameter_change=self._set_enabled)
 
         # TODO[B4]: Check that the given classifier is valid with the given feature
-        self._feature_type: Type[Descriptor] = feature
+        self._feature_type: Type[Descriptor] = descriptor
         self._classifier: Classifier = classifier
         self._memory_space: AbstractMemorySpace = memory_space
         self._activity_pattern: AbstractActivityPattern = activity_pattern

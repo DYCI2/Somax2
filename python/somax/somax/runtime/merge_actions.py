@@ -1,7 +1,7 @@
 import logging
 import typing
 from abc import abstractmethod, ABC
-from typing import List, Optional
+from typing import List, Optional, Type
 
 import numpy as np
 from scipy import sparse
@@ -9,7 +9,7 @@ from scipy import sparse
 from merge.io.component import Component
 from merge.io.param_utils import NumericRange, MaxFloat
 from merge.io.parameter import Parameter
-from merge.io.parsable import Parsable
+from merge.io.parsable import ParsableWithDefault, T
 from merge.main.candidates import Candidates
 from merge.main.exceptions import CandidatesError
 from merge.main.merge_handler import MergeHandler
@@ -18,7 +18,7 @@ from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.corpus import SomaxCorpus
 
 
-class AbstractMergeAction(MergeHandler, Component, ContentAware, Parsable, ABC):
+class AbstractMergeAction(MergeHandler, Component, ContentAware, ParsableWithDefault['AbstractMergeAction'], ABC):
     DEFAULT_MERGE_ACTION_NAME = "mergeaction"
 
     def __init__(self, name: str, *args, **kwargs):
@@ -29,8 +29,8 @@ class AbstractMergeAction(MergeHandler, Component, ContentAware, Parsable, ABC):
         """ """
 
     @classmethod
-    def default(cls, **_kwargs) -> 'AbstractMergeAction':
-        return DistanceMergeAction(name=AbstractMergeAction.DEFAULT_MERGE_ACTION_NAME)
+    def default(cls) -> Type['AbstractMergeAction']:
+        return DistanceMergeAction
 
 
 class DistanceMergeAction(AbstractMergeAction):

@@ -2,14 +2,14 @@ import logging
 import random
 import typing
 from abc import abstractmethod, ABC
-from typing import Optional, List
+from typing import Optional, List, Type
 
 import numpy as np
 
 from merge.io.component import Component
 from merge.io.param_utils import NumericRange, MaxFloat
 from merge.io.parameter import Parameter
-from merge.io.parsable import Parsable
+from merge.io.parsable import Parsable, ParsableWithDefault, T
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.corpus_event import CorpusEvent
@@ -23,7 +23,7 @@ from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.transforms import NoTransform
 
 
-class AbstractPeakSelector(Jury, Component, ContentAware, Parsable, ABC):
+class AbstractPeakSelector(Jury, Component, ContentAware, ParsableWithDefault['AbstractPeakSelector'], ABC):
     PEAK_SELECTOR_NAME = "peakselector"
 
     def __init__(self, name: str, *args, **kwargs):
@@ -32,6 +32,10 @@ class AbstractPeakSelector(Jury, Component, ContentAware, Parsable, ABC):
 
     def __repr__(self):
         return f"{type(self).__name__}(...)"
+
+    @classmethod
+    def default(cls) -> Type['AbstractPeakSelector']:
+        return MaxPeakSelector
 
     @abstractmethod
     def _decide_default(self, candidates: Candidates, **kwargs) -> Optional[Candidate]:
@@ -44,10 +48,6 @@ class AbstractPeakSelector(Jury, Component, ContentAware, Parsable, ABC):
     @abstractmethod
     def clear(self) -> None:
         """ """
-
-    @classmethod
-    def default(cls, **kwargs) -> 'AbstractPeakSelector':
-        return MaxPeakSelector(name=AbstractPeakSelector.PEAK_SELECTOR_NAME)
 
     def decide(self, candidates: Candidates) -> Optional[Candidate]:
         output: Optional[Candidate]

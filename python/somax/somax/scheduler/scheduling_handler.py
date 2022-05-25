@@ -13,7 +13,7 @@ from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, 
 from somax.scheduler.time_object import Time
 
 
-class SchedulingHandler(Parsable, ABC):
+class SchedulingHandler(Parsable['SchedulingHandler'], ABC):
     TRIGGER_PRETIME: float = 0.01  # seconds
 
     def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
@@ -84,15 +84,6 @@ class SchedulingHandler(Parsable, ABC):
                    running=other._scheduler.running, midi_handler=other.midi_handler, audio_handler=other.audio_handler,
                    trigger_pretime=other._trigger_pretime_value, time_stretch=other._stretch_factor,
                    exp_audio_relative_tempo_scaling=other._experimental_use_relative_tempo_scaling_for_audio, **kwargs)
-
-    @classmethod
-    def type_from_string(cls, class_name: str):
-        try:
-            candidate_classes: Dict[str, Type[SchedulingHandler]] = cls._classes()
-            return candidate_classes[class_name.lower()]
-        except KeyError as e:
-            # To be consistent with any other `from_string` method, re-raises error as ValueError if name isn't found
-            raise ValueError from e
 
     def update_time(self, time: Time) -> List[ScheduledEvent]:
         output_events: List[ScheduledEvent] = []

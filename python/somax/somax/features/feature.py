@@ -2,8 +2,10 @@ import importlib
 import inspect
 import warnings
 from abc import ABC, abstractmethod
-from typing import Dict, Any, Type, Tuple, List
+from types import ModuleType
+from typing import Dict, Any, Type, Tuple, List, Optional, Union
 
+import merge
 import somax.features
 from merge.io.introspective import Introspective
 from merge.io.parsable import Parsable
@@ -28,7 +30,16 @@ class AbstractFeature(Descriptor[T], ABC):
     pass
 
 
-class CorpusFeature(AbstractFeature[T], ABC):
+class CorpusFeature(AbstractFeature[T], Parsable['CorpusFeature'], ABC):
+
+    @classmethod
+    def from_string(cls, class_name: str, include_abstract: bool = False) -> Type[T]:
+        try:
+            return Introspective.introspect(cls,
+                                            modules=[merge.main.descriptor, features],
+                                            include_abstract=include_abstract)[class_name.lower()]
+        except KeyError:
+            raise InputError(f"No class named '{class_name}' exists in '{cls.__name__}'")
 
     @classmethod
     @abstractmethod
@@ -69,7 +80,7 @@ class CorpusFeature(AbstractFeature[T], ABC):
                                                       and issubclass(m, CorpusFeature))
 
 
-class RuntimeFeature(AbstractFeature[T], Parsable, ABC):
+class RuntimeFeature(AbstractFeature[T], Parsable['RuntimeFeature'], ABC):
 
     @classmethod
     def from_string(cls, class_name: str, include_abstract: bool = False) -> Type[T]:

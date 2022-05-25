@@ -1,14 +1,14 @@
 import logging
 import warnings
 from abc import abstractmethod, ABC
-from typing import List, Optional
+from typing import List, Optional, Type
 
 import numpy as np
 
 from merge.io.component import Component
 from merge.io.param_utils import MaxFloat, NumericRange, MaxInt
 from merge.io.parameter import Parameter
-from merge.io.parsable import Parsable
+from merge.io.parsable import ParsableWithDefault, T
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.exceptions import CorpusError
@@ -17,7 +17,7 @@ from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.transform_handler import TransformHandler
 
 
-class AbstractActivityPattern(Component, Parsable, ABC):
+class AbstractActivityPattern(Component, ParsableWithDefault['AbstractActivityPattern'], ABC):
     SCORE_IDX = 0
     TIME_IDX = 1
     TRANSFORM_IDX = 2
@@ -29,8 +29,8 @@ class AbstractActivityPattern(Component, Parsable, ABC):
         self.corpus: Optional[SomaxCorpus] = corpus
 
     @classmethod
-    def default(cls, **_kwargs) -> 'AbstractActivityPattern':
-        return ClassicActivityPattern()
+    def default(cls) -> Type[T]:
+        return ClassicActivityPattern
 
     @abstractmethod
     def insert(self, candidates: List[Candidate], self_influenced: bool = False, **kwargs) -> None:

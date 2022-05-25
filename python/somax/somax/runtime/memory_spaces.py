@@ -8,7 +8,7 @@ from typing import Tuple, Dict, Optional, List, Type
 from merge.io.component import Component
 from merge.io.param_utils import MaxInt, NumericRange
 from merge.io.parameter import Parameter
-from merge.io.parsable import Parsable
+from merge.io.parsable import Parsable, ParsableWithDefault, T
 from merge.main.candidate import Candidate
 from merge.main.exceptions import TransformError
 from merge.main.label import Label
@@ -18,7 +18,7 @@ from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 
 
-class AbstractMemorySpace(Component, Parsable, ABC):
+class AbstractMemorySpace(Component, ParsableWithDefault['AbstractMemorySpace'], ABC):
     """ MemorySpaces determine how events are matched to labels """
 
     def __init__(self, name: str, *args, **kwargs):
@@ -32,10 +32,8 @@ class AbstractMemorySpace(Component, Parsable, ABC):
         self._transform_handler: Optional[TransformHandler] = None
 
     @classmethod
-    def default(cls, **_kwargs) -> 'AbstractMemorySpace':
-        return NGramMemorySpace()
-
-
+    def default(cls) -> Type[T]:
+        return NGramMemorySpace
 
     @abstractmethod
     def model(self, corpus: SomaxCorpus, labels: List[Label], **_kwargs) -> None:

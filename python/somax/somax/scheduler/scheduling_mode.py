@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
+from typing import Type
 
-from merge.io.parsable import Parsable
+from merge.io.parsable import ParsableWithDefault, T, ParsableEnum
 from somax.scheduler.time_object import Time
 
 
-class SchedulingMode(Parsable, ABC):
+class SchedulingMode(ParsableWithDefault['SchedulingMode'], ABC):
     @abstractmethod
     def encode(self) -> str:
         """ string representation of class """
@@ -12,6 +13,10 @@ class SchedulingMode(Parsable, ABC):
     @abstractmethod
     def get_time_axis(self, time: Time) -> float:
         """ Determines which mode of time (tick/seconds) should be used for scheduling objects of this type """
+
+    @classmethod
+    def default(cls) -> Type['SchedulingMode']:
+        return RelativeScheduling
 
 
 class RelativeScheduling(SchedulingMode):
