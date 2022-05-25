@@ -9,24 +9,13 @@ from mido import MidiTrack, Message, MetaMessage, MidiFile
 
 from .matrix_keys import MatrixKeys as Keys
 
+from merge.io.parsable import ParsableEnum
 
-class BarNumberAnnotation(Enum):
+
+class BarNumberAnnotation(ParsableEnum):
     NONE = "none"
     JUMPS = "jumps"
     ALL = "all"
-
-    @classmethod
-    def default(cls) -> 'BarNumberAnnotation':
-        return cls.NONE
-
-    @classmethod
-    def from_string(cls, bar_num_annotation: str) -> 'BarNumberAnnotation':
-        try:
-            return BarNumberAnnotation(bar_num_annotation.lower())
-        except ValueError:
-            logging.getLogger(__name__).warning(f"No class named '{bar_num_annotation} exists for the "
-                                                f"{cls.__name__} module. Using default.")
-            return cls.default()
 
 
 class _MidiNote:

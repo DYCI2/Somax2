@@ -8,7 +8,7 @@ from merge.main.candidates import Candidates
 from merge.main.corpus import Corpus
 from merge.main.corpus_event import CorpusEvent
 from merge.main.exceptions import CorpusError
-from merge.main.feature import Feature
+from merge.main.descriptor import Descriptor
 from merge.stubs.transform import Transform
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
@@ -79,7 +79,7 @@ class ContinuousCandidates(Candidates):
         self.times = np.concatenate((self.times, times))
         self.transform_ids = np.concatenate((self.transform_ids, transform_ids))
 
-    def get_feature_array(self, feature: Union[Type[Feature], str]) -> np.ndarray:
+    def get_feature_array(self, feature: Union[Type[Descriptor], str]) -> np.ndarray:
         # TODO[B6]: Requires implementation of optimized `get_feature` in Corpus
         raise NotImplementedError("Not Implemented")
 

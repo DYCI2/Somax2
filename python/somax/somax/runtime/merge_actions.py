@@ -9,16 +9,16 @@ from scipy import sparse
 from merge.io.component import Component
 from merge.io.param_utils import NumericRange, MaxFloat
 from merge.io.parameter import Parameter
+from merge.io.parsable import Parsable
 from merge.main.candidates import Candidates
 from merge.main.exceptions import CandidatesError
 from merge.main.merge_handler import MergeHandler
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.corpus import SomaxCorpus
-from somax.utils.introspective import StringParsed
 
 
-class AbstractMergeAction(MergeHandler, Component, ContentAware, StringParsed, ABC):
+class AbstractMergeAction(MergeHandler, Component, ContentAware, Parsable, ABC):
     DEFAULT_MERGE_ACTION_NAME = "mergeaction"
 
     def __init__(self, name: str, *args, **kwargs):
@@ -31,10 +31,6 @@ class AbstractMergeAction(MergeHandler, Component, ContentAware, StringParsed, A
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractMergeAction':
         return DistanceMergeAction(name=AbstractMergeAction.DEFAULT_MERGE_ACTION_NAME)
-
-    @classmethod
-    def from_string(cls, merge_action: str, **kwargs) -> 'AbstractMergeAction':
-        return cls._from_string(merge_action, **kwargs)
 
 
 class DistanceMergeAction(AbstractMergeAction):

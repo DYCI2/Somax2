@@ -1,18 +1,16 @@
 from enum import Enum
 from typing import Any
 
+from merge.io.parsable import ParsableEnum
 from merge.main.influence import FeatureInfluence
 from somax.features.feature import RuntimeFeature
 
 
-class InfluenceType(Enum):
+class InfluenceType(ParsableEnum):
     PITCH = "pitch"
     CHROMA = "chroma"
 
-    @classmethod
-    def from_string(cls, influence_type: str):
-        """ :raises ValueError """
-        return InfluenceType(influence_type.lower())
+
 
 
 # Corresponds directly to merge.influence.Influence

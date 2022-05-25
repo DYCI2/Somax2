@@ -4,10 +4,10 @@ from typing import Dict, Type, Any
 
 import numpy as np
 
-from merge.io.parsable import Parsable
+from merge.io.parsable import ParsableWithDefault
 
 
-class ChromaFilter(Parsable, ABC):
+class ChromaFilter(ParsableWithDefault, ABC):
     DEFAULT = "default"
 
     def __init__(self, decay_length_ms: float = 0.0, **_kwargs):
@@ -28,12 +28,6 @@ class ChromaFilter(Parsable, ABC):
     @abstractmethod
     def build_parameters(self) -> Dict[str, Any]:
         """ TODO """
-
-    @classmethod
-    def from_string(cls, class_name: str, include_abstract: bool = False) -> Type['ChromaFilter']:
-        if class_name == cls.DEFAULT:
-            return cls.default()
-        return super().from_string(class_name, include_abstract)
 
     @classmethod
     def default(cls) -> Type['ChromaFilter']:

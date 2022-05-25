@@ -8,16 +8,16 @@ import numpy as np
 from merge.io.component import Component
 from merge.io.param_utils import MaxFloat, NumericRange, MaxInt
 from merge.io.parameter import Parameter
+from merge.io.parsable import Parsable
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.exceptions import CorpusError
 from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.transform_handler import TransformHandler
-from somax.utils.introspective import StringParsed
 
 
-class AbstractActivityPattern(Component, StringParsed, ABC):
+class AbstractActivityPattern(Component, Parsable, ABC):
     SCORE_IDX = 0
     TIME_IDX = 1
     TRANSFORM_IDX = 2
@@ -31,10 +31,6 @@ class AbstractActivityPattern(Component, StringParsed, ABC):
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractActivityPattern':
         return ClassicActivityPattern()
-
-    @classmethod
-    def from_string(cls, activity_pattern: str, **kwargs) -> 'AbstractActivityPattern':
-        return cls._from_string(activity_pattern, **kwargs)
 
     @abstractmethod
     def insert(self, candidates: List[Candidate], self_influenced: bool = False, **kwargs) -> None:

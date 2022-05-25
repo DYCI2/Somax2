@@ -7,6 +7,7 @@ import numpy as np
 from merge.io.component import Component
 from merge.io.param_utils import MaxBool, MaxFloat, NumericRange
 from merge.io.parameter import Parameter
+from merge.io.parsable import Parsable
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.exceptions import FilterError
@@ -15,10 +16,9 @@ from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus
 from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.transform_handler import TransformHandler
-from somax.utils.introspective import StringParsed
 
 
-class AbstractScaleAction(PostFilter, Component, ContentAware, StringParsed, ABC):
+class AbstractScaleAction(PostFilter, Component, ContentAware, Parsable, ABC):
     def __init__(self, name: str, *args, **kwargs):
         super().__init__(name=name, *args, **kwargs)
         self.enabled: Parameter[bool] = Parameter(name="enabled",
@@ -50,11 +50,6 @@ class AbstractScaleAction(PostFilter, Component, ContentAware, StringParsed, ABC
     @classmethod
     def default(cls, **_kwargs) -> 'AbstractScaleAction':
         return NoScaleAction(name="identity")
-
-
-    @classmethod
-    def from_string(cls, scale_action: str, **kwargs) -> 'AbstractScaleAction':
-        return cls._from_string(scale_action, **kwargs)
 
     def is_enabled_and_eligible(self):
         return self.enabled.value and self.eligible

@@ -1,11 +1,14 @@
 import importlib
 import inspect
+import warnings
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Type, Tuple, List
 
 import somax.features
+from merge.io.introspective import Introspective
 from merge.io.parsable import Parsable
-from merge.main.feature import Feature, T
+from merge.main.descriptor import Descriptor, T
+from merge.main.exceptions import InputError
 from somax import features
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
 from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent, AudioCorpusEvent
@@ -21,7 +24,7 @@ class FeatureUtils:
         return all([isinstance(e, AudioCorpusEvent) for e in events]) and isinstance(metadata, AudioMetadata)
 
 
-class AbstractFeature(Feature[T], Parsable, ABC):
+class AbstractFeature(Descriptor[T], ABC):
     pass
 
 
@@ -66,19 +69,23 @@ class CorpusFeature(AbstractFeature[T], ABC):
                                                       and issubclass(m, CorpusFeature))
 
 
-class RuntimeFeature(AbstractFeature[T], ABC):
-    @classmethod
-    def from_string(cls, keyword: str, value: Any = None, **kwargs) -> 'RuntimeFeature':
-        """ :raises ValueError if a feature matching the keyword doesn't exist """
-        for feature in cls._classes(somax.features).values():  # type: Type[RuntimeFeature]
-            if issubclass(feature, RuntimeFeature) and feature.keyword() == keyword:
-                return feature(value)
-        raise ValueError(f"No feature matches the keyword '{keyword}'")
+class RuntimeFeature(AbstractFeature[T], Parsable, ABC):
 
     @classmethod
-    def default(cls, **kwargs) -> 'StringParsed':
-        """ :raises ValueError. As no default Feature exists, this will always be raised"""
-        raise ValueError("No default feature exist")
+    def from_string(cls, class_name: str, include_abstract: bool = False) -> Type[T]:
+        for feature in Introspective.introspect(cls, include_abstract=include_abstract).values():  # type: Type[RuntimeFeature]
+            if issubclass(feature, RuntimeFeature) and feature.keyword() == class_name:
+                return feature
+        raise InputError(f"No features matches the keyword '{class_name}'")
+
+    # TODO: Remove if above works correctly
+    # @classmethod
+    # def from_string(cls, keyword: str, value: Any = None, **kwargs) -> 'RuntimeFeature':
+    #     """ :raises ValueError if a feature matching the keyword doesn't exist """
+    #     for feature in cls._classes(somax.features).values():  # type: Type[RuntimeFeature]
+    #         if issubclass(feature, RuntimeFeature) and feature.keyword() == keyword:
+    #             return feature(value)
+    #     raise ValueError(f"No feature matches the keyword '{keyword}'")
 
     @staticmethod
     @abstractmethod

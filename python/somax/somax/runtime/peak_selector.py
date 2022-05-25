@@ -9,6 +9,7 @@ import numpy as np
 from merge.io.component import Component
 from merge.io.param_utils import NumericRange, MaxFloat
 from merge.io.parameter import Parameter
+from merge.io.parsable import Parsable
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.corpus_event import CorpusEvent
@@ -20,10 +21,9 @@ from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.transforms import NoTransform
-from somax.utils.introspective import StringParsed
 
 
-class AbstractPeakSelector(Jury, Component, ContentAware, StringParsed, ABC):
+class AbstractPeakSelector(Jury, Component, ContentAware, Parsable, ABC):
     PEAK_SELECTOR_NAME = "peakselector"
 
     def __init__(self, name: str, *args, **kwargs):
@@ -48,10 +48,6 @@ class AbstractPeakSelector(Jury, Component, ContentAware, StringParsed, ABC):
     @classmethod
     def default(cls, **kwargs) -> 'AbstractPeakSelector':
         return MaxPeakSelector(name=AbstractPeakSelector.PEAK_SELECTOR_NAME)
-
-    @classmethod
-    def from_string(cls, peak_selector: str, **kwargs) -> 'AbstractPeakSelector':
-        return cls._from_string(peak_selector, **kwargs)
 
     def decide(self, candidates: Candidates) -> Optional[Candidate]:
         output: Optional[Candidate]

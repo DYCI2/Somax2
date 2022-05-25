@@ -24,7 +24,6 @@ from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features.feature import CorpusFeature
 from somax.runtime.corpus_event import SomaxCorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.scheduler.scheduling_mode import SchedulingMode
-from somax.utils.introspective import Introspective
 
 S = TypeVar('S', bound=SomaxCorpusEvent)
 
@@ -63,7 +62,7 @@ class HeldObject(Generic[S]):
         raise AttributeError(f"Cannot compare type '{type(other)}' with '{self.__class__}'")
 
 
-class SomaxCorpus(Corpus[S], Introspective, ABC):
+class SomaxCorpus(Corpus[S], ABC):
     INDEX_MAP_SIZE = 1_000_000
 
     def __init__(self, events: List[S], name: str, scheduling_mode: SchedulingMode,

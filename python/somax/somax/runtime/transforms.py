@@ -5,17 +5,17 @@ from typing import List, Type, Union, Any
 
 import numpy as np
 
+from merge.io.parsable import ParsableWithDefault, T
 from merge.main.exceptions import TransformError
-from merge.main.feature import Feature
+from merge.main.descriptor import Descriptor
 from somax.features.chroma_features import OnsetChroma
 from somax.features.feature import AbstractFeature
 from somax.features.pitch_features import AbstractIntegerPitch
 from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import TransformIdentityError
-from somax.utils.introspective import StringParsed
 
 
-class AbstractTransform(StringParsed, ABC):
+class AbstractTransform(ParsableWithDefault['AbstractTransform'], ABC):
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
@@ -25,7 +25,7 @@ class AbstractTransform(StringParsed, ABC):
 
     @staticmethod
     @abstractmethod
-    def valid_features() -> List[Type[Feature]]:
+    def valid_features() -> List[Type[Descriptor]]:
         """"""
 
     @abstractmethod
@@ -33,25 +33,35 @@ class AbstractTransform(StringParsed, ABC):
         """ Value sent to renderer describing how to apply the transform to the event if necessary """
 
     @abstractmethod
-    def apply(self, obj: Union[SomaxCorpusEvent, Feature], **kwargs) -> Union[SomaxCorpusEvent, Feature]:
+    def apply(self, obj: Union[SomaxCorpusEvent, Descriptor], **kwargs) -> Union[SomaxCorpusEvent, Descriptor]:
         """ Note: Should return a deepcopy of the event """
 
     @abstractmethod
-    def inverse(self, obj: Union[SomaxCorpusEvent, Feature], **kwargs) -> Union[SomaxCorpusEvent, Feature]:
+    def inverse(self, obj: Union[SomaxCorpusEvent, Descriptor], **kwargs) -> Union[SomaxCorpusEvent, Descriptor]:
         """"""
 
     @classmethod
-    def default(cls, **kwargs) -> 'AbstractTransform':
-        return NoTransform()
+    def default(cls) -> Type[T]:
+        return NoTransform
 
     @classmethod
-    def from_string(cls, transform: str, **kwargs) -> 'AbstractTransform':
-        """ :raises TypeError if not all positional arguments for the transform's `__init__` are provided as **kwargs"""
+    def from_string(cls, class_name: str, include_abstract: bool = False) -> Type['AbstractTransform']:
         try:
-            return cls._from_string(transform, **kwargs)
+            return super().from_string(class_name, include_abstract)
         except TransformIdentityError:
             # Parameters given duplicates the NoTransform class
             return cls.default()
+
+    # @classmethod
+    # def from_string(cls, transform: str, **kwargs) -> 'AbstractTransform':
+    #     """ :raises TypeError if not all positional arguments for the transform's `__init__` are provided as **kwargs"""
+    #     try:
+    #         return cls._from_string(transform, **kwargs)
+    #     except TransformIdentityError:
+    #         # Parameters given duplicates the NoTransform class
+    #         return cls.default()
+
+
 
 
 class NoTransform(AbstractTransform):
@@ -65,16 +75,16 @@ class NoTransform(AbstractTransform):
         return f"{self.__class__.__name__}()"
 
     @staticmethod
-    def valid_features() -> List[Type[Feature]]:
+    def valid_features() -> List[Type[Descriptor]]:
         return AbstractFeature.classes(include_abstract=True)
 
     def renderer_info(self) -> Any:
         return 0
 
-    def apply(self, obj: Union[SomaxCorpusEvent, Feature], **kwargs) -> Union[SomaxCorpusEvent, Feature]:
+    def apply(self, obj: Union[SomaxCorpusEvent, Descriptor], **kwargs) -> Union[SomaxCorpusEvent, Descriptor]:
         return obj
 
-    def inverse(self, obj: Union[SomaxCorpusEvent, Feature], **kwargs) -> Union[SomaxCorpusEvent, Feature]:
+    def inverse(self, obj: Union[SomaxCorpusEvent, Descriptor], **kwargs) -> Union[SomaxCorpusEvent, Descriptor]:
         return obj
 
 
@@ -90,16 +100,16 @@ class RedundantTransform(AbstractTransform):
         return False
 
     @staticmethod
-    def valid_features() -> List[Type[Feature]]:
+    def valid_features() -> List[Type[Descriptor]]:
         return []
 
     def renderer_info(self) -> Any:
         return None
 
-    def apply(self, obj: Union[SomaxCorpusEvent, Feature], **kwargs) -> Union[SomaxCorpusEvent, Feature]:
+    def apply(self, obj: Union[SomaxCorpusEvent, Descriptor], **kwargs) -> Union[SomaxCorpusEvent, Descriptor]:
         return self._contained_transform.apply(obj, **kwargs)
 
-    def inverse(self, obj: Union[SomaxCorpusEvent, Feature], **kwargs) -> Union[SomaxCorpusEvent, Feature]:
+    def inverse(self, obj: Union[SomaxCorpusEvent, Descriptor], **kwargs) -> Union[SomaxCorpusEvent, Descriptor]:
         return self._contained_transform.inverse(obj, **kwargs)
 
 
@@ -121,10 +131,10 @@ class TransposeTransform(AbstractTransform):
         return self.semitones * 100
 
     @staticmethod
-    def valid_features() -> List[Type[Feature]]:
+    def valid_features() -> List[Type[Descriptor]]:
         return [AbstractIntegerPitch, OnsetChroma]
 
-    def apply(self, obj: Union[SomaxCorpusEvent, Feature], **kwargs) -> Union[SomaxCorpusEvent, Feature]:
+    def apply(self, obj: Union[SomaxCorpusEvent, Descriptor], **kwargs) -> Union[SomaxCorpusEvent, Descriptor]:
         if isinstance(obj, SomaxCorpusEvent):
             event: SomaxCorpusEvent = copy.deepcopy(obj)
             for (key, feature) in event.features.items():
@@ -146,7 +156,7 @@ class TransposeTransform(AbstractTransform):
             raise TransformError(f"Could not apply transform {type(self).__name__} to object {obj}. "
                                  f"Valid feature are {self.valid_features()}")
 
-    def inverse(self, obj: Union[SomaxCorpusEvent, Feature], **kwargs) -> Union[SomaxCorpusEvent, Feature]:
+    def inverse(self, obj: Union[SomaxCorpusEvent, Descriptor], **kwargs) -> Union[SomaxCorpusEvent, Descriptor]:
         if isinstance(obj, SomaxCorpusEvent):
             event: SomaxCorpusEvent = copy.deepcopy(obj)
             for (key, feature) in event.features.items():

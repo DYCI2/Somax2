@@ -11,7 +11,7 @@ from merge.main.candidates import Candidates
 from merge.main.classifier import Classifier, Trainable
 from merge.main.corpus_event import CorpusEvent
 from merge.main.exceptions import QueryError
-from merge.main.feature import Feature
+from merge.main.descriptor import Descriptor
 from merge.main.influence import Influence, CorpusInfluence, FeatureInfluence
 from merge.main.label import Label
 from merge.main.prospector import Prospector
@@ -29,7 +29,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
 
     def __init__(self, name: str,
                  weight: float,
-                 feature: Type[Feature],
+                 feature: Type[Descriptor],
                  classifier: Classifier,
                  activity_pattern: AbstractActivityPattern,
                  memory_space: AbstractMemorySpace,
@@ -52,7 +52,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
                                                    on_parameter_change=self._set_enabled)
 
         # TODO[B4]: Check that the given classifier is valid with the given feature
-        self._feature_type: Type[Feature] = feature
+        self._feature_type: Type[Descriptor] = feature
         self._classifier: Classifier = classifier
         self._memory_space: AbstractMemorySpace = memory_space
         self._activity_pattern: AbstractActivityPattern = activity_pattern
@@ -87,7 +87,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
         if self._corpus is None:
             return
 
-        features: List[Feature] = self._corpus.get_features_of_type(self._feature_type)
+        features: List[Descriptor] = self._corpus.get_features_of_type(self._feature_type)
         if isinstance(self._classifier, Trainable):
             self._classifier.cluster(features)
 

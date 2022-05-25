@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple, Dict, Type
 
+from merge.io.parsable import Parsable
 from somax.features import Tempo
 from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
@@ -10,10 +11,9 @@ from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
-from somax.utils.introspective import Introspective
 
 
-class SchedulingHandler(Introspective, ABC):
+class SchedulingHandler(Parsable, ABC):
     TRIGGER_PRETIME: float = 0.01  # seconds
 
     def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,

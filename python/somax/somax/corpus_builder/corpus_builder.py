@@ -14,7 +14,7 @@ import pandas as pd
 
 from merge.io.osc_sender import OscSender, OscLogForwarder
 from somax import log
-from somax.corpus_builder.chroma_filter import ChromaFilter
+from somax.corpus_builder.chroma_filter import ChromaFilter, NoFilter
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
@@ -26,14 +26,12 @@ from somax.runtime.exceptions import FeatureError, ParameterError
 from somax.runtime.send_protocol import SendProtocol
 from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduling
 
+from merge.io.parsable import ParsableEnum
 
-class AudioSegmentation(Enum):
+
+class AudioSegmentation(ParsableEnum):
     ONSET = "onset"
     INTERVAL = "interval"
-
-    @classmethod
-    def from_string(cls, name: str) -> 'AudioSegmentation':
-        return cls(name.lower())
 
 
 class SegmentationStatistics:
@@ -64,7 +62,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
                  **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
-        self.filepath: str  = filepath
+        self.filepath: str = filepath
         self.corpus_name: str = corpus_name
         self.output_folder: str = output_folder
         self.overwrite: bool = overwrite
@@ -83,7 +81,8 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
         self._sender.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
 
         try:
-            corpus: SomaxCorpus = CorpusBuilder().build(filepath=self.filepath, corpus_name=self.corpus_name, **self.kwargs)
+            corpus: SomaxCorpus = CorpusBuilder().build(filepath=self.filepath, corpus_name=self.corpus_name,
+                                                        **self.kwargs)
             self.logger.debug(f"[build_corpus]: Successfully built '{corpus.name}' from file '{self.filepath}'.")
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
@@ -165,7 +164,7 @@ class CorpusBuilder:
     def _build_midi(self, filepaths: List[str], name: str,
                     foreground_channels: Tuple[int] = tuple(range(1, 17)),
                     background_channels: Tuple[int] = tuple(range(1, 17)),
-                    spectrogram_filter: ChromaFilter = ChromaFilter.parse(ChromaFilter.DEFAULT),
+                    spectrogram_filter: ChromaFilter = NoFilter(),
                     **kwargs) -> SomaxCorpus:
         # TODO: Foreground channels are not used for melodic classification... (might be a good thing)
         # TODO: Onset channels are not supported as means of segmentation (might also be a good thing)
@@ -292,7 +291,8 @@ class CorpusBuilder:
         corpus: AudioSomaxCorpus = AudioSomaxCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
                                                     feature_types=used_features,
                                                     build_parameters=build_parameters, sr=sr, filepath=filepaths[0],
-                                                    file_duration=metadata.duration, file_num_channels=metadata.channels)
+                                                    file_duration=metadata.duration,
+                                                    file_num_channels=metadata.channels)
 
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed construction of audio corpus")
 

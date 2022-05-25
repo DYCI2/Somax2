@@ -5,13 +5,13 @@ from typing import Optional, List, Dict, Type, Any
 import pandas as pd
 
 from merge.main.corpus_event import CorpusEvent
-from merge.main.feature import Feature
+from merge.main.descriptor import Descriptor
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.runtime.exceptions import FeatureError
 from somax.runtime.memory_state import MemoryState
 
 """ Keys correspond to parent module names, ex. "pitch" or "chroma". """
-EventParameterDict = Dict[str, List[Feature]]
+EventParameterDict = Dict[str, List[Descriptor]]
 
 
 class Note:
@@ -87,7 +87,7 @@ class Note:
 
 
 class SomaxCorpusEvent(CorpusEvent):
-    def __init__(self, state_index: int, features: Optional[Dict[Type[Feature], Feature]] = None):
+    def __init__(self, state_index: int, features: Optional[Dict[Type[Descriptor], Descriptor]] = None):
         super().__init__(index=state_index, features=features, labels={})
 
     @classmethod
@@ -96,7 +96,7 @@ class SomaxCorpusEvent(CorpusEvent):
         """ Raises: KeyError, AttributeError"""
 
     @abstractmethod
-    def encode(self, features_dict: Dict[Type[Feature], str]) -> Dict[str, Any]:
+    def encode(self, features_dict: Dict[Type[Descriptor], str]) -> Dict[str, Any]:
         """ """
 
     @property
@@ -109,17 +109,17 @@ class SomaxCorpusEvent(CorpusEvent):
     def duration(self) -> float:
         """ """
 
-    def get_feature(self, feature_type: Type[Feature]) -> Feature:
+    def get_feature(self, feature_type: Type[Descriptor]) -> Descriptor:
         """Raises KeyError"""
         try:
             return self.features[feature_type]
         except ValueError as e:
             raise FeatureError(f"Corpus does not have feature of type '{feature_type}'") from e
 
-    def get_feature_safe(self, feature_type: Type[Feature]) -> Optional[Feature]:
+    def get_feature_safe(self, feature_type: Type[Descriptor]) -> Optional[Descriptor]:
         return self.features.get(feature_type)
 
-    def set_feature(self, feature: Feature):
+    def set_feature(self, feature: Descriptor):
         """ Note! This call is strictly for constructing the corpus. Using it at runtime to edit an already loaded
                   corpus will not warrant well-defined behaviour """
         self.features[type(feature)] = feature
@@ -129,7 +129,7 @@ class MidiCorpusEvent(SomaxCorpusEvent):
     def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float, bar_number: float,
                  duration: Optional[float] = None, absolute_duration: Optional[float] = None,
                  notes: Optional[List[Note]] = None,
-                 features: Optional[Dict[Type[Feature], Feature]] = None):
+                 features: Optional[Dict[Type[Descriptor], Descriptor]] = None):
         super().__init__(state_index=state_index, features=features)
         self.tempo: float = tempo
         self._relative_onset: float = onset
@@ -199,7 +199,7 @@ class MidiCorpusEvent(SomaxCorpusEvent):
     def held_from(self) -> [Note]:
         return [note for note in self.notes if note.is_held_from(self._relative_duration)]
 
-    def encode(self, features_dict: Dict[Type[Feature], str]) -> Dict[str, Any]:
+    def encode(self, features_dict: Dict[Type[Descriptor], str]) -> Dict[str, Any]:
         return {"state_index": self.index,
                 "tempo": self.tempo,
                 "onset": self._relative_onset,
@@ -215,7 +215,7 @@ class MidiCorpusEvent(SomaxCorpusEvent):
 
 class AudioCorpusEvent(SomaxCorpusEvent):
     def __init__(self, state_index: int, absolute_onset: float, absolute_duration: float,
-                 features: Optional[Dict[Type[Feature], Feature]] = None):
+                 features: Optional[Dict[Type[Descriptor], Descriptor]] = None):
         super().__init__(state_index=state_index, features=features)
         self._absolute_onset: float = absolute_onset
         self._absolute_duration: float = absolute_duration
@@ -225,7 +225,7 @@ class AudioCorpusEvent(SomaxCorpusEvent):
         # TODO: Remove from interface once pickling has been made the norm
         raise NotImplementedError("This function is not needed for pickling")
 
-    def encode(self, features_dict: Dict[Type[Feature], str]) -> Dict[str, Any]:
+    def encode(self, features_dict: Dict[Type[Descriptor], str]) -> Dict[str, Any]:
         # TODO: Remove from interface once pickling has been made the norm
         raise NotImplementedError("This function is not needed for pickling")
 

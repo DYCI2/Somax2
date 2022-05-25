@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
-from merge.main.feature import Feature
+from merge.main.descriptor import Descriptor
 from somax.features import Tempo
 from somax.runtime.corpus_event import AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
@@ -35,7 +35,7 @@ class AudioStateHandler:
                 applied_transform: AbstractTransform, time_stretch_factor: float) -> List[ScheduledEvent]:
         output: List[ScheduledEvent] = []
 
-        tempo: Optional[Feature] = event.get_feature_safe(Tempo)
+        tempo: Optional[Descriptor] = event.get_feature_safe(Tempo)
         if tempo is not None:
             output.append(TempoEvent(trigger_time, tempo.value()))
 
