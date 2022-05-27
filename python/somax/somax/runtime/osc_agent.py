@@ -261,7 +261,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         except (AssertionError, ValueError, KeyError, IndexError, ComponentAddressError) as e:
             self.logger.error(f"{str(e)} No prospector was created.")
 
-    def delete_prospector(self, prospector_osc_address: str, name: str):
+    def delete_prospector(self, _osc_address: str, name: str, prospector_osc_address: str):
         try:
             self.generation_scheduler.generator.remove_prospector(name)
             self.deregister_osc_component(prospector_osc_address)
