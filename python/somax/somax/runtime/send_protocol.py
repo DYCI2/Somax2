@@ -4,7 +4,7 @@ class SendProtocol:
     PLAYER_OUTPUT_PEAKS = "output_peaks"
     PLAYER_SINGLE_PARAMETER = "param"
     PLAYER_CORPUS_FILES = "corpus_info"
-    ALL_PLAYER_NAMES = "player_names"
+    ALL_PLAYER_NAMES = "agent_names"
     AGENT_INSTANTIATED = "instantiated_agent"
     INSTANTIATED_ATOMS = "instantiated_atoms"
     PLAYER_CORPUS = "corpus"
@@ -20,9 +20,8 @@ class SendProtocol:
     TRANSPORT_MODE = "transport_mode"
     SCHEDULER_CURRENT_TIME = "time"
     SCHEDULER_CURRENT_TEMPO = "tempo"
-    SCHEDULER_TEMPO_SET_SUCESS = "tempo_was_set"
-    SCHEDULER_HAS_TEMPO_MASTER = "has_tempo_master"
     SCHEDULER_RESET_UI = "reset"
+    TEMPO_MASTER = "temposource"
 
     # Event data
     SEND_MIDI_EVENT = "midi"

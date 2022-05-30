@@ -245,32 +245,38 @@ class SomaxServer(Component, AsyncOscWithStatus):
             if name == tempo_master:
                 queue.put(TempoMasterSignal(is_master=True))
                 found = True
+                self.send(SendProtocol.TEMPO_MASTER, name)
             else:
                 queue.put(TempoMasterSignal(is_master=False))
+
+        if tempo_master is None:
+            self.send(SendProtocol.TEMPO_MASTER, 0)
+
         if tempo_master is not None and not found:
             self.logger.error(f"An agent with the name '{tempo_master}' doesn't exist. No tempo master was set.")
+            self.send(SendProtocol.TEMPO_MASTER, 0)
 
     ######################################################
     # MAX GETTERS
     ######################################################
 
-    def get_time(self):
+    def get_time(self, _address: str):
         time: Time = self._transport.time
-        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.seconds, time.tempo))
+        self.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.seconds, time.ticks, time.tempo))
 
-    def get_player_names(self):
-        for player_name in self._agents.keys():
-            self.target.send(SendProtocol.ALL_PLAYER_NAMES, [player_name])
+    def get_agent_names(self, _address: str):
+        self.send(SendProtocol.ALL_PLAYER_NAMES, list(self._agents.keys()))
 
-    def server_status(self, agents: Optional[List[str]]):
-        if agents is None:
-            all_agents_exist: bool = True
-        else:
-            try:
-                all_agents_exist = all([self._agents[agent_name] is not None for agent_name in agents])
-            except KeyError:
-                all_agents_exist = False
-        self.target.send(SendProtocol.SERVER_STATUS, [all_agents_exist, self._transport.running])
+    # TODO: Update to post-merge
+    # def server_status(self, _address: str, agents: Optional[List[str]]):
+    #     if agents is None:
+    #         all_agents_exist: bool = True
+    #     else:
+    #         try:
+    #             all_agents_exist = all([self._agents[agent_name] is not None for agent_name in agents])
+    #         except KeyError:
+    #             all_agents_exist = False
+    #     self.send(SendProtocol.SERVER_STATUS, [all_agents_exist, self._transport.running])
 
     ######################################################
     # CORPUS
