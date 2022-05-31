@@ -15,6 +15,7 @@ from merge.main.query import TriggerQuery, InfluenceQuery
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.features.feature import CorpusFeature
 from somax.runtime.activity_pattern import AbstractActivityPattern
+from somax.runtime.classification_configuration import ClassificationStereotypes
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.generation_scheduler import SomaxGenerationScheduler
 from somax.runtime.generator import SomaxGenerator
@@ -229,6 +230,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                           osc_address: str,
                           status_address: str,
                           weight: float = SomaxProspector.DEFAULT_WEIGHT,
+                          classification_stereotype: str = "",
                           descriptor: str = "",
                           classifier: str = "",
                           activity_pattern: str = "",
@@ -237,11 +239,20 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                           enabled: bool = True,
                           override: bool = False,
                           **kwargs):
+
         try:
-            descriptor: Type[Descriptor] = CorpusFeature.from_string(descriptor)
-            classifier: Classifier = Classifier.from_string(classifier, **kwargs)
-            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
-            memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
+            if classification_stereotype:
+                if descriptor or classifier:
+                    raise InputError("Detected both stereotype and descriptor/classifier - Input is ambiguous.")
+                descriptor: Type[Descriptor]
+                classifier: Type[Classifier]
+                descriptor, classifier = ClassificationStereotypes.from_string(classification_stereotype)
+            else:
+                descriptor: Type[Descriptor] = CorpusFeature.from_string(descriptor)
+                classifier: Classifier = Classifier.from_string(classifier, **kwargs)
+
+            activity_pattern: Type[AbstractActivityPattern] = AbstractActivityPattern.from_string(activity_pattern)
+            memory_space: Type[AbstractMemorySpace] = AbstractMemorySpace.from_string(memory_space)
 
             prospector: SomaxProspector = SomaxProspector(name=name,
                                                           weight=weight,
@@ -258,7 +269,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                                         override=override)
 
             # self._send_eligibility()
-        except (AssertionError, ValueError, KeyError, IndexError, ComponentAddressError) as e:
+        except (AssertionError, ValueError, KeyError, IndexError, InputError, ComponentAddressError) as e:
             self.logger.error(f"{str(e)} No prospector was created.")
 
     def delete_prospector(self, _osc_address: str, name: str, prospector_osc_address: str):
@@ -279,6 +290,9 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             self.logger.error(f"{str(e)} No peak selector was set.")
 
     def set_descriptor(self, prospector_osc_address: str, descriptor: str, **kwargs):
+        self.logger.error("This is not supported yet")
+
+    def set_classification_stereotype(self, prospector_osc_address: str, stereotype: str, **kwargs):
         self.logger.error("This is not supported yet")
 
     def set_classifier(self, prospector_osc_address: str, classifier: str, **kwargs):

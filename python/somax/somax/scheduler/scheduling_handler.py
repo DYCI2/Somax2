@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple, Dict, Type
 
-from merge.io.parsable import Parsable
+from merge.io.parsable import Parsable, ParsableWithDefault, T
 from somax.features import Tempo
 from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
@@ -13,7 +13,7 @@ from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, 
 from somax.scheduler.time_object import Time
 
 
-class SchedulingHandler(Parsable['SchedulingHandler'], ABC):
+class SchedulingHandler(ParsableWithDefault['SchedulingHandler'], ABC):
     TRIGGER_PRETIME: float = 0.01  # seconds
 
     def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
@@ -35,6 +35,10 @@ class SchedulingHandler(Parsable['SchedulingHandler'], ABC):
         self._experimental_use_relative_tempo_scaling_for_audio: bool = exp_audio_relative_tempo_scaling
         self._experimental_previous_audio_events_tempo: Optional[float] = None
         self._experimental_accumulated_stretch_factor: float = self._stretch_factor
+
+    @classmethod
+    def default(cls) -> Type[T]:
+        return ManualSchedulingHandler
 
     @abstractmethod
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
