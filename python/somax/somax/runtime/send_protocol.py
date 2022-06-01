@@ -33,6 +33,7 @@ class SendProtocol:
     SEND_AUDIO_EVENT = "audio"
     SEND_AUDIO_OFF = "audio_off"
     AUDIO_CONTINUATION_TIMESTRETCH = "audio_continuation_timestretch"
+    DESCRIPTOR = "descriptor"
 
     # Server Info
     SERVER_STATUS = "server_status"

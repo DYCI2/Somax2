@@ -20,7 +20,7 @@ class AudioState:
 
 
 class AudioStateHandler:
-    def __init__(self, play_continuously: bool = False, timeout: float = 10.0):
+    def __init__(self, play_continuously: bool = False, timeout: float = 10.0, render_descriptors: bool = True):
         self._threshold_s: float = 0.1
 
         self._currently_playing: Optional[AudioState] = None
@@ -30,6 +30,8 @@ class AudioStateHandler:
         self._attack: float = 0.05  # seconds
         self._release: float = 0.1  # seconds
         self.timeout: float = timeout  # seconds
+
+        self.render_descriptors: bool = render_descriptors
 
     def process(self, trigger_time: float, event: AudioCorpusEvent,
                 applied_transform: AbstractTransform, time_stretch_factor: float) -> List[ScheduledEvent]:
@@ -52,7 +54,8 @@ class AudioStateHandler:
             output.append(AudioEvent(trigger_time=trigger_time,
                                      corpus_event=event,
                                      applied_transform=applied_transform,
-                                     time_stretch_factor=time_stretch_factor))
+                                     time_stretch_factor=time_stretch_factor,
+                                     render_energy=self.render_descriptors))
 
         self._currently_playing = AudioState(event, applied_transform, trigger_time + event.duration)
 

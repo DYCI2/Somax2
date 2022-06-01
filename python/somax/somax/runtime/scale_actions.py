@@ -374,8 +374,13 @@ class EnergyScaleAction(AbstractScaleAction):
         EXTERNAL = 1
         FEEDBACK = 2
 
-    def __init__(self, weight: float = 1.0, mu: float = DEFAULT_ENERGY, sigma: float = DEFAULT_SIGMA,
-                 listening_mode: ListeningMode = ListeningMode.MANUAL, moving_average_len: int = DEFAULT_MA_LEN):
+    def __init__(self,
+                 weight: float = 1.0,
+                 mu: float = DEFAULT_ENERGY,
+                 sigma: float = DEFAULT_SIGMA,
+                 listening_mode: ListeningMode = ListeningMode.MANUAL,
+                 moving_average_len: int = DEFAULT_MA_LEN,
+                 binary_mode: bool = False):
         super().__init__()
         self.listen_to: Parameter = ParamWithSetter(listening_mode, 0, 2, "int",
                                                     "listen to (manual=0, external=1, feedback=2)",
@@ -383,25 +388,33 @@ class EnergyScaleAction(AbstractScaleAction):
         self.moving_average_len: Parameter = Parameter(moving_average_len, 1, None, "int",
                                                        "num previous events to take into account if listening to input")
         self._weight: Parameter = Parameter(weight, None, None, 'float', "Relative weight of filter")
-        self._mu: Parameter = ParamWithSetter(mu, None, None, 'float', "Mean value of gaussian.", self._set_mu)
-        self._sigma: Parameter = Parameter(sigma, None, None, 'float', "Standard deviation of gaussian")
+        self._binary_mode: Parameter = Parameter(binary_mode, False, True, "bool", "Use binary filtering")
+        self._center: Parameter = ParamWithSetter(mu, None, None, 'float', "Requested amplitude (dB).", self._set_mu)
+        self._width: Parameter = Parameter(sigma, None, None, 'float', "Range of amplitude (dB)")
 
         self.history: deque[float] = deque([], self.moving_average_len.value)
 
     def scale(self, peaks: Peaks, _time: float, corresponding_events: List[CorpusEvent],
               _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
-        if self.mu is None:
+        if self.center is None:
             return peaks
 
         velocities: np.ndarray = np.array([event.get_feature(TotalEnergyDb).value() for event in corresponding_events])
-        peaks.scores *= 1 - self._weight.value * (1 - np.exp(-((velocities - self.mu) ** 2 / (2 * self.sigma ** 2))))
+
+        if self._binary_mode.value:
+            factor: np.ndarray = (self.center - self.width) <= velocities <= (self.center + self.width)
+        else:
+            factor = np.exp(-((velocities - self.center) ** 2 / (2 * self.width ** 2)))
+
+        peaks.scores *= 1 - self._weight.value + self._weight.value * factor
+
         return peaks
 
     def feedback(self, feedback_event: Optional[CorpusEvent], _time: float,
                  _applied_transform: AbstractTransform) -> None:
         if self.listen_to.value == self.ListeningMode.FEEDBACK and feedback_event is not None:
             self.history.append(feedback_event.get_feature(TotalEnergyDb).value())
-            self._mu.value = np.mean(self.history)
+            self._center.value = np.mean(self.history)
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
@@ -411,27 +424,27 @@ class EnergyScaleAction(AbstractScaleAction):
 
     def clear(self) -> None:
         self.history = deque([], self.moving_average_len.value)
-        self._mu.value = None
+        self._center.value = None
 
     def _set_listening_mode(self, mode: int):
         self.listen_to.value = self.ListeningMode(mode)
 
     def _set_mu(self, mu: float):
         if self.listen_to.value == self.ListeningMode.MANUAL:
-            self._mu.value = mu
+            self._center.value = mu
         elif self.listen_to.value == self.ListeningMode.EXTERNAL:
             self.history.append(mu)
-            self._mu.value = np.mean(self.history)
+            self._center.value = np.mean(self.history)
         else:
             logging.info(f"Could not set mu because {self.__class__.__name__} is currently in feedback mode")
 
     @property
-    def mu(self):
-        return self._mu.value
+    def center(self):
+        return self._center.value
 
     @property
-    def sigma(self):
-        return self._sigma.value
+    def width(self):
+        return self._width.value
 
 
 class VerticalDensityScaleAction(AbstractGaussianScale):
