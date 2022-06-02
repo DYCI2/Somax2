@@ -8,6 +8,7 @@ from typing import List, Tuple, Optional
 import numpy as np
 
 from somax.features import VerticalDensity, TotalEnergyDb
+from somax.features.energy_features import PeakEnergyDb
 from somax.features.spectral_features import OctaveBands
 from somax.features.temporal_features import Tempo
 from somax.runtime.content_aware import ContentAware
@@ -380,7 +381,8 @@ class EnergyScaleAction(AbstractScaleAction):
                  sigma: float = DEFAULT_SIGMA,
                  listening_mode: ListeningMode = ListeningMode.MANUAL,
                  moving_average_len: int = DEFAULT_MA_LEN,
-                 binary_mode: bool = False):
+                 binary_mode: bool = False,
+                 use_peak: bool = True):
         super().__init__()
         self.listen_to: Parameter = ParamWithSetter(listening_mode, 0, 2, "int",
                                                     "listen to (manual=0, external=1, feedback=2)",
@@ -391,6 +393,7 @@ class EnergyScaleAction(AbstractScaleAction):
         self._binary_mode: Parameter = Parameter(binary_mode, False, True, "bool", "Use binary filtering")
         self._center: Parameter = ParamWithSetter(mu, None, None, 'float', "Requested amplitude (dB).", self._set_mu)
         self._width: Parameter = Parameter(sigma, None, None, 'float', "Range of amplitude (dB)")
+        self._mean_or_peak: Parameter = Parameter(use_peak, False, True, "bool", "corpus mean (0) or peak (1) energy")
 
         self.history: deque[float] = deque([], self.moving_average_len.value)
 
@@ -399,7 +402,12 @@ class EnergyScaleAction(AbstractScaleAction):
         if self.center is None:
             return peaks
 
-        velocities: np.ndarray = np.array([event.get_feature(TotalEnergyDb).value() for event in corresponding_events])
+        if self._mean_or_peak.value:
+            velocities: np.ndarray = np.array([event.get_feature(PeakEnergyDb).value()
+                                               for event in corresponding_events])
+        else:
+            velocities: np.ndarray = np.array([event.get_feature(TotalEnergyDb).value()
+                                               for event in corresponding_events])
 
         if self._binary_mode.value:
             factor: np.ndarray = (self.center - self.width) <= velocities <= (self.center + self.width)
