@@ -247,6 +247,8 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                 descriptor: Type[Descriptor]
                 classifier: Type[Classifier]
                 descriptor, classifier = ClassificationStereotypes.from_string(classification_stereotype)
+            elif not (classification_stereotype and descriptor and classifier):
+                descriptor, classifier = ClassificationStereotypes.default()
             else:
                 descriptor: Type[Descriptor] = CorpusFeature.from_string(descriptor)
                 classifier: Classifier = Classifier.from_string(classifier, **kwargs)
@@ -267,6 +269,8 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                                         status_address,
                                         prospector,
                                         override=override)
+
+            self.logger.info(f"Created prospector at {name}")
 
             # self._send_eligibility()
         except (AssertionError, ValueError, KeyError, IndexError, InputError, ComponentAddressError) as e:

@@ -5,7 +5,7 @@ from typing import List
 import numpy as np
 
 from merge.main.classifier import Classifier
-from merge.main.feature import Chroma12
+from merge.main.descriptor import Chroma12
 from merge.main.label import IntLabel, Label
 from somax.classification import tables
 
