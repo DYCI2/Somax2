@@ -67,7 +67,6 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
         self.is_tempo_master: bool = is_tempo_master
 
-        self._enabled: bool = True
         self.__terminated: bool = False
 
         self.send(SendProtocol.SCHEDULER_RUNNING, True)
@@ -81,12 +80,14 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     def influence(self, address: str, feature_keyword: str, value: Any) -> None:
         if not self.generation_scheduler.scheduling_handler.running:
+            self.send(SendProtocol.INFLUENCE, -1, address=address)
             return
 
         try:
             influence: SomaxFeatureInfluence = SomaxFeatureInfluence.from_keyword(feature_keyword, value)
         except ValueError as e:
             self.logger.error(f"{str(e)}. No influence was computed.")
+            self.send(SendProtocol.INFLUENCE, -1, address=address)
             return
 
         try:
@@ -95,9 +96,11 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             self.send_peaks()
         except (AssertionError, KeyError, IndexError) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
+            self.send(SendProtocol.INFLUENCE, -1, address=address)
             return
         except CorpusError as e:
-            self.logger.debug(repr(e))
+            self.logger.error(str(e))
+            self.send(SendProtocol.INFLUENCE, -1, address=address)
             return
 
     def read_corpus(self, _address: str, filepath: str, volatile: bool = False) -> None:
@@ -472,11 +475,9 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         except FileNotFoundError as e:
             self.logger.error(f"{str(e)}. Could not read corpora")
 
-
-
-    def get_peaks(self, _address: Optional[str] = None):
+    def get_peaks(self, address: Optional[str] = None):
         """ This function is simply an alias for `send_peaks` to call from the max client side """
-        self.send_peaks()
+        self.send_peaks(address)
 
     def get_parameter(self, component_osc_address: str, parameter_address: str) -> None:
         try:
@@ -515,9 +516,10 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         except ComponentAddressError as e:
             self.logger.error(f"{str(e)}. Could not get parameter")
 
-    def send_peaks(self, _address: Optional[str] = None) -> None:
+    def send_peaks(self, address: Optional[str] = None) -> None:
         """ Gets the current state in each layer, not including the merged layer """
-        self.logger.warning("Send peaks is not updated to current architecture!")  # TODO
+        # TODO: Implement. Look at `influence` for template on how to handle different entry points (Agent/Prospector)
+        self.logger.warning("Send peaks is not updated to current architecture!")
         # peaks_dict = self.generation_scheduler.generator.get_peaks_statistics()
         # for name, count in peaks_dict.items():
         #     self.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])

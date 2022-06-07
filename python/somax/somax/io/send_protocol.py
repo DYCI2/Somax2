@@ -9,6 +9,8 @@ class SendProtocol:
     PLAYER_CORPUS = "corpus"
     CORPUS_FILES = "corpora"
 
+    INFLUENCE = "influence"
+
     ALL_PLAYER_NAMES = "agent_names"
     AGENT_INSTANTIATED = "instantiated_agent"
     INSTANTIATED_ATOMS = "instantiated_atoms"
