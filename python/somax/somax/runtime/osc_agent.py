@@ -147,7 +147,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             # if success: return value to max as response
             self.send(SendProtocol.PARAMETER, parameter_address, value, address=component_osc_address)
         except (ComponentAddressError, ParameterError, InputError) as e:
-            self.logger.error(f"{str(e)} Could not set parameter.")
+            self.logger.error(f"{str(e)}. Could not set parameter.")
 
     #######################################################################################
     # ASYNCIO & MULTIPROCESSING & MAIN INTERNAL FUNCTIONS
@@ -388,15 +388,23 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
         self.set_parameter(address, DefaultNames.ENABLED, enable)
 
-    def clear(self, _address: Optional[str] = None) -> None:
+    def clear(self, address: Optional[str] = None) -> None:
         self.flush()
         self.generation_scheduler.clear()
         self.send_peaks()
 
-    def flush(self, _address: Optional[str] = None) -> None:
+        # address will be none if called internally, in these cases don't output anything
+        if address is not None:
+            self.send(SendProtocol.CLEAR, SendProtocol.BANG)
+
+    def flush(self, address: Optional[str] = None) -> None:
         events: List[ScheduledEvent] = self.generation_scheduler.flush()
         for event in events:
             self.send(event)
+
+        # address will be none if called internally, in these cases don't output anything
+        if address is not None:
+            self.send(SendProtocol.FLUSH, SendProtocol.BANG)
 
     def set_scheduling_handler(self, _address: str, handler_class: str) -> None:
         try:
@@ -445,16 +453,26 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     # TODO: can be single function with send_corpora
     def get_corpus_files(self, _address: str, filepath: str) -> None:
-        corpora: List[Tuple[str, str]] = []
-        for file in os.listdir(filepath):
-            if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
-                # TODO: Not the corpus name that's specified in the json.
-                # TODO 2: splitext won't always be a good way to get info whether it's midi or audio
-                corpus_name, ext = os.path.splitext(file)
-                corpus_type: str = "(M)" if ext == CorpusBuilder.MIDI_CORPUS_FILE_EXT else "(A)"
-                corpora.append((corpus_type + " " + corpus_name, os.path.join(filepath, file)))
-        corpora = sorted(corpora, key=lambda e: e[0].lower())
-        self.send_corpora(corpora)
+        try:
+            corpora: List[Tuple[str, str, str]] = []  # name, type, path
+            for file in os.listdir(filepath):
+                if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
+                    # TODO: Not the corpus name that's specified in the json.
+                    # TODO 2: splitext won't always be a good way to get info whether it's midi or audio
+                    corpus_name, ext = os.path.splitext(file)
+                    corpus_type: str = SendProtocol.CORPUS_TYPE_MIDI if ext == CorpusBuilder.MIDI_CORPUS_FILE_EXT \
+                        else SendProtocol.CORPUS_TYPE_AUDIO
+                    corpora.append((corpus_name, corpus_type, os.path.join(filepath, file)))
+            corpora = sorted(corpora, key=lambda e: (e[1], e[0].lower()))
+
+            for corpus in corpora:
+                self.send(SendProtocol.CORPUS_FILES, *corpus)
+            self.send(SendProtocol.CORPUS_FILES, SendProtocol.BANG)
+
+        except FileNotFoundError as e:
+            self.logger.error(f"{str(e)}. Could not read corpora")
+
+
 
     def get_peaks(self, _address: Optional[str] = None):
         """ This function is simply an alias for `send_peaks` to call from the max client side """
@@ -462,18 +480,40 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     def get_parameter(self, component_osc_address: str, parameter_address: str) -> None:
         try:
-            component_path: List[str] = self.osc_address_to_path(component_osc_address)
+            component: Component = self.component_at(component_osc_address)
             parameter_path: List[str] = self.max_address_to_path(parameter_address)
+            parameter_value: Any = component.get_parameter(parameter_path).value
             self.send(SendProtocol.PARAMETER,
                       parameter_path,
-                      self.get_main_component().get_parameter(component_path + parameter_path).value)
-        except (IndexError, KeyError):
-            self.logger.error(f"Could not get parameter at given path.")
-        except (ParameterError, AssertionError) as e:
-            self.logger.error(str(e))
+                      parameter_value,  # TODO: Handle non-renderable parameters, ex. numpy arrays, etc.
+                      address=component_osc_address)
+        except (ComponentAddressError, ParameterError, InputError) as e:
+            self.logger.error(f"{str(e)}. Could not get parameter")
 
-    def get_all_parameters(self, _osc_address) -> None:
-        self.logger.error("This is not supported yet")
+    def get_all_parameters(self, component_osc_address: str) -> None:
+        try:
+            component: Component = self.component_at(component_osc_address)
+            for path, param in component.get_parameters():  # type: List[str], Parameter
+                parameter_path: str = self.path_to_max_address(path)
+                parameter_value: Any = param.value  # TODO: Handle non-renderable parameters, ex. numpy arrays, etc.
+                self.send(SendProtocol.PARAMETER,
+                          parameter_path,
+                          parameter_value,
+                          address=component_osc_address)
+        except ComponentAddressError:
+            self.logger.error(f"Could not find component with address {component_osc_address}")
+
+    def parameter_info(self, component_osc_address: str, parameter_address: str):
+        try:
+            component: Component = self.component_at(component_osc_address)
+            parameter_path: List[str] = self.max_address_to_path(parameter_address)
+            parameter: Parameter = component.get_parameter(parameter_path)
+            self.send(SendProtocol.PARAMETER_INFO,
+                      parameter_path,
+                      *parameter.renderer_info(),
+                      address=component_osc_address)
+        except ComponentAddressError as e:
+            self.logger.error(f"{str(e)}. Could not get parameter")
 
     def send_peaks(self, _address: Optional[str] = None) -> None:
         """ Gets the current state in each layer, not including the merged layer """
@@ -483,11 +523,6 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         #     self.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
         # self.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.generation_scheduler.improvisation_memory.length())
 
-    def send_corpora(self, _address: str, corpus_names_and_paths: List[Tuple[str, str]]) -> None:
-        for corpus in corpus_names_and_paths:
-            self.send(SendProtocol.PLAYER_CORPUS_FILES, corpus)
-        self.send(SendProtocol.PLAYER_CORPUS_FILES, SendProtocol.BANG)
-
     def send_current_corpus_info(self, _address: Optional[str] = None):
         corpus: Optional[SomaxCorpus] = self.generation_scheduler.generator.corpus
         if corpus is not None:
@@ -496,6 +531,8 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                        corpus.__class__.__name__,
                        corpus.length(),
                        corpus.filepath if isinstance(corpus, AudioSomaxCorpus) else None])
+        else:
+            self.send(SendProtocol.PLAYER_CORPUS, -1)
 
     # TODO: Reimplement post-merge
     # def _send_eligibility(self, _address: Optional[str] = None):

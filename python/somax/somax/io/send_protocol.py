@@ -1,13 +1,18 @@
 class SendProtocol:
+
     # Player info
     PLAYER_NUM_PEAKS = "num_peaks"
     PLAYER_OUTPUT_PEAKS = "output_peaks"
     PARAMETER = "param"
-    PLAYER_CORPUS_FILES = "corpus_info"
+    PARAMETER_INFO = "paraminfo"
+
+    PLAYER_CORPUS = "corpus"
+    CORPUS_FILES = "corpora"
+
     ALL_PLAYER_NAMES = "agent_names"
     AGENT_INSTANTIATED = "instantiated_agent"
     INSTANTIATED_ATOMS = "instantiated_atoms"
-    PLAYER_CORPUS = "corpus"
+
     PLAYER_RECORDED_CORPUS_LENGTH = "recorded_corpus"
     ELIGIBILITY = "eligibility"
 
@@ -40,6 +45,12 @@ class SendProtocol:
     CORPUSBUILDER_AUDIO_STATS = "audiocb stats"
 
     BANG = "bang"
+
+    CORPUS_TYPE_MIDI = "midi"
+    CORPUS_TYPE_AUDIO = "audio"
+
+    CLEAR = "clear"
+    FLUSH = "flush"
 
 
 class DefaultNames:

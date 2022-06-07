@@ -567,8 +567,8 @@ class OscAgent(Agent, AsyncOsc):
 
     def send_corpora(self, corpus_names_and_paths: List[Tuple[str, str]]):
         for corpus in corpus_names_and_paths:
-            self.target.send(SendProtocol.PLAYER_CORPUS_FILES, corpus)
-        self.target.send(SendProtocol.PLAYER_CORPUS_FILES, Target.WRAPPED_BANG)
+            self.target.send(SendProtocol.CORPUS_FILES, corpus)
+        self.target.send(SendProtocol.CORPUS_FILES, Target.WRAPPED_BANG)
 
     def send_atoms(self):
         atom_names: List[str] = [atom.name for atom in self.player.all_atoms()]
