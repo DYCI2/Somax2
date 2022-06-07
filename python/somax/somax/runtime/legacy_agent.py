@@ -9,16 +9,12 @@ from abc import ABC
 from importlib import resources
 from typing import Any, Optional, List, Tuple, Type
 
-import mido
-
 from merge.main.candidate import Candidate
 from merge.main.exceptions import CorpusError, ResourceError, ConfigurationError
 from merge.main.generation_scheduler import GenerationScheduler
 from merge.main.query import Query, TriggerQuery, InfluenceQuery, FeatureQuery
 from somax import settings, log
 from somax.corpus_builder.corpus_builder import CorpusBuilder
-from somax.corpus_builder.midi_parser import BarNumberAnnotation
-from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.async_osc import AsyncOsc
 from somax.runtime.content_aware import ContentAware
@@ -30,8 +26,8 @@ from somax.runtime.influence import SomaxFeatureInfluence
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
-from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.filters import SomaxFilter
+from somax.io.send_protocol import SendProtocol
 from somax.runtime.generator import SomaxGenerator
 from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
@@ -396,7 +392,7 @@ class OscAgent(Agent, AsyncOsc):
 
     def add_scale_action(self, scale_action: str, override: bool = False, verbose: bool = True, **kwargs):
         try:
-            scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
+            scale_action: SomaxFilter = SomaxFilter.from_string(scale_action, **kwargs)
             self.player.add_post_filter(scale_action, override)
             self._send_eligibility()
             if verbose:
@@ -409,7 +405,7 @@ class OscAgent(Agent, AsyncOsc):
     def remove_scale_action(self, scale_action: str, verbose: bool = True, **kwargs):
         try:
             # TODO: Not ideal that it instantiates one to remove it, could we parse class without creating instance?
-            scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
+            scale_action: SomaxFilter = SomaxFilter.from_string(scale_action, **kwargs)
             self.player.remove_post_filter(type(scale_action))
             self._send_eligibility()
             if verbose:
@@ -556,7 +552,7 @@ class OscAgent(Agent, AsyncOsc):
     def get_param(self, path: str):
         try:
             parameter_path: List[str] = self._string_to_path(path)
-            self.target.send(SendProtocol.PLAYER_SINGLE_PARAMETER, [path, self.player.get_param(parameter_path).value])
+            self.target.send(SendProtocol.PARAMETER, [path, self.player.get_param(parameter_path).value])
         except (IndexError, KeyError):
             self.logger.error(f"Could not get parameter at given path.")
         except (ParameterError, AssertionError) as e:

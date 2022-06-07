@@ -15,6 +15,7 @@ from merge.main.generator import Generator
 from merge.main.jury import Jury
 from merge.main.merge_handler import MergeHandler
 from merge.main.query import Query, TriggerQuery, InfluenceQuery
+from somax.io.send_protocol import DefaultNames
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
@@ -23,7 +24,7 @@ from somax.runtime.exceptions import InvalidLabelInput
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.continuous_candidates import ContinuousCandidates
-from somax.runtime.scale_actions import AbstractScaleAction
+from somax.runtime.filters import SomaxFilter
 from somax.runtime.prospector import SomaxProspector
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
@@ -35,7 +36,7 @@ class SomaxGenerator(Generator, ContentAware, Component):
                  jury: Jury = AbstractPeakSelector.default(),
                  merge_handler: MergeHandler = AbstractMergeAction.default(),
                  corpus: Optional[SomaxCorpus] = None,
-                 post_filters: Optional[List[AbstractScaleAction]] = None,
+                 post_filters: Optional[List[SomaxFilter]] = None,
                  *args, **kwargs):
         super().__init__(name=name, search_lists=False, search_dictionary_values=True, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
@@ -57,7 +58,7 @@ class SomaxGenerator(Generator, ContentAware, Component):
 
         self._force_jump_index: Optional[int] = None
 
-        self.enabled: Parameter[bool] = Parameter(name="enabled",
+        self.enabled: Parameter[bool] = Parameter(name=DefaultNames.ENABLED,
                                                   default_value=True,
                                                   type_info=MaxBool(),
                                                   description="enables this object")
@@ -144,7 +145,7 @@ class SomaxGenerator(Generator, ContentAware, Component):
 
     def update_time(self, time: float) -> None:
         for scale_action in self.post_filters.values():
-            if isinstance(scale_action, AbstractScaleAction):
+            if isinstance(scale_action, SomaxFilter):
                 scale_action.update_time(time)
         for prospector in self.prospectors.values():
             if isinstance(prospector, SomaxProspector):
@@ -224,7 +225,7 @@ class SomaxGenerator(Generator, ContentAware, Component):
         self._jury = jury
 
     # TODO[B4]: Replace with add_post_filter
-    def add_post_filter(self, post_filter: AbstractScaleAction, override: bool = False) -> None:
+    def add_post_filter(self, post_filter: SomaxFilter, override: bool = False) -> None:
         """ Raises: ComponentAddressError """
         name: str = post_filter.name
         if name in self.post_filters and not override:

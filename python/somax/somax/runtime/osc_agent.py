@@ -7,6 +7,7 @@ from typing import Optional, Type, List, Any, Tuple
 
 from merge.io.async_osc import AsyncOscMPCWithStatus
 from merge.io.component import Component
+from merge.io.parameter import Parameter
 from merge.main.classifier import Classifier
 from merge.main.descriptor import Descriptor
 from merge.main.exceptions import CorpusError, ResourceError, ComponentAddressError, TransformError, ParameterError, \
@@ -14,17 +15,17 @@ from merge.main.exceptions import CorpusError, ResourceError, ComponentAddressEr
 from merge.main.query import TriggerQuery, InfluenceQuery
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.features.feature import CorpusFeature
+from somax.io.classification_stereotypes import ClassificationStereotypes
+from somax.io.send_protocol import SendProtocol, DefaultNames
 from somax.runtime.activity_pattern import AbstractActivityPattern
-from somax.runtime.classification_configuration import ClassificationStereotypes
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
+from somax.runtime.filters import SomaxFilter
 from somax.runtime.generation_scheduler import SomaxGenerationScheduler
 from somax.runtime.generator import SomaxGenerator
 from somax.runtime.influence import SomaxFeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.prospector import SomaxProspector
-from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.process_messages import ControlSignal, TimeSignal, TempoMasterSignal, TempoSignal, PlayControl
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, RendererEvent
@@ -59,7 +60,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         self.logger = logging.getLogger(__name__)
 
         self.generation_scheduler: SomaxGenerationScheduler = generation_scheduler
-        self.register_osc_component(default_address, status_address, self.generation_scheduler)
+        self.register_osc_component(default_address, status_address, self.get_main_component())
 
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
@@ -75,7 +76,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
     # MAIN RUNTIME FUNCTIONS
     #######################################################################################
 
-    def request_trigger_output(self, _address: str) -> None:
+    def request_output(self, _address: str) -> None:
         self.generation_scheduler.process_query(TriggerQuery())
 
     def influence(self, address: str, feature_keyword: str, value: Any) -> None:
@@ -99,7 +100,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             self.logger.debug(repr(e))
             return
 
-    def read_memory(self, _address: str, filepath: str, volatile: bool = False) -> None:
+    def read_corpus(self, _address: str, filepath: str, volatile: bool = False) -> None:
         self.logger.info(f"Reading corpus at '{filepath}' for agent '{self._name}'...")
         self.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
         if not os.path.exists(filepath):
@@ -138,9 +139,13 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     def set_parameter(self, component_osc_address: str, parameter_address: str, value: Any) -> None:
         try:
+            # get relevant component by registered OSC address
             component: Component = self.component_at(component_osc_address)
+            # parse relative parameter path (from given component)
             parameter_path: List[str] = self.max_address_to_path(parameter_address)
-            self.get_main_component().set_parameter(component_path + parameter_path, value)
+            component.set_parameter(parameter_path, value)
+            # if success: return value to max as response
+            self.send(SendProtocol.PARAMETER, parameter_address, value, address=component_osc_address)
         except (ComponentAddressError, ParameterError, InputError) as e:
             self.logger.error(f"{str(e)} Could not set parameter.")
 
@@ -192,7 +197,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             self.stop()
 
     def get_main_component(self) -> Component:
-        return self.generation_scheduler
+        return self.generation_scheduler.generator
 
     #######################################################################################
     # SCHEDULING, LIFETIME AND PLAYBACK CONTROL
@@ -276,7 +281,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         except (AssertionError, ValueError, KeyError, IndexError, InputError, ComponentAddressError) as e:
             self.logger.error(f"{str(e)} No prospector was created.")
 
-    def delete_prospector(self, _osc_address: str, name: str, prospector_osc_address: str):
+    def delete_prospector(self, _agent_osc_address: str, name: str, prospector_osc_address: str):
         try:
             self.generation_scheduler.generator.remove_prospector(name)
             self.deregister_osc_component(prospector_osc_address)
@@ -339,40 +344,49 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. "
                               f"No transform was removed.")
 
-    def add_filter(self, osc_address: str, status_address: str, post_filter: str, override: bool = False,
-                   verbose: bool = True, **kwargs):
+    def create_filter(self, _agent_osc_address: str,
+                      name: str,
+                      osc_address: str,
+                      status_address: str,
+                      filter_type: str,
+                      override: bool = False,
+                      verbose: bool = True,
+                      **kwargs):
         try:
-            post_filter: AbstractScaleAction = AbstractScaleAction.from_string(post_filter, **kwargs)
+            filter_type: Type[SomaxFilter] = SomaxFilter.from_string(filter_type, **kwargs)
+            post_filter: SomaxFilter = filter_type(name=name, **kwargs)
             self.generation_scheduler.generator.add_post_filter(post_filter, override)
             self.register_osc_component(osc_address, status_address, post_filter)
-            self._send_eligibility()
             if verbose:
-                self.logger.info(f"Added scale action {repr(post_filter)}")
+                self.logger.info(f"Added filter {repr(post_filter)}")
         except ValueError as e:
-            self.logger.error(f"{str(e)}. No scale action was added.")
+            self.logger.error(f"{str(e)}. No filter was added.")
         except ComponentAddressError as e:
-            self.logger.error(f"{str(e)}. No scale action was added.")
+            self.logger.error(f"{str(e)}. No filter was added.")
 
-    def remove_filter(self, osc_address: str, scale_action: str, **kwargs):
+    def delete_filter(self, _osc_address: str, name: str, filter_osc_address: str):
         try:
             # TODO: Not ideal that it instantiates one to remove it, could we parse class without creating instance?
-            scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
-            self.generation_scheduler.generator.remove_post_filter(type(scale_action))
-            self.deregister_osc_component(osc_address)
-            self._send_eligibility()
+            self.generation_scheduler.generator.remove_post_filter(name)
+            self.deregister_osc_component(filter_osc_address)
+            self.logger.info(f"Removed filter '{name}'")
         except KeyError as e:
-            self.logger.error(f"Could not remove scale action: {repr(e)}.")
+            self.logger.error(f"{str(e)}. No filter was removed.")
+        except ComponentAddressError as e:
+            self.logger.error(f"{str(e)}. No filter was removed.")
 
     #######################################################################################
     # SCHEDULING & STATE-RELATED PARAMETERS
     #######################################################################################
 
-    def enabled(self, _address: str, is_enabled: bool) -> None:
+    def enabled(self, address: str, enable: bool) -> None:
+        """ Utility function for setting parameter `enabled` and flushing."""
+        enabled: Parameter[bool] = self.get_main_component().get_parameter([DefaultNames.ENABLED])
         # Flush only when disable is toggled:
-        if self._enabled and not is_enabled:
+        if enabled.value is True and not enable:
             self.flush()
 
-        self._enabled = is_enabled
+        self.set_parameter(address, DefaultNames.ENABLED, enable)
 
     def clear(self, _address: Optional[str] = None) -> None:
         self.flush()
@@ -450,7 +464,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         try:
             component_path: List[str] = self.osc_address_to_path(component_osc_address)
             parameter_path: List[str] = self.max_address_to_path(parameter_address)
-            self.send(SendProtocol.PLAYER_SINGLE_PARAMETER,
+            self.send(SendProtocol.PARAMETER,
                       parameter_path,
                       self.get_main_component().get_parameter(component_path + parameter_path).value)
         except (IndexError, KeyError):
@@ -458,9 +472,12 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         except (ParameterError, AssertionError) as e:
             self.logger.error(str(e))
 
+    def get_all_parameters(self, _osc_address) -> None:
+        self.logger.error("This is not supported yet")
+
     def send_peaks(self, _address: Optional[str] = None) -> None:
         """ Gets the current state in each layer, not including the merged layer """
-        self.logger.warning("Send peaks is not updated to current architecture!") # TODO
+        self.logger.warning("Send peaks is not updated to current architecture!")  # TODO
         # peaks_dict = self.generation_scheduler.generator.get_peaks_statistics()
         # for name, count in peaks_dict.items():
         #     self.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
@@ -470,7 +487,6 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         for corpus in corpus_names_and_paths:
             self.send(SendProtocol.PLAYER_CORPUS_FILES, corpus)
         self.send(SendProtocol.PLAYER_CORPUS_FILES, SendProtocol.BANG)
-
 
     def send_current_corpus_info(self, _address: Optional[str] = None):
         corpus: Optional[SomaxCorpus] = self.generation_scheduler.generator.corpus

@@ -7,7 +7,6 @@ import logging.config
 import multiprocessing
 import sys
 import warnings
-from importlib import resources
 from typing import Optional, Callable, Tuple, List, Dict, Type
 
 from audioread import NoBackendError
@@ -16,7 +15,6 @@ import somax
 from merge.io.async_osc import AsyncOsc, AsyncOscWithStatus
 from merge.io.component import Component
 from merge.io.osc_status import Status
-from somax import log
 from somax.corpus_builder.chroma_filter import ChromaFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
 from somax.runtime.corpus import SomaxCorpus
@@ -26,8 +24,7 @@ from somax.runtime.generator import SomaxGenerator
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_agent import SomaxOscAgent
 from somax.runtime.peak_selector import AbstractPeakSelector
-from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.send_protocol import SendProtocol, DefaultNames
+from somax.io.send_protocol import SendProtocol, DefaultNames
 from somax.scheduler.process_messages import TimeSignal, ControlSignal, PlayControl, \
     Signal, TempoMasterSignal, TempoSignal
 from somax.scheduler.scheduling_handler import SchedulingHandler

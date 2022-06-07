@@ -12,16 +12,17 @@ from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.exceptions import FilterError
 from merge.main.post_filter import PostFilter
+from somax.io.send_protocol import DefaultNames
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus
 from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.transform_handler import TransformHandler
 
 
-class AbstractScaleAction(PostFilter, Component, ContentAware, Parsable['AbstractScaleAction'], ABC):
+class SomaxFilter(PostFilter, Component, ContentAware, Parsable['AbstractScaleAction'], ABC):
     def __init__(self, name: str, *args, **kwargs):
         super().__init__(name=name, *args, **kwargs)
-        self.enabled: Parameter[bool] = Parameter(name="enabled",
+        self.enabled: Parameter[bool] = Parameter(name=DefaultNames.ENABLED,
                                                   default_value=True,
                                                   type_info=MaxBool())
 
@@ -34,6 +35,9 @@ class AbstractScaleAction(PostFilter, Component, ContentAware, Parsable['Abstrac
     # def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
     #              applied_transform: AbstractTransform) -> None:
     #     """ """
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(name={self.name})"
 
     @abstractmethod
     def update_transforms(self, transform_handler: TransformHandler):
@@ -48,14 +52,14 @@ class AbstractScaleAction(PostFilter, Component, ContentAware, Parsable['Abstrac
         """ """
 
     @classmethod
-    def default(cls, **_kwargs) -> 'AbstractScaleAction':
-        return NoScaleAction(name="identity")
+    def default(cls, **_kwargs) -> 'SomaxFilter':
+        return IdentityFilter(name="identity")
 
     def is_enabled_and_eligible(self):
         return self.enabled.value and self.eligible
 
 
-class NoScaleAction(AbstractScaleAction):
+class IdentityFilter(SomaxFilter):
     def __init__(self, name: str, *args, **kwargs):
         super().__init__(name=name, *args, **kwargs)
 
@@ -78,13 +82,12 @@ class NoScaleAction(AbstractScaleAction):
         return True  # valid for all types of corpora
 
 
-class PhaseModulationScaleAction(AbstractScaleAction):
+class PhaseFilter(SomaxFilter):
     DEFAULT_SELECTIVITY = 3.0
 
     def __init__(self, name: str, selectivity=DEFAULT_SELECTIVITY, *args, **kwargs):
         super().__init__(name=name, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self.logger.debug("[__init__] Creating PhaseMergeAction with selectivity {}".format(selectivity))
         self._selectivity: Parameter[float] = Parameter(name="selectivity",
                                                         default_value=selectivity,
                                                         type_info=MaxFloat(),
@@ -128,13 +131,12 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         self._selectivity.value = value
 
 
-class NextStateScaleAction(AbstractScaleAction):
+class ContinuityFilter(SomaxFilter):
     DEFAULT_FACTOR = 1.5
 
     def __init__(self, name: str, factor: float = DEFAULT_FACTOR, *args, **kwargs):
         super().__init__(name=name, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self.logger.debug(f"[__init__] Creating {type(self).__name__} with factor {factor}.")
         self._factor: Parameter[float] = Parameter(name="factor",
                                                    default_value=factor,
                                                    type_info=MaxFloat(),

@@ -16,6 +16,7 @@ from merge.main.influence import Influence, CorpusInfluence, FeatureInfluence
 from merge.main.label import Label
 from merge.main.prospector import Prospector
 from somax.features.feature import AbstractFeature
+from somax.io.send_protocol import DefaultNames
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
@@ -39,13 +40,13 @@ class SomaxProspector(Prospector, Component, ContentAware):
                  *args, **kwargs):
         super().__init__(name=name, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
-        self._weight: Parameter[float] = Parameter(name="weight",
+        self._weight: Parameter[float] = Parameter(name=DefaultNames.WEIGHT,
                                                    default_value=weight,
                                                    type_info=MaxFloat(),
                                                    param_range=NumericRange(0, None),
                                                    description="gain/attenuation of prospector peaks.")
 
-        self._enabled: Parameter[bool] = Parameter(name="enabled",
+        self._enabled: Parameter[bool] = Parameter(name=DefaultNames.ENABLED,
                                                    default_value=enabled,
                                                    type_info=MaxBool(),
                                                    description="enable output from this prospector.",

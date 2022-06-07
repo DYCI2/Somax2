@@ -3,8 +3,6 @@ import logging.config
 import multiprocessing
 import os
 import warnings
-from enum import Enum
-from importlib import resources
 from timeit import default_timer as timer
 from typing import Tuple, List, Optional, Dict, Any, Type, Union
 
@@ -13,7 +11,6 @@ import numpy as np
 import pandas as pd
 
 from merge.io.osc_sender import OscSender, OscLogForwarder
-from somax import log
 from somax.corpus_builder.chroma_filter import ChromaFilter, NoFilter
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
@@ -23,7 +20,7 @@ from somax.features.feature import CorpusFeature
 from somax.runtime.corpus import SomaxCorpus, AudioSomaxCorpus, MidiSomaxCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError, ParameterError
-from somax.runtime.send_protocol import SendProtocol
+from somax.io.send_protocol import SendProtocol
 from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduling
 
 from merge.io.parsable import ParsableEnum

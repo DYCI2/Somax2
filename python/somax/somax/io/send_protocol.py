@@ -2,7 +2,7 @@ class SendProtocol:
     # Player info
     PLAYER_NUM_PEAKS = "num_peaks"
     PLAYER_OUTPUT_PEAKS = "output_peaks"
-    PLAYER_SINGLE_PARAMETER = "param"
+    PARAMETER = "param"
     PLAYER_CORPUS_FILES = "corpus_info"
     ALL_PLAYER_NAMES = "agent_names"
     AGENT_INSTANTIATED = "instantiated_agent"
@@ -52,3 +52,4 @@ class DefaultNames:
     FILTER = "filter"
 
     WEIGHT = "weight"
+    ENABLED = "enabled"
