@@ -105,7 +105,7 @@ class TestSomaxProspector(TestCase):
                                                       None, False, True)
 
         memory_space: NGramMemorySpace = typing.cast(NGramMemorySpace, prospector.memory_space)
-        memory_space.set_ngram_size(1)
+        # memory_space.set_ngram_size(1)@
         self.assertEqual(1, prospector.memory_space._ngram_size.value)
 
         if isinstance(activity_pattern, ClassicActivityPattern):

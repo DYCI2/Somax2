@@ -12,6 +12,7 @@ from merge.io.parsable import Parsable, ParsableWithDefault, T
 from merge.main.candidate import Candidate
 from merge.main.exceptions import TransformError
 from merge.main.label import Label
+from somax.io.send_protocol import DefaultNames
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.transform_handler import TransformHandler
@@ -21,7 +22,7 @@ from somax.runtime.transforms import AbstractTransform
 class AbstractMemorySpace(Component, ParsableWithDefault['AbstractMemorySpace'], ABC):
     """ MemorySpaces determine how events are matched to labels """
 
-    def __init__(self, name: str, *args, **kwargs):
+    def __init__(self, name: str = DefaultNames.MEMORY_SPACE, *args, **kwargs):
         """ Note: kwargs can be used if additional information is need to construct the data structure.
             Note: labels are not classified in default constructor as additional parameters might need init before."""
         super().__init__(name=name, *args, **kwargs)
@@ -73,7 +74,7 @@ class NGramMemorySpace(AbstractMemorySpace):
                                                      type_info=MaxInt(),
                                                      param_range=NumericRange(1, None),
                                                      description="Number of consecutive events to match",
-                                                     on_parameter_change=self.set_ngram_size)
+                                                     on_parameter_change=self._on_size_change)
 
         # history per transform stored with transform id as key
         self._influence_history: Dict[int, deque[int]] = {}
@@ -122,8 +123,10 @@ class NGramMemorySpace(AbstractMemorySpace):
                     continue
         return matches
 
-    def set_ngram_size(self, new_size: int) -> None:
-        self._ngram_size.value = new_size
+    def _on_size_change(self) -> None:
+        # self._ngram_size.value = new_size   # TODO: Test that this works properly - should be set
+        self.logger.warning("_on_size_change has not been tested - "
+                            "make sure that it updates self._ngram_size properly")
         self._influence_history = {t: deque([], new_size) for t in self._influence_history.keys()}
         self._remodel()
 

@@ -10,8 +10,8 @@ from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.classifier import Classifier, Trainable
 from merge.main.corpus_event import CorpusEvent
-from merge.main.exceptions import QueryError
 from merge.main.descriptor import Descriptor
+from merge.main.exceptions import QueryError
 from merge.main.influence import Influence, CorpusInfluence, FeatureInfluence
 from merge.main.label import Label
 from merge.main.prospector import Prospector
@@ -50,7 +50,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
                                                    default_value=enabled,
                                                    type_info=MaxBool(),
                                                    description="enable output from this prospector.",
-                                                   on_parameter_change=self._set_enabled)
+                                                   on_parameter_change=self._on_state_change)
 
         # TODO[B4]: Check that the given classifier is valid with the given feature
         self._feature_type: Type[Descriptor] = descriptor
@@ -208,8 +208,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
     def self_influenced(self, self_influenced: bool):
         self._self_influenced.value = self_influenced
 
-    def _set_enabled(self, enabled: bool):
-        self._enabled.value = enabled
+    def _on_state_change(self):
         self.clear()
 
     def is_enabled_and_eligible(self):

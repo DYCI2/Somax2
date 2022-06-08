@@ -12,6 +12,7 @@ from merge.io.parsable import ParsableWithDefault, T
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
 from merge.main.exceptions import CorpusError
+from somax.io.send_protocol import DefaultNames
 from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.transform_handler import TransformHandler
@@ -22,8 +23,10 @@ class AbstractActivityPattern(Component, ParsableWithDefault['AbstractActivityPa
     TIME_IDX = 1
     TRANSFORM_IDX = 2
 
-    def __init__(self, corpus: Optional[SomaxCorpus] = None, _transform_handler: Optional[TransformHandler] = None):
-        super(AbstractActivityPattern, self).__init__()
+    def __init__(self, name: str = DefaultNames.ACTIVITY_PATTERN,
+                 corpus: Optional[SomaxCorpus] = None,
+                 _transform_handler: Optional[TransformHandler] = None):
+        super(AbstractActivityPattern, self).__init__(name=name)
         self.logger = logging.getLogger(__name__)
         self._candidates: Optional[Candidates] = None
         self.corpus: Optional[SomaxCorpus] = corpus
@@ -88,7 +91,8 @@ class ClassicActivityPattern(AbstractActivityPattern):
                                                        param_range=NumericRange(0, None),
                                                        description="Num steps until peak is decayed below threshold.",
                                                        on_parameter_change=self._calc_tau)
-        self._tau = self._calc_tau(self._decay_time.value)
+        self._tau: float    # initialized on next line
+        self._calc_tau()
 
         self.last_update_time: float = 0.0
 
@@ -116,9 +120,11 @@ class ClassicActivityPattern(AbstractActivityPattern):
             self._candidates = None
         self.last_update_time = 0.0
 
-    def _calc_tau(self, t: float):
-        """ n is the number of updates until peak decays below threshold"""
-        return -np.divide(t, np.log(self._extinction_threshold.value + 0.001))
+    def _calc_tau(self) -> None:
+        """ t is the time in seconds until peak decays below threshold"""
+        self.logger.warning("_calc_tau with setter is not tested")
+        self._tau = -np.divide(self._decay_time.value, np.log(self._extinction_threshold.value + 0.001))
+        # Note: return value unused when called by `on_parameter_change`
 
 
 class ManualActivityPattern(AbstractActivityPattern):
@@ -147,7 +153,8 @@ class ManualActivityPattern(AbstractActivityPattern):
                                                        param_range=NumericRange(0, None),
                                                        description="Num steps until peak is decayed below threshold.",
                                                        on_parameter_change=self._calc_tau)
-        self._tau = self._calc_tau(self._decay_time.value)
+        self._tau: float
+        self._calc_tau()
 
         self._event_indices: np.ndarray = np.zeros(0, dtype=np.int32)
 
@@ -200,9 +207,11 @@ class ManualActivityPattern(AbstractActivityPattern):
             self._candidates = None
         self._event_indices = np.zeros(0, dtype=np.int32)
 
-    def _calc_tau(self, n: int):
+    def _calc_tau(self):
         """ n is the number of updates until peak decays below threshold"""
-        return -np.divide(n, np.log(self._extinction_threshold.value + 0.001))
+        self._tau = -np.divide(self._decay_time.value, np.log(self._extinction_threshold.value + 0.001))
+        self.logger.warning("`_calc_tau` has not been tested")
+        return self._tau
 
 # TODO[B3]: Update: Check ManualActivityPattern on how to handle time. For DecayActivityPattern, override pop_peaks!
 #

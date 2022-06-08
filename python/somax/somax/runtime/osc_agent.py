@@ -259,7 +259,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                 descriptor, classifier = ClassificationStereotypes.default()
             else:
                 descriptor: Type[Descriptor] = CorpusFeature.from_string(descriptor)
-                classifier: Classifier = Classifier.from_string(classifier, **kwargs)
+                classifier: Type[Classifier] = Classifier.from_string(classifier, **kwargs)
 
             activity_pattern: Type[AbstractActivityPattern] = AbstractActivityPattern.from_string(activity_pattern)
             memory_space: Type[AbstractMemorySpace] = AbstractMemorySpace.from_string(memory_space)
@@ -267,9 +267,9 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             prospector: SomaxProspector = SomaxProspector(name=name,
                                                           weight=weight,
                                                           descriptor=descriptor,
-                                                          classifier=classifier,
-                                                          activity_pattern=activity_pattern,
-                                                          memory_space=memory_space,
+                                                          classifier=classifier(),
+                                                          activity_pattern=activity_pattern(),
+                                                          memory_space=memory_space(),
                                                           self_influenced=self_influenced,
                                                           enabled=enabled)
             self._generator.add_prospector(prospector, override=override)
