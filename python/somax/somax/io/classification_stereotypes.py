@@ -1,4 +1,4 @@
-from typing import Tuple, Type, Dict, List
+from typing import Tuple, Type, Dict, List, Optional
 
 from merge.main.classifier import Classifier, IdentityClassifier, PitchClassClassifier
 from merge.main.descriptor import Descriptor
@@ -25,6 +25,14 @@ class ClassificationStereotypes:
             return ClassificationStereotypes().configurations[stereotype_name.lower()]
         except KeyError:
             raise InputError(f"No stereotype named '{stereotype_name}' exists")
+
+    @staticmethod
+    def to_string(descriptor: Type[Descriptor], classifier: Type[Classifier]) -> Optional[str]:
+        for k, (d, c) in ClassificationStereotypes().configurations.items():
+            if descriptor == d and classifier == c:
+                return k
+        else:
+            return None
 
     @staticmethod
     def default() -> Tuple[Type[Descriptor], Type[Classifier]]:

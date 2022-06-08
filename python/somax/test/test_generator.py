@@ -10,7 +10,7 @@ from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.corpus_builder.chroma_filter import NoFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.features import TopNote, OnsetChroma
-from somax.runtime.activity_pattern import AbstractActivityPattern, ClassicActivityPattern, ManualActivityPattern
+from somax.runtime.activity_pattern import AbstractNavigator, ContinuousEchoicNavigator, DiscreteEchoicNavigator
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.memory_spaces import NGramMemorySpace
 from somax.runtime.generator import SomaxGenerator
@@ -19,7 +19,7 @@ from somax.runtime.prospector import SomaxProspector
 
 class TestSomaxGenerator(TestCase):
     def test_trigger_only_continuous(self):
-        generator: SomaxGenerator = self._default_generator(ClassicActivityPattern, ngram_order=1, tau=1.0)
+        generator: SomaxGenerator = self._default_generator(ContinuousEchoicNavigator, ngram_order=1, tau=1.0)
         corpus: SomaxCorpus = CorpusBuilder().build("data/cscale_two_octave.mid", spectrogram_filter=NoFilter())
         generator.read_memory(corpus)
 
@@ -29,7 +29,7 @@ class TestSomaxGenerator(TestCase):
             self.assertEqual(i % corpus.length(), output[0].event.index)
 
     def test_trigger_only_discrete(self):
-        generator: SomaxGenerator = self._default_generator(ManualActivityPattern, ngram_order=1, tau=1.1)
+        generator: SomaxGenerator = self._default_generator(DiscreteEchoicNavigator, ngram_order=1, tau=1.1)
         corpus: SomaxCorpus = CorpusBuilder().build("data/cscale_two_octave.mid", spectrogram_filter=NoFilter())
         generator.read_memory(corpus)
 
@@ -40,7 +40,7 @@ class TestSomaxGenerator(TestCase):
             self.assertEqual(i % corpus.length(), output[0].event.index)
 
     def test_manual_mode(self):
-        generator: SomaxGenerator = self._default_generator(ManualActivityPattern, ngram_order=1, tau=1.0)
+        generator: SomaxGenerator = self._default_generator(DiscreteEchoicNavigator, ngram_order=1, tau=1.0)
         corpus: SomaxCorpus = CorpusBuilder().build("data/cscale_two_octave.mid", spectrogram_filter=NoFilter())
         generator.read_memory(corpus)
 
@@ -83,7 +83,7 @@ class TestSomaxGenerator(TestCase):
         pass
 
     @staticmethod
-    def _default_generator(activity_pattern: Type[AbstractActivityPattern], ngram_order: int = 1, tau: float = 1.0):
+    def _default_generator(activity_pattern: Type[AbstractNavigator], ngram_order: int = 1, tau: float = 1.0):
         melodic: SomaxProspector = SomaxProspector("m", 1.0, TopNote,
                                                    IdentityClassifier(),
                                                    activity_pattern(),
@@ -102,14 +102,14 @@ class TestSomaxGenerator(TestCase):
                                                       self_influenced=True,
                                                       enabled=True)
 
-        if activity_pattern == ClassicActivityPattern:
-            typing.cast(ClassicActivityPattern, melodic._activity_pattern)._set_tau(tau)
-            typing.cast(ClassicActivityPattern, harmonic._activity_pattern)._set_tau(tau)
-            typing.cast(ClassicActivityPattern, self_layer._activity_pattern)._set_tau(tau)
-        if activity_pattern == ManualActivityPattern:
-            typing.cast(ManualActivityPattern, melodic._activity_pattern)._set_tau(int(tau))
-            typing.cast(ManualActivityPattern, harmonic._activity_pattern)._set_tau(int(tau))
-            typing.cast(ManualActivityPattern, self_layer._activity_pattern)._set_tau(int(tau))
+        if activity_pattern == ContinuousEchoicNavigator:
+            typing.cast(ContinuousEchoicNavigator, melodic._activity_pattern)._set_tau(tau)
+            typing.cast(ContinuousEchoicNavigator, harmonic._activity_pattern)._set_tau(tau)
+            typing.cast(ContinuousEchoicNavigator, self_layer._activity_pattern)._set_tau(tau)
+        if activity_pattern == DiscreteEchoicNavigator:
+            typing.cast(DiscreteEchoicNavigator, melodic._activity_pattern)._set_tau(int(tau))
+            typing.cast(DiscreteEchoicNavigator, harmonic._activity_pattern)._set_tau(int(tau))
+            typing.cast(DiscreteEchoicNavigator, self_layer._activity_pattern)._set_tau(int(tau))
 
         generator: SomaxGenerator = SomaxGenerator("g1")
         generator.add_prospector(melodic)

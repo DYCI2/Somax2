@@ -1,6 +1,6 @@
 class SendProtocol:
 
-    # Player info
+    # Agent Info
     PLAYER_NUM_PEAKS = "num_peaks"
     PLAYER_OUTPUT_PEAKS = "output_peaks"
     PARAMETER = "param"
@@ -11,16 +11,13 @@ class SendProtocol:
 
     INFLUENCE = "influence"
 
-    ALL_PLAYER_NAMES = "agent_names"
-    AGENT_INSTANTIATED = "instantiated_agent"
-    INSTANTIATED_ATOMS = "instantiated_atoms"
+    # Agent / Prospector State Info
+    CLASSIFIER_INFO = "classifier"
+    NAVIGATOR_INFO = "navigator"
+    MODEL_INFO = "model"
+    DESCRIPTOR_INFO = "descriptor"
+    STEREOTYPE_INFO = "stereotype"
 
-    PLAYER_RECORDED_CORPUS_LENGTH = "recorded_corpus"
-    ELIGIBILITY = "eligibility"
-
-    BUILDING_CORPUS_STATUS = "building_corpus_status"
-
-    PLAYER_READING_CORPUS_STATUS = "reading_corpus_status"
 
     # Scheduling
     SCHEDULER_RUNNING = "scheduler_running"
@@ -53,6 +50,12 @@ class SendProtocol:
 
     CLEAR = "clear"
     FLUSH = "flush"
+
+    # Legacy Commands
+    ALL_PLAYER_NAMES = "agent_names"
+    ELIGIBILITY = "eligibility"
+    BUILDING_CORPUS_STATUS = "building_corpus_status"
+    PLAYER_READING_CORPUS_STATUS = "reading_corpus_status"
 
 
 class DefaultNames:

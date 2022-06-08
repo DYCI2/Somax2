@@ -9,6 +9,7 @@ from merge.io.param_utils import MaxBool
 from merge.io.parameter import Parameter
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
+from merge.main.classifier import Classifier
 from merge.main.corpus_event import CorpusEvent
 from merge.main.exceptions import CorpusError, QueryError, ComponentAddressError
 from merge.main.generator import Generator
@@ -244,13 +245,12 @@ class SomaxGenerator(Generator, ContentAware, Component):
     def set_merge_handler(self, merge_handler: AbstractMergeAction) -> None:
         self._merge_handler = merge_handler
 
-    # TODO[B5]: Set classifier with feature type
-    # def set_classifier(self, path: List[str], classifier: AbstractClassifier) -> None:
-    #     """ Raises: KeyError, IndexError """
-    #     atom: SomaxProspector = self.get_prospector(path)  # raises: KeyError, IndexError
-    #     atom.set_classifier(classifier)
-    #     atom.update_transforms(self._transform_handler)
-    #     self._parse_parameters()
+    def set_classifier(self, path: List[str], classifier: Classifier) -> None:
+        """ Raises: KeyError, IndexError """
+        # TODO: Remove this function once a state-less solution for `transform_handler` exists
+        atom: SomaxProspector = self.get_prospector(path)  # raises: KeyError, IndexError
+        atom.set_classifier(classifier)
+        atom.update_transforms(self._transform_handler)
 
     # def set_memory_space(self, path: List[str], memory_space: AbstractMemorySpace) -> None:
     #     """ Raises: KeyError, IndexError """

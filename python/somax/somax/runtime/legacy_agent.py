@@ -15,7 +15,7 @@ from merge.main.generation_scheduler import GenerationScheduler
 from merge.main.query import Query, TriggerQuery, InfluenceQuery, FeatureQuery
 from somax import settings, log
 from somax.corpus_builder.corpus_builder import CorpusBuilder
-from somax.runtime.activity_pattern import AbstractActivityPattern
+from somax.runtime.activity_pattern import AbstractNavigator
 from somax.runtime.async_osc import AsyncOsc
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
@@ -309,7 +309,7 @@ class OscAgent(Agent, AsyncOsc):
         try:
             path_and_name: List[str] = self._string_to_path(path)
             classifier: Classifier = AbstractClassifier.from_string(classifier, **kwargs)
-            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
+            activity_pattern: AbstractNavigator = AbstractNavigator.from_string(activity_pattern)
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
             self.player.create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
                                     classifier=classifier, activity_pattern=activity_pattern,
@@ -358,8 +358,8 @@ class OscAgent(Agent, AsyncOsc):
     def set_activity_pattern(self, path: str, activity_pattern: str, **kwargs):
         try:
             path_and_name: List[str] = self._string_to_path(path)
-            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)
-            self.player.set_activity_pattern(path_and_name, activity_pattern)
+            activity_pattern: AbstractNavigator = AbstractNavigator.from_string(activity_pattern, **kwargs)
+            self.player.set_navigator(path_and_name, activity_pattern)
             self._send_eligibility()
             self.logger.debug(f"[set_acitivity_pattern] Activity pattern set to {type(activity_pattern).__name__} "
                               f"for player '{self.player.name}.")

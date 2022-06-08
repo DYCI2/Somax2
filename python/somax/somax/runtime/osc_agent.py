@@ -17,7 +17,7 @@ from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.features.feature import CorpusFeature
 from somax.io.classification_stereotypes import ClassificationStereotypes
 from somax.io.send_protocol import SendProtocol, DefaultNames
-from somax.runtime.activity_pattern import AbstractActivityPattern
+from somax.runtime.activity_pattern import AbstractNavigator
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.filters import SomaxFilter
 from somax.runtime.generation_scheduler import SomaxGenerationScheduler
@@ -261,7 +261,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                 descriptor: Type[Descriptor] = CorpusFeature.from_string(descriptor)
                 classifier: Type[Classifier] = Classifier.from_string(classifier, **kwargs)
 
-            activity_pattern: Type[AbstractActivityPattern] = AbstractActivityPattern.from_string(activity_pattern)
+            activity_pattern: Type[AbstractNavigator] = AbstractNavigator.from_string(activity_pattern)
             memory_space: Type[AbstractMemorySpace] = AbstractMemorySpace.from_string(memory_space)
 
             prospector: SomaxProspector = SomaxProspector(name=name,
@@ -294,36 +294,78 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             self.logger.error(f"{str(e)} No prospector was deleted.")
 
     def set_peak_selector(self, _address: str, peak_selector: str, verbose: bool = True, **kwargs):
-        try:
-            peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
-            self.generation_scheduler.generator.set_jury(peak_selector)
-            # self._send_eligibility()
-        except (ValueError, KeyError) as e:
-            self.logger.error(f"{str(e)} No peak selector was set.")
+        self.logger.error("This is not supported yet")
+        # try:
+        #     peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
+        #     self.generation_scheduler.generator.set_jury(peak_selector)
+        #     # self._send_eligibility()
+        # except (ValueError, KeyError) as e:
+        #     self.logger.error(f"{str(e)} No peak selector was set.")
 
     def set_descriptor(self, prospector_osc_address: str, descriptor: str, **kwargs):
         self.logger.error("This is not supported yet")
 
+    def get_descriptor(self, prospector_osc_address: str) -> None:
+        try:
+            descriptor_type: Type[Descriptor] = self._prospector(prospector_osc_address).descriptor_type()
+            self.send(SendProtocol.DESCRIPTOR_INFO, descriptor_type.to_string(), address=prospector_osc_address)
+        except (InputError, ComponentAddressError) as e:
+            self.logger.error(f"{str(e)}. Could not get descriptor")
+            self.send(SendProtocol.DESCRIPTOR_INFO, -1)
+
     def set_classification_stereotype(self, prospector_osc_address: str, stereotype: str, **kwargs):
         self.logger.error("This is not supported yet")
 
-    def set_classifier(self, prospector_osc_address: str, classifier: str, **kwargs):
+    def get_classification_stereotype(self, prospector_osc_address: str) -> None:
         try:
-            path: List[str] = self.osc_address_to_path(prospector_osc_address)
-            classifier: Classifier = Classifier.from_string(classifier, **kwargs)
-            self.generation_scheduler.generator.set_classifier(path, classifier)
-            self._send_eligibility()
-        except (AssertionError, KeyError, ValueError, CorpusError) as e:
-            self.logger.error(f"{str(e)} No classifier was set.")
+            prospector: SomaxProspector = self._prospector(prospector_osc_address)
+            descriptor_type: Type[Descriptor] = prospector.descriptor_type()
+            classifier_type: Type[Classifier] = prospector.classifier_type()
 
-    def set_activity_pattern(self, prospector_osc_address: str, activity_pattern: str, **kwargs):
+            # None if it doesn't conform to an existing stereotype
+            stereotype: Optional[str] = ClassificationStereotypes.to_string(descriptor_type, classifier_type)
+            self.send(SendProtocol.STEREOTYPE_INFO,stereotype,address=prospector_osc_address)
+
+        except (InputError, ComponentAddressError) as e:
+            self.logger.error(f"{str(e)}. Could not get stereotype")
+            self.send(SendProtocol.STEREOTYPE_INFO, -1)
+
+    def set_classifier(self, prospector_osc_address: str, classifier: str, **kwargs) -> None:
+        self.logger.error("This is not supported yet")
+        # try:
+        #     path: List[str] = self.osc_address_to_path(prospector_osc_address)
+        #     classifier: Type[Classifier] = Classifier.from_string(classifier)
+        #     self._generator.set_classifier(path[1:], classifier(**kwargs))
+        #     self.send(SendProtocol.CLASSIFIER_INFO, classifier.to_string(), address=prospector_osc_address)
+        # except (InputError, ComponentAddressError) as e:
+        #     self.logger.error(f"{str(e)}. No classifier was set.")
+        #     self.send(SendProtocol.CLASSIFIER_INFO, -1)
+
+    def get_classifier(self, prospector_osc_address: str) -> None:
         try:
-            path: List[str] = self.osc_address_to_path(prospector_osc_address)
-            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)
-            self.generation_scheduler.generator.set_activity_pattern(path, activity_pattern)
-            self._send_eligibility()
-        except (AssertionError, KeyError, ValueError) as e:
-            self.logger.error(f"{str(e)} No activity pattern was set.")
+            classifier_type: Type[Classifier] = self._prospector(prospector_osc_address).classifier_type()
+            self.send(SendProtocol.CLASSIFIER_INFO, classifier_type.to_string(), address=prospector_osc_address)
+        except (InputError, ComponentAddressError) as e:
+            self.logger.error(f"{str(e)}. Could not get classifier")
+            self.send(SendProtocol.CLASSIFIER_INFO, -1)
+
+    def set_navigator(self, prospector_osc_address: str, activity_pattern: str, **kwargs) -> None:
+        self.logger.error("This is not supported yet")
+        # try:
+        #     path: List[str] = self.osc_address_to_path(prospector_osc_address)
+        #     activity_pattern: AbstractNavigator = AbstractNavigator.from_string(activity_pattern, **kwargs)
+        #     self.generation_scheduler.generator.set_activity_pattern(path, activity_pattern)
+        #     self._send_eligibility()
+        # except (AssertionError, KeyError, ValueError) as e:
+        #     self.logger.error(f"{str(e)} No activity pattern was set.")
+
+    def get_navigator(self, prospector_osc_address: str) -> None:
+        try:
+            navigator_type: Type[AbstractNavigator] = self._prospector(prospector_osc_address).navigator_type()
+            self.send(SendProtocol.NAVIGATOR_INFO, navigator_type.to_string(), address=prospector_osc_address)
+        except (InputError, ComponentAddressError) as e:
+            self.logger.error(f"{str(e)}. Could not get navigator")
+            self.send(SendProtocol.NAVIGATOR_INFO, -1)
 
     def add_transform(self, _address: str, transform: str, **kwargs):
         try:
@@ -610,6 +652,14 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     def clear_memory(self, _address: str) -> None:
         self.generation_scheduler.clear_memory()
+
+    #######################################################################################
+    # PRIVATE
+    #######################################################################################
+
+    def _prospector(self, prospector_osc_address: str) -> SomaxProspector:
+        path: List[str] = self.osc_address_to_path(prospector_osc_address)
+        return  self._generator.get_prospector(path[1:])
 
     @property
     def _generator(self) -> SomaxGenerator:

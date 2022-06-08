@@ -12,7 +12,7 @@ from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.corpus_builder.chroma_filter import NoFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.features import TopNote, OnsetChroma
-from somax.runtime.activity_pattern import ClassicActivityPattern, AbstractActivityPattern, ManualActivityPattern
+from somax.runtime.activity_pattern import ContinuousEchoicNavigator, AbstractNavigator, DiscreteEchoicNavigator
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.memory_spaces import NGramMemorySpace
 from somax.runtime.prospector import SomaxProspector
@@ -24,7 +24,7 @@ class TestSomaxProspector(TestCase):
     def test_identity_prospecting(self):
         corpus: SomaxCorpus = CorpusBuilder().build("data/cscale_two_octave.mid")
         prospector: SomaxProspector = self._create_direct_prospector(corpus, TopNote, IdentityClassifier(),
-                                                                     ClassicActivityPattern())
+                                                                     ContinuousEchoicNavigator())
 
         for (i, event) in enumerate(corpus.events):  # type: int, CorpusEvent
             prospector.update_time(i)
@@ -37,7 +37,7 @@ class TestSomaxProspector(TestCase):
     def test_mod12_prospecting(self):
         corpus: SomaxCorpus = CorpusBuilder().build("data/cscale_two_octave.mid")
         prospector: SomaxProspector = self._create_direct_prospector(corpus, TopNote, PitchClassClassifier(),
-                                                                     ClassicActivityPattern())
+                                                                     ContinuousEchoicNavigator())
 
         for (i, event) in enumerate(corpus.events):  # type: int, CorpusEvent
             prospector.update_time(i)
@@ -51,7 +51,7 @@ class TestSomaxProspector(TestCase):
         SomChromaClassifier.USE_MULTIPROCESSING = False
 
         prospector: SomaxProspector = self._create_direct_prospector(corpus, OnsetChroma, SomChromaClassifier(),
-                                                                     ClassicActivityPattern())
+                                                                     ContinuousEchoicNavigator())
 
         for (i, event) in enumerate(corpus.events):  # type: int, CorpusEvent
             prospector.update_time(i)
@@ -64,7 +64,7 @@ class TestSomaxProspector(TestCase):
         influence_corpus: SomaxCorpus = CorpusBuilder().build("data/blackkeys_scale_two_octaves.mid")
 
         prospector: SomaxProspector = self._create_direct_prospector(source_corpus, TopNote, IdentityClassifier(),
-                                                                     ClassicActivityPattern())
+                                                                     ContinuousEchoicNavigator())
 
         for (i, event) in enumerate(influence_corpus.events):  # type: int, CorpusEvent
             prospector.update_time(i)
@@ -77,7 +77,7 @@ class TestSomaxProspector(TestCase):
         influence_corpus: SomaxCorpus = CorpusBuilder().build("data/csharp_scale_two_octave.mid")
 
         prospector: SomaxProspector = self._create_direct_prospector(source_corpus, TopNote, IdentityClassifier(),
-                                                                     ClassicActivityPattern())
+                                                                     ContinuousEchoicNavigator())
 
         transform_handler: TransformHandler() = TransformHandler()
         transform_handler.add(TransposeTransform(1))
@@ -97,7 +97,7 @@ class TestSomaxProspector(TestCase):
                                   corpus: SomaxCorpus,
                                   feature_type: Type[Feature],
                                   classifier: Classifier,
-                                  activity_pattern: AbstractActivityPattern) -> SomaxProspector:
+                                  activity_pattern: AbstractNavigator) -> SomaxProspector:
         prospector: SomaxProspector = SomaxProspector("p", 1.0, feature_type,
                                                       classifier,
                                                       activity_pattern,
@@ -108,11 +108,11 @@ class TestSomaxProspector(TestCase):
         # memory_space.set_ngram_size(1)@
         self.assertEqual(1, prospector.memory_space._ngram_size.value)
 
-        if isinstance(activity_pattern, ClassicActivityPattern):
-            activity_pattern: ClassicActivityPattern = typing.cast(ClassicActivityPattern, prospector._activity_pattern)
+        if isinstance(activity_pattern, ContinuousEchoicNavigator):
+            activity_pattern: ContinuousEchoicNavigator = typing.cast(ContinuousEchoicNavigator, prospector._activity_pattern)
             activity_pattern._set_tau(0.1)
-        elif isinstance(activity_pattern, ManualActivityPattern):
-            activity_pattern: ManualActivityPattern = typing.cast(ManualActivityPattern, prospector._activity_pattern)
+        elif isinstance(activity_pattern, DiscreteEchoicNavigator):
+            activity_pattern: DiscreteEchoicNavigator = typing.cast(DiscreteEchoicNavigator, prospector._activity_pattern)
             activity_pattern._set_tau(1)
 
         prospector.update_transforms(TransformHandler())

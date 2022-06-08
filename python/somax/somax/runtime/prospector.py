@@ -17,7 +17,7 @@ from merge.main.label import Label
 from merge.main.prospector import Prospector
 from somax.features.feature import AbstractFeature
 from somax.io.send_protocol import DefaultNames
-from somax.runtime.activity_pattern import AbstractActivityPattern
+from somax.runtime.activity_pattern import AbstractNavigator
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.memory_spaces import AbstractMemorySpace
@@ -32,7 +32,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
                  weight: float,
                  descriptor: Type[Descriptor],
                  classifier: Classifier,
-                 activity_pattern: AbstractActivityPattern,
+                 activity_pattern: AbstractNavigator,
                  memory_space: AbstractMemorySpace,
                  corpus: Optional[SomaxCorpus] = None,
                  self_influenced: bool = False,
@@ -53,10 +53,10 @@ class SomaxProspector(Prospector, Component, ContentAware):
                                                    on_parameter_change=self._on_state_change)
 
         # TODO[B4]: Check that the given classifier is valid with the given feature
-        self._feature_type: Type[Descriptor] = descriptor
+        self._descriptor_type: Type[Descriptor] = descriptor
         self._classifier: Classifier = classifier
         self._memory_space: AbstractMemorySpace = memory_space
-        self._activity_pattern: AbstractActivityPattern = activity_pattern
+        self._activity_pattern: AbstractNavigator = activity_pattern
 
         self._self_influenced: Parameter[bool] = Parameter(name="selfinfluenced",
                                                            default_value=self_influenced,
@@ -88,7 +88,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
         if self._corpus is None:
             return
 
-        features: List[Descriptor] = self._corpus.get_features_of_type(self._feature_type)
+        features: List[Descriptor] = self._corpus.get_features_of_type(self._descriptor_type)
         if isinstance(self._classifier, Trainable):
             self._classifier.cluster(features)
 
@@ -107,7 +107,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
         for transform in self.valid_transforms:
             if isinstance(influence, CorpusInfluence):
                 label: Label = self._classifier.classify(transform.inverse(
-                    influence.value.get_feature(self._feature_type)))
+                    influence.value.get_feature(self._descriptor_type)))
             elif isinstance(influence, FeatureInfluence):
                 label: Label = self._classifier.classify(transform.inverse(influence.value))
             # elif isinstance(influence, LabelInfluence):
@@ -175,14 +175,14 @@ class SomaxProspector(Prospector, Component, ContentAware):
         self._memory_space = memory_space
         self._update_state()
 
-    def set_activity_pattern(self, activity_pattern: AbstractActivityPattern):
+    def set_activity_pattern(self, activity_pattern: AbstractNavigator):
         self._activity_pattern = activity_pattern
         self._update_state()
 
     def update_transforms(self, transform_handler: TransformHandler):
         # TODO[B2]: Temporary cast: should not be handled this way
         self.valid_transforms = transform_handler.get_by_feature(typing.cast(Type[AbstractFeature],
-                                                                             self._feature_type))
+                                                                             self._descriptor_type))
         self._memory_space.update_transforms(transform_handler, self.valid_transforms)
 
     def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
@@ -216,3 +216,15 @@ class SomaxProspector(Prospector, Component, ContentAware):
 
     def num_peaks(self) -> int:
         return self._activity_pattern.num_peaks()
+
+    def classifier_type(self) -> Type[Classifier]:
+        return type(self._classifier)
+
+    def navigator_type(self) -> Type[AbstractNavigator]:
+        return type(self._activity_pattern)
+
+    def model_type(self) -> Type[AbstractMemorySpace]:
+        return type(self._memory_space)
+
+    def descriptor_type(self) -> Type[Descriptor]:
+        return self._descriptor_type

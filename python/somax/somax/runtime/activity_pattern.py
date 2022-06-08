@@ -18,7 +18,7 @@ from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.transform_handler import TransformHandler
 
 
-class AbstractActivityPattern(Component, ParsableWithDefault['AbstractActivityPattern'], ABC):
+class AbstractNavigator(Component, ParsableWithDefault['AbstractActivityPattern'], ABC):
     SCORE_IDX = 0
     TIME_IDX = 1
     TRANSFORM_IDX = 2
@@ -26,14 +26,14 @@ class AbstractActivityPattern(Component, ParsableWithDefault['AbstractActivityPa
     def __init__(self, name: str = DefaultNames.ACTIVITY_PATTERN,
                  corpus: Optional[SomaxCorpus] = None,
                  _transform_handler: Optional[TransformHandler] = None):
-        super(AbstractActivityPattern, self).__init__(name=name)
+        super(AbstractNavigator, self).__init__(name=name)
         self.logger = logging.getLogger(__name__)
         self._candidates: Optional[Candidates] = None
         self.corpus: Optional[SomaxCorpus] = corpus
 
     @classmethod
     def default(cls) -> Type[T]:
-        return ClassicActivityPattern
+        return ContinuousEchoicNavigator
 
     @abstractmethod
     def insert(self, candidates: List[Candidate], self_influenced: bool = False, **kwargs) -> None:
@@ -66,13 +66,13 @@ class AbstractActivityPattern(Component, ParsableWithDefault['AbstractActivityPa
         return self._candidates.size()
 
 
-class ClassicActivityPattern(AbstractActivityPattern):
+class ContinuousEchoicNavigator(AbstractNavigator):
     """Decay: score = exp(-(Δt)/tau), where Δt is the time since creation in beats"""
 
     DEFAULT_DECAY_TIME = 4.6
 
     def __init__(self, corpus: SomaxCorpus = None, decay_time: float = DEFAULT_DECAY_TIME):
-        super().__init__(corpus)
+        super().__init__(corpus=corpus)
         self.logger.debug("[__init__]: ClassicActivityPattern initialized.")
 
         if corpus is not None:
@@ -127,7 +127,7 @@ class ClassicActivityPattern(AbstractActivityPattern):
         # Note: return value unused when called by `on_parameter_change`
 
 
-class ManualActivityPattern(AbstractActivityPattern):
+class DiscreteEchoicNavigator(AbstractNavigator):
     """Decay: score = exp(-n/tau), where n is the number of events generated since creation of peak (new_event calls)"""
 
     DEFAULT_N = 3
