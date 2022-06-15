@@ -49,7 +49,7 @@ class SomaxGenerator(Generator, ContentAware, Component):
 
         self.prospectors: Dict[str, SomaxProspector] = {}
 
-        self.post_filters = {}
+        self.post_filters: Dict[str, SomaxFilter] = {}
         if post_filters is not None:
             for post_filter in post_filters:
                 self.add_post_filter(post_filter, override=False)
@@ -195,6 +195,9 @@ class SomaxGenerator(Generator, ContentAware, Component):
         for prospector in self.prospectors.values():
             prospector.read_memory(corpus, **kwargs)
 
+        for post_filter in self.post_filters.values():
+            post_filter.set_corpus(corpus)
+
     def feedback(self, event: Optional[Candidate], **kwargs) -> None:
         self._jury.feedback(event, **kwargs)
         self._merge_handler.feedback(event, **kwargs)
@@ -214,6 +217,9 @@ class SomaxGenerator(Generator, ContentAware, Component):
                                         f"To override: use 'override=True'.")
 
         self.prospectors[name] = prospector
+        if self.corpus is not None:
+            # TODO: Eligibility/error handling + maybe the same thing for filters.
+            prospector.read_memory(self.corpus)
 
     def remove_prospector(self, name: str) -> None:
         """ Raises: ComponentAddressError if prospector doesn't exist """
@@ -225,13 +231,15 @@ class SomaxGenerator(Generator, ContentAware, Component):
     def set_jury(self, jury: AbstractPeakSelector) -> None:
         self._jury = jury
 
-    # TODO[B4]: Replace with add_post_filter
     def add_post_filter(self, post_filter: SomaxFilter, override: bool = False) -> None:
         """ Raises: ComponentAddressError """
         name: str = post_filter.name
         if name in self.post_filters and not override:
             raise ComponentAddressError(f"A filter with the name '{name}' already exists."
                                         f"To override: use 'override=True'.")
+
+        if self.corpus is not None:
+            post_filter.set_corpus(self.corpus)
 
         post_filter.update_transforms(self._transform_handler)
         self.post_filters[name] = post_filter

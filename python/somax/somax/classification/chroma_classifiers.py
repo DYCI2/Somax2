@@ -1,11 +1,11 @@
 from importlib import resources
-from importlib import resources
-from typing import List
+from typing import List, Type
 
 import numpy as np
 
 from merge.main.classifier import Classifier
-from merge.main.descriptor import Chroma12
+from merge.main.descriptor import Chroma12, Descriptor
+from merge.main.exceptions import ClassificationError
 from merge.main.label import IntLabel, Label
 from somax.classification import tables
 
@@ -27,7 +27,7 @@ from somax.classification import tables
 #     def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
 #         return corpus.has_feature(OnsetChroma)
 
-class SomChromaClassifier(Classifier[Chroma12]):
+class SomChromaClassifier(Classifier):
     SOM_DATA_FILE = 'misc_hsom'  # Note: vectors in file are not normalized
     SOM_CLASS_FILE = 'misc_hsom_c'
 
@@ -39,18 +39,26 @@ class SomChromaClassifier(Classifier[Chroma12]):
         with resources.path(tables, self.SOM_CLASS_FILE) as path:
             self._som_classes = np.loadtxt(path.absolute(), dtype=int, delimiter=",")  # Shape: (N,)
 
-    def classify(self, feature: Chroma12) -> Label:
-        return IntLabel(self._label_from_chroma(feature.value))
+    def classify(self, descriptor: Descriptor) -> Label:
+        if not isinstance(descriptor, Chroma12):
+            raise ClassificationError(f"{self.__class__.__name__} can only handle 12-dimensional chroma vectors")
+        return IntLabel(self._label_from_chroma(descriptor.value))
 
-    def classify_multiple(self, features: List[Chroma12]) -> List[Label]:
+    def classify_multiple(self, descriptors: List[Descriptor]) -> List[Label]:
+        if not all(isinstance(descriptor, Chroma12) for descriptor in descriptors):
+            raise ClassificationError(f"{self.__class__.__name__} can only handle 12-dimensional chroma vectors")
+
         if self.USE_MULTIPROCESSING:
             import multiprocessing
             with multiprocessing.Pool(processes=4) as pool:
-                raw_labels: List[int] = pool.map(self._label_from_chroma, [f.value for f in features])
+                raw_labels: List[int] = pool.map(self._label_from_chroma, [f.value for f in descriptors])
         else:
-            raw_labels = [self._label_from_chroma(f.value) for f in features]
+            raw_labels = [self._label_from_chroma(f.value) for f in descriptors]
 
         return [IntLabel(label) for label in raw_labels]
+
+    def compatible_with(self, descriptor_type: Type[Descriptor]) -> bool:
+        return issubclass(descriptor_type, Chroma12)
 
     def _label_from_chroma(self, chroma: np.ndarray) -> int:
         # max_val: float = np.max(chroma)
@@ -61,77 +69,6 @@ class SomChromaClassifier(Classifier[Chroma12]):
 
     def clear(self) -> None:
         pass
-
-# class BaseSomChromaClassifier(ChromaClassifier):
-#     """ Classifies an event according to its chroma based on a pre-computed self-organizing map.
-#                 Corpus:    Uses foreground chroma (12 non-normalized floats) of EventParameter OnsetChroma
-#                 Influence: Responds to keyword "chroma" followed by 12 non-normalized floats. """
-#
-#     SOM_DATA_FILE = 'misc_hsom'  # Note: vectors in file are not normalized
-#     SOM_CLASS_FILE = 'misc_hsom_c'
-#
-#     USE_MULTIPROCESSING = True
-#
-#     def __init__(self, chroma_type: Type[BaseChroma]):
-#         super().__init__()
-#         self.chroma_type: Type[BaseChroma] = chroma_type
-#         with resources.path(tables, self.SOM_DATA_FILE) as path:
-#             self._som_data = np.loadtxt(path.absolute(), dtype=np.float32, delimiter=",")  # Shape: (N, 12)
-#         with resources.path(tables, self.SOM_CLASS_FILE) as path:
-#             self._som_classes = np.loadtxt(path.absolute(), dtype=int, delimiter=",")  # Shape: (N,)
-#
-#     def cluster(self, corpus: SomaxCorpus, **kwargs) -> None:
-#         # No clustering required for class
-#         pass
-#
-#     def classify_corpus(self, corpus: SomaxCorpus) -> List[IntLabel]:
-#         if self.USE_MULTIPROCESSING:
-#             import multiprocessing
-#             with multiprocessing.Pool(processes=4) as pool:
-#                 labels: List[IntLabel] = pool.map(self._multiproc_compute_label, corpus.events)
-#         else:
-#             labels: List[IntLabel] = []
-#             for event in corpus.events:  # type: SomaxCorpusEvent
-#                 labels.append(self._label_from_chroma(event.get_feature(self.chroma_type).value()))
-#         return labels
-#
-#     def _multiproc_compute_label(self, e: SomaxCorpusEvent):
-#         return self._label_from_chroma(e.get_feature(self.chroma_type).value())
-#
-#     def classify_influence(self, influence: Influence) -> List[Tuple[IntLabel, AbstractTransform]]:
-#         """ :raises TransformError if no transforms exist """
-#         if not self._transforms:  # transforms is empty
-#             raise TransformError(f"No transforms exist in classifier {self}")
-#         if isinstance(influence, SomaxFeatureInfluence) and isinstance(influence.value, BaseChroma):
-#             chroma: Feature = influence.value
-#             return [((self._label_from_chroma(t.inverse(chroma).value())), t)
-#                     for t in self._transforms]
-#         elif isinstance(influence, CorpusInfluence):
-#             chroma: Feature = influence.value.get_feature(self.chroma_type)
-#             return [(self._label_from_chroma(t.inverse(chroma).value()), t) for t in self._transforms]
-#         else:
-#             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
-#
-#     def _label_from_chroma(self, chroma: np.ndarray) -> IntLabel:
-#         # max_val: float = np.max(chroma)
-#         # if max_val > 0:
-#         #     chroma /= max_val
-#         rms: np.ndarray = np.sqrt(np.sum(np.power(chroma - self._som_data, 2), axis=1))
-#         return IntLabel(self._som_classes[np.argmin(rms)])
-#
-#     def clear(self) -> None:
-#         pass  # SomChromaClassifier is stateless
-#
-#
-# class OnsetSomChromaClassifier(BaseSomChromaClassifier):
-#     def __init__(self):
-#         super().__init__(chroma_type=OnsetChroma)
-#
-#
-# class MeanSomChromaClassifier(BaseSomChromaClassifier):
-#     def __init__(self):
-#         super().__init__(chroma_type=MeanChroma)
-
 
 # TODO: Update to generic GMM solution and test
 # class GmmClassifier(ChromaClassifier, ABC):

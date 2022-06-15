@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from somax.corpus_builder.corpus_builder import CorpusBuilder
-from somax.features import TopNote, OnsetChroma
+from somax.descriptors import TopNote, OnsetChroma
 from somax.runtime.corpus import SomaxCorpus
 
 

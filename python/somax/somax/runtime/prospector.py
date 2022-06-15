@@ -15,7 +15,7 @@ from merge.main.exceptions import QueryError
 from merge.main.influence import Influence, CorpusInfluence, FeatureInfluence
 from merge.main.label import Label
 from merge.main.prospector import Prospector
-from somax.features.feature import AbstractFeature
+from somax.descriptors.descriptor import SomaxDescriptor
 from somax.io.send_protocol import DefaultNames
 from somax.runtime.activity_pattern import AbstractNavigator
 from somax.runtime.content_aware import ContentAware
@@ -28,7 +28,8 @@ from somax.runtime.transforms import AbstractTransform
 class SomaxProspector(Prospector, Component, ContentAware):
     DEFAULT_WEIGHT = 1.0
 
-    def __init__(self, name: str,
+    def __init__(self,
+                 name: str,
                  weight: float,
                  descriptor: Type[Descriptor],
                  classifier: Classifier,
@@ -56,7 +57,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
         self._descriptor_type: Type[Descriptor] = descriptor
         self._classifier: Classifier = classifier
         self._memory_space: AbstractMemorySpace = memory_space
-        self._activity_pattern: AbstractNavigator = activity_pattern
+        self._navigator: AbstractNavigator = activity_pattern
 
         self._self_influenced: Parameter[bool] = Parameter(name="selfinfluenced",
                                                            default_value=self_influenced,
@@ -74,17 +75,17 @@ class SomaxProspector(Prospector, Component, ContentAware):
     def learn_event(self, event: CorpusEvent, **kwargs) -> None:
         raise NotImplementedError("This is not supported yet")
 
-    def read_memory(self, corpus: SomaxCorpus, **kwargs):
+    def read_memory(self, corpus: SomaxCorpus, warn_on_ineligible: bool = True, **kwargs) -> None:
         """ :raises RuntimeError """
-        if not self.eligible:
-            print(f"Returning because '{self.name}' cannot read corpus of type")
-            return
+        self._eligible = self._is_eligible_for(corpus)
+        if not self._eligible and warn_on_ineligible:
+            self.logger.warning(f"Prospector {self.name} is not eligible for corpus '{corpus.name}'")
 
-        # TODO[B4]: Check that the corpus has the selected feature before assigning it (self.feature_type)
         self._corpus = corpus
         self._update_state()
 
     def _update_state(self) -> None:
+        raise NotImplementedError("TODO: if isinstance(self.classifier, Trainable)")
         if self._corpus is None:
             return
 
@@ -94,7 +95,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
 
         labels: List[Label] = self._classifier.classify_multiple(features)
         self._memory_space.model(self._corpus, labels)
-        self._activity_pattern.read_corpus(self._corpus)
+        self._navigator.read_memory(self._corpus)
 
     def process(self, influence: Influence, self_influenced: bool = False, **kwargs) -> None:
         if not self.is_enabled_and_eligible():
@@ -119,7 +120,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
             labels.append((label, transform))
 
         matched_events: List[Candidate] = self._memory_space.influence(labels, **kwargs)
-        self._activity_pattern.insert(matched_events, self_influenced)
+        self._navigator.insert(matched_events, self_influenced)
 
     # # influences the memory with incoming data
     # def influence(self, influence: Influence, time: float, **kwargs) -> int:
@@ -138,14 +139,14 @@ class SomaxProspector(Prospector, Component, ContentAware):
     #         return 0
 
     def peek_candidates(self) -> Candidates:
-        return self._activity_pattern.peek_candidates()
+        return self._navigator.peek_candidates()
 
     def pop_candidates(self, **kwargs) -> Candidates:
         """ get peaks: May have side effects inside activity_pattern. """
-        return self._activity_pattern.pop_candidates()
+        return self._navigator.pop_candidates()
 
     def clear(self):
-        self._activity_pattern.clear()
+        self._navigator.clear()
         self._classifier.clear()
         self._memory_space.clear()
 
@@ -165,9 +166,10 @@ class SomaxProspector(Prospector, Component, ContentAware):
 
     def update_time(self, time: float) -> None:
         if self.is_enabled_and_eligible():
-            self._activity_pattern.update_time(time)
+            self._navigator.update_time(time)
 
     def set_classifier(self, classifier: Classifier) -> None:
+        # TODO: Compatibility handling
         self._classifier = classifier
         self._update_state()
 
@@ -175,13 +177,18 @@ class SomaxProspector(Prospector, Component, ContentAware):
         self._memory_space = memory_space
         self._update_state()
 
-    def set_activity_pattern(self, activity_pattern: AbstractNavigator):
-        self._activity_pattern = activity_pattern
+    def set_navigator(self, navigator: AbstractNavigator) -> None:
+        self._navigator = navigator
+        self._update_state()
+
+    def set_descriptor_type(self, descriptor_type: Type[Descriptor]) -> None:
+        # TODO: Compatibility Handling
+        self._descriptor_type = descriptor_type
         self._update_state()
 
     def update_transforms(self, transform_handler: TransformHandler):
         # TODO[B2]: Temporary cast: should not be handled this way
-        self.valid_transforms = transform_handler.get_by_feature(typing.cast(Type[AbstractFeature],
+        self.valid_transforms = transform_handler.get_by_feature(typing.cast(Type[SomaxDescriptor],
                                                                              self._descriptor_type))
         self._memory_space.update_transforms(transform_handler, self.valid_transforms)
 
@@ -215,13 +222,13 @@ class SomaxProspector(Prospector, Component, ContentAware):
         return self._enabled.value and self.eligible
 
     def num_peaks(self) -> int:
-        return self._activity_pattern.num_peaks()
+        return self._navigator.num_peaks()
 
     def classifier_type(self) -> Type[Classifier]:
         return type(self._classifier)
 
     def navigator_type(self) -> Type[AbstractNavigator]:
-        return type(self._activity_pattern)
+        return type(self._navigator)
 
     def model_type(self) -> Type[AbstractMemorySpace]:
         return type(self._memory_space)

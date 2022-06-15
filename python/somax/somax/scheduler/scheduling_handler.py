@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple, Dict, Type
 
 from merge.io.parsable import Parsable, ParsableWithDefault, T
-from somax.features import Tempo
+from somax.descriptors import Tempo
 from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler

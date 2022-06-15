@@ -11,7 +11,7 @@ from merge.main.influence import CorpusInfluence
 from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.corpus_builder.chroma_filter import NoFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder
-from somax.features import TopNote, OnsetChroma
+from somax.descriptors import TopNote, OnsetChroma
 from somax.runtime.activity_pattern import ContinuousEchoicNavigator, AbstractNavigator, DiscreteEchoicNavigator
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.memory_spaces import NGramMemorySpace
@@ -109,10 +109,10 @@ class TestSomaxProspector(TestCase):
         self.assertEqual(1, prospector.memory_space._ngram_size.value)
 
         if isinstance(activity_pattern, ContinuousEchoicNavigator):
-            activity_pattern: ContinuousEchoicNavigator = typing.cast(ContinuousEchoicNavigator, prospector._activity_pattern)
+            activity_pattern: ContinuousEchoicNavigator = typing.cast(ContinuousEchoicNavigator, prospector._navigator)
             activity_pattern._set_tau(0.1)
         elif isinstance(activity_pattern, DiscreteEchoicNavigator):
-            activity_pattern: DiscreteEchoicNavigator = typing.cast(DiscreteEchoicNavigator, prospector._activity_pattern)
+            activity_pattern: DiscreteEchoicNavigator = typing.cast(DiscreteEchoicNavigator, prospector._navigator)
             activity_pattern._set_tau(1)
 
         prospector.update_transforms(TransformHandler())

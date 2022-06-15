@@ -4,22 +4,22 @@ import librosa
 import numpy as np
 
 from somax.corpus_builder.metadata import MidiMetadata, AudioMetadata, Metadata
-from somax.features.feature import CorpusFeature, FeatureUtils
+from somax.descriptors.descriptor import SomaxDescriptor, DescriptorUtils
 from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent, SomaxCorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
-class Tempo(CorpusFeature):
+class Tempo(SomaxDescriptor):
     def __init__(self, value: float):
         super().__init__(value=value)
 
     @classmethod
     def analyze(cls, events: List[SomaxCorpusEvent], metadata: Metadata) -> List[SomaxCorpusEvent]:
-        if FeatureUtils.is_valid_midi(events, metadata):
+        if DescriptorUtils.is_valid_midi(events, metadata):
             events: List[MidiCorpusEvent]
             metadata: MidiMetadata
             cls._analyze_midi(events, metadata)
-        elif FeatureUtils.is_valid_audio(events, metadata):
+        elif DescriptorUtils.is_valid_audio(events, metadata):
             events: List[AudioCorpusEvent]
             metadata: AudioMetadata
             cls._analyze_audio(events, metadata)
@@ -51,8 +51,8 @@ class Tempo(CorpusFeature):
             event.set_feature(cls(tempo))
 
     @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=trait_dict["tempo"])
+    def decode(cls, trait_dict: Dict[str, Any]) -> 'SomaxDescriptor':
+        return cls(value=trait_dict[cls.to_string()])
 
     def encode(self) -> Dict[str, Any]:
-        return {"tempo": self.value}
+        return {self.to_string(): self.value}

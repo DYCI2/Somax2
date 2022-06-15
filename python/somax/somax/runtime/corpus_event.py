@@ -145,7 +145,7 @@ class MidiCorpusEvent(SomaxCorpusEvent):
     @classmethod
     def decode(cls, event_dict: Dict[str, Any], feature_dict: Dict[str, str]) -> 'MidiCorpusEvent':
         """ Raises: KeyError, AttributeError"""
-        from somax.features.feature import CorpusFeature
+        from somax.descriptors.descriptor import SomaxDescriptor
         return MidiCorpusEvent(state_index=event_dict["state_index"],
                                tempo=event_dict["tempo"],
                                onset=event_dict["onset"],
@@ -154,8 +154,8 @@ class MidiCorpusEvent(SomaxCorpusEvent):
                                absolute_duration=event_dict["absolute_duration"],
                                bar_number=event_dict["bar"],
                                notes=[Note.from_json(note_dict) for note_dict in event_dict["notes"]],
-                               features=dict([CorpusFeature.from_json(feature_dict[k], v)
-                                              for (k, v) in event_dict["features"].items()])
+                               features=dict([SomaxDescriptor.from_json(feature_dict[k], v)
+                                              for (k, v) in event_dict["descriptors"].items()])
                                )
 
     @classmethod
@@ -208,7 +208,7 @@ class MidiCorpusEvent(SomaxCorpusEvent):
                 "duration": self._relative_duration,
                 "absolute_duration": self.absolute_duration,
                 "notes": [note.encode() for note in self.notes],
-                "features": {features_dict[cls]: obj for (cls, obj) in self.features.items()}
+                "descriptors": {features_dict[cls]: obj for (cls, obj) in self.features.items()}
                 }
         # : Dict[Type[AbstractTrait], AbstractTrait] = event_parameters if event_parameters else {}
 

@@ -1,6 +1,6 @@
 import logging
 from abc import ABC, abstractmethod
-from typing import Tuple, Optional
+from typing import Optional
 
 import numpy as np
 
@@ -14,27 +14,19 @@ from merge.main.exceptions import FilterError
 from merge.main.post_filter import PostFilter
 from somax.io.send_protocol import DefaultNames
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus
 from somax.runtime.continuous_candidates import ContinuousCandidates
+from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus
 from somax.runtime.transform_handler import TransformHandler
 
 
 class SomaxFilter(PostFilter, Component, ContentAware, Parsable['AbstractScaleAction'], ABC):
     def __init__(self, name: str, *args, **kwargs):
         super().__init__(name=name, *args, **kwargs)
+        self.logger = logging.getLogger(__name__)
         self.enabled: Parameter[bool] = Parameter(name=DefaultNames.ENABLED,
                                                   default_value=True,
                                                   type_info=MaxBool())
-
-    # @abstractmethod
-    # def scale(self, peaks: Peaks, time: float, corresponding_events: List[SomaxCorpusEvent],
-    #           corresponding_transforms: List[AbstractTransform], corpus: SomaxCorpus = None, **kwargs) -> Peaks:
-    #     """ """
-
-    # @abstractmethod
-    # def feedback(self, feedback_event: Optional[SomaxCorpusEvent], time: float,
-    #              applied_transform: AbstractTransform) -> None:
-    #     """ """
+        self.corpus: Optional[SomaxCorpus] = None
 
     def __repr__(self):
         return f"{self.__class__.__name__}(name={self.name})"
@@ -54,6 +46,13 @@ class SomaxFilter(PostFilter, Component, ContentAware, Parsable['AbstractScaleAc
     @classmethod
     def default(cls, **_kwargs) -> 'SomaxFilter':
         return IdentityFilter(name="identity")
+
+    def set_corpus(self, corpus: SomaxCorpus, warn_on_ineligible: bool = True) -> None:
+        self._eligible = self._is_eligible_for(corpus)
+        if not self._eligible and warn_on_ineligible:
+            self.logger.warning(f"Filter {self.name} is not eligible for corpus '{corpus.name}'")
+
+        self.corpus = corpus
 
     def is_enabled_and_eligible(self):
         return self.enabled.value and self.eligible
@@ -126,10 +125,6 @@ class PhaseFilter(SomaxFilter):
     def selectivity(self):
         return self._selectivity.value
 
-    @selectivity.setter
-    def selectivity(self, value):
-        self._selectivity.value = value
-
 
 class ContinuityFilter(SomaxFilter):
     DEFAULT_FACTOR = 1.5
@@ -169,7 +164,7 @@ class ContinuityFilter(SomaxFilter):
         self._previous_output_index = None
 
     def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
-        return True
+        return True  # Eligible for all corpus types
 
     @property
     def factor(self):

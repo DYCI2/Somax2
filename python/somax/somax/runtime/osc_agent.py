@@ -14,17 +14,17 @@ from merge.main.exceptions import CorpusError, ResourceError, ComponentAddressEr
     InputError
 from merge.main.query import TriggerQuery, InfluenceQuery
 from somax.corpus_builder.corpus_builder import CorpusBuilder
-from somax.features.feature import CorpusFeature
+from somax.descriptors.descriptor import SomaxDescriptor
 from somax.io.classification_stereotypes import ClassificationStereotypes
 from somax.io.send_protocol import SendProtocol, DefaultNames
 from somax.runtime.activity_pattern import AbstractNavigator
+from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.filters import SomaxFilter
 from somax.runtime.generation_scheduler import SomaxGenerationScheduler
 from somax.runtime.generator import SomaxGenerator
 from somax.runtime.influence import SomaxFeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
-from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.prospector import SomaxProspector
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.process_messages import ControlSignal, TimeSignal, TempoMasterSignal, TempoSignal, PlayControl
@@ -80,14 +80,14 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     def influence(self, address: str, feature_keyword: str, value: Any) -> None:
         if not self.generation_scheduler.scheduling_handler.running:
-            self.send(SendProtocol.INFLUENCE, -1, address=address)
+            self.send(SendProtocol.INFLUENCE, SendProtocol.DEFAULT_ERROR, address=address)
             return
 
         try:
             influence: SomaxFeatureInfluence = SomaxFeatureInfluence.from_keyword(feature_keyword, value)
         except ValueError as e:
             self.logger.error(f"{str(e)}. No influence was computed.")
-            self.send(SendProtocol.INFLUENCE, -1, address=address)
+            self.send(SendProtocol.INFLUENCE, SendProtocol.DEFAULT_ERROR, address=address)
             return
 
         try:
@@ -96,14 +96,14 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             self.send_peaks()
         except (AssertionError, KeyError, IndexError) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
-            self.send(SendProtocol.INFLUENCE, -1, address=address)
+            self.send(SendProtocol.INFLUENCE, SendProtocol.DEFAULT_ERROR, address=address)
             return
         except CorpusError as e:
             self.logger.error(str(e))
-            self.send(SendProtocol.INFLUENCE, -1, address=address)
+            self.send(SendProtocol.INFLUENCE, SendProtocol.DEFAULT_ERROR, address=address)
             return
 
-    def read_corpus(self, _address: str, filepath: str, volatile: bool = False) -> None:
+    def read_memory(self, _address: str, filepath: str, volatile: bool = False) -> None:
         self.logger.info(f"Reading corpus at '{filepath}' for agent '{self._name}'...")
         self.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
         if not os.path.exists(filepath):
@@ -135,10 +135,15 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         self.generation_scheduler.generator.set_eligibility(corpus)
         self.generation_scheduler.read_memory(corpus)
         self.flush()
-        self._send_eligibility()
+        self.send_eligibility()  # Updated to new ContentAware (TODO: Remove this comment when rewriting read_memory)
         self.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
         self.send_current_corpus_info()
         self.logger.info(f"Corpus '{corpus.name}' successfully loaded in agent '{self._name}'.")
+
+    def send_eligibility(self) -> None:
+        for address, component in self.components:  # type: str, Component
+            if isinstance(component, ContentAware):
+                self.send(SendProtocol.ELIGIBILITY, component.eligible, address=address)
 
     def set_parameter(self, component_osc_address: str, parameter_address: str, value: Any) -> None:
         try:
@@ -258,7 +263,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             elif not (classification_stereotype and descriptor and classifier):
                 descriptor, classifier = ClassificationStereotypes.default()
             else:
-                descriptor: Type[Descriptor] = CorpusFeature.from_string(descriptor)
+                descriptor: Type[Descriptor] = SomaxDescriptor.from_string(descriptor)
                 classifier: Type[Classifier] = Classifier.from_string(classifier, **kwargs)
 
             activity_pattern: Type[AbstractNavigator] = AbstractNavigator.from_string(activity_pattern)
@@ -278,7 +283,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                                         prospector,
                                         override=override)
 
-            self.logger.info(f"Created prospector at {name}")
+            self.logger.info(f"Created prospector '{name}'")
 
             # self._send_eligibility()
         except (AssertionError, ValueError, KeyError, IndexError, InputError, ComponentAddressError) as e:
@@ -303,32 +308,39 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         #     self.logger.error(f"{str(e)} No peak selector was set.")
 
     def set_descriptor(self, prospector_osc_address: str, descriptor: str, **kwargs):
-        self.logger.error("This is not supported yet")
+        raise NotImplementedError("this works but is problematic since we don't have a clear solution for descriptors")
+        try:
+            descriptor_type: Type[SomaxDescriptor] = SomaxDescriptor.from_string(descriptor)
+            self._get_prospector(prospector_osc_address).set_descriptor_type(descriptor_type)
+            self.send(SendProtocol.DESCRIPTOR_INFO, descriptor_type.to_string())
+        except (InputError, ComponentAddressError) as e:
+            self.logger.error(f"{str(e)}. Descriptor was not changed")
+            self.send(SendProtocol.DESCRIPTOR_INFO, SendProtocol.DEFAULT_ERROR)
 
     def get_descriptor(self, prospector_osc_address: str) -> None:
         try:
-            descriptor_type: Type[Descriptor] = self._prospector(prospector_osc_address).descriptor_type()
+            descriptor_type: Type[Descriptor] = self._get_prospector(prospector_osc_address).descriptor_type()
             self.send(SendProtocol.DESCRIPTOR_INFO, descriptor_type.to_string(), address=prospector_osc_address)
         except (InputError, ComponentAddressError) as e:
             self.logger.error(f"{str(e)}. Could not get descriptor")
-            self.send(SendProtocol.DESCRIPTOR_INFO, -1)
+            self.send(SendProtocol.DESCRIPTOR_INFO, SendProtocol.DEFAULT_ERROR)
 
     def set_classification_stereotype(self, prospector_osc_address: str, stereotype: str, **kwargs):
         self.logger.error("This is not supported yet")
 
     def get_classification_stereotype(self, prospector_osc_address: str) -> None:
         try:
-            prospector: SomaxProspector = self._prospector(prospector_osc_address)
+            prospector: SomaxProspector = self._get_prospector(prospector_osc_address)
             descriptor_type: Type[Descriptor] = prospector.descriptor_type()
             classifier_type: Type[Classifier] = prospector.classifier_type()
 
             # None if it doesn't conform to an existing stereotype
             stereotype: Optional[str] = ClassificationStereotypes.to_string(descriptor_type, classifier_type)
-            self.send(SendProtocol.STEREOTYPE_INFO,stereotype,address=prospector_osc_address)
+            self.send(SendProtocol.STEREOTYPE_INFO, stereotype, address=prospector_osc_address)
 
         except (InputError, ComponentAddressError) as e:
             self.logger.error(f"{str(e)}. Could not get stereotype")
-            self.send(SendProtocol.STEREOTYPE_INFO, -1)
+            self.send(SendProtocol.STEREOTYPE_INFO, SendProtocol.DEFAULT_ERROR)
 
     def set_classifier(self, prospector_osc_address: str, classifier: str, **kwargs) -> None:
         self.logger.error("This is not supported yet")
@@ -343,29 +355,29 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
 
     def get_classifier(self, prospector_osc_address: str) -> None:
         try:
-            classifier_type: Type[Classifier] = self._prospector(prospector_osc_address).classifier_type()
+            classifier_type: Type[Classifier] = self._get_prospector(prospector_osc_address).classifier_type()
             self.send(SendProtocol.CLASSIFIER_INFO, classifier_type.to_string(), address=prospector_osc_address)
         except (InputError, ComponentAddressError) as e:
             self.logger.error(f"{str(e)}. Could not get classifier")
-            self.send(SendProtocol.CLASSIFIER_INFO, -1)
+            self.send(SendProtocol.CLASSIFIER_INFO, SendProtocol.DEFAULT_ERROR)
 
-    def set_navigator(self, prospector_osc_address: str, activity_pattern: str, **kwargs) -> None:
-        self.logger.error("This is not supported yet")
-        # try:
-        #     path: List[str] = self.osc_address_to_path(prospector_osc_address)
-        #     activity_pattern: AbstractNavigator = AbstractNavigator.from_string(activity_pattern, **kwargs)
-        #     self.generation_scheduler.generator.set_activity_pattern(path, activity_pattern)
-        #     self._send_eligibility()
-        # except (AssertionError, KeyError, ValueError) as e:
-        #     self.logger.error(f"{str(e)} No activity pattern was set.")
+    def set_navigator(self, prospector_osc_address: str, navigator: str, **kwargs) -> None:
+        try:
+            navigator_type: Type[AbstractNavigator] = AbstractNavigator.from_string(navigator)
+            navigator: AbstractNavigator = navigator_type(**kwargs)
+            self._get_prospector(prospector_osc_address).set_navigator(navigator)
+            self.send(SendProtocol.NAVIGATOR_INFO, navigator_type.to_string())
+        except (InputError, ComponentAddressError) as e:
+            self.logger.error(f"{str(e)}. Navigator was not changed")
+            self.send(SendProtocol.NAVIGATOR_INFO, SendProtocol.DEFAULT_ERROR)
 
     def get_navigator(self, prospector_osc_address: str) -> None:
         try:
-            navigator_type: Type[AbstractNavigator] = self._prospector(prospector_osc_address).navigator_type()
+            navigator_type: Type[AbstractNavigator] = self._get_prospector(prospector_osc_address).navigator_type()
             self.send(SendProtocol.NAVIGATOR_INFO, navigator_type.to_string(), address=prospector_osc_address)
         except (InputError, ComponentAddressError) as e:
             self.logger.error(f"{str(e)}. Could not get navigator")
-            self.send(SendProtocol.NAVIGATOR_INFO, -1)
+            self.send(SendProtocol.NAVIGATOR_INFO, SendProtocol.DEFAULT_ERROR)
 
     def add_transform(self, _address: str, transform: str, **kwargs):
         try:
@@ -389,7 +401,8 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
             self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. "
                               f"No transform was removed.")
 
-    def create_filter(self, _agent_osc_address: str,
+    def create_filter(self,
+                      _agent_osc_address: str,
                       name: str,
                       osc_address: str,
                       status_address: str,
@@ -400,10 +413,15 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
         try:
             filter_type: Type[SomaxFilter] = SomaxFilter.from_string(filter_type, **kwargs)
             post_filter: SomaxFilter = filter_type(name=name, **kwargs)
+
+            # add filter and update its eligibility if a corpus has been loaded
             self.generation_scheduler.generator.add_post_filter(post_filter, override)
+
+            # register filter as an object corresponding to a max object with a given osc address
             self.register_osc_component(osc_address, status_address, post_filter)
-            if verbose:
-                self.logger.info(f"Added filter {repr(post_filter)}")
+
+            self.send(SendProtocol.ELIGIBILITY, post_filter.eligible, address=osc_address)
+            self.logger.info(f"Created filter '{name}' (type: {filter_type.to_string()})")
         except ValueError as e:
             self.logger.error(f"{str(e)}. No filter was added.")
         except ComponentAddressError as e:
@@ -576,7 +594,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
                        corpus.length(),
                        corpus.filepath if isinstance(corpus, AudioSomaxCorpus) else None])
         else:
-            self.send(SendProtocol.PLAYER_CORPUS, -1)
+            self.send(SendProtocol.PLAYER_CORPUS, SendProtocol.DEFAULT_ERROR)
 
     # TODO: Reimplement post-merge
     # def _send_eligibility(self, _address: Optional[str] = None):
@@ -657,9 +675,9 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
     # PRIVATE
     #######################################################################################
 
-    def _prospector(self, prospector_osc_address: str) -> SomaxProspector:
+    def _get_prospector(self, prospector_osc_address: str) -> SomaxProspector:
         path: List[str] = self.osc_address_to_path(prospector_osc_address)
-        return  self._generator.get_prospector(path[1:])
+        return self._generator.get_prospector(path[1:])
 
     @property
     def _generator(self) -> SomaxGenerator:

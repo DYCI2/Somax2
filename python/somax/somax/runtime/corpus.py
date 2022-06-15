@@ -21,7 +21,7 @@ from merge.main.corpus import Corpus, E
 from merge.main.exceptions import CorpusError, ResourceError
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
-from somax.features.feature import CorpusFeature
+from somax.descriptors.descriptor import SomaxDescriptor
 from somax.runtime.corpus_event import SomaxCorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.scheduler.scheduling_mode import SchedulingMode
 
@@ -31,7 +31,7 @@ S = TypeVar('S', bound=SomaxCorpusEvent)
 class CorpusUnpickler(pickle.Unpickler):
     safe_modules = ['logging', 'numpy.core.multiarray', 'numpy']
     safe_builtins = ['range', 'complex', 'set', 'frozenset', 'slice']
-    safe_somax_modules = ['somax.runtime', 'somax.features', 'somax.corpus_builder', 'somax.scheduler']
+    safe_somax_modules = ['somax.runtime', 'somax.descriptors', 'somax.corpus_builder', 'somax.scheduler']
 
     @staticmethod
     def valid_somax_module(module: str) -> bool:
@@ -66,7 +66,7 @@ class SomaxCorpus(Corpus[S], ABC):
     INDEX_MAP_SIZE = 1_000_000
 
     def __init__(self, events: List[S], name: str, scheduling_mode: SchedulingMode,
-                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any], **kwargs):
+                 feature_types: List[Type[SomaxDescriptor]], build_parameters: Dict[str, Any], **kwargs):
         super().__init__(events, feature_types)
         self.logger = logging.getLogger(__name__)
         self.name: str = name
@@ -116,7 +116,7 @@ class SomaxCorpus(Corpus[S], ABC):
                 json.dump(self, f, indent=indentation, default=lambda o: o.encode())
         return filepath
 
-    def has_feature(self, feature_type: Type[CorpusFeature]) -> bool:
+    def has_feature(self, feature_type: Type[SomaxDescriptor]) -> bool:
         return feature_type in self.feature_types
 
     def event_at(self, index: int) -> S:
@@ -138,7 +138,7 @@ class SomaxCorpus(Corpus[S], ABC):
 
 class MidiSomaxCorpus(SomaxCorpus[MidiCorpusEvent]):
     def __init__(self, events: List[MidiCorpusEvent], name: str, scheduling_mode: SchedulingMode,
-                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any]):
+                 feature_types: List[Type[SomaxDescriptor]], build_parameters: Dict[str, Any]):
         super().__init__(events=events, name=name, scheduling_mode=scheduling_mode,
                          feature_types=feature_types, build_parameters=build_parameters)
         self.logger = logging.getLogger(__name__)
@@ -166,7 +166,7 @@ class MidiSomaxCorpus(SomaxCorpus[MidiCorpusEvent]):
             features_dict: Dict[str, str] = corpus_data["features_dict"]
             events: List[MidiCorpusEvent] = [MidiCorpusEvent.decode(event_dict, features_dict)
                                              for event_dict in corpus_data["events"]]
-            features: List[Type[CorpusFeature]] = [CorpusFeature.class_from_string(p) for p in features_dict.values()]
+            features: List[Type[SomaxDescriptor]] = [SomaxDescriptor.class_from_string(p) for p in features_dict.values()]
             return cls(events=events, name=name, scheduling_mode=scheduling_mode,
                        feature_types=features, build_parameters=build_parameters)
 
@@ -178,9 +178,9 @@ class MidiSomaxCorpus(SomaxCorpus[MidiCorpusEvent]):
         raise NotImplementedError("Not implemented")
 
     def encode(self) -> Dict[str, Any]:
-        features: Dict[Type['CorpusFeature'], str] = {cls: name for (name, cls) in CorpusFeature.all_corpus_features()}
+        features: Dict[Type['SomaxDescriptor'], str] = {cls: name for (name, cls) in SomaxDescriptor.all_corpus_features()}
         if len(set(features.keys())) < len(features.keys()):
-            self.logger.warning("Two features with the same name exist in the library. Built corpus may not be properly"
+            self.logger.warning("Two descriptors with the same name exist in the library. Built corpus may not be properly"
                                 " constructed. Ensure that no two CorpusFeatures in the library have the same name.")
         return {"name": self.name,
                 "content_type": self.scheduling_mode.encode(),
@@ -275,7 +275,7 @@ class MidiSomaxCorpus(SomaxCorpus[MidiCorpusEvent]):
 
 class AudioSomaxCorpus(SomaxCorpus):
     def __init__(self, events: List[AudioCorpusEvent], name: str, scheduling_mode: SchedulingMode,
-                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any],
+                 feature_types: List[Type[SomaxDescriptor]], build_parameters: Dict[str, Any],
                  sr: int, filepath: str, file_duration: float, file_num_channels: int):
         super().__init__(events=events, name=name, scheduling_mode=scheduling_mode,
                          feature_types=feature_types, build_parameters=build_parameters)

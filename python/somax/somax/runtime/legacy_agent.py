@@ -444,7 +444,7 @@ class OscAgent(Agent, AsyncOsc):
         self.scheduling_handler.set_scheduling_mode(corpus.scheduling_mode)
 
         self.player.set_eligibility(corpus)
-        self.player.read_corpus(corpus)
+        self.player.read_memory(corpus)
         self.flush()
         self._send_eligibility()
         self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "success")

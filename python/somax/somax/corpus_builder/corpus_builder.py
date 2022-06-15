@@ -16,7 +16,7 @@ from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
-from somax.features.feature import CorpusFeature
+from somax.descriptors.descriptor import SomaxDescriptor
 from somax.runtime.corpus import SomaxCorpus, AudioSomaxCorpus, MidiSomaxCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError, ParameterError
@@ -189,8 +189,8 @@ class CorpusBuilder:
         # TODO: Folder support - should not use filepaths[0]
         metadata: MidiMetadata = MidiMetadata(filepath=filepaths[0], content_type=RelativeScheduling(), stft=stft)
 
-        used_features: List[Type[CorpusFeature]] = []
-        for _, feature in CorpusFeature.all_corpus_features():  # type Type[CorpusFeature]
+        used_features: List[Type[SomaxDescriptor]] = []
+        for _, feature in SomaxDescriptor.all_corpus_features():  # type Type[CorpusFeature]
             try:
                 feature.analyze(events, metadata)
                 used_features.append(feature)
@@ -264,8 +264,8 @@ class CorpusBuilder:
 
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) computed necessary metadata")
 
-        used_features: List[Type[CorpusFeature]] = []
-        for _, feature in CorpusFeature.all_corpus_features():  # type: Type[CorpusFeature]
+        used_features: List[Type[SomaxDescriptor]] = []
+        for _, feature in SomaxDescriptor.all_corpus_features():  # type: Type[SomaxDescriptor]
             try:
                 feature.analyze(events, metadata)
                 used_features.append(feature)

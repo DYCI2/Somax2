@@ -8,9 +8,9 @@ import numpy as np
 from merge.io.parsable import ParsableWithDefault, T
 from merge.main.exceptions import TransformError
 from merge.main.descriptor import Descriptor
-from somax.features.chroma_features import OnsetChroma
-from somax.features.feature import AbstractFeature
-from somax.features.pitch_features import AbstractIntegerPitch
+from somax.descriptors.chroma_descriptors import OnsetChroma
+from somax.descriptors.descriptor import SomaxDescriptor
+from somax.descriptors.pitch_descriptors import AbstractIntegerPitch
 from somax.runtime.corpus_event import SomaxCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import TransformIdentityError
 
@@ -76,7 +76,7 @@ class NoTransform(AbstractTransform):
 
     @staticmethod
     def valid_features() -> List[Type[Descriptor]]:
-        return AbstractFeature.classes(include_abstract=True)
+        return SomaxDescriptor.classes(include_abstract=True)
 
     def renderer_info(self) -> Any:
         return 0

@@ -44,6 +44,7 @@ class SendProtocol:
     CORPUSBUILDER_AUDIO_STATS = "audiocb stats"
 
     BANG = "bang"
+    DEFAULT_ERROR = -1
 
     CORPUS_TYPE_MIDI = "midi"
     CORPUS_TYPE_AUDIO = "audio"

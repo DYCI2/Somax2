@@ -3,12 +3,12 @@ from typing import Any, Dict, List
 import numpy as np
 
 from somax.corpus_builder.metadata import MidiMetadata
-from somax.features.feature import CorpusFeature, FeatureUtils
+from somax.descriptors.descriptor import SomaxDescriptor, DescriptorUtils
 from somax.runtime.corpus_event import MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
-class OctaveBands(CorpusFeature):
+class OctaveBands(SomaxDescriptor):
     NUM_BANDS = 11
 
     def __init__(self, value: np.ndarray):
@@ -16,7 +16,7 @@ class OctaveBands(CorpusFeature):
 
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
-        if FeatureUtils.is_valid_midi(events, metadata):
+        if DescriptorUtils.is_valid_midi(events, metadata):
             for event in events:
                 band_distribution: np.ndarray = np.zeros(OctaveBands.NUM_BANDS, dtype=float)
                 octaves: List[int] = [int(note.pitch // 12) for note in event.notes]
@@ -31,9 +31,9 @@ class OctaveBands(CorpusFeature):
                            f"type {metadata.content_type.__class__.__name__}")
 
     @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=trait_dict["band"])
+    def decode(cls, trait_dict: Dict[str, Any]) -> 'SomaxDescriptor':
+        return cls(value=trait_dict[cls.to_string()])
 
     def encode(self) -> Dict[str, Any]:
-        return {"band": self.value.tolist()}
+        return {self.to_string(): self.value.tolist()}
 

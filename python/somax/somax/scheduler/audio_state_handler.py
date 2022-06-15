@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 from merge.main.descriptor import Descriptor
-from somax.features import Tempo
+from somax.descriptors import Tempo
 from somax.runtime.corpus_event import AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.scheduled_event import ScheduledEvent, AudioEvent, AudioOffEvent, AudioContinueEvent, TempoEvent

@@ -4,7 +4,7 @@ from merge.main.classifier import Classifier, IdentityClassifier, PitchClassClas
 from merge.main.descriptor import Descriptor
 from merge.main.exceptions import InputError
 from somax.classification.chroma_classifiers import SomChromaClassifier
-from somax.features import TopNote, OnsetChroma
+from somax.descriptors import TopNote, OnsetChroma
 
 
 class ClassificationStereotypes:

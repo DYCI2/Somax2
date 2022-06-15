@@ -1,7 +1,7 @@
 from typing import Dict, List, Type
 
 from merge.main.exceptions import TransformError
-from somax.features.feature import AbstractFeature
+from somax.descriptors.descriptor import SomaxDescriptor
 from somax.runtime.transforms import AbstractTransform, RedundantTransform
 
 
@@ -44,7 +44,7 @@ class TransformHandler:
             if v == transform:
                 return k
 
-    def get_by_feature(self, feature: Type[AbstractFeature]) -> List[AbstractTransform]:
+    def get_by_feature(self, feature: Type[SomaxDescriptor]) -> List[AbstractTransform]:
         transforms: List[AbstractTransform] = []
         for transform in self._transforms.values():
             if not isinstance(transform, RedundantTransform):

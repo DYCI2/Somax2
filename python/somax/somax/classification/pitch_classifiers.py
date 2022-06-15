@@ -5,9 +5,9 @@ from merge.main.classifier import Classifier
 from merge.main.feature import Feature
 from merge.main.influence import Influence, CorpusInfluence
 from merge.main.label import IntLabel, Label
-from somax.features import TopNote
-from somax.features.feature import CorpusFeature
-from somax.features.pitch_features import RuntimeIntegerPitch, AbstractIntegerPitch, VirtualFundamental, BassNote, \
+from somax.descriptors import TopNote
+from somax.descriptors.descriptor import SomaxDescriptor
+from somax.descriptors.pitch_descriptors import RuntimeIntegerPitch, AbstractIntegerPitch, VirtualFundamental, BassNote, \
     YinDiscretePitch
 from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent, AudioCorpusEvent, MidiCorpusEvent

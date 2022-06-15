@@ -9,7 +9,7 @@ from merge.main.query import TriggerQuery, InfluenceQuery
 from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.corpus_builder.chroma_filter import NoFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder
-from somax.features import TopNote, OnsetChroma
+from somax.descriptors import TopNote, OnsetChroma
 from somax.runtime.activity_pattern import AbstractNavigator, ContinuousEchoicNavigator, DiscreteEchoicNavigator
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.memory_spaces import NGramMemorySpace
@@ -103,13 +103,13 @@ class TestSomaxGenerator(TestCase):
                                                       enabled=True)
 
         if activity_pattern == ContinuousEchoicNavigator:
-            typing.cast(ContinuousEchoicNavigator, melodic._activity_pattern)._set_tau(tau)
-            typing.cast(ContinuousEchoicNavigator, harmonic._activity_pattern)._set_tau(tau)
-            typing.cast(ContinuousEchoicNavigator, self_layer._activity_pattern)._set_tau(tau)
+            typing.cast(ContinuousEchoicNavigator, melodic._navigator)._set_tau(tau)
+            typing.cast(ContinuousEchoicNavigator, harmonic._navigator)._set_tau(tau)
+            typing.cast(ContinuousEchoicNavigator, self_layer._navigator)._set_tau(tau)
         if activity_pattern == DiscreteEchoicNavigator:
-            typing.cast(DiscreteEchoicNavigator, melodic._activity_pattern)._set_tau(int(tau))
-            typing.cast(DiscreteEchoicNavigator, harmonic._activity_pattern)._set_tau(int(tau))
-            typing.cast(DiscreteEchoicNavigator, self_layer._activity_pattern)._set_tau(int(tau))
+            typing.cast(DiscreteEchoicNavigator, melodic._navigator)._set_tau(int(tau))
+            typing.cast(DiscreteEchoicNavigator, harmonic._navigator)._set_tau(int(tau))
+            typing.cast(DiscreteEchoicNavigator, self_layer._navigator)._set_tau(int(tau))
 
         generator: SomaxGenerator = SomaxGenerator("g1")
         generator.add_prospector(melodic)
