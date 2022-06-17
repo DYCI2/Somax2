@@ -13,16 +13,15 @@ from merge.io.parsable import ParsableWithDefault, T
 from merge.main.candidates import Candidates
 from merge.main.exceptions import CandidatesError
 from merge.main.merge_handler import MergeHandler
-from somax.runtime.content_aware import ContentAware
 from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.corpus import SomaxCorpus
 
 
-class AbstractMergeAction(MergeHandler, Component, ContentAware, ParsableWithDefault['AbstractMergeAction'], ABC):
+class AbstractMergeAction(MergeHandler, Component, ParsableWithDefault['AbstractMergeAction'], ABC):
     DEFAULT_MERGE_ACTION_NAME = "mergeaction"
 
     def __init__(self, name: str, *args, **kwargs):
-        super().__init__(name=name, invalidate_parent=True, *args, **kwargs)
+        super().__init__(name=name, *args, **kwargs)
 
     @abstractmethod
     def clear(self) -> None:

@@ -16,18 +16,17 @@ from merge.main.corpus_event import CorpusEvent
 from merge.main.jury import Jury
 from merge.main.queue import Queue
 from merge.stubs.transform import Transform
-from somax.runtime.content_aware import ContentAware
 from somax.runtime.continuous_candidates import ContinuousCandidates
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.transforms import NoTransform
 
 
-class AbstractPeakSelector(Jury, Component, ContentAware, ParsableWithDefault['AbstractPeakSelector'], ABC):
+class AbstractPeakSelector(Jury, Component, ParsableWithDefault['AbstractPeakSelector'], ABC):
     PEAK_SELECTOR_NAME = "peakselector"
 
     def __init__(self, name: str, *args, **kwargs):
-        super().__init__(name=name, invalidate_parent=True, *args, **kwargs)
+        super().__init__(name=name, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
 
     def __repr__(self):

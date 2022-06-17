@@ -19,7 +19,7 @@ from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 
 
-class AbstractMemorySpace(Component, ParsableWithDefault['AbstractMemorySpace'], ABC):
+class AbstractModel(Component, ParsableWithDefault['AbstractMemorySpace'], ABC):
     """ MemorySpaces determine how events are matched to labels """
 
     def __init__(self, name: str = DefaultNames.MEMORY_SPACE, *args, **kwargs):
@@ -34,7 +34,7 @@ class AbstractMemorySpace(Component, ParsableWithDefault['AbstractMemorySpace'],
 
     @classmethod
     def default(cls) -> Type[T]:
-        return NGramMemorySpace
+        return NGramModel
 
     @abstractmethod
     def model(self, corpus: SomaxCorpus, labels: List[Label], **_kwargs) -> None:
@@ -64,9 +64,9 @@ class AbstractMemorySpace(Component, ParsableWithDefault['AbstractMemorySpace'],
             self.model(self._corpus, self._labels)
 
 
-class NGramMemorySpace(AbstractMemorySpace):
+class NGramModel(AbstractModel):
     def __init__(self, history_len: int = 3, **_kwargs):
-        super(NGramMemorySpace, self).__init__(**_kwargs)
+        super(NGramModel, self).__init__(**_kwargs)
         self.logger.debug(f"[__init__] Initializing {self.__class__.__name__} with history length {history_len}.")
         self._structured_data: Dict[Tuple[int, ...], List[SomaxCorpusEvent]] = {}
         self._ngram_size: Parameter[int] = Parameter(name="memorylength",

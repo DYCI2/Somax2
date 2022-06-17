@@ -14,7 +14,7 @@ from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.descriptors import TopNote, OnsetChroma
 from somax.runtime.activity_pattern import ContinuousEchoicNavigator, AbstractNavigator, DiscreteEchoicNavigator
 from somax.runtime.corpus import SomaxCorpus
-from somax.runtime.memory_spaces import NGramMemorySpace
+from somax.runtime.memory_spaces import NGramModel
 from somax.runtime.prospector import SomaxProspector
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import TransposeTransform, AbstractTransform
@@ -101,12 +101,12 @@ class TestSomaxProspector(TestCase):
         prospector: SomaxProspector = SomaxProspector("p", 1.0, feature_type,
                                                       classifier,
                                                       activity_pattern,
-                                                      NGramMemorySpace(),
+                                                      NGramModel(),
                                                       None, False, True)
 
-        memory_space: NGramMemorySpace = typing.cast(NGramMemorySpace, prospector.memory_space)
+        memory_space: NGramModel = typing.cast(NGramModel, prospector.model)
         # memory_space.set_ngram_size(1)@
-        self.assertEqual(1, prospector.memory_space._ngram_size.value)
+        self.assertEqual(1, prospector.model._ngram_size.value)
 
         if isinstance(activity_pattern, ContinuousEchoicNavigator):
             activity_pattern: ContinuousEchoicNavigator = typing.cast(ContinuousEchoicNavigator, prospector._navigator)

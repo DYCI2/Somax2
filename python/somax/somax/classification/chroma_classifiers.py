@@ -26,6 +26,8 @@ from somax.classification import tables
 #
 #     def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
 #         return corpus.has_feature(OnsetChroma)
+from somax.descriptors.chroma_descriptors import BaseChroma
+
 
 class SomChromaClassifier(Classifier):
     SOM_DATA_FILE = 'misc_hsom'  # Note: vectors in file are not normalized
@@ -58,7 +60,7 @@ class SomChromaClassifier(Classifier):
         return [IntLabel(label) for label in raw_labels]
 
     def compatible_with(self, descriptor_type: Type[Descriptor]) -> bool:
-        return issubclass(descriptor_type, Chroma12)
+        return issubclass(descriptor_type, Chroma12) or issubclass(descriptor_type, BaseChroma)
 
     def _label_from_chroma(self, chroma: np.ndarray) -> int:
         # max_val: float = np.max(chroma)

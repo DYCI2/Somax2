@@ -66,8 +66,8 @@ class SomaxCorpus(Corpus[S], ABC):
     INDEX_MAP_SIZE = 1_000_000
 
     def __init__(self, events: List[S], name: str, scheduling_mode: SchedulingMode,
-                 feature_types: List[Type[SomaxDescriptor]], build_parameters: Dict[str, Any], **kwargs):
-        super().__init__(events, feature_types)
+                 descriptor_types: List[Type[SomaxDescriptor]], build_parameters: Dict[str, Any], **kwargs):
+        super().__init__(events, descriptor_types)
         self.logger = logging.getLogger(__name__)
         self.name: str = name
         self.scheduling_mode: SchedulingMode = scheduling_mode
@@ -116,8 +116,8 @@ class SomaxCorpus(Corpus[S], ABC):
                 json.dump(self, f, indent=indentation, default=lambda o: o.encode())
         return filepath
 
-    def has_feature(self, feature_type: Type[SomaxDescriptor]) -> bool:
-        return feature_type in self.feature_types
+    def has_descriptor(self, descriptor_type: Type[SomaxDescriptor]) -> bool:
+        return descriptor_type in self.descriptor_types
 
     def event_at(self, index: int) -> S:
         return self.events[index]
@@ -138,9 +138,9 @@ class SomaxCorpus(Corpus[S], ABC):
 
 class MidiSomaxCorpus(SomaxCorpus[MidiCorpusEvent]):
     def __init__(self, events: List[MidiCorpusEvent], name: str, scheduling_mode: SchedulingMode,
-                 feature_types: List[Type[SomaxDescriptor]], build_parameters: Dict[str, Any]):
+                 descriptor_types: List[Type[SomaxDescriptor]], build_parameters: Dict[str, Any]):
         super().__init__(events=events, name=name, scheduling_mode=scheduling_mode,
-                         feature_types=feature_types, build_parameters=build_parameters)
+                         descriptor_types=descriptor_types, build_parameters=build_parameters)
         self.logger = logging.getLogger(__name__)
 
     @classmethod
@@ -275,10 +275,10 @@ class MidiSomaxCorpus(SomaxCorpus[MidiCorpusEvent]):
 
 class AudioSomaxCorpus(SomaxCorpus):
     def __init__(self, events: List[AudioCorpusEvent], name: str, scheduling_mode: SchedulingMode,
-                 feature_types: List[Type[SomaxDescriptor]], build_parameters: Dict[str, Any],
+                 descriptor_types: List[Type[SomaxDescriptor]], build_parameters: Dict[str, Any],
                  sr: int, filepath: str, file_duration: float, file_num_channels: int):
         super().__init__(events=events, name=name, scheduling_mode=scheduling_mode,
-                         feature_types=feature_types, build_parameters=build_parameters)
+                         descriptor_types=descriptor_types, build_parameters=build_parameters)
         self.sr: int = sr
         self.filepath: str = filepath
         self.file_duration: float = file_duration

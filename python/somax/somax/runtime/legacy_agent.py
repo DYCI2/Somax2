@@ -22,7 +22,7 @@ from somax.runtime.corpus import SomaxCorpus, MidiSomaxCorpus, AudioSomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, InvalidLabelInput, TransformError
 from somax.runtime.improvisation_memory import ImprovisationMemory
-from somax.runtime.influence import SomaxFeatureInfluence
+from somax.runtime.influence import SomaxDescriptorInfluence
 from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
@@ -277,7 +277,7 @@ class OscAgent(Agent, AsyncOsc):
         if not self.scheduling_handler.running:
             return
         try:
-            influence: SomaxFeatureInfluence = SomaxFeatureInfluence.from_keyword(feature_keyword, value)
+            influence: SomaxDescriptorInfluence = SomaxDescriptorInfluence.from_keyword(feature_keyword, value)
         except ValueError as e:
             self.logger.error(f"{str(e)}. No influence was computed.")
             return

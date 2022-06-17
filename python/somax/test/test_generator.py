@@ -12,7 +12,7 @@ from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.descriptors import TopNote, OnsetChroma
 from somax.runtime.activity_pattern import AbstractNavigator, ContinuousEchoicNavigator, DiscreteEchoicNavigator
 from somax.runtime.corpus import SomaxCorpus
-from somax.runtime.memory_spaces import NGramMemorySpace
+from somax.runtime.memory_spaces import NGramModel
 from somax.runtime.generator import SomaxGenerator
 from somax.runtime.prospector import SomaxProspector
 
@@ -87,17 +87,17 @@ class TestSomaxGenerator(TestCase):
         melodic: SomaxProspector = SomaxProspector("m", 1.0, TopNote,
                                                    IdentityClassifier(),
                                                    activity_pattern(),
-                                                   NGramMemorySpace(history_len=ngram_order),
+                                                   NGramModel(history_len=ngram_order),
                                                    None, False, True)
         harmonic: SomaxProspector = SomaxProspector("h", 1.0, OnsetChroma,
                                                     SomChromaClassifier(),
                                                     activity_pattern(),
-                                                    NGramMemorySpace(history_len=ngram_order),
+                                                    NGramModel(history_len=ngram_order),
                                                     None, False, True)
         self_layer: SomaxProspector = SomaxProspector("s", 1.0, TopNote,
                                                       IdentityClassifier(),
                                                       activity_pattern(),
-                                                      NGramMemorySpace(history_len=ngram_order),
+                                                      NGramModel(history_len=ngram_order),
                                                       corpus=None,
                                                       self_influenced=True,
                                                       enabled=True)

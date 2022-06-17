@@ -31,7 +31,7 @@ class SomaxDescriptor(Descriptor[T], Parsable['SomaxDescriptor'], ABC):
     def from_string(cls, class_name: str, include_abstract: bool = False) -> Type[T]:
         try:
             return Introspective.introspect(cls,
-                                            modules=[somax.features,
+                                            modules=[somax.descriptors,
                                                      merge.main.descriptor,  # supported for runtime parsing only
                                                      ],
                                             include_abstract=include_abstract)[class_name.lower()]

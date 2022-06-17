@@ -17,7 +17,6 @@ from merge.main.jury import Jury
 from merge.main.merge_handler import MergeHandler
 from merge.main.query import Query, TriggerQuery, InfluenceQuery
 from somax.io.send_protocol import DefaultNames
-from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
 from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.exceptions import ContentMismatch
@@ -31,7 +30,7 @@ from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
 
 
-class SomaxGenerator(Generator, ContentAware, Component):
+class SomaxGenerator(Generator, Component):
     def __init__(self,
                  name: str,
                  jury: Jury = AbstractPeakSelector.default(),
@@ -218,7 +217,6 @@ class SomaxGenerator(Generator, ContentAware, Component):
 
         self.prospectors[name] = prospector
         if self.corpus is not None:
-            # TODO: Eligibility/error handling + maybe the same thing for filters.
             prospector.read_memory(self.corpus)
 
     def remove_prospector(self, name: str) -> None:

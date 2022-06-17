@@ -77,4 +77,4 @@ class ImprovisationMemory:
             event.recorded_memory_state = memory_state
             events.append(event)
         return MidiSomaxCorpus(events, name, scheduling_mode=source_corpus.scheduling_mode,
-                               feature_types=[], build_parameters={"build_method": "runtime"})
+                               descriptor_types=[], build_parameters={"build_method": "runtime"})

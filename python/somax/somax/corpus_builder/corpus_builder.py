@@ -201,7 +201,7 @@ class CorpusBuilder:
                           f"{len(used_features)} features ({', '.join([f.__name__ for f in used_features])})")
 
         corpus: MidiSomaxCorpus = MidiSomaxCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
-                                                  feature_types=used_features, build_parameters=build_parameters)
+                                                  descriptor_types=used_features, build_parameters=build_parameters)
 
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) completed construction of MIDI corpus")
 
@@ -286,7 +286,7 @@ class CorpusBuilder:
 
         # TODO: Folder support - should not use filepaths[0]
         corpus: AudioSomaxCorpus = AudioSomaxCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
-                                                    feature_types=used_features,
+                                                    descriptor_types=used_features,
                                                     build_parameters=build_parameters, sr=sr, filepath=filepaths[0],
                                                     file_duration=metadata.duration,
                                                     file_num_channels=metadata.channels)

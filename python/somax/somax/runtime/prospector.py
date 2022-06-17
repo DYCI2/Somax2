@@ -11,8 +11,8 @@ from merge.main.candidates import Candidates
 from merge.main.classifier import Classifier, Trainable
 from merge.main.corpus_event import CorpusEvent
 from merge.main.descriptor import Descriptor
-from merge.main.exceptions import QueryError
-from merge.main.influence import Influence, CorpusInfluence, FeatureInfluence
+from merge.main.exceptions import QueryError, ConfigurationError
+from merge.main.influence import Influence, CorpusInfluence, DescriptorInfluence
 from merge.main.label import Label
 from merge.main.prospector import Prospector
 from somax.descriptors.descriptor import SomaxDescriptor
@@ -20,7 +20,7 @@ from somax.io.send_protocol import DefaultNames
 from somax.runtime.activity_pattern import AbstractNavigator
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import SomaxCorpus
-from somax.runtime.memory_spaces import AbstractMemorySpace
+from somax.runtime.memory_spaces import AbstractModel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 
@@ -34,7 +34,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
                  descriptor: Type[Descriptor],
                  classifier: Classifier,
                  activity_pattern: AbstractNavigator,
-                 memory_space: AbstractMemorySpace,
+                 memory_space: AbstractModel,
                  corpus: Optional[SomaxCorpus] = None,
                  self_influenced: bool = False,
                  enabled: bool = True,
@@ -56,7 +56,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
         # TODO[B4]: Check that the given classifier is valid with the given feature
         self._descriptor_type: Type[Descriptor] = descriptor
         self._classifier: Classifier = classifier
-        self._memory_space: AbstractMemorySpace = memory_space
+        self._model: AbstractModel = memory_space
         self._navigator: AbstractNavigator = activity_pattern
 
         self._self_influenced: Parameter[bool] = Parameter(name="selfinfluenced",
@@ -77,24 +77,25 @@ class SomaxProspector(Prospector, Component, ContentAware):
 
     def read_memory(self, corpus: SomaxCorpus, warn_on_ineligible: bool = True, **kwargs) -> None:
         """ :raises RuntimeError """
-        self._eligible = self._is_eligible_for(corpus)
-        if not self._eligible and warn_on_ineligible:
-            self.logger.warning(f"Prospector {self.name} is not eligible for corpus '{corpus.name}'")
-
         self._corpus = corpus
-        self._update_state()
+        self._update_state(warn_on_ineligible=warn_on_ineligible)
 
-    def _update_state(self) -> None:
-        raise NotImplementedError("TODO: if isinstance(self.classifier, Trainable)")
+    def _update_state(self, warn_on_ineligible: bool = True) -> None:
         if self._corpus is None:
             return
+
+        self._eligible = self._is_eligible_for(self._corpus)
+        if not self._eligible and warn_on_ineligible:
+            self.logger.warning(f"Prospector {self.name} is not eligible for corpus '{self._corpus.name}'")
+
+        raise NotImplementedError("TODO: if isinstance(self.classifier, Trainable), need to cluster/train classifier!")
 
         features: List[Descriptor] = self._corpus.get_features_of_type(self._descriptor_type)
         if isinstance(self._classifier, Trainable):
             self._classifier.cluster(features)
 
         labels: List[Label] = self._classifier.classify_multiple(features)
-        self._memory_space.model(self._corpus, labels)
+        self._model.model(self._corpus, labels)
         self._navigator.read_memory(self._corpus)
 
     def process(self, influence: Influence, self_influenced: bool = False, **kwargs) -> None:
@@ -109,7 +110,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
             if isinstance(influence, CorpusInfluence):
                 label: Label = self._classifier.classify(transform.inverse(
                     influence.value.get_feature(self._descriptor_type)))
-            elif isinstance(influence, FeatureInfluence):
+            elif isinstance(influence, DescriptorInfluence):
                 label: Label = self._classifier.classify(transform.inverse(influence.value))
             # elif isinstance(influence, LabelInfluence):
             #     # TODO[B2]: How to handle Label input with Transform? We can't nor should use transforms here
@@ -119,7 +120,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
                                  f"{influence.__class__.__name__}")
             labels.append((label, transform))
 
-        matched_events: List[Candidate] = self._memory_space.influence(labels, **kwargs)
+        matched_events: List[Candidate] = self._model.influence(labels, **kwargs)
         self._navigator.insert(matched_events, self_influenced)
 
     # # influences the memory with incoming data
@@ -148,7 +149,7 @@ class SomaxProspector(Prospector, Component, ContentAware):
     def clear(self):
         self._navigator.clear()
         self._classifier.clear()
-        self._memory_space.clear()
+        self._model.clear()
 
     def feedback(self, event: Optional[Candidate], **kwargs) -> None:
         if self.self_influenced and event is not None:
@@ -169,12 +170,16 @@ class SomaxProspector(Prospector, Component, ContentAware):
             self._navigator.update_time(time)
 
     def set_classifier(self, classifier: Classifier) -> None:
-        # TODO: Compatibility handling
+        """ raises: ConfigurationError if incomatible with `self._classifier`"""
+        if not classifier.compatible_with(self._descriptor_type):
+            raise ConfigurationError(f"Selected classifier '{classifier.__class__.__name__}' is not compatible with the"
+                                     f" current descriptor type ({self._descriptor_type.__name__})")
+
         self._classifier = classifier
         self._update_state()
 
-    def set_memory_space(self, memory_space: AbstractMemorySpace) -> None:
-        self._memory_space = memory_space
+    def set_model(self, model: AbstractModel) -> None:
+        self._model = model
         self._update_state()
 
     def set_navigator(self, navigator: AbstractNavigator) -> None:
@@ -182,18 +187,27 @@ class SomaxProspector(Prospector, Component, ContentAware):
         self._update_state()
 
     def set_descriptor_type(self, descriptor_type: Type[Descriptor]) -> None:
-        # TODO: Compatibility Handling
+        """ raises: ConfigurationError if incompatible with `self._descriptor_type`"""
+        if not self._classifier.compatible_with(descriptor_type):
+            raise ConfigurationError(f"Selected descriptor type '{descriptor_type.__name__}' is not compatible with the"
+                                     f" current classifier ({self._classifier.__class__.__name__})")
+
         self._descriptor_type = descriptor_type
+        self._update_state()
+
+    def set_classification_stereotype(self, stereotype: Tuple[Type[Descriptor], Type[Classifier]]) -> None:
+        self._descriptor_type = stereotype[0]
+        self._classifier = stereotype[1]()
         self._update_state()
 
     def update_transforms(self, transform_handler: TransformHandler):
         # TODO[B2]: Temporary cast: should not be handled this way
         self.valid_transforms = transform_handler.get_by_feature(typing.cast(Type[SomaxDescriptor],
                                                                              self._descriptor_type))
-        self._memory_space.update_transforms(transform_handler, self.valid_transforms)
+        self._model.update_transforms(transform_handler, self.valid_transforms)
 
     def _is_eligible_for(self, corpus: SomaxCorpus) -> bool:
-        return True
+        return corpus.has_descriptor(self._descriptor_type)
 
     @property
     def weight(self) -> float:
@@ -204,8 +218,20 @@ class SomaxProspector(Prospector, Component, ContentAware):
         self._weight.value = value
 
     @property
-    def memory_space(self):
-        return self._memory_space
+    def model(self) -> AbstractModel:
+        return self._model
+
+    @property
+    def navigator(self) -> AbstractNavigator:
+        return self._navigator
+
+    @property
+    def descriptor_type(self) -> Type[Descriptor]:
+        return self._descriptor_type
+
+    @property
+    def classifier(self) -> Classifier:
+        return self._classifier
 
     @property
     def self_influenced(self) -> float:
@@ -223,15 +249,3 @@ class SomaxProspector(Prospector, Component, ContentAware):
 
     def num_peaks(self) -> int:
         return self._navigator.num_peaks()
-
-    def classifier_type(self) -> Type[Classifier]:
-        return type(self._classifier)
-
-    def navigator_type(self) -> Type[AbstractNavigator]:
-        return type(self._navigator)
-
-    def model_type(self) -> Type[AbstractMemorySpace]:
-        return type(self._memory_space)
-
-    def descriptor_type(self) -> Type[Descriptor]:
-        return self._descriptor_type

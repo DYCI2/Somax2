@@ -2,8 +2,8 @@ from enum import Enum
 from typing import Any
 
 from merge.io.parsable import ParsableEnum
-from merge.main.influence import FeatureInfluence
-from somax.descriptors.descriptor import RuntimeDescriptor
+from merge.main.influence import DescriptorInfluence
+from somax.descriptors.descriptor import SomaxDescriptor
 
 
 class InfluenceType(ParsableEnum):
@@ -24,11 +24,11 @@ class InfluenceType(ParsableEnum):
 #         self.corpus_event: CorpusEvent = corpus_event
 
 
-class SomaxFeatureInfluence(FeatureInfluence):
-    def __init__(self, feature: RuntimeDescriptor):
-        super().__init__(value=feature)
+class SomaxDescriptorInfluence(DescriptorInfluence):
+    def __init__(self, descriptor: SomaxDescriptor):
+        super().__init__(value=descriptor)
 
     @classmethod
     def from_keyword(cls, keyword: str, value: Any):
         """ :raises ValueError if a feature matching the keyword doesn't exist """
-        return cls(RuntimeDescriptor.from_string(keyword, value))
+        return cls(SomaxDescriptor.from_string(keyword, value))
