@@ -11,9 +11,9 @@ class SomaxClassifier(Classifier, ABC):
     # TODO: Remove this class entirely and move behaviour to `merge` repo (`Descriptor` + solution for analysis).
 
     @classmethod
-    def from_string(cls, class_name: str, include_abstract: bool = False) -> Type['SomaxClassifier']:
+    def from_string(cls, class_name: str, include_abstract: bool = False) -> Type[Classifier]:
         try:
-            return Introspective.introspect(cls,
+            return Introspective.introspect(Classifier,
                                             modules=[somax.classification],
                                             include_abstract=include_abstract)[class_name.lower()]
         except KeyError:

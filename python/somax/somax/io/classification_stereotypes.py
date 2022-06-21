@@ -3,6 +3,7 @@ from typing import Tuple, Type, Dict, List, Optional
 from merge.main.classifier import Classifier, IdentityClassifier, PitchClassClassifier
 from merge.main.descriptor import Descriptor
 from merge.main.exceptions import InputError
+from somax.classification import SomaxIdentityClassifier, SomaxPitchClassClassifier
 from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.descriptors import TopNote, OnsetChroma
 
@@ -14,8 +15,8 @@ class ClassificationStereotypes:
 
     def __init__(self):
         self.configurations: Dict[str, Tuple[Type[Descriptor], Type[Classifier]]] = {
-            "pitch": (TopNote, IdentityClassifier),
-            "pitchclass": (TopNote, PitchClassClassifier),
+            "pitch": (TopNote, SomaxIdentityClassifier),
+            "pitchclass": (TopNote, SomaxPitchClassClassifier),
             "chroma": (OnsetChroma, SomChromaClassifier)
         }
 
