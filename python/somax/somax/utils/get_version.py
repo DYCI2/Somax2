@@ -1,5 +1,6 @@
 import re
 from typing import List
+import somax
 
 
 class VersionTools:
@@ -15,7 +16,6 @@ class VersionTools:
         package_dir = os.path.dirname(parent_dir)
         sys.path.insert(0, package_dir)
 
-        import somax
         return somax.__version__
 
     @staticmethod
@@ -24,9 +24,16 @@ class VersionTools:
         return re.split("[.-]", version)  # . for major, minor, rev, - for beta/alpha
 
     @staticmethod
-    def matches_current(version: str, major: bool = True, minor: bool = True,
-                        rev: bool = True, pre_release: bool = True) -> bool:
-        current: List[str] = VersionTools.decode(VersionTools.version())
+    def matches_current(version: str,
+                        use_corpus_version: bool,
+                        major: bool = True,
+                        minor: bool = True,
+                        rev: bool = True,
+                        pre_release: bool = True) -> bool:
+        if use_corpus_version:
+            current: List[str] = VersionTools.decode(somax.__version__corpus__)
+        else:
+            current = VersionTools.decode(somax.__version__)
         other: List[str] = VersionTools.decode(version)
 
         if len(other) < 3:

@@ -13,12 +13,13 @@ from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
+from somax.features import Tempo
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
-from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch
@@ -229,6 +230,38 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def set_tempo_master(self, is_master: bool):
         self.is_tempo_master = is_master
+        self._try_update_server_tempo()
+
+    def _try_update_server_tempo(self):
+        """ Set the server tempo outside the running scheduling loop that normally controls tempo. This can be used
+            while the Player is disabled or when the transport is not running, for example when loading a corpus to
+            a (not yet) enabled player or when setting the tempo master while the transport is not running. """
+        if not self.is_tempo_master:
+            # Don't change the server tempo unless in control of it
+            return
+
+        try:
+            # history exists: use last event's tempo
+            tempo_event, _, _ = self.improvisation_memory.last()  # type: CorpusEvent
+
+        # No history exists
+        except IndexError:
+            if self.player.corpus is not None:
+                tempo_event = self.player.corpus.events[0]
+            else:
+                # cannot set tempo at this time since no corpus is loaded
+                return
+
+        # TODO: This should really be generalized with a unified Tempo/Phase solution
+        if isinstance(tempo_event, MidiCorpusEvent):
+            tempo: float = tempo_event.tempo
+        elif isinstance(tempo_event, AudioCorpusEvent):
+            tempo: float = tempo_event.get_feature(Tempo).value()
+        else:
+            self.logger.warning(f"Cannot set tempo from event of type '{tempo_event.__class__.__name__}'")
+            return
+
+        self.tempo_send_queue.put(TempoMessage(tempo=tempo))
 
     ######################################################
     # MAIN RUNTIME FUNCTIONS
@@ -421,6 +454,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.player.set_eligibility(corpus)
         self.player.read_corpus(corpus)
         self.flush()
+        self._try_update_server_tempo()  # immediately set tempo if player is tempo master
         self._send_eligibility()
         self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
         self.send_current_corpus_info()
