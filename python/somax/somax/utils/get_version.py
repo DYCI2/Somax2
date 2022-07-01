@@ -31,7 +31,7 @@ class VersionTools:
                         rev: bool = True,
                         pre_release: bool = True) -> bool:
         if use_corpus_version:
-            current: List[str] = VersionTools.decode(somax.__version__corpus__)
+            current: List[str] = VersionTools.decode(somax.__version_corpus__)
         else:
             current = VersionTools.decode(somax.__version__)
         other: List[str] = VersionTools.decode(version)

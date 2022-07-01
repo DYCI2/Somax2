@@ -141,7 +141,9 @@ class OscAgent(Agent, AsyncioOscObject):
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
-            event_and_transform = self.player.new_event(scheduling_time, scheduler_tempo)
+            # TODO: BeatPhase should not be `self.scheduling_handler.phase`, but needs to be stored in the trigger to
+            #       make sure that it corresponds to `target time` rather than `trigger time`.
+            event_and_transform = self.player.new_event(scheduling_time, self.scheduling_handler.phase, scheduler_tempo)
             self._send_output_statistics()
         except InvalidCorpus as e:
             self.logger.debug(str(e))

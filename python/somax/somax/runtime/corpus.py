@@ -153,7 +153,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
             with gzip.open(filepath, 'rt', encoding='UTF-8') as f:
                 corpus_data: Dict[str, Any] = json.load(f)
             version: str = corpus_data["version"]
-            if not VersionTools.matches_current(version, use_corpus_version=True, pre_release=False) and not volatile:
+            if not VersionTools.matches_current(version, use_corpus_version=True) and not volatile:
                 raise InvalidCorpus(f"The loaded corpus was built with an old version of Somax. "
                                     f"While it may work, using it could result in a number of bugs. "
                                     f"Recommended action: rebuild corpus. "
@@ -180,7 +180,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
                                 " constructed. Ensure that no two CorpusFeatures in the library have the same name.")
         return {"name": self.name,
                 "content_type": self.scheduling_mode.encode(),
-                "version": somax.__version__corpus__,
+                "version": somax.__version_corpus__,
                 "build_parameters": self._build_parameters,
                 "features_dict": {name: feature.classpath() for (feature, name) in features.items()},
                 "length": self.length(),

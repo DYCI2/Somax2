@@ -83,8 +83,11 @@ class Somax:
         [process.join() for process in self._corpus_builders]
         self._agents = {}
 
-    def set_tempo(self, tempo: float):
+    def set_tempo(self, tempo: float) -> None:
         self._transport.set_tempo(tempo)
+
+    def set_beat_phase(self, beat_phase: float) -> None:
+        self._transport.set_beat_phase(beat_phase)
 
     def set_tempo_master(self, tempo_master: Optional[str] = None):
         """ Passing None to this function will set all Agents as tempo_master = False"""
@@ -227,7 +230,7 @@ class SomaxServer(Somax, AsyncioOscObject):
 
     def get_time(self):
         time: Time = self._transport.time
-        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.seconds, time.tempo))
+        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.seconds, time.tempo, time.phase))
 
     def get_player_names(self):
         for player_name in self._agents.keys():
@@ -262,9 +265,16 @@ class SomaxServer(Somax, AsyncioOscObject):
     def set_tempo(self, tempo: float):
         if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
             super().set_tempo(tempo)
-            self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, tempo)
+            self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, (self._transport.tempo, self._transport.time.phase))
         else:
             self.logger.error(f"Tempo must be a single value larger than zero. Did not set tempo.")
+
+    def set_beat_phase(self, beat_phase: float) -> None:
+        if (isinstance(beat_phase, float) or isinstance(beat_phase, int)) and 0.0 <= beat_phase <= 1.0:
+            super().set_beat_phase(beat_phase)
+            self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, (self._transport.tempo, self._transport.time.phase))
+        else:
+            self.logger.error(f"Beat phase must be a single value between 0.0 and 1.0. Did not set beat phase.")
 
     def exit(self, print_exit_message: bool = True):
         self.terminate()

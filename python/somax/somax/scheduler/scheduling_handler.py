@@ -17,12 +17,12 @@ class SchedulingHandler(Introspective, ABC):
     TRIGGER_PRETIME: float = 0.01  # seconds
 
     def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
-                 running: bool = False, midi_handler: MidiStateHandler = MidiStateHandler(),
+                 phase: float = 0.0, running: bool = False, midi_handler: MidiStateHandler = MidiStateHandler(),
                  audio_handler: AudioStateHandler = AudioStateHandler(),
                  trigger_pretime: float = TRIGGER_PRETIME, time_stretch: float = 1.0,
                  exp_audio_relative_tempo_scaling: bool = False, **_kwargs):
         self.scheduling_mode: SchedulingMode = scheduling_mode
-        self._scheduler: Scheduler = Scheduler(time=time, tempo=tempo, running=running)
+        self._scheduler: Scheduler = Scheduler(time=time, tempo=tempo, phase=phase, running=running)
         self.midi_handler: MidiStateHandler = midi_handler
         self.audio_handler: AudioStateHandler = audio_handler
         self._trigger_pretime_value: float = trigger_pretime
@@ -81,8 +81,9 @@ class SchedulingHandler(Introspective, ABC):
     @classmethod
     def new_from(cls, other: 'SchedulingHandler', **kwargs) -> 'SchedulingHandler':
         return cls(scheduling_mode=other.scheduling_mode, time=other._scheduler.time, tempo=other._scheduler.tempo,
-                   running=other._scheduler.running, midi_handler=other.midi_handler, audio_handler=other.audio_handler,
-                   trigger_pretime=other._trigger_pretime_value, time_stretch=other._stretch_factor,
+                   phase=other._scheduler.phase, running=other._scheduler.running, midi_handler=other.midi_handler,
+                   audio_handler=other.audio_handler, trigger_pretime=other._trigger_pretime_value,
+                   time_stretch=other._stretch_factor,
                    exp_audio_relative_tempo_scaling=other._experimental_use_relative_tempo_scaling_for_audio, **kwargs)
 
     @classmethod
@@ -102,8 +103,9 @@ class SchedulingHandler(Introspective, ABC):
             output_events.extend(self.handle_timeskip(time_value))
 
         tempo: float = time.tempo
+        phase: float = time.phase
         stretched_time = self.stretch_time(time_value, tempo)
-        output_events.extend(self._scheduler.update_time(time=stretched_time, tempo=tempo))
+        output_events.extend(self._scheduler.update_time(time=stretched_time, tempo=tempo, phase=phase))
         output_events.extend(self.audio_handler.poll(stretched_time))
         output_events.extend(self.midi_handler.poll(stretched_time))
         self._handle_output(output_events.copy())
@@ -244,6 +246,10 @@ class SchedulingHandler(Introspective, ABC):
     @property
     def tempo(self) -> float:
         return self._scheduler.tempo
+
+    @property
+    def phase(self) -> float:
+        return self._scheduler.phase
 
     # TODO[Post-merge]: Rewrite MidiStateHandler as a directly addressable Component
     def set_align_note_ons(self, enabled: bool) -> None:

@@ -59,7 +59,10 @@ class Player(Parametric, ContentAware):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def new_event(self, scheduler_time: float, _tempo: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+    def new_event(self,
+                  scheduler_time: float,
+                  beat_phase: float,
+                  _tempo: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
         if not self.is_enabled():
@@ -80,7 +83,7 @@ class Player(Parametric, ContentAware):
         else:
             self._update_peaks_on_new_event(scheduler_time)
             peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
-            peaks = self._scale_peaks(peaks, scheduler_time, self.corpus)
+            peaks = self._scale_peaks(peaks, scheduler_time, beat_phase, self.corpus)
 
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self.peak_selector.decide(peaks, self.corpus, self._transform_handler)
@@ -314,7 +317,7 @@ class Player(Parametric, ContentAware):
             self.logger.debug(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
             return None
 
-    def _scale_peaks(self, peaks: Peaks, scheduler_time: float, corpus: Corpus, **kwargs):
+    def _scale_peaks(self, peaks: Peaks, scheduler_time: float, beat_phase: float, corpus: Corpus, **kwargs):
         if peaks.is_empty():
             return peaks
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
@@ -322,8 +325,8 @@ class Player(Parametric, ContentAware):
                                                              for t in np.unique(peaks.transform_ids)]
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled_and_eligible():
-                peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, corresponding_transforms,
-                                           corpus, **kwargs)
+                peaks = scale_action.scale(peaks, scheduler_time, beat_phase,
+                                           corresponding_events, corresponding_transforms, corpus, **kwargs)
         return peaks
 
     def _update_transforms(self):

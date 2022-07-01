@@ -137,7 +137,7 @@ class CorpusBuilder:
         if content_type == MidiCorpus:
             corpus: Corpus = self._build_midi(filepaths, name, **kwargs)
         elif content_type == AudioCorpus:
-            corpus: Corpus = self._build_audio(filepaths, name, **kwargs)
+            corpus, _ = self._build_audio(filepaths, name, **kwargs)
         else:
             raise IOError("Invalid file format. Valid extensions are '{}'".format(
                 "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
@@ -230,7 +230,7 @@ class CorpusBuilder:
                      hop_length: int = 512,
                      estimated_initial_bpm: float = 120.0,
                      beat_tightness: float = 100.0,
-                     **kwargs) -> Corpus:
+                     **kwargs) -> Tuple[Corpus, AudioMetadata]:
         """ raises: FileNotFoundError  if failed to load file
                     RuntimeError if other issues are encountered in librosa
                     ValueError if an invalid segmentation mode is provided
@@ -315,7 +315,7 @@ class CorpusBuilder:
 
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed construction of audio corpus")
 
-        return corpus
+        return corpus, metadata
 
     def _load_audio_files(self, filepaths: List[str]) -> Tuple[np.ndarray, int]:
         content: List[np.ndarray] = []
