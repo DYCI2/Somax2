@@ -42,6 +42,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+					"hidden" : 1,
 					"id" : "obj-142",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -321,7 +322,7 @@
 					"patching_rect" : [ 1491.500050980232118, 880.500351844216539, 56.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 238.337553999999614, 135.5, 55.0, 20.0 ],
-					"text" : "84.96",
+					"text" : "87.59",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -1199,7 +1200,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-33",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1537,7 +1537,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-64",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -1782,7 +1781,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-20",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -1956,7 +1954,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-158",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -2144,7 +2141,7 @@
 					"patching_rect" : [ 1088.833383161208985, 206.746666253559169, 130.5, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 7.0, 200.250000059604645, 120.0, 18.0 ],
-					"text" : "Tempo Source",
+					"text" : "Global Tempo Source",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -4027,13 +4024,13 @@
 			}
  ],
 		"boxgroups" : [ 			{
-				"boxes" : [ "obj-26", "obj-13", "obj-11", "obj-18" ]
-			}
-, 			{
 				"boxes" : [ "obj-181", "obj-182", "obj-189" ]
 			}
 , 			{
 				"boxes" : [ "obj-186", "obj-347", "obj-183" ]
+			}
+, 			{
+				"boxes" : [ "obj-26", "obj-13", "obj-11", "obj-18" ]
 			}
  ],
 		"styles" : [ 			{
