@@ -1,6 +1,5 @@
 import re
 from typing import List
-import somax
 
 
 class VersionTools:
@@ -16,6 +15,7 @@ class VersionTools:
         package_dir = os.path.dirname(parent_dir)
         sys.path.insert(0, package_dir)
 
+        import somax
         return somax.__version__
 
     @staticmethod
@@ -30,6 +30,7 @@ class VersionTools:
                         minor: bool = True,
                         rev: bool = True,
                         pre_release: bool = True) -> bool:
+        import somax  # local import to avoid static loading of module that clashes with shell script usage
         if use_corpus_version:
             current: List[str] = VersionTools.decode(somax.__version_corpus__)
         else:
@@ -37,7 +38,7 @@ class VersionTools:
         other: List[str] = VersionTools.decode(version)
 
         if len(other) < 3:
-            return False    # Legacy version number
+            return False  # Legacy version number
 
         if major and current[0] != other[0]:
             return False
