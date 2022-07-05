@@ -305,8 +305,13 @@ class AutomaticSchedulingHandler(SchedulingHandler):
         if event_and_transform is None or event_and_transform[0].duration <= 0:
             self._scheduler.add_event(self._default_trigger())
         else:
+            event: CorpusEvent = event_and_transform[0]
+            # # Hacky update for MIDI time stretch July 5, 2022
+            # if isinstance(self.scheduling_mode, AbsoluteScheduling) and isinstance(event, MidiCorpusEvent):
+            #     target_time: float = trigger_time + event.absolute_duration
+            # else:
+            target_time: float = trigger_time + event.duration
             # Note that `trigger_time` with respect to the `CorpusEvent` is the `target_time` of its trigger
-            target_time: float = trigger_time + event_and_transform[0].duration
             next_trigger_time: float = target_time - self._trigger_pretime()
             self._scheduler.add_event(self._adjust_in_time(TriggerEvent(trigger_time=next_trigger_time,
                                                                         target_time=target_time)))
@@ -352,7 +357,13 @@ class IndirectSchedulingHandler(SchedulingHandler):
     def _on_corpus_event_received(self, trigger_time: float,
                                   event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
         if event_and_transform is not None:
-            self.next_possible_onset = self._scheduler.time + event_and_transform[0].duration
+            event: CorpusEvent = event_and_transform[0]
+            # # Hacky update for MIDI time stretch July 5, 2022
+            # if isinstance(self.scheduling_mode, AbsoluteScheduling) and isinstance(event, MidiCorpusEvent):
+            #     duration: float = event.absolute_duration / 1000
+            # else:
+            duration: float = event.duration
+            self.next_possible_onset = self._scheduler.time + duration
 
     def _handle_flushing(self, flushed_triggers: List[TriggerEvent]) -> List[TriggerEvent]:
         self.next_possible_onset = None

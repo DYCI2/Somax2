@@ -495,6 +495,7 @@ class DurationScaleAction(AbstractGaussianScale):
 
     def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
               corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+        # TODO: Not updated to handle absolute scheduling based on hacky update July 5, 2022
         durations: np.ndarray = np.array([event.duration for event in corresponding_events])
         return self._scale(peaks, durations)
 

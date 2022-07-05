@@ -15,7 +15,7 @@ class SchedulingMode(StringParsed, ABC):
 
     @classmethod
     def default(cls, **kwargs) -> 'SchedulingMode':
-        return RelativeScheduling()
+        return AbsoluteScheduling()
 
     @classmethod
     def from_string(cls, class_name: str, **kwargs) -> 'SchedulingMode':

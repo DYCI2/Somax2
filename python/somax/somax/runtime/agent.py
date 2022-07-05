@@ -38,33 +38,42 @@ from somax.scheduler.midi_state_handler import NoteOffMode
 from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
 from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, RendererEvent, TriggerEvent
 from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
-from somax.scheduler.scheduling_mode import SchedulingMode
+from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
 
 
 # TODO: Complete separation Agent/OscAgent where Agent can be initialized and used from the command line
 
 class Agent(multiprocessing.Process):
-    def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 transport_time: Time, scheduler_running: bool,
-                 corpus: Optional[Corpus] = None, is_tempo_master: bool = False,
-                 scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler, **kwargs):
+    def __init__(self,
+                 player: Player,
+                 recv_queue: multiprocessing.Queue,
+                 tempo_send_queue: multiprocessing.Queue,
+                 transport_time: Time,
+                 scheduler_running: bool,
+                 corpus: Optional[Corpus] = None,
+                 is_tempo_master: bool = False,
+                 scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler,
+                 synchronize_to_global_tempo: bool = False,
+                 **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.player: Player = player
         self.is_tempo_master: bool = is_tempo_master
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
+        self.synchronize_to_global_tempo: bool = synchronize_to_global_tempo
 
         if corpus:  # handle corpus object if passed
             self.player.read_corpus(corpus)
 
-        scheduling_mode: SchedulingMode = corpus.scheduling_mode if corpus is not None else SchedulingMode.default()
+        scheduling_mode: SchedulingMode = self.get_scheduling_mode(corpus, synchronize_to_global_tempo)
 
         self.scheduling_handler: SchedulingHandler = scheduling_type(scheduling_mode=scheduling_mode,
                                                                      time=scheduling_mode.get_time_axis(transport_time),
                                                                      tempo=transport_time.tempo,
                                                                      running=scheduler_running)
+
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
 
         self._enabled: bool = True
@@ -73,11 +82,26 @@ class Agent(multiprocessing.Process):
     def terminate(self):
         self._terminated = True
 
+    @staticmethod
+    def get_scheduling_mode(corpus: Optional[Corpus], synchronize_to_global_tempo: bool) -> SchedulingMode:
+        if isinstance(corpus, MidiCorpus) and synchronize_to_global_tempo is True:
+            return RelativeScheduling()
+        else:
+            return AbsoluteScheduling()
+
 
 class OscAgent(Agent, AsyncioOscObject):
-    def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 transport_time: Time, scheduler_running: bool, scheduling_type: Type[SchedulingHandler],
-                 ip: str, recv_port: int, send_port: int, address: str,
+    def __init__(self,
+                 player: Player,
+                 recv_queue: multiprocessing.Queue,
+                 tempo_send_queue: multiprocessing.Queue,
+                 transport_time: Time,
+                 scheduler_running: bool,
+                 scheduling_type: Type[SchedulingHandler],
+                 ip: str,
+                 recv_port: int,
+                 send_port: int,
+                 address: str,
                  corpus_filepath: Optional[str] = None, **kwargs):
         Agent.__init__(self, player=player, recv_queue=recv_queue, tempo_send_queue=tempo_send_queue,
                        transport_time=transport_time, scheduler_running=scheduler_running,
@@ -308,6 +332,7 @@ class OscAgent(Agent, AsyncioOscObject):
             path_and_name: List[str] = self._string_to_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
+            print(f"setting schedluing mode to {self.scheduling_handler.scheduling_mode}")
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
             self.player.create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
                                     classifier=classifier, activity_pattern=activity_pattern,
@@ -451,11 +476,11 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
         self.clear()
-        self.scheduling_handler.set_scheduling_mode(corpus.scheduling_mode)
 
         self.player.set_eligibility(corpus)
         self.player.read_corpus(corpus)
         self.flush()
+        self._update_synchronization()   # set absolute/relative and scaling mode audio/midi
         self._try_update_server_tempo()  # immediately set tempo if player is tempo master
         self._send_eligibility()
         self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
@@ -488,6 +513,33 @@ class OscAgent(Agent, AsyncioOscObject):
         self.flush()
         self.scheduling_handler = new_handler
         self.logger.debug(f"Scheduling mode set to {self.scheduling_handler.renderer_info()}")
+
+    def set_synchronize_to_global_tempo(self, enabled: bool) -> None:
+        if not isinstance(enabled, bool):
+            self.logger.error(f"Invalid input '{enabled}'. Synchronization mode was not set.")
+            return
+
+        self.synchronize_to_global_tempo = enabled
+        self._update_synchronization()
+
+    def _update_synchronization(self):
+        # TODO: Should `clear` be before or after `set_scheduling_mode`?
+        #       What happens in ContinuousMode with existing trigger when we switch mode if time axes are different?
+        self.clear()
+
+        corpus: Optional[Corpus] = self.player.corpus
+        scheduling_mode: SchedulingMode = self.get_scheduling_mode(self.player.corpus, self.synchronize_to_global_tempo)
+        self.scheduling_handler.set_scheduling_mode(scheduling_mode)
+        if corpus is not None:
+            corpus.set_scheduling_mode(scheduling_mode)
+        # self.player.set_scheduling_mode(scheduling_mode)
+
+        if self.synchronize_to_global_tempo is True and isinstance(self.player.corpus, AudioCorpus):
+            print("exp tempo scaling audio")
+            self._set_experimental_relative_temporal_scaling_for_audio(True)
+        else:
+            print("not exp tempo scaling")
+            self._set_experimental_relative_temporal_scaling_for_audio(False)
 
     def set_align_note_ons(self, enable: bool):
         self.scheduling_handler.set_align_note_ons(enable)
@@ -533,7 +585,7 @@ class OscAgent(Agent, AsyncioOscObject):
         else:
             self.scheduling_handler.set_time_stretch_factor(factor)
 
-    def set_experimental_relative_tempo_scaling_for_audio_mode(self, enable: bool) -> None:
+    def _set_experimental_relative_temporal_scaling_for_audio(self, enable: bool) -> None:
         self.scheduling_handler.set_experimental_relative_tempo_scaling_for_audio_mode(enable)
 
     ######################################################

@@ -20,6 +20,7 @@ from somax.runtime.peaks import Peaks
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
+from somax.scheduler.scheduling_mode import SchedulingMode
 
 
 class Player(Parametric, ContentAware):
@@ -184,6 +185,11 @@ class Player(Parametric, ContentAware):
         self.corpus = corpus
         for atom in self.atoms.values():
             atom.read_corpus(corpus)
+
+    # def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
+    #     for atom in self.atoms.values():
+    #         atom.set_scheduling_mode(scheduling_mode)
+    #         print(f"setting scheduling mode for atom {atom.name} to {scheduling_mode}")
 
     def create_atom(self, path: List[str], weight: float, self_influenced: bool, classifier: AbstractClassifier,
                     activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,

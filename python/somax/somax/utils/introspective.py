@@ -42,6 +42,7 @@ class StringParsed(Introspective, ABC):
     @abstractmethod
     def from_string(cls, class_name: str, **kwargs) -> 'StringParsed':
         """ Should call the protected _from_string() method
+            If incorrectly parsed, returns `default` (TODO: not ideal)
             :raises Indirectly raises ValueError if `default()` is not defined.
                     TypeError if not all positional arguments for the class' `__init__` are provided as **kwargs
         """

@@ -8,23 +8,33 @@ from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.features.feature_value import FeatureValue
 from somax.runtime.exceptions import FeatureError
 from somax.runtime.memory_state import MemoryState
+from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling
 
 """ Keys correspond to parent module names, ex. "pitch" or "chroma". """
 EventParameterDict = Dict[str, List[FeatureValue]]
 
 
 class Note:
-    def __init__(self, pitch: int, velocity: int, channel: int, onset: float, duration: float, track: str,
-                 absolute_onset: float, absolute_duration: float):
+    def __init__(self,
+                 pitch: int,
+                 velocity: int,
+                 channel: int,
+                 onset: float,
+                 duration: float,
+                 track: str,
+                 absolute_onset: float,
+                 absolute_duration: float,
+                 scheduling_mode: SchedulingMode = RelativeScheduling()):
         self.logger = logging.getLogger(__name__)
         self.pitch: int = pitch
         self.velocity: int = velocity
         self.channel: int = channel
-        self.onset: float = onset  # in ticks in relation to CorpusEvent onset
-        self.duration: float = duration  # in ticks
+        self._onset: float = onset  # in ticks in relation to CorpusEvent onset
+        self._duration: float = duration  # in ticks
         self.track: str = track  # name of MIDI track note originated from
         self.absolute_onset: float = absolute_onset  # in milliseconds in relation to CorpusEvent onset
         self.absolute_duration: float = absolute_duration  # in milliseconds
+        self.scheduling_mode: SchedulingMode = scheduling_mode
 
     @classmethod
     def from_raw(cls, raw_note: pd.Series, parent_event_relative_onset: float, parent_event_absolute_onset: float):
@@ -84,6 +94,31 @@ class Note:
     def is_held_to(self) -> bool:
         return self.onset < 0.0
 
+    def set_scheduling_mode(self, scheduling_mode: SchedulingMode):
+        self.scheduling_mode = scheduling_mode
+
+    @property
+    def onset(self) -> float:
+        if isinstance(self.scheduling_mode, RelativeScheduling):
+            return self._onset
+        else:
+            return self.absolute_onset / 1000
+
+    @property
+    def duration(self) -> float:
+        if isinstance(self.scheduling_mode, RelativeScheduling):
+            return self._duration
+        else:
+            return self.absolute_duration / 1000
+
+    @onset.setter
+    def onset(self, value):
+        self._onset = value
+
+    @duration.setter
+    def duration(self, value):
+        self._duration = value
+
 
 class CorpusEvent(ABC):
     def __init__(self, state_index: int, features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None):
@@ -128,11 +163,18 @@ class CorpusEvent(ABC):
 
 class MidiCorpusEvent(CorpusEvent):
 
-    def __init__(self, state_index: int, tempo: float, onset: float, absolute_onset: float, bar_number: float,
-                 duration: Optional[float] = None, absolute_duration: Optional[float] = None,
+    def __init__(self, state_index: int,
+                 tempo: float,
+                 onset: float,
+                 absolute_onset: float,
+                 bar_number: float,
+                 duration: Optional[float] = None,
+                 absolute_duration: Optional[float] = None,
                  notes: Optional[List[Note]] = None,
-                 features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None):
+                 features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None,
+                 scheduling_mode: SchedulingMode = RelativeScheduling()):
         super().__init__(state_index=state_index, features=features)
+        self.scheduling_mode: SchedulingMode = scheduling_mode
         self.tempo: float = tempo
         self._relative_onset: float = onset
         self.absolute_onset: float = absolute_onset
@@ -177,7 +219,10 @@ class MidiCorpusEvent(CorpusEvent):
 
     @property
     def onset(self) -> float:
-        return self._relative_onset
+        if isinstance(self.scheduling_mode, RelativeScheduling):
+            return self._relative_onset
+        else:
+            return self.absolute_onset / 1000
 
     def set_onset(self, onset: float):
         # TODO: This shouldn't be settable - only added for corpus export in ImprovisationMemory. Find better solution
@@ -185,7 +230,15 @@ class MidiCorpusEvent(CorpusEvent):
 
     @property
     def duration(self) -> float:
-        return self._relative_duration
+        if isinstance(self.scheduling_mode, RelativeScheduling):
+            return self._relative_duration
+        else:
+            return self.absolute_duration / 1000
+
+    def set_scheduling_mode(self, scheduling_mode: SchedulingMode):
+        self.scheduling_mode = scheduling_mode
+        for note in self.notes:
+            note.set_scheduling_mode(scheduling_mode)
 
     def append_raw(self, note: pd.Series) -> None:
         self.notes.append(Note.from_raw(note, self._relative_onset, self.absolute_onset))
