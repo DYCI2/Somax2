@@ -105,6 +105,7 @@
 				"box" : 				{
 					"activebgcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"activebgoncolor" : [ 0.929411764705882, 0.929411764705882, 0.352941176470588, 1.0 ],
+					"hidden" : 1,
 					"id" : "obj-1150",
 					"maxclass" : "live.text",
 					"mode" : 0,
@@ -204,7 +205,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-214",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -212,7 +212,7 @@
 					"patching_rect" : [ 3787.272151898734592, 286.0, 142.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 119.105974067911518, 220.139516100287437, 47.529404369778035, 18.0 ],
-					"text" : "(1.00)",
+					"text" : "(0.92)",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -263,7 +263,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"hidden" : 1,
 					"id" : "obj-197",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -1936,7 +1935,7 @@
 					"patching_rect" : [ 699.933333333333394, 1127.735836863517761, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 6.283834205357664, 274.825000703334808, 198.549996524623509, 10.0 ],
-					"size" : 22.0
+					"size" : 238.0
 				}
 
 			}
@@ -2177,7 +2176,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "bang", "bang", "" ],
 					"patching_rect" : [ 2869.0, 249.0, 44.0, 22.0 ],
-					"text" : "sel 0 3"
+					"text" : "sel 0 2"
 				}
 
 			}
@@ -2696,11 +2695,11 @@
 				"box" : 				{
 					"id" : "obj-111",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
+					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 2869.0, 190.0, 46.0, 22.0 ],
-					"text" : "pak i i i"
+					"patching_rect" : [ 2869.0, 190.0, 40.0, 22.0 ],
+					"text" : "pak i i"
 				}
 
 			}
@@ -3008,7 +3007,7 @@
 					"patching_rect" : [ 593.443347454071045, 1108.735836863517761, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 6.283834205357664, 275.825000703334808, 198.549996524623509, 10.0 ],
-					"size" : 22.0
+					"size" : 238.0
 				}
 
 			}
@@ -3040,7 +3039,7 @@
 					"patching_rect" : [ 517.292461514472961, 1084.735836863517761, 44.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 145.590042890114091, 290.025000810623169, 57.0, 18.0 ],
-					"text" : "22",
+					"text" : "238",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -3073,7 +3072,7 @@
 					"patching_rect" : [ 430.5, 1084.735836863517761, 56.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 56.933834360329627, 287.025000810623169, 70.0, 24.0 ],
-					"text" : "5",
+					"text" : "154",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -3473,7 +3472,7 @@
 					"patching_rect" : [ 616.333333333333371, 883.0, 49.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 150.333830729981287, 328.587493628263474, 40.0, 18.0 ],
-					"text" : "4",
+					"text" : "26",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -4170,15 +4169,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-111", 2 ],
-					"source" : [ "obj-107", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-111", 1 ],
-					"source" : [ "obj-107", 1 ]
+					"source" : [ "obj-107", 2 ]
 				}
 
 			}
@@ -4246,13 +4238,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-96", 0 ],
 					"source" : [ "obj-108", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-98", 0 ],
-					"source" : [ "obj-108", 2 ]
 				}
 
 			}
@@ -6230,10 +6215,6 @@
  ],
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
 				"default" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
@@ -6249,6 +6230,10 @@
 					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{
