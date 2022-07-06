@@ -268,7 +268,7 @@ class MidiCorpusEvent(CorpusEvent):
         return [note for note in self.notes if note.onset + note.duration == self.duration]
 
     def held_from(self) -> List[Note]:
-        return [note for note in self.notes if note.is_held_from(self._relative_duration)]
+        return [note for note in self.notes if note.is_held_from(self.duration)]
 
     def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
         return {"state_index": self.state_index,

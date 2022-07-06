@@ -332,7 +332,6 @@ class OscAgent(Agent, AsyncioOscObject):
             path_and_name: List[str] = self._string_to_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
-            print(f"setting schedluing mode to {self.scheduling_handler.scheduling_mode}")
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
             self.player.create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
                                     classifier=classifier, activity_pattern=activity_pattern,
@@ -529,16 +528,17 @@ class OscAgent(Agent, AsyncioOscObject):
 
         corpus: Optional[Corpus] = self.player.corpus
         scheduling_mode: SchedulingMode = self.get_scheduling_mode(self.player.corpus, self.synchronize_to_global_tempo)
-        self.scheduling_handler.set_scheduling_mode(scheduling_mode)
+
+        if type(self.scheduling_handler.scheduling_mode) != type(scheduling_mode):
+            self.scheduling_handler.set_scheduling_mode(scheduling_mode)
+
         if corpus is not None:
             corpus.set_scheduling_mode(scheduling_mode)
         # self.player.set_scheduling_mode(scheduling_mode)
 
         if self.synchronize_to_global_tempo is True and isinstance(self.player.corpus, AudioCorpus):
-            print("exp tempo scaling audio")
             self._set_experimental_relative_temporal_scaling_for_audio(True)
         else:
-            print("not exp tempo scaling")
             self._set_experimental_relative_temporal_scaling_for_audio(False)
 
     def set_align_note_ons(self, enable: bool):

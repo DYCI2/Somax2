@@ -34,17 +34,24 @@ class RendererEvent(ScheduledEvent, ABC):
 
 
 class MidiSliceOnsetEvent(RendererEvent):
-    def __init__(self, trigger_time: float, corpus_event: MidiCorpusEvent, applied_transform: AbstractTransform):
+    def __init__(self,
+                 trigger_time: float,
+                 corpus_event: MidiCorpusEvent,
+                 applied_transform: AbstractTransform,
+                 scheduler_tempo: float):
         super().__init__(trigger_time=trigger_time)
         self.event: MidiCorpusEvent = corpus_event
         self.applied_transform: AbstractTransform = applied_transform
+        self.scheduler_tempo: float = scheduler_tempo
 
     def render(self) -> List[RendererMessage]:
         notes: List[Tuple[int, int, int]] = [(n.pitch, n.velocity, n.channel) for n in self.event.notes]
         return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
                                 content=[self.event.state_index, self.applied_transform.renderer_info()]),
                 RendererMessage(keyword=SendProtocol.SEND_STATE_ONSET,
-                                content=notes)]
+                                content=notes),
+                RendererMessage(keyword=SendProtocol.SEND_MIDI_TIMESTRETCH,
+                                content=self.scheduler_tempo / self.event.tempo)]
 
 
 class MidiNoteEvent(RendererEvent):

@@ -30,6 +30,7 @@ class SendProtocol:
     SEND_MIDI_EVENT = "midi"
     SEND_STATE_EVENT = "state"
     SEND_STATE_ONSET = "state_onset"
+    SEND_MIDI_TIMESTRETCH = "timestretch_info"
     SEND_AUDIO_EVENT = "audio"
     SEND_AUDIO_OFF = "audio_off"
     AUDIO_CONTINUATION_TIMESTRETCH = "audio_continuation_timestretch"

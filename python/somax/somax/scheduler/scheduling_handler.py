@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, List, Tuple, Dict, Type
+from typing import Optional, List, Tuple, Dict, Type, cast
 
 from somax.features import Tempo
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
@@ -29,6 +29,7 @@ class SchedulingHandler(Introspective, ABC):
         self._stretch_factor: float = time_stretch
         self._previous_callback: float = time
         self._previous_stretched_time: float = time
+        self._last_time_object: Optional[Time] = None
 
         # TODO: Either remove this or integrate it in the architecture as relative time. Part of [[R7. Tempo/Pulse Seg]]
         #   (The names are parodical to make sure they don't stay in the code base for long)
@@ -110,6 +111,8 @@ class SchedulingHandler(Introspective, ABC):
         output_events.extend(self.midi_handler.poll(stretched_time))
         self._handle_output(output_events.copy())
 
+        self._last_time_object = time
+
         return output_events
 
     def handle_timeskip(self, time: float) -> List[ScheduledEvent]:
@@ -158,7 +161,8 @@ class SchedulingHandler(Introspective, ABC):
             if isinstance(event, MidiCorpusEvent):
                 scheduler_events: List[ScheduledEvent] = self.midi_handler.process(trigger_time=trigger_time,
                                                                                    event=event,
-                                                                                   applied_transform=applied_transform)
+                                                                                   applied_transform=applied_transform,
+                                                                                   scheduler_tempo=self.tempo)
                 self._scheduler.add_events(scheduler_events)
             elif isinstance(event, AudioCorpusEvent):
                 # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
@@ -176,7 +180,22 @@ class SchedulingHandler(Introspective, ABC):
         self._on_corpus_event_received(trigger_time=trigger_time, event_and_transform=event_and_transform)
 
     def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
+        """ Note: Always flush before calling this! """
         self.scheduling_mode = scheduling_mode
+        if self._last_time_object is not None:
+            current_time_new_axis: float = self.scheduling_mode.get_time_axis(time=self._last_time_object)
+
+            # triggers if switching to a time axis < than current time axis
+            events: List[ScheduledEvent] = self._scheduler.update_time(current_time_new_axis,
+                                                                       self._scheduler.tempo,
+                                                                       self._scheduler.phase)
+
+            # triggers if switching to a time axis > than current time axis
+            events.extend(self._scheduler.remove_by_type(TriggerEvent))
+            for event in events:
+                if isinstance(event, TriggerEvent):
+                    self._reschedule(TriggerEvent(trigger_time=current_time_new_axis - self._trigger_pretime(),
+                                                  target_time=current_time_new_axis))
 
     def set_time_stretch_factor(self, factor: float) -> None:
         self._stretch_factor = factor
