@@ -1,3 +1,4 @@
+import typing
 from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple, Dict, Type, cast
 
@@ -6,7 +7,7 @@ from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpus
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
 from somax.scheduler.midi_state_handler import MidiStateHandler, NoteOffMode
-from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, MidiNoteEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
@@ -16,11 +17,19 @@ from somax.utils.introspective import Introspective
 class SchedulingHandler(Introspective, ABC):
     TRIGGER_PRETIME: float = 0.01  # seconds
 
-    def __init__(self, scheduling_mode: SchedulingMode, time: float = 0.0, tempo: float = Time.BASE_TEMPO,
-                 phase: float = 0.0, running: bool = False, midi_handler: MidiStateHandler = MidiStateHandler(),
+    def __init__(self,
+                 scheduling_mode: SchedulingMode,
+                 time: float = 0.0,
+                 tempo: float = Time.BASE_TEMPO,
+                 phase: float = 0.0,
+                 running: bool = False,
+                 midi_handler: MidiStateHandler = MidiStateHandler(),
                  audio_handler: AudioStateHandler = AudioStateHandler(),
-                 trigger_pretime: float = TRIGGER_PRETIME, time_stretch: float = 1.0,
-                 exp_audio_relative_tempo_scaling: bool = False, **_kwargs):
+                 trigger_pretime: float = TRIGGER_PRETIME,
+                 time_stretch: float = 1.0,
+                 exp_audio_relative_tempo_scaling: bool = False,
+                 note_by_note_mode: bool = True,
+                 **kwargs):
         self.scheduling_mode: SchedulingMode = scheduling_mode
         self._scheduler: Scheduler = Scheduler(time=time, tempo=tempo, phase=phase, running=running)
         self.midi_handler: MidiStateHandler = midi_handler
@@ -30,6 +39,8 @@ class SchedulingHandler(Introspective, ABC):
         self._previous_callback: float = time
         self._previous_stretched_time: float = time
         self._last_time_object: Optional[Time] = None
+        self._last_trigger_time: Optional[float] = None
+        self._note_by_note_mode: bool = note_by_note_mode   # only applies to Manual/Indirect SchedulingHandlers
 
         # TODO: Either remove this or integrate it in the architecture as relative time. Part of [[R7. Tempo/Pulse Seg]]
         #   (The names are parodical to make sure they don't stay in the code base for long)
@@ -53,6 +64,15 @@ class SchedulingHandler(Introspective, ABC):
         If the implemented `SchedulingHandler` needs to perform some specific action (related to triggering)
             upon receiving a corpus event, it should be handled here.
         Note that this function should **not** queue the corpus event - this is managed by the base class
+        """
+
+    @abstractmethod
+    def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
+        """ Called whenever a `ContinueEvent` is added to the scheduler (part of `add_corpus_event` but only if
+            `note_by_note_mode` is set to False. ContinueEvents will be ignored in Automatic Mode but more or less
+            treated as Triggers in Indirect and Manual modes.
+            TODO Everything in the code related to ContinueEvent is extremely poorly implemented and should be
+                 considered as a hack that needs to be rewritten.
         """
 
     @abstractmethod
@@ -81,11 +101,18 @@ class SchedulingHandler(Introspective, ABC):
 
     @classmethod
     def new_from(cls, other: 'SchedulingHandler', **kwargs) -> 'SchedulingHandler':
-        return cls(scheduling_mode=other.scheduling_mode, time=other._scheduler.time, tempo=other._scheduler.tempo,
-                   phase=other._scheduler.phase, running=other._scheduler.running, midi_handler=other.midi_handler,
-                   audio_handler=other.audio_handler, trigger_pretime=other._trigger_pretime_value,
+        return cls(scheduling_mode=other.scheduling_mode,
+                   time=other._scheduler.time,
+                   tempo=other._scheduler.tempo,
+                   phase=other._scheduler.phase,
+                   running=other._scheduler.running,
+                   midi_handler=other.midi_handler,
+                   audio_handler=other.audio_handler,
+                   trigger_pretime=other._trigger_pretime_value,
                    time_stretch=other._stretch_factor,
-                   exp_audio_relative_tempo_scaling=other._experimental_use_relative_tempo_scaling_for_audio, **kwargs)
+                   exp_audio_relative_tempo_scaling=other._experimental_use_relative_tempo_scaling_for_audio,
+                   note_by_note_mode=other._note_by_note_mode,
+                   **kwargs)
 
     @classmethod
     def type_from_string(cls, class_name: str):
@@ -109,6 +136,15 @@ class SchedulingHandler(Introspective, ABC):
         output_events.extend(self._scheduler.update_time(time=stretched_time, tempo=tempo, phase=phase))
         output_events.extend(self.audio_handler.poll(stretched_time))
         output_events.extend(self.midi_handler.poll(stretched_time))
+
+        # special case to handle note-by-note mode flushing specific to Indirect/Manual mode
+        if self._last_trigger_time is not None and self.midi_handler.timeout is not None:
+            print("--- ", stretched_time, self._last_trigger_time)
+            if stretched_time - self._last_trigger_time > self.midi_handler.timeout:
+                print(f"flushing from note by note stuff (time={stretched_time})")
+                output_events.extend(self.midi_handler.flush([], stretched_time))
+                self._last_trigger_time = None
+
         self._handle_output(output_events.copy())
 
         self._last_time_object = time
@@ -164,6 +200,13 @@ class SchedulingHandler(Introspective, ABC):
                                                                                    applied_transform=applied_transform,
                                                                                    scheduler_tempo=self.tempo)
                 self._scheduler.add_events(scheduler_events)
+
+                if isinstance(event, MidiCorpusEvent) and not self._note_by_note_mode:
+                    continue_target_time: float = trigger_time + event.duration
+                    continue_trigger_time: float = continue_target_time - self._trigger_pretime()
+                    self._on_continue_event_received(ContinueEvent(trigger_time=continue_trigger_time,
+                                                                   target_time=continue_target_time))
+
             elif isinstance(event, AudioCorpusEvent):
                 # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
                 tempo: Optional[Tempo] = event.get_feature_safe(Tempo)
@@ -283,22 +326,39 @@ class SchedulingHandler(Introspective, ABC):
     def set_sustain_timeout(self, ticks: Optional[float]) -> None:
         self.midi_handler.set_sustain_timeout(ticks, self._scheduler.time)
 
+    def set_note_by_note_mode(self, enabled: bool) -> None:
+        self._note_by_note_mode = enabled
+        self._scheduler.remove_by_type(ContinueEvent)
+
 
 class ManualSchedulingHandler(SchedulingHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
         if self._scheduler.running:
             if trigger_event is not None:
                 self._scheduler.add_event(trigger_event)
+                self._last_trigger_time = trigger_event.trigger_time
             else:
                 current_time: float = self._scheduler.time
                 self._scheduler.add_event(TriggerEvent(trigger_time=current_time, target_time=current_time))
+                self._scheduler.remove_by_type(ContinueEvent)
+                self._last_trigger_time = current_time
+
+    def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
+        if self.midi_handler.timeout is None or \
+                continue_event.trigger_time - self._last_trigger_time < self.midi_handler.timeout:
+            self._scheduler.add_event(continue_event)
+        # else: ignore, don't schedule
 
     def _on_corpus_event_received(self, trigger_time: float,
                                   event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
         pass
 
     def _handle_flushing(self, flushed_triggers: List[TriggerEvent]) -> Optional[List[TriggerEvent]]:
-        pass
+        self._last_trigger_time = None
+        return flushed_triggers
 
     def _reschedule(self, trigger_event: TriggerEvent) -> None:
         pass
@@ -315,6 +375,9 @@ class AutomaticSchedulingHandler(SchedulingHandler):
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
         if not self._scheduler.has_by_type(TriggerEvent):
             self._scheduler.add_event(self._default_trigger())
+
+    def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
+        pass
 
     def _on_corpus_event_received(self, trigger_time: float,
                                   event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
@@ -370,8 +433,16 @@ class IndirectSchedulingHandler(SchedulingHandler):
         else:
             onset_time: float = self._scheduler.time
 
-        self._scheduler.add_event(TriggerEvent(trigger_time=onset_time - self._trigger_pretime(),
-                                               target_time=onset_time))
+        trigger: TriggerEvent = TriggerEvent(trigger_time=onset_time - self._trigger_pretime(), target_time=onset_time)
+        self._last_trigger_time = trigger.trigger_time
+        self._scheduler.remove_by_type(ContinueEvent)
+        self._scheduler.add_event(trigger)
+
+    def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
+        if self.midi_handler.timeout is None or \
+                continue_event.trigger_time - self._last_trigger_time < self.midi_handler.timeout:
+            self._scheduler.add_event(continue_event)
+        # else: ignore, don't schedule
 
     def _on_corpus_event_received(self, trigger_time: float,
                                   event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
@@ -386,6 +457,7 @@ class IndirectSchedulingHandler(SchedulingHandler):
 
     def _handle_flushing(self, flushed_triggers: List[TriggerEvent]) -> List[TriggerEvent]:
         self.next_possible_onset = None
+        self._last_trigger_time = None
         return []
 
     def _reschedule(self, trigger_event: TriggerEvent) -> None:

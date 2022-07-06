@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 252.0, 184.0, 1027.0, 732.0 ],
+		"rect" : [ 34.0, 86.0, 1784.0, 959.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -173,6 +173,7 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-1240" : [ "live.slider", "live.slider", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1241" : [ "live.numbox[2]", "live.numbox[2]", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1247" : [ "live.slider[1]", "live.slider", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1256" : [ "live.menu[2]", "live.menu", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-126" : [ "harmonicbypass", "harmonicbypass", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-134" : [ "continuity", "continuity", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-140" : [ "resetinfluences", "resetinfluences", 0 ],
@@ -295,6 +296,15 @@
 					"parameter_longname" : "live.menu[1]",
 					"parameter_modmode" : 0,
 					"parameter_range" : [ "Not Allowed", "Allowed" ],
+					"parameter_type" : 2,
+					"parameter_unitstyle" : 10
+				}
+,
+				"obj-13::obj-1::obj-6::obj-1::obj-1256" : 				{
+					"parameter_invisible" : 0,
+					"parameter_longname" : "live.menu[2]",
+					"parameter_modmode" : 0,
+					"parameter_range" : [ "Continue", "Note by note" ],
 					"parameter_type" : 2,
 					"parameter_unitstyle" : 10
 				}
@@ -886,10 +896,6 @@
 		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"button" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-				}
-,
 				"default" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
@@ -905,6 +911,10 @@
 					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"button" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"toggle" : 				{

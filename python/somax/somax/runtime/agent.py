@@ -36,7 +36,7 @@ from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.midi_state_handler import NoteOffMode
 from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
-from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, RendererEvent, TriggerEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, RendererEvent, TriggerEvent, ContinueEvent
 from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
@@ -155,6 +155,8 @@ class OscAgent(Agent, AsyncioOscObject):
             for event in events:
                 if isinstance(event, TriggerEvent):
                     self._trigger_output(trigger=event)
+                elif isinstance(event, ContinueEvent):
+                    self._continue_output(continue_event=event)
                 elif isinstance(event, TempoEvent) and self.is_tempo_master:
                     self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
                 elif isinstance(event, RendererEvent):
@@ -188,6 +190,23 @@ class OscAgent(Agent, AsyncioOscObject):
         # self.improvisation_memory.append(event, trigger.target_time, applied_transform, scheduler_tempo,
         #                                  artificially_sustained=self.scheduling_handler.artificially_sustained,
         #                                  aligned_onsets=self.scheduling_handler.aligned_onsets)
+
+        self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
+
+    def _continue_output(self, continue_event: ContinueEvent) -> None:
+        scheduling_time: float = continue_event.target_time
+
+        try:
+            event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
+            event_and_transform = self.player.step(scheduling_time,
+                                                   self.scheduling_handler.phase,
+                                                   self.scheduling_handler.tempo)
+        except InvalidCorpus as e:
+            self.logger.debug(str(e))
+            return
+
+        if event_and_transform is None:
+            return
 
         self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
 
@@ -520,6 +539,14 @@ class OscAgent(Agent, AsyncioOscObject):
 
         self.synchronize_to_global_tempo = enabled
         self._update_synchronization()
+
+    def set_note_by_note_mode(self, enabled: bool) -> None:
+        if not isinstance(enabled, bool):
+            self.logger.error(f"Invalid input '{enabled}'. Note by note mode was not set.")
+            return
+
+        self.scheduling_handler.set_note_by_note_mode(enabled)
+        self.flush()
 
     def _update_synchronization(self):
         # TODO: Should `clear` be before or after `set_scheduling_mode`?

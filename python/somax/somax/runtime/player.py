@@ -44,6 +44,7 @@ class Player(Parametric, ContentAware):
             self.add_scale_action(scale_action)
 
         self.previous_peaks: Peaks = Peaks.create_empty()
+        self.previous_output: Optional[tuple[CorpusEvent, AbstractTransform]] = None
         self._transform_handler: TransformHandler = TransformHandler()
 
         self._force_jump_index: Optional[int] = None
@@ -90,6 +91,8 @@ class Player(Parametric, ContentAware):
             event_and_transform = self.peak_selector.decide(peaks, self.corpus, self._transform_handler)
             self.previous_peaks = peaks
 
+        self.previous_output = event_and_transform
+
         if event_and_transform is None:
             self._feedback(None, scheduler_time, NoTransform())
             return None
@@ -98,6 +101,44 @@ class Player(Parametric, ContentAware):
 
         self._feedback(event, scheduler_time, transform)
         return event, transform
+
+    def step(self,
+             scheduler_time: float,
+             _beat_phase: float,
+             _tempo: float) -> Optional[tuple[CorpusEvent, AbstractTransform]]:
+        if not self.is_enabled():
+            return None
+
+        if not self.eligible:
+            raise ContentMismatch(f"Player '{self.name}' couldn't handle corpus of type '{type(self.corpus).__name__}"
+                                  f"due to incompatibility with the following class: "
+                                  f"'{self._invalidated_by.__class__.__name__}'")
+
+        if not self.corpus:
+            raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
+
+        if self._force_jump_index is not None:
+            self.clear()
+            event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+            event_and_transform = self._force_jump()
+
+        elif self.previous_output is not None:
+            self._update_peaks_on_new_event(scheduler_time)
+            next_event_index = (self.previous_output[0].state_index + 1) % self.corpus.length()
+            event: CorpusEvent = self.corpus.event_at(next_event_index)
+            transform = self.previous_output[1]
+            event = transform.apply(event)
+            event_and_transform = event, transform
+
+        else:
+            event_and_transform = None
+
+        if event_and_transform is not None:
+            self._feedback(event_and_transform[0], scheduler_time, event_and_transform[1])
+
+        self.previous_output = event_and_transform
+
+        return event_and_transform
 
     def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
         """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError

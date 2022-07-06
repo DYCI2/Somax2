@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Optional, List, Tuple
 
 from somax.features import TotalEnergyDb
-from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent
+from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent, CorpusEvent
 from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.transforms import AbstractTransform
 
@@ -125,7 +125,7 @@ class AudioOffEvent(RendererEvent):
         return [RendererMessage(keyword=SendProtocol.SEND_AUDIO_OFF, content=SendProtocol.SEND_AUDIO_OFF)]
 
 
-class TriggerEvent(ScheduledEvent, ABC):
+class TriggerEvent(ScheduledEvent):
     def __init__(self, trigger_time: float, target_time: float):
         """
         Note: the `trigger_time` is the point in time when the `trigger` gets queued,
@@ -136,3 +136,20 @@ class TriggerEvent(ScheduledEvent, ABC):
 
     def __repr__(self):
         return f"{self.__class__.__name__}(trigger_time={self.trigger_time},target_time={self.target_time}"
+
+
+class ContinueEvent(ScheduledEvent):
+    """ Note: everything related to ContinueEvent should be considered a hack that needs to be rewritten. """
+    def __init__(self, trigger_time: float, target_time: float):
+        super().__init__(trigger_time=trigger_time)
+        self.target_time: float = target_time
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(trigger_time={self.trigger_time},target_time={self.target_time}"
+
+
+class ContinueStopEvent(ContinueEvent):
+    """
+    Event for handling note offs after a sequence of ContinueEvents.
+    Note: everything related to ContinueEvent should be considered a hack that needs to be rewritten.
+    """

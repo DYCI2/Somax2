@@ -36,7 +36,7 @@ class MidiStateHandler:
         self.align_note_ons: bool = align_note_ons
         self.note_off_mode: NoteOffMode = note_off_mode
         self.artificial_ties: bool = artificial_ties
-        self._sustain_timeout_ticks: Optional[float] = sustain_timeout_ticks  # None: sustain indefinitely
+        self.timeout: Optional[float] = sustain_timeout_ticks  # None: sustain indefinitely
 
         self.prolonged_notes: List[Note] = []
         self.next_sustain_timeout: Optional[float] = None
@@ -133,8 +133,8 @@ class MidiStateHandler:
             output_events.append(MidiNoteEvent(offset, note.pitch, 0, note.channel, corpus_event.state_index, None))
 
         # set timeout if defined
-        if self._sustain_timeout_ticks is not None:
-            self.next_sustain_timeout = trigger_time + corpus_event.duration + self._sustain_timeout_ticks
+        if self.timeout is not None:
+            self.next_sustain_timeout = trigger_time + corpus_event.duration + self.timeout
 
         return output_events
 
@@ -165,4 +165,4 @@ class MidiStateHandler:
         else:
             self.next_sustain_timeout = None
 
-        self._sustain_timeout_ticks = ticks
+        self.timeout = ticks
