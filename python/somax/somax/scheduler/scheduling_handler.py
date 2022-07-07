@@ -139,9 +139,7 @@ class SchedulingHandler(Introspective, ABC):
 
         # special case to handle note-by-note mode flushing specific to Indirect/Manual mode
         if self._last_trigger_time is not None and self.midi_handler.timeout is not None:
-            print("--- ", stretched_time, self._last_trigger_time)
             if stretched_time - self._last_trigger_time > self.midi_handler.timeout:
-                print(f"flushing from note by note stuff (time={stretched_time})")
                 output_events.extend(self.midi_handler.flush([], stretched_time))
                 self._last_trigger_time = None
 
@@ -437,6 +435,7 @@ class IndirectSchedulingHandler(SchedulingHandler):
         self._last_trigger_time = trigger.trigger_time
         self._scheduler.remove_by_type(ContinueEvent)
         self._scheduler.add_event(trigger)
+        self._last_trigger_time = onset_time
 
     def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
         if self.midi_handler.timeout is None or \

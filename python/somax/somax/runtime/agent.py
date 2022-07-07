@@ -230,8 +230,7 @@ class OscAgent(Agent, AsyncioOscObject):
                 self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
             elif isinstance(event, RendererEvent):
                 self.target.send_event(event)
-            else:
-                raise RuntimeError(f"Invalid event type '{event.__class__}' encountered")
+            # else: ignore any other type of event
 
     ######################################################
     # SCHEDULER & PLAYBACK CONTROL
