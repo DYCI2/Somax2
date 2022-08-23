@@ -154,7 +154,6 @@ if __name__ == '__main__':
                         default=None)
 
     parser.add_argument("--format",
-                        nargs=1,
                         type=TextFormat.from_keyword,
                         help=f"Format used for the text file. Valid formats are: {', '.join(TextFormat.keywords())}.",
                         action='store',
