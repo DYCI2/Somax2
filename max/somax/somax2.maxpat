@@ -106,15 +106,14 @@
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
 					"id" : "obj-11",
-					"ignoreclick" : 1,
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
 					"maxclass" : "bpatcher",
 					"name" : "somax.audio.io.maxpat",
 					"numinlets" : 3,
-					"numoutlets" : 6,
+					"numoutlets" : 7,
 					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "", "", "", "", "", "" ],
+					"outlettype" : [ "", "", "", "", "", "", "multichannelsignal" ],
 					"patching_rect" : [ 7.083333333333258, 5.574140189969739, 367.0, 330.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.0, 0.0, 381.0, 337.0 ],
@@ -470,6 +469,13 @@
 				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
 				"patcherrelativepath" : "./javascript",
 				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "guitar1_part.mp3",
+				"bootpath" : "~/Music",
+				"patcherrelativepath" : "../../../../Music",
+				"type" : "Mp3",
 				"implicit" : 1
 			}
 , 			{

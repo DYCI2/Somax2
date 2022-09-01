@@ -88,6 +88,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-69",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -542,7 +543,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "bang", "bang", "" ],
-					"patching_rect" : [ 238.5, 645.0, 311.0, 22.0 ],
+					"patching_rect" : [ 238.5, 650.0, 311.0, 22.0 ],
 					"text" : "sel MidiCorpus AudioCorpus"
 				}
 
@@ -554,7 +555,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 5,
 					"outlettype" : [ "", "", "", "", "" ],
-					"patching_rect" : [ 228.0, 612.0, 61.0, 22.0 ],
+					"patching_rect" : [ 228.0, 621.0, 61.0, 22.0 ],
 					"text" : "unjoin 4"
 				}
 
