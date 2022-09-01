@@ -1,6 +1,6 @@
 import logging
 from abc import ABC, abstractmethod
-from collections import Iterable
+from collections.abc import Iterable
 from typing import Any, Callable, Dict, Tuple, List, Union
 
 from maxosc.sender import Sender, SendFormat, MaxFormatter

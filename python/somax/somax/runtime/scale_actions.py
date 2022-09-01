@@ -569,7 +569,10 @@ class RegionMaskScaleAction(AbstractScaleAction):
         high_index: int = int(self._high_thresh.value * corpus.length())
         corresponding_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         mask: np.ndarray = ((low_index <= corresponding_indices) & (corresponding_indices <= high_index)).astype(int)
-        peaks.scale(mask)
+        if self._low_thresh.value < 0.001:
+            peaks.remove(mask)
+        else:
+            peaks.scale(mask)
         return peaks
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
