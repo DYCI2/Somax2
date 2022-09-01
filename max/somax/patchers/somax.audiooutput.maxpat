@@ -40,6 +40,74 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 10.0,
+					"hidden" : 1,
+					"id" : "obj-26",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 910.139764237976124, 375.437218602255371, 141.0, 29.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 25.042717339874571, 38.005465965061831, 144.0, 18.0 ],
+					"text" : "Audio output is not enabled!",
+					"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
+					"hidden" : 1,
+					"id" : "obj-32",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 910.139764237976124, 415.0, 57.0, 21.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 18.959798131217894, 29.38319912640668, 156.16583841731341, 34.366800515965451 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
+					"id" : "obj-27",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 869.833333790302277, 375.437218602255371, 23.0, 24.673327137546494 ],
+					"presentation" : 1,
+					"presentation_rect" : [ -0.308332305467616, 1.158694124893202, 244.533334456516286, 119.733334243297577 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"id" : "obj-10",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 276.5, 165.0, 23.0, 24.673327137546494 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 98.083334177732468, 29.38319912640668, 138.694245053342911, 44.892028725818648 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"comment" : "(mc signal) audio out",
 					"id" : "obj-31",
 					"index" : 1,
@@ -103,11 +171,11 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1226.639764237976124, 98.0, 145.0, 22.0 ],
 					"restore" : 					{
-						"enabled" : [ 1 ],
+						"enabled" : [ 0 ],
 						"gain" : [ 0.0 ],
 						"leftchannel" : [ 1.0 ],
-						"monocorpus" : [ 1 ],
-						"pan" : [ -41.999999999999986 ],
+						"monocorpus" : [ 0 ],
+						"pan" : [ 0.0 ],
 						"rightchannel" : [ 2.0 ],
 						"width" : [ 127.0 ]
 					}
@@ -179,110 +247,6 @@
 					"patching_rect" : [ 222.0, 676.0, 57.0, 21.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 189.83416158268659, 29.88319912640668, 45.16583841731341, 38.65026417198942 ],
-					"proportion" : 0.5
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 1,
-					"fontsize" : 10.0,
-					"hidden" : 1,
-					"id" : "obj-26",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 910.139764237976124, 375.437218602255371, 141.0, 29.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 25.042717339874571, 38.005465965061831, 144.0, 18.0 ],
-					"text" : "Audio output is not enabled!",
-					"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
-					"hidden" : 1,
-					"id" : "obj-32",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 910.139764237976124, 415.0, 57.0, 21.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 18.959798131217894, 29.38319912640668, 156.16583841731341, 34.366800515965451 ],
-					"proportion" : 0.5
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
-					"id" : "obj-27",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 869.833333790302277, 375.437218602255371, 23.0, 24.673327137546494 ],
-					"presentation" : 1,
-					"presentation_rect" : [ -0.308332305467616, 1.158694124893202, 244.533334456516286, 119.733334243297577 ],
-					"proportion" : 0.5
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
-					"id" : "obj-279",
-					"ignoreclick" : 0,
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 457.5, 453.0, 23.0, 24.673327137546494 ],
-					"presentation" : 1,
-					"presentation_rect" : [ -0.308332305467616, 1.158694124893202, 240.198688159156717, 114.733334243297577 ],
-					"proportion" : 0.5
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
-					"id" : "obj-10",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 276.5, 165.0, 23.0, 24.673327137546494 ],
-					"presentation" : 1,
-					"presentation_rect" : [ -0.308332305467616, 30.38319912640668, 188.142493888154206, 44.892028725818648 ],
-					"proportion" : 0.5
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
-					"id" : "obj-2",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 241.5, 165.0, 23.0, 24.673327137546494 ],
-					"presentation" : 1,
-					"presentation_rect" : [ -0.308332305467616, 70.999999642372131, 237.058332305467616, 47.866800515965451 ],
 					"proportion" : 0.5
 				}
 
@@ -419,6 +383,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-13",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -1549,15 +1514,6 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
-					"order" : 0,
-					"source" : [ "obj-7", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-2", 0 ],
-					"order" : 1,
 					"source" : [ "obj-7", 0 ]
 				}
 
