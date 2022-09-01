@@ -261,6 +261,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.debug(f"Agent '{self.player.name}' disabled")
             self.flush()
         self._enabled = is_enabled
+        self.player.enabled.value = is_enabled
 
     def clear(self):
         self.flush()
