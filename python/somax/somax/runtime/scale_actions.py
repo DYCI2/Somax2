@@ -17,6 +17,7 @@ from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import FeedbackQueue
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.peaks import Peaks
+from somax.runtime.taboo_mask import TabooMask
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
@@ -28,8 +29,15 @@ class AbstractScaleAction(Parametric, ContentAware, StringParsed, ABC):
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this ScaleAction.")
 
     @abstractmethod
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
         """ """
 
     @abstractmethod
@@ -65,9 +73,16 @@ class NoScaleAction(AbstractScaleAction):
     def __init__(self):
         super().__init__()
 
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **_kwargs) -> Peaks:
-        return peaks
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
+        return peaks, taboo_mask
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
@@ -93,8 +108,15 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         self._selectivity: Parameter = Parameter(selectivity, None, None, 'float', "Phase modulation")  # TODO
         self._parse_parameters()
 
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **_kwargs) -> Peaks:
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
         if corpus is not None and isinstance(corpus, AudioCorpus):
             event_beat_phases: np.ndarray = np.array([e.get_feature(BeatPhase).value() for e in corresponding_events])
             peaks.scores *= np.exp(self.selectivity * (np.cos(2 * np.pi * (beat_phase - event_beat_phases)) - 1))
@@ -103,7 +125,7 @@ class PhaseModulationScaleAction(AbstractScaleAction):
             #     legacy code for the MIDI case
             peaks.scores *= np.exp(self.selectivity * (np.cos(2 * np.pi * (time - peaks.times)) - 1))
         # else: do nothing
-        return peaks
+        return peaks, taboo_mask
 
     def feedback(self, _feedback_event: Optional[CorpusEvent], _time: float,
                  _applied_transform: AbstractTransform) -> None:
@@ -138,15 +160,22 @@ class NextStateScaleAction(AbstractScaleAction):
                                             "Scaling factor for peaks close to previous output.")
         self._previous_output_index: Optional[int] = None
 
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **_kwargs) -> Peaks:
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
         if self._previous_output_index is None:
-            return peaks
+            return peaks, taboo_mask
         else:
             event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
             is_matching: np.ndarray = event_indices == self._previous_output_index + 1
             peaks.scale(self.factor, is_matching)
-            return peaks
+            return peaks, taboo_mask
 
     def feedback(self, feedback_event: Optional[CorpusEvent], _time: float,
                  _applied_transform: AbstractTransform) -> None:
@@ -178,23 +207,32 @@ class AutoJumpScaleAction(AbstractScaleAction):
         self._jump_threshold: Parameter = Parameter(jump_threshold, 1, None, "int", "TODO")
         self._history: FeedbackQueue = FeedbackQueue()
 
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
         event_indices: List[int] = [e[0].state_index for e in self._history.get_n_last(self.jump_threshold + 1)]
         if not event_indices:
-            return peaks
+            return peaks, taboo_mask
         previous_index: int = event_indices[0]
         num_consecutive_events: int = len(list(itertools.takewhile(lambda a: a == -1, np.diff(event_indices))))
         if num_consecutive_events <= self.activation_threshold:
             factor: float = 1.0
         elif num_consecutive_events >= self.jump_threshold:
             factor: float = 0.0
+            # add taboo for all the N previous events
+            taboo_mask.add_taboo(event_indices)
         else:
             factor: float = 0.5 ** (num_consecutive_events - self.activation_threshold)
         event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         is_matching: np.ndarray = event_indices == previous_index + 1
         peaks.scale(factor, is_matching)
-        return peaks
+        return peaks, taboo_mask
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
@@ -276,14 +314,22 @@ class StaticTabooScaleAction(AbstractScaleAction):
 
         self._taboo_indices: deque[int] = deque([], self.taboo_length)
 
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
         event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         matching_indices: np.ndarray = np.zeros(len(corresponding_events), dtype=bool)
         for taboo_index in self._taboo_indices:
             matching_indices += event_indices == taboo_index
         peaks.scale(0, matching_indices)
-        return peaks
+        taboo_mask.add_taboo(list(self._taboo_indices))
+        return peaks, taboo_mask
 
     def feedback(self, feedback_event: Optional[CorpusEvent], _time: float,
                  _applied_transform: AbstractTransform) -> None:
@@ -323,16 +369,23 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
         # Optional case should never have to be handled
         self._transform_handler: Optional[TransformHandler] = None
 
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
         if self._previous_transform is None or self._transform_handler is None:
-            return peaks
+            return peaks, taboo_mask
         else:
             peak_transform_ids: np.ndarray = np.array(peaks.transform_ids)
             previous_transform_id: int = self._transform_handler.get_id(self._previous_transform)
             not_matching: np.ndarray = peak_transform_ids != previous_transform_id
             peaks.scale(self.factor, not_matching)
-            return peaks
+            return peaks, taboo_mask
 
     def feedback(self, _feedback_event: Optional[CorpusEvent], _time: float,
                  applied_transform: AbstractTransform) -> None:
@@ -404,10 +457,17 @@ class EnergyScaleAction(AbstractScaleAction):
 
         self.history: deque[float] = deque([], self.moving_average_len.value)
 
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
         if self.center is None:
-            return peaks
+            return peaks, taboo_mask
 
         if self._mean_or_peak.value:
             velocities: np.ndarray = np.array([event.get_feature(PeakEnergyDb).value()
@@ -423,7 +483,7 @@ class EnergyScaleAction(AbstractScaleAction):
 
         peaks.scores *= 1 - self._weight.value + self._weight.value * factor
 
-        return peaks
+        return peaks, taboo_mask
 
     def feedback(self, feedback_event: Optional[CorpusEvent], _time: float,
                  _applied_transform: AbstractTransform) -> None:
@@ -468,10 +528,17 @@ class VerticalDensityScaleAction(AbstractGaussianScale):
     def __init__(self, mu: float = DEFAULT_VERTICAL_DENSITY):
         super().__init__(mu=mu)
 
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              _corresponding_transforms: List[AbstractTransform], _corpus: Corpus = None, **_kwargs) -> Peaks:
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
         densities: np.ndarray = np.array([event.get_feature(VerticalDensity).value() for event in corresponding_events])
-        return self._scale(peaks, densities)
+        return self._scale(peaks, densities), taboo_mask
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
@@ -493,11 +560,18 @@ class DurationScaleAction(AbstractGaussianScale):
     def __init__(self, mu: float = DEFAULT_DURATION):
         super().__init__(mu=mu)
 
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
         # TODO: Not updated to handle absolute scheduling based on hacky update July 5, 2022
         durations: np.ndarray = np.array([event.duration for event in corresponding_events])
-        return self._scale(peaks, durations)
+        return self._scale(peaks, durations), taboo_mask
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
@@ -522,14 +596,21 @@ class OctaveBandsScaleAction(AbstractScaleAction):
         self._band_distribution: Parameter = ParamWithSetter(OctaveBandsScaleAction.DEFAULT_BAND_DISTRIBUTION, None,
                                                              None, "list[11]", "TODO", self._set_band_distribution)
 
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **kwargs) -> Peaks:
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
         events_band_distribution: np.ndarray = np.array([event.get_feature(OctaveBands).value()
                                                          for event in corresponding_events])
         factor: np.ndarray = 1 / np.sqrt(np.sum(np.power(events_band_distribution - self.band_distribution, 2), axis=1))
         print(np.min(factor), np.max(factor), factor.shape)  # TODO: THIS SHOULD BE HERE UNTIL PROPERLY DEBUGGED
         peaks.scale(factor)
-        return peaks
+        return peaks, taboo_mask
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
@@ -562,18 +643,26 @@ class RegionMaskScaleAction(AbstractScaleAction):
         self._low_thresh: Parameter = Parameter(0, 0, 1.0, "float", "Fraction [0,1] marking start of region")
         self._high_thresh: Parameter = Parameter(1.0, 0, 1.0, "float", "Fraction [0,1] marking end of region")
 
-    def scale(self, peaks: Peaks, time: float, beat_phase: float, corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform], corpus: Corpus = None, **_kwargs) -> Peaks:
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
         # TODO: This could be optimized and stored if ScaleAction had direct access to Corpus
         low_index: int = int(self._low_thresh.value * corpus.length())
         high_index: int = int(self._high_thresh.value * corpus.length())
         corresponding_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
-        mask: np.ndarray = ((low_index <= corresponding_indices) & (corresponding_indices <= high_index)).astype(int)
-        if self._low_thresh.value < 0.001:
-            peaks.remove(mask)
-        else:
-            peaks.scale(mask)
-        return peaks
+        indices_to_remove: np.ndarray = ((low_index > corresponding_indices)
+                                         | (corresponding_indices > high_index)).astype(bool)
+        peaks.remove(indices_to_remove)
+        taboo_mask.add_taboo(corresponding_indices[indices_to_remove])
+        print("rm:", corresponding_indices[indices_to_remove])
+
+        return peaks, taboo_mask
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:
@@ -587,3 +676,41 @@ class RegionMaskScaleAction(AbstractScaleAction):
 
     def clear(self) -> None:
         pass
+
+
+class ThresholdScaleAction(AbstractScaleAction):
+    DEFAULT_THRESHOLD = 0.1
+    DEFAULT_APPLY_TABOO = False
+
+    def __init__(self):
+        super().__init__()
+        self._threshold: Parameter = Parameter(self.DEFAULT_THRESHOLD, 0, None, "float", "TODO")
+        self._apply_taboo: Parameter = Parameter(self.DEFAULT_APPLY_TABOO, False, True, "bool", "TODO")
+
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
+        indices_to_remove: np.ndarray = peaks.scores < self._threshold.value
+        if self._apply_taboo.value:
+            taboo_mask.add_taboo_by_mask(mask=indices_to_remove)
+        peaks.remove(indices_to_remove)
+        return peaks, taboo_mask
+
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
+        pass
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return True

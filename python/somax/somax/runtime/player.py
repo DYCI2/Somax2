@@ -11,16 +11,18 @@ from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch
 from somax.runtime.exceptions import InvalidCorpus, InvalidLabelInput
+from somax.runtime.fallback_peak_selector import FallbackPeakSelector
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.parameter import Parameter, Parametric
+from somax.runtime.peak_post_processing import PeakPostFilter
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.peaks import Peaks
 from somax.runtime.scale_actions import AbstractScaleAction
+from somax.runtime.taboo_mask import TabooMask
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
-from somax.scheduler.scheduling_mode import SchedulingMode
 
 
 class Player(Parametric, ContentAware):
@@ -34,9 +36,11 @@ class Player(Parametric, ContentAware):
         self.name: str = name
         self._transform_handler: TransformHandler = TransformHandler()
         self.peak_selector: AbstractPeakSelector = peak_selector
+        self.fallback_selector: FallbackPeakSelector = FallbackPeakSelector()
         self.corpus: Optional[Corpus] = corpus
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
         self.merge_action: AbstractMergeAction = merge_action
+        self.post_filter: PeakPostFilter = PeakPostFilter()
 
         self.atoms: Dict[str, Atom] = {}
 
@@ -85,10 +89,18 @@ class Player(Parametric, ContentAware):
         else:
             self._update_peaks_on_new_event(scheduler_time)
             peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
-            peaks = self._scale_peaks(peaks, scheduler_time, beat_phase, self.corpus)
+            taboo_mask: TabooMask = TabooMask(self.corpus)
+            peaks, taboo_mask = self._scale_peaks(peaks, scheduler_time, beat_phase, self.corpus, taboo_mask)
 
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self.peak_selector.decide(peaks, self.corpus, self._transform_handler)
+
+            # If no output: try fallback
+            if event_and_transform is None:
+                event_and_transform = self.fallback_selector.decide(self.corpus, taboo_mask)
+
+            event_and_transform = self.post_filter.process(event_and_transform)
+
             self.previous_peaks = peaks
 
         self.previous_output = event_and_transform
@@ -364,17 +376,27 @@ class Player(Parametric, ContentAware):
             self.logger.debug(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
             return None
 
-    def _scale_peaks(self, peaks: Peaks, scheduler_time: float, beat_phase: float, corpus: Corpus, **kwargs):
-        if peaks.is_empty():
-            return peaks
+    def _scale_peaks(self,
+                     peaks: Peaks,
+                     scheduler_time: float,
+                     beat_phase: float,
+                     corpus: Corpus,
+                     taboo_mask: TabooMask,
+                     **kwargs) -> Tuple[Peaks, TabooMask]:
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
         corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
                                                              for t in np.unique(peaks.transform_ids)]
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled_and_eligible():
-                peaks = scale_action.scale(peaks, scheduler_time, beat_phase,
-                                           corresponding_events, corresponding_transforms, corpus, **kwargs)
-        return peaks
+                peaks, taboo_mask = scale_action.scale(peaks=peaks,
+                                                       time=scheduler_time,
+                                                       beat_phase=beat_phase,
+                                                       corresponding_events=corresponding_events,
+                                                       corresponding_transforms=corresponding_transforms,
+                                                       taboo_mask=taboo_mask,
+                                                       corpus=corpus,
+                                                       **kwargs)
+        return peaks, taboo_mask
 
     def _update_transforms(self):
         for scale_action in self.scale_actions.values():
