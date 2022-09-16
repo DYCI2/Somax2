@@ -23,8 +23,9 @@ from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features import YinDiscretePitch, Tempo, TotalEnergyDb, OnsetChroma
 from somax.runtime.corpus import AudioCorpus
 from somax.scheduler.scheduling_mode import AbsoluteScheduling
-from somax.features.feature import CorpusFeature
+from somax.features.feature import CorpusFeature, AbstractFeature
 from somax.runtime.corpus_event import AudioCorpusEvent
+from somax.runtime.exceptions import FeatureError
 
 COMMENT = r"^\\s*?/\\*"
 EMPTY = r"^[\\s.\\n]*?$"
@@ -269,9 +270,14 @@ if __name__ == '__main__':
                                             beat_tightness=1.0)
 
     used_features = []
-    for feature in [YinDiscretePitch, Tempo, TotalEnergyDb, OnsetChroma]:
-        feature.analyze(events, metadata)
-        used_features.append(feature)
+    for _, feature in CorpusFeature.all_corpus_features():
+        try:
+            if feature not in used_features:
+                feature.analyze(events, metadata)
+            used_features.append(feature)
+        except FeatureError:
+            if verbose:
+                print(f"ignoring feature {feature.__name__}")
 
     corpus: AudioCorpus = AudioCorpus(events=events,
                                       name=output_name,
