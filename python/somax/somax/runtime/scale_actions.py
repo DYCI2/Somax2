@@ -225,8 +225,10 @@ class AutoJumpScaleAction(AbstractScaleAction):
             factor: float = 1.0
         elif num_consecutive_events >= self.jump_threshold:
             factor: float = 0.0
-            # add taboo for all the N previous events
+            # add taboo for all the N previous events and the following one (to force jump)
             taboo_mask.add_taboo(event_indices)
+            if len(event_indices) > 0 and corpus is not None and corpus.length() > 0:
+                taboo_mask.add_taboo(event_indices[-1] + 1)
         else:
             factor: float = 0.5 ** (num_consecutive_events - self.activation_threshold)
         event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
