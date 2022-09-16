@@ -58,8 +58,8 @@ class AbstractScaleAction(Parametric, ContentAware, StringParsed, ABC):
         return NoScaleAction()
 
     @classmethod
-    def default_set(cls, **_kwargs) -> Tuple['AbstractScaleAction']:
-        return PhaseModulationScaleAction(),
+    def default_set(cls, **_kwargs) -> Tuple['AbstractScaleAction', ...]:
+        return [PhaseModulationScaleAction(), ThresholdScaleAction()]
 
     @classmethod
     def from_string(cls, scale_action: str, **kwargs) -> 'AbstractScaleAction':
@@ -658,9 +658,12 @@ class RegionMaskScaleAction(AbstractScaleAction):
         corresponding_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         indices_to_remove: np.ndarray = ((low_index > corresponding_indices)
                                          | (corresponding_indices > high_index)).astype(bool)
-        peaks.remove(indices_to_remove)
-        taboo_mask.add_taboo(corresponding_indices[indices_to_remove])
-        print("rm:", corresponding_indices[indices_to_remove])
+        peaks.scale(0, indices_to_remove)
+
+        corpus_mask: np.ndarray = np.zeros(corpus.length(), dtype=bool)
+        corpus_mask[:low_index] = True
+        corpus_mask[high_index:] = True
+        taboo_mask.add_taboo(corpus_mask)
 
         return peaks, taboo_mask
 
@@ -699,7 +702,7 @@ class ThresholdScaleAction(AbstractScaleAction):
         indices_to_remove: np.ndarray = peaks.scores < self._threshold.value
         if self._apply_taboo.value:
             taboo_mask.add_taboo_by_mask(mask=indices_to_remove)
-        peaks.remove(indices_to_remove)
+        peaks.scale(0, indices_to_remove)
         return peaks, taboo_mask
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,

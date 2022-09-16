@@ -8,6 +8,7 @@ from somax.runtime.corpus import Corpus
 class TabooMask:
     def __init__(self, corpus: Corpus):
         self.corpus: Corpus = corpus
+        # True == taboo, False == non-taboo
         self._mask: np.ndarray = np.zeros(corpus.length(), dtype=bool)
 
     def add_taboo(self, indices: Union[int, List[int], np.ndarray]) -> None:
@@ -22,7 +23,7 @@ class TabooMask:
         return self._mask[indices]
 
     def non_taboo_indices(self) -> np.ndarray:
-        return np.nonzero(self._mask)[0]
+        return np.nonzero(~self._mask)[0]
 
     @property
     def mask(self) -> np.ndarray:

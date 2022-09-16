@@ -40,7 +40,7 @@ class Player(Parametric, ContentAware):
         self.corpus: Optional[Corpus] = corpus
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
         self.merge_action: AbstractMergeAction = merge_action
-        self.post_filter: PeakPostFilter = PeakPostFilter()
+        self.post_filter: PeakPostFilter = PeakPostFilter(enabled=False)
 
         self.atoms: Dict[str, Atom] = {}
 
@@ -210,7 +210,9 @@ class Player(Parametric, ContentAware):
     def _feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                   applied_transform: AbstractTransform) -> None:
         self.peak_selector.feedback(feedback_event, time, applied_transform)
+        self.fallback_selector.feedback(feedback_event, time, applied_transform)
         self.merge_action.feedback(feedback_event, time, applied_transform)
+
         for scale_action in self.scale_actions.values():
             scale_action.feedback(feedback_event, time, applied_transform)
 
@@ -396,6 +398,9 @@ class Player(Parametric, ContentAware):
                                                        taboo_mask=taboo_mask,
                                                        corpus=corpus,
                                                        **kwargs)
+
+        # Remove 0-scores
+        peaks.remove(peaks.scores < 1e-5)
         return peaks, taboo_mask
 
     def _update_transforms(self):
