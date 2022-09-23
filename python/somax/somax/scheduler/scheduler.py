@@ -18,7 +18,7 @@ class Scheduler:
         self._tempo: float = tempo
         self._phase: float = phase
         self.running: bool = running
-        self.queue: List[ScheduledEvent] = [] if queued_events else queued_events
+        self.queue: List[ScheduledEvent] = [] if queued_events is None else queued_events
 
     def update_time(self, time: float, tempo: float, phase: float) -> List[ScheduledEvent]:
         if self.running:

@@ -165,6 +165,7 @@ class OscAgent(Agent, AsyncioOscObject):
                     self.target.send_event(event)
 
     def _trigger_output(self, trigger: TriggerEvent):
+        print(f"TRIGGER: {trigger}")
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
@@ -196,6 +197,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
 
     def _continue_output(self, continue_event: ContinueEvent) -> None:
+        print(f"Continue output: {continue_event}")
         scheduling_time: float = continue_event.target_time
 
         try:
@@ -592,12 +594,10 @@ class OscAgent(Agent, AsyncioOscObject):
         self.logger.debug(f"Artificial ties set to {enable} for player '{self.player.name}'.")
 
     def set_timeout(self, timeout: Optional[float]) -> None:
-        if not (timeout is None or isinstance(timeout, float)) or timeout < 0:
-            self.logger.error(f"Timeout must be a value greater than or equal to zero or 'None'.")
+        if timeout is None or (isinstance(timeout, float) and timeout >= 0):
+            self.scheduling_handler.set_timeout(timeout)
         else:
-            self.scheduling_handler.timeout = timeout
-            # TODO: This should be merged into a single field (or split into two separate functions)
-            self.scheduling_handler.midi_handler.timeout = timeout
+            self.logger.error(f"Timeout must be a value greater than or equal to zero or 'None'.")
 
     def set_recombine(self, recombine: bool) -> None:
         self.recombine = recombine
