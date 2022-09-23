@@ -55,6 +55,7 @@ class Agent(multiprocessing.Process):
                  is_tempo_master: bool = False,
                  scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler,
                  synchronize_to_global_tempo: bool = False,
+                 recombine: bool = False,
                  **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
@@ -63,6 +64,7 @@ class Agent(multiprocessing.Process):
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
         self.synchronize_to_global_tempo: bool = synchronize_to_global_tempo
+        self.recombine: bool = recombine
 
         if corpus:  # handle corpus object if passed
             self.player.read_corpus(corpus)
@@ -198,9 +200,14 @@ class OscAgent(Agent, AsyncioOscObject):
 
         try:
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
-            event_and_transform = self.player.step(scheduling_time,
-                                                   self.scheduling_handler.phase,
-                                                   self.scheduling_handler.tempo)
+            if self.recombine:
+                event_and_transform = self.player.new_event(scheduling_time,
+                                                            self.scheduling_handler.phase,
+                                                            self.scheduling_handler.tempo)
+            else:
+                event_and_transform = self.player.step(scheduling_time,
+                                                       self.scheduling_handler.phase,
+                                                       self.scheduling_handler.tempo)
         except InvalidCorpus as e:
             self.logger.debug(str(e))
             return
@@ -209,6 +216,7 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
         self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
+        self._send_output_statistics()
 
     def _process_control_message(self, message_type: PlayControl):
         if message_type == PlayControl.START:
@@ -498,7 +506,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.player.set_eligibility(corpus)
         self.player.read_corpus(corpus)
         self.flush()
-        self._update_synchronization()   # set absolute/relative and scaling mode audio/midi
+        self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
         self._try_update_server_tempo()  # immediately set tempo if player is tempo master
         self._send_eligibility()
         self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
@@ -528,7 +536,6 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{repr(e)}. No scheduling handler was set.")
             return
 
-        self.flush()
         self.scheduling_handler = new_handler
         self.logger.debug(f"Scheduling mode set to {self.scheduling_handler.renderer_info()}")
 
@@ -584,27 +591,16 @@ class OscAgent(Agent, AsyncioOscObject):
         self.flush()
         self.logger.debug(f"Artificial ties set to {enable} for player '{self.player.name}'.")
 
-    def set_sustain_timeout(self, ticks: Optional[float]):
-        if ticks is None:
-            self.scheduling_handler.set_sustain_timeout(ticks)
-            self.logger.debug(f"Sustain timeout disabled for player '{self.player.name}'.")
-        elif isinstance(ticks, int) or isinstance(ticks, float) and ticks >= 0.0:
-            self.scheduling_handler.set_sustain_timeout(ticks)
-            self.flush()
-            self.logger.debug(f"Sustain timeout set to {ticks} ticks for player '{self.player.name}'.")
+    def set_timeout(self, timeout: Optional[float]) -> None:
+        if not (timeout is None or isinstance(timeout, float)) or timeout < 0:
+            self.logger.error(f"Timeout must be a value greater than or equal to zero or 'None'.")
         else:
-            self.logger.error("Sustain timeout must be a non-negative number")
+            self.scheduling_handler.timeout = timeout
+            # TODO: This should be merged into a single field (or split into two separate functions)
+            self.scheduling_handler.midi_handler.timeout = timeout
 
-    def set_audio_continuity_mode(self, enable: bool):
-        self.scheduling_handler.audio_handler.play_continuously = enable
-        self.flush()  # TODO Not ideal for runtime: Should rather output flush ONLY IF mode changes from True to False
-
-    def set_audio_timeout(self, timeout: float):
-        if timeout < 0:
-            self.logger.error(f"Timeout must be a value greater than or equal to zero.")
-        else:
-            self.scheduling_handler.audio_handler.timeout = timeout
-            self.flush()  # TODO: Not ideal for runtime: Should output flush only if value is above current threshold
+    def set_recombine(self, recombine: bool) -> None:
+        self.recombine = recombine
 
     def set_time_stretch(self, factor: float) -> None:
         if factor <= 0:

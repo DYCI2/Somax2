@@ -7,7 +7,7 @@ from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpus
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
 from somax.scheduler.midi_state_handler import MidiStateHandler, NoteOffMode
-from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, MidiNoteEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, MidiNoteEvent, AudioOffEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
@@ -29,9 +29,12 @@ class SchedulingHandler(Introspective, ABC):
                  time_stretch: float = 1.0,
                  exp_audio_relative_tempo_scaling: bool = False,
                  note_by_note_mode: bool = True,
+                 timeout: Optional[float] = 0.0,
+                 queued_events: Optional[List[ScheduledEvent]] = None,
                  **kwargs):
         self.scheduling_mode: SchedulingMode = scheduling_mode
-        self._scheduler: Scheduler = Scheduler(time=time, tempo=tempo, phase=phase, running=running)
+        self._scheduler: Scheduler = Scheduler(time=time, tempo=tempo, phase=phase,
+                                               running=running, queued_events=queued_events)
         self.midi_handler: MidiStateHandler = midi_handler
         self.audio_handler: AudioStateHandler = audio_handler
         self._trigger_pretime_value: float = trigger_pretime
@@ -41,6 +44,7 @@ class SchedulingHandler(Introspective, ABC):
         self._last_time_object: Optional[Time] = None
         self._last_trigger_time: Optional[float] = None
         self._note_by_note_mode: bool = note_by_note_mode   # only applies to Manual/Indirect SchedulingHandlers
+        self._timeout: Optional[float] = timeout    # None: sustain/continue indefinitely
 
         # TODO: Either remove this or integrate it in the architecture as relative time. Part of [[R7. Tempo/Pulse Seg]]
         #   (The names are parodical to make sure they don't stay in the code base for long)
@@ -101,6 +105,7 @@ class SchedulingHandler(Introspective, ABC):
 
     @classmethod
     def new_from(cls, other: 'SchedulingHandler', **kwargs) -> 'SchedulingHandler':
+        other._scheduler.remove_by_type(TriggerEvent)
         return cls(scheduling_mode=other.scheduling_mode,
                    time=other._scheduler.time,
                    tempo=other._scheduler.tempo,
@@ -112,6 +117,8 @@ class SchedulingHandler(Introspective, ABC):
                    time_stretch=other._stretch_factor,
                    exp_audio_relative_tempo_scaling=other._experimental_use_relative_tempo_scaling_for_audio,
                    note_by_note_mode=other._note_by_note_mode,
+                   timeout=other._timeout,
+                   queued_events=other._scheduler.queue,
                    **kwargs)
 
     @classmethod
@@ -215,6 +222,12 @@ class SchedulingHandler(Introspective, ABC):
                     applied_transform=applied_transform,
                     time_stretch_factor=self._experimental_accumulated_stretch_factor)
                 self._scheduler.add_events(scheduler_events)
+
+                continue_target_time: float = trigger_time + event.duration
+                continue_trigger_time: float = continue_target_time - self._trigger_pretime()
+                self._on_continue_event_received(ContinueEvent(trigger_time=continue_trigger_time,
+                                                               target_time=continue_target_time))
+
             else:
                 raise TypeError(f"Scheduling event of type '{event.__class__}' is not supported")
 
@@ -342,13 +355,15 @@ class ManualSchedulingHandler(SchedulingHandler):
                 current_time: float = self._scheduler.time
                 self._scheduler.add_event(TriggerEvent(trigger_time=current_time, target_time=current_time))
                 self._scheduler.remove_by_type(ContinueEvent)
+                self._scheduler.remove_by_type(AudioOffEvent)
                 self._last_trigger_time = current_time
 
     def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
-        if self.midi_handler.timeout is None or \
-                continue_event.trigger_time - self._last_trigger_time < self.midi_handler.timeout:
+        if self._timeout is None or \
+                continue_event.trigger_time - self._last_trigger_time < self._timeout:
             self._scheduler.add_event(continue_event)
-        # else: ignore, don't schedule
+        else:
+            self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
 
     def _on_corpus_event_received(self, trigger_time: float,
                                   event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
@@ -434,14 +449,16 @@ class IndirectSchedulingHandler(SchedulingHandler):
         trigger: TriggerEvent = TriggerEvent(trigger_time=onset_time - self._trigger_pretime(), target_time=onset_time)
         self._last_trigger_time = trigger.trigger_time
         self._scheduler.remove_by_type(ContinueEvent)
+        self._scheduler.remove_by_type(AudioOffEvent)
         self._scheduler.add_event(trigger)
         self._last_trigger_time = onset_time
 
     def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
-        if self.midi_handler.timeout is None or \
-                continue_event.trigger_time - self._last_trigger_time < self.midi_handler.timeout:
+        if self._timeout is None or \
+                continue_event.trigger_time - self._last_trigger_time < self._timeout:
             self._scheduler.add_event(continue_event)
-        # else: ignore, don't schedule
+        else:
+            self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
 
     def _on_corpus_event_received(self, trigger_time: float,
                                   event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
