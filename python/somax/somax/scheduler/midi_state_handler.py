@@ -98,15 +98,17 @@ class MidiStateHandler:
             prolongable_to.extend(starts_at)
             starts_at = []
 
-        # note_offs_previous = held \ prolongable: Generate note offs at start of slice
+        # note_offs_previous = held \ prolongable:  Generate note offs at start of slice
         # non_prolonged_notes = prolongable \ held: Generate note ons at start of slice
-        # prolongable ∩ held: Do nothing at start of slice
+        # continued_notes = prolongable ∩ held:     Continue to prolong
         note_offs_previous: List[Note] = [n for n in self.prolonged_notes if n not in prolongable_to]
         non_prolonged_notes: List[Note] = [n for n in prolongable_to if n not in self.prolonged_notes]
+        continued_notes: List[Note] = [n for n in self.prolonged_notes if n in prolongable_to]
 
         note_ons: List[Note] = non_prolonged_notes + starts_at + starts_within
         note_offs: List[Note] = ends_within + ends_at
-        self.prolonged_notes = prolongable_from
+        self.prolonged_notes = prolongable_from + [n for n in continued_notes if n not in prolongable_from]
+        # self.prolonged_notes = prolongable_from
 
         # Generate note offs at start of slice for previously held notes
         for note in note_offs_previous:
@@ -135,6 +137,10 @@ class MidiStateHandler:
         # set timeout if defined
         if self.timeout is not None:
             self.next_sustain_timeout = trigger_time + corpus_event.duration + self.timeout
+
+        # print(f"{corpus_event.state_index:<3} NOTE ON: {str([n.pitch for n in note_ons]):<30}, "
+        #       f"NOTE OFF: {str([n.pitch for n in note_offs + note_offs_previous]):<30}, "
+        #       f"PROLONGED: {str([n.pitch for n in self.prolonged_notes])}")
 
         return output_events
 

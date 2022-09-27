@@ -165,7 +165,6 @@ class OscAgent(Agent, AsyncioOscObject):
                     self.target.send_event(event)
 
     def _trigger_output(self, trigger: TriggerEvent):
-        print(f"TRIGGER: {trigger}")
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
@@ -197,7 +196,6 @@ class OscAgent(Agent, AsyncioOscObject):
         self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
 
     def _continue_output(self, continue_event: ContinueEvent) -> None:
-        print(f"Continue output: {continue_event}")
         scheduling_time: float = continue_event.target_time
 
         try:

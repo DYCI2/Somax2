@@ -108,7 +108,12 @@ class SchedulingHandler(Introspective, ABC):
     def new_from(cls, other: 'SchedulingHandler', **kwargs) -> 'SchedulingHandler':
         # TODO: REMOVE THIS FUNCTION! Manual/Indirect/Automatic should not BE SchedulingHandlers,
         #  but the SchedulingHandler should HAVE A TriggerHandler (or something along that line)
-        other._scheduler.remove_by_type(TriggerEvent)
+        triggers: List[ScheduledEvent] = other._scheduler.remove_by_type(TriggerEvent)
+
+        # TODO: Hack to handle legacy AutomaticSchedulingHandler when switching to Indirect/Manual in audio case
+        if isinstance(other, AutomaticSchedulingHandler):
+            other._scheduler.add_events([ContinueEvent(trig.trigger_time, typing.cast(TriggerEvent, trig).target_time)
+                                         for trig in triggers])
         return cls(scheduling_mode=other.scheduling_mode,
                    time=other._scheduler.time,
                    tempo=other._scheduler.tempo,
@@ -256,7 +261,7 @@ class SchedulingHandler(Introspective, ABC):
 
     def set_timeout(self, timeout: Optional[float]) -> None:
         self._timeout = timeout
-        self.midi_handler.timeout = timeout
+        self.midi_handler.set_sustain_timeout(timeout, self._scheduler.time)
 
     def set_time_stretch_factor(self, factor: float) -> None:
         self._stretch_factor = factor
@@ -341,9 +346,6 @@ class SchedulingHandler(Introspective, ABC):
     def set_artificial_ties(self, enabled: bool) -> None:
         self.midi_handler.artificial_ties = enabled
 
-    def set_sustain_timeout(self, ticks: Optional[float]) -> None:
-        self.midi_handler.set_sustain_timeout(ticks, self._scheduler.time)
-
     def set_note_by_note_mode(self, enabled: bool) -> None:
         self._note_by_note_mode = enabled
         self._scheduler.remove_by_type(ContinueEvent)
@@ -425,6 +427,7 @@ class AutomaticSchedulingHandler(SchedulingHandler):
             next_trigger_time: float = target_time - self._trigger_pretime()
             self._scheduler.add_event(self._adjust_in_time(TriggerEvent(trigger_time=next_trigger_time,
                                                                         target_time=target_time)))
+            self._last_trigger_time = next_trigger_time
 
     def _handle_flushing(self, flushed_triggers: List[TriggerEvent]) -> Optional[List[TriggerEvent]]:
         # Reschedule trigger but do not output to agent. Technically, `flushed_triggers` should be of length 1 at most

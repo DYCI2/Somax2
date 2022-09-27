@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 0.0, 52.0, 2076.0, 1327.0 ],
+		"rect" : [ 1188.0, 562.0, 985.0, 850.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -45,7 +45,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 9739.0, 1039.0, 97.0, 20.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Recombine/Step"
 				}
 
@@ -1564,13 +1563,14 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-1167",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1576.227848101265863, 1304.361470368357004, 23.0, 24.673327137546494 ],
+					"patching_rect" : [ 1576.227848101265863, 1305.361470368357004, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 11.41666666666697, 178.999999999999886, 217.0, 22.0 ],
 					"proportion" : 0.5,
@@ -6059,7 +6059,7 @@
 					"patching_rect" : [ 1588.300003922424366, 2367.0, 49.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 374.217207646514453, 578.967520112531247, 36.000000238418579, 18.0 ],
-					"text" : "0.19",
+					"text" : "0.20",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -11955,7 +11955,7 @@
 					"patching_rect" : [ 836.727848101265863, 2463.036235367295376, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 517.614192974589628, 696.846404873087522, 204.688280717488396, 14.5 ],
-					"size" : 427.0
+					"size" : 338.0
 				}
 
 			}
@@ -13964,7 +13964,7 @@
 					"patching_rect" : [ 910.727848101265863, 2414.5, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 15.958333333333712, 544.5175204224754, 182.0, 14.5 ],
-					"size" : 427.0
+					"size" : 338.0
 				}
 
 			}
@@ -20011,10 +20011,10 @@
 						"__exp_velscale" : [ 0, 127 ],
 						"artificialmidities" : [ 0 ],
 						"button" : [ 0.0 ],
-						"continuity" : [ 0.62 ],
+						"continuity" : [ 1.0 ],
 						"corpusvolatile" : [ 0 ],
-						"cut" : [ 1 ],
-						"decaybasis" : [ 0 ],
+						"cut" : [ 0 ],
+						"decaybasis" : [ 1 ],
 						"enabled" : [ 1 ],
 						"enforcetaboo" : [ 0 ],
 						"enforcetaboo[1]" : [ 1 ],
@@ -20024,11 +20024,11 @@
 						"harmonicngramorder" : [ 1 ],
 						"harmonicpeakdecay" : [ 3.001 ],
 						"heldnotesmode" : [ "Sustained" ],
-						"ignorephase" : [ 0 ],
+						"ignorephase" : [ 1 ],
 						"live.dial" : [ -6.0 ],
-						"live.menu" : [ 1.0 ],
-						"live.menu[1]" : [ 0.0 ],
-						"live.menu[2]" : [ 0.0 ],
+						"live.menu" : [ 0.0 ],
+						"live.menu[1]" : [ 1.0 ],
+						"live.menu[2]" : [ 1.0 ],
 						"live.numbox" : [ 0.0 ],
 						"live.slider" : [ 0.0 ],
 						"live.slider[1]" : [ 0.0 ],
@@ -20037,13 +20037,13 @@
 						"melodicmod12" : [ 1 ],
 						"melodicngramorder" : [ 1 ],
 						"melodicpeakdecay" : [ 2.001 ],
-						"multislider" : [ 0.621051820119222 ],
-						"notebynote" : [ 0 ],
+						"multislider" : [ 0.645539697011312 ],
+						"notebynote" : [ 1 ],
 						"outputchannels" : [ 0, 0, 1.0, 1, 0, 1.0, 2, 0, 1.0, 3, 0, 1.0, 4, 0, 1.0, 5, 0, 1.0, 6, 0, 1.0, 7, 0, 1.0, 8, 0, 1.0, 9, 0, 1.0, 10, 0, 1.0, 11, 0, 1.0, 12, 0, 1.0, 13, 0, 1.0, 14, 0, 1.0, 15, 0, 1.0 ],
 						"outputfrom" : [ 0 ],
 						"outputprobability" : [ 1.0 ],
 						"outputthreshold" : [ 0.0 ],
-						"playingmode" : [ 0 ],
+						"playingmode" : [ 1 ],
 						"pollpeaks" : [ 1 ],
 						"reinstantiate" : [ 1.0 ],
 						"resetinfluences" : [ 0.0 ],
@@ -20052,11 +20052,11 @@
 						"selfharmonicngramorder" : [ 1 ],
 						"selfharmonicpeakdecay" : [ 3.001 ],
 						"selfmelodicbypass" : [ 0 ],
-						"selfmod12" : [ 0 ],
+						"selfmod12" : [ 1 ],
 						"selfngramorder" : [ 1 ],
 						"selfpeakdecay" : [ 2.001 ],
 						"simultaneousonsets" : [ 1 ],
-						"sustaintimeout" : [ 8.0 ],
+						"sustaintimeout" : [ 4.0 ],
 						"sustaintimeoutenable" : [ 1 ],
 						"timestretch" : [ 1.0 ],
 						"timestretchmode" : [ 0 ],
@@ -20539,7 +20539,7 @@
 					"patching_rect" : [ 1661.099999999999909, 2343.0, 49.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 277.90689743130514, 579.30085411144978, 49.333334237337112, 18.0 ],
-					"text" : "331",
+					"text" : "195",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -25253,7 +25253,7 @@
 					"patching_rect" : [ 836.727848101265863, 2425.5, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 15.958333333333712, 544.5175204224754, 182.0, 14.5 ],
-					"size" : 427.0
+					"size" : 338.0
 				}
 
 			}
@@ -25295,14 +25295,14 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-42",
-					"linecount" : 8,
+					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 788.0, 2297.5, 25.0, 96.0 ],
+					"patching_rect" : [ 788.0, 2297.5, 25.0, 40.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 59.0, 456.555020118491711, 182.0, 18.0 ],
-					"text" : "guitar1_beat_corrected",
+					"text" : "guitar1",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -25318,7 +25318,7 @@
 					"patching_rect" : [ 728.0, 2433.0, 44.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 137.377322951765791, 570.0175204224754, 57.0, 18.0 ],
-					"text" : "427",
+					"text" : "338",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -25418,7 +25418,7 @@
 					"patching_rect" : [ 639.0, 2420.5, 44.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 57.958333333333712, 567.0175204224754, 70.0, 24.0 ],
-					"text" : "297",
+					"text" : "18",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
