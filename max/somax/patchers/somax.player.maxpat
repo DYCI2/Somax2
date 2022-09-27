@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 0.0, 53.0, 440.0, 770.0 ],
+		"rect" : [ 0.0, 53.0, 985.0, 850.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -4566,7 +4566,6 @@
 					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-1192",
 					"linecount" : 3,
 					"maxclass" : "comment",
@@ -4574,7 +4573,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 8388.91666641831398, 1233.0, 30.49999988079071, 40.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 142.425856084520547, 256.335773192596207, 60.0, 18.0 ],
+					"presentation_rect" : [ 137.377322951765791, 256.335773192596207, 60.0, 18.0 ],
 					"text" : "no timeout",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
@@ -4658,7 +4657,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"varname" : "sustaintimeout"
+					"varname" : "timeout"
 				}
 
 			}
@@ -4781,7 +4780,7 @@
 
 					}
 ,
-					"varname" : "sustaintimeoutenable"
+					"varname" : "timeoutenable"
 				}
 
 			}
@@ -20213,8 +20212,8 @@
 						"selfpeakdecay" : [ 2.001 ],
 						"simultaneousonsets" : [ 1 ],
 						"sparse" : [ 0 ],
-						"sustaintimeout" : [ 8.0 ],
-						"sustaintimeoutenable" : [ 1 ],
+						"timeout" : [ 8.76 ],
+						"timeoutenable" : [ 0 ],
 						"timestretch" : [ 1.0 ],
 						"timestretchmode" : [ 0 ],
 						"transpositionconsistency" : [ 1.0 ],
