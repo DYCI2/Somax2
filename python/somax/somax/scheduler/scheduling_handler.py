@@ -239,6 +239,10 @@ class SchedulingHandler(Introspective, ABC):
             else:
                 raise TypeError(f"Scheduling event of type '{event.__class__}' is not supported")
 
+        else:
+            # No event was generated due to taboo, sparsity, etc.: Turn audio off if audio corpus
+            self._scheduler.add_event(AudioOffEvent(trigger_time=trigger_time))
+
         self._on_corpus_event_received(trigger_time=trigger_time, event_and_transform=event_and_transform)
 
     def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:

@@ -118,6 +118,7 @@ class Player(Parametric, ContentAware):
              scheduler_time: float,
              _beat_phase: float,
              _tempo: float) -> Optional[tuple[CorpusEvent, AbstractTransform]]:
+        # TODO: Step mechanism does not respect taboos since it doesn't use scale actions at all.
         if not self.is_enabled():
             return None
 

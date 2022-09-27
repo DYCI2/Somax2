@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 100.0, 1170.0, 823.0 ],
+		"rect" : [ 34.0, 87.0, 1170.0, 823.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -92,9 +92,9 @@
 					"numoutlets" : 8,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "multichannelsignal", "", "", "", "", "", "" ],
-					"patching_rect" : [ 380.083333333333258, 5.574140189969739, 258.0, 742.0 ],
+					"patching_rect" : [ 380.083333333333258, 5.574140189969739, 255.0, 769.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 374.0, 0.0, 258.0, 736.0 ],
+					"presentation_rect" : [ 374.0, 0.0, 258.0, 769.0 ],
 					"varname" : "somax.player.io",
 					"viewvisibility" : 1
 				}
@@ -236,6 +236,7 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-1227" : [ "center", "center", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1240" : [ "live.slider", "live.slider", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1241" : [ "live.numbox[2]", "live.numbox[2]", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1245" : [ "simultaneousonsets[2]", "artificialmidities", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1247" : [ "live.slider[1]", "live.slider", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1256" : [ "live.menu[2]", "live.menu", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-126" : [ "harmonicbypass", "harmonicbypass", 0 ],

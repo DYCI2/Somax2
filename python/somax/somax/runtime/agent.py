@@ -180,10 +180,6 @@ class OscAgent(Agent, AsyncioOscObject):
 
         if event_and_transform is None:
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
-            return
-
-        event: CorpusEvent = event_and_transform[0]
-        applied_transform: AbstractTransform = event_and_transform[1]
 
         # TODO: No longer supported. Update for Corpus
         #  Note that when the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was

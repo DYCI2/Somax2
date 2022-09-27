@@ -96,7 +96,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 825.75, 451.326672862453506, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.0, 0.0, 238.194881659111587, 430.499999875000128 ],
+					"presentation_rect" : [ 346.0, 0.0, 238.194881659111587, 468.0 ],
 					"proportion" : 0.5,
 					"varname" : "serveruidisable"
 				}
@@ -164,7 +164,7 @@
 					"outlettype" : [ "", "multichannelsignal", "", "", "", "", "" ],
 					"patching_rect" : [ 50.0, 272.5, 235.0, 166.5 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 4.0, 0.0, 231.694882000000007, 362.0 ],
+					"presentation_rect" : [ 4.0, 0.0, 231.694882000000007, 401.0 ],
 					"varname" : "player",
 					"viewvisibility" : 1
 				}
@@ -494,7 +494,7 @@
 					"outlettype" : [ "", "", "", "", "", "" ],
 					"patching_rect" : [ 663.0, 834.5, 242.0, 68.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 363.0, 241.75, 67.0 ],
+					"presentation_rect" : [ 0.0, 401.0, 241.75, 67.0 ],
 					"varname" : "audioinfluencer",
 					"viewvisibility" : 1
 				}
@@ -1452,7 +1452,7 @@
 									"patching_rect" : [ 176.375, 225.259227263621824, 100.0, 19.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 5.416666507720947, 50.96435546875, 132.0, 18.5 ],
-									"text" : "Player-20220901",
+									"text" : "Player-20220927",
 									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textjustification" : 1
 								}
@@ -1956,7 +1956,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 356.0, 834.5, 242.0, 68.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 363.0, 241.694882000000007, 67.0 ],
+					"presentation_rect" : [ 0.0, 401.0, 241.694882000000007, 67.0 ],
 					"varname" : "influencer",
 					"viewvisibility" : 1
 				}
@@ -2781,8 +2781,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 70.5, 100.0, 557.0, 35.0 ],
-									"text" : "script newdefault player bpatcher somax.player.compact @args $1 $2 $3 $4 @patching_rect 50. 272.5 235. 166.5 @presentation 1 @presentation_rect 4 0 231.694882 362., script bringtofront player"
+									"patching_rect" : [ 70.5, 100.0, 613.5, 35.0 ],
+									"text" : "script newdefault player bpatcher somax.player.compact @args $1 $2 $3 $4 @patching_rect 50. 272.5 235. 166.5 @presentation 1 @presentation_rect 4 0 231.694882 401., script bringtofront player"
 								}
 
 							}
@@ -3190,7 +3190,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1377.125, 758.0, 128.0, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 241.75, 430.0 ],
+					"presentation_rect" : [ 0.0, 0.0, 241.75, 468.0 ],
 					"proportion" : 0.5
 				}
 
