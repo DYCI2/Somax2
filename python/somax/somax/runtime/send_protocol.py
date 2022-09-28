@@ -22,6 +22,7 @@ class SendProtocol:
     TRANSPORT_MODE = "transport_mode"
     SCHEDULER_CURRENT_TIME = "time"
     SCHEDULER_CURRENT_TEMPO = "tempo"
+    SCHEDULER_BEAT_PHASE = "beat_phase"
     SCHEDULER_TEMPO_SET_SUCESS = "tempo_was_set"
     SCHEDULER_HAS_TEMPO_MASTER = "has_tempo_master"
     SCHEDULER_RESET_UI = "reset"

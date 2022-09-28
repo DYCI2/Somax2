@@ -125,6 +125,8 @@ class SomaxServer(Somax, AsyncioOscObject):
 
         self.loop: Callable = self.__master_loop
 
+        self.previous_time: Time = Time(0, 0, 0, 0, False)
+
     ######################################################
     # ASYNCIO & MAIN LOOP(S)
     ######################################################
@@ -154,7 +156,12 @@ class SomaxServer(Somax, AsyncioOscObject):
         if self._transport.running:
             try:
                 time: Time = self._transport.update_time(ticks=tick)
+
                 self._send_to_all_agents(TimeMessage(time=time))
+
+                if time.phase < self.previous_time.phase:
+                    self.target.send(SendProtocol.SCHEDULER_BEAT_PHASE, Target.WRAPPED_BANG)
+                self.previous_time = time
             except TypeError as e:
                 self.logger.error(f"{repr(e)}")
 

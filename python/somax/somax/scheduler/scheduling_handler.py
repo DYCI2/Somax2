@@ -319,6 +319,9 @@ class SchedulingHandler(Introspective, ABC):
         output_events.extend(self.midi_handler.flush(flushed_events, self._scheduler.time))
         output_events.extend(self.audio_handler.flush(self._scheduler.time))
 
+        if not any([isinstance(e, AudioOffEvent) for e in output_events]):
+            output_events.append(AudioOffEvent(self._scheduler.time))
+
         # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
         self._experimental_previous_audio_events_tempo = None
         self._experimental_accumulated_stretch_factor = self._stretch_factor
