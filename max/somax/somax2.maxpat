@@ -66,7 +66,7 @@
 					"numoutlets" : 8,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "multichannelsignal", "", "", "", "", "", "" ],
-					"patching_rect" : [ 380.083333333333258, 5.574140189969739, 255.0, 769.0 ],
+					"patching_rect" : [ 380.083333333333258, 5.574140189969739, 254.0, 799.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 374.0, 0.0, 258.0, 769.0 ],
 					"varname" : "somax.player.io",
@@ -138,7 +138,7 @@
 					"numoutlets" : 8,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "float", "", "dictionary", "int", "", "", "bang" ],
-					"patching_rect" : [ 640.083333333333258, 5.574140189969739, 371.0, 230.0 ],
+					"patching_rect" : [ 650.083333333333258, 9.574140189969739, 371.0, 230.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 640.0, 0.0, 369.0, 227.0 ],
 					"varname" : "somax.server.io",
@@ -171,6 +171,8 @@
 			"obj-13::obj-1::obj-13::obj-2::obj-65" : [ "filterchroma", "filterchroma", 0 ],
 			"obj-13::obj-1::obj-6::obj-1115" : [ "continuity[3]", "continuity", 0 ],
 			"obj-13::obj-1::obj-6::obj-1150" : [ "live.text[15]", "live.text", 0 ],
+			"obj-13::obj-1::obj-6::obj-1175" : [ "heldnotesmode[2]", "heldnotesmode", 0 ],
+			"obj-13::obj-1::obj-6::obj-1179" : [ "continuity[4]", "continuity", 0 ],
 			"obj-13::obj-1::obj-6::obj-123::obj-1" : [ "live.text[19]", "live.text", 0 ],
 			"obj-13::obj-1::obj-6::obj-123::obj-2" : [ "live.text[20]", "live.text", 0 ],
 			"obj-13::obj-1::obj-6::obj-123::obj-3" : [ "live.text[21]", "live.text", 0 ],
@@ -457,13 +459,6 @@
 				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
 				"patcherrelativepath" : "./javascript",
 				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "guitar1 part copy.mp3",
-				"bootpath" : "~/Music",
-				"patcherrelativepath" : "../../../../Music",
-				"type" : "Mp3",
 				"implicit" : 1
 			}
 , 			{
