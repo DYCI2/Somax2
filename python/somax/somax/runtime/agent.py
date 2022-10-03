@@ -165,6 +165,7 @@ class OscAgent(Agent, AsyncioOscObject):
                     self.target.send_event(event)
 
     def _trigger_output(self, trigger: TriggerEvent):
+        print("TRIGGER", trigger)
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
@@ -192,6 +193,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
 
     def _continue_output(self, continue_event: ContinueEvent) -> None:
+        print("continue", continue_event)
         scheduling_time: float = continue_event.target_time
 
         try:
@@ -268,6 +270,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.player.enabled.value = is_enabled
 
     def clear(self):
+        print("clearing")
         self.flush()
         self.player.clear()
         self.clear_memory()
@@ -552,10 +555,6 @@ class OscAgent(Agent, AsyncioOscObject):
         self.flush()
 
     def _update_synchronization(self):
-        # TODO: Should `clear` be before or after `set_scheduling_mode`?
-        #       What happens in ContinuousMode with existing trigger when we switch mode if time axes are different?
-        self.clear()
-
         corpus: Optional[Corpus] = self.player.corpus
         scheduling_mode: SchedulingMode = self.get_scheduling_mode(self.player.corpus, self.synchronize_to_global_tempo)
 

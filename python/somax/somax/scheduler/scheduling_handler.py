@@ -1,13 +1,13 @@
 import typing
 from abc import ABC, abstractmethod
-from typing import Optional, List, Tuple, Dict, Type, cast
+from typing import Optional, List, Tuple, Dict, Type
 
 from somax.features import Tempo
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
 from somax.scheduler.midi_state_handler import MidiStateHandler, NoteOffMode
-from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, MidiNoteEvent, AudioOffEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, AudioOffEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
@@ -32,6 +32,8 @@ class SchedulingHandler(Introspective, ABC):
                  timeout: Optional[float] = 0.0,
                  queued_events: Optional[List[ScheduledEvent]] = None,
                  last_trigger_time: Optional[float] = None,
+                 last_time_object: Optional[Time] = None,
+                 experimental_previous_audio_events_tempo: Optional[float] = None,
                  **kwargs):
         self.scheduling_mode: SchedulingMode = scheduling_mode
         self._scheduler: Scheduler = Scheduler(time=time, tempo=tempo, phase=phase,
@@ -42,15 +44,15 @@ class SchedulingHandler(Introspective, ABC):
         self._stretch_factor: float = time_stretch
         self._previous_callback: float = time
         self._previous_stretched_time: float = time
-        self._last_time_object: Optional[Time] = None
+        self._last_time_object: Optional[Time] = last_time_object
         self._last_trigger_time: Optional[float] = last_trigger_time
-        self._note_by_note_mode: bool = note_by_note_mode   # only applies to Manual/Indirect SchedulingHandlers
-        self._timeout: Optional[float] = timeout    # None: sustain/continue indefinitely
+        self._note_by_note_mode: bool = note_by_note_mode  # only applies to Manual/Indirect SchedulingHandlers
+        self._timeout: Optional[float] = timeout  # None: sustain/continue indefinitely
 
         # TODO: Either remove this or integrate it in the architecture as relative time. Part of [[R7. Tempo/Pulse Seg]]
         #   (The names are parodical to make sure they don't stay in the code base for long)
         self._experimental_use_relative_tempo_scaling_for_audio: bool = exp_audio_relative_tempo_scaling
-        self._experimental_previous_audio_events_tempo: Optional[float] = None
+        self._experimental_previous_audio_events_tempo: Optional[float] = experimental_previous_audio_events_tempo
         self._experimental_accumulated_stretch_factor: float = self._stretch_factor
 
     @abstractmethod
@@ -112,8 +114,16 @@ class SchedulingHandler(Introspective, ABC):
 
         # TODO: Hack to handle legacy AutomaticSchedulingHandler when switching to Indirect/Manual in audio case
         if isinstance(other, AutomaticSchedulingHandler):
+            # If switching from automatic: convert all triggers (normally a single one) to continue events
             other._scheduler.add_events([ContinueEvent(trig.trigger_time, typing.cast(TriggerEvent, trig).target_time)
                                          for trig in triggers])
+        elif issubclass(cls, AutomaticSchedulingHandler):
+            # If switching to automatic: replace continue events (normally at most a single one) with trigger
+            continue_events: List[ScheduledEvent] = other._scheduler.remove_by_type(ContinueEvent)
+            if len(continue_events) > 0:
+                other._scheduler.add_event(TriggerEvent(continue_events[0].trigger_time,
+                                                        typing.cast(TriggerEvent, continue_events[0]).target_time))
+
         return cls(scheduling_mode=other.scheduling_mode,
                    time=other._scheduler.time,
                    tempo=other._scheduler.tempo,
@@ -128,6 +138,8 @@ class SchedulingHandler(Introspective, ABC):
                    timeout=other._timeout,
                    queued_events=other._scheduler.queue,
                    last_trigger_time=other._last_trigger_time,
+                   last_time_object=other._last_time_object,
+                   experimental_previous_audio_events_tempo=other._experimental_previous_audio_events_tempo,
                    **kwargs)
 
     @classmethod
@@ -403,7 +415,8 @@ class ManualSchedulingHandler(SchedulingHandler):
 class AutomaticSchedulingHandler(SchedulingHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._scheduler.add_event(self._default_trigger())
+        if not self._scheduler.has_by_type(TriggerEvent):
+            self._scheduler.add_event(self._default_trigger())
 
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
         if not self._scheduler.has_by_type(TriggerEvent):
