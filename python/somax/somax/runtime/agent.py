@@ -270,7 +270,6 @@ class OscAgent(Agent, AsyncioOscObject):
         self.player.enabled.value = is_enabled
 
     def clear(self):
-        print("clearing")
         self.flush()
         self.player.clear()
         self.clear_memory()
@@ -555,6 +554,13 @@ class OscAgent(Agent, AsyncioOscObject):
         self.flush()
 
     def _update_synchronization(self):
+        print(f"SETTING SYNC MODE: {self.synchronize_to_global_tempo}")
+        # In the current implementation, a MIDI corpus will change its duration when switching between the two modes.
+        # For this reason, it's absolutely mandatory to clear the player, otherwise we will have issues
+        # when merging peaks created in the second-based time domain with peaks created in a tick-based time domain
+        if isinstance(self.player.corpus, MidiCorpus):
+            self.clear()
+
         corpus: Optional[Corpus] = self.player.corpus
         scheduling_mode: SchedulingMode = self.get_scheduling_mode(self.player.corpus, self.synchronize_to_global_tempo)
 
@@ -569,6 +575,8 @@ class OscAgent(Agent, AsyncioOscObject):
             self._set_experimental_relative_temporal_scaling_for_audio(True)
         else:
             self._set_experimental_relative_temporal_scaling_for_audio(False)
+
+
 
     def set_align_note_ons(self, enable: bool):
         self.scheduling_handler.set_align_note_ons(enable)

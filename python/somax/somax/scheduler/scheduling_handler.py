@@ -199,7 +199,7 @@ class SchedulingHandler(Introspective, ABC):
 
         # TODO: Replace `self._experimental_accumulated_stretch_factor` with `self._stretch_factor`.
         stretched_time: float = (self._previous_stretched_time +
-                                 (time - self._previous_callback) * self._experimental_accumulated_stretch_factor)
+                                 max(0.0, time - self._previous_callback) * self._experimental_accumulated_stretch_factor)
         self._previous_callback = time
         self._previous_stretched_time = stretched_time
 
@@ -258,10 +258,10 @@ class SchedulingHandler(Introspective, ABC):
         self._on_corpus_event_received(trigger_time=trigger_time, event_and_transform=event_and_transform)
 
     def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
-        """ Note: Always flush before calling this! """
         self.scheduling_mode = scheduling_mode
         if self._last_time_object is not None:
             current_time_new_axis: float = self.scheduling_mode.get_time_axis(time=self._last_time_object)
+            print("Current time new axis", current_time_new_axis)
 
             # triggers if switching to a time axis < than current time axis
             events: List[ScheduledEvent] = self._scheduler.update_time(current_time_new_axis,
@@ -272,6 +272,7 @@ class SchedulingHandler(Introspective, ABC):
             events.extend(self._scheduler.remove_by_type(TriggerEvent))
             for event in events:
                 if isinstance(event, TriggerEvent):
+                    print(f"rescheduling trigger: {TriggerEvent} to {current_time_new_axis}")
                     self._reschedule(TriggerEvent(trigger_time=current_time_new_axis - self._trigger_pretime(),
                                                   target_time=current_time_new_axis))
 
@@ -425,6 +426,7 @@ class AutomaticSchedulingHandler(SchedulingHandler):
                 self._last_trigger_time = trigger_event.trigger_time
             else:
                 self._last_trigger_time: float = self._scheduler.time
+            print("TRIGGER RECVD @", self._scheduler.time)
 
     def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
         pass
@@ -458,6 +460,7 @@ class AutomaticSchedulingHandler(SchedulingHandler):
     def _reschedule(self, trigger_event: TriggerEvent) -> None:
         if not self._scheduler.has_by_type(TriggerEvent):
             self._scheduler.add_event(self._adjust_in_time(event=trigger_event, increment=1.0))
+            print("TRIGGER resched", self._adjust_in_time(trigger_event).trigger_time)
 
     def _default_trigger(self) -> TriggerEvent:
         current_time: float = self._scheduler.time

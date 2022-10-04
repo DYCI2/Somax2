@@ -22,6 +22,9 @@ class Scheduler:
 
     def update_time(self, time: float, tempo: float, phase: float) -> List[ScheduledEvent]:
         if self.running:
+            if abs(int(time) - int(self._time)) > 0:
+                print(time, "time")
+
             self._time = time
             self._tempo = tempo
             self._phase = phase
