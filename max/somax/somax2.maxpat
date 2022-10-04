@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 3,
-			"revision" : 1,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 57.0, 87.0, 1447.0, 823.0 ],
+		"rect" : [ 57.0, 87.0, 1010.0, 823.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -140,7 +140,7 @@
 					"outlettype" : [ "", "float", "", "dictionary", "int", "", "", "bang" ],
 					"patching_rect" : [ 650.083333333333258, 9.574140189969739, 371.0, 230.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 919.0, 5.0, 369.0, 227.0 ],
+					"presentation_rect" : [ 641.0, 0.0, 369.0, 227.0 ],
 					"varname" : "somax.server.io",
 					"viewvisibility" : 1
 				}
@@ -338,6 +338,12 @@
 ,
 				"obj-13::obj-1::obj-6::obj-1::obj-1256" : 				{
 					"parameter_longname" : "live.menu[7]"
+				}
+,
+				"obj-13::obj-1::obj-6::obj-1::obj-349::obj-26" : 				{
+					"parameter_invisible" : 1,
+					"parameter_modmode" : 0,
+					"parameter_unitstyle" : 10
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-1::obj-866::obj-1269" : 				{

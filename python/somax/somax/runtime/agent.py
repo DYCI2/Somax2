@@ -210,8 +210,8 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.debug(str(e))
             return
 
-        if event_and_transform is None:
-            return
+        # if event_and_transform is None:
+        #     return
 
         self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
         self._send_output_statistics()
@@ -344,7 +344,8 @@ class OscAgent(Agent, AsyncioOscObject):
                           f"with path '{path}'.")
 
     def influence_onset(self):
-        self.scheduling_handler.add_trigger_event()
+        if self._enabled:
+            self.scheduling_handler.add_trigger_event()
 
     ######################################################
     # CREATION/DELETION OF ATOM

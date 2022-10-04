@@ -199,7 +199,8 @@ class SchedulingHandler(Introspective, ABC):
 
         # TODO: Replace `self._experimental_accumulated_stretch_factor` with `self._stretch_factor`.
         stretched_time: float = (self._previous_stretched_time +
-                                 max(0.0, time - self._previous_callback) * self._experimental_accumulated_stretch_factor)
+                                 max(0.0,
+                                     time - self._previous_callback) * self._experimental_accumulated_stretch_factor)
         self._previous_callback = time
         self._previous_stretched_time = stretched_time
 
@@ -254,6 +255,7 @@ class SchedulingHandler(Introspective, ABC):
         else:
             # No event was generated due to taboo, sparsity, etc.: Turn audio off if audio corpus
             self._scheduler.add_event(AudioOffEvent(trigger_time=trigger_time))
+            self._scheduler.add_events(self.midi_handler.flush([], trigger_time))
 
         self._on_corpus_event_received(trigger_time=trigger_time, event_and_transform=event_and_transform)
 
@@ -278,7 +280,7 @@ class SchedulingHandler(Introspective, ABC):
 
     def set_timeout(self, timeout: Optional[float]) -> None:
         self._timeout = timeout
-        self.midi_handler.set_sustain_timeout(timeout, self._scheduler.time)
+        self.midi_handler.set_sustain_timeout(timeout, self._last_trigger_time if self._last_trigger_time is not None else self._scheduler.time)
 
     def set_time_stretch_factor(self, factor: float) -> None:
         self._stretch_factor = factor
@@ -391,12 +393,14 @@ class ManualSchedulingHandler(SchedulingHandler):
         if self._last_trigger_time is None:
             # Flushing has occurred
             self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
+            print("MANUAL TIMEOUT PASS ON FLUSH")
         elif self._timeout is None or continue_event.trigger_time - self._last_trigger_time < self._timeout:
             # Timeout has not passed: Player should continue playing for at least one more event
             self._scheduler.add_event(continue_event)
         else:
             # Timeout has passed: stop queueing ContinueEvent and if audio queue Audio Off
             self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
+            print("MANUAL TIMEOUT PASS 2")
 
     def _on_corpus_event_received(self, trigger_time: float,
                                   event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
