@@ -7,7 +7,7 @@ from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpus
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
 from somax.scheduler.midi_state_handler import MidiStateHandler, NoteOffMode
-from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, AudioOffEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, AudioOffEvent, MidiNoteEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
@@ -168,7 +168,8 @@ class SchedulingHandler(Introspective, ABC):
         # special case to handle note-by-note mode flushing specific to Indirect/Manual mode
         if self._last_trigger_time is not None and self.midi_handler.timeout is not None:
             if stretched_time - self._last_trigger_time > self.midi_handler.timeout:
-                output_events.extend(self.midi_handler.flush([], stretched_time))
+                midi_events: List[ScheduledEvent] = self._scheduler.remove_by_type(MidiNoteEvent)
+                output_events.extend(self.midi_handler.flush(midi_events, stretched_time))
 
         self._handle_output(output_events.copy())
 

@@ -657,6 +657,13 @@ class RegionMaskScaleAction(AbstractScaleAction):
         # TODO: This could be optimized and stored if ScaleAction had direct access to Corpus
         low_index: int = int(self._low_thresh.value * corpus.length())
         high_index: int = int(self._high_thresh.value * corpus.length())
+        if low_index == high_index:
+            if high_index < corpus.length():
+                high_index += 1
+            elif low_index > 0:
+                low_index -= 1
+            # else: Do nothing: corpus is of length 0
+
         corresponding_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         indices_to_remove: np.ndarray = ((low_index > corresponding_indices)
                                          | (corresponding_indices > high_index)).astype(bool)
