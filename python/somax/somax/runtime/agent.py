@@ -180,7 +180,10 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
         if event_and_transform is None:
+            self.target.send(SendProtocol.HAS_OUTPUT, 0)
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
+        else:
+            self.target.send(SendProtocol.HAS_OUTPUT, 1)
 
         # TODO: No longer supported. Update for Corpus
         #  Note that when the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was
@@ -210,8 +213,10 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.debug(str(e))
             return
 
-        # if event_and_transform is None:
-        #     return
+        if event_and_transform is None:
+            self.target.send(SendProtocol.HAS_OUTPUT, 0)
+        else:
+            self.target.send(SendProtocol.HAS_OUTPUT, 1)
 
         self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
         self._send_output_statistics()
@@ -576,8 +581,6 @@ class OscAgent(Agent, AsyncioOscObject):
             self._set_experimental_relative_temporal_scaling_for_audio(True)
         else:
             self._set_experimental_relative_temporal_scaling_for_audio(False)
-
-
 
     def set_align_note_ons(self, enable: bool):
         self.scheduling_handler.set_align_note_ons(enable)
