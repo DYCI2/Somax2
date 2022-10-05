@@ -55,7 +55,6 @@ class MidiStateHandler:
 
     def poll(self, current_time: float) -> List[ScheduledEvent]:
         if self.next_sustain_timeout is not None and current_time >= self.next_sustain_timeout:
-            print("SUSTAIN FLUSH")
             return self._clear(current_time)
 
         return []
@@ -147,7 +146,6 @@ class MidiStateHandler:
 
     def flush(self, flushed_events: List[ScheduledEvent], time: float) -> List[ScheduledEvent]:
         output: List[ScheduledEvent] = []
-        print("MIDIFLUSHING")
         for event in flushed_events:
             # Output any remaining note offs to avoid lingering midi notes
             if isinstance(event, MidiNoteEvent) and event.velocity == 0:

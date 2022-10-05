@@ -166,7 +166,9 @@ class SchedulingHandler(Introspective, ABC):
         output_events.extend(self.midi_handler.poll(stretched_time))
 
         # special case to handle note-by-note mode flushing specific to Indirect/Manual mode
-        if self._last_trigger_time is not None and self.midi_handler.timeout is not None:
+        if (self._last_trigger_time is not None
+                and self.midi_handler.timeout is not None
+                and not isinstance(self, AutomaticSchedulingHandler)):
             if stretched_time - self._last_trigger_time > self.midi_handler.timeout:
                 midi_events: List[ScheduledEvent] = self._scheduler.remove_by_type(MidiNoteEvent)
                 output_events.extend(self.midi_handler.flush(midi_events, stretched_time))
@@ -256,7 +258,9 @@ class SchedulingHandler(Introspective, ABC):
         else:
             # No event was generated due to taboo, sparsity, etc.: Turn audio off if audio corpus
             self._scheduler.add_event(AudioOffEvent(trigger_time=trigger_time))
-            self._scheduler.add_events(self.midi_handler.flush([], trigger_time))
+
+            self._scheduler.add_events(self.midi_handler.flush(self._scheduler.remove_by_type(MidiNoteEvent),
+                                                               trigger_time))
 
         self._on_corpus_event_received(trigger_time=trigger_time, event_and_transform=event_and_transform)
 
@@ -264,8 +268,6 @@ class SchedulingHandler(Introspective, ABC):
         self.scheduling_mode = scheduling_mode
         if self._last_time_object is not None:
             current_time_new_axis: float = self.scheduling_mode.get_time_axis(time=self._last_time_object)
-            print("Current time new axis", current_time_new_axis)
-
             # triggers if switching to a time axis < than current time axis
             events: List[ScheduledEvent] = self._scheduler.update_time(current_time_new_axis,
                                                                        self._scheduler.tempo,
@@ -275,7 +277,6 @@ class SchedulingHandler(Introspective, ABC):
             events.extend(self._scheduler.remove_by_type(TriggerEvent))
             for event in events:
                 if isinstance(event, TriggerEvent):
-                    print(f"rescheduling trigger: {TriggerEvent} to {current_time_new_axis}")
                     self._reschedule(TriggerEvent(trigger_time=current_time_new_axis - self._trigger_pretime(),
                                                   target_time=current_time_new_axis))
 
@@ -394,14 +395,12 @@ class ManualSchedulingHandler(SchedulingHandler):
         if self._last_trigger_time is None:
             # Flushing has occurred
             self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
-            print("MANUAL TIMEOUT PASS ON FLUSH")
         elif self._timeout is None or continue_event.trigger_time - self._last_trigger_time < self._timeout:
             # Timeout has not passed: Player should continue playing for at least one more event
             self._scheduler.add_event(continue_event)
         else:
             # Timeout has passed: stop queueing ContinueEvent and if audio queue Audio Off
             self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
-            print("MANUAL TIMEOUT PASS 2")
 
     def _on_corpus_event_received(self, trigger_time: float,
                                   event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
@@ -431,7 +430,6 @@ class AutomaticSchedulingHandler(SchedulingHandler):
                 self._last_trigger_time = trigger_event.trigger_time
             else:
                 self._last_trigger_time: float = self._scheduler.time
-            print("TRIGGER RECVD @", self._scheduler.time)
 
     def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
         pass
@@ -465,7 +463,6 @@ class AutomaticSchedulingHandler(SchedulingHandler):
     def _reschedule(self, trigger_event: TriggerEvent) -> None:
         if not self._scheduler.has_by_type(TriggerEvent):
             self._scheduler.add_event(self._adjust_in_time(event=trigger_event, increment=1.0))
-            print("TRIGGER resched", self._adjust_in_time(trigger_event).trigger_time)
 
     def _default_trigger(self) -> TriggerEvent:
         current_time: float = self._scheduler.time
