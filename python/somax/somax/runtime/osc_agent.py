@@ -181,7 +181,7 @@ class SomaxOscAgent(AsyncOscMPCWithStatus):
     def _callback(self, time: Time) -> None:
         if self._enabled:
             # update_time handles triggers:
-            events: List[ScheduledEvent] = self.generation_scheduler.update_time(time)
+            events: List[ScheduledEvent] = self.generation_scheduler.update_performance_time(time)
 
             # handle everything else:
             for event in events:

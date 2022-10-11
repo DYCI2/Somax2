@@ -85,7 +85,7 @@ class SomaxGenerationScheduler(GenerationScheduler, Component):
     def flush(self) -> List[ScheduledEvent]:
         return self.scheduling_handler.flush()
 
-    def update_time(self, time: Timepoint) -> Any:
+    def update_performance_time(self, time: Timepoint) -> Any:
         time = typing.cast(Time, time)
         events: List[ScheduledEvent] = self.scheduling_handler.update_time(time)
         output_events: List[ScheduledEvent] = []

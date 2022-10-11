@@ -143,7 +143,7 @@ class SomaxServer(Component, AsyncOscWithStatus):
             return
 
         generator: SomaxGenerator = SomaxGenerator(name=DefaultNames.GENERATOR,
-                                                   jury=peak_selector(DefaultNames.OUTPUT_SELECTOR),
+                                                   candidate_selector=peak_selector(DefaultNames.OUTPUT_SELECTOR),
                                                    merge_handler=merge_action(DefaultNames.MERGE_HANDLER))
 
         gen_scheduler: SomaxGenerationScheduler = SomaxGenerationScheduler(name=name,

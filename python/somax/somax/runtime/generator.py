@@ -13,7 +13,7 @@ from merge.main.classifier import Classifier
 from merge.main.corpus_event import CorpusEvent
 from merge.main.exceptions import CorpusError, QueryError, ComponentAddressError
 from merge.main.generator import Generator
-from merge.main.jury import Jury
+from merge.main.candidateselector import CandidateSelector
 from merge.main.merge_handler import MergeHandler
 from merge.main.query import Query, TriggerQuery, InfluenceQuery
 from somax.io.send_protocol import DefaultNames
@@ -33,7 +33,7 @@ from somax.runtime.transforms import AbstractTransform, NoTransform
 class SomaxGenerator(Generator, Component):
     def __init__(self,
                  name: str,
-                 jury: Jury = AbstractPeakSelector.default(),
+                 candidate_selector: CandidateSelector = AbstractPeakSelector.default(),
                  merge_handler: MergeHandler = AbstractMergeAction.default(),
                  corpus: Optional[SomaxCorpus] = None,
                  post_filters: Optional[List[SomaxFilter]] = None,
@@ -44,7 +44,7 @@ class SomaxGenerator(Generator, Component):
         self.corpus: Optional[SomaxCorpus] = corpus
 
         self._merge_handler: MergeHandler = merge_handler
-        self._jury: Jury = jury
+        self._jury: Jury = candidate_selector
 
         self.prospectors: Dict[str, SomaxProspector] = {}
 

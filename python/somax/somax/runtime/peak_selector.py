@@ -12,8 +12,8 @@ from merge.io.parameter import Parameter
 from merge.io.parsable import Parsable, ParsableWithDefault, T
 from merge.main.candidate import Candidate
 from merge.main.candidates import Candidates
+from merge.main.candidateselector import CandidateSelector
 from merge.main.corpus_event import CorpusEvent
-from merge.main.jury import Jury
 from merge.main.queue import Queue
 from merge.stubs.transform import Transform
 from somax.runtime.continuous_candidates import ContinuousCandidates
@@ -22,7 +22,7 @@ from somax.runtime.corpus_event import SomaxCorpusEvent
 from somax.runtime.transforms import NoTransform
 
 
-class AbstractPeakSelector(Jury, Component, ParsableWithDefault['AbstractPeakSelector'], ABC):
+class AbstractPeakSelector(CandidateSelector, Component, ParsableWithDefault['AbstractPeakSelector'], ABC):
     PEAK_SELECTOR_NAME = "peakselector"
 
     def __init__(self, name: str, *args, **kwargs):
