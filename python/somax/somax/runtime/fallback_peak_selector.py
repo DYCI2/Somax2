@@ -28,10 +28,11 @@ class FallbackPeakSelector(Parametric, ContentAware):
 
     def decide(self,
                corpus: Corpus,
-               taboo_mask: TabooMask) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+               taboo_mask: TabooMask,
+               enforce_fallback: bool = False) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
 
         # If fallback is disabled: output None
-        if not self.output_if_none.value:
+        if not enforce_fallback and not self.output_if_none.value:
             return None
 
         # Select the next event if it exists

@@ -114,9 +114,15 @@ class SchedulingHandler(Introspective, ABC):
 
         # TODO: Hack to handle legacy AutomaticSchedulingHandler when switching to Indirect/Manual in audio case
         if isinstance(other, AutomaticSchedulingHandler):
-            # If switching from automatic: convert all triggers (normally a single one) to continue events
-            other._scheduler.add_events([ContinueEvent(trig.trigger_time, typing.cast(TriggerEvent, trig).target_time)
-                                         for trig in triggers])
+
+            # If switching from automatic: convert all valid triggers (normally a single one) to continue events
+            for trigger in triggers:
+                if (other._last_trigger_time is not None
+                        and (other._timeout is None
+                             or trigger.trigger_time - other._last_trigger_time < other._timeout)):
+                    print("-- ADDING CONTINUE EVENT")
+                    other._scheduler.add_event(ContinueEvent(trigger.trigger_time,
+                                                             typing.cast(TriggerEvent, trigger).target_time))
         elif issubclass(cls, AutomaticSchedulingHandler):
             # If switching to automatic: replace continue events (normally at most a single one) with trigger
             continue_events: List[ScheduledEvent] = other._scheduler.remove_by_type(ContinueEvent)
@@ -216,13 +222,23 @@ class SchedulingHandler(Introspective, ABC):
             self._on_trigger_received(trigger_event=trigger_event)
 
     def add_corpus_event(self, trigger_time: float,
-                         event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
+                         event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]],
+                         reset_timeout: bool) -> None:
         """ raises TypeError for `CorpusEvents` other than `MidiCorpusEvent` or `AudioCorpusEvent`
             Note: This function could be overloaded if the `SchedulingHandler` needs to store/handle state of received
                   `CorpusEvents`, but make sure to call `super().add_corpus_event` if overloading.
         """
         if event_and_transform is not None:
             event, applied_transform = event_and_transform  # type: CorpusEvent, AbstractTransform
+
+            # Only reset timeout if `event_and_transform` is not None and `reset_timeout`
+            if reset_timeout:
+                self._last_trigger_time = trigger_time
+
+            self._scheduler.remove_by_type(ContinueEvent)
+            self._scheduler.remove_by_type(TriggerEvent)
+            self._scheduler.remove_by_type(AudioOffEvent)
+
             if isinstance(event, MidiCorpusEvent):
                 scheduler_events: List[ScheduledEvent] = self.midi_handler.process(trigger_time=trigger_time,
                                                                                    event=event,
@@ -256,11 +272,12 @@ class SchedulingHandler(Introspective, ABC):
                 raise TypeError(f"Scheduling event of type '{event.__class__}' is not supported")
 
         else:
-            # No event was generated due to taboo, sparsity, etc.: Turn audio off if audio corpus
-            self._scheduler.add_event(AudioOffEvent(trigger_time=trigger_time))
+            if isinstance(self, AutomaticSchedulingHandler):
+                # No event was generated due to taboo, sparsity, etc.: Turn audio off if audio corpus
+                self._scheduler.add_event(AudioOffEvent(trigger_time=trigger_time))
 
-            self._scheduler.add_events(self.midi_handler.flush(self._scheduler.remove_by_type(MidiNoteEvent),
-                                                               trigger_time))
+                self._scheduler.add_events(self.midi_handler.flush(self._scheduler.remove_by_type(MidiNoteEvent),
+                                                                   trigger_time))
 
         self._on_corpus_event_received(trigger_time=trigger_time, event_and_transform=event_and_transform)
 
@@ -279,10 +296,12 @@ class SchedulingHandler(Introspective, ABC):
                 if isinstance(event, TriggerEvent):
                     self._reschedule(TriggerEvent(trigger_time=current_time_new_axis - self._trigger_pretime(),
                                                   target_time=current_time_new_axis))
+                # TODO: Why are we not handling ContinueEvents here?
 
     def set_timeout(self, timeout: Optional[float]) -> None:
         self._timeout = timeout
-        self.midi_handler.set_sustain_timeout(timeout, self._last_trigger_time if self._last_trigger_time is not None else self._scheduler.time)
+        self.midi_handler.set_sustain_timeout(timeout,
+                                              self._last_trigger_time if self._last_trigger_time is not None else self._scheduler.time)
 
     def set_time_stretch_factor(self, factor: float) -> None:
         self._stretch_factor = factor
@@ -339,9 +358,12 @@ class SchedulingHandler(Introspective, ABC):
         if not any([isinstance(e, AudioOffEvent) for e in output_events]):
             output_events.append(AudioOffEvent(self._scheduler.time))
 
+        self._last_trigger_time = None
+
         # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
         self._experimental_previous_audio_events_tempo = None
         self._experimental_accumulated_stretch_factor = self._stretch_factor
+
         return output_events
 
     @property
@@ -383,23 +405,21 @@ class ManualSchedulingHandler(SchedulingHandler):
         if self._scheduler.running:
             if trigger_event is not None:
                 self._scheduler.add_event(trigger_event)
-                self._last_trigger_time = trigger_event.trigger_time
             else:
                 current_time: float = self._scheduler.time
                 self._scheduler.add_event(TriggerEvent(trigger_time=current_time, target_time=current_time))
-                self._scheduler.remove_by_type(ContinueEvent)
-                self._scheduler.remove_by_type(AudioOffEvent)
-                self._last_trigger_time = current_time
 
     def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
         if self._last_trigger_time is None:
             # Flushing has occurred
             self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
+            print("AudioOff due to flush")
         elif self._timeout is None or continue_event.trigger_time - self._last_trigger_time < self._timeout:
             # Timeout has not passed: Player should continue playing for at least one more event
             self._scheduler.add_event(continue_event)
         else:
             # Timeout has passed: stop queueing ContinueEvent and if audio queue Audio Off
+            print("AudioOff due to timeout")
             self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
 
     def _on_corpus_event_received(self, trigger_time: float,
@@ -407,7 +427,6 @@ class ManualSchedulingHandler(SchedulingHandler):
         pass
 
     def _handle_flushing(self, flushed_triggers: List[TriggerEvent]) -> Optional[List[TriggerEvent]]:
-        self._last_trigger_time = None
         return flushed_triggers
 
     def _reschedule(self, trigger_event: TriggerEvent) -> None:
@@ -426,10 +445,6 @@ class AutomaticSchedulingHandler(SchedulingHandler):
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
         if not self._scheduler.has_by_type(TriggerEvent):
             self._scheduler.add_event(self._default_trigger())
-            if trigger_event is not None:
-                self._last_trigger_time = trigger_event.trigger_time
-            else:
-                self._last_trigger_time: float = self._scheduler.time
 
     def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
         pass
@@ -452,7 +467,6 @@ class AutomaticSchedulingHandler(SchedulingHandler):
             next_trigger_time: float = target_time - self._trigger_pretime()
             self._scheduler.add_event(self._adjust_in_time(TriggerEvent(trigger_time=next_trigger_time,
                                                                         target_time=target_time)))
-            self._last_trigger_time = next_trigger_time
 
     def _handle_flushing(self, flushed_triggers: List[TriggerEvent]) -> Optional[List[TriggerEvent]]:
         # Reschedule trigger but do not output to agent. Technically, `flushed_triggers` should be of length 1 at most
@@ -490,11 +504,7 @@ class IndirectSchedulingHandler(SchedulingHandler):
             onset_time: float = self._scheduler.time
 
         trigger: TriggerEvent = TriggerEvent(trigger_time=onset_time - self._trigger_pretime(), target_time=onset_time)
-        self._last_trigger_time = trigger.trigger_time
-        self._scheduler.remove_by_type(ContinueEvent)
-        self._scheduler.remove_by_type(AudioOffEvent)
         self._scheduler.add_event(trigger)
-        self._last_trigger_time = onset_time
 
     def _on_continue_event_received(self, continue_event: ContinueEvent) -> None:
         if self._last_trigger_time is None:
@@ -520,7 +530,6 @@ class IndirectSchedulingHandler(SchedulingHandler):
 
     def _handle_flushing(self, flushed_triggers: List[TriggerEvent]) -> List[TriggerEvent]:
         self.next_possible_onset = None
-        self._last_trigger_time = None
         return []
 
     def _reschedule(self, trigger_event: TriggerEvent) -> None:

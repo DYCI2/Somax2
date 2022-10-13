@@ -166,6 +166,8 @@ class MidiStateHandler:
         return output
 
     def set_sustain_timeout(self, ticks: Optional[float], current_time: float) -> None:
+        # TODO: This is not really a sound implementation: it will effectively reset the elapsed duration since last
+        #       triggered output when the timeout value is changed. Fix
         if ticks is not None:
             self.next_sustain_timeout = current_time + ticks
         else:

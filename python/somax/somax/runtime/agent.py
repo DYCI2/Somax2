@@ -165,13 +165,17 @@ class OscAgent(Agent, AsyncioOscObject):
                     self.target.send_event(event)
 
     def _trigger_output(self, trigger: TriggerEvent):
+        print("TRIGGER")
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
             # TODO: BeatPhase should not be `self.scheduling_handler.phase`, but needs to be stored in the trigger to
             #       make sure that it corresponds to `target time` rather than `trigger time`.
-            event_and_transform = self.player.new_event(scheduling_time, self.scheduling_handler.phase, scheduler_tempo)
+            event_and_transform = self.player.new_event(scheduling_time,
+                                                        self.scheduling_handler.phase,
+                                                        scheduler_tempo,
+                                                        enforce_fallback=False)
             self._send_output_statistics()
         except InvalidCorpus as e:
             self.logger.debug(str(e))
@@ -192,9 +196,13 @@ class OscAgent(Agent, AsyncioOscObject):
         #                                  artificially_sustained=self.scheduling_handler.artificially_sustained,
         #                                  aligned_onsets=self.scheduling_handler.aligned_onsets)
 
-        self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
+        # Note: Timeout will only be reset if `event_and_transform` is not None
+        self.scheduling_handler.add_corpus_event(scheduling_time,
+                                                 event_and_transform=event_and_transform,
+                                                 reset_timeout=True)
 
     def _continue_output(self, continue_event: ContinueEvent) -> None:
+        print("CONTINUE")
         scheduling_time: float = continue_event.target_time
 
         try:
@@ -202,7 +210,8 @@ class OscAgent(Agent, AsyncioOscObject):
             if self.recombine:
                 event_and_transform = self.player.new_event(scheduling_time,
                                                             self.scheduling_handler.phase,
-                                                            self.scheduling_handler.tempo)
+                                                            self.scheduling_handler.tempo,
+                                                            enforce_fallback=True)
             else:
                 event_and_transform = self.player.step(scheduling_time,
                                                        self.scheduling_handler.phase,
@@ -211,12 +220,14 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.debug(str(e))
             return
 
-        if event_and_transform is None:
-            self.target.send(SendProtocol.HAS_OUTPUT, 0)
-        else:
-            self.target.send(SendProtocol.HAS_OUTPUT, 1)
+        # if event_and_transform is None:
+        #     self.target.send(SendProtocol.HAS_OUTPUT, 0)
+        # else:
+        #     self.target.send(SendProtocol.HAS_OUTPUT, 1)
 
-        self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
+        self.scheduling_handler.add_corpus_event(scheduling_time,
+                                                 event_and_transform=event_and_transform,
+                                                 reset_timeout=False)
         self._send_output_statistics()
 
     def _process_control_message(self, message_type: PlayControl):

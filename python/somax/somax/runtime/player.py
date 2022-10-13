@@ -68,7 +68,8 @@ class Player(Parametric, ContentAware):
     def new_event(self,
                   scheduler_time: float,
                   beat_phase: float,
-                  _tempo: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+                  _tempo: float,
+                  enforce_fallback: bool = False) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
         if not self.is_enabled():
@@ -97,7 +98,9 @@ class Player(Parametric, ContentAware):
 
             # If no output: try fallback
             if event_and_transform is None:
-                event_and_transform = self.fallback_selector.decide(self.corpus, taboo_mask)
+                event_and_transform = self.fallback_selector.decide(self.corpus,
+                                                                    taboo_mask,
+                                                                    enforce_fallback=enforce_fallback)
 
             event_and_transform = self.post_filter.process(event_and_transform)
 
