@@ -45,12 +45,14 @@ class MidiStateHandler:
                 trigger_time: float,
                 event: MidiCorpusEvent,
                 applied_transform: AbstractTransform,
-                scheduler_tempo: float) -> List[ScheduledEvent]:
+                scheduler_tempo: float,
+                reset_timeout: bool) -> List[ScheduledEvent]:
         scheduler_events: List[ScheduledEvent] = [TempoEvent(trigger_time, event.tempo)]
         scheduler_events.extend(self._compute_midi_events(trigger_time=trigger_time,
                                                           corpus_event=event,
                                                           applied_transform=applied_transform,
-                                                          scheduler_tempo=scheduler_tempo))
+                                                          scheduler_tempo=scheduler_tempo,
+                                                          reset_timeout=reset_timeout))
         return scheduler_events
 
     def poll(self, current_time: float) -> List[ScheduledEvent]:
@@ -63,7 +65,8 @@ class MidiStateHandler:
                              trigger_time: float,
                              corpus_event: MidiCorpusEvent,
                              applied_transform: AbstractTransform,
-                             scheduler_tempo: float) -> List[ScheduledEvent]:
+                             scheduler_tempo: float,
+                             reset_timeout: bool) -> List[ScheduledEvent]:
         # Note! `trigger_time` is not strictly the same as current time in all cases
         output_events: List[ScheduledEvent] = [MidiSliceOnsetEvent(trigger_time,
                                                                    corpus_event,
@@ -136,7 +139,8 @@ class MidiStateHandler:
 
         # set timeout if defined
         if self.timeout is not None:
-            self.next_sustain_timeout = trigger_time + corpus_event.duration + self.timeout
+            if self.next_sustain_timeout is None or reset_timeout:
+                self.next_sustain_timeout = trigger_time + corpus_event.duration + self.timeout
 
         # print(f"{corpus_event.state_index:<3} NOTE ON: {str([n.pitch for n in note_ons]):<30}, "
         #       f"NOTE OFF: {str([n.pitch for n in note_offs + note_offs_previous]):<30}, "
@@ -170,7 +174,10 @@ class MidiStateHandler:
         #       triggered output when the timeout value is changed. Fix
         if ticks is not None:
             self.next_sustain_timeout = current_time + ticks
+            # By request, enforcing a hidden minimal sustain timeout of 1 second.
+            self.timeout = max(1.0, ticks)
         else:
             self.next_sustain_timeout = None
+            self.timeout = ticks
 
-        self.timeout = ticks
+

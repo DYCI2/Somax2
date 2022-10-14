@@ -120,7 +120,7 @@ class SchedulingHandler(Introspective, ABC):
                 if (other._last_trigger_time is not None
                         and (other._timeout is None
                              or trigger.trigger_time - other._last_trigger_time < other._timeout)):
-                    print("-- ADDING CONTINUE EVENT")
+                    # print("-- ADDING CONTINUE EVENT")
                     other._scheduler.add_event(ContinueEvent(trigger.trigger_time,
                                                              typing.cast(TriggerEvent, trigger).target_time))
         elif issubclass(cls, AutomaticSchedulingHandler):
@@ -174,7 +174,8 @@ class SchedulingHandler(Introspective, ABC):
         # special case to handle note-by-note mode flushing specific to Indirect/Manual mode
         if (self._last_trigger_time is not None
                 and self.midi_handler.timeout is not None
-                and not isinstance(self, AutomaticSchedulingHandler)):
+                and not isinstance(self, AutomaticSchedulingHandler)
+                and self._note_by_note_mode):
             if stretched_time - self._last_trigger_time > self.midi_handler.timeout:
                 midi_events: List[ScheduledEvent] = self._scheduler.remove_by_type(MidiNoteEvent)
                 output_events.extend(self.midi_handler.flush(midi_events, stretched_time))
@@ -243,7 +244,8 @@ class SchedulingHandler(Introspective, ABC):
                 scheduler_events: List[ScheduledEvent] = self.midi_handler.process(trigger_time=trigger_time,
                                                                                    event=event,
                                                                                    applied_transform=applied_transform,
-                                                                                   scheduler_tempo=self.tempo)
+                                                                                   scheduler_tempo=self.tempo,
+                                                                                   reset_timeout=reset_timeout)
                 self._scheduler.add_events(scheduler_events)
 
                 if isinstance(event, MidiCorpusEvent) and not self._note_by_note_mode:
@@ -272,12 +274,16 @@ class SchedulingHandler(Introspective, ABC):
                 raise TypeError(f"Scheduling event of type '{event.__class__}' is not supported")
 
         else:
-            if isinstance(self, AutomaticSchedulingHandler):
+            # print(f"--- add_corpus_event output (reset={reset_timeout}): {event_and_transform is not None}")
+            if isinstance(self, AutomaticSchedulingHandler) or not reset_timeout:
                 # No event was generated due to taboo, sparsity, etc.: Turn audio off if audio corpus
+                #    This only applies to ContinueEvents in the rare case of generating None (due to a configuration
+                #    where all events are taboo) and to Automatic mode in general
                 self._scheduler.add_event(AudioOffEvent(trigger_time=trigger_time))
 
                 self._scheduler.add_events(self.midi_handler.flush(self._scheduler.remove_by_type(MidiNoteEvent),
                                                                    trigger_time))
+                # print("AUDIO OFF DUE TO NONE EVENT UNDER CONDITION")
 
         self._on_corpus_event_received(trigger_time=trigger_time, event_and_transform=event_and_transform)
 
@@ -413,13 +419,13 @@ class ManualSchedulingHandler(SchedulingHandler):
         if self._last_trigger_time is None:
             # Flushing has occurred
             self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
-            print("AudioOff due to flush")
+            # print("AudioOff due to flush")
         elif self._timeout is None or continue_event.trigger_time - self._last_trigger_time < self._timeout:
             # Timeout has not passed: Player should continue playing for at least one more event
             self._scheduler.add_event(continue_event)
         else:
             # Timeout has passed: stop queueing ContinueEvent and if audio queue Audio Off
-            print("AudioOff due to timeout")
+            # print("AudioOff due to timeout")
             self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
 
     def _on_corpus_event_received(self, trigger_time: float,

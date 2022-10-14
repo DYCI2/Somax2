@@ -165,7 +165,7 @@ class OscAgent(Agent, AsyncioOscObject):
                     self.target.send_event(event)
 
     def _trigger_output(self, trigger: TriggerEvent):
-        print("TRIGGER")
+        # print("TRIGGER")
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
@@ -175,7 +175,7 @@ class OscAgent(Agent, AsyncioOscObject):
             event_and_transform = self.player.new_event(scheduling_time,
                                                         self.scheduling_handler.phase,
                                                         scheduler_tempo,
-                                                        enforce_fallback=False)
+                                                        enforce_output=False)
             self._send_output_statistics()
         except InvalidCorpus as e:
             self.logger.debug(str(e))
@@ -202,7 +202,7 @@ class OscAgent(Agent, AsyncioOscObject):
                                                  reset_timeout=True)
 
     def _continue_output(self, continue_event: ContinueEvent) -> None:
-        print("CONTINUE")
+        # print("CONTINUE")
         scheduling_time: float = continue_event.target_time
 
         try:
@@ -211,7 +211,7 @@ class OscAgent(Agent, AsyncioOscObject):
                 event_and_transform = self.player.new_event(scheduling_time,
                                                             self.scheduling_handler.phase,
                                                             self.scheduling_handler.tempo,
-                                                            enforce_fallback=True)
+                                                            enforce_output=True)
             else:
                 event_and_transform = self.player.step(scheduling_time,
                                                        self.scheduling_handler.phase,
@@ -221,6 +221,7 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
         # if event_and_transform is None:
+        #     print("!!! NONE FROM CONTINUE !!!")
         #     self.target.send(SendProtocol.HAS_OUTPUT, 0)
         # else:
         #     self.target.send(SendProtocol.HAS_OUTPUT, 1)
@@ -360,6 +361,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def influence_onset(self):
         if self._enabled:
             self.scheduling_handler.add_trigger_event()
+            # print("-- Adding trigger")
 
     ######################################################
     # CREATION/DELETION OF ATOM

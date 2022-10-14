@@ -69,7 +69,7 @@ class Player(Parametric, ContentAware):
                   scheduler_time: float,
                   beat_phase: float,
                   _tempo: float,
-                  enforce_fallback: bool = False) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+                  enforce_output: bool = False) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
         if not self.is_enabled():
@@ -91,7 +91,7 @@ class Player(Parametric, ContentAware):
             self._update_peaks_on_new_event(scheduler_time)
             peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
             taboo_mask: TabooMask = TabooMask(self.corpus)
-            peaks, taboo_mask = self._scale_peaks(peaks, scheduler_time, beat_phase, self.corpus, taboo_mask)
+            peaks, taboo_mask = self._scale_peaks(peaks, scheduler_time, beat_phase, self.corpus, taboo_mask, enforce_output)
 
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self.peak_selector.decide(peaks, self.corpus, self._transform_handler)
@@ -100,17 +100,18 @@ class Player(Parametric, ContentAware):
             if event_and_transform is None:
                 event_and_transform = self.fallback_selector.decide(self.corpus,
                                                                     taboo_mask,
-                                                                    enforce_fallback=enforce_fallback)
-
-            event_and_transform = self.post_filter.process(event_and_transform)
+                                                                    enforce_fallback=enforce_output)
+            if not enforce_output:
+                event_and_transform = self.post_filter.process(event_and_transform)
 
             self.previous_peaks = peaks
-
-        self.previous_output = event_and_transform
 
         if event_and_transform is None:
             self._feedback(None, scheduler_time, NoTransform())
             return None
+        else:
+            self.previous_output = event_and_transform
+
         event, transform = event_and_transform
         event = transform.apply(event)  # returns deepcopy of transformed event
 
@@ -151,8 +152,7 @@ class Player(Parametric, ContentAware):
 
         if event_and_transform is not None:
             self._feedback(event_and_transform[0], scheduler_time, event_and_transform[1])
-
-        self.previous_output = event_and_transform
+            self.previous_output = event_and_transform
 
         return event_and_transform
 
@@ -389,6 +389,7 @@ class Player(Parametric, ContentAware):
                      beat_phase: float,
                      corpus: Corpus,
                      taboo_mask: TabooMask,
+                     enforce_output: bool,
                      **kwargs) -> Tuple[Peaks, TabooMask]:
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
         corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
@@ -402,6 +403,7 @@ class Player(Parametric, ContentAware):
                                                        corresponding_transforms=corresponding_transforms,
                                                        taboo_mask=taboo_mask,
                                                        corpus=corpus,
+                                                       enforce_output=enforce_output,
                                                        **kwargs)
 
         # Remove 0-scores
