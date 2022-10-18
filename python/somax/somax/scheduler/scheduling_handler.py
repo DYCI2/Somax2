@@ -7,7 +7,8 @@ from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpus
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
 from somax.scheduler.midi_state_handler import MidiStateHandler, NoteOffMode
-from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, AudioOffEvent, MidiNoteEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, AudioOffEvent, MidiNoteEvent, \
+    TimeoutInfoEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
@@ -178,7 +179,10 @@ class SchedulingHandler(Introspective, ABC):
                 and self._note_by_note_mode):
             if stretched_time - self._last_trigger_time > self.midi_handler.timeout:
                 midi_events: List[ScheduledEvent] = self._scheduler.remove_by_type(MidiNoteEvent)
-                output_events.extend(self.midi_handler.flush(midi_events, stretched_time))
+                flushed_notes: List[ScheduledEvent] = self.midi_handler.flush(midi_events, stretched_time)
+                if len(flushed_notes) > 0:
+                    output_events.append(TimeoutInfoEvent(self._scheduler.time))
+                output_events.extend(flushed_notes)
 
         self._handle_output(output_events.copy())
 
@@ -427,6 +431,7 @@ class ManualSchedulingHandler(SchedulingHandler):
             # Timeout has passed: stop queueing ContinueEvent and if audio queue Audio Off
             # print("AudioOff due to timeout")
             self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
+            self._scheduler.add_event(TimeoutInfoEvent(continue_event.target_time))
 
     def _on_corpus_event_received(self, trigger_time: float,
                                   event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:
@@ -522,6 +527,7 @@ class IndirectSchedulingHandler(SchedulingHandler):
         else:
             # Timeout has passed: stop queueing ContinueEvent and if audio queue Audio Off
             self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
+            self._scheduler.add_event(TimeoutInfoEvent(continue_event.target_time))
 
     def _on_corpus_event_received(self, trigger_time: float,
                                   event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]) -> None:

@@ -36,7 +36,12 @@ class SendProtocol:
     SEND_AUDIO_OFF = "audio_off"
     AUDIO_CONTINUATION_TIMESTRETCH = "audio_continuation_timestretch"
     DESCRIPTOR = "descriptor"
-    HAS_OUTPUT = "has_output"
+
+    OUTPUT_TYPE = "output_type"
+    OUTPUT_TYPE_TRIGGER_MATCH = "match"
+    OUTPUT_TYPE_TRIGGER_NOMATCH = "no_match"
+    OUTPUT_TYPE_CONTINUE = "continue"
+    OUTPUT_TYPE_TIMEOUT = "timeout"
 
     # Server Info
     SERVER_STATUS = "server_status"

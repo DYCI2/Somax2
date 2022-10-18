@@ -172,6 +172,7 @@ class OscAgent(Agent, AsyncioOscObject):
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
             # TODO: BeatPhase should not be `self.scheduling_handler.phase`, but needs to be stored in the trigger to
             #       make sure that it corresponds to `target time` rather than `trigger time`.
+            # print(f"TRIG: new event: {scheduling_time}")
             event_and_transform = self.player.new_event(scheduling_time,
                                                         self.scheduling_handler.phase,
                                                         scheduler_tempo,
@@ -183,10 +184,10 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
         if event_and_transform is None:
-            self.target.send(SendProtocol.HAS_OUTPUT, 0)
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
         else:
-            self.target.send(SendProtocol.HAS_OUTPUT, 1)
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
 
         # TODO: No longer supported. Update for Corpus
         #  Note that when the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was
@@ -208,11 +209,13 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
             if self.recombine:
+                # print(f"CONT: new event: {scheduling_time}")
                 event_and_transform = self.player.new_event(scheduling_time,
                                                             self.scheduling_handler.phase,
                                                             self.scheduling_handler.tempo,
                                                             enforce_output=True)
             else:
+                # print(f"CONT: step: {scheduling_time}")
                 event_and_transform = self.player.step(scheduling_time,
                                                        self.scheduling_handler.phase,
                                                        self.scheduling_handler.tempo)
@@ -220,11 +223,11 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.debug(str(e))
             return
 
-        # if event_and_transform is None:
+        if event_and_transform is None:
         #     print("!!! NONE FROM CONTINUE !!!")
-        #     self.target.send(SendProtocol.HAS_OUTPUT, 0)
-        # else:
-        #     self.target.send(SendProtocol.HAS_OUTPUT, 1)
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
+        else:
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_CONTINUE)
 
         self.scheduling_handler.add_corpus_event(scheduling_time,
                                                  event_and_transform=event_and_transform,

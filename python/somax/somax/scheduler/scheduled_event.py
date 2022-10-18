@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Optional, List, Tuple
 
 from somax.features import TotalEnergyDb
-from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent, CorpusEvent
+from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.transforms import AbstractTransform
 
@@ -125,6 +125,11 @@ class AudioOffEvent(RendererEvent):
         return [RendererMessage(keyword=SendProtocol.SEND_AUDIO_OFF, content=SendProtocol.SEND_AUDIO_OFF)]
 
 
+class TimeoutInfoEvent(RendererEvent):
+    def render(self) -> List[RendererMessage]:
+        return [RendererMessage(keyword=SendProtocol.OUTPUT_TYPE, content=SendProtocol.OUTPUT_TYPE_TIMEOUT)]
+
+
 class TriggerEvent(ScheduledEvent):
     def __init__(self, trigger_time: float, target_time: float):
         """
@@ -140,6 +145,7 @@ class TriggerEvent(ScheduledEvent):
 
 class ContinueEvent(ScheduledEvent):
     """ Note: everything related to ContinueEvent should be considered a hack that needs to be rewritten. """
+
     def __init__(self, trigger_time: float, target_time: float):
         super().__init__(trigger_time=trigger_time)
         self.target_time: float = target_time
