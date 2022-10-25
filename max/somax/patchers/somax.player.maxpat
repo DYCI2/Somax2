@@ -59,7 +59,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 6577.227848101265408, 1519.150377132672475, 17.0, 17.0 ],
+					"patching_rect" : [ 6577.227848101265408, 1520.150377132672475, 17.0, 17.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 938.908751237919432, 321.125000223517475, 17.0, 17.0 ],
 					"varname" : "__exp_quality_link_sparse"
@@ -107,7 +107,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
 					"patching_rect" : [ 6342.0, 1146.0, 32.0, 22.0 ],
-					"text" : "t 0 1"
+					"text" : "t 0 0"
 				}
 
 			}
@@ -1866,7 +1866,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-1167",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -15021,7 +15020,7 @@
 					"patching_rect" : [ 1937.568181818181529, 2342.0, 49.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 300.452790086508571, 474.555020118491711, 29.617212271836024, 18.0 ],
-					"text" : "0",
+					"text" : "6",
 					"textcolor" : [ 0.827450980392157, 0.423529411764706, 0.996078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -20313,10 +20312,10 @@
 						"__exp_velscale" : [ 0, 127 ],
 						"artificialmidities" : [ 0 ],
 						"button" : [ 0.0 ],
-						"continuity" : [ 1.5 ],
+						"continuity" : [ 0.0 ],
 						"corpusvolatile" : [ 0 ],
 						"cut" : [ 1 ],
-						"decaybasis" : [ 1 ],
+						"decaybasis" : [ 0 ],
 						"enabled" : [ 1 ],
 						"enforcetaboo" : [ 1 ],
 						"fallback" : [ "Random" ],
@@ -20328,7 +20327,7 @@
 						"ignorephase" : [ 1 ],
 						"live.dial" : [ -6.0 ],
 						"live.menu" : [ 1.0 ],
-						"live.menu[1]" : [ 1.0 ],
+						"live.menu[1]" : [ 0.0 ],
 						"live.menu[2]" : [ 1.0 ],
 						"live.numbox" : [ 0.0 ],
 						"live.slider" : [ 0.0 ],
@@ -20338,13 +20337,13 @@
 						"melodicmod12" : [ 1 ],
 						"melodicngramorder" : [ 3 ],
 						"melodicpeakdecay" : [ 2.001 ],
-						"multislider" : [ 1.0 ],
+						"multislider" : [ 0.648290729522705 ],
 						"notebynote" : [ 1 ],
 						"outputchannels" : [ 0, 0, 1.0, 1, 0, 1.0, 2, 0, 1.0, 3, 0, 1.0, 4, 0, 1.0, 5, 0, 1.0, 6, 0, 1.0, 7, 0, 1.0, 8, 0, 1.0, 9, 0, 1.0, 10, 0, 1.0, 11, 0, 1.0, 12, 0, 1.0, 13, 0, 1.0, 14, 0, 1.0, 15, 0, 1.0 ],
 						"outputfrom" : [ 0 ],
 						"outputprobability" : [ 1.0 ],
-						"outputthreshold" : [ 0.0 ],
-						"playingmode" : [ 1 ],
+						"outputthreshold" : [ 0.066735385742373 ],
+						"playingmode" : [ 0 ],
 						"pollpeaks" : [ 1 ],
 						"recombine" : [ 1 ],
 						"regionmask" : [ 0.0, 1.0 ],
@@ -20353,11 +20352,11 @@
 						"resetinfluences" : [ 0.0 ],
 						"resetparams" : [ 0.0 ],
 						"selfharmonicbypass" : [ 0 ],
-						"selfharmonicngramorder" : [ 2 ],
+						"selfharmonicngramorder" : [ 10 ],
 						"selfharmonicpeakdecay" : [ 3.001 ],
 						"selfmelodicbypass" : [ 0 ],
 						"selfmod12" : [ 0 ],
-						"selfngramorder" : [ 3 ],
+						"selfngramorder" : [ 10 ],
 						"selfpeakdecay" : [ 2.001 ],
 						"simultaneousonsets" : [ 0 ],
 						"sparse" : [ 0 ],
@@ -20793,7 +20792,7 @@
 					"patching_rect" : [ 1729.077272727272657, 2342.0, 49.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 257.727624432390485, 474.555020118491711, 31.95833333333394, 18.0 ],
-					"text" : "0",
+					"text" : "5",
 					"textcolor" : [ 0.481437705647327, 0.846666309931507, 0.361908344245232, 1.0 ],
 					"textjustification" : 1
 				}
@@ -21609,6 +21608,7 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"gradient" : 1,
+					"hidden" : 1,
 					"id" : "obj-364",
 					"ignoreclick" : 1,
 					"maxclass" : "message",
@@ -25722,6 +25722,7 @@
 					"patching_rect" : [ 639.0, 2420.5, 44.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 57.958333333333712, 567.0175204224754, 70.0, 24.0 ],
+					"text" : "217",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 

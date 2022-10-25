@@ -169,25 +169,28 @@ class OscAgent(Agent, AsyncioOscObject):
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
-            event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
+            event_transform_and_match_type: Optional[Tuple[CorpusEvent, AbstractTransform, bool]]
             # TODO: BeatPhase should not be `self.scheduling_handler.phase`, but needs to be stored in the trigger to
             #       make sure that it corresponds to `target time` rather than `trigger time`.
             # print(f"TRIG: new event: {scheduling_time}")
-            event_and_transform = self.player.new_event(scheduling_time,
-                                                        self.scheduling_handler.phase,
-                                                        scheduler_tempo,
-                                                        enforce_output=False)
+            event_transform_and_match_type = self.player.new_event(scheduling_time,
+                                                                   self.scheduling_handler.phase,
+                                                                   scheduler_tempo,
+                                                                   enforce_output=False)
             self._send_output_statistics()
         except InvalidCorpus as e:
             self.logger.debug(str(e))
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
             return
 
-        if event_and_transform is None:
+        if event_transform_and_match_type is None:
             self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
-        else:
+
+        elif event_transform_and_match_type[2] is True:  # output from match
             self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
+        else:  # output from fallback
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
 
         # TODO: No longer supported. Update for Corpus
         #  Note that when the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was
@@ -197,7 +200,15 @@ class OscAgent(Agent, AsyncioOscObject):
         #                                  artificially_sustained=self.scheduling_handler.artificially_sustained,
         #                                  aligned_onsets=self.scheduling_handler.aligned_onsets)
 
+        event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+        event_and_transform = (event_transform_and_match_type[0], event_transform_and_match_type[1]) \
+            if event_transform_and_match_type is not None else None
+
         # Note: Timeout will only be reset if `event_and_transform` is not None
+
+        if event_and_transform is not None:
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TIMEOUT_RESET)
+
         self.scheduling_handler.add_corpus_event(scheduling_time,
                                                  event_and_transform=event_and_transform,
                                                  reset_timeout=True)
@@ -210,22 +221,40 @@ class OscAgent(Agent, AsyncioOscObject):
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
             if self.recombine:
                 # print(f"CONT: new event: {scheduling_time}")
-                event_and_transform = self.player.new_event(scheduling_time,
-                                                            self.scheduling_handler.phase,
-                                                            self.scheduling_handler.tempo,
-                                                            enforce_output=True)
+                event_transform_and_match_type = self.player.new_event(scheduling_time,
+                                                                       self.scheduling_handler.phase,
+                                                                       self.scheduling_handler.tempo,
+                                                                       enforce_output=True)
+                if event_transform_and_match_type is None:
+                    self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
+                    event_and_transform = None
+                else:
+                    output_from_match: bool = event_transform_and_match_type[2]
+                    if output_from_match:
+                        self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
+                    else:
+                        self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
+
+                    event_and_transform = event_transform_and_match_type[0], event_transform_and_match_type[1]
+
             else:
                 # print(f"CONT: step: {scheduling_time}")
                 event_and_transform = self.player.step(scheduling_time,
                                                        self.scheduling_handler.phase,
                                                        self.scheduling_handler.tempo)
+
+                if event_and_transform is None:
+                    self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
+                else:
+                    self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
+
         except InvalidCorpus as e:
             self.logger.debug(str(e))
             return
 
         if event_and_transform is None:
-        #     print("!!! NONE FROM CONTINUE !!!")
-            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
+            #     print("!!! NONE FROM CONTINUE !!!")
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TIMEOUT)
         else:
             self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_CONTINUE)
 

@@ -39,9 +39,12 @@ class SendProtocol:
 
     OUTPUT_TYPE = "output_type"
     OUTPUT_TYPE_TRIGGER_MATCH = "match"
+    OUTPUT_TYPE_TRIGGER_FALLBACK = "fallback"
     OUTPUT_TYPE_TRIGGER_NOMATCH = "no_match"
+
     OUTPUT_TYPE_CONTINUE = "continue"
     OUTPUT_TYPE_TIMEOUT = "timeout"
+    OUTPUT_TYPE_TIMEOUT_RESET = "timeout_reset"
 
     # Server Info
     SERVER_STATUS = "server_status"

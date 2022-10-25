@@ -69,7 +69,7 @@ class Player(Parametric, ContentAware):
                   scheduler_time: float,
                   beat_phase: float,
                   _tempo: float,
-                  enforce_output: bool = False) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+                  enforce_output: bool = False) -> Optional[Tuple[CorpusEvent, AbstractTransform, bool]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
         if not self.is_enabled():
@@ -87,11 +87,13 @@ class Player(Parametric, ContentAware):
             self.clear()
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self._force_jump()
+            output_from_match: bool = True
         else:
             self._update_peaks_on_new_event(scheduler_time)
             peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
             taboo_mask: TabooMask = TabooMask(self.corpus)
-            peaks, taboo_mask = self._scale_peaks(peaks, scheduler_time, beat_phase, self.corpus, taboo_mask, enforce_output)
+            peaks, taboo_mask = self._scale_peaks(peaks, scheduler_time, beat_phase,
+                                                  self.corpus, taboo_mask, enforce_output)
 
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self.peak_selector.decide(peaks, self.corpus, self._transform_handler)
@@ -101,6 +103,10 @@ class Player(Parametric, ContentAware):
                 event_and_transform = self.fallback_selector.decide(self.corpus,
                                                                     taboo_mask,
                                                                     enforce_fallback=enforce_output)
+                output_from_match = False
+            else:
+                output_from_match = True
+
             if not enforce_output:
                 event_and_transform = self.post_filter.process(event_and_transform)
 
@@ -116,7 +122,7 @@ class Player(Parametric, ContentAware):
         event = transform.apply(event)  # returns deepcopy of transformed event
 
         self._feedback(event, scheduler_time, transform)
-        return event, transform
+        return event, transform, output_from_match
 
     def step(self,
              scheduler_time: float,
