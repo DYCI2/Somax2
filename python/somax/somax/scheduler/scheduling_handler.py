@@ -118,12 +118,13 @@ class SchedulingHandler(Introspective, ABC):
 
             # If switching from automatic: convert all valid triggers (normally a single one) to continue events
             for trigger in triggers:
-                if (other._last_trigger_time is not None
-                        and (other._timeout is None
-                             or trigger.trigger_time - other._last_trigger_time < other._timeout)):
-                    # print("-- ADDING CONTINUE EVENT")
-                    other._scheduler.add_event(ContinueEvent(trigger.trigger_time,
-                                                             typing.cast(TriggerEvent, trigger).target_time))
+                if other._last_trigger_time is not None:
+                    if other._timeout is None or trigger.trigger_time - other._last_trigger_time < other._timeout:
+                        other._scheduler.add_event(ContinueEvent(trigger.trigger_time,
+                                                                 typing.cast(TriggerEvent, trigger).target_time))
+                    else:
+                        other._scheduler.add_event(AudioOffEvent(typing.cast(TriggerEvent, trigger).target_time))
+
         elif issubclass(cls, AutomaticSchedulingHandler):
             # If switching to automatic: replace continue events (normally at most a single one) with trigger
             continue_events: List[ScheduledEvent] = other._scheduler.remove_by_type(ContinueEvent)
