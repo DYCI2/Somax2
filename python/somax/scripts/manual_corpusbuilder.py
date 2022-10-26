@@ -1,128 +1,38 @@
 import argparse
-import inspect
+import logging
 import os
 import pathlib
-import re
 import sys
-import warnings
-from abc import ABC, abstractmethod
-from typing import List, Dict, Type, Any, Tuple
-
-import librosa
-import numpy as np
+from typing import List, Type
 
 # Messy pathlib imports for somax due to relative position...
+from somax.features import YinDiscretePitch
+from somax.runtime.corpus import Corpus
+from somax.runtime.corpus_event import AudioCorpusEvent
+
 sys.path.append(str(pathlib.Path(__file__).parents[2]) + "/somax")
 print(pathlib.Path(__file__).parents[2])
-import somax
 
-# Needed to avoid circular import....
-from somax.corpus_builder.corpus_builder import CorpusBuilder
-from somax.corpus_builder.metadata import AudioMetadata
-from somax.corpus_builder.spectrogram import Spectrogram
-from somax.features import YinDiscretePitch, Tempo, TotalEnergyDb, OnsetChroma
-from somax.runtime.corpus import AudioCorpus
-from somax.scheduler.scheduling_mode import AbsoluteScheduling
-from somax.features.feature import CorpusFeature, AbstractFeature
-from somax.runtime.corpus_event import AudioCorpusEvent
-from somax.runtime.exceptions import FeatureError
-
-COMMENT = r"^\\s*?/\\*"
-EMPTY = r"^[\\s.\\n]*?$"
-TEMPO = COMMENT + r"\\s*?tempo"  # Format: /* tempo (...) \d+ (...)
+from somax.corpus_builder.manual_corpus_builder import Descriptors, ManualCorpusBuilder
+from somax.corpus_builder.manual_text_formats import TextFormat
+from somax.features.feature import CorpusFeature
 
 
-class ParsingError(Exception):
-    def __init__(self, message: str):
-        super().__init__(message)
+def text_format_from_keyword(keyword: str) -> Type['TextFormat']:
+    """ raises: argparse.ArgumentTypeError """
+    try:
+        return TextFormat.from_keyword(keyword)
+    except KeyError as e:
+        raise argparse.ArgumentTypeError(f"Cannot find format {str(e)}.\n"
+                                         f"Valid formats are: {', '.join(TextFormat.keywords())}")
 
 
-class Descriptors:
-    @staticmethod
-    def _descriptors() -> Dict[str, Type[CorpusFeature]]:
-        # TODO: Not supported yet
-        return {"none": None}
-        # return {"pitch": YinDiscretePitch,
-        #         "energy": TotalEnergyDb,
-        #         "chroma": OnsetChroma}
-
-    @staticmethod
-    def keywords() -> List[str]:
-        return list(Descriptors._descriptors().keys())
-
-    @staticmethod
-    def from_keyword(keyword: str) -> Type[CorpusFeature]:
-        try:
-            return Descriptors._descriptors()[keyword]
-        except KeyError as e:
-            raise argparse.ArgumentTypeError(f"Cannot find descriptor {str(e)}.\n"
-                                             f"Valid descriptors are: {', '.join(Descriptors.keywords())}")
-
-    @staticmethod
-    def get_keyword(corpus_feature_type: Type[CorpusFeature]) -> str:
-        return {v: k for k, v in Descriptors._descriptors().items()}[corpus_feature_type]
-
-
-class TextFormat(ABC):
-    @staticmethod
-    @abstractmethod
-    def keyword() -> str:
-        """ """
-
-    @staticmethod
-    @abstractmethod
-    def parse_line(line_str: str, keys: List[Type[CorpusFeature]]) -> Tuple[float, Dict[Type[CorpusFeature], Any]]:
-        """ """
-
-    @staticmethod
-    def keywords() -> List[str]:
-        return [cls.keyword() for cls in TextFormat._introspect().values()]
-
-    @staticmethod
-    def _introspect() -> Dict[str, Type['TextFormat']]:
-        return dict(inspect.getmembers(sys.modules[__name__],
-                                       lambda member: inspect.isclass(member) and
-                                                      issubclass(member, TextFormat) and
-                                                      not inspect.isabstract(member) and
-                                                      (member.__module__ == __name__  # static classes
-                                                       or (member.__module__ == 'abc'
-                                                           and not member.__name__ == 'ABC'))))  # dynamic classes
-
-    @staticmethod
-    def from_keyword(keyword: str) -> Type['TextFormat']:
-        """ raises: KeyError """
-        try:
-            return {cls.keyword().lower(): cls for cls in TextFormat._introspect().values()}[keyword.lower()]
-        except KeyError as e:
-            raise argparse.ArgumentTypeError(f"Cannot find format {str(e)}.\n"
-                                             f"Valid formats are: {', '.join(TextFormat.keywords())}")
-
-    @staticmethod
-    def default() -> str:
-        return SoundStudio.keyword()
-
-
-class SoundStudio(TextFormat):
-    @staticmethod
-    def keyword() -> str:
-        return SoundStudio.__name__
-
-    @staticmethod
-    def parse_line(line_str: str, keys: List[Type[CorpusFeature]]) -> Tuple[float, Dict[Type[CorpusFeature], Any]]:
-        tokens = re.match("\s*(\d+)'(\d+),(\d+)\s*", line_str)
-        if tokens is None:
-            raise ParsingError(line_str)
-
-        try:
-            onset: float = int(tokens.group(1)) * 60 + int(tokens.group(2)) + 0.0001 * int(tokens.group(3))
-            descriptors = {}
-            return onset, descriptors
-        except IndexError:
-            raise ParsingError(line_str)
-
-
-def script_name() -> str:
-    return os.path.splitext(os.path.basename(__file__))[0]
+def descriptor_from_keyword(keyword: str) -> Type[CorpusFeature]:
+    try:
+        return Descriptors.from_keyword(keyword)
+    except KeyError as e:
+        raise argparse.ArgumentTypeError(f"Cannot find descriptor {str(e)}.\n"
+                                         f"Valid descriptors are: {', '.join(Descriptors.keywords())}")
 
 
 def file_path(path) -> str:
@@ -133,7 +43,6 @@ def file_path(path) -> str:
 
 
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser()
     parser.add_argument("audio_file",
                         metavar='audio-file',
@@ -201,7 +110,8 @@ if __name__ == '__main__':
                         else os.path.splitext(os.path.basename(analysis_file))[0])
 
     output_folder: str = args.output_folder if args.output_folder else os.getcwd()
-    text_format: TextFormat = args.format
+    text_format: Type[TextFormat] = args.format
+    use_tempo: bool = args.use_tempo
     descriptors: List[Type[CorpusFeature]] = args.descriptors
     verbose: bool = args.verbose
     segmentation_offset_ms: int = args.segmentation_offset_ms
@@ -222,88 +132,37 @@ if __name__ == '__main__':
           f"    Ignore Invalid:      {ignore_invalid}\n"
           f"    Overwrite:           {overwrite}")
 
-    HOP_LENGTH = 512
-
-    with open(analysis_file, 'r') as f:
-        onsets: List[float] = []
-        for i, line in enumerate(f):  # type: int, str
-            if re.match(TEMPO, line, flags=re.IGNORECASE):
-                warnings.warn("Tempo is not supported yet")
-            if re.match(EMPTY, line):
-                if verbose:
-                    print(f"[VERBOSE]: Line {i + 1}: Ignoring empty line")
-            else:
-                try:
-                    onset_ms, descriptor_dict = text_format.parse_line(line, keys=descriptors)
-                    tokens = re.match("\s*(\d+)'(\d+),(\d+)\s*", line)
-                except ParsingError as e:
-                    print(f"\033[31mInvalid line {i + 1}: '{str(e)}'\033[0m")
-                    if ignore_invalid:
-                        continue
-                    else:
-                        print(f"\033[31mTerminating without output due to invalid line\033[0m")
-                        sys.exit(1)
-
-                onsets.append(onset_ms)
-
-    file_end: float = onsets[-1]
-
-    onset_array: np.ndarray = np.array(onsets)[:-1] + segmentation_offset_ms * 0.001
-    duration_array = np.diff(onsets)
-
-    events: List[AudioCorpusEvent] = [AudioCorpusEvent(state_index=i, absolute_onset=onset, absolute_duration=duration)
-                                      for i, (onset, duration) in enumerate(zip(onset_array, duration_array))]
-
-    x, sr = librosa.load(audio_file, sr=None, mono=False)
-    x_mono = CorpusBuilder._parse_channels(x)
-
-    stft: Spectrogram = Spectrogram.from_audio(x_mono, sample_rate=sr, hop_length=HOP_LENGTH)
-    metadata: AudioMetadata = AudioMetadata(filepath=audio_file,
-                                            content_type=AbsoluteScheduling(),
-                                            raw_data=x,
-                                            foreground_data=x_mono,
-                                            background_data=x_mono,
-                                            sr=sr,
-                                            hop_length=HOP_LENGTH,
-                                            stft=stft,
-                                            estimated_initial_bpm=120.0,
-                                            beat_tightness=1.0)
-
-    used_features = []
-    for _, feature in CorpusFeature.all_corpus_features():
-        try:
-            if feature not in used_features:
-                feature.analyze(events, metadata)
-            used_features.append(feature)
-        except FeatureError:
-            if verbose:
-                print(f"ignoring feature {feature.__name__}")
-
-    corpus: AudioCorpus = AudioCorpus(events=events,
-                                      name=output_name,
-                                      scheduling_mode=metadata.content_type,
-                                      feature_types=used_features,
-                                      build_parameters={},
-                                      sr=sr,
-                                      filepath=audio_file,
-                                      file_duration=metadata.duration,
-                                      file_num_channels=metadata.channels)
-
     try:
+        logging.basicConfig(level=logging.DEBUG if verbose else logging.INFO,
+                            format='[%(levelname)s]: %(name)s: %(message)s')
+        corpus: Corpus = ManualCorpusBuilder(verbose).build(audio_file_path=audio_file,
+                                                            analysis_file_path=analysis_file,
+                                                            corpus_name=output_name,
+                                                            analysis_format=text_format,
+                                                            pre_analysed_descriptors=descriptors,
+                                                            use_tempo_annotations=use_tempo,
+                                                            segmentation_offset_ms=segmentation_offset_ms,
+                                                            ignore_invalid_lines=ignore_invalid)
+
         final_output_path: str = corpus.export(output_folder, overwrite=overwrite)
+
+        # verification:
+        if verbose:
+            print("Corpus Validation:")
+            print("INDEX" + " " * 3 + "   ONSET" + " " * 3 + "DURATION" + " " * 3 + "PITCH")
+            for event in corpus.events:  # type: AudioCorpusEvent
+
+                print(f"{event.state_index:>5}   "
+                      f"{event.onset:>8.3f}   "
+                      f"{event.duration:>8.3f}   "
+                      f"{event.get_feature(YinDiscretePitch).value():>3}")
+
+        print(f"Corpus written to {final_output_path}")
+
+    except RuntimeError as e:
+        print(f"\033[31mTerminating without output due to: {str(e)}\033[0m")
+        sys.exit(1)
+
     except IOError as e:
         print(f"\033[31m{str(e)}\033[0m")
         sys.exit(2)
-
-    # verification:
-    if verbose:
-        print("[VERBOSE]: Corpus Validation:")
-        print("INDEX" + " " * 3 + "   ONSET" + " " * 3 + "DURATION" + " " * 3 + "PITCH")
-        for event in corpus.events:  # type: AudioCorpusEvent
-
-            print(f"{event.state_index:>5}   "
-                  f"{event.onset:>8.3f}   "
-                  f"{event.duration:>8.3f}   "
-                  f"{event.get_feature(YinDiscretePitch).value():>3}")
-
-    print(f"Corpus written to {final_output_path}")
