@@ -376,7 +376,6 @@ class SomaxServer(Somax, AsyncioOscObject):
                                       use_tempo_annotations: bool = False,
                                       segmentation_offset_ms: int = 0,
                                       ignore_invalid_lines: bool = False,
-
                                       overwrite: bool = False):
         try:
             analysis_format: Type[TextFormat] = TextFormat.from_keyword(analysis_format)

@@ -81,6 +81,7 @@ class ThreadedManualCorpusBuilder(multiprocessing.Process):
         self.logger.addHandler(OscLogForwarder(self.target))
         self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "init")
         try:
+            self.logger.info(f"Building manually annotated corpus '{self.corpus_name}'")
             corpus: Corpus = ManualCorpusBuilder().build(audio_file_path=self.audio_file_path,
                                                          analysis_file_path=self.analysis_file_path,
                                                          corpus_name=self.corpus_name,
@@ -92,12 +93,12 @@ class ThreadedManualCorpusBuilder(multiprocessing.Process):
 
         except NotImplementedError as e:
             self.logger.error(f"{str(e)}. No corpus was built")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
             return
 
         except RuntimeError as e:
             self.logger.error(f"{str(e)}. Could not parse annotation file")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
             return
 
         except (ValueError,
@@ -106,25 +107,26 @@ class ThreadedManualCorpusBuilder(multiprocessing.Process):
                 librosa.util.exceptions.ParameterError,
                 FileNotFoundError) as e:
             self.logger.error(f"{str(e)}. No corpus was built")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
             return
 
         except NoBackendError:
             self.logger.error(f"The file format of the provided file is not supported.")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
             return
 
         try:
+            self.logger.info(f"Exporting corpus to folder '{self.output_folder}'")
             output_filepath: str = corpus.export(self.output_folder,
                                                  overwrite=self.overwrite,
                                                  copy_resources=self.copy_resources)
 
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
+            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "success")
             self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
 
         except (IOError, AttributeError, KeyError) as e:
             self.logger.error(f"{str(e)} Export of corpus failed.")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
             return
 
 
@@ -173,6 +175,8 @@ class ManualCorpusBuilder:
                             raise RuntimeError(err_msg)
 
                     onsets.append(onset_ms)
+        if len(onsets) == 0:
+            raise RuntimeError("Annotation file did not contain any valid lines")
 
         onset_array: np.ndarray = np.array(onsets)[:-1] + segmentation_offset_ms * 0.001
         duration_array = np.diff(onsets)
