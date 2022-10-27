@@ -25,6 +25,7 @@ class TextFormat(ABC):
 
     @staticmethod
     def keywords() -> List[str]:
+        """ raises: KeyError """
         return [cls.keyword() for cls in TextFormat._introspect().values()]
 
     @staticmethod

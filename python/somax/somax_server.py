@@ -19,6 +19,8 @@ from somax import log
 from somax.classification.chroma_classifiers import OnsetSomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
+from somax.corpus_builder.manual_corpus_builder import ThreadedManualCorpusBuilder
+from somax.corpus_builder.manual_text_formats import TextFormat
 from somax.runtime.agent import OscAgent, Agent
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.corpus import Corpus, AudioCorpus
@@ -361,6 +363,42 @@ class SomaxServer(Somax, AsyncioOscObject):
                                                                       send_port=self.send_port,
                                                                       segmentation_mode=segmentation_mode,
                                                                       **kwargs)
+        corpus_builder.start()
+        self._corpus_builders.append(corpus_builder)
+
+    def build_manual_segmented_corpus(self,
+                                      audio_file_path: str,
+                                      analysis_file_path: str,
+                                      corpus_name: str,
+                                      analysis_format: str,
+                                      output_folder: str,
+                                      # pre_analysed_descriptors: Optional[List[str]] = None,   # TODO
+                                      use_tempo_annotations: bool = False,
+                                      segmentation_offset_ms: int = 0,
+                                      ignore_invalid_lines: bool = False,
+
+                                      overwrite: bool = False):
+        try:
+            analysis_format: Type[TextFormat] = TextFormat.from_keyword(analysis_format)
+        except KeyError as e:
+            self.logger.error(f"Could not find annotation file format '{e}'. No corpus was built")
+            return
+
+        corpus_builder: ThreadedManualCorpusBuilder = ThreadedManualCorpusBuilder(
+            audio_file_path=audio_file_path,
+            analysis_file_path=analysis_file_path,
+            output_folder=output_folder,
+            analysis_format=analysis_format,
+            ip=self.ip,
+            send_port=self.send_port,
+            osc_address=self.address,
+            corpus_name=corpus_name,
+            use_tempo_annotations=use_tempo_annotations,
+            segmentation_offset_ms=segmentation_offset_ms,
+            ignore_invalid_lines=ignore_invalid_lines,
+            overwrite=overwrite
+        )
+
         corpus_builder.start()
         self._corpus_builders.append(corpus_builder)
 

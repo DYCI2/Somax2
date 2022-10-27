@@ -17,6 +17,8 @@ class SendProtocol:
 
     PLAYER_READING_CORPUS_STATUS = "reading_corpus_status"
 
+    MANUAL_CORPUSBUILDER_STATUS = "building_manualcorpus_status"
+
     # Scheduling
     SCHEDULER_RUNNING = "scheduler_running"
     TRANSPORT_MODE = "transport_mode"

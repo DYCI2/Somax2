@@ -1,9 +1,11 @@
 import logging
+import multiprocessing
 import re
 from typing import Dict, Type, List, Optional
 
 import librosa
 import numpy as np
+from audioread import NoBackendError
 
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.manual_text_formats import TextFormat, ParsingError
@@ -13,7 +15,10 @@ from somax.features import YinDiscretePitch, TotalEnergyDb
 from somax.features.feature import CorpusFeature
 from somax.runtime.corpus import Corpus, AudioCorpus
 from somax.runtime.corpus_event import AudioCorpusEvent
-from somax.runtime.exceptions import FeatureError
+from somax.runtime.exceptions import FeatureError, ParameterError
+from somax.runtime.osc_log_forwarder import OscLogForwarder
+from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.target import SimpleOscTarget
 from somax.scheduler.scheduling_mode import AbsoluteScheduling
 
 
@@ -36,6 +41,91 @@ class Descriptors:
     @staticmethod
     def get_keyword(corpus_feature_type: Type[CorpusFeature]) -> str:
         return {v: k for k, v in Descriptors._descriptors().items()}[corpus_feature_type]
+
+
+class ThreadedManualCorpusBuilder(multiprocessing.Process):
+    def __init__(self,
+                 audio_file_path: str,
+                 analysis_file_path: str,
+                 output_folder: str,
+                 analysis_format: Type[TextFormat],
+                 ip: str,
+                 send_port: int,
+                 osc_address: str,
+                 corpus_name: Optional[str] = None,
+                 pre_analysed_descriptors: Optional[List[Type[CorpusFeature]]] = None,
+                 use_tempo_annotations: bool = False,
+                 segmentation_offset_ms: int = 0,
+                 ignore_invalid_lines: bool = False,
+                 overwrite: bool = False,
+                 copy_resources: bool = False,
+                 log_level: int = logging.INFO, ):
+        super().__init__()
+        self.logger = logging.getLogger(__name__)
+        self.audio_file_path: str = audio_file_path
+        self.analysis_file_path: str = analysis_file_path
+        self.output_folder = output_folder
+        self.corpus_name: str = corpus_name
+        self.analysis_format: Type[TextFormat] = analysis_format
+        self.pre_analysed_descriptors: Optional[List[Type[CorpusFeature]]] = pre_analysed_descriptors
+        self.use_tempo_annotations: bool = use_tempo_annotations
+        self.segmentation_offset_ms: int = segmentation_offset_ms
+        self.ignore_invalid_lines: bool = ignore_invalid_lines
+        self.overwrite: bool = overwrite
+        self.copy_resources: bool = copy_resources
+        self.log_level: int = log_level
+        self.target = SimpleOscTarget(address=osc_address, port=send_port, ip=ip)
+
+    def run(self) -> None:
+        logging.basicConfig(level=self.log_level, format="[%(levelname)s]: %(message)s")
+        self.logger.addHandler(OscLogForwarder(self.target))
+        self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "init")
+        try:
+            corpus: Corpus = ManualCorpusBuilder().build(audio_file_path=self.audio_file_path,
+                                                         analysis_file_path=self.analysis_file_path,
+                                                         corpus_name=self.corpus_name,
+                                                         analysis_format=self.analysis_format,
+                                                         pre_analysed_descriptors=self.pre_analysed_descriptors,
+                                                         use_tempo_annotations=self.use_tempo_annotations,
+                                                         segmentation_offset_ms=self.segmentation_offset_ms,
+                                                         ignore_invalid_lines=self.ignore_invalid_lines)
+
+        except NotImplementedError as e:
+            self.logger.error(f"{str(e)}. No corpus was built")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            return
+
+        except RuntimeError as e:
+            self.logger.error(f"{str(e)}. Could not parse annotation file")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            return
+
+        except (ValueError,
+                IOError,
+                ParameterError,
+                librosa.util.exceptions.ParameterError,
+                FileNotFoundError) as e:
+            self.logger.error(f"{str(e)}. No corpus was built")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            return
+
+        except NoBackendError:
+            self.logger.error(f"The file format of the provided file is not supported.")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            return
+
+        try:
+            output_filepath: str = corpus.export(self.output_folder,
+                                                 overwrite=self.overwrite,
+                                                 copy_resources=self.copy_resources)
+
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
+            self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
+
+        except (IOError, AttributeError, KeyError) as e:
+            self.logger.error(f"{str(e)} Export of corpus failed.")
+            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            return
 
 
 class ManualCorpusBuilder:
