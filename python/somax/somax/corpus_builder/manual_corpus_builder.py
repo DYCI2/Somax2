@@ -9,6 +9,7 @@ from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.manual_text_formats import TextFormat, ParsingError
 from somax.corpus_builder.metadata import AudioMetadata
 from somax.corpus_builder.spectrogram import Spectrogram
+from somax.features import YinDiscretePitch, TotalEnergyDb
 from somax.features.feature import CorpusFeature
 from somax.runtime.corpus import Corpus, AudioCorpus
 from somax.runtime.corpus_event import AudioCorpusEvent
@@ -19,9 +20,9 @@ from somax.scheduler.scheduling_mode import AbsoluteScheduling
 class Descriptors:
     @staticmethod
     def _descriptors() -> Dict[str, Type[CorpusFeature]]:
-        raise NotImplementedError("Not implemented yet")
-        # return {"pitch": YinDiscretePitch,
-        #         "energy": TotalEnergyDb,
+        # raise NotImplementedError("Not implemented yet")
+        return {"pitch": YinDiscretePitch,
+                "energy": TotalEnergyDb}
         #         "chroma": OnsetChroma}
 
     @staticmethod

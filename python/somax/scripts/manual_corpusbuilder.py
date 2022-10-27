@@ -6,16 +6,14 @@ import sys
 from typing import List, Type
 
 # Messy pathlib imports for somax due to relative position...
-from somax.features import YinDiscretePitch
-from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import AudioCorpusEvent
-
 sys.path.append(str(pathlib.Path(__file__).parents[2]) + "/somax")
-print(pathlib.Path(__file__).parents[2])
 
 from somax.corpus_builder.manual_corpus_builder import Descriptors, ManualCorpusBuilder
 from somax.corpus_builder.manual_text_formats import TextFormat
 from somax.features.feature import CorpusFeature
+from somax.features import YinDiscretePitch
+from somax.runtime.corpus import Corpus
+from somax.runtime.corpus_event import AudioCorpusEvent
 
 
 def text_format_from_keyword(keyword: str) -> Type['TextFormat']:
