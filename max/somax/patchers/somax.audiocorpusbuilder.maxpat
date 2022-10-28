@@ -69,7 +69,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 480.0, 179.0, 1241.0, 779.0 ],
+						"rect" : [ 480.0, 179.0, 440.0, 210.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -97,7 +97,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-77",
@@ -240,7 +239,6 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"hidden" : 1,
 									"id" : "obj-61",
 									"ignoreclick" : 1,
 									"maxclass" : "led",
@@ -272,6 +270,7 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"hidden" : 1,
 									"id" : "obj-62",
 									"ignoreclick" : 1,
 									"maxclass" : "led",
@@ -344,6 +343,7 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
+									"hidden" : 1,
 									"id" : "obj-66",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -361,7 +361,6 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
-									"hidden" : 1,
 									"id" : "obj-67",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -437,13 +436,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-47",
-									"linecount" : 26,
+									"linecount" : 23,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 247.0, 593.649999999999636, 106.0, 357.0 ],
-									"text" : "audio_file_path= \"/Users/borg/Downloads/chorinho_pra_ele_66_v_b_compr01 (1)/chorinho_pra_ele_66_v_b_compr01.wav\" analysis_file_path= \"/Users/borg/Downloads/chorinho_pra_ele_66_v_b_compr01 (1)/chorinho.txt\" corpus_name= hehe analysis_format= SoundStudio output_folder= /Users/borg/MaxDev/Somax2/max/somax/corpus ignore_invalid_lines= 0 overwrite= 1"
+									"patching_rect" : [ 247.0, 593.649999999999636, 106.0, 317.0 ],
+									"text" : "build_manual_segmented_corpus audio_file_path= /Users/borg/MIDI/Scarbo.mid analysis_file_path= \"/Users/borg/Downloads/chorinho_pra_ele_66_v_b_compr01 (1)/chorinho.txt\" corpus_name= Scarbo analysis_format= SoundStudio output_folder= /Users/borg/MaxDev/Somax2/max/somax/corpus ignore_invalid_lines= 1 overwrite= 1"
 								}
 
 							}
@@ -456,7 +455,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 151.0, 112.460829493087545, 42.0, 40.0 ],
+									"patching_rect" : [ 153.571426499999689, 83.840839925244381, 42.0, 40.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 137.708282499999996, 110.460829493087545, 161.916717500000004, 18.0 ],
 									"text" : "Corpus Name",
@@ -652,7 +651,7 @@
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-37",
-									"items" : "SoundStudio",
+									"items" : [ "Audacity", ",", "SoundStudio" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -716,7 +715,7 @@
 									"patching_rect" : [ 493.0, 265.976551645360587, 171.0, 25.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 137.708282499999996, 130.460829493087545, 157.416717500000004, 20.0 ],
-									"text" : "hehe",
+									"text" : "Scarbo ere",
 									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textjustification" : 1
 								}
@@ -855,15 +854,13 @@
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-11",
-									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 91.0, 306.0, 156.0, 51.0 ],
+									"patching_rect" : [ 91.0, 306.0, 156.0, 18.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 4,
-									"presentation_rect" : [ 17.0, 51.828514913465298, 186.0, 51.0 ],
-									"text" : "/Users/borg/Downloads/chorinho_pra_ele_66_v_b_compr01 (1)/chorinho_pra_ele_66_v_b_compr01.wav",
+									"presentation_rect" : [ 17.0, 51.828514913465298, 186.0, 18.0 ],
+									"text" : "/Users/borg/MIDI/Scarbo.mid",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
 
@@ -939,7 +936,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 160.071426499999689, 125.840839925244381, 35.5, 30.25 ],
+									"patching_rect" : [ 160.071426499999689, 147.034160074755619, 35.5, 30.25 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 13.0, 45.5, 195.943816499999571, 56.0 ]
 								}
@@ -9552,7 +9549,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 9.0, 516.0, 504.101168246139082, 105.0 ],
 					"selectioncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
-					"setmode" : 3,
+					"setmode" : 1,
 					"waveformcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 

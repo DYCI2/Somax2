@@ -2,9 +2,13 @@ import inspect
 import re
 import sys
 from abc import ABC, abstractmethod
-from typing import List, Type, Tuple, Dict, Any
+from typing import List, Type, Tuple, Dict, Any, Optional
 
 from somax.features.feature import CorpusFeature
+
+
+class Constants:
+    FLOAT = r"-?(?:\d+\.[\d]*|\.[\d]+)(?:e-?\d+)?"
 
 
 class ParsingError(Exception):
@@ -20,8 +24,9 @@ class TextFormat(ABC):
 
     @staticmethod
     @abstractmethod
-    def parse_line(line_str: str, keys: List[Type[CorpusFeature]]) -> Tuple[float, Dict[Type[CorpusFeature], Any]]:
-        """ """
+    def parse_line(line_str: str,
+                   keys: List[Type[CorpusFeature]]) -> Tuple[float, Optional[float], Dict[Type[CorpusFeature], Any]]:
+        """ returns: onset, offset, feature_dict """
 
     @staticmethod
     def keywords() -> List[str]:
@@ -54,7 +59,14 @@ class SoundStudio(TextFormat):
         return SoundStudio.__name__
 
     @staticmethod
-    def parse_line(line_str: str, keys: List[Type[CorpusFeature]]) -> Tuple[float, Dict[Type[CorpusFeature], Any]]:
+    def parse_line(line_str: str,
+                   keys: List[Type[CorpusFeature]]) -> Tuple[float, Optional[float], Dict[Type[CorpusFeature], Any]]:
+        """ format: <ONSET>\n
+                    <ONSET>\n
+                    ...
+
+            where ONSET = mm'ss,ffff
+        """
         tokens = re.match("\s*(\d+)'(\d+),(\d+)\s*", line_str)
         if tokens is None:
             raise ParsingError(line_str)
@@ -62,6 +74,46 @@ class SoundStudio(TextFormat):
         try:
             onset: float = int(tokens.group(1)) * 60 + int(tokens.group(2)) + 0.0001 * int(tokens.group(3))
             descriptors = {}
-            return onset, descriptors
+            return onset, None, descriptors
+        except IndexError:
+            raise ParsingError(line_str)
+
+
+class Audacity(TextFormat):
+    REGEX = re.compile(f"\\s*({Constants.FLOAT})\\s({Constants.FLOAT}).*")
+
+    @staticmethod
+    def keyword() -> str:
+        return Audacity.__name__
+
+    @staticmethod
+    def parse_line(line_str: str,
+                   keys: List[Type[CorpusFeature]]) -> Tuple[float, Optional[float], Dict[Type[CorpusFeature], Any]]:
+        """ format:
+                <LINE>\n
+                <LINE>\n
+                ...
+
+            where LINE = <ONSET> <OFFSET> [<MARKER_NAME>]
+                  ONSET       = float
+                  OFFSET      = float
+                  MARKER_NAME = string | <empty>
+
+            Note that in the case where ONSET ≈ OFFSET, OFFSET will be parsed as the next marker's onset
+
+            """
+        if len(keys) > 0:
+            raise RuntimeError(f"Format '{Audacity.keyword()}' does not support manual descriptors")
+        tokens = re.match(Audacity.REGEX, line_str)
+        if tokens is None:
+            raise ParsingError(line_str)
+
+        try:
+            onset: float = float(tokens.group(1))
+            offset: Optional[float] = float(tokens.group(2))
+            if offset - onset < 0.01:  # 10 ms
+                offset = None
+            descriptors = {}
+            return onset, offset, descriptors
         except IndexError:
             raise ParsingError(line_str)

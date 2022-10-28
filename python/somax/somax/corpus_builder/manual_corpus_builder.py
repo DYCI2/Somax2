@@ -1,7 +1,7 @@
 import logging
 import multiprocessing
 import re
-from typing import Dict, Type, List, Optional
+from typing import Dict, Type, List, Optional, Any, Tuple
 
 import librosa
 import numpy as np
@@ -154,10 +154,11 @@ class ManualCorpusBuilder:
                     NotImplementedError for certain features
         """
 
-        pre_analysed_descriptors = pre_analysed_descriptors if pre_analysed_descriptors is not None else None
+        pre_analysed_descriptors = pre_analysed_descriptors if pre_analysed_descriptors is not None else []
 
         with open(analysis_file_path, 'r') as f:
             onsets: List[float] = []
+            offsets: List[float] = []
             for i, line in enumerate(f):  # type: int, str
                 if use_tempo_annotations and re.match(self.TEMPO, line, flags=re.IGNORECASE):
                     raise NotImplementedError("Tempo is not supported yet")
@@ -165,7 +166,11 @@ class ManualCorpusBuilder:
                     self.logger.debug(f"Line {i + 1}: Ignoring empty line")
                 else:
                     try:
-                        onset_ms, descriptor_dict = analysis_format.parse_line(line, keys=pre_analysed_descriptors)
+                        onset_s: float
+                        offset_s: Optional[float]
+                        descriptor_dict: Dict[Type[CorpusFeature], Any]
+                        onset_s, offset_s, descriptor_dict = analysis_format.parse_line(line,
+                                                                                        keys=pre_analysed_descriptors)
                     except ParsingError as e:
                         err_msg: str = f"invalid line {i + 1}: '{str(e)}'"
                         if ignore_invalid_lines:
@@ -174,20 +179,27 @@ class ManualCorpusBuilder:
                         else:
                             raise RuntimeError(err_msg)
 
-                    onsets.append(onset_ms)
+                    onsets.append(onset_s)
+                    offsets.append(offset_s)
+
         if len(onsets) == 0:
             raise RuntimeError("Annotation file did not contain any valid lines")
 
-        onset_array: np.ndarray = np.array(onsets)[:-1] + segmentation_offset_ms * 0.001
-        duration_array = np.diff(onsets)
+        x, sr = librosa.load(audio_file_path, sr=None, mono=False)
+        x_mono = CorpusBuilder._parse_channels(x)
+        file_duration: float = x.size / sr
+
+        onset_array: np.ndarray
+        duration_array: np.ndarray
+        onset_array, duration_array = self.parse_onsets_and_durations(onsets, offsets, eof=file_duration)
+
+        # adjust in time
+        onset_array = np.maximum(0.0, onset_array + segmentation_offset_ms * 0.001)
 
         events: List[AudioCorpusEvent] = [AudioCorpusEvent(state_index=i,
                                                            absolute_onset=onset,
                                                            absolute_duration=duration)
                                           for i, (onset, duration) in enumerate(zip(onset_array, duration_array))]
-
-        x, sr = librosa.load(audio_file_path, sr=None, mono=False)
-        x_mono = CorpusBuilder._parse_channels(x)
 
         stft: Spectrogram = Spectrogram.from_audio(x_mono, sample_rate=sr, hop_length=self.HOP_LENGTH)
         metadata: AudioMetadata = AudioMetadata(filepath=audio_file_path,
@@ -221,3 +233,38 @@ class ManualCorpusBuilder:
                                           file_num_channels=metadata.channels)
 
         return corpus
+
+    @staticmethod
+    def parse_onsets_and_durations(onsets: List[float],
+                                   offsets: List[float],
+                                   eof: float) -> Tuple[np.ndarray, np.ndarray]:
+        if len(onsets) != len(offsets):
+            raise RuntimeError("Onset and offset arrays are of different lengths")
+
+        onset_array = np.array(onsets, dtype=float)
+        has_offset: np.ndarray = np.array([offset is not None for offset in offsets], dtype=bool)
+
+        # All offsets provided
+        if np.all(has_offset):
+            duration_array = np.array(offsets) - onsets
+
+        # Some offsets provided
+        elif np.any(has_offset):
+            duration_array = np.zeros_like(onset_array, dtype=float)
+            for i in range(onset_array - 1):
+                if has_offset[i]:
+                    duration_array[i] = offsets[i] - onset_array[i]
+                else:
+                    duration_array[i] = onset_array[i + 1] - onset_array[i]
+
+            # Last offset
+            if has_offset[-1]:
+                duration_array[-1] = offsets[-1]
+            else:
+                duration_array[-1] = eof - onset_array[-1]
+
+        # No offsets provided
+        else:
+            duration_array = np.block([np.diff(onsets), eof - onsets[-1]])
+
+        return onset_array, duration_array
