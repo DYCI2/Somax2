@@ -187,7 +187,7 @@ class ManualCorpusBuilder:
 
         x, sr = librosa.load(audio_file_path, sr=None, mono=False)
         x_mono = CorpusBuilder._parse_channels(x)
-        file_duration: float = x.size / sr
+        file_duration: float = x_mono.size / sr
 
         onset_array: np.ndarray
         duration_array: np.ndarray
