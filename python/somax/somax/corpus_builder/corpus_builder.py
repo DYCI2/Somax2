@@ -112,7 +112,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
 
 class CorpusBuilder:
     MIDI_FILE_EXTENSIONS = [".mid", ".midi"]
-    AUDIO_FILE_EXTENSIONS = [".mp3", ".aif", ".aiff", ".wav", ".flac"]  # .ogg doesn't work in python
+    AUDIO_FILE_EXTENSIONS = [".aif", ".aiff", ".wav", ".flac", ".mp3"]  # .ogg doesn't work in python
 
     AUDIO_CORPUS_FILE_EXT = ".pickle"
     MIDI_CORPUS_FILE_EXT = ".gz"

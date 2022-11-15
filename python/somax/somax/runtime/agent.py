@@ -529,11 +529,28 @@ class OscAgent(Agent, AsyncioOscObject):
                 except FileNotFoundError as e:
                     # if fails and alternative folder for audio file provided, try relocating audio file
                     if alternative_audio_folder:
-                        self.logger.error(f"{str(e)}. Looking for audio file in '{alternative_audio_folder}'...")
-                        corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile,
-                                                               new_audio_path=alternative_audio_folder)
+                        try:
+                            self.logger.error(f"{str(e)}. Looking for audio file in '{alternative_audio_folder}'...")
+                            corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile,
+                                                                   new_audio_path=alternative_audio_folder)
+                        except FileNotFoundError as e:
+                            # In case corpus and audio file have been renamed, look for an audio file
+                            #    with the same name and path as corpus file
+                            base_path, _ = os.path.splitext(filepath)  # type: str
+                            found_match: bool = False
+                            for ext in CorpusBuilder.AUDIO_FILE_EXTENSIONS:  # type: str
+                                if os.path.isfile(base_path + ext):
+                                    self.logger.error(f"{str(e)}. Attempting to build from  '{base_path + ext}'...")
+                                    found_match = True
+                                    corpus: Corpus = AudioCorpus.from_json(filepath,
+                                                                           volatile=volatile,
+                                                                           new_audio_path=base_path + ext)
+                                    break
+                            if not found_match:
+                                raise
                     else:
                         raise
+
 
             else:
                 self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
