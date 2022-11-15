@@ -35,7 +35,7 @@ class TotalEnergyDb(CorpusFeature):
                                                     hop_length=metadata.hop_length)
             if end_frame - onset_frame == 0:
                 # May happen for frames of length 1 due to rare rounding errors in frame offset
-                mean_rms: float = rms[onset_frame]
+                mean_rms: float = float(rms[onset_frame])
             else:
                 mean_rms: float = float(np.mean(rms[onset_frame:end_frame]))
             event.set_feature(cls(mean_rms))
@@ -87,7 +87,7 @@ class PeakEnergyDb(CorpusFeature):
                                                     hop_length=metadata.hop_length)
             if end_frame - onset_frame == 0:
                 # May happen for frames of length 1 due to rare rounding errors in frame offset
-                peak_rms: float = rms[onset_frame]
+                peak_rms: float = float(rms[onset_frame])
             else:
                 peak_rms: float = float(np.max(rms[onset_frame:end_frame]))
             event.set_feature(cls(peak_rms))
