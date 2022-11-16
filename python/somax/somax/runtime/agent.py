@@ -700,6 +700,10 @@ class OscAgent(Agent, AsyncioOscObject):
 
     # TODO: can be single function with send_corpora
     def get_corpus_files(self, filepath: str):
+        if not(os.path.isdir(filepath)):
+            self.logger.error(f"File '{filepath}' is not a folder")
+            return
+
         # filepath: str = os.path.join(os.path.dirname(__file__), settings.CORPUS_FOLDER)
         corpora: List[Tuple[str, str]] = []
         for file in os.listdir(filepath):
