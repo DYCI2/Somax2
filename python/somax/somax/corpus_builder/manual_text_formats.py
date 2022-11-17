@@ -29,6 +29,11 @@ class TextFormat(ABC):
         """ returns: onset, offset, feature_dict """
 
     @staticmethod
+    @abstractmethod
+    def format_line(onset: float, duration: float, features: List[CorpusFeature]) -> str:
+        """ returns a single line to write to a file """
+
+    @staticmethod
     def keywords() -> List[str]:
         """ raises: KeyError """
         return [cls.keyword() for cls in TextFormat._introspect().values()]
@@ -78,6 +83,12 @@ class SoundStudio(TextFormat):
         except IndexError:
             raise ParsingError(line_str)
 
+    @staticmethod
+    def format_line(onset: float, duration: float, features: List[CorpusFeature]) -> str:
+        minutes, seconds = divmod(onset, 60)  # type: float, float
+        seconds, hundreds = divmod(seconds, 1)  # type: float, float
+        return f"{int(minutes)}'{int(seconds):0>2},{int(hundreds * 1000):0<4}\n"
+
 
 class Audacity(TextFormat):
     REGEX = re.compile(f"\\s*({Constants.FLOAT})\\s({Constants.FLOAT}).*")
@@ -94,7 +105,7 @@ class Audacity(TextFormat):
                 <LINE>\n
                 ...
 
-            where LINE = <ONSET> <OFFSET> [<MARKER_NAME>]
+            where LINE = <ONSET>\t<OFFSET>\t[<MARKER_NAME>]
                   ONSET       = float
                   OFFSET      = float
                   MARKER_NAME = string | <empty>
@@ -117,3 +128,7 @@ class Audacity(TextFormat):
             return onset, offset, descriptors
         except IndexError:
             raise ParsingError(line_str)
+
+    @staticmethod
+    def format_line(onset: float, duration: float, features: List[CorpusFeature]) -> str:
+        return f"{onset:.3f}\t{onset + duration:3f}\n"
