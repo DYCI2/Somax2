@@ -178,7 +178,6 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-1227" : [ "center[2]", "center", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1240" : [ "live.slider[4]", "live.slider", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1241" : [ "live.numbox[16]", "live.numbox[2]", 0 ],
-			"obj-13::obj-1::obj-6::obj-1::obj-1247" : [ "live.slider[5]", "live.slider", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1256" : [ "live.menu[7]", "live.menu", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-126" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-134" : [ "continuity[10]", "continuity", 0 ],
@@ -231,7 +230,6 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-866::obj-98" : [ "live.text[45]", "live.text[26]", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-870" : [ "selfharmonicbypass[2]", "selfharmonicbypass", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-889" : [ "weight[2]", "weight", 0 ],
-			"obj-13::obj-1::obj-6::obj-1::obj-982" : [ "transpositions[5]", "transpositions", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-998" : [ "__exp_regionmaskenable[2]", "__exp_regionmaskenable", 0 ],
 			"obj-13::obj-1::obj-6::obj-5::obj-26" : [ "corpusname[3]", "corpusname", 0 ],
 			"obj-13::obj-1::obj-6::obj-79::obj-1" : [ "live.text[25]", "live.text", 0 ],
@@ -318,10 +316,6 @@
 ,
 				"obj-13::obj-1::obj-6::obj-1::obj-1241" : 				{
 					"parameter_longname" : "live.numbox[16]"
-				}
-,
-				"obj-13::obj-1::obj-6::obj-1::obj-1247" : 				{
-					"parameter_longname" : "live.slider[5]"
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-1::obj-1256" : 				{

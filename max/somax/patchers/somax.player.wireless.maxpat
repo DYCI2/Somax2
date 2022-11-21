@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 3,
-			"revision" : 1,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -232,7 +232,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 3,
-							"revision" : 1,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -622,13 +622,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 3,
-							"revision" : 1,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 1402.0, 168.0, 200.0, 100.0 ],
+						"rect" : [ 1402.0, 168.0, 760.0, 407.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -657,6 +657,19 @@
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+									"id" : "obj-13",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 210.0, 182.0, 79.0, 22.0 ],
+									"text" : "loadmess set"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-15",
 									"maxclass" : "newobj",
@@ -830,7 +843,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 284.0625, 36.0, 30.0, 30.0 ]
+									"patching_rect" : [ 65.375, 18.0, 30.0, 30.0 ]
 								}
 
 							}
@@ -847,7 +860,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 3,
-											"revision" : 1,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1229,14 +1242,14 @@
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-124",
-									"items" : "Player-202202072.json",
+									"items" : "<empty>",
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 749.0625, 460.96435546875, 100.0, 20.0 ],
-									"prefix" : "/Users/borg/MaxDev/Somax2/max/somax/state",
+									"prefix" : "~/MaxDev/Somax2/max/somax/state/",
 									"presentation" : 1,
 									"presentation_rect" : [ 5.416666507720947, 8.96435546875, 132.0, 20.0 ],
 									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -1451,7 +1464,7 @@
 									"patching_rect" : [ 176.375, 225.259227263621824, 100.0, 19.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 5.416666507720947, 50.96435546875, 132.0, 18.5 ],
-									"text" : "Player-20220929",
+									"text" : "Player-20221121",
 									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textjustification" : 1
 								}
@@ -1650,6 +1663,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-92", 0 ],
+									"source" : [ "obj-13", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-135", 0 ],
 									"source" : [ "obj-130", 1 ]
 								}
@@ -1700,6 +1720,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-5", 0 ],
+									"midpoints" : [ 74.875, 75.0, 328.5, 75.0 ],
 									"source" : [ "obj-4", 0 ]
 								}
 
@@ -1876,6 +1897,18 @@
 			}
 , 			{
 				"box" : 				{
+					"active" : 					{
+						"player::somax.newplayer::live.menu" : 0,
+						"player::somax.newplayer::live.menu[1]" : 0,
+						"player::somax.newplayer::live.menu[2]" : 0,
+						"player::somax.newplayer::live.numbox" : 0,
+						"player::somax.newplayer::live.slider" : 0,
+						"player::somax.newplayer::live.text" : 0,
+						"player::somax.newplayer::audiorenderer3::live.numbox" : 0,
+						"player::somax.newplayer::audiorenderer3::live.numbox[1]" : 0,
+						"player::somax.newplayer::audiorenderer3::live.text" : 0
+					}
+,
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"fontface" : 0,
 					"fontname" : "Arial",
@@ -1887,8 +1920,41 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1271.0, 507.0, 313.0, 35.0 ],
+					"priority" : 					{
+						"player::somax.newplayer::__exp_autojumpenable" : 50,
+						"player::somax.newplayer::__exp_durationenable" : 50,
+						"player::somax.newplayer::__exp_melodicpitchfromchords" : 50,
+						"player::somax.newplayer::__exp_numnotesenable" : 50,
+						"player::somax.newplayer::__exp_octavebandsenable" : 50,
+						"player::somax.newplayer::__exp_selfpitchfromchords" : 50,
+						"player::somax.newplayer::__exp_tabooenable" : 50,
+						"player::somax.newplayer::__exp_tempoconsistencyenable" : 50,
+						"player::somax.newplayer::__exp_velocityenable" : 50,
+						"player::somax.newplayer::regionmaskenable" : 50,
+						"player::somax.newplayer::__exp_autojumpactivate" : 60,
+						"player::somax.newplayer::__exp_autojumpforcejump" : 60,
+						"player::somax.newplayer::__exp_durationmu" : 60,
+						"player::somax.newplayer::__exp_durationsigma" : 60,
+						"player::somax.newplayer::__exp_numnotesmu" : 60,
+						"player::somax.newplayer::__exp_numnotessigma" : 60,
+						"player::somax.newplayer::__exp_octavebands" : 60,
+						"player::somax.newplayer::__exp_tabooduration" : 60,
+						"player::somax.newplayer::__exp_tempoconsistencylen" : 60,
+						"player::somax.newplayer::__exp_tempoconsistencysigma" : 60,
+						"player::somax.newplayer::__exp_velocitybinary" : 60,
+						"player::somax.newplayer::__exp_velocitycenter" : 60,
+						"player::somax.newplayer::__exp_velocitypeak" : 60,
+						"player::somax.newplayer::__exp_velocityweight" : 60,
+						"player::somax.newplayer::__exp_velocitywidth" : 60,
+						"player::somax.newplayer::__exp_velscale" : 60,
+						"player::somax.newplayer::regionmask" : 60,
+						"player::somax.newplayer::somax.corpusview::corpusname" : 99,
+						"player::somax.newplayer::audiorenderer3::__exp_energyscaleenable" : 50,
+						"player::somax.newplayer::audiorenderer3::__exp_energyscale" : 60
+					}
+,
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 461, 322 ],
+						"client_rect" : [ 1880, 208, 2595, 537 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -2210,7 +2276,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 3,
-							"revision" : 1,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2534,7 +2600,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 3,
-							"revision" : 1,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2725,7 +2791,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 3,
-							"revision" : 1,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
