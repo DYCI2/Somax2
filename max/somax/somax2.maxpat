@@ -500,6 +500,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "maximalistic_guitar1part3.json",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/state",
+				"patcherrelativepath" : "./state",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "midi2chroma.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "./patchers/resources/influencers",

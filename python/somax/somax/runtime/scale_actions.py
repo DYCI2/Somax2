@@ -280,18 +280,19 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
               beat_phase: float,
               corresponding_events: List[CorpusEvent],
               corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
               corpus: Corpus = None,
               enforce_output: bool = False,
-              **kwargs) -> Peaks:
+              **kwargs) -> Tuple[Peaks, TabooMask]:
 
         previous_tempi: np.ndarray = np.array(
             [e[0].get_feature(Tempo).value() for e in self._history.get_n_last(self.history_len)])
         if previous_tempi.size == 0:
-            return peaks
+            return peaks, taboo_mask
         mu: float = float(np.mean(previous_tempi))
         peaks_tempi: np.ndarray = np.array([e.get_feature(Tempo).value() for e in corresponding_events])
         peaks.scores *= np.exp(-((peaks_tempi - mu) ** 2 / (2 * self.sigma ** 2)))
-        return peaks
+        return peaks, taboo_mask
 
     def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                  applied_transform: AbstractTransform) -> None:

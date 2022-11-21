@@ -88,6 +88,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-69",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -628,7 +629,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 1402.0, 168.0, 760.0, 407.0 ],
+						"rect" : [ 1096.0, 164.0, 1142.0, 777.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -656,6 +657,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
@@ -1242,7 +1244,7 @@
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-124",
-									"items" : "<empty>",
+									"items" : [ "FactorySettings.json", ",", "maximalistic_guitar1part3.json", ",", "maximalistic_pixinguha.json", ",", "minimailistic-obama.json" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -1456,6 +1458,7 @@
 									"fontsize" : 10.0,
 									"id" : "obj-92",
 									"keymode" : 1,
+									"linecount" : 2,
 									"maxclass" : "textedit",
 									"numinlets" : 1,
 									"numoutlets" : 4,
@@ -1464,7 +1467,7 @@
 									"patching_rect" : [ 176.375, 225.259227263621824, 100.0, 19.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 5.416666507720947, 50.96435546875, 132.0, 18.5 ],
-									"text" : "Player-20221121",
+									"text" : "maximalistic_guitar1part3",
 									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textjustification" : 1
 								}
@@ -1904,9 +1907,15 @@
 						"player::somax.newplayer::live.numbox" : 0,
 						"player::somax.newplayer::live.slider" : 0,
 						"player::somax.newplayer::live.text" : 0,
+						"player::somax.newplayer::somax.corpusview" : 0,
+						"player::somax.newplayer::somax.corpusview::u839003605" : 0,
+						"player::somax.newplayer::somax.corpusview::corpusname" : 0,
 						"player::somax.newplayer::audiorenderer3::live.numbox" : 0,
 						"player::somax.newplayer::audiorenderer3::live.numbox[1]" : 0,
-						"player::somax.newplayer::audiorenderer3::live.text" : 0
+						"player::somax.newplayer::audiorenderer3::live.text" : 0,
+						"player::somax.corpusview" : 0,
+						"player::somax.corpusview::u839003605" : 0,
+						"player::somax.corpusview::corpusname" : 0
 					}
 ,
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
