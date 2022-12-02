@@ -1,4 +1,5 @@
 import logging
+import random
 from typing import Dict, Optional, Tuple, Type, List
 
 import numpy as np
@@ -382,6 +383,10 @@ class Player(Parametric, ContentAware):
         self.clear()
         index: Optional[int] = self._force_jump_index
         self._force_jump_index = None
+
+        if index == -1:
+            index = random.randrange(0, self.corpus.length())
+
         try:
             event: CorpusEvent = self.corpus.events[index]
             return event, NoTransform()
