@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 3,
-			"revision" : 1,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -166,7 +166,7 @@
 					"parameter_mappable" : 0,
 					"patching_rect" : [ 788.0, 41.596841145363214, 55.90625, 19.171875 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 147.093749970197678, 284.119793426990555, 71.239583373069763, 15.171874970197678 ],
+					"presentation_rect" : [ 149.093749970197678, 271.119793426990555, 71.739583373069763, 15.171874970197678 ],
 					"rounded" : 8.0,
 					"spacing_x" : 2.0,
 					"text" : "Renderer",

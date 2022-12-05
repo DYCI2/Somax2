@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 1672.0, 758.0 ],
+		"rect" : [ 34.0, 87.0, 972.0, 716.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -128,7 +128,7 @@
 					"outlettype" : [ "", "float", "", "dictionary", "int", "", "", "bang" ],
 					"patching_rect" : [ 639.083333333333258, 5.574140189969739, 371.0, 230.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 634.0, 110.0, 369.0, 227.0 ],
+					"presentation_rect" : [ 0.0, 661.675398314063386, 369.0, 227.0 ],
 					"varname" : "somax.server.io",
 					"viewvisibility" : 1
 				}
@@ -496,13 +496,6 @@
 				"name" : "kslider.compact.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "./patchers/resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "maximalistic_guitar1part3.json",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/state",
-				"patcherrelativepath" : "./state",
 				"type" : "JSON",
 				"implicit" : 1
 			}

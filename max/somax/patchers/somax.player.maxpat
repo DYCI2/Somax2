@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 0.0, 53.0, 440.0, 770.0 ],
+		"rect" : [ 0.0, 52.0, 440.0, 770.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -12203,7 +12203,7 @@
 					"patching_rect" : [ 836.727848101265863, 2464.036235367295376, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 517.614192974589628, 696.846404873087522, 204.688280717488396, 14.5 ],
-					"size" : 338.0
+					"size" : 335.0
 				}
 
 			}
@@ -14212,7 +14212,7 @@
 					"patching_rect" : [ 910.727848101265863, 2414.5, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 15.958333333333712, 544.5175204224754, 182.0, 14.5 ],
-					"size" : 338.0
+					"size" : 335.0
 				}
 
 			}
@@ -14966,7 +14966,7 @@
 					"patching_rect" : [ 1937.568181818181529, 2342.0, 49.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 300.452790086508571, 474.555020118491711, 29.617212271836024, 18.0 ],
-					"text" : "6",
+					"text" : "0",
 					"textcolor" : [ 0.827450980392157, 0.423529411764706, 0.996078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -20113,36 +20113,36 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1824.25, 134.0, 313.0, 35.0 ],
 					"priority" : 					{
-						"__exp_autojumpenable" : 50,
-						"__exp_durationenable" : 50,
-						"__exp_melodicpitchfromchords" : 50,
-						"__exp_numnotesenable" : 50,
-						"__exp_octavebandsenable" : 50,
-						"__exp_selfpitchfromchords" : 50,
-						"__exp_tabooenable" : 50,
-						"__exp_tempoconsistencyenable" : 50,
-						"__exp_velocityenable" : 50,
-						"regionmaskenable" : 50,
 						"__exp_autojumpactivate" : 60,
+						"__exp_autojumpenable" : 50,
 						"__exp_autojumpforcejump" : 60,
+						"__exp_durationenable" : 50,
 						"__exp_durationmu" : 60,
 						"__exp_durationsigma" : 60,
+						"__exp_melodicpitchfromchords" : 50,
+						"__exp_numnotesenable" : 50,
 						"__exp_numnotesmu" : 60,
 						"__exp_numnotessigma" : 60,
 						"__exp_octavebands" : 60,
+						"__exp_octavebandsenable" : 50,
+						"__exp_selfpitchfromchords" : 50,
 						"__exp_tabooduration" : 60,
+						"__exp_tabooenable" : 50,
+						"__exp_tempoconsistencyenable" : 50,
 						"__exp_tempoconsistencylen" : 60,
 						"__exp_tempoconsistencysigma" : 60,
 						"__exp_velocitybinary" : 60,
 						"__exp_velocitycenter" : 60,
+						"__exp_velocityenable" : 50,
 						"__exp_velocitypeak" : 60,
 						"__exp_velocityweight" : 60,
 						"__exp_velocitywidth" : 60,
 						"__exp_velscale" : 60,
 						"regionmask" : 60,
+						"regionmaskenable" : 50,
 						"somax.corpusview::corpusname" : 99,
-						"audiorenderer3::__exp_energyscaleenable" : 50,
-						"audiorenderer3::__exp_energyscale" : 60
+						"audiorenderer3::__exp_energyscale" : 60,
+						"audiorenderer3::__exp_energyscaleenable" : 50
 					}
 ,
 					"saved_object_attributes" : 					{
@@ -25519,7 +25519,7 @@
 					"patching_rect" : [ 836.727848101265863, 2425.5, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 15.958333333333712, 544.5175204224754, 182.0, 14.5 ],
-					"size" : 338.0
+					"size" : 335.0
 				}
 
 			}
