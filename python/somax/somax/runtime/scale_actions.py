@@ -677,6 +677,12 @@ class RegionMaskScaleAction(AbstractScaleAction):
         # TODO: This could be optimized and stored if ScaleAction had direct access to Corpus
         low_index: int = int(self._low_thresh.value * corpus.length())
         high_index: int = int(self._high_thresh.value * corpus.length())
+
+        # If inverse, clip to valid range
+        if high_index < low_index:
+            high_index = low_index
+
+        # Extend range by one if low == high
         if low_index == high_index:
             if high_index < corpus.length():
                 high_index += 1
