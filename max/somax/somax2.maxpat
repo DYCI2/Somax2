@@ -178,8 +178,8 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-1227" : [ "center[2]", "Center", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1240" : [ "live.slider[4]", "live.slider", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1241" : [ "live.numbox[16]", "live.numbox[2]", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1256" : [ "live.menu[7]", "live.menu", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-126" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
-			"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-1256" : [ "live.menu[7]", "live.menu", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-202" : [ "simultaneousonsets[4]", "simultaneousonsets", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-496" : [ "outputchannels[2]", "outputchannels", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-501" : [ "experimental_scaling[2]", "experimental_scaling", 0 ],
@@ -319,7 +319,7 @@
 					"parameter_longname" : "live.numbox[16]"
 				}
 ,
-				"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-1256" : 				{
+				"obj-13::obj-1::obj-6::obj-1::obj-1256" : 				{
 					"parameter_longname" : "live.menu[7]"
 				}
 ,

@@ -481,6 +481,7 @@
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-78",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -627,7 +628,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 1096.0, 164.0, 1142.0, 777.0 ],
+						"rect" : [ 1096.0, 164.0, 200.0, 100.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -655,6 +656,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
@@ -1241,7 +1243,7 @@
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-124",
-									"items" : "FactorySettings.json",
+									"items" : [ "FactorySettings.json", ",", "maximalistic_guitar1part3.json", ",", "maximalistic_pixinguha.json", ",", "minimailistic-obama.json" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -1463,7 +1465,7 @@
 									"patching_rect" : [ 176.375, 225.259227263621824, 100.0, 19.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 5.416666507720947, 50.96435546875, 132.0, 18.5 ],
-									"text" : "Player-20221206",
+									"text" : "Player-20221208",
 									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textjustification" : 1
 								}
@@ -1897,6 +1899,7 @@
 , 			{
 				"box" : 				{
 					"active" : 					{
+						"audioinfluencer::somax.audioinfluencer::live.numbox" : 0,
 						"player::somax.newplayer::live.menu" : 0,
 						"player::somax.newplayer::live.menu[1]" : 0,
 						"player::somax.newplayer::live.menu[2]" : 0,
@@ -1926,40 +1929,39 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1271.0, 507.0, 313.0, 35.0 ],
 					"priority" : 					{
-						"player::somax.newplayer::__exp_autojumpactivate" : 60,
 						"player::somax.newplayer::__exp_autojumpenable" : 50,
-						"player::somax.newplayer::__exp_autojumpforcejump" : 60,
 						"player::somax.newplayer::__exp_durationenable" : 50,
-						"player::somax.newplayer::__exp_durationmu" : 60,
-						"player::somax.newplayer::__exp_durationsigma" : 60,
 						"player::somax.newplayer::__exp_melodicpitchfromchords" : 50,
 						"player::somax.newplayer::__exp_numnotesenable" : 50,
+						"player::somax.newplayer::__exp_octavebandsenable" : 50,
+						"player::somax.newplayer::__exp_selfpitchfromchords" : 50,
+						"player::somax.newplayer::__exp_tabooenable" : 50,
+						"player::somax.newplayer::__exp_tempoconsistencyenable" : 50,
+						"player::somax.newplayer::__exp_velocityenable" : 50,
+						"player::somax.newplayer::regionmaskenable" : 50,
+						"player::somax.newplayer::__exp_autojumpactivate" : 60,
+						"player::somax.newplayer::__exp_autojumpforcejump" : 60,
+						"player::somax.newplayer::__exp_durationmu" : 60,
+						"player::somax.newplayer::__exp_durationsigma" : 60,
 						"player::somax.newplayer::__exp_numnotesmu" : 60,
 						"player::somax.newplayer::__exp_numnotessigma" : 60,
 						"player::somax.newplayer::__exp_octavebands" : 60,
-						"player::somax.newplayer::__exp_octavebandsenable" : 50,
-						"player::somax.newplayer::__exp_selfpitchfromchords" : 50,
 						"player::somax.newplayer::__exp_tabooduration" : 60,
-						"player::somax.newplayer::__exp_tabooenable" : 50,
-						"player::somax.newplayer::__exp_tempoconsistencyenable" : 50,
 						"player::somax.newplayer::__exp_tempoconsistencylen" : 60,
 						"player::somax.newplayer::__exp_tempoconsistencysigma" : 60,
 						"player::somax.newplayer::__exp_velocitybinary" : 60,
 						"player::somax.newplayer::__exp_velocitycenter" : 60,
-						"player::somax.newplayer::__exp_velocityenable" : 50,
 						"player::somax.newplayer::__exp_velocitypeak" : 60,
 						"player::somax.newplayer::__exp_velocityweight" : 60,
 						"player::somax.newplayer::__exp_velocitywidth" : 60,
-						"player::somax.newplayer::__exp_velscale" : 60,
 						"player::somax.newplayer::regionmask" : 60,
-						"player::somax.newplayer::regionmaskenable" : 50,
 						"player::somax.newplayer::somax.corpusview::corpusname" : 99,
-						"player::somax.newplayer::audiorenderer3::__exp_energyscale" : 60,
-						"player::somax.newplayer::audiorenderer3::__exp_energyscaleenable" : 50
+						"player::somax.newplayer::audiorenderer3::__exp_energyscaleenable" : 50,
+						"player::somax.newplayer::audiorenderer3::__exp_energyscale" : 60
 					}
 ,
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 1880, 208, 2595, 537 ],
+						"client_rect" : [ 1880, 207, 2595, 536 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -2014,7 +2016,6 @@
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
