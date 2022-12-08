@@ -174,12 +174,16 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-12" : [ "melodicmod12[2]", "melodicmod12", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-120" : [ "melodicbypass[2]", "melodicbypass", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1218" : [ "simultaneousonsets[5]", "artificialmidities", 0 ],
-			"obj-13::obj-1::obj-6::obj-1::obj-1226" : [ "width[2]", "width", 0 ],
-			"obj-13::obj-1::obj-6::obj-1::obj-1227" : [ "center[2]", "center", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1226" : [ "width[2]", "Width", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1227" : [ "center[2]", "Center", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1240" : [ "live.slider[4]", "live.slider", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1241" : [ "live.numbox[16]", "live.numbox[2]", 0 ],
-			"obj-13::obj-1::obj-6::obj-1::obj-1256" : [ "live.menu[7]", "live.menu", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-126" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-1256" : [ "live.menu[7]", "live.menu", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-202" : [ "simultaneousonsets[4]", "simultaneousonsets", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-496" : [ "outputchannels[2]", "outputchannels", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-501" : [ "experimental_scaling[2]", "experimental_scaling", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-98" : [ "live.text[16]", "live.text[26]", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-134" : [ "continuity[10]", "continuity", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-1344" : [ "enforcetaboo[2]", "enforcetaboo", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-140" : [ "resetinfluences[2]", "resetinfluences", 0 ],
@@ -189,7 +193,6 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-154" : [ "melodicngramorder[2]", "melodicngramorder", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-163" : [ "ignorephase[2]", "ignorephase", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-19" : [ "selfmod12[2]", "selfmod12", 0 ],
-			"obj-13::obj-1::obj-6::obj-1::obj-202" : [ "simultaneousonsets[4]", "simultaneousonsets", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-22" : [ "selfmelodicbypass[2]", "selfmelodicbypass", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-254" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-255" : [ "melodicpeakdecay[2]", "melodicpeakdecay", 0 ],
@@ -200,8 +203,6 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-352" : [ "outputthreshold[2]", "outputthreshold", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-369" : [ "toggle[2]", "toggle", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-4" : [ "reinstantiate[2]", "reinstantiate", 0 ],
-			"obj-13::obj-1::obj-6::obj-1::obj-496" : [ "outputchannels[2]", "outputchannels", 0 ],
-			"obj-13::obj-1::obj-6::obj-1::obj-501" : [ "experimental_scaling[2]", "experimental_scaling", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-504" : [ "transpositionconsistency[2]", "transpositionconsistency", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-570" : [ "__exp_melodicpitchfromchords[2]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-575" : [ "__exp_tempoconsistencysigma[2]", "__exp_tempoconsistencysigma", 0 ],
@@ -229,7 +230,7 @@
 			"obj-13::obj-1::obj-6::obj-1::obj-866::obj-33" : [ "pregain[2]", "pregain", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-866::obj-98" : [ "live.text[45]", "live.text[26]", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-870" : [ "selfharmonicbypass[2]", "selfharmonicbypass", 0 ],
-			"obj-13::obj-1::obj-6::obj-1::obj-889" : [ "weight[2]", "weight", 0 ],
+			"obj-13::obj-1::obj-6::obj-1::obj-889" : [ "weight[2]", "Weight", 0 ],
 			"obj-13::obj-1::obj-6::obj-1::obj-998" : [ "__exp_regionmaskenable[2]", "__exp_regionmaskenable", 0 ],
 			"obj-13::obj-1::obj-6::obj-5::obj-26" : [ "corpusname[3]", "corpusname", 0 ],
 			"obj-13::obj-1::obj-6::obj-79::obj-1" : [ "live.text[25]", "live.text", 0 ],
@@ -318,8 +319,16 @@
 					"parameter_longname" : "live.numbox[16]"
 				}
 ,
-				"obj-13::obj-1::obj-6::obj-1::obj-1256" : 				{
+				"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-1256" : 				{
 					"parameter_longname" : "live.menu[7]"
+				}
+,
+				"obj-13::obj-1::obj-6::obj-1::obj-1307::obj-98" : 				{
+					"parameter_invisible" : 0,
+					"parameter_longname" : "live.text[16]",
+					"parameter_modmode" : 0,
+					"parameter_type" : 2,
+					"parameter_unitstyle" : 10
 				}
 ,
 				"obj-13::obj-1::obj-6::obj-1::obj-349::obj-26" : 				{
