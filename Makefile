@@ -11,6 +11,7 @@ MAX_BUILD_PARENT_FOLDER = build/somax
 MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/Somax-$(VERSION)
 DMG_NAME = Somax-$(VERSION)
 DMG_PATH = dist/$(DMG_NAME).dmg
+APP_PATH = dist/$(DMG_NAME).app
 
 WIN_PKG = Somax-$(VERSION)
 
@@ -50,11 +51,8 @@ codesignature:
 
 notarize:
 	hdiutil create "$(DMG_PATH)" -fs HFS+ -srcfolder dist/somax_server.app -ov
-	xcrun altool --notarize-app --primary-bundle-id "ircam.repmus.somax" \
-				 -u "joakim.borg@ircam.fr" \
-				 -p $$(security find-generic-password -w -a $$LOGNAME -s "somax_app_specific") \
-				 --file "$(DMG_PATH)"
-	@echo "\033[1mNOTE: You will still have to do the final step manually once notarization has been approved:\n      xcrun stapler staple dist/somax_server.app\033[0m"
+	xcrun notarytool submit "$(DMG_PATH)" --keychain-profile "repmus" --wait
+	xcrun stapler staple "$(APP_PATH)"
 
 max-package: clean
 	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN CODESIGNED BEFORE CALLING THIS COMMAND. ORDER SHOULD BE:\n    make pyinstaller\n    make codesignature (+ stapler once finished)\n    make max-package\033[0m"
