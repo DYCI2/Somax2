@@ -45,7 +45,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 583.0, 166.5, 134.0, 33.0 ],
+					"patching_rect" : [ 583.0, 166.5, 136.0, 33.0 ],
 					"text" : "does not verify whether path is a folder"
 				}
 
@@ -97,7 +97,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-4",
