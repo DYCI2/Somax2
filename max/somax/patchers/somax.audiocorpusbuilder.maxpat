@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 0.0, 53.0, 1143.0, 856.0 ],
+		"rect" : [ 1058.0, 62.0, 1282.0, 1096.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,18 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-361",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1106.0, 2109.0, 31.0, 22.0 ],
+					"text" : "stop"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
@@ -2881,7 +2893,7 @@
 					"patching_rect" : [ 566.0, 2508.31633185546707, 178.0, 41.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 9.0, 516.0, 504.0, 105.0 ],
-					"setminmax" : [ 0.0, 16430.998300945888332 ],
+					"setminmax" : [ 0.0, 124998.802510953188175 ],
 					"slidercolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -4473,7 +4485,7 @@
 					"patching_rect" : [ 876.0, 515.294871794871824, 171.0, 25.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 9.0, 251.5, 205.916717500000004, 20.5 ],
-					"text" : "guitar1_part",
+					"text" : "guitar1",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -10325,7 +10337,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-206",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -12696,15 +12707,15 @@
 				"box" : 				{
 					"bubbleusescolors" : 1,
 					"id" : "obj-62",
-					"linecount" : 33,
+					"linecount" : 34,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 432.0, 700.0, 125.0, 449.0 ],
+					"patching_rect" : [ 432.0, 700.0, 125.0, 462.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 34,
 					"presentation_rect" : [ 603.416666507720947, 83.295823402721453, 120.0, 462.0 ],
-					"text" : "build_corpus /Users/borg/Music/guitar1_part.mp3 overwrite= 0 corpus_name= guitar1_part output_folder= /Users/borg/MaxDev/Somax2/max/somax/corpus multithreaded= 1 copy_resources= 0 segmentation_mode=onset hop_length=512 min_interval_s=0.05 max_size_s=None off_threshold_db=-60. discard_by_mean=0 pick_peak_pre_mean_s=0.4 pick_peak_pre_max_s=0.4 pick_peak_post_mean_s=0.4 pick_peak_post_max_s=0.4 pick_peak_delta_gain=0.07 segmentation_interval_s=0.5 estimated_initial_bpm=120",
+					"text" : "build_corpus /Users/joakimborg/Music/guitar1.wav overwrite= 0 corpus_name= guitar1 output_folder= /Users/joakimborg/MaxDev/Somax2/max/somax/corpus multithreaded= 1 copy_resources= 0 segmentation_mode=onset hop_length=512 min_interval_s=0.05 max_size_s=None off_threshold_db=None discard_by_mean=0 pick_peak_pre_mean_s=0.4 pick_peak_pre_max_s=0.4 pick_peak_post_mean_s=0.4 pick_peak_post_max_s=0.4 pick_peak_delta_gain=0.07 segmentation_interval_s=0.5 estimated_initial_bpm=120",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -12743,7 +12754,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 9.0, 59.0, 195.943816499999571, 20.0 ],
 					"style" : "helpfile_label",
-					"text" : "guitar1_part.mp3",
+					"text" : "guitar1.wav",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -12836,6 +12847,22 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 499.0, 329.0, 128.0, 128.0 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 1.0 ],
+					"id" : "obj-178",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 889.0, 230.0, 128.0, 128.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ -1.5, 0.791667342185974, 568.0, 788.0 ],
 					"proportion" : 0.5
 				}
 
@@ -15261,6 +15288,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-317", 0 ],
+					"source" : [ "obj-361", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-366", 0 ],
 					"source" : [ "obj-363", 0 ]
 				}
@@ -15634,7 +15668,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-361", 0 ],
+					"order" : 0,
+					"source" : [ "obj-460", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-462", 0 ],
+					"order" : 1,
 					"source" : [ "obj-460", 0 ]
 				}
 
