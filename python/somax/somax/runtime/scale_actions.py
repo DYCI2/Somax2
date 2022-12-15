@@ -697,7 +697,7 @@ class RegionMaskScaleAction(AbstractScaleAction):
 
         corpus_mask: np.ndarray = np.zeros(corpus.length(), dtype=bool)
         corpus_mask[:low_index] = True
-        corpus_mask[high_index:] = True
+        corpus_mask[high_index + 1:] = True
         # Note: taboo should still be applied even if `enforce_output` is on
         taboo_mask.add_taboo(corpus_mask)
 

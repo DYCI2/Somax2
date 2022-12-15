@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1058.0, 62.0, 1282.0, 1096.0 ],
+		"rect" : [ 1058.0, 62.0, 560.0, 790.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -2893,7 +2893,7 @@
 					"patching_rect" : [ 566.0, 2508.31633185546707, 178.0, 41.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 9.0, 516.0, 504.0, 105.0 ],
-					"setminmax" : [ 0.0, 124998.802510953188175 ],
+					"setminmax" : [ 0.0, 0.0 ],
 					"slidercolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -4485,7 +4485,6 @@
 					"patching_rect" : [ 876.0, 515.294871794871824, 171.0, 25.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 9.0, 251.5, 205.916717500000004, 20.5 ],
-					"text" : "guitar1",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -12707,15 +12706,15 @@
 				"box" : 				{
 					"bubbleusescolors" : 1,
 					"id" : "obj-62",
-					"linecount" : 34,
+					"linecount" : 31,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 432.0, 700.0, 125.0, 462.0 ],
+					"patching_rect" : [ 432.0, 700.0, 125.0, 422.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 34,
-					"presentation_rect" : [ 603.416666507720947, 83.295823402721453, 120.0, 462.0 ],
-					"text" : "build_corpus /Users/joakimborg/Music/guitar1.wav overwrite= 0 corpus_name= guitar1 output_folder= /Users/joakimborg/MaxDev/Somax2/max/somax/corpus multithreaded= 1 copy_resources= 0 segmentation_mode=onset hop_length=512 min_interval_s=0.05 max_size_s=None off_threshold_db=None discard_by_mean=0 pick_peak_pre_mean_s=0.4 pick_peak_pre_max_s=0.4 pick_peak_post_mean_s=0.4 pick_peak_post_max_s=0.4 pick_peak_delta_gain=0.07 segmentation_interval_s=0.5 estimated_initial_bpm=120",
+					"presentation_linecount" : 31,
+					"presentation_rect" : [ 603.416666507720947, 83.295823402721453, 120.0, 422.0 ],
+					"text" : "build_corpus 0 overwrite= 0 corpus_name= 0 output_folder= /Users/joakimborg/MaxDev/Somax2/max/somax/corpus multithreaded= 1 copy_resources= 0 segmentation_mode=onset hop_length=512 min_interval_s=0.05 max_size_s=None off_threshold_db=None discard_by_mean=0 pick_peak_pre_mean_s=0.4 pick_peak_pre_max_s=0.4 pick_peak_post_mean_s=0.4 pick_peak_post_max_s=0.4 pick_peak_delta_gain=0.07 segmentation_interval_s=0.5 estimated_initial_bpm=120",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -12754,7 +12753,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 9.0, 59.0, 195.943816499999571, 20.0 ],
 					"style" : "helpfile_label",
-					"text" : "guitar1.wav",
+					"text" : "drag and drop a file here...",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -14355,7 +14354,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-253", 1 ],
+					"destination" : [ "obj-307", 0 ],
 					"source" : [ "obj-256", 0 ]
 				}
 
@@ -14869,6 +14868,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-305", 0 ],
 					"source" : [ "obj-306", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-253", 1 ],
+					"source" : [ "obj-307", 0 ]
 				}
 
 			}
