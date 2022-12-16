@@ -98,5 +98,49 @@
     "flush": {
         "title": "Flush (MIDI)",
         "description": "If the player is using a MIDI corpus, use this button to flush all notes."
+    },
+    "cut": {
+        "title": "Cut Mid-Event",
+        "description": "---"
+    },
+    "timeout": {
+        "title": "Timeout",
+        "description": "---"
+    },
+    "timeoutbeh": {
+        "title": "Timeout Behaviour",
+        "description": "---"
+    },
+    "midireactive": {
+        "title": "MIDI Reactive Mode",
+        "description": "---"
+    },
+    "proba": {
+        "title": "Output Probability",
+        "description": "Output Probability"
+    },
+    "sparse": {
+        "title": "Sparse",
+        "description": "---"
+    },
+    "taboo": {
+        "title": "Enforce Taboo",
+        "description": "---"
+    },
+    "timestretch": {
+        "title": "Time Stretch",
+        "description": "---"
+    },
+    "renderersettings": {
+        "title": "Audio / MIDI Settings",
+        "description": "---"
+    },
+    "regionmask": {
+        "title": "Region Mask",
+        "description": "---"
+    },
+    "experimental": {
+        "title": "Experimental",
+        "description": "---"
     }
 }
