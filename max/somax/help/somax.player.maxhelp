@@ -97,7 +97,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 271.5, 407.0, 598.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "All MIDI channel information is preserved in the corpus, and all channels will by default be output. This control can be used to turn individual MIDI channels on and off"
 								}
 
@@ -112,7 +111,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 271.5, 354.0, 598.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "By default, the MIDI velocity of the output will be the same as in the corpus. This slider can be used to map the output to a more narrow range of the velocity spectrum"
 								}
 
@@ -126,8 +124,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 271.5, 261.0, 598.0, 91.0 ],
-									"presentation_linecount" : 7,
+									"patching_rect" : [ 271.5, 261.0, 599.0, 91.0 ],
 									"text" : "«Durations» controls the offsets (i.e. the 'note off' messages) of the notes in a slice in the case where not all notes are terminated at the end of the slice. There are three options:\n\n- Original: Use exactly the same durations as in the corpus\n- Aligned: End all notes when the slice ends\n- Sustained: Tie all notes to the next slice (if applicable)"
 								}
 
@@ -141,7 +138,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 271.5, 217.0, 511.5, 37.0 ],
-									"presentation_linecount" : 5,
 									"text" : "Setting «Onsets» to 'Synchronized' will make the player disregard all temporal differences within a chord and play the onsets of all the notes  in the chord simultaneously."
 								}
 
@@ -153,8 +149,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 291.5, 151.0, 567.0, 60.0 ],
-									"presentation_linecount" : 5,
+									"patching_rect" : [ 291.5, 151.0, 568.0, 60.0 ],
 									"text" : "Somax is able to reproduce and synthesize the precise timing-related expressivity of the original corpus by storing «almost simultaneous» notes as a single chord together with their internal temporal differences, thus preserving appogiaturas and performative timing-related aspects of the corpus. In some cases, especially when generating output note-by-note, this behaviour may be perceived as inexact.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -1302,43 +1297,6 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
-									"fontface" : 1,
-									"fontname" : "AppleGothic",
-									"fontsize" : 20.0,
-									"id" : "obj-83",
-									"linecount" : 4,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 480.5, 236.5, 209.0, 104.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 136.0, 151.0, 698.0, 31.0 ],
-									"text" : "WORK IN PROGRESS: DON'T LOOK HERE BEFORE MONDAY PLEASE!",
-									"textcolor" : [ 0.658823529411765, 0.294117647058824, 0.690196078431373, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 1,
-									"fontname" : "AppleGothic",
-									"fontsize" : 14.0,
-									"id" : "obj-84",
-									"linecount" : 5,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 775.0, 373.0, 159.0, 92.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 5,
-									"presentation_rect" : [ 692.0, 376.0, 159.0, 92.0 ],
-									"text" : "Don't forget to update Quality (or in general: all existing parameters, some descriptions are really outdated!!!",
-									"textcolor" : [ 0.658823529411765, 0.294117647058824, 0.690196078431373, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"fontface" : 1,
 									"fontsize" : 8.0,
@@ -1386,7 +1344,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 198.799997210502625, 255.47705078125, 77.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "experimental"
 								}
 
@@ -1495,7 +1452,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 198.799997210502625, 208.27197265625, 95.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "renderersettings"
 								}
 
@@ -2939,7 +2895,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 383.0, 205.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "33",
+									"text" : "29",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -2976,7 +2932,7 @@
 									"patching_rect" : [ 686.5, 10.5, 299.0, 27.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 407.0, 202.0, 244.0, 27.0 ],
-									"text" : "Experimental",
+									"text" : "Matches & Quality",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2986,13 +2942,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
+									"linecount" : 7,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 211.0, 20.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 211.0, 100.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 383.0, 235.5, 272.0, 20.0 ],
-									"text" : "---",
+									"presentation_linecount" : 5,
+									"presentation_rect" : [ 383.0, 235.5, 272.0, 74.0 ],
+									"text" : "These two displays indicate the state of the player at the previously output event. The left one displays the number of unique matches in the corpus (after all layers have been merged), the right one indicates the quality of the best match.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
