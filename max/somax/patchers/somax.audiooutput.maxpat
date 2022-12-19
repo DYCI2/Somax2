@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 3,
-			"revision" : 1,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -39,6 +39,18 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"comment" : "(list) parameters",
+					"id" : "obj-2",
+					"index" : 2,
+					"maxclass" : "outlet",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1090.166666666666515, 799.63319912640668, 30.0, 30.0 ]
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
@@ -94,6 +106,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-10",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -171,7 +184,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1226.639764237976124, 98.0, 145.0, 22.0 ],
 					"restore" : 					{
-						"enabled" : [ 0 ],
+						"enabled" : [ 1 ],
 						"gain" : [ 0.0 ],
 						"leftchannel" : [ 1.0 ],
 						"monocorpus" : [ 0 ],
@@ -197,7 +210,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1061.639764237976124, 126.472230076513938, 310.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 461, 322 ],
+						"client_rect" : [ 1880, 207, 2595, 536 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -1275,6 +1288,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-37", 0 ],
 					"source" : [ "obj-22", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-2", 0 ],
+					"source" : [ "obj-221", 0 ]
 				}
 
 			}

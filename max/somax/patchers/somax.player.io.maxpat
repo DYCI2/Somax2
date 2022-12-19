@@ -40,6 +40,18 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-33",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 255.0, 1157.0, 119.0, 22.0 ],
+					"text" : "prepend audiooutput"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
 					"hidden" : 1,
@@ -93,9 +105,9 @@
 					"maxclass" : "bpatcher",
 					"name" : "somax.audiooutput.maxpat",
 					"numinlets" : 2,
-					"numoutlets" : 1,
+					"numoutlets" : 2,
 					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "multichannelsignal" ],
+					"outlettype" : [ "multichannelsignal", "" ],
 					"patching_rect" : [ 113.75, 1021.0, 252.0, 127.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.084603340888407, 671.558334243297622, 252.0, 127.0 ],
@@ -204,7 +216,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"offset" : [ 0.0, 0.0 ],
-					"patching_rect" : [ 427.0, 1216.0, 231.0, 53.0 ],
+					"patching_rect" : [ 427.0, 1240.0, 231.0, 53.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 7.0, 740.925001364946411, 231.0, 53.0 ],
 					"viewvisibility" : 1
@@ -247,7 +259,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 427.0, 1180.0, 55.0, 22.0 ],
+					"patching_rect" : [ 427.0, 1204.0, 55.0, 22.0 ],
 					"text" : "zl.slice 2"
 				}
 
@@ -1154,6 +1166,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-33", 0 ],
+					"source" : [ "obj-13", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 1 ],
 					"source" : [ "obj-16", 0 ]
 				}
@@ -1316,6 +1335,14 @@
 					"midpoints" : [ 336.0, 852.0, 33.0, 852.0 ],
 					"order" : 2,
 					"source" : [ "obj-31", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-164", 0 ],
+					"midpoints" : [ 264.5, 1188.25, 1091.649350649350936, 1188.25 ],
+					"source" : [ "obj-33", 0 ]
 				}
 
 			}

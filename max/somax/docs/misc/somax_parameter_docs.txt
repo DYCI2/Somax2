@@ -1,0 +1,81 @@
+#### ROUTING ####
+* Add Source:                           router add
+* Clear All Sources:                    router clearall
+* Set Source N:                         router set N source <name_of_source>
+* Toggle Pitch of Source N:             router set N pitch <1/0>
+* Toggle Onset of Source N:             router set n onset <1/0>
+* Set Chroma of Source N:               router set n chroma <0..1>
+* Toggle Chroma Onset of Source N:      router set n chromaonset <1/0>
+* Toggle Source N:                      router set n mute <1/0>
+
+
+#### PLAYER CONTROLS ####
+* Set Corpus:                           setcorpus symbol <name_of_corpus_including_(A)_or_(M)>
+* Refresh Corpora:                      refreshcorpora
+* Set Corpus Volatile Flag:             corpusvolatile <1/0>
+
+* Playing Mode:                         playingmode <1/0>
+* Decay Basis:                          decaybasis <1/0>
+* Cut Mid-event:                        cut <1/0>
+* Timeout (enable):                     timeoutenable <1/0>
+* Timeout (value):                      timeout <0..∞>
+* Timeout Behaviour:                    recombine <0/1>
+* MIDI Reactive Mode:                   midinotebynote <0/1>
+
+* Continuity Factor:                    continuity <0..∞>
+* Quality Threshold:                    outputthreshold <0..∞>
+* Output Probability:                   outputprobability <0..1>
+* Sparse:                               sparse <1/0>
+* Ouptut Selection:                     outputfrom <1/0>
+* Ignore Phase:                         ignorephase <1/0>
+* Enforce Taboo:                        enforcetaboo <1/0>
+
+* Time Stretch Mode:                    timestretchmode <1/0>
+* Time Stretch Factor:                  timestretch <1/0>
+
+* Layer Enable:                         selfmelodicenable <1/0>, selfharmonicenable <1/0>, melodicenable <1/0>, harmonicenable <1/0>
+* Balance:                              weights <0..1> <0..1> <0..1> <0..1>
+* Memory Length:                        selfngramorder <1..∞>, selfharmonicngramorder <1..∞>, melodicngramorder <1..∞>, harmonicngramorder <1..∞>
+* Decay Time:                           selfpeakdecay <1..∞>, selfharmonicpeakdecay <1..∞>, melodicpeakdecay <1..∞>, harmonicpeakdecay <1..∞>
+
+* Region Mask (enable):                 regionmaskenable <1/0>
+* Region Mask (range):                  regionmask <0..1> <0..1>
+
+* Transposition Consistency:            transpositionconsistency <0..1>
+* Active Transpositions                 transpositions (for format: see player's parameter outlet or matrixctrl specification)
+
+* Reinstantiate:                        reinstantiate 1                     
+* Reset Influences:                     resetinfluences 1
+* Flush:                                flush 1
+
+
+#### AUDIO SETTINGS ####
+* Mode:                                 audiorenderer3::mode <1/0>
+* Attack:                               audiorenderer3::attack <1..∞>
+* Release:                              audiorenderer3::release <1..∞>
+* Crossfade Slope:                      audiorenderer3::crossfadecurve <0..1>
+* Timestretch Mode:                     audiorenderer3::tsmode <general/basic/monophonic/rhythmic/extremestretch/efficient>
+* Num Voices:                           audiorenderer3::ngrooves <1..∞>
+
+
+#### MIDI SETTINGS ####
+* Onsets:                               midirenderer::onsets <1/0>
+* Durations:                            midirenderer::durations <Original/Aligned/Sustained>
+* Output Velocity Scaling               midirenderer::velocityscaling <0..127> <0..127>
+* Enabled MIDI Output Channels:         midirenderer::outputchannels (for format: see player's parameter outlet or matrixctrl specification)
+
+
+#### AUDIO OUTPUT SETTINGS ####
+* Listen:                               audiooutput enabled <1/0>
+* Mono Corpus:                          audiooutput monocorpus <1/0> 
+* Pan:                                  audiooutput pan <-127..127>
+* Width:                                audiooutput width <0..127>
+* Left Channel:                         audiooutput leftchannel <0..>
+* Right Channel:                        audiooutput rightchannel <0..>
+* Gain:                                 audiooutput gain <-70..6>
+
+
+#### MIDI OUTPUT SETTINGS ####
+* Listen:                               midioutput enabled <1/0>
+* Output Device:                        midioutput umenu "Name_of_Device"
+* Channel:                              midioutput channel <0..16> (0 = original channels)

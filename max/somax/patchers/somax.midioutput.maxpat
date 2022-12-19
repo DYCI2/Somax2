@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 3,
-			"revision" : 1,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -286,6 +286,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1422.0, 54.749856889523812, 145.0, 22.0 ],
 					"restore" : 					{
+						"channel" : [ 4 ],
 						"enabled" : [ 1 ],
 						"flush" : [ 0.0 ],
 						"umenu" : [ "AU DLS Synth 1" ]
@@ -308,7 +309,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1257.0, 83.22208696603775, 310.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 461, 322 ],
+						"client_rect" : [ 1880, 207, 2595, 536 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -639,7 +640,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 3,
-							"revision" : 1,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1238,6 +1239,7 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"gradient" : 1,
+					"hidden" : 1,
 					"id" : "obj-21",
 					"ignoreclick" : 1,
 					"maxclass" : "message",
@@ -1332,7 +1334,8 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 171.069839013505316, 30.999999761581421, 32.0, 20.0 ],
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
-					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
+					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+					"varname" : "channel"
 				}
 
 			}

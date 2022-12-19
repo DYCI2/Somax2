@@ -1297,6 +1297,73 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-91",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "int" ],
+									"patching_rect" : [ 168.299997210502625, 793.0, 133.0, 22.0 ],
+									"text" : "conformpath slash boot"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-90",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 168.299997210502625, 730.0, 153.0, 22.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 720.299997210502625, 462.0, 153.0, 22.0 ],
+									"text" : "somax_parameter_docs.txt"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-88",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 168.299997210502625, 761.0, 100.0, 22.0 ],
+									"text" : "absolutepath"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-87",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 162.799997210502625, 844.0, 131.0, 35.0 ],
+									"text" : ";\rmax launchbrowser $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-83",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 681.0, 341.0, 684.0, 47.0 ],
+									"presentation" : 1,
+									"presentation_linecount" : 8,
+									"presentation_rect" : [ 684.0, 338.3021284716624, 245.0, 114.0 ],
+									"text" : "Parameters can also be set by sending a message on the player's rightmost inlet. The address of each parameter can be found in the text document below, but it's also possible to access them through the player's rightmost outlet, which will be updated each time a parameter is changed (in the UI or by message)",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"fontface" : 1,
 									"fontsize" : 8.0,
@@ -2895,7 +2962,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 383.0, 205.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "29",
+									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -2932,7 +2999,7 @@
 									"patching_rect" : [ 686.5, 10.5, 299.0, 27.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 407.0, 202.0, 244.0, 27.0 ],
-									"text" : "Matches & Quality",
+									"text" : "Corpus",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2942,15 +3009,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 7,
+									"linecount" : 18,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 211.0, 100.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 211.0, 248.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 5,
-									"presentation_rect" : [ 383.0, 235.5, 272.0, 74.0 ],
-									"text" : "These two displays indicate the state of the player at the previously output event. The left one displays the number of unique matches in the corpus (after all layers have been merged), the right one indicates the quality of the best match.",
+									"presentation_linecount" : 14,
+									"presentation_rect" : [ 383.0, 235.5, 272.0, 194.0 ],
+									"text" : "The corpus is the source of material that the player uses to generate its output from. A corpus is built from a single audio file or from one or more MIDI-files using the Corpus Builder module of the somax.server object.\n\nThe corpus that the player will use can be selected with this drop down menu. If a corpus is not available in the list after successfully built, select the '-- click to refresh --' option (or the «Refresh» button) and the menu will be updated.\n\nThis parameter is also available with the same behaviour in the compact interface.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -4283,6 +4350,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-91", 0 ],
+									"source" : [ "obj-88", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-14", 0 ],
 									"source" : [ "obj-9", 0 ]
 								}
@@ -4292,6 +4366,20 @@
 								"patchline" : 								{
 									"destination" : [ "obj-165", 0 ],
 									"source" : [ "obj-9", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-88", 0 ],
+									"source" : [ "obj-90", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-87", 0 ],
+									"source" : [ "obj-91", 0 ]
 								}
 
 							}
