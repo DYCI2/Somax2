@@ -439,7 +439,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 428.0, 1036.5, 68.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "corpuspath"
 								}
 
@@ -494,7 +493,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 428.0, 1007.5, 51.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "relocate"
 								}
 
@@ -547,7 +545,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 428.0, 978.5, 71.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "annotations"
 								}
 
@@ -3003,7 +3000,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 112.0, 972.0, 689.0 ],
+						"rect" : [ 0.0, 26.0, 972.0, 689.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3175,7 +3172,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
-									"patching_rect" : [ 204.0, 225.0, 378.0, 223.548387096774206 ],
+									"patching_rect" : [ 204.0, 225.0, 378.0, 230.713896457765685 ],
 									"pic" : "server_io.png"
 								}
 
@@ -3384,7 +3381,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 972.0, 689.0 ],
+						"rect" : [ 34.0, 112.0, 972.0, 689.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3419,7 +3416,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 21.0, 389.5, 684.0, 20.0 ],
+									"patching_rect" : [ 10.0, 285.5, 684.0, 20.0 ],
 									"text" : "You can also resolve this issue by changing the default app for unix executables to «Terminal.app»",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -3433,7 +3430,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 21.0, 340.5, 692.0, 47.0 ],
+									"patching_rect" : [ 10.0, 236.5, 692.0, 47.0 ],
 									"text" : "A few users have reported issues with the «Start Server» button on macOS when they have the Atom text editor installed. If you have problems with launching the server, you can always launch the server manually by simply opening the «somax_server.app» inside «Documents/Max 8/Packages/Somax-2.x.x/misc/»",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
@@ -3448,7 +3445,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 154.0, 692.0, 47.0 ],
-									"text" : "The server is a standalone Python application that (in most cases) will run in a terminal window on the same machine as the max code. The first time the server is launched you may need to give it permissions to run, as described in the README and the tutorial below."
+									"text" : "The server is a standalone Python application that (in most cases) will run in a terminal window on the same machine as the max code. The first time the server is launched you may need to give it permissions to run, as described in the README and the tutorial available from the «Extras» menu."
 								}
 
 							}
@@ -3482,6 +3479,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"hidden" : 1,
 									"id" : "obj-15",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -3496,6 +3494,7 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 14.0,
+									"hidden" : 1,
 									"id" : "obj-110",
 									"maxclass" : "textbutton",
 									"numinlets" : 1,

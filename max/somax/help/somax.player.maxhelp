@@ -1266,7 +1266,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 113.0, 965.0, 689.0 ],
+						"rect" : [ 0.0, 26.0, 965.0, 689.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1365,10 +1365,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 681.0, 341.0, 684.0, 47.0 ],
+									"patching_rect" : [ 681.0, 341.0, 687.0, 47.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 8,
-									"presentation_rect" : [ 684.0, 338.3021284716624, 245.0, 114.0 ],
+									"presentation_rect" : [ 684.0, 338.3021284716624, 248.0, 114.0 ],
 									"text" : "Parameters can also be set by sending a message on the player's rightmost inlet. The address of each parameter can be found in the text document below, but it's also possible to access them through the player's rightmost outlet, which will be updated each time a parameter is changed (in the UI or by message)",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -4803,7 +4803,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 965.0, 689.0 ],
+						"rect" : [ 34.0, 113.0, 965.0, 689.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -5189,6 +5189,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"hidden" : 1,
 									"id" : "obj-15",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -5203,6 +5204,7 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 14.0,
+									"hidden" : 1,
 									"id" : "obj-110",
 									"maxclass" : "textbutton",
 									"numinlets" : 1,
