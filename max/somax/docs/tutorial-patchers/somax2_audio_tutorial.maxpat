@@ -1383,7 +1383,7 @@
 									"presentation" : 1,
 									"presentation_linecount" : 7,
 									"presentation_rect" : [ 670.5, 266.0, 343.25, 100.0 ],
-									"text" : "A concept that hasn't been explained so far is how to build a corpus from your own set of (audio or MIDI) files. In the previous tutorial, we were using the pre-built MIDI corpora.\n\nThere are however no pre-built audio corpora distributed in Somax II, so in this step, we're going to build our own corpus from an audio file.",
+									"text" : "A concept that hasn't been explained so far is how to build a corpus from your own set of (audio or MIDI) files. In the previous tutorial, we were using the pre-built MIDI corpora.\n\nThere are a few short pre-build audio corpora distributed in Somax II, but in this step, we're going to build our own corpus from an audio file.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1544,7 +1544,7 @@
 									"patching_rect" : [ 710.25, 726.0, 318.0, 102.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 6,
-									"presentation_rect" : [ 706.75, 724.0, 340.75, 88.0 ],
+									"presentation_rect" : [ 706.75, 724.0, 342.0, 88.0 ],
 									"text" : "This was a brief introduction to using an audio corpus in Somax, but there are plenty of things to experiment with. The next step would be to open the main «somax2» patcher (available in the «Extras» menu) and continue experimenting, for example using the audio influencer, using multiple players and/or experimenting with the parameters of the system.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2005,8 +2005,8 @@
 									"patching_rect" : [ 784.678715404332706, 803.5, 163.0, 102.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
-									"presentation_rect" : [ 711.178715404332706, 303.5, 332.0, 49.0 ],
-									"text" : "playingmode 1, ignorephase 1, decaybasis 1, continuity 0.8, outputthreshold 0., selfpeakdecay 1.5, melodicpeakdecay 1.5, harmonicpeakdecay 1.5, audiorenderer timeout 2500"
+									"presentation_rect" : [ 711.178715404332706, 303.5, 323.071284595667294, 49.0 ],
+									"text" : "playingmode 1, ignorephase 1, decaybasis 1, continuity 0.8, outputthreshold 0., selfpeakdecay 1.5, melodicpeakdecay 1.5, harmonicpeakdecay 1.5, timeout 0"
 								}
 
 							}
@@ -2649,7 +2649,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 1806.0, 125.0, 1277.0, 1275.0 ],
+						"rect" : [ 1806.0, 87.0, 1277.0, 1259.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2678,6 +2678,26 @@
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.2,
+									"fontface" : 0,
+									"fontsize" : 11.0,
+									"id" : "obj-6",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 768.756756756756772, 375.0, 204.0, 47.0 ],
+									"presentation" : 1,
+									"presentation_linecount" : 4,
+									"presentation_rect" : [ 761.756756756756772, 385.0, 133.0, 60.0 ],
+									"text" : "Or use one of the example audio corpora with names starting with \"(A)\"",
+									"textjustification" : 1
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bubble" : 1,
 									"bubblepoint" : 0.2,
@@ -3156,8 +3176,8 @@
 									"patching_rect" : [ 434.0, 644.0, 219.0, 89.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 4,
-									"presentation_rect" : [ 494.678715404332706, 465.0, 247.0, 62.0 ],
-									"text" : "playingmode 0, ignorephase 0, decaybasis 0, selfngramorder 1, melodicngramorder 1, harmonicngramorder 1, selfmod12 1, melodicmod12 1, continuity 10, outputfrom 0"
+									"presentation_rect" : [ 494.678715404332706, 465.0, 246.0, 62.0 ],
+									"text" : "playingmode 0, ignorephase 1, decaybasis 0, selfngramorder 1, melodicngramorder 1, harmonicngramorder 1, selfmod12 1, melodicmod12 1, continuity 10, outputfrom 0"
 								}
 
 							}
@@ -3473,7 +3493,7 @@
 ,
 					"patching_rect" : [ 249.0, 418.0, 69.0, 80.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 257.0, 136.0, 815.25, 812.0 ],
+					"presentation_rect" : [ 257.0, 136.0, 984.25, 812.0 ],
 					"varname" : "interaction1",
 					"viewvisibility" : 1
 				}
