@@ -52,7 +52,7 @@ codesignature:
 notarize:
 	hdiutil create "$(DMG_PATH)" -fs HFS+ -srcfolder dist/somax_server.app -ov
 	xcrun notarytool submit "$(DMG_PATH)" --keychain-profile "repmus" --wait
-	xcrun stapler staple "$(APP_PATH)"
+	xcrun stapler staple dist/somax_server.app
 
 max-package: clean
 	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN CODESIGNED BEFORE CALLING THIS COMMAND. ORDER SHOULD BE:\n    make pyinstaller\n    make codesignature (+ stapler once finished)\n    make max-package\033[0m"
