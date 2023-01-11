@@ -27,7 +27,8 @@ from somax.runtime.transforms import AbstractTransform, NoTransform
 
 
 class Player(Parametric, ContentAware):
-    def __init__(self, name: str,
+    def __init__(self,
+                 name: str,
                  peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
                  merge_action: AbstractMergeAction = AbstractMergeAction.default(),
                  corpus: Optional[Corpus] = None,

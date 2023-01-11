@@ -188,13 +188,21 @@ class SomaxServer(Somax, AsyncioOscObject):
     # CREATION/DELETION OF AGENTS
     ######################################################
 
-    def create_agent(self, name: str, recv_port: int, send_port: int, ip: str = "", scheduling_type: str = "",
-                     peak_selector: str = "", merge_action: str = "", corpus_filepath: str = "",
+    def create_agent(self,
+                     name: str,
+                     recv_port: int,
+                     send_port: int,
+                     ip: str = "",
+                     scheduling_type: str = "",
+                     peak_selector: str = "",
+                     merge_action: str = "",
+                     corpus_filepath: str = "",
                      scale_actions: Tuple[str, ...] = ("",), override: bool = False):
+        raise RuntimeError("Scheduling type, peak selector, corpus filepath and scale actions should NOT be passed at init!")
+
         try:
             address: str = self.parse_osc_address(name)
             ip: str = self.parse_ip(ip)
-
             scheduling_type: Type[SchedulingHandler] = SchedulingHandler.type_from_string(scheduling_type)
             merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector)
@@ -203,8 +211,10 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.error(f"{str(e)}. No agent was created.")
             return
 
-        player: Player = Player(name=name, peak_selector=peak_selector,
-                                merge_action=merge_action, scale_actions=scale_actions)
+        player: Player = Player(name=name,
+                                peak_selector=peak_selector,
+                                merge_action=merge_action,
+                                scale_actions=scale_actions)
 
         if name in self._agents:
             if override:
@@ -215,10 +225,17 @@ class SomaxServer(Somax, AsyncioOscObject):
                 return
 
         agent_queue: multiprocessing.Queue = multiprocessing.Queue()
-        agent: OscAgent = OscAgent(player, recv_queue=agent_queue, tempo_send_queue=self._tempo_master_queue,
-                                   transport_time=self._transport.time, scheduler_running=self._transport.running,
-                                   scheduling_type=scheduling_type, ip=ip, recv_port=recv_port, send_port=send_port,
-                                   address=address, corpus_filepath=corpus_filepath)
+        agent: OscAgent = OscAgent(player,
+                                   recv_queue=agent_queue,
+                                   tempo_send_queue=self._tempo_master_queue,
+                                   transport_time=self._transport.time,
+                                   scheduler_running=self._transport.running,
+                                   scheduling_type=scheduling_type,
+                                   ip=ip,
+                                   recv_port=recv_port,
+                                   send_port=send_port,
+                                   address=address,
+                                   corpus_filepath=corpus_filepath)
         agent.start()
         self._agents[name] = agent, agent_queue
         self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port}, ip {ip}.")
