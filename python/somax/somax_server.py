@@ -140,6 +140,7 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.critical(f"{repr(e)}. Terminating server")
 
     async def _main_loop(self):
+        self._on_launch()
         while not self._terminated:
             await self.loop()  # self.loop is defined as either __master_loop or __slave_loop
 
@@ -152,6 +153,9 @@ class SomaxServer(Somax, AsyncioOscObject):
             communication to continue without redeclaring the server. In slave mode, `callback` will be called
             directly over OSC. """
         await asyncio.sleep(1)
+
+    def _on_launch(self):
+        self.target.send(SendProtocol.SERVER_STARTED, "bang")
 
     def callback(self, tick: Optional[float] = None) -> None:
         self._process_tempo_queue()
@@ -304,7 +308,7 @@ class SomaxServer(Somax, AsyncioOscObject):
 
     def exit(self, print_exit_message: bool = True):
         self.terminate()
-        self.target.send(SendProtocol.SCHEDULER_RESET_UI, Target.WRAPPED_BANG)
+        self.target.send(SendProtocol.SERVER_TERMINATED, Target.WRAPPED_BANG)
         if print_exit_message:
             self.logger.info("Somax was successfully shut down.")
 

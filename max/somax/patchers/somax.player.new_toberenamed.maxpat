@@ -40,12 +40,31 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"bgcolor" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
+					"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_color1" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
+					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_type" : "gradient",
+					"gradient" : 1,
+					"id" : "obj-43",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1878.561181434599803, 535.854203394290039, 276.0, 22.0 ],
+					"text" : "TODO: SOMAX.WINRESIZE (ALREADY EXISTS)"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-112",
 					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1836.004489429430123, 376.83333333333394, 212.410858671837104, 33.0 ],
+					"patching_rect" : [ 1836.004489429430123, 376.83333333333394, 213.0, 33.0 ],
 					"text" : "Note: this object is disconnected, only here for locating associated objects"
 				}
 
@@ -2880,7 +2899,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-56",
@@ -34423,7 +34441,7 @@
 					"patching_rect" : [ 2052.725552050473198, 306.569468929526806, 180.0, 27.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 21.41666666666697, 11.5, 401.10262443239094, 27.0 ],
-					"text" : "Player_1991",
+					"text" : "Player",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -46006,6 +46024,9 @@
 			}
 , 			{
 				"boxes" : [ "obj-93", "obj-112" ]
+			}
+, 			{
+				"boxes" : [ "obj-43", "obj-3", "obj-980" ]
 			}
  ],
 		"styles" : [ 			{
