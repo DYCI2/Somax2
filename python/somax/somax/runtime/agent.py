@@ -31,7 +31,7 @@ from somax.runtime.parameter import Parametric
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
 from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.send_protocol import PlayerSendProtocol
 from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.midi_state_handler import NoteOffMode
@@ -114,7 +114,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.read_corpus(corpus_filepath)
 
         self._send_eligibility()
-        self.target.send(SendProtocol.SCHEDULER_RUNNING, True)
+        self.target.send(PlayerSendProtocol.SCHEDULER_RUNNING, True)
 
     ######################################################
     # ASYNCIO & MAIN LOOP(S)
@@ -184,13 +184,13 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
         if event_transform_and_match_type is None:
-            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
+            self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
 
         elif event_transform_and_match_type[2] is True:  # output from match
-            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
+            self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
         else:  # output from fallback
-            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
+            self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
 
         # TODO: No longer supported. Update for Corpus
         #  Note that when the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was
@@ -207,7 +207,7 @@ class OscAgent(Agent, AsyncioOscObject):
         # Note: Timeout will only be reset if `event_and_transform` is not None
 
         if event_and_transform is not None:
-            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TIMEOUT_RESET)
+            self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TIMEOUT_RESET)
 
         self.scheduling_handler.add_corpus_event(scheduling_time,
                                                  event_and_transform=event_and_transform,
@@ -226,14 +226,14 @@ class OscAgent(Agent, AsyncioOscObject):
                                                                        self.scheduling_handler.tempo,
                                                                        enforce_output=True)
                 if event_transform_and_match_type is None:
-                    self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
+                    self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
                     event_and_transform = None
                 else:
                     output_from_match: bool = event_transform_and_match_type[2]
                     if output_from_match:
-                        self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
+                        self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
                     else:
-                        self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
+                        self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
 
                     event_and_transform = event_transform_and_match_type[0], event_transform_and_match_type[1]
 
@@ -244,9 +244,9 @@ class OscAgent(Agent, AsyncioOscObject):
                                                        self.scheduling_handler.tempo)
 
                 if event_and_transform is None:
-                    self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
+                    self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
                 else:
-                    self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
+                    self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
 
         except InvalidCorpus as e:
             self.logger.debug(str(e))
@@ -254,9 +254,9 @@ class OscAgent(Agent, AsyncioOscObject):
 
         if event_and_transform is None:
             #     print("!!! NONE FROM CONTINUE !!!")
-            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TIMEOUT)
+            self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TIMEOUT)
         else:
-            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_CONTINUE)
+            self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_CONTINUE)
 
         self.scheduling_handler.add_corpus_event(scheduling_time,
                                                  event_and_transform=event_and_transform,
@@ -291,17 +291,17 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def start_scheduler(self):
         self.scheduling_handler.start()
-        self.target.send(SendProtocol.SCHEDULER_RUNNING, True)
+        self.target.send(PlayerSendProtocol.SCHEDULER_RUNNING, True)
 
     def pause_scheduler(self):
         self.scheduling_handler.pause()
-        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
+        self.target.send(PlayerSendProtocol.SCHEDULER_RUNNING, False)
 
     def stop_scheduler(self):
         events: List[ScheduledEvent] = self.scheduling_handler.stop()
         self._send_events(events)
         self.clear()
-        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
+        self.target.send(PlayerSendProtocol.SCHEDULER_RUNNING, False)
 
     def terminate(self):
         self.stop_scheduler()
@@ -512,10 +512,10 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def read_corpus(self, filepath: str, volatile: bool = False, alternative_audio_folder: str = ""):
         self.logger.info(f"Reading corpus at '{filepath}' for player '{self.player.name}'...")
-        self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
+        self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
         if not os.path.exists(filepath):
             self.logger.error(f"The file '{filepath}' does not exist. No corpus was read.")
-            self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
 
         try:
@@ -553,16 +553,16 @@ class OscAgent(Agent, AsyncioOscObject):
 
 
             else:
-                self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
+                self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
                 raise IOError(f"Invalid file extension '{file_extension}'")
 
         except FileNotFoundError as e:
             self.logger.error(f"{str(e)}. Please make sure that the file exists or relocate the corpus.")
-            self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
         except (IOError, AttributeError, TypeError, InvalidCorpus, ExternalDataMismatch) as e:
             self.logger.error(f"{str(e)}. No corpus was read.")
-            self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
 
         self.clear()
@@ -573,7 +573,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
         self._try_update_server_tempo()  # immediately set tempo if player is tempo master
         self._send_eligibility()
-        self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
+        self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
         self.send_current_corpus_info()
         self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
 
@@ -723,7 +723,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def get_param(self, path: str):
         try:
             parameter_path: List[str] = self._string_to_path(path)
-            self.target.send(SendProtocol.PLAYER_SINGLE_PARAMETER, [path, self.player.get_param(parameter_path).value])
+            self.target.send(PlayerSendProtocol.PLAYER_SINGLE_PARAMETER, [path, self.player.get_param(parameter_path).value])
         except (IndexError, KeyError):
             self.logger.error(f"Could not get parameter at given path.")
         except (ParameterError, AssertionError) as e:
@@ -733,26 +733,26 @@ class OscAgent(Agent, AsyncioOscObject):
         """ Gets the current state in each layer, not including the merged layer """
         peaks_dict = self.player.get_peaks_statistics()
         for name, count in peaks_dict.items():
-            self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
+            self.target.send(PlayerSendProtocol.PLAYER_NUM_PEAKS, [name, count])
         # TODO: Update corpus export
         # self.target.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.improvisation_memory.length())
 
     def send_corpora(self, corpus_names_and_paths: List[Tuple[str, str]]):
         for corpus in corpus_names_and_paths:
-            self.target.send(SendProtocol.PLAYER_CORPUS_FILES, corpus)
-        self.target.send(SendProtocol.PLAYER_CORPUS_FILES, Target.WRAPPED_BANG)
+            self.target.send(PlayerSendProtocol.PLAYER_CORPUS_FILES, corpus)
+        self.target.send(PlayerSendProtocol.PLAYER_CORPUS_FILES, Target.WRAPPED_BANG)
 
     def send_atoms(self):
         atom_names: List[str] = [atom.name for atom in self.player.all_atoms()]
-        self.target.send(SendProtocol.INSTANTIATED_ATOMS, atom_names)
+        self.target.send(PlayerSendProtocol.INSTANTIATED_ATOMS, atom_names)
 
     def send_current_corpus_info(self):
         corpus: Optional[Corpus] = self.player.corpus
         if corpus is not None:
-            self.target.send(SendProtocol.PLAYER_CORPUS, [corpus.name,
-                                                          corpus.__class__.__name__,
-                                                          corpus.length(),
-                                                          corpus.filepath if isinstance(corpus, AudioCorpus) else None])
+            self.target.send(PlayerSendProtocol.PLAYER_CORPUS, [corpus.name,
+                                                                corpus.__class__.__name__,
+                                                                corpus.length(),
+                                                                corpus.filepath if isinstance(corpus, AudioCorpus) else None])
 
     def _send_eligibility(self):
         corpus: Optional[Corpus] = self.player.corpus
@@ -761,7 +761,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
         for path in self.player.get_children_paths([]):
             # Default all parameters to eligible
-            self.target.send(SendProtocol.ELIGIBILITY, [self._path_to_string(path), True])
+            self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), True])
 
         not_eligible: List[ContentAware] = [e[0] for e in self.player.get_eligibility() if not e[1]]
         not_eligible: List[Parametric] = [e for e in not_eligible if isinstance(e, Parametric)]
@@ -774,10 +774,10 @@ class OscAgent(Agent, AsyncioOscObject):
 
         for path in ne_paths:
             # Send not eligible status for ineligible parameters
-            self.target.send(SendProtocol.ELIGIBILITY, [self._path_to_string(path), False])
+            self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), False])
 
     def _send_output_statistics(self):
-        self.target.send(SendProtocol.PLAYER_OUTPUT_PEAKS, self.player.get_output_statistics())
+        self.target.send(PlayerSendProtocol.PLAYER_OUTPUT_PEAKS, self.player.get_output_statistics())
 
     def corpus_query(self, *args) -> None:
         if self.player.corpus is None:
@@ -787,7 +787,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             responses: List[QueryResponse] = CorpusQueryManager.query(self.player.corpus, args)
             for response in responses:
-                self.target.send(SendProtocol.PLAYER_CORPUS_QUERY, response.message)
+                self.target.send(PlayerSendProtocol.PLAYER_CORPUS_QUERY, response.message)
 
         except (SyntaxError, ValueError) as e:
             self.logger.error(f"{str(e)}. Could not process query")

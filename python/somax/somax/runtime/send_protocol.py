@@ -1,31 +1,53 @@
-class SendProtocol:
-    # Player info
+class ServerSendProtocol:
+    # Corpus Builder addresses
+    CORPUS_BUILDER_ADDRESS = "corpusbuilder"
+    AUDIO_CORPUS_BUILDER_ADDRESS = f"{CORPUS_BUILDER_ADDRESS} audio"
+    MIDI_CORPUS_BUILDER_ADDRESS = f"{CORPUS_BUILDER_ADDRESS} midi"
+
+    MANUAL_CORPUS_BUILDER_ADDRESS = f"{AUDIO_CORPUS_BUILDER_ADDRESS} manual"
+    RELOCATE_CORPUS_ADDRESS = f"{AUDIO_CORPUS_BUILDER_ADDRESS} relocate"
+
+    # Corpus Builder Protocol
+    CORPUSBUILDER_AUDIO_STATS = f"{AUDIO_CORPUS_BUILDER_ADDRESS} stats"
+    CORPUSBUILDER_AUDIO_SEGMENTATION_DONE = f"{AUDIO_CORPUS_BUILDER_ADDRESS} segdone"
+    CORPUSBUILDER_AUDIO_SEGMENT = f"{AUDIO_CORPUS_BUILDER_ADDRESS} seg"
+
+    MANUAL_CORPUSBUILDER_STATUS = f"{MANUAL_CORPUS_BUILDER_ADDRESS} status"
+
+    BUILDING_STATUS = "building_status"
+    BUILDING_AUDIO_CORPUS_STATUS = f"{AUDIO_CORPUS_BUILDER_ADDRESS} {BUILDING_STATUS}"
+    BUILDING_MIDI_CORPUS_STATUS = f"{MIDI_CORPUS_BUILDER_ADDRESS} {BUILDING_STATUS}"
+    RELOCATE_AUDIO_CORPUS_STATUS = f"{RELOCATE_CORPUS_ADDRESS} status"
+
+    # Server Info
+    SERVER_STATUS = "serverstatus"
+    SERVER_TERMINATED = "terminated"
+    SERVER_STARTED = "initialized"
+
+    # Scheduling
+    SCHEDULER_BEAT_PHASE = "beatphase"
+    SCHEDULER_CURRENT_TEMPO = "tempo"
+    SCHEDULER_CURRENT_TIME = "time"
+    TRANSPORT_MODE = "transport_mode"
+    SCHEDULER_RUNNING = "running"
+
+    # Misc. Info
+    ALL_PLAYER_NAMES = "players"
+
+
+class PlayerSendProtocol:
+    # Player Info
     PLAYER_NUM_PEAKS = "num_peaks"
     PLAYER_OUTPUT_PEAKS = "output_peaks"
     PLAYER_SINGLE_PARAMETER = "param"
     PLAYER_CORPUS_FILES = "corpus_info"
     PLAYER_CORPUS_QUERY = "corpus_query"
-    ALL_PLAYER_NAMES = "player_names"
     AGENT_INSTANTIATED = "instantiated_agent"
     INSTANTIATED_ATOMS = "instantiated_atoms"
     PLAYER_CORPUS = "corpus"
     ELIGIBILITY = "eligibility"
 
-    BUILDING_CORPUS_STATUS = "building_corpus_status"
-    RELOCATE_AUDIO_CORPUS_STATUS = "relocate_audio_corpus_status"
-
     PLAYER_READING_CORPUS_STATUS = "reading_corpus_status"
-
-    MANUAL_CORPUSBUILDER_STATUS = "manual_corpusbuilder_status"
-
-    # Scheduling
-    SCHEDULER_RUNNING = "scheduler_running"
-    TRANSPORT_MODE = "transport_mode"
-    SCHEDULER_CURRENT_TIME = "time"
-    SCHEDULER_CURRENT_TEMPO = "tempo"
-    SCHEDULER_BEAT_PHASE = "beat_phase"
-    SERVER_STARTED = "initialized"
-    SERVER_TERMINATED = "terminated"
 
     # Event data
     SEND_MIDI_EVENT = "midi"
@@ -36,7 +58,7 @@ class SendProtocol:
     SEND_AUDIO_OFF = "audio_off"
     AUDIO_CONTINUATION_TIMESTRETCH = "audio_continuation_timestretch"
 
-    DESCRIPTOR = "descriptor"   # TODO: Unused
+    DESCRIPTOR = "descriptor"  # TODO: Unused
 
     OUTPUT_TYPE = "output_type"
     OUTPUT_TYPE_TRIGGER_MATCH = "match"
@@ -46,11 +68,3 @@ class SendProtocol:
     OUTPUT_TYPE_CONTINUE = "continue"
     OUTPUT_TYPE_TIMEOUT = "timeout"
     OUTPUT_TYPE_TIMEOUT_RESET = "timeout_reset"
-
-    # Server Info
-    SERVER_STATUS = "server_status"
-
-    # Corpus
-    CORPUSBUILDER_AUDIO_SEGMENT = "audiocb seg"
-    CORPUSBUILDER_AUDIO_SEGMENTATION_DONE = "audiocb segdone"
-    CORPUSBUILDER_AUDIO_STATS = "audiocb stats"

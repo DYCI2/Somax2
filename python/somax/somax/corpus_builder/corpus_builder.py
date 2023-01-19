@@ -24,7 +24,7 @@ from somax.runtime.corpus import Corpus, AudioCorpus, MidiCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError, ParameterError
 from somax.runtime.osc_log_forwarder import OscLogForwarder
-from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.send_protocol import PlayerSendProtocol
 from somax.runtime.target import SimpleOscTarget
 from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduling
 
@@ -74,26 +74,26 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
             logging.config.fileConfig(path.absolute())
         self.logger.addHandler(OscLogForwarder(self.target))
 
-        self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
+        self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "init")
 
         try:
             corpus: Corpus = CorpusBuilder().build(filepath=self.filepath, corpus_name=self.corpus_name, **self.kwargs)
             self.logger.debug(f"[build_corpus]: Successfully built '{corpus.name}' from file '{self.filepath}'.")
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)}. No corpus was built")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
         except FileNotFoundError as e:
             self.logger.error(f"{str(e)}. No corpus was built")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
         except NoBackendError:
             self.logger.error(f"The file format of the provided file is not supported.")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
         except (IOError, ParameterError, librosa.util.exceptions.ParameterError) as e:
             self.logger.error(f"{str(e)}. No corpus was built")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
 
         if self.output_folder is not None:
@@ -104,10 +104,10 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
                 self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
-                self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+                self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
                 return
 
-        self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
+        self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "success")
 
 
 class CorpusBuilder:

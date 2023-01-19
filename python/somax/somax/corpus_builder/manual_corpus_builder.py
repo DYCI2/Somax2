@@ -17,7 +17,7 @@ from somax.runtime.corpus import Corpus, AudioCorpus
 from somax.runtime.corpus_event import AudioCorpusEvent
 from somax.runtime.exceptions import FeatureError, ParameterError
 from somax.runtime.osc_log_forwarder import OscLogForwarder
-from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.send_protocol import PlayerSendProtocol
 from somax.runtime.target import SimpleOscTarget
 from somax.scheduler.scheduling_mode import AbsoluteScheduling
 
@@ -79,7 +79,7 @@ class ThreadedManualCorpusBuilder(multiprocessing.Process):
     def run(self) -> None:
         logging.basicConfig(level=self.log_level, format="[%(levelname)s]: %(message)s")
         self.logger.addHandler(OscLogForwarder(self.target))
-        self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "init")
+        self.target.send(PlayerSendProtocol.MANUAL_CORPUSBUILDER_STATUS, "init")
         try:
             self.logger.info(f"Building manually annotated corpus '{self.corpus_name}'")
             corpus: Corpus = ManualCorpusBuilder().build(audio_file_path=self.audio_file_path,
@@ -93,12 +93,12 @@ class ThreadedManualCorpusBuilder(multiprocessing.Process):
 
         except NotImplementedError as e:
             self.logger.error(f"{str(e)}. No corpus was built")
-            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
             return
 
         except RuntimeError as e:
             self.logger.error(f"{str(e)}. Could not parse annotation file")
-            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
             return
 
         except (ValueError,
@@ -107,12 +107,12 @@ class ThreadedManualCorpusBuilder(multiprocessing.Process):
                 librosa.util.exceptions.ParameterError,
                 FileNotFoundError) as e:
             self.logger.error(f"{str(e)}. No corpus was built")
-            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
             return
 
         except NoBackendError:
             self.logger.error(f"The file format of the provided file is not supported.")
-            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
             return
 
         try:
@@ -121,12 +121,12 @@ class ThreadedManualCorpusBuilder(multiprocessing.Process):
                                                  overwrite=self.overwrite,
                                                  copy_resources=self.copy_resources)
 
-            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "success")
+            self.target.send(PlayerSendProtocol.MANUAL_CORPUSBUILDER_STATUS, "success")
             self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
 
         except (IOError, AttributeError, KeyError) as e:
             self.logger.error(f"{str(e)} Export of corpus failed.")
-            self.target.send(SendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
+            self.target.send(PlayerSendProtocol.MANUAL_CORPUSBUILDER_STATUS, "failed")
             return
 
 

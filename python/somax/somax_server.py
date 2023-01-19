@@ -30,7 +30,7 @@ from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
 from somax.runtime.scale_actions import AbstractScaleAction
-from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.send_protocol import ServerSendProtocol
 from somax.runtime.target import Target
 from somax.scheduler.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, \
     TempoMasterMessage, \
@@ -155,7 +155,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         await asyncio.sleep(1)
 
     def _on_launch(self):
-        self.target.send(SendProtocol.SERVER_STARTED, "bang")
+        self.target.send(ServerSendProtocol.SERVER_STARTED, "bang")
 
     def callback(self, tick: Optional[float] = None) -> None:
         self._process_tempo_queue()
@@ -166,7 +166,7 @@ class SomaxServer(Somax, AsyncioOscObject):
                 self._send_to_all_agents(TimeMessage(time=time))
 
                 if time.phase < self.previous_time.phase:
-                    self.target.send(SendProtocol.SCHEDULER_BEAT_PHASE, Target.WRAPPED_BANG)
+                    self.target.send(ServerSendProtocol.SCHEDULER_BEAT_PHASE, Target.WRAPPED_BANG)
                 self.previous_time = time
             except TypeError as e:
                 self.logger.error(f"{repr(e)}")
@@ -186,7 +186,7 @@ class SomaxServer(Somax, AsyncioOscObject):
             self._transport = SlaveTransport.clone_from(self._transport)
         mode_str: str = "master" if master else "slave"
         self.logger.debug(f"Transport mode set to '{mode_str}'.")
-        self.target.send(SendProtocol.TRANSPORT_MODE, mode_str)
+        self.target.send(ServerSendProtocol.TRANSPORT_MODE, mode_str)
 
     ######################################################
     # CREATION/DELETION OF AGENTS
@@ -202,7 +202,8 @@ class SomaxServer(Somax, AsyncioOscObject):
                      merge_action: str = "",
                      corpus_filepath: str = "",
                      scale_actions: Tuple[str, ...] = ("",), override: bool = False):
-        raise RuntimeError("Scheduling type, peak selector, corpus filepath and scale actions should NOT be passed at init!")
+        raise RuntimeError(
+            "Scheduling type, peak selector, corpus filepath and scale actions should NOT be passed at init!")
 
         try:
             address: str = self.parse_osc_address(name)
@@ -260,11 +261,11 @@ class SomaxServer(Somax, AsyncioOscObject):
 
     def get_time(self):
         time: Time = self._transport.time
-        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.seconds, time.tempo, time.phase))
+        self.target.send(ServerSendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.seconds, time.tempo, time.phase))
 
     def get_player_names(self):
         for player_name in self._agents.keys():
-            self.target.send(SendProtocol.ALL_PLAYER_NAMES, [player_name])
+            self.target.send(ServerSendProtocol.ALL_PLAYER_NAMES, [player_name])
 
     def server_status(self, agents: Optional[List[str]]):
         if agents is None:
@@ -274,7 +275,7 @@ class SomaxServer(Somax, AsyncioOscObject):
                 all_agents_exist = all([self._agents[agent_name] is not None for agent_name in agents])
             except KeyError:
                 all_agents_exist = False
-        self.target.send(SendProtocol.SERVER_STATUS, [all_agents_exist, self._transport.running])
+        self.target.send(ServerSendProtocol.SERVER_STATUS, [all_agents_exist, self._transport.running])
 
     ######################################################
     # MAX SETTERS WITH RETURN VALUES
@@ -282,33 +283,37 @@ class SomaxServer(Somax, AsyncioOscObject):
 
     def start_transport(self):
         super().start_transport()
-        self.target.send(SendProtocol.SCHEDULER_RUNNING, True)
+        self.target.send(ServerSendProtocol.SCHEDULER_RUNNING, True)
 
     def pause_transport(self):
         super().pause_transport()
-        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
+        self.target.send(ServerSendProtocol.SCHEDULER_RUNNING, False)
 
     def stop_transport(self):
         super().stop_transport()
-        self.target.send(SendProtocol.SCHEDULER_RUNNING, False)
+        self.target.send(ServerSendProtocol.SCHEDULER_RUNNING, False)
 
     def set_tempo(self, tempo: float):
         if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
             super().set_tempo(tempo)
-            self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, (self._transport.tempo, self._transport.time.phase))
+            self.target.send(ServerSendProtocol.
+                             SCHEDULER_CURRENT_TEMPO
+            
+                             (self._transport.tempo, self._transport.time.phase))
         else:
             self.logger.error(f"Tempo must be a single value larger than zero. Did not set tempo.")
 
     def set_beat_phase(self, beat_phase: float) -> None:
         if (isinstance(beat_phase, float) or isinstance(beat_phase, int)) and 0.0 <= beat_phase <= 1.0:
             super().set_beat_phase(beat_phase)
-            self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, (self._transport.tempo, self._transport.time.phase))
+            self.target.send(ServerSendProtocol.SCHEDULER_CURRENT_TEMPO,
+                             (self._transport.tempo, self._transport.time.phase))
         else:
             self.logger.error(f"Beat phase must be a single value between 0.0 and 1.0. Did not set beat phase.")
 
     def exit(self, print_exit_message: bool = True):
         self.terminate()
-        self.target.send(SendProtocol.SERVER_TERMINATED, Target.WRAPPED_BANG)
+        self.target.send(ServerSendProtocol.SERVER_TERMINATED, Target.WRAPPED_BANG)
         if print_exit_message:
             self.logger.info("Somax was successfully shut down.")
 
@@ -316,8 +321,12 @@ class SomaxServer(Somax, AsyncioOscObject):
     # CORPUS
     ######################################################
 
-    def build_corpus(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                     overwrite: bool = False, copy_resources: bool = False,
+    def build_corpus(self,
+                     filepath: str,
+                     output_folder: str,
+                     corpus_name: Optional[str] = None,
+                     overwrite: bool = False,
+                     copy_resources: bool = False,
                      filter_class: str = "",
                      segmentation_mode: Optional[str] = None,
                      multithreaded: bool = False, **kwargs):
@@ -329,7 +338,7 @@ class SomaxServer(Somax, AsyncioOscObject):
 
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(ServerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
 
         if multithreaded:
@@ -344,10 +353,10 @@ class SomaxServer(Somax, AsyncioOscObject):
         try:
             corpus: AudioCorpus = AudioCorpus.from_json(corpus_filepath, new_audio_path=new_audio_filepath)
             corpus.export(os.path.dirname(corpus_filepath), overwrite=True)
-            self.target.send(SendProtocol.RELOCATE_AUDIO_CORPUS_STATUS, "success")
+            self.target.send(ServerSendProtocol.RELOCATE_AUDIO_CORPUS_STATUS, "success")
         except (FileNotFoundError, IOError, AttributeError, InvalidCorpus, ExternalDataMismatch) as e:
             self.logger.error(f"{str(e)}. Could not complete operation")
-            self.target.send(SendProtocol.RELOCATE_AUDIO_CORPUS_STATUS, "failed")
+            self.target.send(ServerSendProtocol.RELOCATE_AUDIO_CORPUS_STATUS, "failed")
 
     # TODO: Remove once multithreaded corpus builder is stable enough
     def _build(self, filepath: str,
@@ -358,7 +367,7 @@ class SomaxServer(Somax, AsyncioOscObject):
                spectrogram_filter: AbstractFilter = AbstractFilter.default(),
                segmentation_mode: Optional[AudioSegmentation] = None,
                **kwargs):
-        self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "init")
+        self.target.send(ServerSendProtocol.BUILDING_CORPUS_STATUS, "init")
         corpus: Corpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
                                                spectrogram_filter=spectrogram_filter,
                                                segmentation_mode=segmentation_mode, **kwargs)
@@ -367,10 +376,10 @@ class SomaxServer(Somax, AsyncioOscObject):
         try:
             output_filepath: str = corpus.export(output_folder, overwrite=overwrite, copy_resources=copy_resources)
             self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "success")
+            self.target.send(ServerSendProtocol.BUILDING_CORPUS_STATUS, "success")
         except (IOError, AttributeError, KeyError) as e:
             self.logger.error(f"{str(e)} Export of corpus failed.")
-            self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(ServerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
 
     def _build_multithreaded(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
                              overwrite: bool = False, copy_resources: bool = False,
@@ -446,12 +455,12 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Try retuning the parameters with respect to the current audio file")
             return
         finally:
-            self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_SEGMENTATION_DONE, Target.WRAPPED_BANG)
+            self.target.send(ServerSendProtocol.CORPUSBUILDER_AUDIO_SEGMENTATION_DONE, Target.WRAPPED_BANG)
 
-        self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_STATS, stats.render())
+        self.target.send(ServerSendProtocol.CORPUSBUILDER_AUDIO_STATS, stats.render())
 
         for (onset, duration) in zip(onsets, durations):
-            self.target.send(SendProtocol.CORPUSBUILDER_AUDIO_SEGMENT, [onset, onset + duration])
+            self.target.send(ServerSendProtocol.CORPUSBUILDER_AUDIO_SEGMENT, [onset, onset + duration])
 
 
 if __name__ == "__main__":

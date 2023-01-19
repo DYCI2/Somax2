@@ -3,7 +3,7 @@ from typing import Any, Optional, List, Tuple
 
 from somax.features import TotalEnergyDb
 from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent
-from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.send_protocol import PlayerSendProtocol
 from somax.runtime.transforms import AbstractTransform
 
 
@@ -46,11 +46,11 @@ class MidiSliceOnsetEvent(RendererEvent):
 
     def render(self) -> List[RendererMessage]:
         notes: List[Tuple[int, int, int]] = [(n.pitch, n.velocity, n.channel) for n in self.event.notes]
-        return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
+        return [RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_EVENT,
                                 content=[self.event.state_index, self.applied_transform.renderer_info()]),
-                RendererMessage(keyword=SendProtocol.SEND_STATE_ONSET,
+                RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_ONSET,
                                 content=notes),
-                RendererMessage(keyword=SendProtocol.SEND_MIDI_TIMESTRETCH,
+                RendererMessage(keyword=PlayerSendProtocol.SEND_MIDI_TIMESTRETCH,
                                 content=self.scheduler_tempo / self.event.tempo)]
 
 
@@ -65,7 +65,7 @@ class MidiNoteEvent(RendererEvent):
         self.applied_transform: Optional[AbstractTransform] = applied_transform
 
     def render(self) -> List[RendererMessage]:
-        return [RendererMessage(keyword=SendProtocol.SEND_MIDI_EVENT,
+        return [RendererMessage(keyword=PlayerSendProtocol.SEND_MIDI_EVENT,
                                 content=[self.note, self.velocity, self.channel])]
 
 
@@ -83,7 +83,7 @@ class AudioEvent(RendererEvent):
 
     def render(self) -> List[RendererMessage]:
         messages: List[RendererMessage] = [
-            RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
+            RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_EVENT,
                             content=[self.event.state_index, self.applied_transform.renderer_info()])
         ]
 
@@ -95,7 +95,7 @@ class AudioEvent(RendererEvent):
         if self.render_energy:
             content.append(self.event.get_feature(TotalEnergyDb).value())
 
-        messages.append(RendererMessage(keyword=SendProtocol.SEND_AUDIO_EVENT,
+        messages.append(RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_EVENT,
                                         content=content))
 
         return messages
@@ -110,10 +110,10 @@ class AudioContinueEvent(RendererEvent):
         self.time_stretch_factor: float = time_stretch_factor
 
     def render(self) -> List[RendererMessage]:
-        return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
+        return [RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_EVENT,
                                 content=[self.event.state_index,
                                          self.applied_transform.renderer_info()]),
-                RendererMessage(keyword=SendProtocol.AUDIO_CONTINUATION_TIMESTRETCH,
+                RendererMessage(keyword=PlayerSendProtocol.AUDIO_CONTINUATION_TIMESTRETCH,
                                 content=[self.time_stretch_factor])]
 
 
@@ -122,12 +122,12 @@ class AudioOffEvent(RendererEvent):
         super().__init__(trigger_time)
 
     def render(self) -> List[RendererMessage]:
-        return [RendererMessage(keyword=SendProtocol.SEND_AUDIO_OFF, content=SendProtocol.SEND_AUDIO_OFF)]
+        return [RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_OFF, content=PlayerSendProtocol.SEND_AUDIO_OFF)]
 
 
 class TimeoutInfoEvent(RendererEvent):
     def render(self) -> List[RendererMessage]:
-        return [RendererMessage(keyword=SendProtocol.OUTPUT_TYPE, content=SendProtocol.OUTPUT_TYPE_TIMEOUT)]
+        return [RendererMessage(keyword=PlayerSendProtocol.OUTPUT_TYPE, content=PlayerSendProtocol.OUTPUT_TYPE_TIMEOUT)]
 
 
 class TriggerEvent(ScheduledEvent):
