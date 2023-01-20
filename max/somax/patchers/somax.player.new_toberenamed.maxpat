@@ -40,6 +40,52 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"bgcolor" : [ 0.298039215686275, 0.976470588235294, 1.0, 0.17 ],
+					"id" : "obj-419",
+					"linecount" : 4,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 527.664029535864756, 327.069468929526806, 395.0, 60.0 ],
+					"text" : "Or the opposite: create a somax.player.core object without all the UI and then use this object inside the somax.player, where the core contains only the protocol, patcherargs, etc. without player/atom/parameter creation/instaitiation"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.298039215686275, 0.976470588235294, 1.0, 0.17 ],
+					"id" : "obj-313",
+					"linecount" : 16,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 139.605485232067679, 166.069468929526806, 394.0, 221.0 ],
+					"text" : "This would be the first layer of UI (no nesting) regardless, so the UI cost of this wouldn't be huge. I think this could potentially make this patch much clearer, where we would have the main patcher doing:\n- patcherargs\n- input/message parsing\n- oscsend/oscreceive\n- output parsing / protocol\n- player creation & deletion\n- atom instantiation\n\nBut EVERYTHING under Parameters & Visualization could be moved to a separate bpatcher, which can be very small in the control layer. Only problem then is pattr, but assuming that EVERYTHING is moved, we should be able to move the entire pattr inside the bpatcher then too!\nThere will be remove sends/receives past subpatcher levels in this case, but  I think it's worth it for the clarity it would add to the main layer"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
+					"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_autogradient" : 0.0,
+					"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_color1" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
+					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_type" : "gradient",
+					"gradient" : 1,
+					"id" : "obj-105",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 139.605485232067679, 144.069468929526806, 346.0, 22.0 ],
+					"text" : "TODO: Maybe we could move ALL parameters into a bpatcher?"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"color" : [ 0.9373517036, 0.767044425, 0.3548220396, 1.0 ],
 					"id" : "obj-231",
 					"maxclass" : "newobj",
@@ -368,7 +414,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 116.0, 134.0, 191.0, 22.0 ],
+					"patching_rect" : [ 116.0, 110.0, 191.0, 22.0 ],
 					"text" : "r #0_patchargs_initialization_done"
 				}
 
@@ -611,11 +657,11 @@
 								"box" : 								{
 									"id" : "obj-3",
 									"maxclass" : "newobj",
-									"numinlets" : 3,
-									"numoutlets" : 3,
-									"outlettype" : [ "bang", "bang", "" ],
-									"patching_rect" : [ 302.5, 71.0, 83.0, 22.0 ],
-									"text" : "sel done reinit"
+									"numinlets" : 4,
+									"numoutlets" : 4,
+									"outlettype" : [ "bang", "bang", "bang", "" ],
+									"patching_rect" : [ 302.5, 71.0, 130.0, 22.0 ],
+									"text" : "sel bang done reinit"
 								}
 
 							}
@@ -721,6 +767,13 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-19", 0 ],
+									"source" : [ "obj-3", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 0 ],
 									"source" : [ "obj-3", 0 ]
 								}
 
@@ -728,7 +781,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-8", 0 ],
-									"source" : [ "obj-3", 1 ]
+									"source" : [ "obj-3", 2 ]
 								}
 
 							}
@@ -774,7 +827,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 18.0, 171.0, 117.0, 22.0 ],
+					"patching_rect" : [ 18.0, 147.0, 117.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -45704,6 +45757,9 @@
 			}
 , 			{
 				"boxes" : [ "obj-43", "obj-3", "obj-980" ]
+			}
+, 			{
+				"boxes" : [ "obj-105", "obj-313", "obj-419" ]
 			}
  ],
 		"styles" : [ 			{

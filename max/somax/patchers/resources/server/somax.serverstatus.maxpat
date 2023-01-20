@@ -40,6 +40,31 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"id" : "obj-56",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 306.0, 88.0, 85.0, 22.0 ],
+					"text" : "r #0_enable"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
+					"id" : "obj-28",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1151.869328493647799, 128.0, 87.0, 22.0 ],
+					"text" : "s #0_enable"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"color" : [ 0.614107191562653, 0.475544303655624, 1.0, 1.0 ],
 					"id" : "obj-55",
 					"maxclass" : "newobj",
@@ -95,7 +120,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1148.0, 159.0, 150.0, 47.0 ],
+					"patching_rect" : [ 1246.0, 174.0, 150.0, 47.0 ],
 					"text" : "TODO: Way too many pipes/delays: need to rewrite this properly"
 				}
 
@@ -312,7 +337,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1151.869328493647799, 113.0, 120.0, 22.0 ],
+					"patching_rect" : [ 1249.869328493647799, 128.0, 120.0, 22.0 ],
 					"text" : "s #0_playernames"
 				}
 
@@ -324,7 +349,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1281.0, 113.0, 109.0, 22.0 ],
+					"patching_rect" : [ 1379.0, 128.0, 109.0, 22.0 ],
 					"text" : "s #0_pollinterval"
 				}
 
@@ -333,11 +358,11 @@
 				"box" : 				{
 					"id" : "obj-2",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 1151.869328493647799, 64.0, 169.0, 22.0 ],
-					"text" : "route playernames pollinterval"
+					"numinlets" : 4,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "", "", "" ],
+					"patching_rect" : [ 1151.869328493647799, 64.0, 313.0, 22.0 ],
+					"text" : "route enable playernames pollinterval"
 				}
 
 			}
@@ -351,19 +376,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1151.869328493647799, 25.0, 30.0, 30.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
-					"id" : "obj-148",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 306.0, 88.0, 70.0, 22.0 ],
-					"text" : "loadmess 0"
 				}
 
 			}
@@ -1901,13 +1913,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-13", 0 ],
-					"source" : [ "obj-148", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-144", 0 ],
 					"source" : [ "obj-15", 0 ]
 				}
@@ -1953,6 +1958,13 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-19", 0 ],
+					"source" : [ "obj-2", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-28", 0 ],
 					"source" : [ "obj-2", 0 ]
 				}
 
@@ -1960,7 +1972,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
-					"source" : [ "obj-2", 1 ]
+					"source" : [ "obj-2", 2 ]
 				}
 
 			}
@@ -2219,6 +2231,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-43", 0 ],
 					"source" : [ "obj-55", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-13", 0 ],
+					"source" : [ "obj-56", 0 ]
 				}
 
 			}
