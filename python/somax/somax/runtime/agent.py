@@ -390,7 +390,8 @@ class OscAgent(Agent, AsyncioOscObject):
         self.logger.debug(f"[influence] Influence successfully completed for agent '{self.player.name}' "
                           f"with path '{path}'.")
 
-    def influence_onset(self):
+    def bang(self):
+        """ Influence onset / trigger event """
         if self._enabled:
             self.scheduling_handler.add_trigger_event()
             # print("-- Adding trigger")
@@ -797,7 +798,7 @@ class OscAgent(Agent, AsyncioOscObject):
     # OTHER
     ######################################################
 
-    def force_jump(self, index: int):
+    def jump(self, index: int):
         try:
             # self.flush()
             self.player.force_jump(int(index))
