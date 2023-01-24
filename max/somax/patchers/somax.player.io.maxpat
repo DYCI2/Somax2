@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 2,
+			"minor" : 5,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 100.0, 1328.0, 983.0 ],
+		"rect" : [ -227.0, -1308.0, 1891.0, 1094.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -54,7 +54,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-69",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -767,7 +766,7 @@
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 694.0, 189.0, 227.0, 99.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 10.0, 49.824999999999989, 228.0, 99.0 ],
+					"presentation_rect" : [ 13.5, 43.824999999999989, 228.0, 110.0 ],
 					"varname" : "somax.player.routing",
 					"viewvisibility" : 1
 				}
