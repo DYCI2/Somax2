@@ -280,7 +280,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1134.368421052631675, 576.789896561321029, 111.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "patcherargs_init $1"
 				}
 
@@ -578,7 +577,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1445.789473684210861, 294.379134229482588, 209.999999999999773, 35.0 ],
-					"presentation_linecount" : 5,
 					"text" : "a somax.server object already exists. This object will ignore all input"
 				}
 
@@ -4150,7 +4148,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 147.25, 124.0, 251.0, 47.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Note that if any port but default is used, it will be necessary for the user to manually launch the server (shell command or from a terminal)",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
@@ -4689,19 +4686,6 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1201.526315789473756, 911.310432885258706, 144.0, 22.0 ],
 					"text" : "somax.winresize 345 400"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-28",
-					"linecount" : 2,
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1283.5, 816.318701344223882, 83.0, 35.0 ],
-					"text" : "front, window getsize"
 				}
 
 			}
@@ -5284,6 +5268,14 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-17", 0 ],
+					"midpoints" : [ 1292.921052631578732, 904.844783557370647, 1211.026315789473756, 904.844783557370647 ],
+					"source" : [ "obj-127", 15 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-170", 0 ],
 					"source" : [ "obj-127", 19 ]
 				}
@@ -5322,13 +5314,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-27", 0 ],
 					"source" : [ "obj-127", 21 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-28", 0 ],
-					"source" : [ "obj-127", 15 ]
 				}
 
 			}
@@ -5962,14 +5947,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-282", 0 ],
 					"source" : [ "obj-279", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-93", 0 ],
-					"midpoints" : [ 1293.0, 857.788484901594529, 1211.026315789473756, 857.788484901594529 ],
-					"source" : [ "obj-28", 0 ]
 				}
 
 			}

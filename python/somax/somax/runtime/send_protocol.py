@@ -42,9 +42,9 @@ class PlayerSendProtocol:
     PLAYER_SINGLE_PARAMETER = "param"
     PLAYER_CORPUS_FILES = "corpus_info"
     PLAYER_CORPUS_QUERY = "corpus_query"
-    AGENT_INSTANTIATED = "player"
+    INSTANTIATED_PLAYER = "initialized"
     INSTANTIATED_ATOMS = "atoms"
-    PLAYER_CORPUS = "corpus"
+    PLAYER_CORPUS = "loaded_corpus"
     ELIGIBILITY = "eligibility"
 
     PLAYER_STATUS = "playerstatus"
