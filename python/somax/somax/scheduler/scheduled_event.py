@@ -48,7 +48,7 @@ class MidiSliceOnsetEvent(RendererEvent):
         notes: List[Tuple[int, int, int]] = [(n.pitch, n.velocity, n.channel) for n in self.event.notes]
         return [RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_EVENT,
                                 content=[self.event.state_index, self.applied_transform.renderer_info()]),
-                RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_ONSET,
+                RendererMessage(keyword=PlayerSendProtocol.SEND_MIDI_SLICE,
                                 content=notes),
                 RendererMessage(keyword=PlayerSendProtocol.SEND_MIDI_TIMESTRETCH,
                                 content=self.scheduler_tempo / self.event.tempo)]

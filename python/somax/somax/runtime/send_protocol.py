@@ -36,29 +36,38 @@ class ServerSendProtocol:
 
 
 class PlayerSendProtocol:
+    # Corpus messages
+    CORPUS_ADDRESS = "corpus"
+    PLAYER_CORPUS_FILES = f"{CORPUS_ADDRESS} corpus_info"
+    PLAYER_READING_CORPUS_STATUS = f"{CORPUS_ADDRESS} reading_corpus_status"
+    PLAYER_CORPUS = f"{CORPUS_ADDRESS} loaded_corpus"
+
     # Player Info
     PLAYER_NUM_PEAKS = "num_peaks"
     PLAYER_OUTPUT_PEAKS = "output_peaks"
     PLAYER_SINGLE_PARAMETER = "param"
-    PLAYER_CORPUS_FILES = "corpus_info"
+
     PLAYER_CORPUS_QUERY = "corpus_query"
     INSTANTIATED_PLAYER = "initialized"
     INSTANTIATED_ATOMS = "atoms"
-    PLAYER_CORPUS = "loaded_corpus"
+
     ELIGIBILITY = "eligibility"
 
     PLAYER_STATUS = "playerstatus"
 
-    PLAYER_READING_CORPUS_STATUS = "reading_corpus_status"
-
     # Event data
-    SEND_MIDI_EVENT = "midi"
+
+    MIDI_RENDERER_ADDRESS = "midi"
+    SEND_MIDI_EVENT = f"{MIDI_RENDERER_ADDRESS} event"  # Midi message, e.g. 60 127 1
+    SEND_MIDI_SLICE = f"{MIDI_RENDERER_ADDRESS} slice"  # Information about all midi events in a slice, e.g. 60 64 67 72
+    SEND_MIDI_TIMESTRETCH = f"{MIDI_RENDERER_ADDRESS} timestretch_info"
+
+    AUDIO_RENDERER_ADDRESS = "audio"
+    SEND_AUDIO_EVENT = f"{AUDIO_RENDERER_ADDRESS} event"
+    SEND_AUDIO_OFF = f"{AUDIO_RENDERER_ADDRESS} audio_off"
+    AUDIO_CONTINUATION_TIMESTRETCH = f"{AUDIO_RENDERER_ADDRESS} continuation_timestretch"
+
     SEND_STATE_EVENT = "state"
-    SEND_STATE_ONSET = "state_onset"
-    SEND_MIDI_TIMESTRETCH = "timestretch_info"
-    SEND_AUDIO_EVENT = "audio"
-    SEND_AUDIO_OFF = "audio_off"
-    AUDIO_CONTINUATION_TIMESTRETCH = "audio_continuation_timestretch"
 
     DESCRIPTOR = "descriptor"  # TODO: Unused
 
