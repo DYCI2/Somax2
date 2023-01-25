@@ -21,8 +21,11 @@ class Transport(ABC):
     def clone_from(cls, other: 'Transport'):
         return cls(initial_time=other._time, running=other.running)
 
-    def set_tempo(self, tempo: float):
-        self._time = Time(self._time.ticks, self._time.seconds, tempo)
+    def set_tempo(self, tempo: float) -> None:
+        self._time = Time(self._time.ticks, self._time.seconds, tempo, self._time.phase)
+
+    def set_beat_phase(self, beat_phase: float) -> None:
+        self._time = Time(self._time.ticks, self._time.seconds, self._time.tempo, beat_phase)
 
     def terminate(self):
         self.stop()
@@ -79,6 +82,7 @@ class MasterTransport(Transport):
 
 
 class SlaveTransport(Transport):
+    # TODO: This class has not been properly updated with recent architectural changes (June 30, 2022)
     TIME_SKIP_INTERVAL_S = 1.0
 
     def __init__(self, tempo: float, running: bool = False):

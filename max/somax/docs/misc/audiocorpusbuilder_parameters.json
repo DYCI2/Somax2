@@ -1,7 +1,7 @@
 {
     "audiofile": {
         "title": "Audio File",
-        "description": "Drop a the stereo or mono audio file (.aif, .flac, .wav) here to build a corpus, or use the «Read» button to select the audio file.\n\nNote that .mp3 files may work on certain versions of MacOS."
+        "description": "Drop a the stereo or mono audio file (.aif, .flac, .wav) here to build a corpus, or use the «Read» button to select the audio file.\n\nNote that .mp3 files are not supported!"
     },
     "segmode": {
         "title": "Segmentation Mode",
@@ -66,5 +66,25 @@
     "segplay": {
         "title": "Segmentation Playback",
         "description": "When using the «Test Segmentation» button, it's possible to play back the selected region to hear exactly where onsets are detected. Onsets are played as short clicks (at 1000 Hz, left channel), offsets as clicks (at 500 Hz, right channel). "
+    },
+    "status": {
+        "title": "Status Indicator",
+        "description": "The status indicator will blink while building a corpus. If the build succeeds, the indicator will turn green. If it fails, it will turn red. Look in the Max console if this happens."
+    },
+    "annotations": {
+        "title": "Manual Annotations",
+        "description": "If you want to build an audio corpus but create the segmentation yourself (using your own editor of choice), it's possible to do so by providing your own text file with markers for each segment.\n\nCurrently, the native format of a number of different software that allow exporting segmentation markers are supported, but if your editor of choice is missing, please contact the development team and we will add it for you!"
+    },
+    "relocate": {
+        "title": "Relocate",
+        "description": "If the audio file of an already built corpus is moved, the player will no longer be able to load the corpus as it cannot locate its audio file. One of the options to handle this issue is to use the «Relocate Existing Corpus» to update the corpus with the new path to the audio file.\n\nFor more information about this, see the «corpus path» tab of this maxhelp"
+    },
+    "corpuspath": {
+        "title": "Corpus Path",
+        "description": "The «Corpus Path» menu is used to set the path in which corpora should be saved, as well as where the player should look for corpora.\n\nFor more information about this menu, see the «corpus path» tab of this maxhelp"
+    },
+    "export": {
+        "title": "Export Segmentation",
+        "description": "The «Export» button can be used to export the visualized segmentation as a text file."  
     }
 }

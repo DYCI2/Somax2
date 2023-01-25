@@ -91,7 +91,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
             self.logger.error(f"The file format of the provided file is not supported.")
             self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
-        except (IOError, ParameterError) as e:
+        except (IOError, ParameterError, librosa.util.exceptions.ParameterError) as e:
             self.logger.error(f"{str(e)}. No corpus was built")
             self.target.send(SendProtocol.BUILDING_CORPUS_STATUS, "failed")
             return
@@ -112,7 +112,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
 
 class CorpusBuilder:
     MIDI_FILE_EXTENSIONS = [".mid", ".midi"]
-    AUDIO_FILE_EXTENSIONS = [".mp3", ".aif", ".aiff", ".wav", ".flac"]  # .ogg doesn't work in python
+    AUDIO_FILE_EXTENSIONS = [".aif", ".aiff", ".wav", ".flac", ".mp3"]  # .ogg doesn't work in python
 
     AUDIO_CORPUS_FILE_EXT = ".pickle"
     MIDI_CORPUS_FILE_EXT = ".gz"
@@ -137,7 +137,7 @@ class CorpusBuilder:
         if content_type == MidiCorpus:
             corpus: Corpus = self._build_midi(filepaths, name, **kwargs)
         elif content_type == AudioCorpus:
-            corpus: Corpus = self._build_audio(filepaths, name, **kwargs)
+            corpus, _ = self._build_audio(filepaths, name, **kwargs)
         else:
             raise IOError("Invalid file format. Valid extensions are '{}'".format(
                 "','".join(self.MIDI_FILE_EXTENSIONS + self.AUDIO_FILE_EXTENSIONS)))
@@ -230,7 +230,7 @@ class CorpusBuilder:
                      hop_length: int = 512,
                      estimated_initial_bpm: float = 120.0,
                      beat_tightness: float = 100.0,
-                     **kwargs) -> Corpus:
+                     **kwargs) -> Tuple[Corpus, AudioMetadata]:
         """ raises: FileNotFoundError  if failed to load file
                     RuntimeError if other issues are encountered in librosa
                     ValueError if an invalid segmentation mode is provided
@@ -315,7 +315,7 @@ class CorpusBuilder:
 
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed construction of audio corpus")
 
-        return corpus
+        return corpus, metadata
 
     def _load_audio_files(self, filepaths: List[str]) -> Tuple[np.ndarray, int]:
         content: List[np.ndarray] = []
@@ -433,7 +433,8 @@ class CorpusBuilder:
                         durations[i]
 
         if min_size_s is not None:
-            valid_frames_mask = durations > min_size_s
+            min_size_frames = librosa.time_to_frames(min_size_s, sr=sr, hop_length=hop_length)
+            valid_frames_mask = durations > min_size_frames
             onsets = onsets[valid_frames_mask]
             durations = durations[valid_frames_mask]
 

@@ -24,13 +24,21 @@ class VersionTools:
         return re.split("[.-]", version)  # . for major, minor, rev, - for beta/alpha
 
     @staticmethod
-    def matches_current(version: str, major: bool = True, minor: bool = True,
-                        rev: bool = True, pre_release: bool = True) -> bool:
-        current: List[str] = VersionTools.decode(VersionTools.version())
+    def matches_current(version: str,
+                        use_corpus_version: bool,
+                        major: bool = True,
+                        minor: bool = True,
+                        rev: bool = True,
+                        pre_release: bool = True) -> bool:
+        import somax  # local import to avoid static loading of module that clashes with shell script usage
+        if use_corpus_version:
+            current: List[str] = VersionTools.decode(somax.__version_corpus__)
+        else:
+            current = VersionTools.decode(somax.__version__)
         other: List[str] = VersionTools.decode(version)
 
         if len(other) < 3:
-            return False    # Legacy version number
+            return False  # Legacy version number
 
         if major and current[0] != other[0]:
             return False

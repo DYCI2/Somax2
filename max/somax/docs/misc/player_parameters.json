@@ -13,7 +13,7 @@
     },
     "igphase": {
         "title": "Ignore Phase",
-        "description": "If this parameter is set to 'False', the player will apply a weight to each potential output candidate (at each generation time step) based on where it occurs in the beat. More specifically, it compares its position in the original corpus to the current beat of the server tempo. For example, if the player at any point in time where the server currently is on the second quaver of a beat, finds two matches in the corpus - one occuring at the first quaver of any beat and the other one occuring at the second - the player will apply a negative bias to the former match, thus prioritizing the match occuring at a similar time as the server time.\n\nIf this parameter is set to 'True', this behaviour will be entirely bypassed.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'True' and the 'Continuous' mode sets this parameter to 'False'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters.\n\nThis parameter is only available when the player has loaded a MIDI corpus."
+        "description": "If this parameter is set to 'False', the player will apply a weight to each potential output candidate (at each generation time step) based on where it occurs in the beat. More specifically, it compares its position in the original corpus to the current beat of the server tempo. For example, if the player at any point in time where the server currently is on the second quaver of a beat, finds two matches in the corpus - one occuring at the first quaver of any beat and the other one occuring at the second - the player will apply a negative bias to the former match, thus prioritizing the match occuring at a similar time as the server time.\n\nIf this parameter is set to 'True', this behaviour will be entirely bypassed.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'True' and the 'Continuous' mode sets this parameter to 'False'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters."
     },
     "notedur": {
         "title": "Note Duration",
@@ -33,15 +33,15 @@
     },
     "qualthresh": {
         "title": "Quality Threshold",
-        "description": "The «Quality Threshold» controls the consistency between the input (influences) and output (what the player plays), so that if there's no good match between the two, the system will not play anything at all.\n\nUnder the hood, each match found in the corpus is assigned a score (probability), which is further altered by all of the biasing parameters. The player will use this score to determine the best match and use that for its output. But even if the score is very low, or even if there are no matches at all, the player will by default output something. In some cases, having the system stay silent when there are no good matches may be a better choice, and is exactly what this parameter is for. This parameter sets a minimum score required for a match to qualify as output. For reference, a value of 0.01 will be sufficient to filter out all cases where there are no matches at all. A value of 0.1 will be sufficient to (assuming weights and other parameters are within common ranges) find rather good matches either harmonically or melodically, and a value of 1.0 (or larger) will generally remove everything but almost perfect replications of longer sections of the input, both harmonically and melodically."
+        "description": "The «Quality Threshold» controls the consistency between the input (influences) and output (what the player plays), so that if there's no good match between the two, the system will not play anything at all.\n\nUnder the hood, each match found in the corpus is assigned a score (probability), which is further altered by all of the biasing parameters. The player will use this score to determine the best match and use that for its output. But even if the score is very low, or even if there are no matches at all, the player will by default output something.\n\nThis parameter sets a minimum score required for a match to qualify as output. When combined with «Sparse», this will ensure that no events are played unless they are considered good matches.\n\nFor reference, a value of 0.01 will be sufficient to filter out all cases where there are no matches at all. A value of 0.1 will be sufficient to (assuming weights and other parameters are within common ranges) find rather good matches either harmonically or melodically, and a value of 1.0 (or larger) will generally remove everything but almost perfect replications of longer sections of the input."
     },
     "activetransp": {
         "title": "Active Transpositions",
         "description": "The player can also look for matches in transposed versions of the corpus as well as the original, which can be very useful for short corpora or other situations when there are problems with a low amount of matches. Given a corpus in C major, enabling the '0' and '+1' transposition means that it will look for matches in the same corpus transposed to C# as well as the original in C. The transposition range is set to -5 semitones (transposition to G major given corpus in C major) up to +6 semitones (transposition to F# major given corpus in C major).\n\nAny set of transpositions may be enabled, with or without the original ('0'), as long as at least one transposition is active (trying to remove the last transposition will result in an error message). But do note that a large amount of enabled transposition may impact the computation time of the player and in worst case result in perceiveable latency.\n\nAlso note that while this parameter should be operable in real-time, it may in some cases require a couple of seconds of computation time for large corpora, so make sure to experiment thoroughly with this parameter before altering it during a performance."
     },
     "atombypass": {
-        "title": "Layer Bypass",
-        "description": "The player is trying to match incoming influences in multiple layers. One layer matching harmonic input, one layer matching melodic input and one layer matching the previous output of the player itself. Toggling this flag will entirely bypass a specific layer, so that any matches in the bypassed layer won't be taken into account when generating the output."
+        "title": "Layer Enable",
+        "description": "The player is trying to match incoming influences in multiple layers. One layer matching harmonic input, one layer matching melodic input and one layer matching the previous output of the player itself. Disabling one of these toggles will entirely bypass that specific layer, so that any matches in the bypassed layer won't be taken into account when generating the output."
     },
     "atomweight": {
         "title": "Layer Balance",
@@ -73,7 +73,7 @@
     },
     "reset": {
         "title": "Reset Influences",
-        "description": "In some corpora with specific settings, it is possible to reach a state where the player is getting stuck in a loop, repeating the same set of states over and over again. Pressing this button will reset the runtime state of the player (remove all previous matches) without altering any of the set parameters.\n\nThis is perfectly safe to use in real-time!"
+        "description": "In some corpora with specific settings, it is possible to reach a state where the player is getting stuck in a loop, repeating the same set of states over and over again. Pressing this button will reset the runtime state of the player (remove all previous matches) without altering any of the set parameters."
     },
     "outputselection": {
         "title": "Output Selection Mode",
@@ -81,7 +81,7 @@
     },
     "layerpeaksinfo": {
         "title": "Matches (per layer)",
-        "description": "Number of matches found in each in each of the three layers (self/melodic/harmonic) for the last influence."
+        "description": "Number of matches found in each in each of the four layers (internal melodic, internal harmonic, external melodic and external harmonic) for the last influence."
     },
     "corpusstatus": {
         "title": "Corpus Status",
@@ -89,7 +89,7 @@
     },
     "stateinfoslider": {
         "title": "State Slider",
-        "description": "Indicates the index of the current state in the corpus that is being played. This slider can also be used to manually go to a specific point in the corpus."
+        "description": "Indicates the index of the current state in the corpus that is being played. This slider can also be clicked to manually go to a specific point in the corpus."
     },
     "peaksandquality": {
         "title": "Matches & Quality",
@@ -98,5 +98,49 @@
     "flush": {
         "title": "Flush (MIDI)",
         "description": "If the player is using a MIDI corpus, use this button to flush all notes."
+    },
+    "cut": {
+        "title": "Cut Mid-Event",
+        "description": "In reactive mode, output is generated each time a new trigger (onset) arrives. If the player is in the middle of playing an event when a trigger arrives, this option controls whether the currently played event should be interrupted or not:\n\n- Allowed: Interrupt the current event and trigger the new event immediately when the new trigger arrives.\n\n- Not Allowed: Delay the trigger so that the new event starts playing once the current event has been completed."
+    },
+    "timeout": {
+        "title": "Timeout",
+        "description": "In reactive mode, this option controls whether the player should continue playing if no new trigger has arrived by the time the player has finished playing its current event. Setting this to a non-zero value will make the player continue for that number of seconds. It's also possible to disable this to make the player continue endlessly."
+    },
+    "timeoutbeh": {
+        "title": "Timeout Behaviour",
+        "description": "In reactive mode with timeout enabled and set to non-zero, this value controls how the generation should be handled in the timeout period:\n\n- Linear: Play the corpus linearly (i.e. without jumping) during the timeout period.\n\n- Recombine: Allow the player to jump in the corpus during the timeout period."
+    },
+    "midireactive": {
+        "title": "MIDI Reactive Mode",
+        "description": "In reactive mode when using a MIDI corpus, there are two options for how the player should play the events of the corpus:\n\n- Note by Note: Each trigger will trigger a single event (i.e. one or multiple MIDI notes) that will be held until the next trigger (or until timeout, if active)\n\n- Continue: Play the event corresponding to its initial duration and then continue playing (where the behaviour in this mode further depends on the «Timeout Behaviour» setting)"
+    },
+    "proba": {
+        "title": "Output Probability",
+        "description": "This option will condition each generated output with a probability, so that it may or may not play the event. This parameter is inactive when set to 1.0 (off), but any value lower than 1.0 will result in less than 100% of the events being played. For example, when set to 0.2, only 20% of the generated events will be played"
+    },
+    "sparse": {
+        "title": "Sparse",
+        "description": "If sparse is disabled (default), the player will generate output even if it doesn't find any match in the corpus corresponding to the input. Enabling sparse will ensure that the player only outputs something if it finds a good match, and if it doesn't, it will remain silent."
+    },
+    "taboo": {
+        "title": "Enforce Taboo",
+        "description": "A number of controls introduces a taboo on certain events, which can be described as a strong recommendation to not play the taboo'ed event.\n\nWhen this option is disabled, events with a taboo will only be played as a last resort. If disabled, events with a taboo will never be played.\n\nAn example of a control that introduces a taboo is the «Region Mask» filter, which will add a taboo to all events outside the selected region if enabled."
+    },
+    "timestretch": {
+        "title": "Time Stretch",
+        "description": "Each player has an internal tempo determined by the tempo of the corpus.\n\nWhen the mode is set to «Global Tempo», the player will synchronize its playback rate so that the internal tempo of the corpus matches the tempo of the Server object.\n\nWhen the mode is set to «Manual», the playback rate is defined by the tempo of the corpus, but the tempo can be scaled manually with the «Factor», where a factor of 1.0 means no change, 0.5 means half the original tempo and 2.0 double the tempo."
+    },
+    "renderersettings": {
+        "title": "Audio / MIDI Settings",
+        "description": "These buttons control settings that are specific for audio corpora and MIDI corpora respectively."
+    },
+    "regionmask": {
+        "title": "Region Mask",
+        "description": "When enabled, the player will only output events from a specific part of the corpus. The slider controls the region in the corpus from which the player should generate events from, and it corresponds to the timeline of the corpus (linearly, by index). For example, setting the slider to the first half means that only the first half of the events will be played.\n\nNote that events outside of the region may still be played as a last resort in some cases unless «Enforce Taboo» is on."
+    },
+    "experimental": {
+        "title": "Experimental",
+        "description": "This opens up the experimental section of the player interface. These controls in this section lack documentation and are not as stable as the normal controls. Use at own risk!"
     }
 }

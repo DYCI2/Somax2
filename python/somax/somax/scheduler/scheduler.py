@@ -1,23 +1,30 @@
 import copy
 import logging
-from typing import List, Type
+from typing import List, Type, Optional
 
 from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent
 from somax.scheduler.time_object import Time
 
 
 class Scheduler:
-    def __init__(self, time: float = 0, tempo: float = Time.BASE_TEMPO, running: bool = False):
+    def __init__(self,
+                 time: float = 0.0,
+                 tempo: float = Time.BASE_TEMPO,
+                 phase: float = 0.0,
+                 running: bool = False,
+                 queued_events: Optional[List[ScheduledEvent]] = None):
         self.logger = logging.getLogger(__name__)
         self._time: float = time
         self._tempo: float = tempo
+        self._phase: float = phase
         self.running: bool = running
-        self.queue: List[ScheduledEvent] = []
+        self.queue: List[ScheduledEvent] = [] if queued_events is None else queued_events
 
-    def update_time(self, time: float, tempo: float) -> List[ScheduledEvent]:
+    def update_time(self, time: float, tempo: float, phase: float) -> List[ScheduledEvent]:
         if self.running:
             self._time = time
             self._tempo = tempo
+            self._phase = phase
             return self._process_internal_events()
         else:
             return []
@@ -71,3 +78,7 @@ class Scheduler:
     @property
     def tempo(self) -> float:
         return self._tempo
+
+    @property
+    def phase(self) -> float:
+        return self._phase

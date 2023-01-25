@@ -3,7 +3,8 @@ import logging
 import sys
 from abc import ABC, abstractmethod
 from types import ModuleType
-from typing import Dict, Type, Any, Optional, TypeVar, Generic
+from typing import Dict, Type, Any, Optional
+
 
 class Introspective:
     @classmethod
@@ -25,6 +26,11 @@ class Introspective:
 
         return {k.lower(): v for (k, v) in classes.items()}
 
+    @classmethod
+    def parse_type(cls, type_name: str) -> Type[Any]:
+        """ raises: KeyError if not found """
+        return cls._classes()[type_name.lower()]
+
 
 class StringParsed(Introspective, ABC):
     @classmethod
@@ -36,6 +42,7 @@ class StringParsed(Introspective, ABC):
     @abstractmethod
     def from_string(cls, class_name: str, **kwargs) -> 'StringParsed':
         """ Should call the protected _from_string() method
+            If incorrectly parsed, returns `default` (TODO: not ideal)
             :raises Indirectly raises ValueError if `default()` is not defined.
                     TypeError if not all positional arguments for the class' `__init__` are provided as **kwargs
         """

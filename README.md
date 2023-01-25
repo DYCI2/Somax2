@@ -49,7 +49,7 @@ A good starting point in understanding Somax is the document `Introduction Somax
 * **Max Help Files:** The main documentation of Somax. Individual help files exists for each Max object, outlining how to use the object, its parametric controls as well as a number of use cases. The help files can be accessed by pressing the «?» button available in each of the objects or by right-clicking (ctrl-click) the object inside Max in the unlocked patcher and selecting "Open Help".
 * **Videos, Reports and Publications**: Can be found [here](http://repmus.ircam.fr/somax/home).
 
-Further documentation will be added continuously.
+Because of space limitations, only a few tiny audio corpora (marked with a «(A)» in the corpus menu) are included in the distributions. Check the [Somax Project page](https://www.stms-lab.fr/projects/pages/somax2/) for more corpora.
 
 ## Credits
 Somax 2 (c) Ircam 2012-2022
@@ -65,8 +65,12 @@ Legacy:
 
 The Somax 2 project is part of the ANR project MERCI (Mixed Musical Reality with Creative Instruments) ANR-19-CE33-0010, and the ERC project REACH (Raising Co-creativity in Cyber-Human Musicianship) ERC-ADG-19-883313. PI : Gérard Assayag, Music Representation Team, IRCAM STMS Lab (CNRS, Sorbonne University, Ministry of Culture).
 
-Original corpus creation: B. Borron & B. Magnien, (improvisation on ten jazz standards)  
-Original corpus creation: Carine Bonnefoy (Improvisation on Intuition by C. Bonnnefoy)
+Original corpus creation: 
+* B. Borron & B. Magnien, (improvisation on ten jazz standards)  
+* Carine Bonnefoy (Improvisation on Intuition by C. Bonnnefoy)
+* Joëlle Léandre (Free Improvisation)
+* Fabbrizio Cassol (Free Improvisation)
+
 
 ## Contacting the team
 

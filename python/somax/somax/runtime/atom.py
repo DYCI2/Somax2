@@ -14,6 +14,7 @@ from somax.runtime.peak_event import PeakEvent
 from somax.runtime.peaks import Peaks
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
+from somax.scheduler.scheduling_mode import SchedulingMode
 
 
 class Atom(Parametric, ContentAware):
@@ -101,6 +102,9 @@ class Atom(Parametric, ContentAware):
     def set_activity_pattern(self, activity_pattern: AbstractActivityPattern):
         activity_pattern.corpus = self._corpus
         self._activity_pattern = activity_pattern
+
+    # def set_scheduling_mode(self, scheduling_mode: SchedulingMode):
+    #     self._activity_pattern.set_scheduling_mode(scheduling_mode)
 
     def update_transforms(self, transform_handler: TransformHandler):
         valid_transforms: List[AbstractTransform] = self._classifier.update_transforms(transform_handler)

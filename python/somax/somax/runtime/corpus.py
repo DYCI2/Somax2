@@ -23,7 +23,7 @@ from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features.feature import CorpusFeature
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch
-from somax.scheduler.scheduling_mode import SchedulingMode
+from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.utils.get_version import VersionTools
 from somax.utils.introspective import Introspective
 
@@ -85,6 +85,10 @@ class Corpus(Generic[E], Introspective, ABC):
     @abstractmethod
     def duration(self) -> float:
         """ Return the duration of the corpus along its relevant time axis """
+
+    @abstractmethod
+    def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
+        """ raises RuntimeError if mode is not compatible with corpus"""
 
     @classmethod
     @abstractmethod
@@ -153,7 +157,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
             with gzip.open(filepath, 'rt', encoding='UTF-8') as f:
                 corpus_data: Dict[str, Any] = json.load(f)
             version: str = corpus_data["version"]
-            if not VersionTools.matches_current(version, pre_release=False) and not volatile:
+            if not VersionTools.matches_current(version, use_corpus_version=True) and not volatile:
                 raise InvalidCorpus(f"The loaded corpus was built with an old version of Somax. "
                                     f"While it may work, using it could result in a number of bugs. "
                                     f"Recommended action: rebuild corpus. "
@@ -173,6 +177,12 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
         except (KeyError, AttributeError) as e:
             raise InvalidCorpus(f"The Corpus at '{filepath}' has an invalid format and could not be loaded") from e
 
+    def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
+        self.scheduling_mode = scheduling_mode
+        for event in self.events:
+            event.set_scheduling_mode(scheduling_mode)
+        self._index_map, self._grid_size = self._create_index_map()
+
     def encode(self) -> Dict[str, Any]:
         features: Dict[Type['CorpusFeature'], str] = {cls: name for (name, cls) in CorpusFeature.all_corpus_features()}
         if len(set(features.keys())) < len(features.keys()):
@@ -180,7 +190,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
                                 " constructed. Ensure that no two CorpusFeatures in the library have the same name.")
         return {"name": self.name,
                 "content_type": self.scheduling_mode.encode(),
-                "version": somax.__version__,
+                "version": somax.__version_corpus__,
                 "build_parameters": self._build_parameters,
                 "features_dict": {name: feature.classpath() for (feature, name) in features.items()},
                 "length": self.length(),
@@ -191,8 +201,13 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
     def duration(self) -> float:
         if len(self.events) == 0:
             return 0.0
+
         last_event: MidiCorpusEvent = self.events[-1]
-        return last_event.onset + last_event.duration
+
+        if isinstance(self.scheduling_mode, AbsoluteScheduling):
+            return (last_event.absolute_onset + last_event.absolute_duration) / 1000
+        else:
+            return last_event.onset + last_event.duration
 
     def to_note_matrix(self) -> NoteMatrix:
         note_data: List[List[Union[int, float, str]]] = [[] for _ in range(len(Keys))]
@@ -295,6 +310,7 @@ class AudioCorpus(Corpus):
         raises: InvalidCorpus
                 ExternalDataMismatch
                 FileNoteFound
+                TypeError if pickle mismatch
         """
         # TODO: This should obviously not be named `from_json` as it uses a pickle
         try:
@@ -310,11 +326,11 @@ class AudioCorpus(Corpus):
                     else:
                         new_audio_filepath: str = new_audio_path
                     cls.validate_audio_source(new_audio_filepath, corpus.sr,
-                                              corpus.duration(), corpus.num_channels)
+                                              corpus.file_duration, corpus.num_channels)
                     corpus.filepath = new_audio_filepath
 
                 else:
-                    cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.duration(), corpus.num_channels)
+                    cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.file_duration, corpus.num_channels)
 
         # Pickle tried to import module that was not supported
         except pickle.UnpicklingError as e:
@@ -380,3 +396,8 @@ class AudioCorpus(Corpus):
                 f.write(optimized_pickle)
 
         return filepath
+
+    def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
+        if isinstance(scheduling_mode, RelativeScheduling):
+            raise RuntimeError(f"{self.__class__.__name__} does not support relative scheduling")
+        pass

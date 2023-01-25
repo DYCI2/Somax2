@@ -1,14 +1,16 @@
 import logging
 from abc import abstractmethod, ABC
-from typing import Dict, Union, List, Optional, Tuple
+from typing import Dict, Union, List, Optional
 
 import numpy as np
 
 from somax.runtime.corpus import Corpus
+from somax.runtime.corpus_event import MidiCorpusEvent
 from somax.runtime.parameter import Parameter, ParamWithSetter
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_event import PeakEvent
 from somax.runtime.peaks import Peaks
+from somax.scheduler.scheduling_mode import SchedulingMode, AbsoluteScheduling
 from somax.utils.introspective import StringParsed
 
 
@@ -17,9 +19,10 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
     TIME_IDX = 1
     TRANSFORM_IDX = 2
 
-    def __init__(self, corpus: Optional[Corpus] = None):
+    def __init__(self, scheduling_mode: SchedulingMode = SchedulingMode.default(), corpus: Optional[Corpus] = None):
         super(AbstractActivityPattern, self).__init__()
         self.logger = logging.getLogger(__name__)
+        # self.scheduling_mode: SchedulingMode = scheduling_mode
         self._peaks: Peaks = Peaks.create_empty()
         self.corpus: Corpus = corpus
 
@@ -42,6 +45,10 @@ class AbstractActivityPattern(Parametric, StringParsed, ABC):
     @abstractmethod
     def update_peaks_on_new_event(self, new_time: float) -> None:
         """ """
+
+    # def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
+    #     self.scheduling_mode = scheduling_mode
+    #     print(f"schedluing mode set to {scheduling_mode}")
 
     @abstractmethod
     def clear(self) -> None:
@@ -71,7 +78,7 @@ class ClassicActivityPattern(AbstractActivityPattern):
     DEFAULT_T = 4.6
 
     def __init__(self, corpus: Corpus = None, tau_mem_decay: float = DEFAULT_T):
-        super().__init__(corpus)
+        super().__init__(corpus=corpus)
         self.logger.debug("[__init__]: ClassicActivityPattern initialized.")
         self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
         # TODO: tau shouldn't be the parameter: t should
@@ -88,6 +95,14 @@ class ClassicActivityPattern(AbstractActivityPattern):
         scores: List[float] = []
         times: List[float] = []
         transform_hashes: List[int] = []
+        # FIXME: Hacky solution for adding influences in absolute time
+        # if len(influences) > 0 and isinstance(influences[0].event, MidiCorpusEvent) \
+        #         and self.scheduling_mode == AbsoluteScheduling:
+        #     for influence in influences:
+        #         times.append(influence.event.onset)
+        #         scores.append(self.default_score.value)
+        #         transform_hashes.append(influence.transform_hash)
+        # else:
         for influence in influences:
             times.append(influence.event.onset)
             scores.append(self.default_score.value)
@@ -101,8 +116,9 @@ class ClassicActivityPattern(AbstractActivityPattern):
         self._update_peaks(new_time)
 
     def _update_peaks(self, new_time: float) -> None:
-        self._peaks.scores *= np.exp(-np.divide(new_time - self.last_update_time, self.tau_mem_decay.value))
-        self._peaks.times += new_time - self.last_update_time
+        delta_time: float = max(0.0, new_time - self.last_update_time)  # Adjust for TRIGGER_PRETIME
+        self._peaks.scores *= np.exp(-np.divide(delta_time, self.tau_mem_decay.value))
+        self._peaks.times += delta_time
         self.last_update_time = new_time
         indices_to_remove: np.ndarray = np.where((self._peaks.scores <= self.extinction_threshold.value)
                                                  | (self._peaks.times >= self.corpus.duration()))
@@ -127,7 +143,7 @@ class ManualActivityPattern(AbstractActivityPattern):
     DEFAULT_THRESHOLD_TICKS = 0.025
 
     def __init__(self, corpus: Corpus = None):
-        super().__init__(corpus)
+        super().__init__(corpus=corpus)
         self.logger.debug("[__init__]: ManualActivityPattern initialized.")
         self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
         self.tau_mem_decay: Parameter = ParamWithSetter(self._calc_tau(self.DEFAULT_N), 1, None, "int",
@@ -228,7 +244,7 @@ class DecayActivityPattern(AbstractActivityPattern):
     DEFAULT_T = 4.6
 
     def __init__(self, corpus: Corpus = None, tau_mem_decay: float = DEFAULT_T):
-        super().__init__(corpus)
+        super().__init__(corpus=corpus)
         self.logger.debug("[__init__]: ClassicActivityPattern initialized.")
         self.extinction_threshold: Parameter = Parameter(0.1, 0.0, None, 'float', "Score below which peaks are removed")
         # TODO: tau shouldn't be the parameter: t should

@@ -1,4 +1,5 @@
 import logging
+import random
 from typing import Dict, Optional, Tuple, Type, List
 
 import numpy as np
@@ -11,13 +12,16 @@ from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch
 from somax.runtime.exceptions import InvalidCorpus, InvalidLabelInput
+from somax.runtime.fallback_peak_selector import FallbackPeakSelector
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.parameter import Parameter, Parametric
+from somax.runtime.peak_post_processing import PeakPostFilter
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.peaks import Peaks
 from somax.runtime.scale_actions import AbstractScaleAction
+from somax.runtime.taboo_mask import TabooMask
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
 
@@ -33,9 +37,11 @@ class Player(Parametric, ContentAware):
         self.name: str = name
         self._transform_handler: TransformHandler = TransformHandler()
         self.peak_selector: AbstractPeakSelector = peak_selector
+        self.fallback_selector: FallbackPeakSelector = FallbackPeakSelector()
         self.corpus: Optional[Corpus] = corpus
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
         self.merge_action: AbstractMergeAction = merge_action
+        self.post_filter: PeakPostFilter = PeakPostFilter(enabled=False)
 
         self.atoms: Dict[str, Atom] = {}
 
@@ -43,6 +49,7 @@ class Player(Parametric, ContentAware):
             self.add_scale_action(scale_action)
 
         self.previous_peaks: Peaks = Peaks.create_empty()
+        self.previous_output: Optional[tuple[CorpusEvent, AbstractTransform]] = None
         self._transform_handler: TransformHandler = TransformHandler()
 
         self._force_jump_index: Optional[int] = None
@@ -59,7 +66,11 @@ class Player(Parametric, ContentAware):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def new_event(self, scheduler_time: float, _tempo: float) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+    def new_event(self,
+                  scheduler_time: float,
+                  beat_phase: float,
+                  _tempo: float,
+                  enforce_output: bool = False) -> Optional[Tuple[CorpusEvent, AbstractTransform, bool]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
         if not self.is_enabled():
@@ -77,23 +88,80 @@ class Player(Parametric, ContentAware):
             self.clear()
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self._force_jump()
+            output_from_match: bool = True
         else:
             self._update_peaks_on_new_event(scheduler_time)
             peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
-            peaks = self._scale_peaks(peaks, scheduler_time, self.corpus)
+            taboo_mask: TabooMask = TabooMask(self.corpus)
+            peaks, taboo_mask = self._scale_peaks(peaks, scheduler_time, beat_phase,
+                                                  self.corpus, taboo_mask, enforce_output)
 
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self.peak_selector.decide(peaks, self.corpus, self._transform_handler)
+
+            # If no output: try fallback
+            if event_and_transform is None:
+                event_and_transform = self.fallback_selector.decide(self.corpus,
+                                                                    taboo_mask,
+                                                                    enforce_fallback=enforce_output)
+                output_from_match = False
+            else:
+                output_from_match = True
+
+            if not enforce_output:
+                event_and_transform = self.post_filter.process(event_and_transform)
+
             self.previous_peaks = peaks
 
         if event_and_transform is None:
             self._feedback(None, scheduler_time, NoTransform())
             return None
+        else:
+            self.previous_output = event_and_transform
+
         event, transform = event_and_transform
         event = transform.apply(event)  # returns deepcopy of transformed event
 
         self._feedback(event, scheduler_time, transform)
-        return event, transform
+        return event, transform, output_from_match
+
+    def step(self,
+             scheduler_time: float,
+             _beat_phase: float,
+             _tempo: float) -> Optional[tuple[CorpusEvent, AbstractTransform]]:
+        # TODO: Step mechanism does not respect taboos since it doesn't use scale actions at all.
+        if not self.is_enabled():
+            return None
+
+        if not self.eligible:
+            raise ContentMismatch(f"Player '{self.name}' couldn't handle corpus of type '{type(self.corpus).__name__}"
+                                  f"due to incompatibility with the following class: "
+                                  f"'{self._invalidated_by.__class__.__name__}'")
+
+        if not self.corpus:
+            raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
+
+        if self._force_jump_index is not None:
+            self.clear()
+            event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+            event_and_transform = self._force_jump()
+
+        elif self.previous_output is not None:
+            self._update_peaks_on_new_event(scheduler_time)
+            next_event_index = (self.previous_output[0].state_index + 1) % self.corpus.length()
+            event: CorpusEvent = self.corpus.event_at(next_event_index)
+            transform = self.previous_output[1]
+            event = transform.apply(event)
+            event_and_transform = event, transform
+
+        else:
+            event_and_transform = None
+
+        if event_and_transform is not None:
+            self._feedback(event_and_transform[0], scheduler_time, event_and_transform[1])
+            self.previous_output = event_and_transform
+
+        return event_and_transform
 
     def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
         """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError
@@ -153,7 +221,9 @@ class Player(Parametric, ContentAware):
     def _feedback(self, feedback_event: Optional[CorpusEvent], time: float,
                   applied_transform: AbstractTransform) -> None:
         self.peak_selector.feedback(feedback_event, time, applied_transform)
+        self.fallback_selector.feedback(feedback_event, time, applied_transform)
         self.merge_action.feedback(feedback_event, time, applied_transform)
+
         for scale_action in self.scale_actions.values():
             scale_action.feedback(feedback_event, time, applied_transform)
 
@@ -164,6 +234,7 @@ class Player(Parametric, ContentAware):
         """ Reset runtime state without modifying any parameters or settings """
         self.previous_peaks = Peaks.create_empty()
         self.peak_selector.clear()
+        self.fallback_selector.clear()
         for scale_action in self.scale_actions.values():
             scale_action.clear()
 
@@ -181,6 +252,11 @@ class Player(Parametric, ContentAware):
         self.corpus = corpus
         for atom in self.atoms.values():
             atom.read_corpus(corpus)
+
+    # def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
+    #     for atom in self.atoms.values():
+    #         atom.set_scheduling_mode(scheduling_mode)
+    #         print(f"setting scheduling mode for atom {atom.name} to {scheduling_mode}")
 
     def create_atom(self, path: List[str], weight: float, self_influenced: bool, classifier: AbstractClassifier,
                     activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
@@ -307,6 +383,10 @@ class Player(Parametric, ContentAware):
         self.clear()
         index: Optional[int] = self._force_jump_index
         self._force_jump_index = None
+
+        if index == -1:
+            index = random.randrange(0, self.corpus.length())
+
         try:
             event: CorpusEvent = self.corpus.events[index]
             return event, NoTransform()
@@ -314,17 +394,32 @@ class Player(Parametric, ContentAware):
             self.logger.debug(f"[_force_jump]: Force jump cancelled due to error: {repr(e)}")
             return None
 
-    def _scale_peaks(self, peaks: Peaks, scheduler_time: float, corpus: Corpus, **kwargs):
-        if peaks.is_empty():
-            return peaks
+    def _scale_peaks(self,
+                     peaks: Peaks,
+                     scheduler_time: float,
+                     beat_phase: float,
+                     corpus: Corpus,
+                     taboo_mask: TabooMask,
+                     enforce_output: bool,
+                     **kwargs) -> Tuple[Peaks, TabooMask]:
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
         corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
                                                              for t in np.unique(peaks.transform_ids)]
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled_and_eligible():
-                peaks = scale_action.scale(peaks, scheduler_time, corresponding_events, corresponding_transforms,
-                                           corpus, **kwargs)
-        return peaks
+                peaks, taboo_mask = scale_action.scale(peaks=peaks,
+                                                       time=scheduler_time,
+                                                       beat_phase=beat_phase,
+                                                       corresponding_events=corresponding_events,
+                                                       corresponding_transforms=corresponding_transforms,
+                                                       taboo_mask=taboo_mask,
+                                                       corpus=corpus,
+                                                       enforce_output=enforce_output,
+                                                       **kwargs)
+
+        # Remove 0-scores
+        peaks.remove(peaks.scores < 1e-5)
+        return peaks, taboo_mask
 
     def _update_transforms(self):
         for scale_action in self.scale_actions.values():

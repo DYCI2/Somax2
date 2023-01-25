@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, Optional, List, Tuple
 
+from somax.features import TotalEnergyDb
 from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.transforms import AbstractTransform
@@ -33,17 +34,24 @@ class RendererEvent(ScheduledEvent, ABC):
 
 
 class MidiSliceOnsetEvent(RendererEvent):
-    def __init__(self, trigger_time: float, corpus_event: MidiCorpusEvent, applied_transform: AbstractTransform):
+    def __init__(self,
+                 trigger_time: float,
+                 corpus_event: MidiCorpusEvent,
+                 applied_transform: AbstractTransform,
+                 scheduler_tempo: float):
         super().__init__(trigger_time=trigger_time)
         self.event: MidiCorpusEvent = corpus_event
         self.applied_transform: AbstractTransform = applied_transform
+        self.scheduler_tempo: float = scheduler_tempo
 
     def render(self) -> List[RendererMessage]:
         notes: List[Tuple[int, int, int]] = [(n.pitch, n.velocity, n.channel) for n in self.event.notes]
         return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
                                 content=[self.event.state_index, self.applied_transform.renderer_info()]),
                 RendererMessage(keyword=SendProtocol.SEND_STATE_ONSET,
-                                content=notes)]
+                                content=notes),
+                RendererMessage(keyword=SendProtocol.SEND_MIDI_TIMESTRETCH,
+                                content=self.scheduler_tempo / self.event.tempo)]
 
 
 class MidiNoteEvent(RendererEvent):
@@ -62,21 +70,35 @@ class MidiNoteEvent(RendererEvent):
 
 
 class AudioEvent(RendererEvent):
-    def __init__(self, trigger_time: float, corpus_event: AudioCorpusEvent,
-                 applied_transform: AbstractTransform, time_stretch_factor: float):
+    def __init__(self, trigger_time: float,
+                 corpus_event: AudioCorpusEvent,
+                 applied_transform: AbstractTransform,
+                 time_stretch_factor: float,
+                 render_energy: bool):
         super(AudioEvent, self).__init__(trigger_time)
         self.event: AudioCorpusEvent = corpus_event
         self.applied_transform: AbstractTransform = applied_transform
         self.time_stretch_factor: float = time_stretch_factor
+        self.render_energy: bool = render_energy
 
     def render(self) -> List[RendererMessage]:
-        return [RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
-                                content=[self.event.state_index, self.applied_transform.renderer_info()]),
-                RendererMessage(keyword=SendProtocol.SEND_AUDIO_EVENT,
-                                content=[self.event.onset * 1000,
-                                         (self.event.onset + self.event.duration) * 1000,
-                                         self.applied_transform.renderer_info(),
-                                         self.time_stretch_factor])]
+        messages: List[RendererMessage] = [
+            RendererMessage(keyword=SendProtocol.SEND_STATE_EVENT,
+                            content=[self.event.state_index, self.applied_transform.renderer_info()])
+        ]
+
+        content = [self.event.onset * 1000,
+                   (self.event.onset + self.event.duration) * 1000,
+                   self.applied_transform.renderer_info(),
+                   self.time_stretch_factor]
+
+        if self.render_energy:
+            content.append(self.event.get_feature(TotalEnergyDb).value())
+
+        messages.append(RendererMessage(keyword=SendProtocol.SEND_AUDIO_EVENT,
+                                        content=content))
+
+        return messages
 
 
 class AudioContinueEvent(RendererEvent):
@@ -103,7 +125,12 @@ class AudioOffEvent(RendererEvent):
         return [RendererMessage(keyword=SendProtocol.SEND_AUDIO_OFF, content=SendProtocol.SEND_AUDIO_OFF)]
 
 
-class TriggerEvent(ScheduledEvent, ABC):
+class TimeoutInfoEvent(RendererEvent):
+    def render(self) -> List[RendererMessage]:
+        return [RendererMessage(keyword=SendProtocol.OUTPUT_TYPE, content=SendProtocol.OUTPUT_TYPE_TIMEOUT)]
+
+
+class TriggerEvent(ScheduledEvent):
     def __init__(self, trigger_time: float, target_time: float):
         """
         Note: the `trigger_time` is the point in time when the `trigger` gets queued,
@@ -114,3 +141,21 @@ class TriggerEvent(ScheduledEvent, ABC):
 
     def __repr__(self):
         return f"{self.__class__.__name__}(trigger_time={self.trigger_time},target_time={self.target_time}"
+
+
+class ContinueEvent(ScheduledEvent):
+    """ Note: everything related to ContinueEvent should be considered a hack that needs to be rewritten. """
+
+    def __init__(self, trigger_time: float, target_time: float):
+        super().__init__(trigger_time=trigger_time)
+        self.target_time: float = target_time
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(trigger_time={self.trigger_time},target_time={self.target_time}"
+
+
+class ContinueStopEvent(ContinueEvent):
+    """
+    Event for handling note offs after a sequence of ContinueEvents.
+    Note: everything related to ContinueEvent should be considered a hack that needs to be rewritten.
+    """

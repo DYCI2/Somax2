@@ -11,6 +11,7 @@ MAX_BUILD_PARENT_FOLDER = build/somax
 MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/Somax-$(VERSION)
 DMG_NAME = Somax-$(VERSION)
 DMG_PATH = dist/$(DMG_NAME).dmg
+APP_PATH = dist/$(DMG_NAME).app
 
 WIN_PKG = Somax-$(VERSION)
 
@@ -50,11 +51,8 @@ codesignature:
 
 notarize:
 	hdiutil create "$(DMG_PATH)" -fs HFS+ -srcfolder dist/somax_server.app -ov
-	xcrun altool --notarize-app --primary-bundle-id "ircam.repmus.somax" \
-				 -u "joakim.borg@ircam.fr" \
-				 -p $$(security find-generic-password -w -a $$LOGNAME -s "somax_app_specific") \
-				 --file "$(DMG_PATH)"
-	@echo "\033[1mNOTE: You will still have to do the final step manually once notarization has been approved:\n      xcrun stapler staple dist/somax_server.app\033[0m"
+	xcrun notarytool submit "$(DMG_PATH)" --keychain-profile "repmus" --wait
+	xcrun stapler staple dist/somax_server.app
 
 max-package: clean
 	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN CODESIGNED BEFORE CALLING THIS COMMAND. ORDER SHOULD BE:\n    make pyinstaller\n    make codesignature (+ stapler once finished)\n    make max-package\033[0m"
@@ -63,14 +61,13 @@ max-package: clean
 	# clean up local items
 	rm -rf "$(MAX_BUILD_PATH)"/state/*
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
-	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.pickle
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.json
 	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
 	# create extras folder (note: symlinks are not windows-compatible)
 	mkdir -p "$(MAX_BUILD_PATH)/extras/somax"
-	ln -s "../../somax2.maxpat" "$(MAX_BUILD_PATH)/extras/somax"
-	ln -s "../../docs/tutorial-patchers/somax2_first_steps.maxpat" "$(MAX_BUILD_PATH)/extras/somax/intro_tutorial.maxpat"
-	ln -s "../../docs/tutorial-patchers/somax2_audio_tutorial.maxpat" "$(MAX_BUILD_PATH)/extras/somax/audio_tutorial.maxpat"
+	ln -s "../../somax2.maxpat" "$(MAX_BUILD_PATH)/extras/somax2.maxpat"
+	ln -s "../../docs/tutorial-patchers/somax2_first_steps.maxpat" "$(MAX_BUILD_PATH)/extras/somax/tutorial_intro.maxpat"
+	ln -s "../../docs/tutorial-patchers/somax2_audio_tutorial.maxpat" "$(MAX_BUILD_PATH)/extras/somax/tutorial_audio.maxpat"
 	# copy binary (should already be codesigned)
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
 	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"

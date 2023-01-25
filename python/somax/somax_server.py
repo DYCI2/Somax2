@@ -11,6 +11,7 @@ import warnings
 from importlib import resources
 from typing import Optional, Callable, Tuple, List, Dict, Type
 
+import librosa.util.exceptions
 from audioread import NoBackendError
 
 import somax
@@ -18,6 +19,8 @@ from somax import log
 from somax.classification.chroma_classifiers import OnsetSomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
+from somax.corpus_builder.manual_corpus_builder import ThreadedManualCorpusBuilder
+from somax.corpus_builder.manual_text_formats import TextFormat
 from somax.runtime.agent import OscAgent, Agent
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.corpus import Corpus, AudioCorpus
@@ -82,8 +85,11 @@ class Somax:
         [process.join() for process in self._corpus_builders]
         self._agents = {}
 
-    def set_tempo(self, tempo: float):
+    def set_tempo(self, tempo: float) -> None:
         self._transport.set_tempo(tempo)
+
+    def set_beat_phase(self, beat_phase: float) -> None:
+        self._transport.set_beat_phase(beat_phase)
 
     def set_tempo_master(self, tempo_master: Optional[str] = None):
         """ Passing None to this function will set all Agents as tempo_master = False"""
@@ -121,6 +127,8 @@ class SomaxServer(Somax, AsyncioOscObject):
 
         self.loop: Callable = self.__master_loop
 
+        self.previous_time: Time = Time(0, 0, 0, 0, False)
+
     ######################################################
     # ASYNCIO & MAIN LOOP(S)
     ######################################################
@@ -150,7 +158,12 @@ class SomaxServer(Somax, AsyncioOscObject):
         if self._transport.running:
             try:
                 time: Time = self._transport.update_time(ticks=tick)
+
                 self._send_to_all_agents(TimeMessage(time=time))
+
+                if time.phase < self.previous_time.phase:
+                    self.target.send(SendProtocol.SCHEDULER_BEAT_PHASE, Target.WRAPPED_BANG)
+                self.previous_time = time
             except TypeError as e:
                 self.logger.error(f"{repr(e)}")
 
@@ -226,7 +239,7 @@ class SomaxServer(Somax, AsyncioOscObject):
 
     def get_time(self):
         time: Time = self._transport.time
-        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.seconds, time.tempo))
+        self.target.send(SendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.seconds, time.tempo, time.phase))
 
     def get_player_names(self):
         for player_name in self._agents.keys():
@@ -261,9 +274,16 @@ class SomaxServer(Somax, AsyncioOscObject):
     def set_tempo(self, tempo: float):
         if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
             super().set_tempo(tempo)
-            self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, tempo)
+            self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, (self._transport.tempo, self._transport.time.phase))
         else:
             self.logger.error(f"Tempo must be a single value larger than zero. Did not set tempo.")
+
+    def set_beat_phase(self, beat_phase: float) -> None:
+        if (isinstance(beat_phase, float) or isinstance(beat_phase, int)) and 0.0 <= beat_phase <= 1.0:
+            super().set_beat_phase(beat_phase)
+            self.target.send(SendProtocol.SCHEDULER_CURRENT_TEMPO, (self._transport.tempo, self._transport.time.phase))
+        else:
+            self.logger.error(f"Beat phase must be a single value between 0.0 and 1.0. Did not set beat phase.")
 
     def exit(self, print_exit_message: bool = True):
         self.terminate()
@@ -346,6 +366,41 @@ class SomaxServer(Somax, AsyncioOscObject):
         corpus_builder.start()
         self._corpus_builders.append(corpus_builder)
 
+    def build_manual_segmented_corpus(self,
+                                      audio_file_path: str,
+                                      analysis_file_path: str,
+                                      corpus_name: str,
+                                      analysis_format: str,
+                                      output_folder: str,
+                                      # pre_analysed_descriptors: Optional[List[str]] = None,   # TODO
+                                      use_tempo_annotations: bool = False,
+                                      segmentation_offset_ms: int = 0,
+                                      ignore_invalid_lines: bool = False,
+                                      overwrite: bool = False):
+        try:
+            analysis_format: Type[TextFormat] = TextFormat.from_keyword(analysis_format)
+        except KeyError as e:
+            self.logger.error(f"Could not find annotation file format '{e}'. No corpus was built")
+            return
+
+        corpus_builder: ThreadedManualCorpusBuilder = ThreadedManualCorpusBuilder(
+            audio_file_path=audio_file_path,
+            analysis_file_path=analysis_file_path,
+            output_folder=output_folder,
+            analysis_format=analysis_format,
+            ip=self.ip,
+            send_port=self.send_port,
+            osc_address=self.address,
+            corpus_name=corpus_name,
+            use_tempo_annotations=use_tempo_annotations,
+            segmentation_offset_ms=segmentation_offset_ms,
+            ignore_invalid_lines=ignore_invalid_lines,
+            overwrite=overwrite
+        )
+
+        corpus_builder.start()
+        self._corpus_builders.append(corpus_builder)
+
     def test_audio_segmentation(self, filepath: str, segmentation_mode: str, hop_length: int = 512, **kwargs):
         try:
             segmentation: AudioSegmentation = AudioSegmentation.from_string(name=segmentation_mode)
@@ -366,7 +421,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         except NoBackendError:
             self.logger.error(f"The file format of the provided file is not supported.")
             return
-        except ParameterError as e:
+        except (ParameterError, librosa.util.exceptions.ParameterError) as e:
             self.logger.error(f"{str(e)}. Try retuning the parameters with respect to the current audio file")
             return
         finally:

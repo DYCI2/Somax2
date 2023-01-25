@@ -13,12 +13,14 @@ from somax.classification.classifier import AbstractClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
+from somax.features import Tempo
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
-from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
+from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch
 from somax.runtime.improvisation_memory import ImprovisationMemory
@@ -32,36 +34,48 @@ from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.send_protocol import SendProtocol
 from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
+from somax.scheduler.midi_state_handler import NoteOffMode
 from somax.scheduler.process_messages import ControlMessage, TimeMessage, TempoMasterMessage, PlayControl, TempoMessage
-from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, RendererEvent, TriggerEvent
+from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, RendererEvent, TriggerEvent, ContinueEvent
 from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
-from somax.scheduler.scheduling_mode import SchedulingMode
+from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
 
 
 # TODO: Complete separation Agent/OscAgent where Agent can be initialized and used from the command line
 
 class Agent(multiprocessing.Process):
-    def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 transport_time: Time, scheduler_running: bool,
-                 corpus: Optional[Corpus] = None, is_tempo_master: bool = False,
-                 scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler, **kwargs):
+    def __init__(self,
+                 player: Player,
+                 recv_queue: multiprocessing.Queue,
+                 tempo_send_queue: multiprocessing.Queue,
+                 transport_time: Time,
+                 scheduler_running: bool,
+                 corpus: Optional[Corpus] = None,
+                 is_tempo_master: bool = False,
+                 scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler,
+                 synchronize_to_global_tempo: bool = False,
+                 recombine: bool = False,
+                 **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.player: Player = player
         self.is_tempo_master: bool = is_tempo_master
         self.recv_queue: multiprocessing.Queue = recv_queue
         self.tempo_send_queue: multiprocessing.Queue = tempo_send_queue
+        self.synchronize_to_global_tempo: bool = synchronize_to_global_tempo
+        self.recombine: bool = recombine
 
         if corpus:  # handle corpus object if passed
             self.player.read_corpus(corpus)
 
-        scheduling_mode: SchedulingMode = corpus.scheduling_mode if corpus is not None else SchedulingMode.default()
+        scheduling_mode: SchedulingMode = self.get_scheduling_mode(corpus, synchronize_to_global_tempo)
 
         self.scheduling_handler: SchedulingHandler = scheduling_type(scheduling_mode=scheduling_mode,
                                                                      time=scheduling_mode.get_time_axis(transport_time),
                                                                      tempo=transport_time.tempo,
                                                                      running=scheduler_running)
+
         self.improvisation_memory: ImprovisationMemory = ImprovisationMemory()
 
         self._enabled: bool = True
@@ -70,11 +84,26 @@ class Agent(multiprocessing.Process):
     def terminate(self):
         self._terminated = True
 
+    @staticmethod
+    def get_scheduling_mode(corpus: Optional[Corpus], synchronize_to_global_tempo: bool) -> SchedulingMode:
+        if isinstance(corpus, MidiCorpus) and synchronize_to_global_tempo is True:
+            return RelativeScheduling()
+        else:
+            return AbsoluteScheduling()
+
 
 class OscAgent(Agent, AsyncioOscObject):
-    def __init__(self, player: Player, recv_queue: multiprocessing.Queue, tempo_send_queue: multiprocessing.Queue,
-                 transport_time: Time, scheduler_running: bool, scheduling_type: Type[SchedulingHandler],
-                 ip: str, recv_port: int, send_port: int, address: str,
+    def __init__(self,
+                 player: Player,
+                 recv_queue: multiprocessing.Queue,
+                 tempo_send_queue: multiprocessing.Queue,
+                 transport_time: Time,
+                 scheduler_running: bool,
+                 scheduling_type: Type[SchedulingHandler],
+                 ip: str,
+                 recv_port: int,
+                 send_port: int,
+                 address: str,
                  corpus_filepath: Optional[str] = None, **kwargs):
         Agent.__init__(self, player=player, recv_queue=recv_queue, tempo_send_queue=tempo_send_queue,
                        transport_time=transport_time, scheduler_running=scheduler_running,
@@ -128,38 +157,111 @@ class OscAgent(Agent, AsyncioOscObject):
             for event in events:
                 if isinstance(event, TriggerEvent):
                     self._trigger_output(trigger=event)
+                elif isinstance(event, ContinueEvent):
+                    self._continue_output(continue_event=event)
                 elif isinstance(event, TempoEvent) and self.is_tempo_master:
                     self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
                 elif isinstance(event, RendererEvent):
                     self.target.send_event(event)
 
     def _trigger_output(self, trigger: TriggerEvent):
+        # print("TRIGGER")
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
-            event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
-            event_and_transform = self.player.new_event(scheduling_time, scheduler_tempo)
+            event_transform_and_match_type: Optional[Tuple[CorpusEvent, AbstractTransform, bool]]
+            # TODO: BeatPhase should not be `self.scheduling_handler.phase`, but needs to be stored in the trigger to
+            #       make sure that it corresponds to `target time` rather than `trigger time`.
+            # print(f"TRIG: new event: {scheduling_time}")
+            event_transform_and_match_type = self.player.new_event(scheduling_time,
+                                                                   self.scheduling_handler.phase,
+                                                                   scheduler_tempo,
+                                                                   enforce_output=False)
             self._send_output_statistics()
         except InvalidCorpus as e:
             self.logger.debug(str(e))
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
             return
 
-        if event_and_transform is None:
+        if event_transform_and_match_type is None:
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
-            return
 
-        event: CorpusEvent = event_and_transform[0]
-        applied_transform: AbstractTransform = event_and_transform[1]
+        elif event_transform_and_match_type[2] is True:  # output from match
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
+        else:  # output from fallback
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
 
-        # TODO: When the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was
+        # TODO: No longer supported. Update for Corpus
+        #  Note that when the `ImprovisationMemory` was refactored from `Player` to `Agent`, the original behaviour was
         #       preserved here. This means that `None`s will never be added to the ImprovisationMemory and therefore
         #       the timing could possibly deviate in the exported corpus from what was originally generated.
-        self.improvisation_memory.append(event, trigger.target_time, applied_transform, scheduler_tempo,
-                                         artificially_sustained=self.scheduling_handler.artificially_sustained,
-                                         aligned_onsets=self.scheduling_handler.aligned_onsets)
+        # self.improvisation_memory.append(event, trigger.target_time, applied_transform, scheduler_tempo,
+        #                                  artificially_sustained=self.scheduling_handler.artificially_sustained,
+        #                                  aligned_onsets=self.scheduling_handler.aligned_onsets)
 
-        self.scheduling_handler.add_corpus_event(scheduling_time, event_and_transform=event_and_transform)
+        event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+        event_and_transform = (event_transform_and_match_type[0], event_transform_and_match_type[1]) \
+            if event_transform_and_match_type is not None else None
+
+        # Note: Timeout will only be reset if `event_and_transform` is not None
+
+        if event_and_transform is not None:
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TIMEOUT_RESET)
+
+        self.scheduling_handler.add_corpus_event(scheduling_time,
+                                                 event_and_transform=event_and_transform,
+                                                 reset_timeout=True)
+
+    def _continue_output(self, continue_event: ContinueEvent) -> None:
+        # print("CONTINUE")
+        scheduling_time: float = continue_event.target_time
+
+        try:
+            event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
+            if self.recombine:
+                # print(f"CONT: new event: {scheduling_time}")
+                event_transform_and_match_type = self.player.new_event(scheduling_time,
+                                                                       self.scheduling_handler.phase,
+                                                                       self.scheduling_handler.tempo,
+                                                                       enforce_output=True)
+                if event_transform_and_match_type is None:
+                    self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
+                    event_and_transform = None
+                else:
+                    output_from_match: bool = event_transform_and_match_type[2]
+                    if output_from_match:
+                        self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
+                    else:
+                        self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
+
+                    event_and_transform = event_transform_and_match_type[0], event_transform_and_match_type[1]
+
+            else:
+                # print(f"CONT: step: {scheduling_time}")
+                event_and_transform = self.player.step(scheduling_time,
+                                                       self.scheduling_handler.phase,
+                                                       self.scheduling_handler.tempo)
+
+                if event_and_transform is None:
+                    self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
+                else:
+                    self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
+
+        except InvalidCorpus as e:
+            self.logger.debug(str(e))
+            return
+
+        if event_and_transform is None:
+            #     print("!!! NONE FROM CONTINUE !!!")
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_TIMEOUT)
+        else:
+            self.target.send(SendProtocol.OUTPUT_TYPE, SendProtocol.OUTPUT_TYPE_CONTINUE)
+
+        self.scheduling_handler.add_corpus_event(scheduling_time,
+                                                 event_and_transform=event_and_transform,
+                                                 reset_timeout=False)
+        self._send_output_statistics()
 
     def _process_control_message(self, message_type: PlayControl):
         if message_type == PlayControl.START:
@@ -181,8 +283,7 @@ class OscAgent(Agent, AsyncioOscObject):
                 self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
             elif isinstance(event, RendererEvent):
                 self.target.send_event(event)
-            else:
-                raise RuntimeError(f"Invalid event type '{event.__class__}' encountered")
+            # else: ignore any other type of event
 
     ######################################################
     # SCHEDULER & PLAYBACK CONTROL
@@ -213,6 +314,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.debug(f"Agent '{self.player.name}' disabled")
             self.flush()
         self._enabled = is_enabled
+        self.player.enabled.value = is_enabled
 
     def clear(self):
         self.flush()
@@ -226,6 +328,38 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def set_tempo_master(self, is_master: bool):
         self.is_tempo_master = is_master
+        self._try_update_server_tempo()
+
+    def _try_update_server_tempo(self):
+        """ Set the server tempo outside the running scheduling loop that normally controls tempo. This can be used
+            while the Player is disabled or when the transport is not running, for example when loading a corpus to
+            a (not yet) enabled player or when setting the tempo master while the transport is not running. """
+        if not self.is_tempo_master:
+            # Don't change the server tempo unless in control of it
+            return
+
+        try:
+            # history exists: use last event's tempo
+            tempo_event, _, _ = self.improvisation_memory.last()  # type: CorpusEvent
+
+        # No history exists
+        except IndexError:
+            if self.player.corpus is not None:
+                tempo_event = self.player.corpus.events[0]
+            else:
+                # cannot set tempo at this time since no corpus is loaded
+                return
+
+        # TODO: This should really be generalized with a unified Tempo/Phase solution
+        if isinstance(tempo_event, MidiCorpusEvent):
+            tempo: float = tempo_event.tempo
+        elif isinstance(tempo_event, AudioCorpusEvent):
+            tempo: float = tempo_event.get_feature(Tempo).value()
+        else:
+            self.logger.warning(f"Cannot set tempo from event of type '{tempo_event.__class__.__name__}'")
+            return
+
+        self.tempo_send_queue.put(TempoMessage(tempo=tempo))
 
     ######################################################
     # MAIN RUNTIME FUNCTIONS
@@ -257,7 +391,9 @@ class OscAgent(Agent, AsyncioOscObject):
                           f"with path '{path}'.")
 
     def influence_onset(self):
-        self.scheduling_handler.add_trigger_event()
+        if self._enabled:
+            self.scheduling_handler.add_trigger_event()
+            # print("-- Adding trigger")
 
     ######################################################
     # CREATION/DELETION OF ATOM
@@ -393,11 +529,28 @@ class OscAgent(Agent, AsyncioOscObject):
                 except FileNotFoundError as e:
                     # if fails and alternative folder for audio file provided, try relocating audio file
                     if alternative_audio_folder:
-                        self.logger.error(f"{str(e)}. Looking for audio file in '{alternative_audio_folder}'...")
-                        corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile,
-                                                               new_audio_path=alternative_audio_folder)
+                        try:
+                            self.logger.error(f"{str(e)}. Looking for audio file in '{alternative_audio_folder}'...")
+                            corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile,
+                                                                   new_audio_path=alternative_audio_folder)
+                        except FileNotFoundError as e:
+                            # In case corpus and audio file have been renamed, look for an audio file
+                            #    with the same name and path as corpus file
+                            base_path, _ = os.path.splitext(filepath)  # type: str
+                            found_match: bool = False
+                            for ext in CorpusBuilder.AUDIO_FILE_EXTENSIONS:  # type: str
+                                if os.path.isfile(base_path + ext):
+                                    self.logger.error(f"{str(e)}. Attempting to build from  '{base_path + ext}'...")
+                                    found_match = True
+                                    corpus: Corpus = AudioCorpus.from_json(filepath,
+                                                                           volatile=volatile,
+                                                                           new_audio_path=base_path + ext)
+                                    break
+                            if not found_match:
+                                raise
                     else:
                         raise
+
 
             else:
                 self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
@@ -407,17 +560,18 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Please make sure that the file exists or relocate the corpus.")
             self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
-        except (IOError, AttributeError, InvalidCorpus, ExternalDataMismatch) as e:
+        except (IOError, AttributeError, TypeError, InvalidCorpus, ExternalDataMismatch) as e:
             self.logger.error(f"{str(e)}. No corpus was read.")
             self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
 
         self.clear()
-        self.scheduling_handler.set_scheduling_mode(corpus.scheduling_mode)
 
         self.player.set_eligibility(corpus)
         self.player.read_corpus(corpus)
         self.flush()
+        self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
+        self._try_update_server_tempo()  # immediately set tempo if player is tempo master
         self._send_eligibility()
         self.target.send(SendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
         self.send_current_corpus_info()
@@ -446,30 +600,71 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{repr(e)}. No scheduling handler was set.")
             return
 
-        self.flush()
         self.scheduling_handler = new_handler
         self.logger.debug(f"Scheduling mode set to {self.scheduling_handler.renderer_info()}")
 
-    def set_held_notes_mode(self, enable: bool):
-        self.scheduling_handler.set_sustain_notes_mode(enable)
+    def set_synchronize_to_global_tempo(self, enabled: bool) -> None:
+        if not isinstance(enabled, bool):
+            self.logger.error(f"Invalid input '{enabled}'. Synchronization mode was not set.")
+            return
+
+        self.synchronize_to_global_tempo = enabled
+        self._update_synchronization()
+
+    def set_note_by_note_mode(self, enabled: bool) -> None:
+        if not isinstance(enabled, bool):
+            self.logger.error(f"Invalid input '{enabled}'. Note by note mode was not set.")
+            return
+
+        self.scheduling_handler.set_note_by_note_mode(enabled)
         self.flush()
-        self.logger.debug(f"Held notes mode set to {enable} for player '{self.player.name}'.")
 
-    def set_onset_mode(self, enable: bool):
-        self.scheduling_handler.set_align_onset_mode(enable)
-        self.flush()
-        self.logger.debug(f"Simultaneous onset mode set to {enable} for player '{self.player.name}'.")
+    def _update_synchronization(self):
+        # In the current implementation, a MIDI corpus will change its duration when switching between the two modes.
+        # For this reason, it's absolutely mandatory to clear the player, otherwise we will have issues
+        # when merging peaks created in the second-based time domain with peaks created in a tick-based time domain
+        if isinstance(self.player.corpus, MidiCorpus):
+            self.clear()
 
-    def set_audio_continuity_mode(self, enable: bool):
-        self.scheduling_handler.audio_handler.play_continuously = enable
-        self.flush()  # TODO Not ideal for runtime: Should rather output flush ONLY IF mode changes from True to False
+        corpus: Optional[Corpus] = self.player.corpus
+        scheduling_mode: SchedulingMode = self.get_scheduling_mode(self.player.corpus, self.synchronize_to_global_tempo)
 
-    def set_audio_timeout(self, timeout: float):
-        if timeout < 0:
-            self.logger.error(f"Timeout must be a value greater than or equal to zero.")
+        if type(self.scheduling_handler.scheduling_mode) != type(scheduling_mode):
+            self.scheduling_handler.set_scheduling_mode(scheduling_mode)
+
+        if corpus is not None:
+            corpus.set_scheduling_mode(scheduling_mode)
+        # self.player.set_scheduling_mode(scheduling_mode)
+
+        if self.synchronize_to_global_tempo is True and isinstance(self.player.corpus, AudioCorpus):
+            self._set_experimental_relative_temporal_scaling_for_audio(True)
         else:
-            self.scheduling_handler.audio_handler.timeout = timeout
-            self.flush()  # TODO: Not ideal for runtime: Should output flush only if value is above current threshold
+            self._set_experimental_relative_temporal_scaling_for_audio(False)
+
+    def set_align_note_ons(self, enable: bool):
+        self.scheduling_handler.set_align_note_ons(enable)
+        self.flush()
+        self.logger.debug(f"Align note ons set to {enable} for player '{self.player.name}'.")
+
+    def set_align_note_offs(self, mode: str):
+        mode: NoteOffMode = NoteOffMode.from_string(mode)
+        self.scheduling_handler.set_align_note_offs(mode)
+        self.flush()
+        self.logger.debug(f"Align note offs set to '{mode.value}' for player '{self.player.name}'.")
+
+    def set_artificial_ties(self, enable: bool):
+        self.scheduling_handler.set_artificial_ties(enable)
+        self.flush()
+        self.logger.debug(f"Artificial ties set to {enable} for player '{self.player.name}'.")
+
+    def set_timeout(self, timeout: Optional[float]) -> None:
+        if timeout is None or (isinstance(timeout, float) and timeout >= 0):
+            self.scheduling_handler.set_timeout(timeout)
+        else:
+            self.logger.error(f"Timeout must be a value greater than or equal to zero or 'None'.")
+
+    def set_recombine(self, recombine: bool) -> None:
+        self.recombine = recombine
 
     def set_time_stretch(self, factor: float) -> None:
         if factor <= 0:
@@ -477,7 +672,7 @@ class OscAgent(Agent, AsyncioOscObject):
         else:
             self.scheduling_handler.set_time_stretch_factor(factor)
 
-    def set_experimental_relative_tempo_scaling_for_audio_mode(self, enable: bool) -> None:
+    def _set_experimental_relative_temporal_scaling_for_audio(self, enable: bool) -> None:
         self.scheduling_handler.set_experimental_relative_tempo_scaling_for_audio_mode(enable)
 
     ######################################################
@@ -505,6 +700,10 @@ class OscAgent(Agent, AsyncioOscObject):
 
     # TODO: can be single function with send_corpora
     def get_corpus_files(self, filepath: str):
+        if not(os.path.isdir(filepath)):
+            self.logger.error(f"File '{filepath}' is not a folder")
+            return
+
         # filepath: str = os.path.join(os.path.dirname(__file__), settings.CORPUS_FOLDER)
         corpora: List[Tuple[str, str]] = []
         for file in os.listdir(filepath):
@@ -535,7 +734,8 @@ class OscAgent(Agent, AsyncioOscObject):
         peaks_dict = self.player.get_peaks_statistics()
         for name, count in peaks_dict.items():
             self.target.send(SendProtocol.PLAYER_NUM_PEAKS, [name, count])
-        self.target.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.improvisation_memory.length())
+        # TODO: Update corpus export
+        # self.target.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.improvisation_memory.length())
 
     def send_corpora(self, corpus_names_and_paths: List[Tuple[str, str]]):
         for corpus in corpus_names_and_paths:
@@ -579,13 +779,27 @@ class OscAgent(Agent, AsyncioOscObject):
     def _send_output_statistics(self):
         self.target.send(SendProtocol.PLAYER_OUTPUT_PEAKS, self.player.get_output_statistics())
 
+    def corpus_query(self, *args) -> None:
+        if self.player.corpus is None:
+            self.logger.error("No corpus loaded in player. Could not process query")
+            return
+
+        try:
+            responses: List[QueryResponse] = CorpusQueryManager.query(self.player.corpus, args)
+            for response in responses:
+                self.target.send(SendProtocol.PLAYER_CORPUS_QUERY, response.message)
+
+        except (SyntaxError, ValueError) as e:
+            self.logger.error(f"{str(e)}. Could not process query")
+            return
+
     ######################################################
     # OTHER
     ######################################################
 
     def force_jump(self, index: int):
         try:
-            self.flush()
+            # self.flush()
             self.player.force_jump(int(index))
         except ValueError as e:
             self.logger.info(f"{str(e)}")
@@ -597,6 +811,9 @@ class OscAgent(Agent, AsyncioOscObject):
                               initial_time_signature: Tuple[int, int] = (4, 4), ticks_per_beat: int = 480,
                               annotations: str = BarNumberAnnotation.NONE.value, overwrite: bool = False,
                               use_original_tempo: bool = False):
+        # TODO: Update for new architecture
+        self.logger.error("Exporting recorded corpus is currently not supported")
+        return
 
         filepath = os.path.join(folder, filename)
         if os.path.splitext(filepath)[-1] not in CorpusBuilder.MIDI_FILE_EXTENSIONS:
