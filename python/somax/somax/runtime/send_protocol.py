@@ -14,9 +14,7 @@ class ServerSendProtocol:
 
     MANUAL_CORPUSBUILDER_STATUS = f"{MANUAL_CORPUS_BUILDER_ADDRESS} status"
 
-    BUILDING_STATUS = "building_status"
-    BUILDING_AUDIO_CORPUS_STATUS = f"{AUDIO_CORPUS_BUILDER_ADDRESS} {BUILDING_STATUS}"
-    BUILDING_MIDI_CORPUS_STATUS = f"{MIDI_CORPUS_BUILDER_ADDRESS} {BUILDING_STATUS}"
+    BUILDING_STATUS = f"{CORPUS_BUILDER_ADDRESS} building_status"   # sent to all corpus builders
     RELOCATE_AUDIO_CORPUS_STATUS = f"{RELOCATE_CORPUS_ADDRESS} status"
 
     # Server Info
@@ -33,6 +31,7 @@ class ServerSendProtocol:
 
     # Misc. Info
     ALL_PLAYER_NAMES = "players"
+    CORPUS_FILEPATHS = "corpora"
 
 
 class PlayerSendProtocol:

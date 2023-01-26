@@ -58,7 +58,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 482.608686447143555, 4831.456429481506348, 122.826087474822998, 47.0 ],
-					"text" : "UI updates depending on rendering messages"
+					"text" : "Parameter updates depending on rendering messages"
 				}
 
 			}
@@ -106,7 +106,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 544.833931663585645, 4598.313681927197649, 82.565217971801758, 33.0 ],
 					"presentation_linecount" : 2,
-					"text" : "UI and visualization"
+					"text" : "Parameters & visualization"
 				}
 
 			}

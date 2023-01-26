@@ -264,8 +264,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         self.target.send(ServerSendProtocol.SCHEDULER_CURRENT_TIME, (time.ticks, time.seconds, time.tempo, time.phase))
 
     def get_player_names(self):
-        for player_name in self._agents.keys():
-            self.target.send(ServerSendProtocol.ALL_PLAYER_NAMES, [player_name])
+        self.target.send(ServerSendProtocol.ALL_PLAYER_NAMES, list(self._agents.keys()))
 
     def server_status(self, agents: Optional[List[str]]):
         if agents is None:
@@ -296,9 +295,7 @@ class SomaxServer(Somax, AsyncioOscObject):
     def set_tempo(self, tempo: float):
         if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
             super().set_tempo(tempo)
-            self.target.send(ServerSendProtocol.
-                             SCHEDULER_CURRENT_TEMPO
-            
+            self.target.send(ServerSendProtocol.SCHEDULER_CURRENT_TEMPO,
                              (self._transport.tempo, self._transport.time.phase))
         else:
             self.logger.error(f"Tempo must be a single value larger than zero. Did not set tempo.")
@@ -338,7 +335,7 @@ class SomaxServer(Somax, AsyncioOscObject):
 
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
-            self.target.send(ServerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(ServerSendProtocol.BUILDING_STATUS, "failed")
             return
 
         if multithreaded:
@@ -358,6 +355,19 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Could not complete operation")
             self.target.send(ServerSendProtocol.RELOCATE_AUDIO_CORPUS_STATUS, "failed")
 
+    def dump_corpora(self, corpus_folder: str) -> None:
+        if not (os.path.isdir(corpus_folder)):
+            self.logger.error(f"'{corpus_folder}' is not a folder")
+            self.target.send(ServerSendProtocol.CORPUS_FILEPATHS, Target.WRAPPED_BANG)
+            return
+
+        # filepath: str = os.path.join(os.path.dirname(__file__), settings.CORPUS_FOLDER)
+        corpora: List[Tuple[str, str]] = []
+        for file in os.listdir(corpus_folder):
+            if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
+                self.target.send(ServerSendProtocol.CORPUS_FILEPATHS, os.path.join(corpus_folder,file))
+        self.target.send(ServerSendProtocol.CORPUS_FILEPATHS, Target.WRAPPED_BANG)
+
     # TODO: Remove once multithreaded corpus builder is stable enough
     def _build(self, filepath: str,
                output_folder: str,
@@ -367,7 +377,7 @@ class SomaxServer(Somax, AsyncioOscObject):
                spectrogram_filter: AbstractFilter = AbstractFilter.default(),
                segmentation_mode: Optional[AudioSegmentation] = None,
                **kwargs):
-        self.target.send(ServerSendProtocol.BUILDING_CORPUS_STATUS, "init")
+        self.target.send(ServerSendProtocol.BUILDING_STATUS, "init")
         corpus: Corpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
                                                spectrogram_filter=spectrogram_filter,
                                                segmentation_mode=segmentation_mode, **kwargs)
@@ -376,10 +386,10 @@ class SomaxServer(Somax, AsyncioOscObject):
         try:
             output_filepath: str = corpus.export(output_folder, overwrite=overwrite, copy_resources=copy_resources)
             self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
-            self.target.send(ServerSendProtocol.BUILDING_CORPUS_STATUS, "success")
+            self.target.send(ServerSendProtocol.BUILDING_STATUS, "success")
         except (IOError, AttributeError, KeyError) as e:
             self.logger.error(f"{str(e)} Export of corpus failed.")
-            self.target.send(ServerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(ServerSendProtocol.BUILDING_STATUS, "failed")
 
     def _build_multithreaded(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
                              overwrite: bool = False, copy_resources: bool = False,

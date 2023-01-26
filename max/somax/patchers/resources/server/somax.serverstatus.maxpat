@@ -46,7 +46,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1538.869328493647572, 519.0, 137.0, 33.0 ],
-					"presentation_linecount" : 3,
 					"text" : "7. local object is unique (not a duplicate)"
 				}
 
@@ -71,7 +70,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1333.934664246823786, 519.0, 154.065335753176214, 33.0 ],
-					"presentation_linecount" : 4,
 					"text" : "6. local object patcherargs initialization succeeded"
 				}
 
@@ -431,18 +429,6 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-144",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 278.25, 637.0, 60.0, 22.0 ],
-					"text" : "zl.change"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-139",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -462,18 +448,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 911.75, 894.960344827586141, 30.0, 30.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-122",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "int" ],
-					"patching_rect" : [ 278.0, 668.0, 617.5, 22.0 ],
-					"text" : "t l 1"
 				}
 
 			}
@@ -531,7 +505,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 198.75, 375.0, 187.0, 20.0 ],
-									"presentation_linecount" : 2,
 									"text" : "max object successfully initialized"
 								}
 
@@ -697,7 +670,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1001.75, 866.719101123595465, 57.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "duplicate"
 								}
 
@@ -843,7 +815,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 203.5, 802.5, 71.0, 33.0 ],
-									"text" : "server timeouted"
+									"text" : "server timed out"
 								}
 
 							}
@@ -855,7 +827,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 85.0, 802.5, 71.0, 33.0 ],
-									"text" : "server not timeouted"
+									"text" : "server responded"
 								}
 
 							}
@@ -1867,8 +1839,8 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 677.369328493647799, 64.0, 141.0, 22.0 ],
-					"text" : "route server_status reset"
+					"patching_rect" : [ 677.369328493647799, 64.0, 165.0, 22.0 ],
+					"text" : "route serverstatus terminated"
 				}
 
 			}
@@ -2211,13 +2183,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-121", 0 ],
-					"source" : [ "obj-122", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-18", 0 ],
 					"source" : [ "obj-13", 0 ]
 				}
@@ -2260,14 +2225,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-122", 0 ],
-					"source" : [ "obj-144", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-144", 0 ],
+					"destination" : [ "obj-121", 0 ],
 					"source" : [ "obj-15", 0 ]
 				}
 
