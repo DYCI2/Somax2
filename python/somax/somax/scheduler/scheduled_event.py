@@ -122,7 +122,7 @@ class AudioOffEvent(RendererEvent):
         super().__init__(trigger_time)
 
     def render(self) -> List[RendererMessage]:
-        return [RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_OFF, content=PlayerSendProtocol.SEND_AUDIO_OFF)]
+        return [RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_OFF, content="")]
 
 
 class TimeoutInfoEvent(RendererEvent):
