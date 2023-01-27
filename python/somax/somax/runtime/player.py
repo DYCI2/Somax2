@@ -31,7 +31,6 @@ class Player(Parametric, ContentAware):
                  name: str,
                  peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
                  merge_action: AbstractMergeAction = AbstractMergeAction.default(),
-                 corpus: Optional[Corpus] = None,
                  scale_actions: List[AbstractScaleAction] = AbstractScaleAction.default_set()):
         super().__init__()
         self.logger = logging.getLogger(__name__)
@@ -39,7 +38,7 @@ class Player(Parametric, ContentAware):
         self._transform_handler: TransformHandler = TransformHandler()
         self.peak_selector: AbstractPeakSelector = peak_selector
         self.fallback_selector: FallbackPeakSelector = FallbackPeakSelector()
-        self.corpus: Optional[Corpus] = corpus
+        self.corpus: Optional[Corpus] = None
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
         self.merge_action: AbstractMergeAction = merge_action
         self.post_filter: PeakPostFilter = PeakPostFilter(enabled=False)
@@ -248,7 +247,7 @@ class Player(Parametric, ContentAware):
         """ Forces the player to jump to the given state on the next call to `new_event`"""
         self._force_jump_index = index
 
-    def read_corpus(self, corpus: Corpus) -> None:
+    def read_corpus(self, corpus: Corpus, filepath: str) -> None:
         self._update_transforms()
         self.corpus = corpus
         for atom in self.atoms.values():

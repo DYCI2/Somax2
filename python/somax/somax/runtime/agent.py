@@ -3,6 +3,7 @@ import logging
 import logging.config
 import multiprocessing
 import os
+import time
 from importlib import resources
 from typing import Any, Optional, List, Tuple, Type
 
@@ -51,7 +52,6 @@ class Agent(multiprocessing.Process):
                  tempo_send_queue: multiprocessing.Queue,
                  transport_time: Time,
                  scheduler_running: bool,
-                 corpus: Optional[Corpus] = None,
                  is_tempo_master: bool = False,
                  scheduling_type: Type[SchedulingHandler] = ManualSchedulingHandler,
                  synchronize_to_global_tempo: bool = False,
@@ -66,10 +66,7 @@ class Agent(multiprocessing.Process):
         self.synchronize_to_global_tempo: bool = synchronize_to_global_tempo
         self.recombine: bool = recombine
 
-        if corpus:  # handle corpus object if passed
-            self.player.read_corpus(corpus)
-
-        scheduling_mode: SchedulingMode = self.get_scheduling_mode(corpus, synchronize_to_global_tempo)
+        scheduling_mode: SchedulingMode = self.get_scheduling_mode(None, synchronize_to_global_tempo)
 
         self.scheduling_handler: SchedulingHandler = scheduling_type(scheduling_mode=scheduling_mode,
                                                                      time=scheduling_mode.get_time_axis(transport_time),
@@ -93,25 +90,32 @@ class Agent(multiprocessing.Process):
 
 
 class OscAgent(Agent, AsyncioOscObject):
+    STATUS_CALLBACK_INTERVAL = 1.0  # seconds
+
     def __init__(self,
                  player: Player,
                  recv_queue: multiprocessing.Queue,
                  tempo_send_queue: multiprocessing.Queue,
                  transport_time: Time,
                  scheduler_running: bool,
-                 scheduling_type: Type[SchedulingHandler],
                  ip: str,
                  recv_port: int,
                  send_port: int,
                  address: str,
                  corpus_filepath: Optional[str] = None, **kwargs):
-        Agent.__init__(self, player=player, recv_queue=recv_queue, tempo_send_queue=tempo_send_queue,
-                       transport_time=transport_time, scheduler_running=scheduler_running,
-                       scheduling_type=scheduling_type, **kwargs)
+        Agent.__init__(self,
+                       player=player,
+                       recv_queue=recv_queue,
+                       tempo_send_queue=tempo_send_queue,
+                       transport_time=transport_time,
+                       scheduler_running=scheduler_running,
+                       **kwargs)
         AsyncioOscObject.__init__(self, recv_port=recv_port, send_port=send_port, ip=ip, address=address, **kwargs)
         self.logger = logging.getLogger(__name__)
         if corpus_filepath:  # handle corpus filepath if passed
             self.read_corpus(corpus_filepath)
+
+        self.last_status_time: float = -1
 
         self._send_eligibility()
         self.target.send(PlayerSendProtocol.SCHEDULER_RUNNING, True)
@@ -137,23 +141,26 @@ class OscAgent(Agent, AsyncioOscObject):
             self.terminate()
 
     async def _main_loop(self):
+        last_status_message: float = 0
         while not self._terminated:
-            time: Optional[Time] = None
+            self._status_callback()
+
+            scheduling_time: Optional[Time] = None
             while not self.recv_queue.empty():
                 message: ControlMessage = self.recv_queue.get()
                 if isinstance(message, TimeMessage):
-                    time = message.time  # Only process last time message in queue
+                    scheduling_time = message.time  # Only process last time message in queue
                 if isinstance(message, TempoMasterMessage):
                     self.set_tempo_master(is_master=message.is_master)
                 if isinstance(message, ControlMessage):
                     self._process_control_message(message.msg)
-            if time is not None:
-                self._callback(time=time)
+            if scheduling_time is not None:
+                self._callback(scheduling_time=scheduling_time)
             await asyncio.sleep(self.DEFAULT_CALLBACK_INTERVAL)
 
-    def _callback(self, time: Time):
+    def _callback(self, scheduling_time: Time):
         if self._enabled:
-            events: List[ScheduledEvent] = self.scheduling_handler.update_time(time=time)
+            events: List[ScheduledEvent] = self.scheduling_handler.update_time(time=scheduling_time)
             for event in events:
                 if isinstance(event, TriggerEvent):
                     self._trigger_output(trigger=event)
@@ -163,6 +170,12 @@ class OscAgent(Agent, AsyncioOscObject):
                     self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
                 elif isinstance(event, RendererEvent):
                     self.target.send_event(event)
+
+    def _status_callback(self) -> None:
+        current_time: float = time.time()
+        if current_time - self.last_status_time > self.STATUS_CALLBACK_INTERVAL:
+            self.target.send(PlayerSendProtocol.STATUS, Target.WRAPPED_BANG)
+            self.last_status_time = current_time
 
     def _trigger_output(self, trigger: TriggerEvent):
         # print("TRIGGER")
@@ -233,7 +246,8 @@ class OscAgent(Agent, AsyncioOscObject):
                     if output_from_match:
                         self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
                     else:
-                        self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
+                        self.target.send(PlayerSendProtocol.OUTPUT_TYPE,
+                                         PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
 
                     event_and_transform = event_transform_and_match_type[0], event_transform_and_match_type[1]
 
@@ -305,6 +319,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def terminate(self):
         self.stop_scheduler()
+        self.target.send(PlayerSendProtocol.TERMINATED, Target.WRAPPED_BANG)
         super().terminate()
 
     def enabled(self, is_enabled):
@@ -378,8 +393,8 @@ class OscAgent(Agent, AsyncioOscObject):
 
         try:
             path_and_name: List[str] = self._string_to_path(path)
-            time: float = self.scheduling_handler.time
-            self.player.influence(path_and_name, influence, time, **kwargs)
+            scheduling_time: float = self.scheduling_handler.time
+            self.player.influence(path_and_name, influence, scheduling_time, **kwargs)
             self.send_peaks()
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
@@ -569,7 +584,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.clear()
 
         self.player.set_eligibility(corpus)
-        self.player.read_corpus(corpus)
+        self.player.read_corpus(corpus, filepath)
         self.flush()
         self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
         self._try_update_server_tempo()  # immediately set tempo if player is tempo master
@@ -701,7 +716,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     # TODO: can be single function with send_corpora
     def get_corpus_files(self, filepath: str):
-        if not(os.path.isdir(filepath)):
+        if not (os.path.isdir(filepath)):
             self.logger.error(f"File '{filepath}' is not a folder")
             return
 
@@ -724,7 +739,8 @@ class OscAgent(Agent, AsyncioOscObject):
     def get_param(self, path: str):
         try:
             parameter_path: List[str] = self._string_to_path(path)
-            self.target.send(PlayerSendProtocol.PLAYER_SINGLE_PARAMETER, [path, self.player.get_param(parameter_path).value])
+            self.target.send(PlayerSendProtocol.PLAYER_SINGLE_PARAMETER,
+                             [path, self.player.get_param(parameter_path).value])
         except (IndexError, KeyError):
             self.logger.error(f"Could not get parameter at given path.")
         except (ParameterError, AssertionError) as e:
@@ -750,10 +766,12 @@ class OscAgent(Agent, AsyncioOscObject):
     def send_current_corpus_info(self):
         corpus: Optional[Corpus] = self.player.corpus
         if corpus is not None:
-            self.target.send(PlayerSendProtocol.PLAYER_CORPUS, [corpus.name,
-                                                                corpus.__class__.__name__,
-                                                                corpus.length(),
-                                                                corpus.filepath if isinstance(corpus, AudioCorpus) else None])
+            self.target.send(PlayerSendProtocol.PLAYER_LOADED_CORPUS, [
+                corpus.name,
+                corpus.__class__.__name__,
+                corpus.length(),
+                corpus.filepath if isinstance(corpus, AudioCorpus) else None
+            ])
 
     def _send_eligibility(self):
         corpus: Optional[Corpus] = self.player.corpus

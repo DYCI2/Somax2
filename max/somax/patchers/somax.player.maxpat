@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 114.0, 55.0, 450.0, 745.0 ],
+		"rect" : [ 114.0, 55.0, 1846.0, 897.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -29,8 +29,8 @@
 		"toolbars_unpinned_last_save" : 0,
 		"tallnewobj" : 0,
 		"boxanimatetime" : 200,
-		"enablehscroll" : 0,
-		"enablevscroll" : 0,
+		"enablehscroll" : 1,
+		"enablevscroll" : 1,
 		"devicewidth" : 0.0,
 		"description" : "",
 		"digest" : "",
@@ -12373,7 +12373,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1718.41720451457968, 203.5, 105.0, 35.0 ],
+									"patching_rect" : [ 1718.41720451457968, 203.5, 93.0, 35.0 ],
 									"text" : "r #0_timestretch"
 								}
 
@@ -16443,7 +16443,7 @@
 				"box" : 				{
 					"comment" : "(signal) audio ch 1",
 					"id" : "obj-1000",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -18416,7 +18416,7 @@
 				"box" : 				{
 					"comment" : "(list) info messages",
 					"id" : "obj-547",
-					"index" : 7,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -18428,7 +18428,7 @@
 				"box" : 				{
 					"comment" : "(debug)",
 					"id" : "obj-437",
-					"index" : 6,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -22845,7 +22845,7 @@
 				"box" : 				{
 					"comment" : "(unused - all input received over OSC)",
 					"id" : "obj-1",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -23787,7 +23787,7 @@
 					"patching_rect" : [ 355.725552050473198, 123.0, 180.0, 27.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 21.41666666666697, 11.5, 401.10262443239094, 27.0 ],
-					"text" : "Player",
+					"text" : "#1",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -24147,7 +24147,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-388",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -24376,7 +24376,7 @@
 				"box" : 				{
 					"comment" : "(list) Parameters",
 					"id" : "obj-236",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -25479,7 +25479,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1768.227848101265863, 1424.490980245571336, 120.0, 35.0 ],
+					"patching_rect" : [ 1768.227848101265863, 1424.490980245571336, 108.0, 35.0 ],
 					"text" : "v #0_trigger_mode"
 				}
 
@@ -27063,7 +27063,7 @@
 				"box" : 				{
 					"comment" : "(list) info messages from server",
 					"id" : "obj-119",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -27147,7 +27147,7 @@
 				"box" : 				{
 					"comment" : "(list) nn vel ch",
 					"id" : "obj-92",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -27465,7 +27465,7 @@
 				"box" : 				{
 					"comment" : "(list) messages to server",
 					"id" : "obj-9",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -37017,6 +37017,131 @@
 
 			}
  ],
+		"parameters" : 		{
+			"obj-1007" : [ "rslider[2]", "rslider", 0 ],
+			"obj-1115" : [ "continuity[11]", "continuity", 0 ],
+			"obj-1123" : [ "live.menu[6]", "live.menu", 0 ],
+			"obj-1150" : [ "live.text[46]", "live.text", 0 ],
+			"obj-1168" : [ "live.menu[8]", "live.menu", 0 ],
+			"obj-1175" : [ "heldnotesmode[5]", "heldnotesmode", 0 ],
+			"obj-1179" : [ "continuity[12]", "continuity", 0 ],
+			"obj-12" : [ "melodicmod12[2]", "melodicmod12", 0 ],
+			"obj-120" : [ "melodicbypass[2]", "melodicbypass", 0 ],
+			"obj-1218" : [ "simultaneousonsets[5]", "artificialmidities", 0 ],
+			"obj-1226" : [ "width[2]", "Width", 0 ],
+			"obj-1227" : [ "center[2]", "Center", 0 ],
+			"obj-1240" : [ "live.slider[4]", "live.slider", 0 ],
+			"obj-1241" : [ "live.numbox[16]", "live.numbox[2]", 0 ],
+			"obj-1256" : [ "live.menu[7]", "live.menu", 0 ],
+			"obj-126" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
+			"obj-1307::obj-202" : [ "simultaneousonsets[4]", "simultaneousonsets", 0 ],
+			"obj-1307::obj-496" : [ "outputchannels[2]", "outputchannels", 0 ],
+			"obj-1307::obj-501" : [ "experimental_scaling[2]", "experimental_scaling", 0 ],
+			"obj-1307::obj-98" : [ "live.text[16]", "live.text[26]", 0 ],
+			"obj-134" : [ "continuity[10]", "continuity", 0 ],
+			"obj-1344" : [ "enforcetaboo[2]", "enforcetaboo", 0 ],
+			"obj-140" : [ "resetinfluences[2]", "resetinfluences", 0 ],
+			"obj-144" : [ "harmonicngramorder[2]", "harmonicngramorder", 0 ],
+			"obj-1444" : [ "outputprobability[2]", "outputprobability", 0 ],
+			"obj-152" : [ "selfngramorder[2]", "selfngramorder", 0 ],
+			"obj-154" : [ "melodicngramorder[2]", "melodicngramorder", 0 ],
+			"obj-163" : [ "ignorephase[2]", "ignorephase", 0 ],
+			"obj-19" : [ "selfmod12[2]", "selfmod12", 0 ],
+			"obj-22" : [ "selfmelodicbypass[2]", "selfmelodicbypass", 0 ],
+			"obj-254" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay", 0 ],
+			"obj-255" : [ "melodicpeakdecay[2]", "melodicpeakdecay", 0 ],
+			"obj-256" : [ "selfpeakdecay[2]", "selfpeakdecay", 0 ],
+			"obj-295" : [ "playingmode[2]", "playingmode", 0 ],
+			"obj-328" : [ "decaybasis[2]", "decaybasis", 0 ],
+			"obj-349::obj-26" : [ "corpusname[2]", "corpusname", 0 ],
+			"obj-352" : [ "outputthreshold[2]", "outputthreshold", 0 ],
+			"obj-369" : [ "toggle[2]", "toggle", 0 ],
+			"obj-4" : [ "reinstantiate[2]", "reinstantiate", 0 ],
+			"obj-504" : [ "transpositionconsistency[2]", "transpositionconsistency", 0 ],
+			"obj-570" : [ "__exp_melodicpitchfromchords[2]", "__exp_melodicpitchfromchords", 0 ],
+			"obj-575" : [ "__exp_tempoconsistencysigma[2]", "__exp_tempoconsistencysigma", 0 ],
+			"obj-600" : [ "__exp_tabooenable[2]", "__exp_tabooenable", 0 ],
+			"obj-605" : [ "__exp_tabooduration[2]", "__exp_tabooduration", 0 ],
+			"obj-622" : [ "__exp_velocityenable[2]", "__exp_velocityenable", 0 ],
+			"obj-642" : [ "__exp_numnotessigma[2]", "__exp_numnotessigma", 0 ],
+			"obj-653" : [ "__exp_numnotesenable[2]", "__exp_numnotesenable", 0 ],
+			"obj-656" : [ "__exp_numnotesmu[2]", "__exp_numnotesmu", 0 ],
+			"obj-688" : [ "__exp_durationsigma[2]", "__exp_durationsigma", 0 ],
+			"obj-702" : [ "__exp_durationmu[2]", "__exp_durationmu", 0 ],
+			"obj-722" : [ "__exp_octavebandsenable[2]", "__exp_octavebandsenable", 0 ],
+			"obj-733" : [ "__exp_octavebands[2]", "__exp_octavebands", 0 ],
+			"obj-746" : [ "__exp_selfpitchfromchords[2]", "__exp_selfpitchfromchords", 0 ],
+			"obj-763" : [ "__exp_autojumpforcejump[2]", "__exp_autojumpforcejump", 0 ],
+			"obj-774" : [ "__exp_autojumpenable[2]", "__exp_autojumpenable", 0 ],
+			"obj-777" : [ "__exp_autojumpactivate[2]", "__exp_autojumpactivate", 0 ],
+			"obj-799" : [ "__exp_tempoconsistencyenable[2]", "__exp_tempoconsistencyenable", 0 ],
+			"obj-802" : [ "__exp_tempoconsistencylen[2]", "__exp_tempoconsistencylen", 0 ],
+			"obj-835" : [ "transpositions[4]", "transpositions", 0 ],
+			"obj-860" : [ "harmonincpeakdecay[4]", "harmonincpeakdecay[1]", 0 ],
+			"obj-865" : [ "selfharmonicngramorder[2]", "selfharmonicngramorder", 0 ],
+			"obj-866::obj-1269" : [ "live.numbox[14]", "live.numbox[2]", 0 ],
+			"obj-866::obj-1272" : [ "live.numbox[15]", "live.numbox[2]", 0 ],
+			"obj-866::obj-33" : [ "pregain[2]", "pregain", 0 ],
+			"obj-866::obj-98" : [ "live.text[45]", "live.text[26]", 0 ],
+			"obj-870" : [ "selfharmonicbypass[2]", "selfharmonicbypass", 0 ],
+			"obj-889" : [ "weight[2]", "Weight", 0 ],
+			"obj-998" : [ "__exp_regionmaskenable[2]", "__exp_regionmaskenable", 0 ],
+			"parameterbanks" : 			{
+				"0" : 				{
+					"index" : 0,
+					"name" : "",
+					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "abstraction_path.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "heldnotes.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.atom.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "./resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpuspath.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpusview.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "./resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.path.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-255", "obj-64" ]
 			}

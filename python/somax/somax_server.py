@@ -192,34 +192,15 @@ class SomaxServer(Somax, AsyncioOscObject):
     # CREATION/DELETION OF AGENTS
     ######################################################
 
-    def create_agent(self,
-                     name: str,
-                     recv_port: int,
-                     send_port: int,
-                     ip: str = "",
-                     scheduling_type: str = "",
-                     peak_selector: str = "",
-                     merge_action: str = "",
-                     corpus_filepath: str = "",
-                     scale_actions: Tuple[str, ...] = ("",), override: bool = False):
-        raise RuntimeError(
-            "Scheduling type, peak selector, corpus filepath and scale actions should NOT be passed at init!")
-
+    def create_agent(self, name: str, recv_port: int, send_port: int, ip: str = "", override: bool = False):
         try:
             address: str = self.parse_osc_address(name)
             ip: str = self.parse_ip(ip)
-            scheduling_type: Type[SchedulingHandler] = SchedulingHandler.type_from_string(scheduling_type)
-            merge_action: AbstractMergeAction = AbstractMergeAction.from_string(merge_action)
-            peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector)
-            scale_actions: List[AbstractScaleAction] = [AbstractScaleAction.from_string(s) for s in scale_actions]
         except ValueError as e:
             self.logger.error(f"{str(e)}. No agent was created.")
             return
 
-        player: Player = Player(name=name,
-                                peak_selector=peak_selector,
-                                merge_action=merge_action,
-                                scale_actions=scale_actions)
+        player: Player = Player(name=name)
 
         if name in self._agents:
             if override:
@@ -235,12 +216,10 @@ class SomaxServer(Somax, AsyncioOscObject):
                                    tempo_send_queue=self._tempo_master_queue,
                                    transport_time=self._transport.time,
                                    scheduler_running=self._transport.running,
-                                   scheduling_type=scheduling_type,
                                    ip=ip,
                                    recv_port=recv_port,
                                    send_port=send_port,
-                                   address=address,
-                                   corpus_filepath=corpus_filepath)
+                                   address=address)
         agent.start()
         self._agents[name] = agent, agent_queue
         self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port}, ip {ip}.")
@@ -253,7 +232,7 @@ class SomaxServer(Somax, AsyncioOscObject):
             del self._agents[name]
             self.logger.info(f"Deleted agent '{name}'.")
         except KeyError:
-            self.logger.error(f"An agent with the name '{name}' doesn't exist. No agent was deleted.")
+            self.logger.warning(f"An agent with the name '{name}' doesn't exist. No agent was deleted.")
 
     ######################################################
     # MAX GETTERS
@@ -282,15 +261,15 @@ class SomaxServer(Somax, AsyncioOscObject):
 
     def start_transport(self):
         super().start_transport()
-        self.target.send(ServerSendProtocol.SCHEDULER_RUNNING, True)
+        self.target.send(ServerSendProtocol.TRANSPORT_RUNNING, True)
 
     def pause_transport(self):
         super().pause_transport()
-        self.target.send(ServerSendProtocol.SCHEDULER_RUNNING, False)
+        self.target.send(ServerSendProtocol.TRANSPORT_RUNNING, False)
 
     def stop_transport(self):
         super().stop_transport()
-        self.target.send(ServerSendProtocol.SCHEDULER_RUNNING, False)
+        self.target.send(ServerSendProtocol.TRANSPORT_RUNNING, False)
 
     def set_tempo(self, tempo: float):
         if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
@@ -365,7 +344,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         corpora: List[Tuple[str, str]] = []
         for file in os.listdir(corpus_folder):
             if any([file.endswith(extension) for extension in CorpusBuilder.CORPUS_FILE_EXTENSIONS]):
-                self.target.send(ServerSendProtocol.CORPUS_FILEPATHS, os.path.join(corpus_folder,file))
+                self.target.send(ServerSendProtocol.CORPUS_FILEPATHS, os.path.join(corpus_folder, file))
         self.target.send(ServerSendProtocol.CORPUS_FILEPATHS, Target.WRAPPED_BANG)
 
     # TODO: Remove once multithreaded corpus builder is stable enough

@@ -62,9 +62,6 @@ class AsyncioOscObject(Caller, ABC):
     def __unmatched_osc(self, address: str, *_args, **_kwargs) -> None:
         self.logger.info(f"The address '{address}' does not exist.")
 
-
-
-
     def parse_ip(self, ip: str, logger: Optional[Logger] = None) -> str:
         try:
             ipaddress.ip_address(ip)

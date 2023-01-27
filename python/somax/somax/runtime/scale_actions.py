@@ -60,7 +60,7 @@ class AbstractScaleAction(Parametric, ContentAware, StringParsed, ABC):
 
     @classmethod
     def default_set(cls, **_kwargs) -> Tuple['AbstractScaleAction', ...]:
-        return [PhaseModulationScaleAction(), ThresholdScaleAction()]
+        return ()
 
     @classmethod
     def from_string(cls, scale_action: str, **kwargs) -> 'AbstractScaleAction':
