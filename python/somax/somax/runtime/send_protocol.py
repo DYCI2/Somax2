@@ -52,7 +52,7 @@ class PlayerSendProtocol:
     PLAYER_OUTPUT_PEAKS = "output_peaks"
     PLAYER_SINGLE_PARAMETER = "param"
 
-    PLAYER_CORPUS_QUERY = "corpus_query"
+    PLAYER_CORPUS_QUERY = "corpusquery"
     INSTANTIATED_PLAYER = "initialized"
     INSTANTIATED_ATOMS = "atoms"
 

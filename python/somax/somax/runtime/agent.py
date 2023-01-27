@@ -141,6 +141,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.terminate()
 
     async def _main_loop(self):
+        self.target.send(PlayerSendProtocol.INSTANTIATED_PLAYER, Target.WRAPPED_BANG)
         last_status_message: float = 0
         while not self._terminated:
             self._status_callback()
@@ -526,7 +527,10 @@ class OscAgent(Agent, AsyncioOscObject):
             if verbose:
                 self.logger.error(f"Could not remove scale action: {repr(e)}.")
 
-    def read_corpus(self, filepath: str, volatile: bool = False, alternative_audio_folder: str = ""):
+    def read_corpus(self, filepath: str,
+                    volatile: bool = False,
+                    alternative_audio_file: str = "",
+                    alternative_audio_folder: str = ""):
         self.logger.info(f"Reading corpus at '{filepath}' for player '{self.player.name}'...")
         self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
         if not os.path.exists(filepath):
@@ -539,33 +543,39 @@ class OscAgent(Agent, AsyncioOscObject):
             if file_extension == ".gz":
                 corpus: Corpus = MidiCorpus.from_json(filepath, volatile)
             elif file_extension == ".pickle":
-                try:
-                    # try loading corpus with its specified audio filepath
-                    corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile)
-                except FileNotFoundError as e:
-                    # if fails and alternative folder for audio file provided, try relocating audio file
-                    if alternative_audio_folder:
-                        try:
-                            self.logger.error(f"{str(e)}. Looking for audio file in '{alternative_audio_folder}'...")
-                            corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile,
-                                                                   new_audio_path=alternative_audio_folder)
-                        except FileNotFoundError as e:
-                            # In case corpus and audio file have been renamed, look for an audio file
-                            #    with the same name and path as corpus file
-                            base_path, _ = os.path.splitext(filepath)  # type: str
-                            found_match: bool = False
-                            for ext in CorpusBuilder.AUDIO_FILE_EXTENSIONS:  # type: str
-                                if os.path.isfile(base_path + ext):
-                                    self.logger.error(f"{str(e)}. Attempting to build from  '{base_path + ext}'...")
-                                    found_match = True
-                                    corpus: Corpus = AudioCorpus.from_json(filepath,
-                                                                           volatile=volatile,
-                                                                           new_audio_path=base_path + ext)
-                                    break
-                            if not found_match:
-                                raise
-                    else:
-                        raise
+                # If an explicit audio file is provided, load that one (and fail if it doesn't work)
+                if alternative_audio_file != "":
+                    corpus: Corpus = AudioCorpus.from_json(filepath,
+                                                           volatile=volatile,
+                                                           new_audio_path=alternative_audio_file)
+                else:
+                    try:
+                        # try loading corpus with the audio filepath specified inside the pickle file
+                        corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile)
+                    except FileNotFoundError as e:
+                        # if fails and alternative folder for audio file provided, try relocating audio file
+                        if alternative_audio_folder:
+                            try:
+                                self.logger.warning(f"{str(e)}. Looking for audio file in '{alternative_audio_folder}'...")
+                                corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile,
+                                                                       new_audio_path=alternative_audio_folder)
+                            except FileNotFoundError as e:
+                                # In case corpus and audio file have been renamed, look for an audio file
+                                #    with the same name and path as corpus file
+                                base_path, _ = os.path.splitext(filepath)  # type: str
+                                found_match: bool = False
+                                for ext in CorpusBuilder.AUDIO_FILE_EXTENSIONS:  # type: str
+                                    if os.path.isfile(base_path + ext):
+                                        self.logger.warning(f"{str(e)}. Attempting to build from  '{base_path + ext}'...")
+                                        found_match = True
+                                        corpus: Corpus = AudioCorpus.from_json(filepath,
+                                                                               volatile=volatile,
+                                                                               new_audio_path=base_path + ext)
+                                        break
+                                if not found_match:
+                                    raise
+                        else:
+                            raise
 
 
             else:
@@ -808,7 +818,7 @@ class OscAgent(Agent, AsyncioOscObject):
             for response in responses:
                 self.target.send(PlayerSendProtocol.PLAYER_CORPUS_QUERY, response.message)
 
-        except (SyntaxError, ValueError) as e:
+        except (SyntaxError, ValueError, IndexError) as e:
             self.logger.error(f"{str(e)}. Could not process query")
             return
 

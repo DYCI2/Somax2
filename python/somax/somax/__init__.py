@@ -2,4 +2,4 @@
 
 __version__ = '2.5.0-alpha01'
 
-__version_corpus__ = '2.5.0-alpha01'
+__version_corpus__ = '2.4.1-beta04'
