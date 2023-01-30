@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 0.0, 53.0, 2249.0, 1055.0 ],
+		"rect" : [ 1280.0, 52.0, 1280.0, 650.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -699,6 +699,7 @@
 				"box" : 				{
 					"bgcolor" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
 					"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_autogradient" : 0.0,
 					"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
 					"bgfillcolor_color1" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
 					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
@@ -811,7 +812,7 @@
 					"patching_rect" : [ 1472.34523809523921, 4073.5, 150.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 21.41666666666697, 62.5, 202.84395863590575, 20.0 ],
-					"text" : "Debussy_String_Quartet",
+					"text" : "--",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -2897,6 +2898,7 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"hidden" : 1,
 									"id" : "obj-1068",
 									"ignoreclick" : 1,
 									"maxclass" : "led",
@@ -2933,6 +2935,7 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
+									"hidden" : 1,
 									"id" : "obj-1020",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -16041,7 +16044,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
-					"hidden" : 1,
 					"id" : "obj-1260",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -19092,7 +19094,7 @@
 					"patching_rect" : [ 3850.328889946746585, 4111.0, 49.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 387.727624432390485, 659.426026956737701, 36.000000238418579, 18.0 ],
-					"text" : "0.17",
+					"text" : "0.00",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -22876,6 +22878,7 @@
 , 			{
 				"box" : 				{
 					"active" : 					{
+						"live.menu" : 0,
 						"live.menu[1]" : 0,
 						"live.menu[2]" : 0,
 						"live.text" : 0
@@ -22916,10 +22919,10 @@
 					}
 ,
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 1880, 207, 2595, 536 ],
+						"client_rect" : [ 1057, 45, 1440, 407 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
-						"storage_rect" : [ 794, -709, 1244, -510 ]
+						"storage_rect" : [ 583, 69, 1034, 197 ]
 					}
 ,
 					"text" : "pattrstorage pattrstorage @savemode 0 @outputmode 1 @autorestore 0 @greedy 1 @changemode 1",
@@ -22935,7 +22938,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1408.833333333333485, 78.939567114741294, 119.0, 22.0 ],
+					"patching_rect" : [ 1408.833333333333485, 135.939567114741294, 119.0, 22.0 ],
 					"text" : "s #0_parameters"
 				}
 
@@ -22951,7 +22954,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 1546.333333333333485, 78.879134229482588, 143.0, 22.0 ],
+					"patching_rect" : [ 1546.333333333333485, 135.879134229482588, 143.0, 22.0 ],
 					"restore" : 					{
 						"__exp_autojumpactivate" : [ 2 ],
 						"__exp_autojumpenable" : [ 0 ],
@@ -22975,7 +22978,7 @@
 						"continuity" : [ 1.5 ],
 						"cut" : [ 1 ],
 						"decaybasis" : [ 1 ],
-						"durations" : [ "Original" ],
+						"durations" : [ "Sustained" ],
 						"enabled" : [ 1 ],
 						"enforcetaboo" : [ 1 ],
 						"fallback" : [ "Random" ],
@@ -23015,7 +23018,7 @@
 						"timeout" : [ 2.0 ],
 						"timeoutenable" : [ 1 ],
 						"timestretch" : [ 1.0 ],
-						"timestretchmode" : [ 0 ],
+						"timestretchmode" : [ 1 ],
 						"transpositionconsistency" : [ 1.0 ],
 						"transpositions" : [ 5, 0, 1.0 ],
 						"weights" : [ 0.25, 0.25, 1.0, 0.5 ]
@@ -23286,7 +23289,7 @@
 					"patching_rect" : [ 2884.771493148124591, 3944.475191765772252, 49.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 290.977624551600002, 659.967976230862746, 49.333334237337112, 18.0 ],
-					"text" : "186",
+					"text" : "0",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -26556,7 +26559,7 @@
 					"patching_rect" : [ 1301.97308619650471, 4108.5, 143.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 66.0, 550.612867779498515, 135.377322951765791, 18.0 ],
-					"text" : "MidiCorpus",
+					"text" : "--",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -26572,7 +26575,7 @@
 					"patching_rect" : [ 1301.97308619650471, 4083.5, 126.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 66.0, 532.612867779498515, 162.360810332475694, 18.0 ],
-					"text" : "Debussy_String_Quartet",
+					"text" : "--",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -26588,7 +26591,6 @@
 					"patching_rect" : [ 1855.850936557988007, 4112.907651035666277, 44.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 144.835656285099049, 647.134642261746535, 57.0, 18.0 ],
-					"text" : "7966",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -26660,7 +26662,6 @@
 					"patching_rect" : [ 1766.850936557988007, 4109.907651035666277, 44.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 65.41666666666697, 644.134642261746535, 70.0, 24.0 ],
-					"text" : "7275",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 

@@ -5,7 +5,7 @@ import multiprocessing
 import os
 import time
 from importlib import resources
-from typing import Any, Optional, List, Tuple, Type
+from typing import Any, Optional, List, Tuple, Type, Union
 
 import mido
 
@@ -826,10 +826,12 @@ class OscAgent(Agent, AsyncioOscObject):
     # OTHER
     ######################################################
 
-    def jump(self, index: int):
+    def jump(self, index: int, trigger_output: Union[int, bool] = False):
         try:
             # self.flush()
             self.player.force_jump(int(index))
+            if trigger_output:
+                self.bang()
         except ValueError as e:
             self.logger.info(f"{str(e)}")
 
