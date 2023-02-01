@@ -48,8 +48,9 @@ class PlayerSendProtocol:
     PLAYER_LOADED_CORPUS = [CORPUS_ADDRESS, "loaded_corpus"]
 
     # Player Info
-    PLAYER_NUM_PEAKS = "num_peaks"
-    PLAYER_OUTPUT_PEAKS = "output_peaks"
+    PEAKS_ADDRESS = "matches"
+    ATOM_PEAKS = PEAKS_ADDRESS
+    TOTAL_PEAKS = [PEAKS_ADDRESS, "total"]
     PLAYER_SINGLE_PARAMETER = "param"
 
     PLAYER_CORPUS_QUERY = "corpusquery"

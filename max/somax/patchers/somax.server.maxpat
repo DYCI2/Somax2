@@ -40,6 +40,70 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
+					"id" : "obj-43",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 323.400701311032492, 191.042257697700961, 98.0, 22.0 ],
+					"text" : "s #0_dumpout"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-44",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 293.89473684210526, 131.009036044268214, 48.505964468927232, 22.0 ],
+					"text" : "t l l"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-65",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 323.400701311032492, 161.439567114741294, 93.0, 22.0 ],
+					"text" : "prepend remote"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-30",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 336.894736842105203, 69.981824812442255, 127.0, 47.0 ],
+					"presentation_linecount" : 3,
+					"text" : "GLOBAL RECEIVE external address usable by anyone"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 18.0,
+					"id" : "obj-13",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 293.89473684210526, 35.439567114741294, 137.0, 29.0 ],
+					"text" : "r somax.server"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-61",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -2273,7 +2337,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-216",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3810,7 +3874,7 @@
 				"box" : 				{
 					"comment" : "(list) status",
 					"id" : "obj-259",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -4028,7 +4092,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 343.400701311032492, 133.042257697700961, 98.0, 22.0 ],
+					"patching_rect" : [ 509.400701311032492, 191.042257697700961, 98.0, 22.0 ],
 					"text" : "s #0_dumpout"
 				}
 
@@ -4040,7 +4104,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 313.89473684210526, 73.009036044268214, 48.505964468927232, 22.0 ],
+					"patching_rect" : [ 479.89473684210526, 131.009036044268214, 48.505964468927232, 22.0 ],
 					"text" : "t l l"
 				}
 
@@ -4052,7 +4116,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 343.400701311032492, 103.439567114741294, 113.0, 22.0 ],
+					"patching_rect" : [ 509.400701311032492, 161.439567114741294, 113.0, 22.0 ],
 					"text" : "prepend fromserver"
 				}
 
@@ -4060,12 +4124,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-867",
-					"linecount" : 3,
+					"linecount" : 4,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 540.269736842105203, 35.439567114741294, 123.0, 47.0 ],
-					"text" : "GLOBAL RECEIVE from associated somax.player objects"
+					"patching_rect" : [ 520.894736842105203, 69.981824812442255, 123.0, 60.0 ],
+					"text" : "GLOBAL RECEIVE internal address used by somax.player objects"
 				}
 
 			}
@@ -4079,8 +4143,8 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 313.89473684210526, 35.439567114741294, 219.0, 29.0 ],
-					"text" : "receive somax.to_server"
+					"patching_rect" : [ 479.89473684210526, 35.439567114741294, 164.0, 29.0 ],
+					"text" : "r somax.to_server"
 				}
 
 			}
@@ -5081,7 +5145,7 @@
 				"box" : 				{
 					"comment" : "(list) messages from server",
 					"id" : "obj-98",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -5132,11 +5196,11 @@
 				"box" : 				{
 					"comment" : "(any) messages to server",
 					"id" : "obj-29",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "int" ],
 					"patching_rect" : [ 55.0, 35.439567114741294, 30.0, 30.0 ]
 				}
 
@@ -5586,6 +5650,13 @@
 					"destination" : [ "obj-154", 0 ],
 					"midpoints" : [ 883.447368421052602, 999.5, 64.5, 999.5, 64.5, 1065.0, 64.5, 1065.0 ],
 					"source" : [ "obj-129", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-44", 0 ],
+					"source" : [ "obj-13", 0 ]
 				}
 
 			}
@@ -6400,6 +6471,22 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"destination" : [ "obj-249", 0 ],
+					"midpoints" : [ 303.39473684210526, 506.614731838031162, 64.5, 506.614731838031162 ],
+					"source" : [ "obj-44", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-65", 0 ],
+					"source" : [ "obj-44", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-184", 1 ],
 					"source" : [ "obj-45", 1 ]
 				}
@@ -6568,6 +6655,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-43", 0 ],
+					"source" : [ "obj-65", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-69", 0 ],
 					"source" : [ "obj-68", 0 ]
 				}
@@ -6689,7 +6783,7 @@
 				"patchline" : 				{
 					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"destination" : [ "obj-249", 0 ],
-					"midpoints" : [ 323.39473684210526, 506.995430428355235, 64.5, 506.995430428355235 ],
+					"midpoints" : [ 489.39473684210526, 506.995430428355235, 64.5, 506.995430428355235 ],
 					"source" : [ "obj-872", 0 ]
 				}
 
@@ -6768,78 +6862,6 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.await_patcherargs.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.corpuspath.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.interpreter.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.path.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.print.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.relativepath.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.serverstatus.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/server",
-				"patcherrelativepath" : "./resources/server",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.serverstatus.ui.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/server",
-				"patcherrelativepath" : "./resources/server",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.winresize.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-7", "obj-14", "obj-5" ]
 			}
@@ -6862,9 +6884,6 @@
 				"boxes" : [ "obj-211", "obj-1196" ]
 			}
 , 			{
-				"boxes" : [ "obj-821", "obj-867" ]
-			}
-, 			{
 				"boxes" : [ "obj-121", "obj-108" ]
 			}
 , 			{
@@ -6872,6 +6891,9 @@
 			}
 , 			{
 				"boxes" : [ "obj-536", "obj-249" ]
+			}
+, 			{
+				"boxes" : [ "obj-821", "obj-867" ]
 			}
  ],
 		"styles" : [ 			{

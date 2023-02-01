@@ -759,7 +759,7 @@ class OscAgent(Agent, AsyncioOscObject):
         """ Gets the current state in each layer, not including the merged layer """
         peaks_dict = self.player.get_peaks_statistics()
         for name, count in peaks_dict.items():
-            self.target.send(PlayerSendProtocol.PLAYER_NUM_PEAKS, [name, count])
+            self.target.send(PlayerSendProtocol.ATOM_PEAKS, [name, count])
         # TODO: Update corpus export
         # self.target.send(SendProtocol.PLAYER_RECORDED_CORPUS_LENGTH, self.improvisation_memory.length())
 
@@ -805,7 +805,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), False])
 
     def _send_output_statistics(self):
-        self.target.send(PlayerSendProtocol.PLAYER_OUTPUT_PEAKS, self.player.get_output_statistics())
+        self.target.send(PlayerSendProtocol.TOTAL_PEAKS, self.player.get_output_statistics())
 
     def corpus_query(self, *args) -> None:
         if self.player.corpus is None:
