@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 74.0, 169.0, 1042.0, 575.0 ],
+		"rect" : [ 1176.0, 246.0, 1042.0, 575.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -46,7 +46,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 401.928573500000311, 352.0, 84.0, 33.0 ],
-					"presentation_linecount" : 3,
 					"text" : "output continuously"
 				}
 
@@ -59,7 +58,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 15.928573500000311, 388.0, 107.071426499999689, 60.0 ],
-					"presentation_linecount" : 7,
 					"text" : "output only on bang (nofilter chroma is always discontinuous)"
 				}
 
@@ -71,7 +69,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 227.928573500000311, 388.0, 69.0, 33.0 ],
+					"patching_rect" : [ 227.928573500000311, 388.0, 71.0, 33.0 ],
 					"text" : "output only on bang"
 				}
 
@@ -95,7 +93,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 354.0, 144.0, 69.0, 33.0 ],
+					"patching_rect" : [ 354.0, 144.0, 71.0, 33.0 ],
 					"text" : "use filtered chroma"
 				}
 
@@ -293,7 +291,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 328.928573500000311, 22.0, 30.0, 30.0 ]
 				}
 

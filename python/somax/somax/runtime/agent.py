@@ -381,13 +381,12 @@ class OscAgent(Agent, AsyncioOscObject):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def influence(self, path: str, feature_keyword: str, value: Any, **kwargs):
-        self.logger.debug(f"[influence] called for agent '{self.player.name}' with path '{path}', "
-                          f"feature keyword '{feature_keyword}', value '{value}' and kwargs {kwargs}")
+    def influence(self, path: str, feature_keyword: str, *value):
         if not self.scheduling_handler.running:
             return
         try:
-            influence: FeatureInfluence = FeatureInfluence.from_keyword(feature_keyword, value)
+            influence: FeatureInfluence = FeatureInfluence.from_keyword(feature_keyword,
+                                                                        value if len(value) > 1 else value[0])
         except ValueError as e:
             self.logger.error(f"{str(e)}. No influence was computed.")
             return
@@ -395,7 +394,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             path_and_name: List[str] = self._string_to_path(path)
             scheduling_time: float = self.scheduling_handler.time
-            self.player.influence(path_and_name, influence, scheduling_time, **kwargs)
+            self.player.influence(path_and_name, influence, scheduling_time)
             self.send_peaks()
         except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
