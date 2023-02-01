@@ -3,7 +3,7 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 2,
+			"minor" : 3,
 			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
@@ -42,7 +42,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-2",
-					"index" : 8,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -200,7 +200,7 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 2,
+							"minor" : 3,
 							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
@@ -641,7 +641,7 @@
 				"box" : 				{
 					"comment" : "(string) serverstatus",
 					"id" : "obj-5",
-					"index" : 6,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -665,7 +665,7 @@
 				"box" : 				{
 					"comment" : "(1/0) whether server is running or not",
 					"id" : "obj-30",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -677,7 +677,7 @@
 				"box" : 				{
 					"comment" : "parameters (dictionary or single)",
 					"id" : "obj-119",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -689,7 +689,7 @@
 				"box" : 				{
 					"comment" : "(list) tempo and phase",
 					"id" : "obj-107",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -701,7 +701,7 @@
 				"box" : 				{
 					"comment" : "(float) time",
 					"id" : "obj-101",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -713,7 +713,7 @@
 				"box" : 				{
 					"comment" : "(list) messages from server",
 					"id" : "obj-98",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -725,7 +725,7 @@
 				"box" : 				{
 					"comment" : "(list) info messages from server",
 					"id" : "obj-151",
-					"index" : 7,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -737,7 +737,7 @@
 				"box" : 				{
 					"comment" : "(list) Parameters",
 					"id" : "obj-174",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -750,7 +750,7 @@
 				"box" : 				{
 					"comment" : "(list) Messages to server",
 					"id" : "obj-29",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -767,8 +767,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 8,
 					"outlettype" : [ "", "", "", "dictionary", "int", "", "", "" ],
-					"patching_rect" : [ 86.0, 433.0, 1051.0, 22.0 ],
-					"text" : "somax.server #1 #2",
+					"patching_rect" : [ 86.0, 433.0, 165.0, 22.0 ],
+					"text" : "somax.server.LEGACY #1 #2",
 					"varname" : "somax.newserver"
 				}
 
@@ -896,7 +896,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 1 ],
-					"midpoints" : [ 921.100000000000023, 397.5, 1127.5, 397.5 ],
+					"midpoints" : [ 921.100000000000023, 397.5, 241.5, 397.5 ],
 					"source" : [ "obj-13", 0 ]
 				}
 
@@ -962,7 +962,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 1 ],
-					"midpoints" : [ 960.5, 607.939608034215667, 1156.0, 607.939608034215667, 1156.0, 422.0, 1127.5, 422.0 ],
+					"midpoints" : [ 960.5, 607.939608034215667, 1156.0, 607.939608034215667, 1156.0, 422.0, 241.5, 422.0 ],
 					"source" : [ "obj-24", 0 ]
 				}
 
@@ -1019,7 +1019,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 1 ],
-					"midpoints" : [ 169.5, 772.0, 1157.5, 772.0, 1157.5, 422.0, 1127.5, 422.0 ],
+					"midpoints" : [ 169.5, 772.0, 1157.5, 772.0, 1157.5, 422.0, 241.5, 422.0 ],
 					"source" : [ "obj-35", 0 ]
 				}
 
@@ -1073,6 +1073,57 @@
 
 			}
  ],
+		"dependency_cache" : [ 			{
+				"name" : "abstraction_path.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpuspath.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.path.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.server.LEGACY.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.serverstatus.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/server",
+				"patcherrelativepath" : "./resources/server",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.serverstatus.ui.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/server",
+				"patcherrelativepath" : "./resources/server",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-108", "obj-82", "obj-196" ]
 			}
@@ -1089,22 +1140,18 @@
 				"default" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
 					"bgfillcolor" : 					{
-						"type" : "gradient",
+						"angle" : 270.0,
+						"autogradient" : 0,
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
 						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
 						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
 						"proportion" : 0.39,
-						"autogradient" : 0
+						"type" : "gradient"
 					}
 ,
 					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-,
-				"toggle" : 				{
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
 				"newobj" : 				{
@@ -1114,15 +1161,19 @@
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
+				"toggle" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
 				"message" : 				{
 					"bgfillcolor" : 					{
-						"type" : "gradient",
+						"angle" : 270.0,
+						"autogradient" : 0,
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
 						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
 						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
 						"proportion" : 0.39,
-						"autogradient" : 0
+						"type" : "gradient"
 					}
 ,
 					"fontface" : [ 1 ],
