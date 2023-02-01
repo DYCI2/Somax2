@@ -341,6 +341,8 @@ class OscAgent(Agent, AsyncioOscObject):
     def flush(self):
         events: List[ScheduledEvent] = self.scheduling_handler.flush()
         self._send_events(events)
+        self.target.send(keyword=PlayerSendProtocol.SEND_MIDI_FLUSH, content="")
+        self.target.send(keyword=PlayerSendProtocol.SEND_AUDIO_OFF, content="")
 
     def set_tempo_master(self, is_master: bool):
         self.is_tempo_master = is_master
