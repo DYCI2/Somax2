@@ -40,6 +40,30 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-274",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 231.698086196503937, 650.425331195202034, 127.0, 22.0 ],
+					"text" : "doesn't understand $1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.9373517036, 0.767044425, 0.3548220396, 1.0 ],
+					"id" : "obj-276",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 231.698086196503937, 690.425331195202034, 157.0, 22.0 ],
+					"text" : "print somax.player @level 2"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
 					"id" : "obj-60",
 					"maxclass" : "newobj",
@@ -3431,6 +3455,7 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"hidden" : 1,
 									"id" : "obj-1068",
 									"ignoreclick" : 1,
 									"maxclass" : "led",
@@ -3467,6 +3492,7 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
+									"hidden" : 1,
 									"id" : "obj-1020",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -23415,26 +23441,26 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1408.833333333333485, 22.439567114741294, 313.0, 35.0 ],
 					"priority" : 					{
-						"__exp_autojumpenable" : 50,
-						"__exp_durationenable" : 50,
-						"__exp_melodicpitchfromchords" : 50,
-						"__exp_numnotesenable" : 50,
-						"__exp_octavebandsenable" : 50,
-						"__exp_selfpitchfromchords" : 50,
-						"__exp_tabooenable" : 50,
-						"__exp_tempoconsistencyenable" : 50,
-						"regionmaskenable" : 50,
 						"__exp_autojumpactivate" : 60,
+						"__exp_autojumpenable" : 50,
 						"__exp_autojumpforcejump" : 60,
+						"__exp_durationenable" : 50,
 						"__exp_durationmu" : 60,
 						"__exp_durationsigma" : 60,
+						"__exp_melodicpitchfromchords" : 50,
+						"__exp_numnotesenable" : 50,
 						"__exp_numnotesmu" : 60,
 						"__exp_numnotessigma" : 60,
 						"__exp_octavebands" : 60,
+						"__exp_octavebandsenable" : 50,
+						"__exp_selfpitchfromchords" : 50,
 						"__exp_tabooduration" : 60,
+						"__exp_tabooenable" : 50,
+						"__exp_tempoconsistencyenable" : 50,
 						"__exp_tempoconsistencylen" : 60,
 						"__exp_tempoconsistencysigma" : 60,
-						"regionmask" : 60
+						"regionmask" : 60,
+						"regionmaskenable" : 50
 					}
 ,
 					"saved_object_attributes" : 					{
@@ -28575,6 +28601,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-274", 0 ],
+					"source" : [ "obj-1259", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-317", 0 ],
 					"order" : 1,
 					"source" : [ "obj-126", 0 ]
@@ -30153,6 +30186,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-122", 0 ],
 					"source" : [ "obj-273", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-276", 0 ],
+					"source" : [ "obj-274", 0 ]
 				}
 
 			}
