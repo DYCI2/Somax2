@@ -17,6 +17,8 @@ class ServerSendProtocol:
     BUILDING_STATUS = [CORPUS_BUILDER_ADDRESS, "building_status"]   # sent to all corpus builders
     RELOCATE_AUDIO_CORPUS_STATUS = [RELOCATE_CORPUS_ADDRESS, "status"]
 
+    BUILT_CORPUS = [CORPUS_BUILDER_ADDRESS, "corpus"]
+
     # Server Info
     SERVER_STATUS = "serverstatus"
     SERVER_TERMINATED = "terminated"

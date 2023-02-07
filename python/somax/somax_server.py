@@ -25,17 +25,13 @@ from somax.runtime.agent import OscAgent, Agent
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.corpus import Corpus, AudioCorpus
 from somax.runtime.exceptions import ParameterError, InvalidCorpus, ExternalDataMismatch
-from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.osc_log_forwarder import OscLogForwarder
-from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
-from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.send_protocol import ServerSendProtocol
 from somax.runtime.target import Target
 from somax.scheduler.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, \
     TempoMasterMessage, \
     TempoMessage
-from somax.scheduler.scheduling_handler import SchedulingHandler
 from somax.scheduler.time_object import Time
 from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport
 
@@ -305,7 +301,8 @@ class SomaxServer(Somax, AsyncioOscObject):
                      copy_resources: bool = False,
                      filter_class: str = "",
                      segmentation_mode: Optional[str] = None,
-                     multithreaded: bool = False, **kwargs):
+                     multithreaded: bool = True,
+                     **kwargs):
         self.logger.info(f"Building corpus from file(s) '{filepath}'...")
         try:
             spectrogram_filter: AbstractFilter = AbstractFilter.from_string(filter_class)
@@ -318,12 +315,22 @@ class SomaxServer(Somax, AsyncioOscObject):
             return
 
         if multithreaded:
-            self._build_multithreaded(filepath, output_folder, corpus_name, overwrite, copy_resources,
+            self._build_multithreaded(filepath,
+                                      output_folder,
+                                      corpus_name,
+                                      overwrite,
+                                      copy_resources,
                                       spectrogram_filter,
                                       segmentation, **kwargs)
         else:
-            self._build(filepath, output_folder, corpus_name, overwrite, copy_resources, spectrogram_filter,
-                        segmentation, **kwargs)
+            self._build(filepath,
+                        output_folder,
+                        corpus_name,
+                        overwrite,
+                        copy_resources,
+                        spectrogram_filter,
+                        segmentation,
+                        **kwargs)
 
     def relocate_audio_corpus(self, corpus_filepath: str, new_audio_filepath: str):
         try:

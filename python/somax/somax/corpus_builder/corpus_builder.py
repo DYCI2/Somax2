@@ -56,8 +56,16 @@ class SegmentationStatistics:
 
 # TODO: Simple prototype to test the idea of multithreaded corpusbuilding
 class ThreadedCorpusBuilder(multiprocessing.Process):
-    def __init__(self, filepath: str, osc_address: str, ip: str, send_port: int, corpus_name: Optional[str] = None,
-                 output_folder: Optional[str] = None, overwrite: bool = False, copy_resources: bool = False, **kwargs):
+    def __init__(self,
+                 filepath: str,
+                 osc_address: str,
+                 ip: str,
+                 send_port: int,
+                 corpus_name: Optional[str] = None,
+                 output_folder: Optional[str] = None,
+                 overwrite: bool = False,
+                 copy_resources: bool = False,
+                 **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.filepath = filepath
@@ -102,6 +110,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
                 output_filepath: str = corpus.export(self.output_folder, overwrite=self.overwrite,
                                                      copy_resources=self.copy_resources)
                 self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
+                self.target.send(PlayerSendProtocol.BUILT_CORPUS, output_filepath)
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
                 self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
@@ -171,7 +180,9 @@ class CorpusBuilder:
         else:
             return None
 
-    def _build_midi(self, filepaths: List[str], name: str,
+    def _build_midi(self,
+                    filepaths: List[str],
+                    name: str,
                     foreground_channels: Tuple[int] = tuple(range(1, 17)),
                     background_channels: Tuple[int] = tuple(range(1, 17)),
                     spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
