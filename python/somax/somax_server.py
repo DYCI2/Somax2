@@ -302,6 +302,7 @@ class SomaxServer(Somax, AsyncioOscObject):
                      filter_class: str = "",
                      segmentation_mode: Optional[str] = None,
                      multithreaded: bool = True,
+                     builder_address: str = "",
                      **kwargs):
         self.logger.info(f"Building corpus from file(s) '{filepath}'...")
         try:
@@ -311,25 +312,28 @@ class SomaxServer(Somax, AsyncioOscObject):
 
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)} No Corpus was built.")
-            self.target.send(ServerSendProtocol.BUILDING_STATUS, "failed")
+            self.target.send(ServerSendProtocol.BUILDING_STATUS, ["failed", builder_address])
             return
 
         if multithreaded:
-            self._build_multithreaded(filepath,
-                                      output_folder,
-                                      corpus_name,
-                                      overwrite,
-                                      copy_resources,
-                                      spectrogram_filter,
-                                      segmentation, **kwargs)
+            self._build_multithreaded(filepath=filepath,
+                                      output_folder=output_folder,
+                                      corpus_name=corpus_name,
+                                      overwrite=overwrite,
+                                      copy_resources=copy_resources,
+                                      spectrogram_filter=spectrogram_filter,
+                                      segmentation_mode=segmentation,
+                                      builder_address=builder_address,
+                                      **kwargs)
         else:
-            self._build(filepath,
-                        output_folder,
-                        corpus_name,
-                        overwrite,
-                        copy_resources,
-                        spectrogram_filter,
-                        segmentation,
+            self._build(filepath=filepath,
+                        output_folder=output_folder,
+                        corpus_name=corpus_name,
+                        overwrite=overwrite,
+                        copy_resources=copy_resources,
+                        spectrogram_filter=spectrogram_filter,
+                        segmentation_mode=segmentation,
+                        builder_address=builder_address,
                         **kwargs)
 
     def relocate_audio_corpus(self, corpus_filepath: str, new_audio_filepath: str):
@@ -362,30 +366,36 @@ class SomaxServer(Somax, AsyncioOscObject):
                copy_resources: bool = False,
                spectrogram_filter: AbstractFilter = AbstractFilter.default(),
                segmentation_mode: Optional[AudioSegmentation] = None,
+               builder_address: str = "",
                **kwargs):
-        self.target.send(ServerSendProtocol.BUILDING_STATUS, "init")
-        corpus: Corpus = CorpusBuilder().build(filepath=filepath, corpus_name=corpus_name,
+        self.target.send(ServerSendProtocol.BUILDING_STATUS, ["init", builder_address])
+        corpus: Corpus = CorpusBuilder().build(filepath=filepath,
+                                               corpus_name=corpus_name,
                                                spectrogram_filter=spectrogram_filter,
-                                               segmentation_mode=segmentation_mode, **kwargs)
+                                               segmentation_mode=segmentation_mode,
+                                               **kwargs)
         self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{output_folder}'...")
 
         try:
             output_filepath: str = corpus.export(output_folder, overwrite=overwrite, copy_resources=copy_resources)
             self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
-            self.target.send(ServerSendProtocol.BUILDING_STATUS, "success")
+            self.target.send(ServerSendProtocol.BUILDING_STATUS, ["success", builder_address])
         except (IOError, AttributeError, KeyError) as e:
             self.logger.error(f"{str(e)} Export of corpus failed.")
-            self.target.send(ServerSendProtocol.BUILDING_STATUS, "failed")
+            self.target.send(ServerSendProtocol.BUILDING_STATUS, ["failed", builder_address])
 
     def _build_multithreaded(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
                              overwrite: bool = False, copy_resources: bool = False,
                              spectrogram_filter: AbstractFilter = AbstractFilter.default(),
                              segmentation_mode: Optional[AudioSegmentation] = None, **kwargs):
-        corpus_builder: ThreadedCorpusBuilder = ThreadedCorpusBuilder(filepath=filepath, corpus_name=corpus_name,
+        corpus_builder: ThreadedCorpusBuilder = ThreadedCorpusBuilder(filepath=filepath,
+                                                                      corpus_name=corpus_name,
                                                                       spectrogram_filter=spectrogram_filter,
-                                                                      output_folder=output_folder, overwrite=overwrite,
+                                                                      output_folder=output_folder,
+                                                                      overwrite=overwrite,
                                                                       copy_resources=copy_resources,
-                                                                      osc_address=self.address, ip=self.ip,
+                                                                      osc_address=self.address,
+                                                                      ip=self.ip,
                                                                       send_port=self.send_port,
                                                                       segmentation_mode=segmentation_mode,
                                                                       **kwargs)

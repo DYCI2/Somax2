@@ -105,7 +105,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 175.0, 297.0, 195.0, 22.0 ],
-									"presentation_linecount" : 3,
 									"text" : "corpus Debussy_String_Quartet.gz"
 								}
 
@@ -602,7 +601,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "Launchkey MK3 37 LKMK3 MIDI In", ",", "Launchkey MK3 37 LKMK3 DAW In", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "from Max 1", ",", "from Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -2357,7 +2356,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 904.666666666666742, 863.333333333333258, 139.5, 22.0 ],
-									"text" : "statemax 7966"
+									"text" : "live.menu 1."
 								}
 
 							}
@@ -2502,7 +2501,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 966.375, 1070.5, 50.0, 35.0 ],
-									"text" : "Player_4590"
+									"text" : "Player_2431"
 								}
 
 							}
@@ -2821,7 +2820,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 944.541666666666629, 372.0, 213.0, 35.0 ],
-									"text" : "1 ready"
+									"text" : "0 duplicate"
 								}
 
 							}
