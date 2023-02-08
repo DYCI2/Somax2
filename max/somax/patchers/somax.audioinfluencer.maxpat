@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1728.0, 124.0, 1531.0, 1080.0 ],
+		"rect" : [ 34.0, 86.0, 1852.0, 1019.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,6 +40,91 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-14",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patcher" : 					{
+						"fileversion" : 1,
+						"appversion" : 						{
+							"major" : 8,
+							"minor" : 3,
+							"revision" : 2,
+							"architecture" : "x64",
+							"modernui" : 1
+						}
+,
+						"classnamespace" : "box",
+						"rect" : [ 59.0, 106.0, 189.0, 180.0 ],
+						"bglocked" : 0,
+						"openinpresentation" : 0,
+						"default_fontsize" : 12.0,
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"gridonopen" : 1,
+						"gridsize" : [ 15.0, 15.0 ],
+						"gridsnaponopen" : 1,
+						"objectsnaponopen" : 1,
+						"statusbarvisible" : 2,
+						"toolbarvisible" : 1,
+						"lefttoolbarpinned" : 0,
+						"toptoolbarpinned" : 0,
+						"righttoolbarpinned" : 0,
+						"bottomtoolbarpinned" : 0,
+						"toolbars_unpinned_last_save" : 0,
+						"tallnewobj" : 0,
+						"boxanimatetime" : 200,
+						"enablehscroll" : 1,
+						"enablevscroll" : 1,
+						"devicewidth" : 0.0,
+						"description" : "",
+						"digest" : "",
+						"tags" : "",
+						"style" : "",
+						"subpatcher_template" : "",
+						"assistshowspatchername" : 0,
+						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-2",
+									"linecount" : 6,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 17.0, 13.0, 150.0, 87.0 ],
+									"text" : "\"Continuous pitch\" controls whether pitch should be output immediately when detected or if it should wait for a detected onset."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-4",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 17.0, 106.0, 150.0, 60.0 ],
+									"text" : "Note that when onsets are triggered by \"Pitch Detection (Yin)\", the two options are equal"
+								}
+
+							}
+ ],
+						"lines" : [  ]
+					}
+,
+					"patching_rect" : [ 610.0, 1101.0, 42.0, 22.0 ],
+					"saved_object_attributes" : 					{
+						"description" : "",
+						"digest" : "",
+						"globalpatchername" : "",
+						"tags" : ""
+					}
+,
+					"text" : "p note"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontface" : 1,
 					"id" : "obj-118",
 					"linecount" : 2,
@@ -47,7 +132,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 2104.75, 888.441769407526408, 89.0, 33.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Global Onset parameters"
 				}
 
@@ -61,7 +145,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1903.25, 888.441769407526408, 129.0, 33.0 ],
-					"presentation_linecount" : 3,
 					"text" : "Ircamdescriptor (chroma) parameters"
 				}
 
@@ -147,7 +230,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 607.0, 92.623108000000002, 159.0, 35.0 ],
+					"patching_rect" : [ 607.0, 92.623108000000002, 162.0, 35.0 ],
 					"text" : "extra argument for message 'somax.audioinfluencer'"
 				}
 
@@ -278,7 +361,7 @@
 									"maxclass" : "inlet",
 									"numinlets" : 0,
 									"numoutlets" : 1,
-									"outlettype" : [ "" ],
+									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 50.0, 40.000000089843752, 30.0, 30.0 ]
 								}
 
@@ -445,7 +528,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1077.499999999999773, 1014.20824742267996, 110.0, 33.0 ],
+					"patching_rect" : [ 1062.351371424713307, 1016.916494845359921, 113.0, 33.0 ],
 					"text" : "(loadmess handled by patcherargs)"
 				}
 
@@ -567,7 +650,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 350.0, 1022.416494845359921, 95.0, 22.0 ],
+					"patching_rect" : [ 350.0, 1022.416494845359921, 109.0, 22.0 ],
 					"text" : "r #0_onset_gate"
 				}
 
@@ -579,7 +662,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2105.75, 1069.238322447345126, 97.0, 22.0 ],
+					"patching_rect" : [ 2105.75, 1069.238322447345126, 111.0, 22.0 ],
 					"text" : "s #0_onset_gate"
 				}
 
@@ -592,7 +675,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1327.027875999998287, 632.595884703763204, 123.0, 22.0 ],
+					"patching_rect" : [ 1327.027875999998287, 632.595884703763204, 136.0, 22.0 ],
 					"text" : "r #0_chroma_params"
 				}
 
@@ -604,7 +687,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1914.75, 1069.238322447345126, 125.0, 22.0 ],
+					"patching_rect" : [ 1914.75, 1069.238322447345126, 138.0, 22.0 ],
 					"text" : "s #0_chroma_params"
 				}
 
@@ -641,7 +724,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1048.500000000000227, 1052.23667905824027, 100.0, 29.0 ],
+					"patching_rect" : [ 1062.351371424713307, 1053.20824742267996, 98.0, 29.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 2,
 					"presentation_rect" : [ 238.460001416667239, 584.0, 138.806183500000429, 29.0 ],
@@ -660,7 +743,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1042.351371424713307, 1056.670944347997647, 114.958435000000009, 20.0 ],
+					"patching_rect" : [ 1062.351371424713307, 1056.670944347997647, 94.958435000000009, 21.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 247.311373735450218, 586.0, 114.958435000000009, 20.0 ],
 					"proportion" : 0.5
@@ -773,7 +856,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 919.0, 631.595884703763204, 98.0, 22.0 ],
+					"patching_rect" : [ 919.0, 631.595884703763204, 111.0, 22.0 ],
 					"text" : "r #0_yin_params"
 				}
 
@@ -785,7 +868,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1926.0, 800.75, 100.0, 22.0 ],
+					"patching_rect" : [ 1926.0, 800.75, 113.0, 22.0 ],
 					"text" : "s #0_yin_params"
 				}
 
@@ -1549,7 +1632,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 392.666666666666515, 632.595884703763204, 109.0, 22.0 ],
+					"patching_rect" : [ 392.666666666666515, 632.595884703763204, 122.0, 22.0 ],
 					"text" : "r #0_bonk_params"
 				}
 
@@ -1561,7 +1644,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1922.0, 425.783570555563188, 111.0, 22.0 ],
+					"patching_rect" : [ 1922.0, 425.783570555563188, 124.0, 22.0 ],
 					"text" : "s #0_bonk_params"
 				}
 
@@ -1767,11 +1850,11 @@
 				"box" : 				{
 					"comment" : "(any/signal/mc.signal) messages or audio input to audio influencer",
 					"id" : "obj-194",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 365.700000000000045, 45.62310791015625, 30.0, 30.0 ]
 				}
 
@@ -1792,7 +1875,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-5",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3285,7 +3368,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-78",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3687,7 +3770,7 @@
 						"bonkthreshlow" : [ 0.0 ],
 						"continuouschroma" : [ 0 ],
 						"continuouspitch" : [ 1 ],
-						"enabled" : [ 1 ],
+						"enabled" : [ 0 ],
 						"onsetmethod" : [ 2 ],
 						"yindownsample" : [ 1 ],
 						"yinlevel" : [ -48 ],
@@ -3962,7 +4045,7 @@
 				"box" : 				{
 					"comment" : "(list) influences",
 					"id" : "obj-24",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -5542,73 +5625,6 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "OMax.yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "Yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "audio2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "bc.autoname.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "bc.yinstats.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "bonk~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "ircamdescriptor~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "somax.await_patcherargs.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.winresize.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "sr.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "yin~.mxo",
-				"type" : "iLaX"
-			}
- ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-129", "obj-130" ]
 			}
