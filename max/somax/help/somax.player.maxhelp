@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ -1694.0, 100.0, 1339.0, 983.0 ],
+		"rect" : [ 34.0, 86.0, 2178.0, 1259.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ -1694.0, 126.0, 1339.0, 957.0 ],
+						"rect" : [ 34.0, 112.0, 2178.0, 1233.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -87,6 +87,53 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-77",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 293.0, 320.0, 116.0, 20.0 ],
+									"text" : "or absolute filepaths"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-64",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 175.0, 297.0, 195.0, 22.0 ],
+									"text" : "corpus Debussy_String_Quartet.gz"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-61",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 175.0, 265.0, 113.0, 22.0 ],
+									"text" : "corpus Joelle.pickle"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-50",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 293.0, 247.0, 116.0, 47.0 ],
+									"text" : "relative filepaths work for files inside your corpuspath"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-5",
 									"maxclass" : "newobj",
@@ -344,7 +391,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 971.766666666666652, 1094.75, 39.0, 20.0 ],
+									"patching_rect" : [ 971.766666666666652, 1107.75, 39.0, 20.0 ],
 									"text" : "name"
 								}
 
@@ -554,7 +601,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "Launchkey MK3 37 LKMK3 MIDI In", ",", "Launchkey MK3 37 LKMK3 DAW In", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "from Max 1", ",", "from Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -1786,7 +1833,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 566.5, 349.5, 205.141666666666652, 33.0 ],
+									"patching_rect" : [ 584.5, 379.0, 205.141666666666652, 33.0 ],
 									"text" : "2nd argument to provide an alternative path to related audio file"
 								}
 
@@ -1799,7 +1846,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 213.0, 341.5, 351.0, 49.0 ],
+									"patching_rect" : [ 231.0, 371.0, 351.0, 49.0 ],
 									"text" : "corpus /Users/borg/MaxDev/Somax2/max/somax/corpus/Joelle.pickle /Users/borg/Downloads/somax_corpus/Joelle.wav"
 								}
 
@@ -1811,7 +1858,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 213.0, 397.0, 394.0, 22.0 ],
+									"patching_rect" : [ 206.0, 342.0, 394.0, 22.0 ],
 									"text" : "corpus /Users/borg/MaxDev/Somax2/max/somax/corpus/Joelle.pickle"
 								}
 
@@ -2309,7 +2356,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 904.666666666666742, 863.333333333333258, 139.5, 22.0 ],
-									"text" : "reinstantiate 1."
+									"text" : "live.menu 1."
 								}
 
 							}
@@ -2352,13 +2399,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-20",
-									"linecount" : 3,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1158.375, 1148.75, 170.0, 49.0 ],
-									"text" : "/Users/borg/MaxDev/Somax2/max/somax/corpus/Joelle.pickle"
+									"patching_rect" : [ 1158.375, 1148.75, 170.0, 22.0 ],
+									"text" : "Debussy_String_Quartet.gz"
 								}
 
 							}
@@ -2394,7 +2440,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1113.125, 1070.5, 50.0, 22.0 ],
-									"text" : "1237"
+									"text" : "1240"
 								}
 
 							}
@@ -2418,7 +2464,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1039.75, 1070.5, 50.0, 22.0 ],
-									"text" : "1236"
+									"text" : "1241"
 								}
 
 							}
@@ -2449,12 +2495,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-72",
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 966.375, 1070.5, 50.0, 22.0 ],
-									"text" : "Player"
+									"patching_rect" : [ 966.375, 1070.5, 50.0, 35.0 ],
+									"text" : "Player_2431"
 								}
 
 							}
@@ -2773,7 +2820,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 944.541666666666629, 372.0, 213.0, 35.0 ],
-									"text" : "0 offline"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -3390,6 +3437,20 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-143", 0 ],
+									"source" : [ "obj-61", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-143", 0 ],
+									"source" : [ "obj-64", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-7", 0 ],
 									"source" : [ "obj-66", 0 ]
 								}
@@ -3488,7 +3549,7 @@
 									"order" : 0,
 									"source" : [ "obj-71", 0 ],
 									"watchpoint_flags" : 5,
-									"watchpoint_id" : 1
+									"watchpoint_id" : 2
 								}
 
 							}
@@ -3653,10 +3714,10 @@
 								"boxes" : [ "obj-104", "obj-103" ]
 							}
 , 							{
-								"boxes" : [ "obj-62", "obj-59" ]
+								"boxes" : [ "obj-41", "obj-51" ]
 							}
 , 							{
-								"boxes" : [ "obj-41", "obj-51" ]
+								"boxes" : [ "obj-62", "obj-59" ]
 							}
  ]
 					}

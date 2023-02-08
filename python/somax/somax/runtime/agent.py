@@ -528,12 +528,18 @@ class OscAgent(Agent, AsyncioOscObject):
             if verbose:
                 self.logger.error(f"Could not remove scale action: {repr(e)}.")
 
-    def read_corpus(self, filepath: str,
+    def read_corpus(self,
+                    filepath: str,
                     volatile: bool = False,
                     alternative_audio_file: str = "",
-                    alternative_audio_folder: str = ""):
+                    corpuspath_folder: str = ""):
+        if not os.path.isabs(filepath):
+            filepath = os.path.join(corpuspath_folder, filepath)
+
         self.logger.info(f"Reading corpus at '{filepath}' for player '{self.player.name}'...")
         self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
+
+
         if not os.path.exists(filepath):
             self.logger.error(f"The file '{filepath}' does not exist. No corpus was read.")
             self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
@@ -555,11 +561,11 @@ class OscAgent(Agent, AsyncioOscObject):
                         corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile)
                     except FileNotFoundError as e:
                         # if fails and alternative folder for audio file provided, try relocating audio file
-                        if alternative_audio_folder:
+                        if corpuspath_folder:
                             try:
-                                self.logger.warning(f"{str(e)}. Looking for audio file in '{alternative_audio_folder}'...")
+                                self.logger.warning(f"{str(e)}. Looking for audio file in '{corpuspath_folder}'...")
                                 corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile,
-                                                                       new_audio_path=alternative_audio_folder)
+                                                                       new_audio_path=corpuspath_folder)
                             except FileNotFoundError as e:
                                 # In case corpus and audio file have been renamed, look for an audio file
                                 #    with the same name and path as corpus file

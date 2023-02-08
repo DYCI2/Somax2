@@ -24,7 +24,7 @@ from somax.runtime.corpus import Corpus, AudioCorpus, MidiCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError, ParameterError
 from somax.runtime.osc_log_forwarder import OscLogForwarder
-from somax.runtime.send_protocol import PlayerSendProtocol
+from somax.runtime.send_protocol import PlayerSendProtocol, ServerSendProtocol
 from somax.runtime.target import SimpleOscTarget
 from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduling
 
@@ -56,8 +56,17 @@ class SegmentationStatistics:
 
 # TODO: Simple prototype to test the idea of multithreaded corpusbuilding
 class ThreadedCorpusBuilder(multiprocessing.Process):
-    def __init__(self, filepath: str, osc_address: str, ip: str, send_port: int, corpus_name: Optional[str] = None,
-                 output_folder: Optional[str] = None, overwrite: bool = False, copy_resources: bool = False, **kwargs):
+    def __init__(self,
+                 filepath: str,
+                 osc_address: str,
+                 ip: str,
+                 send_port: int,
+                 corpus_name: Optional[str] = None,
+                 output_folder: Optional[str] = None,
+                 overwrite: bool = False,
+                 copy_resources: bool = False,
+                 builder_address: str = "",
+                 **kwargs):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.filepath = filepath
@@ -65,6 +74,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
         self.output_folder = output_folder
         self.overwrite = overwrite
         self.copy_resources: bool = copy_resources
+        self.builder_address: str = builder_address
         self.target = SimpleOscTarget(address=osc_address, port=send_port, ip=ip)
         self.kwargs = kwargs
 
@@ -74,40 +84,42 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
             logging.config.fileConfig(path.absolute())
         self.logger.addHandler(OscLogForwarder(self.target))
 
-        self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "init")
+        self.target.send(ServerSendProtocol.BUILDING_STATUS, ["init", self.builder_address])
 
         try:
             corpus: Corpus = CorpusBuilder().build(filepath=self.filepath, corpus_name=self.corpus_name, **self.kwargs)
             self.logger.debug(f"[build_corpus]: Successfully built '{corpus.name}' from file '{self.filepath}'.")
         except ValueError as e:  # TODO: Missing all exceptions from CorpusBuilder.build()
             self.logger.error(f"{str(e)}. No corpus was built")
-            self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(ServerSendProtocol.BUILDING_STATUS, ["failed", self.builder_address])
             return
         except FileNotFoundError as e:
             self.logger.error(f"{str(e)}. No corpus was built")
-            self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(ServerSendProtocol.BUILDING_STATUS, ["failed", self.builder_address])
             return
         except NoBackendError:
             self.logger.error(f"The file format of the provided file is not supported.")
-            self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(ServerSendProtocol.BUILDING_STATUS, ["failed", self.builder_address])
             return
         except (IOError, ParameterError, librosa.util.exceptions.ParameterError) as e:
             self.logger.error(f"{str(e)}. No corpus was built")
-            self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
+            self.target.send(ServerSendProtocol.BUILDING_STATUS, ["failed", self.builder_address])
             return
 
         if self.output_folder is not None:
             # self.logger.info(f"[build_corpus]: Exporting corpus '{corpus.name}' to path '{self.output_folder}'...")
             try:
-                output_filepath: str = corpus.export(self.output_folder, overwrite=self.overwrite,
+                output_filepath: str = corpus.export(self.output_folder,
+                                                     overwrite=self.overwrite,
                                                      copy_resources=self.copy_resources)
                 self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
+                self.target.send(ServerSendProtocol.BUILDING_CORPUS_DONE, [output_filepath, self.builder_address])
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
-                self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "failed")
+                self.target.send(ServerSendProtocol.BUILDING_STATUS, ["failed", self.builder_address])
                 return
 
-        self.target.send(PlayerSendProtocol.BUILDING_CORPUS_STATUS, "success")
+        self.target.send(ServerSendProtocol.BUILDING_STATUS, ["success", self.builder_address])
 
 
 class CorpusBuilder:
@@ -171,7 +183,9 @@ class CorpusBuilder:
         else:
             return None
 
-    def _build_midi(self, filepaths: List[str], name: str,
+    def _build_midi(self,
+                    filepaths: List[str],
+                    name: str,
                     foreground_channels: Tuple[int] = tuple(range(1, 17)),
                     background_channels: Tuple[int] = tuple(range(1, 17)),
                     spectrogram_filter: AbstractFilter = AbstractFilter.parse(AbstractFilter.DEFAULT),
