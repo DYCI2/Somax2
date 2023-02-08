@@ -113,7 +113,7 @@ class ThreadedCorpusBuilder(multiprocessing.Process):
                                                      overwrite=self.overwrite,
                                                      copy_resources=self.copy_resources)
                 self.logger.info(f"Corpus was successfully written to file '{output_filepath}'.")
-                self.target.send(ServerSendProtocol.BUILT_CORPUS, [output_filepath, self.builder_address])
+                self.target.send(ServerSendProtocol.BUILDING_CORPUS_DONE, [output_filepath, self.builder_address])
             except (IOError, AttributeError, KeyError) as e:
                 self.logger.error(f"{str(e)} Export of corpus failed.")
                 self.target.send(ServerSendProtocol.BUILDING_STATUS, ["failed", self.builder_address])
