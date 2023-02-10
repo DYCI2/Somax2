@@ -162,7 +162,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
                                     f"While it may work, using it could result in a number of bugs. "
                                     f"Recommended action: rebuild corpus. "
                                     f"(To attempt to load the corpus anyway: enable the 'volatile' flag)")
-            name: str = corpus_data["name"]
+            name: str = os.path.basename(os.path.splitext(filepath)[0])
             scheduling_mode: SchedulingMode = SchedulingMode.from_string(corpus_data["content_type"])
 
             build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
@@ -302,7 +302,8 @@ class AudioCorpus(Corpus):
         return self.events[-1].onset + self.events[-1].duration
 
     @classmethod
-    def from_json(cls, filepath: str,
+    def from_json(cls,
+                  filepath: str,
                   volatile: bool = False,
                   new_audio_path: Optional[str] = None) -> 'AudioCorpus':
         """
@@ -328,6 +329,8 @@ class AudioCorpus(Corpus):
                     cls.validate_audio_source(new_audio_filepath, corpus.sr,
                                               corpus.file_duration, corpus.num_channels)
                     corpus.filepath = new_audio_filepath
+                    file_name: str = os.path.basename(os.path.splitext(filepath)[0])
+                    corpus.name = file_name
 
                 else:
                     cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.file_duration, corpus.num_channels)
