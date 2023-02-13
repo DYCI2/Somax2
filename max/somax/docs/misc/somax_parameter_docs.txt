@@ -1,12 +1,12 @@
 #### ROUTING ####
-* Add Source:                           router add
+* Clear Source N:                       router clear N
 * Clear All Sources:                    router clearall
-* Set Source N:                         router set N source <name_of_source>
-* Toggle Pitch of Source N:             router set N pitch <1/0>
-* Toggle Onset of Source N:             router set n onset <1/0>
-* Set Chroma of Source N:               router set n chroma <0..1>
-* Toggle Chroma Onset of Source N:      router set n chromaonset <1/0>
-* Toggle Source N:                      router set n mute <1/0>
+* Set Source N:                         router N source <name_of_source>
+* Toggle Pitch of Source N:             router N pitch <1/0>
+* Toggle Onset of Source N:             router N onset <1/0>
+* Set Chroma of Source N:               router N chroma <0..1>
+* Toggle Chroma Onset of Source N:      router N chromaonset <1/0>
+* Toggle Source N:                      router N enable <1/0>
 
 
 #### PLAYER CONTROLS ####
@@ -79,3 +79,34 @@
 * Listen:                               midioutput enabled <1/0>
 * Output Device:                        midioutput umenu "Name_of_Device"
 * Channel:                              midioutput channel <0..16> (0 = original channels)
+
+
+#### AUDIO INFLUENCER MESSAGES ####
+* Enable:                               influencer enabled <0/1>
+* Yin Downsample Factor:                influencer yindownsample <0/1/2/3>
+* Yin Minimum Frequency:                influencer yinminfreq <0..22000>
+* Yin Gain (dB):                        influencer yinlevel <-120..0>
+* Yin Quality:                          influence yinquality <0..1>
+* Yin Probability:                      influencer yinprobability <0..1>
+* Yin Window Size (ms):                 influencer yinwindow <0..>
+* Bonk Low Threshold:                   influencer bonkthreshlow <0..>
+* Bonk Low Threshold:                   influencer bonkthreshhigh <0..>
+* Bonk Debounce:                        influencer bonkdebounce <0..1>
+* Bonk Minimum Velocity:                influencer bonkminvel <0..1>
+* Pitch Segmentation Source:            influencer pitchsegmethod <0/1/2>
+* Onset Segmentation Source:            influencer onsetmethod <0/1/2>
+* Onset Limiter Enable:                 influencer limiterenable <0/1>
+* Onset Limiter Interval:               influencer bonkqlim <0..>
+
+
+
+#### MIDI INFLUENCER MESSAGES ####
+* Enable:                               influencer enabled <0/1>
+* Onset Limiter (ms):                   influencer onsetlimit <0..>
+* Onset Threshold (ms):                 influencer threshold <0..>
+* Onset Threshold Disable:              influencer threshbypass <0/1>
+
+
+#### SERVER ####
+Start Server (in first inlet):          startserver
+Toggle Run (in first inlet):            <1/0>
