@@ -601,7 +601,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "MPK Mini Mk II", ",", "from Max 1", ",", "from Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -1821,8 +1821,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 932.0, 136.0, 138.0, 24.0 ],
-									"text" : "Toggle Transport"
+									"patching_rect" : [ 932.0, 136.0, 149.0, 24.0 ],
+									"text" : "Toggle Generation"
 								}
 
 							}
@@ -2356,7 +2356,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 904.666666666666742, 863.333333333333258, 139.5, 22.0 ],
-									"text" : "live.menu 1."
+									"text" : "reinstantiate 1."
 								}
 
 							}
@@ -2440,7 +2440,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1113.125, 1070.5, 50.0, 22.0 ],
-									"text" : "1240"
+									"text" : "1237"
 								}
 
 							}
@@ -2464,7 +2464,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1039.75, 1070.5, 50.0, 22.0 ],
-									"text" : "1241"
+									"text" : "1236"
 								}
 
 							}
@@ -2495,13 +2495,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-72",
-									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 966.375, 1070.5, 50.0, 35.0 ],
-									"text" : "Player_2431"
+									"patching_rect" : [ 966.375, 1070.5, 50.0, 22.0 ],
+									"text" : "Player"
 								}
 
 							}
@@ -2820,7 +2819,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 944.541666666666629, 372.0, 213.0, 35.0 ],
-									"text" : "0 duplicate"
+									"text" : "0 offline"
 								}
 
 							}
@@ -3740,15 +3739,11 @@
 		"parameters" : 		{
 			"obj-1::obj-143::obj-1007" : [ "rslider[1]", "rslider", 0 ],
 			"obj-1::obj-143::obj-1115" : [ "continuity[1]", "continuity", 0 ],
-			"obj-1::obj-143::obj-1123" : [ "live.menu[3]", "live.menu", 0 ],
-			"obj-1::obj-143::obj-1150" : [ "live.text[4]", "live.text", 0 ],
-			"obj-1::obj-143::obj-1168" : [ "live.menu[1]", "live.menu", 0 ],
 			"obj-1::obj-143::obj-1175" : [ "heldnotesmode[2]", "heldnotesmode", 0 ],
 			"obj-1::obj-143::obj-1179" : [ "continuity[16]", "continuity", 0 ],
 			"obj-1::obj-143::obj-12" : [ "melodicmod12[1]", "melodicmod12", 0 ],
 			"obj-1::obj-143::obj-120" : [ "melodicbypass[1]", "melodicbypass", 0 ],
 			"obj-1::obj-143::obj-1218" : [ "simultaneousonsets[2]", "artificialmidities", 0 ],
-			"obj-1::obj-143::obj-1256" : [ "live.menu[2]", "live.menu", 0 ],
 			"obj-1::obj-143::obj-126" : [ "harmonicbypass[1]", "harmonicbypass", 0 ],
 			"obj-1::obj-143::obj-134" : [ "continuity[17]", "continuity", 0 ],
 			"obj-1::obj-143::obj-1344" : [ "enforcetaboo[4]", "enforcetaboo", 0 ],
@@ -3772,7 +3767,6 @@
 			"obj-1::obj-143::obj-295" : [ "playingmode[4]", "playingmode", 0 ],
 			"obj-1::obj-143::obj-298" : [ "simultaneousonsets[7]", "simultaneousonsets", 0 ],
 			"obj-1::obj-143::obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
-			"obj-1::obj-143::obj-352" : [ "outputthreshold[4]", "outputthreshold", 0 ],
 			"obj-1::obj-143::obj-504" : [ "transpositionconsistency[4]", "transpositionconsistency", 0 ],
 			"obj-1::obj-143::obj-570" : [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-1::obj-143::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
@@ -3797,18 +3791,13 @@
 			"obj-1::obj-143::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
 			"obj-1::obj-143::obj-998" : [ "__exp_regionmaskenable[1]", "__exp_regionmaskenable", 0 ],
 			"obj-1::obj-27::obj-98" : [ "live.text[6]", "live.text[26]", 0 ],
-			"obj-1::obj-98::obj-98" : [ "live.text[1]", "live.text[26]", 0 ],
 			"obj-1::obj-99::obj-1007" : [ "rslider[2]", "rslider", 0 ],
 			"obj-1::obj-99::obj-1115" : [ "continuity[3]", "continuity", 0 ],
-			"obj-1::obj-99::obj-1123" : [ "live.menu[6]", "live.menu", 0 ],
-			"obj-1::obj-99::obj-1150" : [ "live.text[7]", "live.text", 0 ],
-			"obj-1::obj-99::obj-1168" : [ "live.menu[4]", "live.menu", 0 ],
 			"obj-1::obj-99::obj-1175" : [ "heldnotesmode[3]", "heldnotesmode", 0 ],
 			"obj-1::obj-99::obj-1179" : [ "continuity[2]", "continuity", 0 ],
 			"obj-1::obj-99::obj-12" : [ "melodicmod12[2]", "melodicmod12", 0 ],
 			"obj-1::obj-99::obj-120" : [ "melodicbypass[2]", "melodicbypass", 0 ],
 			"obj-1::obj-99::obj-1218" : [ "simultaneousonsets[3]", "artificialmidities", 0 ],
-			"obj-1::obj-99::obj-1256" : [ "live.menu[5]", "live.menu", 0 ],
 			"obj-1::obj-99::obj-126" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
 			"obj-1::obj-99::obj-134" : [ "continuity[4]", "continuity", 0 ],
 			"obj-1::obj-99::obj-1344" : [ "enforcetaboo[5]", "enforcetaboo", 0 ],
@@ -3832,7 +3821,6 @@
 			"obj-1::obj-99::obj-295" : [ "playingmode[1]", "playingmode", 0 ],
 			"obj-1::obj-99::obj-298" : [ "simultaneousonsets[4]", "simultaneousonsets", 0 ],
 			"obj-1::obj-99::obj-328" : [ "decaybasis[2]", "decaybasis", 0 ],
-			"obj-1::obj-99::obj-352" : [ "outputthreshold[1]", "outputthreshold", 0 ],
 			"obj-1::obj-99::obj-504" : [ "transpositionconsistency[1]", "transpositionconsistency", 0 ],
 			"obj-1::obj-99::obj-570" : [ "__exp_melodicpitchfromchords[1]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-1::obj-99::obj-575" : [ "__exp_tempoconsistencysigma[1]", "__exp_tempoconsistencysigma", 0 ],
@@ -3866,22 +3854,6 @@
 			}
 ,
 			"parameter_overrides" : 			{
-				"obj-1::obj-99::obj-1123" : 				{
-					"parameter_longname" : "live.menu[6]"
-				}
-,
-				"obj-1::obj-99::obj-1150" : 				{
-					"parameter_longname" : "live.text[7]"
-				}
-,
-				"obj-1::obj-99::obj-1168" : 				{
-					"parameter_longname" : "live.menu[4]"
-				}
-,
-				"obj-1::obj-99::obj-1256" : 				{
-					"parameter_longname" : "live.menu[5]"
-				}
-,
 				"obj-1::obj-99::obj-270::obj-1226" : 				{
 					"parameter_longname" : "width[2]"
 				}

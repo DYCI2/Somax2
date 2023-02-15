@@ -6,7 +6,7 @@
 * Toggle Onset of Source N:             router N onset <1/0>
 * Set Chroma of Source N:               router N chroma <0..1>
 * Toggle Chroma Onset of Source N:      router N chromaonset <1/0>
-* Toggle Source N:                      router N enable <1/0>
+* Toggle Source N:                      router N Å <1/0>
 
 
 #### PLAYER CONTROLS ####

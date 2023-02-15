@@ -479,8 +479,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 838.799999999999955, 659.0, 61.0, 33.0 ],
-									"text" : "transport running"
+									"patching_rect" : [ 838.799999999999955, 659.0, 69.0, 33.0 ],
+									"text" : "generation running"
 								}
 
 							}
@@ -659,8 +659,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 587.0, 205.0, 138.0, 24.0 ],
-									"text" : "Toggle Transport"
+									"patching_rect" : [ 587.0, 205.0, 149.0, 24.0 ],
+									"text" : "Toggle Generation"
 								}
 
 							}

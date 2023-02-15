@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 86.0, 1531.0, 1019.0 ],
+		"rect" : [ 34.0, 87.0, 1531.0, 1019.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 112.0, 1531.0, 993.0 ],
+						"rect" : [ 34.0, 113.0, 1531.0, 993.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -87,6 +87,39 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-16",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 886.0, 198.0, 32.0, 22.0 ],
+									"text" : "print"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-15",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 386.333333333333371, 738.0, 150.0, 47.0 ],
+									"text" : "test segmentation requires a connected dac~ (for listening/playback)"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-7",
+									"maxclass" : "mc.ezdac~",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 320.0, 732.0, 45.0, 45.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
 									"id" : "obj-12",
@@ -157,7 +190,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 532.0, 536.25, 110.0, 49.0 ],
-									"text" : "fromserver building_status failed"
+									"text" : "fromserver building_status success"
 								}
 
 							}
@@ -339,7 +372,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 652.541666666666629, 87.0, 213.0, 35.0 ],
-									"text" : "0 duplicate"
+									"text" : "1 ready"
 								}
 
 							}
@@ -387,7 +420,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
-									"patching_rect" : [ 25.0, 192.0, 97.0, 35.0 ],
+									"patching_rect" : [ 25.0, 192.0, 99.0, 35.0 ],
 									"text" : "opendialog .wav .aif .aiff .flac"
 								}
 
@@ -495,12 +528,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-390",
+									"linecount" : 26,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 51.0, 528.0, 138.0, 22.0 ],
-									"text" : "-1"
+									"patching_rect" : [ 51.0, 528.0, 138.0, 357.0 ],
+									"text" : "rawsend test_audio_segmentation /Users/borg/Music/freudaud.wav segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.5 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.4 pick_peak_pre_max_s= 0.4 pick_peak_post_mean_s= 0.4 pick_peak_post_max_s= 0.4"
 								}
 
 							}
@@ -616,6 +650,13 @@
 									"destination" : [ "obj-10", 1 ],
 									"order" : 0,
 									"source" : [ "obj-19", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-16", 0 ],
+									"source" : [ "obj-19", 2 ]
 								}
 
 							}
@@ -749,6 +790,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-7", 0 ],
+									"source" : [ "obj-5", 3 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-5", 0 ],
 									"source" : [ "obj-6", 0 ]
 								}
@@ -787,6 +835,7 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
+			"obj-1::obj-5::obj-395::obj-2" : [ "live.text[4]", "live.text[4]", 0 ],
 			"obj-1::obj-5::obj-395::obj-375" : [ "mc.live.gain~[6]", "click", 0 ],
 			"obj-1::obj-5::obj-395::obj-441" : [ "mc.live.gain~[5]", "corpus", 0 ],
 			"obj-1::obj-5::obj-395::obj-469" : [ "live.text[3]", "live.text[11]", 0 ],

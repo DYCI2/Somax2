@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 0.0, 52.0, 1603.0, 1087.0 ],
+		"rect" : [ 0.0, 53.0, 2293.0, 1327.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -1367,7 +1367,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 59.0, 106.0, 1123.0, 812.0 ],
+						"rect" : [ 34.0, 86.0, 2225.0, 1259.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1396,6 +1396,35 @@
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-2",
+									"maxclass" : "live.text",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"parameter_enable" : 1,
+									"parameter_mappable" : 0,
+									"patching_rect" : [ 1952.500000000000909, 564.0, 44.0, 15.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 466.101168246139082, 264.5, 44.0, 15.0 ],
+									"saved_attribute_attributes" : 									{
+										"valueof" : 										{
+											"parameter_enum" : [ "val1", "val2" ],
+											"parameter_longname" : "live.text[4]",
+											"parameter_mmax" : 1,
+											"parameter_shortname" : "live.text[4]",
+											"parameter_type" : 2
+										}
+
+									}
+,
+									"text" : "Export",
+									"varname" : "live.text[3]"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
 									"id" : "obj-222",
@@ -1712,28 +1741,6 @@
 									"outlettype" : [ "write", "dump", "clear" ],
 									"patching_rect" : [ 1952.500000000000909, 589.886896593098982, 103.0, 22.0 ],
 									"text" : "t write dump clear"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 1,
-									"fontsize" : 13.0,
-									"id" : "obj-377",
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 1952.500000000000909, 553.574786495633361, 65.0, 26.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 447.636906992278796, 338.483749999999873, 100.714226873069151, 22.0 ],
-									"rounded" : 8.0,
-									"text" : "Export",
-									"texton" : "Test",
-									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-									"truncate" : 0
 								}
 
 							}
@@ -2080,7 +2087,7 @@
 									"patching_rect" : [ 604.0, 1433.31633185546707, 178.0, 41.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 6.0, 125.0, 504.0, 105.0 ],
-									"setminmax" : [ 0.0, 0.0 ],
+									"setminmax" : [ 0.0, 116587.373648485576268 ],
 									"slidercolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -4257,7 +4264,7 @@
 									"parameter_enable" : 1,
 									"patching_rect" : [ 544.0, 1009.043637341074373, 44.0, 15.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 298.916666507720947, 264.5, 70.0, 15.0 ],
+									"presentation_rect" : [ 252.916666507720947, 264.5, 70.0, 15.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_enum" : [ "val1", "val2" ],
@@ -4375,7 +4382,7 @@
 									"parameter_enable" : 1,
 									"patching_rect" : [ 178.75, 605.228397804213273, 44.0, 15.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 442.0, 264.5, 70.0, 15.0 ],
+									"presentation_rect" : [ 396.0, 264.5, 70.0, 15.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_enum" : [ "val1", "val2" ],
@@ -4421,7 +4428,7 @@
 									"parameter_enable" : 1,
 									"patching_rect" : [ 689.0, 729.0, 44.0, 15.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 370.458333253860474, 264.5, 70.0, 15.0 ],
+									"presentation_rect" : [ 324.458333253860474, 264.5, 70.0, 15.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_enum" : [ "val1", "val2" ],
@@ -7210,6 +7217,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-379", 0 ],
+									"source" : [ "obj-2", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-210", 0 ],
 									"source" : [ "obj-201", 0 ]
 								}
@@ -8192,13 +8206,6 @@
 								"patchline" : 								{
 									"destination" : [ "obj-393", 0 ],
 									"source" : [ "obj-375", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-379", 0 ],
-									"source" : [ "obj-377", 0 ]
 								}
 
 							}
@@ -14033,7 +14040,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 57.5, 43.5, 30.0, 30.0 ]
 				}
 
@@ -14087,15 +14094,15 @@
 				"box" : 				{
 					"bubbleusescolors" : 1,
 					"id" : "obj-62",
-					"linecount" : 2,
+					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 664.875, 1737.0, 1345.0, 33.0 ],
+					"patching_rect" : [ 664.875, 1737.0, 1348.0, 47.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 24,
-					"presentation_rect" : [ 575.416666507720947, 31.0, 160.0, 328.0 ],
-					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/borg/MaxDev/Somax2/max/somax/corpus builder_address= 4686_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
+					"presentation_linecount" : 26,
+					"presentation_rect" : [ 575.416666507720947, 31.0, 166.0, 355.0 ],
+					"text" : "build_corpus /Users/borg/Music/freudaud.wav overwrite= 0 corpus_name= freudaud output_folder= /Users/borg/MaxDev/Somax2/max/somax/corpus builder_address= 3128_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
