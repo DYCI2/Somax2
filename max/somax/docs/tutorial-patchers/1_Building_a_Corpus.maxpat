@@ -351,7 +351,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 753.017822000000024, 202.571905568096213, 141.0, 60.0 ],
+									"patching_rect" : [ 753.017822000000024, 202.571905568096213, 144.0, 60.0 ],
 									"text" : "status: requires server to run. \nChanges to \"inprogress\" while building corpus"
 								}
 
@@ -1207,7 +1207,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 116.333333333333314, 224.499991001861474, 54.166666666666686, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Start DSP"
 								}
 
@@ -1236,7 +1235,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1004.5, 209.166646409839586, 338.0, 124.227144469525911 ],
+									"patching_rect" : [ 997.5, 228.49997978290935, 308.999999135732651, 122.893811096456147 ],
 									"proportion" : 0.5
 								}
 
@@ -1277,7 +1276,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 452.0, 328.16665195307155, 116.0, 74.0 ],
+									"patching_rect" : [ 452.0, 328.16665195307155, 117.0, 74.0 ],
 									"text" : "Query the Server to get corpuspath folder and the list of the existing corpora in the corpuspath"
 								}
 
@@ -1351,7 +1350,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1007.5, 519.499985266536669, 542.666666686534882, 196.393811156060792 ],
+									"patching_rect" : [ 993.0, 511.66665661551292, 327.66666653752327, 163.333333402872086 ],
 									"proportion" : 0.5
 								}
 
@@ -1720,7 +1719,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1002.0, 506.16665195307155, 20.0, 20.0 ],
+									"patching_rect" : [ 1001.33333158493042, 520.166645009130434, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5.1",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1738,7 +1737,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1004.5, 49.488572234762955, 329.0, 70.227144469525911 ],
+									"patching_rect" : [ 997.5, 67.488572234762955, 329.0, 70.227144469525911 ],
 									"proportion" : 0.5
 								}
 
@@ -1758,7 +1757,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1002.0, 194.666656555908048, 20.0, 20.0 ],
+									"patching_rect" : [ 995.0, 212.666656555908048, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5.2",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1822,7 +1821,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1209.500000000000227, 75.352144469525911, 20.0, 20.0 ],
+									"patching_rect" : [ 1202.500000000000227, 93.352144469525911, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "6.1",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1843,7 +1842,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1007.5, 361.999993012977484, 20.0, 20.0 ],
+									"patching_rect" : [ 997.5, 385.999993191791418, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "6",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1929,7 +1928,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1232.517822499999738, 361.999993012977484, 20.0, 20.0 ],
+									"patching_rect" : [ 997.666666656732559, 474.999993012977484, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1971,7 +1970,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1001.5, 33.625, 20.0, 20.0 ],
+									"patching_rect" : [ 994.5, 51.625, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "4",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -2074,7 +2073,7 @@
 									"numoutlets" : 5,
 									"offset" : [ 0.0, 0.0 ],
 									"outlettype" : [ "", "", "", "multichannelsignal", "" ],
-									"patching_rect" : [ 1000.0, 8.666656555908105, 528.0, 744.000002384186018 ],
+									"patching_rect" : [ 993.0, 26.666656555908105, 337.0, 707.227139866689413 ],
 									"varname" : "somax.audiocorpusbuilder[1]",
 									"viewvisibility" : 1
 								}
@@ -2218,14 +2217,16 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
+			"obj-8::obj-22::obj-395::obj-2" : [ "live.text[7]", "live.text[4]", 0 ],
 			"obj-8::obj-22::obj-395::obj-375" : [ "mc.live.gain~[6]", "click", 0 ],
 			"obj-8::obj-22::obj-395::obj-441" : [ "mc.live.gain~[5]", "corpus", 0 ],
 			"obj-8::obj-22::obj-395::obj-469" : [ "live.text[3]", "live.text[11]", 0 ],
 			"obj-8::obj-22::obj-395::obj-472" : [ "live.text[2]", "live.text[11]", 0 ],
-			"obj-8::obj-22::obj-395::obj-490" : [ "live.text[1]", "live.text[11]", 0 ],
+			"obj-8::obj-22::obj-395::obj-490" : [ "live.text[10]", "live.text[11]", 0 ],
+			"obj-8::obj-25::obj-395::obj-2" : [ "live.text[4]", "live.text[4]", 0 ],
 			"obj-8::obj-25::obj-395::obj-375" : [ "mc.live.gain~[2]", "click", 0 ],
 			"obj-8::obj-25::obj-395::obj-441" : [ "mc.live.gain~[1]", "corpus", 0 ],
-			"obj-8::obj-25::obj-395::obj-469" : [ "live.text[4]", "live.text[11]", 0 ],
+			"obj-8::obj-25::obj-395::obj-469" : [ "live.text[11]", "live.text[11]", 0 ],
 			"obj-8::obj-25::obj-395::obj-472" : [ "live.text[5]", "live.text[11]", 0 ],
 			"obj-8::obj-25::obj-395::obj-490" : [ "live.text[6]", "live.text[11]", 0 ],
 			"parameterbanks" : 			{
@@ -2238,8 +2239,8 @@
 			}
 ,
 			"parameter_overrides" : 			{
-				"obj-8::obj-22::obj-395::obj-490" : 				{
-					"parameter_longname" : "live.text[1]"
+				"obj-8::obj-22::obj-395::obj-2" : 				{
+					"parameter_longname" : "live.text[7]"
 				}
 ,
 				"obj-8::obj-25::obj-395::obj-375" : 				{
@@ -2251,7 +2252,7 @@
 				}
 ,
 				"obj-8::obj-25::obj-395::obj-469" : 				{
-					"parameter_longname" : "live.text[4]"
+					"parameter_longname" : "live.text[11]"
 				}
 ,
 				"obj-8::obj-25::obj-395::obj-472" : 				{
