@@ -615,7 +615,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 323.083333333333371, 121.0, 22.0 ],
-									"text" : "0 duplicate"
+									"text" : "0 offline"
 								}
 
 							}
@@ -718,7 +718,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 673.149407084669292, 657.0, 243.242852497327249, 22.0 ],
-									"text" : "name Player_234755"
+									"text" : "name Player_396533"
 								}
 
 							}
@@ -2070,7 +2070,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 778.027980836006009, 651.208320471908337, 243.242852497327249, 22.0 ],
-									"text" : "name Player_234793"
+									"text" : "name Player_396572"
 								}
 
 							}
@@ -3435,7 +3435,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 899.0, 241.0, 66.0, 20.0 ],
-									"presentation_linecount" : 2,
 									"text" : "MIDI input"
 								}
 
@@ -3509,7 +3508,7 @@
 									"arrows" : 3,
 									"border" : 2.0,
 									"id" : "obj-1",
-									"linecolor" : [ 0.352941176470588, 0.352941176470588, 0.352941176470588, 1.0 ],
+									"linecolor" : [ 1.0, 0.345098039215686, 0.298039215686275, 1.0 ],
 									"maxclass" : "live.line",
 									"numinlets" : 1,
 									"numoutlets" : 0,
@@ -3532,7 +3531,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 754.75, 559.0, 313.0, 74.0 ],
+									"patching_rect" : [ 938.75, 612.0, 313.0, 74.0 ],
 									"text" : "The Player does not play back, it only provides a list of sequential events. \nPlayback is handled independently via a user-created sequencer/playback patch (or using the given Somax audio and MIDI renderers)"
 								}
 
@@ -3624,7 +3623,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 275.0, 467.0, 293.0, 74.0 ],
+									"patching_rect" : [ 275.0, 467.0, 296.0, 74.0 ],
 									"text" : "The Server is the core of Somax 2, handling all the scheduling and communication with the background Python app and all instances of somax.player through OSC. It will open in an external window when you launch it."
 								}
 
@@ -3637,7 +3636,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1054.5, 225.0, 243.0, 100.0 ],
+									"patching_rect" : [ 1054.5, 225.0, 245.0, 100.0 ],
 									"text" : "The Audio and MIDI Influencers listen to a continuous stream of audio or MIDI input data (from any type of source, including live musicians) and segments it temporally, where each slice is analyzed with respect to onset, pitch and chroma, which then is sent to the Player."
 								}
 
@@ -3650,7 +3649,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 911.0, 467.0, 302.0, 60.0 ],
+									"patching_rect" : [ 911.0, 467.0, 305.0, 60.0 ],
 									"text" : "The Player is the main agent of Somax 2. \nIt listens to the influencers and, based on that, it recombines the content of the corpus, generating some output."
 								}
 
@@ -3676,7 +3675,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "multichannelsignal", "", "" ],
-									"patching_rect" : [ 741.0, 682.5, 122.0, 22.0 ],
+									"patching_rect" : [ 741.0, 639.5, 122.0, 22.0 ],
 									"text" : "somax.audiorenderer",
 									"varname" : "somax.audiorenderer"
 								}
@@ -3690,7 +3689,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 589.0, 682.5, 115.0, 22.0 ],
+									"patching_rect" : [ 589.0, 639.5, 115.0, 22.0 ],
 									"text" : "somax.midirenderer",
 									"varname" : "somax.midirenderer"
 								}
@@ -4554,7 +4553,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 763.5, 638.0, 172.0, 24.0 ],
+									"patching_rect" : [ 763.5, 595.0, 172.0, 24.0 ],
 									"text" : "Rendering / Playback",
 									"varname" : "HelpTitle[5]"
 								}
@@ -4572,7 +4571,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 561.5, 638.0, 374.0, 108.0 ],
+									"patching_rect" : [ 561.5, 595.0, 374.0, 108.0 ],
 									"rounded" : 16
 								}
 
@@ -4673,7 +4672,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-19", 0 ],
-									"midpoints" : [ 750.5, 661.5, 598.5, 661.5 ],
+									"midpoints" : [ 750.5, 621.0, 598.5, 621.0 ],
 									"order" : 1,
 									"source" : [ "obj-9", 0 ]
 								}
@@ -4682,6 +4681,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-25", 0 ],
+									"midpoints" : [ 750.5, 573.0, 750.5, 573.0 ],
 									"order" : 0,
 									"source" : [ "obj-9", 0 ]
 								}
@@ -4759,13 +4759,12 @@
 			"obj-2::obj-143::obj-865" : [ "selfharmonicngramorder[5]", "selfharmonicngramorder", 0 ],
 			"obj-2::obj-143::obj-870" : [ "selfharmonicbypass[2]", "selfharmonicbypass", 0 ],
 			"obj-2::obj-143::obj-998" : [ "__exp_regionmaskenable[6]", "__exp_regionmaskenable", 0 ],
-			"obj-2::obj-27::obj-98" : [ "live.text[10]", "live.text[26]", 0 ],
+			"obj-7::obj-17::obj-395::obj-2" : [ "live.text[4]", "live.text[4]", 0 ],
 			"obj-7::obj-17::obj-395::obj-375" : [ "mc.live.gain~[6]", "click", 0 ],
 			"obj-7::obj-17::obj-395::obj-441" : [ "mc.live.gain~[5]", "corpus", 0 ],
 			"obj-7::obj-17::obj-395::obj-469" : [ "live.text[12]", "live.text[11]", 0 ],
 			"obj-7::obj-17::obj-395::obj-472" : [ "live.text[2]", "live.text[11]", 0 ],
 			"obj-7::obj-17::obj-395::obj-490" : [ "live.text[11]", "live.text[11]", 0 ],
-			"obj-7::obj-19::obj-98" : [ "live.text[3]", "live.text[26]", 0 ],
 			"obj-7::obj-25::obj-98" : [ "live.text[6]", "live.text[26]", 0 ],
 			"obj-7::obj-32::obj-11" : [ "live.text[71]", "live.text", 0 ],
 			"obj-7::obj-32::obj-3" : [ "live.text[1]", "live.text", 0 ],
@@ -4908,20 +4907,12 @@
 					"parameter_longname" : "weight[5]"
 				}
 ,
-				"obj-2::obj-27::obj-98" : 				{
-					"parameter_longname" : "live.text[10]"
-				}
-,
 				"obj-7::obj-17::obj-395::obj-469" : 				{
 					"parameter_longname" : "live.text[12]"
 				}
 ,
 				"obj-7::obj-17::obj-395::obj-490" : 				{
 					"parameter_longname" : "live.text[11]"
-				}
-,
-				"obj-7::obj-19::obj-98" : 				{
-					"parameter_longname" : "live.text[3]"
 				}
 ,
 				"obj-7::obj-9::obj-270::obj-1226" : 				{
@@ -5183,6 +5174,13 @@
 				"name" : "somax.relativepath.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.routesignal.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
