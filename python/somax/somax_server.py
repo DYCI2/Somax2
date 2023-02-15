@@ -336,14 +336,17 @@ class SomaxServer(Somax, AsyncioOscObject):
                         builder_address=builder_address,
                         **kwargs)
 
-    def relocate_audio_corpus(self, corpus_filepath: str, new_audio_filepath: str):
+    def relocate_audio_corpus(self,
+                              corpus_filepath: str,
+                              new_audio_filepath: str,
+                              builder_address: str = ""):
         try:
             corpus: AudioCorpus = AudioCorpus.from_json(corpus_filepath, new_audio_path=new_audio_filepath)
             corpus.export(os.path.dirname(corpus_filepath), overwrite=True)
-            self.target.send(ServerSendProtocol.RELOCATE_AUDIO_CORPUS_STATUS, "success")
+            self.target.send(ServerSendProtocol.RELOCATE_AUDIO_CORPUS_STATUS, ["success", builder_address])
         except (FileNotFoundError, IOError, AttributeError, InvalidCorpus, ExternalDataMismatch) as e:
             self.logger.error(f"{str(e)}. Could not complete operation")
-            self.target.send(ServerSendProtocol.RELOCATE_AUDIO_CORPUS_STATUS, "failed")
+            self.target.send(ServerSendProtocol.RELOCATE_AUDIO_CORPUS_STATUS, ["failed", builder_address])
 
     def dump_corpora(self, corpus_folder: str) -> None:
         if not (os.path.isdir(corpus_folder)):
@@ -359,7 +362,8 @@ class SomaxServer(Somax, AsyncioOscObject):
         self.target.send(ServerSendProtocol.CORPUS_FILEPATHS, Target.WRAPPED_BANG)
 
     # TODO: Remove once multithreaded corpus builder is stable enough
-    def _build(self, filepath: str,
+    def _build(self,
+               filepath: str,
                output_folder: str,
                corpus_name: Optional[str] = None,
                overwrite: bool = False,
@@ -384,10 +388,15 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.error(f"{str(e)} Export of corpus failed.")
             self.target.send(ServerSendProtocol.BUILDING_STATUS, ["failed", builder_address])
 
-    def _build_multithreaded(self, filepath: str, output_folder: str, corpus_name: Optional[str] = None,
-                             overwrite: bool = False, copy_resources: bool = False,
+    def _build_multithreaded(self,
+                             filepath: str,
+                             output_folder: str,
+                             corpus_name: Optional[str] = None,
+                             overwrite: bool = False,
+                             copy_resources: bool = False,
                              spectrogram_filter: AbstractFilter = AbstractFilter.default(),
-                             segmentation_mode: Optional[AudioSegmentation] = None, **kwargs):
+                             segmentation_mode: Optional[AudioSegmentation] = None,
+                             **kwargs):
         corpus_builder: ThreadedCorpusBuilder = ThreadedCorpusBuilder(filepath=filepath,
                                                                       corpus_name=corpus_name,
                                                                       spectrogram_filter=spectrogram_filter,
@@ -412,7 +421,8 @@ class SomaxServer(Somax, AsyncioOscObject):
                                       use_tempo_annotations: bool = False,
                                       segmentation_offset_ms: int = 0,
                                       ignore_invalid_lines: bool = False,
-                                      overwrite: bool = False):
+                                      overwrite: bool = False,
+                                      builder_address: str = ""):
         try:
             analysis_format: Type[TextFormat] = TextFormat.from_keyword(analysis_format)
         except KeyError as e:
@@ -431,13 +441,19 @@ class SomaxServer(Somax, AsyncioOscObject):
             use_tempo_annotations=use_tempo_annotations,
             segmentation_offset_ms=segmentation_offset_ms,
             ignore_invalid_lines=ignore_invalid_lines,
-            overwrite=overwrite
+            overwrite=overwrite,
+            builder_address=builder_address
         )
 
         corpus_builder.start()
         self._corpus_builders.append(corpus_builder)
 
-    def test_audio_segmentation(self, filepath: str, segmentation_mode: str, hop_length: int = 512, **kwargs):
+    def test_audio_segmentation(self,
+                                filepath: str,
+                                segmentation_mode: str,
+                                hop_length: int = 512,
+                                builder_address: str = "",
+                                **kwargs):
         try:
             segmentation: AudioSegmentation = AudioSegmentation.from_string(name=segmentation_mode)
         except ValueError:
@@ -450,7 +466,8 @@ class SomaxServer(Somax, AsyncioOscObject):
                 warnings.simplefilter("ignore")
                 onsets, durations, stats = CorpusBuilder().test_audio_segmentation(filepath,
                                                                                    segmentation_mode=segmentation,
-                                                                                   hop_length=hop_length, **kwargs)
+                                                                                   hop_length=hop_length,
+                                                                                   **kwargs)
         except (FileNotFoundError, ValueError) as e:
             self.logger.error(f"{str(e)}. Could not perform segmentation.")
             return
@@ -461,12 +478,12 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Try retuning the parameters with respect to the current audio file")
             return
         finally:
-            self.target.send(ServerSendProtocol.CORPUSBUILDER_AUDIO_SEGMENTATION_DONE, Target.WRAPPED_BANG)
+            self.target.send(ServerSendProtocol.CORPUSBUILDER_AUDIO_SEGMENTATION_DONE, builder_address)
 
-        self.target.send(ServerSendProtocol.CORPUSBUILDER_AUDIO_STATS, stats.render())
+        self.target.send(ServerSendProtocol.CORPUSBUILDER_AUDIO_STATS, [stats.render(), builder_address])
 
         for (onset, duration) in zip(onsets, durations):
-            self.target.send(ServerSendProtocol.CORPUSBUILDER_AUDIO_SEGMENT, [onset, onset + duration])
+            self.target.send(ServerSendProtocol.CORPUSBUILDER_AUDIO_SEGMENT, [onset, onset + duration, builder_address])
 
 
 if __name__ == "__main__":

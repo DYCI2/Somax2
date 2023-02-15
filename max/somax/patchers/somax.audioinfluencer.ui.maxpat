@@ -74,7 +74,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 507.627755300445642, 362.580104217683584, 19.0, 18.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 243.600000999999992, 70.450647929711522 ],
+					"presentation_rect" : [ 0.0, 0.0, 231.600000999999992, 70.450647929711522 ],
 					"proportion" : 0.5,
 					"rounded" : 0
 				}
@@ -205,11 +205,11 @@
 				"box" : 				{
 					"comment" : "(any/signal/mc.signal) messages or audio input to audio influencer",
 					"id" : "obj-194",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "int" ],
 					"patching_rect" : [ 33.15511957378385, 62.0, 30.0, 30.0 ]
 				}
 
@@ -218,7 +218,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-16",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -230,7 +230,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-17",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -242,7 +242,7 @@
 				"box" : 				{
 					"comment" : "(list) influences",
 					"id" : "obj-18",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -260,7 +260,8 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 33.15511957378385, 181.0, 718.59488042621615, 29.0 ],
-					"text" : "somax.audioinfluencer"
+					"text" : "somax.audioinfluencer",
+					"varname" : "somax.audioinfluencer"
 				}
 
 			}
@@ -325,24 +326,12 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 126.15511957378385, 105.460853038769528, 68.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 177.749956983924221, 73.913211087696993, 61.0, 18.0 ],
+					"presentation_rect" : [ 160.749956983924221, 73.913211087696993, 61.0, 18.0 ],
 					"rounded" : 8.0,
 					"text" : "Settings",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"texton" : "",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-3",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 159.166666666666686, 304.73588489275653, 65.0, 22.0 ],
-					"text" : "route pitch"
 				}
 
 			}
@@ -390,7 +379,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 242.600001692771912, 472.202516248187294, 56.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 146.139721221900345, 48.75, 92.610235762023876, 18.0 ],
+					"presentation_rect" : [ 146.139721221900345, 48.75, 75.610235762023876, 18.0 ],
 					"text" : "Chroma",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -465,7 +454,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 238.5, 426.168868294541198, 52.0, 34.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 147.139721221900345, 4.75, 91.0, 43.0 ],
+					"presentation_rect" : [ 147.139721221900345, 4.75, 74.0, 43.0 ],
 					"setminmax" : [ 0.0, 1.0 ],
 					"setstyle" : 1,
 					"size" : 12,
@@ -485,7 +474,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 238.544883811759973, 469.40251692171978, 64.110235762023876, 23.599998652935028 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 146.139721221900345, 3.75, 92.610235762023876, 46.0 ],
+					"presentation_rect" : [ 146.139721221900345, 3.75, 77.0, 46.0 ],
 					"proportion" : 0.5
 				}
 
@@ -516,7 +505,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 815.5, 181.0, 25.680724023055973, 25.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 243.600000999999992, 102.5 ],
+					"presentation_rect" : [ 0.0, 0.0, 236.749956983924221, 102.5 ],
 					"proportion" : 0.5
 				}
 
@@ -623,7 +612,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
+					"destination" : [ "obj-9", 0 ],
 					"source" : [ "obj-21", 1 ]
 				}
 
@@ -647,13 +636,6 @@
 					"destination" : [ "obj-12", 0 ],
 					"midpoints" : [ 421.952559786891925, 437.331725277691021, 772.303839680337887, 437.331725277691021, 772.303839680337887, 166.0, 42.65511957378385, 166.0 ],
 					"source" : [ "obj-28", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-9", 0 ],
-					"source" : [ "obj-3", 0 ]
 				}
 
 			}
@@ -700,80 +682,6 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "OMax.yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "Yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "audio2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "bc.autoname.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "bc.yinstats.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "bonk~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "ircamdescriptor~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "somax.audioinfluencer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.await_patcherargs.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.winresize.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "sr.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "yin~.mxo",
-				"type" : "iLaX"
-			}
- ],
-		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"button" : 				{
