@@ -79,6 +79,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-26",
 					"linecount" : 2,
 					"maxclass" : "comment",
@@ -96,6 +97,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
+					"hidden" : 1,
 					"id" : "obj-32",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -112,6 +114,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-27",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -121,30 +124,6 @@
 					"presentation" : 1,
 					"presentation_rect" : [ -9.833196284236948, -2.832644143212903, 235.033334456516286, 119.733334243297577 ],
 					"proportion" : 0.5
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"appearance" : 1,
-					"id" : "obj-15",
-					"maxclass" : "live.dial",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "float" ],
-					"parameter_enable" : 1,
-					"patching_rect" : [ 523.5, 676.0, 34.999999999999886, 36.0 ],
-					"saved_attribute_attributes" : 					{
-						"valueof" : 						{
-							"parameter_longname" : "live.dial[2]",
-							"parameter_shortname" : "live.dial[2]",
-							"parameter_type" : 0,
-							"parameter_unitstyle" : 0
-						}
-
-					}
-,
-					"varname" : "live.dial"
 				}
 
 			}
@@ -612,8 +591,7 @@
 					"patching_rect" : [ 1127.75, 122.0, 91.0, 35.0 ],
 					"restore" : 					{
 						"enabled" : [ 1 ],
-						"gain" : [ 0.0 ],
-						"live.dial" : [ 0.0 ],
+						"gain" : [ -36.915266844426093 ],
 						"monocorpus" : [ 0 ],
 						"pan" : [ 0.0 ],
 						"width" : [ 127.0 ]
@@ -1149,7 +1127,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 378.333333333333371, 1159.0, 37.0, 18.0 ],
-					"text" : "0.00",
+					"text" : "-36.92",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
