@@ -30,8 +30,7 @@ from somax.runtime.player import Player
 from somax.runtime.send_protocol import ServerSendProtocol
 from somax.runtime.target import Target
 from somax.scheduler.process_messages import TimeMessage, ControlMessage, PlayControl, ProcessMessage, \
-    TempoMasterMessage, \
-    TempoMessage
+    TempoMasterMessage, TempoMessage
 from somax.scheduler.time_object import Time
 from somax.scheduler.transport import Transport, MasterTransport, SlaveTransport
 
@@ -81,7 +80,7 @@ class Somax:
         [process.join() for process in self._corpus_builders]
         self._agents = {}
 
-    def set_tempo(self, tempo: float) -> None:
+    def _set_tempo(self, tempo: float) -> None:
         self._transport.set_tempo(tempo)
 
     def set_beat_phase(self, beat_phase: float) -> None:
@@ -159,7 +158,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         while not self._tempo_master_queue.empty():
             tempo_message: TempoMessage = self._tempo_master_queue.get()
             tempo = tempo_message.tempo  # overwriting parameter tempo
-            self.set_tempo(tempo)
+            self._set_tempo(tempo)
 
     def set_transport_mode(self, master: bool):
         if master:
@@ -260,17 +259,14 @@ class SomaxServer(Somax, AsyncioOscObject):
 
     def set_tempo(self, tempo: float):
         if (isinstance(tempo, int) or isinstance(tempo, float)) and tempo > 0:
-            super().set_tempo(tempo)
-            self.target.send(ServerSendProtocol.SCHEDULER_CURRENT_TEMPO,
-                             (self._transport.tempo, self._transport.time.phase))
+            self._set_tempo(tempo)
+            # self.target.send(ServerSendProtocol.SCHEDULER_CURRENT_TEMPO, self._transport.tempo)
         else:
             self.logger.error(f"Tempo must be a single value larger than zero. Did not set tempo.")
 
     def set_beat_phase(self, beat_phase: float) -> None:
         if (isinstance(beat_phase, float) or isinstance(beat_phase, int)) and 0.0 <= beat_phase <= 1.0:
             super().set_beat_phase(beat_phase)
-            self.target.send(ServerSendProtocol.SCHEDULER_CURRENT_TEMPO,
-                             (self._transport.tempo, self._transport.time.phase))
         else:
             self.logger.error(f"Beat phase must be a single value between 0.0 and 1.0. Did not set beat phase.")
 

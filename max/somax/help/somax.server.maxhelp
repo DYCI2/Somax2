@@ -88,6 +88,77 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-57",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 106.0, 438.0, 101.0, 20.0 ],
+									"text" : "get tempo source"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-43",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 15.5, 436.0, 78.0, 22.0 ],
+									"text" : "temposource"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-51",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 140.0, 371.0, 153.0, 47.0 ],
+									"text" : "to unset temposource, either pass temposource 0 or just set the tempo"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-49",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 91.0, 314.5, 152.0, 33.0 ],
+									"text" : "(temposource will override tempo and vice versa)"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-34",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 19.0, 363.0, 115.0, 22.0 ],
+									"text" : "temposource Player"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-11",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 19.0, 396.0, 92.0, 22.0 ],
+									"text" : "temposource -1"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-38",
 									"linecount" : 7,
 									"maxclass" : "comment",
@@ -172,12 +243,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-123",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1380.949999999999818, 660.0, 86.0, 33.0 ],
-									"text" : "tempo when set manually"
+									"patching_rect" : [ 1380.949999999999818, 660.0, 86.0, 20.0 ],
+									"text" : "tempo source"
 								}
 
 							}
@@ -188,8 +258,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1380.949999999999818, 634.0, 50.0, 22.0 ],
-									"text" : "120. 0."
+									"patching_rect" : [ 1380.949999999999818, 634.0, 50.0, 22.0 ]
 								}
 
 							}
@@ -352,7 +421,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 148.0, 255.379134229482588, 133.0, 20.0 ],
+									"patching_rect" : [ 128.0, 133.379134229482588, 133.0, 20.0 ],
 									"text" : "list all initialized players"
 								}
 
@@ -364,7 +433,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 148.0, 287.0, 154.0, 33.0 ],
+									"patching_rect" : [ 128.0, 165.0, 154.0, 33.0 ],
 									"text" : "convenient way to initialize all existing players"
 								}
 
@@ -386,7 +455,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 159.5, 117.0, 61.0, 20.0 ],
+									"patching_rect" : [ 19.0, 261.0, 61.0, 20.0 ],
 									"text" : "set tempo"
 								}
 
@@ -539,7 +608,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 24.0, 448.541666666666572, 75.0, 22.0 ],
+									"patching_rect" : [ 24.0, 497.3125, 75.0, 22.0 ],
 									"text" : "openwindow"
 								}
 
@@ -557,46 +626,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bgcolor" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
-									"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_autogradient" : 0.0,
-									"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_color1" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
-									"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_type" : "gradient",
-									"gradient" : 1,
-									"id" : "obj-213",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 22.5, 353.933365770517241, 108.0, 22.0 ],
-									"text" : "temposource none"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
-									"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_autogradient" : 0.0,
-									"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_color1" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
-									"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_type" : "gradient",
-									"gradient" : 1,
-									"id" : "obj-212",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 22.5, 384.933365770517241, 78.0, 22.0 ],
-									"text" : "temposource"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-206",
 									"maxclass" : "newobj",
 									"numinlets" : 3,
@@ -604,26 +633,6 @@
 									"outlettype" : [ "", "", "" ],
 									"patching_rect" : [ 1586.363636363636488, 597.0, 146.0, 22.0 ],
 									"text" : "route rawsend rawreceive"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
-									"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_autogradient" : 0.0,
-									"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_color1" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
-									"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_type" : "gradient",
-									"gradient" : 1,
-									"id" : "obj-201",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 22.5, 416.312499999999829, 115.0, 22.0 ],
-									"text" : "temposource Player"
 								}
 
 							}
@@ -699,7 +708,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 269.0, 210.0, 31.0, 22.0 ],
+									"patching_rect" : [ 344.0, 206.0, 31.0, 22.0 ],
 									"text" : "time"
 								}
 
@@ -779,7 +788,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 48.5, 287.0, 90.0, 22.0 ],
+									"patching_rect" : [ 28.5, 165.0, 90.0, 22.0 ],
 									"text" : "initializeplayers"
 								}
 
@@ -1018,7 +1027,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 48.5, 255.379134229482588, 47.0, 22.0 ],
+									"patching_rect" : [ 28.5, 133.379134229482588, 47.0, 22.0 ],
 									"text" : "players"
 								}
 
@@ -1139,7 +1148,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 159.5, 143.0, 50.0, 22.0 ]
+									"patching_rect" : [ 19.0, 287.0, 50.0, 22.0 ]
 								}
 
 							}
@@ -1150,7 +1159,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 159.5, 176.0, 59.0, 22.0 ],
+									"patching_rect" : [ 19.0, 320.0, 59.0, 22.0 ],
 									"text" : "tempo $1"
 								}
 
@@ -1224,8 +1233,8 @@
 									"numinlets" : 13,
 									"numoutlets" : 13,
 									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-									"patching_rect" : [ 527.0, 597.0, 984.399999999999864, 22.0 ],
-									"text" : "route initialized terminated time beatphase running players corpuspath corpora sendport recvport ip tempo"
+									"patching_rect" : [ 527.0, 597.0, 984.400000000000546, 22.0 ],
+									"text" : "route initialized terminated time beatphase running players corpuspath corpora sendport recvport ip temposource"
 								}
 
 							}
@@ -1394,7 +1403,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 24.0, 287.0, 20.0, 20.0 ],
+									"patching_rect" : [ 4.0, 165.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1503,6 +1512,13 @@
 								"patchline" : 								{
 									"destination" : [ "obj-1", 0 ],
 									"source" : [ "obj-108", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"source" : [ "obj-11", 0 ]
 								}
 
 							}
@@ -1673,29 +1689,8 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-1", 0 ],
-									"source" : [ "obj-201", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-12", 0 ],
 									"source" : [ "obj-21", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 0 ],
-									"source" : [ "obj-212", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 0 ],
-									"source" : [ "obj-213", 0 ]
 								}
 
 							}
@@ -1743,6 +1738,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"source" : [ "obj-34", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-37", 0 ],
 									"source" : [ "obj-35", 1 ]
 								}
@@ -1773,6 +1775,13 @@
 								"patchline" : 								{
 									"destination" : [ "obj-1", 0 ],
 									"source" : [ "obj-372", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"source" : [ "obj-43", 0 ]
 								}
 
 							}
