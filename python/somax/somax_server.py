@@ -87,18 +87,6 @@ class Somax:
     def set_beat_phase(self, beat_phase: float) -> None:
         self._transport.set_beat_phase(beat_phase)
 
-    def set_tempo_master(self, tempo_master: Optional[str] = None):
-        """ Passing None to this function will set all Agents as tempo_master = False"""
-        found: bool = False
-        for name, (_, queue) in self._agents.items():
-            if name == tempo_master:
-                queue.put(TempoMasterMessage(is_master=True))
-                found = True
-            else:
-                queue.put(TempoMasterMessage(is_master=False))
-        if tempo_master is not None and not found:
-            self.logger.info(f"An agent with the name '{tempo_master}' doesn't exist. No tempo master was set.")
-
     def _send_to_all_agents(self, message: ProcessMessage):
         for _, queue in self._agents.values():
             queue.put(message)
@@ -219,6 +207,7 @@ class SomaxServer(Somax, AsyncioOscObject):
         agent.start()
         self._agents[name] = agent, agent_queue
         self.logger.info(f"Created agent '{name}' with receive port {recv_port}, send port {send_port}, ip {ip}.")
+        self.target.send(ServerSendProtocol.CREATED_PLAYER, [name, recv_port, send_port, ip])
 
     def delete_agent(self, name: str):
         try:
@@ -227,6 +216,8 @@ class SomaxServer(Somax, AsyncioOscObject):
             agent.join()
             del self._agents[name]
             self.logger.info(f"Deleted agent '{name}'.")
+            self.target.send(ServerSendProtocol.DELETED_PLAYER, name)
+
         except KeyError:
             self.logger.warning(f"An agent with the name '{name}' doesn't exist. No agent was deleted.")
 
@@ -282,6 +273,21 @@ class SomaxServer(Somax, AsyncioOscObject):
                              (self._transport.tempo, self._transport.time.phase))
         else:
             self.logger.error(f"Beat phase must be a single value between 0.0 and 1.0. Did not set beat phase.")
+
+    def set_tempo_master(self, tempo_master: Optional[str] = None):
+        """ Passing None to this function will set all Agents as tempo_master = False"""
+        found: bool = False
+        for name, (_, queue) in self._agents.items():
+            if name == tempo_master:
+                queue.put(TempoMasterMessage(is_master=True))
+                self.target.send(ServerSendProtocol.TEMPO_SOURCE, name)
+                found = True
+            else:
+                queue.put(TempoMasterMessage(is_master=False))
+        if not found:
+            if tempo_master is not None:
+                self.logger.error(f"An agent with the name '{tempo_master}' doesn't exist. No tempo master was set.")
+            self.target.send(ServerSendProtocol.TEMPO_SOURCE, -1)
 
     def exit(self, print_exit_message: bool = True):
         self.terminate()

@@ -27,10 +27,13 @@ class ServerSendProtocol:
     SCHEDULER_CURRENT_TIME = "time"
     TRANSPORT_MODE = "transport_mode"
     TRANSPORT_RUNNING = "running"
+    TEMPO_SOURCE = "temposource"
 
     # Misc. Info
     ALL_PLAYER_NAMES = "players"
     CORPUS_FILEPATHS = "corpora"
+    CREATED_PLAYER = "player_created"
+    DELETED_PLAYER = "player_deleted"
 
 
 class PlayerSendProtocol:

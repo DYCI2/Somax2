@@ -40,6 +40,70 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+					"id" : "obj-2",
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 484.791666895151138, 697.825000250000016, 117.583333790302163, 35.0 ],
+					"text" : "loadmess continuouschroma 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-423",
+					"maxclass" : "meter~",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"oncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"outlettype" : [ "float" ],
+					"patching_rect" : [ 393.125, 611.75, 61.0, 13.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 51.541669934988022, 86.0, 233.194839102912283, 31.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 10.0,
+					"hidden" : 1,
+					"id" : "obj-66",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 400.125, 359.0, 61.0, 18.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 52.707023399209902, 116.5, 232.029485638690403, 18.0 ],
+					"text" : "Input Level",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textjustification" : 1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"hidden" : 1,
+					"id" : "obj-68",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 400.125, 359.0, 61.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 51.541669934988022, 86.0, 232.029485638690403, 32.0 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 14.0,
 					"id" : "obj-190",
@@ -47,7 +111,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 348.25, 182.25, 151.0, 38.0 ],
+					"patching_rect" : [ 348.25, 182.25, 155.0, 38.0 ],
 					"text" : "Source management: playlist or inlet"
 				}
 
@@ -60,7 +124,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1205.75, 1146.202262620628971, 83.0, 22.0 ],
+					"patching_rect" : [ 1205.75, 1146.202262620628971, 96.0, 22.0 ],
 					"text" : "r #0_dumpout"
 				}
 
@@ -72,7 +136,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 641.75, 878.163336431226867, 85.0, 22.0 ],
+					"patching_rect" : [ 641.75, 878.163336431226867, 98.0, 22.0 ],
 					"text" : "s #0_dumpout"
 				}
 
@@ -210,16 +274,15 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1041.833333333333485, 11.900125000000003, 215.0, 49.0 ],
-					"presentation_linecount" : 2,
+					"patching_rect" : [ 1041.833333333333485, 11.900125000000003, 231.0, 49.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 1880, 207, 2595, 536 ],
+						"client_rect" : [ 67, 153, 461, 322 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
 					}
 ,
-					"text" : "pattrstorage pattrstorage @savemode 0 @outputmode 1 @autorestore 0 @greedy 1 @changemode 1",
+					"text" : "pattrstorage pattrstorage @savemode 0 @outputmode 1 @autorestore 0 @greedy 0 @changemode 1",
 					"varname" : "pattrstorage"
 				}
 
@@ -239,27 +302,16 @@
 					"restore" : 					{
 						"gain" : [ 0.0 ],
 						"listen" : [ 1 ],
-						"midilisten" : [ 0 ],
+						"midilisten" : [ 1 ],
 						"pan" : [ 0.0 ],
 						"playlist" : [ 							{
 								"data" : 								{
-									"clips" : [ 										{
-											"absolutepath" : "/Users/borg/Music/shostakovich118no2.flac",
-											"filename" : "shostakovich118no2.flac",
-											"filekind" : "audiofile",
-											"id" : "u947008236",
-											"loop" : 0,
-											"content_state" : 											{
-
-											}
-
-										}
- ]
+									"clips" : [  ]
 								}
 
 							}
  ],
-						"source" : [ 1 ]
+						"source" : [ 0 ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -275,7 +327,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1076.583333333333485, 1146.202262620628971, 97.0, 22.0 ],
+					"patching_rect" : [ 1076.583333333333485, 1146.202262620628971, 110.0, 22.0 ],
 					"text" : "r #0_parameters"
 				}
 
@@ -407,7 +459,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 479.583333790302163, 872.0, 99.0, 22.0 ],
+					"patching_rect" : [ 479.583333790302163, 872.0, 112.0, 22.0 ],
 					"text" : "s #0_parameters"
 				}
 
@@ -1126,7 +1178,7 @@
 						}
 ,
 						"valueof" : 						{
-							"parameter_longname" : "live.dial[1]",
+							"parameter_longname" : "live.dial[2]",
 							"parameter_mmin" : -127.0,
 							"parameter_shortname" : "Pan",
 							"parameter_type" : 0,
@@ -1285,6 +1337,18 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-2",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 86.0, 141.0, 29.5, 22.0 ],
+									"text" : "1"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-27",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -1402,6 +1466,14 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-2", 0 ],
+									"order" : 1,
+									"source" : [ "obj-22", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-24", 0 ],
 									"order" : 1,
 									"source" : [ "obj-22", 0 ]
@@ -1411,6 +1483,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-27", 0 ],
+									"order" : 0,
 									"source" : [ "obj-22", 1 ]
 								}
 
@@ -1418,7 +1491,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-28", 0 ],
-									"midpoints" : [ 59.5, 131.5, 129.0, 131.5 ],
 									"order" : 0,
 									"source" : [ "obj-22", 0 ]
 								}
@@ -1529,7 +1601,6 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-299",
-					"ignoreclick" : 1,
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -1589,23 +1660,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"id" : "obj-66",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 400.125, 356.0, 61.0, 18.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 52.707023399209902, 116.5, 232.029485638690403, 18.0 ],
-					"text" : "Input Level",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
-					"textjustification" : 1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 1,
-					"fontsize" : 10.0,
 					"id" : "obj-127",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -1616,20 +1670,6 @@
 					"text" : "Input Source",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-423",
-					"maxclass" : "meter~",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"oncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
-					"outlettype" : [ "float" ],
-					"patching_rect" : [ 393.125, 611.75, 61.0, 13.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 51.541669934988022, 86.0, 233.194839102912283, 31.0 ]
 				}
 
 			}
@@ -1684,24 +1724,12 @@
 					"channelcount" : 1,
 					"color" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"data" : 					{
-						"clips" : [ 							{
-								"absolutepath" : "/Users/borg/Music/shostakovich118no2.flac",
-								"filename" : "shostakovich118no2.flac",
-								"filekind" : "audiofile",
-								"id" : "u947008236",
-								"loop" : 0,
-								"content_state" : 								{
-
-								}
-
-							}
- ]
+						"clips" : [  ]
 					}
 ,
 					"followglobaltempo" : 0,
 					"formantcorrection" : 0,
 					"id" : "obj-67",
-					"ignoreclick" : 1,
 					"maxclass" : "playlist~",
 					"mode" : "basic",
 					"numinlets" : 1,
@@ -1713,27 +1741,11 @@
 					"patching_rect" : [ 400.125, 470.75, 111.5, 31.0 ],
 					"pitchcorrection" : 0,
 					"presentation" : 1,
-					"presentation_rect" : [ 51.541669934988022, 86.0, 227.694839281726217, 32.75 ],
+					"presentation_rect" : [ 51.541669934988022, 86.0, 233.444839281726217, 32.75 ],
 					"quality" : "basic",
 					"selectioncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"timestretch" : [ 0 ],
 					"varname" : "playlist"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"id" : "obj-68",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 400.125, 354.0, 61.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 51.541669934988022, 86.0, 232.029485638690403, 32.0 ],
-					"proportion" : 0.5
 				}
 
 			}
@@ -2042,7 +2054,7 @@
 					"patching_rect" : [ 223.25, 1284.047737379371029, 120.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 14.769205729460509, 3.825000250000016, 319.360235762023876, 22.0 ],
-					"text" : "#1",
+					"text" : "AudioInfluencer",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -2153,28 +2165,6 @@
 					"outlettype" : [ "", "int" ],
 					"patching_rect" : [ 1113.833333333333485, 311.105102999999986, 91.0, 22.0 ],
 					"text" : "adstatus switch"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-74",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1105.583333333333485, 461.105079774740034, 39.0, 20.0 ],
-					"text" : "audio"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-70",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1146.333333333333485, 461.105079774740034, 76.0, 20.0 ],
-					"text" : "audio output"
 				}
 
 			}
@@ -2677,6 +2667,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-44", 0 ],
+					"source" : [ "obj-2", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-63", 0 ],
 					"source" : [ "obj-204", 0 ]
 				}
@@ -2789,7 +2786,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-423", 0 ],
 					"midpoints" : [ 608.75, 601.25, 402.625, 601.25 ],
-					"order" : 1,
+					"order" : 2,
 					"source" : [ "obj-53", 1 ]
 				}
 
@@ -2806,8 +2803,8 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-66", 0 ],
-					"midpoints" : [ 608.75, 350.375, 409.625, 350.375 ],
-					"order" : 0,
+					"midpoints" : [ 608.75, 355.875, 409.625, 355.875 ],
+					"order" : 1,
 					"source" : [ "obj-53", 1 ]
 				}
 
@@ -2818,6 +2815,15 @@
 					"midpoints" : [ 556.75, 467.75, 409.625, 467.75 ],
 					"order" : 1,
 					"source" : [ "obj-53", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-68", 0 ],
+					"midpoints" : [ 608.75, 356.875, 409.625, 356.875 ],
+					"order" : 0,
+					"source" : [ "obj-53", 1 ]
 				}
 
 			}
@@ -2967,7 +2973,7 @@
  ],
 		"parameters" : 		{
 			"obj-21" : [ "Gain[1]", "Gain", 0 ],
-			"obj-46" : [ "live.dial[1]", "Pan", 0 ],
+			"obj-46" : [ "live.dial[2]", "Pan", 0 ],
 			"parameterbanks" : 			{
 				"0" : 				{
 					"index" : 0,
@@ -3019,13 +3025,6 @@
 , 			{
 				"name" : "ircamdescriptor~.mxo",
 				"type" : "iLaX"
-			}
-, 			{
-				"name" : "shostakovich118no2.flac",
-				"bootpath" : "~/Music",
-				"patcherrelativepath" : "../../../../../Music",
-				"type" : "FLAC",
-				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.audioinfluencer.maxpat",
