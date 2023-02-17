@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 0.0, 52.0, 822.0, 1327.0 ],
+		"rect" : [ 0.0, 52.0, 2293.0, 1327.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -1305,8 +1305,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 426.518518518518249, 270.825364969906218, 101.0, 35.0 ],
-					"text" : "somax.winresize 560 790"
+					"patching_rect" : [ 426.518518518518249, 270.825364969906218, 105.0, 35.0 ],
+					"text" : "somax.winresize 360 780"
 				}
 
 			}
@@ -1461,7 +1461,7 @@
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_enum" : [ "val1", "val2" ],
-											"parameter_longname" : "live.text[6]",
+											"parameter_longname" : "live.text[53]",
 											"parameter_mmax" : 1,
 											"parameter_shortname" : "live.text[11]",
 											"parameter_type" : 2
@@ -1517,7 +1517,7 @@
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_enum" : [ "val1", "val2" ],
-											"parameter_longname" : "live.text[11]",
+											"parameter_longname" : "live.text[24]",
 											"parameter_mmax" : 1,
 											"parameter_shortname" : "live.text[11]",
 											"parameter_type" : 2
@@ -14192,9 +14192,9 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 664.875, 1737.0, 1344.0, 47.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 24,
-					"presentation_rect" : [ 341.416666507720947, 31.0, 159.0, 328.0 ],
-					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/borg/MaxDev/Somax2/max/somax/corpus builder_address= 2165_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
+					"presentation_linecount" : 23,
+					"presentation_rect" : [ 341.416666507720947, 31.0, 162.0, 315.0 ],
+					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/borg/MaxDev/Somax2/max/somax/corpus builder_address= 1441_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
