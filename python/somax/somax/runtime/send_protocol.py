@@ -22,7 +22,7 @@ class ServerSendProtocol:
     SERVER_STARTED = "initialized"
 
     # Scheduling
-    SCHEDULER_BEAT_PHASE = "beatphase"
+    SCHEDULER_BEAT_PHASE = "beat"
     SCHEDULER_CURRENT_TEMPO = "tempo"
     SCHEDULER_CURRENT_TIME = "time"
     TRANSPORT_MODE = "transport_mode"
