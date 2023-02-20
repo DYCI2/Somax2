@@ -312,6 +312,7 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+									"hidden" : 1,
 									"id" : "obj-42",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -4070,7 +4071,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1223.75, 186.0, 313.0, 35.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 1880, 207, 2595, 536 ],
+						"client_rect" : [ 67, 153, 461, 322 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
