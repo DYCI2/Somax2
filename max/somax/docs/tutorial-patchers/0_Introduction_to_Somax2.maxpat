@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 198.0, 155.0, 1340.0, 800.0 ],
+		"rect" : [ 198.0, 155.0, 1074.0, 800.0 ],
 		"openrect" : [ 0.0, 0.0, 1340.0, 800.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1074.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -530,7 +530,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-55",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -595,7 +594,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-45",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -615,7 +613,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 323.083333333333371, 121.0, 22.0 ],
-									"text" : "0 offline"
+									"text" : "1 ready"
 								}
 
 							}
@@ -634,6 +632,7 @@
 							}
 , 							{
 								"box" : 								{
+									"hidden" : 1,
 									"id" : "obj-29",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -718,7 +717,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 673.149407084669292, 657.0, 243.242852497327249, 22.0 ],
-									"text" : "name Player_396533"
+									"text" : "matches self 0"
 								}
 
 							}
@@ -876,19 +875,6 @@
 									"patching_rect" : [ 1060.0, 617.083330662139815, 115.0, 22.0 ],
 									"text" : "somax.midirenderer",
 									"varname" : "somax.audiorenderer"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-147",
-									"ignoreclick" : 1,
-									"maxclass" : "button",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 1121.833333333333258, 521.833331854232711, 14.0, 14.0 ]
 								}
 
 							}
@@ -1183,7 +1169,6 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
-									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-59",
 									"ignoreclick" : 1,
@@ -1205,6 +1190,7 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
+									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-90",
 									"ignoreclick" : 1,
@@ -1303,14 +1289,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-147", 0 ],
-									"order" : 0,
-									"source" : [ "obj-143", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-24", 0 ],
 									"midpoints" : [ 1069.5, 507.624991903652131, 823.77083333333303, 507.624991903652131 ],
 									"order" : 2,
@@ -1338,7 +1316,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-54", 0 ],
-									"order" : 1,
 									"source" : [ "obj-143", 1 ]
 								}
 
@@ -1775,7 +1752,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 198.0, 181.0, 1074.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1859,7 +1836,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 233.0, 471.95832873049676, 92.0, 22.0 ],
+									"patching_rect" : [ 233.0, 471.958328999999992, 150.0, 22.0 ],
 									"text" : "0 duplicate"
 								}
 
@@ -2070,7 +2047,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 778.027980836006009, 651.208320471908337, 243.242852497327249, 22.0 ],
-									"text" : "name Player_396572"
+									"text" : "matches self 0"
 								}
 
 							}
@@ -2464,19 +2441,6 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1168.333333333333485, 509.999995397163275, 113.666666666666742, 47.0 ],
 									"text" : "Status: whether player is initialized on server or not"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-147",
-									"ignoreclick" : 1,
-									"maxclass" : "button",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 1143.583333333333258, 520.708322856094128, 14.0, 14.0 ]
 								}
 
 							}
@@ -3034,14 +2998,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-147", 0 ],
-									"order" : 0,
-									"source" : [ "obj-143", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-23", 0 ],
 									"midpoints" : [ 1091.25, 505.499982905513548, 920.027980836006009, 505.499982905513548 ],
 									"order" : 2,
@@ -3069,7 +3025,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-62", 0 ],
-									"order" : 1,
 									"source" : [ "obj-143", 1 ]
 								}
 
@@ -3086,7 +3041,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-42", 1 ],
-									"midpoints" : [ 201.833333333333314, 457.95832873049676, 315.5, 457.95832873049676 ],
+									"midpoints" : [ 201.833333333333314, 457.95832873049676, 373.5, 457.95832873049676 ],
 									"order" : 0,
 									"source" : [ "obj-15", 1 ]
 								}
@@ -3373,7 +3328,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 198.0, 181.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1074.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3623,7 +3578,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 275.0, 467.0, 296.0, 74.0 ],
+									"patching_rect" : [ 275.0, 467.0, 297.0, 74.0 ],
 									"text" : "The Server is the core of Somax 2, handling all the scheduling and communication with the background Python app and all instances of somax.player through OSC. It will open in an external window when you launch it."
 								}
 
@@ -3702,7 +3657,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 5,
-									"outlettype" : [ "", "", "", "multichannelsignal", "" ],
+									"outlettype" : [ "", "multichannelsignal", "", "", "" ],
 									"patching_rect" : [ 486.0, 272.5, 149.0, 22.0 ],
 									"text" : "somax.audiocorpusbuilder",
 									"varname" : "somax.audiocorpusbuilder"
@@ -4907,8 +4862,24 @@
 					"parameter_longname" : "weight[5]"
 				}
 ,
+				"obj-7::obj-17::obj-395::obj-2" : 				{
+					"parameter_longname" : "live.text[4]"
+				}
+,
+				"obj-7::obj-17::obj-395::obj-375" : 				{
+					"parameter_longname" : "mc.live.gain~[6]"
+				}
+,
+				"obj-7::obj-17::obj-395::obj-441" : 				{
+					"parameter_longname" : "mc.live.gain~[5]"
+				}
+,
 				"obj-7::obj-17::obj-395::obj-469" : 				{
 					"parameter_longname" : "live.text[12]"
+				}
+,
+				"obj-7::obj-17::obj-395::obj-472" : 				{
+					"parameter_longname" : "live.text[2]"
 				}
 ,
 				"obj-7::obj-17::obj-395::obj-490" : 				{
