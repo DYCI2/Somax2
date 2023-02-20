@@ -894,7 +894,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 266.5, 31.0, 131.0, 35.0 ],
+					"patching_rect" : [ 266.5, 23.0, 131.0, 35.0 ],
 					"text" : "midiinfo @autopollcontrollers 1"
 				}
 
@@ -1744,7 +1744,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 266.5, -4.0, 119.0, 22.0 ],
+					"patching_rect" : [ 426.0, -13.0, 119.0, 22.0 ],
 					"text" : "loadmess controllers"
 				}
 
