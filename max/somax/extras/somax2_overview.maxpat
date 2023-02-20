@@ -41,13 +41,43 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontsize" : 12.0,
+					"id" : "obj-35",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 79.5, 459.765625163912773, 135.0, 22.0 ],
+					"presentation_linecount" : 2,
+					"text" : "Ex2_One_Against_One",
+					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontsize" : 12.0,
+					"id" : "obj-34",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 79.5, 544.999999999999886, 135.0, 22.0 ],
+					"text" : "Ex5_Macro_Functions",
+					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontsize" : 12.0,
 					"id" : "obj-29",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.5, 503.874998688697701, 128.0, 22.0 ],
-					"text" : "Ex3_Macro_Functions",
+					"patching_rect" : [ 79.5, 516.588541721304182, 135.0, 22.0 ],
+					"presentation_linecount" : 2,
+					"text" : "Ex4_Sound_Installation",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -60,9 +90,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.5, 473.22916557391477, 135.0, 22.0 ],
+					"patching_rect" : [ 79.5, 488.177083442608478, 196.0, 22.0 ],
 					"presentation_linecount" : 2,
-					"text" : "Ex2_Sound_Installation",
+					"text" : "Ex3_Co_Improvising_The_Masters",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -75,8 +105,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.5, 442.583332459131839, 124.0, 22.0 ],
-					"text" : "Ex1_Mimetic_Players",
+					"patching_rect" : [ 79.5, 431.354166885217069, 124.0, 22.0 ],
+					"text" : "Ex1_Mimetism",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -353,7 +383,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 21.5, 585.0, 57.0, 22.0 ],
+					"patching_rect" : [ 642.5, 36.5, 57.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
