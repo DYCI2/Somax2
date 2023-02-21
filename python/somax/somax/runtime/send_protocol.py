@@ -79,7 +79,7 @@ class PlayerSendProtocol:
 
     SEND_STATE_EVENT = "state"
 
-    DESCRIPTOR = "descriptor"  # TODO: Unused
+    INFLUENCE = "influence"
 
     OUTPUT_TYPE = "output_type"
     OUTPUT_TYPE_TRIGGER_MATCH = "match"

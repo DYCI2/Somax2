@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple, Dict, Type
 
 from somax.features import Tempo
+from somax.features.feature import AbstractFeature
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
@@ -227,7 +228,8 @@ class SchedulingHandler(Introspective, ABC):
         else:
             self._on_trigger_received(trigger_event=trigger_event)
 
-    def add_corpus_event(self, trigger_time: float,
+    def add_corpus_event(self,
+                         trigger_time: float,
                          event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]],
                          reset_timeout: bool) -> None:
         """ raises TypeError for `CorpusEvents` other than `MidiCorpusEvent` or `AudioCorpusEvent`
@@ -322,6 +324,10 @@ class SchedulingHandler(Introspective, ABC):
         self._experimental_use_relative_tempo_scaling_for_audio = enable
         if not enable:
             self._experimental_previous_audio_events_tempo = None
+
+    def set_rendering_features(self, features_and_keywords: List[Tuple[Type[AbstractFeature], str]]) -> None:
+        self.midi_handler.set_rendering_features(features_and_keywords)
+        self.audio_handler.set_rendering_features(features_and_keywords)
 
     def _adjust_in_time(self, event: ScheduledEvent, increment: float = 0.0) -> ScheduledEvent:
         scheduler_time: float = self._scheduler.time

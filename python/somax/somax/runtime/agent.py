@@ -15,6 +15,7 @@ from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features import Tempo
+from somax.features.feature import AbstractFeature
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
@@ -539,7 +540,6 @@ class OscAgent(Agent, AsyncioOscObject):
         self.logger.info(f"Reading corpus at '{filepath}' for player '{self.player.name}'...")
         self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
 
-
         if not os.path.exists(filepath):
             self.logger.error(f"The file '{filepath}' does not exist. No corpus was read.")
             self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
@@ -573,7 +573,9 @@ class OscAgent(Agent, AsyncioOscObject):
                                 found_match: bool = False
                                 for ext in CorpusBuilder.AUDIO_FILE_EXTENSIONS:  # type: str
                                     if os.path.isfile(base_path + ext):
-                                        self.logger.warning(f"{str(e)}. Attempting to build from  '{base_path + ext}'...")
+                                        self.logger.warning(
+                                            f"{str(e)}. Attempting to build from  '{base_path + ext}'..."
+                                        )
                                         found_match = True
                                         corpus: Corpus = AudioCorpus.from_json(filepath,
                                                                                volatile=volatile,
@@ -622,7 +624,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"Could not find {str(e)}. No parameter was set.")
 
     ######################################################
-    # SCHEDULING STATE-RELATED PARAMETERS
+    # SCHEDULING, RENDERING & STATE-RELATED PARAMETERS
     ######################################################
 
     def set_scheduling_handler(self, handler_class: str):
@@ -707,6 +709,21 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def _set_experimental_relative_temporal_scaling_for_audio(self, enable: bool) -> None:
         self.scheduling_handler.set_experimental_relative_tempo_scaling_for_audio_mode(enable)
+
+    def render_features(self, features: List[str], associated_keywords: List[str]) -> None:
+        """ Schedule and output the value of the event's features at the onset """
+        if len(features) != len(associated_keywords):
+            self.logger.error("The number of keywords and the number of features must be equal. "
+                              "No rendering features were added")
+            return
+
+        try:
+            feature_types: List[Type[AbstractFeature]] = [AbstractFeature.parse_type(feature) for feature in features]
+        except KeyError as e:
+            self.logger.error(f"Could not find feature {str(e)}. No rendering features were added")
+            return
+
+        self.scheduling_handler.set_rendering_features(list(zip(feature_types, associated_keywords)))
 
     ######################################################
     # PRIVATE

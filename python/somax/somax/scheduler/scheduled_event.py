@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Any, Optional, List, Tuple
 
-from somax.features import TotalEnergyDb
 from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.send_protocol import PlayerSendProtocol
 from somax.runtime.transforms import AbstractTransform
@@ -70,16 +69,15 @@ class MidiNoteEvent(RendererEvent):
 
 
 class AudioEvent(RendererEvent):
-    def __init__(self, trigger_time: float,
+    def __init__(self,
+                 trigger_time: float,
                  corpus_event: AudioCorpusEvent,
                  applied_transform: AbstractTransform,
-                 time_stretch_factor: float,
-                 render_energy: bool):
+                 time_stretch_factor: float):
         super(AudioEvent, self).__init__(trigger_time)
         self.event: AudioCorpusEvent = corpus_event
         self.applied_transform: AbstractTransform = applied_transform
         self.time_stretch_factor: float = time_stretch_factor
-        self.render_energy: bool = render_energy
 
     def render(self) -> List[RendererMessage]:
         messages: List[RendererMessage] = [
@@ -91,9 +89,6 @@ class AudioEvent(RendererEvent):
                    (self.event.onset + self.event.duration) * 1000,
                    self.applied_transform.renderer_info(),
                    self.time_stretch_factor]
-
-        if self.render_energy:
-            content.append(self.event.get_feature(TotalEnergyDb).value())
 
         messages.append(RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_EVENT,
                                         content=content))
@@ -128,6 +123,16 @@ class AudioOffEvent(RendererEvent):
 class TimeoutInfoEvent(RendererEvent):
     def render(self) -> List[RendererMessage]:
         return [RendererMessage(keyword=PlayerSendProtocol.OUTPUT_TYPE, content=PlayerSendProtocol.OUTPUT_TYPE_TIMEOUT)]
+
+
+class InfluenceEvent(RendererEvent):
+    def __init__(self, trigger_time: float, keywords_and_feature_values: List[Tuple[str, Any]]):
+        super().__init__(trigger_time=trigger_time)
+        self.keywords_and_feature_values: List[Tuple[str, Any]] = keywords_and_feature_values
+
+    def render(self) -> List[RendererMessage]:
+        return [RendererMessage(keyword=PlayerSendProtocol.INFLUENCE, content=[keyword, value])
+                for (keyword, value) in self.keywords_and_feature_values]
 
 
 class TriggerEvent(ScheduledEvent):
