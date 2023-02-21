@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 217.0, 250.0, 1340.0, 800.0 ],
+		"rect" : [ 226.0, 198.0, 1340.0, 800.0 ],
 		"openrect" : [ 0.0, 0.0, 1340.0, 800.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -59,7 +59,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 217.0, 276.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -90,13 +90,237 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
-									"id" : "obj-41",
-									"linecount" : 8,
+									"bubble" : 1,
+									"bubbleside" : 2,
+									"fontsize" : 12.0,
+									"id" : "obj-64",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 671.77083333333303, 85.999999850988388, 246.0, 114.0 ],
-									"text" : "Weights are used to control the balance between the layers. They determine whether the player should prioritize output corresponding to (left to right):\n- internal melody\n- internal harmony\n- external melody\n- external harmony"
+									"patching_rect" : [ 898.466423334669116, 392.416660132186678, 87.0, 39.0 ],
+									"text" : "Load a corpus"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-105",
+									"maxclass" : "toggle",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 653.233343025048271, 499.466671292439628, 24.0, 24.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-102",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 653.233343025048271, 527.850017788289506, 123.0, 22.0 ],
+									"text" : "regionmaskenable $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"format" : 6,
+									"id" : "obj-100",
+									"maxclass" : "flonum",
+									"maximum" : 1.0,
+									"minimum" : 0.0,
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 587.270832205812439, 500.000005055379233, 50.0, 22.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"format" : 6,
+									"id" : "obj-97",
+									"maxclass" : "flonum",
+									"maximum" : 1.0,
+									"minimum" : 0.0,
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 527.0, 500.000005055379233, 50.0, 22.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-95",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 527.16666666666697, 531.666670242945202, 79.0, 22.0 ],
+									"text" : "pak f f"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-94",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 527.16666666666697, 562.000005055379233, 104.0, 22.0 ],
+									"text" : "regionmask $1 $2"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-89",
+									"linecount" : 6,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 527.16666666666697, 601.750003863286338, 253.261122306187644, 87.0 ],
+									"text" : "When enabled, the player will only output events from a specific part of the corpus. \nTwo floats between 0 and 1 delimit the region in the corpus from which the player should generate events from, corresponding to the timeline of the corpus (linearly, by index). "
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-82",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 711.374997744957909, 366.416669790402807, 137.0, 22.0 ],
+									"text" : "harmonicngramorder $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-77",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 655.638887385527596, 335.416669790402807, 129.0, 22.0 ],
+									"text" : "melodicngramorder $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-63",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 599.902777026097283, 305.499993012977484, 155.0, 22.0 ],
+									"text" : "selfharmonicngramorder $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-60",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 544.16666666666697, 273.0, 106.0, 22.0 ],
+									"text" : "selfngramorder $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-52",
+									"maxclass" : "number",
+									"maximum" : 10,
+									"minimum" : 1,
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 711.374997744957909, 241.0, 50.0, 22.0 ],
+									"tricolor" : [ 0.423529411764706, 0.494117647058824, 0.996078431372549, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-50",
+									"maxclass" : "number",
+									"maximum" : 10,
+									"minimum" : 1,
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 655.638887385527596, 241.0, 50.0, 22.0 ],
+									"tricolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-49",
+									"maxclass" : "number",
+									"maximum" : 10,
+									"minimum" : 1,
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 599.902777026097283, 241.0, 50.0, 22.0 ],
+									"tricolor" : [ 0.827450980392157, 0.423529411764706, 0.996078431372549, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-43",
+									"maxclass" : "number",
+									"maximum" : 10,
+									"minimum" : 1,
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 544.16666666666697, 241.0, 50.0, 22.0 ],
+									"tricolor" : [ 0.481437705647327, 0.846666309931507, 0.361908344245232, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-20",
+									"linecount" : 11,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 791.465739166666708, 204.166658940093953, 235.10416666666606, 154.0 ],
+									"text" : "A match is, at a specific time step, a sequence in the corpus that matches the previous N influences sent to a specific layer. Memory Lenghts controls that «N». \nSetting this value to a low value will in other words look for short sequence in the memory, while a high value will look for longer sequences.\nFinding the a good balance for this parameter is one of the most important aspects for generating meaningful output."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-41",
+									"linecount" : 7,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 540.638887385527596, 113.666663542930507, 428.0, 100.0 ],
+									"text" : "Weights are used to control the balance between the layers. \nThey determine whether the player should prioritize output corresponding to (left to right):\n- internal melody\n- internal harmony\n- external melody\n- external harmony"
 								}
 
 							}
@@ -194,26 +418,14 @@
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-85",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 808.27083333333303, 603.166665187565968, 261.0, 47.0 ],
-									"text" : "This corresponds to the event of the corpus currently output by the Player, numbered at the moment of building the corpus"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"bubble" : 1,
-									"bubbleside" : 3,
+									"bubbleside" : 0,
 									"id" : "obj-81",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 808.27083333333303, 564.166665187565968, 143.0, 37.0 ],
+									"patching_rect" : [ 911.753167099570646, 595.833331854232711, 143.0, 52.0 ],
 									"text" : "Monitor the current index of output (state)"
 								}
 
@@ -262,7 +474,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 24.0, 76.999991001861474, 469.5, 74.0 ],
-									"text" : "In this patch we are focusing on the parameters related to Output Control, in charge of defining the model behind the Player's behaviour.\n\nThese paremeters are Weights, Memory Lenghts, Region Mask and Transpositions.\n"
+									"text" : "In this patch we are focusing on the parameters related to Output Control, in charge of defining the model behind the Player's behaviour.\n\nThese paremeters are Weights, Memory Lenghts and Region Mask.\n"
 								}
 
 							}
@@ -343,8 +555,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 24.0, 49.0, 302.0, 20.0 ],
-									"text" : "____________________________________________"
+									"patching_rect" : [ 24.0, 49.0, 322.0, 20.0 ],
+									"text" : "_______________________________________________"
 								}
 
 							}
@@ -763,7 +975,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 383.083333333333371, 121.0, 22.0 ],
-									"text" : "0 duplicate"
+									"text" : "0 offline"
 								}
 
 							}
@@ -993,20 +1205,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble" : 1,
-									"bubbleside" : 2,
-									"fontsize" : 12.0,
-									"id" : "obj-64",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 890.466423334669116, 384.416660132186678, 87.0, 39.0 ],
-									"text" : "Load a corpus"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
@@ -1020,10 +1218,60 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 552.183333333333394, 555.083333333333371, 20.0, 20.0 ],
+									"patching_rect" : [ 635.638887325922951, 563.000005055379233, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "11",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-40",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 876.466423334669003, 393.416660132186678, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "3",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"fontface" : 1,
+									"fontname" : "Arial",
+									"fontsize" : 16.0,
+									"id" : "obj-5",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 996.693650831996592, 378.24999658925617, 64.0, 24.0 ],
+									"text" : "Corpus",
+									"varname" : "HelpTitle[3]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"id" : "obj-31",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 903.422559168002635, 424.416660132186678, 98.0, 22.0 ],
+									"text" : "Ravel_Miroirs.gz"
 								}
 
 							}
@@ -1041,7 +1289,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 785.27083333333303, 572.666665187565968, 20.0, 20.0 ],
+									"patching_rect" : [ 1011.77083333333303, 572.666665187565968, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "7",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1063,7 +1311,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 552.183333333333394, 525.33331311181621, 20.0, 20.0 ],
+									"patching_rect" : [ 681.472220718860626, 501.466671292439628, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "10",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1084,7 +1332,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 552.183333333333394, 490.666665187565968, 20.0, 20.0 ],
+									"patching_rect" : [ 764.638887385527596, 242.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "9",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1196,27 +1444,6 @@
 , 							{
 								"box" : 								{
 									"background" : 1,
-									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-									"fontname" : "Arial Bold",
-									"hint" : "",
-									"id" : "obj-40",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 874.385287501335938, 398.416660132186792, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "3",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
 									"fontface" : 1,
 									"fontname" : "Arial",
 									"fontsize" : 16.0,
@@ -1235,29 +1462,13 @@
 									"background" : 1,
 									"fontface" : 1,
 									"fontname" : "Arial",
-									"fontsize" : 16.0,
-									"id" : "obj-5",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 991.693650831996592, 370.24999658925617, 64.0, 24.0 ],
-									"text" : "Corpus",
-									"varname" : "HelpTitle[3]"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"fontface" : 1,
-									"fontname" : "Arial",
 									"fontsize" : 22.0,
 									"id" : "obj-16",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 28.0, 34.0, 288.0, 31.0 ],
-									"text" : "Balance and Transposition",
+									"patching_rect" : [ 28.0, 34.0, 308.0, 31.0 ],
+									"text" : "Balance and Memory Length",
 									"varname" : "HelpTitle"
 								}
 
@@ -1274,7 +1485,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1017.083333333333258, 183.166658940093953, 275.916666666666742, 151.916674393239418 ],
+									"patching_rect" : [ 1044.583333333333258, 183.166658940093953, 248.416666666666742, 152.416674393239418 ],
 									"rounded" : 16
 								}
 
@@ -1381,23 +1592,6 @@
 							}
 , 							{
 								"box" : 								{
-									"angle" : 0.0,
-									"background" : 1,
-									"bgcolor" : [ 0.094118, 0.113725, 0.137255, 0.0 ],
-									"border" : 1,
-									"bordercolor" : [ 0.415686, 0.454902, 0.52549, 1.0 ],
-									"id" : "obj-1",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 862.922559168002635, 351.24999658925617, 192.771091663993957, 89.499997615814152 ],
-									"rounded" : 16
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"background" : 1,
 									"id" : "obj-54",
 									"maxclass" : "toggle",
@@ -1406,19 +1600,6 @@
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1120.333333333333258, 528.833331854232711, 24.0, 24.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"id" : "obj-31",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 898.422559168002635, 416.416660132186678, 137.0, 22.0 ],
-									"text" : "corpus Ligeti_Etudes.gz"
 								}
 
 							}
@@ -1435,8 +1616,47 @@
 								}
 
 							}
+, 							{
+								"box" : 								{
+									"angle" : 0.0,
+									"background" : 1,
+									"bgcolor" : [ 0.094118, 0.113725, 0.137255, 0.0 ],
+									"border" : 1,
+									"bordercolor" : [ 0.415686, 0.454902, 0.52549, 1.0 ],
+									"id" : "obj-1",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 867.922559168002635, 378.24999658925617, 192.771091663993957, 89.499997615814152 ],
+									"rounded" : 16
+								}
+
+							}
  ],
 						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-95", 1 ],
+									"source" : [ "obj-100", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-143", 0 ],
+									"midpoints" : [ 662.733343025048271, 559.850017788289506, 791.116671512524135, 559.850017788289506, 791.116671512524135, 475.333331854232711, 1069.5, 475.333331854232711 ],
+									"source" : [ "obj-102", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-102", 0 ],
+									"source" : [ "obj-105", 0 ]
+								}
+
+							}
+, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-92", 0 ],
 									"source" : [ "obj-106", 0 ]
@@ -1646,7 +1866,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 907.922559168002635, 457.958328949046972, 1069.5, 457.958328949046972 ],
+									"midpoints" : [ 912.922559168002635, 475.791663007570151, 1069.5, 475.791663007570151 ],
 									"source" : [ "obj-31", 0 ]
 								}
 
@@ -1687,6 +1907,14 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-143", 0 ],
+									"midpoints" : [ 533.66666666666697, 475.416665852610549, 1069.5, 475.416665852610549 ],
+									"source" : [ "obj-37", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-23", 1 ],
 									"hidden" : 1,
 									"source" : [ "obj-38", 0 ]
@@ -1706,6 +1934,13 @@
 									"destination" : [ "obj-11", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-42", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-60", 0 ],
+									"source" : [ "obj-43", 0 ]
 								}
 
 							}
@@ -1780,9 +2015,30 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-63", 0 ],
+									"source" : [ "obj-49", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-77", 0 ],
+									"source" : [ "obj-50", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-47", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-51", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-82", 0 ],
+									"source" : [ "obj-52", 0 ]
 								}
 
 							}
@@ -1799,6 +2055,22 @@
 									"destination" : [ "obj-143", 0 ],
 									"midpoints" : [ 1093.541666666666742, 472.979164448015808, 1069.5, 472.979164448015808 ],
 									"source" : [ "obj-58", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-143", 0 ],
+									"midpoints" : [ 553.66666666666697, 475.916665927116355, 1069.5, 475.916665927116355 ],
+									"source" : [ "obj-60", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-143", 0 ],
+									"midpoints" : [ 609.402777026097283, 475.666662433605097, 1069.5, 475.666662433605097 ],
+									"source" : [ "obj-63", 0 ]
 								}
 
 							}
@@ -1898,6 +2170,14 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-143", 0 ],
+									"midpoints" : [ 665.138887385527596, 475.125000852120081, 1069.5, 475.125000852120081 ],
+									"source" : [ "obj-77", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-48", 0 ],
 									"hidden" : 1,
 									"order" : 0,
@@ -1911,6 +2191,14 @@
 									"hidden" : 1,
 									"order" : 1,
 									"source" : [ "obj-8", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-143", 0 ],
+									"midpoints" : [ 720.874997744957909, 475.625000822317759, 1069.5, 475.625000822317759 ],
+									"source" : [ "obj-82", 0 ]
 								}
 
 							}
@@ -1939,11 +2227,32 @@
 								}
 
 							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-143", 0 ],
+									"midpoints" : [ 536.66666666666697, 594.000005055379233, 791.583333333333485, 594.000005055379233, 791.583333333333485, 475.833331854232711, 1069.5, 475.833331854232711 ],
+									"source" : [ "obj-94", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-94", 0 ],
+									"source" : [ "obj-95", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-95", 0 ],
+									"source" : [ "obj-97", 0 ]
+								}
+
+							}
  ]
 					}
 ,
-					"patching_rect" : [ 320.0, 280.0, 177.0, 43.0 ],
-					"presentation_linecount" : 2,
+					"patching_rect" : [ 320.0, 280.0, 185.0, 43.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -1951,7 +2260,7 @@
 						"tags" : ""
 					}
 ,
-					"text" : "patcher \"Balance and Transposition\"",
+					"text" : "patcher \"Balance and Memory Length\"",
 					"varname" : "02_basic_audio_example[2]"
 				}
 
@@ -2010,7 +2319,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 523.183333333333394, 464.353913221759854, 260.087499999999636, 288.0 ],
+									"patching_rect" : [ 523.183333333333394, 464.353913221759854, 267.0, 288.0 ],
 									"text" : "The «Quality Threshold» controls the consistency between the input (influences) and output (what the player plays), so that if there's no good match between the two, the system will not play anything at all.\n\nThis parameter sets a minimum score required for a match to qualify as output. When combined with «Sparse», this will ensure that no events are played unless they are considered good matches.\n\nFor reference, a value of 0.01 will be sufficient to filter out all cases where there are no matches at all. A value of 0.1 will be sufficient to (assuming weights and other parameters are within common ranges) find rather good matches either harmonically or melodically, and a value of 1.0 (or larger) will generally remove everything but almost perfect replications of longer sections of the input."
 								}
 
@@ -2022,7 +2331,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 642.400441697805263, 282.499993012977541, 326.835059168002999, 74.0 ],
+									"patching_rect" : [ 642.400441697805263, 282.499993012977541, 327.0, 74.0 ],
 									"text" : "If sparse is disabled (default), the player will generate output even if it doesn't find any match in the corpus corresponding to the input. Enabling sparse will ensure that the player only outputs something if it finds a good match, and if it doesn't, it will remain silent."
 								}
 
@@ -2034,33 +2343,21 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 691.77083333333303, 145.666663542930507, 254.0, 114.0 ],
+									"patching_rect" : [ 691.77083333333303, 145.666663542930507, 259.0, 114.0 ],
 									"text" : "Output Probability will condition each generated output with a probability, so that it may or may not play the event. This parameter is inactive when set to 1.0 (off), but any value lower than 1.0 will result in less than 100% of the events being played. For example, when set to 0.2, only 20% of the generated events will be played"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-85",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 808.27083333333303, 603.166665187565968, 261.0, 47.0 ],
-									"text" : "This corresponds to the event of the corpus currently output by the Player, numbered at the moment of building the corpus"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"bubble" : 1,
-									"bubbleside" : 3,
+									"bubbleside" : 0,
 									"id" : "obj-81",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 808.27083333333303, 564.166665187565968, 143.0, 37.0 ],
+									"patching_rect" : [ 911.77083333333303, 595.833331854232711, 143.0, 52.0 ],
 									"text" : "Monitor the current index of output (state)"
 								}
 
@@ -2171,7 +2468,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 553.183333333333394, 199.999991001861474, 113.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "outputprobability $1"
 								}
 
@@ -2209,7 +2505,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 24.0, 76.999991001861474, 469.5, 74.0 ],
-									"presentation_linecount" : 4,
 									"text" : "In this patch we are focusing on the parameters related to Output Control, in charge of defining the model behind the Player's behaviour.\n\nThese paremeters are Continuity, Output Probability, Sparse and Quality.\n"
 								}
 
@@ -2496,7 +2791,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 24.5, 490.666665187565968, 477.0, 47.0 ],
+									"patching_rect" : [ 24.5, 490.666665187565968, 480.0, 47.0 ],
 									"text" : "When this is the case, the object will ignore all messages while it's a duplicate (so it's safe to have multiple servers open). To attempt to clear duplicate flag (if all other servers have been closed) send \"reload\" to the server object"
 								}
 
@@ -2711,7 +3006,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 383.083333333333371, 121.0, 22.0 ],
-									"text" : "0 duplicate"
+									"text" : "0 offline"
 								}
 
 							}
@@ -2948,7 +3243,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 890.466423334669116, 384.416660132186678, 87.0, 39.0 ],
+									"patching_rect" : [ 896.466423334669116, 377.416660132186678, 87.0, 39.0 ],
 									"text" : "Load a corpus"
 								}
 
@@ -2989,7 +3284,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 785.27083333333303, 572.666665187565968, 20.0, 20.0 ],
+									"patching_rect" : [ 1011.77083333333303, 572.666665187565968, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "7",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -3155,7 +3450,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 874.385287501335938, 398.416660132186792, 20.0, 20.0 ],
+									"patching_rect" : [ 874.466423334669003, 378.416660132186678, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "3",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -3188,7 +3483,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 991.693650831996592, 370.24999658925617, 64.0, 24.0 ],
+									"patching_rect" : [ 991.693650831996592, 363.24999658925617, 64.0, 24.0 ],
 									"text" : "Corpus",
 									"varname" : "HelpTitle[3]"
 								}
@@ -3339,7 +3634,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 862.922559168002635, 351.24999658925617, 192.771091663993957, 89.499997615814152 ],
+									"patching_rect" : [ 866.922559168002635, 363.24999658925617, 192.771091663993957, 89.499997615814152 ],
 									"rounded" : 16
 								}
 
@@ -3365,7 +3660,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 898.422559168002635, 416.416660132186678, 137.0, 22.0 ],
+									"patching_rect" : [ 898.422559168002635, 409.416660132186678, 137.0, 22.0 ],
 									"text" : "corpus Ligeti_Etudes.gz"
 								}
 
@@ -3379,7 +3674,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1094.958333333333712, 608.833331854232711, 170.0, 22.0 ],
-									"text" : "Ligeti_Etudes.gz"
+									"text" : "no loaded corpus"
 								}
 
 							}
@@ -3392,7 +3687,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 622.253010833333292, 17.5, 251.517822499999738, 100.0 ],
-									"presentation_linecount" : 7,
 									"text" : "Continuity controls the order of the current state index of output (state):\n- Continuity > 1 will prioritize continuation (and result in fewer jumps).\n- Continuity = 1.00 will result in no alterations (no bias introduced by this parameter).\n- Continuity < 1 will prioritizing jumping."
 								}
 
@@ -3960,7 +4254,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 226.0, 224.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3991,6 +4285,68 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-85",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 812.75, 670.749976288266453, 261.0, 47.0 ],
+									"text" : "This corresponds to the event of the corpus currently output by the Player, numbered at the moment of building the corpus"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 3,
+									"id" : "obj-81",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 812.75, 631.749976288266453, 145.0, 37.0 ],
+									"text" : "Monitor the current index of output (state)"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-78",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 962.75, 639.249976288266453, 50.0, 22.0 ],
+									"text" : "5267"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-19",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 993.75, 611.249976288266453, 51.0, 22.0 ],
+									"text" : "zl.mth 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-20",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 993.75, 585.249976288266453, 65.0, 22.0 ],
+									"text" : "route state"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"hidden" : 1,
@@ -4010,7 +4366,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 582.247802499999807, 575.708322856094128, 319.752197500000307, 87.0 ],
+									"patching_rect" : [ 568.247802499999921, 520.249976288266453, 319.752197500000307, 87.0 ],
 									"text" : "In reactive mode, this timeout controls whether the player should continue playing if no new trigger has arrived by the time the player has finished playing its current event. Setting this to a non-zero value will make the player continue for that number of seconds. It's also possible to disable this to make the player continue endlessly."
 								}
 
@@ -4046,7 +4402,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 812.33333333333303, 191.125000452542793, 203.25, 234.0 ],
+									"patching_rect" : [ 812.33333333333303, 184.125000452542793, 205.0, 234.0 ],
 									"text" : "In reactive mode, output is generated each time a new trigger (onset) arrives. If the player is in the middle of playing an event when a trigger arrives, cut controls whether the currently played event should be interrupted or not:\n\n-Allowed: Interrupt the current event and trigger the new event immediately when the new trigger arrives.\n\n-Not Allowed: Delay the trigger so that the new event starts playing once the current event has been completed."
 								}
 
@@ -4060,7 +4416,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 826.999999999999773, 489.45832873049676, 78.0, 37.0 ],
+									"patching_rect" : [ 826.999999999999773, 442.45832873049676, 78.0, 37.0 ],
 									"text" : "Play with timeout"
 								}
 
@@ -4071,7 +4427,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 963.58333333333303, 497.95832873049676, 61.0, 20.0 ],
+									"patching_rect" : [ 963.58333333333303, 450.95832873049676, 61.0, 20.0 ],
 									"text" : "(seconds)"
 								}
 
@@ -4084,7 +4440,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 787.000000000000114, 499.41665746099352, 24.0, 24.0 ]
+									"patching_rect" : [ 787.000000000000114, 452.41665746099352, 24.0, 24.0 ]
 								}
 
 							}
@@ -4095,7 +4451,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 787.000000000000114, 528.95832873049676, 101.0, 22.0 ],
+									"patching_rect" : [ 787.000000000000114, 481.95832873049676, 101.0, 22.0 ],
 									"text" : "timeoutenable $1"
 								}
 
@@ -4109,7 +4465,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 914.58333333333303, 496.95832873049676, 50.0, 22.0 ]
+									"patching_rect" : [ 914.58333333333303, 449.95832873049676, 50.0, 22.0 ]
 								}
 
 							}
@@ -4120,7 +4476,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 914.58333333333303, 528.95832873049676, 65.0, 22.0 ],
+									"patching_rect" : [ 914.58333333333303, 481.95832873049676, 65.0, 22.0 ],
 									"text" : "timeout $1"
 								}
 
@@ -4128,11 +4484,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-60",
-									"linecount" : 14,
+									"linecount" : 13,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 577.731105836006009, 305.95832873049676, 150.0, 194.0 ],
+									"patching_rect" : [ 577.731105836006009, 305.95832873049676, 155.0, 181.0 ],
 									"text" : "In reactive mode, output will be triggered whenever the Player receives an influence as input (note-by-note)\n\nIn continuous mode, the Player will independently generate its output, even in the absence of external influences. However, when a new influence arrives, the Player will react to it."
 								}
 
@@ -4274,7 +4630,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1194.749999999999773, 536.124996876263822, 24.0, 24.0 ]
+									"patching_rect" : [ 1194.749999999999773, 486.45832873049676, 24.0, 24.0 ]
 								}
 
 							}
@@ -4312,7 +4668,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 233.0, 581.958329000000049, 150.0, 22.0 ],
-									"text" : "0 duplicate"
+									"text" : "0 offline"
 								}
 
 							}
@@ -4491,7 +4847,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1194.749999999999773, 479.45832873049676, 83.0, 20.0 ],
+									"patching_rect" : [ 1194.749999999999773, 427.45832873049676, 83.0, 20.0 ],
 									"text" : "r player_enabled"
 								}
 
@@ -4542,7 +4898,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 21.5, 695.45832873049676, 477.0, 47.0 ],
+									"patching_rect" : [ 21.5, 695.45832873049676, 480.0, 47.0 ],
 									"text" : "When this is the case, the object will ignore all messages while it's a duplicate (so it's safe to have multiple servers open). To attempt to clear duplicate flag (if all other servers have been closed) send \"reload\" to the server object"
 								}
 
@@ -4691,7 +5047,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1194.750000000000227, 280.458326346310912, 60.0, 20.0 ],
+									"patching_rect" : [ 1194.750000000000227, 261.458326346310912, 60.0, 20.0 ],
 									"setminmax" : [ 0.0, 1.0 ],
 									"setstyle" : 1,
 									"size" : 12,
@@ -4709,7 +5065,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1154.083333333333712, 280.458326346310912, 32.0, 20.0 ]
+									"patching_rect" : [ 1154.083333333333712, 261.458326346310912, 32.0, 20.0 ]
 								}
 
 							}
@@ -4721,7 +5077,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1113.41666666666697, 278.458326346310912, 24.0, 24.0 ]
+									"patching_rect" : [ 1113.41666666666697, 259.458326346310912, 24.0, 24.0 ]
 								}
 
 							}
@@ -4732,7 +5088,7 @@
 									"numinlets" : 4,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 1113.41666666666697, 248.458326346310912, 141.0, 22.0 ],
+									"patching_rect" : [ 1113.41666666666697, 229.458326346310912, 141.0, 22.0 ],
 									"text" : "route onset pitch chroma"
 								}
 
@@ -4744,7 +5100,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1083.41666666666697, 319.458326346310969, 104.0, 22.0 ],
+									"patching_rect" : [ 1083.41666666666697, 300.458326346310969, 104.0, 22.0 ],
 									"text" : "prepend influence"
 								}
 
@@ -4757,7 +5113,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 1082.66666666666697, 209.458333333333314, 129.0, 22.0 ],
+									"patching_rect" : [ 1082.66666666666697, 190.458333333333314, 129.0, 22.0 ],
 									"text" : "somax.audioinfluencer",
 									"varname" : "somax.audioinfluencer"
 								}
@@ -4796,7 +5152,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1194.749999999999773, 504.624996876263822, 70.0, 22.0 ],
+									"patching_rect" : [ 1194.749999999999773, 454.95832873049676, 70.0, 22.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -4807,7 +5163,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1223.749999999999773, 538.124996876263822, 83.0, 20.0 ],
+									"patching_rect" : [ 1223.749999999999773, 488.45832873049676, 83.0, 20.0 ],
 									"text" : "Enable Player"
 								}
 
@@ -4832,7 +5188,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1168.333333333333485, 610.999995397163275, 113.666666666666742, 47.0 ],
+									"patching_rect" : [ 1169.967624163993833, 557.499995397163275, 113.666666666666742, 47.0 ],
 									"text" : "Status: whether player is initialized on server or not"
 								}
 
@@ -4846,7 +5202,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
-									"patching_rect" : [ 1081.75, 575.708322856094128, 200.0, 22.0 ],
+									"patching_rect" : [ 1083.41666666666697, 527.208322856094128, 200.0, 22.0 ],
 									"text" : "somax.player",
 									"varname" : "somax.player"
 								}
@@ -4861,7 +5217,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1133.5, 384.124995849706238, 102.0, 39.0 ],
+									"patching_rect" : [ 1133.5, 365.124995849706238, 102.0, 39.0 ],
 									"text" : "Load a corpus"
 								}
 
@@ -4999,7 +5355,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 891.000000000000114, 529.95832873049676, 20.0, 20.0 ],
+									"patching_rect" : [ 891.000000000000114, 482.95832873049676, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "10",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -5061,7 +5417,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 987.499999999999773, 604.000002733162091, 90.0, 39.0 ],
+									"patching_rect" : [ 1194.472019163993764, 614.000002733162091, 90.0, 39.0 ],
 									"text" : "Loaded corpus",
 									"varname" : "HelpTitle[11]"
 								}
@@ -5081,9 +5437,30 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 962.995604999999841, 606.000002733162091, 20.0, 20.0 ],
+									"patching_rect" : [ 1169.967624163993833, 616.000002733162091, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-22",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 1016.25, 640.249976288266453, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "7",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -5123,7 +5500,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1129.506592499999897, 416.125000452542793, 20.0, 20.0 ],
+									"patching_rect" : [ 1129.506592499999897, 397.125000452542793, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "4",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -5161,7 +5538,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1228.5, 200.95832873049676, 88.0, 24.0 ],
+									"patching_rect" : [ 1228.5, 181.95832873049676, 88.0, 24.0 ],
 									"text" : "Influences",
 									"varname" : "HelpTitle[5]"
 								}
@@ -5177,7 +5554,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1237.5, 369.624993465520276, 64.0, 24.0 ],
+									"patching_rect" : [ 1237.5, 350.624993465520276, 64.0, 24.0 ],
 									"text" : "Corpus",
 									"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"varname" : "HelpTitle[3]"
@@ -5231,7 +5608,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1062.250000000000227, 200.95832873049676, 254.249999999999773, 152.166668145767176 ],
+									"patching_rect" : [ 1062.250000000000227, 181.95832873049676, 254.249999999999773, 152.166668145767176 ],
 									"rounded" : 16
 								}
 
@@ -5351,7 +5728,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1121.0, 369.624993465520276, 180.5, 92.666670529952967 ],
+									"patching_rect" : [ 1121.0, 350.624993465520276, 180.5, 92.666670529952967 ],
 									"rounded" : 16
 								}
 
@@ -5365,7 +5742,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1142.083333333333258, 622.499995397163275, 24.0, 24.0 ]
+									"patching_rect" : [ 1143.717624163993605, 568.999995397163275, 24.0, 24.0 ]
 								}
 
 							}
@@ -5377,8 +5754,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 914.027980836006009, 635.999995397163275, 170.0, 22.0 ],
-									"text" : "Joelle.pickle"
+									"patching_rect" : [ 1121.0, 645.999995397163275, 170.0, 22.0 ],
+									"text" : "no loaded corpus"
 								}
 
 							}
@@ -5390,7 +5767,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1152.587728333333189, 416.125000452542793, 113.0, 22.0 ],
+									"patching_rect" : [ 1152.587728333333189, 397.125000452542793, 113.0, 22.0 ],
 									"text" : "corpus Joelle.pickle"
 								}
 
@@ -5437,9 +5814,18 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-20", 0 ],
+									"midpoints" : [ 1092.91666666666697, 566.72914957218029, 1003.25, 566.72914957218029 ],
+									"order" : 2,
+									"source" : [ "obj-143", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-23", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 1091.25, 639.72914957218029, 1004.249999999999773, 639.72914957218029 ],
+									"midpoints" : [ 1092.91666666666697, 639.72914957218029, 1004.249999999999773, 639.72914957218029 ],
 									"order" : 1,
 									"source" : [ "obj-143", 0 ]
 								}
@@ -5491,6 +5877,20 @@
 									"destination" : [ "obj-70", 0 ],
 									"order" : 1,
 									"source" : [ "obj-15", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-78", 1 ],
+									"source" : [ "obj-19", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 0 ],
+									"source" : [ "obj-20", 0 ]
 								}
 
 							}
@@ -5552,7 +5952,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 571.231105836006009, 568.833325793295444, 1091.25, 568.833325793295444 ],
+									"midpoints" : [ 571.231105836006009, 515.354156928977773, 1092.91666666666697, 515.354156928977773 ],
 									"source" : [ "obj-335", 0 ]
 								}
 
@@ -5575,7 +5975,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 924.08333333333303, 568.583325793295444, 1091.25, 568.583325793295444 ],
+									"midpoints" : [ 924.08333333333303, 515.083325793295444, 1092.91666666666697, 515.083325793295444 ],
 									"source" : [ "obj-349", 0 ]
 								}
 
@@ -5621,7 +6021,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 1162.087728333333189, 568.749994021830162, 1091.25, 568.749994021830162 ],
+									"midpoints" : [ 1162.087728333333189, 465.916661654318432, 1092.91666666666697, 465.916661654318432 ],
 									"source" : [ "obj-43", 0 ]
 								}
 
@@ -5694,7 +6094,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 796.500000000000114, 568.333325793295444, 1091.25, 568.333325793295444 ],
+									"midpoints" : [ 796.500000000000114, 515.083325793295444, 1092.91666666666697, 515.083325793295444 ],
 									"source" : [ "obj-67", 0 ]
 								}
 
@@ -5709,7 +6109,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-75", 0 ],
-									"midpoints" : [ 1092.16666666666697, 233.791669790402807, 1092.91666666666697, 233.791669790402807 ],
+									"midpoints" : [ 1092.16666666666697, 214.791669790402807, 1092.91666666666697, 214.791669790402807 ],
 									"order" : 1,
 									"source" : [ "obj-71", 0 ]
 								}
@@ -5718,7 +6118,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-76", 0 ],
-									"midpoints" : [ 1092.16666666666697, 242.125003863286395, 1122.91666666666697, 242.125003863286395 ],
+									"midpoints" : [ 1092.16666666666697, 223.125003863286395, 1122.91666666666697, 223.125003863286395 ],
 									"order" : 0,
 									"source" : [ "obj-71", 0 ]
 								}
@@ -5734,7 +6134,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 1204.249999999999773, 568.416659948946517, 1091.25, 568.416659948946517 ],
+									"midpoints" : [ 1204.249999999999773, 518.333325793295444, 1092.91666666666697, 518.333325793295444 ],
 									"source" : [ "obj-73", 0 ]
 								}
 
@@ -5778,7 +6178,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 766.5, 568.270823645314977, 1091.25, 568.270823645314977 ],
+									"midpoints" : [ 766.5, 515.604156928977773, 1092.91666666666697, 515.604156928977773 ],
 									"source" : [ "obj-94", 0 ]
 								}
 
