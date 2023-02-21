@@ -152,6 +152,46 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         self._selectivity.value = value
 
 
+class DiscretePhaseModulationScaleAction(AbstractScaleAction):
+    DEFAULT_GRID_SIZE = 12
+
+    def __init__(self):
+        super().__init__()
+        self._grid_size: Parameter = Parameter(self.DEFAULT_GRID_SIZE, None, None, 'int', "this is a nice parameter")
+
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              enforce_output: bool = False,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
+        event_beat_phases: np.ndarray = np.floor(np.array([e.get_feature(BeatPhase).value()
+                                                           for e in corresponding_events]) * self._grid_size.value).astype(int)
+        beat_phase_index: int = int(np.floor(beat_phase * self._grid_size.value))
+        mask: np.ndarray = (event_beat_phases == beat_phase_index).astype(int)
+        peaks *= mask
+        return peaks, taboo_mask
+
+    def feedback(self,
+                 feedback_event: Optional[CorpusEvent],
+                 time: float,
+                 applied_transform: AbstractTransform) -> None:
+        pass
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(BeatPhase)
+
+
 class NextStateScaleAction(AbstractScaleAction):
     DEFAULT_FACTOR = 1.5
 
