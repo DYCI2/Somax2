@@ -91,6 +91,32 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubbleside" : 3,
+									"id" : "obj-65",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 527.16666666666697, 706.5, 150.0, 37.0 ],
+									"text" : "For a full overview of all parameters, see"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-30",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 705.427788972854614, 714.0, 75.0, 22.0 ],
+									"text" : "openwindow"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
 									"bubbleside" : 2,
 									"fontsize" : 12.0,
 									"id" : "obj-64",
@@ -183,12 +209,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-89",
-									"linecount" : 6,
+									"linecount" : 7,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 527.16666666666697, 601.750003863286338, 253.261122306187644, 87.0 ],
-									"text" : "When enabled, the player will only output events from a specific part of the corpus. \nTwo floats between 0 and 1 delimit the region in the corpus from which the player should generate events from, corresponding to the timeline of the corpus (linearly, by index). "
+									"patching_rect" : [ 527.16666666666697, 598.750003863286338, 253.261122306187644, 100.0 ],
+									"text" : "When region mast is enabled, the player will only output events from a specific part of the corpus. \nTwo floats between 0 and 1 delimit the region in the corpus from which the player should generate events from, corresponding to the timeline of the corpus (linearly, by index). "
 								}
 
 							}
@@ -425,7 +451,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 911.753167099570646, 595.833331854232711, 143.0, 52.0 ],
+									"patching_rect" : [ 911.753167099570646, 595.833331854232711, 147.0, 52.0 ],
 									"text" : "Monitor the current index of output (state)"
 								}
 
@@ -568,7 +594,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 216.5, 640.5, 29.5, 22.0 ],
+									"patching_rect" : [ 195.0, 605.5, 29.5, 22.0 ],
 									"text" : "0"
 								}
 
@@ -581,7 +607,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 216.5, 689.0, 100.0, 22.0 ],
+									"patching_rect" : [ 195.0, 654.0, 100.0, 22.0 ],
 									"text" : "s player_enabled"
 								}
 
@@ -909,7 +935,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 413.0, 601.750003863286338, 29.5, 22.0 ],
+									"patching_rect" : [ 391.5, 566.750003863286338, 29.5, 22.0 ],
 									"text" : "1"
 								}
 
@@ -922,7 +948,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 373.0, 601.750003863286338, 29.5, 22.0 ],
+									"patching_rect" : [ 351.5, 566.750003863286338, 29.5, 22.0 ],
 									"text" : "0"
 								}
 
@@ -935,7 +961,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "bang", "" ],
-									"patching_rect" : [ 373.0, 561.750003863286338, 59.0, 22.0 ],
+									"patching_rect" : [ 351.5, 526.750003863286338, 59.0, 22.0 ],
 									"text" : "sel 1"
 								}
 
@@ -948,7 +974,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 373.0, 640.750003863286338, 61.0, 22.0 ],
+									"patching_rect" : [ 351.5, 605.750003863286338, 61.0, 22.0 ],
 									"text" : "hidden $1"
 								}
 
@@ -987,7 +1013,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 59.5, 659.250006247472129, 70.0, 22.0 ],
+									"patching_rect" : [ 38.0, 624.250006247472129, 70.0, 22.0 ],
 									"text" : "loadmess 0"
 								}
 
@@ -1023,7 +1049,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 131.5, 659.250006247472129, 61.0, 22.0 ],
+									"patching_rect" : [ 110.0, 624.250006247472129, 61.0, 22.0 ],
 									"text" : "hidden $1"
 								}
 
@@ -1065,7 +1091,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 244.0, 591.250006247472129, 90.0, 22.0 ],
+									"patching_rect" : [ 222.5, 556.250006247472129, 90.0, 22.0 ],
 									"text" : "s somax.server"
 								}
 
@@ -1200,6 +1226,28 @@
 									"patching_rect" : [ 1060.0, 482.833331854232711, 200.0, 22.0 ],
 									"text" : "somax.player",
 									"varname" : "somax.player"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"fontsize" : 11.0,
+									"hint" : "",
+									"id" : "obj-53",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 681.472220718860626, 715.0, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "12",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
 							}
@@ -1644,7 +1692,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 662.733343025048271, 559.850017788289506, 791.116671512524135, 559.850017788289506, 791.116671512524135, 475.333331854232711, 1069.5, 475.333331854232711 ],
+									"midpoints" : [ 662.733343025048271, 559.850017788289506, 791.116671512524135, 559.850017788289506, 791.116671512524135, 475.833331854232711, 1069.5, 475.833331854232711 ],
 									"source" : [ "obj-102", 0 ]
 								}
 
@@ -1853,6 +1901,14 @@
 									"destination" : [ "obj-10", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-29", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-143", 0 ],
+									"midpoints" : [ 714.927788972854614, 745.0, 791.583333333333485, 745.0, 791.583333333333485, 475.333331854232711, 1069.5, 475.333331854232711 ],
+									"source" : [ "obj-30", 0 ]
 								}
 
 							}
@@ -2230,7 +2286,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 536.66666666666697, 594.000005055379233, 791.583333333333485, 594.000005055379233, 791.583333333333485, 475.833331854232711, 1069.5, 475.833331854232711 ],
+									"midpoints" : [ 536.66666666666697, 594.000005055379233, 791.083333333333485, 594.000005055379233, 791.083333333333485, 475.333331854232711, 1069.5, 475.333331854232711 ],
 									"source" : [ "obj-94", 0 ]
 								}
 
@@ -2319,7 +2375,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 523.183333333333394, 464.353913221759854, 267.0, 288.0 ],
+									"patching_rect" : [ 523.183333333333394, 464.353913221759854, 271.0, 288.0 ],
 									"text" : "The «Quality Threshold» controls the consistency between the input (influences) and output (what the player plays), so that if there's no good match between the two, the system will not play anything at all.\n\nThis parameter sets a minimum score required for a match to qualify as output. When combined with «Sparse», this will ensure that no events are played unless they are considered good matches.\n\nFor reference, a value of 0.01 will be sufficient to filter out all cases where there are no matches at all. A value of 0.1 will be sufficient to (assuming weights and other parameters are within common ranges) find rather good matches either harmonically or melodically, and a value of 1.0 (or larger) will generally remove everything but almost perfect replications of longer sections of the input."
 								}
 
@@ -2343,7 +2399,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 691.77083333333303, 145.666663542930507, 259.0, 114.0 ],
+									"patching_rect" : [ 691.77083333333303, 145.666663542930507, 260.0, 114.0 ],
 									"text" : "Output Probability will condition each generated output with a probability, so that it may or may not play the event. This parameter is inactive when set to 1.0 (off), but any value lower than 1.0 will result in less than 100% of the events being played. For example, when set to 0.2, only 20% of the generated events will be played"
 								}
 
@@ -2357,7 +2413,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 911.77083333333303, 595.833331854232711, 143.0, 52.0 ],
+									"patching_rect" : [ 911.77083333333303, 595.833331854232711, 147.0, 52.0 ],
 									"text" : "Monitor the current index of output (state)"
 								}
 
@@ -4366,7 +4422,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 568.247802499999921, 520.249976288266453, 319.752197500000307, 87.0 ],
+									"patching_rect" : [ 577.731105836006009, 520.249976288266453, 319.752197500000307, 87.0 ],
 									"text" : "In reactive mode, this timeout controls whether the player should continue playing if no new trigger has arrived by the time the player has finished playing its current event. Setting this to a non-zero value will make the player continue for that number of seconds. It's also possible to disable this to make the player continue endlessly."
 								}
 
@@ -4488,7 +4544,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 577.731105836006009, 305.95832873049676, 155.0, 181.0 ],
+									"patching_rect" : [ 577.731105836006009, 305.95832873049676, 158.0, 181.0 ],
 									"text" : "In reactive mode, output will be triggered whenever the Player receives an influence as input (note-by-note)\n\nIn continuous mode, the Player will independently generate its output, even in the absence of external influences. However, when a new influence arrives, the Player will react to it."
 								}
 
