@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 455.0, -1180.0, 1340.0, 800.0 ],
+		"rect" : [ 253.0, 178.0, 1340.0, 800.0 ],
 		"openrect" : [ 0.0, 0.0, 1340.0, 800.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -720,7 +720,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 673.149407084669292, 657.0, 243.242852497327249, 22.0 ],
-									"text" : "name Player_6733"
+									"text" : "name Player_7763"
 								}
 
 							}
@@ -1758,7 +1758,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 455.0, -1154.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2134,7 +2134,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 778.027980836006009, 651.208320471908337, 243.242852497327249, 22.0 ],
-									"text" : "name Player_6772"
+									"text" : "name Player_7802"
 								}
 
 							}
@@ -2862,7 +2862,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 726.231105836006009, 30.45832947004692, 288.768894163993991, 37.0 ],
+									"patching_rect" : [ 726.231105836006009, 30.45832947004692, 290.0, 37.0 ],
 									"text" : "Start guiding the Player using an audio influence. Choose between live input or audio file. ",
 									"varname" : "HelpTitle[4]"
 								}
@@ -3446,7 +3446,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 253.0, 204.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
