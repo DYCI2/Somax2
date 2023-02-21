@@ -66,7 +66,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-105",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -209,7 +208,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "int" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 33.15511957378385, 62.0, 30.0, 30.0 ]
 				}
 
@@ -379,7 +378,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 242.600001692771912, 472.202516248187294, 56.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 146.139721221900345, 48.75, 75.610235762023876, 18.0 ],
+					"presentation_rect" : [ 148.139721221900345, 48.75, 73.610235762023876, 18.0 ],
 					"text" : "Chroma",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1

@@ -127,7 +127,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -135,7 +134,7 @@
 					"patching_rect" : [ 349.920865400164075, 550.99999200000002, 24.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 208.041672000000005, 4.5, 24.0, 18.0 ],
-					"text" : "src",
+					"text" : "all",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -144,7 +143,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"hidden" : 1,
 					"id" : "obj-11",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -426,7 +424,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 425.0, 135.5, 313.0, 35.0 ],
-					"presentation_linecount" : 2,
 					"saved_object_attributes" : 					{
 						"client_rect" : [ 67, 153, 461, 322 ],
 						"parameter_enable" : 0,
@@ -793,7 +790,7 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-40",
-					"items" : [ "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "MPK Mini Mk II", ",", "to Max 1", ",", "to Max 2" ],
+					"items" : [ "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "to Max 1", ",", "to Max 2", ",", "MPK Mini Mk II" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
