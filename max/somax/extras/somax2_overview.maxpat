@@ -47,7 +47,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 79.5, 459.765625163912773, 135.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Ex2_One_Against_One",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
@@ -76,7 +75,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 79.5, 516.588541721304182, 135.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Ex4_Sound_Installation",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
@@ -91,7 +89,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 79.5, 488.177083442608478, 196.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Ex3_Co_Improvising_The_Masters",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
@@ -105,7 +102,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.5, 431.354166885217069, 124.0, 22.0 ],
+					"patching_rect" : [ 79.5, 431.354166885217069, 87.0, 22.0 ],
 					"text" : "Ex1_Mimetism",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
