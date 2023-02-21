@@ -720,7 +720,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 673.149407084669292, 657.0, 243.242852497327249, 22.0 ],
-									"text" : "name Player_7763"
+									"text" : "name Player_26106"
 								}
 
 							}
@@ -2134,7 +2134,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 778.027980836006009, 651.208320471908337, 243.242852497327249, 22.0 ],
-									"text" : "name Player_7802"
+									"text" : "name Player_26145"
 								}
 
 							}
@@ -3477,6 +3477,18 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"arrows" : 2,
+									"border" : 2.0,
+									"id" : "obj-13",
+									"maxclass" : "live.line",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 496.0, 293.75, 14.0, 25.25 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-47",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -3543,7 +3555,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 459.0, 391.0, 276.0, 33.0 ],
+									"patching_rect" : [ 492.0, 391.0, 243.0, 33.0 ],
 									"text" : "the corpus is the actual musical material loaded into a Player",
 									"textcolor" : [ 0.000066079199314, 0.001801013946533, 0.998228549957275, 1.0 ]
 								}
@@ -3617,7 +3629,7 @@
 									"maxclass" : "live.line",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 292.0, 241.0, 133.0, 15.0 ]
+									"patching_rect" : [ 470.0, 261.5, 25.0, 57.0 ]
 								}
 
 							}
@@ -3669,7 +3681,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 513.0, 304.0, 141.0, 22.0 ],
+									"patching_rect" : [ 492.0, 269.0, 141.0, 22.0 ],
 									"text" : "somax.midicorpusbuilder",
 									"varname" : "somax.midicorpusbuilder"
 								}
@@ -3776,7 +3788,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 5,
 									"outlettype" : [ "", "multichannelsignal", "", "", "" ],
-									"patching_rect" : [ 486.0, 272.5, 149.0, 22.0 ],
+									"patching_rect" : [ 466.0, 237.5, 149.0, 22.0 ],
 									"text" : "somax.audiocorpusbuilder",
 									"varname" : "somax.audiocorpusbuilder"
 								}
@@ -4518,7 +4530,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 441.0, 234.0, 45.0, 22.0 ],
+									"patching_rect" : [ 465.0, 321.0, 45.0, 22.0 ],
 									"text" : "corpus"
 								}
 
@@ -4561,8 +4573,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 601.0, 209.0, 71.0, 24.0 ],
-									"text" : "Corpora",
+									"patching_rect" : [ 608.0, 204.0, 64.0, 24.0 ],
+									"text" : "Corpus",
 									"varname" : "HelpTitle[4]"
 								}
 
@@ -4710,7 +4722,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 435.0, 209.0, 237.0, 151.0 ],
+									"patching_rect" : [ 435.0, 201.5, 237.0, 158.5 ],
 									"rounded" : 16
 								}
 
@@ -4737,7 +4749,7 @@
 								"patchline" : 								{
 									"color" : [ 0.061618439853191, 0.41733318567276, 1.0, 1.0 ],
 									"destination" : [ "obj-9", 0 ],
-									"midpoints" : [ 450.5, 427.75, 750.5, 427.75 ],
+									"midpoints" : [ 474.5, 427.75, 750.5, 427.75 ],
 									"source" : [ "obj-18", 0 ]
 								}
 
