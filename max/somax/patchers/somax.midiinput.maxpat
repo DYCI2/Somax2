@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1032.0, 87.0, 1904.0, 1259.0 ],
+		"rect" : [ 1032.0, 87.0, 1504.0, 1259.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -790,7 +790,7 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-40",
-					"items" : [ "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "to Max 1", ",", "to Max 2", ",", "MPK Mini Mk II" ],
+					"items" : [ "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "to Max 1", ",", "to Max 2", ",", "Oxygen 25" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -828,14 +828,14 @@
 					"angle" : 270.0,
 					"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
 					"bordercolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
-					"id" : "obj-463",
+					"id" : "obj-1",
 					"maxclass" : "panel",
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 538.0, 35.5, 39.0, 39.0 ],
+					"patching_rect" : [ 1484.249999999999773, 128.75, 30.0, 29.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 243.283334456516258, 26.000000804662704 ],
+					"presentation_rect" : [ 0.0, 0.0, 245.728838999999994, 27.50276199999999 ],
 					"proportion" : 0.5
 				}
 

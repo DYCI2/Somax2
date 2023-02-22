@@ -42,7 +42,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -59,7 +58,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"hidden" : 1,
 					"id" : "obj-11",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -331,8 +329,8 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 850.0, 171.5, 143.0, 22.0 ],
 					"restore" : 					{
-						"channel" : [ 6 ],
-						"device" : [ "IAC Driver IAC1" ]
+						"channel" : [ 0 ],
+						"device" : [ "AU DLS Synth 1" ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -791,7 +789,7 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-204",
-					"items" : [ "AU DLS Synth 1", ",", "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "MPK Mini Mk II", ",", "from Max 1", ",", "from Max 2" ],
+					"items" : [ "AU DLS Synth 1", ",", "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "from Max 1", ",", "from Max 2", ",", "Oxygen 25" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -829,14 +827,14 @@
 					"angle" : 270.0,
 					"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
 					"bordercolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
-					"id" : "obj-463",
+					"id" : "obj-2",
 					"maxclass" : "panel",
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 928.139764237976124, 543.0, 128.0, 128.0 ],
+					"patching_rect" : [ 1484.249999999999773, 128.75, 30.0, 29.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 243.283334456516258, 26.666666805744171 ],
+					"presentation_rect" : [ 0.0, 0.0, 245.728838999999994, 27.25 ],
 					"proportion" : 0.5
 				}
 
