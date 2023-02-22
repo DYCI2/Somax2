@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 226.0, 198.0, 1340.0, 800.0 ],
+		"rect" : [ 119.0, 100.0, 1340.0, 800.0 ],
 		"openrect" : [ 0.0, 0.0, 1340.0, 800.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -701,7 +701,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-22",
-									"items" : [ "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device", ",", "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -874,7 +874,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "from Max 1", ",", "from Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -2371,11 +2371,11 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-103",
-									"linecount" : 21,
+									"linecount" : 20,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 523.183333333333394, 464.353913221759854, 271.0, 288.0 ],
+									"patching_rect" : [ 523.183333333333394, 464.353913221759854, 275.0, 275.0 ],
 									"text" : "The «Quality Threshold» controls the consistency between the input (influences) and output (what the player plays), so that if there's no good match between the two, the system will not play anything at all.\n\nThis parameter sets a minimum score required for a match to qualify as output. When combined with «Sparse», this will ensure that no events are played unless they are considered good matches.\n\nFor reference, a value of 0.01 will be sufficient to filter out all cases where there are no matches at all. A value of 0.1 will be sufficient to (assuming weights and other parameters are within common ranges) find rather good matches either harmonically or melodically, and a value of 1.0 (or larger) will generally remove everything but almost perfect replications of longer sections of the input."
 								}
 
@@ -2762,7 +2762,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-22",
-									"items" : [ "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device", ",", "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -2935,7 +2935,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "from Max 1", ",", "from Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -4310,7 +4310,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 226.0, 224.0, 1340.0, 774.0 ],
+						"rect" : [ 119.0, 126.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -4540,11 +4540,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-60",
-									"linecount" : 13,
+									"linecount" : 12,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 577.731105836006009, 305.95832873049676, 158.0, 181.0 ],
+									"patching_rect" : [ 577.731105836006009, 305.95832873049676, 161.0, 167.0 ],
 									"text" : "In reactive mode, output will be triggered whenever the Player receives an influence as input (note-by-note)\n\nIn continuous mode, the Player will independently generate its output, even in the absence of external influences. However, when a new influence arrives, the Player will react to it."
 								}
 

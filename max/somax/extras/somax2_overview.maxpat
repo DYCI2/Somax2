@@ -527,8 +527,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.5, 329.874998688697701, 128.0, 22.0 ],
-					"text" : "5_Easu_UI_Advanced",
+					"patching_rect" : [ 79.5, 329.874998688697701, 121.0, 22.0 ],
+					"text" : "5_Easy_Abstractions",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -541,8 +541,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.5, 299.22916557391477, 103.0, 22.0 ],
-					"text" : "4_Easy_UI_Basic",
+					"patching_rect" : [ 79.5, 299.22916557391477, 173.0, 22.0 ],
+					"text" : "4_Introducing_User_Interfaces",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
