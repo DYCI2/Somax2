@@ -3616,7 +3616,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 232.5, 622.5, 313.0, 78.0 ],
+									"patching_rect" : [ 232.5, 634.5, 313.0, 78.0 ],
 									"text" : "The Player does not play back, it only provides a list of sequential events. \nPlayback is handled independently via a user-created sequencer/playback patch (or using the given Somax audio and MIDI renderers)"
 								}
 
@@ -3767,7 +3767,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "multichannelsignal", "", "" ],
-									"patching_rect" : [ 732.0, 659.5, 122.0, 22.0 ],
+									"patching_rect" : [ 732.0, 671.5, 122.0, 22.0 ],
 									"text" : "somax.audiorenderer",
 									"varname" : "somax.audiorenderer"
 								}
@@ -3781,7 +3781,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 580.0, 659.5, 115.0, 22.0 ],
+									"patching_rect" : [ 580.0, 671.5, 115.0, 22.0 ],
 									"text" : "somax.midirenderer",
 									"varname" : "somax.midirenderer"
 								}
@@ -4584,7 +4584,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 204.25, 653.0, 20.0, 20.0 ],
+									"patching_rect" : [ 204.25, 665.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -4750,7 +4750,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 754.5, 615.0, 172.0, 24.0 ],
+									"patching_rect" : [ 754.5, 627.0, 172.0, 24.0 ],
 									"text" : "Rendering / Playback",
 									"varname" : "HelpTitle[5]"
 								}
@@ -4768,7 +4768,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 552.5, 615.0, 374.0, 93.0 ],
+									"patching_rect" : [ 552.5, 627.0, 374.0, 93.0 ],
 									"rounded" : 16
 								}
 
@@ -4879,7 +4879,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-25", 0 ],
-									"midpoints" : [ 589.5, 640.0, 741.5, 640.0 ],
+									"midpoints" : [ 589.5, 654.0, 741.5, 654.0 ],
 									"order" : 0,
 									"source" : [ "obj-9", 0 ]
 								}
