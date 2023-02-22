@@ -22,15 +22,18 @@ class ServerSendProtocol:
     SERVER_STARTED = "initialized"
 
     # Scheduling
-    SCHEDULER_BEAT_PHASE = "beatphase"
+    SCHEDULER_BEAT_PHASE = "beat"
     SCHEDULER_CURRENT_TEMPO = "tempo"
     SCHEDULER_CURRENT_TIME = "time"
     TRANSPORT_MODE = "transport_mode"
     TRANSPORT_RUNNING = "running"
+    TEMPO_SOURCE = "temposource"
 
     # Misc. Info
     ALL_PLAYER_NAMES = "players"
     CORPUS_FILEPATHS = "corpora"
+    CREATED_PLAYER = "player_created"
+    DELETED_PLAYER = "player_deleted"
 
 
 class PlayerSendProtocol:
@@ -76,7 +79,7 @@ class PlayerSendProtocol:
 
     SEND_STATE_EVENT = "state"
 
-    DESCRIPTOR = "descriptor"  # TODO: Unused
+    INFLUENCE = "influence"
 
     OUTPUT_TYPE = "output_type"
     OUTPUT_TYPE_TRIGGER_MATCH = "match"

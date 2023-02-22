@@ -29,6 +29,12 @@ class AbstractFeature(FeatureValue, Introspective, ABC):
     def classes(cls, include_abstract: bool = False) -> List[Type['AbstractFeature']]:
         return list(cls._classes(somax.features, include_abstract=include_abstract).values())
 
+    @classmethod
+    def parse_type(cls, type_name: str) -> Type['AbstractFeature']:
+        class_dict: Dict[str, Type['AbstractFeature']]
+        class_dict = {c.__name__.lower(): c for c in cls.classes(include_abstract=False)}
+        return class_dict[type_name.lower()]
+
     def name(self) -> str:
         return self.__class__.__name__
 

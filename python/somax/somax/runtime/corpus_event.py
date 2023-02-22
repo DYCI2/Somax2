@@ -163,7 +163,8 @@ class CorpusEvent(ABC):
 
 class MidiCorpusEvent(CorpusEvent):
 
-    def __init__(self, state_index: int,
+    def __init__(self,
+                 state_index: int,
                  tempo: float,
                  onset: float,
                  absolute_onset: float,
