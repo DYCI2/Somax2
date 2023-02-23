@@ -1451,7 +1451,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 963.375, 367.958328999999992, 14.0, 14.0 ],
 									"rounded" : 60.0,
-									"text" : "7",
+									"text" : "8",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -1501,6 +1501,7 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
+									"fontsize" : 11.0,
 									"hint" : "",
 									"id" : "obj-77",
 									"ignoreclick" : 1,
@@ -1512,7 +1513,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 724.201155833333132, 400.958319732358234, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "9",
+									"text" : "10",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -1588,7 +1589,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 725.064697499999284, 267.708321743474301, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "8",
+									"text" : "9",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -1609,7 +1610,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 608.374999999999773, 586.930415043448306, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "7",
+									"text" : "8",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -1663,7 +1664,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 938.8081049999995, 73.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "6",
+									"text" : "7",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
