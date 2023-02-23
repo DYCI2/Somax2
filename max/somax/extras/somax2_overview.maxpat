@@ -41,6 +41,21 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontsize" : 12.0,
+					"id" : "obj-41",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 79.5, 204.788194262319138, 150.0, 22.0 ],
+					"presentation_linecount" : 2,
+					"text" : "2_Introducing_Parameters",
+					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontsize" : 12.0,
 					"id" : "obj-35",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -527,8 +542,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.5, 329.874998688697701, 121.0, 22.0 ],
-					"text" : "5_Easy_Abstractions",
+					"patching_rect" : [ 79.5, 345.5, 121.0, 22.0 ],
+					"text" : "7_Easy_Abstractions",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -541,8 +556,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.5, 299.22916557391477, 173.0, 22.0 ],
-					"text" : "4_Introducing_User_Interfaces",
+					"patching_rect" : [ 79.5, 317.357638852463822, 173.0, 22.0 ],
+					"text" : "6_Introducing_User_Interfaces",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -555,8 +570,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.5, 268.583332459131839, 250.0, 22.0 ],
-					"text" : "3_Mastering_Somax_Interaction_Parameters",
+					"patching_rect" : [ 79.5, 261.072916557391466, 250.0, 22.0 ],
+					"text" : "4_Mastering_Somax_Interaction_Parameters",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -569,8 +584,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.5, 237.937499344348879, 185.0, 22.0 ],
-					"text" : "2_Advanced_Players_Interaction",
+					"patching_rect" : [ 79.5, 289.215277704927644, 185.0, 22.0 ],
+					"text" : "5_Advanced_Players_Interaction",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -583,8 +598,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.5, 207.291666229565919, 123.0, 22.0 ],
-					"text" : "1_Building_a_Corpus",
+					"patching_rect" : [ 79.5, 232.930555409855316, 123.0, 22.0 ],
+					"text" : "3_Building_a_Corpus",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -626,7 +641,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 79.5, 176.64583311478296, 152.0, 22.0 ],
-					"text" : "0_Introduction_to_Somax2",
+					"text" : "1_Introduction_to_Somax2",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 				}
 
@@ -1106,6 +1121,14 @@
 					"destination" : [ "obj-9", 1 ],
 					"hidden" : 1,
 					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-9", 0 ],
+					"hidden" : 1,
+					"source" : [ "obj-41", 0 ]
 				}
 
 			}
