@@ -477,7 +477,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 554.874999999999773, 585.930415043448306, 50.0, 22.0 ],
-									"text" : "76"
+									"text" : "55"
 								}
 
 							}
@@ -734,7 +734,7 @@
 																"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Joelle.wav",
 																"filename" : "Joelle.wav",
 																"filekind" : "audiofile",
-																"id" : "u162015828",
+																"id" : "u392012589",
 																"loop" : 0,
 																"content_state" : 																{
 
@@ -904,7 +904,7 @@
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 52.0, 276.708321743474301, 45.0, 45.0 ]
+									"patching_rect" : [ 52.0, 282.708321743474301, 45.0, 45.0 ]
 								}
 
 							}
@@ -954,7 +954,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 229.0, 578.430415043448193, 150.0, 22.0 ],
-									"text" : "0 offline"
+									"text" : "1 running"
 								}
 
 							}
@@ -1381,7 +1381,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 107.333333333333314, 280.708321743474301, 54.166666666666686, 37.0 ],
+									"patching_rect" : [ 107.333333333333314, 286.708321743474301, 54.166666666666686, 37.0 ],
 									"text" : "Start DSP"
 								}
 
@@ -1566,7 +1566,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 25.0, 276.708321743474301, 20.0, 20.0 ],
+									"patching_rect" : [ 25.0, 282.708321743474301, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1837,7 +1837,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1112.334146666667039, 605.993157433645933, 170.0, 22.0 ],
-									"text" : "no loaded corpus"
+									"text" : "Joelle.pickle"
 								}
 
 							}
