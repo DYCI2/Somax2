@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 2185.0, 1250.0 ],
+		"rect" : [ 34.0, 87.0, 1281.0, 696.0 ],
 		"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 2185.0, 1224.0 ],
+						"rect" : [ 0.0, 26.0, 1281.0, 670.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -107,7 +107,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 77.0, 363.0, 150.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "custom ip / OSC ports & Manual launching"
 								}
 
@@ -132,7 +131,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 71.0, 250.0, 150.0, 60.0 ],
-									"presentation_linecount" : 4,
 									"text" : "initialization sequence when initializing players (\"route initialized -> initializeplayers)"
 								}
 
@@ -145,7 +143,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 77.0, 201.0, 150.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "autoinitialization: explain argument"
 								}
 
@@ -211,7 +208,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 2185.0, 1224.0 ],
+						"rect" : [ 0.0, 26.0, 1281.0, 670.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -289,7 +286,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 2185.0, 1224.0 ],
+						"rect" : [ 0.0, 26.0, 1281.0, 670.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -414,7 +411,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 349.041666666666629, 354.229166666666629, 206.0, 35.0 ],
-									"text" : "1 running"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -562,7 +559,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 203.0, 154.0, 160.0, 24.0 ],
-									"presentation_linecount" : 2,
 									"text" : "list in current corpus path"
 								}
 
@@ -587,7 +583,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 425.0, 414.0, 609.0, 22.0 ],
-									"text" : "/Users/joakimborg/CustomScripts/InPath/"
+									"text" : "/Users/borg/MaxDev/Somax2/max/somax/corpus"
 								}
 
 							}
@@ -1154,7 +1150,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 113.0, 2185.0, 1224.0 ],
+						"rect" : [ 34.0, 113.0, 1281.0, 670.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1205,7 +1201,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 892.0, 365.5, 140.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "configured to loop its corpus linearly"
 								}
 
@@ -1312,7 +1307,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 907.0, 342.729166666666629, 144.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "name: TImeHelperPlayer"
 								}
 
@@ -1607,8 +1601,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
-									"patching_rect" : [ 740.0, 350.229166666666629, 179.0, 22.0 ],
-									"text" : "somax.player TimeHelperPlayer",
+									"patching_rect" : [ 740.0, 350.229166666666629, 270.0, 22.0 ],
+									"text" : "somax.player TimeHelperPlayer @autoinitialize 0",
 									"varname" : "somax.player"
 								}
 
@@ -1675,7 +1669,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 410.041666666666629, 337.229166666666629, 206.0, 35.0 ],
-									"text" : "1 running"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -1759,7 +1753,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 397.433333333333451, 483.0, 94.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "bang on each beat"
 								}
 
@@ -1905,7 +1898,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 579.0, 145.0, 150.0, 47.0 ],
+									"patching_rect" : [ 579.0, 145.0, 151.0, 47.0 ],
 									"text" : "NOT ITS OWN MAX TRANSPORT -- REMOTE TRANSPORT"
 								}
 
@@ -1980,7 +1973,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 29.0, 112.0, 400.0, 50.0 ],
-													"presentation_linecount" : 3,
 													"text" : "This is a placeholder for the somax.server object. Since we cannot have multiple servers running simultaneously, we're using send and receive to communicate with the real server object in the \"basic\" tab",
 													"textcolor" : [ 0.501961, 0.501961, 0.501961, 1.0 ]
 												}
@@ -1996,7 +1988,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 444.0, 234.5, 221.0, 79.0 ],
-													"presentation_linecount" : 3,
 													"text" : "Normally, there will never be any need to have multiple servers in a single patch (in fact it should be avoided at all cost - this help patcher is a special case!)",
 													"textcolor" : [ 0.501961, 0.501961, 0.501961, 1.0 ]
 												}
@@ -2409,7 +2400,6 @@
 					}
 ,
 					"patching_rect" : [ 393.0, 76.0, 112.0, 22.0 ],
-					"presentation_linecount" : 4,
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -2439,7 +2429,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 2185.0, 1224.0 ],
+						"rect" : [ 0.0, 26.0, 1281.0, 670.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2476,7 +2466,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 681.0, 152.5, 157.0, 33.0 ],
+									"patching_rect" : [ 681.0, 152.5, 161.0, 33.0 ],
 									"text" : "SINGLETON/DUPLICATE!!! (+ remote send & reload)"
 								}
 
@@ -2489,8 +2479,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 433.441666666666606, 283.0, 150.0, 37.0 ],
-									"presentation_linecount" : 2,
+									"patching_rect" : [ 433.441666666666606, 283.0, 154.0, 37.0 ],
 									"text" : "autoinitialize: by default initialized when started"
 								}
 
@@ -2648,7 +2637,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 252.5, 190.0, 125.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "(alias for transport commands)"
 								}
 
@@ -2726,7 +2714,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 328.041666666666629, 371.229166666666629, 206.0, 35.0 ],
-									"text" : "1 running"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -2975,7 +2963,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 2185.0, 1224.0 ],
+						"rect" : [ 0.0, 26.0, 1281.0, 670.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3198,7 +3186,7 @@
 													"maxclass" : "inlet",
 													"numinlets" : 0,
 													"numoutlets" : 1,
-													"outlettype" : [ "bang" ],
+													"outlettype" : [ "int" ],
 													"patching_rect" : [ 29.0, 18.0, 30.0, 30.0 ]
 												}
 
@@ -4110,13 +4098,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-69",
-									"linecount" : 6,
+									"linecount" : 5,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 964.5, 659.0, 65.0, 89.0 ],
-									"text" : "/Users/joakimborg/MaxDev/Somax2/max/somax/corpus"
+									"patching_rect" : [ 964.5, 659.0, 65.0, 76.0 ],
+									"text" : "/Users/borg/MaxDev/Somax2/max/somax/corpus"
 								}
 
 							}
@@ -4473,7 +4461,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 626.541666666666629, 479.541666666666572, 213.0, 35.0 ],
-									"text" : "1 running"
+									"text" : "0 duplicate"
 								}
 
 							}

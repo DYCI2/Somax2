@@ -155,11 +155,11 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</attribute>
-        <attribute name="autoinitialize" get="0" set="0" type="symbol" size="1">
+        <attribute name="autoinitialize" get="0" set="1" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</attribute>
-        <attribute name="autoterminate" get="0" set="0" type="symbol" size="1">
+        <attribute name="autoterminate" get="0" set="1" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</attribute>
