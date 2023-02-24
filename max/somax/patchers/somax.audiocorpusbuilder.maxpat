@@ -40,6 +40,19 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+					"id" : "obj-4",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 100.0, 1403.0, 151.0, 22.0 ],
+					"text" : "loadmess _settypes sound"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"blinkcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"id" : "obj-217",
 					"ignoreclick" : 1,
@@ -102,7 +115,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 373.0, 475.0, 128.0, 128.0 ],
+					"patching_rect" : [ 742.0, 1821.0, 33.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 227.066120372883233, 456.967931513419217, 56.75, 22.235863026838558 ],
 					"proportion" : 0.5
@@ -146,7 +159,7 @@
 				"box" : 				{
 					"comment" : "(mc.signal) audio from test segmentation",
 					"id" : "obj-275",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -171,7 +184,7 @@
 				"box" : 				{
 					"comment" : "(int, str) status",
 					"id" : "obj-437",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -183,7 +196,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-844",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -195,7 +208,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-388",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -207,7 +220,7 @@
 				"box" : 				{
 					"comment" : "(symbol) path to built corpus",
 					"id" : "obj-115",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1589,6 +1602,7 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
+									"hidden" : 1,
 									"id" : "obj-185",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -1606,6 +1620,7 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
+									"hidden" : 1,
 									"id" : "obj-193",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -1622,6 +1637,7 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+									"hidden" : 1,
 									"id" : "obj-195",
 									"ignoreclick" : 0,
 									"maxclass" : "panel",
@@ -6738,7 +6754,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 5.0, 41.0, 315.101168246139082, 105.0 ],
 									"selectioncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
-									"setmode" : 3,
+									"setmode" : 1,
 									"waveformcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 								}
 
@@ -14144,7 +14160,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to audio corpus builder",
 					"id" : "obj-13",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -14206,11 +14222,11 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 664.875, 1737.0, 1342.0, 47.0 ],
+					"patching_rect" : [ 664.875, 1737.0, 1176.0, 47.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 23,
-					"presentation_rect" : [ 341.416666507720947, 31.0, 166.0, 315.0 ],
-					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/borg/MaxDev/Somax2/max/somax/corpus builder_address= 1128_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
+					"presentation_rect" : [ 341.416666507720947, 31.0, 156.0, 315.0 ],
+					"text" : "build_corpus 0 overwrite= 0 0 0 builder_address= 3287_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -15343,6 +15359,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-59", 0 ],
+					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-85", 0 ],
 					"source" : [ "obj-44", 0 ]
 				}
@@ -15580,6 +15603,81 @@
 
 			}
  ],
+		"parameters" : 		{
+			"obj-395::obj-2" : [ "live.text[4]", "live.text[4]", 0 ],
+			"obj-395::obj-375" : [ "mc.live.gain~[2]", "click", 0 ],
+			"obj-395::obj-441" : [ "mc.live.gain~[1]", "corpus", 0 ],
+			"obj-395::obj-469" : [ "live.text[11]", "live.text[11]", 0 ],
+			"obj-395::obj-472" : [ "live.text[5]", "live.text[11]", 0 ],
+			"obj-395::obj-490" : [ "live.text[6]", "live.text[11]", 0 ],
+			"parameterbanks" : 			{
+				"0" : 				{
+					"index" : 0,
+					"name" : "",
+					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "abstraction_path.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpusbuilder.core.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpuspath.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.pan2.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.path.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "wfknob.png",
+				"bootpath" : "C74:/media/max/picts",
+				"type" : "PNG",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "wfmodes.png",
+				"bootpath" : "C74:/media/max/picts",
+				"type" : "PNG",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-1259", "obj-856" ]
 			}

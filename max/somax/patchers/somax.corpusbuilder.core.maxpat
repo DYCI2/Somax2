@@ -40,6 +40,18 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-62",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1230.0, 199.0688934931419, 72.0, 22.0 ],
+					"text" : "prepend set"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-57",
 					"linecount" : 2,
 					"maxclass" : "newobj",
@@ -253,7 +265,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1307.049999999999955, 138.0, 127.0, 22.0 ],
+					"patching_rect" : [ 1335.049999999999955, 167.0, 127.0, 22.0 ],
 					"text" : "doesn't understand $1"
 				}
 
@@ -266,7 +278,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1307.049999999999955, 170.0688934931419, 120.0, 49.0 ],
+					"patching_rect" : [ 1335.049999999999955, 199.0688934931419, 123.0, 49.0 ],
 					"text" : "print somax.corpusbuilder @level 2"
 				}
 
@@ -336,11 +348,11 @@
 				"box" : 				{
 					"id" : "obj-3",
 					"maxclass" : "newobj",
-					"numinlets" : 8,
-					"numoutlets" : 8,
-					"outlettype" : [ "", "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 403.25, 100.0, 922.799999999999955, 22.0 ],
-					"text" : "route bang build rawsend source corpusname corpuspath overwrite"
+					"numinlets" : 9,
+					"numoutlets" : 9,
+					"outlettype" : [ "", "", "", "", "", "", "", "", "" ],
+					"patching_rect" : [ 403.25, 100.0, 1051.914285714285597, 22.0 ],
+					"text" : "route bang build rawsend source corpusname corpuspath overwrite _settypes"
 				}
 
 			}
@@ -2978,6 +2990,7 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+					"hidden" : 1,
 					"id" : "obj-1068",
 					"ignoreclick" : 1,
 					"maxclass" : "led",
@@ -3014,6 +3027,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-1020",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -3295,7 +3309,6 @@
 					"patching_rect" : [ 903.25, 731.794871794871824, 137.0, 28.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 2.0, 66.5, 171.0, 20.5 ],
-					"text" : "freudaud",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -3416,7 +3429,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 2.0, 20.0, 195.943816499999571, 20.0 ],
 					"style" : "helpfile_label",
-					"text" : "freudaud.wav",
+					"text" : "drag and drop a file here...",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -4196,7 +4209,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-274", 0 ],
-					"source" : [ "obj-3", 7 ]
+					"source" : [ "obj-3", 8 ]
 				}
 
 			}
@@ -4219,6 +4232,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-56", 0 ],
 					"source" : [ "obj-3", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-62", 0 ],
+					"midpoints" : [ 1316.549999999999955, 176.03444674657095, 1239.5, 176.03444674657095 ],
+					"source" : [ "obj-3", 7 ]
 				}
 
 			}
@@ -4426,6 +4447,13 @@
 					"destination" : [ "obj-9", 0 ],
 					"midpoints" : [ 583.5, 386.112799691509395, 553.25, 386.112799691509395 ],
 					"source" : [ "obj-6", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-45", 0 ],
+					"source" : [ "obj-62", 0 ]
 				}
 
 			}

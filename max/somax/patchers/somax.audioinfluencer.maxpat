@@ -1883,7 +1883,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 281.200000000000045, 45.62310791015625, 30.0, 30.0 ]
 				}
 
@@ -2042,7 +2042,7 @@
 					"presentation_rect" : [ 317.0, 338.960853038769528, 42.0, 22.0 ],
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"varname" : "bonkqlim"
+					"varname" : "onsetlimit"
 				}
 
 			}
@@ -2147,6 +2147,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-279",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -2170,7 +2171,7 @@
 					"patching_rect" : [ 2054.0, 137.533570555563188, 121.75, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 19.75, 385.341408038769487, 115.0, 18.0 ],
-					"text" : "Upper Threshold  (ms)",
+					"text" : "Upper Threshold",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -2679,7 +2680,7 @@
 					"patching_rect" : [ 1904.75, 137.533570555563188, 114.5, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 19.75, 338.960853038769528, 113.0, 18.0 ],
-					"text" : "Lower Threshold (ms)",
+					"text" : "Lower Threshold",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -2719,7 +2720,7 @@
 					"presentation_rect" : [ 37.902999601477404, 320.460853038769528, 42.0, 22.0 ],
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"varname" : "bonkthreshlow"
+					"varname" : "bonklowthresh"
 				}
 
 			}
@@ -2757,7 +2758,7 @@
 					"presentation_rect" : [ 37.902999601477404, 365.029681620009967, 42.0, 22.0 ],
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"varname" : "bonkthreshhigh"
+					"varname" : "bonkhighthresh"
 				}
 
 			}
@@ -2837,7 +2838,7 @@
 					"presentation_rect" : [ 156.617286351477219, 320.460853038769528, 42.0, 22.0 ],
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"varname" : "bonknminvel"
+					"varname" : "bonkminvel"
 				}
 
 			}
@@ -3755,16 +3756,16 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1649.0, 102.150877833642312, 142.0, 22.0 ],
 					"restore" : 					{
-						"bonkdebounce" : [ 0.97 ],
-						"bonknminvel" : [ 0.1 ],
-						"bonkqlim" : [ 150 ],
-						"bonkthreshhigh" : [ 10.0 ],
-						"bonkthreshlow" : [ 0.0 ],
-						"continuouschroma" : [ 0 ],
+						"bonkdebounce" : [ 0.0 ],
+						"bonkhighthresh" : [ 10.0 ],
+						"bonklowthresh" : [ 0.0 ],
+						"bonkminvel" : [ 0.1 ],
+						"continuouschroma" : [ 1 ],
 						"continuouspitch" : [ 1 ],
 						"enabled" : [ 1 ],
-						"onsetmethod" : [ 2 ],
-						"yindownsample" : [ 3 ],
+						"onsetlimit" : [ 150 ],
+						"onsetmethod" : [ 1 ],
+						"yindownsample" : [ 1 ],
 						"yinlevel" : [ -48 ],
 						"yinminfreq" : [ 50 ],
 						"yinprobability" : [ 0.75 ],
@@ -3790,7 +3791,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1537.0, 45.62310791015625, 254.0, 49.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 461, 322 ],
+						"client_rect" : [ 1880, 207, 2595, 536 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -4159,7 +4160,7 @@
 					"patching_rect" : [ 345.5, 667.595884703763204, 121.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"attackframes" : 1,
-						"debouncedecay" : 0.970000028610229,
+						"debouncedecay" : 0.0,
 						"debug" : 0,
 						"firstbin" : 1.0,
 						"halftones" : 6.0,

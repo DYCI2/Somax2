@@ -39,11 +39,6 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="bonkqlim">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
         <method name="bonkhighthresh">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
@@ -60,6 +55,11 @@
 			<description>TODO</description>
 		</method>
         <method name="enabled">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="onsetlimit">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
