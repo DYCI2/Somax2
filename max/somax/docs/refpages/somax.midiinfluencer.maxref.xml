@@ -17,36 +17,14 @@
 		<metadata name="tag">somax</metadata>
 	</metadatalist>
 
-	<!--ARGUMENTS-->
-	<objarglist>
-        <objarg name="sendport" optional="1" type="int">
-			<digest>
-				OSC send port
-			</digest>
-			<description>
-				TODO
-			</description>
-		</objarg>
-        <objarg name="recvport" optional="1" type="int">
-			<digest>
-				OSC receive port
-			</digest>
-			<description>
-				TODO
-			</description>
-		</objarg>
-        <objarg name="ip" optional="1" type="symbol">
-			<digest>
-				OSC ip address
-			</digest>
-			<description>
-				TODO
-			</description>
-		</objarg>
-	</objarglist>
 
 	<!--MESSAGES-->
 	<methodlist>
+        <method name="(player protocol)">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
 		<method name="bang">
 			<arglist />
 			<digest>TODO</digest>
@@ -55,29 +33,24 @@
         <method name="int">
 			<arglist />
 			<digest>TODO</digest>
-			<description>Performs the same function as <m>start</m> and <m>stop</m></description>
+			<description>Performs the same function as <m>enabled</m></description>
 		</method>
-        <method name="bonkdebounce">
+        <method name="list">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="bonkminvel">
+        <method name="chordthreshold">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="bonkqlim">
+        <method name="chromachannels">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="bonkhighthresh">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="bonklowthresh">
+        <method name="chromafilter">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
@@ -92,7 +65,27 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="onsetmethod">
+        <method name="filterattack">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="filterrelease">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="flush">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="onsetchannels">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="onsetlimit">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
@@ -102,32 +95,12 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="yindownsample">
+        <method name="pitchanalysis">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="yinlevel">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="yinminfreq">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="yinprobability">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="yinquality">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="yinwindow">
+        <method name="pitchchannels">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
@@ -140,11 +113,7 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</attribute>
-        <attribute name="continuouspitch" get="1" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</attribute>
-	</attributelist>
+    </attributelist>
 	
 	<!--SEEALSO-->
 	<seealsolist>

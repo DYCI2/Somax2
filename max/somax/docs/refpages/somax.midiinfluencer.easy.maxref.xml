@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
 
-<c74object name="somax.midiinfluencer.ui" module="somax" kind="patcher">
+<c74object name="somax.midiinfluencer.easy" module="somax" kind="patcher">
 
 	<digest>
 		Digest
