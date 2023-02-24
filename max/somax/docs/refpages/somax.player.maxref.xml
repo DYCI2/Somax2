@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.player" module="somax" kind="patcher">
+
+	<digest>
+		Digest
+	</digest>
+
+	<description>
+		Description
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+	<!--ARGUMENTS-->
+	<objarglist>
+		<objarg name="name" optional="1" type="symbol">
+			<digest>
+				Player name
+			</digest>
+			<description>
+				TODO
+			</description>
+		</objarg>
+        <objarg name="sendport" optional="1" type="int">
+			<digest>
+				OSC send port
+			</digest>
+			<description>
+				TODO
+			</description>
+		</objarg>
+        <objarg name="recvport" optional="1" type="int">
+			<digest>
+				OSC receive port
+			</digest>
+			<description>
+				TODO
+			</description>
+		</objarg>
+        <objarg name="ip" optional="1" type="symbol">
+			<digest>
+				OSC ip address
+			</digest>
+			<description>
+				TODO
+			</description>
+		</objarg>
+	</objarglist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="bang">
+			<arglist />
+			<digest>Trigger output</digest>
+			<description>TODO</description>
+		</method>
+        <method name="int">
+			<arglist />
+			<digest>Enable/Disable the player</digest>
+			<description>Performs the same function as <m>enabled</m></description>
+		</method>
+        <method name="artificialmidities">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="continuity">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="corpus">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="getcorpus">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="corpusquery">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="cut">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="decaybasis">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="enabled">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="enforcetaboo">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="fallback">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="flush">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="harmonicenable">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="harmonicngramorder">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="harmonicpeakdecay">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="ignorephase">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="influence">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="initialize">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="ip">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="jump">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="melodicenable">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="melodicmod12">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="melodicngramorder">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="melodicpeakdecay">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="mididurations">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="midinotebynote">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="midionsets">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="name">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="openwindow">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="outputfrom">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="outputprobability">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="playingmode">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="pollpeaks">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="quality">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="rawsend">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="recombine">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="recvport">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="regionmask">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="regionmaskenable">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="reinstantiate">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="reload">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="resetinfluences">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="selfharmonicenable">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="selfharmonicngramorder">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="selfharmonicpeakdecay">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="selfmelodicenable">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="selfmod12">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="selfngramorder">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="sparse">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="timeout">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="timeoutenable">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="timestretch">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="timestretchmode">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="transpositionconsistency">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="transpositions">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="weights">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="zap">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>Same as <m>reload</m></description>
+		</method>
+	</methodlist>
+
+    <!--ATTRIBUTES-->
+	<attributelist>
+		<attribute name="loglevel" get="1" set="1" type="symbol" size="1">
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</attribute>
+        <attribute name="autoinitialize" get="1" set="1" type="symbol" size="1">
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</attribute>
+	</attributelist>
+	
+	
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.player.ui" />
+		<seealso name="somax.player.easy" />
+		<seealso name="somax.server" />
+		<seealso name="somax.audiorenderer" />
+		<seealso name="somax.midirenderer" />
+		<seealso name="nonexistinghehe" />
+		<seealso name="somax.audioinfluencer" />
+        <seealso name="somax.midiinfluencer" />
+	</seealsolist>
+	
+</c74object>

@@ -1080,7 +1080,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 302.270609887860985, 810.539446598364066, 88.5, 20.0 ],
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"varname" : "durations"
+					"varname" : "mididurations"
 				}
 
 			}
@@ -1339,7 +1339,7 @@
 
 					}
 ,
-					"varname" : "onsets"
+					"varname" : "midionsets"
 				}
 
 			}
@@ -23551,8 +23551,7 @@
 						"artificialmidities" : [ 0 ],
 						"continuity" : [ 1.5 ],
 						"cut" : [ 1 ],
-						"decaybasis" : [ 1 ],
-						"durations" : [ "Sustained" ],
+						"decaybasis" : [ 0 ],
 						"enabled" : [ 1 ],
 						"enforcetaboo" : [ 1 ],
 						"fallback" : [ "Random" ],
@@ -23565,11 +23564,12 @@
 						"melodicmod12" : [ 1 ],
 						"melodicngramorder" : [ 2 ],
 						"melodicpeakdecay" : [ 2.001 ],
+						"mididurations" : [ "Sustained" ],
 						"midinotebynote" : [ 1 ],
-						"onsets" : [ 0 ],
+						"midionsets" : [ 0 ],
 						"outputfrom" : [ 0 ],
 						"outputprobability" : [ 1.0 ],
-						"playingmode" : [ 1 ],
+						"playingmode" : [ 0 ],
 						"pollpeaks" : [ 1 ],
 						"quality" : [ 0.0 ],
 						"recombine" : [ 1 ],
@@ -23792,7 +23792,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 18.0, 22.439567114741294, 30.0, 30.0 ]
 				}
 
@@ -24462,7 +24462,7 @@
 					"patching_rect" : [ 1965.998681434600257, 89.5090360442681, 180.0, 27.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 21.41666666666697, 11.5, 401.10262443239094, 27.0 ],
-					"text" : "Player",
+					"text" : "Player_1224",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.server" module="somax" kind="patcher">
+
+	<digest>
+		Digest
+	</digest>
+
+	<description>
+		Description
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+	<!--ARGUMENTS-->
+	<objarglist>
+        <objarg name="sendport" optional="1" type="int">
+			<digest>
+				OSC send port
+			</digest>
+			<description>
+				TODO
+			</description>
+		</objarg>
+        <objarg name="recvport" optional="1" type="int">
+			<digest>
+				OSC receive port
+			</digest>
+			<description>
+				TODO
+			</description>
+		</objarg>
+        <objarg name="ip" optional="1" type="symbol">
+			<digest>
+				OSC ip address
+			</digest>
+			<description>
+				TODO
+			</description>
+		</objarg>
+	</objarglist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="bang">
+			<arglist />
+			<digest>Output generation time</digest>
+			<description>TODO</description>
+		</method>
+        <method name="int">
+			<arglist />
+			<digest>Toggle generation</digest>
+			<description>Performs the same function as <m>start</m> and <m>stop</m></description>
+		</method>
+        <method name="beatphase">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="corpora">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="corpuspath">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="initialize">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="initializeplayers">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="interpreter">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="ip">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="openwindow">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="players">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="rawsend">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="recvport">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="sendport">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="start">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="stop">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="tempo">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="temposource">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="terminate">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="time">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+	</methodlist>
+	
+    <!--ATTRIBUTES-->
+	<attributelist>
+		<attribute name="loglevel" get="1" set="1" type="symbol" size="1">
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</attribute>
+        <attribute name="autoinitialize" get="0" set="0" type="symbol" size="1">
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</attribute>
+        <attribute name="autoterminate" get="0" set="0" type="symbol" size="1">
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</attribute>
+	</attributelist>
+	
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.server.easy" />
+		<seealso name="somax.player" />
+	</seealsolist>
+	
+</c74object>

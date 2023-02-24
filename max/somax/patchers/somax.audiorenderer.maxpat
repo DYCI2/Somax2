@@ -1274,7 +1274,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 182.844140358744198, 304.333337664604187, 46.0, 20.0 ],
 					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-					"varname" : "ngrooves"
+					"varname" : "voices"
 				}
 
 			}
@@ -1530,9 +1530,9 @@
 						"crossfadecurve" : [ 0.5 ],
 						"live.text" : [ 0.0 ],
 						"mode" : [ 0 ],
-						"ngrooves" : [ 3 ],
 						"release" : [ 150.0 ],
-						"tsmode" : [ "extremestretch" ]
+						"tsmode" : [ "extremestretch" ],
+						"voices" : [ 3 ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",

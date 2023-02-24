@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.audioinfluencer.ui" module="somax" kind="patcher">
+
+	<digest>
+		Digest
+	</digest>
+
+	<description>
+		Description
+	</description>
+    
+    <!--ARGUMENTS-->
+	<objarglist>
+        <objarg name="name" optional="1" type="int">
+			<digest>
+				Remote listening address
+			</digest>
+			<description>
+				TODO
+			</description>
+		</objarg>
+	</objarglist>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+	
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.audioinfluencer" />
+        <seealso name="somax.audioinfluencer.ui" />
+	</seealsolist>
+	
+</c74object>
