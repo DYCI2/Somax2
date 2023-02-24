@@ -2423,7 +2423,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 904.666666666666742, 863.333333333333258, 139.5, 22.0 ],
-									"text" : "statemax 7966"
+									"text" : "durations Sustained"
 								}
 
 							}
@@ -2507,7 +2507,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1113.125, 1070.5, 50.0, 22.0 ],
-									"text" : "1238"
+									"text" : "1237"
 								}
 
 							}
@@ -2531,7 +2531,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1039.75, 1070.5, 50.0, 22.0 ],
-									"text" : "1239"
+									"text" : "1236"
 								}
 
 							}
@@ -2562,13 +2562,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-72",
-									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 966.375, 1070.5, 50.0, 35.0 ],
-									"text" : "Player_1444"
+									"patching_rect" : [ 966.375, 1070.5, 50.0, 22.0 ],
+									"text" : "Player"
 								}
 
 							}
@@ -2728,8 +2727,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
-									"patching_rect" : [ 578.5, 803.0, 290.0, 29.0 ],
-									"text" : "somax.player",
+									"patching_rect" : [ 578.5, 803.0, 253.0, 29.0 ],
+									"text" : "somax.player @autoinitialize 0",
 									"varname" : "somax.player"
 								}
 
@@ -2887,7 +2886,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 944.541666666666629, 372.0, 213.0, 35.0 ],
-									"text" : "1 running"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -2911,8 +2910,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 845.0, 320.0, 117.0, 29.0 ],
-									"text" : "somax.server"
+									"patching_rect" : [ 845.0, 320.0, 254.0, 29.0 ],
+									"text" : "somax.server @autoinitialize 0"
 								}
 
 							}
@@ -3011,7 +3010,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-145", 0 ],
-									"order" : 1,
+									"order" : 0,
 									"source" : [ "obj-143", 1 ]
 								}
 
@@ -3019,7 +3018,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-147", 0 ],
-									"order" : 0,
+									"order" : 1,
 									"source" : [ "obj-143", 1 ]
 								}
 

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 2171.0, 1259.0 ],
+		"rect" : [ 34.0, 87.0, 2171.0, 1250.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 113.0, 2171.0, 1233.0 ],
+						"rect" : [ 34.0, 113.0, 2171.0, 1224.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -949,13 +949,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-69",
-									"linecount" : 5,
+									"linecount" : 6,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 964.5, 659.0, 64.199999999999818, 76.0 ],
-									"text" : "/Users/borg/MaxDev/Somax2/max/somax/corpus"
+									"patching_rect" : [ 964.5, 659.0, 64.199999999999818, 89.0 ],
+									"text" : "/Users/joakimborg/MaxDev/Somax2/max/somax/corpus"
 								}
 
 							}
@@ -1336,8 +1336,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 527.0, 404.0, 117.0, 29.0 ],
-									"text" : "somax.server"
+									"patching_rect" : [ 527.0, 404.0, 254.0, 29.0 ],
+									"text" : "somax.server @autoinitialize 0"
 								}
 
 							}

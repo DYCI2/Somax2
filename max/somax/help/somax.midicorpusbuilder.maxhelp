@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 59.0, 106.0, 1063.0, 705.0 ],
+		"rect" : [ 59.0, 100.0, 1063.0, 705.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 59.0, 132.0, 1063.0, 679.0 ],
+						"rect" : [ 59.0, 126.0, 1063.0, 679.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -105,7 +105,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 296.0, 599.0, 150.0, 60.0 ],
+									"patching_rect" : [ 296.0, 599.0, 152.0, 60.0 ],
 									"text" : "status: requires server to run. Changes to \"inprogress\" while building corpus"
 								}
 
@@ -113,11 +113,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-50",
+									"linecount" : 18,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 447.0, 500.5, 107.0, 22.0 ]
+									"patching_rect" : [ 447.0, 500.5, 107.0, 250.0 ],
+									"text" : "setcmd build_corpus 0 overwrite= 0 0 output_folder= /Users/joakimborg/MaxDev/Somax2/max/somax/corpus builder_address= 1510_corpusbuilder fg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] bg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] filter_class= NoFilter"
 								}
 
 							}
@@ -151,7 +153,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 335.166666666666742, 307.0, 273.0, 20.0 ],
-									"presentation_linecount" : 3,
 									"text" : "set name (will be overwritten if loading new file)"
 								}
 
@@ -282,8 +283,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 421.166666666666742, 192.0, 177.0, 33.0 ],
-									"presentation_linecount" : 2,
+									"patching_rect" : [ 421.166666666666742, 192.0, 180.0, 33.0 ],
 									"text" : "build corpus from given midi file with custom name"
 								}
 
@@ -307,7 +307,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 421.166666666666742, 149.0, 177.0, 33.0 ],
+									"patching_rect" : [ 421.166666666666742, 149.0, 180.0, 33.0 ],
 									"text" : "build corpus from given midi file (name will be same as file)"
 								}
 
@@ -336,7 +336,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 652.541666666666629, 87.0, 213.0, 35.0 ],
-									"text" : "1 ready"
+									"text" : "0 offline"
 								}
 
 							}
@@ -347,8 +347,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 575.0, 52.0, 81.0, 22.0 ],
-									"text" : "somax.server"
+									"patching_rect" : [ 575.0, 52.0, 172.0, 22.0 ],
+									"text" : "somax.server @autoinitialize 0"
 								}
 
 							}
@@ -397,7 +397,8 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "", "", "" ],
 									"patching_rect" : [ 170.0, 454.25, 384.0, 29.0 ],
-									"text" : "somax.midicorpusbuilder"
+									"text" : "somax.midicorpusbuilder",
+									"varname" : "somax.midicorpusbuilder"
 								}
 
 							}
@@ -422,7 +423,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 189.166666666666742, 188.0, 230.0, 49.0 ],
-									"presentation_linecount" : 2,
 									"text" : "build /Users/borg/MIDI/Chamber/debussy.mid MyDebussyCorpus"
 								}
 
@@ -436,8 +436,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 296.0, 565.0, 91.0, 29.0 ],
-									"presentation_linecount" : 3,
-									"text" : "1 ready"
+									"text" : "0 offline"
 								}
 
 							}
@@ -546,7 +545,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 214.0, 258.0, 200.0, 35.0 ],
-									"presentation_linecount" : 3,
 									"text" : "setsource /Users/borg/MIDI/debussy_part.mid"
 								}
 
@@ -792,6 +790,13 @@
 			}
 , 			{
 				"name" : "somax.await_patcherargs.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpusbuilder.core.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",

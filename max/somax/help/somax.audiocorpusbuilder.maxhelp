@@ -104,7 +104,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 386.333333333333371, 738.0, 150.0, 47.0 ],
+									"patching_rect" : [ 386.333333333333371, 738.0, 153.0, 47.0 ],
 									"text" : "test segmentation requires a connected dac~ (for listening/playback)"
 								}
 
@@ -184,13 +184,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-50",
-									"linecount" : 3,
+									"linecount" : 36,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 532.0, 536.25, 110.0, 49.0 ],
-									"text" : "fromserver building_status success"
+									"patching_rect" : [ 532.0, 536.25, 110.0, 491.0 ],
+									"text" : "setcmd build_corpus 0 overwrite= 0 0 output_folder= /Users/joakimborg/MaxDev/Somax2/max/somax/corpus builder_address= 1449_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.5 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.4 pick_peak_pre_max_s= 0.4 pick_peak_post_mean_s= 0.4 pick_peak_post_max_s= 0.4"
 								}
 
 							}
@@ -372,7 +372,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 652.541666666666629, 87.0, 213.0, 35.0 ],
-									"text" : "1 ready"
+									"text" : "0 offline"
 								}
 
 							}
@@ -383,8 +383,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 575.0, 52.0, 81.0, 22.0 ],
-									"text" : "somax.server"
+									"patching_rect" : [ 575.0, 52.0, 172.0, 22.0 ],
+									"text" : "somax.server @autoinitialize 0"
 								}
 
 							}
@@ -432,7 +432,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 5,
-									"outlettype" : [ "", "", "", "multichannelsignal", "" ],
+									"outlettype" : [ "", "multichannelsignal", "", "", "" ],
 									"patching_rect" : [ 170.0, 454.25, 219.0, 29.0 ],
 									"text" : "somax.audiocorpusbuilder",
 									"varname" : "somax.midicorpusbuilder"
@@ -533,7 +533,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 51.0, 528.0, 138.0, 357.0 ],
+									"patching_rect" : [ 51.0, 528.0, 140.0, 357.0 ],
 									"text" : "rawsend test_audio_segmentation /Users/borg/Music/freudaud.wav segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.5 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.4 pick_peak_pre_max_s= 0.4 pick_peak_post_mean_s= 0.4 pick_peak_post_max_s= 0.4"
 								}
 
@@ -846,6 +846,29 @@
 					"index" : 0,
 					"name" : "",
 					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"parameter_overrides" : 			{
+				"obj-1::obj-5::obj-395::obj-375" : 				{
+					"parameter_longname" : "mc.live.gain~[6]"
+				}
+,
+				"obj-1::obj-5::obj-395::obj-441" : 				{
+					"parameter_longname" : "mc.live.gain~[5]"
+				}
+,
+				"obj-1::obj-5::obj-395::obj-469" : 				{
+					"parameter_longname" : "live.text[3]"
+				}
+,
+				"obj-1::obj-5::obj-395::obj-472" : 				{
+					"parameter_longname" : "live.text[2]"
+				}
+,
+				"obj-1::obj-5::obj-395::obj-490" : 				{
+					"parameter_longname" : "live.text[10]"
 				}
 
 			}
