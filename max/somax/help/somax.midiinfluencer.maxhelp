@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 89.0, 137.0, 1074.0, 702.0 ],
+		"rect" : [ 89.0, 100.0, 1074.0, 702.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -89,23 +89,88 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
-									"bgcolor" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgcolor2" : [ 0.2, 0.2, 0.2, 1.0 ],
-									"bgfillcolor_angle" : 270.0,
-									"bgfillcolor_autogradient" : 0.0,
-									"bgfillcolor_color" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgfillcolor_color1" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1.0 ],
-									"bgfillcolor_proportion" : 0.5,
-									"bgfillcolor_type" : "gradient",
-									"gradient" : 1,
-									"id" : "obj-10",
+									"id" : "obj-58",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 517.0, 204.300000000000011, 176.0, 20.0 ],
+									"presentation_linecount" : 4,
+									"text" : "virtual fundamental (2 / \"virfun\")"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-57",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 517.0, 186.900000000000006, 122.0, 20.0 ],
+									"presentation_linecount" : 9,
+									"text" : "bass note (1 / \"bass\")"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-56",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 517.0, 169.5, 105.0, 20.0 ],
+									"text" : "top note (0 / \"top\")"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"disabled" : [ 0, 0, 0 ],
+									"id" : "obj-53",
+									"itemtype" : 0,
+									"maxclass" : "radiogroup",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 499.0, 171.5, 18.0, 50.0 ],
+									"size" : 3,
+									"value" : 0
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-49",
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 622.0, 137.0, 244.0, 22.0 ],
-									"text" : "TODO: pitchanalysis, needs better parsing!!!"
+									"patching_rect" : [ 499.0, 233.0, 94.0, 22.0 ],
+									"text" : "pitchanalysis $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-21",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 583.0, 432.0, 32.0, 22.0 ],
+									"text" : "print"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-20",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 492.0, 409.0, 50.0, 35.0 ],
+									"text" : "pitchanalysis 0"
 								}
 
 							}
@@ -132,28 +197,6 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 213.0, 171.5, 168.0, 53.0 ],
 									"range" : 24
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgcolor2" : [ 0.2, 0.2, 0.2, 1.0 ],
-									"bgfillcolor_angle" : 270.0,
-									"bgfillcolor_autogradient" : 0.0,
-									"bgfillcolor_color" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgfillcolor_color1" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1.0 ],
-									"bgfillcolor_proportion" : 0.5,
-									"bgfillcolor_type" : "gradient",
-									"gradient" : 1,
-									"id" : "obj-18",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 618.0, 174.0, 154.0, 22.0 ],
-									"text" : "TODO: PITCH CHANNELS"
 								}
 
 							}
@@ -189,7 +232,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 420.583333333333258, 252.0, 34.0, 22.0 ],
+									"patching_rect" : [ 413.94620253164544, 233.0, 34.0, 22.0 ],
 									"text" : "flush"
 								}
 
@@ -443,13 +486,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-19",
-									"linecount" : 2,
+									"linecount" : 4,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 308.583333333333258, 528.5, 89.0, 35.0 ],
-									"text" : "0 0 0 0 0 0 0 0 0 0 0 0"
+									"patching_rect" : [ 308.583333333333258, 528.5, 89.0, 62.0 ],
+									"text" : "0 0.0625 0.25 0 0.25 0 0 1.625 0 1.625 0 0.0625"
 								}
 
 							}
@@ -527,6 +570,22 @@
 								"patchline" : 								{
 									"destination" : [ "obj-16", 0 ],
 									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-20", 1 ],
+									"order" : 1,
+									"source" : [ "obj-1", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 0 ],
+									"order" : 0,
+									"source" : [ "obj-1", 1 ]
 								}
 
 							}
@@ -627,6 +686,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"source" : [ "obj-49", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
 									"source" : [ "obj-51", 0 ]
 								}
@@ -637,6 +703,13 @@
 									"destination" : [ "obj-48", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-52", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-49", 0 ],
+									"source" : [ "obj-53", 0 ]
 								}
 
 							}
@@ -807,28 +880,6 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 213.0, 183.0, 62.0, 22.0 ],
 									"text" : "60, 64, 67"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgcolor2" : [ 0.2, 0.2, 0.2, 1.0 ],
-									"bgfillcolor_angle" : 270.0,
-									"bgfillcolor_autogradient" : 0.0,
-									"bgfillcolor_color" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgfillcolor_color1" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1.0 ],
-									"bgfillcolor_proportion" : 0.5,
-									"bgfillcolor_type" : "gradient",
-									"gradient" : 1,
-									"id" : "obj-18",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 549.0, 138.0, 159.0, 22.0 ],
-									"text" : "TODO: ONSET CHANNELS"
 								}
 
 							}
@@ -1410,7 +1461,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 89.0, 163.0, 1074.0, 676.0 ],
+						"rect" : [ 89.0, 126.0, 1074.0, 676.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1441,28 +1492,6 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
-								"box" : 								{
-									"bgcolor" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgcolor2" : [ 0.2, 0.2, 0.2, 1.0 ],
-									"bgfillcolor_angle" : 270.0,
-									"bgfillcolor_autogradient" : 0.0,
-									"bgfillcolor_color" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgfillcolor_color1" : [ 0.298039215686275, 0.976470588235294, 1.0, 1.0 ],
-									"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1.0 ],
-									"bgfillcolor_proportion" : 0.5,
-									"bgfillcolor_type" : "gradient",
-									"gradient" : 1,
-									"id" : "obj-67",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 588.5, 126.0, 171.0, 22.0 ],
-									"text" : "TODO: CHROMA CHANNELS"
-								}
-
-							}
-, 							{
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-64",

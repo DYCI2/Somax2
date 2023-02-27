@@ -20,7 +20,7 @@
 
 	<!--MESSAGES-->
 	<methodlist>
-        <method name="(player protocol)">
+        <method name="(player_protocol)">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
@@ -40,37 +40,7 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="chordthreshold">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="chromachannels">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="chromafilter">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
         <method name="dump">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="enabled">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="filterattack">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="filterrelease">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
@@ -80,27 +50,7 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="onsetchannels">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="onsetlimit">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
         <method name="openwindow">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="pitchanalysis">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="pitchchannels">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
@@ -109,10 +59,50 @@
 	
     <!--ATTRIBUTES-->
 	<attributelist>
-		<attribute name="continuouschroma" get="1" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</attribute>
+        <attribute name="chordthreshold" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="chromachannels" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="chromafilter" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="continuouschroma" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="enabled" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="filterattack" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="filterrelease" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="onsetchannels" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="onsetlimit" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="pitchanalysis" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="pitchchannels" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
     </attributelist>
 	
 	<!--SEEALSO-->

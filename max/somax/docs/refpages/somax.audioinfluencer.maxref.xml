@@ -29,26 +29,6 @@
 			<digest>TODO</digest>
 			<description>Performs the same function as <m>start</m> and <m>stop</m></description>
 		</method>
-        <method name="bonkdebounce">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="bonkminvel">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="bonkhighthresh">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="bonklowthresh">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
         <method name="dump">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
@@ -59,12 +39,7 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="onsetlimit">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="onsetmethod">
+        <method name="signal">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
@@ -74,48 +49,66 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="yindownsample">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="yinlevel">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="yinminfreq">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="yinprobability">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="yinquality">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="yinwindow">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
 	</methodlist>
 	
     <!--ATTRIBUTES-->
 	<attributelist>
-		<attribute name="continuouschroma" get="1" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</attribute>
+        <attribute name="bonkdebounce" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="bonkminvel" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="bonkhighthresh" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="bonklowthresh" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="continuouschroma" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
         <attribute name="continuouspitch" get="1" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</attribute>
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="onsetlimit" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="onsetmethod" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="yindownsample" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="yinlevel" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="yinminfreq" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="yinprobability" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="yinquality" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="yinwindow" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
 	</attributelist>
 	
 	<!--SEEALSO-->

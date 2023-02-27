@@ -127,16 +127,6 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="tempo">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="temposource">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
         <method name="terminate">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
@@ -151,7 +141,7 @@
 	
     <!--ATTRIBUTES-->
 	<attributelist>
-		<attribute name="loglevel" get="1" set="1" type="symbol" size="1">
+        <attribute name="active" get="0" set="1" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</attribute>
@@ -160,6 +150,18 @@
 			<description>TODO</description>
 		</attribute>
         <attribute name="autoterminate" get="0" set="1" type="symbol" size="1">
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</attribute>
+		<attribute name="loglevel" get="1" set="1" type="symbol" size="1">
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</attribute>
+        <attribute name="tempo" get="1" set="1" type="symbol" size="1">
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</attribute>
+        <attribute name="temposource" get="1" set="1" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</attribute>

@@ -20,7 +20,7 @@
 
 	<!--MESSAGES-->
 	<methodlist>
-        <method name="(player protocol)">
+        <method name="(player_protocol)">
 			<arglist />
 			<digest>TODO</digest>
 			<description>TODO</description>

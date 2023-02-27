@@ -65,21 +65,7 @@
 			<digest>Enable/Disable the player</digest>
 			<description>Performs the same function as <m>enabled</m></description>
 		</method>
-        <method name="artificialmidities">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="continuity">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="corpus">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
+        
         <method name="getcorpus">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
@@ -90,56 +76,13 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="cut">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="decaybasis">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="enabled">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="enforcetaboo">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="fallback">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
+        
         <method name="flush">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="harmonicenable">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="harmonicngramorder">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="harmonicpeakdecay">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="ignorephase">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
+        
         <method name="influence">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
@@ -160,41 +103,7 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="melodicenable">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="melodicmod12">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="melodicngramorder">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="melodicpeakdecay">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="mididurations">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="midinotebynote">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="midionsets">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
+        
         <method name="name">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
@@ -205,56 +114,19 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="outputfrom">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="outputprobability">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="playingmode">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="pollpeaks">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="quality">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
+        
         <method name="rawsend">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="recombine">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
+        
         <method name="recvport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="regionmask">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="regionmaskenable">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
+        
         <method name="reinstantiate">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
@@ -270,76 +142,6 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-        <method name="selfharmonicenable">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="selfharmonicngramorder">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="selfharmonicpeakdecay">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="selfmelodicenable">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="selfmod12">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="selfngramorder">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="sparse">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="timeout">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="timeoutenable">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="timestretch">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="timestretchmode">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="transpositionconsistency">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="transpositions">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="weights">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
         <method name="zap">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
@@ -349,14 +151,182 @@
 
     <!--ATTRIBUTES-->
 	<attributelist>
-		<attribute name="loglevel" get="1" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</attribute>
+        <attribute name="artificialmidities" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
         <attribute name="autoinitialize" get="1" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</attribute>
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="continuity" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="corpus" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="cut" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="decaybasis" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="enabled" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="enforcetaboo" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="fallback" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="harmonicenable" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="harmonicngramorder" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="harmonicpeakdecay" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="ignorephase" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="loglevel" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="melodicenable" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="melodicmod12" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="melodicngramorder" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="melodicpeakdecay" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="mididurations" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="midinotebynote" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="midionsets" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="mode" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="outputfrom" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="outputprobability" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="playingmode" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="pollpeaks" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="quality" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="recombine" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="regionmask" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="regionmaskenable" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="selfharmonicenable" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="selfharmonicngramorder" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="selfharmonicpeakdecay" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="selfmelodicenable" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="selfmod12" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="selfngramorder" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="sparse" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="timeout" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="timeoutenable" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="timestretch" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="timestretchmode" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="transpositionconsistency" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="transpositions" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="weights" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
 	</attributelist>
 	
 	

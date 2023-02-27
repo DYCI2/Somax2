@@ -26,7 +26,7 @@ class ServerSendProtocol:
     SCHEDULER_CURRENT_TEMPO = "tempo"
     SCHEDULER_CURRENT_TIME = "time"
     TRANSPORT_MODE = "transport_mode"
-    TRANSPORT_RUNNING = "running"
+    TRANSPORT_RUNNING = "active"
     TEMPO_SOURCE = "temposource"
 
     # Misc. Info
