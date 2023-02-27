@@ -169,7 +169,7 @@
 	
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="somax.server.easy" />
+		<seealso name="somax.server.app" />
 		<seealso name="somax.player" />
 	</seealsolist>
 	

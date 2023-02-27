@@ -110,7 +110,7 @@
         <seealso name="somax.player" />
         <seealso name="somax.audioinfluencer" />
 		<seealso name="somax.midiinfluencer.ui" />
-        <seealso name="somax.midiinfluencer.easy" />
+        <seealso name="somax.midiinfluencer.app" />
 	</seealsolist>
 	
 </c74object>

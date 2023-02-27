@@ -512,13 +512,14 @@
 					"fontface" : 1,
 					"fontsize" : 14.0,
 					"id" : "obj-335",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 331.25, 1158.461073810597554, 120.0, 22.0 ],
+					"patching_rect" : [ 331.25, 1158.461073810597554, 120.0, 38.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 12.381745481049848, 6.825000250000016, 193.986509037900305, 22.0 ],
-					"text" : "MidiInfluencer",
+					"text" : "MidiInfluencer_7275",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -1096,7 +1097,7 @@
 				"box" : 				{
 					"comment" : "(list) midi out/thru [nn vel ch]",
 					"id" : "obj-119",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1108,7 +1109,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-115",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1120,7 +1121,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-116",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1132,7 +1133,7 @@
 				"box" : 				{
 					"comment" : "(list) influences",
 					"id" : "obj-117",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1984,7 +1985,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to audio influencer",
 					"id" : "obj-120",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -3230,6 +3231,103 @@
 
 			}
  ],
+		"dependency_cache" : [ 			{
+				"name" : "bc.virfun.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "computeMemoryPitchClass.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "heldnotes.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "midi2chroma.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "midi2chroma_nofilter.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "midichromaanalysis.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "midipitchanalysis.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.await_patcherargs.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.filter_midichannels.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midiinfluencer.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midiinfluencer.ui.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.source.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.uniquename.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-35", "obj-71", "obj-72" ]
 			}

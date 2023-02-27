@@ -1103,11 +1103,11 @@
 				"box" : 				{
 					"comment" : "(any/signal/mc.signal) messages or audio input to audio influencer",
 					"id" : "obj-120",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "multichannelsignal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 88.15511957378385, 31.900125000000003, 30.0, 30.0 ]
 				}
 
@@ -1116,7 +1116,7 @@
 				"box" : 				{
 					"comment" : "(list) midi transcription [nn vel ch]",
 					"id" : "obj-119",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1128,7 +1128,7 @@
 				"box" : 				{
 					"comment" : "(mc.signal) audio output",
 					"id" : "obj-118",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1140,7 +1140,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-115",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1152,7 +1152,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-116",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1164,7 +1164,7 @@
 				"box" : 				{
 					"comment" : "(list) influences",
 					"id" : "obj-117",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2425,13 +2425,14 @@
 					"fontface" : 1,
 					"fontsize" : 14.0,
 					"id" : "obj-335",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 425.25, 1304.047737379371029, 120.0, 22.0 ],
+					"patching_rect" : [ 425.25, 1304.047737379371029, 120.0, 38.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 8.715084576165509, 2.689114385061202, 193.986509037900305, 22.0 ],
-					"text" : "AudioInfluencer",
+					"text" : "AudioInfluencer_7251",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -3304,6 +3305,131 @@
 
 			}
  ],
+		"parameters" : 		{
+			"obj-121" : [ "Gain[4]", "Gain", 0 ],
+			"obj-46" : [ "live.dial[2]", "Pan", 0 ],
+			"obj-95" : [ "Delay", "Delay", 0 ],
+			"parameterbanks" : 			{
+				"0" : 				{
+					"index" : 0,
+					"name" : "",
+					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "OMax.yin+.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "Yin+.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "audio2chroma.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "bc.autoname.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "bc.yinstats.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "bonk~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "ircamdescriptor~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "somax.audioinfluencer.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.audioinfluencer.ui.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.await_patcherargs.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.pan2.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.routesignal.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.source.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.uniquename.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "sr.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "yin~.mxo",
+				"type" : "iLaX"
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-4", "obj-71", "obj-72" ]
 			}

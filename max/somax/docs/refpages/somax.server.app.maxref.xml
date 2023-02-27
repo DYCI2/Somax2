@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
 
-<c74object name="somax.player.easy" module="somax" kind="patcher">
+<c74object name="somax.server.ui" module="somax" kind="patcher">
 
 	<digest>
 		Digest
@@ -20,8 +20,10 @@
 	
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="somax.player" />
-		<seealso name="somax.player.ui" />
+		<seealso name="somax.server" />
+		<seealso name="somax.player.app" />
+        <seealso name="somax.midiinfluencer.app" />
+        <seealso name="somax.audioinfluencer.app" />
 	</seealsolist>
 	
 </c74object>

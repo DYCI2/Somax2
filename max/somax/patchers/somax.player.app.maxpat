@@ -1274,7 +1274,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to player and peripherals",
 					"id" : "obj-33",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1720,7 +1720,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-844",
-					"index" : 0,
+					"index" : 5,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1732,7 +1732,7 @@
 				"box" : 				{
 					"comment" : "(int) status",
 					"id" : "obj-403",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1744,7 +1744,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-404",
-					"index" : 0,
+					"index" : 4,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1756,7 +1756,7 @@
 				"box" : 				{
 					"comment" : "(list) midi output [nn vel ch]",
 					"id" : "obj-37",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1768,7 +1768,7 @@
 				"box" : 				{
 					"comment" : "(mc.signal) audio output",
 					"id" : "obj-35",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -4071,7 +4071,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1223.75, 186.0, 313.0, 35.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 461, 322 ],
+						"client_rect" : [ 1880, 207, 2595, 536 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -4093,7 +4093,7 @@
 					"patching_rect" : [ 1563.75, 192.5, 130.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 11.084603340888407, 4.0, 224.779485000000022, 22.0 ],
-					"text" : "#1",
+					"text" : "Player_5278",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -5096,527 +5096,6 @@
 
 			}
  ],
-		"parameters" : 		{
-			"obj-17::obj-10::obj-21" : [ "onset[4]", "onset", 0 ],
-			"obj-17::obj-10::obj-28" : [ "chromaonset[4]", "chromaonset", 0 ],
-			"obj-17::obj-10::obj-29" : [ "enable[4]", "enable", 0 ],
-			"obj-17::obj-10::obj-30" : [ "chroma scaling factor[4]", "chroma", 0 ],
-			"obj-17::obj-10::obj-46::obj-1" : [ "source[2]", "source", 0 ],
-			"obj-17::obj-10::obj-9" : [ "pitch[4]", "pitch", 0 ],
-			"obj-17::obj-2::obj-21" : [ "onset[2]", "onset", 0 ],
-			"obj-17::obj-2::obj-28" : [ "chromaonset[2]", "chromaonset", 0 ],
-			"obj-17::obj-2::obj-29" : [ "enable[2]", "enable", 0 ],
-			"obj-17::obj-2::obj-30" : [ "chroma scaling factor[2]", "chroma", 0 ],
-			"obj-17::obj-2::obj-46::obj-1" : [ "source[4]", "source", 0 ],
-			"obj-17::obj-2::obj-9" : [ "pitch[2]", "pitch", 0 ],
-			"obj-17::obj-33::obj-21" : [ "onset[5]", "onset", 0 ],
-			"obj-17::obj-33::obj-28" : [ "chromaonset[5]", "chromaonset", 0 ],
-			"obj-17::obj-33::obj-29" : [ "enable[5]", "enable", 0 ],
-			"obj-17::obj-33::obj-30" : [ "chroma scaling factor[5]", "chroma", 0 ],
-			"obj-17::obj-33::obj-46::obj-1" : [ "source[3]", "source", 0 ],
-			"obj-17::obj-33::obj-9" : [ "pitch[5]", "pitch", 0 ],
-			"obj-17::obj-6::obj-21" : [ "onset[3]", "onset", 0 ],
-			"obj-17::obj-6::obj-28" : [ "chromaonset[3]", "chromaonset", 0 ],
-			"obj-17::obj-6::obj-29" : [ "enable[3]", "enable", 0 ],
-			"obj-17::obj-6::obj-30" : [ "chroma scaling factor[3]", "chroma", 0 ],
-			"obj-17::obj-6::obj-46::obj-1" : [ "source[1]", "source", 0 ],
-			"obj-17::obj-6::obj-9" : [ "pitch[3]", "pitch", 0 ],
-			"obj-25::obj-1" : [ "mc.live.gain~[2]", "mc.live.gain~", 0 ],
-			"obj-25::obj-44" : [ "live.dial[1]", "Width", 0 ],
-			"obj-25::obj-46" : [ "live.dial", "Pan", 0 ],
-			"obj-3::obj-1115" : [ "continuity[22]", "continuity", 0 ],
-			"obj-3::obj-1150" : [ "live.text[33]", "live.text", 0 ],
-			"obj-3::obj-1175" : [ "heldnotesmode[5]", "heldnotesmode", 0 ],
-			"obj-3::obj-1179" : [ "continuity[23]", "continuity", 0 ],
-			"obj-3::obj-123::obj-1" : [ "live.text[10]", "live.text", 0 ],
-			"obj-3::obj-123::obj-2" : [ "live.text[11]", "live.text", 0 ],
-			"obj-3::obj-123::obj-3" : [ "live.text[12]", "live.text", 0 ],
-			"obj-3::obj-16::obj-26" : [ "corpusname[4]", "corpusname", 0 ],
-			"obj-3::obj-407::obj-1007" : [ "rslider[1]", "rslider", 0 ],
-			"obj-3::obj-407::obj-1115" : [ "continuity[1]", "continuity", 0 ],
-			"obj-3::obj-407::obj-1175" : [ "heldnotesmode[2]", "heldnotesmode", 0 ],
-			"obj-3::obj-407::obj-1179" : [ "continuity[16]", "continuity", 0 ],
-			"obj-3::obj-407::obj-12" : [ "melodicmod12[1]", "melodicmod12", 0 ],
-			"obj-3::obj-407::obj-120" : [ "melodicbypass[1]", "melodicbypass", 0 ],
-			"obj-3::obj-407::obj-1218" : [ "simultaneousonsets[2]", "artificialmidities", 0 ],
-			"obj-3::obj-407::obj-126" : [ "harmonicbypass[1]", "harmonicbypass", 0 ],
-			"obj-3::obj-407::obj-134" : [ "continuity[17]", "continuity", 0 ],
-			"obj-3::obj-407::obj-1344" : [ "enforcetaboo[4]", "enforcetaboo", 0 ],
-			"obj-3::obj-407::obj-140" : [ "resetinfluences[1]", "resetinfluences", 0 ],
-			"obj-3::obj-407::obj-144" : [ "harmonicngramorder[1]", "harmonicngramorder", 0 ],
-			"obj-3::obj-407::obj-1444" : [ "outputprobability[4]", "outputprobability", 0 ],
-			"obj-3::obj-407::obj-152" : [ "selfngramorder[1]", "selfngramorder", 0 ],
-			"obj-3::obj-407::obj-154" : [ "melodicngramorder[4]", "melodicngramorder", 0 ],
-			"obj-3::obj-407::obj-163" : [ "ignorephase[4]", "ignorephase", 0 ],
-			"obj-3::obj-407::obj-19" : [ "selfmod12[4]", "selfmod12", 0 ],
-			"obj-3::obj-407::obj-22" : [ "selfmelodicbypass[1]", "selfmelodicbypass", 0 ],
-			"obj-3::obj-407::obj-254" : [ "harmonincpeakdecay[2]", "harmonincpeakdecay", 0 ],
-			"obj-3::obj-407::obj-255" : [ "melodicpeakdecay[4]", "melodicpeakdecay", 0 ],
-			"obj-3::obj-407::obj-256" : [ "selfpeakdecay[1]", "selfpeakdecay", 0 ],
-			"obj-3::obj-407::obj-270::obj-1226" : [ "width[1]", "Width", 0 ],
-			"obj-3::obj-407::obj-270::obj-1227" : [ "center[1]", "Center", 0 ],
-			"obj-3::obj-407::obj-270::obj-1240" : [ "live.slider[3]", "live.slider", 0 ],
-			"obj-3::obj-407::obj-270::obj-1241" : [ "live.numbox[3]", "live.numbox[2]", 0 ],
-			"obj-3::obj-407::obj-270::obj-622" : [ "__exp_velocityenable[1]", "__exp_velocityenable", 0 ],
-			"obj-3::obj-407::obj-270::obj-889" : [ "weight[1]", "Weight", 0 ],
-			"obj-3::obj-407::obj-295" : [ "playingmode[4]", "playingmode", 0 ],
-			"obj-3::obj-407::obj-298" : [ "simultaneousonsets[7]", "simultaneousonsets", 0 ],
-			"obj-3::obj-407::obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
-			"obj-3::obj-407::obj-504" : [ "transpositionconsistency[4]", "transpositionconsistency", 0 ],
-			"obj-3::obj-407::obj-570" : [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
-			"obj-3::obj-407::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-3::obj-407::obj-600" : [ "__exp_tabooenable[1]", "__exp_tabooenable", 0 ],
-			"obj-3::obj-407::obj-605" : [ "__exp_tabooduration[4]", "__exp_tabooduration", 0 ],
-			"obj-3::obj-407::obj-642" : [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
-			"obj-3::obj-407::obj-653" : [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
-			"obj-3::obj-407::obj-656" : [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],
-			"obj-3::obj-407::obj-688" : [ "__exp_durationsigma[4]", "__exp_durationsigma", 0 ],
-			"obj-3::obj-407::obj-702" : [ "__exp_durationmu[1]", "__exp_durationmu", 0 ],
-			"obj-3::obj-407::obj-722" : [ "__exp_octavebandsenable[4]", "__exp_octavebandsenable", 0 ],
-			"obj-3::obj-407::obj-733" : [ "__exp_octavebands[1]", "__exp_octavebands", 0 ],
-			"obj-3::obj-407::obj-746" : [ "__exp_selfpitchfromchords[4]", "__exp_selfpitchfromchords", 0 ],
-			"obj-3::obj-407::obj-763" : [ "__exp_autojumpforcejump[1]", "__exp_autojumpforcejump", 0 ],
-			"obj-3::obj-407::obj-774" : [ "__exp_autojumpenable[1]", "__exp_autojumpenable", 0 ],
-			"obj-3::obj-407::obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
-			"obj-3::obj-407::obj-799" : [ "__exp_tempoconsistencyenable[4]", "__exp_tempoconsistencyenable", 0 ],
-			"obj-3::obj-407::obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
-			"obj-3::obj-407::obj-835" : [ "transpositions[2]", "transpositions", 0 ],
-			"obj-3::obj-407::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
-			"obj-3::obj-407::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
-			"obj-3::obj-407::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
-			"obj-3::obj-407::obj-998" : [ "__exp_regionmaskenable[1]", "__exp_regionmaskenable", 0 ],
-			"obj-3::obj-79::obj-1" : [ "live.text[25]", "live.text", 0 ],
-			"obj-3::obj-79::obj-2" : [ "live.text[23]", "live.text", 0 ],
-			"obj-3::obj-79::obj-3" : [ "live.text[18]", "live.text", 0 ],
-			"obj-3::obj-87::obj-1" : [ "live.text[3]", "live.text", 0 ],
-			"obj-3::obj-87::obj-2" : [ "live.text[2]", "live.text", 0 ],
-			"obj-3::obj-87::obj-3" : [ "live.text[1]", "live.text", 0 ],
-			"obj-3::obj-89::obj-1" : [ "live.text[6]", "live.text", 0 ],
-			"obj-3::obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],
-			"obj-3::obj-89::obj-3" : [ "live.text[4]", "live.text", 0 ],
-			"obj-3::obj-91::obj-1" : [ "live.text[9]", "live.text", 0 ],
-			"obj-3::obj-91::obj-2" : [ "live.text[8]", "live.text", 0 ],
-			"obj-3::obj-91::obj-3" : [ "live.text[7]", "live.text", 0 ],
-			"obj-6::obj-98" : [ "live.text[13]", "live.text[26]", 0 ],
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
-			}
-,
-			"parameter_overrides" : 			{
-				"obj-17::obj-10::obj-30" : 				{
-					"parameter_longname" : "chroma scaling factor[4]"
-				}
-,
-				"obj-17::obj-10::obj-46::obj-1" : 				{
-					"parameter_invisible" : 0,
-					"parameter_modmode" : 0,
-					"parameter_unitstyle" : 10
-				}
-,
-				"obj-17::obj-2::obj-46::obj-1" : 				{
-					"parameter_invisible" : 0,
-					"parameter_modmode" : 0,
-					"parameter_unitstyle" : 10
-				}
-,
-				"obj-17::obj-33::obj-30" : 				{
-					"parameter_longname" : "chroma scaling factor[5]"
-				}
-,
-				"obj-17::obj-33::obj-46::obj-1" : 				{
-					"parameter_invisible" : 0,
-					"parameter_modmode" : 0,
-					"parameter_unitstyle" : 10
-				}
-,
-				"obj-17::obj-6::obj-30" : 				{
-					"parameter_longname" : "chroma scaling factor[3]"
-				}
-,
-				"obj-17::obj-6::obj-46::obj-1" : 				{
-					"parameter_invisible" : 0,
-					"parameter_modmode" : 0,
-					"parameter_unitstyle" : 10
-				}
-,
-				"obj-3::obj-123::obj-1" : 				{
-					"parameter_longname" : "live.text[10]"
-				}
-,
-				"obj-3::obj-123::obj-2" : 				{
-					"parameter_longname" : "live.text[11]"
-				}
-,
-				"obj-3::obj-123::obj-3" : 				{
-					"parameter_longname" : "live.text[12]"
-				}
-,
-				"obj-3::obj-87::obj-1" : 				{
-					"parameter_longname" : "live.text[3]"
-				}
-,
-				"obj-3::obj-87::obj-2" : 				{
-					"parameter_longname" : "live.text[2]"
-				}
-,
-				"obj-3::obj-87::obj-3" : 				{
-					"parameter_longname" : "live.text[1]"
-				}
-,
-				"obj-3::obj-89::obj-1" : 				{
-					"parameter_longname" : "live.text[6]"
-				}
-,
-				"obj-3::obj-89::obj-2" : 				{
-					"parameter_longname" : "live.text[5]"
-				}
-,
-				"obj-3::obj-89::obj-3" : 				{
-					"parameter_longname" : "live.text[4]"
-				}
-,
-				"obj-3::obj-91::obj-1" : 				{
-					"parameter_longname" : "live.text[9]"
-				}
-,
-				"obj-3::obj-91::obj-2" : 				{
-					"parameter_longname" : "live.text[8]"
-				}
-,
-				"obj-3::obj-91::obj-3" : 				{
-					"parameter_longname" : "live.text[7]"
-				}
-,
-				"obj-6::obj-98" : 				{
-					"parameter_longname" : "live.text[13]"
-				}
-
-			}
-,
-			"inherited_shortname" : 1
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "OMax.yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "Yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "audio2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "bc.autoname.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "bc.virfun.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "bc.yinstats.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "bonk~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "computeMemoryPitchClass.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "heldnotes.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "ircamdescriptor~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "kslider.compact.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "midi2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "midi2chroma_nofilter.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "midichromaanalysis.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "midipitchanalysis.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
-				"patcherrelativepath" : "./resources/influencers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "peakmeter.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
-				"patcherrelativepath" : "./resources/player",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.atom.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
-				"patcherrelativepath" : "./resources/player",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.audioinfluencer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.audioinfluencer.ui.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.audiomixer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.audiorenderer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.await_patcherargs.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.corpuspath.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.corpusview.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.filter_midichannels.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.midiinfluencer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.midiinfluencer.ui.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.midimixer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.midirenderer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.multistatebutton.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.pan2.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.path.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.player.core.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.player.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.player.routerblock.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
-				"patcherrelativepath" : "./resources/player",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.player.routing.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
-				"patcherrelativepath" : "./resources/player",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.player.ui.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.print.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.receiveblock.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.routesignal.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.source.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.uniquename.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.uniquenumber.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.winresize.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "sr.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "yin~.mxo",
-				"type" : "iLaX"
-			}
- ],
-		"autosave" : 0,
 		"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 	}
 

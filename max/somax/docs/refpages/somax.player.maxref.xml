@@ -333,7 +333,7 @@
 	<!--SEEALSO-->
 	<seealsolist>
 		<seealso name="somax.player.ui" />
-		<seealso name="somax.player.easy" />
+		<seealso name="somax.player.app" />
 		<seealso name="somax.server" />
 		<seealso name="somax.audiorenderer" />
 		<seealso name="somax.midirenderer" />
