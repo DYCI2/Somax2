@@ -40,39 +40,38 @@
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</method>
-
 	</methodlist>
 
     <!--ATTRIBUTES-->
 	<attributelist>
-        <method name="attack" get="1" set="1" type="symbol" size="1">
+        <attribute name="attack" get="1" set="1" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
-		</method>
+		</attribute>
         <attribute name="buffername" get="1" set="0" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</attribute>
-        <method name="crossfadecurve" get="1" set="1" type="symbol" size="1">
+        <attribute name="crossfadecurve" get="1" set="1" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
-		</method>
-        <method name="release" get="1" set="1" type="symbol" size="1">
+		</attribute>
+        <attribute name="release" get="1" set="1" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
-		</method>
-        <method name="shift" get="1" set="1" type="symbol" size="1">
+		</attribute>
+        <attribute name="shiftmode" get="1" set="1" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
-		</method>
-        <method name="tsmode" get="1" set="1" type="symbol" size="1">
+		</attribute>
+        <attribute name="tsmode" get="1" set="1" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
-		</method>
-        <method name="voices" get="1" set="1" type="symbol" size="1">
+		</attribute>
+        <attribute name="voices" get="1" set="1" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
-		</method>
+		</attribute>
 	</attributelist>
 	
     
