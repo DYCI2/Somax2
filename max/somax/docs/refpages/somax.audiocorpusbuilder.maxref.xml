@@ -20,6 +20,11 @@
 
 	<!--MESSAGES-->
 	<methodlist>
+        <method name="bang">
+			<arglist />
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
 		<method name="bpm">
 			<arglist />
 			<digest>TODO</digest>
@@ -66,6 +71,11 @@
 			<description>TODO</description>
 		</method>
         <method name="reset">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</method>
+        <method name="seginterval">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>

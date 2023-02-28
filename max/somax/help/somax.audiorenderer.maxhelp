@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 86.0, 2134.0, 1259.0 ],
+		"rect" : [ 34.0, 87.0, 2134.0, 1259.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -41,6 +41,71 @@
 		"showontab" : 0,
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-3",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patcher" : 					{
+						"fileversion" : 1,
+						"appversion" : 						{
+							"major" : 8,
+							"minor" : 3,
+							"revision" : 2,
+							"architecture" : "x64",
+							"modernui" : 1
+						}
+,
+						"classnamespace" : "box",
+						"rect" : [ 0.0, 26.0, 2134.0, 1233.0 ],
+						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
+						"bglocked" : 0,
+						"openinpresentation" : 0,
+						"default_fontsize" : 12.0,
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"gridonopen" : 1,
+						"gridsize" : [ 15.0, 15.0 ],
+						"gridsnaponopen" : 1,
+						"objectsnaponopen" : 1,
+						"statusbarvisible" : 2,
+						"toolbarvisible" : 1,
+						"lefttoolbarpinned" : 0,
+						"toptoolbarpinned" : 0,
+						"righttoolbarpinned" : 0,
+						"bottomtoolbarpinned" : 0,
+						"toolbars_unpinned_last_save" : 0,
+						"tallnewobj" : 0,
+						"boxanimatetime" : 200,
+						"enablehscroll" : 1,
+						"enablevscroll" : 1,
+						"devicewidth" : 0.0,
+						"description" : "",
+						"digest" : "",
+						"tags" : "",
+						"style" : "",
+						"subpatcher_template" : "",
+						"showontab" : 1,
+						"isolateaudio" : 1,
+						"assistshowspatchername" : 0,
+						"boxes" : [  ],
+						"lines" : [  ]
+					}
+,
+					"patching_rect" : [ 255.0, 37.0, 25.0, 22.0 ],
+					"saved_object_attributes" : 					{
+						"description" : "",
+						"digest" : "",
+						"globalpatchername" : "",
+						"tags" : ""
+					}
+,
+					"text" : "p ?",
+					"varname" : "basic[3]"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-5",
 					"maxclass" : "newobj",
@@ -90,12 +155,25 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-3",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 710.0, 295.0, 150.0, 20.0 ],
+									"text" : "NOT FLUSH"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-37",
+									"linecount" : 3,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 247.0, 631.0, 50.0, 22.0 ]
+									"patching_rect" : [ 247.0, 631.0, 50.0, 49.0 ],
+									"text" : "name Player_13708"
 								}
 
 							}
@@ -146,24 +224,13 @@
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-29",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 500.858333333333121, 277.5, 162.0, 20.0 ],
-									"text" : "fliush"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-28",
 									"maxclass" : "newobj",
-									"numinlets" : 5,
-									"numoutlets" : 5,
-									"outlettype" : [ "", "", "", "", "" ],
-									"patching_rect" : [ 80.0, 483.0, 283.0, 22.0 ],
-									"text" : "route event audio_off continuation_timestretch flush"
+									"numinlets" : 4,
+									"numoutlets" : 4,
+									"outlettype" : [ "", "", "", "" ],
+									"patching_rect" : [ 80.0, 483.0, 254.0, 22.0 ],
+									"text" : "route event audio_off continuation_timestretch"
 								}
 
 							}
@@ -175,7 +242,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 500.858333333333121, 184.5, 162.0, 87.0 ],
-									"presentation_linecount" : 6,
 									"text" : "event:\n- start (ms)\n- end (ms) [unused here]\n- pitch shift factor (cents)\n- time stretch factor (float)\n- energy (dB)"
 								}
 
@@ -184,11 +250,11 @@
 								"box" : 								{
 									"id" : "obj-27",
 									"maxclass" : "newobj",
-									"numinlets" : 3,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 80.0, 433.458333333333371, 339.0, 22.0 ],
-									"text" : "route audio flush"
+									"numinlets" : 2,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 80.0, 433.458333333333371, 69.0, 22.0 ],
+									"text" : "route audio"
 								}
 
 							}
@@ -254,7 +320,6 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"patching_rect" : [ 80.0, 377.5, 229.0, 35.0 ],
-									"presentation_linecount" : 2,
 									"text" : "somax.player @autoinitialize 0 @mode continuous @corpus Fabbrizio2c.pickle",
 									"varname" : "somax.player"
 								}
@@ -564,7 +629,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 500.858333333333121, 150.5, 393.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "audio_off: received when timeout / flushing / no further output occurs\ncontinuation_timestretch: received on continuation when tempo changes"
 								}
 
@@ -727,7 +791,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 2134.0, 1233.0 ],
+						"rect" : [ 34.0, 113.0, 2134.0, 1233.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -777,7 +841,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.0, 249.5, 150.0, 64.0 ],
+									"patching_rect" : [ 441.0, 249.5, 154.0, 64.0 ],
 									"text" : "note: 0-transposition cannot be disabled (will still be treated as enabled)"
 								}
 
@@ -1094,7 +1158,6 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"patching_rect" : [ 60.0, 261.5, 229.0, 35.0 ],
-									"presentation_linecount" : 2,
 									"text" : "somax.player @autoinitialize 0 @mode continuous @corpus Fabbrizio2c.pickle",
 									"varname" : "somax.player"
 								}
@@ -1122,7 +1185,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 595.541666666666515, 148.0, 127.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "load groove~.maxhelp"
 								}
 
@@ -1625,7 +1687,6 @@
 					}
 ,
 					"patching_rect" : [ 93.0, 38.0, 77.0, 22.0 ],
-					"presentation_linecount" : 3,
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -1655,7 +1716,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 112.0, 2134.0, 1233.0 ],
+						"rect" : [ 0.0, 26.0, 2134.0, 1233.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1690,6 +1751,7 @@
 								"box" : 								{
 									"bgcolor" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
 									"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
+									"bgfillcolor_autogradient" : 0.0,
 									"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
 									"bgfillcolor_color1" : [ 0.297396063804626, 0.977058053016663, 1.0, 1.0 ],
 									"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
@@ -1846,7 +1908,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 261.0, 513.0, 65.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "release $1"
 								}
 

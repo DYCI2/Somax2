@@ -171,6 +171,8 @@
 	<seealsolist>
 		<seealso name="somax.server.app" />
 		<seealso name="somax.player" />
+        <seealso name="somax.audiocorpusbuilder" />
+        <seealso name="somax.midicorpusbuilder" />
 	</seealsolist>
 	
 </c74object>

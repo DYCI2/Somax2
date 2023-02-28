@@ -337,9 +337,10 @@
 		<seealso name="somax.server" />
 		<seealso name="somax.audiorenderer" />
 		<seealso name="somax.midirenderer" />
-		<seealso name="nonexistinghehe" />
 		<seealso name="somax.audioinfluencer" />
         <seealso name="somax.midiinfluencer" />
+        <seealso name="somax.audiocorpusbuilder" />
+        <seealso name="somax.midicorpusbuilder" />
 	</seealsolist>
 	
 </c74object>
