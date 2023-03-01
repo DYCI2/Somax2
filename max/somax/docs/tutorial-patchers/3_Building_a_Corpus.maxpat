@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 176.0, 234.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -86,6 +86,7 @@
 						"style" : "",
 						"subpatcher_template" : "monaco_template",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -96,7 +97,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 807.75, 356.95832873049676, 190.0, 24.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Trigger the output of the Player"
 								}
 
@@ -151,7 +151,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 416.62500188748038, 401.958328999999992, 117.0, 74.0 ],
-									"presentation_linecount" : 5,
 									"text" : "Query the Server to get corpuspath folder and the list of the existing corpora in the corpuspath"
 								}
 
@@ -291,6 +290,7 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-82",
+									"local" : 1,
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
@@ -358,7 +358,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 215.0, 483.958329000000049, 150.0, 22.0 ],
-									"text" : "1 running"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -583,13 +583,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-45",
-									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 668.5, 542.416680250137347, 313.0, 35.0 ],
-									"text" : "/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Somax_Ligeti_1.pickle"
+									"patching_rect" : [ 668.5, 542.416680250137347, 313.0, 22.0 ],
+									"text" : "no loaded corpus"
 								}
 
 							}
@@ -1217,6 +1216,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -1677,7 +1677,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 323.083333333333371, 121.0, 22.0 ],
-									"text" : "1 running"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -2627,6 +2627,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -3034,7 +3035,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 419.333310893165617, 121.0, 22.0 ],
-									"text" : "1 running"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -3168,6 +3169,7 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-31",
+									"local" : 1,
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
@@ -4186,7 +4188,6 @@
 			"obj-1::obj-143::obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
 			"obj-1::obj-143::obj-799" : [ "__exp_tempoconsistencyenable[4]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-1::obj-143::obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
-			"obj-1::obj-143::obj-835" : [ "transpositions[2]", "transpositions", 0 ],
 			"obj-1::obj-143::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
 			"obj-1::obj-143::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-1::obj-143::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
@@ -4220,6 +4221,26 @@
 			}
 ,
 			"parameter_overrides" : 			{
+				"obj-1::obj-143::obj-270::obj-1226" : 				{
+					"parameter_longname" : "width[1]"
+				}
+,
+				"obj-1::obj-143::obj-270::obj-1227" : 				{
+					"parameter_longname" : "center[1]"
+				}
+,
+				"obj-1::obj-143::obj-270::obj-1240" : 				{
+					"parameter_longname" : "live.slider[3]"
+				}
+,
+				"obj-1::obj-143::obj-270::obj-1241" : 				{
+					"parameter_longname" : "live.numbox[3]"
+				}
+,
+				"obj-1::obj-143::obj-270::obj-889" : 				{
+					"parameter_longname" : "weight[1]"
+				}
+,
 				"obj-1::obj-22::obj-395::obj-2" : 				{
 					"parameter_longname" : "live.text[8]"
 				}

@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 194.0, 222.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -86,6 +86,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -625,7 +626,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-22",
-									"items" : [ "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device", ",", "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -798,7 +799,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "from Max 1", ",", "from Max 2", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -840,7 +841,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-55",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -853,7 +853,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-45",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -874,12 +873,13 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 323.083333333333371, 121.0, 22.0 ],
-									"text" : "0 duplicate"
+									"text" : "1 playersmissing"
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"hidden" : 1,
 									"id" : "obj-29",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -1320,7 +1320,6 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
-									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-59",
 									"ignoreclick" : 1,
@@ -1342,6 +1341,7 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
+									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-90",
 									"ignoreclick" : 1,
@@ -1366,6 +1366,7 @@
 									"fontface" : 0,
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
+									"hidden" : 1,
 									"id" : "obj-83",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -1861,7 +1862,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 194.0, 222.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1889,6 +1890,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -1977,7 +1979,7 @@
 												"box" : 												{
 													"autopopulate" : 1,
 													"id" : "obj-16",
-													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "Dutilleux_Sonata_3.gz", ",", "Fabbrizio2c.pickle", ",", "Fabbrizio2c.wav", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Ligeti_Etudes.gz", ",", "Palestrina_Missa_Papae.gz", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz" ],
+													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "DerekBailey_Improvisation_1975.pickle", ",", "DerekBailey_Improvisation_1975.wav", ",", "DerekBailey_SoloGuitar_1971.pickle", ",", "DerekBailey_SoloGuitar_1971.wav", ",", "Dutilleux_Sonata_3.gz", ",", "Fabbrizio2c.pickle", ",", "Fabbrizio2c.wav", ",", "guitar-chords.pickle", ",", "guitar-fast.pickle", ",", "guitar-h5.pickle", ",", "guitar-harmonics-1.pickle", ",", "guitar-harmonics-2.pickle", ",", "guitar-harmonics-B.pickle", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Ligeti_Etudes.gz", ",", "Palestrina_Missa_Papae.gz", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz", ",", "test_midi_piano.gz", ",", "test_midi_piano2.gz" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -2513,6 +2515,7 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-82",
+									"local" : 1,
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
@@ -2566,7 +2569,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 233.0, 471.958328999999992, 150.0, 22.0 ],
-									"text" : "0 duplicate"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -2751,7 +2754,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 100.0, 517.999995397163275, 87.0, 20.0 ],
+									"patching_rect" : [ 173.166666666666629, 544.45832873049676, 87.0, 20.0 ],
 									"text" : "s server_status_1"
 								}
 
@@ -3941,6 +3944,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -4194,7 +4198,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1026.25, 254.5, 242.0, 104.0 ],
+									"patching_rect" : [ 1026.25, 254.5, 246.0, 104.0 ],
 									"text" : "The Audio and MIDI Influencers listen to a continuous stream of audio or MIDI input data (from any type of source, including live musicians) and segments it temporally, where each slice is analyzed with respect to onset, pitch and chroma, which then is sent to the Player."
 								}
 
@@ -5420,7 +5424,6 @@
 			"obj-2::obj-143::obj-777" : [ "__exp_autojumpactivate[2]", "__exp_autojumpactivate", 0 ],
 			"obj-2::obj-143::obj-799" : [ "__exp_tempoconsistencyenable[6]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-2::obj-143::obj-802" : [ "__exp_tempoconsistencylen[5]", "__exp_tempoconsistencylen", 0 ],
-			"obj-2::obj-143::obj-835" : [ "transpositions[3]", "transpositions", 0 ],
 			"obj-2::obj-143::obj-860" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
 			"obj-2::obj-143::obj-865" : [ "selfharmonicngramorder[5]", "selfharmonicngramorder", 0 ],
 			"obj-2::obj-143::obj-870" : [ "selfharmonicbypass[2]", "selfharmonicbypass", 0 ],
@@ -5482,7 +5485,6 @@
 			"obj-7::obj-9::obj-777" : [ "__exp_autojumpactivate[3]", "__exp_autojumpactivate", 0 ],
 			"obj-7::obj-9::obj-799" : [ "__exp_tempoconsistencyenable[4]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-7::obj-9::obj-802" : [ "__exp_tempoconsistencylen[6]", "__exp_tempoconsistencylen", 0 ],
-			"obj-7::obj-9::obj-835" : [ "transpositions[4]", "transpositions", 0 ],
 			"obj-7::obj-9::obj-860" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay[1]", 0 ],
 			"obj-7::obj-9::obj-865" : [ "selfharmonicngramorder[6]", "selfharmonicngramorder", 0 ],
 			"obj-7::obj-9::obj-870" : [ "selfharmonicbypass[3]", "selfharmonicbypass", 0 ],
@@ -5537,7 +5539,6 @@
 			"obj-8::obj-143::obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
 			"obj-8::obj-143::obj-799" : [ "__exp_tempoconsistencyenable[5]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-8::obj-143::obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
-			"obj-8::obj-143::obj-835" : [ "transpositions[2]", "transpositions", 0 ],
 			"obj-8::obj-143::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
 			"obj-8::obj-143::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-8::obj-143::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
@@ -5598,6 +5599,10 @@
 					"parameter_longname" : "live.text[11]"
 				}
 ,
+				"obj-7::obj-25::obj-98" : 				{
+					"parameter_longname" : "live.text[6]"
+				}
+,
 				"obj-7::obj-9::obj-270::obj-1226" : 				{
 					"parameter_longname" : "width[3]"
 				}
@@ -5616,6 +5621,26 @@
 ,
 				"obj-7::obj-9::obj-270::obj-889" : 				{
 					"parameter_longname" : "weight[2]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-1226" : 				{
+					"parameter_longname" : "width[1]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-1227" : 				{
+					"parameter_longname" : "center[1]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-1240" : 				{
+					"parameter_longname" : "live.slider[3]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-1241" : 				{
+					"parameter_longname" : "live.numbox[3]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-889" : 				{
+					"parameter_longname" : "weight[1]"
 				}
 ,
 				"obj-8::obj-27::obj-98" : 				{

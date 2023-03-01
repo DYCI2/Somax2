@@ -86,6 +86,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -96,8 +97,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 533.731105836006009, 558.354182468587169, 101.999999999999773, 185.0 ],
-									"presentation_linecount" : 4,
+									"patching_rect" : [ 533.731105836006009, 558.354182468587169, 102.0, 185.0 ],
 									"text" : "The Player UI looks exactly the same if loaded with an audio (A) or MIDI (M) corpus, but the renderer should match the right type of corpus (in this case, MIDI)"
 								}
 
@@ -132,7 +132,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 28.0, 147.35415444102469, 471.0, 47.0 ],
-									"presentation_linecount" : 3,
 									"text" : "These UI objects have the same behaviour as the base objects, and the same configuration of inlets and outlets. In addition, they include a simple user interface to monitor and control the main parameters."
 								}
 
@@ -395,7 +394,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 805.291666666666742, 627.354182468587169, 113.666666666666742, 47.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Status: whether player is initialized on server or not"
 								}
 
@@ -477,7 +475,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 916.27083333333303, 520.895860804585936, 277.0, 47.0 ],
-									"presentation_linecount" : 3,
 									"text" : "However it is recommended to go thoroughly through the previous tutorials to have a clear understanding of them, as well as reading the "
 								}
 
@@ -528,7 +525,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 533.731105836006009, 377.354189535082696, 112.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "bpatcher somax.player.ui"
 								}
 
@@ -543,7 +539,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 1141.750000000000455, 301.587230498339636, 142.5, 52.0 ],
-									"presentation_linecount" : 2,
 									"text" : "bpatcher somax.midiinfluencer.ui"
 								}
 
@@ -558,8 +553,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 642.5, 142.854189535082696, 76.0, 52.0 ],
-									"presentation_linecount" : 2,
+									"patching_rect" : [ 642.5, 142.854189535082696, 79.0, 52.0 ],
 									"text" : "Load a MIDI corpus (M)"
 								}
 
@@ -680,7 +674,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-22",
-									"items" : [ "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -853,7 +847,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "from Max 1", ",", "from Max 2", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -895,7 +889,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-55",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -960,7 +953,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-45",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -980,7 +972,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 429.083333333333371, 121.0, 22.0 ],
-									"text" : "0 terminated"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -999,6 +991,7 @@
 							}
 , 							{
 								"box" : 								{
+									"hidden" : 1,
 									"id" : "obj-29",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -1233,7 +1226,6 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
-									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-59",
 									"ignoreclick" : 1,
@@ -1255,6 +1247,7 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
+									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-90",
 									"ignoreclick" : 1,
@@ -1822,6 +1815,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -1832,7 +1826,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 770.999999999999773, 660.958321664001232, 249.0, 64.0 ],
+									"patching_rect" : [ 770.999999999999773, 660.958321664001232, 252.0, 64.0 ],
 									"text" : "The Player UI looks exactly the same if loaded with an audio (A) or MIDI (M) corpus, but the renderer should match the right type of corpus (in this case, audio)"
 								}
 
@@ -2397,6 +2391,7 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-82",
+									"local" : 1,
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
@@ -2438,7 +2433,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 233.0, 583.958329000000049, 150.0, 22.0 ],
-									"text" : "0 terminated"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -2789,7 +2784,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1034.5, 184.95832873049676, 87.0, 52.0 ],
+									"patching_rect" : [ 1034.5, 184.95832873049676, 90.0, 52.0 ],
 									"text" : "Load an audio corpus (A)"
 								}
 
@@ -3568,7 +3563,6 @@
 			"obj-2::obj-69::obj-407::obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
 			"obj-2::obj-69::obj-407::obj-799" : [ "__exp_tempoconsistencyenable[5]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-2::obj-69::obj-407::obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
-			"obj-2::obj-69::obj-407::obj-835" : [ "transpositions[2]", "transpositions", 0 ],
 			"obj-2::obj-69::obj-407::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
 			"obj-2::obj-69::obj-407::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-2::obj-69::obj-407::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
@@ -3645,7 +3639,6 @@
 			"obj-8::obj-69::obj-407::obj-777" : [ "__exp_autojumpactivate[3]", "__exp_autojumpactivate", 0 ],
 			"obj-8::obj-69::obj-407::obj-799" : [ "__exp_tempoconsistencyenable[4]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-8::obj-69::obj-407::obj-802" : [ "__exp_tempoconsistencylen[6]", "__exp_tempoconsistencylen", 0 ],
-			"obj-8::obj-69::obj-407::obj-835" : [ "transpositions[4]", "transpositions", 0 ],
 			"obj-8::obj-69::obj-407::obj-860" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay[1]", 0 ],
 			"obj-8::obj-69::obj-407::obj-865" : [ "selfharmonicngramorder[1]", "selfharmonicngramorder", 0 ],
 			"obj-8::obj-69::obj-407::obj-870" : [ "selfharmonicbypass[3]", "selfharmonicbypass", 0 ],
@@ -3692,6 +3685,26 @@
 					"parameter_invisible" : 1,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-2::obj-69::obj-407::obj-270::obj-1226" : 				{
+					"parameter_longname" : "width[1]"
+				}
+,
+				"obj-2::obj-69::obj-407::obj-270::obj-1227" : 				{
+					"parameter_longname" : "center[1]"
+				}
+,
+				"obj-2::obj-69::obj-407::obj-270::obj-1240" : 				{
+					"parameter_longname" : "live.slider[3]"
+				}
+,
+				"obj-2::obj-69::obj-407::obj-270::obj-1241" : 				{
+					"parameter_longname" : "live.numbox[3]"
+				}
+,
+				"obj-2::obj-69::obj-407::obj-270::obj-889" : 				{
+					"parameter_longname" : "weight[1]"
 				}
 ,
 				"obj-2::obj-69::obj-79::obj-1" : 				{

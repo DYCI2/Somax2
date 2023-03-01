@@ -59,7 +59,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 221.0, 175.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -87,6 +87,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -504,7 +505,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-55",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -517,7 +517,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-45",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -538,12 +537,13 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 188.25, 383.583330949147523, 121.0, 22.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"hidden" : 1,
 									"id" : "obj-29",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -1154,7 +1154,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-22",
-									"items" : [ "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device", ",", "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -1285,7 +1285,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "from Max 1", ",", "from Max 2", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -1764,7 +1764,6 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
-									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-59",
 									"ignoreclick" : 1,
@@ -1786,6 +1785,7 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
+									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-90",
 									"ignoreclick" : 1,
@@ -1810,6 +1810,7 @@
 									"fontface" : 0,
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
+									"hidden" : 1,
 									"id" : "obj-83",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -2513,7 +2514,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 221.0, 175.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2541,6 +2542,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -3174,7 +3176,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-55",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -3187,7 +3188,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-45",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -3208,12 +3208,13 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 188.25, 383.583330949147523, 121.0, 22.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"hidden" : 1,
 									"id" : "obj-29",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -3605,7 +3606,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-22",
-									"items" : [ "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device", ",", "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -3736,7 +3737,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "from Max 1", ",", "from Max 2", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -4227,7 +4228,6 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
-									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-59",
 									"ignoreclick" : 1,
@@ -4249,6 +4249,7 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
+									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-90",
 									"ignoreclick" : 1,
@@ -4273,6 +4274,7 @@
 									"fontface" : 0,
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
+									"hidden" : 1,
 									"id" : "obj-83",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -4897,6 +4899,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -5148,7 +5151,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 222.0, 541.708335987022565, 150.0, 22.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -5699,7 +5702,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 24.0, 82.999991001861474, 469.5, 127.0 ],
+									"patching_rect" : [ 24.0, 82.999991001861474, 471.0, 127.0 ],
 									"text" : "In this patch we are exploring more in depth some of the many parameters avaialble in the somax.player.\n\nWe are going to start with the Scheduling Settings, responsible for the Playing Mode and the Temporal Behaviour of the Player.\n\nThe parameters we are focusing on are Mode, Cut and Timeout.\n\nNote that Mode has already been described in the previous tutorial"
 								}
 
@@ -5788,6 +5791,7 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-82",
+									"local" : 1,
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
@@ -7143,7 +7147,6 @@
 			"obj-1::obj-143::obj-777" : [ "__exp_autojumpactivate[3]", "__exp_autojumpactivate", 0 ],
 			"obj-1::obj-143::obj-799" : [ "__exp_tempoconsistencyenable[4]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-1::obj-143::obj-802" : [ "__exp_tempoconsistencylen[6]", "__exp_tempoconsistencylen", 0 ],
-			"obj-1::obj-143::obj-835" : [ "transpositions[4]", "transpositions", 0 ],
 			"obj-1::obj-143::obj-860" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay[1]", 0 ],
 			"obj-1::obj-143::obj-865" : [ "selfharmonicngramorder[6]", "selfharmonicngramorder", 0 ],
 			"obj-1::obj-143::obj-870" : [ "selfharmonicbypass[3]", "selfharmonicbypass", 0 ],
@@ -7196,7 +7199,6 @@
 			"obj-2::obj-143::obj-777" : [ "__exp_autojumpactivate[2]", "__exp_autojumpactivate", 0 ],
 			"obj-2::obj-143::obj-799" : [ "__exp_tempoconsistencyenable[6]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-2::obj-143::obj-802" : [ "__exp_tempoconsistencylen[5]", "__exp_tempoconsistencylen", 0 ],
-			"obj-2::obj-143::obj-835" : [ "transpositions[3]", "transpositions", 0 ],
 			"obj-2::obj-143::obj-860" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
 			"obj-2::obj-143::obj-865" : [ "selfharmonicngramorder[5]", "selfharmonicngramorder", 0 ],
 			"obj-2::obj-143::obj-870" : [ "selfharmonicbypass[2]", "selfharmonicbypass", 0 ],
@@ -7251,7 +7253,6 @@
 			"obj-8::obj-143::obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
 			"obj-8::obj-143::obj-799" : [ "__exp_tempoconsistencyenable[5]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-8::obj-143::obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
-			"obj-8::obj-143::obj-835" : [ "transpositions[2]", "transpositions", 0 ],
 			"obj-8::obj-143::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
 			"obj-8::obj-143::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-8::obj-143::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
@@ -7306,6 +7307,26 @@
 ,
 				"obj-2::obj-143::obj-270::obj-889" : 				{
 					"parameter_longname" : "weight[5]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-1226" : 				{
+					"parameter_longname" : "width[1]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-1227" : 				{
+					"parameter_longname" : "center[1]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-1240" : 				{
+					"parameter_longname" : "live.slider[3]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-1241" : 				{
+					"parameter_longname" : "live.numbox[3]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-889" : 				{
+					"parameter_longname" : "weight[1]"
 				}
 ,
 				"obj-8::obj-27::obj-98" : 				{

@@ -87,6 +87,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
+						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -95,7 +96,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 28.0, 79.166663542930593, 471.0, 181.0 ],
+									"patching_rect" : [ 28.0, 79.166663542930593, 472.0, 181.0 ],
 									"text" : "In order to better control the interaction with the user, the Player has a wide set of parameters, that helps to determine its behaviour.\nIn this tutorial we will introduce a small set of these really useful parameters that will let you co-improvise in a meaningful way.\n\nTo have a better understanding of what's going on, let's constantly monitor the index of output, corresponding to the event of the corpus currently output by the Player. \nThis index determines the position of the played event inside the corpus, and thus could give you hints on the temporal direction of the interaction.\n\nFurthermore, every time the Player finds a match between its known corpus and the incoming influences, these matches will be catalogued in different layers, shaping the harmonic or melodic direction of the improvisation."
 								}
 
@@ -391,7 +392,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-44",
-									"items" : [ "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device", ",", "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2", ",", "MPK mini 3", ",", "MIDI Mix", ",", "USB MIDI Device" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -606,7 +607,7 @@
 												"box" : 												{
 													"autopopulate" : 1,
 													"id" : "obj-16",
-													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "Dutilleux_Sonata_3.gz", ",", "Fabbrizio2c.pickle", ",", "Fabbrizio2c.wav", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Ligeti_Etudes.gz", ",", "Palestrina_Missa_Papae.gz", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz" ],
+													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "DerekBailey_Improvisation_1975.pickle", ",", "DerekBailey_Improvisation_1975.wav", ",", "DerekBailey_SoloGuitar_1971.pickle", ",", "DerekBailey_SoloGuitar_1971.wav", ",", "Dutilleux_Sonata_3.gz", ",", "Fabbrizio2c.pickle", ",", "Fabbrizio2c.wav", ",", "guitar-chords.pickle", ",", "guitar-fast.pickle", ",", "guitar-h5.pickle", ",", "guitar-harmonics-1.pickle", ",", "guitar-harmonics-2.pickle", ",", "guitar-harmonics-B.pickle", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Ligeti_Etudes.gz", ",", "Palestrina_Missa_Papae.gz", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz", ",", "test_midi_piano.gz", ",", "test_midi_piano2.gz" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -901,6 +902,7 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-82",
+									"local" : 1,
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
@@ -954,7 +956,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 229.0, 578.430415043448193, 150.0, 22.0 ],
-									"text" : "1 running"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -1837,7 +1839,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1112.334146666667039, 605.993157433645933, 170.0, 22.0 ],
-									"text" : "Joelle.pickle"
+									"text" : "no loaded corpus"
 								}
 
 							}
@@ -2312,7 +2314,6 @@
 			"obj-8::obj-143::obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
 			"obj-8::obj-143::obj-799" : [ "__exp_tempoconsistencyenable[5]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-8::obj-143::obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
-			"obj-8::obj-143::obj-835" : [ "transpositions[2]", "transpositions", 0 ],
 			"obj-8::obj-143::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
 			"obj-8::obj-143::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-8::obj-143::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
@@ -2328,6 +2329,26 @@
 			}
 ,
 			"parameter_overrides" : 			{
+				"obj-8::obj-143::obj-270::obj-1226" : 				{
+					"parameter_longname" : "width[1]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-1227" : 				{
+					"parameter_longname" : "center[1]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-1240" : 				{
+					"parameter_longname" : "live.slider[3]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-1241" : 				{
+					"parameter_longname" : "live.numbox[3]"
+				}
+,
+				"obj-8::obj-143::obj-270::obj-889" : 				{
+					"parameter_longname" : "weight[1]"
+				}
+,
 				"obj-8::obj-27::obj-98" : 				{
 					"parameter_longname" : "live.text[9]"
 				}
