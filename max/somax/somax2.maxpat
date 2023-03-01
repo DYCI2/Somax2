@@ -45,30 +45,6 @@
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"id" : "obj-13",
-					"lockeddragscroll" : 0,
-					"lockedsize" : 0,
-					"maxclass" : "bpatcher",
-					"name" : "somax.midioutput.maxpat",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 797.0, 948.0, 245.0, 31.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 256.0, 827.0, 245.0, 31.0 ],
-					"varname" : "somax.midioutput[2]",
-					"viewvisibility" : 1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgmode" : 0,
-					"border" : 0,
-					"clickthrough" : 0,
-					"enablehscroll" : 0,
-					"enablevscroll" : 0,
 					"id" : "obj-11",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -102,34 +78,10 @@
 					"numoutlets" : 4,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 533.0, 77.0, 249.0, 222.0 ],
+					"patching_rect" : [ 533.0, 77.0, 250.0, 221.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.5, 359.0, 249.0, 241.0 ],
+					"presentation_rect" : [ 2.5, 306.5, 249.0, 220.0 ],
 					"varname" : "somax.midiinfluencer.app",
-					"viewvisibility" : 1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgmode" : 0,
-					"border" : 0,
-					"clickthrough" : 0,
-					"enablehscroll" : 0,
-					"enablevscroll" : 0,
-					"id" : "obj-6",
-					"lockeddragscroll" : 0,
-					"lockedsize" : 0,
-					"maxclass" : "bpatcher",
-					"name" : "somax.midioutput.maxpat",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 277.0, 948.0, 245.0, 31.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 1.5, 297.0, 245.0, 31.0 ],
-					"varname" : "somax.midioutput",
 					"viewvisibility" : 1
 				}
 
@@ -171,6 +123,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"color" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"id" : "obj-3",
 					"maxclass" : "mc.ezdac~",
@@ -200,14 +153,42 @@
 					"outlettype" : [ "", "multichannelsignal", "", "", "" ],
 					"patching_rect" : [ 15.0, 77.0, 254.0, 299.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.5, 609.0, 254.0, 299.0 ],
+					"presentation_rect" : [ 2.5, 530.0, 254.0, 299.0 ],
 					"varname" : "somax.server.app",
 					"viewvisibility" : 1
 				}
 
 			}
  ],
-		"lines" : [  ],
+		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"source" : [ "obj-11", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"source" : [ "obj-2", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"source" : [ "obj-4", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"source" : [ "obj-5", 0 ]
+				}
+
+			}
+ ],
 		"parameters" : 		{
 			"obj-11::obj-17::obj-10::obj-21" : [ "onset[5]", "onset", 0 ],
 			"obj-11::obj-17::obj-10::obj-28" : [ "chromaonset[5]", "chromaonset", 0 ],
@@ -292,7 +273,6 @@
 			"obj-11::obj-3::obj-407::obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
 			"obj-11::obj-3::obj-407::obj-799" : [ "__exp_tempoconsistencyenable[4]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-11::obj-3::obj-407::obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
-			"obj-11::obj-3::obj-407::obj-835" : [ "transpositions[2]", "transpositions", 0 ],
 			"obj-11::obj-3::obj-407::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
 			"obj-11::obj-3::obj-407::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-11::obj-3::obj-407::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
@@ -381,6 +361,26 @@
 					"parameter_invisible" : 1,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-11::obj-3::obj-407::obj-270::obj-1226" : 				{
+					"parameter_longname" : "width[1]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-270::obj-1227" : 				{
+					"parameter_longname" : "center[1]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-270::obj-1240" : 				{
+					"parameter_longname" : "live.slider[3]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-270::obj-1241" : 				{
+					"parameter_longname" : "live.numbox[3]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-270::obj-889" : 				{
+					"parameter_longname" : "weight[1]"
 				}
 ,
 				"obj-11::obj-3::obj-87::obj-1" : 				{
