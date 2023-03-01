@@ -91,6 +91,162 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"checkedcolor" : [ 0.482352941176471, 0.847058823529412, 0.36078431372549, 1.0 ],
+									"id" : "obj-70",
+									"maxclass" : "toggle",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 209.333333333333314, 540.95832873049676, 24.0, 24.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-65",
+									"maxclass" : "toggle",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 340.0, 445.624985286404922, 24.0, 24.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"id" : "obj-42",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 250.0, 540.958329000000049, 150.0, 22.0 ],
+									"text" : "1 playersmissing"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
+									"fontsize" : 10.0,
+									"hidden" : 1,
+									"id" : "obj-54",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 35.0, 501.95832873049676, 78.0, 20.0 ],
+									"text" : "s server_param"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
+									"fontsize" : 10.0,
+									"hidden" : 1,
+									"id" : "obj-2",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 190.166666666666629, 613.45832873049676, 87.0, 20.0 ],
+									"text" : "s server_status_2"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 3,
+									"fontface" : 0,
+									"fontsize" : 12.0,
+									"id" : "obj-33",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 83.5, 527.45832873049676, 121.0, 51.0 ],
+									"presentation_linecount" : 3,
+									"text" : "The server will be auto-initialized when created"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-87",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 205.5, 569.499995397163275, 150.0, 33.0 ],
+									"presentation_linecount" : 2,
+									"text" : "status outlet can be used to see status of server"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"fontface" : 0,
+									"fontsize" : 12.0,
+									"id" : "obj-180",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 369.291666666666629, 445.624985286404922, 86.0, 24.0 ],
+									"text" : "Run Server"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"fontsize" : 12.0,
+									"id" : "obj-50",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 228.333333333333371, 411.874992273427324, 170.0, 24.0 ],
+									"text" : "initialize all existing players"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
+									"bgfillcolor_autogradient" : 0.0,
+									"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
+									"bgfillcolor_color1" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
+									"bgfillcolor_type" : "gradient",
+									"gradient" : 1,
+									"id" : "obj-112",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 133.0, 413.874992273427324, 90.0, 22.0 ],
+									"text" : "initializeplayers"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"color" : [ 1.0, 0.658823529411765, 0.149019607843137, 1.0 ],
+									"id" : "obj-15",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 133.0, 491.95832873049676, 171.666666666666629, 22.0 ],
+									"text" : "somax.server"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-101",
 									"linecount" : 13,
 									"maxclass" : "comment",
@@ -607,7 +763,7 @@
 												"box" : 												{
 													"autopopulate" : 1,
 													"id" : "obj-16",
-													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "DerekBailey_Improvisation_1975.pickle", ",", "DerekBailey_Improvisation_1975.wav", ",", "DerekBailey_SoloGuitar_1971.pickle", ",", "DerekBailey_SoloGuitar_1971.wav", ",", "Dutilleux_Sonata_3.gz", ",", "Fabbrizio2c.pickle", ",", "Fabbrizio2c.wav", ",", "guitar-chords.pickle", ",", "guitar-fast.pickle", ",", "guitar-h5.pickle", ",", "guitar-harmonics-1.pickle", ",", "guitar-harmonics-2.pickle", ",", "guitar-harmonics-B.pickle", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Ligeti_Etudes.gz", ",", "Palestrina_Missa_Papae.gz", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz", ",", "test_midi_piano.gz", ",", "test_midi_piano2.gz" ],
+													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "DerekBailey_Improvisation_1975.pickle", ",", "DerekBailey_Improvisation_1975.wav", ",", "DerekBailey_SoloGuitar_1971.pickle", ",", "DerekBailey_SoloGuitar_1971.wav", ",", "Dutilleux_Sonata_3.gz", ",", "Fabbrizio2c.pickle", ",", "Fabbrizio2c.wav", ",", "guitar-chords.pickle", ",", "guitar-fast.pickle", ",", "guitar-h5.pickle", ",", "guitar-harmonics-1.pickle", ",", "guitar-harmonics-2.pickle", ",", "guitar-harmonics-B.pickle", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Ligeti_Etudes.gz", ",", "Palestrina_Missa_Papae.gz", ",", "promenade.pickle", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz", ",", "test_midi_piano.gz", ",", "test_midi_piano2.gz" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -924,44 +1080,6 @@
 							}
 , 							{
 								"box" : 								{
-									"checkedcolor" : [ 0.482352941176471, 0.847058823529412, 0.36078431372549, 1.0 ],
-									"id" : "obj-70",
-									"maxclass" : "toggle",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 188.333333333333314, 578.430414773944904, 24.0, 24.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-65",
-									"maxclass" : "toggle",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 318.0, 471.930414773944904, 24.0, 24.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 1,
-									"id" : "obj-42",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 229.0, 578.430415043448193, 150.0, 22.0 ],
-									"text" : "1 playersmissing"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-21",
@@ -1027,20 +1145,6 @@
 							}
 , 							{
 								"box" : 								{
-									"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
-									"fontsize" : 10.0,
-									"hidden" : 1,
-									"id" : "obj-54",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 16.0, 578.430414773944904, 78.0, 20.0 ],
-									"text" : "s server_param"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"color" : [ 0.870588235294118, 0.027450980392157, 0.027450980392157, 1.0 ],
 									"fontsize" : 10.0,
 									"hidden" : 1,
@@ -1061,34 +1165,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 524.0, 20.95832947004692, 6.0, 723.375 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
-									"fontsize" : 10.0,
-									"hidden" : 1,
-									"id" : "obj-2",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 96.0, 624.472081440611419, 87.0, 20.0 ],
-									"text" : "s server_status_2"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"fontface" : 0,
-									"fontsize" : 12.0,
-									"id" : "obj-33",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 169.166666666666629, 400.430414773944904, 108.0, 24.0 ],
-									"text" : "Initialize Server"
 								}
 
 							}
@@ -1121,65 +1197,6 @@
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-87",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 184.5, 606.972081440611419, 150.0, 33.0 ],
-									"text" : "status outlet can be used to see status of server"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"fontface" : 0,
-									"fontsize" : 12.0,
-									"id" : "obj-180",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 347.291666666666629, 471.930414773944904, 86.0, 24.0 ],
-									"text" : "Run Server"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"fontsize" : 12.0,
-									"id" : "obj-50",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 289.0, 436.430414773944904, 170.0, 24.0 ],
-									"text" : "initialize all existing players"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-									"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_autogradient" : 0.0,
-									"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_color1" : [ 0.2, 0.2, 0.2, 1.0 ],
-									"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
-									"bgfillcolor_type" : "gradient",
-									"gradient" : 1,
-									"id" : "obj-112",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 193.666666666666629, 438.430414773944904, 90.0, 22.0 ],
-									"text" : "initializeplayers"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"fontface" : 2,
 									"fontsize" : 16.0,
 									"id" : "obj-10",
@@ -1190,31 +1207,6 @@
 									"patching_rect" : [ 52.0, 342.680407786922387, 443.0, 42.0 ],
 									"text" : "NB: Only one server can be present in an open Max window -- take care not to instantiate multiple servers!",
 									"textcolor" : [ 0.831372549019608, 0.035294117647059, 0.035294117647059, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-12",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 112.0, 402.430414773944904, 51.0, 22.0 ],
-									"text" : "initialize"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 1.0, 0.658823529411765, 0.149019607843137, 1.0 ],
-									"id" : "obj-15",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 112.0, 529.430414773944904, 171.666666666666629, 22.0 ],
-									"text" : "somax.server"
 								}
 
 							}
@@ -1656,6 +1648,69 @@
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
 									"hint" : "",
+									"id" : "obj-18",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 60.0, 542.95832873049676, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "2",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-90",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 108.5, 413.874992273427324, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "3",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-91",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 317.0, 447.624985286404922, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "6",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
 									"id" : "obj-68",
 									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
@@ -1727,69 +1782,6 @@
 , 							{
 								"box" : 								{
 									"background" : 1,
-									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-									"fontname" : "Arial Bold",
-									"hint" : "",
-									"id" : "obj-18",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 88.0, 402.430414773944904, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "2",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-									"fontname" : "Arial Bold",
-									"hint" : "",
-									"id" : "obj-90",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 169.166666666666629, 438.430414773944904, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "3",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-									"fontname" : "Arial Bold",
-									"hint" : "",
-									"id" : "obj-91",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 295.0, 473.930414773944904, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "6",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
 									"id" : "obj-62",
 									"maxclass" : "toggle",
 									"numinlets" : 1,
@@ -1847,15 +1839,8 @@
 						"lines" : [ 							{
 								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
-									"midpoints" : [ 203.166666666666629, 516.430414773944904, 121.5, 516.430414773944904 ],
+									"midpoints" : [ 142.5, 478.95832873049676, 142.5, 478.95832873049676 ],
 									"source" : [ "obj-112", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-15", 0 ],
-									"source" : [ "obj-12", 0 ]
 								}
 
 							}
@@ -1913,7 +1898,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-42", 1 ],
-									"midpoints" : [ 197.833333333333314, 564.430414773944904, 369.5, 564.430414773944904 ],
+									"midpoints" : [ 218.833333333333314, 526.95832873049676, 390.5, 526.95832873049676 ],
 									"order" : 0,
 									"source" : [ "obj-15", 1 ]
 								}
@@ -2179,7 +2164,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
-									"midpoints" : [ 327.5, 517.180414773944904, 121.5, 517.180414773944904 ],
+									"midpoints" : [ 349.5, 479.70832873049676, 142.5, 479.70832873049676 ],
 									"source" : [ "obj-65", 0 ]
 								}
 

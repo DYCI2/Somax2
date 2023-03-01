@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 176.0, 234.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -89,6 +89,23 @@
 						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 3,
+									"fontface" : 0,
+									"fontsize" : 12.0,
+									"id" : "obj-33",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 46.0, 470.45832873049676, 123.0, 51.0 ],
+									"presentation_linecount" : 3,
+									"text" : "The server will be auto-initialized when created"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bubble" : 1,
 									"bubbleside" : 3,
@@ -402,20 +419,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble" : 1,
-									"fontface" : 0,
-									"fontsize" : 12.0,
-									"id" : "obj-33",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 155.166666666666629, 259.95832873049676, 108.0, 24.0 ],
-									"text" : "Initialize Server"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"fontsize" : 12.0,
 									"id" : "obj-10",
 									"linecount" : 3,
@@ -475,7 +478,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 275.0, 295.95832873049676, 170.0, 24.0 ],
+									"patching_rect" : [ 193.333333333333371, 295.95832873049676, 170.0, 24.0 ],
 									"text" : "initialize all existing players"
 								}
 
@@ -495,7 +498,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 179.666666666666629, 297.95832873049676, 90.0, 22.0 ],
+									"patching_rect" : [ 98.0, 297.95832873049676, 90.0, 22.0 ],
 									"text" : "initializeplayers"
 								}
 
@@ -512,18 +515,6 @@
 									"patching_rect" : [ 38.0, 202.208321743474244, 443.0, 42.0 ],
 									"text" : "NB: Only one server can be present in an open Max window -- take care not to instantiate multiple servers!",
 									"textcolor" : [ 0.831372549019608, 0.035294117647059, 0.035294117647059, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-12",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 98.0, 261.95832873049676, 51.0, 22.0 ],
-									"text" : "initialize"
 								}
 
 							}
@@ -769,6 +760,27 @@
 , 							{
 								"box" : 								{
 									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-18",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 22.5, 485.95832873049676, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "2",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
 									"fontface" : 1,
 									"fontname" : "Arial",
 									"fontsize" : 22.0,
@@ -849,27 +861,6 @@
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
 									"hint" : "",
-									"id" : "obj-18",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 74.0, 261.95832873049676, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "2",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-									"fontname" : "Arial Bold",
-									"hint" : "",
 									"id" : "obj-90",
 									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
@@ -878,7 +869,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 155.166666666666629, 297.95832873049676, 20.0, 20.0 ],
+									"patching_rect" : [ 73.5, 297.95832873049676, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "3",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -910,15 +901,8 @@
 						"lines" : [ 							{
 								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
-									"midpoints" : [ 189.166666666666629, 412.95832873049676, 107.5, 412.95832873049676 ],
+									"midpoints" : [ 107.5, 412.95832873049676, 107.5, 412.95832873049676 ],
 									"source" : [ "obj-112", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-15", 0 ],
-									"source" : [ "obj-12", 0 ]
 								}
 
 							}

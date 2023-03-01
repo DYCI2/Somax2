@@ -1979,7 +1979,7 @@
 												"box" : 												{
 													"autopopulate" : 1,
 													"id" : "obj-16",
-													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "DerekBailey_Improvisation_1975.pickle", ",", "DerekBailey_Improvisation_1975.wav", ",", "DerekBailey_SoloGuitar_1971.pickle", ",", "DerekBailey_SoloGuitar_1971.wav", ",", "Dutilleux_Sonata_3.gz", ",", "Fabbrizio2c.pickle", ",", "Fabbrizio2c.wav", ",", "guitar-chords.pickle", ",", "guitar-fast.pickle", ",", "guitar-h5.pickle", ",", "guitar-harmonics-1.pickle", ",", "guitar-harmonics-2.pickle", ",", "guitar-harmonics-B.pickle", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Ligeti_Etudes.gz", ",", "Palestrina_Missa_Papae.gz", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz", ",", "test_midi_piano.gz", ",", "test_midi_piano2.gz" ],
+													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "DerekBailey_Improvisation_1975.pickle", ",", "DerekBailey_Improvisation_1975.wav", ",", "DerekBailey_SoloGuitar_1971.pickle", ",", "DerekBailey_SoloGuitar_1971.wav", ",", "Dutilleux_Sonata_3.gz", ",", "Fabbrizio2c.pickle", ",", "Fabbrizio2c.wav", ",", "guitar-chords.pickle", ",", "guitar-fast.pickle", ",", "guitar-h5.pickle", ",", "guitar-harmonics-1.pickle", ",", "guitar-harmonics-2.pickle", ",", "guitar-harmonics-B.pickle", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Ligeti_Etudes.gz", ",", "Palestrina_Missa_Papae.gz", ",", "promenade.pickle", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz", ",", "test_midi_piano.gz", ",", "test_midi_piano2.gz" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -2544,7 +2544,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 192.333333333333314, 471.95832873049676, 24.0, 24.0 ]
+									"patching_rect" : [ 197.333333333333314, 341.95832873049676, 24.0, 24.0 ]
 								}
 
 							}
@@ -2556,7 +2556,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 322.0, 365.45832873049676, 24.0, 24.0 ]
+									"patching_rect" : [ 328.0, 246.624985286404922, 24.0, 24.0 ]
 								}
 
 							}
@@ -2568,7 +2568,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 233.0, 471.958328999999992, 150.0, 22.0 ],
+									"patching_rect" : [ 238.0, 341.958328999999992, 150.0, 22.0 ],
 									"text" : "1 playersmissing"
 								}
 
@@ -2715,7 +2715,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 20.0, 471.95832873049676, 78.0, 20.0 ],
+									"patching_rect" : [ 23.0, 302.95832873049676, 78.0, 20.0 ],
 									"text" : "s server_param"
 								}
 
@@ -2754,7 +2754,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 173.166666666666629, 544.45832873049676, 87.0, 20.0 ],
+									"patching_rect" : [ 178.166666666666629, 414.45832873049676, 87.0, 20.0 ],
 									"text" : "s server_status_1"
 								}
 
@@ -2762,14 +2762,16 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubbleside" : 3,
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-33",
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 173.166666666666629, 293.95832873049676, 108.0, 24.0 ],
-									"text" : "Initialize Server"
+									"patching_rect" : [ 71.5, 328.45832873049676, 120.0, 51.0 ],
+									"text" : "The server will be auto-initialized when created"
 								}
 
 							}
@@ -2781,7 +2783,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 21.5, 585.45832873049676, 512.0, 47.0 ],
+									"patching_rect" : [ 26.5, 455.45832873049676, 512.0, 47.0 ],
 									"text" : "When this is the case, the object will ignore all messages while it's a duplicate (so it's safe to have multiple servers open). To attempt to clear duplicate flag (if all other servers have been closed) send \"reload\" to the server object"
 								}
 
@@ -2794,7 +2796,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 21.5, 566.45832873049676, 477.0, 20.0 ],
+									"patching_rect" : [ 26.5, 436.45832873049676, 477.0, 20.0 ],
 									"text" : "Note: if a server is open in another window, the status \"duplicate\" will be shown. ",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
@@ -2807,7 +2809,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 188.5, 500.499995397163275, 150.0, 33.0 ],
+									"patching_rect" : [ 193.5, 370.499995397163275, 150.0, 33.0 ],
 									"text" : "status outlet can be used to see status of server"
 								}
 
@@ -2821,7 +2823,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 351.291666666666629, 365.45832873049676, 86.0, 24.0 ],
+									"patching_rect" : [ 357.291666666666629, 246.624985286404922, 86.0, 24.0 ],
 									"text" : "Run Server"
 								}
 
@@ -2834,7 +2836,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 293.0, 329.95832873049676, 170.0, 24.0 ],
+									"patching_rect" : [ 216.333333333333371, 212.874992273427324, 170.0, 24.0 ],
 									"text" : "initialize all existing players"
 								}
 
@@ -2854,7 +2856,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 197.666666666666629, 331.95832873049676, 90.0, 22.0 ],
+									"patching_rect" : [ 121.0, 214.874992273427324, 90.0, 22.0 ],
 									"text" : "initializeplayers"
 								}
 
@@ -2868,21 +2870,9 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 56.0, 236.208321743474244, 443.0, 42.0 ],
+									"patching_rect" : [ 63.0, 508.673499104757866, 443.0, 42.0 ],
 									"text" : "NB: Only one server can be present in an open Max window -- take care not to instantiate multiple servers!",
 									"textcolor" : [ 0.831372549019608, 0.035294117647059, 0.035294117647059, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-12",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 116.0, 295.95832873049676, 51.0, 22.0 ],
-									"text" : "initialize"
 								}
 
 							}
@@ -2894,7 +2884,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 116.0, 422.95832873049676, 171.666666666666629, 22.0 ],
+									"patching_rect" : [ 121.0, 292.95832873049676, 171.666666666666629, 22.0 ],
 									"text" : "somax.server"
 								}
 
@@ -3433,7 +3423,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 92.0, 295.95832873049676, 20.0, 20.0 ],
+									"patching_rect" : [ 48.0, 343.95832873049676, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -3454,7 +3444,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 173.166666666666629, 331.95832873049676, 20.0, 20.0 ],
+									"patching_rect" : [ 96.5, 214.874992273427324, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "3",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -3475,7 +3465,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 299.0, 367.45832873049676, 20.0, 20.0 ],
+									"patching_rect" : [ 305.0, 248.624985286404922, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "6",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -3576,15 +3566,8 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
-									"midpoints" : [ 207.166666666666629, 409.95832873049676, 125.5, 409.95832873049676 ],
+									"midpoints" : [ 130.5, 279.95832873049676, 130.5, 279.95832873049676 ],
 									"source" : [ "obj-112", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-15", 0 ],
-									"source" : [ "obj-12", 0 ]
 								}
 
 							}
@@ -3641,7 +3624,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-42", 1 ],
-									"midpoints" : [ 201.833333333333314, 457.95832873049676, 373.5, 457.95832873049676 ],
+									"midpoints" : [ 206.833333333333314, 327.95832873049676, 378.5, 327.95832873049676 ],
 									"order" : 0,
 									"source" : [ "obj-15", 1 ]
 								}
@@ -3817,7 +3800,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
-									"midpoints" : [ 331.5, 410.70832873049676, 125.5, 410.70832873049676 ],
+									"midpoints" : [ 337.5, 280.70832873049676, 130.5, 280.70832873049676 ],
 									"source" : [ "obj-65", 0 ]
 								}
 
@@ -5119,7 +5102,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1260.625, 303.5, 20.0, 20.0 ],
+									"patching_rect" : [ 1278.0, 296.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
