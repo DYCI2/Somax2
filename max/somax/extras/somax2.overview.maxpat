@@ -40,12 +40,28 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-6",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 403.0, 41.0, 150.0, 33.0 ],
+					"presentation" : 1,
+					"presentation_linecount" : 2,
+					"presentation_rect" : [ 205.0, 93.0, 150.0, 33.0 ],
+					"text" : "PUT THE BASIC WORKFLOW AS A TAB"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"bgmode" : 0,
 					"border" : 0,
 					"clickthrough" : 1,
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-2",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -518,7 +534,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 690.0, 330.0, 155.0, 66.0 ],
+					"patching_rect" : [ 690.0, 330.0, 159.0, 66.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 2,
 					"presentation_rect" : [ 388.296113669872284, 97.912621319293976, 204.0, 52.0 ],
@@ -534,7 +550,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1547,7 +1562,7 @@
 		"dependency_cache" : [ 			{
 				"name" : "somax2.png",
 				"bootpath" : "~/Desktop",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../../../../../../Desktop",
 				"type" : "PNG",
 				"implicit" : 1
 			}
