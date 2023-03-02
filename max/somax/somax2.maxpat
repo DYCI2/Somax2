@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 2092.0, 1250.0 ],
+		"rect" : [ 34.0, 87.0, 2492.0, 1250.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -80,20 +80,9 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 533.0, 77.0, 250.0, 221.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 2.5, 306.5, 249.0, 220.0 ],
+					"presentation_rect" : [ 2.5, 329.0, 249.0, 220.0 ],
 					"varname" : "somax.midiinfluencer.app",
 					"viewvisibility" : 1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-5",
-					"maxclass" : "mc.ezadc~",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "multichannelsignal" ],
-					"patching_rect" : [ 277.0, 14.0, 45.0, 45.0 ]
 				}
 
 			}
@@ -115,7 +104,7 @@
 					"outlettype" : [ "", "multichannelsignal", "", "", "" ],
 					"patching_rect" : [ 277.0, 77.0, 251.0, 295.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.5, 4.0, 251.0, 295.0 ],
+					"presentation_rect" : [ 1.5, 4.0, 251.0, 323.0 ],
 					"varname" : "somax.audioinfluencer.app",
 					"viewvisibility" : 1
 				}
@@ -123,7 +112,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"color" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"id" : "obj-3",
 					"maxclass" : "mc.ezdac~",
@@ -153,7 +141,7 @@
 					"outlettype" : [ "", "multichannelsignal", "", "", "" ],
 					"patching_rect" : [ 15.0, 77.0, 254.0, 299.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 2.5, 530.0, 254.0, 299.0 ],
+					"presentation_rect" : [ 2.5, 552.5, 254.0, 299.0 ],
 					"varname" : "somax.server.app",
 					"viewvisibility" : 1
 				}
@@ -171,20 +159,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-2", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
-					"source" : [ "obj-4", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-4", 0 ],
-					"source" : [ "obj-5", 0 ]
 				}
 
 			}
@@ -621,7 +595,21 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "somax.audioinput.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "somax.audiomixer.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.audiooutput.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",

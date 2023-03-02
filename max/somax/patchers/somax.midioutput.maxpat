@@ -40,12 +40,24 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-5",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 157.187547400163993, 128.0, 68.0, 22.0 ],
+					"text" : "enabled $1"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-1",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 279.0, 143.0, 91.0, 22.0 ],
+					"patching_rect" : [ 336.425000000000011, 128.0, 91.0, 22.0 ],
 					"text" : "prepend device"
 				}
 
@@ -106,7 +118,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 319.462547400163999, 110.0, 77.0, 22.0 ],
+					"patching_rect" : [ 370.112547400163976, 95.0, 77.0, 22.0 ],
 					"text" : "s #0_flush"
 				}
 
@@ -339,7 +351,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 241.712547400163999, 172.22209496603773, 121.0, 22.0 ],
+					"patching_rect" : [ 299.13754740016401, 172.22209496603773, 121.0, 22.0 ],
 					"text" : "s #0_device_index"
 				}
 
@@ -351,7 +363,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 241.712547400163999, 110.0, 52.0, 22.0 ],
+					"patching_rect" : [ 299.13754740016401, 95.0, 52.0, 22.0 ],
 					"text" : "route int"
 				}
 
@@ -735,7 +747,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 397.0, 213.72209496603773, 127.0, 22.0 ],
+					"patching_rect" : [ 440.875, 213.72209496603773, 127.0, 22.0 ],
 					"text" : "doesn't understand $1"
 				}
 
@@ -747,7 +759,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 397.212547400163999, 245.72209496603773, 179.0, 22.0 ],
+					"patching_rect" : [ 441.087547400163999, 245.72209496603773, 179.0, 22.0 ],
 					"text" : "print somax.midioutput @level 2"
 				}
 
@@ -763,7 +775,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 397.212547400163999, 172.22209496603773, 89.0, 29.0 ],
+					"patching_rect" : [ 441.087547400163999, 172.22209496603773, 89.0, 29.0 ],
 					"text" : "pattrhub"
 				}
 
@@ -918,7 +930,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-39",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -930,7 +942,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-38",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -954,7 +966,7 @@
 				"box" : 				{
 					"comment" : "(list) midi through [nn vel ch]",
 					"id" : "obj-36",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1316,11 +1328,11 @@
 				"box" : 				{
 					"id" : "obj-44",
 					"maxclass" : "newobj",
-					"numinlets" : 5,
-					"numoutlets" : 5,
-					"outlettype" : [ "", "", "", "", "" ],
-					"patching_rect" : [ 86.212547400163999, 46.5, 330.0, 22.0 ],
-					"text" : "route list dump device flush"
+					"numinlets" : 6,
+					"numoutlets" : 6,
+					"outlettype" : [ "", "", "", "", "", "" ],
+					"patching_rect" : [ 86.212547400163999, 46.5, 373.875, 22.0 ],
+					"text" : "route list int dump device flush"
 				}
 
 			}
@@ -1328,7 +1340,7 @@
 				"box" : 				{
 					"comment" : "(list) midi messages [nn vel ch]",
 					"id" : "obj-43",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1370,7 +1382,7 @@
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1259", 0 ],
-					"midpoints" : [ 288.5, 168.611047483018865, 406.712547400163999, 168.611047483018865 ],
+					"midpoints" : [ 345.925000000000011, 168.611047483018865, 450.587547400163999, 168.611047483018865 ],
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -1565,21 +1577,28 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1259", 0 ],
-					"source" : [ "obj-44", 4 ]
+					"source" : [ "obj-44", 5 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-31", 0 ],
-					"source" : [ "obj-44", 3 ]
+					"source" : [ "obj-44", 4 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-35", 0 ],
-					"midpoints" : [ 173.462547400163999, 80.142473118279554, 1020.5, 80.142473118279554 ],
+					"midpoints" : [ 237.662547400163987, 80.142473118279554, 1020.5, 80.142473118279554 ],
+					"source" : [ "obj-44", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
 					"source" : [ "obj-44", 1 ]
 				}
 
@@ -1587,7 +1606,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-53", 0 ],
-					"source" : [ "obj-44", 2 ]
+					"source" : [ "obj-44", 3 ]
 				}
 
 			}
@@ -1637,6 +1656,14 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-1259", 0 ],
+					"midpoints" : [ 166.687547400163993, 168.111047483018865, 450.587547400163999, 168.111047483018865 ],
+					"source" : [ "obj-5", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-22", 1 ],
 					"source" : [ "obj-50", 0 ]
 				}
@@ -1659,7 +1686,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
-					"midpoints" : [ 284.212547400163999, 144.611047483018865 ],
+					"midpoints" : [ 341.63754740016401, 129.611047483018865 ],
 					"source" : [ "obj-53", 1 ]
 				}
 
@@ -1787,15 +1814,6 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "heldnotes.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-11", "obj-18", "obj-13", "obj-17", "obj-14" ]
 			}

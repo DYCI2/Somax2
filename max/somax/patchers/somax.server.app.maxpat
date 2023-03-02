@@ -42,6 +42,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-24",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -87,7 +88,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-20",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -2473,7 +2473,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 141.0, 668.0, 356.0, 29.0 ],
-					"text" : "somax.server #1 #2 #3"
+					"text" : "somax.server #1 #2 #3 @autoinitialize 0"
 				}
 
 			}

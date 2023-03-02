@@ -12,7 +12,7 @@
 		"classnamespace" : "box",
 		"rect" : [ 34.0, 87.0, 2092.0, 1250.0 ],
 		"bglocked" : 0,
-		"openinpresentation" : 0,
+		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
 		"default_fontface" : 0,
 		"default_fontname" : "Arial",
@@ -42,7 +42,7 @@
 				"box" : 				{
 					"comment" : "(unused)",
 					"id" : "obj-75",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -70,7 +70,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 211.25, 544.0, 70.0, 22.0 ],
+					"patching_rect" : [ 211.25, 545.0, 70.0, 22.0 ],
 					"text" : "loadmess 2"
 				}
 
@@ -83,7 +83,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 111.712547400163999, 544.0, 70.0, 22.0 ],
+					"patching_rect" : [ 111.712547400163999, 545.0, 70.0, 22.0 ],
 					"text" : "loadmess 1"
 				}
 
@@ -524,7 +524,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-39",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -536,7 +536,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-38",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -570,7 +570,7 @@
 					"patching_rect" : [ 808.0, 217.0, 143.0, 22.0 ],
 					"restore" : 					{
 						"enabled" : [ 1 ],
-						"leftch" : [ 3 ],
+						"leftch" : [ 1 ],
 						"rightch" : [ 1 ]
 					}
 ,
@@ -608,12 +608,44 @@
 				"box" : 				{
 					"comment" : "(list) midi messages [nn vel ch]",
 					"id" : "obj-43",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "multichannelsignal" ],
 					"patching_rect" : [ 86.425094800327997, 9.0, 30.0, 30.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"id" : "obj-47",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 211.25, 577.0, 36.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 73.333335429430008, 19.708334073424339, 150.0, 14.0 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"id" : "obj-18",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 111.712547400163999, 577.0, 34.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 73.333333283662796, 4.333333343267441, 150.0, 14.0 ],
+					"proportion" : 0.5
 				}
 
 			}
@@ -660,40 +692,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 211.25, 522.0, 56.0, 18.0 ],
-					"proportion" : 0.5
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"background" : 1,
-					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"id" : "obj-47",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 211.25, 577.0, 36.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 73.333335429430008, 19.708334073424339, 150.0, 14.0 ],
-					"proportion" : 0.5
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"background" : 1,
-					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"id" : "obj-18",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 111.712547400163999, 577.0, 34.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 73.333333283662796, 4.333333343267441, 150.0, 14.0 ],
 					"proportion" : 0.5
 				}
 
@@ -894,14 +892,14 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-18", 0 ],
+					"destination" : [ "obj-10", 0 ],
 					"source" : [ "obj-71", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-47", 0 ],
+					"destination" : [ "obj-14", 0 ],
 					"source" : [ "obj-72", 0 ]
 				}
 
@@ -921,16 +919,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "somax.routesignal.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0
+ ]
 	}
 
 }
