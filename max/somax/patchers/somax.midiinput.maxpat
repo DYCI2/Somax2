@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1032.0, 87.0, 1504.0, 1259.0 ],
+		"rect" : [ 34.0, 627.0, 1372.0, 710.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,18 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-31",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 593.212547400163658, 184.0, 91.0, 22.0 ],
+					"text" : "prepend device"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
 					"id" : "obj-33",
@@ -1961,8 +1973,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 697.212547400163771, 281.72209496603773, 179.0, 22.0 ],
-					"text" : "print somax.midioutput @level 2"
+					"patching_rect" : [ 697.212547400163771, 281.72209496603773, 172.0, 22.0 ],
+					"text" : "print somax.midiinput @level 2"
 				}
 
 			}
@@ -2132,7 +2144,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-39",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2144,7 +2156,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-38",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2156,7 +2168,7 @@
 				"box" : 				{
 					"comment" : "(list) midi through [nn vel ch]",
 					"id" : "obj-36",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2190,7 +2202,7 @@
 					"patching_rect" : [ 1158.227060090219993, 192.0, 143.0, 22.0 ],
 					"restore" : 					{
 						"channel" : [ 0 ],
-						"device" : [ "MPK Mini Mk II" ],
+						"device" : [ "IAC Driver IAC1" ],
 						"enabled" : [ 1 ],
 						"play" : [ 0 ]
 					}
@@ -2214,10 +2226,10 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 988.227060090219993, 145.0, 313.0, 35.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 461, 322 ],
+						"client_rect" : [ 4, 44, 358, 172 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
-						"storage_rect" : [ 794, -709, 1244, -510 ]
+						"storage_rect" : [ 583, 69, 1034, 197 ]
 					}
 ,
 					"text" : "pattrstorage pattrstorage @savemode 0 @outputmode 1 @autorestore 0 @greedy 0 @changemode 1",
@@ -2488,7 +2500,7 @@
 				"box" : 				{
 					"comment" : "(list) midi messages [nn vel ch]",
 					"id" : "obj-20",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -2549,7 +2561,7 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-40",
-					"items" : [ "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "MPK Mini Mk II", ",", "to Max 1", ",", "to Max 2", ",", "MIDI File" ],
+					"items" : [ "IAC Driver IAC1", ",", "IAC Driver IAC2", ",", "IAC Driver IAC3", ",", "to Max 1", ",", "to Max 2", ",", "Oxygen 25", ",", "MIDI File" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -2819,6 +2831,14 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-1259", 0 ],
+					"midpoints" : [ 602.712547400163658, 209.611047483018865, 706.712547400163771, 209.611047483018865 ],
+					"source" : [ "obj-31", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-26", 0 ],
 					"source" : [ "obj-32", 0 ]
 				}
@@ -2862,8 +2882,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-1259", 0 ],
-					"midpoints" : [ 602.545880733497143, 196.111047483018865, 706.712547400163771, 196.111047483018865 ],
+					"destination" : [ "obj-31", 0 ],
 					"source" : [ "obj-42", 1 ]
 				}
 
@@ -3305,7 +3324,9 @@
 				}
 
 			}
- ]
+ ],
+		"dependency_cache" : [  ],
+		"autosave" : 0
 	}
 
 }
