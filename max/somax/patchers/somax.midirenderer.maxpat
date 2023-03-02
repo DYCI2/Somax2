@@ -115,7 +115,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-18",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -127,7 +127,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-17",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -139,7 +139,7 @@
 				"box" : 				{
 					"comment" : "(list) note_number velocity channel",
 					"id" : "obj-16",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -151,7 +151,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to midirenderer",
 					"id" : "obj-15",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -200,7 +200,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 763.75, 175.0, 214.0, 49.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 1880, 207, 2595, 536 ],
+						"client_rect" : [ 67, 153, 461, 322 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -445,23 +445,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "heldnotes.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.winresize.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0
+ ]
 	}
 
 }

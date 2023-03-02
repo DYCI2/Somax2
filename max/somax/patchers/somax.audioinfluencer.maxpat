@@ -3788,7 +3788,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1537.0, 45.62310791015625, 254.0, 49.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 1880, 207, 2595, 536 ],
+						"client_rect" : [ 67, 153, 461, 322 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]

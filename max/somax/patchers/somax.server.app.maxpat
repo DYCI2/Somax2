@@ -40,6 +40,16 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-45",
+					"maxclass" : "mc.ezdac~",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 356.41651487832678, 1621.0, 45.0, 45.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"hidden" : 1,
@@ -780,7 +790,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-388",
-					"index" : 4,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -853,21 +863,9 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "(mc.signal) audio from test segmentation",
-					"id" : "obj-275",
-					"index" : 2,
-					"maxclass" : "outlet",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 329.5, 1621.0, 30.0, 30.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-216",
-					"index" : 5,
+					"index" : 4,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -891,7 +889,7 @@
 				"box" : 				{
 					"comment" : "(list) status",
 					"id" : "obj-259",
-					"index" : 3,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1100,7 +1098,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 2412.833333333333485, 110.610056836345393, 214.0, 49.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 1880, 207, 2595, 536 ],
+						"client_rect" : [ 67, 153, 461, 322 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -5823,8 +5821,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-275", 0 ],
-					"midpoints" : [ 833.25, 1378.297847696435838, 339.0, 1378.297847696435838 ],
+					"destination" : [ "obj-45", 0 ],
+					"midpoints" : [ 833.25, 1379.297847696435838, 365.91651487832678, 1379.297847696435838 ],
 					"source" : [ "obj-2", 1 ]
 				}
 

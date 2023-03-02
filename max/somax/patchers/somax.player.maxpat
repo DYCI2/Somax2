@@ -2444,7 +2444,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "simultaneousonsets[3]",
+							"parameter_longname" : "simultaneousonsets[7]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "simultaneousonsets",
 							"parameter_type" : 2
@@ -11069,7 +11069,7 @@
 										}
 ,
 										"valueof" : 										{
-											"parameter_longname" : "live.numbox[1]",
+											"parameter_longname" : "live.numbox[3]",
 											"parameter_mmax" : 0.0,
 											"parameter_mmin" : -60.0,
 											"parameter_shortname" : "live.numbox[2]",
@@ -11121,7 +11121,7 @@
 										}
 ,
 										"valueof" : 										{
-											"parameter_longname" : "live.slider[1]",
+											"parameter_longname" : "live.slider[3]",
 											"parameter_mmax" : 0.0,
 											"parameter_mmin" : -60.0,
 											"parameter_shortname" : "live.slider",
@@ -11225,7 +11225,7 @@
 ,
 										"valueof" : 										{
 											"parameter_initial" : [ -30 ],
-											"parameter_longname" : "center[2]",
+											"parameter_longname" : "center[1]",
 											"parameter_mmax" : 0.0,
 											"parameter_mmin" : -60.0,
 											"parameter_shortname" : "Center",
@@ -11297,7 +11297,7 @@
 										"valueof" : 										{
 											"parameter_initial" : [ 1 ],
 											"parameter_initial_enable" : 1,
-											"parameter_longname" : "weight[2]",
+											"parameter_longname" : "weight[1]",
 											"parameter_mmax" : 1.0,
 											"parameter_shortname" : "Weight",
 											"parameter_type" : 0,
@@ -11561,7 +11561,7 @@
 ,
 										"valueof" : 										{
 											"parameter_initial" : [ 30 ],
-											"parameter_longname" : "width[2]",
+											"parameter_longname" : "width[1]",
 											"parameter_mmax" : 30.0,
 											"parameter_mmin" : 0.001,
 											"parameter_shortname" : "Width",
@@ -11718,7 +11718,7 @@
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_enum" : [ "off", "on" ],
-											"parameter_longname" : "__exp_velocityenable[2]",
+											"parameter_longname" : "__exp_velocityenable[1]",
 											"parameter_mmax" : 1,
 											"parameter_shortname" : "__exp_velocityenable",
 											"parameter_type" : 2
@@ -16544,7 +16544,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "simultaneousonsets[4]",
+							"parameter_longname" : "simultaneousonsets[2]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "artificialmidities",
 							"parameter_type" : 2
@@ -16641,7 +16641,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_tempoconsistencysigma[1]",
+							"parameter_longname" : "__exp_tempoconsistencysigma[4]",
 							"parameter_shortname" : "__exp_tempoconsistencysigma",
 							"parameter_type" : 3
 						}
@@ -16701,7 +16701,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_tempoconsistencyenable[1]",
+							"parameter_longname" : "__exp_tempoconsistencyenable[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "__exp_tempoconsistencyenable",
 							"parameter_type" : 2
@@ -16732,7 +16732,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_tempoconsistencylen[5]",
+							"parameter_longname" : "__exp_tempoconsistencylen[4]",
 							"parameter_shortname" : "__exp_tempoconsistencylen",
 							"parameter_type" : 3
 						}
@@ -16828,7 +16828,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_autojumpforcejump[2]",
+							"parameter_longname" : "__exp_autojumpforcejump[1]",
 							"parameter_shortname" : "__exp_autojumpforcejump",
 							"parameter_type" : 3
 						}
@@ -16871,7 +16871,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_autojumpenable[2]",
+							"parameter_longname" : "__exp_autojumpenable[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "__exp_autojumpenable",
 							"parameter_type" : 2
@@ -16902,7 +16902,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_autojumpactivate[2]",
+							"parameter_longname" : "__exp_autojumpactivate[1]",
 							"parameter_shortname" : "__exp_autojumpactivate",
 							"parameter_type" : 3
 						}
@@ -17005,7 +17005,7 @@
 						"valueof" : 						{
 							"parameter_enum" : [ "Top note", "Virtual fundamental", "Bass note" ],
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_selfpitchfromchords[1]",
+							"parameter_longname" : "__exp_selfpitchfromchords[4]",
 							"parameter_mmax" : 2,
 							"parameter_shortname" : "__exp_selfpitchfromchords",
 							"parameter_type" : 2
@@ -17045,7 +17045,7 @@
 						"valueof" : 						{
 							"parameter_enum" : [ "Top note", "Virtual fundamental", "Bass note" ],
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_melodicpitchfromchords[1]",
+							"parameter_longname" : "__exp_melodicpitchfromchords[4]",
 							"parameter_mmax" : 2,
 							"parameter_shortname" : "__exp_melodicpitchfromchords",
 							"parameter_type" : 2
@@ -17089,7 +17089,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_octavebands[2]",
+							"parameter_longname" : "__exp_octavebands[1]",
 							"parameter_shortname" : "__exp_octavebands",
 							"parameter_type" : 3
 						}
@@ -17136,7 +17136,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_octavebandsenable[1]",
+							"parameter_longname" : "__exp_octavebandsenable[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "__exp_octavebandsenable",
 							"parameter_type" : 2
@@ -17217,7 +17217,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_durationsigma[5]",
+							"parameter_longname" : "__exp_durationsigma[4]",
 							"parameter_shortname" : "__exp_durationsigma",
 							"parameter_type" : 3
 						}
@@ -17281,7 +17281,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_durationmu[2]",
+							"parameter_longname" : "__exp_durationmu[1]",
 							"parameter_shortname" : "__exp_durationmu",
 							"parameter_type" : 3
 						}
@@ -17361,7 +17361,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_numnotessigma[2]",
+							"parameter_longname" : "__exp_numnotessigma[1]",
 							"parameter_shortname" : "__exp_numnotessigma",
 							"parameter_type" : 3
 						}
@@ -17404,7 +17404,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_numnotesenable[5]",
+							"parameter_longname" : "__exp_numnotesenable[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "__exp_numnotesenable",
 							"parameter_type" : 2
@@ -17436,7 +17436,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_numnotesmu[2]",
+							"parameter_longname" : "__exp_numnotesmu[1]",
 							"parameter_shortname" : "__exp_numnotesmu",
 							"parameter_type" : 3
 						}
@@ -17511,7 +17511,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_tabooenable[2]",
+							"parameter_longname" : "__exp_tabooenable[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "__exp_tabooenable",
 							"parameter_type" : 2
@@ -17571,7 +17571,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_tabooduration[5]",
+							"parameter_longname" : "__exp_tabooduration[4]",
 							"parameter_shortname" : "__exp_tabooduration",
 							"parameter_type" : 3
 						}
@@ -17898,7 +17898,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "rslider[2]",
+							"parameter_longname" : "rslider[1]",
 							"parameter_shortname" : "rslider",
 							"parameter_type" : 3
 						}
@@ -18024,7 +18024,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[3]",
+							"parameter_longname" : "continuity[1]",
 							"parameter_mmax" : 10.0,
 							"parameter_mmin" : 0.1,
 							"parameter_shortname" : "continuity",
@@ -18250,7 +18250,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "outputprobability[1]",
+							"parameter_longname" : "outputprobability[4]",
 							"parameter_mmax" : 1.0,
 							"parameter_shortname" : "outputprobability",
 							"parameter_type" : 3
@@ -18336,7 +18336,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "enforcetaboo[1]",
+							"parameter_longname" : "enforcetaboo[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "enforcetaboo",
 							"parameter_type" : 2
@@ -18444,7 +18444,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[18]",
+							"parameter_longname" : "continuity[17]",
 							"parameter_shortname" : "continuity",
 							"parameter_type" : 3
 						}
@@ -18596,7 +18596,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "ignorephase[1]",
+							"parameter_longname" : "ignorephase[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "ignorephase",
 							"parameter_type" : 2
@@ -19443,6 +19443,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
+					"hidden" : 1,
 					"id" : "obj-1167",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -19765,7 +19766,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "selfharmonicbypass[1]",
+							"parameter_longname" : "selfharmonicbypass[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "selfharmonicbypass",
 							"parameter_type" : 2
@@ -19792,7 +19793,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "harmonicbypass[2]",
+							"parameter_longname" : "harmonicbypass[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "harmonicbypass",
 							"parameter_type" : 2
@@ -19819,7 +19820,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "melodicbypass[2]",
+							"parameter_longname" : "melodicbypass[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "melodicbypass",
 							"parameter_type" : 2
@@ -19846,7 +19847,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "selfmelodicbypass[2]",
+							"parameter_longname" : "selfmelodicbypass[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "selfmelodicbypass",
 							"parameter_type" : 2
@@ -20189,7 +20190,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[2]",
+							"parameter_longname" : "continuity[16]",
 							"parameter_shortname" : "continuity",
 							"parameter_type" : 3
 						}
@@ -20300,7 +20301,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "heldnotesmode[3]",
+							"parameter_longname" : "heldnotesmode[2]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "heldnotesmode",
 							"parameter_type" : 2
@@ -21070,7 +21071,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_regionmaskenable[2]",
+							"parameter_longname" : "__exp_regionmaskenable[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "__exp_regionmaskenable",
 							"parameter_type" : 2
@@ -22506,7 +22507,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "selfharmonicngramorder[1]",
+							"parameter_longname" : "selfharmonicngramorder[4]",
 							"parameter_shortname" : "selfharmonicngramorder",
 							"parameter_type" : 3
 						}
@@ -22581,7 +22582,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "harmonincpeakdecay[4]",
+							"parameter_longname" : "harmonincpeakdecay[3]",
 							"parameter_mmin" : 1.001,
 							"parameter_shortname" : "harmonincpeakdecay[1]",
 							"parameter_type" : 3
@@ -24123,7 +24124,7 @@
 					"presentation_rect" : [ 391.29012014085788, 425.155028308169904, 45.0, 20.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_longname" : "transpositionconsistency[1]",
+							"parameter_longname" : "transpositionconsistency[4]",
 							"parameter_mmax" : 1.0,
 							"parameter_shortname" : "transpositionconsistency",
 							"parameter_type" : 0
@@ -24477,7 +24478,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "resetinfluences[2]",
+							"parameter_longname" : "resetinfluences[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "resetinfluences",
 							"parameter_type" : 2
@@ -24641,7 +24642,7 @@
 						"artificialmidities" : [ 0 ],
 						"continuity" : [ 1.5 ],
 						"cut" : [ 1 ],
-						"decaybasis" : [ 0 ],
+						"decaybasis" : [ 1 ],
 						"enabled" : [ 1 ],
 						"enforcetaboo" : [ 1 ],
 						"fallback" : [ "Random" ],
@@ -24659,7 +24660,7 @@
 						"midionsets" : [ 0 ],
 						"outputfrom" : [ 0 ],
 						"outputprobability" : [ 1.0 ],
-						"playingmode" : [ 0 ],
+						"playingmode" : [ 1 ],
 						"pollpeaks" : [ 1 ],
 						"quality" : [ 0.0 ],
 						"recombine" : [ 1 ],
@@ -25315,7 +25316,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "selfmod12[1]",
+							"parameter_longname" : "selfmod12[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "selfmod12",
 							"parameter_type" : 2
@@ -25349,7 +25350,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "melodicmod12[2]",
+							"parameter_longname" : "melodicmod12[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "melodicmod12",
 							"parameter_type" : 2
@@ -25450,7 +25451,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "decaybasis[2]",
+							"parameter_longname" : "decaybasis[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "decaybasis",
 							"parameter_type" : 2
@@ -25477,7 +25478,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "playingmode[5]",
+							"parameter_longname" : "playingmode[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "playingmode",
 							"parameter_type" : 2
@@ -25551,7 +25552,7 @@
 					"patching_rect" : [ 1965.998681434600257, 89.5090360442681, 180.0, 27.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 21.41666666666697, 11.5, 401.10262443239094, 27.0 ],
-					"text" : "Player_2527",
+					"text" : "Player",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -27780,7 +27781,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "harmonincpeakdecay[5]",
+							"parameter_longname" : "harmonincpeakdecay[2]",
 							"parameter_mmin" : 1.001,
 							"parameter_shortname" : "harmonincpeakdecay",
 							"parameter_type" : 3
@@ -27813,7 +27814,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "melodicpeakdecay[5]",
+							"parameter_longname" : "melodicpeakdecay[4]",
 							"parameter_mmin" : 1.001,
 							"parameter_shortname" : "melodicpeakdecay",
 							"parameter_type" : 3
@@ -27846,7 +27847,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "selfpeakdecay[2]",
+							"parameter_longname" : "selfpeakdecay[1]",
 							"parameter_mmin" : 1.001,
 							"parameter_shortname" : "selfpeakdecay",
 							"parameter_type" : 3
@@ -28024,7 +28025,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "melodicngramorder[5]",
+							"parameter_longname" : "melodicngramorder[4]",
 							"parameter_shortname" : "melodicngramorder",
 							"parameter_type" : 3
 						}
@@ -28054,7 +28055,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "selfngramorder[2]",
+							"parameter_longname" : "selfngramorder[1]",
 							"parameter_shortname" : "selfngramorder",
 							"parameter_type" : 3
 						}
@@ -28084,7 +28085,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "harmonicngramorder[2]",
+							"parameter_longname" : "harmonicngramorder[1]",
 							"parameter_shortname" : "harmonicngramorder",
 							"parameter_type" : 3
 						}

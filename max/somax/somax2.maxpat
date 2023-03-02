@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 2492.0, 1250.0 ],
+		"rect" : [ 34.0, 87.0, 2119.0, 1250.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -54,7 +54,7 @@
 					"numoutlets" : 5,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "multichannelsignal", "", "", "", "" ],
-					"patching_rect" : [ 793.0, 77.0, 249.0, 825.0 ],
+					"patching_rect" : [ 793.0, 77.0, 250.0, 825.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 256.0, 4.0, 244.5, 825.0 ],
 					"varname" : "somax.player.app",
@@ -117,9 +117,9 @@
 					"maxclass" : "mc.ezdac~",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 73.75, 934.0, 45.0, 45.0 ],
+					"patching_rect" : [ 18.75, 401.0, 45.0, 45.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 586.75, 80.0, 45.0, 45.0 ]
+					"presentation_rect" : [ 547.75, 48.0, 45.0, 45.0 ]
 				}
 
 			}
@@ -136,9 +136,9 @@
 					"maxclass" : "bpatcher",
 					"name" : "somax.server.app.maxpat",
 					"numinlets" : 1,
-					"numoutlets" : 5,
+					"numoutlets" : 4,
 					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "", "multichannelsignal", "", "", "" ],
+					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 15.0, 77.0, 254.0, 299.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 2.5, 552.5, 254.0, 299.0 ],
@@ -148,21 +148,7 @@
 
 			}
  ],
-		"lines" : [ 			{
-				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
-					"source" : [ "obj-11", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
-					"source" : [ "obj-2", 1 ]
-				}
-
-			}
- ],
+		"lines" : [  ],
 		"parameters" : 		{
 			"obj-11::obj-17::obj-10::obj-21" : [ "onset[5]", "onset", 0 ],
 			"obj-11::obj-17::obj-10::obj-28" : [ "chromaonset[5]", "chromaonset", 0 ],
@@ -188,7 +174,7 @@
 			"obj-11::obj-17::obj-6::obj-30" : [ "chroma scaling factor[4]", "chroma", 0 ],
 			"obj-11::obj-17::obj-6::obj-46::obj-1" : [ "source[6]", "source", 0 ],
 			"obj-11::obj-17::obj-6::obj-9" : [ "pitch[4]", "pitch", 0 ],
-			"obj-11::obj-25::obj-1" : [ "mc.live.gain~[2]", "mc.live.gain~", 0 ],
+			"obj-11::obj-25::obj-1" : [ "Gain", "Gain", 0 ],
 			"obj-11::obj-25::obj-44" : [ "live.dial[1]", "Width", 0 ],
 			"obj-11::obj-25::obj-46" : [ "live.dial", "Pan", 0 ],
 			"obj-11::obj-3::obj-1115" : [ "continuity[22]", "continuity", 0 ],
@@ -313,6 +299,11 @@
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-11::obj-25::obj-1" : 				{
+					"parameter_longname" : "Gain",
+					"parameter_shortname" : "Gain"
 				}
 ,
 				"obj-11::obj-3::obj-1150" : 				{
@@ -557,6 +548,13 @@
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
 				"patcherrelativepath" : "./patchers/resources/player",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "shostakovich118no2.flac",
+				"bootpath" : "~/Music",
+				"patcherrelativepath" : "../../../../Music",
+				"type" : "FLAC",
 				"implicit" : 1
 			}
 , 			{

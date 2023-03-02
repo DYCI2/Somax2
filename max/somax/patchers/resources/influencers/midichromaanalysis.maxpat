@@ -324,6 +324,14 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"destination" : [ "obj-119", 0 ],
+					"midpoints" : [ 952.178573500000311, 307.5, 385.428573500000311, 307.5 ],
+					"source" : [ "obj-1", 5 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-119", 1 ],
 					"source" : [ "obj-1", 1 ]
 				}
