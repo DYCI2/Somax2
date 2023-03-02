@@ -102,7 +102,7 @@
 					"numoutlets" : 5,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "multichannelsignal", "", "", "" ],
-					"patching_rect" : [ 277.0, 77.0, 251.0, 295.0 ],
+					"patching_rect" : [ 277.0, 77.0, 251.0, 324.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1.5, 4.0, 251.0, 323.0 ],
 					"varname" : "somax.audioinfluencer.app",
@@ -444,6 +444,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "Syrinx.aiff",
+				"bootpath" : "~/Music",
+				"patcherrelativepath" : "../../../../Music",
+				"type" : "AIFF",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "Yin+.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "./patchers/resources/influencers",
@@ -548,13 +555,6 @@
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
 				"patcherrelativepath" : "./patchers/resources/player",
 				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "shostakovich118no2.flac",
-				"bootpath" : "~/Music",
-				"patcherrelativepath" : "../../../../Music",
-				"type" : "FLAC",
 				"implicit" : 1
 			}
 , 			{
