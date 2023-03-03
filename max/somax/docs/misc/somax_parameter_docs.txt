@@ -6,16 +6,20 @@
 * Toggle Onset of Source N:             router N onset <1/0>
 * Set Chroma of Source N:               router N chroma <0..1>
 * Toggle Chroma Onset of Source N:      router N chromaonset <1/0>
-* Toggle Source N:                      router N Å <1/0>
+* Toggle Source N:                      router N enable <1/0>
 
 
-#### PLAYER CONTROLS ####
-* Set Corpus:                           setcorpus symbol <name_of_corpus_including_(A)_or_(M)>
+#### PLAYER PARAMETERS ####
+* Enable:                               enabled <1/0>
+                                        <1/0>
+* Set Corpus (by path):                 corpus /path/to/corpus.pickle/.gz (absolute path or relative server's corpuspath)
+* Set Corpus (by name):                 corpus symbol <name_of_corpus_including_(A)_or_(M)>
+* Set Corpus (by index):                corpus <0..>
 * Refresh Corpora:                      refreshcorpora
 * Set Corpus Volatile Flag:             corpusvolatile <1/0>
 
-* Playing Mode:                         playingmode <1/0>
-* Decay Basis:                          decaybasis <1/0>
+* Mode:                                 mode <1/0>
+                                        mode <"continuous" / "reactive">
 * Cut Mid-event:                        cut <1/0>
 * Timeout (enable):                     timeoutenable <1/0>
 * Timeout (value):                      timeout <0..∞>
@@ -23,7 +27,7 @@
 * MIDI Reactive Mode:                   midinotebynote <0/1>
 
 * Continuity Factor:                    continuity <0..∞>
-* Quality Threshold:                    outputthreshold <0..∞>
+* Quality Threshold:                    quality <0..∞>
 * Output Probability:                   outputprobability <0..1>
 * Sparse:                               sparse <1/0>
 * Ouptut Selection:                     outputfrom <1/0>
@@ -42,71 +46,109 @@
 * Region Mask (range):                  regionmask <0..1> <0..1>
 
 * Transposition Consistency:            transpositionconsistency <0..1>
-* Active Transpositions                 transpositions (for format: see player's parameter outlet or matrixctrl specification)
+* Active Transpositions:                transpositions <0/1> <0/1> ... <0/1> (binary mask with 12 values, one for each transposition, 1 enables, 0 disables)
+                                        transpositions <-5..6> <-5..6> ... <-5..6> (list of transpositions that should be enabled. ex -5 0 3 enables -5 0 and 3, all others are disabled. 0 disables all but 0-transposition)
 
-* Reinstantiate:                        reinstantiate 1                     
+#### PLAYER RUNTIME MESSAGES ####
+* Trigger Output:                       bang
+* Force Jump to event N:                jump N      (jump on next output)
+                                        jump N bang (jump and trigger output)
+                                        jump -1     (jump to random event)
+* Influence:                            influence onset (same as bang)
+                                        influence pitch <0..127>
+                                        influence chroma <0..1> <0..1> ... <0..1> (12 floats)
+
+* Initialize:                           initialize
+* Terminate:                            terminate
+* Reload:                               reload
+* Reinstantiate:                        reinitialize
 * Reset Influences:                     resetinfluences 1
 * Flush:                                flush 1
+* Dump all parameters:                  dump
+* Query Corpus:                         corpusquery (see base object's maxhelp)
+
+
+#### PLAYER EXPERIMENTAL ####
+* Artificial MIDI Ties:                 artificialmidities <1/0>
+* Fallback:                             fallback <"Random" / "First Available">
+* Auto Jump Enable:                     __exp_autojumpenable <1/0>
+* Auto Jump Lower Threshold:            __exp_autojumpactivate <0..∞>
+* Auto Jump Upper Threshold:            __exp_autojumpforcejump <1..∞>
+* Taboo Enable:                         __exp_tabooenable <1/0>
+* Taboo Num Events:                     __exp_tabooduration <1..∞>
+
 
 
 #### AUDIO SETTINGS ####
-* Mode:                                 audiorenderer3::mode <1/0>
-* Attack:                               audiorenderer3::attack <1..∞>
-* Release:                              audiorenderer3::release <1..∞>
-* Crossfade Slope:                      audiorenderer3::crossfadecurve <0..1>
-* Timestretch Mode:                     audiorenderer3::tsmode <general/basic/monophonic/rhythmic/extremestretch/efficient>
-* Num Voices:                           audiorenderer3::ngrooves <1..∞>
+* Mode:                                 audiorenderer shift <1/0>
+* Attack:                               audiorenderer attack <1..∞>
+* Release:                              audiorenderer release <1..∞>
+* Crossfade Slope:                      audiorenderer crossfadecurve <0..1>
+* Timestretch Mode:                     audiorenderer tsmode <general/basic/monophonic/rhythmic/extremestretch/efficient>
+* Num Voices:                           audiorenderer voices <1..∞>
 
 
 #### MIDI SETTINGS ####
-* Onsets:                               midirenderer::onsets <1/0>
-* Durations:                            midirenderer::durations <Original/Aligned/Sustained>
-* Output Velocity Scaling               midirenderer::velocityscaling <0..127> <0..127>
-* Enabled MIDI Output Channels:         midirenderer::outputchannels (for format: see player's parameter outlet or matrixctrl specification)
+* Onsets:                               midionsets <1/0>
+* Durations:                            mididurations <Original/Aligned/Sustained>
+* Output Velocity Scaling               midimixer velscale <0..127> <0..127>
+* Enabled MIDI Output Channels:         midimixer channels (for format: see player's parameter outlet or matrixctrl specification)
 
 
 #### AUDIO OUTPUT SETTINGS ####
 * Listen:                               audiooutput enabled <1/0>
-* Mono Corpus:                          audiooutput monocorpus <1/0> 
-* Pan:                                  audiooutput pan <-127..127>
-* Width:                                audiooutput width <0..127>
-* Left Channel:                         audiooutput leftchannel <0..>
-* Right Channel:                        audiooutput rightchannel <0..>
-* Gain:                                 audiooutput gain <-70..6>
+* Mono Corpus:                          audiomixer monocorpus <1/0> 
+* Pan:                                  audiomixer pan <-127..127>
+* Width:                                audiomixer width <0..127>
+* Left Channel:                         audiooutput leftchannel <1..>
+* Right Channel:                        audiooutput rightchannel <1..>
+* Gain:                                 audiomixer gain <-70..6>
 
 
 #### MIDI OUTPUT SETTINGS ####
 * Listen:                               midioutput enabled <1/0>
-* Output Device:                        midioutput umenu "Name_of_Device"
+* Output Device:                        midioutput device "Name of Device"
 * Channel:                              midioutput channel <0..16> (0 = original channels)
 
 
 #### AUDIO INFLUENCER MESSAGES ####
-* Enable:                               influencer enabled <0/1>
-* Yin Downsample Factor:                influencer yindownsample <0/1/2/3>
-* Yin Minimum Frequency:                influencer yinminfreq <0..22000>
-* Yin Gain (dB):                        influencer yinlevel <-120..0>
-* Yin Quality:                          influence yinquality <0..1>
-* Yin Probability:                      influencer yinprobability <0..1>
-* Yin Window Size (ms):                 influencer yinwindow <0..>
-* Bonk Low Threshold:                   influencer bonkthreshlow <0..>
-* Bonk Low Threshold:                   influencer bonkthreshhigh <0..>
-* Bonk Debounce:                        influencer bonkdebounce <0..1>
-* Bonk Minimum Velocity:                influencer bonkminvel <0..1>
-* Pitch Segmentation Source:            influencer pitchsegmethod <0/1/2>
-* Onset Segmentation Source:            influencer onsetmethod <0/1/2>
-* Onset Limiter Enable:                 influencer limiterenable <0/1>
-* Onset Limiter Interval:               influencer bonkqlim <0..>
+* Enable:                               audioinfluencer enabled <1/0>
+                                        audioinfluencer <1/0>
+* Yin Downsample Factor:                audioinfluencer yindownsample <off/2/4/8>
+* Yin Minimum Frequency:                audioinfluencer yinminfreq <0..22000>
+* Yin Gain (dB):                        audioinfluencer yinlevel <-120..0>
+* Yin Quality:                          audioinfluencer yinquality <0..1>
+* Yin Probability:                      audioinfluencer yinprobability <0..1>
+* Yin Window Size (ms):                 audioinfluencer yinwindow <0..>
+* Bonk Low Threshold:                   audioinfluencer bonklowthresh <0..>
+* Bonk Low Threshold:                   audioinfluencer bonkhighthresh <0..>
+* Bonk Debounce:                        audioinfluencer bonkdebounce <0..1>
+* Bonk Minimum Velocity:                audioinfluencer bonkminvel <0..1>
+* Onset Segmentation Source:            audioinfluencer onsetmethod <yin/bonk/external> 
+                                        audioinfluencer onsetmethod <0/1/2> 
+* Onset Limiter Enable:                 audioinfluencer limiterenable <0/1>
+* Onset Limiter Interval:               audioinfluencer bonkqlim <0..>
+* Continuous Chroma:                    audioinfluencer continouschroma <0/1>
 
 
 
 #### MIDI INFLUENCER MESSAGES ####
-* Enable:                               influencer enabled <0/1>
-* Onset Limiter (ms):                   influencer onsetlimit <0..>
-* Onset Threshold (ms):                 influencer threshold <0..>
-* Onset Threshold Disable:              influencer threshbypass <0/1>
+* Enable:                               midiinfluencer enabled <0/1> 
+                                        midiinfluencer <1/0> 
+* Onset Limiter (ms):                   midiinfluencer onsetlimit <0..>
+* Chord Onset Threshold (ms):           midiinfluencer chordthreshold <0..>
+* Onset Threshold Disable:              midiinfluencer threshbypass <0/1>
+* Continuous Chroma:                    midiinfluencer continuouschroma <0/1>
 
 
 #### SERVER ####
-Start Server (in first inlet):          startserver
-Toggle Run (in first inlet):            <1/0>
+* Start Server:                         initialize
+* Terminate:                            terminate
+* Reload:                               reload
+* Initialize all Players:               initializeplayers
+* Toggle Run:                           active <1/0>
+                                        <1/0>
+* Enable Spacebar Tap:                  enabletap <1/0>
+* Tempo Source:                         temposource <Name_of_Player_or_Influencer> (temposource 0 or temposource none to disable)
+* Set Tempo:                            tempo <1..∞> (note: setting tempo manually will reset tempo source to None)
+* Set Corpus Path:                      corpuspath /absolute/path/to/folder    
