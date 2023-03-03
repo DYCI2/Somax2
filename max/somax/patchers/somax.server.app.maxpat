@@ -67,7 +67,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 434.083383161208985, 121.282504558642586, 80.0, 22.0 ],
+					"patching_rect" : [ 434.083383161208985, 121.282504558642586, 81.0, 22.0 ],
 					"text" : "s #0_dump"
 				}
 
@@ -4928,8 +4928,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 2656.5, 141.5, 155.0, 22.0 ],
-					"text" : "load somax.server.maxhelp"
+					"patching_rect" : [ 2656.5, 141.5, 178.0, 22.0 ],
+					"text" : "load somax.server.app.maxhelp"
 				}
 
 			}
