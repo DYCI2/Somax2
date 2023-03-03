@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 86.0, 1021.0, 779.0 ],
+		"rect" : [ 34.0, 87.0, 1021.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -89,6 +89,22 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"border" : 0,
+									"filename" : "helpdetails.js",
+									"id" : "obj-2",
+									"ignoreclick" : 1,
+									"jsarguments" : [ "somax.audioinfluencer.app" ],
+									"maxclass" : "jsui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 10.0, 10.0, 613.0, 55.25 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-89",
 									"maxclass" : "message",
@@ -161,10 +177,10 @@
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
 									"name" : "somax.player.routerblock.maxpat",
-									"numinlets" : 0,
-									"numoutlets" : 5,
+									"numinlets" : 1,
+									"numoutlets" : 6,
 									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "", "", "", "", "" ],
+									"outlettype" : [ "", "", "", "", "", "" ],
 									"patching_rect" : [ 94.5, 510.25, 204.0, 22.0 ],
 									"varname" : "somax.player.routing",
 									"viewvisibility" : 1
@@ -251,10 +267,9 @@
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
 									"name" : "somax.audio.io.maxpat",
-									"numinlets" : 3,
-									"numoutlets" : 7,
+									"numinlets" : 0,
+									"numoutlets" : 0,
 									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "", "", "", "", "", "", "multichannelsignal" ],
 									"patching_rect" : [ 10.0, 132.0, 373.0, 332.0 ],
 									"varname" : "somax.audio.io",
 									"viewvisibility" : 1
@@ -281,22 +296,6 @@
 									"patching_rect" : [ 10.0, 89.0, 684.0, 20.0 ],
 									"text" : "Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). ",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"border" : 0,
-									"filename" : "helpdetails.js",
-									"id" : "obj-1",
-									"ignoreclick" : 1,
-									"jsarguments" : [ "somax.audioinfluencer" ],
-									"maxclass" : "jsui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 10.0, 10.0, 515.0, 119.0 ]
 								}
 
 							}
@@ -463,6 +462,22 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"border" : 0,
+									"filename" : "helpdetails.js",
+									"id" : "obj-2",
+									"ignoreclick" : 1,
+									"jsarguments" : [ "somax.audioinfluencer.app" ],
+									"maxclass" : "jsui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 10.0, 10.0, 613.0, 55.25 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-66",
 									"linecount" : 2,
@@ -1252,10 +1267,9 @@
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
 									"name" : "somax.audioinfluencer.compact.maxpat",
-									"numinlets" : 3,
-									"numoutlets" : 6,
+									"numinlets" : 0,
+									"numoutlets" : 0,
 									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "", "", "", "", "", "" ],
 									"patching_rect" : [ 155.0, 271.0, 245.0, 74.0 ],
 									"varname" : "somax.audioinfluencer.compact",
 									"viewvisibility" : 1
@@ -1286,43 +1300,11 @@
 								}
 
 							}
-, 							{
-								"box" : 								{
-									"border" : 0,
-									"filename" : "helpdetails.js",
-									"id" : "obj-2",
-									"ignoreclick" : 1,
-									"jsarguments" : [ "somax.audioinfluencer" ],
-									"maxclass" : "jsui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 10.0, 10.0, 515.0, 119.0 ]
-								}
-
-							}
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
 									"destination" : [ "obj-8", 0 ],
 									"source" : [ "obj-1", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"source" : [ "obj-10", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 0 ],
-									"midpoints" : [ 100.5, 251.0, 164.5, 251.0 ],
-									"order" : 2,
-									"source" : [ "obj-11", 0 ]
 								}
 
 							}
@@ -1376,22 +1358,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-10", 2 ],
-									"hidden" : 1,
-									"source" : [ "obj-29", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 2 ],
-									"hidden" : 1,
-									"source" : [ "obj-30", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-29", 0 ],
 									"source" : [ "obj-32", 0 ]
 								}
@@ -1439,22 +1405,6 @@
 									"destination" : [ "obj-62", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-63", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 2 ],
-									"hidden" : 1,
-									"midpoints" : [ 357.5, 640.0, 462.0, 640.0, 462.0, 260.0, 390.5, 260.0 ],
-									"source" : [ "obj-65", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 2 ],
-									"source" : [ "obj-8", 0 ]
 								}
 
 							}
@@ -1752,6 +1702,22 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"border" : 0,
+									"filename" : "helpdetails.js",
+									"id" : "obj-1",
+									"ignoreclick" : 1,
+									"jsarguments" : [ "somax.audioinfluencer.app" ],
+									"maxclass" : "jsui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 10.0, 10.0, 613.0, 55.25 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"bubble" : 1,
 									"id" : "obj-20",
 									"linecount" : 2,
@@ -1998,10 +1964,9 @@
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
 									"name" : "somax.audioinfluencer.compact.maxpat",
-									"numinlets" : 3,
-									"numoutlets" : 6,
+									"numinlets" : 0,
+									"numoutlets" : 0,
 									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "", "", "", "", "", "" ],
 									"patching_rect" : [ 155.0, 271.0, 245.0, 74.0 ],
 									"varname" : "somax.audioinfluencer.compact",
 									"viewvisibility" : 1
@@ -2044,44 +2009,10 @@
 								}
 
 							}
-, 							{
-								"box" : 								{
-									"border" : 0,
-									"filename" : "helpdetails.js",
-									"id" : "obj-1",
-									"ignoreclick" : 1,
-									"jsarguments" : [ "somax.audioinfluencer" ],
-									"maxclass" : "jsui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 10.0, 10.0, 515.0, 119.0 ]
-								}
-
-							}
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
-									"destination" : [ "obj-13", 1 ],
-									"midpoints" : [ 300.100000000000023, 349.0, 346.5, 349.0 ],
-									"source" : [ "obj-10", 3 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 0 ],
-									"midpoints" : [ 100.5, 251.0, 164.5, 251.0 ],
-									"order" : 1,
-									"source" : [ "obj-11", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-7", 1 ],
-									"order" : 0,
 									"source" : [ "obj-11", 0 ]
 								}
 
@@ -2113,20 +2044,6 @@
 									"destination" : [ "obj-14", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-18", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 2 ],
-									"source" : [ "obj-29", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 2 ],
-									"source" : [ "obj-30", 0 ]
 								}
 
 							}
@@ -2301,6 +2218,22 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"border" : 0,
+									"filename" : "helpdetails.js",
+									"id" : "obj-2",
+									"ignoreclick" : 1,
+									"jsarguments" : [ "somax.audioinfluencer.app" ],
+									"maxclass" : "jsui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 10.0, 10.0, 613.0, 55.25 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bubble" : 1,
 									"id" : "obj-39",
@@ -2560,10 +2493,9 @@
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
 									"name" : "somax.audioinfluencer.compact.maxpat",
-									"numinlets" : 3,
-									"numoutlets" : 6,
+									"numinlets" : 0,
+									"numoutlets" : 0,
 									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "", "", "", "", "", "" ],
 									"patching_rect" : [ 141.0, 337.0, 245.0, 74.0 ],
 									"varname" : "somax.audioinfluencer.compact",
 									"viewvisibility" : 1
@@ -2606,33 +2538,8 @@
 								}
 
 							}
-, 							{
-								"box" : 								{
-									"border" : 0,
-									"filename" : "helpdetails.js",
-									"id" : "obj-1",
-									"ignoreclick" : 1,
-									"jsarguments" : [ "somax.audioinfluencer" ],
-									"maxclass" : "jsui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 10.0, 10.0, 515.0, 119.0 ]
-								}
-
-							}
  ],
 						"lines" : [ 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 0 ],
-									"midpoints" : [ 86.5, 324.5, 150.5, 324.5 ],
-									"order" : 2,
-									"source" : [ "obj-11", 0 ]
-								}
-
-							}
-, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-12", 1 ],
 									"midpoints" : [ 86.5, 548.0, 112.5, 548.0 ],
@@ -2659,24 +2566,8 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-10", 2 ],
-									"hidden" : 1,
-									"source" : [ "obj-18", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-18", 0 ],
 									"source" : [ "obj-20", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 1 ],
-									"hidden" : 1,
-									"source" : [ "obj-28", 0 ]
 								}
 
 							}
@@ -2685,13 +2576,6 @@
 									"destination" : [ "obj-34", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-33", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 2 ],
-									"source" : [ "obj-8", 0 ]
 								}
 
 							}
@@ -2846,7 +2730,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 112.0, 1021.0, 753.0 ],
+						"rect" : [ 34.0, 113.0, 1021.0, 753.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2876,6 +2760,24 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"border" : 0,
+									"filename" : "helpdetails.js",
+									"id" : "obj-2",
+									"ignoreclick" : 1,
+									"jsarguments" : [ "somax.audioinfluencer.app" ],
+									"maxclass" : "jsui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 10.0, 10.0, 613.0, 55.25 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 10.0, 10.0, 613.0, 55.25 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-45",
 									"maxclass" : "message",
@@ -3760,10 +3662,10 @@
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
 									"name" : "somax.audioinfluencer.maxpat",
-									"numinlets" : 3,
-									"numoutlets" : 6,
+									"numinlets" : 1,
+									"numoutlets" : 3,
 									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "", "", "", "", "", "" ],
+									"outlettype" : [ "", "", "" ],
 									"patching_rect" : [ 13.0, 10.0, 454.0, 616.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 34.0, 123.0, 454.0, 616.0 ],
@@ -3796,24 +3698,6 @@
 									"presentation_rect" : [ 10.0, 89.0, 684.0, 20.0 ],
 									"text" : "This tab explains all the available parameters in the main user interface.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"border" : 0,
-									"filename" : "helpdetails.js",
-									"id" : "obj-2",
-									"ignoreclick" : 1,
-									"jsarguments" : [ "somax.audioinfluencer" ],
-									"maxclass" : "jsui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 510.0, 764.0, 515.0, 119.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 10.0, 10.0, 515.0, 119.0 ]
 								}
 
 							}
@@ -4335,6 +4219,22 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"border" : 0,
+									"filename" : "helpdetails.js",
+									"id" : "obj-2",
+									"ignoreclick" : 1,
+									"jsarguments" : [ "somax.audioinfluencer.app" ],
+									"maxclass" : "jsui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 10.0, 10.0, 613.0, 55.25 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontface" : 1,
 									"id" : "obj-11",
 									"linecount" : 3,
@@ -4386,10 +4286,9 @@
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
 									"name" : "somax.audioinfluencer.compact.maxpat",
-									"numinlets" : 3,
-									"numoutlets" : 6,
+									"numinlets" : 0,
+									"numoutlets" : 0,
 									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "", "", "", "", "", "" ],
 									"patching_rect" : [ 484.5, 191.0, 247.0, 101.0 ],
 									"varname" : "somax.audioinfluencer.compact",
 									"viewvisibility" : 1
@@ -4441,9 +4340,9 @@
 								"box" : 								{
 									"id" : "obj-15",
 									"maxclass" : "newobj",
-									"numinlets" : 3,
-									"numoutlets" : 6,
-									"outlettype" : [ "", "", "", "", "", "" ],
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "" ],
 									"patching_rect" : [ 585.5, 465.0, 129.0, 22.0 ],
 									"text" : "somax.audioinfluencer",
 									"varname" : "somax.audioinfluencer[1]"
@@ -4462,10 +4361,10 @@
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
 									"name" : "somax.audioinfluencer.maxpat",
-									"numinlets" : 3,
-									"numoutlets" : 6,
+									"numinlets" : 1,
+									"numoutlets" : 3,
 									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "", "", "", "", "", "" ],
+									"outlettype" : [ "", "", "" ],
 									"patching_rect" : [ 10.0, 120.0, 454.0, 616.0 ],
 									"varname" : "somax.audioinfluencer",
 									"viewvisibility" : 1
@@ -4492,22 +4391,6 @@
 									"patching_rect" : [ 10.0, 89.0, 836.0, 20.0 ],
 									"text" : "Like most objects of the somax package, the audio influencer can be initialized in a number of ways depending on which type of  interface the user prefers.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"border" : 0,
-									"filename" : "helpdetails.js",
-									"id" : "obj-2",
-									"ignoreclick" : 1,
-									"jsarguments" : [ "somax.audioinfluencer" ],
-									"maxclass" : "jsui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 10.0, 10.0, 515.0, 119.0 ]
 								}
 
 							}
@@ -4906,10 +4789,9 @@
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
 									"name" : "somax.audioinfluencer.compact.maxpat",
-									"numinlets" : 3,
-									"numoutlets" : 6,
+									"numinlets" : 0,
+									"numoutlets" : 0,
 									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "", "", "", "", "", "" ],
 									"patching_rect" : [ 247.0, 310.0, 245.0, 74.0 ],
 									"varname" : "somax.audioinfluencer.compact",
 									"viewvisibility" : 1
@@ -4925,7 +4807,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 683.0, 14.25, 139.0, 51.0 ],
+									"patching_rect" : [ 789.0, 14.25, 139.0, 51.0 ],
 									"text" : "Click here for a tutorial of the audio influencer in context"
 								}
 
@@ -4938,7 +4820,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 524.0, 60.5, 138.0, 22.0 ],
+									"patching_rect" : [ 629.0, 60.5, 138.0, 22.0 ],
 									"text" : "load somax2_first_steps"
 								}
 
@@ -4952,7 +4834,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 524.0, 88.0, 51.0, 22.0 ],
+									"patching_rect" : [ 629.0, 88.0, 51.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 
@@ -4969,7 +4851,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 524.0, 24.0, 154.0, 31.5 ],
+									"patching_rect" : [ 629.0, 24.0, 154.0, 31.5 ],
 									"rounded" : 8.0,
 									"text" : "SOMAX II TUTORIAL",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -5006,13 +4888,13 @@
 									"filename" : "helpdetails.js",
 									"id" : "obj-2",
 									"ignoreclick" : 1,
-									"jsarguments" : [ "somax.audioinfluencer" ],
+									"jsarguments" : [ "somax.audioinfluencer.app" ],
 									"maxclass" : "jsui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 10.0, 10.0, 515.0, 119.0 ]
+									"patching_rect" : [ 10.0, 10.0, 613.0, 55.25 ]
 								}
 
 							}
@@ -5021,45 +4903,6 @@
 								"patchline" : 								{
 									"destination" : [ "obj-8", 0 ],
 									"source" : [ "obj-1", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-16", 1 ],
-									"source" : [ "obj-10", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-17", 1 ],
-									"source" : [ "obj-10", 2 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-18", 1 ],
-									"order" : 1,
-									"source" : [ "obj-10", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-20", 0 ],
-									"midpoints" : [ 256.5, 422.5, 280.5, 422.5 ],
-									"order" : 0,
-									"source" : [ "obj-10", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 0 ],
-									"order" : 2,
-									"source" : [ "obj-11", 0 ]
 								}
 
 							}
@@ -5086,13 +4929,6 @@
 									"destination" : [ "obj-89", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-110", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-10", 2 ],
-									"source" : [ "obj-8", 0 ]
 								}
 
 							}
@@ -5183,22 +5019,12 @@
 			"obj-11::obj-17::obj-30" : [ "chroma scaling factor", "chroma", 0 ],
 			"obj-11::obj-17::obj-46::obj-1" : [ "source[3]", "source", 0 ],
 			"obj-11::obj-17::obj-9" : [ "pitch", "pitch", 0 ],
-			"obj-11::obj-6::obj-14::obj-1::obj-1::obj-192" : [ "live.numbox[8]", "live.numbox", 0 ],
-			"obj-11::obj-6::obj-21" : [ "Gain[1]", "Gain", 0 ],
-			"obj-1::obj-10::obj-1::obj-192" : [ "live.numbox", "live.numbox", 0 ],
 			"obj-1::obj-11::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
 			"obj-1::obj-11::obj-35" : [ "[5]", "Level", 0 ],
-			"obj-2::obj-10::obj-1::obj-192" : [ "live.numbox[5]", "live.numbox", 0 ],
 			"obj-2::obj-11::obj-21::obj-6" : [ "live.tab[1]", "live.tab[1]", 0 ],
 			"obj-2::obj-11::obj-35" : [ "[1]", "Level", 0 ],
-			"obj-3::obj-13::obj-192" : [ "live.numbox[1]", "live.numbox", 0 ],
-			"obj-3::obj-15::obj-192" : [ "live.numbox[2]", "live.numbox", 0 ],
-			"obj-3::obj-5::obj-1::obj-192" : [ "live.numbox[3]", "live.numbox", 0 ],
-			"obj-4::obj-10::obj-1::obj-192" : [ "live.numbox[6]", "live.numbox", 0 ],
 			"obj-4::obj-11::obj-21::obj-6" : [ "live.tab[4]", "live.tab[1]", 0 ],
 			"obj-4::obj-11::obj-35" : [ "[2]", "Level", 0 ],
-			"obj-5::obj-13::obj-192" : [ "live.numbox[4]", "live.numbox", 0 ],
-			"obj-8::obj-10::obj-1::obj-192" : [ "live.numbox[7]", "live.numbox", 0 ],
 			"obj-8::obj-11::obj-21::obj-6" : [ "live.tab[5]", "live.tab[1]", 0 ],
 			"obj-8::obj-11::obj-35" : [ "[6]", "Level", 0 ],
 			"parameterbanks" : 			{
@@ -5206,18 +5032,14 @@
 			}
 ,
 			"parameter_overrides" : 			{
+				"obj-11::obj-17::obj-30" : 				{
+					"parameter_longname" : "chroma scaling factor"
+				}
+,
 				"obj-11::obj-17::obj-46::obj-1" : 				{
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
-				}
-,
-				"obj-11::obj-6::obj-14::obj-1::obj-1::obj-192" : 				{
-					"parameter_longname" : "live.numbox[8]"
-				}
-,
-				"obj-2::obj-10::obj-1::obj-192" : 				{
-					"parameter_longname" : "live.numbox[5]"
 				}
 ,
 				"obj-2::obj-11::obj-21::obj-6" : 				{
@@ -5228,36 +5050,12 @@
 					"parameter_longname" : "[1]"
 				}
 ,
-				"obj-3::obj-13::obj-192" : 				{
-					"parameter_longname" : "live.numbox[1]"
-				}
-,
-				"obj-3::obj-15::obj-192" : 				{
-					"parameter_longname" : "live.numbox[2]"
-				}
-,
-				"obj-3::obj-5::obj-1::obj-192" : 				{
-					"parameter_longname" : "live.numbox[3]"
-				}
-,
-				"obj-4::obj-10::obj-1::obj-192" : 				{
-					"parameter_longname" : "live.numbox[6]"
-				}
-,
 				"obj-4::obj-11::obj-21::obj-6" : 				{
 					"parameter_longname" : "live.tab[4]"
 				}
 ,
 				"obj-4::obj-11::obj-35" : 				{
 					"parameter_longname" : "[2]"
-				}
-,
-				"obj-5::obj-13::obj-192" : 				{
-					"parameter_longname" : "live.numbox[4]"
-				}
-,
-				"obj-8::obj-10::obj-1::obj-192" : 				{
-					"parameter_longname" : "live.numbox[7]"
 				}
 ,
 				"obj-8::obj-11::obj-21::obj-6" : 				{
@@ -5350,20 +5148,6 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.audio.io.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.audioinfluencer.compact.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "somax.audioinfluencer.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
@@ -5371,37 +5155,9 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.audioinfluencer.wireless.maxpat",
+				"name" : "somax.await_patcherargs.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.audioinput.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.delay.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.midioutput.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.pan2.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -5420,14 +5176,14 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.source.maxpat",
+				"name" : "somax.routesignal.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.uniquename.maxpat",
+				"name" : "somax.winresize.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
