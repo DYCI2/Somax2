@@ -444,13 +444,6 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "Syrinx.aiff",
-				"bootpath" : "~/Music",
-				"patcherrelativepath" : "../../../../Music",
-				"type" : "AIFF",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "Yin+.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "./patchers/resources/influencers",

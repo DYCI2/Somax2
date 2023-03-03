@@ -42,7 +42,7 @@
 				"box" : 				{
 					"comment" : "(unused)",
 					"id" : "obj-75",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -247,7 +247,7 @@
 					"presentation_rect" : [ 127.333335429430008, 16.708334073424339, 30.0, 20.0 ],
 					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"triscale" : 0.66,
-					"varname" : "rightch"
+					"varname" : "rightchannel"
 				}
 
 			}
@@ -314,7 +314,7 @@
 					"presentation_rect" : [ 127.333335429430008, 1.333333343267441, 30.0, 20.0 ],
 					"tricolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"triscale" : 0.66,
-					"varname" : "leftch"
+					"varname" : "leftchannel"
 				}
 
 			}
@@ -524,7 +524,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-39",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -536,7 +536,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-38",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -570,8 +570,8 @@
 					"patching_rect" : [ 808.0, 217.0, 143.0, 22.0 ],
 					"restore" : 					{
 						"enabled" : [ 1 ],
-						"leftch" : [ 1 ],
-						"rightch" : [ 1 ]
+						"leftchannel" : [ 1 ],
+						"rightchannel" : [ 2 ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -608,11 +608,11 @@
 				"box" : 				{
 					"comment" : "(list) midi messages [nn vel ch]",
 					"id" : "obj-43",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "multichannelsignal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 86.425094800327997, 9.0, 30.0, 30.0 ]
 				}
 
@@ -919,7 +919,16 @@
 				}
 
 			}
- ]
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "somax.routesignal.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0
 	}
 
 }

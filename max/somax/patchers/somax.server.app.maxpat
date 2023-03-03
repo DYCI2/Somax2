@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 86.0, 2492.0, 1250.0 ],
+		"rect" : [ 34.0, 86.0, 2119.0, 1250.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,18 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
+					"id" : "obj-84",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 434.083383161208985, 121.282504558642586, 80.0, 22.0 ],
+					"text" : "s #0_dump"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-45",
 					"maxclass" : "mc.ezdac~",
@@ -98,6 +110,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-20",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -120,6 +133,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-5",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -2553,11 +2567,11 @@
 				"box" : 				{
 					"id" : "obj-72",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 144.41651487832678, 92.0, 308.666868282882206, 22.0 ],
-					"text" : "route temposource tempo"
+					"numinlets" : 4,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "", "", "" ],
+					"patching_rect" : [ 144.41651487832678, 92.0, 453.500302424323309, 22.0 ],
+					"text" : "route temposource tempo dump"
 				}
 
 			}
@@ -3507,7 +3521,7 @@
 					"outlettype" : [ "", "multichannelsignal", "", "", "" ],
 					"patching_rect" : [ 786.0, 1296.595695392871903, 170.0, 22.0 ],
 					"text" : "somax.audiocorpusbuilder",
-					"varname" : "somax.audiocorpusbuilder[1]"
+					"varname" : "somax.audiocorpusbuilder"
 				}
 
 			}
@@ -6292,7 +6306,14 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-58", 0 ],
-					"midpoints" : [ 443.583383161208985, 308.746333341453237, 150.5, 308.746333341453237 ],
+					"midpoints" : [ 588.416817302650088, 308.746333341453237, 150.5, 308.746333341453237 ],
+					"source" : [ "obj-72", 3 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-84", 0 ],
 					"source" : [ "obj-72", 2 ]
 				}
 

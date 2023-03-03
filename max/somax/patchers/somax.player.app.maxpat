@@ -133,7 +133,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-8",
@@ -4848,15 +4847,6 @@
 					"destination" : [ "obj-78", 0 ],
 					"midpoints" : [ 1156.40625, 207.5, 962.702380952380622, 207.5 ],
 					"order" : 2,
-					"source" : [ "obj-21", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-87", 0 ],
-					"midpoints" : [ 1156.40625, 172.5, 283.952380952380963, 172.5 ],
-					"order" : 9,
 					"source" : [ "obj-21", 0 ]
 				}
 
