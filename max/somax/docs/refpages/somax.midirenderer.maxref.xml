@@ -4,11 +4,11 @@
 <c74object name="somax.midirenderer" module="somax" kind="patcher">
 
 	<digest>
-		Digest
+		Render a somax.player's MIDI corpus
 	</digest>
 
 	<description>
-		Description
+		The somax.midirenderer reads a connected somax.player's output protocol and converts its messages into an stream of MIDI events (assuming that a MIDI corpus is loaded into the somax.player)
 	</description>
 
 	<!--METADATA-->

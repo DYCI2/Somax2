@@ -4,11 +4,11 @@
 <c74object name="somax.audiorenderer" module="somax" kind="patcher">
 
 	<digest>
-		Digest
+		Render a somax.player's audio corpus
 	</digest>
 
 	<description>
-		Description
+		The somax.audiorenderer reads a connected somax.player's output protocol and converts its messages into an audio signal (assuming that an audio corpus is loaded into the somax.player)
 	</description>
 
 	<!--METADATA-->

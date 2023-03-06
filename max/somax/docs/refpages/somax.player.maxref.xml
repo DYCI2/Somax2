@@ -299,6 +299,14 @@
             <digest>TODO</digest>
             <description>TODO</description>
         </attribute>
+        <attribute name="tabooenable" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
+        <attribute name="tabooduration" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
         <attribute name="timeout" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
             <description>TODO</description>
@@ -315,7 +323,7 @@
             <digest>TODO</digest>
             <description>TODO</description>
         </attribute>
-        <attribute name="transpositionconsistency" get="1" set="1" type="symbol" size="1">
+        <attribute name="transpositionbias" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
             <description>TODO</description>
         </attribute>
