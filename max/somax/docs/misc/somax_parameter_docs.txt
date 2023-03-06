@@ -45,7 +45,7 @@
 * Region Mask (enable):                 regionmaskenable <1/0>
 * Region Mask (range):                  regionmask <0..1> <0..1>
 
-* Transposition Consistency:            transpositionconsistency <0..1>
+* Transposition Bias:                   transpositionbias <0..1>
 * Active Transpositions:                transpositions <0/1> <0/1> ... <0/1> (binary mask with 12 values, one for each transposition, 1 enables, 0 disables)
                                         transpositions <-5..6> <-5..6> ... <-5..6> (list of transpositions that should be enabled. ex -5 0 3 enables -5 0 and 3, all others are disabled. 0 disables all but 0-transposition)
 
