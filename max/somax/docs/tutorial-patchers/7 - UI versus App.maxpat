@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 125.0, 127.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1063,7 +1063,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1112.589406691029808, 355.5, 112.043864166666481, 93.0 ],
+									"patching_rect" : [ 1112.589406691029808, 355.5, 116.0, 93.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
 									"presentation_rect" : [ 1009.291666666666515, 103.5, 187.0, 66.0 ],
@@ -1528,7 +1528,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 125.0, 127.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1826,7 +1826,6 @@
 										"style" : "",
 										"subpatcher_template" : "",
 										"assistshowspatchername" : 0,
-										"visible" : 1,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-15",
@@ -3111,11 +3110,8 @@
 			"obj-1::obj-1::obj-3::obj-407::obj-295" : [ "playingmode[5]", "playingmode", 0 ],
 			"obj-1::obj-1::obj-3::obj-407::obj-298" : [ "simultaneousonsets[9]", "simultaneousonsets", 0 ],
 			"obj-1::obj-1::obj-3::obj-407::obj-328" : [ "decaybasis[2]", "decaybasis", 0 ],
-			"obj-1::obj-1::obj-3::obj-407::obj-504" : [ "transpositionconsistency[1]", "transpositionconsistency", 0 ],
 			"obj-1::obj-1::obj-3::obj-407::obj-570" : [ "__exp_melodicpitchfromchords[2]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-1::obj-1::obj-3::obj-407::obj-575" : [ "__exp_tempoconsistencysigma[2]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-1::obj-1::obj-3::obj-407::obj-600" : [ "__exp_tabooenable[3]", "__exp_tabooenable", 0 ],
-			"obj-1::obj-1::obj-3::obj-407::obj-605" : [ "__exp_tabooduration[3]", "__exp_tabooduration", 0 ],
 			"obj-1::obj-1::obj-3::obj-407::obj-642" : [ "__exp_numnotessigma[3]", "__exp_numnotessigma", 0 ],
 			"obj-1::obj-1::obj-3::obj-407::obj-653" : [ "__exp_numnotesenable[3]", "__exp_numnotesenable", 0 ],
 			"obj-1::obj-1::obj-3::obj-407::obj-656" : [ "__exp_numnotesmu[3]", "__exp_numnotesmu", 0 ],
@@ -3184,11 +3180,8 @@
 			"obj-1::obj-3::obj-407::obj-295" : [ "playingmode[2]", "playingmode", 0 ],
 			"obj-1::obj-3::obj-407::obj-298" : [ "simultaneousonsets[12]", "simultaneousonsets", 0 ],
 			"obj-1::obj-3::obj-407::obj-328" : [ "decaybasis[4]", "decaybasis", 0 ],
-			"obj-1::obj-3::obj-407::obj-504" : [ "transpositionconsistency[7]", "transpositionconsistency", 0 ],
 			"obj-1::obj-3::obj-407::obj-570" : [ "__exp_melodicpitchfromchords[3]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-1::obj-3::obj-407::obj-575" : [ "__exp_tempoconsistencysigma[3]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-1::obj-3::obj-407::obj-600" : [ "__exp_tabooenable[4]", "__exp_tabooenable", 0 ],
-			"obj-1::obj-3::obj-407::obj-605" : [ "__exp_tabooduration[5]", "__exp_tabooduration", 0 ],
 			"obj-1::obj-3::obj-407::obj-642" : [ "__exp_numnotessigma[4]", "__exp_numnotessigma", 0 ],
 			"obj-1::obj-3::obj-407::obj-653" : [ "__exp_numnotesenable[5]", "__exp_numnotesenable", 0 ],
 			"obj-1::obj-3::obj-407::obj-656" : [ "__exp_numnotesmu[4]", "__exp_numnotesmu", 0 ],
@@ -3307,11 +3300,8 @@
 			"obj-8::obj-1::obj-3::obj-407::obj-295" : [ "playingmode[1]", "playingmode", 0 ],
 			"obj-8::obj-1::obj-3::obj-407::obj-298" : [ "simultaneousonsets[8]", "simultaneousonsets", 0 ],
 			"obj-8::obj-1::obj-3::obj-407::obj-328" : [ "decaybasis[3]", "decaybasis", 0 ],
-			"obj-8::obj-1::obj-3::obj-407::obj-504" : [ "transpositionconsistency[6]", "transpositionconsistency", 0 ],
 			"obj-8::obj-1::obj-3::obj-407::obj-570" : [ "__exp_melodicpitchfromchords[1]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-8::obj-1::obj-3::obj-407::obj-575" : [ "__exp_tempoconsistencysigma[1]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-8::obj-1::obj-3::obj-407::obj-600" : [ "__exp_tabooenable[2]", "__exp_tabooenable", 0 ],
-			"obj-8::obj-1::obj-3::obj-407::obj-605" : [ "__exp_tabooduration[2]", "__exp_tabooduration", 0 ],
 			"obj-8::obj-1::obj-3::obj-407::obj-642" : [ "__exp_numnotessigma[2]", "__exp_numnotessigma", 0 ],
 			"obj-8::obj-1::obj-3::obj-407::obj-653" : [ "__exp_numnotesenable[2]", "__exp_numnotesenable", 0 ],
 			"obj-8::obj-1::obj-3::obj-407::obj-656" : [ "__exp_numnotesmu[2]", "__exp_numnotesmu", 0 ],
@@ -3383,11 +3373,8 @@
 			"obj-8::obj-3::obj-407::obj-295" : [ "playingmode[4]", "playingmode", 0 ],
 			"obj-8::obj-3::obj-407::obj-298" : [ "simultaneousonsets[7]", "simultaneousonsets", 0 ],
 			"obj-8::obj-3::obj-407::obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
-			"obj-8::obj-3::obj-407::obj-504" : [ "transpositionconsistency[4]", "transpositionconsistency", 0 ],
 			"obj-8::obj-3::obj-407::obj-570" : [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-8::obj-3::obj-407::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-8::obj-3::obj-407::obj-600" : [ "__exp_tabooenable[1]", "__exp_tabooenable", 0 ],
-			"obj-8::obj-3::obj-407::obj-605" : [ "__exp_tabooduration[4]", "__exp_tabooduration", 0 ],
 			"obj-8::obj-3::obj-407::obj-642" : [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
 			"obj-8::obj-3::obj-407::obj-653" : [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
 			"obj-8::obj-3::obj-407::obj-656" : [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],
@@ -3933,6 +3920,10 @@
 ,
 				"obj-8::obj-3::obj-91::obj-3" : 				{
 					"parameter_longname" : "live.text[62]"
+				}
+,
+				"obj-8::obj-6::obj-98" : 				{
+					"parameter_longname" : "live.text[6]"
 				}
 ,
 				"obj-8::obj-8::obj-13::obj-1" : 				{
