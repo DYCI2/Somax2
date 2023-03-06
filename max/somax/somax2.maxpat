@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 2119.0, 1250.0 ],
+		"rect" : [ 34.0, 87.0, 2119.0, 1247.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -441,13 +441,6 @@
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "./patchers/resources/influencers",
 				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "Syrinx.aiff",
-				"bootpath" : "~/Music",
-				"patcherrelativepath" : "../../../../Music",
-				"type" : "AIFF",
 				"implicit" : 1
 			}
 , 			{

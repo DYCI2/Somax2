@@ -592,7 +592,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-30",
 					"linecount" : 2,
 					"maxclass" : "comment",
@@ -610,7 +609,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
-					"hidden" : 1,
 					"id" : "obj-32",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -627,7 +625,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-5",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -1160,7 +1157,7 @@
 					"patching_rect" : [ 1315.833333333333485, 93.0, 143.0, 22.0 ],
 					"restore" : 					{
 						"delay" : [ 0.0 ],
-						"gain" : [ -23.413256279364525 ],
+						"gain" : [ 0.0 ],
 						"pan" : [ 0.0 ]
 					}
 ,
@@ -1253,7 +1250,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"comment" : "(signal) mono signal",
@@ -1380,7 +1376,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 88.15511957378385, 31.900125000000003, 30.0, 30.0 ]
 				}
 
@@ -2125,8 +2121,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1315.833333333333485, 197.75, 203.0, 22.0 ],
-					"text" : "load somax.audioinfluencer.maxhelp"
+					"patching_rect" : [ 1315.833333333333485, 197.75, 226.0, 22.0 ],
+					"text" : "load somax.audioinfluencer.app.maxhelp"
 				}
 
 			}

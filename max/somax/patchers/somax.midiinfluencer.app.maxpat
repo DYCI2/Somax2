@@ -815,13 +815,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-89",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1038.333333790302277, 55.25, 172.0, 35.0 ],
-					"text" : "load somax.midiinfluencer.maxhelp"
+					"patching_rect" : [ 1038.333333790302277, 55.25, 219.0, 22.0 ],
+					"text" : "load somax.midiinfluencer.app.maxhelp"
 				}
 
 			}
