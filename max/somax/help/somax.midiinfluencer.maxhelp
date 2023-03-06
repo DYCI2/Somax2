@@ -634,7 +634,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 394.01687763713079, 335.0, 142.61814345991553, 40.0 ],
+									"patching_rect" : [ 497.0, 338.5, 142.61814345991553, 40.0 ],
 									"text" : "double click to view all parameters",
 									"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 								}
@@ -1251,7 +1251,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 223.5, 511.0, 98.0, 36.0 ],
+									"patching_rect" : [ 223.5, 523.0, 98.0, 36.0 ],
 									"text" : "pitch: detected midi pitch",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -1266,7 +1266,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 82.5, 511.0, 133.0, 50.0 ],
+									"patching_rect" : [ 82.5, 523.0, 133.0, 50.0 ],
 									"text" : "onset: bang when an onset is detected in the signal",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -1310,7 +1310,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 363.635021097046433, 515.0, 170.0, 50.0 ],
+									"patching_rect" : [ 363.635021097046433, 527.0, 170.0, 50.0 ],
 									"text" : "chroma: relative energy in bands corresponding to the 12 pitch classes",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -1337,7 +1337,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 422.225738396624479, 468.25, 22.0, 20.0 ],
+									"patching_rect" : [ 422.225738396624479, 480.25, 22.0, 20.0 ],
 									"text" : "e",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1361,7 +1361,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 501.181434599156034, 468.0, 22.0, 20.0 ],
+									"patching_rect" : [ 501.181434599156034, 480.0, 22.0, 20.0 ],
 									"text" : "bb",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1373,7 +1373,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 490.77215189873408, 468.0, 19.0, 20.0 ],
+									"patching_rect" : [ 490.77215189873408, 480.0, 19.0, 20.0 ],
 									"text" : "a",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1385,7 +1385,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 473.362869198312126, 468.0, 22.0, 20.0 ],
+									"patching_rect" : [ 473.362869198312126, 480.0, 22.0, 20.0 ],
 									"text" : "g#",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1397,7 +1397,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 462.953586497890399, 468.0, 19.0, 20.0 ],
+									"patching_rect" : [ 462.953586497890399, 480.0, 19.0, 20.0 ],
 									"text" : "g",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1409,7 +1409,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 447.544303797468388, 468.0, 19.0, 20.0 ],
+									"patching_rect" : [ 447.544303797468388, 480.0, 19.0, 20.0 ],
 									"text" : "f#",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1421,7 +1421,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 437.135021097046433, 468.0, 19.0, 20.0 ],
+									"patching_rect" : [ 437.135021097046433, 480.0, 19.0, 20.0 ],
 									"text" : "f",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1433,7 +1433,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 404.725738396624479, 468.0, 22.0, 20.0 ],
+									"patching_rect" : [ 404.725738396624479, 480.0, 22.0, 20.0 ],
 									"text" : "eb",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1445,7 +1445,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 394.01687763713079, 468.0, 19.0, 20.0 ],
+									"patching_rect" : [ 394.01687763713079, 480.0, 19.0, 20.0 ],
 									"text" : "d",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1457,7 +1457,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 378.308016877637158, 468.0, 21.0, 20.0 ],
+									"patching_rect" : [ 378.308016877637158, 480.0, 21.0, 20.0 ],
 									"text" : "c#",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1469,7 +1469,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 368.0, 468.0, 19.0, 20.0 ],
+									"patching_rect" : [ 368.0, 480.0, 19.0, 20.0 ],
 									"text" : "c",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1483,7 +1483,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 367.0, 471.0, 166.0, 37.0 ],
+									"patching_rect" : [ 367.0, 483.0, 166.0, 37.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 428.833333333333258, 551.0, 166.0, 34.0 ],
 									"setminmax" : [ 0.0, 1.0 ],
@@ -1616,7 +1616,7 @@
 									"numinlets" : 4,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 134.0, 427.0, 368.5, 22.0 ],
+									"patching_rect" : [ 134.0, 439.0, 368.5, 22.0 ],
 									"text" : "route onset pitch chroma"
 								}
 
@@ -1676,7 +1676,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 247.0, 379.5, 96.0, 22.0 ],
+									"patching_rect" : [ 306.0, 386.5, 96.0, 22.0 ],
 									"text" : "print parameters"
 								}
 
@@ -1691,7 +1691,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 250.5, 482.0, 44.0, 26.0 ],
+									"patching_rect" : [ 250.5, 494.0, 44.0, 26.0 ],
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
 
@@ -1705,20 +1705,21 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 134.0, 482.0, 26.0, 26.0 ]
+									"patching_rect" : [ 134.0, 494.0, 26.0, 26.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"fontsize" : 18.0,
 									"id" : "obj-102",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 134.0, 344.0, 245.0, 22.0 ],
+									"patching_rect" : [ 134.0, 344.0, 363.0, 29.0 ],
 									"text" : "somax.midiinfluencer @continuouschroma 1",
-									"varname" : "somax.audioinfluencer[1]"
+									"varname" : "somax.midiinfluencer"
 								}
 
 							}
@@ -2004,8 +2005,6 @@
 			"obj-1::obj-91::obj-328" : [ "decaybasis[2]", "decaybasis", 0 ],
 			"obj-1::obj-91::obj-570" : [ "__exp_melodicpitchfromchords[5]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-1::obj-91::obj-575" : [ "__exp_tempoconsistencysigma[1]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-1::obj-91::obj-600" : [ "__exp_tabooenable[2]", "__exp_tabooenable", 0 ],
-			"obj-1::obj-91::obj-605" : [ "__exp_tabooduration[1]", "__exp_tabooduration", 0 ],
 			"obj-1::obj-91::obj-642" : [ "__exp_numnotessigma[2]", "__exp_numnotessigma", 0 ],
 			"obj-1::obj-91::obj-653" : [ "__exp_numnotesenable[1]", "__exp_numnotesenable", 0 ],
 			"obj-1::obj-91::obj-656" : [ "__exp_numnotesmu[2]", "__exp_numnotesmu", 0 ],

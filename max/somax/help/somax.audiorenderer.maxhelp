@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 391.0, 148.0, 1021.0, 779.0 ],
+		"rect" : [ 100.0, 100.0, 1021.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -122,7 +122,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 391.0, 174.0, 1021.0, 753.0 ],
+						"rect" : [ 100.0, 126.0, 1021.0, 753.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -163,7 +163,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 610.375000000000114, 424.0, 151.0, 36.0 ],
-									"presentation_linecount" : 2,
 									"text" : "A long release time will generally more voices ",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -192,8 +191,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 832.312499999999886, 570.541666666666515, 209.000000000000114, 79.0 ],
-									"presentation_linecount" : 14,
+									"patching_rect" : [ 832.312499999999886, 570.541666666666515, 210.0, 79.0 ],
 									"text" : "The rendering is based on groove~. See the \"timestretch\" tab of the groove~ maxhelp for more information about the timestretch modes",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -239,8 +237,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 400.5625, 129.0, 203.9375, 52.0 ],
-									"presentation_linecount" : 3,
+									"patching_rect" : [ 400.5625, 129.0, 205.0, 52.0 ],
 									"text" : "set transposition bias to 10 increase probability of pitch shifted events",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -295,7 +292,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 253.0, 278.5, 276.0, 50.0 ],
+									"patching_rect" : [ 311.0, 272.0, 276.0, 50.0 ],
 									"text" : "This player is pre-configured with a corpus and settings to ensure that it constantly jumps and may transpose (pitch shift)",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -376,7 +373,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 302.5, 398.541666666666515, 86.0, 36.0 ],
+									"patching_rect" : [ 323.0, 389.541666666666515, 86.0, 36.0 ],
 									"text" : "transposition (semitones)",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -390,7 +387,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 144.0, 398.541666666666515, 154.0, 21.0 ],
+									"patching_rect" : [ 164.5, 389.541666666666515, 154.0, 21.0 ],
 									"text" : "current position in corpus",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -429,7 +426,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 307.5, 377.0, 31.0, 22.0 ],
+									"patching_rect" : [ 328.0, 368.0, 31.0, 22.0 ],
 									"triangle" : 0
 								}
 
@@ -594,7 +591,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 147.5, 377.0, 89.0, 16.0 ],
+									"patching_rect" : [ 168.0, 368.0, 89.0, 16.0 ],
 									"size" : 235.0
 								}
 
@@ -1029,7 +1026,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 147.5, 345.5, 179.0, 22.0 ],
+									"patching_rect" : [ 168.0, 336.5, 179.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -1292,7 +1289,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 844.562499999999886, 252.770833333333201, 142.0, 35.0 ],
-									"text" : "1 running"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -1305,7 +1302,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 91.833333333333314, 345.5, 36.5, 36.5 ]
+									"patching_rect" : [ 112.333333333333329, 336.5, 36.5, 36.5 ]
 								}
 
 							}
@@ -1324,12 +1321,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-6",
-									"linecount" : 4,
+									"linecount" : 3,
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
-									"patching_rect" : [ 25.0, 272.0, 219.5, 62.0 ],
+									"patching_rect" : [ 25.0, 272.0, 281.0, 49.0 ],
 									"text" : "somax.player @autoinitialize 0 @mode continuous @corpus Fabbrizio2c.pickle @continuity 0. @transpositions -4 0 4 @tabooenable 1",
 									"varname" : "somax.player"
 								}
@@ -1361,14 +1358,14 @@
 							}
 , 							{
 								"box" : 								{
+									"fontsize" : 18.0,
 									"id" : "obj-1",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "multichannelsignal", "", "" ],
-									"patching_rect" : [ 25.0, 564.770833333333258, 264.0, 22.0 ],
-									"text" : "somax.audiorenderer",
-									"varname" : "somax.audioinfluencer"
+									"patching_rect" : [ 25.0, 564.770833333333258, 264.0, 29.0 ],
+									"text" : "somax.audiorenderer"
 								}
 
 							}
@@ -1399,7 +1396,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 208.5, 129.0, 186.0, 52.0 ],
-									"presentation_linecount" : 3,
 									"text" : "change timestretch factor to listen to time stretched rendering",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -1693,7 +1689,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
-									"midpoints" : [ 34.5, 339.25, 157.0, 339.25 ],
+									"midpoints" : [ 34.5, 329.25, 177.5, 329.25 ],
 									"order" : 0,
 									"source" : [ "obj-6", 0 ]
 								}

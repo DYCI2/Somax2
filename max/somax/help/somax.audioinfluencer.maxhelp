@@ -474,7 +474,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 394.01687763713079, 335.0, 142.61814345991553, 40.0 ],
+									"patching_rect" : [ 511.01687763713079, 338.5, 142.61814345991553, 40.0 ],
 									"text" : "double click to view all parameters",
 									"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 								}
@@ -2459,7 +2459,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 250.5, 383.0, 96.0, 22.0 ],
+									"patching_rect" : [ 311.5, 383.0, 96.0, 22.0 ],
 									"text" : "print parameters"
 								}
 
@@ -2494,12 +2494,13 @@
 							}
 , 							{
 								"box" : 								{
+									"fontsize" : 18.0,
 									"id" : "obj-1",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 134.0, 344.0, 252.0, 22.0 ],
+									"patching_rect" : [ 134.0, 344.0, 374.0, 29.0 ],
 									"text" : "somax.audioinfluencer @continuouschroma 1",
 									"varname" : "somax.audioinfluencer"
 								}
@@ -2649,7 +2650,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-60", 1 ],
-									"midpoints" : [ 376.5, 386.5, 667.0, 386.5 ],
+									"midpoints" : [ 498.5, 386.5, 667.0, 386.5 ],
 									"source" : [ "obj-1", 2 ]
 								}
 
@@ -2874,8 +2875,6 @@
 			"obj-1::obj-8::obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
 			"obj-1::obj-8::obj-570" : [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-1::obj-8::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-1::obj-8::obj-600" : [ "__exp_tabooenable[1]", "__exp_tabooenable", 0 ],
-			"obj-1::obj-8::obj-605" : [ "__exp_tabooduration[4]", "__exp_tabooduration", 0 ],
 			"obj-1::obj-8::obj-642" : [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
 			"obj-1::obj-8::obj-653" : [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
 			"obj-1::obj-8::obj-656" : [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],

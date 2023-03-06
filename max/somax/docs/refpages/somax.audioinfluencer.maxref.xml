@@ -8,7 +8,7 @@
 	</digest>
 
 	<description>
-		The audio influencer segments and analyzes an incoming signal with respect to pitch, chroma and onset into discrete labels, which then can be used to influence a somax.player
+		The audio influencer segments and analyzes an incoming signal with respect to pitch, chroma and onset into discrete labels, which then can be used to influence a somax.player in order to control the player's way of navigating through the corpus.
 	</description>
 
 	<!--METADATA-->
