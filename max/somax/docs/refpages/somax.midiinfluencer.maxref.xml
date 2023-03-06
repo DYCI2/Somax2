@@ -4,11 +4,11 @@
 <c74object name="somax.midiinfluencer" module="somax" kind="patcher">
 
 	<digest>
-		Digest
+		Analyzes MIDI data into labels
 	</digest>
 
 	<description>
-		Description
+		The MIDI influencer analyzes incoming MIDI data with respect to pitch, chroma and onset into discrete labels, which then can be used to influence a somax.player
 	</description>
 
 	<!--METADATA-->
