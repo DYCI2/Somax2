@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 284.0, 174.0, 942.0, 638.0 ],
+		"rect" : [ 314.0, 182.0, 942.0, 598.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -59,15 +59,15 @@
 				"box" : 				{
 					"fontsize" : 14.0,
 					"id" : "obj-9",
-					"linecount" : 3,
+					"linecount" : 4,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 114.522727272727252, 66.0, 956.0, 53.0 ],
+					"patching_rect" : [ 114.522727272727252, 66.0, 956.0, 69.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 4,
-					"presentation_rect" : [ 115.0, 56.0, 712.0, 69.0 ],
-					"text" : "Somax 2.5 is a suite of tools for reactive musical co-improvisation.\n\nThis new version consists of a Max UI application and a collection of Max abstractions, providing different strategies to build custom patches "
+					"presentation_rect" : [ 115.0, 46.0, 712.0, 69.0 ],
+					"text" : "Somax 2.5 is a suite of tools for reactive musical co-improvisation.\n\nThis new version consists of a Max application with a new user interface design and a collection of Max abstractions, providing different strategies to build custom patches "
 				}
 
 			}
@@ -136,7 +136,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 214.0, 564.0, 267.0, 49.0 ],
-									"text" : ";\rmax launchbrowser vimeo.com/showcase/8537329"
+									"text" : ";\rmax launchbrowser http://vimeo.com/showcase/8537329"
 								}
 
 							}
@@ -195,7 +195,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 214.0, 504.0, 267.0, 49.0 ],
-									"text" : ";\rmax launchbrowser repmus.ircam.fr/somax/home"
+									"text" : ";\rmax launchbrowser http://repmus.ircam.fr/somax/home"
 								}
 
 							}
@@ -499,13 +499,25 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
-									"id" : "obj-2",
-									"linecount" : 4,
+									"fontsize" : 14.0,
+									"id" : "obj-1",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.5, 15.0, 853.0, 60.0 ],
-									"text" : "These tutorials will guide you through the usage of the Somax 2.5 core abstractions, implemented to provide you a complete Max-style workflow.\n\nWith these abstractions you could achieve the same results as the App objects but, thanks to their modular architecture, you could build custom patches and unlock unimagined new behaviours of interaction."
+									"patching_rect" : [ 7.5, 16.0, 525.0, 22.0 ],
+									"text" : "These tutorials will guide you through the usage of the Somax 2.5 core abstractions"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-2",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.5, 45.0, 853.0, 33.0 ],
+									"text" : "With these abstractions, implemented to provide you a complete Max-style workflow, you could achieve the same results as the App objects but, thanks to their modular architecture, you could build custom patches and unlock unimagined new behaviours of interaction."
 								}
 
 							}
@@ -521,113 +533,8 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 7.5, 90.0, 268.0, 272.0 ],
-									"tabs" : [ "1 - Introduction to Somax2", "2 - Introducing Parameters", "3 - Building a Corpus", "4 - Mastering Somax Interaction Parameters", "5 - Advanced Players Interaction", "6 - Introducing User Interfaces" ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-41",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 358.5, 435.788194262319166, 150.0, 22.0 ],
-									"text" : "2_Introducing_Parameters",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-17",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 358.5, 576.5, 121.0, 22.0 ],
-									"text" : "7_Easy_Abstractions",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-15",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 358.5, 548.357638852463879, 173.0, 22.0 ],
-									"text" : "6_Introducing_User_Interfaces",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-14",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 358.5, 492.072916557391466, 250.0, 22.0 ],
-									"text" : "4_Mastering_Somax_Interaction_Parameters",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-13",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 358.5, 520.215277704927644, 185.0, 22.0 ],
-									"text" : "5_Advanced_Players_Interaction",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-8",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 358.5, 463.930555409855288, 123.0, 22.0 ],
-									"text" : "3_Building_a_Corpus",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-12",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 358.5, 407.645833114782931, 152.0, 22.0 ],
-									"text" : "1 - Introduction to Somax2",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
+									"patching_rect" : [ 28.5, 98.0, 268.0, 272.0 ],
+									"tabs" : [ "1 - Basic Workflow", "2 - Introducing Parameters", "3 - Building a Corpus", "4 - Mastering Somax Interaction Parameters", "5 - Advanced Players Interaction", "6 - Introducing User Interfaces", "7 - UI versus App" ]
 								}
 
 							}
@@ -649,7 +556,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 89.0, 104.0, 640.0, 480.0 ],
+										"rect" : [ 600.0, 169.0, 640.0, 480.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -840,7 +747,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 41.0, 383.0, 201.0, 22.0 ],
+									"patching_rect" : [ 48.0, 413.0, 201.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -857,63 +764,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
-									"source" : [ "obj-12", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-13", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-14", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-15", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-17", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"hidden" : 1,
 									"source" : [ "obj-37", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-41", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-8", 0 ]
 								}
 
 							}
@@ -1003,7 +854,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 89.0, 87.0, 1106.0, 736.0 ],
+						"rect" : [ 105.0, 190.0, 1106.0, 736.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1033,6 +884,50 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 13.0,
+									"id" : "obj-11",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 30.0, 83.59375, 108.0, 21.0 ],
+									"presentation_linecount" : 2,
+									"text" : "Max Application"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 13.0,
+									"id" : "obj-10",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 261.0, 83.59375, 116.0, 21.0 ],
+									"text" : "Max Abstractions"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 0,
+									"fontname" : "Arial",
+									"fontsize" : 11.595186999999999,
+									"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"id" : "obj-5",
+									"maxclass" : "tab",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "int", "", "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 261.0, 105.59375, 163.0, 280.0 ],
+									"tabs" : [ "somax.server", "somax.player", "somax.audioinfluencer", "somax.midiinfluencer", "somax.audiorender", "somax.midirenderer", "somax.audiocorpusbuilder", "somax.midicorpusbuilder" ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontface" : 0,
 									"fontname" : "Arial",
 									"fontsize" : 11.595186999999999,
@@ -1043,20 +938,8 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 15.0, 75.59375, 163.0, 280.0 ],
-									"tabs" : [ "somax.server", "somax.player", "somax.audioinfluencer", "somax.midiinfluencer", "somax.audiorender", "somax.midirenderer", "somax.audiocorpusbuilder", "somax.midicorpusbuilder" ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"hidden" : 1,
-									"id" : "obj-7",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 812.0, 229.59375, 79.0, 20.0 ],
-									"text" : "Core Objects"
+									"patching_rect" : [ 30.0, 105.59375, 163.0, 135.0 ],
+									"tabs" : [ "somax.server.app", "somax.player.app", "somax.audioinfluencer.app", "somax.midiinfluencer.app" ]
 								}
 
 							}
@@ -1068,126 +951,6 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.0, 42.0, 337.0, 20.0 ],
 									"text" : "Here you will find documentation for all the Somax 2.5 objects"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-28",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 812.0, 462.75, 141.0, 22.0 ],
-									"text" : "somax.midicorpusbuilder",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-4",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 812.0, 433.15625, 149.0, 22.0 ],
-									"text" : "somax.audiocorpusbuilder",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-21",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 812.0, 373.96875, 122.0, 22.0 ],
-									"text" : "somax.audiorenderer",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-18",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 812.0, 403.5625, 115.0, 22.0 ],
-									"text" : "somax.midirenderer",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-1",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 812.0, 314.78125, 129.0, 22.0 ],
-									"text" : "somax.audioinfluencer",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-2",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 812.0, 344.375, 121.0, 22.0 ],
-									"text" : "somax.midiinfluencer",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-20",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 812.0, 285.1875, 80.0, 22.0 ],
-									"text" : "somax.player",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 12.0,
-									"hidden" : 1,
-									"id" : "obj-19",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 812.0, 255.59375, 81.0, 22.0 ],
-									"text" : "somax.server",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 								}
 
 							}
@@ -1381,7 +1144,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 10.0, 414.0, 201.0, 22.0 ],
+									"patching_rect" : [ 10.0, 473.0, 201.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -1410,62 +1173,6 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 1 ],
 									"hidden" : 1,
-									"source" : [ "obj-1", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 1 ],
-									"hidden" : 1,
-									"source" : [ "obj-18", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 1 ],
-									"hidden" : 1,
-									"source" : [ "obj-19", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 1 ],
-									"hidden" : 1,
-									"source" : [ "obj-2", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 1 ],
-									"hidden" : 1,
-									"source" : [ "obj-20", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 1 ],
-									"hidden" : 1,
-									"source" : [ "obj-21", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 1 ],
-									"hidden" : 1,
-									"source" : [ "obj-28", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 1 ],
-									"hidden" : 1,
 									"source" : [ "obj-37", 1 ]
 								}
 
@@ -1474,7 +1181,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 1 ],
 									"hidden" : 1,
-									"source" : [ "obj-4", 0 ]
+									"source" : [ "obj-5", 1 ]
 								}
 
 							}
