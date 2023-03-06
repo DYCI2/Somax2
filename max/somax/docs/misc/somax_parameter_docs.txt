@@ -74,8 +74,8 @@
 * Auto Jump Enable:                     __exp_autojumpenable <1/0>
 * Auto Jump Lower Threshold:            __exp_autojumpactivate <0..∞>
 * Auto Jump Upper Threshold:            __exp_autojumpforcejump <1..∞>
-* Taboo Enable:                         __exp_tabooenable <1/0>
-* Taboo Num Events:                     __exp_tabooduration <1..∞>
+* Taboo Enable:                         tabooenable <1/0>
+* Taboo Num Events:                     tabooduration <1..∞>
 
 
 
