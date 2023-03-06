@@ -1050,13 +1050,12 @@
 									"fontface" : 1,
 									"fontsize" : 24.0,
 									"id" : "obj-106",
-									"linecount" : 3,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 841.562499999999886, 250.770833333333201, 142.0, 89.0 ],
-									"text" : "1 playersmissing"
+									"patching_rect" : [ 841.562499999999886, 250.770833333333201, 142.0, 35.0 ],
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -1125,14 +1124,15 @@
 							}
 , 							{
 								"box" : 								{
+									"fontsize" : 18.0,
 									"id" : "obj-112",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 22.0, 544.770833333333258, 150.5, 22.0 ],
+									"patching_rect" : [ 22.0, 544.770833333333258, 178.0, 29.0 ],
 									"text" : "somax.midirenderer",
-									"varname" : "somax.audioinfluencer[1]"
+									"varname" : "somax.midirenderer"
 								}
 
 							}

@@ -4,11 +4,11 @@
 <c74object name="somax.audiocorpusbuilder" module="somax" kind="patcher">
 
 	<digest>
-		Digest
+		Build somax corpora from audio files
 	</digest>
 
 	<description>
-		Description
+		The somax.audiocorpusbuilder is used to construct a corpus from an audio file. A somax.player cannot read an audio file directly, it requires the audio to be analyzed and segmented before being able to parse it. The somax.audiocorpusbuilder does exactly that — it segments the audio file and analyzes it with regards to a number of descriptors and exports the result as a separate file, that then can be loaded into a somax.player.
 	</description>
 
 	<!--METADATA-->
