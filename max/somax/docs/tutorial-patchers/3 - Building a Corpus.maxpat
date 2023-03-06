@@ -90,6 +90,19 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontsize" : 12.0,
+									"id" : "obj-19",
+									"linecount" : 8,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 26.0, 79.673499104757866, 509.625001887480494, 114.0 ],
+									"text" : "As previously mentioned, the Somax 2 system generates its improvisation material based on an external set of musical material, the Corpus.\n\nWhile in the previous tutorial we were using pre-built audio and MIDI Corpora, it is possible to build a Corpus from your own set of audio or MIDI files.\n\nThere are a few short pre-build audio corpora distributed in Somax 2, but in this tutorial we are going to build our own Corpus from an audio file."
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"bubble" : 1,
 									"bubbleside" : 3,
 									"fontface" : 0,
@@ -112,7 +125,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 807.75, 356.95832873049676, 190.0, 24.0 ],
+									"patching_rect" : [ 637.75, 350.791661821085654, 190.0, 24.0 ],
 									"text" : "Trigger the output of the Player"
 								}
 
@@ -126,7 +139,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 864.75, 80.173499104757866, 186.25, 37.0 ],
+									"patching_rect" : [ 803.75, 80.173499104757866, 186.25, 37.0 ],
 									"text" : "Load an audio file of your choice to be used as corpus"
 								}
 
@@ -141,7 +154,7 @@
 									"outlettype" : [ "bang" ],
 									"outlinecolor" : [ 1.0, 0.658823529411765, 0.149019607843137, 1.0 ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1002.0, 356.95832873049676, 24.0, 24.0 ]
+									"patching_rect" : [ 832.0, 344.624994911674492, 36.333333818822268, 36.333333818822268 ]
 								}
 
 							}
@@ -155,7 +168,7 @@
 									"outlettype" : [ "bang" ],
 									"outlinecolor" : [ 1.0, 0.658823529411765, 0.149019607843137, 1.0 ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1061.0, 86.673499104757866, 24.0, 24.0 ]
+									"patching_rect" : [ 1000.0, 86.673499104757866, 24.0, 24.0 ]
 								}
 
 							}
@@ -250,7 +263,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "multichannelsignal", "", "" ],
-									"patching_rect" : [ 1061.0, 543.708322856094128, 122.0, 22.0 ],
+									"patching_rect" : [ 1000.0, 543.708322856094128, 122.0, 22.0 ],
 									"text" : "somax.audiorenderer",
 									"varname" : "somax.audiorenderer"
 								}
@@ -264,7 +277,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1061.0, 701.45832873049676, 54.0, 22.0 ],
+									"patching_rect" : [ 1000.0, 701.45832873049676, 54.0, 22.0 ],
 									"text" : "mc.dac~"
 								}
 
@@ -283,7 +296,7 @@
 									"outlettype" : [ "multichannelsignal", "", "float", "list" ],
 									"parameter_enable" : 1,
 									"parameter_mappable" : 0,
-									"patching_rect" : [ 1061.0, 622.966078523065335, 88.0, 51.0 ],
+									"patching_rect" : [ 1000.0, 622.966078523065335, 88.0, 51.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_initial" : [ 0 ],
@@ -310,7 +323,7 @@
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 59.0, 125.499991001861474, 45.0, 45.0 ]
+									"patching_rect" : [ 61.0, 220.499991001861474, 45.0, 45.0 ]
 								}
 
 							}
@@ -322,7 +335,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 114.333333333333314, 129.499991001861474, 54.166666666666686, 37.0 ],
+									"patching_rect" : [ 116.333333333333314, 224.499991001861474, 54.166666666666686, 37.0 ],
 									"text" : "Start DSP"
 								}
 
@@ -374,7 +387,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 215.0, 483.958329000000049, 150.0, 22.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -504,21 +517,6 @@
 							}
 , 							{
 								"box" : 								{
-									"fontface" : 2,
-									"fontsize" : 16.0,
-									"id" : "obj-11",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 38.0, 202.208321743474244, 443.0, 42.0 ],
-									"text" : "NB: Only one server can be present in an open Max window -- take care not to instantiate multiple servers!",
-									"textcolor" : [ 0.831372549019608, 0.035294117647059, 0.035294117647059, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"color" : [ 1.0, 0.658823529411765, 0.149019607843137, 1.0 ],
 									"id" : "obj-15",
 									"maxclass" : "newobj",
@@ -539,7 +537,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 786.207519999999931, 472.166681442230242, 131.0, 20.0 ],
+									"patching_rect" : [ 725.207519999999931, 472.166681442230242, 131.0, 20.0 ],
 									"text" : "loadmess no loaded corpus"
 								}
 
@@ -554,7 +552,7 @@
 									"outlettype" : [ "bang" ],
 									"outlinecolor" : [ 1.0, 0.658823529411765, 0.149019607843137, 1.0 ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 926.0, 504.13185769089398, 24.0, 24.0 ]
+									"patching_rect" : [ 865.0, 504.13185769089398, 24.0, 24.0 ]
 								}
 
 							}
@@ -565,7 +563,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "bang", "" ],
-									"patching_rect" : [ 926.0, 472.166681442230242, 55.5, 22.0 ],
+									"patching_rect" : [ 865.0, 472.166681442230242, 55.5, 22.0 ],
 									"text" : "t b l"
 								}
 
@@ -577,7 +575,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 668.5, 542.416680250137347, 313.0, 22.0 ],
+									"patching_rect" : [ 607.5, 542.416680250137347, 313.0, 22.0 ],
 									"text" : "no loaded corpus"
 								}
 
@@ -589,7 +587,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 926.0, 443.750001541069082, 75.0, 22.0 ],
+									"patching_rect" : [ 865.0, 443.750001541069082, 75.0, 22.0 ],
 									"text" : "route corpus"
 								}
 
@@ -601,7 +599,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1147.583333333333485, 432.250001541069082, 113.666666666666742, 47.0 ],
+									"patching_rect" : [ 1086.583333333333485, 432.250001541069082, 113.666666666666742, 47.0 ],
 									"text" : "Status: whether player is initialized on server or not"
 								}
 
@@ -613,7 +611,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1061.0, 287.0, 100.0, 22.0 ],
+									"patching_rect" : [ 1000.0, 287.0, 100.0, 22.0 ],
 									"text" : "prepend corpus"
 								}
 
@@ -626,7 +624,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 784.0, 221.0, 279.0, 35.0 ],
+									"patching_rect" : [ 723.0, 221.0, 279.0, 35.0 ],
 									"text" : "/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Somax_Ligeti_1.pickle"
 								}
 
@@ -638,7 +636,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
-									"patching_rect" : [ 1061.0, 121.0, 100.0, 22.0 ],
+									"patching_rect" : [ 1000.0, 121.0, 100.0, 22.0 ],
 									"text" : "opendialog"
 								}
 
@@ -650,7 +648,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1061.0, 151.0, 100.0, 22.0 ],
+									"patching_rect" : [ 1000.0, 151.0, 100.0, 22.0 ],
 									"text" : "prepend build"
 								}
 
@@ -663,7 +661,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1094.232177500000034, 226.5, 24.0, 24.0 ]
+									"patching_rect" : [ 1033.232177500000034, 226.5, 24.0, 24.0 ]
 								}
 
 							}
@@ -675,8 +673,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1127.583333333333258, 227.5, 80.0, 22.0 ],
-									"text" : "0 offline"
+									"patching_rect" : [ 1066.583333333333258, 227.5, 80.0, 22.0 ],
+									"text" : "1 ready"
 								}
 
 							}
@@ -687,7 +685,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 5,
 									"outlettype" : [ "", "multichannelsignal", "", "", "" ],
-									"patching_rect" : [ 1061.0, 181.488572234762955, 149.0, 22.0 ],
+									"patching_rect" : [ 1000.0, 181.488572234762955, 149.0, 22.0 ],
 									"text" : "somax.audiocorpusbuilder",
 									"varname" : "somax.audiocorpusbuilder"
 								}
@@ -701,7 +699,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1105.777980836006009, 356.95832873049676, 24.0, 24.0 ]
+									"patching_rect" : [ 1044.777980836006009, 356.95832873049676, 24.0, 24.0 ]
 								}
 
 							}
@@ -712,7 +710,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1105.777980836006009, 327.95832873049676, 70.0, 22.0 ],
+									"patching_rect" : [ 1044.777980836006009, 327.95832873049676, 70.0, 22.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -723,7 +721,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1134.777980836006009, 358.95832873049676, 83.0, 20.0 ],
+									"patching_rect" : [ 1073.777980836006009, 358.95832873049676, 83.0, 20.0 ],
 									"text" : "Enable Player"
 								}
 
@@ -737,9 +735,113 @@
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
-									"patching_rect" : [ 1061.0, 401.958328999999992, 200.0, 22.0 ],
+									"patching_rect" : [ 1000.0, 401.958328999999992, 200.0, 22.0 ],
 									"text" : "somax.player",
 									"varname" : "somax.player"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-20",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 1237.207519999999931, 228.5, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "5",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"bubble" : 1,
+									"fontface" : 0,
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-24",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 1154.207519999999931, 213.0, 81.0, 51.0 ],
+									"presentation_linecount" : 2,
+									"text" : "Wait for corpus to be built",
+									"varname" : "HelpTitle[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-17",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 616.207519999999931, 351.791661821085654, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "8",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-12",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 690.707519999999931, 505.13185769089398, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "6",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-5",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 780.707519999999931, 88.673499104757866, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "4",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
 							}
@@ -752,7 +854,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1121.333333333333485, 443.750001541069082, 24.0, 24.0 ]
+									"patching_rect" : [ 1060.333333333333485, 443.750001541069082, 24.0, 24.0 ]
 								}
 
 							}
@@ -807,7 +909,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 32.0, 125.499991001861474, 20.0, 20.0 ],
+									"patching_rect" : [ 34.0, 220.499991001861474, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -830,7 +932,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 458.142824387480118, 359.624994911674492, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "7",
+									"text" : "9",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -848,7 +950,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 776.207519999999931, 504.13185769089398, 145.0, 24.0 ],
+									"patching_rect" : [ 715.207519999999931, 504.13185769089398, 145.0, 24.0 ],
 									"text" : "Wait for corpus to load",
 									"varname" : "HelpTitle[11]"
 								}
@@ -891,7 +993,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 224.0, 333.45832873049676, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "6",
+									"text" : "7",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -915,7 +1017,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-23", 0 ],
-									"midpoints" : [ 1070.5, 433.354165270534509, 935.5, 433.354165270534509 ],
+									"midpoints" : [ 1009.5, 433.354165270534509, 874.5, 433.354165270534509 ],
 									"order" : 1,
 									"source" : [ "obj-143", 0 ]
 								}
@@ -989,7 +1091,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-420", 1 ],
-									"midpoints" : [ 1135.5, 214.994286117381478, 1198.083333333333258, 214.994286117381478 ],
+									"midpoints" : [ 1074.5, 214.994286117381478, 1137.083333333333258, 214.994286117381478 ],
 									"order" : 0,
 									"source" : [ "obj-22", 2 ]
 								}
@@ -998,7 +1100,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-44", 0 ],
-									"midpoints" : [ 1135.5, 214.494286117381478, 1103.732177500000034, 214.494286117381478 ],
+									"midpoints" : [ 1074.5, 214.494286117381478, 1042.732177500000034, 214.494286117381478 ],
 									"order" : 1,
 									"source" : [ "obj-22", 2 ]
 								}
@@ -1051,7 +1153,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 1011.5, 390.958328865248404, 1070.5, 390.958328865248404 ],
+									"midpoints" : [ 841.5, 390.958328865248404, 1009.5, 390.958328865248404 ],
 									"source" : [ "obj-31", 0 ]
 								}
 
@@ -1126,7 +1228,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 1115.277980836006009, 390.958328865248404, 1070.5, 390.958328865248404 ],
+									"midpoints" : [ 1054.277980836006009, 390.958328865248404, 1009.5, 390.958328865248404 ],
 									"source" : [ "obj-73", 0 ]
 								}
 
@@ -1628,7 +1730,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-55",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -1641,7 +1742,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-45",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -1662,12 +1762,13 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 323.083333333333371, 121.0, 22.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"hidden" : 1,
 									"id" : "obj-29",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -2008,7 +2109,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 669.351155333333395, 221.571905568096213, 80.0, 22.0 ],
-									"text" : "0 offline"
+									"text" : "1 ready"
 								}
 
 							}
@@ -2296,7 +2397,6 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
-									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-2",
 									"ignoreclick" : 1,
@@ -2318,6 +2418,7 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
+									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-90",
 									"ignoreclick" : 1,
@@ -2342,6 +2443,7 @@
 									"fontface" : 0,
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
+									"hidden" : 1,
 									"id" : "obj-83",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -2986,7 +3088,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-9",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -2999,7 +3100,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-15",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -3020,12 +3120,13 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 419.333310893165617, 121.0, 22.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"hidden" : 1,
 									"id" : "obj-32",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -3393,7 +3494,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 705.333333333333485, 193.655224187834506, 80.0, 22.0 ],
-									"text" : "0 offline"
+									"text" : "1 ready"
 								}
 
 							}
@@ -3419,7 +3520,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 28.0, 79.625, 540.0, 114.0 ],
-									"text" : "As previously mentioned, the Somax 2 system generates its improvisation material based on an external set of musical material, the Corpus.\n\nWhile in the previous tutorial we were using pre-built audio and MIDI Corpora, it is possible to build a Corpus from your own set of audio or MIDI files.\n\nThere are a few short pre-build audio corpora distributed in Somax 2, but in this tutorial we are going to build our own corpus from an audio file."
+									"text" : "Building a Corpus from your own music material, or from any sound source of your choice, could be very exciting, and it's indeed the intended and suggested usage of Somax 2.5.\n\nHowever, not every sound material gives immediate nice results, and some fine tuning of the building parameters could be needed.\n\nIn this patch you will learn how to master these parameters and obtain better results in building your own corpora."
 								}
 
 							}
@@ -3833,7 +3934,6 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
-									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-56",
 									"ignoreclick" : 1,
@@ -3855,6 +3955,7 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
+									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-60",
 									"ignoreclick" : 1,
@@ -3879,6 +3980,7 @@
 									"fontface" : 0,
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
+									"hidden" : 1,
 									"id" : "obj-83",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -4153,11 +4255,8 @@
 			"obj-1::obj-143::obj-295" : [ "playingmode[4]", "playingmode", 0 ],
 			"obj-1::obj-143::obj-298" : [ "simultaneousonsets[7]", "simultaneousonsets", 0 ],
 			"obj-1::obj-143::obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
-			"obj-1::obj-143::obj-504" : [ "transpositionconsistency[4]", "transpositionconsistency", 0 ],
 			"obj-1::obj-143::obj-570" : [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-1::obj-143::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-1::obj-143::obj-600" : [ "__exp_tabooenable[1]", "__exp_tabooenable", 0 ],
-			"obj-1::obj-143::obj-605" : [ "__exp_tabooduration[4]", "__exp_tabooduration", 0 ],
 			"obj-1::obj-143::obj-642" : [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
 			"obj-1::obj-143::obj-653" : [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
 			"obj-1::obj-143::obj-656" : [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],
