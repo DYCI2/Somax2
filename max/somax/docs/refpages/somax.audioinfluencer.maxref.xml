@@ -4,11 +4,11 @@
 <c74object name="somax.audioinfluencer" module="somax" kind="patcher">
 
 	<digest>
-		Digest
+		Analyzes and segments audio into discrete labels in real-time
 	</digest>
 
 	<description>
-		Description
+		The audio influencer segments and analyzes an incoming signal with respect to pitch, chroma and onset into discrete labels, which can be used by the somax.player. 
 	</description>
 
 	<!--METADATA-->
@@ -30,11 +30,6 @@
 			<description>Performs the same function as <m>start</m> and <m>stop</m></description>
 		</method>
         <method name="dump">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="enabled">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>TODO</digest>
 			<description>TODO</description>
@@ -69,6 +64,10 @@
             <digest>TODO</digest>
             <description>TODO</description>
         </attribute>
+        <attribute name="chromadecay" get="1" set="1" type="symbol" size="1">
+            <digest>TODO</digest>
+            <description>TODO</description>
+        </attribute>
         <attribute name="continuouschroma" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
             <description>TODO</description>
@@ -77,6 +76,10 @@
             <digest>TODO</digest>
             <description>TODO</description>
         </attribute>
+        <attribute name="enabled"  get="1" set="1" type="symbol" size="1">
+			<digest>TODO</digest>
+			<description>TODO</description>
+		</attribute>
         <attribute name="onsetlimit" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
             <description>TODO</description>
