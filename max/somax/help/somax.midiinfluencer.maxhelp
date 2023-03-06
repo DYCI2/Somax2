@@ -295,7 +295,6 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 449.0, 328.0, 87.0, 22.0 ],
-													"presentation_linecount" : 2,
 													"text" : "filterrelease $1"
 												}
 
@@ -364,7 +363,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 91.0, 281.0, 196.0, 40.0 ],
-													"presentation_linecount" : 2,
 													"text" : "chromafilter disables/enables the leaky integration",
 													"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 												}
@@ -724,7 +722,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 221.0, 90.0, 255.0, 54.0 ],
-													"presentation_linecount" : 3,
 													"text" : "For polyphonic content, the pitchanalysis parameter controls which note in the chord should be output",
 													"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 												}
@@ -739,7 +736,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 42.0, 90.0, 162.0, 21.0 ],
-													"presentation_linecount" : 10,
 													"text" : "virfun (virtual fundamental)",
 													"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 												}
@@ -754,7 +750,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 42.0, 122.0, 36.0, 21.0 ],
-													"presentation_linecount" : 2,
 													"text" : "bass",
 													"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 												}
@@ -969,7 +964,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 73.0, 342.0, 334.0, 65.0 ],
-													"presentation_linecount" : 5,
 													"text" : "onsetchannels: When working with MIDI input consisting of multiple channels (e.g. a MIDI file), the onsetchannels message can be used to select which channels onsets should be detected on. See reference for format",
 													"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 												}
@@ -987,7 +981,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 136.0, 227.0, 255.0, 69.0 ],
-													"presentation_linecount" : 4,
 													"text" : "If the onsets are too frequent in the MIDI input, a limiter can be engaged to set the minimum duration between two onsets. Set to 0 (default) to disable ",
 													"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 												}
@@ -1056,7 +1049,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 136.0, 87.5, 322.0, 54.0 ],
-													"presentation_linecount" : 120,
 													"text" : "the chordthreshold parameter can be used to avoid duplicate onsets when notes arrive closely in time (e.g. when playing chords on a MIDI keyboard)",
 													"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 												}
@@ -1072,7 +1064,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 15.0, 15.0, 279.0, 36.0 ],
-													"presentation_linecount" : 3,
 													"text" : "An onset is detected each time a MIDI note on message arrives, but...",
 													"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 												}
@@ -1262,7 +1253,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 223.5, 511.0, 98.0, 36.0 ],
 									"text" : "pitch: detected midi pitch",
-									"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
 							}
@@ -1277,7 +1268,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 82.5, 511.0, 133.0, 50.0 ],
 									"text" : "onset: bang when an onset is detected in the signal",
-									"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
 							}
@@ -1306,7 +1297,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 827.25, 482.0, 138.5, 36.0 ],
 									"text" : "discrete labels \n(onset, pitch, chroma)",
-									"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
 							}
@@ -1321,7 +1312,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 363.635021097046433, 515.0, 170.0, 50.0 ],
 									"text" : "chroma: relative energy in bands corresponding to the 12 pitch classes",
-									"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
 							}
@@ -1336,7 +1327,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 682.0, 281.0, 172.0, 36.0 ],
 									"text" : "dump all current parameter values on the second outlet",
-									"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
 							}
@@ -2011,7 +2002,6 @@
 			"obj-1::obj-91::obj-295" : [ "playingmode[1]", "playingmode", 0 ],
 			"obj-1::obj-91::obj-298" : [ "simultaneousonsets[4]", "simultaneousonsets", 0 ],
 			"obj-1::obj-91::obj-328" : [ "decaybasis[2]", "decaybasis", 0 ],
-			"obj-1::obj-91::obj-504" : [ "transpositionconsistency[5]", "transpositionconsistency", 0 ],
 			"obj-1::obj-91::obj-570" : [ "__exp_melodicpitchfromchords[5]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-1::obj-91::obj-575" : [ "__exp_tempoconsistencysigma[1]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-1::obj-91::obj-600" : [ "__exp_tabooenable[2]", "__exp_tabooenable", 0 ],
