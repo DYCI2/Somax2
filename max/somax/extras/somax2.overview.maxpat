@@ -64,7 +64,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 177.0, 96.0, 1106.0, 736.0 ],
+						"rect" : [ 175.0, 87.0, 840.0, 736.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -128,7 +128,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 28.5, 98.0, 268.0, 272.0 ],
-									"tabs" : [ "1 - First Steps with Somax2" ]
+									"tabs" : [ "1 - First Steps with Somax2", "2 - Audio Corpus Builder" ]
 								}
 
 							}
