@@ -2,6 +2,7 @@
 
 import argparse
 import asyncio
+import ipaddress
 import logging
 import logging.config
 import multiprocessing
@@ -488,6 +489,14 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.target.send(ServerSendProtocol.CORPUSBUILDER_AUDIO_SEGMENT, [onset, onset + duration, builder_address])
 
 
+def parse_ip(ip: str) -> str:
+    try:
+        ipaddress.ip_address(ip)
+        return ip
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"'{ip}' is not a valid ip address")
+
+
 if __name__ == "__main__":
     multiprocessing.freeze_support()  # Required for PyInstaller
     parser = argparse.ArgumentParser(description='Launch and manage a Somax server')
@@ -495,7 +504,8 @@ if __name__ == "__main__":
                         help='in port used by the server', default=SomaxServer.DEFAULT_RECV_PORT)
     parser.add_argument('out_port', metavar='OUT_PORT', type=int, nargs='?', default=SomaxServer.DEFAULT_SEND_PORT,
                         help='out port used by the server')
-    # TODO: Ip as input argument
+    parser.add_argument('ip', metavar='IP', type=parse_ip, nargs='?', default=SomaxServer.IP_LOCALHOST,
+                        help='ip address used by the max client')
 
     with resources.path(log, 'logging.ini') as path:
         logging.config.fileConfig(path.absolute())
@@ -506,7 +516,8 @@ if __name__ == "__main__":
     parsed_args = parser.parse_args()
     in_port = parsed_args.in_port
     out_port = parsed_args.out_port
-    somax_server = SomaxServer(in_port, out_port)
+    ip = parsed_args.ip
+    somax_server = SomaxServer(in_port, out_port, ip)
 
 
     async def run():

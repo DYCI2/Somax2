@@ -4,11 +4,11 @@
 <c74object name="somax.player" module="somax" kind="patcher">
 
 	<digest>
-		Digest
+		Main generative object in somax
 	</digest>
 
 	<description>
-		Description
+		The somax.player is the main object in the somax package. The player reads a corpus (constructed through a corpus builder) and generates MIDI or audio content by playing segments (events) from the corpus in a non-linear manner. The main way of interacting with the player is by sending influence messages from a somax.midiinfluencer and/or a somax.audioinfluencer. These serve as the harmonic and melodic context which the player is trying to match.
 	</description>
 
 	<!--METADATA-->

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 53.0, 1869.0, 1283.0 ],
+		"rect" : [ 34.0, 53.0, 1869.0, 1281.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1869.0, 1257.0 ],
+						"rect" : [ 0.0, 26.0, 1869.0, 1255.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -121,7 +121,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 79.0, 1869.0, 1257.0 ],
+						"rect" : [ 34.0, 79.0, 1869.0, 1255.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -153,6 +153,32 @@
 						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-12",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 388.0, 471.312499999999886, 101.0, 22.0 ],
+									"text" : "enabled 1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 13.0,
+									"id" : "obj-13",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 495.516877637130847, 471.312499999999886, 144.0, 21.0 ],
+									"text" : "last modified parameter",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 13.0,
@@ -224,7 +250,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 498.25, 206.0, 140.0, 52.0 ],
+									"patching_rect" : [ 498.25, 206.0, 143.0, 52.0 ],
 									"text" : "choose either method to build an audio corpus",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -277,17 +303,6 @@
 									"patching_rect" : [ 172.0, 568.89583333333303, 129.0, 65.0 ],
 									"text" : "Audio outlet is only needed when using \"Test Segmentation\" in the UI",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-68",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 470.0, 475.312499999999886, 96.0, 22.0 ],
-									"text" : "print parameters"
 								}
 
 							}
@@ -1060,6 +1075,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-12", 1 ],
+									"source" : [ "obj-5", 3 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-16", 0 ],
 									"order" : 1,
 									"source" : [ "obj-5", 2 ]
@@ -1080,13 +1102,6 @@
 									"destination" : [ "obj-390", 1 ],
 									"midpoints" : [ 32.5, 474.208333333333144, 153.5, 474.208333333333144 ],
 									"source" : [ "obj-5", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-68", 0 ],
-									"source" : [ "obj-5", 3 ]
 								}
 
 							}

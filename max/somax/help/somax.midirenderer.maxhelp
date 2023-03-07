@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 2137.0, 1249.0 ],
+		"rect" : [ 34.0, 87.0, 2137.0, 1247.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 2137.0, 1223.0 ],
+						"rect" : [ 0.0, 26.0, 2137.0, 1221.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -122,7 +122,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 113.0, 2137.0, 1223.0 ],
+						"rect" : [ 34.0, 113.0, 2137.0, 1221.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -153,6 +153,21 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 13.0,
+									"id" : "obj-21",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 35.666666666666686, 473.0, 206.333333333333314, 50.0 ],
+									"text" : "The midirenderer listens directly to the output protocol on the first outlet of somax.player",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bubble" : 1,
 									"bubblepoint" : 0.2,
@@ -216,7 +231,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 95.0, 494.0, 298.0, 36.0 ],
+									"patching_rect" : [ 442.0, 494.0, 298.0, 36.0 ],
 									"text" : "The MIDI renderer does not take any parameters, it only supports a MIDI flush message",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -265,7 +280,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 56.0, 501.0, 34.0, 22.0 ],
+									"patching_rect" : [ 403.0, 501.0, 34.0, 22.0 ],
 									"text" : "flush"
 								}
 
@@ -1344,7 +1359,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-112", 0 ],
-									"midpoints" : [ 65.5, 537.385416666666629, 31.5, 537.385416666666629 ],
+									"midpoints" : [ 412.5, 537.385416666666629, 31.5, 537.385416666666629 ],
 									"source" : [ "obj-116", 0 ]
 								}
 

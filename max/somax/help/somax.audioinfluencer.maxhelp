@@ -152,6 +152,32 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-4",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 229.5, 386.0, 101.0, 22.0 ],
+									"text" : "enabled 1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 13.0,
+									"id" : "obj-3",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 337.016877637130847, 386.0, 144.0, 21.0 ],
+									"text" : "last modified parameter",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"bubble" : 1,
 									"bubblepoint" : 0.8,
 									"id" : "obj-79",
@@ -2064,7 +2090,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 106.600210970464104, 621.5, 72.0, 24.0 ],
+									"patching_rect" : [ 98.600210970464104, 625.5, 72.0, 24.0 ],
 									"text" : "start dsp"
 								}
 
@@ -2385,6 +2411,7 @@
 							}
 , 							{
 								"box" : 								{
+									"args" : [ "@file", "duduk.aif" ],
 									"bgmode" : 0,
 									"border" : 0,
 									"clickthrough" : 0,
@@ -2424,7 +2451,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 160.0, 288.0, 46.0, 20.0 ],
-									"text" : "Enable",
+									"text" : "enable",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -2450,17 +2477,6 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 634.5, 288.0, 39.0, 22.0 ],
 									"text" : "dump"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-7",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 311.5, 383.0, 96.0, 22.0 ],
-									"text" : "print parameters"
 								}
 
 							}
@@ -2525,10 +2541,9 @@
 , 							{
 								"box" : 								{
 									"background" : 1,
-									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-									"fontname" : "Arial Bold",
+									"bgcolor" : [ 1.0, 0.788235, 0.470588, 1.0 ],
 									"hint" : "",
-									"id" : "obj-78",
+									"id" : "obj-19",
 									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
 									"maxclass" : "textbutton",
@@ -2536,41 +2551,19 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 308.0, 261.0, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "4",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-									"fontname" : "Arial Bold",
-									"hint" : "",
-									"id" : "obj-77",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 622.0, 481.0, 20.0, 20.0 ],
+									"patching_rect" : [ 622.0, 481.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "3",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"background" : 1,
-									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-									"fontname" : "Arial Bold",
+									"bgcolor" : [ 1.0, 0.788235, 0.470588, 1.0 ],
 									"hint" : "",
-									"id" : "obj-58",
+									"id" : "obj-10",
 									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
 									"maxclass" : "textbutton",
@@ -2578,20 +2571,19 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 79.0, 623.5, 20.0, 20.0 ],
+									"patching_rect" : [ 74.5, 627.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"background" : 1,
-									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-									"fontname" : "Arial Bold",
+									"bgcolor" : [ 1.0, 0.788235, 0.470588, 1.0 ],
 									"hint" : "",
-									"id" : "obj-76",
+									"id" : "obj-6",
 									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
 									"maxclass" : "textbutton",
@@ -2602,7 +2594,27 @@
 									"patching_rect" : [ 257.5, 185.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.788235, 0.470588, 1.0 ],
+									"hint" : "",
+									"id" : "obj-45",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 301.5, 263.0, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "4",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
 								}
 
 							}
@@ -2649,16 +2661,16 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-60", 1 ],
-									"midpoints" : [ 498.5, 386.5, 667.0, 386.5 ],
-									"source" : [ "obj-1", 2 ]
+									"destination" : [ "obj-4", 1 ],
+									"source" : [ "obj-1", 1 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-7", 0 ],
-									"source" : [ "obj-1", 1 ]
+									"destination" : [ "obj-60", 1 ],
+									"midpoints" : [ 498.5, 386.5, 667.0, 386.5 ],
+									"source" : [ "obj-1", 2 ]
 								}
 
 							}

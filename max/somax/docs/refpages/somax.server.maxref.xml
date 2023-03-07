@@ -4,11 +4,11 @@
 <c74object name="somax.server" module="somax" kind="patcher">
 
 	<digest>
-		Digest
+		Controls the remote somax server
 	</digest>
 
 	<description>
-		Description
+		The somax server is an external application through which all somax.player objects communicate. The somax.server object manages all the communication with the remote server using the OSC protocol, so in order to use a somax.player, it's always necessary to first initialize the somax.server object. The server is also responsible for managing and synchronize time between the players.
 	</description>
 
 	<!--METADATA-->
