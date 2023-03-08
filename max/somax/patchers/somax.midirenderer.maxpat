@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 86.0, 2225.0, 1259.0 ],
+		"rect" : [ 34.0, 86.0, 1852.0, 1259.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -40,13 +40,26 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-3",
+					"ignoreclick" : 1,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 851.0, 204.635399315715972, 157.0, 22.0 ],
+					"text" : "midi event <nn> <vel> <ch>"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-2",
-					"linecount" : 14,
+					"linecount" : 12,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 819.0, 31.0, 284.0, 194.0 ],
-					"text" : "MIDI rendering is trivial since all the necessary information is already stored inside the corpus. \n\nThis is different from the audio renderer, where the audio file and the corpus are two separate files and needs a much more elaborate strategy.\n\nThis midirenderer implementation simply provides a convenient multichannel \"flush\" message, but technically, implementing a midi renderer can be done by simply listening to the player's protocol address:\n\nmidi event <nn> <vel> <ch>"
+					"patching_rect" : [ 819.0, 31.0, 286.0, 167.0 ],
+					"text" : "MIDI rendering is trivial since all the necessary information is already stored inside the corpus. \n\nThis is different from the audio renderer, where the audio file and the corpus are two separate files and needs a much more elaborate strategy.\n\nThis midirenderer implementation simply provides a convenient multichannel \"flush\" message, but technically, implementing a midi renderer can be done by simply listening to the player's midi event message with the following format:"
 				}
 
 			}
