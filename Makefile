@@ -63,11 +63,6 @@ max-package: clean
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.json
 	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
-	# create extras folder (note: symlinks are not windows-compatible)
-	mkdir -p "$(MAX_BUILD_PATH)/extras/somax"
-	ln -s "../../somax2.maxpat" "$(MAX_BUILD_PATH)/extras/somax2.maxpat"
-	ln -s "../../docs/tutorial-patchers/somax2_first_steps.maxpat" "$(MAX_BUILD_PATH)/extras/somax/tutorial_intro.maxpat"
-	ln -s "../../docs/tutorial-patchers/somax2_audio_tutorial.maxpat" "$(MAX_BUILD_PATH)/extras/somax/tutorial_audio.maxpat"
 	# copy binary (should already be codesigned)
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
 	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
