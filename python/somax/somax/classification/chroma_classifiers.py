@@ -3,7 +3,7 @@ from importlib import resources
 from typing import List, Tuple, Optional, Type
 
 import numpy as np
-from sklearn.mixture import GaussianMixture
+# from sklearn.mixture import GaussianMixture
 
 from somax.classification import tables
 from somax.classification.classifier import AbstractClassifier
@@ -108,82 +108,82 @@ class MeanSomChromaClassifier(BaseSomChromaClassifier):
         super().__init__(chroma_type=MeanChroma)
 
 
-class GmmClassifier(ChromaClassifier, ABC):
-    USE_MULTIPROCESSING = True
-
-    def __init__(self, num_components: int = 100, max_iter: int = 500):
-        super().__init__()
-        self.num_components: int = num_components
-        self.max_iter: int = max_iter
-        self.gmm: Optional[GaussianMixture] = None
-
-    def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
-        if self.USE_MULTIPROCESSING:
-            import multiprocessing
-            with multiprocessing.Pool(processes=4) as pool:
-                labels: List[IntLabel] = pool.map(self._multiproc_compute_label, corpus.events)
-        else:
-            labels: List[IntLabel] = []
-            for event in corpus.events:  # type: CorpusEvent
-                chroma: np.ndarray = event.get_feature(OnsetChroma).value().reshape(1, -1)
-                # max_val: float = np.max(chroma)
-                # if max_val > 0:
-                #     chroma /= max_val
-                labels.append(IntLabel(int(self.gmm.predict(chroma))))
-        return labels
-
-    def _multiproc_compute_label(self, e: CorpusEvent) -> IntLabel:
-        return IntLabel(int(self.gmm.predict(e.get_feature(OnsetChroma).value().reshape(1, -1))))
-
-    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
-        """ :raises TransformError if no transforms exist """
-        if not self._transforms:
-            raise TransformError(f"No Transforms exist in classifier {self}")
-        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, OnsetChroma):
-            chroma: FeatureValue = influence.feature
-        elif isinstance(influence, CorpusInfluence):
-            chroma: FeatureValue = influence.corpus_event.get_feature(OnsetChroma)
-        else:
-            raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
-
-        # max_val: float = np.max(chroma)
-        # if max_val > 0:
-        #     chroma /= max_val
-        return [(IntLabel(int(self.gmm.predict(t.inverse(chroma).value().reshape(1, -1)))), t)
-                for t in self._transforms]
-
-    def clear(self) -> None:
-        pass  # GmmClassifier is stateless
-
-
-class AbsoluteGmmClassifier(GmmClassifier):
-    GMM_DATA_FILE = 'misc_hsom'
-
-    def __init__(self, num_components: int = 100, max_iter: int = 500):
-        super().__init__(num_components, max_iter)
-        with resources.path(tables, self.GMM_DATA_FILE) as p:
-            self._gmm_data: np.ndarray = np.loadtxt(p.absolute(), dtype=np.float32, delimiter=",")  # Shape: (N, 12)
-
-    def cluster(self, _corpus: Corpus) -> None:
-        self.gmm = GaussianMixture(n_components=self.num_components, max_iter=self.max_iter).fit(self._gmm_data)
-
-
-class RelativeGmmClassifier(GmmClassifier):
-
-    def cluster(self, corpus: Corpus) -> None:
-        """ :raises InvalidCorpus if number of events in corpus is lower than `self.num_components`."""
-        chromas: List[np.ndarray] = [event.get_feature(OnsetChroma).value() for event in corpus.events]
-        gmm_data: np.ndarray = np.row_stack(chromas)
-        max_per_col: np.ndarray = np.max(chromas, axis=1)
-        max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
-        chromas /= max_per_col[:, np.newaxis]
-        try:
-            self.gmm = GaussianMixture(n_components=self.num_components, max_iter=self.max_iter).fit(gmm_data)
-        except ValueError as e:
-            if self.num_components > corpus.length():
-                raise InvalidCorpus(f"{self.__class__.__name__} could not classify corpus '{str(corpus)}' since corpus "
-                                    f"length ({corpus.length()}) is lower than number of requested clusters "
-                                    f"({self.num_components}). "
-                                    f"Reduce the number of clusters or select another classifier")
-            else:
-                raise InvalidCorpus(f"Unknown error encountered in {self.__class__.__name__}. Error: {repr(e)}.")
+# class GmmClassifier(ChromaClassifier, ABC):
+#     USE_MULTIPROCESSING = True
+#
+#     def __init__(self, num_components: int = 100, max_iter: int = 500):
+#         super().__init__()
+#         self.num_components: int = num_components
+#         self.max_iter: int = max_iter
+#         self.gmm: Optional[GaussianMixture] = None
+#
+#     def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
+#         if self.USE_MULTIPROCESSING:
+#             import multiprocessing
+#             with multiprocessing.Pool(processes=4) as pool:
+#                 labels: List[IntLabel] = pool.map(self._multiproc_compute_label, corpus.events)
+#         else:
+#             labels: List[IntLabel] = []
+#             for event in corpus.events:  # type: CorpusEvent
+#                 chroma: np.ndarray = event.get_feature(OnsetChroma).value().reshape(1, -1)
+#                 # max_val: float = np.max(chroma)
+#                 # if max_val > 0:
+#                 #     chroma /= max_val
+#                 labels.append(IntLabel(int(self.gmm.predict(chroma))))
+#         return labels
+#
+#     def _multiproc_compute_label(self, e: CorpusEvent) -> IntLabel:
+#         return IntLabel(int(self.gmm.predict(e.get_feature(OnsetChroma).value().reshape(1, -1))))
+#
+#     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+#         """ :raises TransformError if no transforms exist """
+#         if not self._transforms:
+#             raise TransformError(f"No Transforms exist in classifier {self}")
+#         if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, OnsetChroma):
+#             chroma: FeatureValue = influence.feature
+#         elif isinstance(influence, CorpusInfluence):
+#             chroma: FeatureValue = influence.corpus_event.get_feature(OnsetChroma)
+#         else:
+#             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
+#
+#         # max_val: float = np.max(chroma)
+#         # if max_val > 0:
+#         #     chroma /= max_val
+#         return [(IntLabel(int(self.gmm.predict(t.inverse(chroma).value().reshape(1, -1)))), t)
+#                 for t in self._transforms]
+#
+#     def clear(self) -> None:
+#         pass  # GmmClassifier is stateless
+#
+#
+# class AbsoluteGmmClassifier(GmmClassifier):
+#     GMM_DATA_FILE = 'misc_hsom'
+#
+#     def __init__(self, num_components: int = 100, max_iter: int = 500):
+#         super().__init__(num_components, max_iter)
+#         with resources.path(tables, self.GMM_DATA_FILE) as p:
+#             self._gmm_data: np.ndarray = np.loadtxt(p.absolute(), dtype=np.float32, delimiter=",")  # Shape: (N, 12)
+#
+#     def cluster(self, _corpus: Corpus) -> None:
+#         self.gmm = GaussianMixture(n_components=self.num_components, max_iter=self.max_iter).fit(self._gmm_data)
+#
+#
+# class RelativeGmmClassifier(GmmClassifier):
+#
+#     def cluster(self, corpus: Corpus) -> None:
+#         """ :raises InvalidCorpus if number of events in corpus is lower than `self.num_components`."""
+#         chromas: List[np.ndarray] = [event.get_feature(OnsetChroma).value() for event in corpus.events]
+#         gmm_data: np.ndarray = np.row_stack(chromas)
+#         max_per_col: np.ndarray = np.max(chromas, axis=1)
+#         max_per_col[max_per_col == 0] = 1  # don't normalize empty vectors - avoid div0 error
+#         chromas /= max_per_col[:, np.newaxis]
+#         try:
+#             self.gmm = GaussianMixture(n_components=self.num_components, max_iter=self.max_iter).fit(gmm_data)
+#         except ValueError as e:
+#             if self.num_components > corpus.length():
+#                 raise InvalidCorpus(f"{self.__class__.__name__} could not classify corpus '{str(corpus)}' since corpus "
+#                                     f"length ({corpus.length()}) is lower than number of requested clusters "
+#                                     f"({self.num_components}). "
+#                                     f"Reduce the number of clusters or select another classifier")
+#             else:
+#                 raise InvalidCorpus(f"Unknown error encountered in {self.__class__.__name__}. Error: {repr(e)}.")
