@@ -46,6 +46,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -64,7 +65,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 306.0, 250.0, 929.0, 480.0 ],
+						"rect" : [ 305.0, 250.0, 929.0, 480.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -101,7 +102,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 307.5, 277.5, 419.0, 33.0 ],
 									"presentation_linecount" : 2,
-									"text" : "In the second tutorial you will learn how to build a corpus from your musical materials, and interact with it "
+									"text" : "In the second tutorial you will learn how to build a corpus from your audio materials, and interact with it "
 								}
 
 							}
@@ -119,6 +120,7 @@
 							}
 , 							{
 								"box" : 								{
+									"button" : 1,
 									"fontface" : 0,
 									"fontname" : "Arial",
 									"fontsize" : 11.595186999999999,
@@ -149,17 +151,18 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-2",
-									"linecount" : 3,
+									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.5, 45.0, 854.0, 47.0 ],
-									"text" : "The application implementation of Somax 2.5 provides modular objects for immediate musical interaction. \nAfter completing these tutorials, we recommend moving to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours, and to the \"Max Tutorials\" to explore the potentiality of Somax 2.5 as a Max library."
+									"patching_rect" : [ 7.5, 45.0, 854.0, 60.0 ],
+									"text" : "The application implementation of Somax 2.5 provides modular objects for immediate musical interaction. \n\nAfter completing these tutorials, we recommend moving to the \"Max Tutorials\" tab to explore the potentiality of Somax 2.5 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours."
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"button" : 1,
 									"fontface" : 0,
 									"fontname" : "Arial",
 									"fontsize" : 11.595186999999999,
@@ -1084,7 +1087,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1103,7 +1105,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 105.0, 190.0, 1106.0, 736.0 ],
+						"rect" : [ 627.0, 247.0, 519.0, 516.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1139,7 +1141,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 30.0, 83.59375, 108.0, 21.0 ],
+									"patching_rect" : [ 279.0, 83.59375, 108.0, 21.0 ],
 									"text" : "Max Application"
 								}
 
@@ -1152,7 +1154,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 261.0, 83.59375, 116.0, 21.0 ],
+									"patching_rect" : [ 30.0, 83.59375, 116.0, 21.0 ],
 									"text" : "Max Abstractions"
 								}
 
@@ -1169,7 +1171,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 261.0, 105.59375, 163.0, 280.0 ],
+									"patching_rect" : [ 30.0, 105.59375, 163.0, 280.0 ],
 									"tabs" : [ "somax.server", "somax.player", "somax.audioinfluencer", "somax.midiinfluencer", "somax.audiorender", "somax.midirenderer", "somax.audiocorpusbuilder", "somax.midicorpusbuilder" ]
 								}
 
@@ -1186,7 +1188,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 30.0, 105.59375, 163.0, 135.0 ],
+									"patching_rect" : [ 279.0, 105.59375, 163.0, 135.0 ],
 									"tabs" : [ "somax.server.app", "somax.player.app", "somax.audioinfluencer.app", "somax.midiinfluencer.app" ]
 								}
 
@@ -1207,7 +1209,7 @@
 									"hidden" : 1,
 									"id" : "obj-9",
 									"maxclass" : "newobj",
-									"numinlets" : 2,
+									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patcher" : 									{
 										"fileversion" : 1,
@@ -1220,7 +1222,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 89.0, 104.0, 640.0, 480.0 ],
+										"rect" : [ 505.0, 295.0, 207.0, 236.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -1250,48 +1252,12 @@
 										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
-													"id" : "obj-1",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 21.0, 73.0, 104.0, 22.0 ],
-													"text" : "sprintf %s.maxpat"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"id" : "obj-4",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 21.0, 136.0, 53.0, 22.0 ],
-													"text" : "pcontrol"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"id" : "obj-5",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 21.0, 108.0, 117.0, 22.0 ],
-													"text" : "prepend loadunique"
-												}
-
-											}
-, 											{
-												"box" : 												{
 													"id" : "obj-14",
 													"maxclass" : "newobj",
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 136.0, 53.0, 22.0 ],
+													"patching_rect" : [ 35.0, 151.0, 53.0, 22.0 ],
 													"text" : "pcontrol"
 												}
 
@@ -1303,7 +1269,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 108.0, 117.0, 22.0 ],
+													"patching_rect" : [ 35.0, 123.0, 117.0, 22.0 ],
 													"text" : "prepend loadunique"
 												}
 
@@ -1315,7 +1281,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 80.0, 112.0, 22.0 ],
+													"patching_rect" : [ 35.0, 95.0, 112.0, 22.0 ],
 													"text" : "sprintf %s.maxhelp"
 												}
 
@@ -1324,37 +1290,17 @@
 												"box" : 												{
 													"comment" : "",
 													"id" : "obj-7",
-													"index" : 2,
-													"maxclass" : "inlet",
-													"numinlets" : 0,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 20.0, 30.0, 30.0 ]
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"comment" : "",
-													"id" : "obj-8",
 													"index" : 1,
 													"maxclass" : "inlet",
 													"numinlets" : 0,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 21.0, 20.0, 30.0, 30.0 ]
+													"patching_rect" : [ 35.0, 35.0, 30.0, 30.0 ]
 												}
 
 											}
  ],
 										"lines" : [ 											{
-												"patchline" : 												{
-													"destination" : [ "obj-5", 0 ],
-													"source" : [ "obj-1", 0 ]
-												}
-
-											}
-, 											{
 												"patchline" : 												{
 													"destination" : [ "obj-14", 0 ],
 													"source" : [ "obj-13", 0 ]
@@ -1370,29 +1316,15 @@
 											}
 , 											{
 												"patchline" : 												{
-													"destination" : [ "obj-4", 0 ],
-													"source" : [ "obj-5", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
 													"destination" : [ "obj-3", 0 ],
 													"source" : [ "obj-7", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
-													"destination" : [ "obj-1", 0 ],
-													"source" : [ "obj-8", 0 ]
 												}
 
 											}
  ]
 									}
 ,
-									"patching_rect" : [ 10.0, 473.0, 201.0, 22.0 ],
+									"patching_rect" : [ 231.0, 451.0, 77.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -1400,7 +1332,7 @@
 										"tags" : ""
 									}
 ,
-									"text" : "p load"
+									"text" : "p load_helps"
 								}
 
 							}
@@ -1419,16 +1351,18 @@
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
-									"destination" : [ "obj-9", 1 ],
+									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
+									"midpoints" : [ 360.5, 426.296875, 240.5, 426.296875 ],
 									"source" : [ "obj-37", 1 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-9", 1 ],
+									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
+									"midpoints" : [ 111.5, 428.796875, 240.5, 428.796875 ],
 									"source" : [ "obj-5", 1 ]
 								}
 
@@ -1622,8 +1556,8 @@
 			}
 , 			{
 				"box" : 				{
-					"fontface" : 1,
-					"fontsize" : 14.0,
+					"fontface" : 0,
+					"fontsize" : 16.0,
 					"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"id" : "obj-20",
 					"maxclass" : "tab",
@@ -1634,18 +1568,19 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 6.0, 140.0, 930.0, 26.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 6.0, 140.0, 930.0, 26.0 ],
+					"presentation_rect" : [ 5.0, 140.0, 930.0, 26.0 ],
+					"tabcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ],
 					"tabs" : [ "App Tutorials", "Max Tutorials", "Performance Strategies", "Help Center", "Credits" ]
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"angle" : 2.119789079722068,
+					"angle" : 2.119789079722011,
 					"background" : 1,
 					"border" : 1,
 					"bordercolor" : [ 0.803922, 0.898039, 0.909804, 0.0 ],
-					"grad1" : [ 0.427450980392157, 0.843137254901961, 1.0, 1.0 ],
+					"grad1" : [ 0.427450980392157, 0.843137254901961, 1.0, 0.54 ],
 					"grad2" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"id" : "obj-5",
 					"maxclass" : "panel",
@@ -1998,7 +1933,8 @@
 		}
 ,
 		"dependency_cache" : [  ],
-		"autosave" : 0
+		"autosave" : 0,
+		"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 	}
 
 }
