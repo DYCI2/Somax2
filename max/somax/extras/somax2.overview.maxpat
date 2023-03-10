@@ -400,7 +400,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-7",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -419,7 +418,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 89.0, 87.0, 1106.0, 736.0 ],
+						"rect" : [ 345.0, 182.0, 1034.0, 600.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -450,14 +449,57 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"hidden" : 1,
-									"id" : "obj-5",
-									"linecount" : 3,
+									"id" : "obj-9",
+									"linecount" : 5,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 214.0, 564.0, 267.0, 49.0 ],
+									"patching_rect" : [ 37.0, 471.0, 107.0, 76.0 ],
+									"presentation_linecount" : 3,
 									"text" : ";\rmax launchbrowser http://vimeo.com/showcase/8537329"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.290196, 0.309804, 0.301961, 0.0 ],
+									"id" : "obj-6",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 37.0, 383.5, 231.0, 19.0 ],
+									"text" : "http://vimeo.com/showcase/8537329",
+									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
+									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
+									"underline" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-8",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 10.0, 383.5, 48.0, 20.0 ],
+									"text" : "Videos:"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-5",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 310.0, 403.0, 263.0, 35.0 ],
+									"text" : ";\rmax launchbrowser http://repmus.ircam.fr/impro"
 								}
 
 							}
@@ -470,8 +512,8 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 23.0, 356.5, 231.0, 19.0 ],
-									"text" : "vimeo.com/showcase/8537329",
+									"patching_rect" : [ 310.0, 356.5, 231.0, 19.0 ],
+									"text" : "http://repmus.ircam.fr/impro",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
 									"underline" : 1
@@ -484,8 +526,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 356.5, 401.0, 20.0 ],
-									"text" : "Videos:"
+									"patching_rect" : [ 10.0, 356.5, 343.0, 20.0 ],
+									"text" : "See all the recents RepMus projects on modelling co-creativity:"
 								}
 
 							}
@@ -498,8 +540,8 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 170.0, 324.5, 311.0, 18.5 ],
-									"text" : "repmus.ircam.fr/somax/home",
+									"patching_rect" : [ 218.0, 330.5, 311.0, 18.5 ],
+									"text" : "https://www.stms-lab.fr/projects/pages/somax2/",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
 									"underline" : 1
@@ -510,13 +552,13 @@
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-33",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 214.0, 504.0, 267.0, 49.0 ],
-									"text" : ";\rmax launchbrowser http://repmus.ircam.fr/somax/home"
+									"patching_rect" : [ 218.0, 504.0, 367.0, 35.0 ],
+									"text" : ";\rmax launchbrowser https://www.stms-lab.fr/projects/pages/somax2/"
 								}
 
 							}
@@ -526,185 +568,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 323.5, 401.0, 20.0 ],
-									"text" : "developed at IRCAM by the RepMus team :"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"hidden" : 1,
-									"id" : "obj-7",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patcher" : 									{
-										"fileversion" : 1,
-										"appversion" : 										{
-											"major" : 8,
-											"minor" : 5,
-											"revision" : 3,
-											"architecture" : "x64",
-											"modernui" : 1
-										}
-,
-										"classnamespace" : "box",
-										"rect" : [ 89.0, 106.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
-										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
-										"boxes" : [ 											{
-												"box" : 												{
-													"id" : "obj-1",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 100.0, 91.0, 22.0 ],
-													"text" : "sprintf http://%s"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"background" : 1,
-													"fontname" : "Arial",
-													"fontsize" : 9.0,
-													"id" : "obj-2",
-													"linecount" : 2,
-													"maxclass" : "message",
-													"numinlets" : 2,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 130.0, 104.0, 29.0 ],
-													"text" : ";\rmax launch_browser $1"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"comment" : "",
-													"id" : "obj-6",
-													"index" : 1,
-													"maxclass" : "inlet",
-													"numinlets" : 0,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 40.0, 30.0, 30.0 ]
-												}
-
-											}
- ],
-										"lines" : [ 											{
-												"patchline" : 												{
-													"destination" : [ "obj-2", 0 ],
-													"source" : [ "obj-1", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
-													"destination" : [ "obj-1", 0 ],
-													"source" : [ "obj-6", 0 ]
-												}
-
-											}
- ]
-									}
-,
-									"patching_rect" : [ 814.0, 430.0, 103.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
-									}
-,
-									"text" : "p launch_browser"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 11.0,
-									"hidden" : 1,
-									"hint" : "#1",
-									"id" : "obj-3",
-									"maxclass" : "live.text",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "" ],
-									"parameter_enable" : 1,
-									"patching_rect" : [ 612.0, 394.0, 300.0, 20.0 ],
-									"saved_attribute_attributes" : 									{
-										"valueof" : 										{
-											"parameter_enum" : [ "val1", "val2" ],
-											"parameter_longname" : "live.text[1]",
-											"parameter_mmax" : 1,
-											"parameter_shortname" : "live.text",
-											"parameter_type" : 2
-										}
-
-									}
-,
-									"text" : "vimeo.com/showcase/8537329",
-									"texton" : "#1",
-									"varname" : "live.text[1]"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontsize" : 11.0,
-									"hidden" : 1,
-									"hint" : "#1",
-									"id" : "obj-11",
-									"maxclass" : "live.text",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "" ],
-									"parameter_enable" : 1,
-									"patching_rect" : [ 612.0, 347.0, 300.0, 20.0 ],
-									"saved_attribute_attributes" : 									{
-										"valueof" : 										{
-											"parameter_enum" : [ "val1", "val2" ],
-											"parameter_longname" : "live.text[71]",
-											"parameter_mmax" : 1,
-											"parameter_shortname" : "live.text",
-											"parameter_type" : 2
-										}
-
-									}
-,
-									"text" : "repmus.ircam.fr/somax/home",
-									"texton" : "#1",
-									"varname" : "live.text"
+									"patching_rect" : [ 10.0, 329.5, 401.0, 20.0 ],
+									"text" : "Developed at IRCAM by the RepMus team :"
 								}
 
 							}
@@ -731,25 +596,17 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-7", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-11", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-7", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-3", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-33", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-38", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-9", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-6", 0 ]
 								}
 
 							}
@@ -772,6 +629,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-2",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1917,21 +1775,6 @@
 
 			}
  ],
-		"parameters" : 		{
-			"obj-7::obj-11" : [ "live.text[71]", "live.text", 0 ],
-			"obj-7::obj-3" : [ "live.text[1]", "live.text", 0 ],
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
-			}
-,
-			"inherited_shortname" : 1
-		}
-,
 		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
