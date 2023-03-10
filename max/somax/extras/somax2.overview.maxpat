@@ -378,17 +378,17 @@
 			}
 , 			{
 				"box" : 				{
-					"fontsize" : 14.0,
+					"fontsize" : 13.0,
 					"id" : "obj-9",
-					"linecount" : 4,
+					"linecount" : 5,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 114.522727272727252, 66.0, 956.0, 69.0 ],
+					"patching_rect" : [ 114.522727272727252, 66.0, 938.0, 79.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 6,
-					"presentation_rect" : [ 115.0, 26.0, 712.0, 100.0 ],
-					"text" : "Somax 2.5 is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. It is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. It uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on  a globally learned harmonic and textural knowledge representation space."
+					"presentation_linecount" : 7,
+					"presentation_rect" : [ 116.5, 15.5, 709.0, 108.0 ],
+					"text" : "Somax 2.5 is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. \nIt is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space."
 				}
 
 			}
@@ -772,7 +772,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-2",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1087,6 +1086,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
