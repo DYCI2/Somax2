@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 359.0, 187.0, 942.0, 598.0 ],
+		"rect" : [ 369.0, 225.0, 942.0, 597.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -64,7 +64,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 175.0, 87.0, 840.0, 736.0 ],
+						"rect" : [ 306.0, 250.0, 929.0, 480.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -94,24 +94,67 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-5",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 307.5, 277.5, 419.0, 33.0 ],
+									"presentation_linecount" : 2,
+									"text" : "In the second tutorial you will learn how to build a corpus from your musical materials, and interact with it "
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-4",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 307.5, 165.0, 419.0, 33.0 ],
+									"text" : "The first tutorial will give you an overview of the Somax 2.5 application workflow, guiding you through immediate audio and MIDI interactions"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 0,
+									"fontname" : "Arial",
+									"fontsize" : 11.595186999999999,
+									"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"id" : "obj-3",
+									"maxclass" : "tab",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "int", "", "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 28.5, 255.0, 268.0, 78.0 ],
+									"tabs" : [ "2 - Audio Corpus Builder" ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontsize" : 14.0,
 									"id" : "obj-1",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 16.0, 525.0, 22.0 ],
-									"text" : "App"
+									"text" : "These tutorials will guide you through the usage of the Somax 2.5 application"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"id" : "obj-2",
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.5, 45.0, 854.0, 20.0 ],
-									"text" : "App"
+									"patching_rect" : [ 7.5, 45.0, 854.0, 47.0 ],
+									"text" : "The application implementation of Somax 2.5 provides modular objects for immediate musical interaction. \nAfter completing these tutorials, we recommend moving to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours, and to the \"Max Tutorials\" to explore the potentiality of Somax 2.5 as a Max library."
 								}
 
 							}
@@ -127,8 +170,8 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 28.5, 98.0, 268.0, 272.0 ],
-									"tabs" : [ "1 - First Steps with Somax2", "2 - Audio Corpus Builder" ]
+									"patching_rect" : [ 28.5, 146.0, 268.0, 78.0 ],
+									"tabs" : [ "1 - First Steps with Somax2" ]
 								}
 
 							}
@@ -137,7 +180,7 @@
 									"hidden" : 1,
 									"id" : "obj-9",
 									"maxclass" : "newobj",
-									"numinlets" : 2,
+									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patcher" : 									{
 										"fileversion" : 1,
@@ -150,7 +193,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 600.0, 169.0, 640.0, 480.0 ],
+										"rect" : [ 680.0, 304.0, 213.0, 233.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -228,55 +271,6 @@
 											}
 , 											{
 												"box" : 												{
-													"id" : "obj-14",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 136.0, 53.0, 22.0 ],
-													"text" : "pcontrol"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"id" : "obj-13",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 108.0, 117.0, 22.0 ],
-													"text" : "prepend loadunique"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"id" : "obj-3",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 80.0, 112.0, 22.0 ],
-													"text" : "sprintf %s.maxhelp"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"comment" : "",
-													"id" : "obj-7",
-													"index" : 2,
-													"maxclass" : "inlet",
-													"numinlets" : 0,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 20.0, 30.0, 30.0 ]
-												}
-
-											}
-, 											{
-												"box" : 												{
 													"comment" : "",
 													"id" : "obj-8",
 													"index" : 1,
@@ -298,13 +292,6 @@
 											}
 , 											{
 												"patchline" : 												{
-													"destination" : [ "obj-14", 0 ],
-													"source" : [ "obj-13", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
 													"destination" : [ "obj-5", 0 ],
 													"source" : [ "obj-2", 0 ]
 												}
@@ -312,22 +299,8 @@
 											}
 , 											{
 												"patchline" : 												{
-													"destination" : [ "obj-13", 0 ],
-													"source" : [ "obj-3", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
 													"destination" : [ "obj-4", 0 ],
 													"source" : [ "obj-5", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
-													"destination" : [ "obj-3", 0 ],
-													"source" : [ "obj-7", 0 ]
 												}
 
 											}
@@ -341,7 +314,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 48.0, 413.0, 201.0, 22.0 ],
+									"patching_rect" : [ 7.5, 406.0, 68.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -349,7 +322,7 @@
 										"tags" : ""
 									}
 ,
-									"text" : "p load"
+									"text" : "p load_app"
 								}
 
 							}
@@ -358,6 +331,16 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
+									"midpoints" : [ 162.5, 364.5, 17.0, 364.5 ],
+									"source" : [ "obj-3", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-9", 0 ],
+									"hidden" : 1,
+									"midpoints" : [ 162.5, 240.0, 17.0, 240.0 ],
 									"source" : [ "obj-37", 1 ]
 								}
 
@@ -400,9 +383,9 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 114.522727272727252, 66.0, 956.0, 69.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 4,
-					"presentation_rect" : [ 115.0, 46.0, 712.0, 69.0 ],
-					"text" : "Somax 2.5 is a suite of tools for reactive musical co-improvisation.\n\nThis new version consists of a Max application with a new user interface design and a collection of Max abstractions, providing different strategies to build custom patches "
+					"presentation_linecount" : 6,
+					"presentation_rect" : [ 115.0, 26.0, 712.0, 100.0 ],
+					"text" : "Somax 2.5 is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. It is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. It uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on  a globally learned harmonic and textural knowledge representation space."
 				}
 
 			}
@@ -805,7 +788,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 89.0, 87.0, 1106.0, 736.0 ],
+						"rect" : [ 359.0, 254.0, 930.0, 518.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -869,7 +852,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 28.5, 98.0, 268.0, 272.0 ],
+									"patching_rect" : [ 28.5, 106.0, 268.0, 272.0 ],
 									"tabs" : [ "1 - Basic Workflow", "2 - Introducing Parameters", "3 - Building a Corpus", "4 - Mastering Somax Interaction Parameters", "5 - Advanced Players Interaction", "6 - Introducing User Interfaces", "7 - UI versus App" ]
 								}
 
@@ -879,7 +862,7 @@
 									"hidden" : 1,
 									"id" : "obj-9",
 									"maxclass" : "newobj",
-									"numinlets" : 2,
+									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patcher" : 									{
 										"fileversion" : 1,
@@ -892,7 +875,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 600.0, 169.0, 640.0, 480.0 ],
+										"rect" : [ 600.0, 169.0, 250.0, 246.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -970,55 +953,6 @@
 											}
 , 											{
 												"box" : 												{
-													"id" : "obj-14",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 136.0, 53.0, 22.0 ],
-													"text" : "pcontrol"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"id" : "obj-13",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 108.0, 117.0, 22.0 ],
-													"text" : "prepend loadunique"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"id" : "obj-3",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 80.0, 112.0, 22.0 ],
-													"text" : "sprintf %s.maxhelp"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"comment" : "",
-													"id" : "obj-7",
-													"index" : 2,
-													"maxclass" : "inlet",
-													"numinlets" : 0,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 20.0, 30.0, 30.0 ]
-												}
-
-											}
-, 											{
-												"box" : 												{
 													"comment" : "",
 													"id" : "obj-8",
 													"index" : 1,
@@ -1040,13 +974,6 @@
 											}
 , 											{
 												"patchline" : 												{
-													"destination" : [ "obj-14", 0 ],
-													"source" : [ "obj-13", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
 													"destination" : [ "obj-5", 0 ],
 													"source" : [ "obj-2", 0 ]
 												}
@@ -1054,22 +981,8 @@
 											}
 , 											{
 												"patchline" : 												{
-													"destination" : [ "obj-13", 0 ],
-													"source" : [ "obj-3", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
 													"destination" : [ "obj-4", 0 ],
 													"source" : [ "obj-5", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
-													"destination" : [ "obj-3", 0 ],
-													"source" : [ "obj-7", 0 ]
 												}
 
 											}
@@ -1083,7 +996,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 48.0, 413.0, 201.0, 22.0 ],
+									"patching_rect" : [ 153.0, 413.0, 103.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -1091,7 +1004,7 @@
 										"tags" : ""
 									}
 ,
-									"text" : "p load"
+									"text" : "p load_max_tutos"
 								}
 
 							}
@@ -2084,21 +1997,7 @@
 			"inherited_shortname" : 1
 		}
 ,
-		"dependency_cache" : [ 			{
-				"name" : "ircam_logo.jpg",
-				"bootpath" : "~/Downloads",
-				"patcherrelativepath" : "../../../../../../Downloads",
-				"type" : "JPEG",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax2.png",
-				"bootpath" : "~/Desktop",
-				"patcherrelativepath" : "../../../../../../Desktop",
-				"type" : "PNG",
-				"implicit" : 1
-			}
- ],
+		"dependency_cache" : [  ],
 		"autosave" : 0
 	}
 
