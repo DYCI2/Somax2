@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 2,
+			"minor" : 5,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 1054.0, 736.0 ],
+		"rect" : [ 84.0, 100.0, 1054.0, 736.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -43,7 +43,7 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
-					"id" : "obj-8",
+					"id" : "obj-7",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
@@ -51,14 +51,14 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
+						"rect" : [ 84.0, 126.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -89,39 +89,456 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
-									"border" : 0,
-									"filename" : "helpdetails.js",
-									"id" : "obj-1",
-									"ignoreclick" : 1,
-									"jsarguments" : [ "somax.midiinfluencer.app" ],
-									"maxclass" : "jsui",
+									"id" : "obj-42",
+									"linecount" : 2,
+									"maxclass" : "comment",
 									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 10.0, 10.0, 556.0, 55.25 ]
+									"numoutlets" : 0,
+									"patching_rect" : [ 595.25, 580.119512407609136, 359.0, 33.0 ],
+									"text" : "MIDI Output module: Select the MIDI output device to route the MIDI messages.",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "MidiInfluencer-In-Maxhelp" ],
-									"bgmode" : 0,
-									"border" : 0,
-									"clickthrough" : 0,
-									"enablehscroll" : 0,
-									"enablevscroll" : 0,
-									"id" : "obj-2",
-									"lockeddragscroll" : 0,
-									"lockedsize" : 0,
-									"maxclass" : "bpatcher",
-									"name" : "somax.midi.io.maxpat",
-									"numinlets" : 0,
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-43",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 565.75, 580.119512407609136, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "6",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-40",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
 									"numoutlets" : 0,
-									"offset" : [ 0.0, 0.0 ],
-									"patching_rect" : [ 59.0, 147.0, 248.0, 327.0 ],
-									"varname" : "somax.midi.io",
-									"viewvisibility" : 1
+									"patching_rect" : [ 595.25, 523.119512407609136, 359.0, 47.0 ],
+									"text" : "MIDI Influencer module: this corresponds to the somax.audioinfluencer.ui object and it's a compact interface for the visualization of influences.",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-41",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 565.75, 523.119512407609136, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "5",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-38",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 595.25, 480.119512407609136, 362.0, 33.0 ],
+									"text" : "MIDI Input module: Select between a MIDI File (press the «Read» button) or any MIDI input device connected to your computer.",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-39",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 565.75, 480.119512407609136, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "4",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-36",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 595.25, 450.247787610619525, 326.0, 20.0 ],
+									"text" : "The «Settings» button displays all the available parameters.",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-37",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 565.75, 450.247787610619525, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "3",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-34",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 595.25, 420.5, 229.0, 20.0 ],
+									"text" : "Enable or disable the midiinfluencer.app",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-35",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 565.75, 420.5, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "2",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-32",
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 37.5, 400.985295608639717, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "6",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-31",
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 41.499999791383743, 354.875000357627869, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "5",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-30",
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 41.499999791383743, 288.909660593114836, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "4",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-29",
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 211.5, 245.069321022316785, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "3",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-28",
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 45.5, 245.069321022316785, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "2",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-26",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 62.333333313465118, 245.069321022316785, 70.666668146848679, 21.00000087916851 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-24",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 54.083330243825912, 398.750001430511475, 236.083341896533966, 24.470588356256485 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-23",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 54.083330243825912, 332.999999284744263, 236.083341896533966, 63.750002145767212 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-22",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 227.666670650243759, 247.069320262357564, 52.333334714174271, 18.000001639127731 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-20",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 54.083330243825912, 268.194321901485353, 236.083341896533966, 64.80567738325891 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-27",
+									"linecount" : 9,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 595.25, 190.5, 359.0, 127.0 ],
+									"text" : "The midiinfluencer.app can be given a name to differentiate it from other influencers, using the bpatchers @args attribute, i.e.:\n\nbpatcher somax.midiinfluencer.app @args <name>\n\nIf no argument is provided, the influencer will automatically be assigned a unique name.\nThe name attribute can also be set using the «Argument(s)» field in the Max Inspector.",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-93",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 565.75, 193.0, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "1",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-12",
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 48.0, 205.235987485334249, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "1",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-10",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 60.333333313465118, 214.402654112264486, 195.333338528871536, 24.00000011920929 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-1",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 48.5, 180.235987485334249, 70.0, 22.0 ],
+									"text" : "loadmess 1"
 								}
 
 							}
@@ -133,8 +550,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 110.0, 576.747787610619525, 158.0, 22.0 ],
-									"text" : "load somax.player.maxhelp"
+									"patching_rect" : [ 763.25, 414.747787610619525, 177.0, 22.0 ],
+									"text" : "load somax.player.app.maxhelp"
 								}
 
 							}
@@ -147,7 +564,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 110.0, 604.247787610619525, 55.0, 22.0 ],
+									"patching_rect" : [ 763.25, 442.247787610619525, 55.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 
@@ -164,11 +581,11 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 110.0, 536.247787610619525, 67.533199310302734, 14.0546875 ],
+									"patching_rect" : [ 763.25, 374.247787610619525, 85.53759765625, 14.0546875 ],
 									"rounded" : 8.0,
 									"spacing_x" : 1.0,
 									"spacing_y" : 2.0,
-									"text" : "somax.player",
+									"text" : "somax.player.app",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 								}
@@ -181,8 +598,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 79.0, 534.247787610619525, 204.0, 33.0 ],
-									"text" : "See                        for more information on wireless routing",
+									"patching_rect" : [ 732.25, 372.247787610619525, 204.0, 33.0 ],
+									"text" : "See                             for more information on wireless routing",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -203,7 +620,7 @@
 									"numoutlets" : 6,
 									"offset" : [ 0.0, 0.0 ],
 									"outlettype" : [ "", "", "", "", "", "" ],
-									"patching_rect" : [ 81.0, 505.25, 204.0, 22.0 ],
+									"patching_rect" : [ 734.25, 343.25, 204.0, 22.0 ],
 									"varname" : "somax.player.routing",
 									"viewvisibility" : 1
 								}
@@ -212,67 +629,51 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubbleside" : 3,
 									"id" : "obj-16",
 									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 287.0, 489.75, 248.0, 51.0 ],
-									"text" : "The name of the influencer (and all of its influences) will be available in the routing section of the somax.player.io module."
+									"patching_rect" : [ 479.0, 327.75, 248.0, 51.0 ],
+									"text" : "The name of the influencer (and all of its influences) will be available in the routing section of the somax.player.app module."
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubblepoint" : 0.39,
-									"id" : "obj-15",
-									"linecount" : 10,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 309.0, 282.634218289085538, 246.0, 145.0 ],
-									"text" : "The wireless influencer can be given a name to differentiate it from other influencers using the bpatchers @args attribute, i.e.:\n\nbpatcher somax.midi.io @args <name>\n\nIf no argument is provided, the influencer will automatically be assigned a unique name"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-13",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 326.0, 431.247787610619469, 224.0, 47.0 ],
-									"text" : "The name attribute can also be set using the «Argument(s)» field in the Inspector",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-8",
-									"linecount" : 4,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 326.0, 216.764011799410014, 224.0, 60.0 ],
-									"text" : "the somax.midi.io object is just a convenient wrapper around the MIDI influencer with some additional user interface to handle input and output",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"bubblepoint" : 0.8,
+									"bubblepoint" : 1.0,
 									"id" : "obj-7",
 									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 309.0, 147.0, 248.0, 64.0 ],
-									"text" : "To create a wireless MIDI influencer, press N and type:\n\nbpatcher somax.midi.io"
+									"patching_rect" : [ 281.5, 159.235987485334249, 250.0, 64.0 ],
+									"text" : "To create an audioinfluencer.app, press N and type:\n\nbpatcher somax.audioinfluencer.app"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "MidiInfluencer-In-Maxhelp" ],
+									"bgmode" : 0,
+									"border" : 0,
+									"clickthrough" : 0,
+									"enablehscroll" : 0,
+									"enablevscroll" : 0,
+									"id" : "obj-6",
+									"lockeddragscroll" : 0,
+									"lockedsize" : 0,
+									"maxclass" : "bpatcher",
+									"name" : "somax.midiinfluencer.app.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 4,
+									"offset" : [ 0.0, 0.0 ],
+									"outlettype" : [ "", "", "", "" ],
+									"patching_rect" : [ 48.5, 209.235987485334249, 249.0, 223.0 ],
+									"varname" : "somax.audio.io",
+									"viewvisibility" : 1
 								}
 
 							}
@@ -285,20 +686,8 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 78.0, 503.25, 207.0, 24.0 ],
+									"patching_rect" : [ 731.25, 341.25, 207.0, 24.0 ],
 									"proportion" : 0.5
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-3",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 89.0, 688.0, 20.0 ],
-									"text" : "Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). ",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
 							}
@@ -309,12 +698,49 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 67.0, 326.0, 20.0 ],
-									"text" : "Sending influences wirelessly"
+									"text" : "Wrapper around the somax.midiinfluencer object"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-3",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 10.0, 89.0, 684.0, 60.0 ],
+									"text" : "The somax.midiinfluencer.app object is a convenient wrapper around the MIDI influencer with some additional user interface to handle input and output. \nThanks to this app object, Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). ",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"border" : 0,
+									"filename" : "helpdetails.js",
+									"id" : "obj-2",
+									"ignoreclick" : 1,
+									"jsarguments" : [ "somax.midiinfluencer.app" ],
+									"maxclass" : "jsui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 10.0, 10.0, 556.0, 55.25 ]
 								}
 
 							}
  ],
 						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-6", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-89", 0 ],
 									"hidden" : 1,
@@ -387,7 +813,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 574.666666666666629, 15.0, 70.0, 22.0 ],
+					"patching_rect" : [ 54.0, 46.0, 47.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -395,8 +821,8 @@
 						"tags" : ""
 					}
 ,
-					"text" : "p wireless",
-					"varname" : "multiple sources[1]"
+					"text" : "p basic",
+					"varname" : "basic[1]"
 				}
 
 			}
@@ -411,8 +837,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -473,6 +899,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 15.0, 177.5, 174.0, 64.0 ],
+									"presentation_linecount" : 4,
 									"text" : "this keyboard sends MIDI data on channel one, triggering pitch and onset influences"
 								}
 
@@ -513,7 +940,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 538.0, 250.0, 58.0, 22.0 ],
+									"patching_rect" : [ 644.0, 245.0, 58.0, 22.0 ],
 									"text" : "loadbang"
 								}
 
@@ -525,21 +952,20 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 552.0, 305.356622998544367, 250.0, 22.0 ],
-									"text" : "chromachannels clear, chromachannels 1 0 1"
+									"patching_rect" : [ 552.0, 305.356622998544367, 253.0, 22.0 ],
+									"text" : "chromachannels clear, chromachannels 1 0 1."
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"id" : "obj-23",
-									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 563.0, 330.53493449781655, 239.0, 35.0 ],
-									"text" : "onsetchannels clear, onsetchannels 0 0 1, onsetchannels 1 0 1"
+									"patching_rect" : [ 567.0, 330.53493449781655, 265.0, 22.0 ],
+									"text" : "onsetchannels clear, onsetchannels 0 0 1. 1 0 1."
 								}
 
 							}
@@ -550,8 +976,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 538.0, 280.178311499272183, 221.0, 22.0 ],
-									"text" : "pitchchannels clear, pitchchannels 0 0 1"
+									"patching_rect" : [ 538.0, 280.178311499272183, 224.0, 22.0 ],
+									"text" : "pitchchannels clear, pitchchannels 0 0 1."
 								}
 
 							}
@@ -640,12 +1066,13 @@
 									"lockeddragscroll" : 0,
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
-									"name" : "somax.midiinfluencer.compact.maxpat",
-									"numinlets" : 0,
-									"numoutlets" : 0,
+									"name" : "somax.midiinfluencer.ui.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 3,
 									"offset" : [ 0.0, 0.0 ],
-									"patching_rect" : [ 195.0, 339.0, 245.0, 71.0 ],
-									"varname" : "somax.midiinfluencer.compact",
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 195.0, 394.5, 246.0, 107.0 ],
+									"varname" : "somax.midiinfluencer.ui",
 									"viewvisibility" : 1
 								}
 
@@ -698,6 +1125,21 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"source" : [ "obj-16", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"midpoints" : [ 390.5, 373.75, 204.5, 373.75 ],
+									"source" : [ "obj-17", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-17", 2 ],
 									"source" : [ "obj-18", 2 ]
 								}
@@ -729,6 +1171,30 @@
 								"patchline" : 								{
 									"destination" : [ "obj-18", 0 ],
 									"source" : [ "obj-19", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"midpoints" : [ 547.5, 373.33915574963612, 204.5, 373.33915574963612 ],
+									"source" : [ "obj-22", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"midpoints" : [ 576.5, 373.017467248908247, 204.5, 373.017467248908247 ],
+									"source" : [ "obj-23", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"midpoints" : [ 561.5, 373.428311499272183, 204.5, 373.428311499272183 ],
+									"source" : [ "obj-24", 0 ]
 								}
 
 							}
@@ -855,8 +1321,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -893,6 +1359,44 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+									"hidden" : 1,
+									"id" : "obj-8",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "bang" ],
+									"patching_rect" : [ 82.0, 319.0, 58.0, 22.0 ],
+									"text" : "loadbang"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-7",
+									"maxclass" : "newobj",
+									"numinlets" : 3,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 482.0, 502.0, 123.0, 22.0 ],
+									"text" : "routepass onset pitch"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-5",
+									"maxclass" : "newobj",
+									"numinlets" : 3,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 52.0, 502.0, 123.0, 22.0 ],
+									"text" : "routepass onset pitch"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"border" : 0,
 									"filename" : "helpdetails.js",
 									"id" : "obj-1",
@@ -910,16 +1414,15 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubblepoint" : 0.2,
-									"bubbleside" : 2,
+									"bubblepoint" : 0.9,
 									"fontface" : 1,
 									"id" : "obj-6",
-									"linecount" : 8,
+									"linecount" : 10,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 278.0, 131.0, 179.0, 133.0 ],
-									"text" : "Note: this behaviour was changed in version 2.3: the right hand side behaviour is now the default. To toggle monophonic, no-latency mode, send this message (or toggle the «bypass» switch under «Onset Threshold»)"
+									"patching_rect" : [ 182.0, 233.5, 179.0, 145.0 ],
+									"text" : "Note: this behaviour was changed in version 2.3: the right hand side behaviour is now the default. To toggle monophonic, no-latency mode, send this message (orturn off «Chord Threshold», under «Settings»)"
 								}
 
 							}
@@ -930,22 +1433,21 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 278.0, 266.0, 90.0, 22.0 ],
-									"text" : "threshbypass 1"
+									"patching_rect" : [ 82.0, 349.0, 98.0, 22.0 ],
+									"text" : "chordthreshold 0"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubblepoint" : 0.1,
-									"bubbleside" : 2,
+									"bubblepoint" : 0.9,
 									"id" : "obj-68",
-									"linecount" : 3,
+									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 741.0, 222.0, 210.0, 66.0 ],
+									"patching_rect" : [ 615.0, 307.0, 210.0, 64.0 ],
 									"text" : "These parameters are of course also available in the main interface. See the «parameters» tab for more info."
 								}
 
@@ -957,7 +1459,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 735.0, 330.0, 216.0, 127.0 ],
+									"patching_rect" : [ 735.0, 391.0, 216.0, 127.0 ],
 									"text" : "Note that this parameter introduces latency to the system - we're effectively waiting 20 ms from our first input to see if any further messages are received. When using this in real-time, it's recommended to tune this parameter to a level where the delay isn't obtrusive while still working with your own way of performing",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -971,7 +1473,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 238.0, 470.5, 187.0, 64.0 ],
+									"patching_rect" : [ 238.0, 574.5, 187.0, 64.0 ],
 									"text" : "while everything looks fine in in the ui, the MIDI influencer actually sends three different messages, one for each note"
 								}
 
@@ -984,7 +1486,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 676.0, 484.0, 173.0, 37.0 ],
+									"patching_rect" : [ 676.0, 588.0, 173.0, 37.0 ],
 									"text" : "...we only received a single message as intended"
 								}
 
@@ -997,7 +1499,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 708.0, 182.0, 50.0, 22.0 ]
+									"patching_rect" : [ 508.0, 331.0, 50.0, 22.0 ]
 								}
 
 							}
@@ -1010,7 +1512,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 708.0, 116.0, 77.0, 22.0 ],
+									"patching_rect" : [ 394.0, 290.0, 77.0, 22.0 ],
 									"text" : "loadmess 20"
 								}
 
@@ -1018,13 +1520,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-58",
-									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 708.0, 283.5, 97.0, 35.0 ],
-									"text" : "threshbypass 0, threshold $1"
+									"patching_rect" : [ 508.0, 356.5, 105.0, 22.0 ],
+									"text" : "chordthreshold $1"
 								}
 
 							}
@@ -1035,7 +1536,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 595.0, 430.0, 96.0, 22.0 ],
+									"patching_rect" : [ 595.0, 534.0, 96.0, 22.0 ],
 									"text" : "prepend append"
 								}
 
@@ -1049,7 +1550,7 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 595.0, 474.0, 67.0, 57.0 ]
+									"patching_rect" : [ 595.0, 578.0, 67.0, 57.0 ]
 								}
 
 							}
@@ -1062,7 +1563,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 388.0, 430.0, 89.0, 22.0 ],
+									"patching_rect" : [ 388.0, 534.0, 89.0, 22.0 ],
 									"text" : "loadmess clear"
 								}
 
@@ -1086,7 +1587,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 482.0, 430.0, 96.0, 22.0 ],
+									"patching_rect" : [ 482.0, 534.0, 96.0, 22.0 ],
 									"text" : "prepend append"
 								}
 
@@ -1100,7 +1601,7 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 482.0, 474.0, 86.0, 57.0 ]
+									"patching_rect" : [ 482.0, 578.0, 86.0, 57.0 ]
 								}
 
 							}
@@ -1127,12 +1628,13 @@
 									"lockeddragscroll" : 0,
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
-									"name" : "somax.midiinfluencer.compact.maxpat",
-									"numinlets" : 0,
-									"numoutlets" : 0,
+									"name" : "somax.midiinfluencer.ui.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 3,
 									"offset" : [ 0.0, 0.0 ],
-									"patching_rect" : [ 482.0, 330.0, 245.0, 69.0 ],
-									"varname" : "somax.midiinfluencer.compact[1]",
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 482.0, 391.0, 247.0, 103.0 ],
+									"varname" : "somax.midiinfluencer.ui2",
 									"viewvisibility" : 1
 								}
 
@@ -1193,7 +1695,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 165.0, 430.0, 96.0, 22.0 ],
+									"patching_rect" : [ 165.0, 534.0, 96.0, 22.0 ],
 									"text" : "prepend append"
 								}
 
@@ -1207,7 +1709,7 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 165.0, 474.0, 67.0, 57.0 ]
+									"patching_rect" : [ 165.0, 578.0, 67.0, 57.0 ]
 								}
 
 							}
@@ -1220,7 +1722,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 287.0, 430.0, 89.0, 22.0 ],
+									"patching_rect" : [ 287.0, 534.0, 89.0, 22.0 ],
 									"text" : "loadmess clear"
 								}
 
@@ -1244,7 +1746,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 52.0, 430.0, 96.0, 22.0 ],
+									"patching_rect" : [ 52.0, 534.0, 96.0, 22.0 ],
 									"text" : "prepend append"
 								}
 
@@ -1258,7 +1760,7 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 52.0, 474.0, 86.0, 57.0 ]
+									"patching_rect" : [ 52.0, 578.0, 86.0, 57.0 ]
 								}
 
 							}
@@ -1269,7 +1771,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 52.0, 553.0, 706.0, 33.0 ],
+									"patching_rect" : [ 52.0, 657.0, 706.0, 33.0 ],
 									"text" : "Note that this demonstration skipped over chroma entirely. This is because chroma segmentation is handled in a different module, but since it's based on the same onset influence, the same reasoning that was demonstrated here applies to chroma as well.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -1298,12 +1800,13 @@
 									"lockeddragscroll" : 0,
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
-									"name" : "somax.midiinfluencer.compact.maxpat",
-									"numinlets" : 0,
-									"numoutlets" : 0,
+									"name" : "somax.midiinfluencer.ui.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 3,
 									"offset" : [ 0.0, 0.0 ],
-									"patching_rect" : [ 52.0, 330.0, 245.0, 69.0 ],
-									"varname" : "somax.midiinfluencer.compact",
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 52.0, 391.0, 244.0, 107.0 ],
+									"varname" : "somax.midiinfluencer.ui",
 									"viewvisibility" : 1
 								}
 
@@ -1397,6 +1900,14 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-26", 0 ],
+									"midpoints" : [ 91.5, 380.5, 61.5, 380.5 ],
+									"source" : [ "obj-2", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-27", 2 ],
 									"source" : [ "obj-21", 2 ]
 								}
@@ -1418,6 +1929,20 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"source" : [ "obj-26", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-26", 0 ],
+									"source" : [ "obj-27", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-34", 0 ],
 									"source" : [ "obj-35", 0 ]
 								}
@@ -1433,7 +1958,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-34", 0 ],
-									"midpoints" : [ 236.5, 462.5, 61.5, 462.5 ],
+									"midpoints" : [ 236.5, 566.5, 61.5, 566.5 ],
 									"order" : 1,
 									"source" : [ "obj-38", 1 ]
 								}
@@ -1442,7 +1967,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-40", 0 ],
-									"midpoints" : [ 236.5, 462.5, 174.5, 462.5 ],
+									"midpoints" : [ 236.5, 566.5, 174.5, 566.5 ],
 									"order" : 0,
 									"source" : [ "obj-38", 1 ]
 								}
@@ -1452,7 +1977,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-34", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 296.5, 462.5, 61.5, 462.5 ],
+									"midpoints" : [ 296.5, 566.5, 61.5, 566.5 ],
 									"order" : 1,
 									"source" : [ "obj-39", 0 ]
 								}
@@ -1462,7 +1987,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-40", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 296.5, 462.5, 174.5, 462.5 ],
+									"midpoints" : [ 296.5, 566.5, 174.5, 566.5 ],
 									"order" : 0,
 									"source" : [ "obj-39", 0 ]
 								}
@@ -1486,7 +2011,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-45", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 397.5, 462.5, 604.5, 462.5 ],
+									"midpoints" : [ 397.5, 566.5, 604.5, 566.5 ],
 									"order" : 0,
 									"source" : [ "obj-46", 0 ]
 								}
@@ -1496,7 +2021,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-49", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 397.5, 462.5, 491.5, 462.5 ],
+									"midpoints" : [ 397.5, 566.5, 491.5, 566.5 ],
 									"order" : 1,
 									"source" : [ "obj-46", 0 ]
 								}
@@ -1505,7 +2030,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-45", 0 ],
-									"midpoints" : [ 666.5, 462.5, 604.5, 462.5 ],
+									"midpoints" : [ 666.5, 565.5, 604.5, 565.5 ],
 									"order" : 0,
 									"source" : [ "obj-47", 1 ]
 								}
@@ -1514,7 +2039,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-49", 0 ],
-									"midpoints" : [ 666.5, 462.5, 491.5, 462.5 ],
+									"midpoints" : [ 666.5, 565.0, 491.5, 565.0 ],
 									"order" : 1,
 									"source" : [ "obj-47", 1 ]
 								}
@@ -1531,6 +2056,35 @@
 								"patchline" : 								{
 									"destination" : [ "obj-49", 0 ],
 									"source" : [ "obj-48", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-35", 0 ],
+									"source" : [ "obj-5", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-41", 0 ],
+									"midpoints" : [ 113.5, 528.5, 174.5, 528.5 ],
+									"source" : [ "obj-5", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-52", 0 ],
+									"source" : [ "obj-51", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-7", 0 ],
+									"source" : [ "obj-52", 0 ]
 								}
 
 							}
@@ -1571,8 +2125,16 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-52", 0 ],
+									"source" : [ "obj-58", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-64", 0 ],
 									"hidden" : 1,
+									"midpoints" : [ 403.5, 321.0, 517.5, 321.0 ],
 									"source" : [ "obj-61", 0 ]
 								}
 
@@ -1581,6 +2143,29 @@
 								"patchline" : 								{
 									"destination" : [ "obj-58", 0 ],
 									"source" : [ "obj-64", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-44", 0 ],
+									"midpoints" : [ 543.5, 528.5, 604.5, 528.5 ],
+									"source" : [ "obj-7", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-48", 0 ],
+									"source" : [ "obj-7", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-2", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-8", 0 ]
 								}
 
 							}
@@ -1665,8 +2250,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1728,14 +2313,14 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 113.0, 1054.0, 710.0 ],
+						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1765,6 +2350,61 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-34",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 537.0, 489.041015625, 107.0, 22.0 ],
+									"text" : "continuouschroma"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-27",
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 509.0, 490.041015625, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 174.333331644535065, 419.5, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "9",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-32",
+									"ignoreclick" : 0,
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 482.0, 490.0, 21.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 185.833331644535065, 417.75, 176.166669845581055, 23.5 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"border" : 0,
 									"filename" : "helpdetails.js",
@@ -1936,7 +2576,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 4,
 									"outlettype" : [ "dictionary", "", "", "" ],
-									"patching_rect" : [ 678.5, 459.0, 249.0, 22.0 ],
+									"patching_rect" : [ 678.5, 459.0, 255.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"embed" : 0,
 										"parameter_enable" : 0,
@@ -1987,7 +2627,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 509.0, 382.541015625, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 219.0, 415.75, 20.0, 20.0 ],
+									"presentation_rect" : [ 364.66667103767395, 205.25, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "8",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2009,7 +2649,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 482.0, 386.5, 21.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 227.5, 414.0, 69.5, 23.5 ],
+									"presentation_rect" : [ 374.16667103767395, 203.5, 69.5, 23.5 ],
 									"proportion" : 0.5
 								}
 
@@ -2078,7 +2718,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 509.0, 286.5, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 42.0, 208.5, 20.0, 20.0 ],
+									"presentation_rect" : [ 42.0, 204.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2124,7 +2764,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 482.0, 360.541015625, 21.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 51.5, 367.0, 163.5, 28.5 ],
+									"presentation_rect" : [ 51.5, 367.0, 103.499998211860657, 28.5 ],
 									"proportion" : 0.5
 								}
 
@@ -2162,7 +2802,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 482.0, 286.5, 21.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 53.5, 208.5, 296.0, 21.0 ],
+									"presentation_rect" : [ 53.5, 204.5, 296.0, 21.0 ],
 									"proportion" : 0.5
 								}
 
@@ -2202,7 +2842,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 509.0, 236.5, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 42.0, 245.5, 20.0, 21.0 ],
+									"presentation_rect" : [ 42.0, 244.5, 20.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2224,7 +2864,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 482.0, 236.5, 21.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 53.5, 245.5, 296.0, 21.0 ],
+									"presentation_rect" : [ 53.5, 244.5, 296.0, 21.0 ],
 									"proportion" : 0.5
 								}
 
@@ -2235,15 +2875,15 @@
 									"bubbleside" : 2,
 									"fontface" : 0,
 									"id" : "obj-11",
-									"linecount" : 2,
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 509.0, 576.0, 76.0, 52.0 ],
+									"patching_rect" : [ 509.0, 576.0, 76.0, 66.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 2,
-									"presentation_rect" : [ 16.0, 150.5, 76.0, 52.0 ],
-									"text" : "click for more info",
+									"presentation_linecount" : 3,
+									"presentation_rect" : [ 10.0, 134.352144469525967, 76.0, 66.0 ],
+									"text" : "click on any number for more info",
 									"textjustification" : 1
 								}
 
@@ -2307,7 +2947,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 602.0, 503.0, 45.0, 22.0 ],
+									"patching_rect" : [ 614.0, 553.0, 45.0, 22.0 ],
 									"text" : "text $1"
 								}
 
@@ -2326,11 +2966,11 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 602.0, 535.0, 20.0, 20.0 ],
+									"patching_rect" : [ 614.0, 585.0, 20.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 529.0, 180.352144469525967, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "7",
+									"text" : "4",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -2364,10 +3004,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 4.0, 162.0, 33.0 ],
+									"patching_rect" : [ 686.5, 4.0, 294.0, 33.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 557.0, 173.852144469525967, 227.0, 33.0 ],
-									"text" : "Flush",
+									"presentation_rect" : [ 557.0, 173.852144469525967, 294.0, 33.0 ],
+									"text" : "Pitch Analysis",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2377,15 +3017,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 3,
+									"linecount" : 10,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 197.0, 47.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 197.0, 141.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 2,
-									"presentation_rect" : [ 557.0, 214.352144469525967, 229.0, 33.0 ],
-									"text" : "Flushes stuck notes in the chroma analysis without producing any output.",
+									"presentation_linecount" : 8,
+									"presentation_rect" : [ 557.0, 214.352144469525967, 229.0, 114.0 ],
+									"text" : "If the «Onset Threshold» parameter is not bypassed, this parameter specifies which pitch analysis method should be used for polyphonic input. Note that it is recommended (but not required) to make sure that the receiving somax.player uses the same analysis method as the MIDI influencer.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2596,6 +3236,20 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-165", 0 ],
+									"source" : [ "obj-27", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-34", 0 ],
+									"source" : [ "obj-27", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-165", 0 ],
 									"source" : [ "obj-28", 1 ]
 								}
 
@@ -2639,6 +3293,13 @@
 								"patchline" : 								{
 									"destination" : [ "obj-17", 0 ],
 									"source" : [ "obj-33", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-33", 0 ],
+									"source" : [ "obj-34", 0 ]
 								}
 
 							}
@@ -2725,8 +3386,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2763,6 +3424,81 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-10",
+									"linecount" : 6,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 750.5, 206.5, 179.0, 87.0 ],
+									"text" : "This compact interface is just a wrapper around the main interface. No parameters are visible here, but all parameters are available by pressing the «Settings» button.",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"id" : "obj-13",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 703.375, 498.764011799410014, 156.0, 64.0 ],
+									"text" : "See somax.midiinfluencer documentation for more info"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-31",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 602.375, 571.946902654867245, 195.0, 22.0 ],
+									"text" : "load somax.midiinfluencer.maxhelp"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"id" : "obj-34",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 602.375, 509.081120943952783, 95.25, 43.365781710914462 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 574.0, 683.220703125, 254.0, 46.0 ],
+									"rounded" : 8.0,
+									"text" : "MIDI Influencer Documentation",
+									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"truncate" : 0
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+									"hidden" : 1,
+									"id" : "obj-22",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 602.375, 600.946902654867245, 51.0, 22.0 ],
+									"text" : "pcontrol"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"border" : 0,
 									"filename" : "helpdetails.js",
 									"id" : "obj-1",
@@ -2785,8 +3521,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 502.5, 553.0, 335.0, 47.0 ],
-									"text" : "In most cases, it's easier to use the somax.midi.io object to initialize and use the MIDI influencer. See the «wireless» tab for more information."
+									"patching_rect" : [ 502.5, 565.0, 335.0, 47.0 ],
+									"text" : "In most cases, it's easier to use the somax.midiinfluencera.pp object to initialize and use the MIDI influencer."
 								}
 
 							}
@@ -2797,7 +3533,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 607.5, 507.0, 121.0, 22.0 ],
+									"patching_rect" : [ 602.375, 461.0, 121.0, 22.0 ],
 									"text" : "somax.midiinfluencer",
 									"varname" : "somax.midiinfluencer[1]"
 								}
@@ -2810,7 +3546,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 502.5, 463.295711060948179, 331.0, 33.0 ],
+									"patching_rect" : [ 502.5, 418.5, 331.0, 33.0 ],
 									"text" : "The MIDI influencer can of course also be initialized as a normal max object without any visible user interface at all:",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2831,19 +3567,6 @@
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-10",
-									"linecount" : 7,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 753.5, 198.0, 148.0, 100.0 ],
-									"text" : "The compact interface is just a wrapper around the main interface. No parameters are visible here, but all parameters are available by pressing the «Settings» button.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"bubble" : 1,
 									"bubblepoint" : 0.0,
 									"bubbleside" : 2,
@@ -2853,7 +3576,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 597.5, 124.0, 226.0, 79.0 ],
-									"text" : "Compact Interface: To create the object, (pressing N and) type:\n\nbpatcher somax.midiinfluencer.compact"
+									"text" : "Compact Interface: To create the object, (pressing N and) type:\n\nbpatcher somax.midiinfluencer.ui"
 								}
 
 							}
@@ -2883,12 +3606,13 @@
 									"lockeddragscroll" : 0,
 									"lockedsize" : 0,
 									"maxclass" : "bpatcher",
-									"name" : "somax.midiinfluencer.compact.maxpat",
-									"numinlets" : 0,
-									"numoutlets" : 0,
+									"name" : "somax.midiinfluencer.ui.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 3,
 									"offset" : [ 0.0, 0.0 ],
+									"outlettype" : [ "", "", "" ],
 									"patching_rect" : [ 502.5, 198.0, 246.0, 104.0 ],
-									"varname" : "somax.midiinfluencer.compact",
+									"varname" : "somax.midiinfluencer.ui",
 									"viewvisibility" : 1
 								}
 
@@ -2939,7 +3663,23 @@
 
 							}
  ],
-						"lines" : [  ],
+						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-22", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-31", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-31", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-34", 0 ]
+								}
+
+							}
+ ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3009,556 +3749,21 @@
 				}
 
 			}
-, 			{
-				"box" : 				{
-					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
-					"id" : "obj-1",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
-					"patcher" : 					{
-						"fileversion" : 1,
-						"appversion" : 						{
-							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
-							"architecture" : "x64",
-							"modernui" : 1
-						}
-,
-						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
-						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"showontab" : 1,
-						"assistshowspatchername" : 0,
-						"boxes" : [ 							{
-								"box" : 								{
-									"id" : "obj-15",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 147.0, 340.0, 61.0, 20.0 ],
-									"text" : "onset",
-									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-22",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 64.0, 535.0, 618.0, 47.0 ],
-									"text" : "The pitch and chroma influences should in most cases be sent to a somax.player object where they are matched to the corpus to determine the most suitable output. The onset influence is used to trigger output (when a player is in Manual/Reactive mode) as well as segment the continuous stream of chroma messages.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"id" : "obj-21",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 530.0, 143.5, 152.0, 51.0 ],
-									"text" : "The «Settings» button displays all the available options"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-19",
-									"linecount" : 9,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 64.0, 340.0, 144.0, 127.0 ],
-									"text" : "By default, an «onset influence» is sent each time a note on is received. This isn't always ideal for polyphonic input, for which a workaround is described in the «polyphony» tab.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-13",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 88.0, 226.0, 52.0, 20.0 ],
-									"text" : "pitch",
-									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-14",
-									"linecount" : 6,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 64.0, 226.0, 144.0, 87.0 ],
-									"text" : "The pitch is by default selected as the top note in the received input, but there are a number of other options available  in the «Settings» dialog.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-9",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 553.0, 226.0, 52.0, 20.0 ],
-									"text" : "chroma",
-									"textcolor" : [ 0.423529411764706, 0.494117647058824, 0.996078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-1",
-									"linecount" : 6,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 512.0, 379.0, 170.0, 87.0 ],
-									"text" : "The changes in chroma are also not instantaneous but decays slowly once a note has been released. This behaviour can be turned off in the «Settings».",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-32",
-									"linecount" : 10,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 512.0, 226.0, 170.0, 141.0 ],
-									"text" : "For the chroma, a set of harmonics are created for each MIDI note before computing a pseudo-spectrogram for the MIDI input. The purpose of this is to create a smoother interaction between influence data from MIDI and audio respectively",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"hidden" : 1,
-									"id" : "obj-30",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 657.0, 14.25, 138.0, 51.0 ],
-									"text" : "Click here for a tutorial of the MIDI influencer in context"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"bubbleside" : 3,
-									"id" : "obj-28",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 49.0, 159.0, 189.0, 51.0 ],
-									"text" : "press some keys on the polyphonic keyboard to see the behaviour of the influencer"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-20",
-									"maxclass" : "button",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 258.0, 478.0, 24.0, 24.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-18",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 185.0, 479.0, 68.0, 22.0 ],
-									"text" : "onset bang"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-17",
-									"linecount" : 2,
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 371.0, 479.0, 108.0, 35.0 ],
-									"text" : "chroma 0 0 0 0 0 0 0 0 0 0 0 0"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-16",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 298.0, 479.0, 68.0, 22.0 ],
-									"text" : "pitch 48"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-12",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 234.0, 253.0, 59.0, 22.0 ],
-									"text" : "append 1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-11",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 234.0, 226.0, 37.0, 22.0 ],
-									"text" : "join 2"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 1,
-									"fontsize" : 10.0,
-									"id" : "obj-10",
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 460.0, 159.0, 68.0, 20.0 ],
-									"rounded" : 20.0,
-									"text" : "Settings",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
-									"texton" : "",
-									"textoncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-8",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 460.0, 190.0, 75.0, 22.0 ],
-									"text" : "openwindow"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-6",
-									"maxclass" : "kslider",
-									"mode" : 1,
-									"numinlets" : 2,
-									"numoutlets" : 2,
-									"outlettype" : [ "int", "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 234.0, 159.0, 168.0, 53.0 ],
-									"range" : 24
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgmode" : 0,
-									"border" : 0,
-									"clickthrough" : 0,
-									"enablehscroll" : 0,
-									"enablevscroll" : 0,
-									"id" : "obj-5",
-									"lockeddragscroll" : 0,
-									"lockedsize" : 0,
-									"maxclass" : "bpatcher",
-									"name" : "somax.midiinfluencer.compact.maxpat",
-									"numinlets" : 0,
-									"numoutlets" : 0,
-									"offset" : [ 0.0, 0.0 ],
-									"patching_rect" : [ 234.0, 282.0, 245.0, 71.0 ],
-									"varname" : "somax.midiinfluencer.compact",
-									"viewvisibility" : 1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"hidden" : 1,
-									"id" : "obj-89",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 498.0, 60.5, 138.0, 22.0 ],
-									"text" : "load somax2_first_steps"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
-									"hidden" : 1,
-									"id" : "obj-87",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 498.0, 88.0, 51.0, 22.0 ],
-									"text" : "pcontrol"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 1,
-									"fontsize" : 14.0,
-									"hidden" : 1,
-									"id" : "obj-110",
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 498.0, 24.0, 154.0, 31.5 ],
-									"rounded" : 8.0,
-									"text" : "SOMAX II TUTORIAL",
-									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-4",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 67.0, 326.0, 20.0 ],
-									"text" : "Analyzer of MIDI input for the Somax architecture"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-3",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 89.0, 684.0, 20.0 ],
-									"text" : "The MIDI influencer segments and analyzes an incoming stream of midi messages with respect to pitch, chroma and onset.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"border" : 0,
-									"filename" : "helpdetails.js",
-									"id" : "obj-2",
-									"ignoreclick" : 1,
-									"jsarguments" : [ "somax.midiinfluencer.app" ],
-									"maxclass" : "jsui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 10.0, 10.0, 556.0, 55.25 ]
-								}
-
-							}
- ],
-						"lines" : [ 							{
-								"patchline" : 								{
-									"destination" : [ "obj-8", 0 ],
-									"source" : [ "obj-10", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-12", 0 ],
-									"source" : [ "obj-11", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-89", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-110", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-11", 1 ],
-									"midpoints" : [ 392.5, 219.5, 261.5, 219.5 ],
-									"source" : [ "obj-6", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-11", 0 ],
-									"source" : [ "obj-6", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-87", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-89", 0 ]
-								}
-
-							}
- ],
-						"styles" : [ 							{
-								"name" : "dUG Yello 01-1",
-								"button" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"default" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"bgfillcolor" : 									{
-										"angle" : 270.0,
-										"autogradient" : 0,
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"proportion" : 0.39,
-										"type" : "gradient"
-									}
-,
-									"fontface" : [ 1 ],
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-								}
-,
-								"newobj" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-									"fontface" : [ 1 ],
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-								}
-,
-								"toggle" : 								{
-									"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
-								}
-,
-								"message" : 								{
-									"bgfillcolor" : 									{
-										"angle" : 270.0,
-										"autogradient" : 0,
-										"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-										"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-										"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-										"proportion" : 0.39,
-										"type" : "gradient"
-									}
-,
-									"fontface" : [ 1 ],
-									"fontsize" : [ 10.0 ],
-									"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
-								}
-,
-								"parentstyle" : "",
-								"multi" : 0
-							}
- ]
-					}
-,
-					"patching_rect" : [ 11.0, 15.0, 47.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
-					"text" : "p basic",
-					"varname" : "basic"
-				}
-
-			}
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-8::obj-17::obj-21" : [ "onset", "onset", 0 ],
-			"obj-8::obj-17::obj-28" : [ "chromaonset", "chromaonset", 0 ],
-			"obj-8::obj-17::obj-29" : [ "enable", "enable", 0 ],
-			"obj-8::obj-17::obj-30" : [ "chroma scaling factor", "chroma", 0 ],
-			"obj-8::obj-17::obj-46::obj-1" : [ "source[2]", "source", 0 ],
-			"obj-8::obj-17::obj-9" : [ "pitch", "pitch", 0 ],
+			"obj-7::obj-17::obj-21" : [ "onset[2]", "onset", 0 ],
+			"obj-7::obj-17::obj-28" : [ "chromaonset[2]", "chromaonset", 0 ],
+			"obj-7::obj-17::obj-29" : [ "enable[2]", "enable", 0 ],
+			"obj-7::obj-17::obj-30" : [ "chroma scaling factor[2]", "chroma", 0 ],
+			"obj-7::obj-17::obj-46::obj-1" : [ "source[4]", "source", 0 ],
+			"obj-7::obj-17::obj-9" : [ "pitch[2]", "pitch", 0 ],
 			"parameterbanks" : 			{
 
 			}
 ,
 			"parameter_overrides" : 			{
-				"obj-8::obj-17::obj-30" : 				{
-					"parameter_longname" : "chroma scaling factor"
-				}
-,
-				"obj-8::obj-17::obj-46::obj-1" : 				{
+				"obj-7::obj-17::obj-46::obj-1" : 				{
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
@@ -3575,14 +3780,14 @@
 			}
 , 			{
 				"name" : "computeMemoryPitchClass.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/javascript",
 				"patcherrelativepath" : "../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "heldnotes.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
@@ -3595,70 +3800,112 @@
 			}
 , 			{
 				"name" : "midi2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "midi2chroma_nofilter.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "midichromaanalysis.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "midipitchanalysis.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.await_patcherargs.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.filter_midichannels.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midiinfluencer.app.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midiinfluencer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midiinfluencer.ui.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midiinput.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.midioutput.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.player.routerblock.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
 				"patcherrelativepath" : "../patchers/resources/player",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.receiveblock.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.source.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.uniquename.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.winresize.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
