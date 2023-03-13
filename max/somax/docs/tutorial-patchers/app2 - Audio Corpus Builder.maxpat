@@ -2041,16 +2041,16 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-148",
-									"linecount" : 7,
+									"linecount" : 4,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 784.678715404332706, 803.5, 163.0, 102.0 ],
+									"patching_rect" : [ 784.678715404332706, 803.5, 201.0, 62.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
 									"presentation_rect" : [ 742.178715404332706, 138.5, 323.071284595667294, 49.0 ],
-									"text" : "playingmode 1, ignorephase 1, decaybasis 1, continuity 0.8, outputthreshold 0., selfpeakdecay 1.5, melodicpeakdecay 1.5, harmonicpeakdecay 1.5, timeout 0"
+									"text" : "mode 1, ignorephase 1, decaybasis 1, continuity 0.8, selfpeakdecay 1.5, melodicpeakdecay 1.5, harmonicpeakdecay 1.5, timeout 0"
 								}
 
 							}
@@ -3056,7 +3056,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1015.0, 616.0, 231.0, 24.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 874.25, 272.0, 76.0, 24.0 ],
+									"presentation_rect" : [ 887.25, 272.0, 76.0, 24.0 ],
 									"text" : "click this",
 									"textjustification" : 1
 								}
@@ -3146,16 +3146,16 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-115",
-									"linecount" : 6,
+									"linecount" : 5,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 434.0, 644.0, 219.0, 89.0 ],
+									"patching_rect" : [ 434.0, 644.0, 229.0, 76.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 4,
-									"presentation_rect" : [ 640.678715404332706, 253.0, 246.0, 62.0 ],
-									"text" : "playingmode 0, ignorephase 1, decaybasis 0, selfngramorder 1, melodicngramorder 1, harmonicngramorder 1, selfmod12 1, melodicmod12 1, continuity 10, outputfrom 0"
+									"presentation_rect" : [ 616.717736080544682, 253.0, 294.921958647575934, 62.0 ],
+									"text" : "mode 0, ignorephase 1, decaybasis 0, selfngramorder 1, melodicngramorder 1, harmonicngramorder 1, selfmod12 1, melodicmod12 1, continuity 10, outputfrom 0, timeout 2"
 								}
 
 							}
