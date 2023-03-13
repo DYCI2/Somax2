@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 293.0, 162.0, 1130.0, 779.0 ],
+		"rect" : [ 293.0, 161.0, 1130.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -29,8 +29,8 @@
 		"toolbars_unpinned_last_save" : 0,
 		"tallnewobj" : 0,
 		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
+		"enablehscroll" : 0,
+		"enablevscroll" : 0,
 		"devicewidth" : 0.0,
 		"description" : "",
 		"digest" : "",
@@ -249,7 +249,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 58.5, 470.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 156.054455445544505, 275.852144469525911, 21.0, 21.0 ],
+									"presentation_rect" : [ 149.054455445544505, 281.852144469525911, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "6",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -288,7 +288,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1183.518518518518249, 768.5, 79.0, 21.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 625.601151315789593, 546.0, 75.789473684210407, 20.0 ],
+									"presentation_rect" : [ 644.601151315789593, 546.0, 75.789473684210407, 20.0 ],
 									"rounded" : 8.0,
 									"text" : "max window",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -620,7 +620,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1091.5, 768.5, 79.0, 21.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 621.851151315789593, 205.0, 75.789473684210407, 20.0 ],
+									"presentation_rect" : [ 640.851151315789593, 205.0, 75.789473684210407, 20.0 ],
 									"rounded" : 8.0,
 									"text" : "max window",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -708,7 +708,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 45.75, 244.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 142.0, 167.75, 21.0, 21.0 ],
+									"presentation_rect" : [ 146.0, 156.75, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "4",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -729,7 +729,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 989.25, 172.0, 80.0, 79.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 147.065934065934073, 167.75, 155.934065934065927, 23.75 ],
+									"presentation_rect" : [ 156.0, 167.75, 152.0, 21.0 ],
 									"proportion" : 0.5
 								}
 
@@ -1242,7 +1242,7 @@
 									"presentation" : 1,
 									"presentation_linecount" : 5,
 									"presentation_rect" : [ 763.75, 265.5, 320.0, 74.0 ],
-									"text" : "Next, the «Audio» (Corpus Builder) button should become available once the server has started. Normally, we'd go here whenever we want to build an audio corpus, but in this tutorial, we'll use the copy of the Audio Corpus Builder on the left in this patch.",
+									"text" : "Next, the «Audio» and «MIDI» (Corpus Builder) buttons should become available once the server has started. Normally, we'd go here whenever we want to build an audio corpus, but in this tutorial, we'll use the copy of the Audio Corpus Builder on the left in this patch.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1310,7 +1310,7 @@
 									"presentation" : 1,
 									"presentation_linecount" : 5,
 									"presentation_rect" : [ 763.75, 185.5, 315.0, 74.0 ],
-									"text" : "The first step is once again to start the server. Once clicked, the server should start in a new window and the «Start Server» button should change to «Instantiate Players» (there's no harm in clicking on this one as well, but we don't need to do this for now)",
+									"text" : "The first step is once again to start the server. Once clicked, the server should start in a new window and the «Start Server» button should disappear. This won't be present if you already started the server in the first tab of the tutorial. ",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1407,7 +1407,7 @@
 									"presentation" : 1,
 									"presentation_linecount" : 7,
 									"presentation_rect" : [ 735.5, 80.0, 343.25, 100.0 ],
-									"text" : "A concept that hasn't been explained so far is how to build a corpus from your own set of (audio or MIDI) files. In the previous tutorial, we were using the pre-built MIDI corpora.\n\nThere are a few short pre-build audio corpora distributed in Somax II, but in this step, we're going to build our own corpus from an audio file.",
+									"text" : "A concept that hasn't been explained so far is how to build a corpus from your own set of (audio or MIDI) files. In the previous tutorial, we were using some pre-built corpora.\n\nThere are a few short pre-build audio corpora distributed in Somax II, but in this tutorial, we're going to build our own corpus from an audio file.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1527,7 +1527,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-166",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1547,7 +1546,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 226.0, 100.0, 1112.0, 839.0 ],
+						"rect" : [ 396.0, 151.0, 1112.0, 839.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1586,9 +1585,9 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 710.25, 726.0, 318.0, 102.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 6,
-									"presentation_rect" : [ 737.75, 559.0, 342.0, 88.0 ],
-									"text" : "This was a brief introduction to using an audio corpus in Somax, but there are plenty of things to experiment with. The next step would be to open the main «somax2» patcher (available in the «Extras» menu) and continue experimenting, for example using the audio influencer, using multiple players and/or experimenting with the parameters of the system.",
+									"presentation_linecount" : 7,
+									"presentation_rect" : [ 737.75, 543.0, 342.0, 102.0 ],
+									"text" : "This was a brief introduction to using an audio corpus in Somax, but there are plenty of things to experiment with. The next step would be to go back to the somax2.overview and go through the \"Max Tutorials\" tab to explore the potentiality of Somax 2.5 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1833,7 +1832,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1193.75, 70.137931034482762, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 171.75, 427.25, 21.0, 21.0 ],
+									"presentation_rect" : [ 0.0, 404.25, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1854,7 +1853,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1193.536210530951621, 70.536945812807886, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 6.0, 438.25, 178.04516129032254, 28.75 ],
+									"presentation_rect" : [ 6.0, 413.0, 76.04516129032254, 28.75 ],
 									"proportion" : 0.5
 								}
 
@@ -1864,15 +1863,13 @@
 									"fontface" : 0,
 									"fontsize" : 12.162162162162161,
 									"id" : "obj-157",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 732.25, 641.0, 316.0, 34.0 ],
+									"patching_rect" : [ 732.25, 641.0, 316.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 2,
-									"presentation_rect" : [ 762.25, 373.0, 316.25, 34.0 ],
-									"text" : "Select «Inlet (External)» as the input source to the MIDI influencer",
+									"presentation_rect" : [ 762.25, 361.0, 148.0, 20.0 ],
+									"text" : "Enable the MidiInfluencer.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1894,7 +1891,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 707.75, 645.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 737.75, 377.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 737.75, 361.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1912,7 +1909,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1004.0, 751.0, 252.0, 53.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 782.178715404332706, 500.0, 252.0, 53.0 ],
+									"presentation_rect" : [ 782.178715404332706, 484.0, 252.0, 53.0 ],
 									"range" : 36
 								}
 
@@ -1929,7 +1926,7 @@
 									"patching_rect" : [ 731.25, 644.0, 318.0, 74.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 5,
-									"presentation_rect" : [ 762.25, 413.0, 318.0, 74.0 ],
+									"presentation_rect" : [ 762.25, 397.0, 318.0, 74.0 ],
 									"text" : "Play a couple of notes on the keyboard below. Each note should trigger a new slice in the audio corpus. If it for some reason doesn't work, make sure that the indicators at (3.1) respond when you're playing and that the indicators at (3.2) show the same thing.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1952,7 +1949,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 706.75, 648.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 737.75, 417.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 737.75, 401.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "3",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2008,15 +2005,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.162162162162161,
 									"id" : "obj-150",
-									"linecount" : 7,
+									"linecount" : 6,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 730.75, 563.0, 316.0, 102.0 ],
+									"patching_rect" : [ 730.75, 563.0, 316.0, 88.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 7,
-									"presentation_rect" : [ 762.25, 266.0, 316.25, 102.0 ],
-									"text" : "Select the «TutorialMidi» as source in the «Influence sources & routing» section of the Player. You can keep all the toggles on, they indicate that the Player should listen to the (P)itch, (O)nset, (C)hroma and (C)hroma_(O)nset  of the MIDI influencer, and will generally only be used when mixing input from multiple sources.",
+									"presentation_linecount" : 6,
+									"presentation_rect" : [ 762.25, 266.0, 316.25, 88.0 ],
+									"text" : "Select the «MidiInfluencer» as source in the «Influence sources» section of the Player. You can keep all the toggles on, they indicate that the Player should listen to the (P)itch, (O)nset, (C)hroma and (C)hroma_(O)nset  of the MIDI influencer, and will generally only be used when mixing input from multiple sources.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2046,7 +2043,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 784.678715404332706, 803.5, 201.0, 62.0 ],
+									"patching_rect" : [ 784.678715404332706, 803.5, 203.0, 62.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
 									"presentation_rect" : [ 742.178715404332706, 138.5, 323.071284595667294, 49.0 ],
@@ -2498,15 +2495,14 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-26",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 635.5, 346.5, 308.0, 33.0 ],
+									"patching_rect" : [ 635.5, 346.5, 308.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
 									"presentation_rect" : [ 767.75, 247.0, 285.0, 33.0 ],
-									"text" : "The «Start Server» (and «Instantiate Players») buttons have been moved to the server module. ",
+									"text" : "You have to «Start Server» for the application to work.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2620,15 +2616,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 15,
+									"linecount" : 14,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 619.5, 121.5, 308.0, 208.0 ],
+									"patching_rect" : [ 619.5, 121.5, 308.0, 194.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 13,
 									"presentation_rect" : [ 734.5, 64.0, 343.25, 181.0 ],
-									"text" : "As can be seen, this patcher looks a bit different than the one previous tutorial. This is because it uses wireless communication (i.e. without patch cords) between the different objects in order to simplify dynamic routing of messages and creation of objects.\n\nWhen using the wireless paradigm, it's possible to create another player or another influencer by simply duplicating the object, which wasn't possible in the previous patch. This can be very useful in the future if you want to make your own patcher, but won't for now make a huge difference.\n\nThere are however a couple of new things to be aware of:",
+									"text" : "As can be seen, this patcher looks a bit different than the one previous tutorial. This is because the app objects of Somax 2.5 use wireless communication (i.e. without patch cords) between them, in order to simplify dynamic routing of messages and creation of objects.\n\nWhen using the wireless paradigm, it's possible to create another player or another influencer by simply duplicating the object. This can be very useful in the future if you want to make your own patcher, but won't for now make a huge difference.\n\nLet's begin by reviewing a couple of things to be aware of:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2676,6 +2672,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-147",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2695,7 +2692,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 410.0, 260.0, 773.0, 587.0 ],
+						"rect" : [ 593.0, 194.0, 773.0, 587.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -3074,7 +3071,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 859.518518518518249, 263.5, 22.0, 22.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 859.746676058638968, 521.0, 18.0, 18.0 ],
+									"presentation_rect" : [ 738.746676058638968, 523.0, 18.0, 18.0 ],
 									"rounded" : 99.0,
 									"text" : "?",
 									"texton" : "?",
@@ -3095,7 +3092,7 @@
 									"presentation" : 1,
 									"presentation_linecount" : 4,
 									"presentation_rect" : [ 613.5, 480.0, 321.0, 61.0 ],
-									"text" : "You can use the output module to control the pan, gain and output channels of the Player. There's also a «Renderer» tab to control the playback and crossfade parameters (4.1). For more information, see ",
+									"text" : "You can use the output module to control the pan, gain and output channels of the Player. There's also a section to control the playback and crossfade parameters . For more information, see ",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3138,7 +3135,7 @@
 									"presentation" : 1,
 									"presentation_linecount" : 11,
 									"presentation_rect" : [ 613.5, 320.0, 321.0, 156.0 ],
-									"text" : "Then start the improvisation by enabling the audio (3.1) and running the server (3.2). \n\nYou should now hear the Player playing the audio file linearly. If you however change the «Continuity» parameter (3.3) to 0, you should notice how the player starts jumping in the content, recombining the slices in a non-linear manner. This parameter can be very useful to control the linearity of the improvisation, where a value below 1 will prioritize non-linearity and a value above 1 prioritize linearity",
+									"text" : "Then start the improvisation by enabling the audio and running the server (3.1). \n\nYou should now hear the Player playing the audio file linearly. If you however change the «Continuity» parameter (3.2) to 0, you should notice how the player starts jumping in the content, recombining the slices in a non-linear manner. This parameter can be very useful to control the linearity of the improvisation, where a value below 1 will prioritize non-linearity and a value above 1 prioritize linearity",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3154,7 +3151,7 @@
 									"patching_rect" : [ 434.0, 644.0, 229.0, 76.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 4,
-									"presentation_rect" : [ 616.717736080544682, 253.0, 294.921958647575934, 62.0 ],
+									"presentation_rect" : [ 616.717736080544682, 253.0, 299.0, 62.0 ],
 									"text" : "mode 0, ignorephase 1, decaybasis 0, selfngramorder 1, melodicngramorder 1, harmonicngramorder 1, selfmod12 1, melodicmod12 1, continuity 10, outputfrom 0, timeout 2"
 								}
 
@@ -3289,15 +3286,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.162162162162161,
 									"id" : "obj-41",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 730.5, 521.0, 316.0, 47.0 ],
+									"patching_rect" : [ 730.5, 521.0, 316.0, 34.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 3,
-									"presentation_rect" : [ 613.5, 100.0, 321.0, 47.0 ],
-									"text" : "First, instantiate the Player by pressing the «Instantiate Players» button (if it's not there, you've already instantiated it)",
+									"presentation_linecount" : 2,
+									"presentation_rect" : [ 613.5, 100.0, 321.0, 34.0 ],
+									"text" : "First, start the Server by pressing the «Start Server» button (if it's not there, you've already instantiated it)",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3515,30 +3512,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgmode" : 0,
-					"border" : 0,
-					"clickthrough" : 0,
-					"enablehscroll" : 0,
-					"enablevscroll" : 0,
-					"id" : "obj-5",
-					"lockeddragscroll" : 0,
-					"lockedsize" : 0,
-					"maxclass" : "bpatcher",
-					"name" : "somax.server.app.maxpat",
-					"numinlets" : 1,
-					"numoutlets" : 4,
-					"offset" : [ 0.0, 0.0 ],
-					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 734.5, 1310.644438921164465, 248.0, 298.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 456.0, 124.0, 250.0, 295.0 ],
-					"varname" : "somax.server.io",
-					"viewvisibility" : 1
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-184",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -3576,13 +3549,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-124",
-					"linecount" : 3,
+					"linecount" : 5,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 300.0, 284.0, 165.0, 49.0 ],
-					"text" : "script $1 corpusbuilder2, script $1 audiocorpusbuilder, script $1 cbpanel"
+					"patching_rect" : [ 300.0, 284.0, 155.0, 76.0 ],
+					"text" : "script $1 corpusbuilder2, script $1 audiocorpusbuilder, script $1 cbpanel, script $1 cbpanel2"
 				}
 
 			}
@@ -4005,7 +3978,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1046.0, 840.166676044464111, 60.0, 51.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 124.0, 447.0, 621.5 ],
+					"presentation_rect" : [ 7.0, 124.0, 442.0, 621.5 ],
 					"proportion" : 0.5,
 					"varname" : "cbpanel"
 				}
@@ -4295,6 +4268,50 @@
 					"presentation_linecount" : 2,
 					"presentation_rect" : [ 30.0, 87.0, 1062.0, 33.0 ],
 					"text" : "This tutorial will introduce how to work with an audio corpus in Somax II. \nThis tutorial assumes that you've already completed the first tutorial and that you're familiar with the basic components of Somax II, as these won't be explained here."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"background" : 1,
+					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
+					"hidden" : 1,
+					"id" : "obj-6",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1046.0, 769.166676044464111, 60.0, 51.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 456.0, 124.0, 262.0, 304.5 ],
+					"proportion" : 0.5,
+					"varname" : "cbpanel2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"background" : 1,
+					"bgmode" : 0,
+					"border" : 0,
+					"clickthrough" : 0,
+					"enablehscroll" : 0,
+					"enablevscroll" : 0,
+					"id" : "obj-5",
+					"lockeddragscroll" : 0,
+					"lockedsize" : 0,
+					"maxclass" : "bpatcher",
+					"name" : "somax.server.app.maxpat",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"offset" : [ 0.0, 0.0 ],
+					"outlettype" : [ "", "", "", "" ],
+					"patching_rect" : [ 734.5, 1310.644438921164465, 248.0, 298.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 456.0, 124.0, 250.0, 295.0 ],
+					"varname" : "somax.server.io",
+					"viewvisibility" : 1
 				}
 
 			}

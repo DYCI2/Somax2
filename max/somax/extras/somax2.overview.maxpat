@@ -46,7 +46,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -101,7 +100,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 307.5, 277.5, 419.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "In the second tutorial you will learn how to build a corpus from your audio materials, and interact with it "
 								}
 
@@ -387,7 +385,7 @@
 					"patching_rect" : [ 114.522727272727252, 66.0, 938.0, 79.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 7,
-					"presentation_rect" : [ 116.5, 15.5, 709.0, 108.0 ],
+					"presentation_rect" : [ 116.5, 15.5, 710.0, 108.0 ],
 					"text" : "Somax 2.5 is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. \nIt is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space."
 				}
 
@@ -400,6 +398,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-7",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -456,7 +455,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 37.0, 471.0, 107.0, 76.0 ],
-									"presentation_linecount" : 3,
 									"text" : ";\rmax launchbrowser http://vimeo.com/showcase/8537329"
 								}
 
