@@ -95,8 +95,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 595.25, 618.119512407609136, 359.0, 47.0 ],
-									"presentation_linecount" : 3,
-									"text" : "MIDI Output module: the audio influencer will synthesize MIDI messages corresponding to the pitch estimation, routing them to the selected MIDI output device",
+									"text" : "MIDI Output module: the audio influencer will synthesize MIDI messages corresponding to the pitch estimation, routing them to the selected MIDI output device.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -132,8 +131,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 595.25, 580.119512407609136, 359.0, 33.0 ],
-									"presentation_linecount" : 2,
-									"text" : "Audio Output module: Select the Left and Right audio channel, Pan, Delay and Gain",
+									"text" : "Audio Output module: Select the Left and Right audio channel, control Pan, Delay and Gain.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -169,7 +167,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 595.25, 523.119512407609136, 359.0, 47.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Audio Influencer module: this corresponds to the somax.audioinfluencer.ui object and it's a compact interface for the visualization of influences.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -206,8 +203,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 595.25, 480.119512407609136, 359.0, 33.0 ],
-									"presentation_linecount" : 3,
-									"text" : "Audio Input module: Select between an Audio File (press the Read button) or any input of your sound card.",
+									"text" : "Audio Input module: Select between an Audio File (press the «Read» button) or any input of your sound card.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -241,9 +237,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 595.25, 450.247787610619525, 301.0, 20.0 ],
-									"presentation_linecount" : 2,
-									"text" : "The «Settings» button displays all the available options",
+									"patching_rect" : [ 595.25, 450.247787610619525, 326.0, 20.0 ],
+									"text" : "The «Settings» button displays all the available parameters.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -542,8 +537,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 595.25, 190.5, 359.0, 127.0 ],
-									"presentation_linecount" : 11,
-									"text" : "The audioinfluencer.app can be given a name to differentiate it from other influencers, using the bpatchers @args attribute, i.e.:\n\nbpatcher somax.audioinfluencer.app @args <name>\n\nIf no argument is provided, the influencer will automatically be assigned a unique name.\nThe name attribute can also be set using the «Argument(s)» field in the Inspector",
+									"text" : "The audioinfluencer.app can be given a name to differentiate it from other influencers, using the bpatchers @args attribute, i.e.:\n\nbpatcher somax.audioinfluencer.app @args <name>\n\nIf no argument is provided, the influencer will automatically be assigned a unique name.\nThe name attribute can also be set using the «Argument(s)» field in the Max Inspector.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -745,7 +739,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 281.5, 159.235987485334249, 249.0, 64.0 ],
+									"patching_rect" : [ 281.5, 159.235987485334249, 250.0, 64.0 ],
 									"text" : "To create an audioinfluencer.app, press N and type:\n\nbpatcher somax.audioinfluencer.app"
 								}
 
@@ -779,8 +773,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 67.0, 266.0, 20.0 ],
-									"text" : "Wrapper around the somax.midiinfluencer object"
+									"patching_rect" : [ 10.0, 67.0, 274.0, 20.0 ],
+									"text" : "Wrapper around the somax.audioinfluencer object"
 								}
 
 							}
@@ -976,7 +970,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 326.0, 124.5, 134.0, 66.0 ],
+									"patching_rect" : [ 326.0, 124.5, 137.0, 66.0 ],
 									"text" : "Click on the «Settings» button to monitor parameter's changes"
 								}
 
@@ -990,7 +984,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 661.125, 106.0, 51.0 ],
+									"patching_rect" : [ 724.5, 661.125, 108.0, 51.0 ],
 									"text" : "See yin~ documentation for more info"
 								}
 
@@ -1798,7 +1792,6 @@
 									"patching_rect" : [ 382.0, 187.0, 68.0, 20.0 ],
 									"rounded" : 20.0,
 									"text" : "Settings",
-									"textcolor" : [ 0.501961, 0.501961, 0.501961, 1.0 ],
 									"texton" : "",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -2889,7 +2882,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 94.0, 126.0, 1026.0, 753.0 ],
+						"rect" : [ 0.0, 26.0, 1026.0, 753.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2926,8 +2919,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 259.0, 247.5, 149.0, 51.0 ],
-									"presentation_linecount" : 4,
+									"patching_rect" : [ 259.0, 247.5, 152.0, 51.0 ],
 									"text" : "Click on the «Settings» button to monitor parameter's changes"
 								}
 
@@ -3508,7 +3500,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1026.0, 753.0 ],
+						"rect" : [ 94.0, 126.0, 1026.0, 753.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -3538,6 +3530,23 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.1,
+									"id" : "obj-51",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 717.0, 97.0, 150.0, 37.0 ],
+									"presentation" : 1,
+									"presentation_linecount" : 3,
+									"presentation_rect" : [ 371.0, 164.295711060948179, 117.0, 51.0 ],
+									"text" : "Click on any number for more info"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"border" : 0,
 									"filename" : "helpdetails.js",
@@ -4163,7 +4172,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 511.0, 134.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "11",
+									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -4201,7 +4210,7 @@
 									"patching_rect" : [ 686.5, 4.0, 163.0, 87.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 539.0, 128.0, 295.0, 33.0 ],
-									"text" : "Min Frequency (Yin)",
+									"text" : "Onset Detection from",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -4219,7 +4228,7 @@
 									"presentation" : 1,
 									"presentation_linecount" : 2,
 									"presentation_rect" : [ 539.0, 168.5, 304.0, 33.0 ],
-									"text" : "The minimum frequency (in Hz) that the Yin algorithm can detect.",
+									"text" : "This determines which algorithm should be used for onset detection.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -4453,8 +4462,8 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 510.0, 835.5, 684.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 10.0, 89.0, 577.0, 20.0 ],
-									"text" : "This tab explains all the available parameters in the main user interface. Click on any number for more info.",
+									"presentation_rect" : [ 10.0, 89.0, 390.0, 20.0 ],
+									"text" : "This tab explains all the available parameters in the main user interface.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -5119,11 +5128,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-10",
-									"linecount" : 7,
+									"linecount" : 6,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 738.5, 186.0, 148.0, 100.0 ],
+									"patching_rect" : [ 733.5, 198.0, 179.0, 87.0 ],
 									"text" : "This compact interface is just a wrapper around the main interface. No parameters are visible here, but all parameters are available by pressing the «Settings» button.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
