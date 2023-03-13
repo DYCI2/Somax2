@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 126.0, 1054.0, 710.0 ],
+						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -899,7 +899,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 15.0, 177.5, 174.0, 64.0 ],
-									"presentation_linecount" : 4,
 									"text" : "this keyboard sends MIDI data on channel one, triggering pitch and onset influences"
 								}
 
@@ -2320,7 +2319,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
+						"rect" : [ 84.0, 126.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2879,10 +2878,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 509.0, 576.0, 76.0, 66.0 ],
+									"patching_rect" : [ 509.0, 576.0, 77.0, 66.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
-									"presentation_rect" : [ 10.0, 134.352144469525967, 76.0, 66.0 ],
+									"presentation_rect" : [ 10.0, 134.352144469525967, 77.0, 66.0 ],
 									"text" : "click on any number for more info",
 									"textjustification" : 1
 								}
@@ -2970,7 +2969,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 529.0, 180.352144469525967, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "4",
+									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -3007,7 +3006,7 @@
 									"patching_rect" : [ 686.5, 4.0, 294.0, 33.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 557.0, 173.852144469525967, 294.0, 33.0 ],
-									"text" : "Pitch Analysis",
+									"text" : "Onset Channels",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3017,15 +3016,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 10,
+									"linecount" : 5,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 197.0, 141.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 201.0, 74.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 8,
-									"presentation_rect" : [ 557.0, 214.352144469525967, 229.0, 114.0 ],
-									"text" : "If the «Onset Threshold» parameter is not bypassed, this parameter specifies which pitch analysis method should be used for polyphonic input. Note that it is recommended (but not required) to make sure that the receiving somax.player uses the same analysis method as the MIDI influencer.",
+									"presentation_linecount" : 4,
+									"presentation_rect" : [ 557.0, 214.352144469525967, 230.0, 60.0 ],
+									"text" : "Use this to select which MIDI channels should be used for onset analysis. An in-depth explanation of this parameter can be found in the «multiple source» tab",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
