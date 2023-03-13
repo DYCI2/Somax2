@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 222.0, 113.0, 1130.0, 779.0 ],
+		"rect" : [ 293.0, 162.0, 1130.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -140,7 +140,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 203.0, 87.0, 1147.0, 839.0 ],
+						"rect" : [ 203.0, 100.0, 1147.0, 839.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1000,6 +1000,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-68",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1546,7 +1547,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 226.0, 89.0, 1112.0, 839.0 ],
+						"rect" : [ 226.0, 100.0, 1112.0, 839.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2176,6 +2177,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-3", 1 ],
+									"source" : [ "obj-154", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-3", 0 ],
 									"source" : [ "obj-154", 0 ]
 								}
@@ -2668,7 +2676,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-147",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2688,7 +2695,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 231.0, 204.0, 773.0, 587.0 ],
+						"rect" : [ 410.0, 260.0, 773.0, 587.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2717,6 +2724,24 @@
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 4,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-7",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 115.463079627726302, 147.0, 373.0, 332.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 115.463079627726302, 148.0, 37.045161290322596, 16.75 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bubble" : 1,
 									"bubblepoint" : 0.2,
@@ -2955,7 +2980,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1385.115020324977877, 81.882250764049118, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 115.463079627726302, 127.0, 162.045161290322596, 25.75 ],
+									"presentation_rect" : [ 115.463079627726302, 127.0, 162.045161290322596, 24.75 ],
 									"proportion" : 0.5
 								}
 
@@ -3735,6 +3760,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-22",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -3755,7 +3781,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 89.0, 87.0, 1082.0, 839.0 ],
+						"rect" : [ 89.0, 100.0, 1082.0, 839.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -3971,6 +3997,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
+					"hidden" : 1,
 					"id" : "obj-8",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -4012,7 +4039,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 89.0, 87.0, 1082.0, 839.0 ],
+						"rect" : [ 89.0, 100.0, 1082.0, 839.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -4509,6 +4536,20 @@
 				"patchline" : 				{
 					"destination" : [ "obj-23", 0 ],
 					"source" : [ "obj-147", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-2", 0 ],
+					"source" : [ "obj-166", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-23", 0 ],
+					"source" : [ "obj-166", 1 ]
 				}
 
 			}

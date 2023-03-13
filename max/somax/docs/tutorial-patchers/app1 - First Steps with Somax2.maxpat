@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 167.0, 93.0, 1243.0, 792.0 ],
+		"rect" : [ 244.0, 155.0, 1243.0, 792.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -267,6 +267,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -286,7 +287,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 89.0, 87.0, 1372.0, 736.0 ],
+						"rect" : [ 85.0, 106.0, 1372.0, 736.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -506,7 +507,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 844.5, 336.0, 43.0, 15.0 ],
+									"patching_rect" : [ 844.5, 378.0, 43.0, 15.0 ],
 									"text" : "this",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -550,12 +551,12 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 25,
+									"linecount" : 28,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 837.5, 119.0, 311.0, 342.0 ],
-									"text" : "Somax II is an application for musical improvisation and composition. It is based on a generative model using a process similar to concatenative synthesis to provide stylistically coherent improvisation, while in real-time listening to and adapting to a musician (or any other type of audio or MIDI source). The model is operating in the symbolic domain and is trained on a corpus of choice, consisting of one audio or MIDI file, from which it draws its material used for improvisation.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, make sure that the Somax folder really is in the Packages folder of Max.\n\n\nIf the interface now looks like in the image above, please continue to the second tab:",
+									"patching_rect" : [ 837.5, 119.0, 308.0, 382.0 ],
+									"text" : "Somax II is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. It is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. It uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on  a globally learned harmonic and textural knowledge representation space.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, make sure that the Somax folder really is in the Packages folder of Max.\n\n\nIf the interface now looks like in the image above, please continue to the second tab:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -603,10 +604,6 @@
 									"source" : [ "obj-7", 0 ]
 								}
 
-							}
- ],
-						"boxgroups" : [ 							{
-								"boxes" : [ "obj-155", "obj-156", "obj-160", "obj-152", "obj-7", "obj-10", "obj-2", "obj-11" ]
 							}
  ]
 					}
@@ -683,7 +680,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 217.0, 110.0, 1266.0, 744.0 ],
+						"rect" : [ 260.0, 195.0, 1266.0, 744.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -749,7 +746,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 103.0, 292.352144469525911, 20.0, 20.0 ],
+									"patching_rect" : [ 103.0, 293.352144469525911, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5.70",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -810,7 +807,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 12.0, 353.352144469525911, 20.0, 20.0 ],
+									"patching_rect" : [ 3.0, 357.352144469525911, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5.60",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -902,7 +899,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 95.852144469525911, 19.0, 19.0 ],
+									"patching_rect" : [ 453.0, 98.852144469525911, 19.0, 19.0 ],
 									"rounded" : 60.0,
 									"text" : "4.2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1089,7 +1086,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 12.0, 435.352144469525911, 20.0, 20.0 ],
+									"patching_rect" : [ 1.0, 431.352144469525911, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5.40",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1172,7 +1169,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 60.0, 306.352144469525911, 20.0, 20.0 ],
+									"patching_rect" : [ 65.0, 305.352144469525911, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5.50",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1586,7 +1583,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-180",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1606,7 +1602,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 153.0, 161.0, 881.0, 736.0 ],
+						"rect" : [ 413.0, 208.0, 881.0, 736.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2308,7 +2304,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 452.0, 101.352144469525911, 19.0, 19.0 ],
+									"patching_rect" : [ 452.0, 99.352144469525911, 19.0, 19.0 ],
 									"rounded" : 60.0,
 									"text" : "4.1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2391,11 +2387,11 @@
 									"bubblepoint" : 0.3,
 									"fontface" : 0,
 									"id" : "obj-32",
-									"linecount" : 8,
+									"linecount" : 7,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1090.0, 0.0, 131.0, 118.0 ],
+									"patching_rect" : [ 1090.0, 0.0, 138.0, 104.0 ],
 									"text" : "If you've already started the server and have a terminal window running, this button will not be present and you can disregard this step.",
 									"textjustification" : 1
 								}
@@ -2443,20 +2439,6 @@
 									"text" : "continue to the next step -->",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 0,
-									"fontsize" : 12.0,
-									"id" : "obj-167",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 805.0, 315.942477876106182, 312.0, 20.0 ],
-									"text" : "once instantiated, the server status should change to",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
 							}
@@ -2686,7 +2668,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
-									"patching_rect" : [ 880.0, 335.942477876106182, 149.0, 19.969072164948454 ],
+									"patching_rect" : [ 880.0, 162.942477876106182, 149.0, 19.969072164948454 ],
 									"pic" : "ready.png"
 								}
 
@@ -2702,24 +2684,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
-									"patching_rect" : [ 931.0, 278.877961747073925, 52.0, 36.064516129032263 ],
+									"patching_rect" : [ 931.0, 319.877961747073925, 52.0, 36.064516129032263 ],
 									"pic" : "initialize_players.png"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"autofit" : 1,
-									"data" : [ 3251, "png", "IBkSG0fBZn....PCIgDQRA....L...fFHX....P34MkS....DLmPIQEBHf.B7g.YHB..LnVRDEDU3wY6btGbScdk.+2UOrjrjkkeIgsv3W7PXDNfwF65k7fsjcmzrIMgg1DlNPmFBaXm1gsra2cBYfc1cf1ralPljlsalTRCaSXxrIkzlTOzPIPZyChqABP.CX.a4GxXIaYYK4Gx58c+C8.jQVt3ZVVWzuYzXe+Nm649cu2y24b99z8JgsrksHd1ydV74yGoIM2IPN4jCqd0ql0u90ivJVwJDuc2gRSZtcfYylQxs6NwMKhhhHJldLaZt4HY9LszRKH61Pe4OIDDDtc2ERyrPlL+lYcY.RSZltjrr.yJF.jtjmzLSPxxBLqX.PZRyLESLX5rhA.2oW2eFRjfdkJtg1xUQFSodyjjkbYHKE2KlJ4SGzbKvlWOobRvpTohryNara29srNvsZVn1r3Yqsp3aGRTjgCDj2wR2b3qZGiYpheTsUwEcML+6e4EmT672s34yZJx.VFYL9mN9YvjNsr6UrT7GNLe+lNE86Mx2ixNVVkr77xgCZsWBIJxCOOi2fsBC7MN5wXiyuT95kbM4gDEYz.A4y6e.12k6fPQiV8cqbATVVpYqMcJlmlLYqUtPJMK0HQPfdGabNZu8wupqdXNYpjWr9p4GdlyyWLvP2vwcSKrb9ZEWH.7BsbINVeCPFRjvade0iLAAb6O.Owmdb1ho4y8az.O2Yaklc3j6qP87sWPYjcFxwanPbtAcQic2KsLja.Ro76JWc7ur7kvm1mCdwVtLuxeQMnWoB9ON6E43NFD.9AK0DeE84wVN1IwgWeH.r9JJg6qP8juRE3KTHtfqg421is36yLEIMCPlYlI6ZW6h268dOdy27MYe6aeTWc0A.EVXgryctSjKW9jZz+Xz4+qPPHRFj985iec2WkO1tCTIUJaYwyGSYmExjHPVxkiZYSdrfLjHgUYHeDDDnBsZn7rTSqtFlO1V+nTpT9aMUA.Tu97n57ykg76m+GKciDAADDD3LC5h2uqqF+SiccU.tA4GpGaDPLLeshKJtipIcZ4tmSAbPq8B.ay7hnrrTygupcdGKciBoRXCKnTVT1YQ2i5gyMnK91KnLjjjflwNdBBBTUt5.fJ0oE4RjDIKqPL8tVVWiYphstjERfvg4WXoa9c81O0VPd78pbAHUPXJkKPDaID03w1dSKpbxPhjDZSRzi4+3RMw5JqXjIHvg6wNedeCvRyIa1l4EwbUqZZ6KjLR5c8UspUQ80WOm3Dm.KVrvZW6ZYSaZSzbyMyi8XOF2y8bO7bO2yEWeAAgDpsJY5b6ldFyC+7qzI.LVff7vkXjkkWNzT+CLk6aCFxGUxjQudFmhxTEqw3b3m1Z6ruqzAUmetTc94xeYg54wqnD.XusZAOACEe++T6N32aq+I09GytC9nnxs4wKa1TELW0YB.+UFmCgDE4y6KR+TiLYDF3BC4l+P+N4bC4lklS1nPpzH1puAXKKd9TWA4QS86bROlwF.D6uSFYIOhKxXACRyNFDKiLJW0iGTKSF5xP9TJexn.kJ4aVdwr+15Jg1MnRIMXHer6wKasouffQ8qtxviPIZTiV4xAFOk84aFR5.fXNygBEhVZoErZ0JpUqlEu3EyZVyZ.fW60dM1111Fae6aGSlLQ3vg4fG7fbjibjDzY+6e+rwMtQ1912Ntb4hW4UdEZrwF4zm9z7TO0SgISln+96m28ceWZrwFmwNwlHZjICSYmE4pPA0oOO.hW1xTwWsHC.vK1xkXWqXob2yo.9uubGLZffruKaguu4Ew2aIKD.Nd+NoYGI538XkOOdf4VX7sO2PtY+s0Y7sWYA4Q9JUfRoR4dJr..3jQS0Wr5LwoWeLRff.vg5wFeq4WJ+CK0DdCEhy3bHNnUab9nkiXYjQAfRzndRG.XY3QobsZvfJkrzb0gKe9ILjzrFs5dD5XjQorrzvyW2xn+w8xmX2AefUaLje+3zm+TJu3nCjmHi3O.O77Lxuq2DCLrXcZib9OfSBJJhTAAzkgbNgiA4DNFDegCmT6McIok.czidTZpolnt5picsqcwV25VovBKDqVsx4O+4Af8t28hYylYzQGkW5kdIFXfA3QezGEGNbjfNpUqF850ib4xQlLYnWudznQCqcsqEylMy6+9uOW5RWB850eKcxtKRmV9Q0dW7CpxDFToD6d7RyoHBYLLnRIUpSKcM5Xz1vixwcLHpkIiFLjO.7I1cvYbFod6wCFje5kZOo1nbsZh+onLUlf7UpOOd7JJgGoz4hV4x4.cXkuv4fH.LW0pvoO+w0swt6keYmVYX+APoToTu974esZyTS94B.N8FQ24NINd.bAWCCDIyVYYoN51S9RM+Bm6Rb79cRvvgQuJkrtxJlms1pPazn+Sk7IxXABxaYoKjIQBOUzxGiQ9QmD+3Qyft.sZXu28Ji+4uOZflYJRZOrlZpgVZoEd4W9kwjISr90uddjG4Q3HG4HXylM.n4lalpppJJojRnlZpgPgBgDIRHPf.InyC9fOXjCjLYnPw0VghCbfCfYylYcqac.voN0olQOwlHN75ki2+fLdnPLjO+7I1cvXACR9jQJ2uUWXjAl5Upf8T2xH2nmCqoHCwKq4P8XikkWNzriAYvqyYMF+3ye4TVBz61gUFxue9NKrbBIJRKC4lvhPdJx.ERkhqn1ToToTgVM7G52IuUacwB0oku97LRc5yi62nAN4.Cha+QzsfTrZPs5ZX9alWQ7MKqXjHHvEc4FS5xJo5VfREnWkRd0VaGegCwxyKG9VUTJyISkr77xgK3Z3TJ2s+.I0teXO14u1XgXNWcD35hp24HiA.EEsVe29CvmY2A5xPNlmhx0lNjzL.FMZjMu4Myl27lQiFMHMZ8k974ivQ6rMzPCr10tVLZzHOyy7LzQGcDwfRjjfNiOdj50V4JWY7Ri.3du26kd6sW18t2Ms0VaTc0UiQi23JlLSQ2i5ge1ksva0dW7A8XiwBFbJ2GAfUWjdfHSfrnLUgRoRHrnHUlS1TTlQtIENZvyvSyuvNadFmeiUa7K6vJJjJkstjEPlxjha+AHjnX7560kgb92p1LOycUIRkHPqtFlC0SjfM4DcIQiMQxjMPLFN84i9F2ab6FKiPxXUFJfct7kviWw7vSvPbr9FfyMjqH8GEYLkxmLBC7ytrE.Ptjq4F11vifnnH0UPdTpF0Xabu7BsbINZu8kxqgSWRZFfFarQJu7xo95qmUu5UiGOd30e8WmN6rSt3EuHOzC8P7zO8Syd1ydvjIS77O+yGOpeokVZB57jO4Shc61Yiabizd6QJOPTTjlatYZngFXG6XG31sad629somd54VxI4eLTpF0rikUY7sEANjUaTfRkz1viv+7w+x3x17hpfGn3BYMEYf235pkex3gmmQVUzRlhwq15MVpzunCq7ULjOyUclrg4WJuZqsiiw8RNJhLYR6i6kS5XPVo973+rgUfkgGCy4jM.btAiLGfXQ9sOdpmn3EFxMFToDOACFOpax3vW0NeixKl0TjAJVclDRTDSQqS+bC5h9F2WJkqMEqD34GxMedeCDubR.b4O.6ustXCKnTd1ZqhuzoKxJCYXJ6H1zWnY14.jzA.ACFj8rm8fff.5zoigF5Zqo7G9geHM0TS32ue762OezG8QnPgBFarqcQrkVZIAc1vF1.Ymc131s6DNNOwS7DnUqVFYjQtk83NDyrSl4i0tZ4xn5n0QGiX0g9o1cjP6+da8wCTbgbeEpm2nsNQLE0OCPoYolRyRcBskgjNh++wtkFTTj+qKbE9g0TE2uw4vGziM5dTOrh7yEERjfuvgY+s2IiGJDUmeNTm97vWnP7w15m2wR2.PYYoA.5HEN0gEE4htFlUWjAZ00HHRjrXSbFXgQjwBFjexEtB2uw4Pk5zhLIRvke+7FWoSrD8XjJ420DJaI7DtT8yuRGTS94RFRuVVfeUW8fDAXUyo.psfbQPP.6d7xm0mCNPGVS405aVR+9.7+yY44kC6b4Kgce5yyobds.QR.xUoBb50WBC+9tKd9r77ygs7YmL9RHNSgJoRQlDg3qH0Mq7oCpkICQDSXYk+SAQQwDVrkYEOJD2IyocNDsO7nrFiFRn8v.CLAmeURkRCFJfecW8Ni67Cv3gBkRm6oR9zgwBFbFy4OYLqX.vc5OMnu1kZmtF0yTpWtJxfei0d4vWc16itxsZl3RsOqnDnIl1JMoYlhYEY.R67mlYBl09BwjlzLSveV7Bwj9khOMSGlLelzuT7o4NBRleiYylQVs0VKo+gwJM2Iw0+Ci0+KeaoVGo3b6CI.....IUjSD4pPfIH" ],
-									"embed" : 1,
-									"forceaspect" : 1,
-									"id" : "obj-140",
-									"maxclass" : "fpic",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "jit_matrix" ],
-									"patching_rect" : [ 882.5, 161.852144469525911, 149.0, 20.177083333333332 ],
-									"pic" : "players_missing.png"
 								}
 
 							}
@@ -2746,12 +2712,12 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-134",
-									"linecount" : 5,
+									"linecount" : 6,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 805.0, 231.852144469525911, 315.0, 87.0 ],
-									"text" : "The second step is to iinitialize all existing Players (which in our case is just the single one). This is done by once again clicking this button, which now should say\n\n\n",
+									"text" : "By default, players will automatically be initialized on the server, when created, so no further action is needed now.\nBut if you create a player with attribute @autoinitialize 0, you would need to initialize this player manually.\nThis could be done in the server by clicking on the dedicated button that would pop up, saying",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3131,7 +3097,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 194.0, 98.0, 881.0, 766.0 ],
+						"rect" : [ 194.0, 100.0, 881.0, 766.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3210,7 +3176,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 89.0, 87.0, 576.0, 641.0 ],
+										"rect" : [ 89.0, 100.0, 576.0, 641.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -3404,7 +3370,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 325.0, 42.0, 78.0, 19.0 ],
+									"patching_rect" : [ 325.0, 41.0, 78.0, 19.0 ],
 									"rounded" : 8.0,
 									"text" : "this diagram",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -5394,6 +5360,26 @@
 					"parameter_unitstyle" : 10
 				}
 ,
+				"obj-1::obj-1::obj-3::obj-407::obj-270::obj-1226" : 				{
+					"parameter_longname" : "width[1]"
+				}
+,
+				"obj-1::obj-1::obj-3::obj-407::obj-270::obj-1227" : 				{
+					"parameter_longname" : "center[1]"
+				}
+,
+				"obj-1::obj-1::obj-3::obj-407::obj-270::obj-1240" : 				{
+					"parameter_longname" : "live.slider[3]"
+				}
+,
+				"obj-1::obj-1::obj-3::obj-407::obj-270::obj-1241" : 				{
+					"parameter_longname" : "live.numbox[3]"
+				}
+,
+				"obj-1::obj-1::obj-3::obj-407::obj-270::obj-889" : 				{
+					"parameter_longname" : "weight[1]"
+				}
+,
 				"obj-1::obj-1::obj-3::obj-87::obj-1" : 				{
 					"parameter_longname" : "live.text[14]"
 				}
@@ -5574,13 +5560,6 @@
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
 				"patcherrelativepath" : "../../patchers/resources/player",
 				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "players_missing.png",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
-				"patcherrelativepath" : "../../media",
-				"type" : "PNG",
 				"implicit" : 1
 			}
 , 			{
