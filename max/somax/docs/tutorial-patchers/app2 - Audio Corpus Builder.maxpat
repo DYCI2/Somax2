@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 293.0, 161.0, 1130.0, 779.0 ],
+		"rect" : [ 292.0, 160.0, 1130.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -1306,7 +1306,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 730.5, 521.0, 311.0, 74.0 ],
+									"patching_rect" : [ 730.5, 521.0, 312.0, 74.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 5,
 									"presentation_rect" : [ 763.75, 185.5, 315.0, 74.0 ],
@@ -1527,6 +1527,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-166",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1586,7 +1587,7 @@
 									"patching_rect" : [ 710.25, 726.0, 318.0, 102.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 7,
-									"presentation_rect" : [ 737.75, 543.0, 342.0, 102.0 ],
+									"presentation_rect" : [ 737.75, 543.0, 345.0, 102.0 ],
 									"text" : "This was a brief introduction to using an audio corpus in Somax, but there are plenty of things to experiment with. The next step would be to go back to the somax2.overview and go through the \"Max Tutorials\" tab to explore the potentiality of Somax 2.5 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2009,10 +2010,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 730.75, 563.0, 316.0, 88.0 ],
+									"patching_rect" : [ 730.75, 563.0, 318.0, 88.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 6,
-									"presentation_rect" : [ 762.25, 266.0, 316.25, 88.0 ],
+									"presentation_rect" : [ 762.25, 266.0, 318.0, 88.0 ],
 									"text" : "Select the «MidiInfluencer» as source in the «Influence sources» section of the Player. You can keep all the toggles on, they indicate that the Player should listen to the (P)itch, (O)nset, (C)hroma and (C)hroma_(O)nset  of the MIDI influencer, and will generally only be used when mixing input from multiple sources.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2622,8 +2623,8 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 619.5, 121.5, 308.0, 194.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 13,
-									"presentation_rect" : [ 734.5, 64.0, 343.25, 181.0 ],
+									"presentation_linecount" : 12,
+									"presentation_rect" : [ 734.5, 64.0, 345.0, 167.0 ],
 									"text" : "As can be seen, this patcher looks a bit different than the one previous tutorial. This is because the app objects of Somax 2.5 use wireless communication (i.e. without patch cords) between them, in order to simplify dynamic routing of messages and creation of objects.\n\nWhen using the wireless paradigm, it's possible to create another player or another influencer by simply duplicating the object. This can be very useful in the future if you want to make your own patcher, but won't for now make a huge difference.\n\nLet's begin by reviewing a couple of things to be aware of:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2672,7 +2673,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-147",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2692,7 +2692,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 593.0, 194.0, 773.0, 587.0 ],
+						"rect" : [ 497.0, 251.0, 773.0, 587.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2999,7 +2999,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1414.89165130780475, 71.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 460.7649976748055, 81.8125, 21.0, 21.0 ],
+									"presentation_rect" : [ 459.7649976748055, 83.8125, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -3020,7 +3020,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1415.359749407816253, 71.720678858546293, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 469.754916976687809, 91.8125, 62.753323941361032, 41.75 ],
+									"presentation_rect" : [ 468.754916976687809, 93.8125, 62.753323941361032, 41.75 ],
 									"proportion" : 0.5
 								}
 
