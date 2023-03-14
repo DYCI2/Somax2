@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 94.0, 100.0, 1026.0, 779.0 ],
+		"rect" : [ 93.0, 100.0, 1026.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 94.0, 126.0, 1026.0, 753.0 ],
+						"rect" : [ 93.0, 126.0, 1026.0, 753.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -830,12 +830,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-3",
-									"linecount" : 4,
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 89.0, 684.0, 60.0 ],
-									"text" : "The somax.audioinfluencer.app object is a convenient wrapper around the audio influencer with some additional user interface to handle input and output. \nThanks to this app object, Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). ",
+									"patching_rect" : [ 10.0, 89.0, 684.0, 47.0 ],
+									"text" : "The somax.audioinfluencer.app object is a convenient wrapper around the audio influencer with some additional user interface to handle input and output. Thanks to this app object, Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). ",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 

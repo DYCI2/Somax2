@@ -1383,6 +1383,7 @@
 								"box" : 								{
 									"color" : [ 0.980525732040405, 0.526075959205627, 0.0, 1.0 ],
 									"id" : "obj-18",
+									"linecount" : 2,
 									"maxclass" : "newobj",
 									"numinlets" : 2,
 									"numoutlets" : 4,
@@ -4289,12 +4290,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-27",
-									"linecount" : 9,
+									"linecount" : 8,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 502.25, 174.5, 459.0, 127.0 ],
-									"text" : "The server.app can be given a name to differentiate it from other influencers, using the bpatchers @args attribute, i.e.:\n\nbpatcher somax.server.app @args <name>\n\nIf no argument is provided, the influencer will automatically be assigned a unique name.\nThe name attribute can also be set using the «Argument(s)» field in the Max Inspector.",
+									"patching_rect" : [ 502.25, 174.5, 459.0, 114.0 ],
+									"text" : "The server.app can be given a name to differentiate it from other influencers, using the bpatchers @args attribute, i.e.:\n\nbpatcher somax.server.app @args <name>\n\nIf no argument is provided, the server will automatically be assigned a unique name.\nThe name attribute can also be set using the «Argument(s)» field in the Max Inspector.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -4721,8 +4722,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 67.0, 326.0, 20.0 ],
-									"text" : "The server of the Somax architecture"
+									"patching_rect" : [ 10.0, 67.0, 201.0, 20.0 ],
+									"text" : "The server of the Somax application"
 								}
 
 							}
