@@ -677,7 +677,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-7",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -747,7 +746,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 37.0, 383.5, 231.0, 19.0 ],
+									"patching_rect" : [ 37.0, 393.5, 231.0, 19.0 ],
 									"text" : "http://vimeo.com/showcase/8537329",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -761,7 +760,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 383.5, 48.0, 20.0 ],
+									"patching_rect" : [ 10.0, 393.5, 48.0, 20.0 ],
 									"text" : "Videos:"
 								}
 
@@ -775,7 +774,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 310.0, 403.0, 263.0, 35.0 ],
+									"patching_rect" : [ 640.0, 464.0, 263.0, 35.0 ],
 									"text" : ";\rmax launchbrowser http://repmus.ircam.fr/impro"
 								}
 
@@ -789,7 +788,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 310.0, 356.5, 231.0, 19.0 ],
+									"patching_rect" : [ 310.0, 369.5, 231.0, 19.0 ],
 									"text" : "http://repmus.ircam.fr/impro",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -803,7 +802,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 356.5, 343.0, 20.0 ],
+									"patching_rect" : [ 10.0, 369.5, 343.0, 20.0 ],
 									"text" : "See all the recents RepMus projects on modelling co-creativity:"
 								}
 
@@ -817,7 +816,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 218.0, 330.5, 311.0, 18.5 ],
+									"patching_rect" : [ 30.0, 348.5, 311.0, 18.5 ],
 									"text" : "https://www.stms-lab.fr/projects/pages/somax2/",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -845,20 +844,20 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 329.5, 401.0, 20.0 ],
-									"text" : "Developed at IRCAM by the RepMus team :"
+									"patching_rect" : [ 10.0, 347.5, 53.0, 20.0 ],
+									"text" : "More at:"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"id" : "obj-2",
-									"linecount" : 21,
+									"linecount" : 24,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 14.0, 843.0, 301.0 ],
-									"text" : "\nSomax 2 (c) Ircam 2012-2022\n\nSomax 2.5 is a new version of the Somax reactive co-improvisation paradigm by G. Assayag. Written by Joakim Borg in Max and Python (2019-2022), featuring a modular multithreaded implementation, multiple wireless interacting players, new UI design with tutorials and documentation, as well as a number of new interaction parameters.\n\nThe Somax 2 project is part of the ANR project MERCI (Mixed Musical Reality with Creative Instruments) ANR-19-CE33-0010, and the ERC project REACH (Raising Co-creativity in Cyber-Human Musicianship) ERC-ADG-19-883313. PI : Gérard Assayag, Musical Representation Team, IRCAM STMS Lab (CNRS, Sorbonne University, Ministry of Culture).\n\nOriginal corpus creation: * B. Borron & B. Magnien, (improvisation on ten jazz standards)\n* Carine Bonnefoy (Improvisation on Intuition by C. Bonnnefoy) * Joëlle Léandre (Free Improvisation) * Fabbrizio Cassol (Free Improvisation)\n\nTutorial and overview patches: Marco Fiorini\n\nLegacy: Early Java prototype by Olivier Delerue: adding reactivity to OMax\nVersions 0.1 to 1.3 by Laurent Bonnasse-Gahot (postdoc): Design and implementation of core cognitive model, with external influence and reactive memory\nVersions 1.4 to 1.9 by Axel Chemla-Romeu-Santos: Python server, object-oriented design, streamviews\n\nThanks: Georges Bloch, Mikhaïl Malt\n"
+									"patching_rect" : [ 10.0, 8.0, 900.0, 328.0 ],
+									"text" : "Somax 2.5 is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. \nIt is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisatin, composition, installations etc.\nWritten in Max and Python, it features a modular multithreaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project.\n\nOriginal corpus creation: * B. Borron & B. Magnien, (improvisation on ten jazz standards)\n* Carine Bonnefoy (Improvisation on Intuition by C. Bonnnefoy) * Joëlle Léandre (Free Improvisation) * Fabbrizio Cassol (Free Improvisation) * Marco Fiorini (Free Improvisation)\n\nThe Somax2 Music Representation team: Gérard Assayag, Joakim Borg, Georges Bloch, Marco Fiorini, Mikhaïl Malt."
 								}
 
 							}
@@ -1221,6 +1220,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
