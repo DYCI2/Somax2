@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 126.0, 1054.0, 710.0 ],
+						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -91,12 +91,13 @@
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-63",
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 945.25, 55.0, 169.0, 22.0 ],
-									"text" : "load somax2.overview.maxpat"
+									"patching_rect" : [ 945.25, 55.0, 143.0, 35.0 ],
+									"text" : "loadunique somax2.overview.maxpat"
 								}
 
 							}
@@ -131,7 +132,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 945.25, 84.0, 51.0, 22.0 ],
+									"patching_rect" : [ 945.25, 96.0, 51.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 
@@ -599,8 +600,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 763.25, 414.747787610619525, 177.0, 22.0 ],
-									"text" : "load somax.player.app.maxhelp"
+									"patching_rect" : [ 763.25, 414.747787610619525, 213.0, 22.0 ],
+									"text" : "loadunique somax.player.app.maxhelp"
 								}
 
 							}
@@ -758,7 +759,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 89.0, 684.0, 47.0 ],
+									"patching_rect" : [ 10.0, 89.0, 685.0, 47.0 ],
 									"text" : "The somax.midiinfluencer.app object is a convenient wrapper around the MIDI influencer with some additional user interface to handle input and output. Thanks to this app object, Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). ",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -3464,7 +3465,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
+						"rect" : [ 84.0, 126.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3527,8 +3528,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 602.375, 571.946902654867245, 195.0, 22.0 ],
-									"text" : "load somax.midiinfluencer.maxhelp"
+									"patching_rect" : [ 602.375, 571.946902654867245, 231.0, 22.0 ],
+									"text" : "loadunique somax.midiinfluencer.maxhelp"
 								}
 
 							}

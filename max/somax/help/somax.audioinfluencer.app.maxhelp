@@ -91,12 +91,13 @@
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-63",
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 920.25, 59.625, 169.0, 22.0 ],
-									"text" : "load somax2.overview.maxpat"
+									"patching_rect" : [ 920.25, 59.625, 143.0, 35.0 ],
+									"text" : "loadunique somax2.overview.maxpat"
 								}
 
 							}
@@ -131,7 +132,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 920.25, 88.625, 51.0, 22.0 ],
+									"patching_rect" : [ 920.25, 101.625, 51.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 
@@ -689,8 +690,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 763.25, 414.747787610619525, 177.0, 22.0 ],
-									"text" : "load somax.player.app.maxhelp"
+									"patching_rect" : [ 763.25, 414.747787610619525, 213.0, 22.0 ],
+									"text" : "loadunique somax.player.app.maxhelp"
 								}
 
 							}
@@ -1062,8 +1063,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 839.0, 715.125, 106.0, 22.0 ],
-									"text" : "load yin~.maxhelp"
+									"patching_rect" : [ 839.0, 715.125, 142.0, 22.0 ],
+									"text" : "loadunique yin~.maxhelp"
 								}
 
 							}
@@ -3017,8 +3018,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 829.75, 720.0, 116.0, 22.0 ],
-									"text" : "load bonk~.maxhelp"
+									"patching_rect" : [ 829.75, 720.0, 152.0, 22.0 ],
+									"text" : "loadunique bonk~.maxhelp"
 								}
 
 							}
@@ -4147,8 +4148,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 209.0, 692.0, 116.0, 22.0 ],
-									"text" : "load bonk~.maxhelp"
+									"patching_rect" : [ 209.0, 692.0, 152.0, 22.0 ],
+									"text" : "loadunique bonk~.maxhelp"
 								}
 
 							}
@@ -4180,8 +4181,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 13.0, 692.0, 106.0, 22.0 ],
-									"text" : "load yin~.maxhelp"
+									"patching_rect" : [ 13.0, 692.0, 142.0, 22.0 ],
+									"text" : "loadunique yin~.maxhelp"
 								}
 
 							}
@@ -5070,8 +5071,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 602.375, 568.946902654867245, 203.0, 22.0 ],
-									"text" : "load somax.audioinfluencer.maxhelp"
+									"patching_rect" : [ 602.375, 568.946902654867245, 239.0, 22.0 ],
+									"text" : "loadunique somax.audioinfluencer.maxhelp"
 								}
 
 							}

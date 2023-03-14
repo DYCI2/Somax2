@@ -790,7 +790,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
+						"rect" : [ 85.0, 126.0, 1168.0, 879.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -871,7 +871,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 325.0, 487.344580777096098, 468.0, 78.0 ],
+									"patching_rect" : [ 325.0, 487.344580777096098, 471.0, 78.0 ],
 									"text" : "The «Timestretch Mode» controls the time stretching / pitch shifting algorithm used. «efficient» is recommended when using multiple agents or when performance is a concern. \n\n"
 								}
 
@@ -899,8 +899,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 820.0, 597.46362839614369, 127.0, 22.0 ],
-									"text" : "load groove~.maxhelp"
+									"patching_rect" : [ 820.0, 597.46362839614369, 163.0, 22.0 ],
+									"text" : "loadunique groove~.maxhelp"
 								}
 
 							}
@@ -1047,7 +1047,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 194.0, 313.0, 66.0 ],
+									"patching_rect" : [ 10.0, 194.0, 317.0, 66.0 ],
 									"text" : "In aun audio player, pressing the «Settings» button in the Output Control module will bring up the audio rendering settings"
 								}
 
@@ -3450,7 +3450,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 214.0, 248.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 217.0, 248.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 14,
 									"presentation_rect" : [ 450.0, 259.945306280665704, 272.0, 194.0 ],
@@ -5033,8 +5033,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 538.25, 811.946902654867245, 154.0, 22.0 ],
-									"text" : "load somax.player.maxhelp"
+									"patching_rect" : [ 538.25, 811.946902654867245, 190.0, 22.0 ],
+									"text" : "loadunique somax.player.maxhelp"
 								}
 
 							}
@@ -5146,11 +5146,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-10",
-									"linecount" : 13,
+									"linecount" : 12,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 979.0, 119.0, 133.0, 181.0 ],
+									"patching_rect" : [ 979.0, 119.0, 140.0, 167.0 ],
 									"text" : "This compact interface is just a wrapper around the main interface. Only a subset of the main interface's parameters are displayed here\n\nUpdating parameters in the compact interface will send the changes to the main interface as well (and vice versa).",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -5348,7 +5348,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 85.0, 126.0, 1168.0, 879.0 ],
+						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -5385,8 +5385,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 474.4375, 814.0, 219.0, 22.0 ],
-									"text" : "load somax.midiinfluencer.app.maxhelp"
+									"patching_rect" : [ 474.4375, 814.0, 255.0, 22.0 ],
+									"text" : "loadunique somax.midiinfluencer.app.maxhelp"
 								}
 
 							}
@@ -5398,9 +5398,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 474.4375, 783.0, 226.0, 22.0 ],
-									"presentation_linecount" : 5,
-									"text" : "load somax.audioinfluencer.app.maxhelp"
+									"patching_rect" : [ 474.4375, 783.0, 262.0, 22.0 ],
+									"text" : "loadunique somax.audioinfluencer.app.maxhelp"
 								}
 
 							}
@@ -5433,7 +5432,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 917.5, 663.00000011920929, 224.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "see the Audio or MIDI Influencer documentations for more info"
 								}
 
@@ -5574,8 +5572,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1013.25, 773.0, 85.0, 62.0 ],
-									"text" : "load \"app2 - Audio Corpus Builder.maxpat\""
+									"patching_rect" : [ 1013.25, 773.0, 96.0, 62.0 ],
+									"text" : "loadunique \"app2 - Audio Corpus Builder.maxpat\""
 								}
 
 							}
@@ -5616,13 +5614,13 @@
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-60",
-									"linecount" : 4,
+									"linecount" : 5,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 926.4375, 773.0, 74.0, 62.0 ],
-									"text" : "load \"max3 - Building a Corpus.maxpat\""
+									"patching_rect" : [ 926.4375, 773.0, 76.0, 76.0 ],
+									"text" : "loadunique \"max3 - Building a Corpus.maxpat\""
 								}
 
 							}
@@ -6204,12 +6202,13 @@
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-63",
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1051.0, 59.5, 169.0, 22.0 ],
-									"text" : "load somax2.overview.maxpat"
+									"patching_rect" : [ 1051.0, 59.5, 143.0, 35.0 ],
+									"text" : "loadunique somax2.overview.maxpat"
 								}
 
 							}
@@ -6244,7 +6243,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1051.0, 88.5, 51.0, 22.0 ],
+									"patching_rect" : [ 1051.0, 100.5, 51.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 

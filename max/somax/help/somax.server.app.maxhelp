@@ -1383,7 +1383,6 @@
 								"box" : 								{
 									"color" : [ 0.980525732040405, 0.526075959205627, 0.0, 1.0 ],
 									"id" : "obj-18",
-									"linecount" : 2,
 									"maxclass" : "newobj",
 									"numinlets" : 2,
 									"numoutlets" : 4,
@@ -3409,12 +3408,13 @@
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-63",
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 877.0, 57.5, 169.0, 22.0 ],
-									"text" : "load somax2.overview.maxpat"
+									"patching_rect" : [ 877.0, 57.5, 143.0, 35.0 ],
+									"text" : "loadunique somax2.overview.maxpat"
 								}
 
 							}
@@ -3449,7 +3449,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 877.0, 86.5, 51.0, 22.0 ],
+									"patching_rect" : [ 877.0, 99.5, 51.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 
@@ -3458,20 +3458,20 @@
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-47",
-									"linecount" : 4,
+									"linecount" : 3,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 881.25, 748.0, 85.0, 62.0 ],
-									"text" : "load \"app2 - Audio Corpus Builder.maxpat\""
+									"patching_rect" : [ 881.25, 748.0, 112.0, 49.0 ],
+									"text" : "loadunique \"app2 - Audio Corpus Builder.maxpat\""
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"fontface" : 1,
-									"fontsize" : 12.0,
+									"fontsize" : 10.0,
 									"id" : "obj-48",
 									"maxclass" : "textbutton",
 									"numinlets" : 1,
@@ -3733,7 +3733,7 @@
 , 							{
 								"box" : 								{
 									"fontface" : 1,
-									"fontsize" : 12.0,
+									"fontsize" : 10.0,
 									"id" : "obj-30",
 									"maxclass" : "textbutton",
 									"numinlets" : 1,
@@ -4243,20 +4243,20 @@
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-60",
-									"linecount" : 4,
+									"linecount" : 5,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 794.4375, 748.0, 74.0, 62.0 ],
-									"text" : "load \"max3 - Building a Corpus.maxpat\""
+									"patching_rect" : [ 794.4375, 748.0, 73.0, 76.0 ],
+									"text" : "loadunique \"max3 - Building a Corpus.maxpat\""
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"fontface" : 1,
-									"fontsize" : 12.0,
+									"fontsize" : 10.0,
 									"id" : "obj-61",
 									"maxclass" : "textbutton",
 									"numinlets" : 1,
