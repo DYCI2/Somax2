@@ -243,7 +243,6 @@
 									}
 ,
 									"patching_rect" : [ 533.0, 413.0, 121.0, 22.0 ],
-									"presentation_linecount" : 3,
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -268,7 +267,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 408.5, 106.0, 268.0, 272.0 ],
-									"tabs" : [ "Mimetism" ]
+									"tabs" : [ "Mimetism", "Harmonization" ]
 								}
 
 							}
