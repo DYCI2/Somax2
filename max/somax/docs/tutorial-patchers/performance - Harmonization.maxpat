@@ -47,7 +47,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 731.268894163993991, 34.0, 136.0, 78.0 ],
+					"patching_rect" : [ 753.268894163993991, 19.0, 136.0, 78.0 ],
 					"text" : "change corpus to move from a jazz harmonization to a more contemporary  one"
 				}
 
@@ -65,7 +65,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 864.75, 38.999991001861474, 20.0, 20.0 ],
+					"patching_rect" : [ 886.75, 23.999991001861474, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "8",
 					"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -79,7 +79,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 865.0, 62.0, 137.0, 22.0 ],
+					"patching_rect" : [ 887.0, 47.0, 137.0, 22.0 ],
 					"text" : "corpus Ligeti_Etudes.gz"
 				}
 
@@ -506,7 +506,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 52.333333313465118, 506.402654112264486, 52.333338528871536, 50.00000011920929 ],
+					"patching_rect" : [ 52.333333313465118, 505.402654112264486, 52.333338528871536, 50.00000011920929 ],
 					"proportion" : 0.5
 				}
 
@@ -518,7 +518,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 22.0, 76.0, 429.731105836006009, 87.0 ],
+					"patching_rect" : [ 22.0, 76.0, 433.0, 87.0 ],
 					"text" : "In this ready-to-play performance strategy you will experience the harmonization behaviour of Somax2.\nFor the Audio Influencer we will use a free improvisation sax solo by Fabrizio Cassol, while for the Player we will start with a MIDI piano corpus, based on some standard jazz changes, played by Carine Bonnefoy, and later some Ligeti Etudes."
 				}
 
@@ -1799,7 +1799,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-69", 0 ],
-					"midpoints" : [ 874.5, 119.0, 949.25, 119.0 ],
+					"midpoints" : [ 896.5, 119.0, 949.25, 119.0 ],
 					"source" : [ "obj-52", 0 ]
 				}
 

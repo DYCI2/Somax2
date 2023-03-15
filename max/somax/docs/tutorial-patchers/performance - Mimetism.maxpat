@@ -106,7 +106,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 255.731105836006009, 285.95832873049676, 175.0, 20.0 ],
+					"patching_rect" : [ 255.731105836006009, 278.95832873049676, 175.0, 20.0 ],
 					"text" : "for more info on its parameters."
 				}
 
@@ -117,7 +117,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 22.0, 284.95832873049676, 50.0, 20.0 ],
+					"patching_rect" : [ 22.0, 277.95832873049676, 50.0, 20.0 ],
 					"text" : "See the"
 				}
 
@@ -146,7 +146,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 70.0, 285.95832873049676, 187.0, 20.0 ],
+					"patching_rect" : [ 70.0, 278.95832873049676, 187.0, 20.0 ],
 					"rounded" : 8.0,
 					"text" : "Audio Influencer Documentation",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -226,7 +226,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 22.0, 164.0, 435.0, 114.0 ],
+					"patching_rect" : [ 22.0, 159.0, 435.0, 114.0 ],
 					"text" : "Follow the steps and enjoy the mimetism provided by this patch. \nThen, for further interaction, try increasing the Onset Limiter parameter (as described at point 7) and see how this varies the pace of the performance. This parameter sets the minimal amount of time (in milliseconds) between two consecutive onsets. Any consecutive onset detected within this time frame will be discarded, so it's very useful to control the time relation of phrases between an Influencer and a Player. Setting this value at 0 ms will make the player mimic the Audio Influencer, as it will respond immediately to its input."
 				}
 
@@ -238,7 +238,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 22.0, 315.95832873049676, 432.0, 47.0 ],
+					"patching_rect" : [ 22.0, 308.95832873049676, 432.0, 47.0 ],
 					"text" : "In this patch we intentionally provided a mixture of .app and .ui objects from the Somax2.5 library, to show how their combination could bring up multiple ways of interactions and performance design."
 				}
 
@@ -355,7 +355,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 52.333333313465118, 506.402654112264486, 52.333338528871536, 50.00000011920929 ],
+					"patching_rect" : [ 52.333333313465118, 505.402654112264486, 52.333338528871536, 50.00000011920929 ],
 					"proportion" : 0.5
 				}
 
@@ -367,7 +367,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 22.0, 82.0, 429.731105836006009, 74.0 ],
+					"patching_rect" : [ 22.0, 76.0, 433.0, 74.0 ],
 					"text" : "In this ready-to-play performance strategy you will experience the mimetic behaviour of Somax2.\nWe will use the same audio material both for the Audio Influencer and for the Player's Corpus. This material will be the audio file \"Fabbrizio2c.wav\" provided with the Somax2 distribution, a free improvisation by Fabrizio Cassol."
 				}
 
