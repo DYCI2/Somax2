@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 262.0, 169.0, 1205.0, 769.0 ],
+		"rect" : [ 259.0, 186.0, 1241.0, 769.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -40,13 +40,194 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-2",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1136.708333333333485, 62.0, 205.0, 22.0 ],
+					"text" : "loadunique somax2.overview.maxpat"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 12.0,
+					"id" : "obj-64",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1136.708333333333485, 13.5, 84.25, 29.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 619.0, 728.220703125, 254.0, 46.0 ],
+					"rounded" : 8.0,
+					"text" : "Somax Overview",
+					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+					"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+					"truncate" : 0
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+					"hidden" : 1,
+					"id" : "obj-39",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1136.708333333333485, 91.0, 51.0, 22.0 ],
+					"text" : "pcontrol"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-48",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 517.731105836006009, 127.0, 58.0, 22.0 ],
+					"text" : "loadbang"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-47",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 255.731105836006009, 272.95832873049676, 175.0, 20.0 ],
+					"text" : "for more info on its parameters."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-45",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 22.0, 271.95832873049676, 50.0, 20.0 ],
+					"text" : "See the"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-41",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 202.333333313465118, 359.402654112264486, 262.0, 22.0 ],
+					"text" : "loadunique somax.audioinfluencer.app.maxhelp"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 10.0,
+					"id" : "obj-42",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 70.0, 272.95832873049676, 187.0, 20.0 ],
+					"rounded" : 8.0,
+					"text" : "Audio Influencer Documentation",
+					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+					"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+					"truncate" : 0
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+					"hidden" : 1,
+					"id" : "obj-43",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 202.333333313465118, 387.5, 51.0, 22.0 ],
+					"text" : "pcontrol"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bubble" : 1,
+					"id" : "obj-40",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 742.999999999999773, 334.95832873049676, 130.0, 37.0 ],
+					"text" : "or change its value from here"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-12",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 706.731105836006009, 343.45832873049676, 32.0, 20.0 ],
+					"text" : "(ms)"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-35",
+					"maxclass" : "number",
+					"maximum" : 2000,
+					"minimum" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 654.731105836006009, 342.45832873049676, 50.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 654.731105836006009, 372.499991001861417, 76.0, 22.0 ],
+					"text" : "onsetlimit $1"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-38",
 					"linecount" : 7,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 22.0, 184.0, 387.731105836006009, 100.0 ],
-					"text" : "Follow the steps and enjoy the mimetism provided by this patch. \nThen, lately, try increasing the Onset Limiter parameter (as described at point 7) and see how this varies the pace of the parformance. This parameter sets the minimal amount of time (in milliseconds) between two consecutive onsets. Any consecutive onset detected within this time frame will be discarded, so it's very useful to control the time relation of phrases between an Influencer and a Player."
+					"patching_rect" : [ 22.0, 169.0, 432.0, 100.0 ],
+					"text" : "Follow the steps and enjoy the mimetism provided by this patch. \nThen, for further interaction, try increasing the Onset Limiter parameter (as described at point 7) and see how this varies the pace of the performance. This parameter sets the minimal amount of time (in milliseconds) between two consecutive onsets. Any consecutive onset detected within this time frame will be discarded, so it's very useful to control the time relation of phrases between an Influencer and a Player."
 				}
 
 			}
@@ -57,7 +238,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 22.0, 297.458321743474414, 387.731105836006009, 47.0 ],
+					"patching_rect" : [ 22.0, 302.95832873049676, 432.0, 47.0 ],
 					"text" : "In this patch we intentionally provided a mixture of .app and .ui objects from the Somax2.5 library, to show how their combination could bring up multiple ways of interactions and performance design."
 				}
 
@@ -72,7 +253,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 658.231105836006009, 282.95832873049676, 183.0, 52.0 ],
+					"patching_rect" : [ 702.231105836006009, 280.95832873049676, 183.0, 52.0 ],
 					"text" : "Open the Settings and play with the Onset Limiter parameter"
 				}
 
@@ -90,7 +271,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 636.999999999999773, 305.95832873049676, 20.0, 20.0 ],
+					"patching_rect" : [ 680.999999999999773, 304.95832873049676, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "7",
 					"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -104,7 +285,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 259.731105836006009, 471.999991001861531, 170.0, 24.0 ],
+					"patching_rect" : [ 259.731105836006009, 472.999991001861531, 170.0, 24.0 ],
 					"text" : "bpatcher somax.server.app"
 				}
 
@@ -118,7 +299,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 334.731105836006009, 29.999991001861474, 212.0, 39.0 ],
+					"patching_rect" : [ 378.731105836006009, 29.999991001861474, 212.0, 39.0 ],
 					"text" : "Play the Audio File \"Fabbrizio2c.wav\" "
 				}
 
@@ -136,7 +317,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 409.731105836006009, 59.499991001861474, 20.0, 20.0 ],
+					"patching_rect" : [ 453.731105836006009, 59.499991001861474, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "6",
 					"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -182,12 +363,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-15",
-					"linecount" : 6,
+					"linecount" : 5,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 22.0, 86.0, 385.731105836006009, 87.0 ],
-					"text" : "In this ready-to-play performance strategy you will experience the mimetic behaviour of Somax2.\nWe will use the same audio material both for the Audio Influencer and for the Player's Corpus. This is the audio file \"Fabbrizio2c.wav\" provided with the Somax2 distribution, a free improvisation by Fabrizio Cassol."
+					"patching_rect" : [ 22.0, 86.0, 429.731105836006009, 74.0 ],
+					"text" : "In this ready-to-play performance strategy you will experience the mimetic behaviour of Somax2.\nWe will use the same audio material both for the Audio Influencer and for the Player's Corpus. This material will be the audio file \"Fabbrizio2c.wav\" provided with the Somax2 distribution, a free improvisation by Fabrizio Cassol."
 				}
 
 			}
@@ -198,7 +379,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 924.5, 92.499991001861474, 179.0, 24.0 ],
+					"patching_rect" : [ 968.5, 92.499991001861474, 179.0, 24.0 ],
 					"text" : "Initialize Player's parameters"
 				}
 
@@ -210,7 +391,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 544.731105836006009, 155.0, 250.0, 24.0 ],
+					"patching_rect" : [ 588.731105836006009, 155.0, 250.0, 24.0 ],
 					"text" : "Send this message to the Audio Influencer"
 				}
 
@@ -228,7 +409,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 451.731105836006009, 156.0, 20.0, 20.0 ],
+					"patching_rect" : [ 495.731105836006009, 156.0, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "3",
 					"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -248,7 +429,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 871.833333313465118, 93.499991001861474, 20.0, 20.0 ],
+					"patching_rect" : [ 915.833333313465118, 93.499991001861474, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "4",
 					"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -334,7 +515,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 969.0, 126.0, 90.0, 24.0 ],
+					"patching_rect" : [ 1013.0, 126.0, 90.0, 24.0 ],
 					"text" : "Look inside!"
 				}
 
@@ -348,7 +529,7 @@
 					"outlettype" : [ "bang" ],
 					"outlinecolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 895.75, 91.499991001861474, 24.0, 24.0 ]
+					"patching_rect" : [ 939.75, 91.499991001861474, 24.0, 24.0 ]
 				}
 
 			}
@@ -371,7 +552,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 225.0, 273.0, 718.0, 429.0 ],
+						"rect" : [ 518.0, 329.0, 711.0, 429.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -401,6 +582,67 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 3,
+									"id" : "obj-9",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 340.0, 385.5, 249.0, 24.0 ],
+									"text" : "For more info on Player's parameters, see"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-31",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 598.0, 420.5, 128.0, 35.0 ],
+									"text" : "loadunique somax.player.maxhelp"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"id" : "obj-34",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 598.0, 383.0, 84.25, 29.0 ],
+									"rounded" : 8.0,
+									"text" : "Player Documentation",
+									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"truncate" : 0
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+									"hidden" : 1,
+									"id" : "obj-3",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 598.0, 460.5, 51.0, 22.0 ],
+									"text" : "pcontrol"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"arrows" : 1,
 									"border" : 2.0,
 									"id" : "obj-25",
@@ -417,8 +659,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 378.0, 62.0, 176.0, 20.0 ],
-									"text" : "Messages sent from right to left"
+									"patching_rect" : [ 357.0, 61.0, 197.0, 20.0 ],
+									"text" : "Messages are sent from right to left"
 								}
 
 							}
@@ -428,7 +670,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 43.0, 159.0, 102.0, 20.0 ],
+									"patching_rect" : [ 43.0, 157.0, 102.0, 20.0 ],
 									"text" : "set Continuity = 2"
 								}
 
@@ -439,7 +681,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 183.0, 186.0, 91.0, 20.0 ],
+									"patching_rect" : [ 170.0, 183.0, 91.0, 20.0 ],
 									"text" : "set Timeout = 0"
 								}
 
@@ -451,7 +693,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 303.0, 186.0, 85.0, 74.0 ],
+									"patching_rect" : [ 296.0, 189.0, 85.0, 74.0 ],
 									"text" : "set weights for internal and external melody and harmony"
 								}
 
@@ -542,11 +784,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-4",
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 409.5, 197.0, 144.0, 22.0 ],
+									"patching_rect" : [ 409.5, 186.0, 110.0, 35.0 ],
 									"text" : "corpus Fabbrizio2c.pickle"
 								}
 
@@ -596,6 +839,22 @@
 								"patchline" : 								{
 									"destination" : [ "obj-2", 0 ],
 									"source" : [ "obj-12", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-3", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-31", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-31", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-34", 0 ]
 								}
 
 							}
@@ -661,7 +920,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 895.75, 127.0, 70.0, 22.0 ],
+					"patching_rect" : [ 939.75, 127.0, 73.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -669,7 +928,7 @@
 						"tags" : ""
 					}
 ,
-					"text" : "p player init"
+					"text" : "p player_init"
 				}
 
 			}
@@ -680,7 +939,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 473.731105836006009, 156.0, 69.0, 22.0 ],
+					"patching_rect" : [ 517.731105836006009, 156.0, 69.0, 22.0 ],
 					"text" : "onsetlimit 0"
 				}
 
@@ -833,7 +1092,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 678.731105836006009, 119.250002916201424, 120.0, 22.0 ],
+					"patching_rect" : [ 722.731105836006009, 119.250002916201424, 120.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -854,7 +1113,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 636.999999999999773, 600.958321664001232, 252.0, 64.0 ],
+					"patching_rect" : [ 680.999999999999773, 600.958321664001232, 252.0, 64.0 ],
 					"text" : "The Player UI looks exactly the same if loaded with an audio (A) or MIDI (M) corpus, but the renderer should match the right type of corpus (in this case, audio)"
 				}
 
@@ -866,7 +1125,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1063.291666666666742, 610.458321664001232, 113.666666666666742, 47.0 ],
+					"patching_rect" : [ 1107.291666666666742, 610.458321664001232, 113.666666666666742, 47.0 ],
 					"text" : "Status: whether player is initialized on server or not"
 				}
 
@@ -879,7 +1138,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1035.0, 621.958321664001232, 24.0, 24.0 ]
+					"patching_rect" : [ 1079.0, 621.958321664001232, 24.0, 24.0 ]
 				}
 
 			}
@@ -892,7 +1151,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 657.999999999999773, 602.5, 51.0, 22.0 ],
+					"patching_rect" : [ 701.999999999999773, 602.5, 51.0, 22.0 ],
 					"text" : "pcontrol"
 				}
 
@@ -906,7 +1165,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 791.731105836006009, 360.45832873049676, 112.0, 37.0 ],
+					"patching_rect" : [ 836.731105836006009, 512.902654171869017, 112.0, 37.0 ],
 					"text" : "bpatcher somax.player.ui"
 				}
 
@@ -919,7 +1178,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 701.731105836006009, 232.624992273427438, 159.5, 37.0 ],
+					"patching_rect" : [ 745.731105836006009, 232.624992273427438, 159.5, 37.0 ],
 					"text" : "bpatcher somax.audioinfluencer.ui"
 				}
 
@@ -940,7 +1199,7 @@
 					"numoutlets" : 3,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 473.731105836006009, 189.95832873049676, 240.0, 104.0 ],
+					"patching_rect" : [ 517.731105836006009, 189.95832873049676, 240.0, 104.0 ],
 					"varname" : "somax.audioinfluencer.ui",
 					"viewvisibility" : 1
 				}
@@ -956,7 +1215,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 610.731105836006009, 119.250002916201424, 60.0, 21.0 ],
+					"patching_rect" : [ 654.731105836006009, 119.250002916201424, 60.0, 21.0 ],
 					"rounded" : 8.0,
 					"text" : "Read",
 					"texton" : "Read",
@@ -971,7 +1230,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 473.731105836006009, 297.458321743474414, 104.0, 22.0 ],
+					"patching_rect" : [ 517.731105836006009, 297.458321743474414, 104.0, 22.0 ],
 					"text" : "prepend influence"
 				}
 
@@ -983,7 +1242,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "multichannelsignal", "", "" ],
-					"patching_rect" : [ 895.75, 621.958321664001232, 122.0, 22.0 ],
+					"patching_rect" : [ 939.75, 621.958321664001232, 122.0, 22.0 ],
 					"text" : "somax.audiorenderer",
 					"varname" : "somax.audiorenderer"
 				}
@@ -997,7 +1256,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "multichannelsignal" ],
-					"patching_rect" : [ 666.231105836006009, 784.374983641769177, 154.0, 22.0 ],
+					"patching_rect" : [ 710.231105836006009, 784.374983641769177, 154.0, 22.0 ],
 					"text" : "mc.mixdown~ @autogain 1"
 				}
 
@@ -1011,7 +1270,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 666.231105836006009, 816.506817257583407, 54.0, 22.0 ],
+					"patching_rect" : [ 710.231105836006009, 816.506817257583407, 54.0, 22.0 ],
 					"text" : "mc.dac~"
 				}
 
@@ -1029,7 +1288,7 @@
 					"outlettype" : [ "multichannelsignal", "", "float", "list" ],
 					"parameter_enable" : 1,
 					"parameter_mappable" : 0,
-					"patching_rect" : [ 433.231105836006009, 676.216077330972439, 88.0, 45.0 ],
+					"patching_rect" : [ 477.231105836006009, 676.216077330972439, 88.0, 45.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_linknames" : 1,
@@ -1055,7 +1314,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "multichannelsignal" ],
-					"patching_rect" : [ 666.231105836006009, 757.374983641769177, 95.0, 22.0 ],
+					"patching_rect" : [ 710.231105836006009, 757.374983641769177, 95.0, 22.0 ],
 					"text" : "mc.combine~ 2"
 				}
 
@@ -1074,7 +1333,7 @@
 					"outlettype" : [ "multichannelsignal", "", "float", "list" ],
 					"parameter_enable" : 1,
 					"parameter_mappable" : 0,
-					"patching_rect" : [ 895.75, 676.216077330972439, 88.0, 45.0 ],
+					"patching_rect" : [ 939.75, 676.216077330972439, 88.0, 45.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_initial" : [ 0 ],
@@ -1149,7 +1408,7 @@
 					"originaltempo" : 0,
 					"outlettype" : [ "signal", "signal", "", "dictionary" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 433.231105836006009, 59.499991001861474, 239.0, 56.0 ],
+					"patching_rect" : [ 477.231105836006009, 59.499991001861474, 239.0, 56.0 ],
 					"pitchcorrection" : 0,
 					"quality" : "basic",
 					"timestretch" : [ 0 ]
@@ -1210,7 +1469,7 @@
 					"numoutlets" : 4,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "int", "", "" ],
-					"patching_rect" : [ 895.75, 169.354145442886193, 243.0, 438.0 ],
+					"patching_rect" : [ 939.75, 169.354145442886193, 243.0, 438.0 ],
 					"varname" : "somax.player.ui",
 					"viewvisibility" : 1
 				}
@@ -1221,7 +1480,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-14", 1 ],
 					"hidden" : 1,
-					"midpoints" : [ 905.25, 754.874991001861417, 751.731105836006009, 754.874991001861417 ],
+					"midpoints" : [ 949.25, 754.874991001861417, 795.731105836006009, 754.874991001861417 ],
 					"source" : [ "obj-13", 0 ]
 				}
 
@@ -1237,8 +1496,16 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-53", 0 ],
-					"midpoints" : [ 483.231105836006009, 182.97916436524838, 483.231105836006009, 182.97916436524838 ],
+					"midpoints" : [ 527.231105836006009, 182.97916436524838, 527.231105836006009, 182.97916436524838 ],
 					"source" : [ "obj-18", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-39", 0 ],
+					"hidden" : 1,
+					"source" : [ "obj-2", 0 ]
 				}
 
 			}
@@ -1253,7 +1520,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-14", 0 ],
 					"hidden" : 1,
-					"midpoints" : [ 442.731105836006009, 754.874991001861417, 675.731105836006009, 754.874991001861417 ],
+					"midpoints" : [ 486.731105836006009, 754.874991001861417, 719.731105836006009, 754.874991001861417 ],
 					"source" : [ "obj-24", 0 ]
 				}
 
@@ -1262,7 +1529,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-26", 0 ],
 					"hidden" : 1,
-					"midpoints" : [ 688.231105836006009, 147.0, 811.5, 147.0, 811.5, 54.0, 442.731105836006009, 54.0 ],
+					"midpoints" : [ 732.231105836006009, 147.0, 855.5, 147.0, 855.5, 54.0, 486.731105836006009, 54.0 ],
 					"source" : [ "obj-25", 0 ]
 				}
 
@@ -1278,7 +1545,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-53", 0 ],
-					"midpoints" : [ 442.731105836006009, 182.229159866179117, 483.231105836006009, 182.229159866179117 ],
+					"midpoints" : [ 486.731105836006009, 182.229159866179117, 527.231105836006009, 182.229159866179117 ],
 					"order" : 1,
 					"source" : [ "obj-26", 0 ]
 				}
@@ -1310,8 +1577,40 @@
 				"patchline" : 				{
 					"destination" : [ "obj-25", 0 ],
 					"hidden" : 1,
-					"midpoints" : [ 620.231105836006009, 141.0, 675.0, 141.0, 675.0, 114.0, 688.231105836006009, 114.0 ],
+					"midpoints" : [ 664.231105836006009, 141.0, 719.0, 141.0, 719.0, 114.0, 732.231105836006009, 114.0 ],
 					"source" : [ "obj-34", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-8", 0 ],
+					"source" : [ "obj-35", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-43", 0 ],
+					"hidden" : 1,
+					"source" : [ "obj-41", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-41", 0 ],
+					"hidden" : 1,
+					"midpoints" : [ 79.5, 295.0, 9.0, 295.0, 9.0, 361.0, 198.0, 361.0, 198.0, 355.0, 211.833333313465118, 355.0 ],
+					"source" : [ "obj-42", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-18", 0 ],
+					"hidden" : 1,
+					"source" : [ "obj-48", 0 ]
 				}
 
 			}
@@ -1319,6 +1618,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-75", 0 ],
 					"source" : [ "obj-53", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-2", 0 ],
+					"hidden" : 1,
+					"source" : [ "obj-64", 0 ]
 				}
 
 			}
@@ -1332,7 +1639,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-5", 0 ],
-					"midpoints" : [ 979.916666666666629, 612.156233553443712, 1044.5, 612.156233553443712 ],
+					"midpoints" : [ 1023.916666666666629, 612.156233553443712, 1088.5, 612.156233553443712 ],
 					"source" : [ "obj-69", 1 ]
 				}
 
@@ -1340,8 +1647,16 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-69", 0 ],
-					"midpoints" : [ 483.231105836006009, 349.0, 880.0, 349.0, 880.0, 165.0, 905.25, 165.0 ],
+					"midpoints" : [ 527.231105836006009, 447.0, 924.0, 447.0, 924.0, 165.0, 949.25, 165.0 ],
 					"source" : [ "obj-75", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-53", 0 ],
+					"midpoints" : [ 664.231105836006009, 420.0, 503.0, 420.0, 503.0, 186.0, 527.231105836006009, 186.0 ],
+					"source" : [ "obj-8", 0 ]
 				}
 
 			}
