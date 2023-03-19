@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 368.0, 224.0, 942.0, 597.0 ],
+		"rect" : [ 366.0, 220.0, 942.0, 597.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -73,7 +73,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-8",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -128,8 +127,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 408.5, 83.59375, 154.0, 21.0 ],
-									"presentation_linecount" : 2,
+									"patching_rect" : [ 408.5, 112.59375, 154.0, 21.0 ],
 									"text" : "Performance Strategies"
 								}
 
@@ -142,7 +140,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 30.0, 83.59375, 72.0, 21.0 ],
+									"patching_rect" : [ 30.0, 112.59375, 72.0, 21.0 ],
 									"text" : "Templates"
 								}
 
@@ -286,7 +284,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 533.0, 413.0, 121.0, 22.0 ],
+									"patching_rect" : [ 533.0, 403.0, 121.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -310,7 +308,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 408.5, 106.0, 268.0, 200.0 ],
+									"patching_rect" : [ 408.5, 137.0, 268.0, 165.0 ],
 									"tabs" : [ "Mimetism", "Harmonization", "Installation" ]
 								}
 
@@ -351,7 +349,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 28.5, 106.0, 268.0, 272.0 ],
+									"patching_rect" : [ 28.5, 137.0, 268.0, 231.0 ],
 									"tabs" : [ "Template 1 Player", "Template 2 Players", "Template 3 Players", "Template 4 Players" ]
 								}
 
@@ -495,7 +493,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 153.0, 413.0, 100.0, 22.0 ],
+									"patching_rect" : [ 153.0, 403.0, 100.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -543,6 +541,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
