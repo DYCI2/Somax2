@@ -267,7 +267,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 408.5, 106.0, 268.0, 272.0 ],
-									"tabs" : [ "Mimetism", "Harmonization" ]
+									"tabs" : [ "Mimetism", "Harmonization", "Installation" ]
 								}
 
 							}
