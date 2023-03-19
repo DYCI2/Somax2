@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 369.0, 225.0, 942.0, 597.0 ],
+		"rect" : [ 368.0, 224.0, 942.0, 597.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,6 +40,22 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontface" : 0,
+					"id" : "obj-15",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 114.522727272727252, 88.5, 754.0, 33.0 ],
+					"presentation" : 1,
+					"presentation_linecount" : 2,
+					"presentation_rect" : [ 117.5, 73.0, 736.0, 33.0 ],
+					"text" : "Max application and library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nDeveloped by the Music Representation team at IRCAM."
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-10",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -57,6 +73,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-8",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -104,6 +121,33 @@
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 13.0,
+									"id" : "obj-5",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 408.5, 83.59375, 154.0, 21.0 ],
+									"presentation_linecount" : 2,
+									"text" : "Performance Strategies"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 13.0,
+									"id" : "obj-10",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 30.0, 83.59375, 72.0, 21.0 ],
+									"text" : "Templates"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-4",
@@ -266,7 +310,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 408.5, 106.0, 268.0, 272.0 ],
+									"patching_rect" : [ 408.5, 106.0, 268.0, 200.0 ],
 									"tabs" : [ "Mimetism", "Harmonization", "Installation" ]
 								}
 
@@ -499,7 +543,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -603,12 +646,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-2",
-									"linecount" : 4,
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.5, 45.0, 854.0, 60.0 ],
-									"text" : "The application implementation of Somax 2.5 provides modular objects for immediate musical interaction. \n\nAfter completing these tutorials, we recommend moving to the \"Max Tutorials\" tab to explore the potentiality of Somax 2.5 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours."
+									"patching_rect" : [ 7.5, 45.0, 854.0, 47.0 ],
+									"text" : "The application implementation of Somax 2.5 provides modular objects for immediate musical interaction. \nAfter completing these tutorials, we recommend moving to the \"Max Tutorials\" tab to explore the potentiality of Somax 2.5 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours."
 								}
 
 							}
@@ -830,17 +873,16 @@
 			}
 , 			{
 				"box" : 				{
-					"fontsize" : 13.0,
+					"fontface" : 1,
+					"fontsize" : 18.0,
 					"id" : "obj-9",
-					"linecount" : 5,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 114.522727272727252, 66.0, 938.0, 79.0 ],
+					"patching_rect" : [ 114.522727272727252, 66.0, 1296.0, 27.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 7,
-					"presentation_rect" : [ 116.5, 15.5, 710.0, 108.0 ],
-					"text" : "Somax 2.5 is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. \nIt is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space."
+					"presentation_rect" : [ 117.5, 33.0, 98.0, 27.0 ],
+					"text" : "Somax 2.5"
 				}
 
 			}
@@ -1033,7 +1075,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 8.0, 900.0, 328.0 ],
-									"text" : "Somax 2.5 is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. \nIt is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisatin, composition, installations etc.\nWritten in Max and Python, it features a modular multithreaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project.\n\nOriginal corpus creation: * B. Borron & B. Magnien, (improvisation on ten jazz standards)\n* Carine Bonnefoy (Improvisation on Intuition by C. Bonnnefoy) * Joëlle Léandre (Free Improvisation) * Fabbrizio Cassol (Free Improvisation) * Marco Fiorini (Free Improvisation)\n\nThe Somax2 Music Representation team: Gérard Assayag, Joakim Borg, Georges Bloch, Marco Fiorini, Mikhaïl Malt."
+									"text" : "Somax 2.5 is an application and a library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nIt is based on a machine listening, reactive engine and generative model that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisatin, composition, installations etc.\nWritten in Max and Python, it features a modular multithreaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project.\n\nOriginal corpus creation: * B. Borron & B. Magnien, (improvisation on ten jazz standards)\n* Carine Bonnefoy (Improvisation on Intuition by C. Bonnnefoy) * Joëlle Léandre (Free Improvisation) * Fabbrizio Cassol (Free Improvisation) * Marco Fiorini (Free Improvisation)\n\nThe Somax2 Music Representation team: Gérard Assayag, Joakim Borg, Georges Bloch, Marco Fiorini, Mikhaïl Malt."
 								}
 
 							}
