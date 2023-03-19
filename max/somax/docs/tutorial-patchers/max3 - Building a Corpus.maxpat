@@ -86,7 +86,6 @@
 						"style" : "",
 						"subpatcher_template" : "monaco_template",
 						"showontab" : 1,
-						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -96,7 +95,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 26.0, 79.673499104757866, 509.625001887480494, 114.0 ],
+									"patching_rect" : [ 26.0, 79.673499104757866, 511.0, 114.0 ],
 									"text" : "As previously mentioned, the Somax 2 system generates its improvisation material based on an external set of musical material, the Corpus.\n\nWhile in the previous tutorial we were using pre-built audio and MIDI Corpora, it is possible to build a Corpus from your own set of audio or MIDI files.\n\nThere are a few short pre-build audio corpora distributed in Somax 2, but in this tutorial we are going to build our own Corpus from an audio file."
 								}
 
@@ -387,7 +386,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 215.0, 483.958329000000049, 150.0, 22.0 ],
-									"text" : "1 playersmissing"
+									"text" : "1 ready"
 								}
 
 							}
@@ -776,7 +775,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 1154.207519999999931, 213.0, 81.0, 51.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Wait for corpus to be built",
 									"varname" : "HelpTitle[1]"
 								}
@@ -1301,7 +1299,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
-						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -1762,7 +1759,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 323.083333333333371, 121.0, 22.0 ],
-									"text" : "1 playersmissing"
+									"text" : "1 ready"
 								}
 
 							}
@@ -2712,7 +2709,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
-						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -3120,7 +3116,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 419.333310893165617, 121.0, 22.0 ],
-									"text" : "1 playersmissing"
+									"text" : "1 ready"
 								}
 
 							}
@@ -3519,7 +3515,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 28.0, 79.625, 540.0, 114.0 ],
+									"patching_rect" : [ 28.0, 79.625, 541.0, 114.0 ],
 									"text" : "Building a Corpus from your own music material, or from any sound source of your choice, could be very exciting, and it's indeed the intended and suggested usage of Somax 2.5.\n\nHowever, not every sound material gives immediate nice results, and some fine tuning of the building parameters could be needed.\n\nIn this patch you will learn how to master these parameters and obtain better results in building your own corpora."
 								}
 

@@ -86,7 +86,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
-						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -1065,7 +1064,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-55",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -1130,7 +1128,6 @@
 							}
 , 							{
 								"box" : 								{
-									"hidden" : 1,
 									"id" : "obj-45",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -1150,7 +1147,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 192.0, 429.083333333333371, 121.0, 22.0 ],
-									"text" : "0 duplicate"
+									"text" : "1 ready"
 								}
 
 							}
@@ -1169,6 +1166,7 @@
 							}
 , 							{
 								"box" : 								{
+									"hidden" : 1,
 									"id" : "obj-29",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -1403,7 +1401,6 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
-									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-59",
 									"ignoreclick" : 1,
@@ -1425,6 +1422,7 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
+									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-90",
 									"ignoreclick" : 1,
@@ -1992,7 +1990,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
-						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -2802,7 +2799,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 233.0, 583.958329000000049, 150.0, 22.0 ],
-									"text" : "0 duplicate"
+									"text" : "1 ready"
 								}
 
 							}
@@ -3850,11 +3847,8 @@
 			"obj-2::obj-69::obj-407::obj-295" : [ "playingmode[4]", "playingmode", 0 ],
 			"obj-2::obj-69::obj-407::obj-298" : [ "simultaneousonsets[7]", "simultaneousonsets", 0 ],
 			"obj-2::obj-69::obj-407::obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
-			"obj-2::obj-69::obj-407::obj-504" : [ "transpositionconsistency[4]", "transpositionconsistency", 0 ],
 			"obj-2::obj-69::obj-407::obj-570" : [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-2::obj-69::obj-407::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-2::obj-69::obj-407::obj-600" : [ "__exp_tabooenable[1]", "__exp_tabooenable", 0 ],
-			"obj-2::obj-69::obj-407::obj-605" : [ "__exp_tabooduration[4]", "__exp_tabooduration", 0 ],
 			"obj-2::obj-69::obj-407::obj-642" : [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
 			"obj-2::obj-69::obj-407::obj-653" : [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
 			"obj-2::obj-69::obj-407::obj-656" : [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],
@@ -3926,11 +3920,8 @@
 			"obj-8::obj-69::obj-407::obj-295" : [ "playingmode[1]", "playingmode", 0 ],
 			"obj-8::obj-69::obj-407::obj-298" : [ "simultaneousonsets[5]", "simultaneousonsets", 0 ],
 			"obj-8::obj-69::obj-407::obj-328" : [ "decaybasis[3]", "decaybasis", 0 ],
-			"obj-8::obj-69::obj-407::obj-504" : [ "transpositionconsistency[6]", "transpositionconsistency", 0 ],
 			"obj-8::obj-69::obj-407::obj-570" : [ "__exp_melodicpitchfromchords[1]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-8::obj-69::obj-407::obj-575" : [ "__exp_tempoconsistencysigma[1]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-8::obj-69::obj-407::obj-600" : [ "__exp_tabooenable[7]", "__exp_tabooenable", 0 ],
-			"obj-8::obj-69::obj-407::obj-605" : [ "__exp_tabooduration[2]", "__exp_tabooduration", 0 ],
 			"obj-8::obj-69::obj-407::obj-642" : [ "__exp_numnotessigma[2]", "__exp_numnotessigma", 0 ],
 			"obj-8::obj-69::obj-407::obj-653" : [ "__exp_numnotesenable[2]", "__exp_numnotesenable", 0 ],
 			"obj-8::obj-69::obj-407::obj-656" : [ "__exp_numnotesmu[7]", "__exp_numnotesmu", 0 ],

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 112.0, 97.0, 1340.0, 800.0 ],
+		"rect" : [ 112.0, 100.0, 1340.0, 800.0 ],
 		"openrect" : [ 0.0, 0.0, 1340.0, 800.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -87,7 +87,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
-						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -537,7 +536,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 188.25, 383.583330949147523, 121.0, 22.0 ],
-									"text" : "1 playersmissing"
+									"text" : "1 ready"
 								}
 
 							}
@@ -2514,7 +2513,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 112.0, 123.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2542,7 +2541,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
-						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -3230,7 +3228,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 188.25, 383.583330949147523, 121.0, 22.0 ],
-									"text" : "1 playersmissing"
+									"text" : "1 ready"
 								}
 
 							}
@@ -4893,7 +4891,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 112.0, 126.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -4921,7 +4919,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"showontab" : 1,
-						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -5211,7 +5208,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 222.0, 541.708335987022565, 150.0, 22.0 ],
-									"text" : "1 playersmissing"
+									"text" : "1 ready"
 								}
 
 							}
@@ -7156,11 +7153,8 @@
 			"obj-1::obj-143::obj-295" : [ "playingmode[6]", "playingmode", 0 ],
 			"obj-1::obj-143::obj-298" : [ "simultaneousonsets[5]", "simultaneousonsets", 0 ],
 			"obj-1::obj-143::obj-328" : [ "decaybasis[3]", "decaybasis", 0 ],
-			"obj-1::obj-143::obj-504" : [ "transpositionconsistency[6]", "transpositionconsistency", 0 ],
 			"obj-1::obj-143::obj-570" : [ "__exp_melodicpitchfromchords[6]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-1::obj-143::obj-575" : [ "__exp_tempoconsistencysigma[6]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-1::obj-143::obj-600" : [ "__exp_tabooenable[2]", "__exp_tabooenable", 0 ],
-			"obj-1::obj-143::obj-605" : [ "__exp_tabooduration[2]", "__exp_tabooduration", 0 ],
 			"obj-1::obj-143::obj-642" : [ "__exp_numnotessigma[2]", "__exp_numnotessigma", 0 ],
 			"obj-1::obj-143::obj-653" : [ "__exp_numnotesenable[2]", "__exp_numnotesenable", 0 ],
 			"obj-1::obj-143::obj-656" : [ "__exp_numnotesmu[2]", "__exp_numnotesmu", 0 ],
@@ -7208,11 +7202,8 @@
 			"obj-2::obj-143::obj-295" : [ "playingmode[5]", "playingmode", 0 ],
 			"obj-2::obj-143::obj-298" : [ "simultaneousonsets[3]", "simultaneousonsets", 0 ],
 			"obj-2::obj-143::obj-328" : [ "decaybasis[2]", "decaybasis", 0 ],
-			"obj-2::obj-143::obj-504" : [ "transpositionconsistency[5]", "transpositionconsistency", 0 ],
 			"obj-2::obj-143::obj-570" : [ "__exp_melodicpitchfromchords[5]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-2::obj-143::obj-575" : [ "__exp_tempoconsistencysigma[5]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-2::obj-143::obj-600" : [ "__exp_tabooenable[6]", "__exp_tabooenable", 0 ],
-			"obj-2::obj-143::obj-605" : [ "__exp_tabooduration[1]", "__exp_tabooduration", 0 ],
 			"obj-2::obj-143::obj-642" : [ "__exp_numnotessigma[6]", "__exp_numnotessigma", 0 ],
 			"obj-2::obj-143::obj-653" : [ "__exp_numnotesenable[1]", "__exp_numnotesenable", 0 ],
 			"obj-2::obj-143::obj-656" : [ "__exp_numnotesmu[6]", "__exp_numnotesmu", 0 ],
@@ -7262,11 +7253,8 @@
 			"obj-8::obj-143::obj-295" : [ "playingmode[4]", "playingmode", 0 ],
 			"obj-8::obj-143::obj-298" : [ "simultaneousonsets[7]", "simultaneousonsets", 0 ],
 			"obj-8::obj-143::obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
-			"obj-8::obj-143::obj-504" : [ "transpositionconsistency[4]", "transpositionconsistency", 0 ],
 			"obj-8::obj-143::obj-570" : [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-8::obj-143::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-8::obj-143::obj-600" : [ "__exp_tabooenable[1]", "__exp_tabooenable", 0 ],
-			"obj-8::obj-143::obj-605" : [ "__exp_tabooduration[4]", "__exp_tabooduration", 0 ],
 			"obj-8::obj-143::obj-642" : [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
 			"obj-8::obj-143::obj-653" : [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
 			"obj-8::obj-143::obj-656" : [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],
