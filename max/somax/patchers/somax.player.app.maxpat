@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 2,
+			"minor" : 5,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 104.0, 87.0, 2008.0, 1250.0 ],
+		"rect" : [ 67.0, 100.0, 2008.0, 1250.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -143,8 +143,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -371,6 +371,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-92",
 					"linecount" : 2,
 					"maxclass" : "comment",
@@ -388,6 +389,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
+					"hidden" : 1,
 					"id" : "obj-94",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -404,6 +406,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-95",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -525,6 +528,7 @@
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-48",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -549,7 +553,6 @@
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-42",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -599,6 +602,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-124",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -611,8 +615,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -941,6 +945,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-41",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -1207,8 +1212,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1625,8 +1630,8 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1257.0, 1620.5, 188.0, 22.0 ],
-					"text" : "r #0_to_midiinfluencer_settings"
+					"patching_rect" : [ 1257.0, 1620.5, 171.0, 22.0 ],
+					"text" : "r #0_midiinfluencer_settings"
 				}
 
 			}
@@ -2140,8 +2145,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2639,8 +2644,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2890,7 +2895,6 @@
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-26",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2915,6 +2919,7 @@
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-25",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -3041,8 +3046,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3279,8 +3284,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 5,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -3669,7 +3674,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 749.0625, 460.96435546875, 100.0, 20.0 ],
-									"prefix" : "~/MaxDev/Somax2/max/somax/state/",
+									"prefix" : "~/Documents/GitHub/Somax2/max/somax/state/",
 									"presentation" : 1,
 									"presentation_rect" : [ 5.416666507720947, 8.96435546875, 132.0, 20.0 ],
 									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -4328,7 +4333,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1394.75, 169.0, 313.0, 35.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 461, 322 ],
+						"client_rect" : [ 1880, 207, 2595, 536 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -4350,7 +4355,7 @@
 					"patching_rect" : [ 1734.75, 175.5, 130.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 11.084603340888407, 4.0, 197.279485000000022, 22.0 ],
-					"text" : "Player",
+					"text" : "Player1",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -4428,7 +4433,6 @@
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-5",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -4453,6 +4457,7 @@
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-4",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
