@@ -133,9 +133,6 @@ class ThreadedManualCorpusBuilder(multiprocessing.Process):
 
 
 class ManualCorpusBuilder:
-    COMMENT = r"^\\s*?/\\*"
-    EMPTY = r"^[\\s.\\n]*?$"
-    TEMPO = COMMENT + r"\\s*?tempo"  # Format: /* tempo (...) \d+ (...)
     HOP_LENGTH = 512
 
     def __init__(self, verbose: bool = False):
@@ -158,31 +155,12 @@ class ManualCorpusBuilder:
 
         pre_analysed_descriptors = pre_analysed_descriptors if pre_analysed_descriptors is not None else []
 
-        with open(analysis_file_path, 'r') as f:
-            onsets: List[float] = []
-            offsets: List[float] = []
-            for i, line in enumerate(f):  # type: int, str
-                if use_tempo_annotations and re.match(self.TEMPO, line, flags=re.IGNORECASE):
-                    raise NotImplementedError("Tempo is not supported yet")
-                if re.match(self.EMPTY, line):
-                    self.logger.debug(f"Line {i + 1}: Ignoring empty line")
-                else:
-                    try:
-                        onset_s: float
-                        offset_s: Optional[float]
-                        descriptor_dict: Dict[Type[CorpusFeature], Any]
-                        onset_s, offset_s, descriptor_dict = analysis_format.parse_line(line,
-                                                                                        keys=pre_analysed_descriptors)
-                    except ParsingError as e:
-                        err_msg: str = f"invalid line {i + 1}: '{str(e)}'"
-                        if ignore_invalid_lines:
-                            logging.warning(err_msg)
-                            continue
-                        else:
-                            raise RuntimeError(err_msg)
-
-                    onsets.append(onset_s)
-                    offsets.append(offset_s)
+        onsets: List[float]
+        offsets: List[Optional[float]]
+        onsets, offsets = analysis_format.parse_file(analysis_file_path=analysis_file_path,
+                                                     use_tempo_annotations=use_tempo_annotations,
+                                                     pre_analysed_descriptors=pre_analysed_descriptors,
+                                                     ignore_invalid_lines=ignore_invalid_lines)
 
         if len(onsets) == 0:
             raise RuntimeError("Annotation file did not contain any valid lines")
@@ -238,7 +216,7 @@ class ManualCorpusBuilder:
 
     @staticmethod
     def parse_onsets_and_durations(onsets: List[float],
-                                   offsets: List[float],
+                                   offsets: List[Optional[float]],
                                    eof: float) -> Tuple[np.ndarray, np.ndarray]:
         if len(onsets) != len(offsets):
             raise RuntimeError("Onset and offset arrays are of different lengths")
