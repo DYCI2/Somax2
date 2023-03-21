@@ -1,5 +1,5 @@
 #### ROUTING ####
-* Clear Source N:                       router clear N
+* Clear Source N:                       router N clear
 * Clear All Sources:                    router clearall
 * Set Source N:                         router N source <name_of_source>
 * Toggle Pitch of Source N:             router N pitch <1/0>
