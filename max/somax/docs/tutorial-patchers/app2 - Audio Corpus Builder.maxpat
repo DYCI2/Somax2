@@ -29,8 +29,8 @@
 		"toolbars_unpinned_last_save" : 0,
 		"tallnewobj" : 0,
 		"boxanimatetime" : 200,
-		"enablehscroll" : 0,
-		"enablevscroll" : 0,
+		"enablehscroll" : 1,
+		"enablevscroll" : 1,
 		"devicewidth" : 0.0,
 		"description" : "",
 		"digest" : "",
@@ -1000,7 +1000,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-68",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2624,7 +2623,7 @@
 									"patching_rect" : [ 619.5, 121.5, 308.0, 194.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 12,
-									"presentation_rect" : [ 734.5, 64.0, 345.0, 167.0 ],
+									"presentation_rect" : [ 734.5, 64.0, 347.0, 167.0 ],
 									"text" : "As can be seen, this patcher looks a bit different than the one previous tutorial. This is because the app objects of Somax 2.5 use wireless communication (i.e. without patch cords) between them, in order to simplify dynamic routing of messages and creation of objects.\n\nWhen using the wireless paradigm, it's possible to create another player or another influencer by simply duplicating the object. This can be very useful in the future if you want to make your own patcher, but won't for now make a huge difference.\n\nLet's begin by reviewing a couple of things to be aware of:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2673,6 +2672,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-147",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -3733,7 +3733,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-22",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -3784,6 +3783,17 @@
 						"showontab" : 0,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-7",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 85.166674137115479, 822.0, 54.0, 22.0 ],
+									"text" : "mc.dac~"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"comment" : "",
 									"id" : "obj-5",
@@ -3901,6 +3911,13 @@
 								}
 
 							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-7", 0 ],
+									"source" : [ "obj-90", 1 ]
+								}
+
+							}
  ],
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
@@ -3970,7 +3987,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
-					"hidden" : 1,
 					"id" : "obj-8",
 					"maxclass" : "panel",
 					"mode" : 0,
