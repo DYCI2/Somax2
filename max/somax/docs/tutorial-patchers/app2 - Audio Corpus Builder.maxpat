@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 290.0, 160.0, 1130.0, 779.0 ],
+		"rect" : [ 317.0, 181.0, 1130.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -120,7 +120,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-99",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -140,7 +139,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 203.0, 100.0, 1147.0, 839.0 ],
+						"rect" : [ 229.0, 215.0, 1147.0, 839.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -201,8 +200,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 783.018518518518249, 1003.5, 178.0, 22.0 ],
-									"text" : "load somax.server.app.maxhelp"
+									"patching_rect" : [ 783.018518518518249, 1003.5, 214.0, 22.0 ],
+									"text" : "loadunique somax.server.app.maxhelp"
 								}
 
 							}
@@ -432,7 +431,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 785.518518518518249, 962.5, 22.0, 22.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 676.390625, 418.0, 19.0, 19.0 ],
+									"presentation_rect" : [ 669.245888157894797, 418.0, 19.0, 19.0 ],
 									"rounded" : 99.0,
 									"text" : "?",
 									"texton" : "?",
@@ -454,8 +453,8 @@
 									"patching_rect" : [ 1045.75, 689.5, 237.0, 65.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 5,
-									"presentation_rect" : [ 574.5, 360.0, 167.640625, 79.0 ],
-									"text" : "You can read more about these parameters (and all the other parameters) in the somax.server.app help file:",
+									"presentation_rect" : [ 562.5, 360.0, 179.640625, 79.0 ],
+									"text" : "You can read more about these parameters in the \"audio corpus builder (2)\" tab of the somax.server.app help file:",
 									"textjustification" : 1
 								}
 
@@ -2288,6 +2287,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-36",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2459,7 +2459,7 @@
 									"patching_rect" : [ 656.75, 388.5, 309.0, 74.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 5,
-									"presentation_rect" : [ 767.75, 350.0, 286.0, 74.0 ],
+									"presentation_rect" : [ 767.75, 350.0, 289.0, 74.0 ],
 									"text" : "The Player will not listen to any of the Influencers by default: it's necessary to select which ones to listen to in the «Influencer sources & routing» module.\n\n(This will be explained later in the tutorial)",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2620,10 +2620,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 619.5, 121.5, 308.0, 275.0 ],
+									"patching_rect" : [ 619.5, 121.5, 311.0, 275.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 17,
-									"presentation_rect" : [ 734.5, 64.0, 347.0, 234.0 ],
+									"presentation_rect" : [ 734.5, 64.0, 349.0, 234.0 ],
 									"text" : "This tutorial will introduce how to work with an audio corpus in Somax II. \nThis tutorial assumes that you've already completed the first tutorial and that you're familiar with the basic components of Somax II, as these won't be explained here.\n\nThe Somax II system generates its improvisation material based on an external set of musical material, the Corpus.\nWhile in the previous tutorial we were using pre-built audio and MIDI Corpora, it is possible to build a Corpus from your own set of audio or MIDI files.\nThere are a few short pre-build audio corpora distributed in Somax II, but in this tutorial we are going to build our own Corpus from an audio file.\n\n\nLet's begin by reviewing a couple of things to be aware of:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2823,8 +2823,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 859.518518518518249, 297.823927765237045, 177.0, 22.0 ],
-									"text" : "load somax.player.app.maxhelp"
+									"patching_rect" : [ 859.518518518518249, 297.823927765237045, 213.0, 22.0 ],
+									"text" : "loadunique somax.player.app.maxhelp"
 								}
 
 							}
@@ -3733,7 +3733,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-22",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -3988,7 +3987,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
-					"hidden" : 1,
 					"id" : "obj-8",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -4278,7 +4276,6 @@
 					"angle" : 270.0,
 					"background" : 1,
 					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
-					"hidden" : 1,
 					"id" : "obj-6",
 					"maxclass" : "panel",
 					"mode" : 0,

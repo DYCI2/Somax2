@@ -8,8 +8,8 @@
         "description": "There are two segmentation modes:\n\nOnset: The audio file is segmented into slices by detecting onsets in the content. This is the default mode and there are a number of parameters to determine how onsets should be detected\n\nInterval: The content is segmented at fixed intervals set by the «Interval Duration» parameter."
     },
     "hoplength": {
-        "title": "Hop Length",
-        "description": "The number of samples between consecutive frames when detecting onsets. Only change this parameter if you know what you're doing."
+        "title": "Advanced Settings",
+        "description": "Click the toggle to visualize the advanced settings for segmentation."
     },
     "minsegdur": {
         "title": "Minimum Segment Duration",
@@ -73,7 +73,7 @@
     },
     "annotations": {
         "title": "Manual Annotations",
-        "description": "If you want to build an audio corpus but create the segmentation yourself (using your own editor of choice), it's possible to do so by providing your own text file with markers for each segment.\n\nCurrently, the native format of a number of different software that allow exporting segmentation markers are supported, but if your editor of choice is missing, please contact the development team and we will add it for you!"
+        "description": "If you want to build an audio corpus but create the segmentation yourself (using your own editor of choice), it's possible to do so by providing your own text file with markers for each segment.\n\nCurrently, the native format of a number of different software that allow exporting segmentation markers are supported, including Audacity, SoundStudio, ProTools and Reaper, but if your editor of choice is missing, please contact the development team and we will add it for you!"
     },
     "relocate": {
         "title": "Relocate",
