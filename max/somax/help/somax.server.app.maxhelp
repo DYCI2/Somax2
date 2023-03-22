@@ -457,7 +457,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 373.0, 1067.5, 21.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 184.16666167974472, 633.75, 43.666666209697723, 16.99999988079071 ],
+									"presentation_rect" : [ 184.16666167974472, 630.75, 43.666666209697723, 16.99999988079071 ],
 									"proportion" : 0.5
 								}
 
@@ -855,7 +855,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 373.0, 861.5, 21.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 36.256106315785928, 709.466770741507844, 269.333332300186157, 122.013346086063166 ],
+									"presentation_rect" : [ 36.256106315785928, 705.466770741507844, 269.333332300186157, 122.013346086063166 ],
 									"proportion" : 0.5
 								}
 
@@ -1028,7 +1028,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 400.0, 783.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 169.756110190087838, 217.0, 18.5, 18.5 ],
+									"presentation_rect" : [ 172.756110190087838, 217.0, 18.5, 18.5 ],
 									"rounded" : 60.0,
 									"text" : "12",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1057,24 +1057,6 @@
 									"text" : "13",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 2,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-55",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 373.0, 783.0, 21.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 559.50000187754631, 612.5, 200.666666507720947, 22.25 ],
-									"proportion" : 0.5
 								}
 
 							}
@@ -1387,7 +1369,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 4,
 									"outlettype" : [ "dictionary", "", "", "" ],
-									"patching_rect" : [ 544.5, 616.0, 282.0, 22.0 ],
+									"patching_rect" : [ 544.5, 616.0, 283.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"embed" : 0,
 										"parameter_enable" : 0,
@@ -1440,7 +1422,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 519.0, 149.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "10",
+									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -1471,14 +1453,13 @@
 									"fontface" : 1,
 									"fontsize" : 24.0,
 									"id" : "obj-156",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 537.5, 146.0, 162.0, 60.0 ],
+									"patching_rect" : [ 537.5, 146.0, 162.0, 33.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 547.0, 143.0, 332.0, 33.0 ],
-									"text" : "Manual Annotations",
+									"text" : "Audio File",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1488,15 +1469,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 16,
+									"linecount" : 7,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 537.5, 211.220703125, 205.0, 221.0 ],
+									"patching_rect" : [ 537.5, 211.220703125, 207.0, 100.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 10,
-									"presentation_rect" : [ 547.0, 183.5, 337.0, 141.0 ],
-									"text" : "If you want to build an audio corpus but create the segmentation yourself (using your own editor of choice), it's possible to do so by providing your own text file with markers for each segment.\n\nCurrently, the native format of a number of different software that allow exporting segmentation markers are supported, including Audacity, SoundStudio, ProTools and Reaper, but if your editor of choice is missing, please contact the development team and we will add it for you!",
+									"presentation_linecount" : 5,
+									"presentation_rect" : [ 547.0, 183.5, 337.0, 74.0 ],
+									"text" : "Drop a the stereo or mono audio file (.aif, .flac, .wav) here to build a corpus, or use the «Read» button to select the audio file.\n\nNote that .mp3 files are not supported!",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1573,7 +1554,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 400.0, 555.5, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 273.166670000000011, 298.983385370753922, 15.0, 15.0 ],
+									"presentation_rect" : [ 273.166670000000011, 297.983385370753922, 15.0, 15.0 ],
 									"rounded" : 60.0,
 									"text" : "8",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1799,7 +1780,7 @@
 									"patching_rect" : [ 36.256106315785928, 128.225806451612925, 275.292391706062119, 703.254310375958084 ],
 									"pic" : "audiocorpusbuilder.png",
 									"presentation" : 1,
-									"presentation_rect" : [ 36.256106315785928, 128.225806451612925, 273.487787368428144, 703.254310375958084 ]
+									"presentation_rect" : [ 36.256106315785928, 128.225806451612925, 273.487787368428144, 698.644318174214618 ]
 								}
 
 							}

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 130.0, 100.0, 1168.0, 905.0 ],
+		"rect" : [ 100.0, 100.0, 1168.0, 905.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -575,7 +575,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 130.0, 126.0, 1168.0, 879.0 ],
+						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -606,6 +606,20 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-1",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 325.5, 428.662276555141261, 594.0, 60.0 ],
+									"presentation_linecount" : 5,
+									"text" : "When set to a non-zero value, all MIDI messages will be output on src channel. \nThe default value 0 (== src) will use the original channels from the source (e.g. the corpus or the MIDI file). \nThus, if you have a MIDI file with MIDI data on channels 1 2 3 and 5, setting \"ch\" to 1 will output everything on channel 1. Setting it to \"src\"/0 will output it on channels 1 2 3 and 5",
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"bubble" : 1,
 									"bubblepoint" : 0.0,
 									"id" : "obj-10",
@@ -613,7 +627,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 325.5, 398.645228215767702, 175.0, 24.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Select MIDI Output Channel"
 								}
 
@@ -3441,7 +3454,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 450.0, 229.945306280665704, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "5",
+									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -3478,7 +3491,7 @@
 									"patching_rect" : [ 686.5, 10.5, 299.0, 27.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 474.0, 226.445306280665704, 244.0, 27.0 ],
-									"text" : "Timeout",
+									"text" : "Corpus",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3488,15 +3501,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 9,
+									"linecount" : 17,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 217.0, 127.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 225.0, 234.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 8,
-									"presentation_rect" : [ 450.0, 259.945306280665704, 272.0, 114.0 ],
-									"text" : "In reactive mode, this option controls whether the player should continue playing if no new trigger has arrived by the time the player has finished playing its current event. Setting this to a non-zero value will make the player continue for that number of seconds. It's also possible to disable this to make the player continue endlessly.",
+									"presentation_linecount" : 14,
+									"presentation_rect" : [ 450.0, 259.945306280665704, 273.0, 194.0 ],
+									"text" : "The corpus is the source of material that the player uses to generate its output from. A corpus is built from a single audio file or from one or more MIDI-files using the Corpus Builder module of the somax.server object.\n\nThe corpus that the player will use can be selected with this drop down menu. If a corpus is not available in the list after successfully built, select the '-- click to refresh --' option (or the «Refresh» button) and the menu will be updated.\n\nThis parameter is also available with the same behaviour in the compact interface.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -4910,7 +4923,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 220.909994807510202, 333.673361161761591, 282.288655519485474, 37.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Press the «Save/Load» button to save or load a specific configuration of parameters"
 								}
 
@@ -4936,7 +4948,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 173.808833685188119, 712.477460959964105, 142.0, 37.0 ],
+									"patching_rect" : [ 173.808833685188119, 712.477460959964105, 143.0, 37.0 ],
 									"text" : "click here for a brief description of those"
 								}
 
@@ -5009,7 +5021,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 900.819555766054918, 750.339621838776679, 265.0, 47.0 ],
-													"presentation_linecount" : 3,
 													"text" : "The gren, purple, red and blue indicators shows the number of matches in each layer. Note that this may contain overlapping matches",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -5023,7 +5034,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 900.819555766054918, 799.339621838776679, 259.0, 74.0 ],
-													"presentation_linecount" : 5,
 													"text" : "The white indicator shows the total number of matches when all layers have been merged. The merged result will not contain duplicates, and will in most cases be lower than the sum of the individual layers",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -5040,7 +5050,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 393.5, 804.021771956354655, 273.0, 51.0 ],
-													"presentation_linecount" : 3,
 													"text" : "The last state that was output and the current number of matches found in each of the layer is visualized in the lower part of the interface"
 												}
 
@@ -5081,7 +5090,7 @@
 													"outlettype" : [ "", "", "int" ],
 													"outputmode" : 0,
 													"parameter_enable" : 0,
-													"patching_rect" : [ 644.22916666666697, 137.795711060948065, 18.0, 18.0 ],
+													"patching_rect" : [ 623.22916666666697, 137.795711060948065, 18.0, 18.0 ],
 													"rounded" : 60.0,
 													"text" : "7",
 													"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -5125,7 +5134,7 @@
 													"outlettype" : [ "", "", "int" ],
 													"outputmode" : 0,
 													"parameter_enable" : 0,
-													"patching_rect" : [ 644.22916666666697, 24.795711060948065, 18.0, 18.0 ],
+													"patching_rect" : [ 623.22916666666697, 24.795711060948065, 18.0, 18.0 ],
 													"rounded" : 60.0,
 													"text" : "6",
 													"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -5398,8 +5407,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 664.22916666666697, 137.795711060948065, 172.0, 20.0 ],
-													"presentation_linecount" : 3,
+													"patching_rect" : [ 643.22916666666697, 137.795711060948065, 172.0, 20.0 ],
 													"text" : "Internal / External Influences"
 												}
 
@@ -5411,7 +5419,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 664.22916666666697, 24.795711060948065, 71.0, 20.0 ],
+													"patching_rect" : [ 643.22916666666697, 24.795711060948065, 71.0, 20.0 ],
 													"text" : "Probability"
 												}
 
@@ -5423,8 +5431,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 696.0, 51.0, 445.819555766054918, 60.0 ],
-													"presentation_linecount" : 7,
+													"patching_rect" : [ 675.0, 51.0, 474.0, 60.0 ],
 													"text" : "It will condition each generated output with a probability, so that it may or may not play the event. This parameter is inactive when set to 1.0 (off), but any value lower than 1.0 will result in less than 100% of the events being played. For example, when set to 0.2, only 20% of the generated events will be played"
 												}
 
@@ -5449,7 +5456,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 55.33333333333303, 663.125000452542736, 490.0, 127.0 ],
-													"presentation_linecount" : 17,
 													"text" : "In reactive mode, output is generated each time a new trigger (onset) arrives. If the player is in the middle of playing an event when a trigger arrives, cut controls whether the currently played event should be interrupted or not:\n\n-Allowed: Interrupt the current event and trigger the new event immediately when the new trigger arrives.\n\n-Not Allowed: Delay the trigger so that the new event starts playing once the current event has been completed."
 												}
 
@@ -5462,7 +5468,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 62.590389099387949, 454.063145126144377, 425.0, 167.0 ],
-													"presentation_linecount" : 16,
 													"text" : "The «Quality» Threshod sets a minimum score required for a match to qualify as output. When combined with «Sparse», this will ensure that no events are played unless they are considered good matches.\n\nIf «Sparse» is On, \nquality 0.0 plays any found match\nquality 1.0 will almost never play\nin-between values will act as a threshold, to select matches above this threshold and play them\n\nIf «Sparse» is Off, it will replace the voids (no-play) by a default event, generally the next event, or a jump resulting from self influence."
 												}
 
@@ -5475,7 +5480,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 34.590389099387949, 427.204288939051935, 99.0, 20.0 ],
-													"presentation_linecount" : 2,
 													"text" : "Quality / Sparse"
 												}
 
@@ -5488,7 +5492,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 34.590389099387949, 317.183325739847191, 68.0, 20.0 ],
-													"presentation_linecount" : 2,
 													"text" : "Continuity"
 												}
 
@@ -5501,7 +5504,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 62.590389099387949, 342.887614678899126, 456.0, 60.0 ],
-													"presentation_linecount" : 4,
 													"style" : "default",
 													"text" : "Continuity controls the order of the current state index of the player's output:\n- Continuity > 1 will prioritize continuation (and result in fewer jumps).\n- Continuity = 1.00 will result in no alterations (no bias introduced by this parameter).\n- Continuity < 1 will prioritizing jumping."
 												}
@@ -5527,7 +5529,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 62.590389099387949, 234.887614678899126, 532.0, 60.0 ],
-													"presentation_linecount" : 5,
 													"style" : "default",
 													"text" : "In reactive mode, this option controls whether the player should continue playing if no new trigger has arrived by the time the player has finished playing its current event. \nSetting this to a non-zero value will make the player continue for that number of seconds. \nIt's also possible to disable this to make the player continue endlessly."
 												}
@@ -5548,12 +5549,11 @@
 , 											{
 												"box" : 												{
 													"id" : "obj-24",
-													"linecount" : 15,
+													"linecount" : 14,
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 696.0, 164.683325739847191, 445.819555766054918, 208.0 ],
-													"presentation_linecount" : 25,
+													"patching_rect" : [ 675.0, 164.683325739847191, 471.0, 194.0 ],
 													"style" : "default",
 													"text" : "Control the balance between different internal and external type of influences (layers).\nThe four colors (green, purple, red, blue) correspond to the four different layers.\n\nGreen (self, mel.): The feedback layer which listens to the pitch of the previous output of the player itself\n\nPurple (self, harm.): The feedback layer which listens to the harmony (chroma )of the previous output of the player itself\n\nRed (mel.): The melody layer which listens to melodic (pitch) influences from exernal sources (audio/MIDI influencers)\n\nBlue (harm.): The harmony layer which listens to harmonic (chroma) from external source (audio/MIDI influencers)"
 												}
@@ -5808,7 +5808,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 163.909994807510202, 198.969072222709656, 189.0, 79.0 ],
+									"patching_rect" : [ 163.909994807510202, 198.969072222709656, 190.0, 79.0 ],
 									"text" : "UI Interface: To create the object, (pressing N and) type:\n\nbpatcher somax.player.ui"
 								}
 
@@ -6027,7 +6027,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
+						"rect" : [ 100.0, 126.0, 1168.0, 879.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -6448,12 +6448,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-25",
-									"linecount" : 6,
+									"linecount" : 7,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 698.25, 309.50000011920929, 437.0, 87.0 ],
-									"text" : "Influence Sources routing module: all available influencers are listed and can be selected as sources for the player to listen to. It's also possible to select and mix between the dimensions (pitch, onset, chroma). The bottom row indicates the pitch, onset and chroma influences received. For chroma, this will only be triggered when a «chroma onset» (CO) is received, so at least one CO must be enabled for the player to actually receive any chroma",
+									"patching_rect" : [ 698.25, 298.50000011920929, 437.0, 100.0 ],
+									"text" : "Influence Sources routing module: all available influencers are listed and can be selected as sources for the player to listen to. It's also possible to select and mix between the dimensions (pitch, onset, chroma). The bottom row indicates the pitch, onset and chroma influences received. For chroma, this will only be triggered when a «chroma onset» (CO) is received, so at least one CO must be enabled for the player to actually receive any chroma.\nClick on the little question mark to know more.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
@@ -6473,7 +6473,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 668.75, 312.00000011920929, 20.0, 20.0 ],
+									"patching_rect" : [ 668.75, 301.00000011920929, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -6488,7 +6488,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 698.25, 160.50000011920929, 437.0, 141.0 ],
+									"patching_rect" : [ 698.25, 151.50000011920929, 437.0, 141.0 ],
 									"text" : "The player.app can be given a name to differentiate it from other influencers, using the bpatchers @args attribute, i.e.:\n\nbpatcher somax.player.app @args <name>\n\nIf no argument is provided, the player will automatically be created with a unique name (for wireless influence routing) and unique OSC ports for sending to and receving from the server\nThe name attribute can also be set using the «Argument(s)» field in the Max Inspector.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -6509,7 +6509,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 668.75, 163.00000011920929, 20.0, 20.0 ],
+									"patching_rect" : [ 668.75, 154.00000011920929, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
