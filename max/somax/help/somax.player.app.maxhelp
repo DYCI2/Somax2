@@ -612,7 +612,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 325.5, 428.662276555141261, 594.0, 60.0 ],
-									"presentation_linecount" : 5,
 									"text" : "When set to a non-zero value, all MIDI messages will be output on src channel. \nThe default value 0 (== src) will use the original channels from the source (e.g. the corpus or the MIDI file). \nThus, if you have a MIDI file with MIDI data on channels 1 2 3 and 5, setting \"ch\" to 1 will output everything on channel 1. Setting it to \"src\"/0 will output it on channels 1 2 3 and 5",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -3505,7 +3504,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 225.0, 234.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 226.0, 234.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 14,
 									"presentation_rect" : [ 450.0, 259.945306280665704, 273.0, 194.0 ],
@@ -4949,7 +4948,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 173.808833685188119, 712.477460959964105, 143.0, 37.0 ],
-									"text" : "click here for a brief description of those"
+									"text" : "click here for a brief description of these"
 								}
 
 							}
