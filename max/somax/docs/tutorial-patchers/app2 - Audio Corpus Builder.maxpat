@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 292.0, 160.0, 1130.0, 779.0 ],
+		"rect" : [ 290.0, 160.0, 1130.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -201,8 +201,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 783.018518518518249, 1003.5, 155.0, 22.0 ],
-									"text" : "load somax.server.maxhelp"
+									"patching_rect" : [ 783.018518518518249, 1003.5, 178.0, 22.0 ],
+									"text" : "load somax.server.app.maxhelp"
 								}
 
 							}
@@ -432,7 +432,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 785.518518518518249, 962.5, 22.0, 22.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 683.390625, 404.0, 19.0, 19.0 ],
+									"presentation_rect" : [ 676.390625, 418.0, 19.0, 19.0 ],
 									"rounded" : 99.0,
 									"text" : "?",
 									"texton" : "?",
@@ -447,15 +447,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.1875,
 									"id" : "obj-84",
-									"linecount" : 3,
+									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1045.75, 689.5, 237.0, 51.0 ],
+									"patching_rect" : [ 1045.75, 689.5, 237.0, 65.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 4,
-									"presentation_rect" : [ 570.5, 360.0, 171.640625, 65.0 ],
-									"text" : "You can read more about these parameters (and all the other parameters) in the help file:",
+									"presentation_linecount" : 5,
+									"presentation_rect" : [ 574.5, 360.0, 167.640625, 79.0 ],
+									"text" : "You can read more about these parameters (and all the other parameters) in the somax.server.app help file:",
 									"textjustification" : 1
 								}
 
@@ -1000,6 +1000,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-68",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2287,7 +2288,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-36",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2307,7 +2307,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 363.0, 442.0, 881.0, 534.0 ],
+						"rect" : [ 239.0, 323.0, 1073.0, 660.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2358,9 +2358,9 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 658.75, 505.5, 309.0, 33.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 3,
-									"presentation_rect" : [ 734.5, 440.5, 154.0, 47.0 ],
-									"text" : "With that said, let's move on to the main topic of this tutorial: Audio",
+									"presentation_linecount" : 4,
+									"presentation_rect" : [ 734.5, 504.5, 154.0, 60.0 ],
+									"text" : "With that said, let's move on to the main topic of this tutorial: building an Audio Corpus",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2378,7 +2378,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 712.5, 703.5, 147.0, 19.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 899.5, 454.5, 147.0, 19.0 ],
+									"presentation_rect" : [ 899.5, 518.5, 147.0, 19.0 ],
 									"rounded" : 8.0,
 									"text" : "continue to the next step -->",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -2398,8 +2398,8 @@
 									"patching_rect" : [ 655.75, 453.5, 321.0, 74.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 4,
-									"presentation_rect" : [ 734.5, 371.0, 343.25, 60.0 ],
-									"text" : "It's not possible to have multiple instances of the server open at the same time, so if you already have another Somax II tutorial (or any patcher using Somax II) open, make sure to close it before starting this tutorial!",
+									"presentation_rect" : [ 734.5, 435.0, 343.25, 60.0 ],
+									"text" : "It's not possible to have multiple instances of the server open at the same time, so if you already have another Somax 2 tutorial (or any patcher using Somax II) open, make sure to close it before starting this tutorial!",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
 
@@ -2459,7 +2459,7 @@
 									"patching_rect" : [ 656.75, 388.5, 309.0, 74.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 5,
-									"presentation_rect" : [ 767.75, 286.0, 289.0, 74.0 ],
+									"presentation_rect" : [ 767.75, 350.0, 286.0, 74.0 ],
 									"text" : "The Player will not listen to any of the Influencers by default: it's necessary to select which ones to listen to in the «Influencer sources & routing» module.\n\n(This will be explained later in the tutorial)",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2482,7 +2482,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 633.5, 392.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 744.5, 289.5, 20.0, 20.0 ],
+									"presentation_rect" : [ 744.5, 353.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2501,7 +2501,7 @@
 									"patching_rect" : [ 635.5, 346.5, 308.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
-									"presentation_rect" : [ 767.75, 247.0, 285.0, 33.0 ],
+									"presentation_rect" : [ 767.75, 311.0, 286.0, 33.0 ],
 									"text" : "You have to «Start Server» for the application to work.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2524,7 +2524,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 619.75, 420.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 744.5, 250.5, 20.0, 20.0 ],
+									"presentation_rect" : [ 744.5, 314.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2605,8 +2605,8 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 619.5, 81.0, 299.0, 27.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 734.5, 23.5, 343.0, 27.0 ],
-									"text" : "1. The Wireless Paradigm",
+									"presentation_rect" : [ 734.5, 23.5, 133.0, 27.0 ],
+									"text" : "1. Introduction",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2616,15 +2616,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 14,
+									"linecount" : 20,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 619.5, 121.5, 308.0, 194.0 ],
+									"patching_rect" : [ 619.5, 121.5, 308.0, 275.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 12,
-									"presentation_rect" : [ 734.5, 64.0, 347.0, 167.0 ],
-									"text" : "As can be seen, this patcher looks a bit different than the one previous tutorial. This is because the app objects of Somax 2.5 use wireless communication (i.e. without patch cords) between them, in order to simplify dynamic routing of messages and creation of objects.\n\nWhen using the wireless paradigm, it's possible to create another player or another influencer by simply duplicating the object. This can be very useful in the future if you want to make your own patcher, but won't for now make a huge difference.\n\nLet's begin by reviewing a couple of things to be aware of:",
+									"presentation_linecount" : 17,
+									"presentation_rect" : [ 734.5, 64.0, 347.0, 234.0 ],
+									"text" : "This tutorial will introduce how to work with an audio corpus in Somax II. \nThis tutorial assumes that you've already completed the first tutorial and that you're familiar with the basic components of Somax II, as these won't be explained here.\n\nThe Somax II system generates its improvisation material based on an external set of musical material, the Corpus.\nWhile in the previous tutorial we were using pre-built audio and MIDI Corpora, it is possible to build a Corpus from your own set of audio or MIDI files.\nThere are a few short pre-build audio corpora distributed in Somax II, but in this tutorial we are going to build our own Corpus from an audio file.\n\n\nLet's begin by reviewing a couple of things to be aware of:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2640,7 +2640,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 609.0, 67.852144469525911, 319.5, 611.943566591422268 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 721.75, 12.852144469525911, 371.5, 497.647855530474089 ],
+									"presentation_rect" : [ 721.75, 12.852144469525911, 371.5, 584.647855530474089 ],
 									"proportion" : 0.5
 								}
 
@@ -2823,8 +2823,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 859.518518518518249, 297.823927765237045, 154.0, 22.0 ],
-									"text" : "load somax.player.maxhelp"
+									"patching_rect" : [ 859.518518518518249, 297.823927765237045, 177.0, 22.0 ],
+									"text" : "load somax.player.app.maxhelp"
 								}
 
 							}
@@ -3733,6 +3733,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-22",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -3987,6 +3988,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
+					"hidden" : 1,
 					"id" : "obj-8",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -4268,22 +4270,6 @@
 					"presentation_rect" : [ 7.0, 448.0, 245.0, 218.0 ],
 					"varname" : "midiplayer",
 					"viewvisibility" : 1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"background" : 1,
-					"id" : "obj-13",
-					"linecount" : 4,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 29.0, 115.0, 426.0, 60.0 ],
-					"presentation" : 1,
-					"presentation_linecount" : 2,
-					"presentation_rect" : [ 30.0, 87.0, 1062.0, 33.0 ],
-					"text" : "This tutorial will introduce how to work with an audio corpus in Somax II. \nThis tutorial assumes that you've already completed the first tutorial and that you're familiar with the basic components of Somax II, as these won't be explained here."
 				}
 
 			}
@@ -4817,6 +4803,22 @@
 			}
 ,
 			"parameter_overrides" : 			{
+				"obj-22::obj-90::obj-395::obj-375" : 				{
+					"parameter_longname" : "mc.live.gain~[2]"
+				}
+,
+				"obj-22::obj-90::obj-395::obj-441" : 				{
+					"parameter_longname" : "mc.live.gain~[1]"
+				}
+,
+				"obj-22::obj-90::obj-395::obj-469" : 				{
+					"parameter_longname" : "live.text[11]"
+				}
+,
+				"obj-22::obj-90::obj-395::obj-490" : 				{
+					"parameter_longname" : "live.text[6]"
+				}
+,
 				"obj-23::obj-1::obj-17::obj-10::obj-30" : 				{
 					"parameter_longname" : "chroma scaling factor[8]"
 				}

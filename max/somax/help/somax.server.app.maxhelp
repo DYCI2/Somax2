@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 92.0, 100.0, 985.0, 880.0 ],
+		"rect" : [ 84.0, 100.0, 985.0, 880.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -344,7 +344,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 972.0, 689.0 ],
+						"rect" : [ 0.0, 26.0, 985.0, 854.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -371,7 +371,7 @@
 						"tags" : "",
 						"style" : "",
 						"subpatcher_template" : "",
-						"showontab" : 0,
+						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -1440,7 +1440,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 519.0, 149.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "14",
+									"text" : "20",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -1471,13 +1471,14 @@
 									"fontface" : 1,
 									"fontsize" : 24.0,
 									"id" : "obj-156",
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 537.5, 146.0, 162.0, 33.0 ],
+									"patching_rect" : [ 537.5, 146.0, 162.0, 87.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 547.0, 143.0, 332.0, 33.0 ],
-									"text" : "Corpus Path",
+									"text" : "Export Segmentation",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1487,15 +1488,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 8,
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 537.5, 211.220703125, 199.0, 114.0 ],
+									"patching_rect" : [ 537.5, 211.220703125, 203.0, 47.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 6,
-									"presentation_rect" : [ 547.0, 183.5, 337.0, 87.0 ],
-									"text" : "The «Corpus Path» menu is used to set the path in which corpora should be saved, as well as where the player should look for corpora.\n\nFor more information about this menu, see the «corpus path» tab of this maxhelp",
+									"presentation_linecount" : 2,
+									"presentation_rect" : [ 547.0, 183.5, 337.0, 33.0 ],
+									"text" : "The «Export» button can be used to export the visualized segmentation as a text file.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -2333,7 +2334,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 438.666666666666629, 15.0, 153.0, 22.0 ],
+					"patching_rect" : [ 245.666666666666629, 19.0, 153.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -2363,7 +2364,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 972.0, 689.0 ],
+						"rect" : [ 0.0, 26.0, 985.0, 854.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2390,7 +2391,7 @@
 						"tags" : "",
 						"style" : "",
 						"subpatcher_template" : "",
-						"showontab" : 0,
+						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -2690,7 +2691,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 294.0, 15.0, 153.0, 22.0 ],
+					"patching_rect" : [ 79.0, 19.0, 153.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -2720,7 +2721,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 373.0, 264.0, 972.0, 689.0 ],
+						"rect" : [ 0.0, 26.0, 985.0, 854.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2747,7 +2748,7 @@
 						"tags" : "",
 						"style" : "",
 						"subpatcher_template" : "",
-						"showontab" : 0,
+						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
@@ -2929,7 +2930,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 156.333333333333343, 15.0, 128.0, 22.0 ],
+					"patching_rect" : [ 414.333333333333371, 19.0, 128.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -3340,7 +3341,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 92.0, 126.0, 985.0, 854.0 ],
+						"rect" : [ 84.0, 126.0, 985.0, 854.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,

@@ -267,7 +267,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -287,7 +286,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 85.0, 106.0, 1372.0, 736.0 ],
+						"rect" : [ 84.0, 106.0, 1372.0, 736.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -555,7 +554,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 837.5, 119.0, 311.0, 382.0 ],
+									"patching_rect" : [ 837.5, 119.0, 305.0, 382.0 ],
 									"text" : "Somax II is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. It is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. It uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on  a globally learned harmonic and textural knowledge representation space.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, make sure that the Somax folder really is in the Packages folder of Max.\n\n\nIf the interface now looks like in the image above, please continue to the second tab:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -660,6 +659,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-238",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -809,7 +809,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 820.0, 612.352144469525911, 313.0, 47.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Note that it's possible to interact directly with a physical MIDI controller if you have one. Simply select the name of your MIDI device from the MIDI In menu at",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
