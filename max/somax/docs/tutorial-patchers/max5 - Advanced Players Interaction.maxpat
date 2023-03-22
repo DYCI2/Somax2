@@ -59,7 +59,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 116.0, 131.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -372,7 +372,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 759.806778332664521, 628.819589089341548, 61.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "harmonic \ninternal"
 								}
 
@@ -385,7 +384,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 880.506778332664567, 628.819589089341548, 58.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "harmonic\nexternal"
 								}
 
@@ -398,7 +396,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 820.206778332664612, 628.819589089341548, 53.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "melodic \nexternal"
 								}
 
@@ -411,7 +408,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 698.094506665997756, 628.819589089341548, 58.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "melodic\ninternal"
 								}
 
@@ -424,7 +420,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 636.006778332664567, 628.819589089341548, 54.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "total \nmatches"
 								}
 
@@ -527,7 +522,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 491.154550835337545, 551.728522280072184, 130.0, 52.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Monitor the current index of output "
 								}
 
@@ -939,7 +933,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 32.0, 280.916669790402807, 342.0, 60.0 ],
+									"patching_rect" : [ 32.0, 280.916669790402807, 346.0, 60.0 ],
 									"text" : "NB: Only one server can be present in an open Max window -- take care not to instantiate multiple servers!",
 									"textcolor" : [ 0.831372549019608, 0.035294117647059, 0.035294117647059, 1.0 ]
 								}
@@ -1645,7 +1639,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-22",
-									"items" : [ "MIDI Mix", ",", "MPK mini 3", ",", "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -1776,7 +1770,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "MIDI Mix", ",", "MPK mini 3", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "from Max 1", ",", "from Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -2044,10 +2038,10 @@
 									"clipheight" : 54.500000000000028,
 									"data" : 									{
 										"clips" : [ 											{
-												"absolutepath" : "Macintosh HD:/Users/marcofiorini/Desktop/Tuto_4Players/Corpus_Tuto/Fabbrizio2c.wav",
+												"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Fabbrizio2c.wav",
 												"filename" : "Fabbrizio2c.wav",
 												"filekind" : "audiofile",
-												"id" : "u534003217",
+												"id" : "u679001262",
 												"loop" : 0,
 												"content_state" : 												{
 
@@ -3012,7 +3006,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 116.0, 131.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3325,7 +3319,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 861.806778332664521, 630.819589089341548, 61.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "harmonic \ninternal"
 								}
 
@@ -3338,7 +3331,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 982.506778332664567, 630.819589089341548, 58.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "harmonic\nexternal"
 								}
 
@@ -3351,7 +3343,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 922.206778332664612, 630.819589089341548, 53.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "melodic \nexternal"
 								}
 
@@ -3364,7 +3355,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 800.094506665997756, 630.819589089341548, 58.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "melodic\ninternal"
 								}
 
@@ -3377,7 +3367,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 738.006778332664567, 630.819589089341548, 54.0, 33.0 ],
-									"presentation_linecount" : 2,
 									"text" : "total \nmatches"
 								}
 
@@ -3480,7 +3469,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 593.154550835337545, 553.728522280072184, 130.0, 52.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Monitor the current index of output "
 								}
 
@@ -5492,6 +5480,13 @@
 		}
 ,
 		"dependency_cache" : [ 			{
+				"name" : "Fabbrizio2c.wav",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/corpus",
+				"patcherrelativepath" : "../../corpus",
+				"type" : "WAVE",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "OMax.yin+.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../../patchers/resources/influencers",

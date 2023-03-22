@@ -3488,10 +3488,10 @@
 									"clipheight" : 55.0,
 									"data" : 									{
 										"clips" : [ 											{
-												"absolutepath" : "Bach_GouldPraeludium.mp3",
-												"filename" : "Bach_GouldPraeludium.mp3",
+												"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Marco_guitar.wav",
+												"filename" : "Marco_guitar.wav",
 												"filekind" : "audiofile",
-												"id" : "u215004590",
+												"id" : "u884001522",
 												"loop" : 0,
 												"content_state" : 												{
 
@@ -4139,10 +4139,10 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "Bach_GouldPraeludium.mp3",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
-				"patcherrelativepath" : "../../media",
-				"type" : "Mp3",
+				"name" : "Marco_guitar.wav",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/corpus",
+				"patcherrelativepath" : "../../corpus",
+				"type" : "WAVE",
 				"implicit" : 1
 			}
 , 			{

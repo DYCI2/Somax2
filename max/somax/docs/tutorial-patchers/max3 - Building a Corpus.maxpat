@@ -89,6 +89,17 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-11",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 718.166666909411106, 213.0, 265.833333090588894, 22.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontsize" : 12.0,
 									"id" : "obj-19",
 									"linecount" : 8,
@@ -617,19 +628,6 @@
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-8",
-									"linecount" : 2,
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 723.0, 221.0, 279.0, 35.0 ],
-									"text" : "/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Somax_Ligeti_1.pickle"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-6",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
@@ -1088,6 +1086,14 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-11", 1 ],
+									"order" : 1,
+									"source" : [ "obj-22", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-420", 1 ],
 									"midpoints" : [ 1074.5, 214.994286117381478, 1137.083333333333258, 214.994286117381478 ],
 									"order" : 0,
@@ -1101,14 +1107,6 @@
 									"midpoints" : [ 1074.5, 214.494286117381478, 1042.732177500000034, 214.494286117381478 ],
 									"order" : 1,
 									"source" : [ "obj-22", 2 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-8", 1 ],
-									"order" : 1,
-									"source" : [ "obj-22", 0 ]
 								}
 
 							}

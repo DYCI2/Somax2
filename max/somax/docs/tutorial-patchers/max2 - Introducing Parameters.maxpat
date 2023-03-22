@@ -122,7 +122,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 250.0, 540.958329000000049, 150.0, 22.0 ],
-									"text" : "0 duplicate"
+									"text" : "1 ready"
 								}
 
 							}
@@ -546,7 +546,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-44",
-									"items" : [ "MIDI Mix", ",", "MPK mini 3", ",", "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -1092,11 +1092,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-22",
-									"linecount" : 5,
+									"linecount" : 8,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 692.462728333332961, 60.166663542930564, 111.0, 74.0 ],
+									"patching_rect" : [ 724.201155833333132, 48.5, 85.0, 114.0 ],
 									"text" : "this is a pre-build audio corpus, contained in the default corpuspath folder of Somax 2"
 								}
 
@@ -1798,8 +1798,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 568.462728333332961, 69.166663542930564, 113.0, 22.0 ],
-									"text" : "corpus Joelle.pickle"
+									"patching_rect" : [ 568.462728333332961, 69.166663542930564, 151.0, 22.0 ],
+									"text" : "corpus Marco_guitar.pickle"
 								}
 
 							}

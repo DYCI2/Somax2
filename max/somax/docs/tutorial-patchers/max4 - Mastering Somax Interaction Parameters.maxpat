@@ -988,7 +988,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 139.25, 424.416660132186678, 121.0, 22.0 ],
-									"text" : "1 ready"
+									"text" : "1 running"
 								}
 
 							}
@@ -1686,7 +1686,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "MIDI Mix", ",", "MPK mini 3", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "from Max 1", ",", "from Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -4116,7 +4116,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 143.25, 436.583330949147523, 121.0, 22.0 ],
-									"text" : "1 ready"
+									"text" : "1 running"
 								}
 
 							}
@@ -4595,7 +4595,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "MIDI Mix", ",", "MPK mini 3", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "from Max 1", ",", "from Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -6238,7 +6238,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 668.08333333333303, 696.021476980377429, 50.0, 22.0 ],
-									"text" : "55"
+									"text" : "36"
 								}
 
 							}
@@ -6530,7 +6530,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 222.0, 541.708335987022565, 150.0, 22.0 ],
-									"text" : "1 ready"
+									"text" : "1 running"
 								}
 
 							}
@@ -7713,7 +7713,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1129.506592499999897, 397.125000452542793, 20.0, 20.0 ],
+									"patching_rect" : [ 1122.506592499999897, 397.125000452542793, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "4",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -7835,10 +7835,10 @@
 									"clipheight" : 55.0,
 									"data" : 									{
 										"clips" : [ 											{
-												"absolutepath" : "Bach_GouldPraeludium.mp3",
-												"filename" : "Bach_GouldPraeludium.mp3",
+												"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Joelle.wav",
+												"filename" : "Joelle.wav",
 												"filekind" : "audiofile",
-												"id" : "u215004590",
+												"id" : "u711006797",
 												"loop" : 0,
 												"content_state" : 												{
 
@@ -7931,23 +7931,6 @@
 							}
 , 							{
 								"box" : 								{
-									"angle" : 0.0,
-									"background" : 1,
-									"bgcolor" : [ 0.094118, 0.113725, 0.137255, 0.0 ],
-									"border" : 1,
-									"bordercolor" : [ 0.415686, 0.454902, 0.52549, 1.0 ],
-									"id" : "obj-1",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 1121.0, 350.624993465520276, 180.5, 92.666670529952967 ],
-									"rounded" : 16
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"background" : 1,
 									"id" : "obj-62",
 									"maxclass" : "toggle",
@@ -7968,7 +7951,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1121.0, 645.999995397163275, 170.0, 22.0 ],
-									"text" : "no loaded corpus"
+									"text" : "Marco_guitar.pickle"
 								}
 
 							}
@@ -7980,8 +7963,25 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1152.587728333333189, 397.125000452542793, 113.0, 22.0 ],
-									"text" : "corpus Joelle.pickle"
+									"patching_rect" : [ 1145.587728333333189, 397.125000452542793, 151.0, 22.0 ],
+									"text" : "corpus Marco_guitar.pickle"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 0.0,
+									"background" : 1,
+									"bgcolor" : [ 0.094118, 0.113725, 0.137255, 0.0 ],
+									"border" : 1,
+									"bordercolor" : [ 0.415686, 0.454902, 0.52549, 1.0 ],
+									"id" : "obj-1",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 1121.0, 350.624993465520276, 180.5, 92.666670529952967 ],
+									"rounded" : 16
 								}
 
 							}
@@ -8224,7 +8224,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 1162.087728333333189, 465.916661654318432, 1092.91666666666697, 465.916661654318432 ],
+									"midpoints" : [ 1155.087728333333189, 465.916661654318432, 1092.91666666666697, 465.916661654318432 ],
 									"source" : [ "obj-43", 0 ]
 								}
 
@@ -8660,10 +8660,10 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "Bach_GouldPraeludium.mp3",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
-				"patcherrelativepath" : "../../media",
-				"type" : "Mp3",
+				"name" : "Joelle.wav",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/corpus",
+				"patcherrelativepath" : "../../corpus",
+				"type" : "WAVE",
 				"implicit" : 1
 			}
 , 			{

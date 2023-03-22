@@ -625,7 +625,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-22",
-									"items" : [ "MIDI Mix", ",", "MPK mini 3", ",", "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -798,7 +798,7 @@
 									"bgfillcolor_type" : "color",
 									"fontface" : 1,
 									"id" : "obj-204",
-									"items" : [ "AU DLS Synth 1", ",", "MIDI Mix", ",", "MPK mini 3", ",", "from Max 1", ",", "from Max 2" ],
+									"items" : [ "AU DLS Synth 1", ",", "from Max 1", ",", "from Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -1861,7 +1861,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 118.0, 126.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3479,10 +3479,10 @@
 									"clipheight" : 55.0,
 									"data" : 									{
 										"clips" : [ 											{
-												"absolutepath" : "Bach_GouldPraeludium.mp3",
-												"filename" : "Bach_GouldPraeludium.mp3",
+												"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Fabbrizio2c.wav",
+												"filename" : "Fabbrizio2c.wav",
 												"filekind" : "audiofile",
-												"id" : "u215004590",
+												"id" : "u815014955",
 												"loop" : 0,
 												"content_state" : 												{
 
@@ -3897,7 +3897,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 118.0, 126.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -4926,10 +4926,10 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "Bach_GouldPraeludium.mp3",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
-				"patcherrelativepath" : "../../media",
-				"type" : "Mp3",
+				"name" : "Fabbrizio2c.wav",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/corpus",
+				"patcherrelativepath" : "../../corpus",
+				"type" : "WAVE",
 				"implicit" : 1
 			}
 , 			{
