@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 244.0, 155.0, 1243.0, 792.0 ],
+		"rect" : [ 244.0, 154.0, 1243.0, 792.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -555,7 +555,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 837.5, 119.0, 308.0, 382.0 ],
+									"patching_rect" : [ 837.5, 119.0, 311.0, 382.0 ],
 									"text" : "Somax II is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. It is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. It uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on  a globally learned harmonic and textural knowledge representation space.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, make sure that the Somax folder really is in the Packages folder of Max.\n\n\nIf the interface now looks like in the image above, please continue to the second tab:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -660,7 +660,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-238",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -680,7 +679,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 260.0, 195.0, 1266.0, 744.0 ],
+						"rect" : [ 262.0, 222.0, 1266.0, 744.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -709,6 +708,52 @@
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-12",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 1066.5, 640.352144469525911, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "5.8",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 8.0,
+									"hint" : "",
+									"id" : "obj-1",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 516.5, 463.352144469525911, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "5.8",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"fontface" : 1,
@@ -763,8 +808,9 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 822.0, 612.352144469525911, 313.0, 47.0 ],
-									"text" : "Note that it's of course possible to interact directly with a physical MIDI controller iff you have one. Simply change «Inlet (External)» to the name of your MIDI Controller.",
+									"patching_rect" : [ 820.0, 612.352144469525911, 313.0, 47.0 ],
+									"presentation_linecount" : 3,
+									"text" : "Note that it's possible to interact directly with a physical MIDI controller if you have one. Simply select the name of your MIDI device from the MIDI In menu at",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1337,7 +1383,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 818.0, 65.704288939051821, 323.0, 593.647855530474089 ],
+									"patching_rect" : [ 818.0, 65.704288939051821, 323.0, 595.647855530474089 ],
 									"proportion" : 0.5
 								}
 
@@ -1583,6 +1629,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-180",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2886,7 +2933,6 @@
 									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"fontface" : 1,
 									"fontsize" : 12.0,
-									"hidden" : 1,
 									"hint" : "",
 									"id" : "obj-130",
 									"ignoreclick" : 1,
@@ -5420,6 +5466,22 @@
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-24::obj-1::obj-2::obj-395::obj-375" : 				{
+					"parameter_longname" : "mc.live.gain~[2]"
+				}
+,
+				"obj-24::obj-1::obj-2::obj-395::obj-441" : 				{
+					"parameter_longname" : "mc.live.gain~[1]"
+				}
+,
+				"obj-24::obj-1::obj-2::obj-395::obj-469" : 				{
+					"parameter_longname" : "live.text[11]"
+				}
+,
+				"obj-24::obj-1::obj-2::obj-395::obj-490" : 				{
+					"parameter_longname" : "live.text[6]"
 				}
 
 			}
