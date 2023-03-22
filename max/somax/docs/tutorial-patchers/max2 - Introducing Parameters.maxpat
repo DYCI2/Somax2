@@ -122,7 +122,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 250.0, 540.958329000000049, 150.0, 22.0 ],
-									"text" : "1 ready"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -305,11 +305,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-92",
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 630.374999999999773, 722.0137523611387, 31.0, 20.0 ],
-									"text" : "total"
+									"patching_rect" : [ 630.374999999999773, 722.0137523611387, 54.0, 33.0 ],
+									"text" : "total\nmatches"
 								}
 
 							}
@@ -545,7 +546,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-44",
-									"items" : [ "to Max 1", ",", "to Max 2" ],
+									"items" : [ "MIDI Mix", ",", "MPK mini 3", ",", "to Max 1", ",", "to Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,

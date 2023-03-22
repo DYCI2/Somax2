@@ -2720,7 +2720,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 972.0, 689.0 ],
+						"rect" : [ 373.0, 264.0, 972.0, 689.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2837,27 +2837,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bgmode" : 0,
-									"border" : 0,
-									"clickthrough" : 0,
-									"enablehscroll" : 0,
-									"enablevscroll" : 0,
-									"id" : "obj-5",
-									"ignoreclick" : 1,
-									"lockeddragscroll" : 0,
-									"lockedsize" : 0,
-									"maxclass" : "bpatcher",
-									"name" : "somax.corpusbuilder.maxpat",
-									"numinlets" : 0,
-									"numoutlets" : 0,
-									"offset" : [ 0.0, 0.0 ],
-									"patching_rect" : [ 15.0, 137.0, 331.0, 372.0 ],
-									"viewvisibility" : 1
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-1",
 									"linecount" : 4,
 									"maxclass" : "comment",
@@ -2889,20 +2868,6 @@
 									"patching_rect" : [ 10.0, 89.0, 684.0, 20.0 ],
 									"text" : "Module for constructing corpora from MIDI files. ",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
-									"id" : "obj-6",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 15.0, 137.0, 331.0, 372.0 ],
-									"proportion" : 0.5
 								}
 
 							}
@@ -4915,6 +4880,22 @@
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-1::obj-6::obj-2::obj-395::obj-375" : 				{
+					"parameter_longname" : "mc.live.gain~[2]"
+				}
+,
+				"obj-1::obj-6::obj-2::obj-395::obj-441" : 				{
+					"parameter_longname" : "mc.live.gain~[1]"
+				}
+,
+				"obj-1::obj-6::obj-2::obj-395::obj-469" : 				{
+					"parameter_longname" : "live.text[11]"
+				}
+,
+				"obj-1::obj-6::obj-2::obj-395::obj-490" : 				{
+					"parameter_longname" : "live.text[6]"
 				}
 
 			}
