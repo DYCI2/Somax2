@@ -42,7 +42,6 @@ class PlayerSendProtocol:
     TERMINATED = "terminated"
     SCHEDULER_RUNNING = "running"
 
-
     # Corpus messages
     CORPUS_ADDRESS = "corpusview"
     PLAYER_CORPUS_FILES = [CORPUS_ADDRESS, "corpus_info"]
@@ -72,10 +71,8 @@ class PlayerSendProtocol:
 
     AUDIO_RENDERER_ADDRESS = "audio"
     SEND_AUDIO_EVENT = [AUDIO_RENDERER_ADDRESS, "event"]
+    SEND_AUDIO_CONTINUATION = [AUDIO_RENDERER_ADDRESS, "continuation"]
     SEND_AUDIO_OFF = [AUDIO_RENDERER_ADDRESS, "audio_off"]
-    AUDIO_CONTINUATION_TIMESTRETCH = [AUDIO_RENDERER_ADDRESS, "continuation_timestretch"]
-
-
 
     SEND_STATE_EVENT = "state"
 
