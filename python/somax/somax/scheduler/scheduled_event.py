@@ -68,48 +68,65 @@ class MidiNoteEvent(RendererEvent):
                                 content=[self.note, self.velocity, self.channel])]
 
 
-class AudioEvent(RendererEvent):
+class AudioBase(RendererEvent, ABC):
     def __init__(self,
                  trigger_time: float,
                  corpus_event: AudioCorpusEvent,
                  applied_transform: AbstractTransform,
                  time_stretch_factor: float):
-        super(AudioEvent, self).__init__(trigger_time)
-        self.event: AudioCorpusEvent = corpus_event
-        self.applied_transform: AbstractTransform = applied_transform
-        self.time_stretch_factor: float = time_stretch_factor
-
-    def render(self) -> List[RendererMessage]:
-        messages: List[RendererMessage] = [
-            RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_EVENT,
-                            content=[self.event.state_index, self.applied_transform.renderer_info()])
-        ]
-
-        content = [self.event.onset * 1000,
-                   (self.event.onset + self.event.duration) * 1000,
-                   self.applied_transform.renderer_info(),
-                   self.time_stretch_factor]
-
-        messages.append(RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_EVENT,
-                                        content=content))
-
-        return messages
-
-
-class AudioContinueEvent(RendererEvent):
-    def __init__(self, trigger_time: float, corpus_event: AudioCorpusEvent,
-                 applied_transform: AbstractTransform, time_stretch_factor: float):
         super().__init__(trigger_time=trigger_time)
         self.event: AudioCorpusEvent = corpus_event
         self.applied_transform: AbstractTransform = applied_transform
         self.time_stretch_factor: float = time_stretch_factor
 
+    def _state_content(self) -> List[Any]:
+        return [self.event.state_index, self.applied_transform.renderer_info()]
+
+    def _rendering_content(self) -> List[Any]:
+        return [self.event.onset * 1000,
+                (self.event.onset + self.event.duration) * 1000,
+                self.applied_transform.renderer_info(),
+                self.time_stretch_factor]
+
+
+class AudioEvent(AudioBase):
+    def __init__(self,
+                 trigger_time: float,
+                 corpus_event: AudioCorpusEvent,
+                 applied_transform: AbstractTransform,
+                 time_stretch_factor: float):
+        super().__init__(trigger_time=trigger_time,
+                         corpus_event=corpus_event,
+                         applied_transform=applied_transform,
+                         time_stretch_factor=time_stretch_factor)
+
     def render(self) -> List[RendererMessage]:
-        return [RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_EVENT,
-                                content=[self.event.state_index,
-                                         self.applied_transform.renderer_info()]),
-                RendererMessage(keyword=PlayerSendProtocol.AUDIO_CONTINUATION_TIMESTRETCH,
-                                content=[self.time_stretch_factor])]
+        messages: List[RendererMessage] = [
+            RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_EVENT, content=self._state_content()),
+            RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_EVENT, content=self._rendering_content())
+        ]
+
+        return messages
+
+
+class AudioContinueEvent(AudioBase):
+    def __init__(self,
+                 trigger_time: float,
+                 corpus_event: AudioCorpusEvent,
+                 applied_transform: AbstractTransform,
+                 time_stretch_factor: float):
+        super().__init__(trigger_time=trigger_time,
+                         corpus_event=corpus_event,
+                         applied_transform=applied_transform,
+                         time_stretch_factor=time_stretch_factor)
+
+    def render(self) -> List[RendererMessage]:
+        messages: List[RendererMessage] = [
+            RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_EVENT, content=self._state_content()),
+            RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_CONTINUATION, content=self._rendering_content())
+        ]
+
+        return messages
 
 
 class AudioOffEvent(RendererEvent):

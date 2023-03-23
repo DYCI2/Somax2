@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 283.0, 166.0, 923.0, 855.0 ],
+		"rect" : [ 283.0, 166.0, 1472.0, 915.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,31 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-46",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 53.0, 507.0, 155.0, 33.0 ],
+					"presentation_linecount" : 2,
+					"text" : "continuation: \nidentical to event"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-45",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 393.666666666666629, 453.5, 29.5, 22.0 ],
+					"text" : "$4"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-26",
 					"maxclass" : "newobj",
@@ -980,8 +1005,8 @@
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 237.0, 421.0, 488.999999999999886, 22.0 ],
-					"text" : "route event continuation_timestretch audio_off"
+					"patching_rect" : [ 237.0, 421.0, 488.999999999999773, 22.0 ],
+					"text" : "route event continuation audio_off"
 				}
 
 			}
@@ -1244,7 +1269,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "val1", "val2" ],
-							"parameter_longname" : "live.text[2]",
+							"parameter_longname" : "live.text[6]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "live.text[26]",
 							"parameter_type" : 2
@@ -2524,12 +2549,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-129",
-					"linecount" : 6,
+					"linecount" : 5,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 53.0, 421.0, 162.0, 87.0 ],
-					"text" : "event:\n- start (ms)\n- end (ms) [unused here]\n- pitch shift factor (cents)\n- time stretch factor (float)\n- energy (dB)"
+					"patching_rect" : [ 53.0, 421.0, 162.0, 74.0 ],
+					"text" : "event:\n- start (ms)\n- end (ms) [unused here]\n- pitch shift factor (cents)\n- time stretch factor (float)"
 				}
 
 			}
@@ -3328,7 +3353,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-8", 0 ],
+					"destination" : [ "obj-45", 0 ],
 					"source" : [ "obj-38", 1 ]
 				}
 
@@ -3389,6 +3414,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-48", 0 ],
 					"source" : [ "obj-44", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-8", 0 ],
+					"source" : [ "obj-45", 0 ]
 				}
 
 			}
@@ -3612,13 +3644,13 @@
 				"boxes" : [ "obj-157", "obj-259" ]
 			}
 , 			{
-				"boxes" : [ "obj-38", "obj-90" ]
-			}
-, 			{
 				"boxes" : [ "obj-37", "obj-6" ]
 			}
 , 			{
 				"boxes" : [ "obj-56", "obj-54" ]
+			}
+, 			{
+				"boxes" : [ "obj-38", "obj-90" ]
 			}
  ],
 		"styles" : [ 			{

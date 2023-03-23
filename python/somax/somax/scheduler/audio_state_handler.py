@@ -47,7 +47,7 @@ class AudioStateHandler(AbstractStateHandler):
                 self._currently_playing.index + 1 == event.state_index and
                 self._currently_playing.transform == applied_transform and
                 abs(trigger_time - self._currently_playing.end_time) <= self._threshold_s and  # interrupts mid-event
-                abs(event.onset - self._currently_playing.end_time) <= self._threshold_s):  # gaps in corpus
+                abs(event.onset - (self._currently_playing.event.onset+self._currently_playing.event.duration)) <= self._threshold_s):  # gaps in corpus
 
             output.append(AudioContinueEvent(trigger_time=trigger_time,
                                              corpus_event=event,
