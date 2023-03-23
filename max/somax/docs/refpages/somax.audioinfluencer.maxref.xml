@@ -21,27 +21,27 @@
 	<methodlist>
 		<method name="bang">
 			<arglist />
-			<digest>TODO</digest>
+			<digest>Trigger segmentation, when onset method is set to `external'</digest>
 			<description>TODO</description>
 		</method>
         <method name="int">
 			<arglist />
-			<digest>TODO</digest>
+			<digest>Enable/Disable the audio influencer</digest>
 			<description>Performs the same function as <m>start</m> and <m>stop</m></description>
 		</method>
         <method name="dump">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Dump all current parameter values on the second outlet</digest>
 			<description>TODO</description>
 		</method>
         <method name="signal">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Audio signal to analyze</digest>
 			<description>TODO</description>
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Open the audio influencer parameters window</digest>
 			<description>TODO</description>
 		</method>
 	</methodlist>
@@ -49,67 +49,67 @@
     <!--ATTRIBUTES-->
 	<attributelist>
         <attribute name="bonkdebounce" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set bonk debounce decay rate value</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="bonkminvel" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set bonk minimum velocity value</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="bonkhighthresh" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set bonk higher threshold value</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="bonklowthresh" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set bonk lower threshold value</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="chromadecay" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set decay rate value for the chroma filter</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="continuouschroma" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enalbe/Disable continuous chroma output</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="continuouspitch" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enalbe/Disable continuous pitch output</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="enabled"  get="1" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
+			<digest>Enable/Disable the audio influencer</digest>
 			<description>TODO</description>
 		</attribute>
         <attribute name="onsetlimit" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set minimum amount of time (ms) between two consecutive onsets</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="onsetmethod" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set onset method</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="yindownsample" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set value for yin downsample</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="yinlevel" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set yin gain level (dB)</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="yinminfreq" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set yin minimum frequency (Hz)</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="yinprobability" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set yin probability value</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="yinquality" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set value for yin quality threshold</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="yinwindow" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set value for yin window (ms)</digest>
             <description>TODO</description>
         </attribute>
 	</attributelist>

@@ -27,12 +27,12 @@
 		</method>
 		<method name="bpm">
 			<arglist />
-			<digest>TODO</digest>
+			<digest>Set initial BPM corpus value</digest>
 			<description>TODO</description>
 		</method>
         <method name="build">
 			<arglist />
-			<digest>TODO</digest>
+			<digest>Build audio corpus</digest>
 			<description>TODO</description>
 		</method>
         <method name="copy">
@@ -42,7 +42,7 @@
 		</method>
         <method name="corpuspath">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Set corpuspath</digest>
 			<description>TODO</description>
 		</method>
         <method name="dump">
@@ -52,42 +52,42 @@
 		</method>
         <method name="gainthresh">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Set peak gain threshold in audio corpus segmentation</digest>
 			<description>TODO</description>
 		</method>
         <method name="mindur">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Set minimum segment duration (ms) in audio corpus segmentation</digest>
 			<description>TODO</description>
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Open audio corpus builder parameters window</digest>
 			<description>TODO</description>
 		</method>
         <method name="overwrite">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Overwrite existing audio corpus</digest>
 			<description>TODO</description>
 		</method>
         <method name="reset">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Reset default parameters for audio corpus segmentation</digest>
 			<description>TODO</description>
 		</method>
         <method name="seginterval">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Set interval duration in audio corpus segmentation</digest>
 			<description>TODO</description>
 		</method>
         <method name="segmode">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Select audio corpus segmentation mode</digest>
 			<description>TODO</description>
 		</method>
         <method name="window">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Set peak window value (ms) in audio corpus segmentation</digest>
 			<description>TODO</description>
 		</method>
 	</methodlist>

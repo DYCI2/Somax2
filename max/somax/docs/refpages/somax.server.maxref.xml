@@ -64,22 +64,22 @@
 		</method>
         <method name="corpora">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>List the corpora present on the current corpuspath</digest>
 			<description>TODO</description>
 		</method>
         <method name="corpuspath">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Query the current corpuspath</digest>
 			<description>TODO</description>
 		</method>
         <method name="initialize">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Initialize server</digest>
 			<description>TODO</description>
 		</method>
         <method name="initializeplayers">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Initialize on the server all local players</digest>
 			<description>TODO</description>
 		</method>
         <method name="interpreter">
@@ -89,12 +89,12 @@
 		</method>
         <method name="ip">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Set server ip address</digest>
 			<description>TODO</description>
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Open server window</digest>
 			<description>TODO</description>
 		</method>
         <method name="players">
@@ -109,27 +109,32 @@
 		</method>
         <method name="recvport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Set OSC receive port address</digest>
+			<description>TODO</description>
+		</method>
+		<method name="reload">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Reload the server if terminated</digest>
 			<description>TODO</description>
 		</method>
         <method name="sendport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Set OSC send port address</digest>
 			<description>TODO</description>
 		</method>
         <method name="start">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Start generation</digest>
 			<description>TODO</description>
 		</method>
         <method name="stop">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Stop generation</digest>
 			<description>TODO</description>
 		</method>
         <method name="terminate">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Terminate the server</digest>
 			<description>TODO</description>
 		</method>
         <method name="time">
@@ -146,7 +151,7 @@
 			<description>TODO</description>
 		</attribute>
         <attribute name="autoinitialize" get="0" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
+			<digest>Enable/Disable autoinitialization of the server when created</digest>
 			<description>TODO</description>
 		</attribute>
         <attribute name="autoterminate" get="0" set="1" type="symbol" size="1">
@@ -158,11 +163,11 @@
 			<description>TODO</description>
 		</attribute>
         <attribute name="tempo" get="1" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
+			<digest>Set server transport tempo value</digest>
 			<description>TODO</description>
 		</attribute>
         <attribute name="temposource" get="1" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
+			<digest>Select the source from which the server controls its tempo</digest>
 			<description>TODO</description>
 		</attribute>
 	</attributelist>

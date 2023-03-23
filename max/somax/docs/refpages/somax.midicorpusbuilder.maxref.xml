@@ -22,17 +22,17 @@
 	<methodlist>
         <method name="build">
 			<arglist />
-			<digest>TODO</digest>
+			<digest>Build MIDI corpus</digest>
 			<description>TODO</description>
 		</method>
         <method name="chromachannels">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Select chroma channels for MIDI corpus segmentation</digest>
 			<description>TODO</description>
 		</method>
         <method name="corpuspath">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Set corpuspath</digest>
 			<description>TODO</description>
 		</method>
         <method name="dump">
@@ -42,22 +42,22 @@
 		</method>
         <method name="echoic">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Enable/Disable echoic memory</digest>
 			<description>TODO</description>
 		</method>
         <method name="pitchchannels">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Select pitch channels for MIDI corpus segmentation</digest>
 			<description>TODO</description>
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Open MIDI corpus builder parameters window</digest>
 			<description>TODO</description>
 		</method>
         <method name="overwrite">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Overwrite existing MIDI corpus</digest>
 			<description>TODO</description>
 		</method>
 	</methodlist>

@@ -32,17 +32,17 @@
 		</method>
         <method name="int">
 			<arglist />
-			<digest>TODO</digest>
+			<digest>Enable/Disable the audio influencer</digest>
 			<description>Performs the same function as <m>enabled</m></description>
 		</method>
         <method name="list">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>MIDI values to analyze</digest>
 			<description>TODO</description>
 		</method>
         <method name="dump">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Dump all current parameter values on the second outlet</digest>
 			<description>TODO</description>
 		</method>
         <method name="flush">
@@ -52,7 +52,7 @@
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Open the MIDI influencer parameters window</digest>
 			<description>TODO</description>
 		</method>
 	</methodlist>
@@ -60,47 +60,47 @@
     <!--ATTRIBUTES-->
 	<attributelist>
         <attribute name="chordthreshold" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set time (ms) to avoid duplicate onsets when notes arrive closely in time, as chords </digest>
             <description>TODO</description>
         </attribute>
         <attribute name="chromachannels" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set the MIDI channels from which the chroma should be analyzed</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="chromafilter" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable chroma filter</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="continuouschroma" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enalbe/Disable continuous chroma output</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="enabled" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable the audio influencer</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="filterattack" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set chroma filter attack</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="filterrelease" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set chroma filter release</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="onsetchannels" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set the MIDI channels from which the onset should be analyzed</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="onsetlimit" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set minimum amount of time (ms) between two consecutive onsets</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="pitchanalysis" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set pitch analysis method</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="pitchchannels" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set the MIDI channels from which the pitch should be analyzed</digest>
             <description>TODO</description>
         </attribute>
     </attributelist>

@@ -68,12 +68,12 @@
         
         <method name="getcorpus">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Get the loaded corpus</digest>
 			<description>TODO</description>
 		</method>
         <method name="corpusquery">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>ERROR</digest>
 			<description>TODO</description>
 		</method>
         
@@ -85,33 +85,33 @@
         
         <method name="influence">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Send data as influences to the player</digest>
 			<description>TODO</description>
 		</method>
         <method name="initialize">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Initialize the player</digest>
 			<description>TODO</description>
 		</method>
         <method name="ip">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Set player's ip address</digest>
 			<description>TODO</description>
 		</method>
         <method name="jump">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Jump to event by index (on next trigger)</digest>
 			<description>TODO</description>
 		</method>
         
         <method name="name">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Set player's name</digest>
 			<description>TODO</description>
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Open the player parameters user interface</digest>
 			<description>TODO</description>
 		</method>
         
@@ -129,17 +129,17 @@
         
         <method name="reinstantiate">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>ERROR</digest>
 			<description>TODO</description>
 		</method>
         <method name="reload">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Reload the player, if terminated. You need to initialize it after reloading.</digest>
 			<description>TODO</description>
 		</method>
         <method name="resetinfluences">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Reset all the current stored influences</digest>
 			<description>TODO</description>
 		</method>
         <method name="zap">
@@ -156,19 +156,19 @@
             <description>TODO</description>
         </attribute>
         <attribute name="autoinitialize" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable autoinitialization of the player when created</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="continuity" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set continuity value</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="corpus" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Load a corpus</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="cut" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable cut</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="decaybasis" get="1" set="1" type="symbol" size="1">
@@ -192,7 +192,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="harmonicngramorder" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set value for external harmonic memory length</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="harmonicpeakdecay" get="1" set="1" type="symbol" size="1">
@@ -216,7 +216,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="melodicngramorder" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set value for external melodic memory length</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="melodicpeakdecay" get="1" set="1" type="symbol" size="1">
@@ -236,7 +236,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="mode" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set playing mode to decide when to play the next event</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="outputfrom" get="1" set="1" type="symbol" size="1">
@@ -244,7 +244,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="outputprobability" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Sets output probability value</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="playingmode" get="1" set="1" type="symbol" size="1">
@@ -256,7 +256,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="quality" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set quality value</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="recombine" get="1" set="1" type="symbol" size="1">
@@ -264,11 +264,11 @@
             <description>TODO</description>
         </attribute>
         <attribute name="regionmask" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set lower and upper indexes for region mask</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="regionmaskenable" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable region mask</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="selfharmonicenable" get="1" set="1" type="symbol" size="1">
@@ -276,7 +276,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="selfharmonicngramorder" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set value for internal harmonic memory length</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="selfharmonicpeakdecay" get="1" set="1" type="symbol" size="1">
@@ -292,35 +292,35 @@
             <description>TODO</description>
         </attribute>
         <attribute name="selfngramorder" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set value for internal melodic memory length</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="sparse" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable sparse</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="tabooenable" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable taboo</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="tabooduration" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set taboo duration</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="timeout" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set timeout value</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="timeoutenable" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable timeout</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="timestretch" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set timestretch value</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="timestretchmode" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Select timestretch mode</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="transpositionbias" get="1" set="1" type="symbol" size="1">
@@ -328,11 +328,11 @@
             <description>TODO</description>
         </attribute>
         <attribute name="transpositions" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set values for transposition intervals</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="weights" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set values for the weights on different layers</digest>
             <description>TODO</description>
         </attribute>
 	</attributelist>
