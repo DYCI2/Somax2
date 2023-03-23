@@ -40,6 +40,30 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-50",
+					"linecount" : 4,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 735.231105836006009, 378.499991001861474, 150.0, 60.0 ],
+					"text" : "this will still make the player mimetic but it will add variations, resulting in a very interesting effect"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-46",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 565.731105836006009, 336.95832873049676, 87.0, 33.0 ],
+					"text" : "try 500 ms, then 1000 ms"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"hidden" : 1,
 					"id" : "obj-2",
 					"maxclass" : "message",
@@ -1755,6 +1779,22 @@
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-1::obj-2::obj-395::obj-375" : 				{
+					"parameter_longname" : "mc.live.gain~[2]"
+				}
+,
+				"obj-1::obj-2::obj-395::obj-441" : 				{
+					"parameter_longname" : "mc.live.gain~[1]"
+				}
+,
+				"obj-1::obj-2::obj-395::obj-469" : 				{
+					"parameter_longname" : "live.text[11]"
+				}
+,
+				"obj-1::obj-2::obj-395::obj-490" : 				{
+					"parameter_longname" : "live.text[6]"
 				}
 ,
 				"obj-69::obj-1150" : 				{

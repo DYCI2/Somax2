@@ -89,6 +89,41 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 3,
+									"fontface" : 1,
+									"id" : "obj-34",
+									"linecount" : 8,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 123.291666666666515, 200.5, 160.0, 118.0 ],
+									"presentation" : 1,
+									"presentation_linecount" : 4,
+									"presentation_rect" : [ 54.0, 169.0, 292.0, 64.0 ],
+									"text" : "Note: the somax.player.app is a generic player, meaning it can output either audio or MIDI. \nIn order to have a MIDI player, load a MIDI (M) corpus",
+									"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 3,
+									"fontface" : 1,
+									"id" : "obj-11",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 89.0, 482.50000799999998, 184.0, 24.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 150.0, 488.5, 185.0, 24.0 ],
+									"text" : "bpatcher somax.player.app"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
 									"fontsize" : 10.0,
@@ -129,7 +164,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 1063.291666666666515, 88.0, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "6",
+									"text" : "7",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -573,7 +608,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 17.5, 719.0, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "5",
+									"text" : "6",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -609,7 +644,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 935.0, 504.50000799999998, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "4",
+									"text" : "5",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -661,11 +696,11 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 95.0, 225.0, 151.0, 64.0 ],
+									"patching_rect" : [ 89.0, 525.0, 151.0, 64.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 4,
-									"presentation_rect" : [ 147.0, 186.0, 151.0, 64.0 ],
-									"text" : "Look at the two Somax Players on the right, they look almost identical, don't they?"
+									"presentation_rect" : [ 158.0, 251.0, 151.0, 64.0 ],
+									"text" : "Now look at the two Somax Players on the right, they look almost identical, don't they?"
 								}
 
 							}
@@ -682,7 +717,7 @@
 									"presentation" : 1,
 									"presentation_linecount" : 4,
 									"presentation_rect" : [ 593.0, 163.0, 95.0, 64.0 ],
-									"text" : "Remember to load an MIDI (M) corpus"
+									"text" : "Remember to load a MIDI (M) corpus"
 								}
 
 							}
@@ -711,10 +746,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 95.0, 296.0, 150.0, 93.0 ],
+									"patching_rect" : [ 89.0, 596.0, 150.0, 93.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
-									"presentation_rect" : [ 62.0, 272.0, 237.0, 66.0 ],
+									"presentation_rect" : [ 73.0, 337.0, 237.0, 66.0 ],
 									"text" : "Now switch from Presentation Mode to Patching Mode, on the Max Toolbar below (or click alt+cmd+E)"
 								}
 
@@ -978,6 +1013,7 @@
 							}
 , 							{
 								"box" : 								{
+									"args" : [ "MIDI Player" ],
 									"bgmode" : 0,
 									"border" : 0,
 									"clickthrough" : 0,
@@ -1045,7 +1081,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 805.0, 54.0, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "3",
+									"text" : "4",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -1078,6 +1114,30 @@
 									"fontname" : "Arial Bold",
 									"fontsize" : 10.0,
 									"hint" : "",
+									"id" : "obj-12",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 100.291666666666515, 252.0, 15.0, 15.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 34.5, 193.5, 15.0, 15.0 ],
+									"rounded" : 60.0,
+									"text" : "1",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"fontsize" : 10.0,
+									"hint" : "",
 									"id" : "obj-31",
 									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
@@ -1086,11 +1146,11 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 72.166666666666515, 335.0, 15.0, 15.0 ],
+									"patching_rect" : [ 66.166666666666515, 635.0, 15.0, 15.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 41.5, 290.5, 15.0, 15.0 ],
+									"presentation_rect" : [ 52.5, 355.5, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "2",
+									"text" : "3",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -1110,11 +1170,11 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 72.166666666666515, 249.5, 15.0, 15.0 ],
+									"patching_rect" : [ 66.166666666666515, 549.5, 15.0, 15.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 128.5, 210.5, 15.0, 15.0 ],
+									"presentation_rect" : [ 139.5, 275.5, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "1",
+									"text" : "2",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -1132,7 +1192,7 @@
 									"patching_rect" : [ 28.0, 34.0, 237.0, 31.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 28.0, 34.0, 237.0, 31.0 ],
-									"text" : "UI versus App - Audio",
+									"text" : "UI versus App - MIDI",
 									"varname" : "HelpTitle"
 								}
 
@@ -1332,7 +1392,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 1063.291666666666515, 124.0, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "8",
+									"text" : "9",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -1558,6 +1618,41 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 3,
+									"fontface" : 1,
+									"id" : "obj-34",
+									"linecount" : 8,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 124.0, 200.5, 159.0, 118.0 ],
+									"presentation" : 1,
+									"presentation_linecount" : 4,
+									"presentation_rect" : [ 54.0, 169.0, 292.0, 64.0 ],
+									"text" : "Note: the somax.player.app is a generic player, meaning it can output either audio or MIDI. \nIn order to have an audio player, load an audio (A) corpus",
+									"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 3,
+									"fontface" : 1,
+									"id" : "obj-33",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 89.0, 482.50000799999998, 184.0, 24.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 150.0, 488.5, 185.0, 24.0 ],
+									"text" : "bpatcher somax.player.app"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.898039, 0.898039, 0.898039, 1 ],
 									"id" : "obj-18",
@@ -1602,7 +1697,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 17.5, 719.0, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "5",
+									"text" : "6",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -1638,7 +1733,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 935.0, 504.50000799999998, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "4",
+									"text" : "5",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -1690,11 +1785,11 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 95.0, 225.0, 151.0, 64.0 ],
+									"patching_rect" : [ 95.0, 522.0, 151.0, 64.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 4,
-									"presentation_rect" : [ 147.0, 186.0, 151.0, 64.0 ],
-									"text" : "Look at the two Somax Players on the right, they look almost identical, don't they?"
+									"presentation_rect" : [ 158.0, 251.0, 151.0, 64.0 ],
+									"text" : "Now look at the two Somax Players on the right, they look almost identical, don't they?"
 								}
 
 							}
@@ -1740,10 +1835,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 95.0, 296.0, 150.0, 93.0 ],
+									"patching_rect" : [ 95.0, 593.0, 150.0, 93.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
-									"presentation_rect" : [ 62.0, 272.0, 237.0, 66.0 ],
+									"presentation_rect" : [ 73.0, 337.0, 237.0, 66.0 ],
 									"text" : "Now switch from Presentation Mode to Patching Mode, on the Max Toolbar below (or click alt+cmd+E)"
 								}
 
@@ -2607,6 +2702,7 @@
 							}
 , 							{
 								"box" : 								{
+									"args" : [ "Audio Player" ],
 									"bgmode" : 0,
 									"border" : 0,
 									"clickthrough" : 0,
@@ -2674,7 +2770,31 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 805.0, 54.0, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "3",
+									"text" : "4",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"fontsize" : 10.0,
+									"hint" : "",
+									"id" : "obj-37",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 102.0, 252.0, 15.0, 15.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 34.5, 193.5, 15.0, 15.0 ],
+									"rounded" : 60.0,
+									"text" : "1",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -2694,11 +2814,11 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 72.166666666666515, 335.0, 15.0, 15.0 ],
+									"patching_rect" : [ 72.166666666666515, 632.0, 15.0, 15.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 41.5, 290.5, 15.0, 15.0 ],
+									"presentation_rect" : [ 52.5, 355.5, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "2",
+									"text" : "3",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -2742,11 +2862,11 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 72.166666666666515, 249.5, 15.0, 15.0 ],
+									"patching_rect" : [ 72.166666666666515, 546.5, 15.0, 15.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 128.5, 210.5, 15.0, 15.0 ],
+									"presentation_rect" : [ 139.5, 275.5, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "1",
+									"text" : "2",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -2909,6 +3029,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-11", 0 ],
+									"hidden" : 1,
 									"midpoints" : [ 1180.166666666666515, 416.0, 1127.666666666666515, 416.0 ],
 									"order" : 1,
 									"source" : [ "obj-26", 0 ]
@@ -3948,6 +4069,18 @@
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-8::obj-8::obj-2::obj-395::obj-375" : 				{
+					"parameter_longname" : "mc.live.gain~[2]"
+				}
+,
+				"obj-8::obj-8::obj-2::obj-395::obj-441" : 				{
+					"parameter_longname" : "mc.live.gain~[1]"
+				}
+,
+				"obj-8::obj-8::obj-2::obj-395::obj-469" : 				{
+					"parameter_longname" : "live.text[11]"
 				}
 ,
 				"obj-8::obj-8::obj-2::obj-395::obj-490" : 				{
