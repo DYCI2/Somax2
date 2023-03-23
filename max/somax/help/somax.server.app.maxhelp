@@ -344,7 +344,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 83.0, 126.0, 985.0, 854.0 ],
+						"rect" : [ 0.0, 26.0, 985.0, 854.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -3358,7 +3358,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 985.0, 854.0 ],
+						"rect" : [ 83.0, 126.0, 985.0, 854.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -4718,7 +4718,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 89.0, 684.0, 47.0 ],
-									"text" : "The somax.server.app object is a wrapper that handles the communication with the remote server (written in Python), where all the players are stored. The server also handles the scheduling of events and all aspects of timing and tempo, as well as the construction of new corpora through the Corpus Builder module.",
+									"text" : "The somax.server.app object is a wrapper that handles the communication with the remote server (written in Python), where all the players are stored. The server also handles the scheduling of events and all aspects of timing and tempo, as well as the construction of new corpora through the Corpus Builders module.",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
