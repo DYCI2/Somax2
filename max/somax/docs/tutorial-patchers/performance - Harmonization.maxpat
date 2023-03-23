@@ -40,6 +40,30 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-50",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 546.731105836006009, 334.95832873049676, 106.0, 47.0 ],
+					"text" : "try increasing it to 200, 500 or even 1000 ms"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-31",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 759.731105836006009, 182.95832873049676, 152.0, 47.0 ],
+					"text" : "with an initial onsetlimit of 50 ms, the playing is almost homorythmic"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"bubble" : 1,
 					"bubbleside" : 3,
 					"id" : "obj-13",
@@ -378,7 +402,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 22.0, 166.0, 432.0, 127.0 ],
-					"text" : "Follow the steps and enjoy the harmonic layer provided by this patch. \nThen, for further interaction, try increasing the Onset Limiter parameter (as described at point 7) and see how this varies the pace of the performance. This parameter sets the minimal amount of time (in milliseconds) between two consecutive onsets. Any consecutive onset detected within this time frame will be discarded, so it's very useful to control the time relation of phrases between an Influencer and a Player. This is initially set to 150 ms to provide a short but not immediate response to the Influence'rs input but try increasing it and see how the harmonization changes according to it."
+					"text" : "Follow the steps and enjoy the harmonic layer provided by this patch. \nThen, for further interaction, try increasing the Onset Limiter parameter (as described at point 7) and see how this varies the pace of the performance. This parameter sets the minimal amount of time (in milliseconds) between two consecutive onsets. Any consecutive onset detected within this time frame will be discarded, so it's very useful to control the time relation of phrases between an Influencer and a Player. This is initially set to 50 ms to provide a short but not immediate response to the Influence'rs input but try increasing it and see how the harmonization changes according to it."
 				}
 
 			}
@@ -703,7 +727,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 415.0, 350.0, 953.0, 429.0 ],
+						"rect" : [ 367.0, 323.0, 953.0, 429.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -750,7 +774,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 548.5, 169.5, 97.0, 47.0 ],
+									"patching_rect" : [ 548.5, 169.5, 100.0, 47.0 ],
 									"text" : "set internal melodic Memory Lenght"
 								}
 
@@ -763,7 +787,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 409.5, 223.5, 132.0, 22.0 ],
-									"text" : "melodicngramorder 3"
+									"text" : "melodicngramorder 2"
 								}
 
 							}
@@ -775,7 +799,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 535.0, 148.0, 99.0, 22.0 ],
-									"text" : "selfngramorder 3"
+									"text" : "selfngramorder 2"
 								}
 
 							}
@@ -1169,7 +1193,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 517.731105836006009, 156.0, 83.0, 22.0 ],
-					"text" : "onsetlimit 150"
+					"text" : "onsetlimit 50"
 				}
 
 			}
@@ -1943,6 +1967,22 @@
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-1::obj-2::obj-395::obj-375" : 				{
+					"parameter_longname" : "mc.live.gain~[2]"
+				}
+,
+				"obj-1::obj-2::obj-395::obj-441" : 				{
+					"parameter_longname" : "mc.live.gain~[1]"
+				}
+,
+				"obj-1::obj-2::obj-395::obj-469" : 				{
+					"parameter_longname" : "live.text[11]"
+				}
+,
+				"obj-1::obj-2::obj-395::obj-490" : 				{
+					"parameter_longname" : "live.text[6]"
 				}
 ,
 				"obj-69::obj-1150" : 				{
