@@ -51,27 +51,23 @@ A good starting point in understanding Somax is the document `Introduction Somax
 
 Because of space limitations, only a few tiny audio corpora (marked with a «(A)» in the corpus menu) are included in the distributions. Check the [Somax Project page](https://www.stms-lab.fr/projects/pages/somax2/) for more corpora.
 
-## Credits
-Somax 2 (c) Ircam 2012-2022
+## Credits 
 
-Somax 2 is a new version of the Somax reactive co-improvisation paradigm by G. Assayag. Written by Joakim Borg in Max and Python (2019-2022), featuring a modular multithreaded implementation, multiple wireless interacting players, new UI design with tutorials and documentation, as well as a number of new interaction parameters. 
+Somax2 (c) Ircam 2012-2023
 
+Somax2 is a radically new version of the Somax reactive co-improvisation paradigm born in the Music Representations Team at Ircam - STMS.
 
-Legacy:
+It is  part of the research projects ANR MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) directed by Gérard Assayag.
 
-* Early Java prototype by Olivier Delerue: adding reactivity to OMax
-* Versions 0.1 to 1.3 by Laurent Bonnasse-Gahot (postdoc): Design and implementation of core cognitive model, with external influence and reactive memory 
-* Versions 1.4 to 1.9 by Axel Chemla-Romeu-Santos: Python server, object-oriented design, streamviews
+Somax2 design by Gérard Assayag and Joakim Borg, development by Joakim Borg, documentations by Joakim Borg and Marco Fiorini.
 
-The Somax 2 project is part of the ANR project MERCI (Mixed Musical Reality with Creative Instruments) ANR-19-CE33-0010, and the ERC project REACH (Raising Co-creativity in Cyber-Human Musicianship) ERC-ADG-19-883313. PI : Gérard Assayag, Music Representation Team, IRCAM STMS Lab (CNRS, Sorbonne University, Ministry of Culture).
+Legacy:  original somax design by Gérard Assayag and Laurent-Bonnasse Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early prototype by Olivier Delerue.
 
-Original corpus creation: 
-* B. Borron & B. Magnien, (improvisation on ten jazz standards)  
-* Carine Bonnefoy (Improvisation on Intuition by C. Bonnnefoy)
-* Joëlle Léandre (Free Improvisation)
-* Fabbrizio Cassol (Free Improvisation)
+Thanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.
+
+Thanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini for their musical material used in Somax2 distribution corpus.
 
 
 ## Contacting the team
 
-See [Ircam Project Page](https://www.stms-lab.fr/projects/pages/somax2/) and [Ircam Forum discussion list](https://forum.ircam.fr/projects/detail/somax-2/).
+See [Project Page](http://repmus.ircam.fr/somax2).

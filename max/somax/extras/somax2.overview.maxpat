@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 366.0, 220.0, 942.0, 597.0 ],
+		"rect" : [ 365.0, 220.0, 942.0, 597.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -542,6 +542,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -638,7 +639,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 16.0, 525.0, 22.0 ],
-									"text" : "These tutorials will guide you through the usage of the Somax 2.5 application"
+									"text" : "These tutorials will guide you through the usage of the Somax2.5 application"
 								}
 
 							}
@@ -650,7 +651,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 45.0, 854.0, 47.0 ],
-									"text" : "The application implementation of Somax 2.5 provides modular objects for immediate musical interaction. \nAfter completing these tutorials, we recommend moving to the \"Max Tutorials\" tab to explore the potentiality of Somax 2.5 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours."
+									"text" : "The application implementation of Somax2.5 provides modular objects for immediate musical interaction. \nAfter completing these tutorials, we recommend moving to the \"Max Tutorials\" tab to explore the potentiality of Somax 2.5 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours."
 								}
 
 							}
@@ -881,7 +882,7 @@
 					"patching_rect" : [ 114.522727272727252, 66.0, 1296.0, 27.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 117.5, 33.0, 98.0, 27.0 ],
-					"text" : "Somax 2.5"
+					"text" : "Somax2"
 				}
 
 			}
@@ -893,7 +894,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-7",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -949,7 +949,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 640.0, 464.0, 275.0, 35.0 ],
+									"patching_rect" : [ 362.0, 417.0, 275.0, 35.0 ],
 									"text" : ";\rmax launchbrowser http://repmus.ircam.fr/somax2"
 								}
 
@@ -990,7 +990,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 8.0, 900.0, 355.0 ],
-									"text" : "Somax 2.5 is an application and a library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nIt is based on a machine listening, reactive engine and generative model that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisatin, composition, installations etc.\nWritten in Max and Python, it features a modular multithreaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM - STMS and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project of the European Research Council (director : Gérard Assayag).\n\nSomax2 development : Joakim Borg\nTutorials and help : Joakim Borg and Marco Fiorini\nLegacy:  original version written by Laurent-Bonnasse Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos.\nThanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their expertise.\n\nThanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini for their musical material used in Somax2 standard corpus."
+									"text" : "Somax2 is an application and a library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nIt is based on a machine listening, reactive engine and generative model that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisatin, composition, installations etc.\nWritten in Max and Python, it features a modular multithreaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM - STMS and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project of the European Research Council (director : Gérard Assayag).\n\nSomax2 development : Joakim Borg\nTutorials and help : Joakim Borg and Marco Fiorini\nLegacy:  original version written by Laurent-Bonnasse Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos.\nThanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.\n\nThanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini for their musical material used in Somax2 distribution corpus."
 								}
 
 							}
@@ -1077,7 +1077,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 16.0, 525.0, 22.0 ],
-									"text" : "These tutorials will guide you through the usage of the Somax 2.5 core abstractions"
+									"text" : "These tutorials will guide you through the usage of the Somax2.5 core abstractions"
 								}
 
 							}
@@ -1451,7 +1451,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.0, 42.0, 337.0, 20.0 ],
-									"text" : "Here you will find documentation for all the Somax 2.5 objects"
+									"text" : "Here you will find documentation for all the Somax2.5 objects"
 								}
 
 							}
@@ -1595,7 +1595,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.0, 15.0, 270.0, 22.0 ],
-									"text" : "Welcome to the Help Center of Somax 2.5"
+									"text" : "Welcome to the Help Center of Somax2.5"
 								}
 
 							}
