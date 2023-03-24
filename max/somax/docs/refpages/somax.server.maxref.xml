@@ -64,7 +64,12 @@
 		<method name="bang">
 			<arglist />
 			<digest>Output generation time</digest>
-			<description>TODO</description>
+			<description>
+				While the remote python server is running, a <m>bang</m> sent to its inlet will cause the <o>somax.server</o> object to output the current time of the remote python server's transport, out the left outlet. 
+				<br />
+				<br />
+				Time information is available in a list of four values: the time passed since the activation of the transport in ticks, the time passed since the activation of the transport in seconds, the current tempo in BPM and the current beat phase (describing the current position of the beat with a phase value between 0 and 1).
+			</description>
 		</method>
         <method name="int">
 			<arglist />
@@ -74,22 +79,33 @@
         <method name="corpora">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>List the corpora present on the current corpuspath</digest>
-			<description>The message <m>corpora</m> will cause the <o>somax.server</o> to output a list of all the corpora located in its <m>corpuspath</m>, out the left outlet.</description>
+			<description>
+				The message <m>corpora</m> will cause the <o>somax.server</o> to output a list of all the corpora located in its <m>corpuspath</m>, out the left outlet.
+			</description>
 		</method>
         <method name="corpuspath">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Query the current corpuspath</digest>
-			<description>The message <m>corpuspath</m> will cause the <o>somax.server</o> to output the location of its corpuspath, out the left outlet.</description>
+			<description>
+				The message <m>corpuspath</m> will cause the <o>somax.server</o> to output the location of its corpuspath, out the left outlet.
+			</description>
 		</method>
         <method name="initialize">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Initialize server</digest>
-			<description>TODO</description>
+			<description>
+				The <m>initialize</m> message will launch the remote python server through an external application. This will open on a separate terminal window, showing the remote server's <m>sendport</m>, <m>recvport</m> and <m>ip</m> address. 
+				<br />
+				<br />
+				Note: the status of the remote python server is constantly available out the middle outlet of the <o>somax.server</o> object.
+			</description>
 		</method>
         <method name="initializeplayers">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Initialize on the server all local players</digest>
-			<description>TODO</description>
+			<description>
+				The <m>initializeplayers</m> message will intialize all the local <o>somax.player</o> objects. This is the same as sending the <m>initialize</m> message to all of the <o>somax.player</o> objects individually. 
+			</description>
 		</method>
         <method name="ip">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
@@ -99,12 +115,16 @@
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Open server window</digest>
-			<description>Open the <o>somax.server</o> window. Here the remote python server's status is reported, as well as the <m>sendport</m>, the <m>recvport</m> and the <m>ip</m> address. Additional commands to <m>initialize</m>, <m>terminate</m> and <m>reload</m> the remote python server are provided, as well as the location of the current <m>corpuspath</m> and controls to set it to a new location, or reset it to default.</description>
+			<description>
+				Open the <o>somax.server</o> window. Here the remote python server's status is reported, as well as the <m>sendport</m>, the <m>recvport</m> and the <m>ip</m> address. Additional commands to <m>initialize</m>, <m>terminate</m> and <m>reload</m> the remote python server are provided, as well as the location of the current <m>corpuspath</m> and controls to set it to a new location, or reset it to default.
+			</description>
 		</method>
         <method name="players">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Get list of the players currently initialized on the server</digest>
-			<description>The message <m>players</m> will cause the <o>somax.server</o> to output the list of the <o>somax.player</o> objects currently initialized, out the left outlet.</description>
+			<description>
+				The message <m>players</m> will cause the <o>somax.server</o> to output the list of the <o>somax.player</o> objects currently initialized, out the left outlet.
+			</description>
 		</method>
         <method name="recvport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
@@ -114,7 +134,12 @@
 		<method name="reload">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Reload the server if terminated</digest>
-			<description>Reload the remote python server, if this has previously been terminated</description>
+			<description>
+				Reload the remote python server, if this has previously been terminated.
+				<br />
+				<br />
+				Note: the status of the remote python server is constantly available out the middle outlet of the <o>somax.server</o> object.	
+			</description>
 		</method>
         <method name="sendport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
@@ -124,17 +149,26 @@
         <method name="start">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Start generation</digest>
-			<description>Once the <o>somax.server</o> is initialized, the start message activates the server's transport to start the generation for all the <o>somax.player</o> objects currently initialized</description>
+			<description>
+				Once the <o>somax.server</o> is initialized, the <m>start</m> message activates the server's transport to start the generation for all the <o>somax.player</o> objects currently initialized.
+			</description>
 		</method>
         <method name="stop">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Stop generation</digest>
-			<description>Stops the server's transport and generation for all the <o>somax.player</o> objects currently initialized</description>
+			<description>
+				Once the <o>somax.server</o> is initialized, the <m>stop</m> message stops the server's transport and generation for all the <o>somax.player</o> objects currently initialized.
+			</description>
 		</method>
         <method name="terminate">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Terminate the server</digest>
-			<description>Terminates the remote python server</description>
+			<description>
+				Terminates the remote python server.
+				<br />
+				<br />
+				Note: the status of the remote python server is constantly available out the middle outlet of the <o>somax.server</o> object.
+			</description>
 		</method>
         <method name="time">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
@@ -147,23 +181,31 @@
 	<attributelist>
         <attribute name="active" get="0" set="1" type="symbol" size="1">
 			<digest>Performs the same function as int</digest>
-			<description>TODO</description>
+			<description>Performs the same function as <m>int</m></description>
 		</attribute>
         <attribute name="autoinitialize" get="0" set="1" type="symbol" size="1">
 			<digest>Enable/Disable autoinitialization of the server when created</digest>
-			<description>TODO</description>
+			<description>
+				By default the <o>somax.server</o> will be automatically initalized when created. Set this attribute to 0 to disable this behaviour. 
+			</description>
 		</attribute>
         <attribute name="autoterminate" get="0" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
-			<description>TODO</description>
+			<digest>Enable/Disable autotermination of the server when closing its Max window</digest>
+			<description>
+				By default the <o>somax.server</o> will be automatically terminated when closing the Max window containing it. Set this attribute to 0 to disable this behaviour. 
+			</description>
 		</attribute>
         <attribute name="tempo" get="1" set="1" type="symbol" size="1">
 			<digest>Set server transport tempo value</digest>
-			<description>TODO</description>
+			<description>The <m>tempo</m> messages, followed by a value in BPM, will set the remote python server's transport tempo.</description>
 		</attribute>
         <attribute name="temposource" get="1" set="1" type="symbol" size="1">
 			<digest>Select the source from which the server controls its tempo</digest>
-			<description>TODO</description>
+			<description>
+				The tempo of the remote python server can be controlled by the original tempo of any <o>somax.player</o>'s loaded <m>corpus</m>. To do so, send to the <o>somax.server</o> object the message <m>temposource</m> followed by the target <o>somax.player</o>'s <m>name</m>. To stop following the tempo of the player, send to the <o>somax.server</o> the message <m>temposource -1</m>.
+				<br />
+				Note: Changing the tempo with the <m>tempo</m> message will also clear the tempo source.
+			</description>
 		</attribute>
 	</attributelist>
 	
