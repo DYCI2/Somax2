@@ -22,12 +22,12 @@
 	<methodlist>
         <method name="(player_protocol)">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Directly connected to the first inlet of the player</digest>
 			<description>TODO</description>
 		</method>
 		<method name="bang">
 			<arglist />
-			<digest>TODO</digest>
+			<digest>Trigger output for current chroma value and onset</digest>
 			<description>TODO</description>
 		</method>
         <method name="int">

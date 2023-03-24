@@ -57,11 +57,6 @@
 			<digest>Toggle generation</digest>
 			<description>Performs the same function as <m>start</m> and <m>stop</m></description>
 		</method>
-        <method name="beatphase">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
         <method name="corpora">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>List the corpora present on the current corpuspath</digest>
@@ -82,11 +77,6 @@
 			<digest>Initialize on the server all local players</digest>
 			<description>TODO</description>
 		</method>
-        <method name="interpreter">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
         <method name="ip">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Set server ip address</digest>
@@ -99,12 +89,7 @@
 		</method>
         <method name="players">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        <method name="rawsend">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Get list of the players currently initialized on the server</digest>
 			<description>TODO</description>
 		</method>
         <method name="recvport">
@@ -139,7 +124,7 @@
 		</method>
         <method name="time">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Performs the same function as bang</digest>
 			<description>TODO</description>
 		</method>
 	</methodlist>
@@ -147,7 +132,7 @@
     <!--ATTRIBUTES-->
 	<attributelist>
         <attribute name="active" get="0" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
+			<digest>Performs the same function as int</digest>
 			<description>TODO</description>
 		</attribute>
         <attribute name="autoinitialize" get="0" set="1" type="symbol" size="1">
@@ -155,10 +140,6 @@
 			<description>TODO</description>
 		</attribute>
         <attribute name="autoterminate" get="0" set="1" type="symbol" size="1">
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</attribute>
-		<attribute name="loglevel" get="1" set="1" type="symbol" size="1">
 			<digest>TODO</digest>
 			<description>TODO</description>
 		</attribute>

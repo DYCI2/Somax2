@@ -73,7 +73,7 @@
 		</method>
         <method name="corpusquery">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>ERROR</digest>
+			<digest>Query information about the player's loaded corpus.</digest>
 			<description>TODO</description>
 		</method>
         
@@ -144,7 +144,7 @@
 		</method>
         <method name="zap">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Performs the same function as reload</digest>
 			<description>Same as <m>reload</m></description>
 		</method>
 	</methodlist>
@@ -212,7 +212,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="melodicmod12" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Select between exact pitch or pitch class matching for external melodic influences</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="melodicngramorder" get="1" set="1" type="symbol" size="1">
@@ -236,7 +236,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="mode" get="1" set="1" type="symbol" size="1">
-            <digest>Set playing mode to decide when to play the next event</digest>
+            <digest>Macro parameter that controls both playingmode and decaybasis</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="outputfrom" get="1" set="1" type="symbol" size="1">
@@ -248,7 +248,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="playingmode" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set playing mode to decide when to play the next event</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="pollpeaks" get="1" set="1" type="symbol" size="1">
@@ -288,7 +288,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="selfmod12" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Select between exact pitch or pitch class matching for internal melodic influences</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="selfngramorder" get="1" set="1" type="symbol" size="1">

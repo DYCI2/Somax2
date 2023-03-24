@@ -20,11 +20,6 @@
 
 	<!--MESSAGES-->
 	<methodlist>
-        <method name="bang">
-			<arglist />
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
 		<method name="bpm">
 			<arglist />
 			<digest>Set initial BPM corpus value</digest>
@@ -37,7 +32,7 @@
 		</method>
         <method name="copy">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Enable/Disable copy audio file option</digest>
 			<description>TODO</description>
 		</method>
         <method name="corpuspath">
