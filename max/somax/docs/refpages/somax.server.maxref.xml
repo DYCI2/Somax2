@@ -144,7 +144,9 @@
         <method name="sendport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Query the current OSC send port address</digest>
-			<description>The message <m>recvport</m> will cause the <o>somax.server</o> to output the value of its OSC send port, out the left outlet.</description>
+			<description>
+				The message <m>recvport</m> will cause the <o>somax.server</o> to output the value of its OSC send port, out the left outlet.
+			</description>
 		</method>
         <method name="start">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>

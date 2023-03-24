@@ -36,6 +36,7 @@
 				The <m>build</m> message will cause the <o>somax.audiocorpusbuilder</o> to build the specified corpus according to the used segmentation parameters.
 				There are two supported formats for this message: <m>build path/to/audiofile.wav</m> or <m>build path/to/audiofile.wav corpus_name</m>.
 				Once build, the corpus will be available in the selected <m>corpuspath</m> to load in any <o>somax.player</o>.
+				When the build is successfull, the <m>corpuspath</m> of the built corpus is output by the <o>somax.audiocorpusbuilder</o> out its first outlet. The value -1 is output instead if the build fails.
 				<br />
 				Note: if no explicit corpus_name is provided, the corpus will have the same name as the audio file.
 			</description>
@@ -51,7 +52,7 @@
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Set corpuspath</digest>
 			<description>
-				Set the path for the folder in which the segmented corpus should be saved. When a corpus is build, the current <m>corpuspath</m> is output by the <o>somax.audiocorpusbuilde</o> out its first outlet.
+				Set the path for the folder in which the segmented corpus should be saved. When a corpus is build, the current <m>corpuspath</m> is output by the <o>somax.audiocorpusbuilder</o> out its first outlet. The value -1 is output if the build fails.
 			</description>
 		</method>
         <method name="dump">
@@ -91,7 +92,7 @@
 			<description>
 				The <m>overwrite</m> message controls the Overwrite existing <o>toggle</o> available in the <o>somax.audiocorpusbuilder</o> window, enabling it with <m>overwrite 1</m> and disabling it with <m>overwrite 0</m>. If this toggle is active, and a corpus with the same name exist in the current <m>corpuspath</m>, the corpus file will be overwritten. 
 				<br />
-				Note: this will not overwrite any audio file, only the pickle corpus file.
+				Note: this will not overwrite any audio file, only the (.pickle) corpus file.
 			</description>
 		</method>
         <method name="reset">
