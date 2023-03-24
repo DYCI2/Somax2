@@ -24,7 +24,13 @@
 				OSC send port
 			</digest>
 			<description>
-				TODO
+				The optional first argument sets the value for the port used by the <o>somax.server</o> object to send information to the remote python server. This port value is passed to the <o>udpsend</o> internal object, used to communicate with the python server through OSC. Therefore, the same port will be the python server input port, as you read in the terminal at the moment of initializing the <o>somax.server</o> object.
+				<br />
+				<br />
+				Note: if any port but default is used, it will be necessary for the user to manually launch the server (shell command or from a terminal)
+				<br />
+				<br />
+				If there's no argument, the OSC send port is initialized at the default 1234.
 			</description>
 		</objarg>
         <objarg name="recvport" optional="1" type="int">
@@ -32,7 +38,13 @@
 				OSC receive port
 			</digest>
 			<description>
-				TODO
+				The optional second argument sets the value for the port used by the <o>somax.server</o> object to receive information from the remote python server. This port value is passed to the <o>udpreceive</o> internal object, used to communicate with the python server through OSC. Therefore, the same port will be the python server output port, as you read in the terminal at the moment of initializing the <o>somax.server</o> object.
+				<br />
+				<br />
+				Note: if any port but default is used, it will be necessary for the user to manually launch the server (shell command or from a terminal)
+				<br />
+				<br />
+				If there's no argument, the OSC receive port is initialized at the default 1235.
 			</description>
 		</objarg>
         <objarg name="ip" optional="1" type="symbol">
@@ -40,7 +52,9 @@
 				OSC ip address
 			</digest>
 			<description>
-				TODO
+				The optional third argument specifies the ip address used by the <o>somax.server</o> to communicate with the remote python server. This address is passed to the <o>udpsend</o> internal object, as the <m>host</m> destination to which messages will be sent. The OSC ip address can be specified either by name (e.g., localhost) or by ip address (e.g., 127.0.0.1)
+				<br /> 
+				If there's no argument, the OSC ip address is initialized at 127.0.0.1, corresponding to <m>localhost</m>
 			</description>
 		</objarg>
 	</objarglist>
@@ -79,53 +93,53 @@
 		</method>
         <method name="ip">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Set server ip address</digest>
+			<digest>Set server OSC ip address</digest>
 			<description>TODO</description>
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Open server window</digest>
-			<description>TODO</description>
+			<description>Open the <o>somax.server</o> window. Here the remote python server's status is reported, as well as the <m>sendport</m>, the <m>recvport</m> and the <m>ip</m> address. Additional commands to <m>initialize</m>, <m>terminate</m> and <m>reload</m> the remote python server are provided, as well as the location of the current <m>corpuspath</m> and controls to set it to a new location, or reset it to default.</description>
 		</method>
         <method name="players">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Get list of the players currently initialized on the server</digest>
-			<description>TODO</description>
+			<description>The message <m>players</m> will cause the <o>somax.server</o> to output the list of the <o>somax.player</o> objects currently initialized, out the left outlet.</description>
 		</method>
         <method name="recvport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Set OSC receive port address</digest>
-			<description>TODO</description>
+			<description>Performs the same function as <m>recvport</m>, but after initialization.</description>
 		</method>
 		<method name="reload">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Reload the server if terminated</digest>
-			<description>TODO</description>
+			<description>Reload the remote python server, if this has previously been terminated</description>
 		</method>
         <method name="sendport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Set OSC send port address</digest>
-			<description>TODO</description>
+			<description>Performs the same function as <m>sendport</m>, but after initialization.</description>
 		</method>
         <method name="start">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Start generation</digest>
-			<description>TODO</description>
+			<description>Once the <o>somax.server</o> is initialized, the start message activates the server's transport to start the generation for all the <o>somax.player</o> objects currently initialized</description>
 		</method>
         <method name="stop">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Stop generation</digest>
-			<description>TODO</description>
+			<description>Stops the server's transport and generation for all the <o>somax.player</o> objects currently initialized</description>
 		</method>
         <method name="terminate">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Terminate the server</digest>
-			<description>TODO</description>
+			<description>Terminates the remote python server</description>
 		</method>
         <method name="time">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Performs the same function as bang</digest>
-			<description>TODO</description>
+			<description>Performs the same function as <m>bang</m></description>
 		</method>
 	</methodlist>
 	

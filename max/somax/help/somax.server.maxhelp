@@ -1241,7 +1241,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 59.0, 106.0, 859.0, 650.0 ],
+										"rect" : [ 67.0, 106.0, 859.0, 650.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -1302,7 +1302,7 @@
 														}
 ,
 														"classnamespace" : "box",
-														"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
+														"rect" : [ 67.0, 106.0, 640.0, 480.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 0,
 														"default_fontsize" : 12.0,
@@ -1963,7 +1963,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 113.999999999999886, 352.229166666666572, 212.0, 127.0 ],
+													"patching_rect" : [ 113.999999999999886, 352.229166666666572, 215.0, 127.0 ],
 													"text" : "the server is not responding to any requests. If you are in the middle of performing an expensive operation (for example \"test segmentation\" on a long audio file in the audio corpus builder), this is nothing to worry about. If this would happen in any other case, it's likely an indicator that the server has crashed",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2248,7 +2248,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 522.541666666666629, 127.229166666666572, 206.0, 35.0 ],
-													"text" : "offline"
+													"text" : "terminated"
 												}
 
 											}
@@ -2289,7 +2289,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 12.941666666666606, 40.0, 301.0, 60.0 ],
-													"text" : "The somax.server object is communicating with the remote server, so it's important to know if the remote server's status. This is shown by the second outlet of the somax.server",
+													"text" : "The somax.server object is communicating with the remote server, so it's important to know the remote server's status. This is shown by the second outlet of the somax.server",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
 
@@ -2640,7 +2640,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 212.541666666666629, 370.229166666666572, 206.0, 35.0 ],
-									"text" : "0 offline"
+									"text" : "0 terminated"
 								}
 
 							}
