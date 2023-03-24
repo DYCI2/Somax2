@@ -74,12 +74,12 @@
         <method name="corpora">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>List the corpora present on the current corpuspath</digest>
-			<description>TODO</description>
+			<description>The message <m>corpora</m> will cause the <o>somax.server</o> to output a list of all the corpora located in its <m>corpuspath</m>, out the left outlet.</description>
 		</method>
         <method name="corpuspath">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Query the current corpuspath</digest>
-			<description>TODO</description>
+			<description>The message <m>corpuspath</m> will cause the <o>somax.server</o> to output the location of its corpuspath, out the left outlet.</description>
 		</method>
         <method name="initialize">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
@@ -93,8 +93,8 @@
 		</method>
         <method name="ip">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Set server OSC ip address</digest>
-			<description>TODO</description>
+			<digest>Query the current OSC ip address</digest>
+			<description>The message <m>ip</m> will cause the <o>somax.server</o> to output its OSC ip address, out the left outlet.</description>
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
@@ -108,8 +108,8 @@
 		</method>
         <method name="recvport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Set OSC receive port address</digest>
-			<description>Performs the same function as <m>recvport</m>, but after initialization.</description>
+			<digest>Query the current OSC receive port address</digest>
+			<description>The message <m>recvport</m> will cause the <o>somax.server</o> to output the value of its OSC receive port, out the left outlet.</description>
 		</method>
 		<method name="reload">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
@@ -118,8 +118,8 @@
 		</method>
         <method name="sendport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Set OSC send port address</digest>
-			<description>Performs the same function as <m>sendport</m>, but after initialization.</description>
+			<digest>Query the current OSC send port address</digest>
+			<description>The message <m>recvport</m> will cause the <o>somax.server</o> to output the value of its OSC send port, out the left outlet.</description>
 		</method>
         <method name="start">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
