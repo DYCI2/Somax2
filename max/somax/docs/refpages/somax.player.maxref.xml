@@ -172,11 +172,11 @@
             <description>TODO</description>
         </attribute>
         <attribute name="decaybasis" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Select method for decay time scaling of previous peaks</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="enabled" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable the player</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="enforcetaboo" get="1" set="1" type="symbol" size="1">
@@ -188,7 +188,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="harmonicenable" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable external harmonic influences</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="harmonicngramorder" get="1" set="1" type="symbol" size="1">
@@ -196,7 +196,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="harmonicpeakdecay" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set decay time value (unit according to the selected decay basis method) for external harmonic peaks</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="ignorephase" get="1" set="1" type="symbol" size="1">
@@ -208,7 +208,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="melodicenable" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable external melodic influences</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="melodicmod12" get="1" set="1" type="symbol" size="1">
@@ -220,7 +220,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="melodicpeakdecay" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set decay time value (unit according to the selected decay basis method) for external melodic peaks</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="mididurations" get="1" set="1" type="symbol" size="1">
@@ -272,7 +272,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="selfharmonicenable" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable internal harmonic influences</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="selfharmonicngramorder" get="1" set="1" type="symbol" size="1">
@@ -280,11 +280,11 @@
             <description>TODO</description>
         </attribute>
         <attribute name="selfharmonicpeakdecay" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set decay time value (unit according to the selected decay basis method) for internal harmonic peaks</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="selfmelodicenable" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Enable/Disable internal melodic influences</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="selfmod12" get="1" set="1" type="symbol" size="1">
@@ -293,6 +293,10 @@
         </attribute>
         <attribute name="selfngramorder" get="1" set="1" type="symbol" size="1">
             <digest>Set value for internal melodic memory length</digest>
+            <description>TODO</description>
+        </attribute>
+         <attribute name="selfpeakdecay" get="1" set="1" type="symbol" size="1">
+            <digest>Set decay time value (unit according to the selected decay basis method) for internal melodic peaks</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="sparse" get="1" set="1" type="symbol" size="1">
@@ -324,7 +328,7 @@
             <description>TODO</description>
         </attribute>
         <attribute name="transpositionbias" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set attenuation value for transpositions</digest>
             <description>TODO</description>
         </attribute>
         <attribute name="transpositions" get="1" set="1" type="symbol" size="1">

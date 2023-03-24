@@ -47,7 +47,7 @@
 		</method>
         <method name="dump">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
+			<digest>Dump all current parameter values on the fourth outlet</digest>
 			<description>TODO</description>
 		</method>
         <method name="gainthresh">
