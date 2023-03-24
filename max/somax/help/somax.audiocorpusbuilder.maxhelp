@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 84.0, 66.0, 1869.0, 1281.0 ],
+		"rect" : [ 67.0, 66.0, 1058.0, 722.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1869.0, 1255.0 ],
+						"rect" : [ 0.0, 26.0, 1058.0, 696.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -121,7 +121,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 92.0, 1869.0, 1255.0 ],
+						"rect" : [ 67.0, 92.0, 1058.0, 696.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1190,8 +1190,24 @@
 					"parameter_longname" : "live.text[5]"
 				}
 ,
+				"obj-3::obj-5::obj-395::obj-375" : 				{
+					"parameter_longname" : "mc.live.gain~[2]"
+				}
+,
+				"obj-3::obj-5::obj-395::obj-441" : 				{
+					"parameter_longname" : "mc.live.gain~[1]"
+				}
+,
+				"obj-3::obj-5::obj-395::obj-469" : 				{
+					"parameter_longname" : "live.text[11]"
+				}
+,
 				"obj-3::obj-5::obj-395::obj-472" : 				{
 					"parameter_longname" : "live.text[7]"
+				}
+,
+				"obj-3::obj-5::obj-395::obj-490" : 				{
+					"parameter_longname" : "live.text[6]"
 				}
 
 			}

@@ -23,67 +23,104 @@
 		<method name="bpm">
 			<arglist />
 			<digest>Set initial BPM corpus value</digest>
-			<description>TODO</description>
+			<description>
+				The <m>bpm</m> message, followed by a tempo value in BPM, will provide the <o>somax.audiocorpusbuilder</o> with an estimate of the initial tempo of the corpus to be segmented.
+				<br />
+				Note: this is only used when using beat-related <m>timestretchmode</m> in the <o>somax.player</o>. Providing this value is therefore not mandatory.
+			</description>
 		</method>
         <method name="build">
 			<arglist />
 			<digest>Build audio corpus</digest>
-			<description>TODO</description>
+			<description>
+				The <m>build</m> message will cause the <o>somax.audiocorpusbuilder</o> to build the specified corpus according to the used segmentation parameters.
+				There are two supported formats for this message: <m>build path/to/audiofile.wav</m> or <m>build path/to/audiofile.wav corpus_name</m>.
+				Once build, the corpus will be available in the selected <m>corpuspath</m> to load in any <o>somax.player</o>.
+				<br />
+				Note: if no explicit corpus_name is provided, the corpus will have the same name as the audio file.
+			</description>
 		</method>
         <method name="copy">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Enable/Disable copy audio file option</digest>
-			<description>TODO</description>
+			<description>
+				The <m>copy</m> message controls the Copy Audio File <o>toggle</o> available in the <o>somax.audiocorpusbuilder</o> window, enabling it with <m>copy 1</m> and disabling it with <m>copy 0</m>. The state of this toggle determines whether the audio file that the corpus is constructed from should be copied to the <m>corpuspath</m> folder along with the .pickle file generated from its segmentation.
+			</description>
 		</method>
         <method name="corpuspath">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Set corpuspath</digest>
-			<description>TODO</description>
+			<description>
+				Set the path for the folder in which the segmented corpus should be saved. When a corpus is build, the current <m>corpuspath</m> is output by the <o>somax.audiocorpusbuilde</o> out its first outlet.
+			</description>
 		</method>
         <method name="dump">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Dump all current parameter values on the fourth outlet</digest>
-			<description>TODO</description>
+			<description>
+				The <m>dump</m> message will cause the <o>somax.audiocorpusbuilder</o> to output the current values of all its parameters out its fourth outlet.
+			</description>
 		</method>
         <method name="gainthresh">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Set peak gain threshold in audio corpus segmentation</digest>
-			<description>TODO</description>
+			<description>
+				If the <m>segmode</m> is set to Onset, the message <m>gainthresh</m>, followed by a <o>float</o>, will set the value for the peak gain threshold.
+				This parameter controls how much a peak in the audio signal must differ (in amplitude) from its surrounding samples in order to be considered a peak.
+				<br />
+				For polyphonic content, a low value (~0.07) is a good solution to detect many peaks, while for monophonic content or content with clear onsets, a higher value (~0.3) can be used.
+			</description>
 		</method>
         <method name="mindur">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Set minimum segment duration (ms) in audio corpus segmentation</digest>
-			<description>TODO</description>
+			<description>
+				If the <m>segmode</m> is set to Onset, the message <m>mindur</m>, followed by a <o>float</o>, will set the minimum amount of time (in milliseconds) between two consecutive onsets. This parameter is useful to avoid too short slices.
+			</description>
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Open audio corpus builder parameters window</digest>
-			<description>TODO</description>
+			<description>
+				Open the <o>somax.audiocorpusbuilder</o> window, with access to a user interface to control all the parameters of the segmentation. It's recommended to use this user interface to build the corpus, as it allows to test the segmentation and to listen to the it before building the corpus.
+			</description>
 		</method>
         <method name="overwrite">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Overwrite existing audio corpus</digest>
-			<description>TODO</description>
+			<description>
+				The <m>overwrite</m> message controls the Overwrite existing <o>toggle</o> available in the <o>somax.audiocorpusbuilder</o> window, enabling it with <m>overwrite 1</m> and disabling it with <m>overwrite 0</m>. If this toggle is active, and a corpus with the same name exist in the current <m>corpuspath</m>, the corpus file will be overwritten. 
+				<br />
+				Note: this will not overwrite any audio file, only the pickle corpus file.
+			</description>
 		</method>
         <method name="reset">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Reset default parameters for audio corpus segmentation</digest>
-			<description>TODO</description>
+			<description>
+				Resets the parameters of the <o>somax.audiocorpusbuilder</o> to their default values.
+			</description>
 		</method>
         <method name="seginterval">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Set interval duration in audio corpus segmentation</digest>
-			<description>TODO</description>
+			<description>
+				If the <m>segmode</m> is set to Interval, this message controls the duration in milliseconds of the slices.
+			</description>
 		</method>
         <method name="segmode">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Select audio corpus segmentation mode</digest>
-			<description>TODO</description>
+			<description>
+				The <m>segmode</m> message controls the segmentation mode used in the <o>somax.audiocorpusbuilder</o>. There are two segmentation modes, selected with the following messages. The message <m>segmode 0</m> sets the mode to Interval, meaning that the content is segmented at fixed intervals set by the <m>seginterval</m> parameter. The message <m>segmode 1</m> sets the mode to Onset, where the audio file is segmented into slices by detecting onsets in the content. This is the default mode and there are a number of parameters to determine how onsets should be detected: <m>mindur</m>, <m>window</m> and <m>gainthresh</m>.
+			</description>
 		</method>
         <method name="window">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Set peak window value (ms) in audio corpus segmentation</digest>
-			<description>TODO</description>
+			<description>
+				If the <m>segmode</m> is set to Onset, the message <m>window</m>, followed by a <o>float</o>, will set the minimum amount of time (in milliseconds) that controls the window over which each peak in the signal is evaluated in order to determine whether it's an onset or not. A smaller window will generally result in more detected onsets and therefore more slices.
+			</description>
 		</method>
 	</methodlist>
 	

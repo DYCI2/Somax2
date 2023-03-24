@@ -86,5 +86,9 @@
     "export": {
         "title": "Export Segmentation",
         "description": "The «Export» button can be used to export the visualized segmentation as a text file."  
+    },
+    "copy": {
+        "title": "Copy Audio File",
+        "description": "The state of this toggle determines whether the audio file that the corpus is constructed from should be copied to the corpuspath folder along with the .pickle file generated from its segmentation."  
     }
 }
