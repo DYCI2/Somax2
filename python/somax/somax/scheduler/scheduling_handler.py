@@ -9,7 +9,7 @@ from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
 from somax.scheduler.midi_state_handler import MidiStateHandler, NoteOffMode
 from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, AudioOffEvent, MidiNoteEvent, \
-    TimeoutInfoEvent
+    TimeoutInfoEvent, AudioContinueEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
@@ -170,6 +170,10 @@ class SchedulingHandler(Introspective, ABC):
         phase: float = time.phase
         stretched_time = self.stretch_time(time_value, tempo)
         output_events.extend(self._scheduler.update_time(time=stretched_time, tempo=tempo, phase=phase))
+
+        # Inform audio handler that it should not output any AudioContinueEvent if a timeout has occurred
+        output_events = self._handle_timeout_audio(current_time=stretched_time, events=output_events)
+
         output_events.extend(self.audio_handler.poll(stretched_time))
         output_events.extend(self.midi_handler.poll(stretched_time))
 
@@ -190,6 +194,19 @@ class SchedulingHandler(Introspective, ABC):
         self._last_time_object = time
 
         return output_events
+
+    def _handle_timeout_audio(self, current_time: float, events: List[ScheduledEvent]) -> List[ScheduledEvent]:
+        audio_continuation_occurred: bool = any(isinstance(e, AudioContinueEvent) for e in events)
+
+        # if an AudioContinueEvent and an AudioOffEvent exist in the same buffer, delete the AudioOffEvent:
+        if audio_continuation_occurred:
+            return [e for e in events if not isinstance(e, AudioOffEvent)]
+        # if no AudioContinueEvent occurred and an AudioOffEvent occurred, inform the AudioStateHandler
+        else:
+            if any(isinstance(e, AudioOffEvent) for e in events):
+                events.extend(self.audio_handler.flush(current_time))
+
+        return events
 
     def handle_timeskip(self, time: float) -> List[ScheduledEvent]:
         output_events: List[ScheduledEvent] = self.flush()
