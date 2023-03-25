@@ -388,7 +388,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 91.0, 281.0, 196.0, 40.0 ],
+													"patching_rect" : [ 91.0, 281.0, 197.0, 40.0 ],
 													"text" : "chromafilter disables/enables the leaky integration",
 													"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 												}
@@ -684,7 +684,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
+										"rect" : [ 67.0, 106.0, 640.0, 480.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -989,7 +989,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 73.0, 342.0, 334.0, 65.0 ],
+													"patching_rect" : [ 73.0, 342.0, 337.0, 65.0 ],
 													"text" : "onsetchannels: When working with MIDI input consisting of multiple channels (e.g. a MIDI file), the onsetchannels message can be used to select which channels onsets should be detected on. See reference for format",
 													"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 												}
@@ -1074,7 +1074,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 136.0, 87.5, 322.0, 54.0 ],
+													"patching_rect" : [ 136.0, 87.5, 323.0, 54.0 ],
 													"text" : "the chordthreshold parameter can be used to avoid duplicate onsets when notes arrive closely in time (e.g. when playing chords on a MIDI keyboard)",
 													"textcolor" : [ 0.34782600402832, 0.34782600402832, 0.34782600402832, 1.0 ]
 												}

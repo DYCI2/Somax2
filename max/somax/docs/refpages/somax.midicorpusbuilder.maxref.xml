@@ -8,7 +8,7 @@
 	</digest>
 
 	<description>
-		The somax.midicorpusbuilder is used to construct a corpus from one (or multiple) MIDI file(s). A somax.player cannot read a MIDI file directly, it requires the MIDI to be analyzed before being able to parse it. The somax.audiocorpusbuilder does exactly that — it segments the audio file and analyzes it with regards to a number of descriptors and exports the result as a separate file, that then can be loaded into a somax.player.
+		The <o>somax.midicorpusbuilder</o> is used to construct a corpus from one (or multiple) MIDI file(s). A somax.player cannot read a MIDI file directly, it requires the MIDI to be analyzed before being able to parse it. The <o>somax.midicorpusbuilder</o> does exactly that — it segments the MIDI file and analyzes it with regards to a number of descriptors and exports the result as a separate file, that then can be loaded into a <o>somax.player</o>.
 	</description>
 
 	<!--METADATA-->

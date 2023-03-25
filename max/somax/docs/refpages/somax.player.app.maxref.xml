@@ -4,11 +4,11 @@
 <c74object name="somax.player.app" module="somax" kind="patcher">
 
 	<digest>
-		Digest
+		Main generative object of the somax application 
 	</digest>
 
 	<description>
-		Description
+		The <o>somax.player.app</o> is a wrapper around the <o>somax.player</o>, encapsulating it together with other useful tools for routing influences, rendering and playing back audio or MIDI output. The <o>somax.player.app</o> has a graphic interface to control all its parameters and provide the user with better interaction. Thanks to this app object, somax can send influences between influencers and players wirelessly (i.e. without max patch cords). 
 	</description>
 
 	<!--METADATA-->

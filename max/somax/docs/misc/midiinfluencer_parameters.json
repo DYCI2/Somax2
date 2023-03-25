@@ -13,7 +13,7 @@
     },
     "pitchfromchords": {
         "title": "Pitch Analysis",
-        "description": "If the «Onset Threshold» parameter is not bypassed, this parameter specifies which pitch analysis method should be used for polyphonic input. Note that it is recommended (but not required) to make sure that the receiving somax.player uses the same analysis method as the MIDI influencer."
+        "description": "If the «Chord Threshold» parameter is not bypassed, this parameter specifies which pitch analysis method should be used for polyphonic input. Note that it is recommended (but not required) to make sure that the receiving somax.player uses the same analysis method as the MIDI influencer."
     },
     "onsetfrom": {
         "title": "Onset Analysis",
@@ -21,7 +21,7 @@
     },
     "threshold": {
         "title": "Chord Threshold",
-        "description": "When bypassed, any MIDI Note On generates new pitch onset influences. This can sometimes be problematic for polyphonic MIDI input. By turning the bypassing off, the MIDI influencer will the number of milliseconds specified by this value for further input before analysing any received messages, thereby grouping the input into chords. This behaviour is further explained in the «polyphony» tab."
+        "description": "When bypassed, any MIDI Note On generates new pitch onset influences. This can sometimes be problematic for polyphonic MIDI input. By turning the bypassing off, the MIDI influencer will wait the number of milliseconds specified by this value for further input before analysing any received messages, thereby grouping the input into chords. This behaviour is further explained in the «polyphony» tab."
     },
     "flush": {
         "title": "Flush",

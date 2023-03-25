@@ -4,11 +4,11 @@
 <c74object name="somax.server.ui" module="somax" kind="patcher">
 
 	<digest>
-		Digest
+		The server of the somax application
 	</digest>
 
 	<description>
-		Description
+		The <o>somax.server.app</o> object is a wrapper that handles the communication with the remote server (written in python), where all the players are stored. The server also handles the scheduling of events and all aspects of timing and tempo, as well as the construction of new corpora through the corpus builders module.
 	</description>
 
 	<!--METADATA-->

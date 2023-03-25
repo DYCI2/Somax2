@@ -4,11 +4,11 @@
 <c74object name="somax.audioinfluencer.ui" module="somax" kind="patcher">
 
 	<digest>
-		Digest
+		Wrapper around the <o>somax.audioinfluencer</o> object
 	</digest>
 
 	<description>
-		Description
+		The <o>somax.audioinfluencer.app</o> object is a convenient wrapper around the audio influencer with some additional user interface to handle input and output. Thanks to this app object, Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). 
 	</description>
     
     <!--ARGUMENTS-->

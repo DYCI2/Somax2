@@ -2385,7 +2385,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
+						"rect" : [ 84.0, 126.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2452,25 +2452,6 @@
 							}
 , 							{
 								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 2,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-32",
-									"ignoreclick" : 0,
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 482.0, 490.0, 21.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 185.833331644535065, 417.75, 176.166669845581055, 23.5 ],
-									"proportion" : 0.5
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"border" : 0,
 									"filename" : "helpdetails.js",
 									"id" : "obj-2",
@@ -2530,7 +2511,6 @@
 									"border" : 2,
 									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"id" : "obj-24",
-									"ignoreclick" : 0,
 									"maxclass" : "panel",
 									"mode" : 0,
 									"numinlets" : 1,
@@ -2573,7 +2553,6 @@
 									"border" : 2,
 									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"id" : "obj-12",
-									"ignoreclick" : 0,
 									"maxclass" : "panel",
 									"mode" : 0,
 									"numinlets" : 1,
@@ -2707,7 +2686,6 @@
 									"border" : 2,
 									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"id" : "obj-14",
-									"ignoreclick" : 0,
 									"maxclass" : "panel",
 									"mode" : 0,
 									"numinlets" : 1,
@@ -2822,7 +2800,6 @@
 									"border" : 2,
 									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"id" : "obj-13",
-									"ignoreclick" : 0,
 									"maxclass" : "panel",
 									"mode" : 0,
 									"numinlets" : 1,
@@ -2841,7 +2818,6 @@
 									"border" : 2,
 									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"id" : "obj-7",
-									"ignoreclick" : 0,
 									"maxclass" : "panel",
 									"mode" : 0,
 									"numinlets" : 1,
@@ -2860,7 +2836,6 @@
 									"border" : 2,
 									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"id" : "obj-6",
-									"ignoreclick" : 0,
 									"maxclass" : "panel",
 									"mode" : 0,
 									"numinlets" : 1,
@@ -2879,7 +2854,6 @@
 									"border" : 2,
 									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"id" : "obj-5",
-									"ignoreclick" : 0,
 									"maxclass" : "panel",
 									"mode" : 0,
 									"numinlets" : 1,
@@ -2922,7 +2896,6 @@
 									"border" : 2,
 									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"id" : "obj-8",
-									"ignoreclick" : 0,
 									"maxclass" : "panel",
 									"mode" : 0,
 									"numinlets" : 1,
@@ -2950,31 +2923,6 @@
 									"presentation_rect" : [ 10.0, 134.352144469525967, 77.0, 66.0 ],
 									"text" : "click on any number for more info",
 									"textjustification" : 1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgmode" : 0,
-									"border" : 0,
-									"clickthrough" : 0,
-									"enablehscroll" : 0,
-									"enablevscroll" : 0,
-									"id" : "obj-1",
-									"ignoreclick" : 1,
-									"lockeddragscroll" : 0,
-									"lockedsize" : 0,
-									"maxclass" : "bpatcher",
-									"name" : "somax.midiinfluencer.maxpat",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"offset" : [ 0.0, 0.0 ],
-									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 10.0, 145.25390625, 457.0, 462.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 42.0, 163.0, 458.0, 478.0 ],
-									"varname" : "somax.midiinfluencer",
-									"viewvisibility" : 1
 								}
 
 							}
@@ -3072,7 +3020,7 @@
 									"patching_rect" : [ 686.5, 4.0, 294.0, 33.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 557.0, 173.852144469525967, 294.0, 33.0 ],
-									"text" : "Onset Channels",
+									"text" : "Continuous Chroma",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3082,15 +3030,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 5,
+									"linecount" : 16,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 201.0, 74.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 201.0, 221.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 4,
-									"presentation_rect" : [ 557.0, 214.352144469525967, 230.0, 60.0 ],
-									"text" : "Use this to select which MIDI channels should be used for onset analysis. An in-depth explanation of this parameter can be found in the «multiple source» tab",
+									"presentation_linecount" : 15,
+									"presentation_rect" : [ 557.0, 214.352144469525967, 230.0, 208.0 ],
+									"text" : "By default, chroma is only output whenever an onset is detected. Turning continuous chroma on will generate output continuously. When influencing a player, the player will use the chroma influences look for sequences in its corpus matching the N last influences it received. With continuouschroma 1, the resolution will be too high and generate way too many matches. continuouscrhoma 1 can however still be useful for mixing chromas from multiple audio influencers, but it requires segmentation of the combined chromas afterwards.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3180,6 +3128,49 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 519.0, 168.852144469525967, 302.0, 451.295711060948065 ],
 									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-32",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 482.0, 490.0, 21.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 185.833331644535065, 417.75, 176.166669845581055, 23.5 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgmode" : 0,
+									"border" : 0,
+									"clickthrough" : 0,
+									"enablehscroll" : 0,
+									"enablevscroll" : 0,
+									"id" : "obj-1",
+									"lockeddragscroll" : 0,
+									"lockedsize" : 0,
+									"maxclass" : "bpatcher",
+									"name" : "somax.midiinfluencer.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"offset" : [ 0.0, 0.0 ],
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 10.0, 145.25390625, 457.0, 462.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 42.0, 163.0, 458.0, 478.0 ],
+									"varname" : "somax.midiinfluencer",
+									"viewvisibility" : 1
 								}
 
 							}
@@ -3465,7 +3456,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 126.0, 1054.0, 710.0 ],
+						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,

@@ -4,11 +4,11 @@
 <c74object name="somax.midiinfluencer.ui" module="somax" kind="patcher">
 
 	<digest>
-		Digest
+		Wrapper around the <o>somax.midiinfluencer</o> object, only for visual feedback
 	</digest>
 
 	<description>
-		Description
+		This compact interface is just a wrapper around the main interface. No parameters are visible here, but all parameters are available by pressing the «Settings» button.
 	</description>
 
 	<!--METADATA-->
