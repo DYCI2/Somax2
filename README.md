@@ -5,11 +5,11 @@ While the application can be used straight out of the box with little configurat
 
 ## Requirements
 
-* macOS 10.13 or later 
+* macOS 10.13 or later
 * Max 8
 * (Python 3.9 or later -- only needed for manual installation)
 
-**Note: It's currently not possible to run Somax natively on M1 machines: if you're using a M1 Mac, make sure to [run Max under Rosetta](https://docs.cycling74.com/max8/vignettes/apple_arm64)** 
+**Note: It's currently not possible to run Somax natively on M1 machines: if you're using a M1 Mac, make sure to [run Max under Rosetta](https://docs.cycling74.com/max8/vignettes/apple_arm64)**
 
 ## Installation
 
@@ -30,38 +30,39 @@ If you want to modify the python code, you will need a manual installation. This
 * Clone the master branch of this [repository](https://github.com/DYCI2/Somax2) or go to [Releases](https://github.com/DYCI2/Somax2/releases) and download the latest version of the Somax source code.
 * Add the `max/somax` subfolder of Somax2 to your Max path through Options -> File Preferences in Max. Make sure that the `subfolders` option is checked.
 
-#### Step 2: Install Python Requirements 
+#### Step 2: Install Python Requirements
 
 * In a terminal, cd to the `Somax2` root folder and install the requirements with `pip3 install -r python/somax/requirements.txt`
 
 ## Getting Started
-The main Somax application is the patch `somax2.maxpat`. You can open this patch from inside Max or directly from Finder. 
+The main Somax application is the patch `somax2.maxpat`. You can open this patch from inside Max or directly from Finder.
 
-It is recommended to first follow the interactive tutorial by opening the `tutorial_intro.maxpat` patch. This tutorial gives a brief introduction to the different modules of Somax and introduces the first steps towards interacting with the model. A second tutorial describing how to work with audio files in somax can be found in the same folder (`tutorial_audio.maxpat`). 
+The document `Somax2 User's Guide.pdf` gives an overview of how the somax2 interaction model works and presents the Somax2 objects and UI.
 
-A good starting point in understanding Somax is the document `Introduction Somax.pdf`, which gives a brief overview of how the Somax interaction model works.
+The ‘somax2.overview.maxpat’ tutorial and help center is the starting point to begin exploring interactively the world of Somax2. From here you will be able to access all the different interactive tutorials, as well as to get access to ready-to-play patches defining specific performance strategies. Templates from one to four players are also available, as well as maxhelps for all the Somax2 objects.
 
 **Note that the first time you launch Somax, depending on your security settings you may be presented with a number of dialogues asking you to give permission to a number of externals (shell, bonk, ircamdescriptor, bc.virfun and bc.yinstats) that Somax requires to be able to run. You may also be asked for permission the first time you launch the server (this step is explained in the tutorial). Accept each of those to proceed.**
 
 ## Documentation and Resources
 
-* **Introduction to Somax:** The document `Introduction Somax.pdf` is intended as a starting point to give an understanding of how the interaction model of Somax works.
-* **Max Help Files:** The main documentation of Somax. Individual help files exists for each Max object, outlining how to use the object, its parametric controls as well as a number of use cases. The help files can be accessed by pressing the «?» button available in each of the objects or by right-clicking (ctrl-click) the object inside Max in the unlocked patcher and selecting "Open Help".
-* **Videos, Reports and Publications**: Can be found [here](http://repmus.ircam.fr/somax/home).
+* **Introduction to Somax:** The document `Somax2 User's Guide.pdf` is intended as a starting point to give an understanding of how the interaction model of Somax works.
+* **Max Help Files:** The main documentation of Somax. Individual help files exists for each Max object, outlining how to use the object, its parametric controls as well as a number of use cases. The help files can be accessed by pressing the «?» button available in each of the objects UI or by right-clicking (ctrl-click) the object inside Max in the unlocked patcher and selecting "Open Help".
+* **Videos, demos, Reports and Publications**: Can be found [in the Somax2 project page](http://repmus.ircam.fr/somax2).
 
-Because of space limitations, only a few tiny audio corpora (marked with a «(A)» in the corpus menu) are included in the distributions. Check the [Somax Project page](https://www.stms-lab.fr/projects/pages/somax2/) for more corpora.
+Because of space limitations, only a few tiny audio corpora (marked with a «(A)» in the corpus menu) are included in the distributions. Check the [Somax2 Project page](http://repmus.ircam.fr/somax2) for more corpora.
 
-## Credits 
+## Credits
 
 Somax2 (c) Ircam 2012-2023
 
-Somax2 is a radically new version of the Somax reactive co-improvisation paradigm born in the Music Representations Team at Ircam - STMS.
+Somax2 is a totally renewed version of the Somax reactive co-improvisation paradigm born in the Music Representations Team at Ircam - STMS.
 
 It is  part of the research projects ANR MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) directed by Gérard Assayag.
 
-Somax2 design by Gérard Assayag and Joakim Borg, development by Joakim Borg, documentations by Joakim Borg and Marco Fiorini.
+Somax2 development by Joakim Borg, documentations and tutorials by Joakim Borg and Marco Fiorini.
 
-Legacy:  original somax design by Gérard Assayag and Laurent-Bonnasse Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early prototype by Olivier Delerue.
+Somax created by Gérard Assayag and Laurent Bonnasse-Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early pro-
+totype by Olivier Delerue.
 
 Thanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.
 
