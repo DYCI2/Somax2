@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 33.0, 66.0, 360.0, 780.0 ],
+		"rect" : [ 71.0, 80.0, 360.0, 780.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
+						"rect" : [ 67.0, 106.0, 640.0, 480.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -85,6 +85,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-7",
@@ -93,7 +94,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 73.0, 99.0, 29.5, 22.0 ],
-									"text" : "1"
+									"text" : "0"
 								}
 
 							}
@@ -105,7 +106,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 27.0, 99.0, 29.5, 22.0 ],
-									"text" : "0"
+									"text" : "1"
 								}
 
 							}
@@ -1717,7 +1718,7 @@
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_enum" : [ "val1", "val2" ],
-											"parameter_longname" : "live.text[53]",
+											"parameter_longname" : "live.text[6]",
 											"parameter_mmax" : 1,
 											"parameter_shortname" : "live.text[11]",
 											"parameter_type" : 2
@@ -1773,7 +1774,7 @@
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_enum" : [ "val1", "val2" ],
-											"parameter_longname" : "live.text[24]",
+											"parameter_longname" : "live.text[11]",
 											"parameter_mmax" : 1,
 											"parameter_shortname" : "live.text[11]",
 											"parameter_type" : 2
@@ -4974,7 +4975,7 @@
 										}
 ,
 										"valueof" : 										{
-											"parameter_longname" : "mc.live.gain~[7]",
+											"parameter_longname" : "mc.live.gain~[1]",
 											"parameter_mmax" : 6.0,
 											"parameter_mmin" : -70.0,
 											"parameter_shortname" : "corpus",
@@ -5165,7 +5166,7 @@
 										}
 ,
 										"valueof" : 										{
-											"parameter_longname" : "mc.live.gain~[8]",
+											"parameter_longname" : "mc.live.gain~[2]",
 											"parameter_mmax" : 6.0,
 											"parameter_mmin" : -70.0,
 											"parameter_shortname" : "click",
@@ -9168,7 +9169,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-26",
@@ -9355,6 +9355,7 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"hidden" : 1,
 									"id" : "obj-62",
 									"ignoreclick" : 1,
 									"maxclass" : "led",
@@ -9427,6 +9428,7 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
+									"hidden" : 1,
 									"id" : "obj-66",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -9520,12 +9522,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-47",
-									"linecount" : 32,
+									"linecount" : 31,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 247.0, 593.649999999999636, 106.0, 437.0 ],
+									"patching_rect" : [ 247.0, 593.649999999999636, 109.0, 424.0 ],
 									"text" : "build_manual_segmented_corpus audio_file_path= \"/Volumes/Marco_Ircam/Somax Developing/Manual Corpus Formats/ProTools/test_scripts/promenade.wav\" analysis_file_path= \"/Volumes/Marco_Ircam/Somax Developing/Manual Corpus Formats/ProTools/test_scripts/promenade_markers_test_samples 2.txt\" corpus_name= promenade analysis_format= ProTools output_folder= /Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus ignore_invalid_lines= 0 overwrite= 1"
 								}
 
@@ -9799,7 +9801,6 @@
 									"patching_rect" : [ 493.0, 265.976551645360587, 171.0, 25.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 137.708282499999996, 130.460829493087545, 157.416717500000004, 20.0 ],
-									"text" : "promenade",
 									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textjustification" : 1
 								}
@@ -9920,15 +9921,12 @@
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-14",
-									"linecount" : 5,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 276.0, 306.0, 148.0, 62.0 ],
+									"patching_rect" : [ 276.0, 306.0, 149.0, 18.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 4,
-									"presentation_rect" : [ 225.0, 51.828514913465298, 186.0, 51.0 ],
-									"text" : "/Volumes/Marco_Ircam/Somax Developing/Manual Corpus Formats/ProTools/test_scripts/promenade_markers_test_samples 2.txt",
+									"presentation_rect" : [ 225.0, 51.828514913465298, 186.0, 18.0 ],
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
 
@@ -9938,15 +9936,12 @@
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-11",
-									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 91.0, 306.0, 156.0, 51.0 ],
+									"patching_rect" : [ 91.0, 306.0, 156.0, 18.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 4,
-									"presentation_rect" : [ 17.0, 51.828514913465298, 186.0, 51.0 ],
-									"text" : "/Volumes/Marco_Ircam/Somax Developing/Manual Corpus Formats/ProTools/test_scripts/promenade.wav",
+									"presentation_rect" : [ 17.0, 51.828514913465298, 186.0, 18.0 ],
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
 
@@ -14419,9 +14414,9 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 664.875, 1737.0, 1176.0, 47.0 ],
 					"presentation" : 1,
-					"presentation_linecount" : 21,
-					"presentation_rect" : [ 341.416666507720947, 31.0, 173.0, 288.0 ],
-					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus builder_address= 2549_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
+					"presentation_linecount" : 20,
+					"presentation_rect" : [ 341.416666507720947, 31.0, 176.0, 275.0 ],
+					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus builder_address= 6840_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 

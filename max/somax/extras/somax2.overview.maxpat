@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 365.0, 220.0, 942.0, 597.0 ],
+		"rect" : [ 363.0, 216.0, 942.0, 597.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,52 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-11",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 387.0, 543.0, 275.0, 35.0 ],
+					"text" : ";\rmax launchbrowser http://repmus.ircam.fr/somax2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.290196, 0.309804, 0.301961, 0.0 ],
+					"id" : "obj-16",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 387.0, 495.5, 231.0, 19.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 469.5, 106.0, 231.0, 19.0 ],
+					"text" : "http://repmus.ircam.fr/somax2",
+					"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
+					"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
+					"underline" : 1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-18",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 35.0, 495.5, 388.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 117.5, 106.0, 388.0, 20.0 ],
+					"text" : "Get more info, context, demos and medias at the Somax2 project page:"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontface" : 0,
 					"id" : "obj-15",
@@ -321,8 +367,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.5, 16.0, 721.0, 22.0 ],
-									"text" : "These patches will provide you templates and performance strategies for you to explore specific Somax behaviours"
+									"patching_rect" : [ 7.5, 16.0, 729.0, 22.0 ],
+									"text" : "These patches will provide you templates and performance strategies for you to explore specific Somax2 behaviours"
 								}
 
 							}
@@ -609,7 +655,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 307.5, 165.0, 419.0, 33.0 ],
-									"text" : "The first tutorial will give you an overview of the Somax 2.5 application workflow, guiding you through immediate audio and MIDI interactions"
+									"text" : "The first tutorial will give you an overview of the Somax2 application workflow, guiding you through immediate audio and MIDI interactions"
 								}
 
 							}
@@ -639,7 +685,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 16.0, 525.0, 22.0 ],
-									"text" : "These tutorials will guide you through the usage of the Somax2.5 application"
+									"text" : "These tutorials will guide you through the usage of the Somax2 application"
 								}
 
 							}
@@ -651,7 +697,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 45.0, 854.0, 47.0 ],
-									"text" : "The application implementation of Somax2.5 provides modular objects for immediate musical interaction. \nAfter completing these tutorials, we recommend moving to the \"Max Tutorials\" tab to explore the potentiality of Somax 2.5 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours."
+									"text" : "The application implementation of Somax2 provides modular objects for immediate musical interaction. \nAfter completing these tutorials, we recommend moving to the \"Max Tutorials\" tab to explore the potentiality of Somax2 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours."
 								}
 
 							}
@@ -943,68 +989,18 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
-									"hidden" : 1,
-									"id" : "obj-5",
-									"linecount" : 2,
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 362.0, 417.0, 275.0, 35.0 ],
-									"text" : ";\rmax launchbrowser http://repmus.ircam.fr/somax2"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.290196, 0.309804, 0.301961, 0.0 ],
-									"id" : "obj-1",
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 362.0, 369.5, 231.0, 19.0 ],
-									"text" : "http://repmus.ircam.fr/somax2",
-									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
-									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
-									"underline" : 1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-4",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 369.5, 388.0, 20.0 ],
-									"text" : "Get more info, context, demos and medias at the Somax2 project page:"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-2",
 									"linecount" : 26,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 8.0, 900.0, 355.0 ],
-									"text" : "Somax2 is an application and a library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nIt is based on a machine listening, reactive engine and generative model that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisatin, composition, installations etc.\nWritten in Max and Python, it features a modular multithreaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM - STMS and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project of the European Research Council (director : Gérard Assayag).\n\nSomax2 development : Joakim Borg\nTutorials and help : Joakim Borg and Marco Fiorini\nLegacy:  original version written by Laurent-Bonnasse Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos.\nThanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.\n\nThanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini for their musical material used in Somax2 distribution corpus."
+									"patching_rect" : [ 10.0, 18.0, 900.0, 355.0 ],
+									"text" : "Somax2 is an application and a library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nIt is based on a machine listening, reactive engine and generative model that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisatin, composition, installations etc.\nWritten in Max and Python, it features a modular multithreaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM - STMS and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project of the European Research Council (director : Gérard Assayag).\n\nSomax2 development : Joakim Borg\nTutorials and help : Joakim Borg and Marco Fiorini\nSomax created by Gérard Assayag and Laurent Bonnasse-Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early prototype by Olivier Delerue.\nThanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.\n\nThanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini for their musical material used in Somax2 distribution corpus."
 								}
 
 							}
  ],
-						"lines" : [ 							{
-								"patchline" : 								{
-									"destination" : [ "obj-5", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-1", 0 ]
-								}
-
-							}
- ]
+						"lines" : [  ]
 					}
 ,
 					"patching_rect" : [ 528.0, 391.5, 87.0, 77.0 ],
@@ -1078,7 +1074,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 16.0, 525.0, 22.0 ],
-									"text" : "These tutorials will guide you through the usage of the Somax2.5 core abstractions"
+									"text" : "These tutorials will guide you through the usage of the Somax2 core abstractions"
 								}
 
 							}
@@ -1356,7 +1352,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 627.0, 247.0, 519.0, 516.0 ],
+						"rect" : [ 302.0, 245.0, 881.0, 516.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1385,6 +1381,204 @@
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.1,
+									"bubbleside" : 0,
+									"id" : "obj-12",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 599.0, 147.59375, 221.0, 66.0 ],
+									"text" : "Click here to have access to the list of Max messages available to control all the parameters of the Somax2 objects"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 13.0,
+									"id" : "obj-7",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 527.0, 83.59375, 178.0, 21.0 ],
+									"presentation_linecount" : 2,
+									"text" : "Parameters Documentation"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 0,
+									"fontname" : "Arial",
+									"fontsize" : 11.595186999999999,
+									"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"id" : "obj-4",
+									"maxclass" : "tab",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "int", "", "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 527.0, 105.59375, 163.0, 35.0 ],
+									"tabs" : [ "somax_parameter_docs.txt" ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-2",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patcher" : 									{
+										"fileversion" : 1,
+										"appversion" : 										{
+											"major" : 8,
+											"minor" : 5,
+											"revision" : 3,
+											"architecture" : "x64",
+											"modernui" : 1
+										}
+,
+										"classnamespace" : "box",
+										"rect" : [ 92.0, 119.0, 640.0, 480.0 ],
+										"bglocked" : 0,
+										"openinpresentation" : 0,
+										"default_fontsize" : 12.0,
+										"default_fontface" : 0,
+										"default_fontname" : "Arial",
+										"gridonopen" : 1,
+										"gridsize" : [ 15.0, 15.0 ],
+										"gridsnaponopen" : 1,
+										"objectsnaponopen" : 1,
+										"statusbarvisible" : 2,
+										"toolbarvisible" : 1,
+										"lefttoolbarpinned" : 0,
+										"toptoolbarpinned" : 0,
+										"righttoolbarpinned" : 0,
+										"bottomtoolbarpinned" : 0,
+										"toolbars_unpinned_last_save" : 0,
+										"tallnewobj" : 0,
+										"boxanimatetime" : 200,
+										"enablehscroll" : 1,
+										"enablevscroll" : 1,
+										"devicewidth" : 0.0,
+										"description" : "",
+										"digest" : "",
+										"tags" : "",
+										"style" : "",
+										"subpatcher_template" : "",
+										"assistshowspatchername" : 0,
+										"boxes" : [ 											{
+												"box" : 												{
+													"id" : "obj-95",
+													"maxclass" : "newobj",
+													"numinlets" : 2,
+													"numoutlets" : 2,
+													"outlettype" : [ "", "" ],
+													"patching_rect" : [ 50.0, 167.0, 161.0, 22.0 ],
+													"text" : "combine file:/// s @triggers 1"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"id" : "obj-91",
+													"maxclass" : "newobj",
+													"numinlets" : 1,
+													"numoutlets" : 2,
+													"outlettype" : [ "", "int" ],
+													"patching_rect" : [ 50.0, 135.59375, 133.0, 22.0 ],
+													"text" : "conformpath slash boot"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"id" : "obj-88",
+													"maxclass" : "newobj",
+													"numinlets" : 1,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 50.0, 100.0, 100.0, 22.0 ],
+													"text" : "absolutepath"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"id" : "obj-87",
+													"linecount" : 2,
+													"maxclass" : "message",
+													"numinlets" : 2,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 50.0, 195.0, 131.0, 35.0 ],
+													"text" : ";\rmax launchbrowser $1"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"comment" : "",
+													"id" : "obj-1",
+													"index" : 1,
+													"maxclass" : "inlet",
+													"numinlets" : 0,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 50.0, 40.0, 30.0, 30.0 ]
+												}
+
+											}
+ ],
+										"lines" : [ 											{
+												"patchline" : 												{
+													"destination" : [ "obj-88", 0 ],
+													"source" : [ "obj-1", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-91", 0 ],
+													"source" : [ "obj-88", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-95", 1 ],
+													"source" : [ "obj-91", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-87", 0 ],
+													"source" : [ "obj-95", 0 ]
+												}
+
+											}
+ ]
+									}
+,
+									"patching_rect" : [ 599.0, 174.0, 135.0, 22.0 ],
+									"saved_object_attributes" : 									{
+										"description" : "",
+										"digest" : "",
+										"globalpatchername" : "",
+										"tags" : ""
+									}
+,
+									"text" : "p load_parameter_docs"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 13.0,
@@ -1439,7 +1633,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 279.0, 105.59375, 163.0, 135.0 ],
+									"patching_rect" : [ 279.0, 105.59375, 163.0, 140.0 ],
 									"tabs" : [ "somax.server.app", "somax.player.app", "somax.audioinfluencer.app", "somax.midiinfluencer.app" ]
 								}
 
@@ -1450,8 +1644,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 6.0, 42.0, 337.0, 20.0 ],
-									"text" : "Here you will find documentation for all the Somax2.5 objects"
+									"patching_rect" : [ 6.0, 42.0, 818.0, 20.0 ],
+									"text" : "Here you will find documentation for all the Somax2 objects, as well a list of available Max messages to script the parameters of the Somax2 objects."
 								}
 
 							}
@@ -1576,7 +1770,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.0, 15.0, 270.0, 22.0 ],
-									"text" : "Welcome to the Help Center of Somax2.5"
+									"text" : "Welcome to the Help Center of Somax2"
 								}
 
 							}
@@ -1587,6 +1781,14 @@
 									"hidden" : 1,
 									"midpoints" : [ 360.5, 426.296875, 240.5, 426.296875 ],
 									"source" : [ "obj-37", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-2", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-4", 1 ]
 								}
 
 							}
@@ -2061,6 +2263,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-25", 0 ],
 					"source" : [ "obj-125", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"hidden" : 1,
+					"source" : [ "obj-16", 0 ]
 				}
 
 			}

@@ -45,7 +45,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 735.231105836006009, 378.499991001861474, 150.0, 60.0 ],
+					"patching_rect" : [ 735.231105836006009, 378.499991001861474, 151.0, 60.0 ],
 					"text" : "this will still make the player mimetic but it will add variations, resulting in a very interesting effect"
 				}
 
@@ -706,7 +706,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 170.0, 183.0, 91.0, 20.0 ],
-									"text" : "set Timeout = 0"
+									"text" : "set Timeout = 2"
 								}
 
 							}
@@ -765,7 +765,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 158.5, 159.0, 58.0, 22.0 ],
-									"text" : "timeout 0"
+									"text" : "timeout 2"
 								}
 
 							}
@@ -1797,6 +1797,10 @@
 					"parameter_longname" : "live.text[6]"
 				}
 ,
+				"obj-27::obj-98" : 				{
+					"parameter_longname" : "live.text[2]"
+				}
+,
 				"obj-69::obj-1150" : 				{
 					"parameter_longname" : "live.text[36]"
 				}
@@ -1817,6 +1821,26 @@
 					"parameter_invisible" : 1,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-69::obj-407::obj-270::obj-1226" : 				{
+					"parameter_longname" : "width[2]"
+				}
+,
+				"obj-69::obj-407::obj-270::obj-1227" : 				{
+					"parameter_longname" : "center[2]"
+				}
+,
+				"obj-69::obj-407::obj-270::obj-1240" : 				{
+					"parameter_longname" : "live.slider[6]"
+				}
+,
+				"obj-69::obj-407::obj-270::obj-1241" : 				{
+					"parameter_longname" : "live.numbox[6]"
+				}
+,
+				"obj-69::obj-407::obj-270::obj-889" : 				{
+					"parameter_longname" : "weight[2]"
 				}
 ,
 				"obj-69::obj-87::obj-1" : 				{

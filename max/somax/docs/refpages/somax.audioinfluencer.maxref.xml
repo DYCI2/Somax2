@@ -22,27 +22,39 @@
 		<method name="bang">
 			<arglist />
 			<digest>Trigger segmentation, when onset method is set to `external'</digest>
-			<description>TODO</description>
+			<description>
+                When <m>onsetmethod</m> is set to <m>external</m>, the segmentation is triggered each time a <m>bang</m> is received on the inlet of the <o>somax.audioinfluencer</o>.         
+            </description>
 		</method>
         <method name="int">
 			<arglist />
 			<digest>Enable/Disable the audio influencer</digest>
-			<description>Performs the same function as <m>start</m> and <m>stop</m></description>
+			<description>
+                Any number other than 0 enables the <o>somax.audioinfluencer</o>. 
+                <br />
+                <m>0</m> disables <o>somax.audioinfluencer</o>.         
+            </description>
 		</method>
         <method name="dump">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Dump all current parameter values on the second outlet</digest>
-			<description>TODO</description>
+			<description>
+                The <m>dump</m> message will cause the <o>somax.audioinfluencer</o> to output the current values of all its parameters out its second outlet.
+            </description>
 		</method>
         <method name="signal">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Audio signal to analyze</digest>
-			<description>TODO</description>
+			<description>
+                Send an audio signal to the <o>somax.audioinfluencer</o> for analysys. The audio signal can be mono, stereo or a multi-channel signal.
+            </description>
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Open the audio influencer parameters window</digest>
-			<description>TODO</description>
+			<description>
+                Open the <o>somax.audioinfluencer</o> window, with access to a user interface to control all the parameters of the analysis. The window provides also visual feedback for the analyzed signal with respect to chroma, onset and pitch.        
+            </description>
 		</method>
 	</methodlist>
 	
@@ -86,7 +98,11 @@
         </attribute>
         <attribute name="onsetmethod" get="1" set="1" type="symbol" size="1">
             <digest>Set onset method</digest>
-            <description>TODO</description>
+            <description>
+                The <m>onsetmethod</m> message determines which algorithm should be used by the <o>somax.audioinfluencer</o> for onset detection. There are three methods, selected with the following messages. 
+                <br />
+                The message <m>onsetmethod 0</m> or <m>onsetmethod external</m> sets onset detection from the external inlet, the message <m>onsetmethod 1</m> or <m>onsetmethod bonk</m> sets the onset detection from Bonk algorithm, the message <m>onsetmethod 2</m> or <m>onsetmethod yin</m> sets the onset detection from Yin algorithm (default method).
+            </description>
         </attribute>
         <attribute name="yindownsample" get="1" set="1" type="symbol" size="1">
             <digest>Set value for yin downsample</digest>

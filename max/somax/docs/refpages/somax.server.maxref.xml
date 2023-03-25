@@ -74,7 +74,12 @@
         <method name="int">
 			<arglist />
 			<digest>Toggle generation</digest>
-			<description>Performs the same function as <m>start</m> and <m>stop</m></description>
+			<description>
+				Performs the same function as <m>start</m> and <m>stop</m>.
+				Any number other than 0 activates the remote python server's transport to start the generation for all the <o>somax.player</o> objects currently initialized.
+				<br />
+				<m>0</m> stops the remote python server's transport.
+			</description>
 		</method>
         <method name="corpora">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
@@ -152,14 +157,14 @@
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Start generation</digest>
 			<description>
-				Once the <o>somax.server</o> is initialized, the <m>start</m> message activates the server's transport to start the generation for all the <o>somax.player</o> objects currently initialized.
+				Once the <o>somax.server</o> is initialized, the <m>start</m> message activates the remote python server's transport to start the generation for all the <o>somax.player</o> objects currently initialized.
 			</description>
 		</method>
         <method name="stop">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Stop generation</digest>
 			<description>
-				Once the <o>somax.server</o> is initialized, the <m>stop</m> message stops the server's transport and generation for all the <o>somax.player</o> objects currently initialized.
+				Once the <o>somax.server</o> is initialized, the <m>stop</m> message stops the remote python server's transport and generation for all the <o>somax.player</o> objects currently initialized.
 			</description>
 		</method>
         <method name="terminate">

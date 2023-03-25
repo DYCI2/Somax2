@@ -113,7 +113,7 @@
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Select audio corpus segmentation mode</digest>
 			<description>
-				The <m>segmode</m> message controls the segmentation mode used in the <o>somax.audiocorpusbuilder</o>. There are two segmentation modes, selected with the following messages. The message <m>segmode 0</m> sets the mode to Interval, meaning that the content is segmented at fixed intervals set by the <m>seginterval</m> parameter. The message <m>segmode 1</m> sets the mode to Onset, where the audio file is segmented into slices by detecting onsets in the content. This is the default mode and there are a number of parameters to determine how onsets should be detected: <m>mindur</m>, <m>window</m> and <m>gainthresh</m>.
+				The <m>segmode</m> message controls the segmentation mode used in the <o>somax.audiocorpusbuilder</o>. There are two segmentation modes, selected with the following messages. The message <m>segmode 0</m> or <m>segmode interval</m> sets the mode to Interval, meaning that the content is segmented at fixed intervals set by the <m>seginterval</m> parameter. The message <m>segmode 1</m> or <m>segmode onset</m> sets the mode to Onset, where the audio file is segmented into slices by detecting onsets in the content. This is the default mode and there are a number of parameters to determine how onsets should be detected: <m>mindur</m>, <m>window</m> and <m>gainthresh</m>.
 			</description>
 		</method>
         <method name="window">
