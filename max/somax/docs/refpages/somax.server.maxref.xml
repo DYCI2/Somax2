@@ -54,7 +54,7 @@
 			<description>
 				The optional third argument specifies the ip address used by the <o>somax.server</o> to communicate with the remote python server. This address is passed to the <o>udpsend</o> internal object, as the <m>host</m> destination to which messages will be sent. The OSC ip address can be specified either by name (e.g., localhost) or by ip address (e.g., 127.0.0.1)
 				<br /> 
-				If there's no argument, the OSC ip address is initialized at 127.0.0.1, corresponding to <m>localhost</m>
+				If there's no argument, the OSC ip address is initialized at 127.0.0.1, corresponding to <m>localhost</m>.
 			</description>
 		</objarg>
 	</objarglist>

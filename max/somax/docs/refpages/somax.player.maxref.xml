@@ -24,31 +24,43 @@
 				Player name
 			</digest>
 			<description>
-				TODO
+                The optional first argument sets the <m>name</m> of the <o>somax.player</o>.
+				<br />
+                <br />
+                If there's no argument, the <o>somax.player</o> will automatically be created with a unique name.
 			</description>
 		</objarg>
+        <objarg name="recvport" optional="1" type="int">
+            <digest>
+                OSC receive port
+            </digest>
+            <description>
+                The optional second argument sets the value for the port used by the <o>somax.player</o> object to receive information from the remote python server.
+                <br />
+                <br />
+                If there's no argument, the <o>somax.player</o> will automatically be created with a unique <m>recvport</m>.
+            </description>
+        </objarg>
         <objarg name="sendport" optional="1" type="int">
 			<digest>
 				OSC send port
 			</digest>
 			<description>
-				TODO
+				The optional third argument sets the value for the port used by the <o>somax.player</o> object to send information to the remote python server.
+                <br />
+                <br />
+                If there's no argument, the <o>somax.player</o> will automatically be created with a unique <m>sendport</m>.
 			</description>
 		</objarg>
-        <objarg name="recvport" optional="1" type="int">
-			<digest>
-				OSC receive port
-			</digest>
-			<description>
-				TODO
-			</description>
-		</objarg>
+        
         <objarg name="ip" optional="1" type="symbol">
 			<digest>
 				OSC ip address
 			</digest>
 			<description>
-				TODO
+				The optional fourth argument specifies the ip address used by the <o>somax.player</o> to communicate with the remote python server. The OSC ip address can be specified either by name (e.g., localhost) or by ip address (e.g., 127.0.0.1)
+                <br /> 
+                If there's no argument, the OSC ip address is initialized at 127.0.0.1, corresponding to <m>localhost</m>.
 			</description>
 		</objarg>
 	</objarglist>
@@ -58,23 +70,35 @@
 		<method name="bang">
 			<arglist />
 			<digest>Trigger output</digest>
-			<description>TODO</description>
+			<description>
+                When <m>mode</m> is set to <m>reactive</m>, or <m>playingmode</m> is set to <m>manual</m>, a <m>bang</m> will cause the <o>somax.player</o> to trigger a new event.       
+            </description>
 		</method>
         <method name="int">
 			<arglist />
 			<digest>Enable/Disable the player</digest>
-			<description>Performs the same function as <m>enabled</m></description>
+			<description>
+                Performs the same function as <m>enabled</m>.
+                Any number other than 0 will start the <o>somax.player</o> generation. 
+                <br />
+                <m>0</m> stops the player.
+            </description>
 		</method>
         
         <method name="getcorpus">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Get the loaded corpus</digest>
-			<description>TODO</description>
+			<description>
+                Performs the same function as <m>corpus</m>.
+                The message <m>getcorpus</m> will cause the <o>somax.player</o> to output the name of the corpus currently loaded, out the left outlet.         
+            </description>
 		</method>
         <method name="corpusquery">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Query information about the player's loaded corpus.</digest>
-			<description>TODO</description>
+			<description>
+                The message <m>corpusquery</m> followed by a keyword will cause the <o>somax.player</o> to output the required corpus information, out the left outlet. Valid keywords are <m>corpusinfo</m>, <m>features</m>, <m>feature</m>, <m>events</m>, <m>notes</m>, <m>pitches</m>, <m>velocities</m> and <m>channels</m>.         
+            </description>
 		</method>
         
         <method name="flush">
@@ -86,17 +110,27 @@
         <method name="influence">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Send data as influences to the player</digest>
-			<description>TODO</description>
+			<description>
+                The message <m>influence</m>, followed by a label and a value, will send that value to the <o>somax.player</o> as an influence, classified according to the label.
+                <br />
+                Accepted labels are <m>onset</m>, which will trigger output in reactive mode (same as <m>bang</m>), <m>pitch</m>, guiding the player, generating matches in the melodic layer, and <m>chroma</m>, that will guide the player, generating matches in the harmonic layer. 
+                <br />
+                Note: the word <m>influence</m> can be simply prepended to the output of a <o>somax.audioinfluencer</o> or <o>somax.midiinfluencer</o> to send their output to the inlet of the <o>somax.player</o>.       
+            </description>
 		</method>
         <method name="initialize">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Initialize the player</digest>
-			<description>TODO</description>
+			<description>
+                The <m>initialize</m> message will instantiate the player on the remote python server, assuming that the server is running (the <o>somax.server</o> object has to be initialized first).         
+            </description>
 		</method>
         <method name="ip">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Set player's ip address</digest>
-			<description>TODO</description>
+			<digest>Query the current OSC ip address</digest>
+			<description>
+                The message <m>ip</m> will cause the <o>somax.player</o> to output its OSC ip address, out the left outlet.         
+            </description>
 		</method>
         <method name="jump">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
@@ -106,13 +140,17 @@
         
         <method name="name">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Set player's name</digest>
-			<description>TODO</description>
+			<digest>Query the player's name</digest>
+			<description>
+                The message <m>recvport</m> will cause the <o>somax.player</o> to output its <m>name</m>, out the left outlet.         
+            </description>
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Open the player parameters user interface</digest>
-			<description>TODO</description>
+			<description>
+                Open the <o>somax.player</o> window. This window will give you access to all the available parameters, as well as visual feedback for the number of peaks, matches and last output state index.     
+            </description>
 		</method>
         
         <method name="rawsend">
@@ -123,8 +161,10 @@
         
         <method name="recvport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
+			<digest>Query the current OSC receive port address</digest>
+			<description>
+                The message <m>recvport</m> will cause the <o>somax.player</o> to output the value of its OSC receive port, out the left outlet.         
+            </description>
 		</method>
         
         <method name="reinstantiate">
@@ -135,17 +175,26 @@
         <method name="reload">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Reload the player, if terminated. You need to initialize it after reloading.</digest>
-			<description>TODO</description>
+			<description>
+                TODO         
+            </description>
 		</method>
         <method name="resetinfluences">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Reset all the current stored influences</digest>
 			<description>TODO</description>
 		</method>
+        <method name="sendport">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Query the current OSC send port address</digest>
+            <description>
+                The message <m>recvport</m> will cause the <o>somax.player</o> to output the value of its OSC send port, out the left outlet.
+            </description>
+        </method>
         <method name="zap">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Performs the same function as reload</digest>
-			<description>Same as <m>reload</m></description>
+			<description>Performs the same function as <m>reload</m></description>
 		</method>
 	</methodlist>
 
@@ -161,11 +210,20 @@
         </attribute>
         <attribute name="continuity" get="1" set="1" type="symbol" size="1">
             <digest>Set continuity value</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>continuity</m>, followed by a <o>float</o>, will set the value for the continuity factor.
+                This parameter controls the order of played events in the corpus.
+                The message <m>continuity  1.00</m> will result in no alterations in the order of the events in the corpus.
+                A <m>continuity</m> greater than 1 will prioritize continuation (and result in fewer jumps).
+                A <m>continuity</m> value less than 1 will prioritizing jumping between non consecutive events in the corpus.
+            </description>
         </attribute>
         <attribute name="corpus" get="1" set="1" type="symbol" size="1">
-            <digest>Load a corpus</digest>
-            <description>TODO</description>
+            <digest>Get the loaded corpus</digest>
+            <description>
+                Performs the same function as <m>getcorpus</m>.
+                The message <m>corpus</m> will cause the <o>somax.player</o> to output the name of the corpus currently loaded, out the left outlet.
+            </description>
         </attribute>
         <attribute name="cut" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable cut</digest>
@@ -173,11 +231,22 @@
         </attribute>
         <attribute name="decaybasis" get="1" set="1" type="symbol" size="1">
             <digest>Select method for decay time scaling of previous peaks</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>decaybasis</m> controls the method for decay of previous peaks.
+                What this parameter does is to control the time scale of how the shifting of the previous matching peaks is being made.
+                There are two decay methods, selected with the following messages.
+                <br />
+                The message <m>decaybasis 0</m> will set the playing mode to <m>time</m>, meaning that the shift will be done continuously upon generating each note corresponding to the tempo of the server. The message <m>decaybasis 1</m> will set the playing mode to <m>event</m>, meaning that the previous matches will be shifted by exactly the time corresponding to one event once the an influence 'onset' is received.
+                <br />
+                <br />
+                Note: this parameter is also controlled by the message <m>mode</m>.
+            </description>
         </attribute>
         <attribute name="enabled" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable the player</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>enabled 1</m> will start the <o>somax.player</o> generation. The message <m>enabled 0</m> will stop the player.
+            </description>
         </attribute>
         <attribute name="enforcetaboo" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
@@ -200,10 +269,6 @@
             <description>TODO</description>
         </attribute>
         <attribute name="ignorephase" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
-            <description>TODO</description>
-        </attribute>
-        <attribute name="loglevel" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
             <description>TODO</description>
         </attribute>
@@ -237,7 +302,14 @@
         </attribute>
         <attribute name="mode" get="1" set="1" type="symbol" size="1">
             <digest>Macro parameter that controls both playingmode and decaybasis</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>mode</m> is a macro message that control both the <m>playingmode</m> and the <m>decaybasis</m> parameters. 
+                There are two modes, selected with the following messages.
+                <br />
+                The message <m>mode 0</m> or <m>mode continuous</m> will set the mode to <m>continuous</m>, setting as well <m>playingmode</m> to <m>automatic</m> and <m>decaybasis</m> to <m>time</m>.
+                <br />
+                The message <m>mode 1</m> or <m>mode reactive</m> will set the mode to <m>reactive</m>, setting as well <m>playingmode</m> to <m>manual</m> and <m>decaybasis</m> to <m>event</m>.
+            </description>
         </attribute>
         <attribute name="outputfrom" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
@@ -245,11 +317,23 @@
         </attribute>
         <attribute name="outputprobability" get="1" set="1" type="symbol" size="1">
             <digest>Sets output probability value</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>outputprobability</m>, followed by a <o>float</o> between 0 and 1, will set the value for the output probability parameter. This parameter will condition each generated output with a probability, so that the <o>somax.player</o> may or may not play the event. Any value lower than 1.0 will result in less than 100% of the events being played. For example, <m>outputprobability 0.2</m> will let the <o>somax.player</o> play only 20% of the generated events.
+                <br />
+                Note: <m>outputprobability 1</m> will turn it off. 
+            </description>
         </attribute>
         <attribute name="playingmode" get="1" set="1" type="symbol" size="1">
             <digest>Set playing mode to decide when to play the next event</digest>
-            <description>TODO</description>
+            <description>
+                The <m>playingmode</m> message determines the playing mode of the <o>somax.player</o>. 
+                There are two playing modes, selected with the following messages.
+                <br />
+                The message <m>playingmode 0</m> will set the playing mode to <m>automatic</m>, the message <m>playingmode 1</m> will set the playing mode to <m>manual</m>.
+                <br />
+                <br />
+                Note: this parameter is also controlled by the message <m>mode</m>.
+            </description>
         </attribute>
         <attribute name="pollpeaks" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
@@ -257,7 +341,10 @@
         </attribute>
         <attribute name="quality" get="1" set="1" type="symbol" size="1">
             <digest>Set quality value</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>quality</m>, followed by a <o>float</o> between 0 and 1, will set the value for the quality threshold.
+                This parameter sets a minimum score required for a match to qualify as output. When combined with <m>sparse</m>, this will ensure that no events are played unless they are considered good matches. If <m>sparse</m> is <m>on</m>, <m>quality 0.0</m> plays any found match, while <m>quality 1.0</m> will almost never play. In-between values will act as a threshold, to select matches above this threshold and play them. If <m>sparse</m> is <m>off</m>, the <o>somax.player</o> will replace the voids (no-play) by a default event, generally the next event, or a jump resulting from self-influence.
+            </description>
         </attribute>
         <attribute name="recombine" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
