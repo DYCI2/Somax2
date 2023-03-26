@@ -238,7 +238,6 @@
                 <br />
                 The message <m>decaybasis 0</m> will set the playing mode to <m>time</m>, meaning that the shift will be done continuously upon generating each note corresponding to the tempo of the server. The message <m>decaybasis 1</m> will set the playing mode to <m>event</m>, meaning that the previous matches will be shifted by exactly the time corresponding to one event once the an influence 'onset' is received.
                 <br />
-                <br />
                 Note: this parameter is also controlled by the message <m>mode</m>.
             </description>
         </attribute>
@@ -330,7 +329,6 @@
                 There are two playing modes, selected with the following messages.
                 <br />
                 The message <m>playingmode 0</m> will set the playing mode to <m>automatic</m>, the message <m>playingmode 1</m> will set the playing mode to <m>manual</m>.
-                <br />
                 <br />
                 Note: this parameter is also controlled by the message <m>mode</m>.
             </description>
