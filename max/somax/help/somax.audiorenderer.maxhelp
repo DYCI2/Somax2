@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 100.0, 100.0, 1021.0, 779.0 ],
+		"rect" : [ 100.0, 100.0, 1062.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1021.0, 753.0 ],
+						"rect" : [ 0.0, 26.0, 1062.0, 753.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -122,7 +122,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 100.0, 126.0, 1021.0, 753.0 ],
+						"rect" : [ 100.0, 126.0, 1062.0, 753.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -162,7 +162,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 38.666666666666686, 414.541666666666515, 120.0, 79.0 ],
+									"patching_rect" : [ 38.666666666666686, 414.541666666666515, 123.0, 79.0 ],
 									"text" : "The audiorenderer listens directly to the output protocol on the first outlet of somax.player",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
