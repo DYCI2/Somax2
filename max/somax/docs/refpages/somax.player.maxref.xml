@@ -422,7 +422,7 @@
         </attribute>
         <attribute name="weights" get="1" set="1" type="symbol" size="1">
             <digest>Set values for the weights on different layers</digest>
-            <description>TODO</description>
+            <description>changes</description>
         </attribute>
 	</attributelist>
 	
