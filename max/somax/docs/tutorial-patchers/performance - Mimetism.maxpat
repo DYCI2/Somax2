@@ -706,7 +706,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 170.0, 183.0, 91.0, 20.0 ],
-									"text" : "set Timeout = 2"
+									"text" : "set Timeout = 0"
 								}
 
 							}
@@ -765,7 +765,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 158.5, 159.0, 58.0, 22.0 ],
-									"text" : "timeout 2"
+									"text" : "timeout 0"
 								}
 
 							}
