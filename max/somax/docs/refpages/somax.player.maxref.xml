@@ -159,7 +159,6 @@
                 Open the <o>somax.player</o> window. This window will give you access to all the available parameters, as well as visual feedback for the number of peaks, matches and last output state index.     
             </description>
 		</method>
-            
         <method name="recvport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Query the current OSC receive port address</digest>
@@ -167,17 +166,11 @@
                 The message <m>recvport</m> will cause the <o>somax.player</o> to output the value of its OSC receive port, out the left outlet.         
             </description>
 		</method>
-        
-        <method name="reinstantiate">
+        <method name="reinitialize">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>ERROR</digest>
-			<description>TODO</description>
-		</method>
-        <method name="reload">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Reload the player, if terminated. You need to initialize it after reloading.</digest>
+			<digest>Terminate and initialize the player</digest>
 			<description>
-                TODO         
+                The message <m>reinitialize</m> performs the same function as sending first <m>terminate</m> and then <m>initialize</m>.      
             </description>
 		</method>
         <method name="resetinfluences">
@@ -192,11 +185,6 @@
                 The message <m>recvport</m> will cause the <o>somax.player</o> to output the value of its OSC send port, out the left outlet.
             </description>
         </method>
-        <method name="zap">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Performs the same function as reload</digest>
-			<description>Performs the same function as <m>reload</m></description>
-		</method>
 	</methodlist>
 
     <!--ATTRIBUTES-->
@@ -237,7 +225,6 @@
                 The message <m>cut 1</m> sets the parameter to <m>allowed</m>, meaning that the <o>somax.player</o> will interrupt the current event and trigger the new event immediately when the new trigger arrives. 
                 <br />
                 The message <m>cut 0</m> sets the parameter to <m>not allowed</m>, meaning that the <o>somax.player</o> will delay the trigger so that the new event starts playing once the current event has been completed.
-
             </description>
         </attribute>
         <attribute name="decaybasis" get="1" set="1" type="symbol" size="1">
@@ -411,8 +398,6 @@
                 The message <m>recombine 0</m> will set the timeout behaviour to <m>linear</m>, meaning that the <o>somax.player</o> will play the corpus linearly (i.e. without jumping) during the timeout period.
                 <br />
                 The message <m>recombine 1</m> will set the timeout behaviour to <m>recombine</m>, allowing the player to jump in the corpus during the timeout period.
-
-
             </description>
         </attribute>
         <attribute name="regionmask" get="1" set="1" type="symbol" size="1">
@@ -571,7 +556,6 @@
 	
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="somax.player.ui" />
 		<seealso name="somax.player.app" />
 		<seealso name="somax.server" />
 		<seealso name="somax.audiorenderer" />
