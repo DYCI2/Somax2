@@ -13,7 +13,7 @@
     },
     "igphase": {
         "title": "Ignore Phase",
-        "description": "If this parameter is set to 'False', the player will apply a weight to each potential output candidate (at each generation time step) based on where it occurs in the beat. More specifically, it compares its position in the original corpus to the current beat of the server tempo. For example, if the player at any point in time where the server currently is on the second quaver of a beat, finds two matches in the corpus - one occuring at the first quaver of any beat and the other one occuring at the second - the player will apply a negative bias to the former match, thus prioritizing the match occuring at a similar time as the server time.\n\nIf this parameter is set to 'True', this behaviour will be entirely bypassed.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'True' and the 'Continuous' mode sets this parameter to 'False'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters."
+        "description": "If this parameter is set to 'False', the player will apply a weight to each potential output candidate (at each generation time step) based on where it occurs in the beat. More specifically, it compares its position in the original corpus to the current beat of the server tempo. For example, if the player at any point in time where the server currently is on the second quaver of a beat, finds two matches in the corpus - one occuring at the first quaver of any beat and the other one occuring at the second - the player will apply a negative bias to the former match, thus prioritizing the match occuring at a similar time as the server time.\n\nIf this parameter is set to 'True', this behaviour will be entirely bypassed."
     },
     "notedur": {
         "title": "Note Duration",
@@ -125,7 +125,7 @@
     },
     "taboo": {
         "title": "Enforce Taboo",
-        "description": "A number of controls introduces a taboo on certain events, which can be described as a strong recommendation to not play the taboo'ed event.\n\nWhen this option is disabled, events with a taboo will only be played as a last resort. If disabled, events with a taboo will never be played.\n\nAn example of a control that introduces a taboo is the «Region Mask» filter, which will add a taboo to all events outside the selected region if enabled."
+        "description": "A number of controls introduces a taboo on certain events, which can be described as a strong recommendation to not play the taboo'ed event.\n\nWhen this option is disabled, events with a taboo will only be played as a last resort. If enabled, events with a taboo will never be played.\n\nAn example of a control that introduces a taboo is the «Region Mask» filter, which will add a taboo to all events outside the selected region if enabled."
     },
     "timestretch": {
         "title": "Time Stretch",

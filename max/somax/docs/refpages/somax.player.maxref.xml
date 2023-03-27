@@ -30,28 +30,31 @@
                 If there's no argument, the <o>somax.player</o> will automatically be created with a unique name.
 			</description>
 		</objarg>
+
+        <objarg name="sendport" optional="1" type="int">
+            <digest>
+                OSC send port
+            </digest>
+            <description>
+                The optional second argument sets the value for the port used by the <o>somax.player</o> object to send information to the remote python player. his port value is passed to the <o>udpsend</o> internal object, used to communicate with the python player through OSC. Therefore, the same port will be the remote player input port, as you read in the terminal at the moment of initializing the <o>somax.player</o> object.
+                <br />
+                <br />
+                If there's no argument, the <o>somax.player</o> will automatically be created with a unique <m>sendport</m>.
+            </description>
+        </objarg>
+
         <objarg name="recvport" optional="1" type="int">
             <digest>
                 OSC receive port
             </digest>
             <description>
-                The optional second argument sets the value for the port used by the <o>somax.player</o> object to receive information from the remote python server.
+                The optional third argument sets the value for the port used by the <o>somax.player</o> object to receive information from the remote python player. This port value is passed to the <o>udpreceive</o> internal object, used to communicate with the python player through OSC. Therefore, the same port will be the python player output port, as you read in the terminal at the moment of initializing the <o>somax.player</o> object.
                 <br />
                 <br />
                 If there's no argument, the <o>somax.player</o> will automatically be created with a unique <m>recvport</m>.
             </description>
         </objarg>
-        <objarg name="sendport" optional="1" type="int">
-			<digest>
-				OSC send port
-			</digest>
-			<description>
-				The optional third argument sets the value for the port used by the <o>somax.player</o> object to send information to the remote python server.
-                <br />
-                <br />
-                If there's no argument, the <o>somax.player</o> will automatically be created with a unique <m>sendport</m>.
-			</description>
-		</objarg>
+        
         
         <objarg name="ip" optional="1" type="symbol">
 			<digest>
@@ -103,8 +106,10 @@
         
         <method name="flush">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
+			<digest>Output MIDI note-offs for held notes</digest>
+			<description>
+                Outputs note-offs messages for any held MIDI note-ons.         
+            </description>
 		</method>
         
         <method name="influence">
@@ -135,7 +140,9 @@
         <method name="jump">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Jump to event by index (on next trigger)</digest>
-			<description>TODO</description>
+			<description>
+                The message <m>jump</m>, followed by an <o>int</o>, will cause the <o>somax.player</o> to jump to the state having index according to the specified value. This will happen on the next trigger received by the player, so if you want to have an immediate <m>jump</m>, send a <m>bang</m> immediately after.         
+            </description>
 		</method>
         
         <method name="name">
@@ -152,13 +159,7 @@
                 Open the <o>somax.player</o> window. This window will give you access to all the available parameters, as well as visual feedback for the number of peaks, matches and last output state index.     
             </description>
 		</method>
-        
-        <method name="rawsend">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
-		</method>
-        
+            
         <method name="recvport">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Query the current OSC receive port address</digest>
@@ -206,7 +207,9 @@
         </attribute>
         <attribute name="autoinitialize" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable autoinitialization of the player when created</digest>
-            <description>TODO</description>
+            <description>
+                By default the <o>somax.player</o> will be automatically initalized when created. Set this attribute to 0 to disable this behaviour. 
+            </description>
         </attribute>
         <attribute name="continuity" get="1" set="1" type="symbol" size="1">
             <digest>Set continuity value</digest>
@@ -227,7 +230,15 @@
         </attribute>
         <attribute name="cut" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable cut</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>cut</m> controls the cut mid-event parameter.
+                When <m>mode</m> is set to <m>reactive</m> or <m>playingmode</m> is set to <m>manual</m>, the output is generated each time a new trigger (onset or <m>bang</m>) arrives. If the <o>somax.player</o> is in the middle of playing an event when a trigger arrives, <m>cut</m> controls whether the currently played event should be interrupted or not. 
+                <br />
+                The message <m>cut 1</m> sets the parameter to <m>allowed</m>, meaning that the <o>somax.player</o> will interrupt the current event and trigger the new event immediately when the new trigger arrives. 
+                <br />
+                The message <m>cut 0</m> sets the parameter to <m>not allowed</m>, meaning that the <o>somax.player</o> will delay the trigger so that the new event starts playing once the current event has been completed.
+
+            </description>
         </attribute>
         <attribute name="decaybasis" get="1" set="1" type="symbol" size="1">
             <digest>Select method for decay time scaling of previous peaks</digest>
@@ -248,8 +259,12 @@
             </description>
         </attribute>
         <attribute name="enforcetaboo" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
-            <description>TODO</description>
+            <digest>Enable/Disable enforce taboo</digest>
+            <description>
+                The message <m>enforcetaboo 1</m> will set the enforce taboo parameter to <m>true</m>, while the message <m>enforcetaboo 0</m> will set it to <m>false</m>.
+                <br />
+                A number of controls introduces a taboo on certain events, which can be described as a strong recommendation to not play the taboo'ed event. The message <m>enforcetaboo 0</m> will disabled it, meaning that events with a taboo will only be played as a last resort. If enabled, events with a taboo will never be played. An example of a control that introduces a taboo is the <m>regionmask</m> filter, which will add a taboo to all events outside the selected region if enabled.
+            </description>
         </attribute>
         <attribute name="fallback" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
@@ -257,35 +272,73 @@
         </attribute>
         <attribute name="harmonicenable" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable external harmonic influences</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>harmonicenable 1</m> will cause the <o>somax.player</o> to listen to external harmonic influences. The message <m>harmonicenable 0</m> will disable it.
+            </description>
         </attribute>
         <attribute name="harmonicngramorder" get="1" set="1" type="symbol" size="1">
             <digest>Set value for external harmonic memory length</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>harmonicngramorder</m>, followed by an <o>int</o> between 1 and 10, will set the value for the memory length (or n-gram order) of the external harmonic influences. This value corresponds to the lenght of the sequence of last n influences to look for in the external harmonic layer, when searching for a match. 
+                <br />
+                Setting this value to a low value will in other words look for short sequence in the memory (and in most cases increase the probability of finding matches, at the cost of each match containing less contextual information), while a high value will look for longer sequences (and in most cases reduce the probability of finding matches, where each match has a higher degree of contextual information). Finding the a good balance for this parameter is one of the most important aspects for generating meaningful output.
+            </description>
         </attribute>
         <attribute name="harmonicpeakdecay" get="1" set="1" type="symbol" size="1">
             <digest>Set decay time value (unit according to the selected decay basis method) for external harmonic peaks</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>harmonicpeakdecay</m>, followed by a <o>float</o> between 0 and 1, will set the value for the decay time of previous matches on the external harmonic layer. 
+                <br />
+                The unit of this parameter is strictly connected to the <m>decaybasis</m> parameter. 
+                <br />
+                If <m>decaybasis</m> is set to <m>event</m>, the unit of <m>harmonicpeakdecay</m> will be <m>events</m>.
+                If <m>decaybasis</m> is set to <m>time</m>, the unit of <m>harmonicpeakdecay</m> will be <m>beats</m>.
+            </description>
         </attribute>
         <attribute name="ignorephase" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
-            <description>TODO</description>
+            <digest>Enable/Disable ignore phase</digest>
+            <description>
+                The message <m>ignorephase 0</m> will set ignore phase to <m>false</m>, meaning that the <o>somax.player</o> will apply a weight to each potential output candidate (at each generation time step) based on where it occurs in the beat. More specifically, it compares its position in the original corpus to the current beat of the <o>somax.server</o> tempo. For example, if the player at any point in time where the server currently is on the second quaver of a beat, finds two matches in the corpus - one occuring at the first quaver of any beat and the other one occuring at the second - the player will apply a negative bias to the former match, thus prioritizing the match occuring at a similar time as the server time.
+                <br />
+                The message <m>ignorephase 1</m> will set ignore phase to <m>true</m> (as default), bypassing the previously described behaviour.
+            </description>
         </attribute>
         <attribute name="melodicenable" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable external melodic influences</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>melodiccenable 1</m> will cause the <o>somax.player</o> to listen to external melodic influences. The message <m>melodicenable 0</m> will disable it.
+            </description>
         </attribute>
         <attribute name="melodicmod12" get="1" set="1" type="symbol" size="1">
             <digest>Select between exact pitch or pitch class matching for external melodic influences</digest>
-            <description>TODO</description>
+            <description>
+                For layers that matches pitch information, like the external melodic influence layer, the <o>somax.player</o> has two options of decoding those influences, controlled by the <m>melodicmod12</m> message.
+                <br />
+                The message <m>melodicmod12 1</m> will select the matching of pitch classes for the external melodic influences.
+                <br />
+                The message <m>melodicmod12 0</m> will select the matching of exact pitches for the external melodic influences.
+                <br />
+                Enabling this will in most cases drastically increase the number of matches for that respective layer.\n\nThese buttons are also available with the same behaviour in the compact interface.
+            </description>
         </attribute>
         <attribute name="melodicngramorder" get="1" set="1" type="symbol" size="1">
             <digest>Set value for external melodic memory length</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>melodicngramorder</m>, followed by an <o>int</o> between 1 and 10, will set the value for the memory length (or n-gram order) of the external melodic influences. This value corresponds to the lenght of the sequence of last n influences to look for in the external melodic layer, when searching for a match. 
+                <br />
+                Setting this value to a low value will in other words look for short sequence in the memory (and in most cases increase the probability of finding matches, at the cost of each match containing less contextual information), while a high value will look for longer sequences (and in most cases reduce the probability of finding matches, where each match has a higher degree of contextual information). Finding the a good balance for this parameter is one of the most important aspects for generating meaningful output.
+            </description>
         </attribute>
         <attribute name="melodicpeakdecay" get="1" set="1" type="symbol" size="1">
             <digest>Set decay time value (unit according to the selected decay basis method) for external melodic peaks</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>melodicpeakdecay</m>, followed by a <o>float</o> between 0 and 1, will set the value for the decay time of previous matches on the external melodic layer. 
+                <br />
+                The unit of this parameter is strictly connected to the <m>decaybasis</m> parameter. 
+                <br />
+                If <m>decaybasis</m> is set to <m>event</m>, the unit of <m>melodicpeakdecay</m> will be <m>events</m>.
+                If <m>decaybasis</m> is set to <m>time</m>, the unit of <m>melodicpeakdecay</m> will be <m>beats</m>.
+            </description>
         </attribute>
         <attribute name="mididurations" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
@@ -293,7 +346,13 @@
         </attribute>
         <attribute name="midinotebynote" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>midinotebynote</m> will control the MIDI reactive mode of the <o>somax.player</o>. When <m>mode</m> is set to <m>reactive</m>, or <m>playingmode</m> is set to <m>manual</m>, there are two options for how the player should play the events of the corpus, controlled by this parameter.
+                <br />
+                The message <m>midinotebynote 1</m> will set the MIDI reactive mode to <m>note by note</m>, meaning that each trigger will trigger a single event (i.e. one or multiple MIDI notes) that will be held until the next trigger (or until <m>timeout</m>, if active).
+                <br />
+                The message <m>midinotebynote 0</m> will set the MIDI reactive mode to <m>continue</m>, meaning that the <o>somax.player</o> will play the event corresponding to its initial duration and then continue playing (where the behaviour in this mode further depends on the <m>recombine</m> setting).
+            </description>
         </attribute>
         <attribute name="midionsets" get="1" set="1" type="symbol" size="1">
             <digest>TODO</digest>
@@ -345,84 +404,167 @@
             </description>
         </attribute>
         <attribute name="recombine" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
-            <description>TODO</description>
+            <digest>Set timeout behaviour method</digest>
+            <description>
+                The message <m>recombine</m> sets the behaviour for the timeout, when <m>mode</m> is set to <m>reactive</m>, or <m>playingmode</m> is set to <m>manual</m>. In this mode, if <m>timeoutenable</m> is <m>on</m> and <m>timeout</m> has a non-zero value, <m>recombine</m> controls how the generation should be handled in the timeout period.
+                <br />
+                The message <m>recombine 0</m> will set the timeout behaviour to <m>linear</m>, meaning that the <o>somax.player</o> will play the corpus linearly (i.e. without jumping) during the timeout period.
+                <br />
+                The message <m>recombine 1</m> will set the timeout behaviour to <m>recombine</m>, allowing the player to jump in the corpus during the timeout period.
+
+
+            </description>
         </attribute>
         <attribute name="regionmask" get="1" set="1" type="symbol" size="1">
             <digest>Set lower and upper indexes for region mask</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>regionmask</m>, followed by two <o>float</o> values between 0 and 1, will set the lower and upper bounds of the region mask, when <m>regionmaskenable</m> is on. These values do not correspond to the exact state indexes of the corpus, but are rather relative positions of the whole duration of the corpus, where 0 is the beginning and 1 is the end of the corpus. 
+                <br />
+                Note: since the first value sets the lower index and the second value sets the upper index, the second value should always be equal or higher than the first one. If the two values are the same, a unitary region mask will be selected. 
+            </description>
         </attribute>
         <attribute name="regionmaskenable" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable region mask</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>regionmaskenable 1</m> will enable the region mask, while the message <m>regionamaskenable 0</m> will disable it. When enabled, the <o>somax.player</o> will only output events from a specific part of the corpus. The extremes of the <m>regionmask</m> are set by the <m>regionmask</m> message.
+                <br />
+                Note: events outside of the region may still be played as a last resort in some cases unless <m>enforcetaboo</m> is on.
+            </description>
         </attribute>
         <attribute name="selfharmonicenable" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable internal harmonic influences</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>selfharmonicenable 1</m> will cause the <o>somax.player</o> to listen to its internal harmonic influences. The message <m>selfharmonicenable 0</m> will disable it.
+            </description>
         </attribute>
         <attribute name="selfharmonicngramorder" get="1" set="1" type="symbol" size="1">
             <digest>Set value for internal harmonic memory length</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>selfharmonicngramorder</m>, followed by an <o>int</o> between 1 and 10, will set the value for the memory length (or n-gram order) of the internal harmonic influences. This value corresponds to the lenght of the sequence of last n influences to look for in the internal harmonic layer, when searching for a match. 
+                <br />
+                Setting this value to a low value will in other words look for short sequence in the memory (and in most cases increase the probability of finding matches, at the cost of each match containing less contextual information), while a high value will look for longer sequences (and in most cases reduce the probability of finding matches, where each match has a higher degree of contextual information). Finding the a good balance for this parameter is one of the most important aspects for generating meaningful output.
+            </description>
         </attribute>
         <attribute name="selfharmonicpeakdecay" get="1" set="1" type="symbol" size="1">
             <digest>Set decay time value (unit according to the selected decay basis method) for internal harmonic peaks</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>selfharmonicpeakdecay</m>, followed by a <o>float</o> between 0 and 1, will set the value for the decay time of previous matches on the internal harmonic layer. 
+                <br />
+                The unit of this parameter is strictly connected to the <m>decaybasis</m> parameter. 
+                <br />
+                If <m>decaybasis</m> is set to <m>event</m>, the unit of <m>selfharmonicpeakdecay</m> will be <m>events</m>.
+                If <m>decaybasis</m> is set to <m>time</m>, the unit of <m>selfharmonicpeakdecay</m> will be <m>beats</m>.
+            </description>
         </attribute>
         <attribute name="selfmelodicenable" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable internal melodic influences</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>selfmelodicenable 1</m> will cause the <o>somax.player</o> to listen to its internal melodic influences. The message <m>selfmelodicenable 0</m> will disable it.
+            </description>
         </attribute>
         <attribute name="selfmod12" get="1" set="1" type="symbol" size="1">
             <digest>Select between exact pitch or pitch class matching for internal melodic influences</digest>
-            <description>TODO</description>
+            <description>
+                For layers that matches pitch information, like the internal melodic influence layer, the <o>somax.player</o> has two options of decoding those influences, controlled by the <m>selfmod12</m> message.
+                <br />
+                The message <m>selfmod12 1</m> will select the matching of pitch classes for the internal melodic influences.
+                <br />
+                The message <m>selfmod12 0</m> will select the matching of exact pitches for the internal melodic influences.
+                <br />
+                Enabling this will in most cases drastically increase the number of matches for that respective layer.\n\nThese buttons are also available with the same behaviour in the compact interface.
+            </description>
         </attribute>
         <attribute name="selfngramorder" get="1" set="1" type="symbol" size="1">
             <digest>Set value for internal melodic memory length</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>selfngramorder</m>, followed by an <o>int</o> between 1 and 10, will set the value for the memory length (or n-gram order) of the internal melodic influences. This value corresponds to the lenght of the sequence of last n influences to look for in the internal melodic layer, when searching for a match. 
+                <br />
+                Setting this value to a low value will in other words look for short sequence in the memory (and in most cases increase the probability of finding matches, at the cost of each match containing less contextual information), while a high value will look for longer sequences (and in most cases reduce the probability of finding matches, where each match has a higher degree of contextual information). Finding the a good balance for this parameter is one of the most important aspects for generating meaningful output.
+            </description>
         </attribute>
          <attribute name="selfpeakdecay" get="1" set="1" type="symbol" size="1">
             <digest>Set decay time value (unit according to the selected decay basis method) for internal melodic peaks</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>selfpeakdecay</m>, followed by a <o>float</o> between 0 and 1, will set the value for the decay time of previous matches on the internal melodic layer. 
+                <br />
+                The unit of this parameter is strictly connected to the <m>decaybasis</m> parameter. 
+                <br />
+                If <m>decaybasis</m> is set to <m>event</m>, the unit of <m>selfpeakdecay</m> will be <m>events</m>.
+                If <m>decaybasis</m> is set to <m>time</m>, the unit of <m>selfpeakdecay</m> will be <m>beats</m>.
+            </description>
         </attribute>
         <attribute name="sparse" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable sparse</digest>
-            <description>TODO</description>
-        </attribute>
-        <attribute name="tabooenable" get="1" set="1" type="symbol" size="1">
-            <digest>Enable/Disable taboo</digest>
-            <description>TODO</description>
-        </attribute>
-        <attribute name="tabooduration" get="1" set="1" type="symbol" size="1">
-            <digest>Set taboo duration</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>sparse 0</m> will disable the sparse parameter.
+                This is the default behaviour, in which the <o>somax.player</o> will generate output even if it doesn't find any match in the corpus corresponding to the input. 
+                The message <m>sparse 1</m> will enable sparse, ensuring that the <o>somax.player</o> only outputs something if it finds a good match, and if it doesn't, it will remain silent.
+                <br />
+                Note: this parameter is strictly connected to the <m>quality</m> threshold.
+            </description>
         </attribute>
         <attribute name="timeout" get="1" set="1" type="symbol" size="1">
             <digest>Set timeout value</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>timeout</m>, followed by a <o>float</o>, will set the value (in milliseconds) for the timeout parameter.
+                If <m>timeout</m> is enabled, through the <m>timeoutenable</m> message, and <m>mode</m> is set to <m>reactive</m>, or <m>playingmode</m> is set to <m>manual</m>, this value controls whether the <o>somax.player</o> should continue playing if no new trigger has arrived by the time the player has finished playing its current event. Setting this to a non-zero value will make the <o>somax.player</o> continue for that number of seconds. It's also possible to disable this to make the player continue endlessly.
+            </description>
         </attribute>
         <attribute name="timeoutenable" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable timeout</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>timeoutenable 1</m> will enable the <m>timeout</m> parameter.
+                The message <m>timeoutenable 0</m> will disable it.
+            </description>
         </attribute>
         <attribute name="timestretch" get="1" set="1" type="symbol" size="1">
             <digest>Set timestretch value</digest>
-            <description>TODO</description>
+            <description>
+                 The message <m>timestretch</m>, followed by a <o>float</o>, will set the value for the timestretch factor.
+                 When <m>timestretchmode</m> is set to <m>manual</m>, this value controls the playback rate of the <o>somax.player</o>.
+                 <br />
+                 For example, the message <m>timestretch 1</m> will result in a timestretch factor of 1.0, meaning that the <o>somax.player</o> will follow the original tempo of its corpus. The message <m>timestretch 0.5</m> will halve the original tempo, while <m>timestretch 2.0</m> will double it.
+            </description>
         </attribute>
         <attribute name="timestretchmode" get="1" set="1" type="symbol" size="1">
             <digest>Select timestretch mode</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>timestretchmode</m> determines which source the <o>somax.player</o> will use to synchronize its internal tempo.
+                There are two modes, selected with the following messages.
+                <br />
+                The message <m>timestretchmode 0</m> sets the mode to <m>manual</m>, meaning that the playback rate is defined by the tempo of the corpus, but the tempo can be scaled manually with the <m>timestretch</m> factor.
+                <br />
+                The message <m>timestretchmode 1</m> sets the mode to <m>by global tempo</m>, meaning that the <o>somax.player</o> will synchronize its playback rate so that the internal tempo of the corpus matches the tempo of the <o>somax.server</o>.
+            </description>
         </attribute>
         <attribute name="transpositionbias" get="1" set="1" type="symbol" size="1">
-            <digest>Set attenuation value for transpositions</digest>
-            <description>TODO</description>
+            <digest>Set consistency bias for transpositions</digest>
+            <description>
+                The message <m>transpositionbias</m>, followed by a <o>float</o> between 0 and 1, will set the value for the transposition consistency bias. The message <m>transpositionbias 1</m> will result in no attenuation between the different <m>transpositions</m>, while the message <m>transpositionbias 0</m> will enforce the current transposition, having a full attenuation.
+                <br />
+                When using <m>transpositions</m>, the continuous transitions between different transpositions can in some cases make the generated result sound quite incoherent (especially for tonal music due to the difference in harmonic function). This parameter can be used to attenuate other transpositions so that transitions between different tranpositions become less likely, thus only occuring if the match found in another transposition is much better than that of the current.
+            </description>
         </attribute>
         <attribute name="transpositions" get="1" set="1" type="symbol" size="1">
             <digest>Set values for transposition intervals</digest>
-            <description>TODO</description>
+            <description>
+                The message <m>transpositions</m> controls the active semitone transpositions. The <o>somax.player</o> can infact look for matches in transposed versions of the corpus as well as the original, which can be very useful for short corpora or other situations when there are problems with a low amount of matches. The transposition range is set to -5 semitones (transposition to G major given corpus in C major) up to +6 semitones (transposition to F# major given corpus in C major). Given a corpus in C major, enabling the '0' and '+1' transposition means that it will look for matches in the same corpus transposed to C# as well as the original in C. 
+                <br />
+                There are two ways of using this message. You can send it followed by a binary list of 12 values, each one enabling or disabling the specified transpositio semitone. So <m>transpositions 0 0 0 0 1 1 1 0 0 0 0 0</m> will enable the '-1' '0' and '1' semitones transposition, while disabling the others.
+                <br />
+                The other method consists in specifying directly the value for the semitones you want to enable. So <m>transpositions -5 0 3</m> will enable the '-5' '0' and '3' semitones transpositions only.
+                <br />
+                Any set of <m>transpositions</m> may be enabled, with or without the original ('0'), as long as at least one transposition is active. 
+                <br />
+                Note:a large amount of enabled transposition may impact the computation time of the player and in worst case result in perceiveable latency.
+            </description>
         </attribute>
         <attribute name="weights" get="1" set="1" type="symbol" size="1">
             <digest>Set values for the weights on different layers</digest>
-            <description>changes</description>
+            <description>
+                The message <m>weights</m>, followed by a list of four <m>floats</m> between 0 and 1, will control the balance between the different layers. These parameters determine whether the <o>somax.player</o> should prioritize output corresponding to harmonic and/or melodic matches, or prioritize matches with its own previous output.
+                For example, the message <m>weights 0.25 0.5 1 0.6</m> will set the following balance weights between the layers: internal melodic influences to 0.25, internal harmonic influences to 0.5, external melodic influences to 1, and external harmonic influences to 0.6.
+            </description>
         </attribute>
 	</attributelist>
 	
