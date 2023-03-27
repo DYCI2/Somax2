@@ -55,17 +55,20 @@ notarize:
 	xcrun stapler staple dist/somax_server.app
 
 max-package: clean
-	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN CODESIGNED BEFORE CALLING THIS COMMAND. ORDER SHOULD BE:\n    make pyinstaller\n    make codesignature (+ stapler once finished)\n    make max-package\033[0m"
+	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN SIGNED AND NOTARIZED BEFORE CALLING THIS COMMAND!\nORDER SHOULD BE:\n    make pyinstaller\n    make codesignature \n    make notarize \n    make max-package\033[0m"
 	mkdir -p "$(MAX_BUILD_PARENT_FOLDER)"
 	cp -r "$(MAX_LIB_PATH)" "$(MAX_BUILD_PATH)"
 	# clean up local items
 	rm -rf "$(MAX_BUILD_PATH)"/state/*
+	cp "$(MAX_LIB_PATH)"/state/FactorySettings.json "$(MAX_BUILD_PATH)"/state
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.json
 	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
 	# copy binary (should already be codesigned)
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
 	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
+	cp -r templates "$(MAX_BUILD_PATH)"
+	ln -s "extras/somax2.overview.maxpat" "$(MAX_BUILD_PATH)"
 	create-dmg \
 		--volname "$(DMG_NAME)" \
 		--window-pos 200 120 \
