@@ -54,11 +54,6 @@
 				The <m>dump</m> message will cause the <o>somax.midicorpusbuilder</o> to output the current values of all its parameters out its third outlet.
 			</description>
 		</method>
-        <method name="echoic">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Enable/Disable echoic memory</digest>
-			<description>TODO</description>
-		</method>
         <method name="pitchchannels">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Select pitch channels for MIDI corpus segmentation</digest>
