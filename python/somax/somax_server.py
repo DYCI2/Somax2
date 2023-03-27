@@ -219,7 +219,7 @@ class SomaxServer(Somax, AsyncioOscObject):
             self.target.send(ServerSendProtocol.DELETED_PLAYER, name)
 
         except KeyError:
-            self.logger.warning(f"An agent with the name '{name}' doesn't exist. No agent was deleted.")
+            self.logger.debug(f"An agent with the name '{name}' doesn't exist. No agent was deleted.")
 
     ######################################################
     # MAX GETTERS

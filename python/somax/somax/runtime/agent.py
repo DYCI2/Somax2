@@ -563,7 +563,7 @@ class OscAgent(Agent, AsyncioOscObject):
                         # if fails and alternative folder for audio file provided, try relocating audio file
                         if corpuspath_folder:
                             try:
-                                self.logger.warning(f"{str(e)}. Looking for audio file in '{corpuspath_folder}'...")
+                                self.logger.debug(f"{str(e)}. Looking for audio file in '{corpuspath_folder}'...")
                                 corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile,
                                                                        new_audio_path=corpuspath_folder)
                             except FileNotFoundError as e:
@@ -573,9 +573,8 @@ class OscAgent(Agent, AsyncioOscObject):
                                 found_match: bool = False
                                 for ext in CorpusBuilder.AUDIO_FILE_EXTENSIONS:  # type: str
                                     if os.path.isfile(base_path + ext):
-                                        self.logger.warning(
-                                            f"{str(e)}. Attempting to build from  '{base_path + ext}'..."
-                                        )
+                                        self.logger.debug(f"{str(e)}. Attempting to build from  "
+                                                          f"'{base_path + ext}'...")
                                         found_match = True
                                         corpus: Corpus = AudioCorpus.from_json(filepath,
                                                                                volatile=volatile,
