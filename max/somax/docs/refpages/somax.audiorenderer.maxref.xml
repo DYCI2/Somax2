@@ -36,8 +36,8 @@
 		</method>
         <method name="flush">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>TODO</digest>
-			<description>TODO</description>
+			<digest>Stops rendering of any lingering events</digest>
+			<description>Stops rendering of any lingering events.</description>
 		</method>
         <method name="openwindow">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
@@ -57,8 +57,8 @@
 			</description>
 		</attribute>
         <attribute name="buffername" get="1" set="0" type="symbol" size="1">
-			<digest>TODO</digest>
-			<description>TODO</description>
+			<digest>Set name of internal buffer</digest>
+			<description>The <m>buffername</m> attribute can be used to access the renderer's internal <o>buffer~</o> from outside. By default, the buffer will have an auto-generated and therefore not be accessible.</description>
 		</attribute>
         <attribute name="crossfadecurve" get="1" set="1" type="symbol" size="1">
 			<digest>Set crossfade slope curve</digest>

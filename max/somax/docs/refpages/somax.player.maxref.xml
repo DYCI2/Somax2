@@ -98,7 +98,7 @@
 		</method>
         <method name="corpusquery">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Query information about the player's loaded corpus.</digest>
+			<digest>Query information about the player's loaded corpus</digest>
 			<description>
                 The message <m>corpusquery</m> followed by a keyword will cause the <o>somax.player</o> to output the required corpus information, out the left outlet. Valid keywords are <m>corpusinfo</m>, <m>features</m>, <m>feature</m>, <m>events</m>, <m>notes</m>, <m>pitches</m>, <m>velocities</m> and <m>channels</m>.         
             </description>
@@ -175,8 +175,8 @@
 		</method>
         <method name="resetinfluences">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Reset all the current stored influences</digest>
-			<description>TODO</description>
+			<digest>Reset the history of influences</digest>
+			<description>The message <m>resetinfluences</m> will reset the player's internal history of received influences</description>
 		</method>
         <method name="sendport">
             <arglist><arg name="input" optional="0" type="int" /></arglist>
@@ -189,10 +189,6 @@
 
     <!--ATTRIBUTES-->
 	<attributelist>
-        <attribute name="artificialmidities" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
-            <description>TODO</description>
-        </attribute>
         <attribute name="autoinitialize" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable autoinitialization of the player when created</digest>
             <description>
@@ -254,8 +250,10 @@
             </description>
         </attribute>
         <attribute name="fallback" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
-            <description>TODO</description>
+            <digest>Set strategy when no matches exist</digest>
+            <description>
+                The message <m>fallback</m>, followed by an <o>int</o> between 0 and 1, controls which event the player should play if no matches are found. <m>fallback 0</m> will in this case play a random event in the corpus, <m>fallback 1</m> will play the first event in the corpus.
+            </description>
         </attribute>
         <attribute name="harmonicenable" get="1" set="1" type="symbol" size="1">
             <digest>Enable/Disable external harmonic influences</digest>
@@ -328,11 +326,19 @@
             </description>
         </attribute>
         <attribute name="mididurations" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
-            <description>TODO</description>
+            <digest>Set note off strategy for MIDI corpora</digest>
+            <description>
+                The message <m>mididurations</m>, followed by an <o>int</o> between 0 and 2, will set the strategy for handling duration of note when the player is generating from a MIDI corpus.
+                <br />
+                The message <m>mididurations 0</m> will use the original durations of the MIDI file the corpus was built from.
+                <br />
+                The message <m>mididurations 1</m> will align the durations of all notes with the end of the event they correspond to.
+                <br />
+                The message <m>mididurations 2</m> will sustain the durations of all notes to the start of the next event (or until <m>timeout</m> occurs, if enabled).
+            </description>
         </attribute>
         <attribute name="midinotebynote" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
+            <digest>Set MIDI generation strategy for reactive mode</digest>
             <description>
                 The message <m>midinotebynote</m> will control the MIDI reactive mode of the <o>somax.player</o>. When <m>mode</m> is set to <m>reactive</m>, or <m>playingmode</m> is set to <m>manual</m>, there are two options for how the player should play the events of the corpus, controlled by this parameter.
                 <br />
@@ -342,8 +348,14 @@
             </description>
         </attribute>
         <attribute name="midionsets" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
-            <description>TODO</description>
+            <digest>Set note on strategy for MIDI corpora</digest>
+            <description>
+                The message <m>midionsets</m>, followed by an <o>int</o> between 0 and 1, will set the strategy for handling note ons when the player is generating from a MIDI corpus. 
+                <br />
+                The message <m>midionsets 0</m> will use the original onsets of the MIDI file the corpus was built from.
+                <br />
+                The message <m>midionsets 1</m> will align the onset of all notes with the start of the event they correspond to.
+            </description>
         </attribute>
         <attribute name="mode" get="1" set="1" type="symbol" size="1">
             <digest>Macro parameter that controls both playingmode and decaybasis</digest>
@@ -357,8 +369,14 @@
             </description>
         </attribute>
         <attribute name="outputfrom" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
-            <description>TODO</description>
+            <digest>Set match selection strategy</digest>
+            <description>
+                The message <m>outputfrom</m>, followed by an <o>int</o> between 0 and 1, will set the strategy for selecting the output from the set of matches at each point in time.
+                <br />
+                The message <m>outputfrom 0</m> will set the strategy to always choose the best match (the match with the highest quality).
+                <br />
+                The message <m>outputfrom 1</m> will set the strategy to a probabilistic approach, where the probability of a match corresponds to its relative quality.
+            </description>
         </attribute>
         <attribute name="outputprobability" get="1" set="1" type="symbol" size="1">
             <digest>Sets output probability value</digest>
@@ -378,10 +396,6 @@
                 <br />
                 Note: this parameter is also controlled by the message <m>mode</m>.
             </description>
-        </attribute>
-        <attribute name="pollpeaks" get="1" set="1" type="symbol" size="1">
-            <digest>TODO</digest>
-            <description>TODO</description>
         </attribute>
         <attribute name="quality" get="1" set="1" type="symbol" size="1">
             <digest>Set quality value</digest>
