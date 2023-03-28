@@ -66,7 +66,7 @@ max-package: clean
 	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
 	# copy binary (should already be codesigned)
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
-	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
+	cp LICENSE README.md "Somax2 User's Guide.pdf" "$(MAX_BUILD_PATH)"
 	cp -r templates "$(MAX_BUILD_PATH)"
 	ln -s "extras/somax2.overview.maxpat" "$(MAX_BUILD_PATH)"
 	create-dmg \
