@@ -96,7 +96,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 69.562499999999972, 465.0, 164.0, 22.0 ],
-									"text" : "name Player_5482"
+									"text" : "name Player_1583"
 								}
 
 							}
@@ -865,7 +865,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 31.0, 154.0, 85.0, 22.0 ],
-													"text" : "Player_5482"
+													"text" : "Player_1583"
 												}
 
 											}
@@ -2303,7 +2303,6 @@
 										"style" : "",
 										"subpatcher_template" : "",
 										"assistshowspatchername" : 0,
-										"visible" : 1,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -3839,7 +3838,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 864.604166666666401, 299.791666666666515, 163.0, 29.0 ],
-									"text" : "0 duplicate"
+									"text" : "0 offline"
 								}
 
 							}
@@ -5927,7 +5926,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 873.229166666666401, 397.562499999999829, 163.0, 29.0 ],
-									"text" : "0 duplicate"
+									"text" : "0 offline"
 								}
 
 							}
@@ -6616,7 +6615,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 126.0, 1055.0, 664.0 ],
+						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -6870,7 +6869,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 501.5, 346.541666666666629, 80.0, 22.0 ],
-									"text" : "1 ready"
+									"text" : "0 offline"
 								}
 
 							}
@@ -8122,7 +8121,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 864.604166666666401, 374.791666666666515, 163.0, 29.0 ],
-									"text" : "0 duplicate"
+									"text" : "0 offline"
 								}
 
 							}
@@ -10718,7 +10717,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 821.604166666666401, 235.000000000000114, 171.645833333333599, 29.0 ],
-									"text" : "0 duplicate"
+									"text" : "0 offline"
 								}
 
 							}
@@ -11325,7 +11324,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
+						"rect" : [ 84.0, 126.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1056.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -12273,7 +12272,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 847.104166666666401, 311.562499999999829, 163.0, 29.0 ],
-									"text" : "0 duplicate"
+									"text" : "0 offline"
 								}
 
 							}
