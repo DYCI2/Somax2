@@ -89,6 +89,22 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.05,
+									"bubbleside" : 2,
+									"id" : "obj-8",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 174.333333333333314, 240.0, 337.350000000000136, 79.0 ],
+									"text" : "By default, players will automatically be initailized on the server when created. But if this is not the case (i.e., if they have been created with @autoinitialize 0) this message will initialize them",
+									"textcolor" : [ 0.137254901960784, 0.137254901960784, 0.137254901960784, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-11",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -494,19 +510,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble" : 1,
-									"fontsize" : 12.0,
-									"id" : "obj-50",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 193.333333333333371, 295.95832873049676, 170.0, 24.0 ],
-									"text" : "initialize all existing players"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
 									"bgfillcolor_autogradient" : 0.0,
@@ -520,7 +523,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 98.0, 297.95832873049676, 90.0, 22.0 ],
+									"patching_rect" : [ 98.0, 314.95832873049676, 90.0, 22.0 ],
 									"text" : "initializeplayers"
 								}
 
@@ -966,7 +969,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 73.5, 297.95832873049676, 20.0, 20.0 ],
+									"patching_rect" : [ 73.5, 314.95832873049676, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "3",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1299,6 +1302,22 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.4,
+									"bubbleside" : 0,
+									"id" : "obj-4",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 153.912271666666811, 397.083333333333371, 337.350000000000136, 79.0 ],
+									"text" : "By default, players will automatically be initailized on the server when created. But if this is not the case (i.e., if they have been created with @autoinitialize 0) this message will initialize them",
+									"textcolor" : [ 0.137254901960784, 0.137254901960784, 0.137254901960784, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-31",
 									"maxclass" : "message",
@@ -2124,6 +2143,27 @@
 , 							{
 								"box" : 								{
 									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-7",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 43.0, 324.083333333333371, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "1",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
 									"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"bubble" : 1,
 									"bubblepoint" : 0.0,
@@ -2541,6 +2581,16 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-4", 0 ],
+									"hidden" : 1,
+									"midpoints" : [ 480.0, 394.083333333333371, 163.412271666666811, 394.083333333333371 ],
+									"order" : 3,
+									"source" : [ "obj-47", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-45", 0 ],
 									"hidden" : 1,
 									"midpoints" : [ 480.0, 393.0, 489.0, 393.0, 489.0, 357.0, 240.0, 357.0, 240.0, 363.0, 238.0, 363.0 ],
@@ -2709,6 +2759,22 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.4,
+									"bubbleside" : 0,
+									"id" : "obj-1",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 167.324999999999932, 488.333310893165617, 337.350000000000136, 79.0 ],
+									"text" : "By default, players will automatically be initailized on the server when created. But if this is not the case (i.e., if they have been created with @autoinitialize 0) this message will initialize them",
+									"textcolor" : [ 0.137254901960784, 0.137254901960784, 0.137254901960784, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-2",
@@ -3526,7 +3592,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 34.0, 583.66665195307155, 512.0, 47.0 ],
+									"patching_rect" : [ 34.0, 591.66665195307155, 512.0, 47.0 ],
 									"text" : "When this is the case, the object will ignore all messages while it's a duplicate (so it's safe to have multiple servers open). To attempt to clear duplicate flag (if all other servers have been closed) send \"reload\" to the server object"
 								}
 
@@ -3539,7 +3605,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 34.0, 564.66665195307155, 477.0, 20.0 ],
+									"patching_rect" : [ 34.0, 572.66665195307155, 477.0, 20.0 ],
 									"text" : "Note: if a server is open in another window, the status \"duplicate\" will be shown. ",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
@@ -3610,6 +3676,27 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 993.0, 498.66665661551292, 333.5, 165.333333402872086 ],
 									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-6",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 45.0, 420.333310893165617, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "1",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
 							}
@@ -4097,6 +4184,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"hidden" : 1,
+									"order" : 2,
+									"source" : [ "obj-47", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
 									"hidden" : 1,
 									"midpoints" : [ 480.0, 489.249977559832246, 489.0, 489.249977559832246, 489.0, 453.249977559832246, 240.0, 453.249977559832246, 240.0, 459.249977559832246, 238.0, 459.249977559832246 ],
@@ -4149,7 +4245,7 @@
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
 									"midpoints" : [ 480.0, 489.249977559832246, 489.0, 489.249977559832246, 489.0, 453.249977559832246, 171.0, 453.249977559832246, 171.0, 459.249977559832246, 170.5, 459.249977559832246 ],
-									"order" : 2,
+									"order" : 3,
 									"source" : [ "obj-47", 1 ]
 								}
 

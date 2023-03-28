@@ -90,6 +90,22 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.46,
+									"bubbleside" : 0,
+									"id" : "obj-4",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 62.649999999999864, 494.000005055379233, 337.350000000000136, 79.0 ],
+									"text" : "By default, players will automatically be initailized on the server when created. But if this is not the case (i.e., if they have been created with @autoinitialize 0) this message will initialize them",
+									"textcolor" : [ 0.137254901960784, 0.137254901960784, 0.137254901960784, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-101",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -1555,7 +1571,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-22",
-									"items" : [ "MIDI Mix", ",", "MPK mini 3", ",", "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -1842,6 +1858,27 @@
 									"patching_rect" : [ 1060.0, 482.833331854232711, 200.0, 22.0 ],
 									"text" : "somax.player",
 									"varname" : "somax.player"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-10",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 17.25, 402.583330949147523, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "1",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
 							}
@@ -2630,6 +2667,16 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-4", 0 ],
+									"hidden" : 1,
+									"midpoints" : [ 427.25, 496.208332593782984, 72.149999999999864, 496.208332593782984 ],
+									"order" : 3,
+									"source" : [ "obj-47", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-45", 0 ],
 									"hidden" : 1,
 									"midpoints" : [ 427.25, 494.333326798853307, 436.25, 494.333326798853307, 436.25, 458.333326798853307, 187.25, 458.333326798853307, 187.25, 464.333326798853307, 185.25, 464.333326798853307 ],
@@ -2949,7 +2996,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 112.0, 126.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2979,6 +3026,22 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.4,
+									"bubbleside" : 0,
+									"id" : "obj-11",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 74.0, 505.583330949147523, 337.350000000000136, 79.0 ],
+									"text" : "By default, players will automatically be initailized on the server when created. But if this is not the case (i.e., if they have been created with @autoinitialize 0) this message will initialize them",
+									"textcolor" : [ 0.137254901960784, 0.137254901960784, 0.137254901960784, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-42",
 									"maxclass" : "comment",
@@ -3425,7 +3488,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 702.27083333333303, 590.563145126144377, 50.0, 22.0 ],
-									"text" : "55"
+									"text" : "3599"
 								}
 
 							}
@@ -3451,7 +3514,7 @@
 									"hidden" : 1,
 									"id" : "obj-7",
 									"maxclass" : "newobj",
-									"numinlets" : 2,
+									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patcher" : 									{
 										"fileversion" : 1,
@@ -3464,7 +3527,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 89.0, 104.0, 640.0, 480.0 ],
+										"rect" : [ 202.0, 178.0, 307.0, 242.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -3511,8 +3574,8 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 21.0, 73.0, 229.0, 22.0 ],
-													"text" : "sprintf 2 - Introducing Parameters.maxpat"
+													"patching_rect" : [ 21.0, 73.0, 252.0, 22.0 ],
+													"text" : "sprintf max2 - Introducing Parameters.maxpat"
 												}
 
 											}
@@ -3542,55 +3605,6 @@
 											}
 , 											{
 												"box" : 												{
-													"id" : "obj-14",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 136.0, 53.0, 22.0 ],
-													"text" : "pcontrol"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"id" : "obj-13",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 108.0, 117.0, 22.0 ],
-													"text" : "prepend loadunique"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"id" : "obj-3",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 80.0, 112.0, 22.0 ],
-													"text" : "sprintf %s.maxhelp"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"comment" : "",
-													"id" : "obj-7",
-													"index" : 2,
-													"maxclass" : "inlet",
-													"numinlets" : 0,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 20.0, 30.0, 30.0 ]
-												}
-
-											}
-, 											{
-												"box" : 												{
 													"comment" : "",
 													"id" : "obj-8",
 													"index" : 1,
@@ -3605,22 +3619,8 @@
  ],
 										"lines" : [ 											{
 												"patchline" : 												{
-													"destination" : [ "obj-14", 0 ],
-													"source" : [ "obj-13", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
 													"destination" : [ "obj-6", 0 ],
 													"source" : [ "obj-2", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
-													"destination" : [ "obj-13", 0 ],
-													"source" : [ "obj-3", 0 ]
 												}
 
 											}
@@ -3635,13 +3635,6 @@
 												"patchline" : 												{
 													"destination" : [ "obj-5", 0 ],
 													"source" : [ "obj-6", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
-													"destination" : [ "obj-3", 0 ],
-													"source" : [ "obj-7", 0 ]
 												}
 
 											}
@@ -3726,6 +3719,7 @@
 										"style" : "",
 										"subpatcher_template" : "",
 										"assistshowspatchername" : 0,
+										"visible" : 1,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-81",
@@ -3945,6 +3939,16 @@
 , 											{
 												"patchline" : 												{
 													"destination" : [ "obj-10", 0 ],
+													"order" : 0,
+													"source" : [ "obj-39", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-42", 0 ],
+													"midpoints" : [ 90.5, 86.874996136713662, 55.5, 86.874996136713662 ],
+													"order" : 1,
 													"source" : [ "obj-39", 0 ]
 												}
 
@@ -4464,7 +4468,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-22",
-									"items" : [ "MIDI Mix", ",", "MPK mini 3", ",", "to Max 1", ",", "to Max 2" ],
+									"items" : [ "to Max 1", ",", "to Max 2" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -4765,6 +4769,27 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 840.729151668002487, 359.416660132186678, 87.0, 39.0 ],
 									"text" : "Load a corpus"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
+									"hint" : "",
+									"id" : "obj-10",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 18.25, 416.583330949147523, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "1",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
 							}
@@ -5196,7 +5221,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1094.958333333333712, 608.833331854232711, 170.0, 22.0 ],
-									"text" : "no loaded corpus"
+									"text" : "Ligeti_Etudes.gz"
 								}
 
 							}
@@ -5486,6 +5511,16 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-11", 0 ],
+									"hidden" : 1,
+									"midpoints" : [ 431.25, 515.583330949147467, 257.375, 515.583330949147467, 257.375, 494.583330949147523, 83.5, 494.583330949147523 ],
+									"order" : 3,
+									"source" : [ "obj-47", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-29", 0 ],
 									"hidden" : 1,
 									"midpoints" : [ 325.25, 506.499997615814152, 164.25, 506.499997615814152, 164.25, 476.499997615814152, 121.75, 476.499997615814152 ],
@@ -5763,7 +5798,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 112.0, 126.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -5793,6 +5828,22 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.1,
+									"bubbleside" : 2,
+									"id" : "obj-19",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 161.166666666666629, 332.499991001861474, 337.350000000000136, 79.0 ],
+									"text" : "By default, players will automatically be initailized on the server when created. But if this is not the case (i.e., if they have been created with @autoinitialize 0) this message will initialize them",
+									"textcolor" : [ 0.137254901960784, 0.137254901960784, 0.137254901960784, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-101",
 									"maxclass" : "comment",
@@ -6238,7 +6289,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 668.08333333333303, 696.021476980377429, 50.0, 22.0 ],
-									"text" : "36"
+									"text" : "52"
 								}
 
 							}
@@ -6280,7 +6331,7 @@
 									"hidden" : 1,
 									"id" : "obj-9",
 									"maxclass" : "newobj",
-									"numinlets" : 2,
+									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patcher" : 									{
 										"fileversion" : 1,
@@ -6293,7 +6344,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 89.0, 104.0, 640.0, 480.0 ],
+										"rect" : [ 183.0, 198.0, 296.0, 254.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -6340,8 +6391,8 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 21.0, 73.0, 229.0, 22.0 ],
-													"text" : "sprintf 2 - Introducing Parameters.maxpat"
+													"patching_rect" : [ 21.0, 73.0, 252.0, 22.0 ],
+													"text" : "sprintf max2 - Introducing Parameters.maxpat"
 												}
 
 											}
@@ -6371,55 +6422,6 @@
 											}
 , 											{
 												"box" : 												{
-													"id" : "obj-14",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 136.0, 53.0, 22.0 ],
-													"text" : "pcontrol"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"id" : "obj-13",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 108.0, 117.0, 22.0 ],
-													"text" : "prepend loadunique"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"id" : "obj-3",
-													"maxclass" : "newobj",
-													"numinlets" : 1,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 80.0, 112.0, 22.0 ],
-													"text" : "sprintf %s.maxhelp"
-												}
-
-											}
-, 											{
-												"box" : 												{
-													"comment" : "",
-													"id" : "obj-7",
-													"index" : 2,
-													"maxclass" : "inlet",
-													"numinlets" : 0,
-													"numoutlets" : 1,
-													"outlettype" : [ "" ],
-													"patching_rect" : [ 296.0, 20.0, 30.0, 30.0 ]
-												}
-
-											}
-, 											{
-												"box" : 												{
 													"comment" : "",
 													"id" : "obj-8",
 													"index" : 1,
@@ -6434,22 +6436,8 @@
  ],
 										"lines" : [ 											{
 												"patchline" : 												{
-													"destination" : [ "obj-14", 0 ],
-													"source" : [ "obj-13", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
 													"destination" : [ "obj-6", 0 ],
 													"source" : [ "obj-2", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
-													"destination" : [ "obj-13", 0 ],
-													"source" : [ "obj-3", 0 ]
 												}
 
 											}
@@ -6464,13 +6452,6 @@
 												"patchline" : 												{
 													"destination" : [ "obj-5", 0 ],
 													"source" : [ "obj-6", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
-													"destination" : [ "obj-3", 0 ],
-													"source" : [ "obj-7", 0 ]
 												}
 
 											}
@@ -6617,19 +6598,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble" : 1,
-									"fontsize" : 12.0,
-									"id" : "obj-50",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 200.333333333333371, 400.708335717519276, 170.0, 24.0 ],
-									"text" : "initialize all existing players"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
 									"bgfillcolor_autogradient" : 0.0,
@@ -6657,7 +6625,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 44.5, 332.62499346552022, 443.0, 42.0 ],
+									"patching_rect" : [ 38.0, 708.216077330972439, 443.0, 42.0 ],
 									"text" : "NB: Only one server can be present in an open Max window -- take care not to instantiate multiple servers!",
 									"textcolor" : [ 0.831372549019608, 0.035294117647059, 0.035294117647059, 1.0 ]
 								}

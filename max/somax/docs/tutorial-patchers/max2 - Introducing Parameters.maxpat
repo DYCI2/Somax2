@@ -90,6 +90,22 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.1,
+									"bubbleside" : 2,
+									"id" : "obj-6",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 183.324999999999932, 342.680407786922387, 337.350000000000136, 79.0 ],
+									"text" : "By default, players will automatically be initailized on the server when created. But if this is not the case (i.e., if they have been created with @autoinitialize 0) this message will initialize them",
+									"textcolor" : [ 0.137254901960784, 0.137254901960784, 0.137254901960784, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"checkedcolor" : [ 0.482352941176471, 0.847058823529412, 0.36078431372549, 1.0 ],
 									"id" : "obj-70",
 									"maxclass" : "toggle",
@@ -198,19 +214,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble" : 1,
-									"fontsize" : 12.0,
-									"id" : "obj-50",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 228.333333333333371, 411.874992273427324, 170.0, 24.0 ],
-									"text" : "initialize all existing players"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
 									"bgfillcolor_autogradient" : 0.0,
@@ -249,8 +252,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 28.0, 79.166663542930593, 472.0, 181.0 ],
-									"text" : "In order to better control the interaction with the user, the Player has a wide set of parameters, that helps to determine its behaviour.\nIn this tutorial we will introduce a small set of these really useful parameters that will let you co-improvise in a meaningful way.\n\nTo have a better understanding of what's going on, let's constantly monitor the index of output, corresponding to the event of the corpus currently output by the Player. \nThis index determines the position of the played event inside the corpus, and thus could give you hints on the temporal direction of the interaction.\n\nFurthermore, every time the Player finds a match between its known corpus and the incoming influences, these matches will be catalogued in different layers, shaping the harmonic or melodic direction of the improvisation."
+									"patching_rect" : [ 28.0, 79.166663542930593, 490.5, 181.0 ],
+									"text" : "In order to better control the interaction with the user, the Player has a wide set of parameters, that helps to determine its behaviour.\nIn this tutorial we will introduce a small set of these really useful parameters that will let you co-improvise in a meaningful way.\n\nTo have a better understanding of what's going on, let's constantly monitor the index of output at point 8, corresponding to the event of the corpus currently output by the Player. \nThis index determines the position of the played event inside the corpus, and thus could give you hints on the temporal direction of the interaction.\n\nFurthermore, every time the Player finds a match between its known corpus and the incoming influences, these matches will be catalogued in different layers, shaping the harmonic or melodic direction of the improvisation."
 								}
 
 							}
@@ -886,10 +889,10 @@
 													"clipheight" : 81.0,
 													"data" : 													{
 														"clips" : [ 															{
-																"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Joelle.wav",
-																"filename" : "Joelle.wav",
+																"absolutepath" : "/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Marco_guitar.wav",
+																"filename" : "Marco_guitar.wav",
 																"filekind" : "audiofile",
-																"id" : "u392012589",
+																"id" : "u449016160",
 																"loop" : 0,
 																"content_state" : 																{
 
@@ -1143,21 +1146,6 @@
 							}
 , 							{
 								"box" : 								{
-									"color" : [ 0.870588235294118, 0.027450980392157, 0.027450980392157, 1.0 ],
-									"fontsize" : 10.0,
-									"hidden" : 1,
-									"id" : "obj-36",
-									"maxclass" : "newobj",
-									"numinlets" : 0,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 1091.94383416933897, 367.45832873049676, 83.0, 20.0 ],
-									"text" : "r player_enabled"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-28",
 									"maxclass" : "live.line",
 									"numinlets" : 1,
@@ -1202,7 +1190,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 52.0, 342.680407786922387, 443.0, 42.0 ],
+									"patching_rect" : [ 52.0, 615.45832873049676, 443.0, 42.0 ],
 									"text" : "NB: Only one server can be present in an open Max window -- take care not to instantiate multiple servers!",
 									"textcolor" : [ 0.831372549019608, 0.035294117647059, 0.035294117647059, 1.0 ]
 								}
@@ -1829,7 +1817,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1112.334146666667039, 605.993157433645933, 170.0, 22.0 ],
-									"text" : "no loaded corpus"
+									"text" : "Marco_guitar.pickle"
 								}
 
 							}
@@ -1975,14 +1963,6 @@
 								"patchline" : 								{
 									"destination" : [ "obj-335", 0 ],
 									"source" : [ "obj-345", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-73", 0 ],
-									"hidden" : 1,
-									"source" : [ "obj-36", 0 ]
 								}
 
 							}
@@ -2339,7 +2319,7 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "Joelle.wav",
+				"name" : "Marco_guitar.wav",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/corpus",
 				"patcherrelativepath" : "../../corpus",
 				"type" : "WAVE",
