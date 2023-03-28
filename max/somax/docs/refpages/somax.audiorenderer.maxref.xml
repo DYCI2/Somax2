@@ -24,7 +24,7 @@
 			<arglist />
 			<digest>Directly connected to the first outlet of the player</digest>
 			<description>
-				The <o>somax.player</o> has a specific output protocol that can be directly read by the <o>somax.audiorenderer</o> for immediate audio playback. Just connet the first outlet of the <o>somax.player</o> to the inlet of the <o>somax.audiorenderer</o> for this to convert the player's protocol into audio signal.
+				The <o>somax.player</o> has a specific output protocol that can be directly read by the <o>somax.audiorenderer</o> for immediate audio playback. Just connect the first outlet of the <o>somax.player</o> to the inlet of the <o>somax.audiorenderer</o> for this to convert the player's protocol into audio signal.
 			</description>
 		</method>
         <method name="dump">
@@ -58,7 +58,7 @@
 		</attribute>
         <attribute name="buffername" get="1" set="0" type="symbol" size="1">
 			<digest>Set name of internal buffer</digest>
-			<description>The <m>buffername</m> attribute can be used to access the renderer's internal <o>buffer~</o> from outside. By default, the buffer will have an auto-generated and therefore not be accessible.</description>
+			<description>The <m>buffername</m> attribute can be used to access the renderer's internal <o>buffer~</o> from outside. By default, the buffer will have an auto-generated name and therefore not be accessible.</description>
 		</attribute>
         <attribute name="crossfadecurve" get="1" set="1" type="symbol" size="1">
 			<digest>Set crossfade slope curve</digest>
