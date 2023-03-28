@@ -820,13 +820,13 @@
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-31",
-									"linecount" : 2,
+									"linecount" : 3,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 837.0, 422.5, 128.0, 35.0 ],
-									"text" : "loadunique somax.player.maxhelp"
+									"patching_rect" : [ 837.0, 422.5, 123.0, 49.0 ],
+									"text" : "loadunique somax.player.app.maxhelp"
 								}
 
 							}
@@ -859,7 +859,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 837.0, 462.5, 51.0, 22.0 ],
+									"patching_rect" : [ 837.0, 473.5, 51.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 
@@ -2005,6 +2005,26 @@
 					"parameter_invisible" : 1,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-69::obj-407::obj-270::obj-1226" : 				{
+					"parameter_longname" : "width[2]"
+				}
+,
+				"obj-69::obj-407::obj-270::obj-1227" : 				{
+					"parameter_longname" : "center[2]"
+				}
+,
+				"obj-69::obj-407::obj-270::obj-1240" : 				{
+					"parameter_longname" : "live.slider[6]"
+				}
+,
+				"obj-69::obj-407::obj-270::obj-1241" : 				{
+					"parameter_longname" : "live.numbox[6]"
+				}
+,
+				"obj-69::obj-407::obj-270::obj-889" : 				{
+					"parameter_longname" : "weight[2]"
 				}
 ,
 				"obj-69::obj-87::obj-1" : 				{

@@ -687,13 +687,13 @@
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-31",
-									"linecount" : 2,
+									"linecount" : 3,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 598.0, 420.5, 128.0, 35.0 ],
-									"text" : "loadunique somax.player.maxhelp"
+									"patching_rect" : [ 598.0, 420.5, 123.0, 49.0 ],
+									"text" : "loadunique somax.player.app.maxhelp"
 								}
 
 							}
@@ -726,7 +726,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 598.0, 460.5, 51.0, 22.0 ],
+									"patching_rect" : [ 598.0, 471.5, 51.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 
