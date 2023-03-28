@@ -192,7 +192,7 @@ class CorpusQueryManager:
         """
         return CorpusQueryManager._query_note_attribute(corpus,
                                                         args,
-                                                        query_type=QueryProtocol.PITCHES,
+                                                        query_type=QueryProtocol.VELOCITIES,
                                                         attribute_name="velocity")
 
     @staticmethod
@@ -202,7 +202,7 @@ class CorpusQueryManager:
         """
         return CorpusQueryManager._query_note_attribute(corpus,
                                                         args,
-                                                        query_type=QueryProtocol.PITCHES,
+                                                        query_type=QueryProtocol.CHANNELS,
                                                         attribute_name="channel")
 
     @staticmethod

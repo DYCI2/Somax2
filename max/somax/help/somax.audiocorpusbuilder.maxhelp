@@ -570,7 +570,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 371.541666666666742, 514.854166666666401, 160.0, 35.0 ],
-									"text" : "0 offline"
+									"text" : "1 ready"
 								}
 
 							}
@@ -585,7 +585,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 341.541666666666742, 152.5, 202.0, 50.0 ],
 									"text" : "Building a corpus takes some time: expect around 10 seconds of build time per minute of audio",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
 							}
@@ -835,11 +835,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-390",
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 23.0, 521.354166666666401, 140.0, 22.0 ]
+									"patching_rect" : [ 23.0, 521.354166666666401, 140.0, 35.0 ],
+									"text" : "/Users/joakimborg/Desktop/guitar1.pickle"
 								}
 
 							}

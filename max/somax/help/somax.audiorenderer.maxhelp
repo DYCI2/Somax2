@@ -155,6 +155,17 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-22",
+									"maxclass" : "meter~",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "float" ],
+									"patching_rect" : [ 99.0, 608.0, 76.5, 18.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 13.0,
 									"id" : "obj-21",
@@ -175,8 +186,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 148.75, 604.0, 101.0, 22.0 ],
-									"text" : "tsmode general"
+									"patching_rect" : [ 229.0, 604.0, 101.0, 22.0 ],
+									"text" : "dump done"
 								}
 
 							}
@@ -188,7 +199,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 256.266877637130847, 604.0, 144.0, 21.0 ],
+									"patching_rect" : [ 336.516877637130847, 604.0, 144.0, 21.0 ],
 									"text" : "last modified parameter",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -291,7 +302,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 111.0, 636.0, 128.0, 24.0 ],
+									"patching_rect" : [ 111.0, 644.0, 128.0, 24.0 ],
 									"text" : "start dsp & set gain",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -1126,7 +1137,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "multichannelsignal", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 25.0, 600.0, 69.0, 18.0 ]
+									"patching_rect" : [ 25.0, 608.0, 69.0, 18.0 ]
 								}
 
 							}
@@ -1178,7 +1189,7 @@
 									"maxclass" : "mc.ezdac~",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 25.0, 629.0, 45.0, 45.0 ]
+									"patching_rect" : [ 25.0, 637.0, 45.0, 45.0 ]
 								}
 
 							}
@@ -1299,14 +1310,14 @@
 , 							{
 								"box" : 								{
 									"fontface" : 1,
-									"fontsize" : 24.0,
+									"fontsize" : 18.0,
 									"id" : "obj-13",
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 844.562499999999886, 252.770833333333201, 142.0, 35.0 ],
-									"text" : "0 offline"
+									"patching_rect" : [ 844.562499999999886, 252.770833333333201, 156.0, 29.0 ],
+									"text" : "1 running"
 								}
 
 							}
@@ -1432,7 +1443,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 82.0, 638.0, 20.0, 20.0 ],
+									"patching_rect" : [ 82.0, 646.0, 20.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 146.0, 658.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
@@ -1484,7 +1495,17 @@
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
+									"destination" : [ "obj-22", 0 ],
+									"midpoints" : [ 34.5, 600.385416666666629, 108.5, 600.385416666666629 ],
+									"order" : 0,
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-48", 0 ],
+									"order" : 1,
 									"source" : [ "obj-1", 0 ]
 								}
 
@@ -1492,7 +1513,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-7", 1 ],
-									"midpoints" : [ 157.0, 598.385416666666629, 240.25, 598.385416666666629 ],
+									"midpoints" : [ 157.0, 598.385416666666629, 320.5, 598.385416666666629 ],
 									"source" : [ "obj-1", 1 ]
 								}
 
@@ -1561,7 +1582,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-13", 1 ],
-									"midpoints" : [ 803.520833333333258, 243.885416666666629, 977.062499999999886, 243.885416666666629 ],
+									"midpoints" : [ 803.520833333333258, 243.885416666666629, 991.062499999999886, 243.885416666666629 ],
 									"order" : 0,
 									"source" : [ "obj-3", 1 ]
 								}

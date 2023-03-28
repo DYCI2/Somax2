@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 84.0, 100.0, 1060.0, 730.0 ],
+		"rect" : [ 84.0, 100.0, 1055.0, 690.0 ],
 		"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 126.0, 1060.0, 704.0 ],
+						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -96,7 +96,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 69.562499999999972, 465.0, 164.0, 22.0 ],
-									"text" : "matches self 13"
+									"text" : "name Player_5482"
 								}
 
 							}
@@ -135,7 +135,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 347.687499999999886, 125.062499999999801, 68.0, 21.0 ],
-									"presentation_linecount" : 2,
 									"text" : "message",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
@@ -165,7 +164,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 316.249999999999886, 64.333333333333258, 300.0, 50.0 ],
-									"presentation_linecount" : 3,
 									"text" : "All attribute changes (set when the player is created, through messages or through the user interface) are output on the third outlet",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -181,7 +179,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 316.249999999999886, 125.062499999999801, 300.0, 50.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Most message to the somax.player generates a response on the first outlet, typically prepended with the name of the function calling it",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -196,8 +193,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 696.554166666666561, 415.0, 142.0, 36.0 ],
-									"presentation_linecount" : 2,
+									"patching_rect" : [ 696.554166666666561, 415.0, 145.0, 36.0 ],
 									"text" : "access any information to/from the player",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -227,8 +223,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 489.0, 415.0, 160.0, 36.0 ],
-									"presentation_linecount" : 3,
+									"patching_rect" : [ 489.0, 415.0, 162.0, 36.0 ],
 									"text" : "parameters controlling the behaviour of the player",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -244,7 +239,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 489.0, 397.000000000000057, 160.0, 21.0 ],
-									"presentation_linecount" : 2,
 									"text" : "3rd outlet: attributes",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -290,7 +284,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 307.0, 415.0, 148.687499999999886, 36.0 ],
-									"presentation_linecount" : 2,
 									"text" : "whether the player is initialized on server",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -306,7 +299,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 55.0, 415.0, 165.0, 36.0 ],
-									"presentation_linecount" : 3,
 									"text" : "responses to messages and/or ongoing generation",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -348,8 +340,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 764.604166666666401, 530.0, 83.895833333333371, 36.0 ],
-									"presentation_linecount" : 2,
+									"patching_rect" : [ 764.604166666666401, 530.0, 87.0, 36.0 ],
 									"text" : "internal state of layers",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -365,7 +356,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 660.000000000000114, 530.0, 69.0, 36.0 ],
-									"presentation_linecount" : 2,
 									"text" : "matches per layer",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -381,7 +371,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 561.031249999999886, 530.0, 78.0, 36.0 ],
-									"presentation_linecount" : 2,
 									"text" : "generated influences",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -397,7 +386,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 458.031249999999886, 530.0, 93.0, 36.0 ],
-									"presentation_linecount" : 2,
 									"text" : "messages to midirenderer",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -413,7 +401,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 356.687499999999886, 530.0, 93.0, 36.0 ],
-									"presentation_linecount" : 4,
 									"text" : "messages to audiorenderer",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -429,7 +416,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 288.499999999999943, 629.5, 87.0, 36.0 ],
-									"presentation_linecount" : 4,
 									"text" : "transposition (semitones)",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
 									"textjustification" : 1
@@ -472,11 +458,9 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 253.624999999999943, 530.0, 73.375000000000114, 36.0 ],
-									"presentation_linecount" : 2,
+									"patching_rect" : [ 253.624999999999943, 530.0, 74.0, 36.0 ],
 									"text" : "last played event",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
-									"textjustification" : 0
+									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
 							}
@@ -490,7 +474,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 110.4840087890625, 629.5, 79.0, 36.0 ],
-									"presentation_linecount" : 2,
 									"text" : "bang when terminated",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
 									"textjustification" : 1
@@ -518,8 +501,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 14.208333333333371, 629.5, 88.583333333333258, 50.0 ],
-									"presentation_linecount" : 5,
+									"patching_rect" : [ 14.208333333333371, 629.5, 92.0, 50.0 ],
 									"text" : "bang when initialization is done",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
 									"textjustification" : 1
@@ -536,7 +518,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 850.499999999999773, 571.0, 104.583333333333258, 36.0 ],
-									"presentation_linecount" : 2,
 									"text" : "corpusquery: see \"corpus\" tab",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -568,7 +549,6 @@
 							}
 , 							{
 								"box" : 								{
-									"color" : [ 0.501961, 0.501961, 0.501961, 1.0 ],
 									"fontface" : 1,
 									"id" : "obj-54",
 									"maxclass" : "newobj",
@@ -635,7 +615,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 365.0, 331.0, 137.0, 21.0 ],
-													"presentation_linecount" : 3,
 													"text" : "everything else",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
 													"textjustification" : 1
@@ -649,8 +628,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 365.0, 307.0, 175.14285714285711, 22.0 ],
-													"text" : "output_type timeout_reset"
+													"patching_rect" : [ 365.0, 307.0, 175.14285714285711, 22.0 ]
 												}
 
 											}
@@ -666,10 +644,8 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 387.035714285714278, 197.5, 120.5, 69.0 ],
-													"presentation_linecount" : 5,
 													"text" : "running: player is enabled and server is active",
-													"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ],
-													"textjustification" : 0
+													"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 												}
 
 											}
@@ -698,7 +674,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 333.321428571428498, 178.0, 79.5, 36.0 ],
-													"presentation_linecount" : 2,
 													"text" : "OSC remote ip",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
 													"textjustification" : 1
@@ -727,7 +702,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 251.821428571428498, 178.0, 79.5, 36.0 ],
-													"presentation_linecount" : 3,
 													"text" : "OSC receive port",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
 													"textjustification" : 1
@@ -756,7 +730,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 172.964285714285722, 178.0, 67.5, 36.0 ],
-													"presentation_linecount" : 2,
 													"text" : "OSC send port",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
 													"textjustification" : 1
@@ -788,7 +761,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 18.5, 331.0, 287.0, 21.0 ],
-													"presentation_linecount" : 2,
 													"text" : "path/name of loaded corpus (as set by the user)",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -803,8 +775,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 172.964285714285722, 42.0, 239.516666666666652, 50.0 ],
-													"presentation_linecount" : 5,
+													"patching_rect" : [ 172.964285714285722, 42.0, 240.0, 50.0 ],
 													"text" : "The player outputs a lot of miscellaneous info as responses to specific messages. A subset of thes are:",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -844,8 +815,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 18.5, 307.25, 274.0, 22.0 ],
-													"text" : "Fabbrizio2c.pickle"
+													"patching_rect" : [ 18.5, 307.25, 274.0, 22.0 ]
 												}
 
 											}
@@ -895,7 +865,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 31.0, 154.0, 85.0, 22.0 ],
-													"text" : "Player_8562"
+													"text" : "Player_5482"
 												}
 
 											}
@@ -1003,7 +973,6 @@
 							}
 , 							{
 								"box" : 								{
-									"color" : [ 0.501961, 0.501961, 0.501961, 1.0 ],
 									"fontface" : 1,
 									"id" : "obj-50",
 									"maxclass" : "newobj",
@@ -1020,7 +989,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 84.0, 131.0, 604.0, 486.0 ],
+										"rect" : [ 1446.0, 220.0, 604.0, 486.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -1070,7 +1039,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 197.333333333333343, 353.46296296296299, 138.0, 50.0 ],
-													"presentation_linecount" : 7,
 													"text" : "<nn1> <vel1> <ch1> <nn2> <vel2> <ch2> ...",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1085,8 +1053,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 385.0, 184.0, 129.0, 123.0 ],
-													"presentation_linecount" : 7,
+													"patching_rect" : [ 385.0, 184.0, 133.0, 123.0 ],
 													"text" : "flush: tells the renderer to flush any lingering note offs (note that when lingering note offs will typically be output on the \"event\" address regardless)",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1129,8 +1096,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 206.0, 184.0, 121.0, 123.0 ],
-													"presentation_linecount" : 5,
+													"patching_rect" : [ 206.0, 184.0, 123.0, 123.0 ],
 													"text" : "slice: an alternative format to \"event\" where all note ons of an entire slice are output simulataneously (note offs are not output)",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1144,7 +1110,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 197.333333333333343, 325.0, 138.000000000000028, 22.0 ],
-													"text" : "71 64 1 62 64 2"
+													"text" : "50 64 2 84 64 1"
 												}
 
 											}
@@ -1158,7 +1124,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 29.0, 190.0, 109.0, 50.0 ],
-													"presentation_linecount" : 3,
 													"text" : "event: trigger a new MIDI event (note on/off)",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1173,7 +1138,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 73.0, 448.388888888888914, 81.0, 21.0 ],
-													"presentation_linecount" : 2,
 													"text" : "note number",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1202,7 +1166,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 311.0, 51.0, 232.0, 79.0 ],
-													"presentation_linecount" : 5,
 													"text" : "The somax.midirenderer will automatically listen to this address, so there's no need to understand this protocol unless you want to implement your own audiorenderer",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1266,7 +1229,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 55.0, 51.0, 231.0, 50.0 ],
-													"presentation_linecount" : 3,
 													"text" : "The keyword \"midi\" on the first outlet contains all messages related to rendering MIDI corpora",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1389,7 +1351,6 @@
 							}
 , 							{
 								"box" : 								{
-									"color" : [ 0.501961, 0.501961, 0.501961, 1.0 ],
 									"fontface" : 1,
 									"id" : "obj-45",
 									"maxclass" : "newobj",
@@ -1481,7 +1442,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 400.0, 193.0, 161.0, 65.0 ],
-													"presentation_linecount" : 4,
 													"text" : "audio_off: tells the renderer to stop playing (because of timeout, enabled, etc)",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1496,7 +1456,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 108.833333333333371, 323.0, 407.0, 21.0 ],
-													"presentation_linecount" : 4,
 													"text" : "time stretch factor (ratio, i.e. 1.0 = no stretch, 2.0 = double speed)",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1511,7 +1470,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 108.833333333333371, 352.46296296296299, 143.0, 21.0 ],
-													"presentation_linecount" : 3,
 													"text" : "pitch shift factor (cents)",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1540,8 +1498,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 211.0, 193.0, 160.0, 65.0 ],
-													"presentation_linecount" : 7,
+													"patching_rect" : [ 211.0, 193.0, 161.0, 65.0 ],
 													"text" : "continuation: special case of \"event\" when playing a consective event. Same format as \"event\"",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1550,13 +1507,11 @@
 , 											{
 												"box" : 												{
 													"id" : "obj-18",
-													"linecount" : 2,
 													"maxclass" : "message",
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 164.333333333333343, 276.0, 175.000000000000028, 35.0 ],
-													"text" : "66771.359375 68205.195312 0 1."
+													"patching_rect" : [ 164.333333333333343, 276.0, 175.000000000000028, 22.0 ]
 												}
 
 											}
@@ -1570,7 +1525,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 27.0, 193.0, 109.0, 36.0 ],
-													"presentation_linecount" : 4,
 													"text" : "event: trigger a new audio event",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1625,8 +1579,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 309.0, 54.0, 231.0, 79.0 ],
-													"presentation_linecount" : 5,
+													"patching_rect" : [ 309.0, 54.0, 232.0, 79.0 ],
 													"text" : "The somax.audiorenderer will automatically listen to this address, so there's no need to understand this protocol unless you want to implement your own audiorenderer",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1692,7 +1645,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 53.0, 54.0, 231.0, 50.0 ],
-													"presentation_linecount" : 8,
 													"text" : "The keyword \"audio\" on the first outlet contains all messages related to rendering audio corpora",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1840,7 +1792,6 @@
 							}
 , 							{
 								"box" : 								{
-									"color" : [ 0.501961, 0.501961, 0.501961, 1.0 ],
 									"fontface" : 1,
 									"id" : "obj-41",
 									"maxclass" : "newobj",
@@ -1895,7 +1846,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 20.941666666666606, 173.0, 273.0, 79.0 ],
-													"presentation_linecount" : 8,
 													"text" : "Any parameter (attribute) changes triggers output on the third outlet of the somax.player\n\nAttributes on the third outlet have the format \n<name> <values>",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -1909,7 +1859,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 20.941666666666606, 129.0, 273.0, 22.0 ],
-													"text" : "statemax 235"
+													"text" : "enabled 1"
 												}
 
 											}
@@ -1966,7 +1916,6 @@
 							}
 , 							{
 								"box" : 								{
-									"color" : [ 0.501961, 0.501961, 0.501961, 1.0 ],
 									"fontface" : 1,
 									"id" : "obj-40",
 									"maxclass" : "newobj",
@@ -2021,7 +1970,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 15.941666666666606, 149.0, 273.0, 79.0 ],
-													"presentation_linecount" : 5,
 													"text" : "The 4th outlet outputs everything about the somax.players internal state, any OSC messages being sent or received as well as communication with the local somax.server object.",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2035,7 +1983,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 15.941666666666606, 111.0, 257.0, 22.0 ],
-													"text" : "rawreceive matches self 13"
+													"text" : "rawsend get_peaks"
 												}
 
 											}
@@ -2092,7 +2040,6 @@
 							}
 , 							{
 								"box" : 								{
-									"color" : [ 0.501961, 0.501961, 0.501961, 1.0 ],
 									"fontface" : 1,
 									"id" : "obj-39",
 									"maxclass" : "newobj",
@@ -2146,8 +2093,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 262.0, 199.0, 146.0, 36.0 ],
-													"presentation_linecount" : 2,
+													"patching_rect" : [ 262.0, 199.0, 150.0, 36.0 ],
 													"text" : "See the \"influences\" tab for more information",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2163,8 +2109,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 17.0, 185.0, 194.0, 50.0 ],
-													"presentation_linecount" : 3,
-													"text" : "The format for these is exactly the same as for audio/midi influencers",
+													"text" : "The format for these is exactly the same as for the audio/MIDI influencers",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
 
@@ -2179,7 +2124,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 243.0, 45.0, 165.0, 79.0 ],
-													"presentation_linecount" : 13,
 													"text" : "While generating output, the player also generates influences (one per event) that can be used to re-influence other players",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2315,7 +2259,6 @@
 							}
 , 							{
 								"box" : 								{
-									"color" : [ 0.501961, 0.501961, 0.501961, 1.0 ],
 									"fontface" : 1,
 									"id" : "obj-37",
 									"maxclass" : "newobj",
@@ -2370,7 +2313,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 249.941666666666606, 199.0, 160.0, 21.0 ],
-													"presentation_linecount" : 2,
 													"text" : "status: init, failed, success",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2398,7 +2340,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 249.941666666666606, 147.0, 158.0, 36.0 ],
-													"presentation_linecount" : 2,
 													"text" : "reading_corpus_status: while reading a corpus",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2414,7 +2355,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 32.941666666666606, 147.0, 158.0, 36.0 ],
-													"presentation_linecount" : 2,
 													"text" : "loaded_corpus: When a corpus has been loaded",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2457,7 +2397,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 173.941666666666606, 386.0, 277.0, 21.0 ],
-													"presentation_linecount" : 3,
 													"text" : "type of corpus (\"AudioCorpus\" / \"MidiCorpus\")",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2487,7 +2426,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 203.941666666666606, 32.0, 279.0, 50.0 ],
-													"presentation_linecount" : 6,
 													"text" : "The \"corpusview\" keywords contains detailed information about the corpus when loaded (and while loading). ",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2664,7 +2602,6 @@
 							}
 , 							{
 								"box" : 								{
-									"color" : [ 0.501961, 0.501961, 0.501961, 1.0 ],
 									"fontface" : 1,
 									"id" : "obj-35",
 									"maxclass" : "newobj",
@@ -2734,8 +2671,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 362.5, 129.0, 253.0, 69.0 ],
-													"presentation_linecount" : 5,
+													"patching_rect" : [ 362.5, 129.0, 255.0, 69.0 ],
 													"text" : "Influencing the player while it's generating output will typically trigger matches in the melodic (red) and harmonic (blue) layers",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2805,8 +2741,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 72.400000000000006, 43.0, 406.600000000000023, 65.0 ],
-													"presentation_linecount" : 34,
+													"patching_rect" : [ 72.400000000000006, 43.0, 407.0, 65.0 ],
 													"text" : "The  player continuously outputs information about the number of matches found in each layer. This information is incredibly important to be aware of in order to tune the player's parameters optimally, and may greatly vary between different corpora and influence sources",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2822,7 +2757,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 64.0, 314.0, 242.599999999999909, 36.0 ],
-													"presentation_linecount" : 4,
 													"text" : "Number of matches of the previous output when all layers had been merged",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -2838,7 +2772,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 12.0, 387.0, 150.0, 36.0 ],
-													"presentation_linecount" : 2,
 													"text" : "See the \"influences\" tab for more information",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -3802,7 +3735,8 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"patching_rect" : [ 38.0, 354.791666666666515, 664.0, 29.0 ],
-									"text" : "somax.player @autoinitialize 0 @mode continuous @corpus Bach_Invention_1.gz"
+									"text" : "somax.player @autoinitialize 0 @mode continuous @corpus Bach_Invention_1.gz",
+									"varname" : "somax.player"
 								}
 
 							}
@@ -3905,7 +3839,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 864.604166666666401, 299.791666666666515, 163.0, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -4330,7 +4264,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1060.0, 704.0 ],
+						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4675,7 +4609,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 15.941666666666606, 286.0, 330.0, 65.0 ],
+													"patching_rect" : [ 15.941666666666606, 286.0, 332.0, 65.0 ],
 													"text" : "There are a number of parameters (<layer>ngramorder, <layer>decaytime, <layer>mod12, <layer>enable) for each of the layers that will impact the number of peaks generated by each layer",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
@@ -4734,6 +4668,7 @@
 												"box" : 												{
 													"fontface" : 1,
 													"fontsize" : 12.0,
+													"hidden" : 1,
 													"id" : "obj-64",
 													"maxclass" : "textbutton",
 													"numinlets" : 1,
@@ -4745,7 +4680,7 @@
 													"presentation" : 1,
 													"presentation_rect" : [ 694.0, 803.220703125, 254.0, 46.0 ],
 													"rounded" : 8.0,
-													"text" : "\"Introduction Somax.pdf\"",
+													"text" : "User's Guide (PDF)",
 													"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 													"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 													"truncate" : 0
@@ -4800,8 +4735,8 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 349.5, 511.0, 140.0, 22.0 ],
-													"text" : "\"Introduction Somax.pdf\""
+													"patching_rect" : [ 349.5, 511.0, 153.0, 22.0 ],
+													"text" : "\"Somax2 User's Guide.pdf\""
 												}
 
 											}
@@ -4828,7 +4763,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 15.941666666666606, 225.0, 319.058333333333394, 50.0 ],
-													"text" : "The model that the player uses is described in the introduction document (\"Introduction Somax.pdf\") as well as in the tutorials (\"Somax Overview\" button)",
+													"text" : "The model that the player uses is described in the Somax2 User's Guide document as well as in the tutorials (\"Somax Overview\" button)",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
 
@@ -5992,7 +5927,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 873.229166666666401, 397.562499999999829, 163.0, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -6681,7 +6616,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1060.0, 704.0 ],
+						"rect" : [ 84.0, 126.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -6722,7 +6657,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 567.041666666666515, 391.791666666666515, 137.0, 52.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Query information about loaded corpus",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -6834,8 +6768,8 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 21.0, 110.791666666666515, 81.0, 22.0 ],
-													"text" : "append Temp"
+													"patching_rect" : [ 21.0, 110.791666666666515, 88.0, 22.0 ],
+													"text" : "append _Temp"
 												}
 
 											}
@@ -6970,13 +6904,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-56",
-									"linecount" : 3,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 543.0, 581.0, 192.0, 49.0 ],
-									"text" : "/Users/joakimborg/MaxDev/Somax2/max/somax/corpus/Bach_Invention_1.gz"
+									"patching_rect" : [ 543.0, 581.0, 192.0, 22.0 ],
+									"text" : "Bach_Invention_1.gz"
 								}
 
 							}
@@ -7070,7 +7003,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 67.275675455729186, 391.791666666666515, 485.724324544270814, 22.0 ],
-									"text" : "corpus /Users/joakimborg/MaxDev/Somax2/max/somax/corpus/Bach_Invention_1.gz"
+									"text" : "corpus Bach_Invention_1.gz"
 								}
 
 							}
@@ -7907,8 +7840,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 300.0, 571.25, 50.0, 22.0 ],
-									"text" : "59 64 2"
+									"patching_rect" : [ 300.0, 571.25, 50.0, 22.0 ]
 								}
 
 							}
@@ -8190,7 +8122,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 864.604166666666401, 374.791666666666515, 163.0, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -9657,7 +9589,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1060.0, 704.0 ],
+						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -10786,7 +10718,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 821.604166666666401, 235.000000000000114, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -11328,7 +11260,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1060.0, 704.0 ],
+						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -11393,7 +11325,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1060.0, 704.0 ],
+						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1056.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -12341,7 +12273,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 847.104166666666401, 311.562499999999829, 163.0, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 duplicate"
 								}
 
 							}
