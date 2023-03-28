@@ -138,7 +138,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 250.0, 540.958329000000049, 150.0, 22.0 ],
-									"text" : "1 ready"
+									"text" : "1 running"
 								}
 
 							}
@@ -635,7 +635,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 554.874999999999773, 585.930415043448306, 50.0, 22.0 ],
-									"text" : "55"
+									"text" : "93"
 								}
 
 							}
@@ -764,7 +764,7 @@
 												"box" : 												{
 													"autopopulate" : 1,
 													"id" : "obj-16",
-													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "Dutilleux_Sonata_3.gz", ",", "Fabbrizio2c.pickle", ",", "Fabbrizio2c.wav", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Ligeti_Etudes.gz", ",", "Marco_guitar.pickle", ",", "Marco_guitar.wav", ",", "Palestrina_Missa_Papae.gz", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz" ],
+													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "Dutilleux_Sonata_3.gz", ",", "Fabbrizio2c.pickle", ",", "Fabbrizio2c.wav", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Joelle_Georgia_Pizz.pickle", ",", "Ligeti_Etudes.gz", ",", "Marco_guitar.pickle", ",", "Marco_guitar.wav", ",", "Palestrina_Missa_Papae.gz", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -889,10 +889,10 @@
 													"clipheight" : 81.0,
 													"data" : 													{
 														"clips" : [ 															{
-																"absolutepath" : "/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Marco_guitar.wav",
+																"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Marco_guitar.wav",
 																"filename" : "Marco_guitar.wav",
 																"filekind" : "audiofile",
-																"id" : "u449016160",
+																"id" : "u599023226",
 																"loop" : 0,
 																"content_state" : 																{
 
@@ -1382,11 +1382,10 @@
 							}
 , 							{
 								"box" : 								{
-									"channels" : 1,
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-13",
-									"lastchannelcount" : 1,
+									"lastchannelcount" : 2,
 									"maxclass" : "mc.live.gain~",
 									"numinlets" : 1,
 									"numoutlets" : 4,
@@ -1394,7 +1393,7 @@
 									"outlettype" : [ "multichannelsignal", "", "float", "list" ],
 									"parameter_enable" : 1,
 									"parameter_mappable" : 0,
-									"patching_rect" : [ 1075.25, 715.466083474878246, 88.0, 45.0 ],
+									"patching_rect" : [ 1075.25, 713.0137523611387, 88.0, 51.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_initial" : [ 0 ],
