@@ -120,6 +120,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-99",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2287,7 +2288,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-36",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2623,8 +2623,8 @@
 									"patching_rect" : [ 619.5, 121.5, 311.0, 275.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 17,
-									"presentation_rect" : [ 734.5, 64.0, 349.0, 234.0 ],
-									"text" : "This tutorial will introduce how to work with an audio corpus in Somax II. \nThis tutorial assumes that you've already completed the first tutorial and that you're familiar with the basic components of Somax II, as these won't be explained here.\n\nThe Somax II system generates its improvisation material based on an external set of musical material, the Corpus.\nWhile in the previous tutorial we were using pre-built audio and MIDI Corpora, it is possible to build a Corpus from your own set of audio or MIDI files.\nThere are a few short pre-build audio corpora distributed in Somax II, but in this tutorial we are going to build our own Corpus from an audio file.\n\n\nLet's begin by reviewing a couple of things to be aware of:",
+									"presentation_rect" : [ 734.5, 64.0, 353.0, 234.0 ],
+									"text" : "This tutorial will introduce how to work with an audio corpus in Somax II. \nThis tutorial assumes that you've already completed the first application tutorial and that you're familiar with the basic components of Somax II, as these won't be explained here.\n\nThe Somax II system generates its improvisation material based on an external set of musical material, the Corpus.\nWhile in the previous tutorial we were using pre-built audio and MIDI corpora, it is possible to build a Corpus from your own set of audio or MIDI files.\nThere are a few short pre-build audio corpora distributed in Somax II, but in this tutorial we are going to build our own Corpus from an audio file.\n\n\nLet's begin by reviewing a couple of things to be aware of:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3733,6 +3733,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-22",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -3987,6 +3988,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
+					"hidden" : 1,
 					"id" : "obj-8",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -4276,6 +4278,7 @@
 					"angle" : 270.0,
 					"background" : 1,
 					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
+					"hidden" : 1,
 					"id" : "obj-6",
 					"maxclass" : "panel",
 					"mode" : 0,

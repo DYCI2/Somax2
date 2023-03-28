@@ -158,12 +158,12 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-6",
-									"linecount" : 17,
+									"linecount" : 16,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.5, 367.647855530474089, 288.0, 234.0 ],
-									"text" : "When you open the real «somax2» patcher, you will notice that it doesn't look exactly the same as in this tutorial. In this patcher, the four main modules have been moved around, and each player has a routing module attached to it. \n\nIn the real patcher, it's possible to duplicate any player or influencer by (unlocking the patcher and), selecting the object and pressing ⌘D (alternatively ⌥-drag the object). This way, it's possible to create multiple players and/or influencers listening to each other. To make a player p1 listen to a player (or infuencer) p2, simply select «p2» as the source in «p1»'s routing module. Here, it's also possible to select which musical dimensions the player should listen to. Consult the somax.player help file for more information.",
+									"patching_rect" : [ 10.5, 367.647855530474089, 288.0, 221.0 ],
+									"text" : "When you open the real «somax2» patcher, you will notice that it doesn't look exactly the same as in this tutorial. In this patcher, as the four main modules have been moved around.\n\nIn the real patcher, it's possible to duplicate any player or influencer by (unlocking the patcher and), selecting the object and pressing ⌘D (alternatively ⌥-drag the object). This way, it's possible to create multiple players and/or influencers listening to each other. To make a player p1 listen to a player (or infuencer) p2, simply select «p2» as the source in «p1»'s routing module. Here, it's also possible to select which musical dimensions the player should listen to. Consult the somax.player.app help file for more information.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -219,12 +219,12 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 19,
+									"linecount" : 20,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.5, 53.647855530474089, 321.0, 261.0 ],
-									"text" : "This tutorial intended to give you a quick introduction to Somax and to serve as a starting point for both audio and MIDI-based interaction.\n\nThere are however a number of other aspects of the system to explore, for example connecting a MIDI keyboard, audio file or a sequencer (using an IAC bus) as an input, using multiple players who listen to each other, constructing your own corpora, experimenting with the tempo and beat tracker, and many other possibilies.\n\nIn the end, the quality of the output will always depend largely on how well the influencers and the player(s) are tuned with respect to the corpus and the input, so it's highly encouraged to experiment with the different parameters available. The help files («Help» buttons in each module) will provide a good starting point for going further, outline a few use cases as well as provide detailed descriptions about each individual parameter.",
+									"patching_rect" : [ 10.5, 53.647855530474089, 321.0, 275.0 ],
+									"text" : "This tutorial intended to give you a quick introduction to Somax and to serve as a starting point for both audio and MIDI-based interaction.\n\nThere are however a number of other aspects of the system to explore, for example connecting a MIDI keyboard, audio file or a sequencer (using an IAC bus) as an input, using multiple players who listen to each other, constructing your own corpora, experimenting with the tempo and beat tracker, and many other possibilies.\nExplore the rest of available tutorials to cover more topics.\n\nIn the end, the quality of the output will always depend largely on how well the influencers and the player(s) are tuned with respect to the corpus and the input, so it's highly encouraged to experiment with the different parameters available. The help files («Help» buttons in each module) will provide a good starting point for going further, outline a few use cases as well as provide detailed descriptions about each individual parameter.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -506,7 +506,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 844.5, 378.0, 43.0, 15.0 ],
+									"patching_rect" : [ 844.5, 365.0, 43.0, 15.0 ],
 									"text" : "this",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -550,12 +550,12 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 28,
+									"linecount" : 27,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 837.5, 119.0, 305.0, 382.0 ],
-									"text" : "Somax II is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. It is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. It uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on  a globally learned harmonic and textural knowledge representation space.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, make sure that the Somax folder really is in the Packages folder of Max.\n\n\nIf the interface now looks like in the image above, please continue to the second tab:",
+									"patching_rect" : [ 837.5, 119.0, 318.0, 368.0 ],
+									"text" : "Somax II is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. It is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or MIDI musical context. It uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on  a globally learned harmonic and textural knowledge representation space.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, make sure that the Somax folder really is in the Packages folder of Max.\n\n\nIf the interface now looks like in the image above, please continue to the second tab:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -979,8 +979,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1141.0, 469.0, 154.0, 22.0 ],
-									"text" : "load somax.player.maxhelp"
+									"patching_rect" : [ 1141.0, 469.0, 213.0, 22.0 ],
+									"text" : "loadunique somax.player.app.maxhelp"
 								}
 
 							}
@@ -2958,7 +2958,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 0.0, 0.0, 792.0, 74.0 ],
-									"text" : "This slide will present a brief introduction to how to interact with somax - the steps required to get some output from the Player and how to use the influencers to interact with the generated output.\n\nIt's divided into two parts: «Interaction I» describing how to start the server and produce output and «Interaction II» describing how to interact with the output"
+									"text" : "This slide will present a brief introduction to how to interact with Somax - the steps required to get some output from the Player and how to use the influencers to interact with the generated output.\n\nIt's divided into two parts: «Interaction I» describing how to start the server and produce output and «Interaction II» describing how to interact with the output"
 								}
 
 							}
@@ -3431,8 +3431,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1078.0, 242.0, 155.0, 22.0 ],
-									"text" : "load somax.server.maxhelp"
+									"patching_rect" : [ 1078.0, 242.0, 214.0, 22.0 ],
+									"text" : "loadunique somax.server.app.maxhelp"
 								}
 
 							}
@@ -3458,8 +3458,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1078.0, 433.5, 203.0, 22.0 ],
-									"text" : "load somax.audioinfluencer.maxhelp"
+									"patching_rect" : [ 1078.0, 433.5, 270.0, 22.0 ],
+									"text" : "loadunique somax.audioinfluencer.app.maxhelp"
 								}
 
 							}
@@ -3669,8 +3669,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1084.0, 585.0, 195.0, 22.0 ],
-									"text" : "load somax.midiinfluencer.maxhelp"
+									"patching_rect" : [ 1084.0, 585.0, 255.0, 22.0 ],
+									"text" : "loadunique somax.midiinfluencer.app.maxhelp"
 								}
 
 							}
@@ -3717,8 +3717,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1078.0, 118.5, 154.0, 22.0 ],
-									"text" : "load somax.player.maxhelp"
+									"patching_rect" : [ 1078.0, 118.5, 214.0, 22.0 ],
+									"text" : "loadunique somax.player.app.maxhelp"
 								}
 
 							}
@@ -3747,7 +3747,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1022.5, 76.0, 45.0, 19.0 ],
+									"patching_rect" : [ 1009.5, 76.0, 45.0, 19.0 ],
 									"rounded" : 8.0,
 									"text" : "help",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -4142,7 +4142,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 768.5, 113.5, 286.0, 60.0 ],
-									"text" : "The player is the main agent of Somax II. It listens to the influencers and recombines the content corpus based on its input, generating audio or MIDI output.",
+									"text" : "The Player is the main agent of Somax II. It listens to the influencers and recombines the content corpus based on its input, generating audio or MIDI output.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -4274,13 +4274,10 @@
 							}
  ],
 						"boxgroups" : [ 							{
-								"boxes" : [ "obj-155", "obj-156", "obj-85", "obj-160", "obj-98", "obj-152" ]
+								"boxes" : [ "obj-80", "obj-81", "obj-82", "obj-83", "obj-84", "obj-94", "obj-96" ]
 							}
 , 							{
 								"boxes" : [ "obj-105", "obj-101", "obj-104", "obj-103", "obj-102", "obj-100", "obj-99", "obj-109", "obj-108" ]
-							}
-, 							{
-								"boxes" : [ "obj-80", "obj-81", "obj-82", "obj-83", "obj-84", "obj-94", "obj-96" ]
 							}
 , 							{
 								"boxes" : [ "obj-79", "obj-77", "obj-75", "obj-76", "obj-78", "obj-90", "obj-97", "obj-91", "obj-92" ]
@@ -5459,6 +5456,10 @@
 ,
 				"obj-1::obj-1::obj-3::obj-91::obj-3" : 				{
 					"parameter_longname" : "live.text[49]"
+				}
+,
+				"obj-1::obj-1::obj-6::obj-98" : 				{
+					"parameter_longname" : "live.text[2]"
 				}
 ,
 				"obj-24::obj-1::obj-13::obj-1" : 				{
