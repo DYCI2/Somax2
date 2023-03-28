@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 720.0, 87.0, 1528.0, 1259.0 ],
+		"rect" : [ 720.0, 87.0, 250.0, 110.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -97,7 +97,7 @@
 					"patching_rect" : [ 763.628336166665918, 933.0, 41.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 191.617299386541532, 41.333333045244217, 25.0, 18.0 ],
-					"text" : "108",
+					"text" : "127",
 					"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ],
 					"textjustification" : 1
 				}
@@ -114,7 +114,7 @@
 					"patching_rect" : [ 719.681909666666002, 933.0, 34.750000000000455, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 90.26978137789007, 41.333333045244217, 28.333333611488342, 18.0 ],
-					"text" : "38",
+					"text" : "0",
 					"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ],
 					"textjustification" : 1
 				}
@@ -225,7 +225,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-55",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -237,7 +237,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-17",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -249,7 +249,7 @@
 				"box" : 				{
 					"comment" : "(list) note_number velocity channel",
 					"id" : "obj-52",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -311,7 +311,7 @@
 				"box" : 				{
 					"comment" : "(list) note_number velocity channel",
 					"id" : "obj-16",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -495,7 +495,7 @@
 					"patching_rect" : [ 1113.75, 157.0, 91.0, 35.0 ],
 					"restore" : 					{
 						"channels" : [ 0, 0, 1.0, 1, 0, 1.0, 2, 0, 1.0, 3, 0, 1.0, 4, 0, 1.0, 5, 0, 1.0, 6, 0, 1.0, 7, 0, 1.0, 8, 0, 1.0, 9, 0, 1.0, 10, 0, 1.0, 11, 0, 1.0, 12, 0, 1.0, 13, 0, 1.0, 14, 0, 1.0, 15, 0, 1.0 ],
-						"velscale" : [ 38, 108 ]
+						"velscale" : [ 0, 127 ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -1901,6 +1901,36 @@
 
 			}
  ],
+		"dependency_cache" : [ 			{
+				"name" : "heldnotes.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "kslider.compact.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.filter_midichannels.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-495", "obj-497", "obj-496", "obj-494", "obj-493", "obj-490", "obj-474", "obj-473", "obj-472", "obj-471", "obj-470", "obj-469", "obj-462", "obj-461", "obj-460", "obj-459", "obj-458", "obj-457", "obj-10" ]
 			}

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 1852.0, 1259.0 ],
+		"rect" : [ 34.0, 91.0, 254.0, 103.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -200,7 +200,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-55",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -212,7 +212,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-83",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -224,11 +224,11 @@
 				"box" : 				{
 					"comment" : "(mc.signal) audio input from renderer",
 					"id" : "obj-72",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "multichannelsignal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 348.833333790302277, 59.0, 30.0, 30.0 ]
 				}
 
@@ -395,7 +395,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1127.75, 122.0, 91.0, 35.0 ],
 					"restore" : 					{
-						"gain" : [ -34.866141732283388 ],
+						"gain" : [ 0.0 ],
 						"monocorpus" : [ 0 ],
 						"pan" : [ 0.0 ],
 						"width" : [ 127.0 ]
@@ -422,7 +422,7 @@
 				"box" : 				{
 					"comment" : "(mc.signal) audio out",
 					"id" : "obj-31",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -855,7 +855,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 378.333333333333371, 1159.0, 37.0, 18.0 ],
-					"text" : "-34.87",
+					"text" : "0.00",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -1270,6 +1270,38 @@
 
 			}
  ],
+		"parameters" : 		{
+			"obj-1" : [ "Gain", "Gain", 0 ],
+			"obj-44" : [ "live.dial[1]", "Width", 0 ],
+			"obj-46" : [ "live.dial", "Pan", 0 ],
+			"parameterbanks" : 			{
+				"0" : 				{
+					"index" : 0,
+					"name" : "",
+					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "somax.pan2.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-164", "obj-20", "obj-1" ]
 			}

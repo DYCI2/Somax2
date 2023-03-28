@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ -1728.0, 66.0, 1278.0, 1051.0 ],
+		"rect" : [ 23.0, 60.0, 337.0, 381.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -1368,11 +1368,11 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 434.777777777777601, 864.5, 485.570164191081631, 33.0 ],
+					"patching_rect" : [ 434.777777777777601, 864.5, 547.570164191081631, 33.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 3,
-					"presentation_rect" : [ 336.416666507720947, 31.0, 359.0, 47.0 ],
-					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/borg/Ircam/SomaxDocs/ builder_address= 4162_corpusbuilder 0",
+					"presentation_rect" : [ 336.416666507720947, 31.0, 381.0, 47.0 ],
+					"text" : "build_corpus 0 overwrite= 0 0 0 builder_address= 1344_corpusbuilder fg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] bg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] filter_class= NoFilter",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
