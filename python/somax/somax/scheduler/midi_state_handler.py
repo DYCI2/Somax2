@@ -1,10 +1,12 @@
 import logging
 from enum import Enum
-from typing import List, Optional
+from typing import List, Optional, Tuple, Any
 
 from somax.runtime.corpus_event import Note, MidiCorpusEvent
 from somax.runtime.transforms import AbstractTransform
-from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiSliceOnsetEvent, MidiNoteEvent
+from somax.scheduler.abstract_state_handler import AbstractStateHandler
+from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, MidiSliceOnsetEvent, MidiNoteEvent, \
+    InfluenceEvent
 
 
 class NoteOffMode(Enum):
@@ -26,13 +28,13 @@ class NoteOffMode(Enum):
         return cls.ORIGINAL
 
 
-class MidiStateHandler:
+class MidiStateHandler(AbstractStateHandler):
     def __init__(self,
                  align_note_ons: bool = False,
                  note_off_mode: NoteOffMode = NoteOffMode.default(),
                  artificial_ties: bool = False,
-                 sustain_timeout_ticks: Optional[float] = None
-                 ):
+                 sustain_timeout_ticks: Optional[float] = None):
+        super().__init__()
         self.align_note_ons: bool = align_note_ons
         self.note_off_mode: NoteOffMode = note_off_mode
         self.artificial_ties: bool = artificial_ties
@@ -48,6 +50,11 @@ class MidiStateHandler:
                 scheduler_tempo: float,
                 reset_timeout: bool) -> List[ScheduledEvent]:
         scheduler_events: List[ScheduledEvent] = [TempoEvent(trigger_time, event.tempo)]
+
+        features: List[Tuple[str, Any]] = self._get_rendering_features_if_exists(event)
+        if len(features) > 0:
+            scheduler_events.append(InfluenceEvent(trigger_time=trigger_time, keywords_and_feature_values=features))
+
         scheduler_events.extend(self._compute_midi_events(trigger_time=trigger_time,
                                                           corpus_event=event,
                                                           applied_transform=applied_transform,
@@ -179,5 +186,3 @@ class MidiStateHandler:
         else:
             self.next_sustain_timeout = None
             self.timeout = ticks
-
-

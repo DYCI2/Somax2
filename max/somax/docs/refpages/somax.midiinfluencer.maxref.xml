@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.midiinfluencer" module="somax" kind="patcher">
+
+	<digest>
+		Analyzes MIDI data into labels
+	</digest>
+
+	<description>
+		The MIDI influencer analyzes incoming MIDI data with respect to pitch, chroma and onset into discrete labels, which then can be used to influence a <o>somax.player</o> in order to control the player's way of navigating through the corpus.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+
+	<!--MESSAGES-->
+	<methodlist>
+        <method name="(player_protocol)">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Directly connected to the first outlet of the player</digest>
+			<description>
+				The <o>somax.player</o> has a specific output protocol that can be directly analyzed by the <o>somax.midiinfluencer</o> for the generation of MIDI influences. Just connet the first outlet of the <o>somax.player</o> to the inlet of the <o>somax.midiinfluencer</o> for this to analyze the output of the player, according to the selected parametrization.
+			</description>
+		</method>
+		<method name="bang">
+			<arglist />
+			<digest>Trigger output for current chroma value and onset</digest>
+			<description>
+				When a <m>bang</m> is sent to its inlet, the <o>somax.midiinfluencer</o> will output the current onset and chroma values.
+			</description>
+		</method>
+        <method name="int">
+			<arglist />
+			<digest>Enable/Disable the audio influencer</digest>
+			<description>
+				Performs the same function as <m>enabled</m>.
+				Any number other than 0 enables the <o>somax.audioinfluencer</o>. 
+                <br />
+                <m>0</m> disables <o>somax.audioinfluencer</o>.  </description>
+		</method>
+        <method name="list">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>MIDI values to analyze</digest>
+			<description>
+				The <o>somax.midiinfluencer</o> accepts as input a stream of MIDI data in the format of pitch, velocity and (optional) MIDI channel. This list is the raw data used by the <o>somax.midiinfluencer</o> for its analysis, according to the selected parameters and methods.
+			</description>
+		</method>
+        <method name="dump">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Dump all current parameter values on the second outlet</digest>
+			<description>
+				The <m>dump</m> message will cause the <o>somax.midiinfluencer</o> to output the current values of all its parameters out its second outlet.
+			</description>
+		</method>
+        <method name="flush">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Output MIDI note-offs for held notes</digest>
+			<description>
+				Outputs note-offs messages for any held MIDI note-ons.
+			</description>
+		</method>
+        <method name="openwindow">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Open the MIDI influencer parameters window</digest>
+			<description>
+				Open the <o>somax.midiinfluencer</o> window, with access to a user interface to control all the parameters of the analysis. The window provides also visual feedback for the analyzed signal with respect to chroma, onset and pitch.    
+			</description>
+		</method>
+	</methodlist>
+	
+    <!--ATTRIBUTES-->
+	<attributelist>
+        <attribute name="chordthreshold" get="1" set="1" type="symbol" size="1">
+            <digest>Set time (ms) to avoid duplicate onsets when notes arrive closely in time, as chords </digest>
+            <description>
+            	The message <m>chordthreshold</m>, followed by a <o>float</o>, will set the value (in millisecond) for the chord threshold. This parameter can be used to avoid duplicate onsets when notes arrive closely in time (e.g. when playing chords on a MIDI keyboard).
+            	When bypassed, through the message <m>chordthreshold 0</m>, any MIDI <m>note-on</m> message generates new pitch onset influences. This can sometimes be problematic for polyphonic MIDI input. By selecting a value for the <m>chordthreshold</m>, the <o>somax.midiinfluencer</o> will wait the number of milliseconds specified by this value for further input before analysing any received messages, thereby grouping the input into chords.
+            	<br />
+            	Note: the <m>chordthreshold</m> parameter determines how notes are grouped toghether and is therefore relevant for the <m>pitchanalysis</m> method.
+            </description>
+        </attribute>
+        <attribute name="chromachannels" get="1" set="1" type="symbol" size="1">
+            <digest>Set the MIDI channels from which the chroma should be analyzed</digest>
+            <description>
+            	The message <m>chromachannels</m>, followed by an <o>int</o> between 1 and 16, will select which MIDI channels should be used for chroma analysis. This is useful when working with MIDI input consisting of multiple channels (e.g., a MIDI file).
+            </description>
+        </attribute>
+        <attribute name="chromafilter" get="1" set="1" type="symbol" size="1">
+            <digest>Enable/Disable chroma filter</digest>
+            <description>
+            	The message <m>chromafilter 1</m> enables the leaky chroma filtering. 
+                The message <m>chromafilter 0</m> disables it.  
+            	This filter is by default applied to the generated chroma signal to smooth the changes over time. 
+            	<br />
+            	Note: disabling <m>chromafilter</m> will disable also <m>continuouschroma</m>.
+            </description>
+        </attribute>
+        <attribute name="continuouschroma" get="1" set="1" type="symbol" size="1">
+            <digest>Enalbe/Disable continuous chroma output</digest>
+            <description>
+            	By default, the <o>somax.midiinfluencer</o> outputs chroma values only whenever an onset is detected. The message <m>continuouschroma 1</m> will generate output continuously. When influencing a <o>somax.player</o>, the player will use the chroma influences look for sequences in its corpus matching the N last influences it received. With <m>continuouschroma 1</m>, the resolution will be too high and generate way too many matches. This can however still be useful for mixing chromas from multiple audio influencers, but it requires segmentation of the combined chromas afterwards.
+            </description>
+        </attribute>
+        <attribute name="enabled" get="1" set="1" type="symbol" size="1">
+            <digest>Enable/Disable the audio influencer</digest>
+            <description>
+            	Performs same function as <m>int</m>.
+                <br />
+                The message <m>enable 1</m> enables the <o>somax.midiinfluencer</o>. 
+                The message <m>enable 0</m> disables the <o>somax.midiinfluencer</o>.   
+            </description>
+        </attribute>
+        <attribute name="filterattack" get="1" set="1" type="symbol" size="1">
+            <digest>Set chroma filter attack</digest>
+            <description>
+            	The message <m>filterattack</m>, followed by an <o>int</o>, will set the value (in milliseconds) for the <m>chromafilter</m> attack. This controls the amount of time from when a MIDI note is registered until the corresponding chroma reaches its peak.
+            </description>
+        </attribute>
+        <attribute name="filterrelease" get="1" set="1" type="symbol" size="1">
+            <digest>Set chroma filter release</digest>
+            <description>
+            	The message <m>filterrelease</m>, followed by an <o>int</o>, will set the value (in milliseconds) for the <m>chromafilter</m> release. This corresponds to the time from when a MIDI note is released until it's chroma is completely decayed. 
+            </description>
+        </attribute>
+        <attribute name="onsetchannels" get="1" set="1" type="symbol" size="1">
+            <digest>Set the MIDI channels from which the onset should be analyzed</digest>
+            <description>
+            	The message <m>onsetchannels</m>, followed by an <o>int</o> between 1 and 16, will select which MIDI channels should be used for onset analysis. This is useful when working with MIDI input consisting of multiple channels (e.g., a MIDI file).
+            </description>
+        </attribute>
+        <attribute name="onsetlimit" get="1" set="1" type="symbol" size="1">
+            <digest>Set minimum amount of time (ms) between two consecutive onsets</digest>
+            <description>
+            	The message <m>onsetlimit</m>, followed by a <o>float</o>, will set the value (in milliseconds) for the onset limiter. This controls the least amount of time that has to pass between two onsets for the second onset to be registered. If this is enabled, it will discard any onset received within that number of milliseconds since its last received onset.
+            	<br />
+            	Set <m>onsetlimit 0</m> to disable it.
+            </description>
+        </attribute>
+        <attribute name="pitchanalysis" get="1" set="1" type="symbol" size="1">
+            <digest>Set pitch analysis method</digest>
+            <description>
+            	If the <m>chordthreshold</m> parameter is not bypassed, the <m>pitchanalysis</m>message specifies which pitch analysis method should be used by the <o>somax.midiinfluencer</o> for polyphonic input, controlling which note in the chord should be output. 
+            	There are three methods, selected with the following messages. 
+                <br />
+                The message <m>pitchanalysis 0</m> will output the virtual fundamental of the chord, the message <m>pitchanalysis 1</m> will output the top note of the chord, the message <m>pitchanalysis 2</m> will output the bass note of the chord.
+                <br />
+                <bt /> 
+                Note:it is recommended (but not required) to make sure that the receiving <o>somax.player</o> uses the same analysis method as the MIDI influencer.
+            </description>
+        </attribute>
+        <attribute name="pitchchannels" get="1" set="1" type="symbol" size="1">
+            <digest>Set the MIDI channels from which the pitch should be analyzed</digest>
+            <description>
+            	The message <m>pitchchannels</m>, followed by an <o>int</o> between 1 and 16, will select which MIDI channels should be used for pitch analysis. This is useful when working with MIDI input consisting of multiple channels (e.g., a MIDI file).
+            </description>
+        </attribute>
+    </attributelist>
+	
+	<!--SEEALSO-->
+	<seealsolist>
+        <seealso name="somax.player" />
+        <seealso name="somax.audioinfluencer" />
+		<seealso name="somax.midiinfluencer.ui" />
+        <seealso name="somax.midiinfluencer.app" />
+	</seealsolist>
+	
+</c74object>

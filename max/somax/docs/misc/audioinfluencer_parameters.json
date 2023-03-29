@@ -11,12 +11,12 @@
         "title": "Onset Detection from",
         "description": "This determines which algorithm should be used for onset detection."
     },
-    "pitchsegmethod": {
-        "title": "Pitch Segmentation from",
-        "description": "This determines when the pitch estimation should generate an influence. By default, each estimated pitch immediately generates an influence («Pitch Detection (Yin)»). It's however possible to set this so that pitch influences are only sent upon (Bonk's) onset detection or even synchronize it to an external bang on the middle inlet. This can be useful if, for example, the need of low latency requires the (Yin) parameter «Window» to be set very low, thus generating a lot of false onsets. In this case, the pitch information of these detections will still generate influences, but at a rate corresponding to the detected onsets if this parameter is set to «Onset Detection (Bonk)»."
+    "continuouschroma": {
+        "title": "Continuous Chroma",
+        "description": "By default, chroma is only output whenever an onset is detected. Turning continuous chroma on will generate output continuously. When influencing a player, the player will use the chroma influences look for sequences in its corpus matching the N last influences it received. With continuouschroma 1, the resolution will be too high and generate way too many matches. continuouscrhoma 1 can however still be useful for mixing chromas from multiple audio influencers, but it requires segmentation of the combined chromas afterwards."
     },
-    "onsetmininterval": {
-        "title": "Onset Min Interval",
+    "onsetlimiter": {
+        "title": "Onset Limiter",
         "description": "The minimal amount of time (in milliseconds) between two consecutive onsets. Any consecutive onset detected within this time frame will be discarded."
     },
     "chromadecayrate": {

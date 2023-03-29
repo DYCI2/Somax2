@@ -37,6 +37,9 @@ class CorpusQueryManager:
         query_keyword = query[0]
         query_content = query[1:]
 
+        if query_keyword == "bang":
+            raise SyntaxError(f"A keyword is required. Valid keywords are: {', '.join([e.value for e in QueryProtocol])}'")
+
         if query_keyword == QueryProtocol.CORPUSINFO.value:
             return [CorpusQueryManager._query_corpus_info(corpus)]
         elif query_keyword == QueryProtocol.FEATURES.value:
@@ -56,7 +59,7 @@ class CorpusQueryManager:
             return CorpusQueryManager._query_channels(corpus, query_content)
 
         else:
-            raise SyntaxError(f"Unknown keyword '{query_keyword}'")
+            raise SyntaxError(f"Unknown keyword '{query_keyword}. Valid keywords are: {', '.join([e.value for e in QueryProtocol])}'")
 
     @staticmethod
     def _query_corpus_info(corpus: Corpus) -> QueryResponse:
@@ -189,7 +192,7 @@ class CorpusQueryManager:
         """
         return CorpusQueryManager._query_note_attribute(corpus,
                                                         args,
-                                                        query_type=QueryProtocol.PITCHES,
+                                                        query_type=QueryProtocol.VELOCITIES,
                                                         attribute_name="velocity")
 
     @staticmethod
@@ -199,7 +202,7 @@ class CorpusQueryManager:
         """
         return CorpusQueryManager._query_note_attribute(corpus,
                                                         args,
-                                                        query_type=QueryProtocol.PITCHES,
+                                                        query_type=QueryProtocol.CHANNELS,
                                                         attribute_name="channel")
 
     @staticmethod

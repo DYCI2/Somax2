@@ -3,8 +3,8 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 1,
-			"revision" : 10,
+			"minor" : 3,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -42,12 +42,12 @@
 				"box" : 				{
 					"comment" : "(any) ircamdescriptor parameters",
 					"id" : "obj-6",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 289.0, 24.0, 25.0, 25.0 ]
+					"outlettype" : [ "int" ],
+					"patching_rect" : [ 116.0, 20.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -108,7 +108,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-4",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -121,7 +121,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-3",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -133,11 +133,11 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-2",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 27.0, 23.0, 25.0, 25.0 ]
 				}
 
@@ -155,8 +155,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 1,
-							"revision" : 10,
+							"minor" : 3,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -656,13 +656,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "ircamdescriptor~.mxo",
-				"type" : "iLaX"
-			}
- ],
-		"autosave" : 0
+ ]
 	}
 
 }

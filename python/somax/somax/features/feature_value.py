@@ -17,5 +17,7 @@ class FeatureValue(ABC):
     def as_max_compatible(self) -> Any:
         if isinstance(self.value(), np.ndarray):
             return self.value().tolist()
+        elif isinstance(self.value(), np.int64):
+            return int(self.value())
         else:
             return self.value()

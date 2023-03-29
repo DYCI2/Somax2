@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.server" module="somax" kind="patcher">
+
+	<digest>
+		Controls the remote somax server
+	</digest>
+
+	<description>
+		The somax server is an external application through which all somax.player objects communicate. The somax.server object manages all the communication with the remote server using the OSC protocol, so in order to use a somax.player, it's always necessary to first initialize the somax.server object. The server is also responsible for managing and synchronize time between the players.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+	<!--ARGUMENTS-->
+	<objarglist>
+        <objarg name="sendport" optional="1" type="int">
+			<digest>
+				OSC send port
+			</digest>
+			<description>
+				The optional first argument sets the value for the port used by the <o>somax.server</o> object to send information to the remote python server. This port value is passed to the <o>udpsend</o> internal object, used to communicate with the python server through OSC. Therefore, the same port will be the python server input port, as you read in the terminal at the moment of initializing the <o>somax.server</o> object.
+				<br />
+				<br />
+				Note: if any port but default is used, it will be necessary for the user to manually launch the server (shell command or from a terminal)
+				<br />
+				<br />
+				If there's no argument, the OSC send port is initialized at the default 1234.
+			</description>
+		</objarg>
+        <objarg name="recvport" optional="1" type="int">
+			<digest>
+				OSC receive port
+			</digest>
+			<description>
+				The optional second argument sets the value for the port used by the <o>somax.server</o> object to receive information from the remote python server. This port value is passed to the <o>udpreceive</o> internal object, used to communicate with the python server through OSC. Therefore, the same port will be the python server output port, as you read in the terminal at the moment of initializing the <o>somax.server</o> object.
+				<br />
+				<br />
+				Note: if any port but default is used, it will be necessary for the user to manually launch the server (shell command or from a terminal)
+				<br />
+				<br />
+				If there's no argument, the OSC receive port is initialized at the default 1235.
+			</description>
+		</objarg>
+        <objarg name="ip" optional="1" type="symbol">
+			<digest>
+				OSC ip address
+			</digest>
+			<description>
+				The optional third argument specifies the ip address used by the <o>somax.server</o> to communicate with the remote python server. This address is passed to the <o>udpsend</o> internal object, as the <m>host</m> destination to which messages will be sent. The OSC ip address can be specified either by name (e.g., localhost) or by ip address (e.g., 127.0.0.1)
+				<br /> 
+				If there's no argument, the OSC ip address is initialized at 127.0.0.1, corresponding to <m>localhost</m>.
+			</description>
+		</objarg>
+	</objarglist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="bang">
+			<arglist />
+			<digest>Output generation time</digest>
+			<description>
+				While the remote python server is running, a <m>bang</m> sent to its inlet will cause the <o>somax.server</o> object to output the current time of the remote python server's transport, out the left outlet. 
+				<br />
+				<br />
+				Time information is available in a list of four values: the time passed since the activation of the transport in ticks, the time passed since the activation of the transport in seconds, the current tempo in BPM and the current beat phase (describing the current position of the beat with a phase value between 0 and 1).
+			</description>
+		</method>
+        <method name="int">
+			<arglist />
+			<digest>Toggle generation</digest>
+			<description>
+				Performs the same function as <m>start</m> and <m>stop</m>.
+				Any number other than 0 activates the remote python server's transport to start the generation for all the <o>somax.player</o> objects currently initialized.
+				<br />
+				<m>0</m> stops the remote python server's transport.
+			</description>
+		</method>
+        <method name="corpora">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>List the corpora present on the current corpuspath</digest>
+			<description>
+				The message <m>corpora</m> will cause the <o>somax.server</o> to output a list of all the corpora located in its <m>corpuspath</m>, out the left outlet.
+			</description>
+		</method>
+        <method name="corpuspath">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Query the current corpuspath</digest>
+			<description>
+				The message <m>corpuspath</m> will cause the <o>somax.server</o> to output the location of its corpuspath, out the left outlet.
+			</description>
+		</method>
+        <method name="initialize">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Initialize server</digest>
+			<description>
+				The <m>initialize</m> message will launch the remote python server through an external application. This will open on a separate terminal window, showing the remote server's <m>sendport</m>, <m>recvport</m> and <m>ip</m> address. 
+				<br />
+				<br />
+				Note: the status of the remote python server is constantly available out the middle outlet of the <o>somax.server</o> object.
+			</description>
+		</method>
+        <method name="initializeplayers">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Initialize on the server all local players</digest>
+			<description>
+				The <m>initializeplayers</m> message will intialize all the local <o>somax.player</o> objects. This is the same as sending the <m>initialize</m> message to all of the <o>somax.player</o> objects individually. 
+			</description>
+		</method>
+        <method name="ip">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Query the current OSC ip address</digest>
+			<description>The message <m>ip</m> will cause the <o>somax.server</o> to output its OSC ip address, out the left outlet.</description>
+		</method>
+        <method name="openwindow">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Open server window</digest>
+			<description>
+				Open the <o>somax.server</o> window. Here the remote python server's status is reported, as well as the <m>sendport</m>, the <m>recvport</m> and the <m>ip</m> address. Additional commands to <m>initialize</m>, <m>terminate</m> and <m>reload</m> the remote python server are provided, as well as the location of the current <m>corpuspath</m> and controls to set it to a new location, or reset it to default.
+			</description>
+		</method>
+        <method name="players">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Get list of the players currently initialized on the server</digest>
+			<description>
+				The message <m>players</m> will cause the <o>somax.server</o> to output the list of the <o>somax.player</o> objects currently initialized, out the left outlet.
+			</description>
+		</method>
+        <method name="recvport">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Query the current OSC receive port address</digest>
+			<description>The message <m>recvport</m> will cause the <o>somax.server</o> to output the value of its OSC receive port, out the left outlet.</description>
+		</method>
+		<method name="reload">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Reload the server if terminated</digest>
+			<description>
+				Reload the remote python server, if this has previously been terminated.
+				<br />
+				<br />
+				Note: the status of the remote python server is constantly available out the middle outlet of the <o>somax.server</o> object.	
+			</description>
+		</method>
+        <method name="sendport">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Query the current OSC send port address</digest>
+			<description>
+				The message <m>recvport</m> will cause the <o>somax.server</o> to output the value of its OSC send port, out the left outlet.
+			</description>
+		</method>
+        <method name="start">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Start generation</digest>
+			<description>
+				Once the <o>somax.server</o> is initialized, the <m>start</m> message activates the remote python server's transport to start the generation for all the <o>somax.player</o> objects currently initialized.
+			</description>
+		</method>
+        <method name="stop">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Stop generation</digest>
+			<description>
+				Once the <o>somax.server</o> is initialized, the <m>stop</m> message stops the remote python server's transport and generation for all the <o>somax.player</o> objects currently initialized.
+			</description>
+		</method>
+        <method name="terminate">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Terminate the server</digest>
+			<description>
+				Terminates the remote python server.
+				<br />
+				<br />
+				Note: the status of the remote python server is constantly available out the middle outlet of the <o>somax.server</o> object.
+			</description>
+		</method>
+        <method name="time">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Performs the same function as bang</digest>
+			<description>Performs the same function as <m>bang</m></description>
+		</method>
+	</methodlist>
+	
+    <!--ATTRIBUTES-->
+	<attributelist>
+        <attribute name="active" get="0" set="1" type="symbol" size="1">
+			<digest>Performs the same function as int</digest>
+			<description>Performs the same function as <m>int</m></description>
+		</attribute>
+        <attribute name="autoinitialize" get="0" set="1" type="symbol" size="1">
+			<digest>Enable/Disable autoinitialization of the server when created</digest>
+			<description>
+				By default the <o>somax.server</o> will be automatically initalized when created. Set this attribute to 0 to disable this behaviour. 
+			</description>
+		</attribute>
+        <attribute name="autoterminate" get="0" set="1" type="symbol" size="1">
+			<digest>Enable/Disable autotermination of the server when closing its Max window</digest>
+			<description>
+				By default the <o>somax.server</o> will be automatically terminated when closing the Max window containing it. Set this attribute to 0 to disable this behaviour. 
+			</description>
+		</attribute>
+        <attribute name="tempo" get="1" set="1" type="symbol" size="1">
+			<digest>Set server transport tempo value</digest>
+			<description>The <m>tempo</m> messages, followed by a value in BPM, will set the remote python server's transport tempo.</description>
+		</attribute>
+        <attribute name="temposource" get="1" set="1" type="symbol" size="1">
+			<digest>Select the source from which the server controls its tempo</digest>
+			<description>
+				The tempo of the remote python server can be controlled by the original tempo of any <o>somax.player</o>'s loaded <m>corpus</m>. To do so, send to the <o>somax.server</o> object the message <m>temposource</m> followed by the target <o>somax.player</o>'s <m>name</m>. To stop following the tempo of the player, send to the <o>somax.server</o> the message <m>temposource -1</m>.
+				<br />
+				Note: Changing the tempo with the <m>tempo</m> message will also clear the tempo source.
+			</description>
+		</attribute>
+	</attributelist>
+	
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.server.app" />
+		<seealso name="somax.player" />
+        <seealso name="somax.audiocorpusbuilder" />
+        <seealso name="somax.midicorpusbuilder" />
+	</seealsolist>
+	
+</c74object>

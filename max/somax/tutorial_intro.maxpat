@@ -1,1 +1,0 @@
-docs/tutorial-patchers/somax2_first_steps.maxpat

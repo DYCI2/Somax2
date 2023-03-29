@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 1,
-			"revision" : 5,
+			"minor" : 3,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 78.0, 1052.0, 730.0 ],
+		"rect" : [ 34.0, 86.0, 251.0, 139.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,6 +40,45 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
+					"id" : "obj-27",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1019.0, 162.066916884716534, 144.0, 22.0 ],
+					"text" : "somax.winresize 285 180"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+					"id" : "obj-77",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 1019.0, 127.0, 67.0, 22.0 ],
+					"save" : [ "#N", "thispatcher", ";", "#Q", "end", ";" ],
+					"text" : "thispatcher"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 1019.0, 88.0, 168.0, 22.0 ],
+					"text" : "route thispatcher openwindow"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-11",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -54,12 +93,12 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-19",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1022.0, 65.0, 30.0, 30.0 ]
+					"patching_rect" : [ 1019.0, 43.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -79,7 +118,7 @@
 				"box" : 				{
 					"comment" : "tempo",
 					"id" : "obj-2",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -432,8 +471,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 1,
-							"revision" : 5,
+							"minor" : 3,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -816,8 +855,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 1,
-											"revision" : 5,
+											"minor" : 3,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1140,8 +1179,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 1,
-											"revision" : 5,
+											"minor" : 3,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1587,8 +1626,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 1,
-											"revision" : 5,
+											"minor" : 3,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1752,8 +1791,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 1,
-											"revision" : 5,
+											"minor" : 3,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1970,8 +2009,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 1,
-											"revision" : 5,
+											"minor" : 3,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -2968,6 +3007,7 @@
 					"enablevscroll" : 0,
 					"id" : "obj-63",
 					"lockeddragscroll" : 0,
+					"lockedsize" : 0,
 					"maxclass" : "bpatcher",
 					"name" : "params_interface.maxpat",
 					"numinlets" : 3,
@@ -2978,8 +3018,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 1,
-							"revision" : 5,
+							"minor" : 3,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -4408,7 +4448,7 @@
 				"box" : 				{
 					"comment" : "bang to force phase and period",
 					"id" : "obj-183",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -4571,7 +4611,7 @@
 				"box" : 				{
 					"comment" : "beat",
 					"id" : "obj-6",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -4676,11 +4716,11 @@
 				"box" : 				{
 					"comment" : "midi",
 					"id" : "obj-123",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 248.0, 31.0, 20.0, 20.0 ]
 				}
 
@@ -4769,8 +4809,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 1,
-							"revision" : 5,
+							"minor" : 3,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -5046,8 +5086,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 1,
-											"revision" : 5,
+											"minor" : 3,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -5289,8 +5329,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 1,
-											"revision" : 5,
+											"minor" : 3,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -5545,8 +5585,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 1,
-											"revision" : 5,
+											"minor" : 3,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -5645,8 +5685,8 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 8,
-															"minor" : 1,
-															"revision" : 5,
+															"minor" : 3,
+															"revision" : 2,
 															"architecture" : "x64",
 															"modernui" : 1
 														}
@@ -5913,8 +5953,8 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 8,
-															"minor" : 1,
-															"revision" : 5,
+															"minor" : 3,
+															"revision" : 2,
 															"architecture" : "x64",
 															"modernui" : 1
 														}
@@ -6245,8 +6285,8 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 8,
-															"minor" : 1,
-															"revision" : 5,
+															"minor" : 3,
+															"revision" : 2,
 															"architecture" : "x64",
 															"modernui" : 1
 														}
@@ -7626,6 +7666,28 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"destination" : [ "obj-20", 0 ],
+					"midpoints" : [ 1177.5, 198.0, 257.5, 198.0 ],
+					"source" : [ "obj-1", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-27", 0 ],
+					"source" : [ "obj-1", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-77", 0 ],
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-71", 0 ],
 					"source" : [ "obj-105", 0 ]
 				}
@@ -7788,8 +7850,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-20", 0 ],
-					"midpoints" : [ 1031.5, 186.0, 257.5, 186.0 ],
+					"destination" : [ "obj-1", 0 ],
 					"source" : [ "obj-19", 0 ]
 				}
 
@@ -7833,6 +7894,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-67", 0 ],
 					"source" : [ "obj-20", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-77", 0 ],
+					"midpoints" : [ 1028.5, 209.066916884716534, 1006.5, 209.066916884716534, 1006.5, 116.0, 1028.5, 116.0 ],
+					"source" : [ "obj-27", 0 ]
 				}
 
 			}
@@ -8191,6 +8260,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-27", 0 ],
+					"source" : [ "obj-77", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-172", 5 ],
 					"midpoints" : [ 463.5, 900.0, 396.5, 900.0 ],
 					"source" : [ "obj-85", 0 ]
@@ -8293,7 +8369,16 @@
 				}
 
 			}
- ]
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0
 	}
 
 }

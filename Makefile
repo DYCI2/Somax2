@@ -55,22 +55,20 @@ notarize:
 	xcrun stapler staple dist/somax_server.app
 
 max-package: clean
-	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN CODESIGNED BEFORE CALLING THIS COMMAND. ORDER SHOULD BE:\n    make pyinstaller\n    make codesignature (+ stapler once finished)\n    make max-package\033[0m"
+	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN SIGNED AND NOTARIZED BEFORE CALLING THIS COMMAND!\nORDER SHOULD BE:\n    make pyinstaller\n    make codesignature \n    make notarize \n    make max-package\033[0m"
 	mkdir -p "$(MAX_BUILD_PARENT_FOLDER)"
 	cp -r "$(MAX_LIB_PATH)" "$(MAX_BUILD_PATH)"
 	# clean up local items
 	rm -rf "$(MAX_BUILD_PATH)"/state/*
+	cp "$(MAX_LIB_PATH)"/state/FactorySettings.json "$(MAX_BUILD_PATH)"/state
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.json
 	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
-	# create extras folder (note: symlinks are not windows-compatible)
-	mkdir -p "$(MAX_BUILD_PATH)/extras/somax"
-	ln -s "../../somax2.maxpat" "$(MAX_BUILD_PATH)/extras/somax2.maxpat"
-	ln -s "../../docs/tutorial-patchers/somax2_first_steps.maxpat" "$(MAX_BUILD_PATH)/extras/somax/tutorial_intro.maxpat"
-	ln -s "../../docs/tutorial-patchers/somax2_audio_tutorial.maxpat" "$(MAX_BUILD_PATH)/extras/somax/tutorial_audio.maxpat"
 	# copy binary (should already be codesigned)
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
-	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
+	cp LICENSE README.md "Somax2 User's Guide.pdf" "$(MAX_BUILD_PATH)"
+	cp -r templates "$(MAX_BUILD_PATH)"
+	cp "$(MAX_BUILD_PATH)"/extras/somax2.overview.maxpat "$(MAX_BUILD_PATH)"/somax2.overview.maxpat
 	create-dmg \
 		--volname "$(DMG_NAME)" \
 		--window-pos 200 120 \

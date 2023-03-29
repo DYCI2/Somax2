@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.audiorenderer" module="somax" kind="patcher">
+
+	<digest>
+		Render a somax.player's audio corpus
+	</digest>
+
+	<description>
+		The somax.audiorenderer reads a connected somax.player's output protocol and converts its messages into an audio signal (assuming that an audio corpus is loaded into the somax.player)
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+
+	<!--MESSAGES-->
+	<methodlist>
+        <method name="(player_protocol)">
+			<arglist />
+			<digest>Directly connected to the first outlet of the player</digest>
+			<description>
+				The <o>somax.player</o> has a specific output protocol that can be directly read by the <o>somax.audiorenderer</o> for immediate audio playback. Just connect the first outlet of the <o>somax.player</o> to the inlet of the <o>somax.audiorenderer</o> for this to convert the player's protocol into audio signal.
+			</description>
+		</method>
+        <method name="dump">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Dump all current parameter values on the second outlet</digest>
+			<description>
+				The <m>dump</m> message will cause the <o>somax.audiorenderer</o> to output the current values of all its parameters out its second outlet.
+			</description>
+		</method>
+        <method name="flush">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Stops rendering of any lingering events</digest>
+			<description>Stops rendering of any lingering events.</description>
+		</method>
+        <method name="openwindow">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Open the audio renderer parameters window</digest>
+			<description>
+				Open the <o>somax.audiorenderer</o> window, with access to a user interface to control all the parameters of audio rendering. 
+			</description>
+		</method>
+	</methodlist>
+
+    <!--ATTRIBUTES-->
+	<attributelist>
+        <attribute name="attack" get="1" set="1" type="symbol" size="1">
+			<digest>Set crossfade attack</digest>
+			<description>
+				The message <m>attack</m>, followed by an <o>int</o>, will set the value (in milliseconds) for the crossfade attack at the start of each played segment.
+			</description>
+		</attribute>
+        <attribute name="buffername" get="1" set="0" type="symbol" size="1">
+			<digest>Set name of internal buffer</digest>
+			<description>The <m>buffername</m> attribute can be used to access the renderer's internal <o>buffer~</o> from outside. By default, the buffer will have an auto-generated name and therefore not be accessible.</description>
+		</attribute>
+        <attribute name="crossfadecurve" get="1" set="1" type="symbol" size="1">
+			<digest>Set crossfade slope curve</digest>
+			<description>
+				The message <m>crossfadecurve</m>, followed by a <o>float</o> between 0 and 1, will set the value for the crossfade slope. This parameters controls how abrupt the crossfade between two played slices should be. Use <m> crossfadecurve 0.5</m> for equal-power crossfade.
+			</description>
+		</attribute>
+        <attribute name="release" get="1" set="1" type="symbol" size="1">
+			<digest>Set crossfade release</digest>
+			<description>
+				The message <m>release</m>, followed by an <o>int</o>, will set the value (in milliseconds) for the crossfade release at the end of each played segment.
+			</description>
+		</attribute>
+        <attribute name="shift" get="1" set="1" type="symbol" size="1">
+			<digest>Set shift mode for playback</digest>
+			<description>
+				The <m>shift</m> message specifies from where each segment should be played.
+				There are two modes, selected with the following messages.
+				The message <m>shift 0</m> will set the shift mode to <m>pre-segment</m>, meaning that each slice will be played from slightly before the start of the segment, so that the crossfade is completed at the start of the segment.
+				The message <m>shift 1</m> will set the shift mode to <m>at segment</m>, meaning that each slice will be played from the start of the segment, so that the first part of the segment, which will be more accurate timing-wise but may result in less clear attacks for certain corpora.
+			</description>
+		</attribute>
+        <attribute name="tsmode" get="1" set="1" type="symbol" size="1">
+			<digest>Set timestretch mode</digest>
+			<description>
+				The message <m>tsmode</m> controls the time stretching / pitch shifting algorithm used. There are differend modes, based on the <m>timestretch</m> model of <o>groove~</o>. The modes are <m>general</m>, <m>basic</m>, <m>monophonic</m>, <m>rhytmic</m>, <m>extremestretch</m> and <m>efficient</m>.
+				<br />
+				Using <m>tsmode efficient</m> is recommended when dealing with multiple agents or when performance is a concern, while for single agents in need of high quality pitch shifting, <m>tsmode general</m> is strongly recommended.
+			</description>
+		</attribute>
+        <attribute name="voices" get="1" set="1" type="symbol" size="1">
+			<digest>Set number of voices in the audio renderer</digest>
+			<description>
+				The message <m>voices</m>, followed by an <o>int</o>, will set the number of voices for the <o>somax.audiorenderer</o>. In very fast-paced corpora with a lot of jumps, it is sometimes necessary to increase the number of voices in order to avoid clipping. Make sure to restart the <o>dac</o> (turn the audio on and off in Max) for this change to take effect.
+			</description>
+		</attribute>
+	</attributelist>
+	
+    
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.player" />
+		<seealso name="somax.midirenderer" />
+	</seealsolist>
+	
+</c74object>

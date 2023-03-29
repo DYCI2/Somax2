@@ -1,4 +1,5 @@
 import inspect
+import logging
 import re
 import sys
 from abc import ABC, abstractmethod
@@ -9,6 +10,9 @@ from somax.features.feature import CorpusFeature
 
 class Constants:
     FLOAT = r"-?(?:\d+\.[\d]*|\.[\d]+)(?:e-?\d+)?"
+    COMMENT = r"^\\s*?/\\*"
+    EMPTY = r"^\s*$"
+    TEMPO = COMMENT + r"\\s*?tempo"  # Format: /* tempo (...) \d+ (...)
 
 
 class ParsingError(Exception):
@@ -22,11 +26,14 @@ class TextFormat(ABC):
     def keyword() -> str:
         """ """
 
-    @staticmethod
+    @classmethod
     @abstractmethod
-    def parse_line(line_str: str,
-                   keys: List[Type[CorpusFeature]]) -> Tuple[float, Optional[float], Dict[Type[CorpusFeature], Any]]:
-        """ returns: onset, offset, feature_dict """
+    def parse_file(cls,
+                   analysis_file_path: str,
+                   use_tempo_annotations: bool = False,
+                   pre_analysed_descriptors: Optional[List[Type[CorpusFeature]]] = None,
+                   ignore_invalid_lines: bool = False) -> Tuple[List[float], List[Optional[float]]]:
+        """ raises: RuntimeError if parsing failed """
 
     @staticmethod
     @abstractmethod
@@ -58,7 +65,200 @@ class TextFormat(ABC):
         return SoundStudio.keyword()
 
 
-class SoundStudio(TextFormat):
+class UniformTextFormat(TextFormat, ABC):
+
+    @staticmethod
+    @abstractmethod
+    def parse_line(line_str: str,
+                   keys: List[Type[CorpusFeature]]) -> Tuple[float, Optional[float], Dict[Type[CorpusFeature], Any]]:
+        """ returns: onset, offset, feature_dict """
+
+    @classmethod
+    def parse_file(cls,
+                   analysis_file_path: str,
+                   use_tempo_annotations: bool = False,
+                   pre_analysed_descriptors: Optional[List[Type[CorpusFeature]]] = None,
+                   ignore_invalid_lines: bool = False
+                   ) -> Tuple[List[float], List[Optional[float]]]:
+        with open(analysis_file_path, 'r') as f:
+            onsets: List[float] = []
+            offsets: List[float] = []
+            for i, line in enumerate(f):  # type: int, str
+                if use_tempo_annotations and re.match(Constants.TEMPO, line, flags=re.IGNORECASE):
+                    raise NotImplementedError("Tempo is not supported yet")
+                if re.match(Constants.EMPTY, line):
+                    logging.debug(f"Line {i + 1}: Ignoring empty line")
+                else:
+                    try:
+                        onset_s: float
+                        offset_s: Optional[float]
+                        descriptor_dict: Dict[Type[CorpusFeature], Any]
+                        onset_s, offset_s, descriptor_dict = cls.parse_line(line,
+                                                                            keys=pre_analysed_descriptors)
+                    except ParsingError as e:
+                        err_msg: str = f"invalid line {i + 1}: '{str(e)}'"
+                        if ignore_invalid_lines:
+                            logging.warning(err_msg)
+                            continue
+                        else:
+                            raise RuntimeError(err_msg)
+
+                    onsets.append(onset_s)
+                    offsets.append(offset_s)
+
+        return onsets, offsets
+
+
+class ProTools(TextFormat):
+
+    @staticmethod
+    def keyword() -> str:
+        return ProTools.__name__
+
+    @classmethod
+    def parse_file(cls,
+                   analysis_file_path: str,
+                   use_tempo_annotations: bool = False,
+                   pre_analysed_descriptors: Optional[List[Type[CorpusFeature]]] = None,
+                   ignore_invalid_lines: bool = False
+                   ) -> Tuple[List[float], List[Optional[float]]]:
+        with open(analysis_file_path, 'r') as f:
+            sample_rate: Optional[float] = None
+            while sample_rate is None:
+                try:
+                    sample_rate = cls.parse_sample_rate(next(f))
+                    if sample_rate is not None and sample_rate <= 0:
+                        raise RuntimeError(f"Invalid sample rate: {sample_rate}")
+
+                except StopIteration as e:
+                    # End of file without successfully parsing any sample rate
+                    raise RuntimeError from e
+
+            found_markers: bool = False
+            pattern: re.Pattern[str] = re.compile("M A R K E R S\s\sL I S T I N G")
+            while not found_markers:
+                try:
+                    found_markers = bool(re.match(pattern, next(f)))
+                except StopIteration as e:
+                    # End of file without successfully parsing markers listing header
+                    raise RuntimeError from e
+
+            # Ignore headers of markers list
+            next(f)
+
+            onsets: List[float] = []
+            offsets: List[Optional[float]] = []
+
+            reached_end_of_markers: bool = False
+            while not reached_end_of_markers:
+                try:
+                    onset: Optional[int] = cls.parse_line(next(f))
+                    if onset is None:
+                        reached_end_of_markers = True
+                    else:
+                        onsets.append(onset / sample_rate)
+                        offsets.append(None)
+
+                except ParsingError as e:
+                    raise RuntimeError from e
+                except StopIteration:
+                    reached_end_of_markers = True
+
+        return onsets, offsets
+
+    @staticmethod
+    def format_line(onset: float, duration: float, features: List[CorpusFeature]) -> str:
+        raise RuntimeError("Not implemented")
+
+    @staticmethod
+    def parse_line(line: str) -> Optional[int]:
+        if re.match(Constants.EMPTY, line):
+            logging.debug("Ignoring empty line")
+            return None
+
+        pattern: re.Pattern[str] = re.compile(f"^\\s*\\d+\\s+(?:\\d+|\\d+:\\d+)\\s+(\\d+)")
+        tokens = re.match(pattern, line)
+
+        if tokens is None:
+            raise ParsingError(f"Invalid format: {line}")
+
+        return int(tokens.group(1))
+
+    @staticmethod
+    def parse_sample_rate(line: str) -> Optional[float]:
+        pattern: re.Pattern[str] = re.compile(f"SAMPLE RATE:\\s*({Constants.FLOAT})")
+        tokens = re.match(pattern, line)
+
+        return None if tokens is None else float(tokens.group(1))
+
+
+class Reaper(TextFormat):
+
+    @staticmethod
+    def keyword() -> str:
+        return Reaper.__name__
+
+    @classmethod
+    def parse_file(cls,
+                   analysis_file_path: str,
+                   use_tempo_annotations: bool = False,
+                   pre_analysed_descriptors: Optional[List[Type[CorpusFeature]]] = None,
+                   ignore_invalid_lines: bool = False
+                   ) -> Tuple[List[float], List[Optional[float]]]:
+        with open(analysis_file_path, 'r') as f:
+
+            found_markers: bool = False
+            pattern: re.Pattern[str] = re.compile("   #                                 Name          Start")
+            while not found_markers:
+                try:
+                    found_markers = bool(re.match(pattern, next(f)))
+                except StopIteration as e:
+                    # End of file without successfully parsing markers listing header
+                    raise RuntimeError from e
+
+            # Ignore headers of markers list
+            next(f)
+
+            onsets: List[float] = []
+            offsets: List[Optional[float]] = []
+
+            reached_end_of_markers: bool = False
+            while not reached_end_of_markers:
+                try:
+                    onset: Optional[float] = cls.parse_line(next(f))
+                    if onset is None:
+                        reached_end_of_markers = True
+                    else:
+                        onsets.append(onset)
+                        offsets.append(None)
+
+                except ParsingError as e:
+                    raise RuntimeError from e
+                except StopIteration:
+                    reached_end_of_markers = True
+
+        return onsets, offsets
+
+    @staticmethod
+    def format_line(onset: float, duration: float, features: List[CorpusFeature]) -> str:
+        raise RuntimeError("Not implemented")
+
+    @staticmethod
+    def parse_line(line: str) -> Optional[float]:
+        if re.match(Constants.EMPTY, line):
+            logging.debug("Ignoring empty line")
+            return None
+
+        pattern: re.Pattern[str] = re.compile(f"^\\s*.\\d+(?:\\d+|\\s*|.+)\\s+({Constants.FLOAT})")
+        tokens = re.match(pattern, line)
+
+        if tokens is None:
+            raise ParsingError(f"Invalid format: {line}")
+
+        return float(tokens.group(1))
+
+
+class SoundStudio(UniformTextFormat):
     @staticmethod
     def keyword() -> str:
         return SoundStudio.__name__
@@ -90,7 +290,7 @@ class SoundStudio(TextFormat):
         return f"{int(minutes)}'{int(seconds):0>2},{int(hundreds * 1000):0<4}\n"
 
 
-class Audacity(TextFormat):
+class Audacity(UniformTextFormat):
     REGEX = re.compile(f"\\s*({Constants.FLOAT})\\s({Constants.FLOAT}).*")
 
     @staticmethod

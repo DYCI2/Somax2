@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.player.app" module="somax" kind="patcher">
+
+	<digest>
+		Main generative object of the somax application 
+	</digest>
+
+	<description>
+		The <o>somax.player.app</o> is a wrapper around the <o>somax.player</o>, encapsulating it together with other useful tools for routing influences, rendering and playing back audio or MIDI output. The <o>somax.player.app</o> has a graphic interface to control all its parameters and provide the user with better interaction. Thanks to this app object, somax can send influences between influencers and players wirelessly (i.e. without max patch cords). 
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+	
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.player" />
+		<seealso name="somax.player.ui" />
+	</seealsolist>
+	
+</c74object>

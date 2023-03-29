@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.midiinfluencer.ui" module="somax" kind="patcher">
+
+	<digest>
+		Wrapper around the <o>somax.midiinfluencer</o> object, only for visual feedback
+	</digest>
+
+	<description>
+		This compact interface is just a wrapper around the main interface. No parameters are visible here, but all parameters are available by pressing the «Settings» button.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+	
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.midiinfluencer" />
+        <seealso name="somax.midiinfluencer.app" />
+	</seealsolist>
+	
+</c74object>

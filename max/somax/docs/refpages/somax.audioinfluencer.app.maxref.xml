@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.audioinfluencer.ui" module="somax" kind="patcher">
+
+	<digest>
+		Wrapper around the <o>somax.audioinfluencer</o> object
+	</digest>
+
+	<description>
+		The <o>somax.audioinfluencer.app</o> object is a convenient wrapper around the audio influencer with some additional user interface to handle input and output. Thanks to this app object, Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). 
+	</description>
+    
+    <!--ARGUMENTS-->
+	<objarglist>
+        <objarg name="name" optional="1" type="int">
+			<digest>
+				Remote listening address
+			</digest>
+			<description>
+			</description>
+		</objarg>
+	</objarglist>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+	
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.audioinfluencer" />
+        <seealso name="somax.audioinfluencer.ui" />
+	</seealsolist>
+	
+</c74object>

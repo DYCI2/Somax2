@@ -13,15 +13,15 @@
     },
     "pitchfromchords": {
         "title": "Pitch Analysis",
-        "description": "If the «Onset Threshold» parameter is not bypassed, this parameter specifies which pitch analysis method should be used for polyphonic input. Note that it is recommended (but not required) to make sure that the receiving somax.player uses the same analysis method as the MIDI influencer."
+        "description": "If the «Chord Threshold» parameter is not bypassed, this parameter specifies which pitch analysis method should be used for polyphonic input. Note that it is recommended (but not required) to make sure that the receiving somax.player uses the same analysis method as the MIDI influencer."
     },
     "onsetfrom": {
         "title": "Onset Analysis",
         "description": "This parameter specifies how onset segmentation should be done by the MIDI influencer. By default, this is set to be triggered by each MIDI Note On message, but can also be changed to synchronize to an external pulse or input of some sort by sending bangs to the middle inlet of the MIDI influencer."
     },
     "threshold": {
-        "title": "Onset Threshold",
-        "description": "When bypassed, any MIDI Note On generates new pitch onset influences. This can sometimes be problematic for polyphonic MIDI input. By turning the bypassing off, the MIDI influencer will the number of milliseconds specified by this value for further input before analysing any received messages, thereby grouping the input into chords. This behaviour is further explained in the «polyphony» tab."
+        "title": "Chord Threshold",
+        "description": "When bypassed, any MIDI Note On generates new pitch onset influences. This can sometimes be problematic for polyphonic MIDI input. By turning the bypassing off, the MIDI influencer will wait the number of milliseconds specified by this value for further input before analysing any received messages, thereby grouping the input into chords. This behaviour is further explained in the «polyphony» tab."
     },
     "flush": {
         "title": "Flush",
@@ -34,6 +34,10 @@
     "onsetlimit": {
         "title":"Onset Limiter",
         "description": "The onset limiter controls the least amount of time that has to pass between two onsets for the second onset to be registered. If this is enabled, it will discard any onset received within that number of milliseconds since its last received onset."
+    },
+    "continuouschroma": {
+        "title": "Continuous Chroma",
+        "description": "By default, chroma is only output whenever an onset is detected. Turning continuous chroma on will generate output continuously. When influencing a player, the player will use the chroma influences look for sequences in its corpus matching the N last influences it received. With continuouschroma 1, the resolution will be too high and generate way too many matches. continuouscrhoma 1 can however still be useful for mixing chromas from multiple audio influencers, but it requires segmentation of the combined chromas afterwards."
     }
 
 }

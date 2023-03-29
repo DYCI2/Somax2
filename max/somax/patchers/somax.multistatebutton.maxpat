@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 1,
-			"revision" : 8,
+			"minor" : 3,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1037.0, 79.0, 969.0, 1277.0 ],
+		"rect" : [ 1037.0, 79.0, 123.0, 50.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -164,7 +164,7 @@
 				"box" : 				{
 					"comment" : "(int) mode",
 					"id" : "obj-65",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -188,7 +188,7 @@
 				"box" : 				{
 					"comment" : "(int) mode",
 					"id" : "obj-63",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -209,7 +209,7 @@
 					"patching_rect" : [ 395.783333333333303, 806.5, 67.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 19.0, -1.0, 67.0, 18.0 ],
-					"text" : "Continuous",
+					"text" : "Name1",
 					"textcolor" : [ 0.481437705647327, 0.846666309931507, 0.361908344245232, 1.0 ],
 					"textjustification" : 1
 				}
@@ -226,7 +226,7 @@
 					"patching_rect" : [ 466.674999999999955, 806.5, 67.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 19.0, -1.0, 67.0, 18.0 ],
-					"text" : "Reactive",
+					"text" : "Name2",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -244,7 +244,7 @@
 					"patching_rect" : [ 537.566666666666606, 806.5, 67.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 19.0, -1.0, 67.0, 18.0 ],
-					"text" : "(Custom)",
+					"text" : "Name3",
 					"textcolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
 					"textjustification" : 1
 				}
@@ -833,54 +833,56 @@
 
 			}
  ],
+		"dependency_cache" : [  ],
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
-				"newobj" : 				{
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"fontsize" : [ 10.0 ]
-				}
-,
-				"message" : 				{
-					"fontface" : [ 1 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontsize" : [ 10.0 ]
-				}
-,
-				"default" : 				{
-					"fontface" : [ 1 ],
-					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
-					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"bgfillcolor" : 					{
-						"type" : "gradient",
-						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
-						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
-						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-						"angle" : 270.0,
-						"proportion" : 0.39,
-						"autogradient" : 0
-					}
-,
-					"fontsize" : [ 10.0 ]
-				}
-,
 				"button" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
 				}
 ,
+				"default" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"bgfillcolor" : 					{
+						"angle" : 270.0,
+						"autogradient" : 0,
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"proportion" : 0.39,
+						"type" : "gradient"
+					}
+,
+					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
+				"newobj" : 				{
+					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ],
+					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
+				}
+,
 				"toggle" : 				{
 					"bgcolor" : [ 1.0, 0.941176, 0.803922, 1.0 ]
+				}
+,
+				"message" : 				{
+					"bgfillcolor" : 					{
+						"angle" : 270.0,
+						"autogradient" : 0,
+						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"color1" : [ 0.94902, 0.992157, 1.0, 1.0 ],
+						"color2" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
+						"proportion" : 0.39,
+						"type" : "gradient"
+					}
+,
+					"fontface" : [ 1 ],
+					"fontsize" : [ 10.0 ],
+					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"parentstyle" : "",

@@ -12,7 +12,7 @@ class Target(ABC):
     WRAPPED_BANG = ["bang"]
 
     @abstractmethod
-    def send(self, keyword: str, content: Any, **kwargs):
+    def send(self, keyword: Union[str, List[str]], content: Any, **kwargs):
         raise NotImplementedError("Target.send is abstract.")
 
     def send_event(self, event: RendererEvent):
@@ -32,8 +32,11 @@ class SimpleOscTarget(Target):
         self._client: Sender = Sender(ip, port, send_format=SendFormat.FLATTEN, warning_address="/warning")
         self._max_formatter: MaxFormatter = MaxFormatter()
 
-    def send(self, keyword: str, content: Any, **_kwargs):
-        self._client.send(self.address, [keyword, content])
+    def send(self, keyword: Union[str, List[str]], content: Any, **_kwargs):
+        if isinstance(keyword, list):
+            self._client.send(self.address, [*keyword, content])
+        else:
+            self._client.send(self.address, [keyword, content])
 
     def send_dict(self, content: Dict, **_kwargs):
         max_dict: List[Tuple[str, str]] = self._max_formatter.format_maxdict_large(content)

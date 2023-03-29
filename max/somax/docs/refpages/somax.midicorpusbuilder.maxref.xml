@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.midicorpusbuilder" module="somax" kind="patcher">
+
+	<digest>
+		Build somax corpora from MIDI files
+	</digest>
+
+	<description>
+		The <o>somax.midicorpusbuilder</o> is used to construct a corpus from one (or multiple) MIDI file(s). A somax.player cannot read a MIDI file directly, it requires the MIDI to be analyzed before being able to parse it. The <o>somax.midicorpusbuilder</o> does exactly that — it segments the MIDI file and analyzes it with regards to a number of descriptors and exports the result as a separate file, that then can be loaded into a <o>somax.player</o>.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+
+	<!--MESSAGES-->
+	<methodlist>
+        <method name="build">
+			<arglist />
+			<digest>Build MIDI corpus</digest>
+			<description>
+				The <m>build</m> message will cause the <o>somax.midicorpusbuilder</o> to build the specified corpus according to the used segmentation parameters.
+				There are two supported formats for this message: <m>build path/to/midifile.mid</m> or <m>build path/to/midifile.mid corpus_name</m>.
+				Once build, the corpus will be available in the selected <m>corpuspath</m> to load in any <o>somax.player</o>.
+				It's also possible to build a combined corpus from all MIDI files in a folder.
+				When the build is successfull, the <m>corpuspath</m> of the built corpus is output by the <o>somax.midicorpusbuilder</o> out its first outlet. The value -1 is output instead if the build fails.
+				<br />
+				Note: if no explicit corpus_name is provided, the corpus will have the same name as the MIDI file or folder.
+			</description>
+		</method>
+        <method name="chromachannels">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Select chroma channels for MIDI corpus segmentation</digest>
+			<description>
+				The message <m>chromachannels</m>, followed by an <o>int</o> between 1 and 16, controls which MIDI channels should be used to determine the harmonic content of the corpus. All notes in these channels will be used.
+			</description>
+		</method>
+        <method name="corpuspath">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Set corpuspath</digest>
+			<description>
+				Set the path for the folder in which the segmented corpus should be saved. When a corpus is build, the current <m>corpuspath</m> is output by the <o>somax.midicorpusbuilder</o> out its first outlet. The value -1 is output if the build fails.
+			</description>
+		</method>
+        <method name="dump">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Dump all current parameter values on the third outlet</digest>
+			<description>
+				The <m>dump</m> message will cause the <o>somax.midicorpusbuilder</o> to output the current values of all its parameters out its third outlet.
+			</description>
+		</method>
+        <method name="pitchchannels">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Select pitch channels for MIDI corpus segmentation</digest>
+			<description>
+				The message <m>pitchchannels</m>, followed by an us <o>int</o> between 1 and 16, controls which MIDI channels should be used to determine the melodic content of the corpus. If the content in the selected channels is polyphonic, it will select the top note as the melody.
+			</description>
+		</method>
+        <method name="openwindow">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Open MIDI corpus builder parameters window</digest>
+			<description>
+				Open the <o>somax.midicorpusbuilder</o> window, with access to a user interface to control all the parameters of the segmentation.
+			</description>
+		</method>
+        <method name="overwrite">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Overwrite existing MIDI corpus</digest>
+			<description>
+				The <m>overwrite</m> message controls the Overwrite existing <o>toggle</o> available in the <o>somax.midiorpusbuilder</o> window, enabling it with <m>overwrite 1</m> and disabling it with <m>overwrite 0</m>. If this toggle is active, and a corpus with the same name exist in the current <m>corpuspath</m>, the corpus file will be overwritten. 
+				<br />
+				Note: this will not overwrite any MIDI file, only the (.gz) corpus file.
+			</description>
+		</method>
+	</methodlist>
+	
+    
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.server" />
+		<seealso name="somax.audiocorpusbuilder" />
+        <seealso name="somax.player" />
+	</seealsolist>
+	
+</c74object>

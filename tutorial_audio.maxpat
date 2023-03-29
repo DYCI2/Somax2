@@ -1,1 +1,0 @@
-max/somax/docs/tutorial-patchers/somax2_audio_tutorial.maxpat

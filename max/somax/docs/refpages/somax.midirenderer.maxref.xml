@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.midirenderer" module="somax" kind="patcher">
+
+	<digest>
+		Render a somax.player's MIDI corpus
+	</digest>
+
+	<description>
+		The somax.midirenderer reads a connected somax.player's output protocol and converts its messages into an stream of MIDI events (assuming that a MIDI corpus is loaded into the somax.player)
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+
+	<!--MESSAGES-->
+	<methodlist>
+        <method name="(player_protocol)">
+			<arglist />
+			<digest>Directly connected to the first outlet of the player</digest>
+			<description>
+				The <o>somax.player</o> has a specific output protocol that can be directly analyzed by the <o>somax.midirenderer</o> for the generation of MIDI note-on and note-off messages. Just connet the first outlet of the <o>somax.player</o> to the inlet of the <o>somax.midirenderer</o> for this to convert the player's protocol into MIDI messages that can be read by a <o>noteout</o>.
+			</description>
+		</method>
+        <method name="dump">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Dump all current parameter values on the second outlet</digest>
+			<description>
+				The <m>dump</m> message will cause the <o>somax.midirenderer</o> to output the current values of all its parameters out its second outlet.
+			</description>
+		</method>
+        <method name="flush">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Output MIDI note-offs for held notes</digest>
+			<description>
+				Outputs note-offs messages for any held MIDI note-ons. The <o>somax.midirenderer</o> does not take any parameters, it only supports a MIDI <m>flush</m> message
+			</description>
+		</method>
+	</methodlist>
+	
+    
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.player" />
+		<seealso name="somax.audiorenderer" />
+	</seealsolist>
+	
+</c74object>

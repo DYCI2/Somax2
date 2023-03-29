@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.audioinfluencer" module="somax" kind="patcher">
+
+	<digest>
+		Analyzes and segments audio into discrete labels in real-time
+	</digest>
+
+	<description>
+		The audio influencer segments and analyzes an incoming signal with respect to pitch, chroma and onset into discrete labels, which then can be used to influence a <o>somax.player</o> in order to control the player's way of navigating through the corpus.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="bang">
+			<arglist />
+			<digest>Trigger segmentation, when onset method is set to `external'</digest>
+			<description>
+                When <m>onsetmethod</m> is set to <m>external</m>, the segmentation is triggered each time a <m>bang</m> is received on the inlet of the <o>somax.audioinfluencer</o>.         
+            </description>
+		</method>
+        <method name="int">
+			<arglist />
+			<digest>Enable/Disable the audio influencer</digest>
+			<description>
+                Performs the same function as <m>enabled</m>.
+                Any number other than 0 enables the <o>somax.audioinfluencer</o>. 
+                <br />
+                <m>0</m> disables <o>somax.audioinfluencer</o>.         
+            </description>
+		</method>
+        <method name="dump">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Dump all current parameter values on the second outlet</digest>
+			<description>
+                The <m>dump</m> message will cause the <o>somax.audioinfluencer</o> to output the current values of all its parameters out its second outlet.
+            </description>
+		</method>
+        <method name="signal">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Audio signal to analyze</digest>
+			<description>
+                Send an audio signal to the <o>somax.audioinfluencer</o> for analysys. The audio signal can be mono, stereo or a multi-channel signal.
+            </description>
+		</method>
+        <method name="openwindow">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Open the audio influencer parameters window</digest>
+			<description>
+                Open the <o>somax.audioinfluencer</o> window, with access to a user interface to control all the parameters of the analysis. The window provides also visual feedback for the analyzed signal with respect to chroma, onset and pitch.        
+            </description>
+		</method>
+	</methodlist>
+	
+    <!--ATTRIBUTES-->
+	<attributelist>
+        <attribute name="bonkdebounce" get="1" set="1" type="symbol" size="1">
+            <digest>Set bonk debounce decay rate value</digest>
+            <description>
+                When <m>onsetmethod</m> is set to <m>bonk</m>, the message <m>bonkdebounce</m>, followed by a <o>float</o> between 0 and 1, will set the value for the bonk debounce decay rate.
+            </description>
+        </attribute>
+        <attribute name="bonkminvel" get="1" set="1" type="symbol" size="1">
+            <digest>Set bonk minimum velocity value</digest>
+            <description>
+                When <m>onsetmethod</m> is set to <m>bonk</m>, the message <m>bonkminvel</m>, followed by a <o>float</o> between 0 and 1, will set the value for the bonk minimum velocity.
+            </description>
+        </attribute>
+        <attribute name="bonkhighthresh" get="1" set="1" type="symbol" size="1">
+            <digest>Set bonk higher threshold value</digest>
+            <description>
+                When <m>onsetmethod</m> is set to <m>bonk</m>, the message <m>bonkhighthresh</m>, followed by a <o>float</o> between 0 and 100, will set the value for the bonk upper threshold.
+            </description>
+        </attribute>
+        <attribute name="bonklowthresh" get="1" set="1" type="symbol" size="1">
+            <digest>Set bonk lower threshold value</digest>
+            <description>
+                When <m>onsetmethod</m> is set to <m>bonk</m>, the message <m>bonklowthresh</m>, followed by a <o>float</o> between 0 and 100, will set the value for the bonk lower threshold.
+            </description>
+        </attribute>
+        <attribute name="chromadecay" get="1" set="1" type="symbol" size="1">
+            <digest>Set decay rate value for the chroma filter</digest>
+            <description>
+                The message <m>chromadecay</m>, followed by a <o>float</o>, sets the value (in milliseconds) for the decay rate of the chroma filter. This parameter acts as a low-pass filter on the chroma data. This can be useful for monophonic signals to simulate a harmonic contour over the previously played notes. Generally, a higher value of <m>chromadecay</m> will result in smoother transitions.
+            </description>
+        </attribute>
+        <attribute name="continuouschroma" get="1" set="1" type="symbol" size="1">
+            <digest>Enalbe/Disable continuous chroma output</digest>
+            <description>
+                By default, the <o>somax.audioinfluencer</o> outputs chroma values only whenever an onset is detected. The message <m>continuouschroma 1</m> will generate output continuously. When influencing a <o>somax.player</o>, the player will use the chroma influences look for sequences in its corpus matching the N last influences it received. With <m>continuouschroma 1</m>, the resolution will be too high and generate way too many matches. This can however still be useful for mixing chromas from multiple audio influencers, but it requires segmentation of the combined chromas afterwards.
+            </description>
+        </attribute>
+        <attribute name="continuouspitch" get="1" set="1" type="symbol" size="1">
+            <digest>Enalbe/Disable continuous pitch output</digest>
+            <description>
+                By default, the <o>somax.audioinfluencer</o> outputs pitch values continuously. The message <m>continuouspitch 0</m> will disable this behaviour, generating pitch output only whenever an onset is detected.
+            </description>
+        </attribute>
+        <attribute name="enabled"  get="1" set="1" type="symbol" size="1">
+			<digest>Enable/Disable the audio influencer</digest>
+			<description>
+                Performs same function as <m>int</m>.
+                <br />
+                The message <m>enable 1</m> enables the <o>somax.audioinfluencer</o>. 
+                The message <m>enable 0</m> disables the <o>somax.audioinfluencer</o>.         
+            </description>
+		</attribute>
+        <attribute name="onsetlimit" get="1" set="1" type="symbol" size="1">
+            <digest>Set minimum amount of time (ms) between two consecutive onsets</digest>
+            <description>
+                The message <m>onsetlimit</m>, followed by a <o>float</o>, sets the minimal amount of time (in milliseconds) between two consecutive onsets. Any consecutive onset detected within this time frame will be discarded.
+                This is independent of the selected <m>onsetmethod</m>. 
+                <br />
+                Set <m>onsetlimit 0</m> to disable it.
+            </description>
+        </attribute>
+        <attribute name="onsetmethod" get="1" set="1" type="symbol" size="1">
+            <digest>Set onset method</digest>
+            <description>
+                The <m>onsetmethod</m> message determines which algorithm should be used by the <o>somax.audioinfluencer</o> for onset detection. There are three methods, selected with the following messages. 
+                <br />
+                The message <m>onsetmethod 0</m> or <m>onsetmethod external</m> sets onset detection from the external inlet, the message <m>onsetmethod 1</m> or <m>onsetmethod bonk</m> sets the onset detection from bonk algorithm, the message <m>onsetmethod 2</m> or <m>onsetmethod yin</m> sets the onset detection from yin algorithm (default method).
+                <br />
+                Note: In general, yin works better for monophonic pitched signals, while bonk is suggested for polyphonic or unpitched material.
+            </description>
+        </attribute>
+        <attribute name="yindownsample" get="1" set="1" type="symbol" size="1">
+            <digest>Set value for yin downsample</digest>
+            <description>
+                When <m>onsetmethod</m> is set to <m>yin</m>, the message <m>yindownsample</m>, followed by an <o>int</o> of choice between 1, 2, 4 and 8, will set the value for the yin downsample factor. A higher value will make the algorithm more CPU efficient at the cost of the quality of the estimation. Anyway it's recommended to set this parameter at least to 1 or 2.
+            </description>
+        </attribute>
+        <attribute name="yinlevel" get="1" set="1" type="symbol" size="1">
+            <digest>Set yin gain level (dB)</digest>
+            <description>
+                When <m>onsetmethod</m> is set to <m>yin</m>, the message <m>yinlevel</m>, followed by a <o>float</o>, will set the pre-gain (in dB) of the audio signal before the pitch estimation.
+            </description>
+        </attribute>
+        <attribute name="yinminfreq" get="1" set="1" type="symbol" size="1">
+            <digest>Set yin minimum frequency (Hz)</digest>
+            <description>
+                When <m>onsetmethod</m> is set to <m>yin</m>, the message <m>yinminfreq</m>, followed by a <o>float</o>, will set the minimum frequency (in Hz) that the yin algorithm can detect.
+            </description>
+        </attribute>
+        <attribute name="yinprobability" get="1" set="1" type="symbol" size="1">
+            <digest>Set yin probability value</digest>
+            <description>
+                When <m>onsetmethod</m> is set to <m>yin</m>, the message <m>yinminfreq</m>, followed by a <o>float</o> between 0 and 1, controls how stable (frequently occurring in the continuous pitch contour) a pitch must be in order to be considered a note in the post-processing stage.A higher value generally results in fewer (but better) detected onsets.
+            </description>
+        </attribute>
+        <attribute name="yinquality" get="1" set="1" type="symbol" size="1">
+            <digest>Set value for yin quality threshold</digest>
+            <description>
+                When <m>onsetmethod</m> is set to <m>yin</m>, the message <m>yinminfreq</m>, followed by a <o>float</o> between 0 and 1, will set the quality threshold of the yin algorithm. Each pitch estimated by the yin algorithm has a quality (between 0 and 1) indicating how good the estimation is. The quality threshold will ignore any pitch estimation below this threshold in the post-processing. A higher value genrally results in fewer estimated onsets.
+            </description>
+        </attribute>
+        <attribute name="yinwindow" get="1" set="1" type="symbol" size="1">
+            <digest>Set value for yin window (ms)</digest>
+            <description>
+                When <m>onsetmethod</m> is set to <m>yin</m>, the message <m>yinminfreq</m>, followed by a <o>float</o>, will set the value for the window (in milliseconds) which the post-processing will use to estimate notes.A higher value generally means better estimations, but be aware that this parameter directly controls the latency of the pitch estimation (e.g., a <m>yinwindow</m> of 50 ms will add 50 ms between the perceived onset and the estimated onset).
+            </description>
+        </attribute>
+	</attributelist>
+	
+	<!--SEEALSO-->
+	<seealsolist>
+        <seealso name="somax.player" />
+        <seealso name="somax.midiinfluencer" />
+		<seealso name="somax.audioinfluencer.ui" />
+        <seealso name="somax.audioinfluencer.app" />
+	</seealsolist>
+	
+</c74object>

@@ -15,7 +15,7 @@ from pythonosc.osc_server import AsyncIOOSCUDPServer
 
 from somax import settings
 from somax.runtime.target import Target, SimpleOscTarget
-from somax.runtime.send_protocol import SendProtocol
+from somax.runtime.send_protocol import PlayerSendProtocol
 
 
 class AsyncioOscObject(Caller, ABC):
@@ -45,7 +45,6 @@ class AsyncioOscObject(Caller, ABC):
         self.server: AsyncIOOSCUDPServer = AsyncIOOSCUDPServer((self.ip, self.recv_port),
                                                                osc_dispatcher, asyncio.get_event_loop())
         transport, protocol = await self.server.create_serve_endpoint()
-        self.target.send(SendProtocol.AGENT_INSTANTIATED, Target.WRAPPED_BANG)
         await self._main_loop()
         transport.close()
 
@@ -61,9 +60,6 @@ class AsyncioOscObject(Caller, ABC):
 
     def __unmatched_osc(self, address: str, *_args, **_kwargs) -> None:
         self.logger.info(f"The address '{address}' does not exist.")
-
-
-
 
     def parse_ip(self, ip: str, logger: Optional[Logger] = None) -> str:
         try:

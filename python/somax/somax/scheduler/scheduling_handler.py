@@ -3,12 +3,13 @@ from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple, Dict, Type
 
 from somax.features import Tempo
+from somax.features.feature import AbstractFeature
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
 from somax.scheduler.midi_state_handler import MidiStateHandler, NoteOffMode
 from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, AudioOffEvent, MidiNoteEvent, \
-    TimeoutInfoEvent
+    TimeoutInfoEvent, AudioContinueEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
@@ -50,8 +51,7 @@ class SchedulingHandler(Introspective, ABC):
         self._note_by_note_mode: bool = note_by_note_mode  # only applies to Manual/Indirect SchedulingHandlers
         self._timeout: Optional[float] = timeout  # None: sustain/continue indefinitely
 
-        # TODO: Either remove this or integrate it in the architecture as relative time. Part of [[R7. Tempo/Pulse Seg]]
-        #   (The names are parodical to make sure they don't stay in the code base for long)
+        # TODO: Either remove this or integrate it in the architecture as relative time.
         self._experimental_use_relative_tempo_scaling_for_audio: bool = exp_audio_relative_tempo_scaling
         self._experimental_previous_audio_events_tempo: Optional[float] = experimental_previous_audio_events_tempo
         self._experimental_accumulated_stretch_factor: float = self._stretch_factor
@@ -79,8 +79,8 @@ class SchedulingHandler(Introspective, ABC):
         """ Called whenever a `ContinueEvent` is added to the scheduler (part of `add_corpus_event` but only if
             `note_by_note_mode` is set to False. ContinueEvents will be ignored in Automatic Mode but more or less
             treated as Triggers in Indirect and Manual modes.
-            TODO Everything in the code related to ContinueEvent is extremely poorly implemented and should be
-                 considered as a hack that needs to be rewritten.
+            TODO Everything in the code related to ContinueEvent is poorly integrated and should ideally be rewritten
+                 with a unifying plan in mind
         """
 
     @abstractmethod
@@ -109,8 +109,8 @@ class SchedulingHandler(Introspective, ABC):
 
     @classmethod
     def new_from(cls, other: 'SchedulingHandler', **kwargs) -> 'SchedulingHandler':
-        # TODO: REMOVE THIS FUNCTION! Manual/Indirect/Automatic should not BE SchedulingHandlers,
-        #  but the SchedulingHandler should HAVE A TriggerHandler (or something along that line)
+        # TODO: This design should be redesigned.
+        #  It was never intended for swapping between modes at runtime without flushing
         triggers: List[ScheduledEvent] = other._scheduler.remove_by_type(TriggerEvent)
 
         # TODO: Hack to handle legacy AutomaticSchedulingHandler when switching to Indirect/Manual in audio case
@@ -170,6 +170,10 @@ class SchedulingHandler(Introspective, ABC):
         phase: float = time.phase
         stretched_time = self.stretch_time(time_value, tempo)
         output_events.extend(self._scheduler.update_time(time=stretched_time, tempo=tempo, phase=phase))
+
+        # Inform audio handler that it should not output any AudioContinueEvent if a timeout has occurred
+        output_events = self._handle_timeout_audio(current_time=stretched_time, events=output_events)
+
         output_events.extend(self.audio_handler.poll(stretched_time))
         output_events.extend(self.midi_handler.poll(stretched_time))
 
@@ -191,6 +195,19 @@ class SchedulingHandler(Introspective, ABC):
 
         return output_events
 
+    def _handle_timeout_audio(self, current_time: float, events: List[ScheduledEvent]) -> List[ScheduledEvent]:
+        audio_continuation_occurred: bool = any(isinstance(e, AudioContinueEvent) for e in events)
+
+        # if an AudioContinueEvent and an AudioOffEvent exist in the same buffer, delete the AudioOffEvent:
+        if audio_continuation_occurred:
+            return [e for e in events if not isinstance(e, AudioOffEvent)]
+        # if no AudioContinueEvent occurred and an AudioOffEvent occurred, inform the AudioStateHandler
+        else:
+            if any(isinstance(e, AudioOffEvent) for e in events):
+                events.extend(self.audio_handler.flush(current_time))
+
+        return events
+
     def handle_timeskip(self, time: float) -> List[ScheduledEvent]:
         output_events: List[ScheduledEvent] = self.flush()
         self._previous_callback = time
@@ -201,8 +218,7 @@ class SchedulingHandler(Introspective, ABC):
         # TODO: This is a way to simulate the `Relative` mode for audio content without significant changes to the
         #   architecture. Should this work well, it should be removed and fully integrated in the
         #   AudioCorpus/AudioCorpusEvent using the Relative scheduling mode and corresponding
-        #   relative_onset/relative_dur. Part of [[R7. Tempo/Pulse Seg]].
-        #   ============= Start of experimental part
+        #   relative_onset/relative_dur.
         if self._experimental_use_relative_tempo_scaling_for_audio and \
                 self._experimental_previous_audio_events_tempo is not None:
             experimental_ts_factor: float = tempo / self._experimental_previous_audio_events_tempo
@@ -210,7 +226,6 @@ class SchedulingHandler(Introspective, ABC):
             experimental_ts_factor = 1.0
 
         self._experimental_accumulated_stretch_factor = self._stretch_factor * experimental_ts_factor
-        # TODO: ========= End of experimental part
 
         # TODO: Replace `self._experimental_accumulated_stretch_factor` with `self._stretch_factor`.
         stretched_time: float = (self._previous_stretched_time +
@@ -227,7 +242,8 @@ class SchedulingHandler(Introspective, ABC):
         else:
             self._on_trigger_received(trigger_event=trigger_event)
 
-    def add_corpus_event(self, trigger_time: float,
+    def add_corpus_event(self,
+                         trigger_time: float,
                          event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]],
                          reset_timeout: bool) -> None:
         """ raises TypeError for `CorpusEvents` other than `MidiCorpusEvent` or `AudioCorpusEvent`
@@ -260,7 +276,6 @@ class SchedulingHandler(Introspective, ABC):
                                                                    target_time=continue_target_time))
 
             elif isinstance(event, AudioCorpusEvent):
-                # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
                 tempo: Optional[Tempo] = event.get_feature_safe(Tempo)
                 self._experimental_previous_audio_events_tempo = tempo.value() if tempo is not None else None
                 scheduler_events: List[ScheduledEvent] = self.audio_handler.process(
@@ -317,11 +332,14 @@ class SchedulingHandler(Introspective, ABC):
     def set_time_stretch_factor(self, factor: float) -> None:
         self._stretch_factor = factor
 
-    # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
     def set_experimental_relative_tempo_scaling_for_audio_mode(self, enable: bool):
         self._experimental_use_relative_tempo_scaling_for_audio = enable
         if not enable:
             self._experimental_previous_audio_events_tempo = None
+
+    def set_rendering_features(self, features_and_keywords: List[Tuple[Type[AbstractFeature], str]]) -> None:
+        self.midi_handler.set_rendering_features(features_and_keywords)
+        self.audio_handler.set_rendering_features(features_and_keywords)
 
     def _adjust_in_time(self, event: ScheduledEvent, increment: float = 0.0) -> ScheduledEvent:
         scheduler_time: float = self._scheduler.time
@@ -371,7 +389,6 @@ class SchedulingHandler(Introspective, ABC):
 
         self._last_trigger_time = None
 
-        # TODO: Remove. Part of [[R7. Tempo/Pulse Seg]].
         self._experimental_previous_audio_events_tempo = None
         self._experimental_accumulated_stretch_factor = self._stretch_factor
 
@@ -393,7 +410,7 @@ class SchedulingHandler(Introspective, ABC):
     def phase(self) -> float:
         return self._scheduler.phase
 
-    # TODO[Post-merge]: Rewrite MidiStateHandler as a directly addressable Component
+    # TODO: Rewrite MidiStateHandler as a directly addressable Parametric
     def set_align_note_ons(self, enabled: bool) -> None:
         self.midi_handler.align_note_ons = enabled
 
