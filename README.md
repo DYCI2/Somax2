@@ -9,6 +9,9 @@ While the application can be used straight out of the box with little configurat
 * Max 8
 * (Python 3.9 or later -- only needed for manual installation)
 
+**KNOWN ISSUE for Mac Os 13 Ventura: the Somax Server will give you a terminal error when you try to start it. **
+**To solve it, see this [post on the Ircam Forum](https://discussion.forum.ircam.fr/t/mac-os-ventura-issue/44698)**
+
 **Note: It's currently not possible to run Somax natively on M1 machines: if you're using a M1 Mac, make sure to [run Max under Rosetta](https://docs.cycling74.com/max8/vignettes/apple_arm64)**
 
 ## Installation
