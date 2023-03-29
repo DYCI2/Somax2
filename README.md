@@ -11,9 +11,8 @@ While the application can be used straight out of the box with little configurat
 
 **Note: It's currently not possible to run Somax natively on M1 machines: if you're using a M1 Mac, make sure to [run Max under Rosetta](https://docs.cycling74.com/max8/vignettes/apple_arm64)**
 
-### WARNING: known issue for Mac Os 13 Ventura 
-
-**The Somax Server will give you a terminal error when you try to start it. **
+#### WARNING: known issue for Mac Os 13 Ventura 
+**The Somax Server may indicate an issue with Terminal.app when you try to start it**.
 **To solve it, see this [post on the Ircam Forum](https://discussion.forum.ircam.fr/t/mac-os-ventura-issue/44698)**
 
 ## Installation
