@@ -16,7 +16,7 @@ macholib==1.14
 matplotlib==3.3.4
 mido==1.2.10
 numba==0.55.1
-numpy==1.20.3
+numpy==1.22.0
 packaging==21.3
 pandas==1.2.4
 Pillow==8.2.0
