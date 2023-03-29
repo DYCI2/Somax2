@@ -68,7 +68,7 @@ max-package: clean
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
 	cp LICENSE README.md "Somax2 User's Guide.pdf" "$(MAX_BUILD_PATH)"
 	cp -r templates "$(MAX_BUILD_PATH)"
-	cp "extras/somax2.overview.maxpat" "$(MAX_BUILD_PATH)"/somax2.overview.maxpat
+	cp "$(MAX_BUILD_PATH)"/extras/somax2.overview.maxpat "$(MAX_BUILD_PATH)"/somax2.overview.maxpat
 	create-dmg \
 		--volname "$(DMG_NAME)" \
 		--window-pos 200 120 \
