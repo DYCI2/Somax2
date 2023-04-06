@@ -6,7 +6,7 @@ While the application can be used straight out of the box with little configurat
 ## Requirements
 
 * macOS 10.13 or later
-* Max 8
+* Max 8.5 or later
 * (Python 3.9 or later -- only needed for manual installation)
 
 **Note: It's currently not possible to run Somax natively on M1 machines: if you're using a M1 Mac, make sure to [run Max under Rosetta](https://docs.cycling74.com/max8/vignettes/apple_arm64)**
