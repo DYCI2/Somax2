@@ -66,6 +66,8 @@ class HeldObject(Generic[E]):
 
 class Corpus(Generic[E], Introspective, ABC):
     INDEX_MAP_SIZE = 1_000_000
+    DEFAULT_CORPUS_DURATION: float = 1800  # seconds
+    MINIMUM_RECORD_BUFFER_DURATION: int = 600  # seconds
 
     def __init__(self, events: List[E], name: str, scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any], **kwargs):
@@ -75,9 +77,10 @@ class Corpus(Generic[E], Introspective, ABC):
         self.scheduling_mode: SchedulingMode = scheduling_mode
         self.feature_types: List[Type[CorpusFeature]] = feature_types
         self._build_parameters: Dict[str, Any] = build_parameters
+
         self._index_map: np.ndarray
         self._grid_size: int
-        self._index_map, self._grid_size = self._create_index_map()
+        self._compute_index_map(self.duration())        # defines _index_map and _grid_size
 
     def __repr__(self):
         return f"{self.__class__.__name__}(name='{self.name}', ...)"
@@ -102,14 +105,24 @@ class Corpus(Generic[E], Introspective, ABC):
     def encode(self) -> Dict[str, Any]:
         """ Encode the corpus to a dictionary to allow JSON export """
 
-    def _create_index_map(self) -> Tuple[np.ndarray, float]:
-        grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / self.duration()
-        index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
+    def _compute_index_map(self, duration: float) -> None:
+        if duration > 0:  # offline case
+            self.grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / duration
+        else:  # real-time case
+            self.grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / self.DEFAULT_CORPUS_DURATION
+
+        self.index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
         for event in self.events:
-            start_index: int = int(np.floor(event.onset * grid_size))
-            end_index: int = int(np.floor((event.onset + event.duration) * grid_size))
-            index_map[start_index:end_index] = event.state_index
-        return index_map, grid_size
+            self._append_to_index_map(event)
+
+    def _append_to_index_map(self, event: CorpusEvent) -> None:
+        start_index: int = int(np.floor(event.onset * self.grid_size))
+        end_index: int = int(np.floor((event.onset + event.duration) * self.grid_size))
+
+        if end_index > Corpus.INDEX_MAP_SIZE:
+            self._compute_index_map(self.duration() + self.MINIMUM_RECORD_BUFFER_DURATION)
+
+        self.index_map[start_index:end_index] = event.state_index
 
     def export(self, output_folder: str, overwrite: bool = False,
                indentation: Optional[int] = None, **kwargs) -> str:
@@ -181,7 +194,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
         self.scheduling_mode = scheduling_mode
         for event in self.events:
             event.set_scheduling_mode(scheduling_mode)
-        self._index_map, self._grid_size = self._create_index_map()
+        self._index_map, self._grid_size = self._compute_index_map()
 
     def encode(self) -> Dict[str, Any]:
         features: Dict[Type['CorpusFeature'], str] = {cls: name for (name, cls) in CorpusFeature.all_corpus_features()}
@@ -285,11 +298,21 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
 
 
 class AudioCorpus(Corpus):
-    def __init__(self, events: List[AudioCorpusEvent], name: str, scheduling_mode: SchedulingMode,
-                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any],
-                 sr: int, filepath: str, file_duration: float, file_num_channels: int):
-        super().__init__(events=events, name=name, scheduling_mode=scheduling_mode,
-                         feature_types=feature_types, build_parameters=build_parameters)
+    def __init__(self,
+                 events: List[AudioCorpusEvent],
+                 name: str,
+                 scheduling_mode: SchedulingMode,
+                 feature_types: List[Type[CorpusFeature]],
+                 build_parameters: Dict[str, Any],
+                 sr: int,
+                 filepath: str,
+                 file_duration: float,
+                 file_num_channels: int):
+        super().__init__(events=events,
+                         name=name,
+                         scheduling_mode=scheduling_mode,
+                         feature_types=feature_types,
+                         build_parameters=build_parameters)
         self.sr: int = sr
         self.filepath: str = filepath
         self.file_duration: float = file_duration
@@ -350,7 +373,9 @@ class AudioCorpus(Corpus):
         return corpus
 
     @staticmethod
-    def validate_audio_source(filepath: str, expected_sample_rate: int, expected_duration: float,
+    def validate_audio_source(filepath: str,
+                              expected_sample_rate: int,
+                              expected_duration: float,
                               expected_num_channels: int) -> None:
         """ raises: FileNotFoundError if file cannot be found or other issue with loading audio file through librosa
                             ValueError if mismatch between file and expected data
@@ -375,7 +400,7 @@ class AudioCorpus(Corpus):
     def encode(self) -> Dict[str, Any]:
         # TODO: Separate so that `export` is the abstract interface rather than `encode`
         # This function is only specifically for JSON encoding which currently isn't supported for audio corpora
-        raise NotImplementedError("Not implemented")
+        raise RuntimeError("Not implemented")
 
     def export(self, output_folder: str, overwrite: bool = False, copy_resources: bool = False, **kwargs) -> str:
         """ raises: IOError if export fails """
@@ -404,3 +429,57 @@ class AudioCorpus(Corpus):
         if isinstance(scheduling_mode, RelativeScheduling):
             raise RuntimeError(f"{self.__class__.__name__} does not support relative scheduling")
         pass
+
+
+class RealtimeRecordedAudioCorpus(AudioCorpus):
+    RT_RECORDED_KEY: str = "realtime_recorded"
+
+    def __init__(self,
+                 events: List[AudioCorpusEvent],
+                 name: str,
+                 scheduling_mode: SchedulingMode,
+                 feature_types: List[Type[CorpusFeature]],
+                 build_parameters: Dict[str, Any],
+                 sr: int,
+                 filepath: str,
+                 file_duration: float,
+                 file_num_channels: int):
+        super().__init__(events=events,
+                         name=name,
+                         scheduling_mode=scheduling_mode,
+                         feature_types=feature_types,
+                         build_parameters=build_parameters,
+                         sr=sr,
+                         filepath=filepath,
+                         file_duration=file_duration,
+                         file_num_channels=file_num_channels)
+
+    @classmethod
+    def from_existing(cls, corpus: AudioCorpus) -> 'RealtimeRecordedAudioCorpus':
+        build_params: Dict[str, Any] = copy.copy(corpus._build_parameters)
+        build_params[RealtimeRecordedAudioCorpus.RT_RECORDED_KEY] = True
+        return RealtimeRecordedAudioCorpus(events=corpus.events,
+                                           name=corpus.name,
+                                           scheduling_mode=corpus.scheduling_mode,
+                                           feature_types=corpus.feature_types,
+                                           build_parameters=build_params,
+                                           sr=-1,
+                                           filepath="",
+                                           file_duration=-1,
+                                           file_num_channels=-1)
+
+    @classmethod
+    def new(cls) -> 'RealtimeRecordedAudioCorpus':
+        return RealtimeRecordedAudioCorpus(events=[],
+                                           name="realtime",
+                                           scheduling_mode=AbsoluteScheduling(),
+                                           feature_types=[],
+                                           build_parameters={RealtimeRecordedAudioCorpus.RT_RECORDED_KEY: True},
+                                           sr=-1,
+                                           filepath="",
+                                           file_duration=-1,
+                                           file_num_channels=-1)
+
+    def learn_event(self) -> None:
+        pass
+
