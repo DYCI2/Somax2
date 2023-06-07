@@ -9,9 +9,10 @@ import pickle
 import pickletools
 import shutil
 import sys
+import typing
 import warnings
 from abc import ABC, abstractmethod
-from typing import List, Optional, Type, Dict, Any, Tuple, Union, TypeVar, Generic
+from typing import List, Optional, Type, Dict, Any, Tuple, Union, TypeVar, Generic, Iterable
 
 import librosa
 import numpy as np
@@ -21,8 +22,9 @@ import somax
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features.feature import CorpusFeature
+from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
-from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch
+from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch, FeatureError
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.utils.get_version import VersionTools
 from somax.utils.introspective import Introspective
@@ -69,8 +71,13 @@ class Corpus(Generic[E], Introspective, ABC):
     DEFAULT_CORPUS_DURATION: float = 1800  # seconds
     MINIMUM_RECORD_BUFFER_DURATION: int = 600  # seconds
 
-    def __init__(self, events: List[E], name: str, scheduling_mode: SchedulingMode,
-                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any], **kwargs):
+    def __init__(self,
+                 events: List[E],
+                 name: str,
+                 scheduling_mode: SchedulingMode,
+                 feature_types: List[Type[CorpusFeature]],
+                 build_parameters: Dict[str, Any],
+                 **kwargs):
         self.logger = logging.getLogger(__name__)
         self.events: List[E] = events
         self.name: str = name
@@ -78,9 +85,9 @@ class Corpus(Generic[E], Introspective, ABC):
         self.feature_types: List[Type[CorpusFeature]] = feature_types
         self._build_parameters: Dict[str, Any] = build_parameters
 
-        self._index_map: np.ndarray
-        self._grid_size: int
-        self._compute_index_map(self.duration())        # defines _index_map and _grid_size
+        self._index_map: np.ndarray = np.array([])
+        self._grid_size: int = -1
+        self._compute_index_map(self.duration())  # initializes _index_map and _grid_size
 
     def __repr__(self):
         return f"{self.__class__.__name__}(name='{self.name}', ...)"
@@ -107,22 +114,23 @@ class Corpus(Generic[E], Introspective, ABC):
 
     def _compute_index_map(self, duration: float) -> None:
         if duration > 0:  # offline case
-            self.grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / duration
+            self._grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / duration
         else:  # real-time case
-            self.grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / self.DEFAULT_CORPUS_DURATION
+            self._grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / self.DEFAULT_CORPUS_DURATION
 
-        self.index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
+        self._index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
         for event in self.events:
             self._append_to_index_map(event)
 
     def _append_to_index_map(self, event: CorpusEvent) -> None:
-        start_index: int = int(np.floor(event.onset * self.grid_size))
-        end_index: int = int(np.floor((event.onset + event.duration) * self.grid_size))
+        start_index: int = int(np.floor(event.onset * self._grid_size))
+        end_index: int = int(np.floor((event.onset + event.duration) * self._grid_size))
 
         if end_index > Corpus.INDEX_MAP_SIZE:
+            print("recomputing index map")
             self._compute_index_map(self.duration() + self.MINIMUM_RECORD_BUFFER_DURATION)
 
-        self.index_map[start_index:end_index] = event.state_index
+        self._index_map[start_index:end_index] = event.state_index
 
     def export(self, output_folder: str, overwrite: bool = False,
                indentation: Optional[int] = None, **kwargs) -> str:
@@ -157,10 +165,17 @@ class Corpus(Generic[E], Introspective, ABC):
 
 
 class MidiCorpus(Corpus[MidiCorpusEvent]):
-    def __init__(self, events: List[MidiCorpusEvent], name: str, scheduling_mode: SchedulingMode,
-                 feature_types: List[Type[CorpusFeature]], build_parameters: Dict[str, Any]):
-        super().__init__(events=events, name=name, scheduling_mode=scheduling_mode,
-                         feature_types=feature_types, build_parameters=build_parameters)
+    def __init__(self,
+                 events: List[MidiCorpusEvent],
+                 name: str,
+                 scheduling_mode: SchedulingMode,
+                 feature_types: List[Type[CorpusFeature]],
+                 build_parameters: Dict[str, Any]):
+        super().__init__(events=events,
+                         name=name,
+                         scheduling_mode=scheduling_mode,
+                         feature_types=feature_types,
+                         build_parameters=build_parameters)
         self.logger = logging.getLogger(__name__)
 
     @classmethod
@@ -194,7 +209,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
         self.scheduling_mode = scheduling_mode
         for event in self.events:
             event.set_scheduling_mode(scheduling_mode)
-        self._index_map, self._grid_size = self._compute_index_map()
+        self._compute_index_map(self.duration())
 
     def encode(self) -> Dict[str, Any]:
         features: Dict[Type['CorpusFeature'], str] = {cls: name for (name, cls) in CorpusFeature.all_corpus_features()}
@@ -454,10 +469,21 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                          file_duration=file_duration,
                          file_num_channels=file_num_channels)
 
+        self._compute_index_map(min(self.duration() + self.MINIMUM_RECORD_BUFFER_DURATION,
+                                    self.DEFAULT_CORPUS_DURATION))
+
     @classmethod
-    def from_existing(cls, corpus: AudioCorpus) -> 'RealtimeRecordedAudioCorpus':
+    def from_existing(cls,
+                      corpus: AudioCorpus,
+                      target_features: List[Type[CorpusFeature]]) -> 'RealtimeRecordedAudioCorpus':
+        """ raises: FeatureError: if existing corpus doesn't have a particular targeted feature """
+
+        if not cls._has_features(corpus.feature_types, target_features):
+            raise FeatureError("Current corpus missing targeted feature: ")
+
         build_params: Dict[str, Any] = copy.copy(corpus._build_parameters)
         build_params[RealtimeRecordedAudioCorpus.RT_RECORDED_KEY] = True
+
         return RealtimeRecordedAudioCorpus(events=corpus.events,
                                            name=corpus.name,
                                            scheduling_mode=corpus.scheduling_mode,
@@ -469,17 +495,40 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                                            file_num_channels=-1)
 
     @classmethod
-    def new(cls) -> 'RealtimeRecordedAudioCorpus':
+    def new(cls, target_features: List[Type[CorpusFeature]]) -> 'RealtimeRecordedAudioCorpus':
         return RealtimeRecordedAudioCorpus(events=[],
                                            name="realtime",
                                            scheduling_mode=AbsoluteScheduling(),
-                                           feature_types=[],
+                                           feature_types=target_features,
                                            build_parameters={RealtimeRecordedAudioCorpus.RT_RECORDED_KEY: True},
                                            sr=-1,
                                            filepath="",
                                            file_duration=-1,
                                            file_num_channels=-1)
 
-    def learn_event(self) -> None:
-        pass
+    def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> None:
+        """ raises: FeatureError if a feature is missing """
+        if not self._has_features(self.feature_types, [typing.cast(Type[CorpusFeature], feature)
+                                                       for feature in features]):
+            raise FeatureError("feature information missing")
 
+        onset, duration = self._adjust_duration(onset, duration)
+
+        event: AudioCorpusEvent = AudioCorpusEvent(self.length(), onset, duration, {type(f): f for f in features})
+        self.events.append(event)
+        self._append_to_index_map(event)
+
+    def _adjust_duration(self, onset: float, duration: float) -> Tuple[float, float]:
+        if self.length() == 0:  # empty corpus
+            return onset, duration
+
+        diff: float = self.duration() - onset
+        if abs(diff) > 1e-4:
+            self.logger.warning("Gap detected: adjusting onset position to end of previous event")
+
+        return self.duration(), duration + diff
+
+    @staticmethod
+    def _has_features(current_features: List[Type[CorpusFeature]],
+                      target_features: Iterable[Type[CorpusFeature]]) -> bool:
+        return all(feature in current_features for feature in target_features)
