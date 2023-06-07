@@ -86,3 +86,6 @@ class PlayerSendProtocol:
     OUTPUT_TYPE_CONTINUE = "continue"
     OUTPUT_TYPE_TIMEOUT = "timeout"
     OUTPUT_TYPE_TIMEOUT_RESET = "timeout_reset"
+
+    # Recording
+    RECORD_LEARN_EVENT = "learned"

@@ -269,7 +269,7 @@ class Player(Parametric, ContentAware):
 
         self.set_eligibility(self.corpus)
 
-    def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> int:
+    def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> CorpusEvent:
         """ raises: RecordingError if corpus is not record-enabled or if the event data is invalid """
         if not isinstance(self.corpus, RealtimeRecordedAudioCorpus):
             raise RecordingError(f"recording is not allowed for corpus of type {type(self.corpus)}")
@@ -277,7 +277,7 @@ class Player(Parametric, ContentAware):
         event: AudioCorpusEvent = self.corpus.learn_event(onset=onset, duration=duration, features=features)
         for atom in self.atoms.values():
             atom.learn_event(event)
-        return event.state_index
+        return event
 
     # def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
     #     for atom in self.atoms.values():

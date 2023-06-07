@@ -612,7 +612,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.send_current_corpus_info()
         self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
 
-    def start_recording(self, required_features: List[str]) -> None:
+    def start_recording(self, *required_features) -> None:
         try:
             required_feature_types: List[Type[CorpusFeature]] = []
             for feature in required_features:
@@ -625,22 +625,32 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Recording aborted")
             return
 
-    def learn_event(self, onset: float, duration: float, features: List[Tuple[str, Any, ...]]) -> None:
+    def learn_event(self, onset: float, duration: float, *features) -> None:
         try:
             parsed_features: List[CorpusFeature] = self.parse_features(features)
-            self.player.learn_event(onset, duration, parsed_features)
-        except (RecordingError, ValueError) as e:
+            event: CorpusEvent = self.player.learn_event(onset, duration, parsed_features)
+            self.target.send(PlayerSendProtocol.RECORD_LEARN_EVENT, [event.state_index, event.onset, event.duration])
+        except (RecordingError, ValueError, IndexError) as e:
             self.logger.error(f"{str(e)}. No event was recorded")
+            self.target.send(PlayerSendProtocol.RECORD_LEARN_EVENT, -1)
             return
 
     @staticmethod
-    def parse_features(features: List[Tuple[str, Any, ...]]) -> List[CorpusFeature]:
+    def parse_features(features) -> List[CorpusFeature]:
+        """ raises: IndexError, RecordingError, ValueError"""
+        # format: (keyword, values...], ...)
         parsed_features: List[CorpusFeature] = []
-        for feature_keyword, *feature_data in features:
+        for feature in features:
+            feature_keyword: str = feature[0]
+            feature_data: List[Any] = feature[1:]
+
             parsed_feature: Type[CorpusFeature]
             parsed_feature = typing.cast(Type[CorpusFeature],
                                          RuntimeRecordable.runtime_class_from_string(feature_keyword))
-            parsed_features.append(parsed_feature(*feature_data))
+            if len(feature_data) == 1:
+                parsed_features.append(parsed_feature(feature_data[0]))
+            else:
+                parsed_features.append(parsed_feature(feature_data))
 
         return parsed_features
 
