@@ -256,7 +256,8 @@ class Player(Parametric, ContentAware):
             atom.read_corpus(corpus)
 
     def enable_recording(self, required_features: List[Type[CorpusFeature]]) -> None:
-        """ raises: RecordingError if corpus is of the wrong type """
+        """ Must be called prior to learn_event
+            raises: RecordingError if corpus is of the wrong type """
         if isinstance(self.corpus, AudioCorpus):  # note: includes RealtimeRecordedAudioCorpus
             self.corpus = RealtimeRecordedAudioCorpus.from_existing(self.corpus, required_features)
         elif isinstance(self.corpus, MidiCorpus):

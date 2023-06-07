@@ -7,7 +7,7 @@ import numpy as np
 
 from somax.corpus_builder.metadata import MidiMetadata, Metadata, AudioMetadata
 from somax.features import virfun
-from somax.features.feature import CorpusFeature, RuntimeFeature, AbstractFeature, FeatureUtils
+from somax.features.feature import CorpusFeature, RuntimeFeature, AbstractFeature, FeatureUtils, RuntimeRecordable
 from somax.runtime.corpus_event import MidiCorpusEvent, CorpusEvent
 from somax.runtime.exceptions import FeatureError
 
@@ -78,7 +78,12 @@ class BassNote(AbstractIntegerPitch, CorpusFeature):
                            f"type {metadata.content_type.__class__.__name__}")
 
 
-class YinDiscretePitch(AbstractIntegerPitch, CorpusFeature):
+class YinDiscretePitch(AbstractIntegerPitch, RuntimeRecordable, CorpusFeature):
+
+    @staticmethod
+    def recordable_keyword() -> str:
+        return "yin"
+
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
         if not FeatureUtils.is_valid_audio(events, metadata):

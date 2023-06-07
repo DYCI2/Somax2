@@ -98,3 +98,21 @@ class RuntimeFeature(AbstractFeature, StringParsed, ABC):
     @abstractmethod
     def keyword() -> str:
         """ The keyword that the class responds to when receiving runtime influences from the client. """
+
+
+class RuntimeRecordable(Introspective, ABC):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    @staticmethod
+    @abstractmethod
+    def recordable_keyword() -> str:
+        pass
+
+    @classmethod
+    def runtime_class_from_string(cls, keyword: str) -> Type['RuntimeRecordable']:
+        """ :raises ValueError if a feature matching the keyword doesn't exist """
+        for feature in cls._classes(somax.features).values():  # type: Type[RuntimeRecordable]
+            if issubclass(feature, RuntimeRecordable) and feature.recordable_keyword() == keyword:
+                return feature
+        raise ValueError(f"No feature matches the keyword '{keyword}'")

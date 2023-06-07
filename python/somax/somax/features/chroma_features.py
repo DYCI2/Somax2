@@ -6,7 +6,7 @@ import numpy as np
 
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
 from somax.corpus_builder.midi_chromagram import MidiChromagram
-from somax.features.feature import CorpusFeature, RuntimeFeature, FeatureUtils
+from somax.features.feature import CorpusFeature, RuntimeFeature, FeatureUtils, RuntimeRecordable
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.exceptions import FeatureError
 
@@ -50,13 +50,17 @@ class BaseChroma(CorpusFeature, RuntimeFeature):
         return self._value
 
 
-class OnsetChroma(BaseChroma):
+class OnsetChroma(RuntimeRecordable, BaseChroma):
     def __init__(self, value: Union[np.ndarray, List[float]]):
         super().__init__(value=np.array(value))
 
     @staticmethod
     def keyword() -> str:
         return "chroma"
+
+    @staticmethod
+    def recordable_keyword() -> str:
+        return "onsetchroma"
 
     @classmethod
     def _analyze_midi(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata):
@@ -75,12 +79,16 @@ class OnsetChroma(BaseChroma):
             event.set_feature(cls(chroma[:, onset_frame]))
 
 
-class MeanChroma(BaseChroma):
+class MeanChroma(RuntimeRecordable, BaseChroma):
     def __init__(self, value: Union[np.ndarray, List[float]]):
         super().__init__(value=np.array(value))
 
     @staticmethod
     def keyword() -> str:
+        return "meanchroma"
+
+    @staticmethod
+    def recordable_keyword() -> str:
         return "meanchroma"
 
     @classmethod

@@ -4,6 +4,7 @@ import logging.config
 import multiprocessing
 import os
 import time
+import typing
 from importlib import resources
 from typing import Any, Optional, List, Tuple, Type, Union
 
@@ -15,7 +16,7 @@ from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features import Tempo
-from somax.features.feature import AbstractFeature
+from somax.features.feature import AbstractFeature, CorpusFeature, RuntimeRecordable
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
@@ -24,7 +25,7 @@ from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
-    InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch
+    InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch, RecordingError
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
@@ -610,6 +611,38 @@ class OscAgent(Agent, AsyncioOscObject):
         self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
         self.send_current_corpus_info()
         self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
+
+    def start_recording(self, required_features: List[str]) -> None:
+        try:
+            required_feature_types: List[Type[CorpusFeature]] = []
+            for feature in required_features:
+                parsed_feature: Type[RuntimeRecordable] = RuntimeRecordable.runtime_class_from_string(feature)
+                required_feature_types.append(typing.cast(Type[CorpusFeature], parsed_feature))
+
+            self.player.enable_recording(required_feature_types)
+
+        except ValueError as e:
+            self.logger.error(f"{str(e)}. Recording aborted")
+            return
+
+    def learn_event(self, onset: float, duration: float, features: List[Tuple[str, Any, ...]]) -> None:
+        try:
+            parsed_features: List[CorpusFeature] = self.parse_features(features)
+            self.player.learn_event(onset, duration, parsed_features)
+        except (RecordingError, ValueError) as e:
+            self.logger.error(f"{str(e)}. No event was recorded")
+            return
+
+    @staticmethod
+    def parse_features(features: List[Tuple[str, Any, ...]]) -> List[CorpusFeature]:
+        parsed_features: List[CorpusFeature] = []
+        for feature_keyword, *feature_data in features:
+            parsed_feature: Type[CorpusFeature]
+            parsed_feature = typing.cast(Type[CorpusFeature],
+                                         RuntimeRecordable.runtime_class_from_string(feature_keyword))
+            parsed_features.append(parsed_feature(*feature_data))
+
+        return parsed_features
 
     def set_param(self, path: str, value: Any):
         self.logger.debug(f"[set_param] Attempting to set parameter for player '{self.player.name}' at '{path}' "

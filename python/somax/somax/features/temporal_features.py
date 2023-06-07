@@ -4,14 +4,18 @@ import librosa
 import numpy as np
 
 from somax.corpus_builder.metadata import MidiMetadata, AudioMetadata, Metadata
-from somax.features.feature import CorpusFeature, FeatureUtils
+from somax.features.feature import CorpusFeature, FeatureUtils, RuntimeRecordable
 from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent, CorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
-class Tempo(CorpusFeature):
+class Tempo(RuntimeRecordable, CorpusFeature):
     def __init__(self, value: float):
         super().__init__(value=value)
+
+    @staticmethod
+    def recordable_keyword() -> str:
+        return "tempo"
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
@@ -68,10 +72,14 @@ class Tempo(CorpusFeature):
         return tempo, beats_s
 
 
-class BeatPhase(CorpusFeature):
+class BeatPhase(RuntimeRecordable, CorpusFeature):
     def __init__(self, value: float):
         """ value: float \in R[0, 1]"""
         super().__init__(value=value)
+
+    @staticmethod
+    def recordable_keyword() -> str:
+        return "beat"
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
