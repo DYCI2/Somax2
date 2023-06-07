@@ -4,6 +4,7 @@ from typing import List, Tuple
 import somax.classification
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
+from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.label import AbstractLabel
 from somax.runtime.transform_handler import TransformHandler
@@ -34,6 +35,10 @@ class AbstractClassifier(StringParsed, ContentAware, ABC):
     def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
         """ :returns List of untransformed labels of the same length as the corpus. """
         pass
+
+    @abstractmethod
+    def classify_event(self, event: CorpusEvent) -> AbstractLabel:
+        """ :returns untransformed label of event """
 
     @abstractmethod
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:

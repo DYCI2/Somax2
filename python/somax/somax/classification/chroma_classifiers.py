@@ -1,9 +1,8 @@
 from abc import ABC
 from importlib import resources
-from typing import List, Tuple, Optional, Type
+from typing import List, Tuple, Type
 
 import numpy as np
-# from sklearn.mixture import GaussianMixture
 
 from somax.classification import tables
 from somax.classification.classifier import AbstractClassifier
@@ -12,11 +11,14 @@ from somax.features.chroma_features import BaseChroma, MeanChroma
 from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.exceptions import InvalidLabelInput, TransformError, InvalidCorpus
+from somax.runtime.exceptions import InvalidLabelInput, TransformError
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence, FeatureInfluence
 from somax.runtime.label import AbstractLabel, IntLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
+
+
+# from sklearn.mixture import GaussianMixture
 
 
 # TODO: Normalization. Normalization has been removed for now, but should be thoroughly tested.
@@ -63,15 +65,15 @@ class BaseSomChromaClassifier(ChromaClassifier):
         if self.USE_MULTIPROCESSING:
             import multiprocessing
             with multiprocessing.Pool(processes=4) as pool:
-                labels: List[IntLabel] = pool.map(self._multiproc_compute_label, corpus.events)
+                labels: List[IntLabel] = pool.map(self.classify_event, corpus.events)
         else:
             labels: List[IntLabel] = []
             for event in corpus.events:  # type: CorpusEvent
-                labels.append(self._label_from_chroma(event.get_feature(self.chroma_type).value()))
+                labels.append(self.classify_event(event))
         return labels
 
-    def _multiproc_compute_label(self, e: CorpusEvent):
-        return self._label_from_chroma(e.get_feature(self.chroma_type).value())
+    def classify_event(self, event: CorpusEvent) -> IntLabel:
+        return self._label_from_chroma(event.get_feature(self.chroma_type).value())
 
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
         """ :raises TransformError if no transforms exist """
@@ -106,7 +108,6 @@ class OnsetSomChromaClassifier(BaseSomChromaClassifier):
 class MeanSomChromaClassifier(BaseSomChromaClassifier):
     def __init__(self):
         super().__init__(chroma_type=MeanChroma)
-
 
 # class GmmClassifier(ChromaClassifier, ABC):
 #     USE_MULTIPROCESSING = True

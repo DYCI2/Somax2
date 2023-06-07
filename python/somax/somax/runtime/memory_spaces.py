@@ -43,6 +43,10 @@ class AbstractMemorySpace(Parametric, StringParsed, ABC):
         pass
 
     @abstractmethod
+    def learn_event(self, event: CorpusEvent, label: AbstractLabel) -> None:
+        pass
+
+    @abstractmethod
     def influence(self, labels: List[Tuple[AbstractLabel, AbstractTransform]], time: float,
                   **kwargs) -> List[PeakEvent]:
         pass
@@ -82,6 +86,8 @@ class NGramMemorySpace(AbstractMemorySpace):
         self._ngram_size: Parameter = ParamWithSetter(history_len, 1, None, 'int',
                                                       "Number of events to hard-match. (TODO)",
                                                       self.set_ngram_size)  # TODO
+        self._learned_labels: deque[int] = deque([], self._ngram_size.value)
+
         # history per transform stored with transform id as key
         self._influence_history: Dict[int, deque[int]] = {}
         self._parse_parameters()
@@ -96,18 +102,21 @@ class NGramMemorySpace(AbstractMemorySpace):
         self._corpus = corpus
         self._labels = labels
         self._structured_data = {}
-        labels: deque[int] = deque([], self._ngram_size.value)
+        self._learned_labels: deque[int] = deque([], self._ngram_size.value)
         for event, label in zip(self._corpus.events, self._labels):
-            labels.append(hash(label))
-            if len(labels) < self._ngram_size.value:
-                continue
+            self.learn_event(event, label)
+
+    def learn_event(self, event: CorpusEvent, label: AbstractLabel) -> None:
+        self._learned_labels.append(hash(label))
+        if len(self._learned_labels) < self._ngram_size.value:
+            return
+        else:
+            key: Tuple[int, ...] = tuple(self._learned_labels)
+            value: CorpusEvent = event
+            if key in self._structured_data:
+                self._structured_data[key].append(value)
             else:
-                key: Tuple[int, ...] = tuple(labels)
-                value: CorpusEvent = event
-                if key in self._structured_data:
-                    self._structured_data[key].append(value)
-                else:
-                    self._structured_data[key] = [value]
+                self._structured_data[key] = [value]
 
     def influence(self, labels: List[Tuple[AbstractLabel, AbstractTransform]], time: float,
                   **_kwargs) -> List[PeakEvent]:

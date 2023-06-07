@@ -5,12 +5,14 @@ from typing import Dict, Optional, Tuple, Type, List
 import numpy as np
 
 from somax.classification.classifier import AbstractClassifier
+from somax.features.feature import CorpusFeature
+from somax.features.feature_value import FeatureValue
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch
+from somax.runtime.corpus import Corpus, RealtimeRecordedAudioCorpus, MidiCorpus, AudioCorpus
+from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent
+from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch, RecordingError
 from somax.runtime.exceptions import InvalidCorpus, InvalidLabelInput
 from somax.runtime.fallback_peak_selector import FallbackPeakSelector
 from somax.runtime.influence import AbstractInfluence
@@ -247,11 +249,34 @@ class Player(Parametric, ContentAware):
         """ Forces the player to jump to the given state on the next call to `new_event`"""
         self._force_jump_index = index
 
-    def read_corpus(self, corpus: Corpus, filepath: str) -> None:
+    def read_corpus(self, corpus: Corpus) -> None:
         self._update_transforms()
         self.corpus = corpus
         for atom in self.atoms.values():
             atom.read_corpus(corpus)
+
+    def enable_recording(self, required_features: List[Type[CorpusFeature]]) -> None:
+        """ raises: RecordingError if corpus is of the wrong type """
+        if isinstance(self.corpus, AudioCorpus):  # note: includes RealtimeRecordedAudioCorpus
+            self.corpus = RealtimeRecordedAudioCorpus.from_existing(self.corpus, required_features)
+        elif isinstance(self.corpus, MidiCorpus):
+            raise RecordingError("Recording into MIDI corpora is not supported yet")
+        elif self.corpus is None:
+            self.corpus = RealtimeRecordedAudioCorpus.new(required_features)
+        else:
+            raise RecordingError(f"Recording is not supported for corpus of type {type(self.corpus)}")
+
+        self.set_eligibility(self.corpus)
+
+    def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> int:
+        """ raises: RecordingError if corpus is not record-enabled or if the event data is invalid """
+        if not isinstance(self.corpus, RealtimeRecordedAudioCorpus):
+            raise RecordingError(f"recording is not allowed for corpus of type {type(self.corpus)}")
+
+        event: AudioCorpusEvent = self.corpus.learn_event(onset=onset, duration=duration, features=features)
+        for atom in self.atoms.values():
+            atom.learn_event(event)
+        return event.state_index
 
     # def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
     #     for atom in self.atoms.values():

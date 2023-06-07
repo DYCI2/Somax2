@@ -489,7 +489,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         return RealtimeRecordedAudioCorpus(events=corpus.events,
                                            name=corpus.name,
                                            scheduling_mode=corpus.scheduling_mode,
-                                           feature_types=corpus.feature_types,
+                                           feature_types=required_features,
                                            build_parameters=build_params,
                                            sr=-1,
                                            filepath="",
@@ -508,7 +508,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                                            file_duration=-1,
                                            file_num_channels=-1)
 
-    def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> None:
+    def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> AudioCorpusEvent:
         """ raises: RecordingError if a feature is missing """
         if not self._has_features(features=[type(typing.cast(CorpusFeature, feature)) for feature in features],
                                   required=self.feature_types):
@@ -519,6 +519,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         event: AudioCorpusEvent = AudioCorpusEvent(self.length(), onset, duration, {type(f): f for f in features})
         self.events.append(event)
         self._append_to_index_map(event)
+        return event
 
     def _adjust_duration(self, onset: float, duration: float) -> Tuple[float, float]:
         if self.length() == 0:  # empty corpus

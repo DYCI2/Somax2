@@ -31,8 +31,11 @@ class BasicPitchClassifier(AbstractClassifier, ABC):
     def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
         labels: List[IntLabel] = []
         for event in corpus.events:  # type: CorpusEvent
-            labels.append(self._label_from_corpus_event(event, NoTransform()))
+            labels.append(self.classify_event(event))
         return labels
+
+    def classify_event(self, event: CorpusEvent) -> IntLabel:
+        return self._label_from_corpus_event(event, NoTransform())
 
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
         if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, RuntimeIntegerPitch):

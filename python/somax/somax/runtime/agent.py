@@ -602,7 +602,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.clear()
 
         self.player.set_eligibility(corpus)
-        self.player.read_corpus(corpus, filepath)
+        self.player.read_corpus(corpus)
         self.flush()
         self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
         self._try_update_server_tempo()  # immediately set tempo if player is tempo master

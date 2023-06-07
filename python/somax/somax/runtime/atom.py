@@ -5,7 +5,7 @@ from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence
 from somax.runtime.label import AbstractLabel
 from somax.runtime.memory_spaces import AbstractMemorySpace
@@ -14,7 +14,6 @@ from somax.runtime.peak_event import PeakEvent
 from somax.runtime.peaks import Peaks
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
-from somax.scheduler.scheduling_mode import SchedulingMode
 
 
 class Atom(Parametric, ContentAware):
@@ -64,6 +63,10 @@ class Atom(Parametric, ContentAware):
         self._memory_space.model(self._corpus, labels)
         self._activity_pattern.corpus = self._corpus
 
+    def learn_event(self, event: AudioCorpusEvent) -> None:
+        label: AbstractLabel = self._classifier.classify_event(event)
+        self._memory_space.learn_event(event, label)
+
     # influences the memory with incoming data
     def influence(self, influence: AbstractInfluence, time: float, **kwargs) -> int:
         """ :raises InvalidLabelInput
@@ -87,7 +90,8 @@ class Atom(Parametric, ContentAware):
         if self.is_enabled_and_eligible():
             self._activity_pattern.update_peaks_on_new_event(time)
 
-    def feedback(self, feedback_event: Optional[CorpusEvent], time: float, _applied_transform: AbstractTransform) -> None:
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 _applied_transform: AbstractTransform) -> None:
         if self.self_influenced and feedback_event is not None:
             self.influence(CorpusInfluence(feedback_event), time)
 
