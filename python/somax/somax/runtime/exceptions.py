@@ -56,3 +56,8 @@ class ParameterError(Exception):
 class FeatureError(Exception):
     def __init__(self, error):
         super(FeatureError, self).__init__(error)
+
+
+class RecordingError(Exception):
+    def __init__(self, error):
+        super(RecordingError, self).__init__(error)

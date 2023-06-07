@@ -24,7 +24,7 @@ from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features.feature import CorpusFeature
 from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
-from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch, FeatureError
+from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch, RecordingError
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.utils.get_version import VersionTools
 from somax.utils.introspective import Introspective
@@ -449,6 +449,8 @@ class AudioCorpus(Corpus):
 class RealtimeRecordedAudioCorpus(AudioCorpus):
     RT_RECORDED_KEY: str = "realtime_recorded"
 
+    ERROR_RESOLUTION_TIME = 1e-4
+
     def __init__(self,
                  events: List[AudioCorpusEvent],
                  name: str,
@@ -469,17 +471,17 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                          file_duration=file_duration,
                          file_num_channels=file_num_channels)
 
-        self._compute_index_map(min(self.duration() + self.MINIMUM_RECORD_BUFFER_DURATION,
+        self._compute_index_map(max(self.duration() + self.MINIMUM_RECORD_BUFFER_DURATION,
                                     self.DEFAULT_CORPUS_DURATION))
 
     @classmethod
     def from_existing(cls,
                       corpus: AudioCorpus,
-                      target_features: List[Type[CorpusFeature]]) -> 'RealtimeRecordedAudioCorpus':
-        """ raises: FeatureError: if existing corpus doesn't have a particular targeted feature """
+                      required_features: List[Type[CorpusFeature]]) -> 'RealtimeRecordedAudioCorpus':
+        """ raises: RecordingError: if existing corpus doesn't have a particular targeted feature """
 
-        if not cls._has_features(corpus.feature_types, target_features):
-            raise FeatureError("Current corpus missing targeted feature: ")
+        if not cls._has_features(corpus.feature_types, required_features):
+            raise RecordingError("Current corpus missing targeted feature: ")
 
         build_params: Dict[str, Any] = copy.copy(corpus._build_parameters)
         build_params[RealtimeRecordedAudioCorpus.RT_RECORDED_KEY] = True
@@ -507,10 +509,10 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                                            file_num_channels=-1)
 
     def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> None:
-        """ raises: FeatureError if a feature is missing """
-        if not self._has_features(self.feature_types, [typing.cast(Type[CorpusFeature], feature)
-                                                       for feature in features]):
-            raise FeatureError("feature information missing")
+        """ raises: RecordingError if a feature is missing """
+        if not self._has_features(features=[type(typing.cast(CorpusFeature, feature)) for feature in features],
+                                  required=self.feature_types):
+            raise RecordingError("feature information missing")
 
         onset, duration = self._adjust_duration(onset, duration)
 
@@ -522,13 +524,14 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         if self.length() == 0:  # empty corpus
             return onset, duration
 
-        diff: float = self.duration() - onset
-        if abs(diff) > 1e-4:
+        diff: float = onset - self.duration()
+        if diff < -self.ERROR_RESOLUTION_TIME:
+            raise RecordingError("overdubbing recorded corpus events is not supported")
+        if abs(diff) > self.ERROR_RESOLUTION_TIME:
             self.logger.warning("Gap detected: adjusting onset position to end of previous event")
 
         return self.duration(), duration + diff
 
     @staticmethod
-    def _has_features(current_features: List[Type[CorpusFeature]],
-                      target_features: Iterable[Type[CorpusFeature]]) -> bool:
-        return all(feature in current_features for feature in target_features)
+    def _has_features(features: List[Type[CorpusFeature]], required: Iterable[Type[CorpusFeature]]) -> bool:
+        return all(feature in features for feature in required)
