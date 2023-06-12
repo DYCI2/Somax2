@@ -387,6 +387,22 @@ class AudioCorpus(Corpus):
 
         return corpus
 
+    @classmethod
+    def from_realtime_recorded(cls,
+                               other: 'RealtimeRecordedAudioCorpus',
+                               new_audio_filepath: str,
+                               new_audio_duration: float,
+                               new_audio_num_channels: int) -> 'AudioCorpus':
+        return cls(events=other.events,
+                   name=other.name,
+                   scheduling_mode=other.scheduling_mode,
+                   feature_types=other.feature_types,
+                   build_parameters=other._build_parameters,
+                   sr=other.sr,
+                   filepath=new_audio_filepath,
+                   file_duration=new_audio_duration,
+                   file_num_channels=new_audio_num_channels)
+
     @staticmethod
     def validate_audio_source(filepath: str,
                               expected_sample_rate: int,
@@ -473,6 +489,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
 
         self._compute_index_map(max(self.duration() + self.MINIMUM_RECORD_BUFFER_DURATION,
                                     self.DEFAULT_CORPUS_DURATION))
+        self.saved: bool = True
 
     @classmethod
     def from_existing(cls,
@@ -527,6 +544,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         event: AudioCorpusEvent = AudioCorpusEvent(self.length(), onset, duration, {type(f): f for f in features})
         self.events.append(event)
         self._append_to_index_map(event)
+        self.saved = False
         return event
 
     def _adjust_duration(self, onset: float, duration: float) -> Tuple[float, float]:
@@ -540,6 +558,23 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
             self.logger.warning("Gap detected: adjusting onset position to end of previous event")
 
         return self.duration(), duration + diff
+
+    def export_realtime(self,
+                        output_folder: str,
+                        audio_filepath: str,
+                        audio_file_duration: float,
+                        audio_num_channels: int,
+                        overwrite: bool = False,
+                        **kwargs) -> str:
+        self.saved = True
+        audio_corpus: AudioCorpus = AudioCorpus.from_realtime_recorded(self,
+                                                                       new_audio_filepath=audio_filepath,
+                                                                       new_audio_duration=audio_file_duration,
+                                                                       new_audio_num_channels=audio_num_channels)
+        return audio_corpus.export(output_folder=output_folder,
+                                   overwrite=overwrite,
+                                   copy_resources=False,
+                                   **kwargs)
 
     @staticmethod
     def _missing_features(features: List[Type[CorpusFeature]],

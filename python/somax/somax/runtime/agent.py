@@ -21,7 +21,7 @@ from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
+from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus, RealtimeRecordedAudioCorpus
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
@@ -118,6 +118,8 @@ class OscAgent(Agent, AsyncioOscObject):
             self.read_corpus(corpus_filepath)
 
         self.last_status_time: float = -1
+
+        self.recording_buffer_size_ms: int = 0
 
         self._send_eligibility()
         self.target.send(PlayerSendProtocol.SCHEDULER_RUNNING, True)
@@ -600,17 +602,17 @@ class OscAgent(Agent, AsyncioOscObject):
             self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
             return
 
-        self.clear()
-
-        self.player.set_eligibility(corpus)
-        self.player.read_corpus(corpus)
-        self.flush()
-        self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
-        self._try_update_server_tempo()  # immediately set tempo if player is tempo master
-        self._send_eligibility()
+        self._read_corpus(corpus)
         self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
-        self.send_current_corpus_info()
         self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
+
+    def reload_corpus(self) -> None:
+        if self.player.corpus is None:
+            return
+
+        self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
+        self._read_corpus(self.player.corpus)
+        self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
 
     def start_recording(self, *required_features) -> None:
         try:
@@ -624,6 +626,29 @@ class OscAgent(Agent, AsyncioOscObject):
         except (RecordingError, ValueError) as e:
             self.logger.error(f"{str(e)}. Recording aborted")
             return
+        
+    def save_realtime_corpus(self, 
+                             corpus_filepath: str, 
+                             audio_filepath: str, 
+                             audio_file_duration: float, 
+                             audio_file_num_channels: int, 
+                             overwrite: bool = False) -> None:
+        if isinstance(self.player.corpus, RealtimeRecordedAudioCorpus):
+            # TODO: Continue. ALSO: OUTPUT_FOLDER IS INSUFFICIENT: WE NEED TO BE ABLE TO SPECIFY NAME, NOT JUST PATH
+            self.player.corpus.export_realtime() # TODO
+
+    def set_recording_buffer_size(self, duration_ms: int, override: bool = False) -> None:
+        if self.player.corpus is None:
+            self.recording_buffer_size_ms = duration_ms
+            self.target.send(PlayerSendProtocol.RECORDING_BUFFER_SIZE, duration_ms)
+        elif not isinstance(self.player.corpus, RealtimeRecordedAudioCorpus):
+            self.recording_buffer_size_ms = duration_ms
+            self.reload_corpus()
+            # no send required here: duration will be set through send_current_corpus_info
+        else:
+            self.logger.error("Cannot set buffer size while recording a corpus, save the corpus first "
+                              "or use override=True to discard changes")
+
 
     def learn_event(self, onset: float, duration: float, *features) -> None:
         try:
@@ -634,6 +659,9 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. No event was recorded")
             self.target.send(PlayerSendProtocol.RECORD_LEARN_EVENT, -1)
             return
+
+    def save_corpus(self, corpus_filepath: str, audio_filepath: Optional[str]) -> None:
+        self.logger.warning("placeholder for save. No actual saving occurred on server")
 
     @staticmethod
     def parse_features(features) -> List[CorpusFeature]:
@@ -786,6 +814,17 @@ class OscAgent(Agent, AsyncioOscObject):
     def _path_to_string(path: List[str]) -> str:
         return settings.PATH_SEPARATOR.join(path)
 
+    def _read_corpus(self, corpus: Corpus):
+        self.clear()
+
+        self.player.set_eligibility(corpus)
+        self.player.read_corpus(corpus)
+        self.flush()
+        self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
+        self._try_update_server_tempo()  # immediately set tempo if player is tempo master
+        self._send_eligibility()
+        self.send_current_corpus_info()
+
     ######################################################
     # MAX GETTERS
     ######################################################
@@ -846,7 +885,8 @@ class OscAgent(Agent, AsyncioOscObject):
                 corpus.name,
                 corpus.__class__.__name__,
                 corpus.length(),
-                corpus.filepath if isinstance(corpus, AudioCorpus) else None
+                corpus.filepath if isinstance(corpus, AudioCorpus) else None,
+                self.recording_buffer_size_ms
             ])
 
     def _send_eligibility(self):
