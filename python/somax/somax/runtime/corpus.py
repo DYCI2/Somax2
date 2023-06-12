@@ -480,8 +480,11 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                       required_features: List[Type[CorpusFeature]]) -> 'RealtimeRecordedAudioCorpus':
         """ raises: RecordingError: if existing corpus doesn't have a particular targeted feature """
 
-        if not cls._has_features(corpus.feature_types, required_features):
-            raise RecordingError("Current corpus missing targeted feature: ")
+        missing_features: List[Type[CorpusFeature]] = cls._missing_features(corpus.feature_types, required_features)
+
+        if len(missing_features) > 0:
+            raise RecordingError(f"Currently loaded corpus is missing these requested features: "
+                                 f"{' '.join([str(t.__name__).lower() for t in missing_features])}")
 
         build_params: Dict[str, Any] = copy.copy(corpus._build_parameters)
         build_params[RealtimeRecordedAudioCorpus.RT_RECORDED_KEY] = True
@@ -510,9 +513,14 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
 
     def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> AudioCorpusEvent:
         """ raises: RecordingError if a feature is missing """
-        if not self._has_features(features=[type(typing.cast(CorpusFeature, feature)) for feature in features],
-                                  required=self.feature_types):
-            raise RecordingError("feature information missing")
+        missing_features: List[Type[CorpusFeature]] = self._missing_features(
+            features=[type(typing.cast(CorpusFeature, feature)) for feature in features],
+            required=self.feature_types
+        )
+
+        if len(missing_features) > 0:
+            raise RecordingError(f"The following features are missing in the recorded event: "
+                                 f"{' '.join([str(t.__name__).lower() for t in missing_features])}")
 
         onset, duration = self._adjust_duration(onset, duration)
 
@@ -534,5 +542,6 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         return self.duration(), duration + diff
 
     @staticmethod
-    def _has_features(features: List[Type[CorpusFeature]], required: Iterable[Type[CorpusFeature]]) -> bool:
-        return all(feature in features for feature in required)
+    def _missing_features(features: List[Type[CorpusFeature]],
+                          required: Iterable[Type[CorpusFeature]]) -> List[Type[CorpusFeature]]:
+        return [feature for feature in required if feature not in features]

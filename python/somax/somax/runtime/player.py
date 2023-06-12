@@ -258,12 +258,15 @@ class Player(Parametric, ContentAware):
     def enable_recording(self, required_features: List[Type[CorpusFeature]]) -> None:
         """ Must be called prior to learn_event
             raises: RecordingError if corpus is of the wrong type """
-        if isinstance(self.corpus, AudioCorpus):  # note: includes RealtimeRecordedAudioCorpus
+        # note: includes RealtimeCorpus. We want to ensure that the required_features are still valid
+        if isinstance(self.corpus, AudioCorpus):
             self.corpus = RealtimeRecordedAudioCorpus.from_existing(self.corpus, required_features)
         elif isinstance(self.corpus, MidiCorpus):
             raise RecordingError("Recording into MIDI corpora is not supported yet")
         elif self.corpus is None:
-            self.corpus = RealtimeRecordedAudioCorpus.new(required_features)
+            corpus: Corpus = RealtimeRecordedAudioCorpus.new(required_features)
+            self.read_corpus(corpus)
+
         else:
             raise RecordingError(f"Recording is not supported for corpus of type {type(self.corpus)}")
 

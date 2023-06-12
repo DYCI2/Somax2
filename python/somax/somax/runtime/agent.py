@@ -621,7 +621,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
             self.player.enable_recording(required_feature_types)
 
-        except ValueError as e:
+        except (RecordingError, ValueError) as e:
             self.logger.error(f"{str(e)}. Recording aborted")
             return
 
