@@ -671,10 +671,10 @@ class OscAgent(Agent, AsyncioOscObject):
     #         self.logger.error("Cannot set buffer size while recording a corpus, save the corpus first "
     #                           "or use override=True to discard changes")
 
-    def learn_event(self, onset: float, duration: float, *features) -> None:
+    def learn_event(self, onset_ms: float, duration_ms: float, *features) -> None:
         try:
             parsed_features: List[CorpusFeature] = self.parse_features(features)
-            event: CorpusEvent = self.player.learn_event(onset, duration, parsed_features)
+            event: CorpusEvent = self.player.learn_event(onset_ms / 1000, duration_ms / 1000, parsed_features)
             self.target.send(PlayerSendProtocol.RECORD_LEARN_EVENT, [event.state_index, event.onset, event.duration])
         except (RecordingError, ValueError, IndexError) as e:
             self.logger.error(f"{str(e)}. No event was recorded")
@@ -685,23 +685,38 @@ class OscAgent(Agent, AsyncioOscObject):
         self.logger.warning("placeholder for save. No actual saving occurred on server")
 
     @staticmethod
-    def parse_features(features_data) -> List[CorpusFeature]:
+    def parse_features(unparsed_feature_data) -> List[CorpusFeature]:
         """ raises: IndexError, RecordingError, ValueError"""
-        # format: (keyword, values...], ...)
+        # format: (keyword1, values1..., keyword2, values2..., ...)
         parsed_features: List[CorpusFeature] = []
-        for feature in features_data:
-            feature_keyword: str = feature[0]
-            feature_data: List[Any] = feature[1:]
 
-            parsed_feature: Type[CorpusFeature]
-            parsed_feature = typing.cast(Type[CorpusFeature],
-                                         RuntimeRecordable.runtime_class_from_string(feature_keyword))
-            if len(feature_data) == 1:
-                parsed_features.append(parsed_feature(feature_data[0]))
+        feature_keyword: Optional[str] = None
+        feature_data: List[Any] = []
+        for element in unparsed_feature_data:
+            if isinstance(element, str):
+                if feature_keyword is not None:
+                    parsed_features.append(OscAgent._parse_feature(feature_keyword, feature_data))
+                    feature_data = []
+                feature_keyword = element
             else:
-                parsed_features.append(parsed_feature(feature_data))
+                feature_data.append(element)
+
+        if feature_keyword is not None:
+            parsed_features.append(OscAgent._parse_feature(feature_keyword, feature_data))
 
         return parsed_features
+
+    @staticmethod
+    def _parse_feature(feature_keyword: str, feature_data: List[Any]) -> CorpusFeature:
+        parsed_feature: Type[CorpusFeature]
+        parsed_feature = typing.cast(Type[CorpusFeature],
+                                     RuntimeRecordable.runtime_class_from_string(feature_keyword))
+        if len(feature_data) == 0:
+            raise ValueError("A value is required for each feature keyword")
+        if len(feature_data) == 1:
+            return parsed_feature(feature_data[0])
+        else:
+            return parsed_feature(feature_data)
 
     def set_param(self, path: str, value: Any):
         self.logger.debug(f"[set_param] Attempting to set parameter for player '{self.player.name}' at '{path}' "

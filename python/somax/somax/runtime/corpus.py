@@ -575,6 +575,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
             return onset, duration
 
         diff: float = onset - self.duration()
+        print(diff)
         if diff < -self.ERROR_RESOLUTION_TIME:
             raise RecordingError("overdubbing recorded corpus events is not supported")
         if abs(diff) > self.ERROR_RESOLUTION_TIME:
