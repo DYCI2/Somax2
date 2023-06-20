@@ -507,7 +507,7 @@ if __name__ == "__main__":
     parser.add_argument('ip', metavar='IP', type=parse_ip, nargs='?', default=SomaxServer.IP_LOCALHOST,
                         help='ip address used by the max client')
 
-    with resources.path(log, 'logging.ini') as path:
+    with resources.as_file(resources.files(log).joinpath('logging.ini')) as path:
         logging.config.fileConfig(path.absolute())
 
     # Called to enforce file io at start of program

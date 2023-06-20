@@ -210,8 +210,8 @@ class DirectActivityPattern(AbstractActivityPattern):
         self._parse_parameters()
 
     def insert(self, influences: List[PeakEvent]) -> None:
-        self._peaks = Peaks(scores=np.array([self.default_score.value for _ in range(len(influences))], dtype=np.float),
-                            times=np.array([influence.event.onset for influence in influences], dtype=np.float),
+        self._peaks = Peaks(scores=np.array([self.default_score.value for _ in range(len(influences))], dtype=float),
+                            times=np.array([influence.event.onset for influence in influences], dtype=float),
                             transform_hashes=np.array([influence.transform_hash for influence in influences],
                                                       dtype=np.int32))
 
@@ -257,8 +257,8 @@ class DecayActivityPattern(AbstractActivityPattern):
         self._parse_parameters()
 
     def insert(self, influences: List[PeakEvent]) -> None:
-        self._peaks = Peaks(scores=np.array([self.default_score.value for _ in range(len(influences))], dtype=np.float),
-                            times=np.array([influence.event.onset for influence in influences], dtype=np.float),
+        self._peaks = Peaks(scores=np.array([self.default_score.value for _ in range(len(influences))], dtype=float),
+                            times=np.array([influence.event.onset for influence in influences], dtype=float),
                             transform_hashes=np.array([influence.transform_hash for influence in influences],
                                                       dtype=np.int32))
 
