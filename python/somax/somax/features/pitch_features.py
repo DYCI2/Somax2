@@ -82,7 +82,7 @@ class YinDiscretePitch(AbstractIntegerPitch, RuntimeRecordable, CorpusFeature):
 
     @staticmethod
     def recordable_keyword() -> str:
-        return "yin"
+        return "pitch"
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:

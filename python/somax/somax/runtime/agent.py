@@ -119,7 +119,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
         self.last_status_time: float = -1
 
-        self.recording_buffer_size_ms: int = 0
+        # self.recording_buffer_size_ms: int = 0
 
         self._send_eligibility()
         self.target.send(PlayerSendProtocol.SCHEDULER_RUNNING, True)
@@ -614,41 +614,62 @@ class OscAgent(Agent, AsyncioOscObject):
         self._read_corpus(self.player.corpus)
         self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
 
-    def start_recording(self, *required_features) -> None:
+    def record_enable(self, *required_features) -> None:
         try:
-            required_feature_types: List[Type[CorpusFeature]] = []
-            for feature in required_features:
-                parsed_feature: Type[RuntimeRecordable] = RuntimeRecordable.runtime_class_from_string(feature)
-                required_feature_types.append(typing.cast(Type[CorpusFeature], parsed_feature))
-
+            required_feature_types: List[Type[CorpusFeature]] = self._parse_features(*required_features)
             self.player.enable_recording(required_feature_types)
 
         except (RecordingError, ValueError) as e:
             self.logger.error(f"{str(e)}. Recording aborted")
             return
-        
-    def save_realtime_corpus(self, 
-                             corpus_filepath: str, 
-                             audio_filepath: str, 
-                             audio_file_duration: float, 
-                             audio_file_num_channels: int, 
+
+    def new_recorded_corpus(self, *required_features) -> None:
+        try:
+            required_feature_types: Optional[List[Type[CorpusFeature]]] = self._parse_features(*required_features)
+            corpus: Corpus = RealtimeRecordedAudioCorpus.new(required_feature_types)
+            self._read_corpus(corpus)
+        except ValueError as e:
+            self.logger.error(f"{str(e)}. Could not create corpus")
+            return
+
+    @staticmethod
+    def _parse_features(*required_features) -> Optional[List[Type[CorpusFeature]]]:
+        """ raises: ValueError if an invalid feature name is passed """
+        if len(required_features) == 0:
+            # raise ValueError("A feature specification is required. Use 'auto' to handle automatically")
+            raise ValueError("A list of enabled descriptors is required")
+
+        # if len(required_features) == 1 and required_features[0] == 'auto':
+        #     return None
+
+        required_feature_types: List[Type[CorpusFeature]] = []
+        for feature in required_features:
+            parsed_feature: Type[RuntimeRecordable] = RuntimeRecordable.runtime_class_from_string(feature)
+            required_feature_types.append(typing.cast(Type[CorpusFeature], parsed_feature))
+
+        return required_feature_types
+
+    def save_realtime_corpus(self,
+                             corpus_filepath: str,
+                             audio_filepath: str,
+                             audio_file_duration: float,
+                             audio_file_num_channels: int,
                              overwrite: bool = False) -> None:
         if isinstance(self.player.corpus, RealtimeRecordedAudioCorpus):
             # TODO: Continue. ALSO: OUTPUT_FOLDER IS INSUFFICIENT: WE NEED TO BE ABLE TO SPECIFY NAME, NOT JUST PATH
-            self.player.corpus.export_realtime() # TODO
+            self.player.corpus.export_realtime()  # TODO
 
-    def set_recording_buffer_size(self, duration_ms: int, override: bool = False) -> None:
-        if self.player.corpus is None:
-            self.recording_buffer_size_ms = duration_ms
-            self.target.send(PlayerSendProtocol.RECORDING_BUFFER_SIZE, duration_ms)
-        elif not isinstance(self.player.corpus, RealtimeRecordedAudioCorpus):
-            self.recording_buffer_size_ms = duration_ms
-            self.reload_corpus()
-            # no send required here: duration will be set through send_current_corpus_info
-        else:
-            self.logger.error("Cannot set buffer size while recording a corpus, save the corpus first "
-                              "or use override=True to discard changes")
-
+    # def set_recording_buffer_size(self, duration_ms: int, override: bool = False) -> None:
+    #     if self.player.corpus is None:
+    #         self.recording_buffer_size_ms = duration_ms
+    #         self.target.send(PlayerSendProtocol.RECORDING_BUFFER_SIZE, duration_ms)
+    #     elif not isinstance(self.player.corpus, RealtimeRecordedAudioCorpus):
+    #         self.recording_buffer_size_ms = duration_ms
+    #         self.reload_corpus()
+    #         # no send required here: duration will be set through send_current_corpus_info
+    #     else:
+    #         self.logger.error("Cannot set buffer size while recording a corpus, save the corpus first "
+    #                           "or use override=True to discard changes")
 
     def learn_event(self, onset: float, duration: float, *features) -> None:
         try:
@@ -664,11 +685,11 @@ class OscAgent(Agent, AsyncioOscObject):
         self.logger.warning("placeholder for save. No actual saving occurred on server")
 
     @staticmethod
-    def parse_features(features) -> List[CorpusFeature]:
+    def parse_features(features_data) -> List[CorpusFeature]:
         """ raises: IndexError, RecordingError, ValueError"""
         # format: (keyword, values...], ...)
         parsed_features: List[CorpusFeature] = []
-        for feature in features:
+        for feature in features_data:
             feature_keyword: str = feature[0]
             feature_data: List[Any] = feature[1:]
 
@@ -885,8 +906,9 @@ class OscAgent(Agent, AsyncioOscObject):
                 corpus.name,
                 corpus.__class__.__name__,
                 corpus.length(),
-                corpus.filepath if isinstance(corpus, AudioCorpus) else None,
-                self.recording_buffer_size_ms
+                corpus.filepath if isinstance(corpus, AudioCorpus) and
+                                   not isinstance(corpus, RealtimeRecordedAudioCorpus) else None
+                # self.recording_buffer_size_ms
             ])
 
     def _send_eligibility(self):

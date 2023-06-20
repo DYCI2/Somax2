@@ -476,7 +476,8 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                  sr: int,
                  filepath: str,
                  file_duration: float,
-                 file_num_channels: int):
+                 file_num_channels: int,
+                 recording_features_determined: bool):
         super().__init__(events=events,
                          name=name,
                          scheduling_mode=scheduling_mode,
@@ -489,19 +490,24 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
 
         self._compute_index_map(max(self.duration() + self.MINIMUM_RECORD_BUFFER_DURATION,
                                     self.DEFAULT_CORPUS_DURATION))
+
+        # determine required features at first recorded event rather than at initialization time
+        self.recording_features_determined: bool = recording_features_determined
+
         self.saved: bool = True
 
     @classmethod
     def from_existing(cls,
                       corpus: AudioCorpus,
-                      required_features: List[Type[CorpusFeature]]) -> 'RealtimeRecordedAudioCorpus':
+                      required_features: Optional[List[Type[CorpusFeature]]]) -> 'RealtimeRecordedAudioCorpus':
         """ raises: RecordingError: if existing corpus doesn't have a particular targeted feature """
 
-        missing_features: List[Type[CorpusFeature]] = cls._missing_features(corpus.feature_types, required_features)
-
-        if len(missing_features) > 0:
-            raise RecordingError(f"Currently loaded corpus is missing these requested features: "
-                                 f"{' '.join([str(t.__name__).lower() for t in missing_features])}")
+        if required_features is not None:
+            cls._validate_corpus(corpus, required_features)
+            recording_features_determined: bool = True
+        else:
+            required_features = []
+            recording_features_determined = False
 
         build_params: Dict[str, Any] = copy.copy(corpus._build_parameters)
         build_params[RealtimeRecordedAudioCorpus.RT_RECORDED_KEY] = True
@@ -514,10 +520,15 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                                            sr=-1,
                                            filepath="",
                                            file_duration=-1,
-                                           file_num_channels=-1)
+                                           file_num_channels=-1,
+                                           recording_features_determined=recording_features_determined)
 
     @classmethod
-    def new(cls, target_features: List[Type[CorpusFeature]]) -> 'RealtimeRecordedAudioCorpus':
+    def new(cls, target_features: Optional[List[Type[CorpusFeature]]]) -> 'RealtimeRecordedAudioCorpus':
+
+        recording_features_determined: bool = target_features is not None
+        target_features = [] if target_features is None else target_features
+
         return RealtimeRecordedAudioCorpus(events=[],
                                            name="realtime",
                                            scheduling_mode=AbsoluteScheduling(),
@@ -526,18 +537,30 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                                            sr=-1,
                                            filepath="",
                                            file_duration=-1,
-                                           file_num_channels=-1)
+                                           file_num_channels=-1,
+                                           recording_features_determined=recording_features_determined
+                                           )
 
     def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> AudioCorpusEvent:
         """ raises: RecordingError if a feature is missing """
-        missing_features: List[Type[CorpusFeature]] = self._missing_features(
-            features=[type(typing.cast(CorpusFeature, feature)) for feature in features],
-            required=self.feature_types
-        )
 
-        if len(missing_features) > 0:
-            raise RecordingError(f"The following features are missing in the recorded event: "
-                                 f"{' '.join([str(t.__name__).lower() for t in missing_features])}")
+        # validate that all required features exist
+        if self.recording_features_determined:
+            missing_features: List[Type[CorpusFeature]] = self._missing_features(
+                features=[type(typing.cast(CorpusFeature, feature)) for feature in features],
+                required=self.feature_types
+            )
+
+            if len(missing_features) > 0:
+                raise RecordingError(f"The following features are missing in the recorded event: "
+                                     f"{' '.join([str(t.__name__).lower() for t in missing_features])}")
+
+        # if first event and mode is 'auto': determine required features from this event
+        else:
+            required_features: List[Type[CorpusFeature]] = [type(typing.cast(CorpusFeature, feature))
+                                                            for feature in features]
+            self._validate_corpus(self, required_features)
+            self.feature_types = required_features
 
         onset, duration = self._adjust_duration(onset, duration)
 
@@ -575,6 +598,15 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                                    overwrite=overwrite,
                                    copy_resources=False,
                                    **kwargs)
+
+    @staticmethod
+    def _validate_corpus(corpus: AudioCorpus, required_features: List[Type[CorpusFeature]]) -> None:
+        if corpus.length() > 0:
+            missing_features: List[Type[CorpusFeature]]
+            missing_features = RealtimeRecordedAudioCorpus._missing_features(corpus.feature_types, required_features)
+            if len(missing_features) > 0:
+                raise RecordingError(f"Currently loaded corpus is missing these requested features: "
+                                     f"{' '.join([str(t.__name__).lower() for t in missing_features])}")
 
     @staticmethod
     def _missing_features(features: List[Type[CorpusFeature]],

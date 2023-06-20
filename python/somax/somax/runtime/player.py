@@ -255,7 +255,7 @@ class Player(Parametric, ContentAware):
         for atom in self.atoms.values():
             atom.read_corpus(corpus)
 
-    def enable_recording(self, required_features: List[Type[CorpusFeature]]) -> None:
+    def enable_recording(self, required_features: Optional[List[Type[CorpusFeature]]]) -> None:
         """ Must be called prior to learn_event
             raises: RecordingError if corpus is of the wrong type """
         # note: includes RealtimeCorpus. We want to ensure that the required_features are still valid
@@ -274,6 +274,9 @@ class Player(Parametric, ContentAware):
 
     def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> CorpusEvent:
         """ raises: RecordingError if corpus is not record-enabled or if the event data is invalid """
+        if self.corpus is None:
+            raise RecordingError(f"A corpus must be initialized before learning events")
+
         if not isinstance(self.corpus, RealtimeRecordedAudioCorpus):
             raise RecordingError(f"recording is not allowed for corpus of type {type(self.corpus)}")
 
