@@ -249,7 +249,7 @@ class Player(Parametric, ContentAware):
         """ Forces the player to jump to the given state on the next call to `new_event`"""
         self._force_jump_index = index
 
-    def read_corpus(self, corpus: Corpus) -> None:
+    def read_corpus(self, corpus: Optional[Corpus]) -> None:
         self._update_transforms()
         self.corpus = corpus
         for atom in self.atoms.values():
@@ -268,7 +268,7 @@ class Player(Parametric, ContentAware):
             self.read_corpus(corpus)
 
         else:
-            raise RecordingError(f"Recording is not supported for corpus of type {type(self.corpus)}")
+            raise RecordingError(f"Recording is not supported for corpus of type {type(self.corpus).__name__}")
 
         self.set_eligibility(self.corpus)
 
@@ -278,7 +278,7 @@ class Player(Parametric, ContentAware):
             raise RecordingError(f"A corpus must be initialized before learning events")
 
         if not isinstance(self.corpus, RealtimeRecordedAudioCorpus):
-            raise RecordingError(f"recording is not allowed for corpus of type {type(self.corpus)}")
+            raise RecordingError(f"Player '{self.name}' is not record enabled")
 
         event: AudioCorpusEvent = self.corpus.learn_event(onset=onset, duration=duration, features=features)
         for atom in self.atoms.values():

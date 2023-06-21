@@ -537,6 +537,13 @@ class OscAgent(Agent, AsyncioOscObject):
                     volatile: bool = False,
                     alternative_audio_file: str = "",
                     corpuspath_folder: str = ""):
+
+        if filepath == "null":
+            self._read_corpus(None)
+            self.logger.info(f"Loaded empty corpus in player '{self.player.name}'.")
+            self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
+            return
+
         if not os.path.isabs(filepath):
             filepath = os.path.join(corpuspath_folder, filepath)
 
@@ -588,7 +595,6 @@ class OscAgent(Agent, AsyncioOscObject):
                         else:
                             raise
 
-
             else:
                 self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
                 raise IOError(f"Invalid file extension '{file_extension}'")
@@ -618,6 +624,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             required_feature_types: List[Type[CorpusFeature]] = self._parse_features(*required_features)
             self.player.enable_recording(required_feature_types)
+            self._post_read_corpus()
 
         except (RecordingError, ValueError) as e:
             self.logger.error(f"{str(e)}. Recording aborted")
@@ -850,11 +857,14 @@ class OscAgent(Agent, AsyncioOscObject):
     def _path_to_string(path: List[str]) -> str:
         return settings.PATH_SEPARATOR.join(path)
 
-    def _read_corpus(self, corpus: Corpus):
+    def _read_corpus(self, corpus: Optional[Corpus]):
         self.clear()
 
         self.player.set_eligibility(corpus)
         self.player.read_corpus(corpus)
+        self._post_read_corpus()
+
+    def _post_read_corpus(self):
         self.flush()
         self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
         self._try_update_server_tempo()  # immediately set tempo if player is tempo master
@@ -921,9 +931,7 @@ class OscAgent(Agent, AsyncioOscObject):
                 corpus.name,
                 corpus.__class__.__name__,
                 corpus.length(),
-                corpus.filepath if isinstance(corpus, AudioCorpus) and
-                                   not isinstance(corpus, RealtimeRecordedAudioCorpus) else None
-                # self.recording_buffer_size_ms
+                corpus.filepath if isinstance(corpus, AudioCorpus) and corpus.filepath else None
             ])
 
     def _send_eligibility(self):

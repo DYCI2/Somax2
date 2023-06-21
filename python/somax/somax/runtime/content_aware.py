@@ -44,7 +44,10 @@ class ContentAware(ABC):
     def _format(self) -> Tuple['ContentAware', bool, Optional['ContentAware']]:
         return self, self._eligible, self._invalidated_by
 
-    def set_eligibility(self, corpus: Corpus) -> bool:
+    def set_eligibility(self, corpus: Optional[Corpus]) -> bool:
+        if corpus is None:
+            return True
+
         self._invalidated_by = None
         self._eligible: bool = self._set_eligibility(corpus)
         for z, child in self.__dict__.items():

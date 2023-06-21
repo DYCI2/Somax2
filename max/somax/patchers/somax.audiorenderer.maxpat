@@ -277,6 +277,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-2",
@@ -1722,7 +1723,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 393.666666666666629, 297.0, 118.0, 22.0 ],
+					"patching_rect" : [ 393.666666666666629, 313.0, 118.0, 22.0 ],
 					"text" : "route loaded_corpus"
 				}
 
@@ -2497,7 +2498,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 5,
 					"outlettype" : [ "", "", "", "", "" ],
-					"patching_rect" : [ 393.666666666666629, 328.0, 115.0, 22.0 ],
+					"patching_rect" : [ 393.666666666666629, 344.0, 115.0, 22.0 ],
 					"text" : "unjoin 4"
 				}
 

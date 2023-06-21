@@ -518,7 +518,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                                            feature_types=required_features,
                                            build_parameters=build_params,
                                            sr=-1,
-                                           filepath="",
+                                           filepath=corpus.filepath,
                                            file_duration=-1,
                                            file_num_channels=-1,
                                            recording_features_determined=recording_features_determined)
