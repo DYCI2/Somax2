@@ -258,7 +258,10 @@ class Player(Parametric, ContentAware):
     def enable_recording(self, required_features: Optional[List[Type[CorpusFeature]]]) -> None:
         """ Must be called prior to learn_event
             raises: RecordingError if corpus is of the wrong type """
-        # note: includes RealtimeCorpus. We want to ensure that the required_features are still valid
+        if isinstance(self.corpus, RealtimeRecordedAudioCorpus):
+            # can technically allow this case here (i.e. reconfiguring descriptors of existing corpus),
+            #   but this will break the buffer in Max (new events will not be stored) and is therefore not allowed
+            raise RecordingError("Corpus is already record enabled")
         if isinstance(self.corpus, AudioCorpus):
             self.corpus = RealtimeRecordedAudioCorpus.from_existing(self.corpus, required_features)
         elif isinstance(self.corpus, MidiCorpus):

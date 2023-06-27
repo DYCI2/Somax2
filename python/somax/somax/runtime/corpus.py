@@ -34,7 +34,7 @@ E = TypeVar('E', bound=CorpusEvent)
 
 class CorpusUnpickler(pickle.Unpickler):
     safe_modules = ['logging', 'numpy.core.multiarray', 'numpy']
-    safe_builtins = ['range', 'complex', 'set', 'frozenset', 'slice']
+    safe_builtins = ['range', 'complex', 'set', 'frozenset', 'slice', 'getattr']
     safe_somax_modules = ['somax.runtime', 'somax.features', 'somax.corpus_builder', 'somax.scheduler']
 
     @staticmethod
@@ -313,6 +313,8 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
 
 
 class AudioCorpus(Corpus):
+    UNSPECIFIED = -1
+
     def __init__(self,
                  events: List[AudioCorpusEvent],
                  name: str,
@@ -391,14 +393,16 @@ class AudioCorpus(Corpus):
     def from_realtime_recorded(cls,
                                other: 'RealtimeRecordedAudioCorpus',
                                new_audio_filepath: str,
+                               new_sample_rate: int,
                                new_audio_duration: float,
-                               new_audio_num_channels: int) -> 'AudioCorpus':
+                               new_audio_num_channels: int,
+                               new_name: Optional[str] = None) -> 'AudioCorpus':
         return cls(events=other.events,
-                   name=other.name,
+                   name=new_name if new_name is not None else other.name,
                    scheduling_mode=other.scheduling_mode,
                    feature_types=other.feature_types,
                    build_parameters=other._build_parameters,
-                   sr=other.sr,
+                   sr=new_sample_rate,
                    filepath=new_audio_filepath,
                    file_duration=new_audio_duration,
                    file_num_channels=new_audio_num_channels)
@@ -418,14 +422,16 @@ class AudioCorpus(Corpus):
         except (FileNotFoundError, RuntimeError) as e:
             raise FileNotFoundError(e) from e
 
-        if expected_sample_rate != sample_rate:
+        if expected_sample_rate != AudioCorpus.UNSPECIFIED and expected_sample_rate != sample_rate:
             raise ValueError("Sample rate of file does not match corpus information")
 
-        if audio.ndim > 1 and expected_num_channels == 1 or audio.ndim > 1 and expected_num_channels != audio.shape[0]:
+        if expected_num_channels != AudioCorpus.UNSPECIFIED and \
+                (audio.ndim > 1 and expected_num_channels == 1 or
+                 audio.ndim > 1 and expected_num_channels != audio.shape[0]):
             raise ValueError("Number of channels of file does not match corpus information")
 
         num_samples: float = audio.size if audio.ndim == 1 else audio.shape[1]
-        if abs(expected_duration - num_samples / sample_rate) > 1.0:
+        if expected_duration != AudioCorpus.UNSPECIFIED and abs(expected_duration - num_samples / sample_rate) > 1.0:
             raise ValueError("Duration of file does not match corpus information")
 
     def encode(self) -> Dict[str, Any]:
@@ -534,10 +540,10 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                                            scheduling_mode=AbsoluteScheduling(),
                                            feature_types=target_features,
                                            build_parameters={RealtimeRecordedAudioCorpus.RT_RECORDED_KEY: True},
-                                           sr=-1,
+                                           sr=AudioCorpus.UNSPECIFIED,
                                            filepath="",
-                                           file_duration=-1,
-                                           file_num_channels=-1,
+                                           file_duration=AudioCorpus.UNSPECIFIED,
+                                           file_num_channels=AudioCorpus.UNSPECIFIED,
                                            recording_features_determined=recording_features_determined
                                            )
 

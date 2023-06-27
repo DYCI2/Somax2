@@ -1,4 +1,5 @@
 import asyncio
+import copy
 import logging
 import logging.config
 import multiprocessing
@@ -43,6 +44,7 @@ from somax.scheduler.scheduled_event import ScheduledEvent, TempoEvent, Renderer
 from somax.scheduler.scheduling_handler import SchedulingHandler, ManualSchedulingHandler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
+from somax.utils.file_utils import FileUtils
 
 
 # TODO: Complete separation Agent/OscAgent where Agent can be initialized and used from the command line
@@ -619,6 +621,33 @@ class OscAgent(Agent, AsyncioOscObject):
         self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "init")
         self._read_corpus(self.player.corpus)
         self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
+
+    def save_recorded_corpus(self, corpus_filepath: str, audio_filepath: str, overwrite: bool = False) -> None:
+        if self.player.corpus is None:
+            self.logger.error(f"No corpus exists")
+
+        if not isinstance(self.player.corpus, RealtimeRecordedAudioCorpus):
+            self.logger.error(f"Only record enabled corpora can be saved")
+            return
+
+        corpus: RealtimeRecordedAudioCorpus = copy.deepcopy(self.player.corpus)
+        try:
+            # Since corpus and buffer are saved simultaneously in the front-end, we won't validate corpora in this case
+            # audio, sample_rate = AudioUtils.read_audio_file(audio_filepath)
+            # num_channels: int = AudioUtils.get_num_channels(audio)
+            # duration_s: float = AudioUtils.get_duration_s(audio, sample_rate)
+            corpus_name: str = FileUtils.get_base_name_without_extension(corpus_filepath)
+            corpus: AudioCorpus = AudioCorpus.from_realtime_recorded(other=corpus,
+                                                                     new_audio_filepath=audio_filepath,
+                                                                     new_sample_rate=AudioCorpus.UNSPECIFIED,
+                                                                     new_audio_duration=AudioCorpus.UNSPECIFIED,
+                                                                     new_audio_num_channels=AudioCorpus.UNSPECIFIED,
+                                                                     new_name=corpus_name)
+
+            corpus.export(FileUtils.get_folder_of(corpus_filepath), overwrite=overwrite, copy_resources=False)
+
+        except (FileNotFoundError, RuntimeError, IOError) as e:
+            self.logger.error(f"{str(e)}. Could not save corpus")
 
     def record_enable(self, *required_features) -> None:
         try:
