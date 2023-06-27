@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 0.0, 53.0, 1443.0, 870.0 ],
+		"rect" : [ 0.0, 524.0, 1443.0, 870.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,92 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"color" : [ 0.4616160095, 1.0, 0.8905446529, 1.0 ],
+					"id" : "obj-872",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patcher" : 					{
+						"fileversion" : 1,
+						"appversion" : 						{
+							"major" : 8,
+							"minor" : 5,
+							"revision" : 5,
+							"architecture" : "x64",
+							"modernui" : 1
+						}
+,
+						"classnamespace" : "box",
+						"rect" : [ 59.0, 106.0, 291.0, 180.0 ],
+						"bglocked" : 0,
+						"openinpresentation" : 0,
+						"default_fontsize" : 12.0,
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"gridonopen" : 1,
+						"gridsize" : [ 15.0, 15.0 ],
+						"gridsnaponopen" : 1,
+						"objectsnaponopen" : 1,
+						"statusbarvisible" : 2,
+						"toolbarvisible" : 1,
+						"lefttoolbarpinned" : 0,
+						"toptoolbarpinned" : 0,
+						"righttoolbarpinned" : 0,
+						"bottomtoolbarpinned" : 0,
+						"toolbars_unpinned_last_save" : 0,
+						"tallnewobj" : 0,
+						"boxanimatetime" : 200,
+						"enablehscroll" : 1,
+						"enablevscroll" : 1,
+						"devicewidth" : 0.0,
+						"description" : "",
+						"digest" : "",
+						"tags" : "",
+						"style" : "",
+						"subpatcher_template" : "",
+						"assistshowspatchername" : 0,
+						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-4",
+									"linecount" : 6,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 15.0, 77.0, 255.0, 87.0 ],
+									"text" : "The reason why @corpus and @recordconfig are passed explicitly is simply to ensure the order of these messages: we want to ensure that @recordconfig always is passed before @corpus to avoid the corpus being overwritten by an empty recordconfig"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-2",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 15.0, 10.0, 255.0, 60.0 ],
+									"text" : "all default attributes may be passed even though they are not listed in the `patcherargs`: the patcherargs interface is completely open to attributes not defined by the object."
+								}
+
+							}
+ ],
+						"lines" : [  ]
+					}
+,
+					"patching_rect" : [ 1196.0, 7.0, 42.0, 22.0 ],
+					"saved_object_attributes" : 					{
+						"description" : "",
+						"digest" : "",
+						"globalpatchername" : "",
+						"tags" : ""
+					}
+,
+					"text" : "p note"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
 					"id" : "obj-675",
@@ -1607,7 +1693,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 100.0, 2092.0, 1256.0 ],
+						"rect" : [ 34.0, 87.0, 2512.0, 1255.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1637,50 +1723,13 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
-									"id" : "obj-34",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 1464.0, 505.0, 50.0, 22.0 ],
-									"text" : "null"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-27",
-									"maxclass" : "button",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 1452.0, 395.0, 24.0, 24.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.980525732, 0.5260759592, 0.0, 1.0 ],
-									"id" : "obj-18",
+									"id" : "obj-37",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 1447.477847236860271, 449.524808234227748, 136.0, 22.0 ],
-									"text" : "v #0_bufferconfig null"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-16",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "bang", "bang", "" ],
-									"patching_rect" : [ 818.477847236860384, 57.999906234227637, 40.0, 22.0 ],
-									"text" : "t b b l"
+									"numoutlets" : 4,
+									"outlettype" : [ "bang", "bang", "", "null" ],
+									"patching_rect" : [ 818.477847236860271, 64.999906234227637, 60.0, 22.0 ],
+									"text" : "t b b l null"
 								}
 
 							}
@@ -1763,7 +1812,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 953.0, 494.0, 123.0, 33.0 ],
+									"patching_rect" : [ 954.0, 480.0, 123.0, 33.0 ],
 									"text" : "null = no bufferconfig provided by user"
 								}
 
@@ -1775,7 +1824,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 1075.0, 501.0, 58.0, 22.0 ],
+									"patching_rect" : [ 1076.0, 487.0, 58.0, 22.0 ],
 									"text" : "route null"
 								}
 
@@ -4867,7 +4916,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 904.477847236860384, 134.524808234227748, 132.0, 22.0 ],
+									"patching_rect" : [ 938.477847236860384, 210.049616468455497, 132.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -4898,7 +4947,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 832.477847236860384, 148.024808234227748, 29.5, 22.0 ],
+									"patching_rect" : [ 870.227847236860384, 217.049616468455497, 29.5, 22.0 ],
 									"text" : "null"
 								}
 
@@ -4922,7 +4971,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 818.477847236860384, 102.0, 65.0, 22.0 ],
+									"patching_rect" : [ 852.477847236860384, 177.524808234227748, 65.0, 22.0 ],
 									"text" : "route clear"
 								}
 
@@ -5576,7 +5625,7 @@
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
-									"destination" : [ "obj-16", 0 ],
+									"destination" : [ "obj-37", 0 ],
 									"source" : [ "obj-1", 0 ]
 								}
 
@@ -5612,6 +5661,15 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-25", 0 ],
+									"order" : 0,
+									"source" : [ "obj-13", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-33", 0 ],
+									"order" : 1,
 									"source" : [ "obj-13", 0 ]
 								}
 
@@ -5633,27 +5691,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-20", 0 ],
-									"source" : [ "obj-16", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-5", 0 ],
-									"source" : [ "obj-16", 2 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-561", 0 ],
-									"source" : [ "obj-16", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-20", 0 ],
 									"source" : [ "obj-17", 2 ]
 								}
 
@@ -5669,13 +5706,6 @@
 								"patchline" : 								{
 									"destination" : [ "obj-877", 0 ],
 									"source" : [ "obj-17", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-34", 1 ],
-									"source" : [ "obj-18", 0 ]
 								}
 
 							}
@@ -5726,13 +5756,6 @@
 									"destination" : [ "obj-372", 0 ],
 									"midpoints" : [ 1282.420088520520721, 388.728633752060887, 355.977848101266659, 388.728633752060887 ],
 									"source" : [ "obj-26", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-18", 0 ],
-									"source" : [ "obj-27", 0 ]
 								}
 
 							}
@@ -5807,6 +5830,34 @@
 									"destination" : [ "obj-4", 0 ],
 									"midpoints" : [ 387.977848101266659, 248.2568485615584, 387.977848101266659, 248.2568485615584 ],
 									"source" : [ "obj-369", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-20", 0 ],
+									"source" : [ "obj-37", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-350", 0 ],
+									"source" : [ "obj-37", 3 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-395", 0 ],
+									"source" : [ "obj-37", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"source" : [ "obj-37", 2 ]
 								}
 
 							}
@@ -5933,7 +5984,16 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-20", 0 ],
+									"order" : 0,
+									"source" : [ "obj-9", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-561", 0 ],
+									"order" : 1,
 									"source" : [ "obj-9", 0 ]
 								}
 
@@ -8422,7 +8482,7 @@
 									"midpoints" : [ 230.944444013371367, 616.833329811692238, 158.999999568927024, 616.833329811692238 ],
 									"source" : [ "obj-36", 0 ],
 									"watchpoint_flags" : 5,
-									"watchpoint_id" : 2
+									"watchpoint_id" : 1
 								}
 
 							}
@@ -12534,8 +12594,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 704.0, 22.439567114741294, 372.0, 22.0 ],
-					"text" : "patcherargs name sendport recvport ip @loglevel 2 @autoinitialize 1"
+					"patching_rect" : [ 704.0, 22.439567114741294, 505.0, 22.0 ],
+					"text" : "patcherargs name sendport recvport ip @loglevel 2 @autoinitialize 1 @corpus @recordconfig"
 				}
 
 			}
@@ -12661,8 +12721,8 @@
 					"numinlets" : 16,
 					"numoutlets" : 16,
 					"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 19.333333333333314, 418.0, 822.0, 22.0 ],
-					"text" : "route influence learn corpus getcorpus recordenable savecorpus corpusquery thispatcher openwindow descriptor dump flush rawsend initialize reinitialize"
+					"patching_rect" : [ 19.333333333333314, 418.0, 818.0, 22.0 ],
+					"text" : "route influence learn corpus getcorpus recordconfig savecorpus corpusquery thispatcher openwindow descriptor dump flush rawsend initialize reinitialize"
 				}
 
 			}
@@ -35645,7 +35705,7 @@
 				"patchline" : 				{
 					"color" : [ 0.1294117647, 0.1294117647, 0.1294117647, 1.0 ],
 					"destination" : [ "obj-1262", 0 ],
-					"midpoints" : [ 831.833333333333258, 706.798883918782508, 28.833333333333314, 706.798883918782508 ],
+					"midpoints" : [ 827.833333333333258, 706.798883918782508, 28.833333333333314, 706.798883918782508 ],
 					"source" : [ "obj-1239", 15 ]
 				}
 
@@ -35681,7 +35741,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"midpoints" : [ 778.299999999999955, 467.951116081217435, 1053.5, 467.951116081217435 ],
+					"midpoints" : [ 774.566666666666606, 467.951116081217435, 1053.5, 467.951116081217435 ],
 					"source" : [ "obj-1239", 14 ]
 				}
 
@@ -35689,7 +35749,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"midpoints" : [ 724.766666666666652, 467.951116081217435, 1053.5, 467.951116081217435 ],
+					"midpoints" : [ 721.299999999999955, 467.951116081217435, 1053.5, 467.951116081217435 ],
 					"source" : [ "obj-1239", 13 ]
 				}
 
@@ -35746,7 +35806,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
-					"midpoints" : [ 671.233333333333348, 590.250000000000114, 28.833333333333314, 590.250000000000114 ],
+					"midpoints" : [ 668.033333333333303, 590.250000000000114, 28.833333333333314, 590.250000000000114 ],
 					"source" : [ "obj-1239", 12 ]
 				}
 
@@ -42258,9 +42318,6 @@
 				"boxes" : [ "obj-583", "obj-580" ]
 			}
 , 			{
-				"boxes" : [ "obj-213", "obj-536" ]
-			}
-, 			{
 				"boxes" : [ "obj-544", "obj-512" ]
 			}
 , 			{
@@ -42301,6 +42358,9 @@
 			}
 , 			{
 				"boxes" : [ "obj-954", "obj-1239" ]
+			}
+, 			{
+				"boxes" : [ "obj-213", "obj-536" ]
 			}
  ],
 		"styles" : [ 			{

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 95.0, 215.0, 2092.0, 1162.0 ],
+		"rect" : [ 0.0, 66.0, 1512.0, 853.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -81,7 +81,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 863.666666666666401, 328.0, 113.0, 22.0 ],
+					"patching_rect" : [ 863.666666666666401, 328.0, 114.0, 22.0 ],
 					"text" : "s #0_buffer_write"
 				}
 
@@ -94,7 +94,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1894.334651898732773, 497.0, 111.0, 22.0 ],
+					"patching_rect" : [ 1894.334651898732773, 497.0, 112.0, 22.0 ],
 					"text" : "r #0_buffer_write"
 				}
 
@@ -310,7 +310,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 577.0, 176.0, 1470.0, 774.0 ],
+						"rect" : [ 34.0, 100.0, 1470.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -338,7 +338,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-2",
@@ -574,6 +573,7 @@
 , 							{
 								"box" : 								{
 									"comment" : "(int, int) recording buffer size and num channels",
+									"cool" : 1,
 									"id" : "obj-140",
 									"index" : 2,
 									"maxclass" : "inlet",
@@ -1168,7 +1168,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 87.0, 924.0, 596.0 ],
+						"rect" : [ 34.0, 100.0, 924.0, 596.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1248,11 +1248,11 @@
 								"box" : 								{
 									"id" : "obj-19",
 									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 32.0, 56.0, 65.0, 22.0 ],
-									"text" : "route clear"
+									"numinlets" : 3,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 32.0, 56.0, 87.0, 22.0 ],
+									"text" : "route clear null"
 								}
 
 							}
@@ -1467,6 +1467,14 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-11", 0 ],
+									"midpoints" : [ 75.5, 81.5, 41.5, 81.5 ],
+									"source" : [ "obj-19", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-11", 0 ],
 									"source" : [ "obj-19", 0 ]
 								}
 
@@ -1474,7 +1482,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
-									"source" : [ "obj-19", 1 ]
+									"source" : [ "obj-19", 2 ]
 								}
 
 							}
