@@ -702,7 +702,7 @@ class OctaveBandsScaleAction(AbstractScaleAction):
 class RegionMaskScaleAction(AbstractScaleAction):
     def __init__(self):
         super().__init__()
-        print("\033[48;5;95;38;5;214mThis class' behaviour is disabled for now\033[0m")
+        print("\033[48;5;95;38;5;214mThis class' behaviour has not yet been tested, but should be ok?\033[0m")
         self._low_thresh: Parameter = Parameter(0, 0, 1.0, "float", "Fraction [0,1] marking start of region")
         self._high_thresh: Parameter = Parameter(1.0, 0, 1.0, "float", "Fraction [0,1] marking end of region")
 
@@ -716,9 +716,6 @@ class RegionMaskScaleAction(AbstractScaleAction):
               corpus: Corpus = None,
               enforce_output: bool = False,
               **kwargs) -> Tuple[Peaks, TabooMask]:
-        return peaks, taboo_mask  # TODO: THIS IS DISABLED!!!!
-
-        # TODO: This could be optimized and stored if ScaleAction had direct access to Corpus
         low_index: int = int(self._low_thresh.value * corpus.length())
         high_index: int = int(self._high_thresh.value * corpus.length())
 
