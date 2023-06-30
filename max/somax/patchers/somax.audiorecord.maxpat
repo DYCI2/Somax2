@@ -1362,7 +1362,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1021.0, 202.5, 165.0, 35.0 ],
-									"text" : "loadmess pitch onsetchroma meanchroma beat time"
+									"text" : "loadmess pitch onsetchroma meanchroma beat tempo"
 								}
 
 							}
@@ -3401,7 +3401,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
+					"outlettype" : [ "int" ],
 					"patching_rect" : [ 11.0, 67.0, 30.0, 30.0 ]
 				}
 
@@ -3756,7 +3756,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-155", 0 ],
-					"midpoints" : [ 306.022222222222183, 1154.25, 401.522222222222183, 1154.25 ],
+					"midpoints" : [ 306.022222222222183, 1141.25, 401.522222222222183, 1141.25 ],
 					"source" : [ "obj-170", 0 ]
 				}
 
