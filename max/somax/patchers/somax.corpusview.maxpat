@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 2,
+			"minor" : 5,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 237.0, 73.0 ],
+		"rect" : [ 34.0, 87.0, 2512.0, 1255.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -87,8 +87,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -130,7 +130,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 148.0, 154.0, 29.5, 22.0 ],
-									"text" : "(M)"
+									"text" : "(A)"
 								}
 
 							}
@@ -142,7 +142,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 71.0, 154.0, 29.5, 22.0 ],
-									"text" : "(A)"
+									"text" : "(M)"
 								}
 
 							}
@@ -177,8 +177,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "bang", "" ],
-									"patching_rect" : [ 71.0, 122.0, 96.0, 22.0 ],
-									"text" : "sel AudioCorpus"
+									"patching_rect" : [ 71.0, 122.0, 88.0, 22.0 ],
+									"text" : "sel MidiCorpus"
 								}
 
 							}
@@ -522,7 +522,6 @@
 , 			{
 				"box" : 				{
 					"fontface" : 1,
-					"hidden" : 1,
 					"id" : "obj-64",
 					"ignoreclick" : 1,
 					"maxclass" : "message",
@@ -532,7 +531,7 @@
 					"patching_rect" : [ 166.200000000000045, 879.200917431192693, 179.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ -0.58333333333303, 2.931034482758621, 190.0, 22.0 ],
-					"text" : "(A) freudaud*",
+					"text" : "(M) new*",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -598,8 +597,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -987,7 +986,7 @@
 				"box" : 				{
 					"comment" : "(protocol) messages to player",
 					"id" : "obj-20",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1019,8 +1018,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1451,7 +1450,6 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-					"hidden" : 1,
 					"id" : "obj-1068",
 					"ignoreclick" : 1,
 					"maxclass" : "led",
@@ -1530,7 +1528,7 @@
 					"fontface" : 1,
 					"fontsize" : 12.0,
 					"id" : "obj-26",
-					"items" : [ "--", "click", "to", "refresh", "--" ],
+					"items" : [ "--", "click", "to", "refresh", "--", ",", "(A) _heheasdf", ",", "(A) Fabbrizio2c", ",", "(A) Joelle", ",", "(A) Marco_guitar", ",", "(A) Untitled", ",", "(M) Bach_Invention_1", ",", "(M) Carine_Intuition", ",", "(M) Debussy_Preludes", ",", "(M) Debussy_String_Quartet", ",", "(M) Dutilleux_Sonata_3", ",", "(M) Ligeti_Etudes", ",", "(M) Palestrina_Missa_Papae", ",", "(M) Ravel_Miroirs", ",", "(M) Ten_Jazz_Standards" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -1542,10 +1540,10 @@
 					"presentation_rect" : [ 1.905677918418265, 2.931034482758621, 207.354947384154457, 22.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_enum" : [ "-- click to refresh --", "(A) Fabbrizio2c", "(A) Joelle", "(A) shostakovich118no2", "(M) _hehe", "(M) _SomeDebussyCorpus", "(M) Bach_Invention_1", "(M) Carine_Intuition", "(M) debussy_part", "(M) Debussy_Preludes", "(M) Debussy_String_Quartet", "(M) Dutilleux_Sonata_3", "(M) Hehe", "(M) Ligeti_Etudes", "(M) Palestrina_Missa_Papae", "(M) Ravel_Miroirs", "(M) scarbo_part", "(M) Ten_Jazz_Standards", "(M) This_corpus_has_been_renamed" ],
+							"parameter_enum" : [ "-- click to refresh --", "(A) _heheasdf", "(A) Fabbrizio2c", "(A) Joelle", "(A) Marco_guitar", "(A) Untitled", "(M) Bach_Invention_1", "(M) Carine_Intuition", "(M) Debussy_Preludes", "(M) Debussy_String_Quartet", "(M) Dutilleux_Sonata_3", "(M) Ligeti_Etudes", "(M) Palestrina_Missa_Papae", "(M) Ravel_Miroirs", "(M) Ten_Jazz_Standards" ],
 							"parameter_invisible" : 1,
 							"parameter_longname" : "corpusname[4]",
-							"parameter_mmax" : 18,
+							"parameter_mmax" : 14,
 							"parameter_shortname" : "corpusname",
 							"parameter_type" : 2
 						}
@@ -1616,7 +1614,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to corpusview",
 					"id" : "obj-12",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -2138,43 +2136,6 @@
 
 			}
  ],
-		"parameters" : 		{
-			"obj-26" : [ "corpusname[4]", "corpusname", 0 ],
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
-			}
-,
-			"inherited_shortname" : 1
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.corpuspath.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.path.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-1022", "obj-1080", "obj-1068" ]
 			}

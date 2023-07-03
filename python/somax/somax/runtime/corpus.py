@@ -536,7 +536,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         target_features = [] if target_features is None else target_features
 
         return RealtimeRecordedAudioCorpus(events=[],
-                                           name="realtime",
+                                           name="new",
                                            scheduling_mode=AbsoluteScheduling(),
                                            feature_types=target_features,
                                            build_parameters={RealtimeRecordedAudioCorpus.RT_RECORDED_KEY: True},
