@@ -40,6 +40,18 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-32",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "int", "int" ],
+					"patching_rect" : [ 163.922222222222217, 887.0, 62.0, 22.0 ],
+					"text" : "change -1"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
 					"id" : "obj-50",
 					"maxclass" : "newobj",
@@ -747,7 +759,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "int", "int" ],
-					"patching_rect" : [ 163.922222222222217, 891.0, 40.0, 22.0 ],
+					"patching_rect" : [ 163.922222222222217, 919.0, 40.0, 22.0 ],
 					"text" : "t i i i"
 				}
 
@@ -772,7 +784,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 207.172222222222217, 959.0, 140.0, 22.0 ],
+					"patching_rect" : [ 207.172222222222217, 974.0, 140.0, 22.0 ],
 					"text" : "s #0_recording_status"
 				}
 
@@ -2869,7 +2881,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 175.522222222222183, 1172.5, 180.0, 22.0 ],
-					"text" : "mc.record~ buffer-01 2",
+					"text" : "mc.record~ 4663_buf 2",
 					"varname" : "mcrecord"
 				}
 
@@ -3437,7 +3449,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-173", 0 ],
+					"destination" : [ "obj-32", 0 ],
 					"source" : [ "obj-113", 0 ]
 				}
 
@@ -3778,7 +3790,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-171", 0 ],
-					"midpoints" : [ 173.422222222222217, 947.5, 216.672222222222217, 947.5 ],
+					"midpoints" : [ 173.422222222222217, 963.5, 216.672222222222217, 963.5 ],
 					"source" : [ "obj-173", 0 ]
 				}
 
@@ -3786,7 +3798,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-181", 0 ],
-					"midpoints" : [ 194.422222222222217, 927.5, 108.755555555555418, 927.5 ],
+					"midpoints" : [ 194.422222222222217, 951.5, 108.755555555555418, 951.5 ],
 					"source" : [ "obj-173", 2 ]
 				}
 
@@ -3971,6 +3983,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-5", 0 ],
 					"source" : [ "obj-30", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-173", 0 ],
+					"source" : [ "obj-32", 0 ]
 				}
 
 			}

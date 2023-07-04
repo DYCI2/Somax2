@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 2,
+			"minor" : 5,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 67.0, 100.0, 603.0, 853.0 ],
+		"rect" : [ 67.0, 100.0, 674.0, 889.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -50,13 +50,13 @@
 					"lockedsize" : 0,
 					"maxclass" : "bpatcher",
 					"name" : "somax.player.app.maxpat",
-					"numinlets" : 1,
+					"numinlets" : 2,
 					"numoutlets" : 5,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "multichannelsignal", "", "", "", "" ],
 					"patching_rect" : [ 793.0, 77.0, 250.0, 825.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 256.0, 4.0, 244.5, 825.0 ],
+					"presentation_rect" : [ 256.0, 4.0, 244.5, 882.0 ],
 					"varname" : "somax.player.app",
 					"viewvisibility" : 1
 				}
@@ -117,9 +117,9 @@
 					"maxclass" : "mc.ezdac~",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 18.75, 401.0, 45.0, 45.0 ],
+					"patching_rect" : [ 22.75, 467.0, 45.0, 45.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 547.75, 48.0, 45.0, 45.0 ]
+					"presentation_rect" : [ 537.75, 209.0, 45.0, 45.0 ]
 				}
 
 			}
@@ -247,6 +247,11 @@
 			"obj-11::obj-3::obj-91::obj-2" : [ "live.text[31]", "live.text", 0 ],
 			"obj-11::obj-3::obj-91::obj-3" : [ "live.text[30]", "live.text", 0 ],
 			"obj-11::obj-6::obj-98" : [ "live.text[6]", "live.text[26]", 0 ],
+			"obj-11::obj-91::obj-13" : [ "live.text", "live.text", 0 ],
+			"obj-11::obj-91::obj-140" : [ "mc.live.gain~[3]", "mc.live.gain~", 0 ],
+			"obj-11::obj-96::obj-103" : [ "live.text[35]", "live.text[2]", 0 ],
+			"obj-11::obj-96::obj-140" : [ "mc.live.gain~", "mc.live.gain~", 0 ],
+			"obj-11::obj-96::obj-62::obj-1" : [ "source[9]", "source", 0 ],
 			"obj-2::obj-13::obj-1" : [ "source[4]", "source", 0 ],
 			"obj-2::obj-2::obj-395::obj-2" : [ "live.text[5]", "live.text[4]", 0 ],
 			"obj-2::obj-2::obj-395::obj-375" : [ "mc.live.gain~[8]", "click", 0 ],
@@ -383,6 +388,12 @@
 ,
 				"obj-11::obj-6::obj-98" : 				{
 					"parameter_longname" : "live.text[6]"
+				}
+,
+				"obj-11::obj-96::obj-62::obj-1" : 				{
+					"parameter_invisible" : 0,
+					"parameter_modmode" : 0,
+					"parameter_unitstyle" : 10
 				}
 ,
 				"obj-2::obj-13::obj-1" : 				{
@@ -598,6 +609,20 @@
 			}
 , 			{
 				"name" : "somax.audiooutput.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.audiorecord.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.audiorecord.ui.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
