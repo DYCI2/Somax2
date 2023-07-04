@@ -711,7 +711,10 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             parsed_features: List[CorpusFeature] = self.parse_features(features)
             event: CorpusEvent = self.player.learn_event(onset_ms / 1000, duration_ms / 1000, parsed_features)
-            self.target.send(PlayerSendProtocol.RECORD_LEARN_EVENT, [event.state_index, event.onset, event.duration])
+            self.target.send(PlayerSendProtocol.RECORD_LEARN_EVENT, [event.state_index,
+                                                                     event.onset,
+                                                                     event.duration,
+                                                                     self.player.corpus.duration() * 1000])
         except (RecordingError, ValueError, IndexError) as e:
             self.logger.error(f"{str(e)}. No event was recorded")
             self.target.send(PlayerSendProtocol.RECORD_LEARN_EVENT, -1)
@@ -960,7 +963,8 @@ class OscAgent(Agent, AsyncioOscObject):
                 corpus.name,
                 corpus.__class__.__name__,
                 corpus.length(),
-                corpus.filepath if isinstance(corpus, AudioCorpus) and corpus.filepath else None
+                corpus.filepath if isinstance(corpus, AudioCorpus) and corpus.filepath else None,
+                corpus.duration()
             ])
 
     def _send_eligibility(self):

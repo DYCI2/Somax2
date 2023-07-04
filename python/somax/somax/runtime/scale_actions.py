@@ -702,7 +702,6 @@ class OctaveBandsScaleAction(AbstractScaleAction):
 class RegionMaskScaleAction(AbstractScaleAction):
     def __init__(self):
         super().__init__()
-        print("\033[48;5;95;38;5;214mThis class' behaviour has not yet been tested, but should be ok?\033[0m")
         self._low_thresh: Parameter = Parameter(0, 0, 1.0, "float", "Fraction [0,1] marking start of region")
         self._high_thresh: Parameter = Parameter(1.0, 0, 1.0, "float", "Fraction [0,1] marking end of region")
 
