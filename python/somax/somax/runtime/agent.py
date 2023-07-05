@@ -645,6 +645,7 @@ class OscAgent(Agent, AsyncioOscObject):
                                                                      new_name=corpus_name)
 
             corpus.export(FileUtils.get_folder_of(corpus_filepath), overwrite=overwrite, copy_resources=False)
+            self.logger.info(f"Saved corpus to '{corpus_filepath}'.")
 
         except (FileNotFoundError, RuntimeError, IOError) as e:
             self.logger.error(f"{str(e)}. Could not save corpus")
