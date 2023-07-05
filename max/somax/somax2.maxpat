@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 67.0, 100.0, 674.0, 889.0 ],
+		"rect" : [ 67.0, 100.0, 702.0, 931.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -56,7 +56,7 @@
 					"outlettype" : [ "multichannelsignal", "", "", "", "" ],
 					"patching_rect" : [ 793.0, 77.0, 250.0, 825.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 256.0, 4.0, 244.5, 882.0 ],
+					"presentation_rect" : [ 256.0, 4.0, 244.5, 910.0 ],
 					"varname" : "somax.player.app",
 					"viewvisibility" : 1
 				}
@@ -388,6 +388,10 @@
 ,
 				"obj-11::obj-6::obj-98" : 				{
 					"parameter_longname" : "live.text[6]"
+				}
+,
+				"obj-11::obj-96::obj-103" : 				{
+					"parameter_longname" : "live.text[35]"
 				}
 ,
 				"obj-11::obj-96::obj-62::obj-1" : 				{
