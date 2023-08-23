@@ -22,6 +22,7 @@ from somax.runtime.parameter import Parameter, Parametric
 from somax.runtime.peak_post_processing import PeakPostFilter
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.peaks import Peaks
+from somax.runtime.region_mask import RegionMask
 from somax.runtime.scale_actions import AbstractScaleAction
 from somax.runtime.taboo_mask import TabooMask
 from somax.runtime.transform_handler import TransformHandler
@@ -42,6 +43,7 @@ class Player(Parametric, ContentAware):
         self.fallback_selector: FallbackPeakSelector = FallbackPeakSelector()
         self.corpus: Optional[Corpus] = None
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
+        self.region_mask: RegionMask = RegionMask()
         self.merge_action: AbstractMergeAction = merge_action
         self.post_filter: PeakPostFilter = PeakPostFilter(enabled=False)
 
@@ -440,6 +442,9 @@ class Player(Parametric, ContentAware):
         corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
         corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
                                                              for t in np.unique(peaks.transform_ids)]
+
+        peaks, taboo_mask = self.region_mask.process(peaks, corresponding_events, taboo_mask, corpus)
+
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled_and_eligible():
                 peaks, taboo_mask = scale_action.scale(peaks=peaks,

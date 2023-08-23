@@ -154,6 +154,11 @@ class Corpus(Generic[E], Introspective, ABC):
         index: int = self._index_map[int(np.floor(time * self._grid_size))]
         return self.event_at(index)
 
+    def event_around_ceil(self, time: float) -> E:
+        index_map_index: int = min(len(self._index_map) - 1, int(np.ceil(time * self._grid_size)))
+        index: int = self._index_map[index_map_index]
+        return self.event_at(index)
+
     def events_around(self, times: np.ndarray) -> List[E]:
         indices: np.ndarray = self._index_map[(np.floor(times * self._grid_size)).astype(int)]
         events: List[E] = [self.event_at(index) for index in indices]
