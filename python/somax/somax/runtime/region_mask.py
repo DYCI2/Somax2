@@ -33,15 +33,15 @@ class RegionMask:  # Note: not using Parametric since messages are more complex 
                 corresponding_events: List[CorpusEvent],
                 taboo_mask: TabooMask,
                 corpus: Corpus = None) -> Tuple[Peaks, TabooMask]:
-        corpus_mask: Optional[np.ndarray] = self.compute_corpus_mask(corpus)
+        corpus_taboo_mask: Optional[np.ndarray] = self.compute_corpus_taboo_mask(corpus)
 
-        if corpus_mask is None:  # all regions are disabled: ignore entire RegionMask rather than filter all events
+        if corpus_taboo_mask is None:  # all regions are disabled: ignore entire RegionMask rather than filter events
             return peaks, taboo_mask
 
         corresponding_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
-        is_disabled: np.ndarray = ~corpus_mask[corresponding_indices]
+        is_disabled: np.ndarray = corpus_taboo_mask[corresponding_indices]
         peaks.scale(0, is_disabled)
-        taboo_mask.add_taboo(is_disabled)
+        taboo_mask.add_taboo(corpus_taboo_mask)
 
         return peaks, taboo_mask
 
@@ -72,9 +72,9 @@ class RegionMask:  # Note: not using Parametric since messages are more complex 
             except IndexError:
                 raise ParameterError(f"Region {region_index} is out of range, max is {self.N_REGIONS - 1}")
 
-    def compute_corpus_mask(self, corpus: Corpus) -> Optional[np.ndarray]:
+    def compute_corpus_taboo_mask(self, corpus: Corpus) -> Optional[np.ndarray]:
         """ returns a boolean mask where of the same size as `corpus.events`,
-                    where True indicates that the index should be enabled, or None if all regions are disabled"""
+                    where True indicates that the index should be disabled, or None if all regions are disabled"""
         region_masks: List[np.ndarray] = []
         for region in self.regions:
             region_mask: Optional[np.ndarray] = self._compute_single_mask(region, corpus)
@@ -82,14 +82,14 @@ class RegionMask:  # Note: not using Parametric since messages are more complex 
                 region_masks.append(region_mask)
 
         if len(region_masks) > 0:
-            return np.logical_or.reduce(region_masks)
+            return ~np.logical_or.reduce(region_masks)
         else:
             return None
 
     @staticmethod
     def _compute_single_mask(region: Region, corpus: Corpus) -> Optional[np.ndarray]:
         """ returns a boolean mask where of the same size as `corpus.events`,
-            where True indicates that the index should be enabled"""
+            where True indicates that the index should be __enabled__"""
         if not region.enabled:
             return None
 

@@ -486,6 +486,24 @@ class OscAgent(Agent, AsyncioOscObject):
         except (AssertionError, KeyError, ValueError) as e:
             self.logger.error(f"{str(e)} No activity pattern was set.")
 
+    def set_region_mask(self, region_index: int, start_time: float, end_time: Optional[float]) -> None:
+        try:
+            start_time = max(0.0, start_time / 1000.0)
+            end_time = max(0.0, end_time / 1000.0)
+
+            if end_time is not None and start_time > end_time:
+                start_time, end_time = end_time, start_time
+
+            self.player.region_mask.set_region(region_index, start_time, end_time)
+        except ParameterError as e:
+            self.logger.error(f"{str(e)}. Parameter was not changed.")
+
+    def set_region_enable(self, region_index: int, enabled: bool) -> None:
+        try:
+            self.player.region_mask.enable_region(region_index, enabled)
+        except ParameterError as e:
+            self.logger.error(f"{str(e)}. Parameter was not changed.")
+
     def add_transform(self, transform: str, **kwargs):
         try:
             transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)

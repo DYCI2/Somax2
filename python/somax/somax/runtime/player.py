@@ -368,7 +368,7 @@ class Player(Parametric, ContentAware):
         self._parse_parameters()
 
     def add_transform(self, transform: AbstractTransform):
-        """ :raises TransformError if a transform of the same instance with the same parameters already exists """
+        """ raises TransformError if a transform of the same instance with the same parameters already exists """
         self._transform_handler.add(transform)
         self._update_transforms()
 

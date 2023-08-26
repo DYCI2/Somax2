@@ -75,6 +75,7 @@ class PlayerSendProtocol:
     SEND_AUDIO_OFF = [AUDIO_RENDERER_ADDRESS, "audio_off"]
 
     SEND_STATE_EVENT = "state"
+    SEND_POSITION_EVENT = "position"
 
     INFLUENCE = "influence"
 
