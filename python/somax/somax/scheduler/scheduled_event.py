@@ -48,7 +48,7 @@ class MidiSliceOnsetEvent(RendererEvent):
         return [RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_EVENT,
                                 content=[self.event.state_index, self.applied_transform.renderer_info()]),
                 RendererMessage(keyword=PlayerSendProtocol.SEND_POSITION_EVENT,
-                                content=[self.event.onset, self.event.duration]),
+                                content=[self.event.onset * 1000, (self.event.onset + self.event.duration) * 1000]),
                 RendererMessage(keyword=PlayerSendProtocol.SEND_MIDI_SLICE,
                                 content=notes),
                 RendererMessage(keyword=PlayerSendProtocol.SEND_MIDI_TIMESTRETCH,
@@ -106,7 +106,7 @@ class AudioEvent(AudioBase):
         messages: List[RendererMessage] = [
             RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_EVENT, content=self._state_content()),
             RendererMessage(keyword=PlayerSendProtocol.SEND_POSITION_EVENT,
-                            content=[self.event.onset, self.event.duration]),
+                            content=[self.event.onset * 1000, (self.event.onset + self.event.duration) * 1000]),
             RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_EVENT, content=self._rendering_content())
         ]
 
@@ -128,7 +128,7 @@ class AudioContinueEvent(AudioBase):
         messages: List[RendererMessage] = [
             RendererMessage(keyword=PlayerSendProtocol.SEND_STATE_EVENT, content=self._state_content()),
             RendererMessage(keyword=PlayerSendProtocol.SEND_POSITION_EVENT,
-                            content=[self.event.onset, self.event.duration]),
+                            content=[self.event.onset * 1000, (self.event.onset + self.event.duration) * 1000]),
             RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_CONTINUATION, content=self._rendering_content())
         ]
 

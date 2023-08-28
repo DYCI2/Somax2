@@ -39,9 +39,9 @@ class RegionMask:  # Note: not using Parametric since messages are more complex 
             return peaks, taboo_mask
 
         corresponding_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
-        is_disabled: np.ndarray = corpus_taboo_mask[corresponding_indices]
+        is_disabled: np.ndarray = np.array(corpus_taboo_mask[corresponding_indices])
         peaks.scale(0, is_disabled)
-        taboo_mask.add_taboo(corpus_taboo_mask)
+        taboo_mask.add_taboo_by_mask(corpus_taboo_mask)
 
         return peaks, taboo_mask
 
@@ -50,7 +50,7 @@ class RegionMask:  # Note: not using Parametric since messages are more complex 
         try:
             region: Region = self.regions[region_index]
             region.start_time = max(0.0, start_time)
-            region.end_time = min(region.start_time, end_time)
+            region.end_time = max(region.start_time, end_time)
         except IndexError:
             raise ParameterError(f"Region {region_index} is out of range, max is {self.N_REGIONS - 1}")
 
@@ -99,15 +99,15 @@ class RegionMask:  # Note: not using Parametric since messages are more complex 
         else:
             end_index = corpus.event_around_ceil(region.end_time).state_index
 
-        # Extend range by one if low == high
-        if start_index == end_index:
-            if end_index < corpus.length():
-                end_index += 1
-            elif start_index > 0:
-                start_index -= 1
-            # else: Do nothing: corpus is of length 0
+        # # Extend range by one if low == high
+        # if start_index == end_index:
+        #     if end_index < corpus.length() - 1:
+        #         end_index += 1
+        #     elif start_index > 0:
+        #         start_index -= 1
+        #     # else: Do nothing: corpus is of length 0
 
         corpus_mask: np.ndarray = np.zeros(corpus.length(), dtype=bool)
-        corpus_mask[start_index:end_index] = True
+        corpus_mask[start_index:end_index + 1] = True
 
         return corpus_mask

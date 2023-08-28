@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1633.0, 235.0, 1544.0, 1095.0 ],
+		"rect" : [ 982.0, 235.0, 1192.0, 1095.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,29 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"args" : [ "#0_buf" ],
+					"bgmode" : 0,
+					"border" : 0,
+					"clickthrough" : 0,
+					"enablehscroll" : 0,
+					"enablevscroll" : 0,
+					"id" : "obj-117",
+					"lockeddragscroll" : 0,
+					"lockedsize" : 0,
+					"maxclass" : "bpatcher",
+					"name" : "somax.regionmask.maxpat",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"offset" : [ 0.0, 0.0 ],
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 656.0, 746.0, 244.0, 95.0 ],
+					"varname" : "somax.regionmask",
+					"viewvisibility" : 1
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
@@ -158,7 +181,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "multichannelsignal" ],
 					"patching_rect" : [ 1491.809523809523853, 49.0, 30.0, 30.0 ]
 				}
 
@@ -388,6 +411,7 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.8 ],
+									"hidden" : 1,
 									"id" : "obj-105",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -2248,7 +2272,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 565.345238095238074, 750.952314739831309, 98.0, 18.0 ],
+					"patching_rect" : [ 535.345238095238074, 556.952314739831309, 98.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.0, 200.952314739831309, 220.208743189660254, 18.0 ],
 					"text" : "Player Controls",
@@ -5831,7 +5855,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 565.345238095238074, 750.952314739831309, 98.0, 18.0 ],
+					"patching_rect" : [ 535.345238095238074, 556.952314739831309, 98.0, 18.0 ],
 					"proportion" : 0.5
 				}
 

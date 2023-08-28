@@ -127,7 +127,6 @@ class Corpus(Generic[E], Introspective, ABC):
         end_index: int = int(np.floor((event.onset + event.duration) * self._grid_size))
 
         if end_index > Corpus.INDEX_MAP_SIZE:
-            print("recomputing index map")
             self._compute_index_map(self.duration() + self.MINIMUM_RECORD_BUFFER_DURATION)
 
         self._index_map[start_index:end_index] = event.state_index
@@ -160,7 +159,7 @@ class Corpus(Generic[E], Introspective, ABC):
 
     def event_around_ceil(self, time: float) -> E:
         index_map_index: int = min(len(self._index_map) - 1, int(np.ceil(time * self._grid_size)))
-        if index_map_index >= len(self._index_map):
+        if index_map_index >= len(self._index_map) - 1:
             return self.events[-1]
 
         index: int = self._index_map[index_map_index]
