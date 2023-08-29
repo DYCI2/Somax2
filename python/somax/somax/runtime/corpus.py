@@ -70,6 +70,7 @@ class Corpus(Generic[E], Introspective, ABC):
     INDEX_MAP_SIZE = 1_000_000
     DEFAULT_CORPUS_DURATION: float = 1800  # seconds
     MINIMUM_RECORD_BUFFER_DURATION: int = 600  # seconds
+    INDEX_MAP_UNRECORDED = -1
 
     def __init__(self,
                  events: List[E],
@@ -119,10 +120,16 @@ class Corpus(Generic[E], Introspective, ABC):
             self._grid_size: float = (Corpus.INDEX_MAP_SIZE - 1) / self.DEFAULT_CORPUS_DURATION
 
         self._index_map: np.ndarray = np.zeros(Corpus.INDEX_MAP_SIZE, dtype=int)
-        for event in self.events:
-            self._append_to_index_map(event)
 
-    def _append_to_index_map(self, event: CorpusEvent) -> None:
+        last_index_map_index: int = 0
+        for event in self.events:
+            last_index_map_index = self._append_to_index_map(event)
+
+        # rt-recorded: fill unused part with -1, corresponding to last event
+        if last_index_map_index < self._index_map.size - 1:
+            self._index_map[last_index_map_index + 1:] = self.INDEX_MAP_UNRECORDED
+
+    def _append_to_index_map(self, event: CorpusEvent) -> int:
         start_index: int = int(np.floor(event.onset * self._grid_size))
         end_index: int = int(np.floor((event.onset + event.duration) * self._grid_size))
 
@@ -130,6 +137,7 @@ class Corpus(Generic[E], Introspective, ABC):
             self._compute_index_map(self.duration() + self.MINIMUM_RECORD_BUFFER_DURATION)
 
         self._index_map[start_index:end_index] = event.state_index
+        return end_index
 
     def export(self, output_folder: str, overwrite: bool = False,
                indentation: Optional[int] = None, **kwargs) -> str:
@@ -151,7 +159,7 @@ class Corpus(Generic[E], Introspective, ABC):
 
     def event_around(self, time: float) -> E:
         index_map_index: int = int(np.floor(time * self._grid_size))
-        if index_map_index >= len(self._index_map):
+        if index_map_index >= len(self._index_map) or index_map_index == self.INDEX_MAP_UNRECORDED:
             return self.events[-1]
         index: int = self._index_map[index_map_index]
 
@@ -159,7 +167,7 @@ class Corpus(Generic[E], Introspective, ABC):
 
     def event_around_ceil(self, time: float) -> E:
         index_map_index: int = min(len(self._index_map) - 1, int(np.ceil(time * self._grid_size)))
-        if index_map_index >= len(self._index_map) - 1:
+        if index_map_index >= len(self._index_map) - 1 or index_map_index == self.INDEX_MAP_UNRECORDED:
             return self.events[-1]
 
         index: int = self._index_map[index_map_index]
@@ -167,6 +175,7 @@ class Corpus(Generic[E], Introspective, ABC):
 
     def events_around(self, times: np.ndarray) -> List[E]:
         indices: np.ndarray = self._index_map[(np.floor(times * self._grid_size)).astype(int)]
+        indices[indices == self.INDEX_MAP_UNRECORDED] = len(self.events) - 1
         events: List[E] = [self.event_at(index) for index in indices]
         return events
 
