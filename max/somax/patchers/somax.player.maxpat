@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1280.0, 53.0, 1280.0, 646.0 ],
+		"rect" : [ 865.0, 53.0, 1695.0, 1024.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -9820,7 +9820,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "simultaneousonsets[8]",
+							"parameter_longname" : "simultaneousonsets[2]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "simultaneousonsets",
 							"parameter_type" : 2
@@ -9980,10 +9980,10 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1469.563818565402016, 4207.5, 150.0, 20.0 ],
+					"patching_rect" : [ 1469.563818565402016, 4208.5, 150.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 21.41666666666697, 62.5, 202.84395863590575, 20.0 ],
-					"text" : "Joelle",
+					"text" : "--",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -11013,11 +11013,11 @@
 				"box" : 				{
 					"id" : "obj-112",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 1299.191666666667516, 3908.0, 118.0, 22.0 ],
-					"text" : "route loaded_corpus"
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 1299.191666666667516, 3908.0, 196.0, 22.0 ],
+					"text" : "route loaded_corpus saved_corpus"
 				}
 
 			}
@@ -11573,6 +11573,7 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"hidden" : 1,
 									"id" : "obj-1068",
 									"ignoreclick" : 1,
 									"maxclass" : "led",
@@ -11609,6 +11610,7 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
+									"hidden" : 1,
 									"id" : "obj-1020",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -17807,7 +17809,7 @@
 										}
 ,
 										"valueof" : 										{
-											"parameter_longname" : "live.numbox[3]",
+											"parameter_longname" : "live.numbox[4]",
 											"parameter_mmax" : 0.0,
 											"parameter_mmin" : -60.0,
 											"parameter_shortname" : "live.numbox[2]",
@@ -17859,7 +17861,7 @@
 										}
 ,
 										"valueof" : 										{
-											"parameter_longname" : "live.slider[3]",
+											"parameter_longname" : "live.slider[4]",
 											"parameter_mmax" : 0.0,
 											"parameter_mmin" : -60.0,
 											"parameter_shortname" : "live.slider",
@@ -17963,7 +17965,7 @@
 ,
 										"valueof" : 										{
 											"parameter_initial" : [ -30 ],
-											"parameter_longname" : "center[4]",
+											"parameter_longname" : "center[1]",
 											"parameter_mmax" : 0.0,
 											"parameter_mmin" : -60.0,
 											"parameter_shortname" : "Center",
@@ -18035,7 +18037,7 @@
 										"valueof" : 										{
 											"parameter_initial" : [ 1 ],
 											"parameter_initial_enable" : 1,
-											"parameter_longname" : "weight[4]",
+											"parameter_longname" : "weight[1]",
 											"parameter_mmax" : 1.0,
 											"parameter_shortname" : "Weight",
 											"parameter_type" : 0,
@@ -18299,7 +18301,7 @@
 ,
 										"valueof" : 										{
 											"parameter_initial" : [ 30 ],
-											"parameter_longname" : "width[4]",
+											"parameter_longname" : "width[1]",
 											"parameter_mmax" : 30.0,
 											"parameter_mmin" : 0.001,
 											"parameter_shortname" : "Width",
@@ -18456,7 +18458,7 @@
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_enum" : [ "off", "on" ],
-											"parameter_longname" : "__exp_velocityenable[4]",
+											"parameter_longname" : "__exp_velocityenable[1]",
 											"parameter_mmax" : 1,
 											"parameter_shortname" : "__exp_velocityenable",
 											"parameter_type" : 2
@@ -23282,7 +23284,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "simultaneousonsets[7]",
+							"parameter_longname" : "simultaneousonsets[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "artificialmidities",
 							"parameter_type" : 2
@@ -23379,7 +23381,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_tempoconsistencysigma[3]",
+							"parameter_longname" : "__exp_tempoconsistencysigma[4]",
 							"parameter_shortname" : "__exp_tempoconsistencysigma",
 							"parameter_type" : 3
 						}
@@ -23439,7 +23441,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_tempoconsistencyenable[2]",
+							"parameter_longname" : "__exp_tempoconsistencyenable[3]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "__exp_tempoconsistencyenable",
 							"parameter_type" : 2
@@ -23470,7 +23472,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_tempoconsistencylen[3]",
+							"parameter_longname" : "__exp_tempoconsistencylen[4]",
 							"parameter_shortname" : "__exp_tempoconsistencylen",
 							"parameter_type" : 3
 						}
@@ -23566,7 +23568,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_autojumpforcejump[4]",
+							"parameter_longname" : "__exp_autojumpforcejump[1]",
 							"parameter_shortname" : "__exp_autojumpforcejump",
 							"parameter_type" : 3
 						}
@@ -23609,7 +23611,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_autojumpenable[4]",
+							"parameter_longname" : "__exp_autojumpenable[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "__exp_autojumpenable",
 							"parameter_type" : 2
@@ -23640,7 +23642,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_autojumpactivate[4]",
+							"parameter_longname" : "__exp_autojumpactivate[1]",
 							"parameter_shortname" : "__exp_autojumpactivate",
 							"parameter_type" : 3
 						}
@@ -23743,7 +23745,7 @@
 						"valueof" : 						{
 							"parameter_enum" : [ "Top note", "Virtual fundamental", "Bass note" ],
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_selfpitchfromchords[3]",
+							"parameter_longname" : "__exp_selfpitchfromchords[4]",
 							"parameter_mmax" : 2,
 							"parameter_shortname" : "__exp_selfpitchfromchords",
 							"parameter_type" : 2
@@ -23783,7 +23785,7 @@
 						"valueof" : 						{
 							"parameter_enum" : [ "Top note", "Virtual fundamental", "Bass note" ],
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_melodicpitchfromchords[1]",
+							"parameter_longname" : "__exp_melodicpitchfromchords[2]",
 							"parameter_mmax" : 2,
 							"parameter_shortname" : "__exp_melodicpitchfromchords",
 							"parameter_type" : 2
@@ -23827,7 +23829,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_octavebands[4]",
+							"parameter_longname" : "__exp_octavebands[1]",
 							"parameter_shortname" : "__exp_octavebands",
 							"parameter_type" : 3
 						}
@@ -23874,7 +23876,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_octavebandsenable[3]",
+							"parameter_longname" : "__exp_octavebandsenable[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "__exp_octavebandsenable",
 							"parameter_type" : 2
@@ -23955,7 +23957,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_durationsigma[3]",
+							"parameter_longname" : "__exp_durationsigma[4]",
 							"parameter_shortname" : "__exp_durationsigma",
 							"parameter_type" : 3
 						}
@@ -24019,7 +24021,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_durationmu[4]",
+							"parameter_longname" : "__exp_durationmu[1]",
 							"parameter_shortname" : "__exp_durationmu",
 							"parameter_type" : 3
 						}
@@ -24099,7 +24101,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_numnotessigma[4]",
+							"parameter_longname" : "__exp_numnotessigma[1]",
 							"parameter_shortname" : "__exp_numnotessigma",
 							"parameter_type" : 3
 						}
@@ -24142,7 +24144,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_numnotesenable[3]",
+							"parameter_longname" : "__exp_numnotesenable[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "__exp_numnotesenable",
 							"parameter_type" : 2
@@ -24174,7 +24176,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_numnotesmu[4]",
+							"parameter_longname" : "__exp_numnotesmu[1]",
 							"parameter_shortname" : "__exp_numnotesmu",
 							"parameter_type" : 3
 						}
@@ -24611,7 +24613,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "rslider[4]",
+							"parameter_longname" : "rslider[1]",
 							"parameter_shortname" : "rslider",
 							"parameter_type" : 3
 						}
@@ -24737,7 +24739,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[9]",
+							"parameter_longname" : "continuity[1]",
 							"parameter_mmax" : 10.0,
 							"parameter_mmin" : 0.1,
 							"parameter_shortname" : "continuity",
@@ -24942,7 +24944,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "outputprobability[2]",
+							"parameter_longname" : "outputprobability[3]",
 							"parameter_mmax" : 1.0,
 							"parameter_shortname" : "outputprobability",
 							"parameter_type" : 3
@@ -25028,7 +25030,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "enforcetaboo[3]",
+							"parameter_longname" : "enforcetaboo[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "enforcetaboo",
 							"parameter_type" : 2
@@ -25136,7 +25138,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[24]",
+							"parameter_longname" : "continuity[2]",
 							"parameter_shortname" : "continuity",
 							"parameter_type" : 3
 						}
@@ -25288,7 +25290,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "ignorephase[3]",
+							"parameter_longname" : "ignorephase[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "ignorephase",
 							"parameter_type" : 2
@@ -26229,7 +26231,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "selfharmonicbypass[3]",
+							"parameter_longname" : "selfharmonicbypass[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "selfharmonicbypass",
 							"parameter_type" : 2
@@ -26256,7 +26258,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "harmonicbypass[4]",
+							"parameter_longname" : "harmonicbypass[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "harmonicbypass",
 							"parameter_type" : 2
@@ -26283,7 +26285,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "melodicbypass[4]",
+							"parameter_longname" : "melodicbypass[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "melodicbypass",
 							"parameter_type" : 2
@@ -26310,7 +26312,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "selfmelodicbypass[4]",
+							"parameter_longname" : "selfmelodicbypass[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "selfmelodicbypass",
 							"parameter_type" : 2
@@ -26484,7 +26486,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[8]",
+							"parameter_longname" : "continuity[27]",
 							"parameter_shortname" : "continuity",
 							"parameter_type" : 3
 						}
@@ -26595,7 +26597,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "heldnotesmode[6]",
+							"parameter_longname" : "heldnotesmode[8]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "heldnotesmode",
 							"parameter_type" : 2
@@ -27363,7 +27365,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_regionmaskenable[4]",
+							"parameter_longname" : "__exp_regionmaskenable[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "__exp_regionmaskenable",
 							"parameter_type" : 2
@@ -28782,7 +28784,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "selfharmonicngramorder[2]",
+							"parameter_longname" : "selfharmonicngramorder[3]",
 							"parameter_shortname" : "selfharmonicngramorder",
 							"parameter_type" : 3
 						}
@@ -28857,7 +28859,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "harmonincpeakdecay[1]",
+							"parameter_longname" : "harmonincpeakdecay[3]",
 							"parameter_mmin" : 1.001,
 							"parameter_shortname" : "harmonincpeakdecay[1]",
 							"parameter_type" : 3
@@ -30742,7 +30744,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "resetinfluences[4]",
+							"parameter_longname" : "resetinfluences[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "resetinfluences",
 							"parameter_type" : 2
@@ -30881,7 +30883,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1549.16666666666697, 143.388170273750688, 143.0, 22.0 ],
 					"restore" : 					{
-						"LEGACY_regionmask" : [ 0.127777777777781, 0.248989898989903 ],
+						"LEGACY_regionmask" : [ 0.0, 1.0 ],
 						"LEGACY_regionmaskenable" : [ 0 ],
 						"__exp_autojumpactivate" : [ 2 ],
 						"__exp_autojumpenable" : [ 0 ],
@@ -30900,9 +30902,9 @@
 						"__exp_tempoconsistencylen" : [ 5 ],
 						"__exp_tempoconsistencysigma" : [ 5 ],
 						"artificialmidities" : [ 0 ],
-						"continuity" : [ 0.0 ],
+						"continuity" : [ 1.5 ],
 						"cut" : [ 1 ],
-						"decaybasis" : [ 0 ],
+						"decaybasis" : [ 1 ],
 						"enabled" : [ 1 ],
 						"enforcetaboo" : [ 1 ],
 						"fallback" : [ "Random" ],
@@ -30920,17 +30922,17 @@
 						"midionsets" : [ 0 ],
 						"outputfrom" : [ 0 ],
 						"outputprobability" : [ 1.0 ],
-						"playingmode" : [ 0 ],
+						"playingmode" : [ 1 ],
 						"pollpeaks" : [ 1 ],
 						"quality" : [ 0.0 ],
 						"recombine" : [ 1 ],
 						"resetinfluences" : [ 0.0 ],
 						"selfharmonicenable" : [ 1 ],
-						"selfharmonicngramorder" : [ 1 ],
+						"selfharmonicngramorder" : [ 2 ],
 						"selfharmonicpeakdecay" : [ 3.001 ],
 						"selfmelodicenable" : [ 1 ],
 						"selfmod12" : [ 0 ],
-						"selfngramorder" : [ 1 ],
+						"selfngramorder" : [ 2 ],
 						"selfpeakdecay" : [ 2.001 ],
 						"sparse" : [ 0 ],
 						"tabooduration" : [ 1 ],
@@ -30940,7 +30942,7 @@
 						"timestretch" : [ 1.0 ],
 						"timestretchmode" : [ 0 ],
 						"transpositionbias" : [ 1.0 ],
-						"weights" : [ 0.001000000047497, 0.001000000047497, 1.0, 0.5 ]
+						"weights" : [ 0.25, 0.25, 1.0, 0.5 ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -31208,7 +31210,7 @@
 					"patching_rect" : [ 2881.99007361828717, 4078.475191765772252, 49.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 290.977624551600002, 659.967976230862746, 49.333334237337112, 18.0 ],
-					"text" : "3",
+					"text" : "0",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -31575,7 +31577,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "selfmod12[3]",
+							"parameter_longname" : "selfmod12[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "selfmod12",
 							"parameter_type" : 2
@@ -31609,7 +31611,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "melodicmod12[4]",
+							"parameter_longname" : "melodicmod12[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "melodicmod12",
 							"parameter_type" : 2
@@ -31710,7 +31712,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "decaybasis[4]",
+							"parameter_longname" : "decaybasis[1]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "decaybasis",
 							"parameter_type" : 2
@@ -31737,7 +31739,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "playingmode[3]",
+							"parameter_longname" : "playingmode[4]",
 							"parameter_mmax" : 1,
 							"parameter_shortname" : "playingmode",
 							"parameter_type" : 2
@@ -31811,7 +31813,7 @@
 					"patching_rect" : [ 1965.998681434600257, 89.5090360442681, 180.0, 27.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 21.41666666666697, 11.5, 401.10262443239094, 27.0 ],
-					"text" : "Player_1282",
+					"text" : "Player",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -34039,7 +34041,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "harmonincpeakdecay[8]",
+							"parameter_longname" : "harmonincpeakdecay[2]",
 							"parameter_mmin" : 1.001,
 							"parameter_shortname" : "harmonincpeakdecay",
 							"parameter_type" : 3
@@ -34072,7 +34074,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "melodicpeakdecay[2]",
+							"parameter_longname" : "melodicpeakdecay[3]",
 							"parameter_mmin" : 1.001,
 							"parameter_shortname" : "melodicpeakdecay",
 							"parameter_type" : 3
@@ -34105,7 +34107,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "selfpeakdecay[4]",
+							"parameter_longname" : "selfpeakdecay[1]",
 							"parameter_mmin" : 1.001,
 							"parameter_shortname" : "selfpeakdecay",
 							"parameter_type" : 3
@@ -34283,7 +34285,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "melodicngramorder[2]",
+							"parameter_longname" : "melodicngramorder[3]",
 							"parameter_shortname" : "melodicngramorder",
 							"parameter_type" : 3
 						}
@@ -34313,7 +34315,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "selfngramorder[4]",
+							"parameter_longname" : "selfngramorder[1]",
 							"parameter_shortname" : "selfngramorder",
 							"parameter_type" : 3
 						}
@@ -34343,7 +34345,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "harmonicngramorder[4]",
+							"parameter_longname" : "harmonicngramorder[1]",
 							"parameter_shortname" : "harmonicngramorder",
 							"parameter_type" : 3
 						}
@@ -34460,7 +34462,7 @@
 					"patching_rect" : [ 1299.191666666667516, 4242.5, 160.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 66.0, 550.612867779498515, 160.0, 18.0 ],
-					"text" : "AudioCorpus",
+					"text" : "--",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -34476,7 +34478,7 @@
 					"patching_rect" : [ 1299.191666666667516, 4217.5, 126.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 66.0, 532.612867779498515, 162.360810332475694, 18.0 ],
-					"text" : "Joelle",
+					"text" : "--",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -34492,7 +34494,6 @@
 					"patching_rect" : [ 1853.069517028150585, 4246.907651035666277, 44.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 144.835656285099049, 647.134642261746535, 57.0, 18.0 ],
-					"text" : "80",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -34564,7 +34565,6 @@
 					"patching_rect" : [ 1764.069517028150585, 4243.907651035666277, 44.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 65.41666666666697, 644.134642261746535, 70.0, 24.0 ],
-					"text" : "6",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -35360,6 +35360,13 @@
 					"destination" : [ "obj-904", 0 ],
 					"order" : 1,
 					"source" : [ "obj-1115", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1106", 0 ],
+					"source" : [ "obj-112", 1 ]
 				}
 
 			}
