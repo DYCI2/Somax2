@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 1588.0, 1137.0 ],
+		"rect" : [ 34.0, 100.0, 1588.0, 1137.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -73,7 +73,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-29",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -317,7 +316,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 343.75, 571.5, 44.0, 35.0 ],
-									"text" : "0 0 0 0 0"
+									"text" : "0 0 0 0"
 								}
 
 							}
@@ -1418,7 +1417,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1984.055204165706527, 145.0, 84.0, 19.0 ],
+					"patching_rect" : [ 1984.055204165706527, 147.0, 84.0, 19.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 57.60223139936295, 31.166513085365295, 36.55078125, 13.75 ],
 					"text" : "RESET",
@@ -2849,7 +2848,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to player",
 					"id" : "obj-406",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -2862,7 +2861,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-844",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2874,7 +2873,7 @@
 				"box" : 				{
 					"comment" : "(int) status",
 					"id" : "obj-403",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2886,7 +2885,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-404",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2898,7 +2897,7 @@
 				"box" : 				{
 					"comment" : "(any) rendering messages from server",
 					"id" : "obj-405",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -7236,7 +7235,7 @@
 					"patching_rect" : [ 981.827602082853218, 1580.277821151306853, 26.0, 29.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 122.1940929683349, 253.139516100287437, 47.529404369778035, 18.0 ],
-					"text" : "(1.00)",
+					"text" : "1.00",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -7375,6 +7374,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-177",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -8076,7 +8076,7 @@
 					"patching_rect" : [ 789.777602082853264, 1323.920199000000139, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 15.754275447334038, 390.058338403701782, 173.549996524623509, 10.0 ],
-					"size" : 122.0
+					"size" : 1.0
 				}
 
 			}
@@ -8417,7 +8417,7 @@
 					"patching_rect" : [ 669.277602082853264, 1322.920199000000139, 50.000000000000114, 19.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 11.61473037911847, 390.058338403701782, 173.549996524623509, 10.0 ],
-					"size" : 122.0
+					"size" : 1.0
 				}
 
 			}
@@ -8449,7 +8449,7 @@
 					"patching_rect" : [ 887.12671614325518, 1313.920199000000139, 44.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 142.660483977118389, 404.258338510990143, 48.295910194374756, 18.0 ],
-					"text" : "122",
+					"text" : "0",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -8482,7 +8482,7 @@
 					"patching_rect" : [ 725.277602082853264, 1320.920199000000139, 54.0, 23.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 61.004275447333924, 401.258338510990143, 67.0, 23.0 ],
-					"text" : "53",
+					"text" : "0",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -8647,7 +8647,7 @@
 					"patching_rect" : [ 1247.277602082853264, 1368.920199000000139, 41.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 154.695939084736807, 440.254164308309555, 40.0, 18.0 ],
-					"text" : "5",
+					"text" : "0",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -11277,6 +11277,260 @@
 
 			}
  ],
+		"parameters" : 		{
+			"obj-1115" : [ "continuity[22]", "continuity", 0 ],
+			"obj-1150" : [ "live.text[34]", "live.text", 0 ],
+			"obj-1175" : [ "heldnotesmode[5]", "heldnotesmode", 0 ],
+			"obj-1179" : [ "continuity[23]", "continuity", 0 ],
+			"obj-123::obj-1" : [ "live.text[10]", "live.text", 0 ],
+			"obj-123::obj-2" : [ "live.text[11]", "live.text", 0 ],
+			"obj-123::obj-3" : [ "live.text[12]", "live.text", 0 ],
+			"obj-14::obj-128" : [ "live.text[62]", "live.text", 1 ],
+			"obj-14::obj-135" : [ "live.text[59]", "live.text", 1 ],
+			"obj-14::obj-153" : [ "live.text[61]", "live.text", 1 ],
+			"obj-14::obj-163" : [ "live.text[60]", "live.text", 1 ],
+			"obj-14::obj-173" : [ "live.text[51]", "live.text", 1 ],
+			"obj-14::obj-39" : [ "live.tab[1]", "live.tab", 0 ],
+			"obj-14::obj-64" : [ "live.text[52]", "live.text", 0 ],
+			"obj-16::obj-26" : [ "corpusname[4]", "corpusname", 0 ],
+			"obj-33" : [ "live.text[53]", "live.text[53]", 0 ],
+			"obj-407::obj-1007" : [ "rslider[1]", "rslider", 0 ],
+			"obj-407::obj-1115" : [ "continuity[1]", "continuity", 0 ],
+			"obj-407::obj-1175" : [ "heldnotesmode[8]", "heldnotesmode", 0 ],
+			"obj-407::obj-1179" : [ "continuity[27]", "continuity", 0 ],
+			"obj-407::obj-12" : [ "melodicmod12[1]", "melodicmod12", 0 ],
+			"obj-407::obj-120" : [ "melodicbypass[1]", "melodicbypass", 0 ],
+			"obj-407::obj-1218" : [ "simultaneousonsets[1]", "artificialmidities", 0 ],
+			"obj-407::obj-126" : [ "harmonicbypass[1]", "harmonicbypass", 0 ],
+			"obj-407::obj-134" : [ "continuity[2]", "continuity", 0 ],
+			"obj-407::obj-1344" : [ "enforcetaboo[4]", "enforcetaboo", 0 ],
+			"obj-407::obj-140" : [ "resetinfluences[1]", "resetinfluences", 0 ],
+			"obj-407::obj-144" : [ "harmonicngramorder[1]", "harmonicngramorder", 0 ],
+			"obj-407::obj-1444" : [ "outputprobability[3]", "outputprobability", 0 ],
+			"obj-407::obj-152" : [ "selfngramorder[1]", "selfngramorder", 0 ],
+			"obj-407::obj-154" : [ "melodicngramorder[3]", "melodicngramorder", 0 ],
+			"obj-407::obj-163" : [ "ignorephase[4]", "ignorephase", 0 ],
+			"obj-407::obj-19" : [ "selfmod12[4]", "selfmod12", 0 ],
+			"obj-407::obj-22" : [ "selfmelodicbypass[1]", "selfmelodicbypass", 0 ],
+			"obj-407::obj-254" : [ "harmonincpeakdecay[2]", "harmonincpeakdecay", 0 ],
+			"obj-407::obj-255" : [ "melodicpeakdecay[3]", "melodicpeakdecay", 0 ],
+			"obj-407::obj-256" : [ "selfpeakdecay[1]", "selfpeakdecay", 0 ],
+			"obj-407::obj-270::obj-1226" : [ "width[1]", "Width", 0 ],
+			"obj-407::obj-270::obj-1227" : [ "center[1]", "Center", 0 ],
+			"obj-407::obj-270::obj-1240" : [ "live.slider[4]", "live.slider", 0 ],
+			"obj-407::obj-270::obj-1241" : [ "live.numbox[4]", "live.numbox[2]", 0 ],
+			"obj-407::obj-270::obj-622" : [ "__exp_velocityenable[1]", "__exp_velocityenable", 0 ],
+			"obj-407::obj-270::obj-889" : [ "weight[1]", "Weight", 0 ],
+			"obj-407::obj-295" : [ "playingmode[4]", "playingmode", 0 ],
+			"obj-407::obj-298" : [ "simultaneousonsets[2]", "simultaneousonsets", 0 ],
+			"obj-407::obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
+			"obj-407::obj-570" : [ "__exp_melodicpitchfromchords[2]", "__exp_melodicpitchfromchords", 0 ],
+			"obj-407::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
+			"obj-407::obj-642" : [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
+			"obj-407::obj-653" : [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
+			"obj-407::obj-656" : [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],
+			"obj-407::obj-688" : [ "__exp_durationsigma[4]", "__exp_durationsigma", 0 ],
+			"obj-407::obj-702" : [ "__exp_durationmu[1]", "__exp_durationmu", 0 ],
+			"obj-407::obj-722" : [ "__exp_octavebandsenable[4]", "__exp_octavebandsenable", 0 ],
+			"obj-407::obj-733" : [ "__exp_octavebands[1]", "__exp_octavebands", 0 ],
+			"obj-407::obj-746" : [ "__exp_selfpitchfromchords[4]", "__exp_selfpitchfromchords", 0 ],
+			"obj-407::obj-763" : [ "__exp_autojumpforcejump[1]", "__exp_autojumpforcejump", 0 ],
+			"obj-407::obj-774" : [ "__exp_autojumpenable[1]", "__exp_autojumpenable", 0 ],
+			"obj-407::obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
+			"obj-407::obj-799" : [ "__exp_tempoconsistencyenable[3]", "__exp_tempoconsistencyenable", 0 ],
+			"obj-407::obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
+			"obj-407::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
+			"obj-407::obj-865" : [ "selfharmonicngramorder[3]", "selfharmonicngramorder", 0 ],
+			"obj-407::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
+			"obj-407::obj-998" : [ "__exp_regionmaskenable[1]", "__exp_regionmaskenable", 0 ],
+			"obj-79::obj-1" : [ "live.text[25]", "live.text", 0 ],
+			"obj-79::obj-2" : [ "live.text[23]", "live.text", 0 ],
+			"obj-79::obj-3" : [ "live.text[18]", "live.text", 0 ],
+			"obj-87::obj-1" : [ "live.text[2]", "live.text", 0 ],
+			"obj-87::obj-2" : [ "live.text[1]", "live.text", 0 ],
+			"obj-87::obj-3" : [ "live.text[3]", "live.text", 0 ],
+			"obj-89::obj-1" : [ "live.text[6]", "live.text", 0 ],
+			"obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],
+			"obj-89::obj-3" : [ "live.text[4]", "live.text", 0 ],
+			"obj-91::obj-1" : [ "live.text[7]", "live.text", 0 ],
+			"obj-91::obj-2" : [ "live.text[9]", "live.text", 0 ],
+			"obj-91::obj-3" : [ "live.text[8]", "live.text", 0 ],
+			"parameterbanks" : 			{
+				"0" : 				{
+					"index" : 0,
+					"name" : "",
+					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"parameter_overrides" : 			{
+				"obj-123::obj-1" : 				{
+					"parameter_longname" : "live.text[10]"
+				}
+,
+				"obj-123::obj-2" : 				{
+					"parameter_longname" : "live.text[11]"
+				}
+,
+				"obj-123::obj-3" : 				{
+					"parameter_longname" : "live.text[12]"
+				}
+,
+				"obj-16::obj-26" : 				{
+					"parameter_invisible" : 1,
+					"parameter_modmode" : 0,
+					"parameter_unitstyle" : 10
+				}
+,
+				"obj-87::obj-1" : 				{
+					"parameter_longname" : "live.text[2]"
+				}
+,
+				"obj-87::obj-2" : 				{
+					"parameter_longname" : "live.text[1]"
+				}
+,
+				"obj-87::obj-3" : 				{
+					"parameter_longname" : "live.text[3]"
+				}
+,
+				"obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[6]"
+				}
+,
+				"obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[5]"
+				}
+,
+				"obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[4]"
+				}
+,
+				"obj-91::obj-1" : 				{
+					"parameter_longname" : "live.text[7]"
+				}
+,
+				"obj-91::obj-2" : 				{
+					"parameter_longname" : "live.text[9]"
+				}
+,
+				"obj-91::obj-3" : 				{
+					"parameter_longname" : "live.text[8]"
+				}
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "abstraction_path.js",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "peakmeter.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "./resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.atom.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "./resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.await_patcherargs.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpuspath.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpusview.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.multistatebutton.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.path.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.player.core.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.player.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.print.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.regionmask.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.uniquename.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.uniquenumber.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-100", "obj-103" ]
 			}
