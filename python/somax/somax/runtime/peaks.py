@@ -18,7 +18,7 @@ class Peaks:
 
     @classmethod
     def create_empty(cls):
-        return cls(np.empty(0, dtype=np.float), np.empty(0, dtype=np.float), np.empty(0, dtype=np.int32))
+        return cls(np.empty(0, dtype=np.float), np.empty(0, dtype=float), np.empty(0, dtype=np.int32))
 
     @classmethod
     def optimized_copy(cls, other: 'Peaks') -> 'Peaks':
