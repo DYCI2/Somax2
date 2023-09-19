@@ -486,6 +486,24 @@ class OscAgent(Agent, AsyncioOscObject):
         except (AssertionError, KeyError, ValueError) as e:
             self.logger.error(f"{str(e)} No activity pattern was set.")
 
+    def set_region_mask(self, region_index: int, start_time: float, end_time: Optional[float]) -> None:
+        try:
+            start_time = max(0.0, start_time / 1000.0)
+            end_time = max(0.0, end_time / 1000.0)
+
+            if end_time is not None and start_time > end_time:
+                start_time, end_time = end_time, start_time
+
+            self.player.region_mask.set_region(region_index, start_time, end_time)
+        except ParameterError as e:
+            self.logger.error(f"{str(e)}. Parameter was not changed.")
+
+    def set_region_enable(self, region_index: int, enabled: bool) -> None:
+        try:
+            self.player.region_mask.enable_region(region_index, enabled)
+        except ParameterError as e:
+            self.logger.error(f"{str(e)}. Parameter was not changed.")
+
     def add_transform(self, transform: str, **kwargs):
         try:
             transform: AbstractTransform = AbstractTransform.from_string(transform, **kwargs)
@@ -645,6 +663,7 @@ class OscAgent(Agent, AsyncioOscObject):
                                                                      new_name=corpus_name)
 
             corpus.export(FileUtils.get_folder_of(corpus_filepath), overwrite=overwrite, copy_resources=False)
+            self.send_corpus_info(corpus, protocol_address=PlayerSendProtocol.PLAYER_SAVED_CORPUS)
             self.logger.info(f"Saved corpus to '{corpus_filepath}'.")
 
         except (FileNotFoundError, RuntimeError, IOError) as e:
@@ -686,28 +705,6 @@ class OscAgent(Agent, AsyncioOscObject):
 
         return required_feature_types
 
-    def save_realtime_corpus(self,
-                             corpus_filepath: str,
-                             audio_filepath: str,
-                             audio_file_duration: float,
-                             audio_file_num_channels: int,
-                             overwrite: bool = False) -> None:
-        if isinstance(self.player.corpus, RealtimeRecordedAudioCorpus):
-            # TODO: Continue. ALSO: OUTPUT_FOLDER IS INSUFFICIENT: WE NEED TO BE ABLE TO SPECIFY NAME, NOT JUST PATH
-            self.player.corpus.export_realtime()  # TODO
-
-    # def set_recording_buffer_size(self, duration_ms: int, override: bool = False) -> None:
-    #     if self.player.corpus is None:
-    #         self.recording_buffer_size_ms = duration_ms
-    #         self.target.send(PlayerSendProtocol.RECORDING_BUFFER_SIZE, duration_ms)
-    #     elif not isinstance(self.player.corpus, RealtimeRecordedAudioCorpus):
-    #         self.recording_buffer_size_ms = duration_ms
-    #         self.reload_corpus()
-    #         # no send required here: duration will be set through send_current_corpus_info
-    #     else:
-    #         self.logger.error("Cannot set buffer size while recording a corpus, save the corpus first "
-    #                           "or use override=True to discard changes")
-
     def learn_event(self, onset_ms: float, duration_ms: float, *features) -> None:
         try:
             parsed_features: List[CorpusFeature] = self.parse_features(features)
@@ -720,9 +717,6 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. No event was recorded")
             self.target.send(PlayerSendProtocol.RECORD_LEARN_EVENT, -1)
             return
-
-    def save_corpus(self, corpus_filepath: str, audio_filepath: Optional[str]) -> None:
-        self.logger.warning("placeholder for save. No actual saving occurred on server")
 
     @staticmethod
     def parse_features(unparsed_feature_data) -> List[CorpusFeature]:
@@ -902,7 +896,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
         self._try_update_server_tempo()  # immediately set tempo if player is tempo master
         self._send_eligibility()
-        self.send_current_corpus_info()
+        self.send_corpus_info()
 
     ######################################################
     # MAX GETTERS
@@ -957,10 +951,12 @@ class OscAgent(Agent, AsyncioOscObject):
         atom_names: List[str] = [atom.name for atom in self.player.all_atoms()]
         self.target.send(PlayerSendProtocol.INSTANTIATED_ATOMS, atom_names)
 
-    def send_current_corpus_info(self):
-        corpus: Optional[Corpus] = self.player.corpus
+    def send_corpus_info(self,
+                         corpus: Optional[Corpus] = None,
+                         protocol_address: List[str] = PlayerSendProtocol.PLAYER_LOADED_CORPUS) -> None:
+        corpus: Optional[Corpus] = corpus if corpus is not None else self.player.corpus
         if corpus is not None:
-            self.target.send(PlayerSendProtocol.PLAYER_LOADED_CORPUS, [
+            self.target.send(protocol_address, [
                 corpus.name,
                 corpus.__class__.__name__,
                 corpus.length(),

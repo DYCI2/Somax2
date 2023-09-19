@@ -47,6 +47,7 @@ class PlayerSendProtocol:
     PLAYER_CORPUS_FILES = [CORPUS_ADDRESS, "corpus_info"]
     PLAYER_READING_CORPUS_STATUS = [CORPUS_ADDRESS, "reading_corpus_status"]
     PLAYER_LOADED_CORPUS = [CORPUS_ADDRESS, "loaded_corpus"]
+    PLAYER_SAVED_CORPUS = [CORPUS_ADDRESS, "saved_corpus"]  # keyword when only visual updates are needed
 
     # Player Info
     PEAKS_ADDRESS = "matches"
@@ -75,6 +76,7 @@ class PlayerSendProtocol:
     SEND_AUDIO_OFF = [AUDIO_RENDERER_ADDRESS, "audio_off"]
 
     SEND_STATE_EVENT = "state"
+    SEND_POSITION_EVENT = "position"
 
     INFLUENCE = "influence"
 

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1633.0, 235.0, 1544.0, 1095.0 ],
+		"rect" : [ 982.0, 235.0, 1192.0, 1095.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -158,7 +158,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "multichannelsignal" ],
 					"patching_rect" : [ 1491.809523809523853, 49.0, 30.0, 30.0 ]
 				}
 
@@ -1655,7 +1655,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1754.806430447673847, 1308.671761930873799, 141.0, 29.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 53.446091326391524, 801.248508741790147, 144.0, 18.0 ],
+					"presentation_rect" : [ 53.446091326391524, 831.248508741790147, 144.0, 18.0 ],
 					"text" : "Audio output is not enabled!",
 					"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 				}
@@ -1673,7 +1673,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1754.806430447673847, 1348.234543328618429, 57.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 47.561593824301383, 793.130327670484348, 156.16583841731341, 34.366800515965451 ],
+					"presentation_rect" : [ 47.561593824301383, 823.130327670484348, 156.16583841731341, 34.366800515965451 ],
 					"proportion" : 0.5
 				}
 
@@ -1690,7 +1690,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1714.5, 1308.671761930873799, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.012757366895017, 779.294275507330894, 235.033334456516286, 119.733334243297577 ],
+					"presentation_rect" : [ 1.012757366895017, 809.294275507330894, 235.033334456516286, 119.733334243297577 ],
 					"proportion" : 0.5
 				}
 
@@ -1815,7 +1815,7 @@
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 326.166666666666629, 2091.0, 250.0, 42.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -4.487242633104984, 861.544275507330894, 238.5, 42.0 ],
+					"presentation_rect" : [ -4.487242633104984, 891.544275507330894, 238.5, 42.0 ],
 					"varname" : "audiooutput",
 					"viewvisibility" : 1
 				}
@@ -1840,7 +1840,7 @@
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 738.0, 2086.0, 248.0, 31.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.563522277931724, 874.544275507330894, 242.728838934480223, 31.0 ],
+					"presentation_rect" : [ -0.563522277931724, 904.544275507330894, 242.728838934480223, 31.0 ],
 					"varname" : "midioutput",
 					"viewvisibility" : 1
 				}
@@ -2187,7 +2187,7 @@
 ,
 					"patching_rect" : [ 365.0, 1516.0, 87.666666666666629, 36.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 3.0, 809.294275507330894, 95.25, 46.0 ],
+					"presentation_rect" : [ 3.0, 839.294275507330894, 95.25, 46.0 ],
 					"varname" : "audio_crossfade_params",
 					"viewvisibility" : 1
 				}
@@ -2206,7 +2206,7 @@
 					"parameter_mappable" : 0,
 					"patching_rect" : [ 1577.296875, 1158.0, 55.90625, 19.171875 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 176.969159816590491, 676.641377239831399, 48.239583373069763, 14.621875000000045 ],
+					"presentation_rect" : [ 176.969159816590491, 706.641377239831399, 48.239583373069763, 14.621875000000045 ],
 					"rounded" : 8.0,
 					"spacing_x" : 2.0,
 					"text" : "Settings",
@@ -2229,7 +2229,7 @@
 					"parameter_mappable" : 0,
 					"patching_rect" : [ 1394.5, 1156.0, 55.90625, 19.171875 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 176.969159816590491, 765.500003308057785, 48.239583373069763, 14.621875000000045 ],
+					"presentation_rect" : [ 176.969159816590491, 795.500003308057785, 48.239583373069763, 14.621875000000045 ],
 					"rounded" : 8.0,
 					"spacing_x" : 2.0,
 					"text" : "Settings",
@@ -2248,7 +2248,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 565.345238095238074, 750.952314739831309, 98.0, 18.0 ],
+					"patching_rect" : [ 535.345238095238074, 556.952314739831309, 98.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.0, 200.952314739831309, 220.208743189660254, 18.0 ],
 					"text" : "Player Controls",
@@ -2288,7 +2288,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 922.999604686419389, 1763.0, 98.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 763.500003308057785, 220.208743189660254, 18.0 ],
+					"presentation_rect" : [ 5.0, 793.500003308057785, 220.208743189660254, 18.0 ],
 					"text" : "Output Control",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -2305,7 +2305,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 2099.842478265590216, 120.814617391619322, 5.0, 13.833332926034927 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 755.002152636647224, 220.208743189660254, 15.0 ],
+					"presentation_rect" : [ 5.0, 785.002152636647224, 220.208743189660254, 15.0 ],
 					"saved_attribute_attributes" : 					{
 						"linecolor" : 						{
 							"expression" : ""
@@ -2326,7 +2326,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1588.999604686419389, 1736.499999999999773, 105.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 674.952314739831309, 220.208743189660254, 18.0 ],
+					"presentation_rect" : [ 5.0, 704.952314739831309, 220.208743189660254, 18.0 ],
 					"text" : "Outgoing Influences",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
@@ -2343,7 +2343,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 2090.40625, 120.814617391619322, 5.0, 13.833332926034927 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.0, 666.454464068420748, 220.208743189660254, 15.0 ],
+					"presentation_rect" : [ 5.0, 696.454464068420748, 220.208743189660254, 15.0 ],
 					"saved_attribute_attributes" : 					{
 						"linecolor" : 						{
 							"expression" : ""
@@ -4181,7 +4181,7 @@
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 679.0, 1711.0, 233.0, 97.5 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 3.512757366895016, 779.294275507330894, 236.0, 122.0 ],
+					"presentation_rect" : [ 3.512757366895016, 809.294275507330894, 236.0, 122.0 ],
 					"varname" : "midimixer",
 					"viewvisibility" : 1
 				}
@@ -4205,7 +4205,7 @@
 					"outlettype" : [ "multichannelsignal", "", "" ],
 					"patching_rect" : [ 285.0, 1716.0, 233.0, 85.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.012757366895017, 779.294275507330894, 233.0, 82.25 ],
+					"presentation_rect" : [ 1.012757366895017, 809.294275507330894, 233.0, 82.25 ],
 					"varname" : "audiomixer",
 					"viewvisibility" : 1
 				}
@@ -5719,7 +5719,7 @@
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 1326.5, 1711.0, 232.0, 69.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.012757366895017, 690.5, 236.0, 67.5 ],
+					"presentation_rect" : [ 1.012757366895017, 720.5, 236.0, 67.5 ],
 					"varname" : "midiinfluencer",
 					"viewvisibility" : 1
 				}
@@ -5743,7 +5743,7 @@
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 1050.0, 1711.0, 246.0, 69.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.012757366895017, 690.5, 236.0, 67.5 ],
+					"presentation_rect" : [ 1.012757366895017, 720.5, 236.0, 67.5 ],
 					"varname" : "audioinfluencer",
 					"viewvisibility" : 1
 				}
@@ -5768,7 +5768,7 @@
 					"outlettype" : [ "", "int", "", "" ],
 					"patching_rect" : [ 285.0, 548.0, 242.0, 437.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.932044170444215, 219.454464068420748, 236.0, 451.0 ],
+					"presentation_rect" : [ 1.932044170444215, 219.454464068420748, 236.0, 478.0 ],
 					"varname" : "somax.player.ui",
 					"viewvisibility" : 1
 				}
@@ -5786,7 +5786,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 2084.115780912310584, 113.231283854636786, 30.0, 29.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -2.644235474382526, -1.958486914634705, 245.728838934480223, 911.252762421965599 ],
+					"presentation_rect" : [ -2.644235474382526, -1.958486914634705, 245.728838934480223, 937.502762421965599 ],
 					"proportion" : 0.5
 				}
 
@@ -5831,7 +5831,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 565.345238095238074, 750.952314739831309, 98.0, 18.0 ],
+					"patching_rect" : [ 535.345238095238074, 556.952314739831309, 98.0, 18.0 ],
 					"proportion" : 0.5
 				}
 

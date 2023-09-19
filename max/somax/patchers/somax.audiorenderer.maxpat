@@ -4834,9 +4834,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-59", 0 ],
 					"order" : 1,
-					"source" : [ "obj-216", 0 ],
-					"watchpoint_flags" : 5,
-					"watchpoint_id" : 1
+					"source" : [ "obj-216", 0 ]
 				}
 
 			}
