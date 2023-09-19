@@ -46,7 +46,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 73.672222222222217, 32.0, 30.0, 30.0 ]
 				}
 
@@ -1721,8 +1721,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1021.0, 202.5, 165.0, 35.0 ],
-									"text" : "loadmess pitch onsetchroma meanchroma beat tempo"
+									"patching_rect" : [ 1021.0, 202.5, 166.0, 35.0 ],
+									"text" : "loadmess pitch onsetchroma meanchroma tempo beat"
 								}
 
 							}
@@ -3181,7 +3181,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 217.522222222222183, 1245.5, 180.0, 22.0 ],
-					"text" : "mc.record~ 7943_buf 2",
+					"text" : "mc.record~ buffer-03 2",
 					"varname" : "mcrecord"
 				}
 
@@ -3700,7 +3700,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "multichannelsignal" ],
+					"outlettype" : [ "int" ],
 					"patching_rect" : [ 12.0, 32.0, 30.0, 30.0 ]
 				}
 
