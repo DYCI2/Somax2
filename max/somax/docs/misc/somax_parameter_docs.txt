@@ -42,12 +42,35 @@
 * Memory Length:                        selfngramorder <1..∞>, selfharmonicngramorder <1..∞>, melodicngramorder <1..∞>, harmonicngramorder <1..∞>
 * Decay Time:                           selfpeakdecay <1..∞>, selfharmonicpeakdecay <1..∞>, melodicpeakdecay <1..∞>, harmonicpeakdecay <1..∞>
 
-* Region Mask (enable):                 regionmaskenable <1/0>
-* Region Mask (range):                  regionmask <0..1> <0..1>
+* Region Mask Enable:                   region enabled <1..6> <1/0>
+* Region Mask Start/End:                region bounds <1..6> <start_ms> <end_ms>
+* Region Editable (GUI):                region editable <1..6>
+* Region Reset to Default (Single):     region reset <1..6>
+* Region Reset to Default (All):        region reset
 
 * Transposition Bias:                   transpositionbias <0..1>
 * Active Transpositions:                transpositions <0/1> <0/1> ... <0/1> (binary mask with 12 values, one for each transposition, 1 enables, 0 disables)
                                         transpositions <-5..6> <-5..6> ... <-5..6> (list of transpositions that should be enabled. ex -5 0 3 enables -5 0 and 3, all others are disabled. 0 disables all but 0-transposition)
+
+#### PLAYER REAL-TIME RECORDING MESSAGES ####
+
+* Enable Recording Module:              audiorecord enabled
+* Set Analysis Source:                  audiorecord source <Name_of_Influencer>
+* Set Recording Source:                 audiorecord audiodevice "Name of Device" (name of device as listed in the menu, for example "2 Input 2")
+* Toggle Recording Source:              audiorecord inputenabled <1/0>
+* Crossfade:                            audiorecord crossfade <0..>
+* Recording Source Gain:                audiorecord gain <-70..6>                                  
+* Start/Stop recording:                 audiorecord start/stop
+* Pause Recording on Silence:           audiorecord autopause <1/0>
+* Silence Threshold:                    audiorecord pausethresh <-70..0> 
+* Pause Interval:                       audiorecord pauseinterval <0..>
+
+* Reset to New Empty Corpus:            corpus new
+* Save Recorded Corpus:                 savecorpus <Name_of_Corpus> (will write both .wav and .pickle file to corpuspath)
+                                        savecorpus <Name_of_Corpus> 1 (overwrite existing)
+
+
+
 
 #### PLAYER RUNTIME MESSAGES ####
 * Trigger Output:                       bang
