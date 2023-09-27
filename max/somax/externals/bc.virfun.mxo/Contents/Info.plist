@@ -3,17 +3,22 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>17G65</string>
+	<string>20G527</string>
+	<key>C74ObjectProperties</key>
+	<dict>
+		<key>c74excludefromcollectives</key>
+		<string></string>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>bc.virfun</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.bc.virfun</string>
+	<string>.</string>
 	<key>CFBundleInfoDictionaryVersion</key>
-	<string></string>
+	<string>6.0</string>
 	<key>CFBundleLongVersionString</key>
-	<string>bc.virfun , Copyright 2017 BenCello</string>
+	<string>bc.virfun  - </string>
 	<key>CFBundlePackageType</key>
 	<string>iLaX</string>
 	<key>CFBundleSignature</key>
@@ -22,23 +27,29 @@
 	<array>
 		<string>MacOSX</string>
 	</array>
-	<key>CFBundleVersion</key>
-	<string></string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>9F2000</string>
+	<string>13C100</string>
+	<key>DTPlatformName</key>
+	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>GM</string>
+	<string>12.1</string>
 	<key>DTSDKBuild</key>
-	<string>17E189</string>
+	<string>21C46</string>
 	<key>DTSDKName</key>
-	<string>macosx10.13</string>
+	<string>macosx12.1</string>
 	<key>DTXcode</key>
-	<string>0941</string>
+	<string>1321</string>
 	<key>DTXcodeBuild</key>
-	<string>9F2000</string>
+	<string>13C100</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.11</string>
+	<key>LSRequiresCarbon</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
 </dict>
 </plist>
