@@ -19,14 +19,21 @@ class SchedulingMode(StringParsed, ABC):
 
     @classmethod
     def from_string(cls, class_name: str, **kwargs) -> 'SchedulingMode':
-        return cls._from_string(class_name)
+        # Legacy formats from pre-2.4 json/pickle files:
+        if class_name.lower() == "relative":
+            return RelativeScheduling()
+        elif class_name.lower() == "absolute":
+            return AbsoluteScheduling()
+
+        else:
+            return cls._from_string(class_name)
 
 
 class RelativeScheduling(SchedulingMode):
     """ Scheduling based on tick (i.e. beats, bars, ...) """
 
     def encode(self) -> str:
-        return "Relative"
+        return "RelativeScheduling"
 
     def get_time_axis(self, time: Time) -> float:
         return time.ticks
@@ -36,7 +43,7 @@ class AbsoluteScheduling(SchedulingMode):
     """ Scheduling based on seconds """
 
     def encode(self) -> str:
-        return "Absolute"
+        return "AbsoluteScheduling"
 
     def get_time_axis(self, time: Time) -> float:
         return time.seconds
