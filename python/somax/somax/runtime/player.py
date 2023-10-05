@@ -88,6 +88,9 @@ class Player(Parametric, ContentAware):
         if not self.corpus:
             raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
 
+        if self.corpus.length() == 0:
+            raise InvalidCorpus(f"Corpus is empty in player '{self.name}'.")
+
         if self._force_jump_index is not None:
             self.clear()
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
@@ -145,6 +148,9 @@ class Player(Parametric, ContentAware):
         if not self.corpus:
             raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
 
+        if self.corpus.length() == 0:
+            raise InvalidCorpus(f"Corpus is empty in player '{self.name}'.")
+
         if self._force_jump_index is not None:
             self.clear()
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
@@ -180,6 +186,9 @@ class Player(Parametric, ContentAware):
 
         if self.corpus is None:
             raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
+
+        if self.corpus.length() == 0:
+            raise InvalidCorpus(f"Corpus is empty in player '{self.name}'.")
 
         num_generated_peaks: Dict[Atom, int] = {}
         if not path:
@@ -396,7 +405,7 @@ class Player(Parametric, ContentAware):
     ######################################################
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return True  # valid for all types of corpora
+        return True  # valid for all types of corpora (for now)
 
     # TODO: Legacy function from recursive Streamview structure: remove at some point
     def _get_atom(self, path: List[str]) -> Atom:

@@ -1481,7 +1481,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 2141.0, 1223.0 ],
+						"rect" : [ 34.0, 113.0, 2141.0, 1223.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1542,7 +1542,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 488.0, 694.0, 197.0, 20.0 ],
+									"patching_rect" : [ 484.0, 688.0, 197.0, 20.0 ],
 									"text" : "SEE NEXT TAB FOR EXAMPLES!"
 								}
 
@@ -2267,7 +2267,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 901.104166666666401, 245.562499999999829, 163.0, 29.0 ],
-									"text" : "0 offline"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -3220,6 +3220,10 @@
 ,
 				"obj-1::obj-14::obj-270::obj-889" : 				{
 					"parameter_longname" : "weight[3]"
+				}
+,
+				"obj-1::obj-23::obj-98" : 				{
+					"parameter_longname" : "live.text[3]"
 				}
 ,
 				"obj-6::obj-23::obj-98" : 				{
