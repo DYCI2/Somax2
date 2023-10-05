@@ -1514,6 +1514,32 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-1",
+									"linecount" : 17,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 484.0, 750.5, 338.0, 234.0 ],
+									"presentation_linecount" : 17,
+									"text" : "@linkto <name> \n\nThis attribute exists for both somax.audiorenderer and somax.audiorecord and can be used when multiple objects refer to the same buffer. \n\nFor example in the case where you have 1 audiorecord recording simultaneously into 3 players which each have a separate renderer referring to the same buffer. In this case, setting \"@linkto null\" in two of the renderers is recommended (but not mandatory) to avoid duplicate messages.\n\nAnother example is if you have 3 audiorecord objects with different segmentations recording into the same buffer. (i.e. 3 audiorecord -> 3 player -> 3 audiorenderer). In this case, you should use individual @linkto attributes for each pair of audiorecord/audiorenderer"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"id" : "obj-3",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 484.0, 728.5, 350.0, 20.0 ],
+									"presentation_linecount" : 3,
+									"text" : "Linkto attribute (somax.audiorenderer / somax.audiorecord)"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-47",
 									"maxclass" : "comment",
 									"numinlets" : 1,
