@@ -69,7 +69,7 @@ class DistanceMergeAction(AbstractMergeAction):
             times: np.ndarray = peaks.times[indices]
             num_cols: int = scores.size
 
-            row_indices: np.ndarray = np.floor(times * inv_duration * num_rows).astype(np.int32)
+            row_indices: np.ndarray = np.minimum(num_rows, np.floor(times * inv_duration * num_rows).astype(np.int32))
             interp_matrix: sparse.coo_matrix = sparse.coo_matrix(
                 (np.ones(num_cols), (row_indices, np.arange(num_cols))),
                 shape=(num_rows + 1, num_cols))
