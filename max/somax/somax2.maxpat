@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 67.0, 100.0, 702.0, 931.0 ],
+		"rect" : [ 34.0, 87.0, 606.0, 933.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -184,6 +184,15 @@
 			"obj-11::obj-3::obj-123::obj-1" : [ "live.text[32]", "live.text", 0 ],
 			"obj-11::obj-3::obj-123::obj-2" : [ "live.text[33]", "live.text", 0 ],
 			"obj-11::obj-3::obj-123::obj-3" : [ "live.text[19]", "live.text", 0 ],
+			"obj-11::obj-3::obj-14::obj-12" : [ "live.slider[2]", "live.slider[2]", 0 ],
+			"obj-11::obj-3::obj-14::obj-128" : [ "live.text[62]", "live.text", 1 ],
+			"obj-11::obj-3::obj-14::obj-135" : [ "live.text[59]", "live.text", 1 ],
+			"obj-11::obj-3::obj-14::obj-153" : [ "live.text[61]", "live.text", 1 ],
+			"obj-11::obj-3::obj-14::obj-163" : [ "live.text[60]", "live.text", 1 ],
+			"obj-11::obj-3::obj-14::obj-173" : [ "live.text[51]", "live.text", 1 ],
+			"obj-11::obj-3::obj-14::obj-39" : [ "live.tab[1]", "live.tab", 0 ],
+			"obj-11::obj-3::obj-14::obj-40" : [ "live.slider[4]", "live.slider[2]", 0 ],
+			"obj-11::obj-3::obj-14::obj-64" : [ "live.text[52]", "live.text", 0 ],
 			"obj-11::obj-3::obj-16::obj-26" : [ "corpusname[4]", "corpusname", 0 ],
 			"obj-11::obj-3::obj-407::obj-1007" : [ "rslider[1]", "rslider", 0 ],
 			"obj-11::obj-3::obj-407::obj-1115" : [ "continuity[1]", "continuity", 0 ],
@@ -250,6 +259,8 @@
 			"obj-11::obj-91::obj-13" : [ "live.text", "live.text", 0 ],
 			"obj-11::obj-91::obj-140" : [ "mc.live.gain~[3]", "mc.live.gain~", 0 ],
 			"obj-11::obj-96::obj-103" : [ "live.text[35]", "live.text[2]", 0 ],
+			"obj-11::obj-96::obj-117" : [ "live.text[63]", "live.text[30]", 0 ],
+			"obj-11::obj-96::obj-119" : [ "live.text[64]", "live.text[30]", 0 ],
 			"obj-11::obj-96::obj-140" : [ "mc.live.gain~", "mc.live.gain~", 0 ],
 			"obj-11::obj-96::obj-62::obj-1" : [ "source[9]", "source", 0 ],
 			"obj-2::obj-13::obj-1" : [ "source[4]", "source", 0 ],
@@ -322,6 +333,10 @@
 ,
 				"obj-11::obj-3::obj-123::obj-3" : 				{
 					"parameter_longname" : "live.text[19]"
+				}
+,
+				"obj-11::obj-3::obj-14::obj-40" : 				{
+					"parameter_longname" : "live.slider[4]"
 				}
 ,
 				"obj-11::obj-3::obj-16::obj-26" : 				{
@@ -818,6 +833,13 @@
 				"name" : "somax.receiveblock.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "./patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.regionmask.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
