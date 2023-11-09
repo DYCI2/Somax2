@@ -272,7 +272,7 @@ class SoundStudio(UniformTextFormat):
 
             where ONSET = mm'ss,ffff
         """
-        tokens = re.match("\s*(\d+)'(\d+),(\d+)\s*", line_str)
+        tokens = re.match("\s*(\d+)'(\d+)[.,](\d+)\s*", line_str)
         if tokens is None:
             raise ParsingError(line_str)
 
