@@ -152,47 +152,6 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         self._selectivity.value = value
 
 
-class DiscretePhaseModulationScaleAction(AbstractScaleAction):
-    DEFAULT_GRID_SIZE = 12
-
-    def __init__(self):
-        super().__init__()
-        self._grid_size: Parameter = Parameter(self.DEFAULT_GRID_SIZE, None, None, 'int', "this is a nice parameter")
-
-    def scale(self,
-              peaks: Peaks,
-              time: float,
-              beat_phase: float,
-              corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform],
-              taboo_mask: TabooMask,
-              corpus: Corpus = None,
-              enforce_output: bool = False,
-              **kwargs) -> Tuple[Peaks, TabooMask]:
-        event_beat_phases: np.ndarray = np.floor(np.array([e.get_feature(BeatPhase).value()
-                                                           for e in
-                                                           corresponding_events]) * self._grid_size.value).astype(int)
-        beat_phase_index: int = int(np.floor(beat_phase * self._grid_size.value))
-        mask: np.ndarray = (event_beat_phases == beat_phase_index).astype(int)
-        peaks *= mask
-        return peaks, taboo_mask
-
-    def feedback(self,
-                 feedback_event: Optional[CorpusEvent],
-                 time: float,
-                 applied_transform: AbstractTransform) -> None:
-        pass
-
-    def update_transforms(self, transform_handler: TransformHandler):
-        pass
-
-    def clear(self) -> None:
-        pass
-
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return corpus.has_feature(BeatPhase)
-
-
 class NextStateScaleAction(AbstractScaleAction):
     DEFAULT_FACTOR = 1.5
 
@@ -794,3 +753,62 @@ class ThresholdScaleAction(AbstractScaleAction):
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
         return True
+
+
+class BeatPhaseScaleAction(AbstractScaleAction):
+    DEFAULT_GRID_SIZE = 12
+
+    def __init__(self):
+        super().__init__()
+        self._grid_size: Parameter = Parameter(self.DEFAULT_GRID_SIZE, 1, None, 'int',
+                                               "number of subdivisions of the beat")
+        self._previous_output_index: Optional[int] = None
+
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              enforce_output: bool = False,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
+        current_grid_position: int = int(np.floor(beat_phase * self._grid_size.value))
+
+        corpus_beat_phases: np.ndarray = np.array([e.get_feature(BeatPhase).value() for e in corpus.events])
+        corpus_grid_positions: np.ndarray = np.floor(corpus_beat_phases * self._grid_size.value).astype(int)
+        corpus_taboos: np.ndarray = np.not_equal(corpus_grid_positions, current_grid_position)
+
+        if self._previous_output_index is not None:
+            corpus_taboos[(self._previous_output_index + 1) % corpus.length()] = False
+
+        # Note: taboo should still be applied even if `enforce_output` is on
+        taboo_mask.add_taboo(corpus_taboos)
+
+        if peaks.is_empty():
+            return peaks, taboo_mask
+
+        peak_beat_phases: np.ndarray = np.array([e.get_feature(BeatPhase).value() for e in corresponding_events])
+        peak_grid_positions: np.ndarray = np.floor(peak_beat_phases * self._grid_size.value).astype(int)
+
+        peak_mask: np.ndarray = np.not_equal(peak_grid_positions, current_grid_position)
+        peaks.scale(0, peak_mask)
+
+        return peaks, taboo_mask
+
+    def feedback(self,
+                 feedback_event: Optional[CorpusEvent],
+                 time: float,
+                 applied_transform: AbstractTransform) -> None:
+        if feedback_event is not None:
+            self._previous_output_index = feedback_event.state_index
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        self._previous_output_index = None
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(BeatPhase)
