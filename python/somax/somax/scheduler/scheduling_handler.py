@@ -410,6 +410,22 @@ class SchedulingHandler(Introspective, ABC):
     def phase(self) -> float:
         return self._scheduler.phase
 
+    def predict_phase(self, target_time: float) -> float:
+        # TODO: This is not updated properly for time stretch!!
+        delta_time: float = target_time - self.time
+        current_phase: float = self.phase
+
+        if isinstance(self.scheduling_mode, RelativeScheduling):
+            delta_phase: float = delta_time
+        elif isinstance(self.scheduling_mode, AbsoluteScheduling):
+            delta_phase: float = delta_time * self.tempo / 60.0
+        else:
+            raise TypeError(f"Cannot compute trigger pre-time for scheduling "
+                            f"mode '{self.scheduling_mode.__class__}'")
+
+        return (current_phase + delta_phase) % 1.0
+
+
     # TODO: Rewrite MidiStateHandler as a directly addressable Parametric
     def set_align_note_ons(self, enabled: bool) -> None:
         self.midi_handler.align_note_ons = enabled

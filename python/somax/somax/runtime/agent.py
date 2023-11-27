@@ -194,7 +194,7 @@ class OscAgent(Agent, AsyncioOscObject):
             #       make sure that it corresponds to `target time` rather than `trigger time`.
             # print(f"TRIG: new event: {scheduling_time}")
             event_transform_and_match_type = self.player.new_event(scheduling_time,
-                                                                   self.scheduling_handler.phase,
+                                                                   self.scheduling_handler.predict_phase(scheduling_time),
                                                                    scheduler_tempo,
                                                                    enforce_output=False)
             self._send_output_statistics()
@@ -242,7 +242,7 @@ class OscAgent(Agent, AsyncioOscObject):
             if self.recombine:
                 # print(f"CONT: new event: {scheduling_time}")
                 event_transform_and_match_type = self.player.new_event(scheduling_time,
-                                                                       self.scheduling_handler.phase,
+                                                                       self.scheduling_handler.predict_phase(scheduling_time),
                                                                        self.scheduling_handler.tempo,
                                                                        enforce_output=True)
                 if event_transform_and_match_type is None:
@@ -261,7 +261,7 @@ class OscAgent(Agent, AsyncioOscObject):
             else:
                 # print(f"CONT: step: {scheduling_time}")
                 event_and_transform = self.player.step(scheduling_time,
-                                                       self.scheduling_handler.phase,
+                                                       self.scheduling_handler.predict_phase(scheduling_time),
                                                        self.scheduling_handler.tempo)
 
                 if event_and_transform is None:
