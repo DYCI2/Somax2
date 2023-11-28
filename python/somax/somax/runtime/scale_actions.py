@@ -3,7 +3,7 @@ import logging
 from abc import ABC, abstractmethod
 from collections import deque
 from enum import Enum
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Union
 
 import numpy as np
 
@@ -222,20 +222,26 @@ class AutoJumpScaleAction(AbstractScaleAction):
               enforce_output: bool = False,
               **kwargs) -> Tuple[Peaks, TabooMask]:
         event_indices: List[int] = [e[0].state_index for e in self._history.get_n_last(self.jump_threshold + 1)]
+
         if not event_indices:
             return peaks, taboo_mask
+
         previous_index: int = event_indices[0]
         num_consecutive_events: int = len(list(itertools.takewhile(lambda a: a == -1, np.diff(event_indices))))
+
         if num_consecutive_events >= self.jump_threshold:
             factor: float = 0.0
             # add taboo for all the N previous events and the following one (to force jump)
             taboo_mask.add_taboo(event_indices)
             if len(event_indices) > 0 and corpus is not None and corpus.length() > 0:
-                taboo_mask.add_taboo(event_indices[-1] + 1)
+                taboo_mask.add_taboo(event_indices[0] + 1)
+
         elif num_consecutive_events <= self.activation_threshold:
             factor: float = 1.0
+
         else:
             factor: float = 0.5 ** (num_consecutive_events - self.activation_threshold)
+
         event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         is_matching: np.ndarray = event_indices == previous_index + 1
         peaks.scale(factor, is_matching)
@@ -762,6 +768,13 @@ class BeatPhaseScaleAction(AbstractScaleAction):
         super().__init__()
         self._grid_size: Parameter = Parameter(self.DEFAULT_GRID_SIZE, 1, None, 'int',
                                                "number of subdivisions of the beat")
+        self._always_allow_next: Parameter = Parameter(
+            False, False, True, 'bool',
+            "if enabled: never taboo the next event even if it doesn't match the phase")
+        self._round_beat: Parameter = Parameter(
+            True, False, True, 'bool',
+            "if enabled: round the beat to the nearest grid position rather than floor")
+
         self._previous_output_index: Optional[int] = None
 
     def scale(self,
@@ -774,24 +787,23 @@ class BeatPhaseScaleAction(AbstractScaleAction):
               corpus: Corpus = None,
               enforce_output: bool = False,
               **kwargs) -> Tuple[Peaks, TabooMask]:
-        current_grid_position: int = int(np.floor(beat_phase * self._grid_size.value))
+        current_grid_position: int = self._grid_positions(beat_phase)
 
         corpus_beat_phases: np.ndarray = np.array([e.get_feature(BeatPhase).value() for e in corpus.events])
-        corpus_grid_positions: np.ndarray = np.floor(corpus_beat_phases * self._grid_size.value).astype(int)
+        corpus_grid_positions: np.ndarray = self._grid_positions(corpus_beat_phases)
         corpus_taboos: np.ndarray = np.not_equal(corpus_grid_positions, current_grid_position)
 
-        if self._previous_output_index is not None:
+        if self._previous_output_index is not None and self._always_allow_next.value:
             corpus_taboos[(self._previous_output_index + 1) % corpus.length()] = False
 
         # Note: taboo should still be applied even if `enforce_output` is on
-        taboo_mask.add_taboo(corpus_taboos)
+        taboo_mask.add_taboo_by_mask(corpus_taboos)
 
         if peaks.is_empty():
             return peaks, taboo_mask
 
         peak_beat_phases: np.ndarray = np.array([e.get_feature(BeatPhase).value() for e in corresponding_events])
-        peak_grid_positions: np.ndarray = np.floor(peak_beat_phases * self._grid_size.value).astype(int)
-
+        peak_grid_positions: np.ndarray = self._grid_positions(peak_beat_phases)
         peak_mask: np.ndarray = np.not_equal(peak_grid_positions, current_grid_position)
         peaks.scale(0, peak_mask)
 
@@ -812,3 +824,14 @@ class BeatPhaseScaleAction(AbstractScaleAction):
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
         return corpus.has_feature(BeatPhase)
+
+    def _grid_positions(self, beat_phases: Union[float, np.ndarray]) -> Union[int, np.ndarray]:
+        if self._round_beat.value:
+            grid_positions = np.round(beat_phases * self._grid_size.value)
+        else:
+            grid_positions = np.floor(beat_phases * self._grid_size.value)
+
+        if isinstance(beat_phases, np.ndarray):
+            return grid_positions.astype(int)
+        else:
+            return int(grid_positions)
