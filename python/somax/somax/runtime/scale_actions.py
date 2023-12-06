@@ -20,6 +20,7 @@ from somax.runtime.peaks import Peaks
 from somax.runtime.taboo_mask import TabooMask
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
+from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling
 from somax.utils.introspective import StringParsed
 
 
@@ -774,8 +775,17 @@ class BeatPhaseScaleAction(AbstractScaleAction):
         self._round_beat: Parameter = Parameter(
             True, False, True, 'bool',
             "if enabled: round the beat to the nearest grid position rather than floor")
+        self._enforce_beat: Parameter = Parameter(
+            True, False, True, 'bool',
+            "if enabled always match the beat and taboo events that don't.")
+        self._scale_factor: Parameter = Parameter(
+            0.0, 0.0, None, 'float',
+            "if enforce_beat is disabled, scale any peaks that don't match the beat by this factor")
+        self._align_to_clock: Parameter = Parameter(
+            True, False, True, 'bool',
+            "if enabled: align the beat to the global clock, otherwise align with the previous event")
 
-        self._previous_output_index: Optional[int] = None
+        self._previous_event_and_time: Optional[Tuple[CorpusEvent, float]] = None
 
     def scale(self,
               peaks: Peaks,
@@ -787,17 +797,22 @@ class BeatPhaseScaleAction(AbstractScaleAction):
               corpus: Corpus = None,
               enforce_output: bool = False,
               **kwargs) -> Tuple[Peaks, TabooMask]:
-        current_grid_position: int = self._grid_positions(beat_phase)
+        if self._align_to_clock.value:
+            current_grid_position: int = self._grid_positions(beat_phase)
+        else:
+            current_grid_position = self._grid_positions(self._internal_beat_phase(time, corpus.scheduling_mode))
 
-        corpus_beat_phases: np.ndarray = np.array([e.get_feature(BeatPhase).value() for e in corpus.events])
-        corpus_grid_positions: np.ndarray = self._grid_positions(corpus_beat_phases)
-        corpus_taboos: np.ndarray = np.not_equal(corpus_grid_positions, current_grid_position)
+        # Note: given this condition, taboo should still be applied even if `enforce_output` is True
+        if self._enforce_beat.value:
+            corpus_beat_phases: np.ndarray = np.array([e.get_feature(BeatPhase).value() for e in corpus.events])
+            corpus_grid_positions: np.ndarray = self._grid_positions(corpus_beat_phases)
+            corpus_taboos: np.ndarray = np.not_equal(corpus_grid_positions, current_grid_position)
 
-        if self._previous_output_index is not None and self._always_allow_next.value:
-            corpus_taboos[(self._previous_output_index + 1) % corpus.length()] = False
+            if self._previous_event_and_time is not None and self._always_allow_next.value:
+                previous_event_index: int = self._previous_event_and_time[0].state_index
+                corpus_taboos[(previous_event_index + 1) % corpus.length()] = False
 
-        # Note: taboo should still be applied even if `enforce_output` is on
-        taboo_mask.add_taboo_by_mask(corpus_taboos)
+            taboo_mask.add_taboo_by_mask(corpus_taboos)
 
         if peaks.is_empty():
             return peaks, taboo_mask
@@ -805,7 +820,10 @@ class BeatPhaseScaleAction(AbstractScaleAction):
         peak_beat_phases: np.ndarray = np.array([e.get_feature(BeatPhase).value() for e in corresponding_events])
         peak_grid_positions: np.ndarray = self._grid_positions(peak_beat_phases)
         peak_mask: np.ndarray = np.not_equal(peak_grid_positions, current_grid_position)
-        peaks.scale(0, peak_mask)
+        if self._enforce_beat.value:
+            peaks.scale(0, peak_mask)
+        else:
+            peaks.scale(self._scale_factor.value, peak_mask)
 
         return peaks, taboo_mask
 
@@ -814,16 +832,32 @@ class BeatPhaseScaleAction(AbstractScaleAction):
                  time: float,
                  applied_transform: AbstractTransform) -> None:
         if feedback_event is not None:
-            self._previous_output_index = feedback_event.state_index
+            self._previous_event_and_time = feedback_event, time
 
     def update_transforms(self, transform_handler: TransformHandler):
         pass
 
     def clear(self) -> None:
-        self._previous_output_index = None
+        self._previous_event_and_time = None
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return corpus.has_feature(BeatPhase)
+        return corpus.has_feature(BeatPhase) and corpus.has_feature(Tempo)
+
+    def _internal_beat_phase(self, current_time: float, scheduling_mode: SchedulingMode) -> float:
+        if self._previous_event_and_time is None:
+            return 0.0
+
+        elapsed: float = current_time - self._previous_event_and_time[1]
+        if elapsed < 0:
+            return 0.0
+
+        last_beast_phase: float = self._previous_event_and_time[0].get_feature(BeatPhase).value()
+
+        if isinstance(scheduling_mode, RelativeScheduling):
+            return (last_beast_phase + elapsed) % 1.0
+        else:
+            tempo: float = self._previous_event_and_time[0].get_feature(Tempo).value()
+            return (last_beast_phase + elapsed * tempo / 60.0) % 1.0
 
     def _grid_positions(self, beat_phases: Union[float, np.ndarray]) -> Union[int, np.ndarray]:
         if self._round_beat.value:
