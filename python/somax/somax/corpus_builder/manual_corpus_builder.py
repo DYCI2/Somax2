@@ -231,7 +231,7 @@ class ManualCorpusBuilder:
         # Some offsets provided
         elif np.any(has_offset):
             duration_array = np.zeros_like(onset_array, dtype=float)
-            for i in range(onset_array - 1):
+            for i in range(len(onset_array) - 1):
                 if has_offset[i]:
                     duration_array[i] = offsets[i] - onset_array[i]
                 else:
