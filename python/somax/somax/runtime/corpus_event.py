@@ -169,6 +169,7 @@ class MidiCorpusEvent(CorpusEvent):
                  onset: float,
                  absolute_onset: float,
                  bar_number: float,
+                 raw_beat_phase: Optional[float] = None,
                  duration: Optional[float] = None,
                  absolute_duration: Optional[float] = None,
                  notes: Optional[List[Note]] = None,
@@ -180,6 +181,7 @@ class MidiCorpusEvent(CorpusEvent):
         self._relative_onset: float = onset
         self.absolute_onset: float = absolute_onset
         self.bar_number: float = bar_number
+        self.raw_beat_phase: float = raw_beat_phase  # Only used when building: use BeatPhase Feature everywhere else!!
 
         self._relative_duration: Optional[float] = duration
         self.absolute_duration: Optional[float] = absolute_duration
@@ -210,8 +212,15 @@ class MidiCorpusEvent(CorpusEvent):
         event_onset: float = raw_note[Keys.REL_ONSET]
         event_absolute_onset: float = raw_note[Keys.ABS_ONSET]
         bar_number: float = raw_note[Keys.BAR_NUMBER]
+        beat_phase: float = raw_note[Keys.BEAT_PHASE]
         notes: List[Note] = [Note.from_raw(raw_note, event_onset, event_absolute_onset)]
-        return cls(state_index, raw_note[Keys.TEMPO], event_onset, event_absolute_onset, bar_number, notes=notes)
+        return cls(state_index=state_index,
+                   tempo=raw_note[Keys.TEMPO],
+                   onset=event_onset,
+                   absolute_onset=event_absolute_onset,
+                   bar_number=bar_number,
+                   raw_beat_phase=beat_phase,
+                   notes=notes)
 
     def set_duration(self, end: float, absolute_end: float):
         """ Completes a CorpusEvent constructed with the `incomplete` constructor. """
