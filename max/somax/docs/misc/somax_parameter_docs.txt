@@ -31,11 +31,18 @@
 * Output Probability:                   outputprobability <0..1>
 * Sparse:                               sparse <1/0>
 * Ouptut Selection:                     outputfrom <1/0>
-* Ignore Phase:                         ignorephase <1/0>
 * Enforce Taboo:                        enforcetaboo <1/0>
 
 * Time Stretch Mode:                    timestretchmode <1/0>
 * Time Stretch Factor:                  timestretch <1/0>
+
+* Beat Phase Filter Enable:             beat enabled <1/0>
+* Beat Source:                          beat aligntoserver <1/0>
+* Grid Size:                            beat gridsize <1..∞>
+* Enforce Beat:                         beat enforce <1/0>
+* Beat Attenuation Factor:              beat factor <0..∞>
+* Beat Always Allow Next Event:         beat allownext <1/0>
+* Grid Mode (Round/Floor):              beat round <1/0>
 
 * Layer Enable:                         selfmelodicenable <1/0>, selfharmonicenable <1/0>, melodicenable <1/0>, harmonicenable <1/0>
 * Balance:                              weights <0..1> <0..1> <0..1> <0..1>

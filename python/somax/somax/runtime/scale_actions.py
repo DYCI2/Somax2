@@ -346,6 +346,9 @@ class StaticTabooScaleAction(AbstractScaleAction):
               corpus: Corpus = None,
               enforce_output: bool = False,
               **kwargs) -> Tuple[Peaks, TabooMask]:
+        if self._taboo_length.value <= 0:
+            return peaks, taboo_mask
+
         event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         matching_indices: np.ndarray = np.zeros(len(corresponding_events), dtype=bool)
         for taboo_index in self._taboo_indices:
