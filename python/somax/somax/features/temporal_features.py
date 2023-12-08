@@ -101,7 +101,10 @@ class BeatPhase(RuntimeRecordable, CorpusFeature):
         #       In practice, it will need access to meter / beat phase position.
         #       See [[55. Time Tempo Phase]] for further discussion
         for event in events:
-            event.set_feature(cls(event.onset % 1.0))
+            if event.raw_beat_phase is not None:
+                event.set_feature(cls(event.raw_beat_phase))
+            else:
+                event.set_feature(cls(event.onset % 1.0))
 
     @classmethod
     def _analyze_audio(cls, events: List[AudioCorpusEvent], metadata: AudioMetadata) -> None:

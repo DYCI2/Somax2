@@ -2,6 +2,8 @@ import typing
 from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple, Dict, Type
 
+import numpy as np
+
 from somax.features import Tempo
 from somax.features.feature import AbstractFeature
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
@@ -410,6 +412,21 @@ class SchedulingHandler(Introspective, ABC):
     def phase(self) -> float:
         return self._scheduler.phase
 
+    def predict_phase(self, target_time: float) -> float:
+        # Note: This is only relevant when using the server's tempo
+        delta_time: float = target_time - self.time
+        current_phase: float = self.phase
+
+        if isinstance(self.scheduling_mode, RelativeScheduling):
+            delta_phase: float = delta_time
+        elif isinstance(self.scheduling_mode, AbsoluteScheduling):
+            delta_phase: float = self.seconds2ticks(delta_time, self.tempo)
+        else:
+            raise TypeError(f"Cannot compute trigger pre-time for scheduling "
+                            f"mode '{self.scheduling_mode.__class__}'")
+
+        return (current_phase + delta_phase) % 1.0
+
     # TODO: Rewrite MidiStateHandler as a directly addressable Parametric
     def set_align_note_ons(self, enabled: bool) -> None:
         self.midi_handler.align_note_ons = enabled
@@ -423,6 +440,32 @@ class SchedulingHandler(Introspective, ABC):
     def set_note_by_note_mode(self, enabled: bool) -> None:
         self._note_by_note_mode = enabled
         self._scheduler.remove_by_type(ContinueEvent)
+
+    @staticmethod
+    def seconds2ticks(s: float, tempo: float) -> float:
+        return s * tempo / 60.0
+
+    @staticmethod
+    def ticks2seconds(t: float, tempo: float) -> float:
+        return t * 60.0 / tempo
+
+    @staticmethod
+    def min_beat_quantization_level(trigger_pretime: float, tempo: float) -> int:
+        return 2 ** np.floor(np.log2(1 / SchedulingHandler.seconds2ticks(trigger_pretime, tempo)))
+
+    def _next_valid_tick(self) -> float:
+        # Note: This is only relevant when using the server's tempo
+        min_quantization_level:  int = self.min_beat_quantization_level(self._trigger_pretime_value, self.tempo)
+        phase_quantization: float = 1 / min_quantization_level
+        current_phase: float = self.phase
+
+        # delta_phase in (phase_quantization, 2 * phase_quantization], where phase_quantization > trigger_pretime_value
+        #  to ensure that no scheduling occurs in the interval [0, trigger_pretime_value]
+        delta_phase: float = 2 * phase_quantization - (current_phase % phase_quantization)
+
+        return self.time + delta_phase
+
+
 
 
 class ManualSchedulingHandler(SchedulingHandler):
@@ -505,7 +548,8 @@ class AutomaticSchedulingHandler(SchedulingHandler):
 
     def _reschedule(self, trigger_event: TriggerEvent) -> None:
         if not self._scheduler.has_by_type(TriggerEvent):
-            self._scheduler.add_event(self._adjust_in_time(event=trigger_event, increment=1.0))
+            delta_time: float = self.time - self._next_valid_tick()
+            self._scheduler.add_event(self._adjust_in_time(event=trigger_event, increment=delta_time))
 
     def _default_trigger(self) -> TriggerEvent:
         current_time: float = self._scheduler.time
