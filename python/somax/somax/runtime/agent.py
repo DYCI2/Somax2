@@ -23,7 +23,7 @@ from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus, RealtimeRecordedAudioCorpus
-from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
+from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent, SilenceEvent
 from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch, RecordingError
@@ -206,6 +206,13 @@ class OscAgent(Agent, AsyncioOscObject):
         if event_transform_and_match_type is None:
             self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
+        elif isinstance(event_transform_and_match_type[0], SilenceEvent):
+            self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
+            event: SilenceEvent = typing.cast(SilenceEvent, event_transform_and_match_type[0])
+            retrigger: TriggerEvent = TriggerEvent(trigger.trigger_time + event.duration,
+                                                   trigger.target_time + event.duration)
+            self.scheduling_handler.add_trigger_event(retrigger, reschedule=True)
+            event_transform_and_match_type = None
 
         elif event_transform_and_match_type[2] is True:  # output from match
             self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)

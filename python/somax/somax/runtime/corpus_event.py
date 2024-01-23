@@ -317,3 +317,29 @@ class AudioCorpusEvent(CorpusEvent):
     @property
     def duration(self) -> float:
         return self._absolute_duration
+
+
+class SilenceEvent(CorpusEvent):
+    """ Note: This class should solely be used for passing silences from the Player to the SchedulingHandler,
+              and should therefore never be stored in a corpus """
+
+    def __init__(self, duration: float):
+        super().__init__(state_index=0)
+        self._duration: float = duration
+
+    @classmethod
+    def decode(cls, event_dict: Dict[str, Any], feature_classpath_dict: Dict[str, str]) -> 'CorpusEvent':
+        assert (False, "A SilenceEvent should never be stored in a corpus and therefore should never be decoded")
+        return SilenceEvent(0.0)
+
+    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
+        assert (False, "A SilenceEvent should never be stored in a corpus and should therefore never be encoded")
+        return {}
+
+    @property
+    def onset(self) -> float:
+        return 0.0
+
+    @property
+    def duration(self) -> float:
+        return self._duration

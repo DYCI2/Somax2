@@ -1,5 +1,6 @@
 import logging
 import random
+import typing
 from typing import Dict, Optional, Tuple, Type, List
 
 import numpy as np
@@ -11,7 +12,7 @@ from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, RealtimeRecordedAudioCorpus, MidiCorpus, AudioCorpus
-from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent
+from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent, SilenceEvent
 from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch, RecordingError
 from somax.runtime.exceptions import InvalidCorpus, InvalidLabelInput
 from somax.runtime.fallback_peak_selector import FallbackPeakSelector
@@ -19,7 +20,7 @@ from somax.runtime.influence import AbstractInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
 from somax.runtime.parameter import Parameter, Parametric
-from somax.runtime.peak_post_processing import PeakPostFilter
+from somax.runtime.peak_post_processing import ProbabilityFilter
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.peaks import Peaks
 from somax.runtime.region_mask import RegionMask
@@ -45,7 +46,7 @@ class Player(Parametric, ContentAware):
         self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
         self.region_mask: RegionMask = RegionMask()
         self.merge_action: AbstractMergeAction = merge_action
-        self.post_filter: PeakPostFilter = PeakPostFilter(enabled=False)
+        self.post_filter: ProbabilityFilter = ProbabilityFilter(enabled=False)
 
         self.atoms: Dict[str, Atom] = {}
 
@@ -115,21 +116,21 @@ class Player(Parametric, ContentAware):
             else:
                 output_from_match = True
 
-            if not enforce_output:
-                event_and_transform = self.post_filter.process(event_and_transform)
-
             self.previous_peaks = peaks
 
         if event_and_transform is None:
             self._feedback(None, scheduler_time, NoTransform())
             return None
-        else:
-            self.previous_output = event_and_transform
+
+        self.previous_output = event_and_transform
 
         event, transform = event_and_transform
         event = transform.apply(event)  # returns deepcopy of transformed event
-
         self._feedback(event, scheduler_time, transform)
+
+        if not enforce_output and self.post_filter.insert_silence():
+            return SilenceEvent(event.duration), transform, False
+
         return event, transform, output_from_match
 
     def step(self,
