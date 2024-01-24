@@ -4,3 +4,4 @@ from .pitch_features import TopNote, AbstractIntegerPitch, RuntimeIntegerPitch, 
     BassNote, YinDiscretePitch
 from .spectral_features import OctaveBands
 from .temporal_features import Tempo, BeatPhase
+from .label_feature import LabelFeature
