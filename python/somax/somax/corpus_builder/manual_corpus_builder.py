@@ -1,3 +1,4 @@
+import copy
 import logging
 import multiprocessing
 import re
@@ -11,7 +12,7 @@ from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.manual_text_formats import TextFormat, ParsingError
 from somax.corpus_builder.metadata import AudioMetadata
 from somax.corpus_builder.spectrogram import Spectrogram
-from somax.features import YinDiscretePitch, TotalEnergyDb
+from somax.features import YinDiscretePitch, TotalEnergyDb, LabelFeature
 from somax.features.feature import CorpusFeature
 from somax.runtime.corpus import Corpus, AudioCorpus
 from somax.runtime.corpus_event import AudioCorpusEvent
@@ -25,9 +26,9 @@ from somax.scheduler.scheduling_mode import AbsoluteScheduling
 class Descriptors:
     @staticmethod
     def _descriptors() -> Dict[str, Type[CorpusFeature]]:
-        # raise NotImplementedError("Not implemented yet")
         return {"pitch": YinDiscretePitch,
-                "energy": TotalEnergyDb}
+                "energy": TotalEnergyDb,
+                "label": LabelFeature}
         #         "chroma": OnsetChroma}
 
     @staticmethod
@@ -165,9 +166,7 @@ class ManualCorpusBuilder:
         if len(onsets) == 0:
             raise RuntimeError("Annotation file did not contain any valid lines")
 
-        x, sr = librosa.load(audio_file_path, sr=None, mono=False)
-        x_mono = CorpusBuilder._parse_channels(x)
-        file_duration: float = x_mono.size / sr
+        x_mono, sr, file_duration, metadata = self.read_audio(audio_file_path, self.HOP_LENGTH)
 
         onset_array: np.ndarray
         duration_array: np.ndarray
@@ -181,31 +180,15 @@ class ManualCorpusBuilder:
                                                            absolute_duration=duration)
                                           for i, (onset, duration) in enumerate(zip(onset_array, duration_array))]
 
-        stft: Spectrogram = Spectrogram.from_audio(x_mono, sample_rate=sr, hop_length=self.HOP_LENGTH)
-        metadata: AudioMetadata = AudioMetadata(filepath=audio_file_path,
-                                                content_type=AbsoluteScheduling(),
-                                                raw_data=x,
-                                                foreground_data=x_mono,
-                                                background_data=x_mono,
-                                                sr=sr,
-                                                hop_length=self.HOP_LENGTH,
-                                                stft=stft,
-                                                estimated_initial_bpm=120.0,
-                                                beat_tightness=1.0)
-
-        used_features = []
-        for _, feature in CorpusFeature.all_corpus_features():
-            try:
-                if feature not in used_features:
-                    feature.analyze(events, metadata)
-                used_features.append(feature)
-            except FeatureError:
-                self.logger.debug(f"ignoring feature {feature.__name__}")
+        all_features: List[Type[CorpusFeature]] = self.analyze_events(events,
+                            metadata,
+                            pre_analyzed=pre_analysed_descriptors,
+                            logger=self.logger)
 
         corpus: AudioCorpus = AudioCorpus(events=events,
                                           name=corpus_name,
                                           scheduling_mode=metadata.content_type,
-                                          feature_types=used_features,
+                                          feature_types=all_features,
                                           build_parameters={},
                                           sr=sr,
                                           filepath=audio_file_path,
@@ -248,3 +231,39 @@ class ManualCorpusBuilder:
             duration_array = np.block([np.diff(onsets), eof - onsets[-1]])
 
         return onset_array, duration_array
+
+    @staticmethod
+    def read_audio(audio_file_path: str, hop_length: int) -> Tuple[np.ndarray, int, float, AudioMetadata]:
+        x, sr = librosa.load(audio_file_path, sr=None, mono=False)
+        x_mono = CorpusBuilder._parse_channels(x)
+        file_duration: float = x_mono.size / sr
+
+        stft: Spectrogram = Spectrogram.from_audio(x_mono, sample_rate=int(sr), hop_length=hop_length)
+        metadata: AudioMetadata = AudioMetadata(filepath=audio_file_path,
+                                                content_type=AbsoluteScheduling(),
+                                                raw_data=x,
+                                                foreground_data=x_mono,
+                                                background_data=x_mono,
+                                                sr=sr,
+                                                hop_length=hop_length,
+                                                stft=stft,
+                                                estimated_initial_bpm=120.0,
+                                                beat_tightness=1.0)
+
+        return x_mono, int(sr), file_duration, metadata
+
+    @staticmethod
+    def analyze_events(events: List[AudioCorpusEvent],
+                       metadata: AudioMetadata,
+                       pre_analyzed: List[Type[CorpusFeature]],
+                       logger = logging.Logger(__name__)) -> List[Type[CorpusFeature]]:
+        used_features = copy.deepcopy(pre_analyzed)
+        for _, feature in CorpusFeature.all_corpus_features():
+            try:
+                if feature not in used_features:
+                    feature.analyze(events, metadata)
+                used_features.append(feature)
+            except FeatureError:
+                logger.debug(f"ignoring feature {feature.__name__}")
+
+        return used_features

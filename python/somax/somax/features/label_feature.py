@@ -6,8 +6,8 @@ from somax.runtime.corpus_event import CorpusEvent
 
 
 class LabelFeature(CorpusFeature, RuntimeFeature):
-    def __init__(self, label: str):
-        super().__init__(value=label)
+    def __init__(self, value: str):
+        super().__init__(value=value)
 
     def __eq__(self, other):
         return isinstance(other, LabelFeature) and self.value() == other.value()

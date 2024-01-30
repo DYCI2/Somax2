@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 2492.0, 958.0 ],
+		"rect" : [ 34.0, 87.0, 2144.0, 958.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -41,36 +41,36 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-18",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1137.0, 455.0, 47.0, 22.0 ],
-					"text" : "mylabe"
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1406.0, 532.0, 54.0, 20.0 ],
+					"text" : "matches"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-16",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1255.0, 371.0, 47.0, 22.0 ],
-					"text" : "mylabe"
+					"id" : "obj-14",
+					"ignoreclick" : 1,
+					"maxclass" : "number",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1408.0, 505.0, 50.0, 22.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-13",
+					"id" : "obj-19",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1197.0, 408.0, 177.0, 22.0 ],
-					"text" : "rawsend influence asdf label $1"
+					"patching_rect" : [ 221.0, 35.0, 59.0, 22.0 ],
+					"text" : "terminate"
 				}
 
 			}
@@ -100,25 +100,13 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-143",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1092.0, 502.0, 223.0, 22.0 ],
-					"text" : "rawsend influence text_external label $1"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-141",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1317.0, 502.0, 283.0, 22.0 ],
-					"text" : "somax.customatom text_external @selfinfluenced 0"
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 1157.0, 461.0, 270.0, 22.0 ],
+					"text" : "somax.labelatom text_external @selfinfluenced 0"
 				}
 
 			}
@@ -281,13 +269,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-22",
-					"linecount" : 4,
+					"linecount" : 6,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 807.0, 1052.0, 50.0, 62.0 ],
-					"text" : "audiorecord enabled 0"
+					"patching_rect" : [ 807.0, 1052.0, 50.0, 89.0 ],
+					"text" : "audiorecord buffername 1878_buf"
 				}
 
 			}
@@ -542,21 +530,14 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
-					"source" : [ "obj-13", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-11", 0 ],
 					"source" : [ "obj-141", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-11", 0 ],
-					"source" : [ "obj-143", 0 ]
+					"destination" : [ "obj-14", 0 ],
+					"source" : [ "obj-141", 2 ]
 				}
 
 			}
@@ -569,13 +550,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-13", 0 ],
-					"source" : [ "obj-16", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
 					"source" : [ "obj-17", 0 ]
 				}
@@ -583,8 +557,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-143", 0 ],
-					"source" : [ "obj-18", 0 ]
+					"destination" : [ "obj-2", 0 ],
+					"source" : [ "obj-19", 0 ]
 				}
 
 			}
@@ -1216,13 +1190,6 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "somax.customatom.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/experimental",
-				"patcherrelativepath" : "./experimental",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "somax.filter_midichannels.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "./patchers",
@@ -1233,6 +1200,13 @@
 				"name" : "somax.interpreter.maxpat",
 				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "./patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.labelatom.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/experimental",
+				"patcherrelativepath" : "./experimental",
 				"type" : "JSON",
 				"implicit" : 1
 			}
