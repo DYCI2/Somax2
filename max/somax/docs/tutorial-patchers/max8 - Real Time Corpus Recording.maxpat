@@ -41,13 +41,26 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"bubble" : 1,
+					"bubbleside" : 3,
+					"id" : "obj-21",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 754.0, 279.0, 117.0, 24.0 ],
+					"text" : "1/0 works as well"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bubble" : 1,
 					"bubbleside" : 2,
 					"id" : "obj-50",
 					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1205.0, 367.5, 122.0, 66.0 ],
+					"patching_rect" : [ 1204.0, 370.0, 122.0, 66.0 ],
 					"text" : "plays with continuity to encourage jumps in the corpus "
 				}
 
@@ -116,7 +129,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1037.0, 91.0, 294.0, 79.0 ],
+					"patching_rect" : [ 1038.0, 91.0, 294.0, 79.0 ],
 					"text" : "this waveform~ object has been initalised with @buffername buffer-tuto-01, thus it shows the content of the buffer used by the somax.audiorecord, the somax.player and the somax.audiorenderer"
 				}
 
@@ -198,13 +211,13 @@
 				"box" : 				{
 					"bubble" : 1,
 					"bubblepoint" : 0.1,
-					"bubbleside" : 2,
+					"bubbleside" : 0,
 					"id" : "obj-47",
-					"linecount" : 6,
+					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1080.0, 360.0, 113.0, 106.0 ],
+					"patching_rect" : [ 1093.0, 482.0, 204.0, 66.0 ],
 					"text" : "you can also load an existing corpus and append new recordings to it by starting again from point 5"
 				}
 
@@ -219,7 +232,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 669.0, 501.5, 177.0, 79.0 ],
+					"patching_rect" : [ 666.0, 502.0, 177.0, 79.0 ],
 					"text" : "try switching between reactive and continuous mode (in continuous mode you can stop the influences at point 9)"
 				}
 
@@ -241,11 +254,11 @@
 					"bubblepoint" : 0.1,
 					"bubbleside" : 2,
 					"id" : "obj-45",
-					"linecount" : 3,
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 912.0, 399.5, 136.0, 66.0 ],
+					"patching_rect" : [ 905.0, 415.0, 198.0, 52.0 ],
 					"text" : "this will clear the buffer and load a new empty corpus in the player"
 				}
 
@@ -280,12 +293,13 @@
 , 			{
 				"box" : 				{
 					"bubble" : 1,
+					"bubblepoint" : 0.2,
 					"bubbleside" : 2,
 					"id" : "obj-35",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 911.0, 197.5, 101.0, 39.0 ],
+					"patching_rect" : [ 935.0, 243.0, 101.0, 39.0 ],
 					"text" : "stop audiorecord"
 				}
 
@@ -293,12 +307,13 @@
 , 			{
 				"box" : 				{
 					"bubble" : 1,
+					"bubblepoint" : 1.0,
 					"bubbleside" : 2,
 					"id" : "obj-34",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 865.0, 238.5, 101.0, 39.0 ],
+					"patching_rect" : [ 806.0, 243.0, 101.0, 39.0 ],
 					"text" : "start audiorecord"
 				}
 
@@ -408,7 +423,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 222.0, 522.0, 150.0, 22.0 ],
-					"text" : "1 playersmissing"
+					"text" : "1 ready"
 				}
 
 			}
@@ -522,7 +537,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 540.0, 429.0, 132.0, 24.0 ],
+					"patching_rect" : [ 540.0, 427.0, 132.0, 24.0 ],
 					"text" : "start/stop influences"
 				}
 
@@ -535,7 +550,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 514.0, 429.0, 24.0, 24.0 ]
+					"patching_rect" : [ 514.0, 427.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -546,7 +561,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 514.0, 458.5, 87.0, 22.0 ],
+					"patching_rect" : [ 514.0, 461.5, 87.0, 22.0 ],
 					"text" : "gate"
 				}
 
@@ -648,7 +663,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 582.0, 391.5, 104.0, 22.0 ],
+					"patching_rect" : [ 582.0, 380.0, 104.0, 22.0 ],
 					"text" : "prepend influence"
 				}
 
@@ -661,7 +676,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 582.0, 281.5, 129.0, 22.0 ],
+					"patching_rect" : [ 582.0, 279.5, 129.0, 22.0 ],
 					"text" : "somax.audioinfluencer",
 					"varname" : "somax.audioinfluencer[1]"
 				}
@@ -686,7 +701,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 597.0, 561.0, 84.0, 22.0 ],
+					"patching_rect" : [ 583.0, 561.0, 84.0, 22.0 ],
 					"text" : "mode reactive"
 				}
 
@@ -748,7 +763,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 949.0, 641.5, 258.0, 22.0 ],
-					"text" : "21 10.674668 0.434667 11109.335938"
+					"text" : "138 96.846809 0.565333 97412.148438"
 				}
 
 			}
@@ -1030,28 +1045,6 @@
 					"background" : 1,
 					"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 					"fontname" : "Arial Bold",
-					"fontsize" : 11.0,
-					"hint" : "",
-					"id" : "obj-59",
-					"ignoreclick" : 1,
-					"legacytextcolor" : 1,
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 1054.0, 416.0, 20.0, 20.0 ],
-					"rounded" : 60.0,
-					"text" : "13",
-					"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"background" : 1,
-					"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-					"fontname" : "Arial Bold",
 					"hint" : "",
 					"id" : "obj-11",
 					"ignoreclick" : 1,
@@ -1120,7 +1113,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 674.666686773300171, 431.33334618806839, 20.0, 20.0 ],
+					"patching_rect" : [ 675.0, 429.0, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "9",
 					"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1141,7 +1134,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 889.0, 199.5, 20.0, 20.0 ],
+					"patching_rect" : [ 914.0, 245.0, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "6",
 					"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1226,7 +1219,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 843.0, 240.5, 20.0, 20.0 ],
+					"patching_rect" : [ 785.0, 245.0, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "4",
 					"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
@@ -1246,39 +1239,6 @@
 					"patching_rect" : [ 1076.0, 273.5, 104.0, 24.0 ],
 					"text" : "Audiorecord",
 					"varname" : "HelpTitle[1]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"background" : 1,
-					"fontface" : 1,
-					"fontname" : "Arial",
-					"fontsize" : 16.0,
-					"id" : "obj-21",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 728.0, 273.5, 88.0, 24.0 ],
-					"text" : "Influences",
-					"varname" : "HelpTitle[5]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 0.0,
-					"background" : 1,
-					"bgcolor" : [ 0.094118, 0.113725, 0.137255, 0.0 ],
-					"border" : 1,
-					"bordercolor" : [ 0.415686, 0.454902, 0.52549, 1.0 ],
-					"id" : "obj-56",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 561.0, 273.5, 254.249999999999773, 152.166668145767176 ],
-					"rounded" : 16
 				}
 
 			}
@@ -1484,7 +1444,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-9", 0 ],
-					"midpoints" : [ 606.5, 619.5, 849.0, 619.5, 849.0, 498.5, 875.5, 498.5 ],
+					"midpoints" : [ 592.5, 619.5, 849.0, 619.5, 849.0, 498.5, 875.5, 498.5 ],
 					"source" : [ "obj-29", 0 ]
 				}
 
@@ -1597,7 +1557,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-76", 0 ],
-					"midpoints" : [ 591.5, 314.708345662742715, 621.5, 314.708345662742715 ],
+					"midpoints" : [ 591.5, 311.5, 621.5, 311.5 ],
 					"order" : 1,
 					"source" : [ "obj-71", 0 ]
 				}
