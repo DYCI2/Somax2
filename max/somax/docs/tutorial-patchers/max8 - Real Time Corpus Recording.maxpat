@@ -48,7 +48,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1205.0, 367.5, 122.0, 66.0 ],
-					"presentation_linecount" : 4,
 					"text" : "plays with continuity to encourage jumps in the corpus "
 				}
 
@@ -205,7 +204,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1080.0, 360.0, 111.0, 106.0 ],
+					"patching_rect" : [ 1080.0, 360.0, 113.0, 106.0 ],
 					"text" : "you can also load an existing corpus and append new recordings to it by starting again from point 5"
 				}
 
@@ -409,7 +408,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 222.0, 522.0, 150.0, 22.0 ],
-					"text" : "1 ready"
+					"text" : "1 playersmissing"
 				}
 
 			}
