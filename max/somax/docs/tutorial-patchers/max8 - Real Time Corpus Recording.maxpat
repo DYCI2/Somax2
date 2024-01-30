@@ -41,6 +41,48 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"bubble" : 1,
+					"bubbleside" : 2,
+					"id" : "obj-50",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1205.0, 367.5, 122.0, 66.0 ],
+					"presentation_linecount" : 4,
+					"text" : "plays with continuity to encourage jumps in the corpus "
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"format" : 6,
+					"id" : "obj-48",
+					"maxclass" : "flonum",
+					"maximum" : 10.0,
+					"minimum" : 0.0,
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1222.0, 430.5, 50.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-26",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1222.0, 461.5, 76.0, 22.0 ],
+					"text" : "continuity $1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bubble" : 1,
 					"bubblepoint" : 1.0,
 					"bubbleside" : 3,
 					"id" : "obj-23",
@@ -48,7 +90,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1018.5, 718.0, 102.5, 64.0 ],
+					"patching_rect" : [ 1018.5, 718.0, 104.0, 64.0 ],
 					"text" : "retrieve buffer information, in this case its name"
 				}
 
@@ -62,7 +104,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 540.0, 8.0, 105.0, 39.0 ],
-					"presentation_linecount" : 2,
 					"text" : "stop the audio file"
 				}
 
@@ -160,12 +201,12 @@
 					"bubblepoint" : 0.1,
 					"bubbleside" : 2,
 					"id" : "obj-47",
-					"linecount" : 3,
+					"linecount" : 6,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1080.000032186508179, 399.333345234394073, 161.0, 66.0 ],
-					"text" : "you can also load an existing corpus and append new recordings to it"
+					"patching_rect" : [ 1080.0, 360.0, 111.0, 106.0 ],
+					"text" : "you can also load an existing corpus and append new recordings to it by starting again from point 5"
 				}
 
 			}
@@ -179,7 +220,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 669.0, 501.5, 174.0, 79.0 ],
+					"patching_rect" : [ 669.0, 501.5, 177.0, 79.0 ],
 					"text" : "try switching between reactive and continuous mode (in continuous mode you can stop the influences at point 9)"
 				}
 
@@ -708,7 +749,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 949.0, 641.5, 258.0, 22.0 ],
-					"text" : "23 11.365335 0.312 11677.334961"
+					"text" : "21 10.674668 0.434667 11109.335938"
 				}
 
 			}
@@ -970,6 +1011,28 @@
 					"fontname" : "Arial Bold",
 					"fontsize" : 11.0,
 					"hint" : "",
+					"id" : "obj-49",
+					"ignoreclick" : 1,
+					"legacytextcolor" : 1,
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1199.0, 431.0, 20.0, 20.0 ],
+					"rounded" : 60.0,
+					"text" : "12",
+					"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"background" : 1,
+					"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+					"fontname" : "Arial Bold",
+					"fontsize" : 11.0,
+					"hint" : "",
 					"id" : "obj-59",
 					"ignoreclick" : 1,
 					"legacytextcolor" : 1,
@@ -980,7 +1043,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1054.0, 416.0, 20.0, 20.0 ],
 					"rounded" : 60.0,
-					"text" : "12",
+					"text" : "13",
 					"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 				}
 
@@ -1406,6 +1469,14 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-9", 0 ],
+					"midpoints" : [ 1231.5, 496.0, 875.5, 496.0 ],
+					"source" : [ "obj-26", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-9", 0 ],
 					"midpoints" : [ 630.5, 619.0, 849.0, 619.0, 849.0, 498.5, 875.5, 498.5 ],
 					"source" : [ "obj-28", 0 ]
 				}
@@ -1458,6 +1529,13 @@
 					"destination" : [ "obj-60", 0 ],
 					"order" : 1,
 					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-26", 0 ],
+					"source" : [ "obj-48", 0 ]
 				}
 
 			}
