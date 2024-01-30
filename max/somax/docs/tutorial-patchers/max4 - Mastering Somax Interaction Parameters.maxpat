@@ -3,8 +3,8 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 5,
-			"revision" : 3,
+			"minor" : 6,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -52,8 +52,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 3,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -126,8 +126,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 5,
-											"revision" : 3,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -579,8 +579,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 5,
-											"revision" : 3,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1004,7 +1004,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 139.25, 424.416660132186678, 121.0, 22.0 ],
-									"text" : "1 running"
+									"text" : "1 ready"
 								}
 
 							}
@@ -2315,7 +2315,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1094.958333333333712, 608.833331854232711, 170.0, 22.0 ],
-									"text" : "no loaded corpus"
+									"text" : "null"
 								}
 
 							}
@@ -2989,14 +2989,14 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 3,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 112.0, 126.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3063,8 +3063,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 5,
-											"revision" : 3,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -3520,8 +3520,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 5,
-											"revision" : 3,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -3684,8 +3684,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 5,
-											"revision" : 3,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -3719,7 +3719,6 @@
 										"style" : "",
 										"subpatcher_template" : "",
 										"assistshowspatchername" : 0,
-										"visible" : 1,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-81",
@@ -4120,7 +4119,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 143.25, 436.583330949147523, 121.0, 22.0 ],
-									"text" : "1 running"
+									"text" : "1 ready"
 								}
 
 							}
@@ -5221,7 +5220,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1094.958333333333712, 608.833331854232711, 170.0, 22.0 ],
-									"text" : "Ligeti_Etudes.gz"
+									"text" : "null"
 								}
 
 							}
@@ -5791,14 +5790,14 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 3,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 112.0, 126.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -5865,8 +5864,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 5,
-											"revision" : 3,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -6337,8 +6336,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 5,
-											"revision" : 3,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -6511,7 +6510,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 222.0, 541.708335987022565, 150.0, 22.0 ],
-									"text" : "1 running"
+									"text" : "1 ready"
 								}
 
 							}
@@ -6656,8 +6655,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 5,
-											"revision" : 3,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -7803,7 +7802,7 @@
 									"clipheight" : 55.0,
 									"data" : 									{
 										"clips" : [ 											{
-												"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Joelle.wav",
+												"absolutepath" : "Joelle.wav",
 												"filename" : "Joelle.wav",
 												"filekind" : "audiofile",
 												"id" : "u711006797",
@@ -7919,7 +7918,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1121.0, 645.999995397163275, 170.0, 22.0 ],
-									"text" : "Marco_guitar.pickle"
+									"text" : "null"
 								}
 
 							}
@@ -8412,7 +8411,6 @@
 			"obj-1::obj-143::obj-1444" : [ "outputprobability[2]", "outputprobability", 0 ],
 			"obj-1::obj-143::obj-152" : [ "selfngramorder[2]", "selfngramorder", 0 ],
 			"obj-1::obj-143::obj-154" : [ "melodicngramorder[6]", "melodicngramorder", 0 ],
-			"obj-1::obj-143::obj-163" : [ "ignorephase[3]", "ignorephase", 0 ],
 			"obj-1::obj-143::obj-19" : [ "selfmod12[3]", "selfmod12", 0 ],
 			"obj-1::obj-143::obj-22" : [ "selfmelodicbypass[2]", "selfmelodicbypass", 0 ],
 			"obj-1::obj-143::obj-254" : [ "harmonincpeakdecay[7]", "harmonincpeakdecay", 0 ],
@@ -8461,7 +8459,6 @@
 			"obj-2::obj-143::obj-1444" : [ "outputprobability[1]", "outputprobability", 0 ],
 			"obj-2::obj-143::obj-152" : [ "selfngramorder[6]", "selfngramorder", 0 ],
 			"obj-2::obj-143::obj-154" : [ "melodicngramorder[5]", "melodicngramorder", 0 ],
-			"obj-2::obj-143::obj-163" : [ "ignorephase[2]", "ignorephase", 0 ],
 			"obj-2::obj-143::obj-19" : [ "selfmod12[2]", "selfmod12", 0 ],
 			"obj-2::obj-143::obj-22" : [ "selfmelodicbypass[6]", "selfmelodicbypass", 0 ],
 			"obj-2::obj-143::obj-254" : [ "harmonincpeakdecay[4]", "harmonincpeakdecay", 0 ],
@@ -8512,7 +8509,6 @@
 			"obj-8::obj-143::obj-1444" : [ "outputprobability[4]", "outputprobability", 0 ],
 			"obj-8::obj-143::obj-152" : [ "selfngramorder[1]", "selfngramorder", 0 ],
 			"obj-8::obj-143::obj-154" : [ "melodicngramorder[4]", "melodicngramorder", 0 ],
-			"obj-8::obj-143::obj-163" : [ "ignorephase[4]", "ignorephase", 0 ],
 			"obj-8::obj-143::obj-19" : [ "selfmod12[4]", "selfmod12", 0 ],
 			"obj-8::obj-143::obj-22" : [ "selfmelodicbypass[1]", "selfmelodicbypass", 0 ],
 			"obj-8::obj-143::obj-254" : [ "harmonincpeakdecay[2]", "harmonincpeakdecay", 0 ],
@@ -8629,8 +8625,8 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "Joelle.wav",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/corpus",
-				"patcherrelativepath" : "../../corpus",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
+				"patcherrelativepath" : "../../media",
 				"type" : "WAVE",
 				"implicit" : 1
 			}
@@ -8750,6 +8746,13 @@
 			}
 , 			{
 				"name" : "somax.await_patcherargs.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.beatphase.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
