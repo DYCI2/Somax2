@@ -7,7 +7,7 @@ from somax.features.label_feature import LabelFeature
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import InvalidLabelInput, TransformError
-from somax.runtime.influence import AbstractInfluence, FeatureInfluence
+from somax.runtime.influence import AbstractInfluence, FeatureInfluence, CorpusInfluence
 from somax.runtime.label import AbstractLabel, IntLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
@@ -21,17 +21,14 @@ class StaticTextClassifier(AbstractClassifier):
         self._map: List[LabelFeature] = []
 
     def cluster(self, corpus: Corpus) -> None:
-        # No clustering required for this class
-        pass
-
-    def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
         for event in corpus.events:
             feature: LabelFeature = typing.cast(LabelFeature, event.get_feature(LabelFeature))
             index: int = self._classify_internal(feature)
             if index == self.UNMATCHED:
                 self._map.append(feature)
 
-        return [IntLabel(self.UNMATCHED)] + [IntLabel(i) for i in range(len(self._map))]
+    def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
+        return [self.classify_event(event) for event in corpus.events]
 
     def classify_event(self, event: CorpusEvent) -> AbstractLabel:
         try:
@@ -42,6 +39,11 @@ class StaticTextClassifier(AbstractClassifier):
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
         if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, LabelFeature):
             return [(self._classify_feature(typing.cast(LabelFeature, influence.feature)), NoTransform())]
+        elif isinstance(influence, CorpusInfluence):
+            return [(
+                self._classify_feature(typing.cast(LabelFeature, influence.corpus_event.get_feature(LabelFeature))),
+                NoTransform()
+            )]
         else:
             raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
 
