@@ -188,8 +188,6 @@ if __name__ == '__main__':
               f"  - Onset: {event.onset}\n"
               f"  - Features: {[(feature.__class__.__name__, feature.value()) for feature in event.features]}")
 
-    output_folder: str = "/Users/joakimborg/MaxDev/SomaxResearch/manual_corpus_building/mikhail_label_format/"
-
     x_mono, sr, file_duration, metadata = ManualCorpusBuilder.read_audio(audio_file_path,
                                                                          ManualCorpusBuilder.HOP_LENGTH)
 
