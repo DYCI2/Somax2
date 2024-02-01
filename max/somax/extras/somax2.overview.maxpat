@@ -940,6 +940,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-7",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1333,7 +1334,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1616,7 +1616,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 30.0, 105.59375, 163.0, 280.0 ],
-									"tabs" : [ "somax.server", "somax.player", "somax.audioinfluencer", "somax.midiinfluencer", "somax.audiorenderer", "somax.midirenderer", "somax.audiocorpusbuilder", "somax.midicorpusbuilder" ]
+									"tabs" : [ "somax.server", "somax.player", "somax.audioinfluencer", "somax.midiinfluencer", "somax.audiorenderer", "somax.midirenderer", "somax.audiocorpusbuilder", "somax.midicorpusbuilder", "somax.audiorecord" ]
 								}
 
 							}
