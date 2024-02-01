@@ -217,7 +217,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1093.0, 482.0, 204.0, 66.0 ],
+					"patching_rect" : [ 1093.0, 482.0, 207.0, 66.0 ],
 					"text" : "you can also load an existing corpus and append new recordings to it by starting again from point 5"
 				}
 
@@ -423,7 +423,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 222.0, 522.0, 150.0, 22.0 ],
-					"text" : "1 ready"
+					"text" : "0 duplicate"
 				}
 
 			}
@@ -801,7 +801,7 @@
 					"orientation" : 1,
 					"outlettype" : [ "multichannelsignal", "", "float", "list" ],
 					"parameter_enable" : 1,
-					"patching_rect" : [ 1034.0, 197.5, 136.0, 47.0 ],
+					"patching_rect" : [ 1034.0, 193.0, 136.0, 47.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_longname" : "audio input",
