@@ -4547,7 +4547,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 381.000007510185242, 531.0, 196.0, 24.0 ],
+									"patching_rect" : [ 376.0, 531.0, 196.0, 24.0 ],
 									"text" : "event learned in the new corpus",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -4587,7 +4587,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 347.0, 396.0, 189.0, 24.0 ],
+									"patching_rect" : [ 342.0, 396.0, 189.0, 24.0 ],
 									"text" : "bang player to generate output",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -4671,7 +4671,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 180.0, 497.0, 24.0, 24.0 ]
+									"patching_rect" : [ 175.0, 497.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -4683,7 +4683,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 321.0, 396.0, 24.0, 24.0 ]
+									"patching_rect" : [ 316.0, 396.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -4743,7 +4743,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 85.0, 531.0, 24.0, 24.0 ]
+									"patching_rect" : [ 80.0, 531.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -4754,7 +4754,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 134.0, 396.0, 125.0, 24.0 ],
+									"patching_rect" : [ 129.0, 396.0, 125.0, 24.0 ],
 									"text" : "initialize the player",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -4767,7 +4767,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 82.0, 396.0, 51.0, 22.0 ],
+									"patching_rect" : [ 77.0, 396.0, 51.0, 22.0 ],
 									"text" : "initialize"
 								}
 
@@ -4781,7 +4781,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "multichannelsignal", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 65.0, 606.5, 69.0, 18.0 ]
+									"patching_rect" : [ 60.0, 607.0, 69.0, 18.0 ]
 								}
 
 							}
@@ -4792,7 +4792,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 116.166666666666629, 644.5, 128.0, 24.0 ],
+									"patching_rect" : [ 111.0, 645.0, 128.0, 24.0 ],
 									"text" : "start dsp & set gain",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -4946,7 +4946,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 118.0, 532.0, 258.0, 22.0 ],
+									"patching_rect" : [ 113.0, 532.0, 258.0, 22.0 ],
 									"text" : "31 27.066668 0.309333 27376.001953"
 								}
 
@@ -4958,7 +4958,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 85.0, 498.0, 79.0, 22.0 ],
+									"patching_rect" : [ 80.0, 498.0, 79.0, 22.0 ],
 									"text" : "route learned"
 								}
 
@@ -5152,7 +5152,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 139.0, 606.5, 69.0, 18.0 ]
+									"patching_rect" : [ 134.0, 607.0, 69.0, 18.0 ]
 								}
 
 							}
@@ -5162,7 +5162,7 @@
 									"maxclass" : "mc.ezdac~",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 65.0, 634.0, 45.0, 45.0 ]
+									"patching_rect" : [ 60.0, 634.0, 45.0, 45.0 ]
 								}
 
 							}
@@ -5174,7 +5174,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 321.000007510185242, 565.5, 306.0, 37.0 ],
+									"patching_rect" : [ 316.0, 566.0, 306.0, 37.0 ],
 									"text" : "the somax.audiorenderer's @buffername argument must be provided for somax.audiorecord to work",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -5187,7 +5187,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "multichannelsignal", "", "" ],
-									"patching_rect" : [ 65.0, 573.0, 249.0, 22.0 ],
+									"patching_rect" : [ 60.0, 573.0, 249.0, 22.0 ],
 									"text" : "somax.audiorenderer @buffername buffer-01",
 									"varname" : "somax.audiorenderer"
 								}
@@ -5225,7 +5225,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 599.0, 416.5, 301.0, 87.0 ],
+									"patching_rect" : [ 594.0, 417.0, 301.0, 87.0 ],
 									"text" : "valid descriptors are:\n- pitch\n- onsetchroma (chroma at onset of the slice)\n- meanchroma (mean chroma of the slice)\n- tempo\n- beat (position in beat as a number between 0 and 1)",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -5239,7 +5239,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 433.0, 428.5, 160.0, 64.0 ],
+									"patching_rect" : [ 428.0, 429.0, 160.0, 64.0 ],
 									"text" : "@recordconfig format:\n- record buffer size (ms)\n- number of channels\n- required descriptors",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -5253,7 +5253,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
-									"patching_rect" : [ 65.0, 436.0, 364.0, 49.0 ],
+									"patching_rect" : [ 60.0, 436.0, 364.0, 49.0 ],
 									"text" : "somax.player @autoinitialize 0 @recordconfig 120000 2 pitch onsetchroma meanchroma @mode reactive @continuity 0. @transpositions -4 0 4 @tabooenable 0 @timeout 0",
 									"varname" : "somax.player"
 								}
@@ -5426,7 +5426,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 538.0, 398.0, 20.0, 20.0 ],
+									"patching_rect" : [ 533.0, 398.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "7",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
@@ -5599,7 +5599,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-4", 0 ],
-									"midpoints" : [ 74.5, 491.0, 94.5, 491.0 ],
+									"midpoints" : [ 69.5, 491.5, 89.5, 491.5 ],
 									"order" : 0,
 									"source" : [ "obj-14", 0 ]
 								}
@@ -5608,7 +5608,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-14", 0 ],
-									"midpoints" : [ 330.5, 430.0, 74.5, 430.0 ],
+									"midpoints" : [ 325.5, 430.5, 69.5, 430.5 ],
 									"source" : [ "obj-17", 0 ]
 								}
 
@@ -5660,7 +5660,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-28", 0 ],
-									"midpoints" : [ 74.5, 601.25, 148.5, 601.25 ],
+									"midpoints" : [ 69.5, 601.75, 143.5, 601.75 ],
 									"order" : 0,
 									"source" : [ "obj-23", 0 ]
 								}
@@ -5684,7 +5684,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-14", 0 ],
-									"midpoints" : [ 336.5, 370.5, 74.5, 370.5 ],
+									"midpoints" : [ 336.5, 370.5, 69.5, 370.5 ],
 									"source" : [ "obj-3", 0 ]
 								}
 
@@ -5731,7 +5731,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-38", 1 ],
-									"midpoints" : [ 94.5, 525.5, 366.5, 525.5 ],
+									"midpoints" : [ 89.5, 526.0, 361.5, 526.0 ],
 									"order" : 0,
 									"source" : [ "obj-4", 0 ]
 								}
@@ -5755,7 +5755,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-14", 0 ],
-									"midpoints" : [ 91.5, 428.5, 74.5, 428.5 ],
+									"midpoints" : [ 86.5, 429.0, 69.5, 429.0 ],
 									"source" : [ "obj-47", 0 ]
 								}
 
