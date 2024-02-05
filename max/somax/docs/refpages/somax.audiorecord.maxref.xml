@@ -109,28 +109,7 @@
             </description>
         </method>
 
-        <method name="appendend">
-            <arglist><arg name="input" optional="0" type="int" /></arglist>
-            <digest>Enable/Disable the appending of the last event when stopping the recording</digest>
-            <description>
-                By default when recording is toggled off through <m>stop</m>, the <o>somax.audiorecord</o> will learn as a new event whatever has been recorded into its <o>buffer~</o> since the last event.
-                <br />
-                Reversely, if set to <m>appendend 0</m>, the <o>somax.audiorecord</o> will discard everything since the last recorded event.         
-            </description>
-        </method>
-
-        <method name="releasetime">
-            <arglist><arg name="input" optional="0" type="float" /></arglist>
-            <digest>Sets the release time for final corpus crossfade</digest>
-            <description>
-                The default value is <m>releasetime 0</m>. 
-                <br />
-                This argument sets the time (in ms) the <o>somax.audiorecord</o> will wait before it actually stops recording when recording is toggled off through <m>stop</m>.
-                This is to allow the user to apply crossfades at the end of the recorded corpus.
-
-                
-            </description>
-        </method>
+        
 
 
 	</methodlist>
@@ -147,6 +126,27 @@
                 If any of these descriptors are missing when it starts recording, it will indicate errors in the console.
                 <br />
                 Note that onsetchroma and meanchroma are two variations of chroma that will be handled internally.
+            </description>
+        </attribute>
+
+        <attribute name="appendend">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Enable/Disable the appending of the last event when stopping the recording</digest>
+            <description>
+                By default when recording is toggled off through <m>stop</m>, the <o>somax.audiorecord</o> will learn as a new event whatever has been recorded into its <o>buffer~</o> since the last event.
+                <br />
+                Reversely, if set to <m>appendend 0</m>, the <o>somax.audiorecord</o> will discard everything since the last recorded event.         
+            </description>
+        </attribute>
+
+        <attribute name="releasetime">
+            <arglist><arg name="input" optional="0" type="float" /></arglist>
+            <digest>Sets the release time for final corpus crossfade</digest>
+            <description>
+                The default value is <m>releasetime 0</m>. 
+                <br />
+                This argument sets the time (in ms) the <o>somax.audiorecord</o> will wait before it actually stops recording when recording is toggled off through <m>stop</m>.
+                This is to allow the user to apply crossfades at the end of the recorded corpus.
             </description>
         </attribute>
 	</attributelist>
