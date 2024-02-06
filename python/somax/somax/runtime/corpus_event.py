@@ -329,11 +329,13 @@ class SilenceEvent(CorpusEvent):
 
     @classmethod
     def decode(cls, event_dict: Dict[str, Any], feature_classpath_dict: Dict[str, str]) -> 'CorpusEvent':
-        assert (False, "A SilenceEvent should never be stored in a corpus and therefore should never be decoded")
+        logging.getLogger(__name__).warning("A SilenceEvent should never be stored in a corpus "
+                                            "and should therefore never be decoded")
         return SilenceEvent(0.0)
 
     def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
-        assert (False, "A SilenceEvent should never be stored in a corpus and should therefore never be encoded")
+        logging.getLogger(__name__).warning("A SilenceEvent should never be stored in a corpus "
+                                            "and should therefore never be decoded")
         return {}
 
     @property
