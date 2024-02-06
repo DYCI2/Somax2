@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.player" module="somax" kind="patcher">
+
+	<digest>
+		Build a corpus in real-time from an incoming audio source
+	</digest>
+
+	<description>
+		The somax.audiorecord is used to build a corpus from an audio source in real-time. It takes as inputs an audio stream and its analysis derived from a somax.audioinfluencer and sends a specific message to the somax.player to learn the events and build a corpus from them.
+
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+	<!--ARGUMENTS-->
+	<objarglist>
+		<objarg name="buffername" optional="1" type="symbol">
+			<digest>
+				Buffer name
+			</digest>
+			<description>
+                This mandatory argument sets the <m>name</m> of the <o>buffer~</o> used by the somax.audiorecord to record the audio input in.
+				<br />
+                If there's no argument, the <o>somax.audiorecord</o> will give an error and ignore all input.
+			</description>
+		</objarg>
+    </objarglist>    
+
+	<!--MESSAGES-->
+	<methodlist>
+        <method name="int">
+			<arglist />
+			<digest>Start/Stop the recording</digest>
+			<description>
+                Performs the same function as <m>start</m> and <m>stop</m>.
+                <br />
+                Any integer number greater than 0 will start the <o>somax.audiorecord</o> recording. 
+                <m>0</m> stops the recording.
+            </description>
+		</method>
+
+        <method name="start">
+            <arglist />
+            <digest>Start the recording</digest>
+            <description>
+                Start the <o>somax.audiorecord</o> recording. 
+            </description>
+        </method>
+
+        <method name="stop">
+            <arglist />
+            <digest>Stop the recording</digest>
+            <description>
+                Stops the <o>somax.audiorecord</o> recording. 
+            </description>
+        </method>
+        
+        <method name="pitch">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Sets the pitch of an event</digest>
+			<description>
+                The message <m>pitch</m> followed by an <o>int</o> sets the the pitch of the currently recorded event to this value.         
+            </description>
+		</method>
+
+        <method name="chroma">
+            <arglist><arg name="input" optional="0" type="float" size="12" /></arglist>
+            <digest>Sets the chroma of an event</digest>
+            <description>
+                The message <m>chroma</m> followed by a a list of 12 <o>float</o> values sets the the chroma of the currently recorded event to these values.         
+            </description>
+        </method>
+
+        <method name="tempo">
+            <arglist><arg name="input" optional="0" type="float" /></arglist>
+            <digest>Sets the tempo of an event</digest>
+            <description>
+                The message <m>tempo</m> followed by a <o>float</o> sets the the tempo of the currently recorded event to this value.         
+            </description>
+        </method>
+
+        <method name="beat">
+            <arglist><arg name="input" optional="0" type="float" /></arglist>
+            <digest>Sets the beat phase of an event</digest>
+            <description>
+                The message <m>beat</m> followed by a <o>float</o> between 0 and 1 sets the beat phase of the currently recorded event to this value.         
+            </description>
+        </method>
+
+        <method name="bang">
+            <arglist />
+            <digest>Learn next event</digest>
+            <description>
+                Triggers the segmentation and learning of the next event, which gets appended to the corpus that is currently being recorded. 
+            </description>
+        </method>
+
+        <method name="onset">
+            <arglist />
+            <digest>Learn next event</digest>
+            <description>
+                Performs the same function as <m>bang</m>. 
+            </description>
+        </method>
+
+        
+
+
+	</methodlist>
+
+    <!--ATTRIBUTES-->
+	<attributelist>
+        <attribute name="descriptors" get="0" set="1" type="symbol" size="1">
+            <digest>Specify the descriptors used for the audio analysis</digest>
+            <description>
+                By default the <o>somax.audiorecord</o> is initialized with <m>descriptors pitch onsetchroma meanchroma</m>. 
+                <br /> 
+                Use this attribute to specify the list of descriptors that the object should use when analysing its audio input. Valid descriptors are: pitch, onsetchroma, meanchroma, beat, tempo.
+                <br />
+                If any of these descriptors are missing when it starts recording, it will indicate errors in the console.
+                <br />
+                Note that onsetchroma and meanchroma are two variations of chroma that will be handled internally.
+            </description>
+        </attribute>
+
+        <attribute name="appendend">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Enable/Disable the appending of the last event when stopping the recording</digest>
+            <description>
+                By default when recording is toggled off through <m>stop</m>, the <o>somax.audiorecord</o> will learn as a new event whatever has been recorded into its <o>buffer~</o> since the last event.
+                <br />
+                Reversely, if set to <m>appendend 0</m>, the <o>somax.audiorecord</o> will discard everything since the last recorded event.         
+            </description>
+        </attribute>
+
+        <attribute name="releasetime">
+            <arglist><arg name="input" optional="0" type="float" /></arglist>
+            <digest>Sets the release time for final corpus crossfade</digest>
+            <description>
+                The default value is <m>releasetime 0</m>. 
+                <br />
+                This argument sets the time (in ms) the <o>somax.audiorecord</o> will wait before it actually stops recording when recording is toggled off through <m>stop</m>.
+                This is to allow the user to apply crossfades at the end of the recorded corpus.
+            </description>
+        </attribute>
+	</attributelist>
+	
+	
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.player.app" />
+		<seealso name="somax.server" />
+		<seealso name="somax.audiorenderer" />
+		<seealso name="somax.midirenderer" />
+		<seealso name="somax.audioinfluencer" />
+        <seealso name="somax.midiinfluencer" />
+        <seealso name="somax.audiocorpusbuilder" />
+        <seealso name="somax.midicorpusbuilder" />
+	</seealsolist>
+	
+</c74object>
