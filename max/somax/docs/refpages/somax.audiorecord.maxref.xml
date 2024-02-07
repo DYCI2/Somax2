@@ -8,7 +8,7 @@
 	</digest>
 
 	<description>
-		The somax.audiorecord is used to build a corpus from an audio source in real-time. It takes as inputs an audio stream and its analysis derived from a somax.audioinfluencer and sends a specific message to the somax.player to learn the events and build a corpus from them.
+		The somax.audiorecord is used to build a corpus from an audio source in real-time. It takes as inputs an audio stream and a segmentation analysis derived from a somax.audioinfluencer and sends a specific message to the somax.player to learn the events and build a corpus from them.
 
 	</description>
 
