@@ -925,7 +925,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "1 running"
 								}
 
 							}
@@ -1539,7 +1539,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 100.0, 126.0, 1056.0, 690.0 ],
+						"rect" : [ 0.0, 26.0, 1056.0, 690.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 782.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2367,7 +2367,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "signal", "" ],
-									"patching_rect" : [ 654.0, 322.0, 165.0, 35.0 ],
+									"patching_rect" : [ 594.0, 322.0, 165.0, 35.0 ],
 									"text" : "somax.audiorecord buffer-05 @linkto recording-03"
 								}
 
@@ -2407,7 +2407,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 688.0, 360.0, 199.0, 39.0 ],
+									"patching_rect" : [ 628.0, 360.0, 199.0, 39.0 ],
 									"text" : "bang any player to trigger its output",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -2473,7 +2473,7 @@
 									"orientation" : 1,
 									"outlettype" : [ "multichannelsignal", "", "float", "list" ],
 									"parameter_enable" : 1,
-									"patching_rect" : [ 654.0, 554.0, 136.0, 47.0 ],
+									"patching_rect" : [ 594.0, 554.0, 136.0, 47.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_longname" : "player 3[1]",
@@ -2554,7 +2554,7 @@
 									"outlettype" : [ "bang" ],
 									"outlinecolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 677.0, 392.0, 24.0, 24.0 ]
+									"patching_rect" : [ 617.0, 392.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -2617,7 +2617,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 734.0, 480.0, 24.0, 24.0 ]
+									"patching_rect" : [ 674.0, 480.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -2629,7 +2629,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "multichannelsignal", "", "" ],
-									"patching_rect" : [ 654.0, 513.0, 252.0, 35.0 ],
+									"patching_rect" : [ 594.0, 513.0, 252.0, 35.0 ],
 									"text" : "somax.audiorenderer @buffername buffer-05 @linkto recording-03",
 									"varname" : "somax.audiorenderer[2]"
 								}
@@ -2643,7 +2643,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
-									"patching_rect" : [ 654.0, 435.0, 259.000000000000114, 35.0 ],
+									"patching_rect" : [ 594.0, 435.0, 259.000000000000114, 35.0 ],
 									"text" : "somax.player @autoinitialize 1 @recordconfig 30000 2 pitch onsetchroma meanchroma",
 									"varname" : "somax.player[2]"
 								}
@@ -3127,7 +3127,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "1 running"
 								}
 
 							}
@@ -3294,7 +3294,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 890.0, 361.0, 20.0, 20.0 ],
+									"patching_rect" : [ 830.0, 361.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "6",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
@@ -3406,7 +3406,7 @@
 								"patchline" : 								{
 									"color" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ],
 									"destination" : [ "obj-70", 0 ],
-									"midpoints" : [ 77.5, 312.25, 663.5, 312.25 ],
+									"midpoints" : [ 77.5, 312.25, 603.5, 312.25 ],
 									"order" : 0,
 									"source" : [ "obj-10", 0 ]
 								}
@@ -3461,7 +3461,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-3", 1 ],
-									"midpoints" : [ 53.5, 222.645833333333314, 199.5, 222.645833333333314 ],
+									"midpoints" : [ 53.5, 216.645833333333314, 199.5, 216.645833333333314 ],
 									"order" : 2,
 									"source" : [ "obj-21", 0 ]
 								}
@@ -3478,7 +3478,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-69", 1 ],
-									"midpoints" : [ 53.5, 223.145833333333314, 473.5, 223.145833333333314 ],
+									"midpoints" : [ 53.5, 216.145833333333314, 473.5, 216.145833333333314 ],
 									"order" : 1,
 									"source" : [ "obj-21", 0 ]
 								}
@@ -3487,7 +3487,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-70", 1 ],
-									"midpoints" : [ 53.5, 223.145833333333314, 809.5, 223.145833333333314 ],
+									"midpoints" : [ 53.5, 216.145833333333314, 749.5, 216.145833333333314 ],
 									"order" : 0,
 									"source" : [ "obj-21", 0 ]
 								}
@@ -3547,7 +3547,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-26", 0 ],
-									"midpoints" : [ 75.5, 424.5, 663.5, 424.5 ],
+									"midpoints" : [ 75.5, 424.5, 603.5, 424.5 ],
 									"order" : 0,
 									"source" : [ "obj-28", 0 ]
 								}
@@ -3582,7 +3582,7 @@
 								"patchline" : 								{
 									"color" : [ 0.000066079199314, 0.001801013946533, 0.998228549957275, 1.0 ],
 									"destination" : [ "obj-70", 0 ],
-									"midpoints" : [ 125.5, 271.0, 663.5, 271.0 ],
+									"midpoints" : [ 125.5, 271.0, 603.5, 271.0 ],
 									"source" : [ "obj-40", 2 ]
 								}
 
@@ -3609,7 +3609,7 @@
 								"patchline" : 								{
 									"color" : [ 0.99565577507019, 0.634684503078461, 0.026361644268036, 1.0 ],
 									"destination" : [ "obj-26", 0 ],
-									"midpoints" : [ 686.5, 425.0, 663.5, 425.0 ],
+									"midpoints" : [ 626.5, 425.0, 603.5, 425.0 ],
 									"source" : [ "obj-54", 0 ]
 								}
 
@@ -3641,7 +3641,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-29", 0 ],
-									"midpoints" : [ 663.5, 616.0, 53.5, 616.0 ],
+									"midpoints" : [ 603.5, 616.0, 53.5, 616.0 ],
 									"source" : [ "obj-58", 0 ]
 								}
 
@@ -3773,7 +3773,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1056.0, 690.0 ],
+						"rect" : [ 100.0, 126.0, 1056.0, 690.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 782.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3805,6 +3805,28 @@
 						"isolateaudio" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-58",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 236.0, 663.0, 403.0, 20.0 ],
+									"text" : "learned <index> <onset_ms> <duration_ms> <new_corpus_duration_ms>",
+									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-53",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 528.0, 357.0, 150.0, 20.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontsize" : 13.0,
 									"id" : "obj-36",
@@ -4473,7 +4495,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "1 running"
 								}
 
 							}
@@ -4511,7 +4533,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 553.0, 462.0, 412.0, 47.0 ],
-									"text" : "if buffer reaches its end: overflow message on dumpout. There's no way to resize an existing buffer in max, you'll need to save the corpus (savecorpus my_corpus), resize the buffer (recordconfig ...), reload (corpus my_corpus)"
+									"text" : "if buffer reaches its end: overflow message on dumpout. There's no way to resize an existing buffer in max, you'll need to save the corpus (savecorpus my_corpus), resize the buffer (recordconfig ...), reload (corpus my_corpus)",
+									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
 
 							}
@@ -4573,7 +4596,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 349.0, 144.0, 230.0, 60.0 ],
-									"text" : "We'd normally use influencers to annotate real pitch, chroma, tempo, etc. \nThese are fake data just to illustrate how learning works"
+									"text" : "We'd normally use influencers to annotate real pitch, chroma, tempo, etc. \nThese are fake data just to illustrate how learning works",
+									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
 
 							}
@@ -4703,7 +4727,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 683.0, 333.0, 150.0, 47.0 ],
-									"text" : "amplitude varying noise just to be able to see it in properly in the waveform~"
+									"text" : "amplitude varying noise just to be able to see it in properly in the waveform~",
+									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
 
 							}
@@ -5297,7 +5322,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-40", 1 ],
-									"midpoints" : [ 300.5, 621.25, 505.5, 621.25 ],
+									"midpoints" : [ 300.5, 624.5, 505.5, 624.5 ],
 									"order" : 1,
 									"source" : [ "obj-39", 0 ]
 								}
@@ -5306,7 +5331,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-8", 0 ],
-									"midpoints" : [ 300.5, 620.75, 532.5, 620.75 ],
+									"midpoints" : [ 300.5, 624.0, 532.5, 624.0 ],
 									"order" : 0,
 									"source" : [ "obj-39", 0 ]
 								}
@@ -5962,7 +5987,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 258.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "1 running"
 								}
 
 							}
@@ -7778,7 +7803,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 76.0, 534.0, 258.0, 22.0 ],
-									"text" : "20 8.617508 0.365714 8983.220703"
+									"text" : "29 24082.67 800. 24882.67"
 								}
 
 							}
@@ -7930,7 +7955,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 889.0, 253.0, 163.0, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "1 running"
 								}
 
 							}
@@ -8722,7 +8747,6 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-1::obj-14::obj-1007" : [ "rslider[3]", "rslider", 0 ],
 			"obj-1::obj-14::obj-1115" : [ "continuity[6]", "continuity", 0 ],
 			"obj-1::obj-14::obj-1175" : [ "heldnotesmode[1]", "heldnotesmode", 0 ],
 			"obj-1::obj-14::obj-1179" : [ "continuity[5]", "continuity", 0 ],
@@ -8769,11 +8793,9 @@
 			"obj-1::obj-14::obj-860" : [ "harmonincpeakdecay[7]", "harmonincpeakdecay[1]", 0 ],
 			"obj-1::obj-14::obj-865" : [ "selfharmonicngramorder[1]", "selfharmonicngramorder", 0 ],
 			"obj-1::obj-14::obj-870" : [ "selfharmonicbypass[2]", "selfharmonicbypass", 0 ],
-			"obj-1::obj-14::obj-998" : [ "__exp_regionmaskenable[3]", "__exp_regionmaskenable", 0 ],
 			"obj-1::obj-21::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
 			"obj-1::obj-21::obj-35" : [ "[5]", "Level", 0 ],
 			"obj-1::obj-23::obj-98" : [ "live.text[3]", "live.text[26]", 0 ],
-			"obj-6::obj-14::obj-1007" : [ "rslider[1]", "rslider", 0 ],
 			"obj-6::obj-14::obj-1115" : [ "continuity[1]", "continuity", 0 ],
 			"obj-6::obj-14::obj-1175" : [ "heldnotesmode[8]", "heldnotesmode", 0 ],
 			"obj-6::obj-14::obj-1179" : [ "continuity[27]", "continuity", 0 ],
@@ -8820,9 +8842,7 @@
 			"obj-6::obj-14::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
 			"obj-6::obj-14::obj-865" : [ "selfharmonicngramorder[3]", "selfharmonicngramorder", 0 ],
 			"obj-6::obj-14::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
-			"obj-6::obj-14::obj-998" : [ "__exp_regionmaskenable[1]", "__exp_regionmaskenable", 0 ],
 			"obj-6::obj-23::obj-98" : [ "live.text[1]", "live.text[26]", 0 ],
-			"obj-7::obj-14::obj-1007" : [ "rslider[2]", "rslider", 0 ],
 			"obj-7::obj-14::obj-1115" : [ "continuity[3]", "continuity", 0 ],
 			"obj-7::obj-14::obj-1175" : [ "heldnotesmode[2]", "heldnotesmode", 0 ],
 			"obj-7::obj-14::obj-1179" : [ "continuity[9]", "continuity", 0 ],
@@ -8869,10 +8889,8 @@
 			"obj-7::obj-14::obj-860" : [ "harmonincpeakdecay[8]", "harmonincpeakdecay[1]", 0 ],
 			"obj-7::obj-14::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-7::obj-14::obj-870" : [ "selfharmonicbypass[5]", "selfharmonicbypass", 0 ],
-			"obj-7::obj-14::obj-998" : [ "__exp_regionmaskenable[4]", "__exp_regionmaskenable", 0 ],
 			"obj-7::obj-23::obj-98" : [ "live.text[4]", "live.text[26]", 0 ],
 			"obj-8::obj-11::obj-98" : [ "live.text[10]", "live.text[26]", 0 ],
-			"obj-8::obj-14::obj-1007" : [ "rslider[7]", "rslider", 0 ],
 			"obj-8::obj-14::obj-1115" : [ "continuity[19]", "continuity", 0 ],
 			"obj-8::obj-14::obj-1175" : [ "heldnotesmode[4]", "heldnotesmode", 0 ],
 			"obj-8::obj-14::obj-1179" : [ "continuity[14]", "continuity", 0 ],
@@ -8919,10 +8937,8 @@
 			"obj-8::obj-14::obj-860" : [ "harmonincpeakdecay[21]", "harmonincpeakdecay[1]", 0 ],
 			"obj-8::obj-14::obj-865" : [ "selfharmonicngramorder[10]", "selfharmonicngramorder", 0 ],
 			"obj-8::obj-14::obj-870" : [ "selfharmonicbypass[11]", "selfharmonicbypass", 0 ],
-			"obj-8::obj-14::obj-998" : [ "__exp_regionmaskenable[10]", "__exp_regionmaskenable", 0 ],
 			"obj-8::obj-21::obj-21::obj-6" : [ "live.tab[5]", "live.tab[1]", 0 ],
 			"obj-8::obj-21::obj-35" : [ "[2]", "Level", 0 ],
-			"obj-8::obj-22::obj-1007" : [ "rslider[9]", "rslider", 0 ],
 			"obj-8::obj-22::obj-1115" : [ "continuity[38]", "continuity", 0 ],
 			"obj-8::obj-22::obj-1175" : [ "heldnotesmode[5]", "heldnotesmode", 0 ],
 			"obj-8::obj-22::obj-1179" : [ "continuity[20]", "continuity", 0 ],
@@ -8969,10 +8985,8 @@
 			"obj-8::obj-22::obj-860" : [ "harmonincpeakdecay[22]", "harmonincpeakdecay[1]", 0 ],
 			"obj-8::obj-22::obj-865" : [ "selfharmonicngramorder[8]", "selfharmonicngramorder", 0 ],
 			"obj-8::obj-22::obj-870" : [ "selfharmonicbypass[7]", "selfharmonicbypass", 0 ],
-			"obj-8::obj-22::obj-998" : [ "__exp_regionmaskenable[11]", "__exp_regionmaskenable", 0 ],
 			"obj-8::obj-23::obj-98" : [ "live.text[9]", "live.text[26]", 0 ],
 			"obj-8::obj-25::obj-98" : [ "live.text[6]", "live.text[26]", 0 ],
-			"obj-8::obj-26::obj-1007" : [ "rslider[10]", "rslider", 0 ],
 			"obj-8::obj-26::obj-1115" : [ "continuity[22]", "continuity", 0 ],
 			"obj-8::obj-26::obj-1175" : [ "heldnotesmode[12]", "heldnotesmode", 0 ],
 			"obj-8::obj-26::obj-1179" : [ "continuity[39]", "continuity", 0 ],
@@ -9019,12 +9033,10 @@
 			"obj-8::obj-26::obj-860" : [ "harmonincpeakdecay[16]", "harmonincpeakdecay[1]", 0 ],
 			"obj-8::obj-26::obj-865" : [ "selfharmonicngramorder[11]", "selfharmonicngramorder", 0 ],
 			"obj-8::obj-26::obj-870" : [ "selfharmonicbypass[8]", "selfharmonicbypass", 0 ],
-			"obj-8::obj-26::obj-998" : [ "__exp_regionmaskenable[8]", "__exp_regionmaskenable", 0 ],
 			"obj-8::obj-55" : [ "player 1", "player 1", 0 ],
 			"obj-8::obj-56" : [ "player 2", "player 2", 0 ],
 			"obj-8::obj-58" : [ "player 3", "player 3", 0 ],
 			"obj-9::obj-11::obj-98" : [ "live.text[17]", "live.text[26]", 0 ],
-			"obj-9::obj-14::obj-1007" : [ "rslider[8]", "rslider", 0 ],
 			"obj-9::obj-14::obj-1115" : [ "continuity[34]", "continuity", 0 ],
 			"obj-9::obj-14::obj-1175" : [ "heldnotesmode[9]", "heldnotesmode", 0 ],
 			"obj-9::obj-14::obj-1179" : [ "continuity[33]", "continuity", 0 ],
@@ -9071,10 +9083,8 @@
 			"obj-9::obj-14::obj-860" : [ "harmonincpeakdecay[17]", "harmonincpeakdecay[1]", 0 ],
 			"obj-9::obj-14::obj-865" : [ "selfharmonicngramorder[6]", "selfharmonicngramorder", 0 ],
 			"obj-9::obj-14::obj-870" : [ "selfharmonicbypass[6]", "selfharmonicbypass", 0 ],
-			"obj-9::obj-14::obj-998" : [ "__exp_regionmaskenable[9]", "__exp_regionmaskenable", 0 ],
 			"obj-9::obj-21::obj-21::obj-6" : [ "live.tab[4]", "live.tab[1]", 0 ],
 			"obj-9::obj-21::obj-35" : [ "[1]", "Level", 0 ],
-			"obj-9::obj-22::obj-1007" : [ "rslider[5]", "rslider", 0 ],
 			"obj-9::obj-22::obj-1115" : [ "continuity[36]", "continuity", 0 ],
 			"obj-9::obj-22::obj-1175" : [ "heldnotesmode[10]", "heldnotesmode", 0 ],
 			"obj-9::obj-22::obj-1179" : [ "continuity[12]", "continuity", 0 ],
@@ -9121,10 +9131,8 @@
 			"obj-9::obj-22::obj-860" : [ "harmonincpeakdecay[18]", "harmonincpeakdecay[1]", 0 ],
 			"obj-9::obj-22::obj-865" : [ "selfharmonicngramorder[9]", "selfharmonicngramorder", 0 ],
 			"obj-9::obj-22::obj-870" : [ "selfharmonicbypass[9]", "selfharmonicbypass", 0 ],
-			"obj-9::obj-22::obj-998" : [ "__exp_regionmaskenable[6]", "__exp_regionmaskenable", 0 ],
 			"obj-9::obj-23::obj-98" : [ "live.text[16]", "live.text[26]", 0 ],
 			"obj-9::obj-25::obj-98" : [ "live.text[7]", "live.text[26]", 0 ],
-			"obj-9::obj-26::obj-1007" : [ "rslider[6]", "rslider", 0 ],
 			"obj-9::obj-26::obj-1115" : [ "continuity[29]", "continuity", 0 ],
 			"obj-9::obj-26::obj-1175" : [ "heldnotesmode[11]", "heldnotesmode", 0 ],
 			"obj-9::obj-26::obj-1179" : [ "continuity[13]", "continuity", 0 ],
@@ -9171,7 +9179,6 @@
 			"obj-9::obj-26::obj-860" : [ "harmonincpeakdecay[12]", "harmonincpeakdecay[1]", 0 ],
 			"obj-9::obj-26::obj-865" : [ "selfharmonicngramorder[7]", "selfharmonicngramorder", 0 ],
 			"obj-9::obj-26::obj-870" : [ "selfharmonicbypass[10]", "selfharmonicbypass", 0 ],
-			"obj-9::obj-26::obj-998" : [ "__exp_regionmaskenable[7]", "__exp_regionmaskenable", 0 ],
 			"obj-9::obj-55" : [ "mc.live.gain~", "player 1", 0 ],
 			"obj-9::obj-56" : [ "player 2[1]", "player 2", 0 ],
 			"obj-9::obj-58" : [ "player 3[1]", "player 3", 0 ],
