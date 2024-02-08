@@ -717,8 +717,8 @@ class OscAgent(Agent, AsyncioOscObject):
             parsed_features: List[CorpusFeature] = self.parse_features(features)
             event: CorpusEvent = self.player.learn_event(onset_ms / 1000, duration_ms / 1000, parsed_features)
             self.target.send(PlayerSendProtocol.RECORD_LEARN_EVENT, [event.state_index,
-                                                                     event.onset,
-                                                                     event.duration,
+                                                                     event.onset * 1000,
+                                                                     event.duration * 1000,
                                                                      self.player.corpus.duration() * 1000])
         except (RecordingError, ValueError, IndexError) as e:
             self.logger.error(f"{str(e)}. No event was recorded")
