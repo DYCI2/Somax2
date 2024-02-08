@@ -3,6 +3,7 @@ from typing import Any, Dict, List
 from somax.corpus_builder.metadata import Metadata
 from somax.features.feature import CorpusFeature, RuntimeFeature
 from somax.runtime.corpus_event import CorpusEvent
+from somax.runtime.exceptions import FeatureError
 
 
 class LabelFeature(CorpusFeature, RuntimeFeature):
@@ -14,7 +15,7 @@ class LabelFeature(CorpusFeature, RuntimeFeature):
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
-        pass
+        raise FeatureError("this feature cannot be analyzed")
 
     @classmethod
     def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':

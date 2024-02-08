@@ -175,9 +175,11 @@ if __name__ == '__main__':
 
     output_folder: str = args.output_folder if args.output_folder else os.getcwd()
 
-    # analysis_file_path: str = "/Users/joakimborg/MaxDev/SomaxResearch/manual_corpus_building/mikhail_label_format/bergson_003_gram_002_pitches.txt"
-    # audio_file_path: str = "/Users/joakimborg/MaxDev/SomaxResearch/manual_corpus_building/mikhail_label_format/Bergson_le_rire_003_mrk_003.aiff"
-    # corpus_name: str = os.path.splitext(os.path.basename(audio_file_path))[0]
+
+    # analysis_file_path: str = "/Users/joakimborg/MaxDev/SomaxResearch/manual_corpus_building/mikhail_label_format/Joelle_Syllable_SpectralCentroid_Hertz_MIDI_contour_ms.txt"
+    # audio_file_path: str = "/Users/joakimborg/MaxDev/SomaxResearch/manual_corpus_building/mikhail_label_format/Joelle.wav"
+    # corpus_name: str = "joelle_test"
+    # output_folder = "/Users/joakimborg/MaxDev/SomaxResearch/manual_corpus_building/mikhail_label_format/"
 
     event_data: List[EventData]
     spec: Specification
