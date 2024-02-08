@@ -124,7 +124,6 @@ class Atom(Parametric, ContentAware):
         return self.parameter_dict
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
-        print(f"atom: {self.name}: {self._classifier.eligible}")
         return self._classifier.eligible
 
     @property
