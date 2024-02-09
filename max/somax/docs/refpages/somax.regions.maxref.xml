@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.player" module="somax" kind="patcher">
+
+	<digest>
+		Monitor and control different regions to navigate the corpus
+	</digest>
+
+	<description>
+		The somax.regions module should be connected in a loop with the somax.player and is used to monitor the playback and to dynamically interact with the corpus to guide the generation of the next event.
+		Regions can be edited, enabled, disabled and resized according to your needs, providing precise and dynamic selection of different sections of the corpus, and offering tools to structure your interaction.  
+
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+	<!--ARGUMENTS-->
+	<objarglist>
+		<objarg name="buffername" optional="1" type="symbol">
+			<digest>
+				Buffer name
+			</digest>
+			<description>
+                This mandatory argument sets the <m>name</m> of the <o>buffer~</o> used by the somax.audiorecord to record the audio input in.
+				<br />
+                When using somax.regions through a bpatcher, buffer name should be configured in the Max Inspector, by setting Argument(s) to @buffername name_of_your_buffer.
+                <br /> 
+                What happens if there's no argument?
+			</description>
+		</objarg>
+    </objarglist>    
+
+	<!--MESSAGES-->
+	<methodlist>
+        
+        <method name="editable">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Select the region to edit</digest>
+			<description>
+                The message <m>editable</m> followed by an <o>int</o> between 1 and 6 sets the corresponding region as editable.         
+            </description>
+		</method>
+
+        <method name="enabled">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Enable/Disable regions</digest>
+            <description>
+                The message <m>enabled</m> is used to enable or disable a specific region. The syntax is <m>enabled index state</m>, where <m>index</m> is the number of the region (between 1 and 6) you want to enable or disable, and <m>state</m> is 1 if enabled, 0 if disabled.
+                <br />
+                Regions can be enabled or disabled one at a time (i.e., the message <m>enabled 1 0</m> will disable region 1), or by sending compound <m>enabled</m> messages separated by a comma.
+            </description>
+        </method>
+
+        <method name="reset">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Reset regions</digest>
+            <description>
+                The message <m>reset</m> followed by an <o>int</o> between 1 and 6 reset the corresponding region to its original size.
+                <br />
+                The message <m>reset</m>, without any argument, resets all the six regions to their default values, equally dividing them according to the corpus's length. 
+            </description>
+        </method>
+
+        <method name="bounds">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Set regions bounds</digest>
+            <description>
+                The message <m>bounds</m> sets the bounds, and thus the size, of a specific region.
+                <br />
+                The syntax is <m>bounds index start_ms end_ms</m> where <m>index</m> is the number of the region (between 1 and 6) and <m>start_ms</m> and <m>end_ms</m> are the start and end time (in ms) of the region. 
+                <br />
+                I.e., the message <m>bounds 1 0. 6000.</m> will resize region 1 with start bound at 0 ms and end bound at 6000 ms, selecting the first 6 seconds of the corpus.
+            </description>
+        </method>
+
+	</methodlist>
+
+    <!--ATTRIBUTES-->
+	<attributelist>
+    
+	</attributelist>
+	
+	
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.player.app" />
+		<seealso name="somax.server" />
+		<seealso name="somax.audiorenderer" />
+		<seealso name="somax.midirenderer" />
+		<seealso name="somax.audioinfluencer" />
+        <seealso name="somax.midiinfluencer" />
+        <seealso name="somax.audiocorpusbuilder" />
+        <seealso name="somax.midicorpusbuilder" />
+        <seealso name="somax.audiorecord" />
+	</seealsolist>
+	
+</c74object>

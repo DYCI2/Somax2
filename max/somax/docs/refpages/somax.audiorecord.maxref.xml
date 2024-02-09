@@ -63,7 +63,7 @@
         
         <method name="pitch">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Sets the pitch of an event</digest>
+			<digest>Set the pitch of an event</digest>
 			<description>
                 The message <m>pitch</m> followed by an <o>int</o> sets the the pitch of the currently recorded event to this value.         
             </description>
@@ -71,7 +71,7 @@
 
         <method name="chroma">
             <arglist><arg name="input" optional="0" type="float" size="12" /></arglist>
-            <digest>Sets the chroma of an event</digest>
+            <digest>Set the chroma of an event</digest>
             <description>
                 The message <m>chroma</m> followed by a a list of 12 <o>float</o> values sets the the chroma of the currently recorded event to these values.         
             </description>
@@ -79,7 +79,7 @@
 
         <method name="tempo">
             <arglist><arg name="input" optional="0" type="float" /></arglist>
-            <digest>Sets the tempo of an event</digest>
+            <digest>Set the tempo of an event</digest>
             <description>
                 The message <m>tempo</m> followed by a <o>float</o> sets the the tempo of the currently recorded event to this value.         
             </description>
@@ -87,7 +87,7 @@
 
         <method name="beat">
             <arglist><arg name="input" optional="0" type="float" /></arglist>
-            <digest>Sets the beat phase of an event</digest>
+            <digest>Set the beat phase of an event</digest>
             <description>
                 The message <m>beat</m> followed by a <o>float</o> between 0 and 1 sets the beat phase of the currently recorded event to this value.         
             </description>
@@ -141,7 +141,7 @@
 
         <attribute name="releasetime">
             <arglist><arg name="input" optional="0" type="float" /></arglist>
-            <digest>Sets the release time for final corpus crossfade</digest>
+            <digest>Set the release time for final corpus crossfade</digest>
             <description>
                 The default value is <m>releasetime 0</m>. 
                 <br />
@@ -162,6 +162,7 @@
         <seealso name="somax.midiinfluencer" />
         <seealso name="somax.audiocorpusbuilder" />
         <seealso name="somax.midicorpusbuilder" />
+        <seealso name="somax.regions" />
 	</seealsolist>
 	
 </c74object>
