@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 5,
-			"revision" : 5,
+			"minor" : 6,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 982.0, 231.0, 1192.0, 876.0 ],
+		"rect" : [ 34.0, 87.0, 2492.0, 1258.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,80 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"id" : "obj-73",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 288.0, 794.0, 139.0, 22.0 ],
+					"text" : "r #0_has_valid_config"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-71",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"patching_rect" : [ 206.0, 865.0, 29.5, 22.0 ],
+					"text" : "&&"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-70",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 206.0, 839.0, 101.0, 22.0 ],
+					"text" : "pak 0 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-69",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1797.0, 443.5, 29.5, 22.0 ],
+					"text" : "0"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
+					"id" : "obj-67",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1472.0, 622.0, 141.0, 22.0 ],
+					"text" : "s #0_has_valid_config"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-66",
+					"linecount" : 6,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 2119.0, 406.0, 237.0, 87.0 ],
+					"text" : "reset: received immediately when the user sends  a \"corpus\" or \"recordconfig\" to the associated somax.player. This is to disable any recording in the gap between the command being issued and the buffer / corpus being allocated / loaded"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-65",
 					"maxclass" : "newobj",
@@ -123,8 +197,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -371,8 +445,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -470,8 +544,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -621,8 +695,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -841,7 +915,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1476.0, 517.5, 98.0, 22.0 ],
+					"patching_rect" : [ 1360.0, 622.0, 98.0, 22.0 ],
 					"text" : "s #0_dumpout"
 				}
 
@@ -923,12 +997,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-16",
-					"linecount" : 3,
+					"linecount" : 4,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1781.088308457711491, 597.5, 338.0, 47.0 ],
-					"text" : "When audio is on, the sync outlet of the record~ object will be based on the previous size and hence incorrectly aligned. Restarting DSP or recreating the object will solve this"
+					"patching_rect" : [ 1780.916666666666742, 654.0, 338.0, 60.0 ],
+					"text" : "When audio is on, the sync outlet of the record~ object will be based on the previous size and hence incorrectly aligned. Restarting DSP or recreating the object will solve this, hence the script replace command here"
 				}
 
 			}
@@ -984,8 +1058,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1246,8 +1320,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1356,8 +1430,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 5,
-											"revision" : 5,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1922,8 +1996,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 5,
-											"revision" : 5,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -2635,7 +2709,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "bang" ],
-					"patching_rect" : [ 205.922222222222217, 719.0, 205.0, 22.0 ],
+					"patching_rect" : [ 206.0, 670.0, 205.0, 22.0 ],
 					"text" : "t b b"
 				}
 
@@ -2648,7 +2722,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 205.922222222222217, 684.0, 129.0, 22.0 ],
+					"patching_rect" : [ 206.0, 635.0, 129.0, 22.0 ],
 					"text" : "r #0_start_recording"
 				}
 
@@ -2700,8 +2774,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2879,7 +2953,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1714.5, 517.5, 121.0, 22.0 ],
+					"patching_rect" : [ 1733.0, 574.0, 121.0, 22.0 ],
 					"text" : "s #0_buffer_length"
 				}
 
@@ -2892,7 +2966,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 249.172222222222217, 749.0, 129.0, 22.0 ],
+					"patching_rect" : [ 249.0, 700.0, 129.0, 22.0 ],
 					"text" : "r #0_stop_recording"
 				}
 
@@ -2904,7 +2978,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1961.25, 565.5, 131.0, 22.0 ],
+					"patching_rect" : [ 1979.0, 622.0, 131.0, 22.0 ],
 					"text" : "s #0_stop_recording"
 				}
 
@@ -2953,7 +3027,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 1714.5, 482.5, 131.257462686567351, 22.0 ],
+					"patching_rect" : [ 1733.0, 539.0, 131.257462686567351, 22.0 ],
 					"text" : "unjoin 3"
 				}
 
@@ -2963,10 +3037,10 @@
 					"id" : "obj-159",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "bang" ],
-					"patching_rect" : [ 1714.5, 443.5, 29.5, 22.0 ],
-					"text" : "t l b"
+					"numoutlets" : 3,
+					"outlettype" : [ "int", "", "bang" ],
+					"patching_rect" : [ 1714.5, 443.5, 56.0, 22.0 ],
+					"text" : "t 1 l b"
 				}
 
 			}
@@ -2978,8 +3052,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1861.5, 336.5, 106.0, 60.0 ],
-					"text" : "format: \n$1: buffer duration\n$2: num channels\n$3: file duration"
+					"patching_rect" : [ 1973.75, 406.0, 115.0, 60.0 ],
+					"text" : "bufferconfig format: \n$1: buffer duration\n$2: num channels\n$3: file duration"
 				}
 
 			}
@@ -3089,7 +3163,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1789.338308457711491, 565.5, 176.0, 22.0 ],
+					"patching_rect" : [ 1807.0, 622.0, 176.0, 22.0 ],
 					"text" : "v #0_previous_segment_end"
 				}
 
@@ -3188,7 +3262,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 205.922222222222217, 826.0, 56.0, 56.0 ]
+					"patching_rect" : [ 206.0, 777.0, 56.0, 56.0 ]
 				}
 
 			}
@@ -3199,7 +3273,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1632.916666666666742, 565.5, 138.0, 22.0 ],
+					"patching_rect" : [ 1632.916666666666742, 622.0, 156.502487562189117, 22.0 ],
 					"text" : "join 2 @triggers 1"
 				}
 
@@ -3212,7 +3286,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1632.916666666666742, 597.5, 146.171641791044749, 49.0 ],
+					"patching_rect" : [ 1632.916666666666742, 654.0, 146.171641791044749, 49.0 ],
 					"text" : "script replace mcrecord newex 0 0 180 12 mc.record~ $1 $2"
 				}
 
@@ -3225,7 +3299,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 1632.916666666666742, 654.5, 67.0, 22.0 ],
+					"patching_rect" : [ 1632.916666666666742, 711.0, 67.0, 22.0 ],
 					"save" : [ "#N", "thispatcher", ";", "#Q", "end", ";" ],
 					"text" : "thispatcher"
 				}
@@ -3241,7 +3315,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 217.522222222222183, 1245.5, 180.0, 22.0 ],
-					"text" : "mc.record~ buffer-03 2",
+					"text" : "mc.record~ buffer-tuto-01 2",
 					"varname" : "mcrecord"
 				}
 
@@ -3265,7 +3339,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1861.5, 404.060432885258706, 130.495024875621993, 60.0 ],
+					"patching_rect" : [ 1973.75, 473.0, 130.495024875621993, 60.0 ],
 					"text" : "sent when a corpus is loaded \n(including an empty RealtimeRecorded)"
 				}
 
@@ -3274,11 +3348,11 @@
 				"box" : 				{
 					"id" : "obj-34",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 1714.5, 406.0, 102.0, 22.0 ],
-					"text" : "route bufferconfig"
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 1714.5, 406.0, 184.0, 22.0 ],
+					"text" : "route bufferconfig reset"
 				}
 
 			}
@@ -3390,7 +3464,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 249.172222222222217, 782.0, 29.5, 22.0 ],
+					"patching_rect" : [ 249.0, 733.0, 29.5, 22.0 ],
 					"text" : "0"
 				}
 
@@ -3402,7 +3476,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 205.922222222222217, 782.0, 29.5, 22.0 ],
+					"patching_rect" : [ 206.0, 733.0, 29.5, 22.0 ],
 					"text" : "1"
 				}
 
@@ -3545,8 +3619,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 5,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3796,7 +3870,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-32", 0 ],
+					"destination" : [ "obj-70", 0 ],
 					"source" : [ "obj-113", 0 ]
 				}
 
@@ -4015,15 +4089,23 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-161", 0 ],
-					"source" : [ "obj-159", 0 ]
+					"source" : [ "obj-159", 1 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-35", 0 ],
-					"midpoints" : [ 1734.5, 474.0, 1970.75, 474.0 ],
-					"source" : [ "obj-159", 1 ]
+					"midpoints" : [ 1761.0, 474.0, 1988.5, 474.0 ],
+					"source" : [ "obj-159", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-67", 0 ],
+					"midpoints" : [ 1724.0, 504.25, 1481.5, 504.25 ],
+					"source" : [ "obj-159", 0 ]
 				}
 
 			}
@@ -4212,7 +4294,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-19", 0 ],
-					"midpoints" : [ 1713.5, 397.25, 1485.5, 397.25 ],
+					"midpoints" : [ 1713.5, 397.25, 1369.5, 397.25 ],
 					"source" : [ "obj-22", 0 ]
 				}
 
@@ -4329,6 +4411,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-159", 0 ],
 					"source" : [ "obj-34", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-69", 0 ],
+					"source" : [ "obj-34", 1 ]
 				}
 
 			}
@@ -4625,7 +4714,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-19", 0 ],
-					"midpoints" : [ 1815.5, 398.75, 1485.5, 398.75 ],
+					"midpoints" : [ 1815.5, 398.75, 1369.5, 398.75 ],
 					"source" : [ "obj-62", 0 ]
 				}
 
@@ -4639,8 +4728,37 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-67", 0 ],
+					"midpoints" : [ 1806.5, 504.25, 1481.5, 504.25 ],
+					"source" : [ "obj-69", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-71", 0 ],
+					"source" : [ "obj-70", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-32", 0 ],
+					"source" : [ "obj-71", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-145", 0 ],
 					"source" : [ "obj-72", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-70", 1 ],
+					"source" : [ "obj-73", 0 ]
 				}
 
 			}
@@ -4709,19 +4827,19 @@
 			}
  ],
 		"boxgroups" : [ 			{
-				"boxes" : [ "obj-34", "obj-57", "obj-157" ]
-			}
-, 			{
 				"boxes" : [ "obj-51", "obj-54" ]
 			}
 , 			{
 				"boxes" : [ "obj-146", "obj-89" ]
 			}
 , 			{
-				"boxes" : [ "obj-103", "obj-16" ]
+				"boxes" : [ "obj-8", "obj-17" ]
 			}
 , 			{
-				"boxes" : [ "obj-8", "obj-17" ]
+				"boxes" : [ "obj-34", "obj-57", "obj-157" ]
+			}
+, 			{
+				"boxes" : [ "obj-103", "obj-16" ]
 			}
  ]
 	}
