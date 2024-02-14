@@ -40,12 +40,24 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-160",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 738.33333333333303, 297.0, 65.0, 22.0 ],
+					"text" : "terminated"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-156",
 					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2505.1528481012665, 394.0, 242.0, 47.0 ],
+					"patching_rect" : [ 2576.0, 394.0, 242.0, 47.0 ],
 					"text" : "reset: sent to handle the gap between the command to load a corpus / bufferconfig and the completed allocation / load"
 				}
 
@@ -54,11 +66,11 @@
 				"box" : 				{
 					"id" : "obj-153",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 2401.0, 402.0, 91.0, 22.0 ],
-					"text" : "routepass reset"
+					"numinlets" : 3,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 2401.0, 402.0, 151.0, 22.0 ],
+					"text" : "routepass reset terminated"
 				}
 
 			}
@@ -2789,11 +2801,11 @@
 				"box" : 				{
 					"id" : "obj-6",
 					"maxclass" : "newobj",
-					"numinlets" : 6,
-					"numoutlets" : 6,
-					"outlettype" : [ "", "", "", "", "", "" ],
-					"patching_rect" : [ 237.0, 267.0, 802.33333333333303, 22.0 ],
-					"text" : "route audio corpusview running bufferconfig bufferwrite"
+					"numinlets" : 7,
+					"numoutlets" : 7,
+					"outlettype" : [ "", "", "", "", "", "", "" ],
+					"patching_rect" : [ 237.0, 267.0, 770.999999999999659, 22.0 ],
+					"text" : "route audio corpusview running bufferconfig terminated bufferwrite"
 				}
 
 			}
@@ -4717,6 +4729,13 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-36", 0 ],
+					"source" : [ "obj-153", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-59", 0 ],
 					"source" : [ "obj-153", 1 ]
 				}
 
@@ -4790,6 +4809,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-42", 0 ],
 					"source" : [ "obj-16", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-149", 0 ],
+					"source" : [ "obj-160", 0 ]
 				}
 
 			}
@@ -5469,7 +5495,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-127", 0 ],
-					"source" : [ "obj-6", 4 ]
+					"source" : [ "obj-6", 5 ]
 				}
 
 			}
@@ -5477,6 +5503,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-149", 0 ],
 					"source" : [ "obj-6", 3 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-160", 0 ],
+					"source" : [ "obj-6", 4 ]
 				}
 
 			}
@@ -5490,8 +5523,8 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-54", 0 ],
-					"midpoints" : [ 1029.83333333333303, 299.0, 1028.29857594936675, 299.0, 1028.29857594936675, 257.0, 1068.69430379746791, 257.0 ],
-					"source" : [ "obj-6", 5 ]
+					"midpoints" : [ 998.499999999999659, 299.0, 1028.29857594936675, 299.0, 1028.29857594936675, 257.0, 1068.69430379746791, 257.0 ],
+					"source" : [ "obj-6", 6 ]
 				}
 
 			}

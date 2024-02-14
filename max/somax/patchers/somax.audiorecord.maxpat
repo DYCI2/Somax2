@@ -59,7 +59,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1620.41666666666697, 1776.0, 90.0, 22.0 ],
+					"patching_rect" : [ 1620.41666666666697, 1776.0, 91.0, 22.0 ],
 					"text" : "r #0_warning"
 				}
 
@@ -71,7 +71,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1191.0, 228.0, 92.0, 22.0 ],
+					"patching_rect" : [ 1191.0, 228.0, 93.0, 22.0 ],
 					"text" : "s #0_warning"
 				}
 
@@ -83,7 +83,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1032.0, 228.0, 76.0, 22.0 ],
+					"patching_rect" : [ 1032.0, 228.0, 77.0, 22.0 ],
 					"text" : "s #0_error"
 				}
 
@@ -95,7 +95,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 936.722222222221944, 420.0, 76.0, 22.0 ],
+					"patching_rect" : [ 936.722222222221944, 420.0, 77.0, 22.0 ],
 					"text" : "s #0_error"
 				}
 
@@ -119,7 +119,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 386.0, 762.0, 77.0, 22.0 ],
+					"patching_rect" : [ 386.0, 778.0, 77.0, 22.0 ],
 					"text" : "s #0_error"
 				}
 
@@ -127,13 +127,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-84",
-					"linecount" : 2,
+					"linecount" : 3,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 386.0, 719.0, 139.0, 35.0 ],
-					"text" : "object has not yet been configured for recording"
+					"patching_rect" : [ 386.0, 719.0, 94.0, 49.0 ],
+					"text" : "object is not configured for recording"
 				}
 
 			}
@@ -464,7 +464,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2119.0, 406.0, 239.0, 87.0 ],
+					"patching_rect" : [ 2131.0, 406.0, 239.0, 87.0 ],
 					"text" : "reset: received immediately when the user sends  a \"corpus\" or \"recordconfig\" to the associated somax.player. This is to disable any recording in the gap between the command being issued and the buffer / corpus being allocated / loaded"
 				}
 
@@ -3571,11 +3571,11 @@
 				"box" : 				{
 					"id" : "obj-34",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 1714.5, 406.0, 184.0, 22.0 ],
-					"text" : "route bufferconfig reset"
+					"numinlets" : 4,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "", "", "" ],
+					"patching_rect" : [ 1714.5, 406.0, 266.5, 22.0 ],
+					"text" : "route bufferconfig reset terminated"
 				}
 
 			}
@@ -4606,6 +4606,14 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-68", 0 ],
+					"midpoints" : [ 1889.0, 435.25, 1806.5, 435.25 ],
+					"source" : [ "obj-34", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-68", 0 ],
 					"source" : [ "obj-34", 1 ]
 				}
 
@@ -5141,10 +5149,10 @@
 				"boxes" : [ "obj-8", "obj-17" ]
 			}
 , 			{
-				"boxes" : [ "obj-34", "obj-57", "obj-157" ]
+				"boxes" : [ "obj-103", "obj-16" ]
 			}
 , 			{
-				"boxes" : [ "obj-103", "obj-16" ]
+				"boxes" : [ "obj-34", "obj-57", "obj-157" ]
 			}
  ]
 	}
