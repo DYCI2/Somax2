@@ -21,18 +21,7 @@
 
 	<!--ARGUMENTS-->
 	<objarglist>
-		<objarg name="buffername" optional="1" type="symbol">
-			<digest>
-				Buffer name
-			</digest>
-			<description>
-                This mandatory argument sets the <m>name</m> of the <o>buffer~</o> used by the somax.audiorecord to record the audio input in.
-				<br />
-                When using somax.regions through a bpatcher, buffer name should be configured in the Max Inspector, by setting Argument(s) to @buffername name_of_your_buffer.
-                <br /> 
-                What happens if there's no argument?
-			</description>
-		</objarg>
+		
     </objarglist>    
 
 	<!--MESSAGES-->
@@ -82,7 +71,13 @@
 
     <!--ATTRIBUTES-->
 	<attributelist>
-    
+		<attribute name="buffername" optional="1" type="symbol">
+			<digest>Buffer name</digest>
+			<description>This optional argument sets the <m>name</m> of the <o>buffer~</o> used by the somax.audiorecord to display the audio recorded in as a waveform.
+				<br />
+                When using somax.regions through a bpatcher, buffer name could be configured in the Max Inspector, by setting Argument(s) to @buffername name_of_your_buffer.
+            </description>
+		</attribute>
 	</attributelist>
 	
 	
