@@ -34,6 +34,27 @@
 
 	<!--MESSAGES-->
 	<methodlist>
+        <method name="bang">
+            <arglist />
+            <digest>Learn next event</digest>
+            <description>
+                Triggers the segmentation and learning of the next event, which gets appended to the corpus that is currently being recorded. 
+            </description>
+        </method>
+        <method name="beat">
+            <arglist><arg name="input" optional="0" type="float" /></arglist>
+            <digest>Set the beat phase of an event</digest>
+            <description>
+                The message <m>beat</m> followed by a <o>float</o> between 0 and 1 sets the beat phase of the currently recorded event to this value.         
+            </description>
+        </method>
+        <method name="chroma">
+            <arglist><arg name="input" optional="0" type="float" size="12" /></arglist>
+            <digest>Set the chroma of an event</digest>
+            <description>
+                The message <m>chroma</m> followed by a a list of 12 <o>float</o> values sets the the chroma of the currently recorded event to these values.         
+            </description>
+        </method>
         <method name="int">
 			<arglist />
 			<digest>Start/Stop the recording</digest>
@@ -44,63 +65,6 @@
                 <m>0</m> stops the recording.
             </description>
 		</method>
-
-        <method name="start">
-            <arglist />
-            <digest>Start the recording</digest>
-            <description>
-                Start the <o>somax.audiorecord</o> recording. 
-            </description>
-        </method>
-
-        <method name="stop">
-            <arglist />
-            <digest>Stop the recording</digest>
-            <description>
-                Stops the <o>somax.audiorecord</o> recording. 
-            </description>
-        </method>
-        
-        <method name="pitch">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Set the pitch of an event</digest>
-			<description>
-                The message <m>pitch</m> followed by an <o>int</o> sets the the pitch of the currently recorded event to this value.         
-            </description>
-		</method>
-
-        <method name="chroma">
-            <arglist><arg name="input" optional="0" type="float" size="12" /></arglist>
-            <digest>Set the chroma of an event</digest>
-            <description>
-                The message <m>chroma</m> followed by a a list of 12 <o>float</o> values sets the the chroma of the currently recorded event to these values.         
-            </description>
-        </method>
-
-        <method name="tempo">
-            <arglist><arg name="input" optional="0" type="float" /></arglist>
-            <digest>Set the tempo of an event</digest>
-            <description>
-                The message <m>tempo</m> followed by a <o>float</o> sets the the tempo of the currently recorded event to this value.         
-            </description>
-        </method>
-
-        <method name="beat">
-            <arglist><arg name="input" optional="0" type="float" /></arglist>
-            <digest>Set the beat phase of an event</digest>
-            <description>
-                The message <m>beat</m> followed by a <o>float</o> between 0 and 1 sets the beat phase of the currently recorded event to this value.         
-            </description>
-        </method>
-
-        <method name="bang">
-            <arglist />
-            <digest>Learn next event</digest>
-            <description>
-                Triggers the segmentation and learning of the next event, which gets appended to the corpus that is currently being recorded. 
-            </description>
-        </method>
-
         <method name="onset">
             <arglist />
             <digest>Learn next event</digest>
@@ -108,14 +72,47 @@
                 Performs the same function as <m>bang</m>. 
             </description>
         </method>
-
-        
-
-
+        <method name="pitch">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Set the pitch of an event</digest>
+            <description>
+                The message <m>pitch</m> followed by an <o>int</o> sets the the pitch of the currently recorded event to this value.         
+            </description>
+        </method>
+        <method name="start">
+            <arglist />
+            <digest>Start the recording</digest>
+            <description>
+                Start the <o>somax.audiorecord</o> recording. 
+            </description>
+        </method>
+        <method name="stop">
+            <arglist />
+            <digest>Stop the recording</digest>
+            <description>
+                Stops the <o>somax.audiorecord</o> recording. 
+            </description>
+        </method>
+        <method name="tempo">
+            <arglist><arg name="input" optional="0" type="float" /></arglist>
+            <digest>Set the tempo of an event</digest>
+            <description>
+                The message <m>tempo</m> followed by a <o>float</o> sets the the tempo of the currently recorded event to this value.         
+            </description>
+        </method>
 	</methodlist>
 
     <!--ATTRIBUTES-->
 	<attributelist>
+        <attribute name="appendend">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Enable/Disable the appending of the last event when stopping the recording</digest>
+            <description>
+                By default when recording is toggled off through <m>stop</m>, the <o>somax.audiorecord</o> will learn as a new event whatever has been recorded into its <o>buffer~</o> since the last event.
+                <br />
+                Reversely, if set to <m>appendend 0</m>, the <o>somax.audiorecord</o> will discard everything since the last recorded event.         
+            </description>
+        </attribute>
         <attribute name="descriptors" get="0" set="1" type="symbol" size="1">
             <digest>Specify the descriptors used for the audio analysis</digest>
             <description>
@@ -128,17 +125,6 @@
                 Note that onsetchroma and meanchroma are two variations of chroma that will be handled internally.
             </description>
         </attribute>
-
-        <attribute name="appendend">
-            <arglist><arg name="input" optional="0" type="int" /></arglist>
-            <digest>Enable/Disable the appending of the last event when stopping the recording</digest>
-            <description>
-                By default when recording is toggled off through <m>stop</m>, the <o>somax.audiorecord</o> will learn as a new event whatever has been recorded into its <o>buffer~</o> since the last event.
-                <br />
-                Reversely, if set to <m>appendend 0</m>, the <o>somax.audiorecord</o> will discard everything since the last recorded event.         
-            </description>
-        </attribute>
-
         <attribute name="releasetime">
             <arglist><arg name="input" optional="0" type="float" /></arglist>
             <digest>Set the release time for final corpus crossfade</digest>
@@ -154,7 +140,7 @@
 	
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="somax.player.app" />
+		<seealso name="somax.player" />
 		<seealso name="somax.server" />
 		<seealso name="somax.audiorenderer" />
 		<seealso name="somax.midirenderer" />

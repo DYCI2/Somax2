@@ -26,36 +26,7 @@
 
 	<!--MESSAGES-->
 	<methodlist>
-        
-        <method name="editable">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Select the region to edit</digest>
-			<description>
-                The message <m>editable</m> followed by an <o>int</o> between 1 and 6 sets the corresponding region as editable.         
-            </description>
-		</method>
-
-        <method name="enabled">
-            <arglist><arg name="input" optional="0" type="int" /></arglist>
-            <digest>Enable/Disable regions</digest>
-            <description>
-                The message <m>enabled</m> is used to enable or disable a specific region. The syntax is <m>enabled index state</m>, where <m>index</m> is the number of the region (between 1 and 6) you want to enable or disable, and <m>state</m> is 1 if enabled, 0 if disabled.
-                <br />
-                Regions can be enabled or disabled one at a time (i.e., the message <m>enabled 1 0</m> will disable region 1), or by sending compound <m>enabled</m> messages separated by a comma.
-            </description>
-        </method>
-
-        <method name="reset">
-            <arglist><arg name="input" optional="0" type="int" /></arglist>
-            <digest>Reset regions</digest>
-            <description>
-                The message <m>reset</m> followed by an <o>int</o> between 1 and 6 reset the corresponding region to its original size.
-                <br />
-                The message <m>reset</m>, without any argument, resets all the six regions to their default values, equally dividing them according to the corpus's length. 
-            </description>
-        </method>
-
-        <method name="bounds">
+		 <method name="bounds">
             <arglist><arg name="input" optional="0" type="int" /></arglist>
             <digest>Set regions bounds</digest>
             <description>
@@ -66,7 +37,31 @@
                 I.e., the message <m>bounds 1 0. 6000.</m> will resize region 1 with start bound at 0 ms and end bound at 6000 ms, selecting the first 6 seconds of the corpus.
             </description>
         </method>
-
+        <method name="editable">
+			<arglist><arg name="input" optional="0" type="int" /></arglist>
+			<digest>Select the region to edit</digest>
+			<description>
+                The message <m>editable</m> followed by an <o>int</o> between 1 and 6 sets the corresponding region as editable.         
+            </description>
+		</method>
+        <method name="enabled">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Enable/Disable regions</digest>
+            <description>
+                The message <m>enabled</m> is used to enable or disable a specific region. The syntax is <m>enabled index state</m>, where <m>index</m> is the number of the region (between 1 and 6) you want to enable or disable, and <m>state</m> is 1 if enabled, 0 if disabled.
+                <br />
+                Regions can be enabled or disabled one at a time (i.e., the message <m>enabled 1 0</m> will disable region 1), or by sending compound <m>enabled</m> messages separated by a comma.
+            </description>
+        </method>
+        <method name="reset">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Reset regions</digest>
+            <description>
+                The message <m>reset</m> followed by an <o>int</o> between 1 and 6 reset the corresponding region to its original size.
+                <br />
+                The message <m>reset</m>, without any argument, resets all the six regions to their default values, equally dividing them according to the corpus's length. 
+            </description>
+        </method>
 	</methodlist>
 
     <!--ATTRIBUTES-->
@@ -83,7 +78,7 @@
 	
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="somax.player.app" />
+		<seealso name="somax.player" />
 		<seealso name="somax.server" />
 		<seealso name="somax.audiorenderer" />
 		<seealso name="somax.midirenderer" />

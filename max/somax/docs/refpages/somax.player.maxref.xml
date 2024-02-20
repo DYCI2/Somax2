@@ -77,25 +77,26 @@
                 When <m>mode</m> is set to <m>reactive</m>, or <m>playingmode</m> is set to <m>manual</m>, a <m>bang</m> will cause the <o>somax.player</o> to trigger a new event.       
             </description>
 		</method>
-        <method name="int">
-			<arglist />
-			<digest>Enable/Disable the player</digest>
-			<description>
-                Performs the same function as <m>enabled</m>.
-                Any number other than 0 will start the <o>somax.player</o> generation. 
+        <method name="beat">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Query information about the player's loaded corpus</digest>
+            <description>
+                The message <m>beat</m> followed by a keyword will control the beat phase filter associated to the <o>somax.player</o>. 
                 <br />
-                <m>0</m> stops the player.
+                Valid messages are <m>enabled 1/0</m> to enable/disable the beat phase filter, <m>hardfilter 1/0</m> to enable/disable hard filtering, <m>gridsize</m> followed by an <o>int</o> to specify the grid size of the beat phase filter, <m>factor</m> followed by a <o>float</o> to set the beat attenuation factor, and <m>round 1/0</m> to set the grid to round (1) or floor (0) values.         
             </description>
-		</method>
-        
-        <method name="getcorpus">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Get the loaded corpus</digest>
-			<description>
-                Performs the same function as <m>corpus</m>.
-                The message <m>getcorpus</m> will cause the <o>somax.player</o> to output the name of the corpus currently loaded, out the left outlet.         
+        </method>
+        <method name="corpus">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Load corpus</digest>
+            <description>
+                The message <m>corpus new</m> resets the <o>somax.player</o> with an empty corpus and clears the <o>somax.audiorecord</o> buffer, if this is connected to the player.
+                <br />
+                The message <m>corpus corpusname.gz</m> loads into the player an already built MIDI corpus present in the current corpuspath. 
+                <br />
+                The message <m>corpus corpusname.pickle</m> loads into the player an already built audio corpus present in the current corpuspath.
             </description>
-		</method>
+        </method> 
         <method name="corpusquery">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Query information about the player's loaded corpus</digest>
@@ -103,7 +104,6 @@
                 The message <m>corpusquery</m> followed by a keyword will cause the <o>somax.player</o> to output the required corpus information, out the left outlet. Valid keywords are <m>corpusinfo</m>, <m>features</m>, <m>feature</m>, <m>events</m>, <m>notes</m>, <m>pitches</m>, <m>velocities</m> and <m>channels</m>.         
             </description>
 		</method>
-        
         <method name="flush">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Output MIDI note-offs for held notes</digest>
@@ -111,7 +111,13 @@
                 Outputs note-offs messages for any held MIDI note-ons.         
             </description>
 		</method>
-        
+         <method name="getcorpus">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Get the loaded corpus</digest>
+            <description>
+                The message <m>getcorpus</m> will cause the <o>somax.player</o> to output the name of the corpus currently loaded, out the left outlet.         
+            </description>
+        </method>
         <method name="influence">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Send data as influences to the player</digest>
@@ -130,6 +136,16 @@
                 The <m>initialize</m> message will instantiate the player on the remote python server, assuming that the server is running (the <o>somax.server</o> object has to be initialized first).         
             </description>
 		</method>
+        <method name="int">
+            <arglist />
+            <digest>Enable/Disable the player</digest>
+            <description>
+                Performs the same function as <m>enabled</m>.
+                Any number other than 0 will start the <o>somax.player</o> generation. 
+                <br />
+                <m>0</m> stops the player.
+            </description>
+        </method>
         <method name="ip">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Query the current OSC ip address</digest>
@@ -144,7 +160,6 @@
                 The message <m>jump</m>, followed by an <o>int</o>, will cause the <o>somax.player</o> to jump to the state having index according to the specified value. This will happen on the next trigger received by the player, so if you want to have an immediate <m>jump</m>, send a <m>bang</m> immediately after.         
             </description>
 		</method>
-        
         <method name="name">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
 			<digest>Query the player's name</digest>
@@ -178,6 +193,22 @@
 			<digest>Reset the history of influences</digest>
 			<description>The message <m>resetinfluences</m> will reset the player's internal history of received influences</description>
 		</method>
+        <method name="savecorpus">
+            <arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Save the current corpus</digest>
+            <description>
+                The message <m>savecorpus</m> will save the current <o>somax.player</o> corpus, storing it into the current corpuspath. 
+                This is useful when you record a new corpus or modify an existing one via the <o>somax.audiorecord</o> and you want to store its changes.
+                <br />
+                This command will by default save two files: corpus_name.wav and corpus_name.pickle
+                <br />
+                There are three formats: <m>savecorpus corpus_name</m>, <m>savecorpus corpus_name 0/1</m> and <m>savecorpus corpus_name 0/1 audio_format</m>
+                <br />
+                The second arguments enables overwriting. If 1, will overwrite existing files, if 0, won't overwrite.
+                <br />
+                The <m>audio_format</m> argument can be used to select other formats supported by Max (aiff, wav, flac, etc.)    
+            </description>
+        </method>
         <method name="sendport">
             <arglist><arg name="input" optional="0" type="int" /></arglist>
             <digest>Query the current OSC send port address</digest>
@@ -185,7 +216,7 @@
                 The message <m>recvport</m> will cause the <o>somax.player</o> to output the value of its OSC send port, out the left outlet.
             </description>
         </method>
-	</methodlist>
+    </methodlist>
 
     <!--ATTRIBUTES-->
 	<attributelist>
@@ -203,13 +234,6 @@
                 The message <m>continuity  1.00</m> will result in no alterations in the order of the events in the corpus.
                 A <m>continuity</m> greater than 1 will prioritize continuation (and result in fewer jumps).
                 A <m>continuity</m> value less than 1 will prioritizing jumping between non consecutive events in the corpus.
-            </description>
-        </attribute>
-        <attribute name="corpus" get="1" set="1" type="symbol" size="1">
-            <digest>Get the loaded corpus</digest>
-            <description>
-                Performs the same function as <m>getcorpus</m>.
-                The message <m>corpus</m> will cause the <o>somax.player</o> to output the name of the corpus currently loaded, out the left outlet.
             </description>
         </attribute>
         <attribute name="cut" get="1" set="1" type="symbol" size="1">
@@ -414,20 +438,14 @@
                 The message <m>recombine 1</m> will set the timeout behaviour to <m>recombine</m>, allowing the player to jump in the corpus during the timeout period.
             </description>
         </attribute>
-        <attribute name="regionmask" get="1" set="1" type="symbol" size="1">
-            <digest>Set lower and upper indexes for region mask</digest>
+        <attribute name="recordconfig" get="1" set="1" type="symbol" size="1">
+            <digest>Set corpus recording configuration</digest>
             <description>
-                The message <m>regionmask</m>, followed by two <o>float</o> values between 0 and 1, will set the lower and upper bounds of the region mask, when <m>regionmaskenable</m> is on. These values do not correspond to the exact state indexes of the corpus, but are rather relative positions of the whole duration of the corpus, where 0 is the beginning and 1 is the end of the corpus. 
-                <br />
-                Note: since the first value sets the lower index and the second value sets the upper index, the second value should always be equal or higher than the first one. If the two values are the same, a unitary region mask will be selected. 
-            </description>
-        </attribute>
-        <attribute name="regionmaskenable" get="1" set="1" type="symbol" size="1">
-            <digest>Enable/Disable region mask</digest>
-            <description>
-                The message <m>regionmaskenable 1</m> will enable the region mask, while the message <m>regionamaskenable 0</m> will disable it. When enabled, the <o>somax.player</o> will only output events from a specific part of the corpus. The extremes of the <m>regionmask</m> are set by the <m>regionmask</m> message.
-                <br />
-                Note: events outside of the region may still be played as a last resort in some cases unless <m>enforcetaboo</m> is on.
+                The attribute <m>recordconfig</m> enables the <o>somax.player</o> to work with the <o>somax.audiorecord</o> in order to record a new corpus in real-time.
+                
+                The format is <m>recordconfig buffer_size n_channels descriptors_to_use</m>. The <m>buffer_size</m> should be set in ms, while the <m>n_channels</m>> could be 2 (stereo) or 1 (mono). 
+                Valid descriptors are: pitch, onsetchroma, meanchroma, beat and tempo.
+                <m>recordconfig</m> can also be sent, with its arguments, as a message to the <o>somax.player</o>. 
             </description>
         </attribute>
         <attribute name="selfharmonicenable" get="1" set="1" type="symbol" size="1">
@@ -578,6 +596,8 @@
         <seealso name="somax.midiinfluencer" />
         <seealso name="somax.audiocorpusbuilder" />
         <seealso name="somax.midicorpusbuilder" />
+        <seealso name="somax.audiorecord" />
+        <seealso name="somax.regions" />
 	</seealsolist>
 	
 </c74object>
