@@ -59,16 +59,19 @@
 
 #### PLAYER REAL-TIME RECORDING MESSAGES ####
 
+* Initialize:                           audiorecord initialize <buffer_size_in_seconds> (buffer size is optional, will use default if not provided)
+* Clear Buffer:                         audiorecord clear (same as "corpus new")
 * Enable Recording Module:              audiorecord enabled
 * Set Analysis Source:                  audiorecord source <Name_of_Influencer>
 * Set Recording Source:                 audiorecord audiodevice "Name of Device" (name of device as listed in the menu, for example "2 Input 2")
-* Toggle Recording Source:              audiorecord inputenabled <1/0>
-* Crossfade:                            audiorecord crossfade <0..>
 * Recording Source Gain:                audiorecord gain <-70..6>                                  
-* Start/Stop recording:                 audiorecord start/stop
+* Monitor Audio Input:                  audiorecord monitor <0/1>
+* Start/Stop recording:                 audiorecord record <0/1> (also just "audiorecord <0/1>", or "audiorecord start" / "audiorecord stop")
 * Pause Recording on Silence:           audiorecord autopause <1/0>
 * Silence Threshold:                    audiorecord pausethresh <-70..0> 
 * Pause Interval:                       audiorecord pauseinterval <0..>
+* Record End:                           audiorecord appendend
+* Crossfade:                            audiorecord crossfade <0..>
 
 * Reset to New Empty Corpus:            corpus new
 * Save Recorded Corpus:                 savecorpus <Name_of_Corpus> (will write both .wav and .pickle file to corpuspath)
