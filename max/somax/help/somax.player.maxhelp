@@ -3,8 +3,8 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 2,
+			"minor" : 6,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -51,8 +51,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -96,7 +96,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 69.562499999999972, 465.0, 164.0, 22.0 ],
-									"text" : "name Player_1583"
+									"text" : "bufferconfig null"
 								}
 
 							}
@@ -558,8 +558,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -628,7 +628,8 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 365.0, 307.0, 175.14285714285711, 22.0 ]
+													"patching_rect" : [ 365.0, 307.0, 175.14285714285711, 22.0 ],
+													"text" : "bufferconfig null"
 												}
 
 											}
@@ -865,7 +866,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 31.0, 154.0, 85.0, 22.0 ],
-													"text" : "Player_1583"
+													"text" : "Player_4340"
 												}
 
 											}
@@ -982,8 +983,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1360,8 +1361,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1801,8 +1802,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1925,8 +1926,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -2049,8 +2050,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -2268,8 +2269,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -2611,8 +2612,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -3131,8 +3132,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -3376,8 +3377,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -4256,14 +4257,14 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
+						"rect" : [ 84.0, 126.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4504,8 +4505,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -5143,8 +5144,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -5388,8 +5389,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -5821,8 +5822,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
-									"patching_rect" : [ 23.0, 377.0, 326.66666666666697, 49.0 ],
-									"text" : "somax.player @autoinitialize 0 @melodicngramorder 1 @harmonicngramorder 1 @mode reactive @corpus Fabbrizio2c.pickle @transpositions -1 0 1 @tabooenable 1",
+									"patching_rect" : [ 23.0, 377.0, 326.666666666666913, 49.0 ],
+									"text" : "somax.player @autoinitialize 0 @melodicngramorder 1 @harmonicngramorder 1 @mode reactive @corpus Fabbrizio2c.pickle @transpositions -1 0 1",
 									"varname" : "somax.player[1]"
 								}
 
@@ -6608,8 +6609,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -6686,8 +6687,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -7029,8 +7030,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -7276,8 +7277,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -7521,8 +7522,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -8166,8 +8167,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -9581,8 +9582,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -9894,8 +9895,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -10139,8 +10140,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -11252,8 +11253,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -11317,14 +11318,14 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 126.0, 1055.0, 664.0 ],
+						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1056.0, 690.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -11487,8 +11488,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 6,
+											"revision" : 0,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -12758,7 +12759,6 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-24::obj-76::obj-1007" : [ "rslider[1]", "rslider", 0 ],
 			"obj-24::obj-76::obj-1115" : [ "continuity[1]", "continuity", 0 ],
 			"obj-24::obj-76::obj-1175" : [ "heldnotesmode[2]", "heldnotesmode", 0 ],
 			"obj-24::obj-76::obj-1179" : [ "continuity[35]", "continuity", 0 ],
@@ -12773,7 +12773,6 @@
 			"obj-24::obj-76::obj-1444" : [ "outputprobability[6]", "outputprobability", 0 ],
 			"obj-24::obj-76::obj-152" : [ "selfngramorder[1]", "selfngramorder", 0 ],
 			"obj-24::obj-76::obj-154" : [ "melodicngramorder[4]", "melodicngramorder", 0 ],
-			"obj-24::obj-76::obj-163" : [ "ignorephase[6]", "ignorephase", 0 ],
 			"obj-24::obj-76::obj-19" : [ "selfmod12[4]", "selfmod12", 0 ],
 			"obj-24::obj-76::obj-22" : [ "selfmelodicbypass[1]", "selfmelodicbypass", 0 ],
 			"obj-24::obj-76::obj-254" : [ "harmonincpeakdecay[7]", "harmonincpeakdecay", 0 ],
@@ -12806,8 +12805,6 @@
 			"obj-24::obj-76::obj-860" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay[1]", 0 ],
 			"obj-24::obj-76::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-24::obj-76::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
-			"obj-24::obj-76::obj-998" : [ "__exp_regionmaskenable[1]", "__exp_regionmaskenable", 0 ],
-			"obj-2::obj-10::obj-1007" : [ "rslider[9]", "rslider", 0 ],
 			"obj-2::obj-10::obj-1115" : [ "continuity[33]", "continuity", 0 ],
 			"obj-2::obj-10::obj-1175" : [ "heldnotesmode[8]", "heldnotesmode", 0 ],
 			"obj-2::obj-10::obj-1179" : [ "continuity[32]", "continuity", 0 ],
@@ -12822,7 +12819,6 @@
 			"obj-2::obj-10::obj-1444" : [ "outputprobability[7]", "outputprobability", 0 ],
 			"obj-2::obj-10::obj-152" : [ "selfngramorder[6]", "selfngramorder", 0 ],
 			"obj-2::obj-10::obj-154" : [ "melodicngramorder[10]", "melodicngramorder", 0 ],
-			"obj-2::obj-10::obj-163" : [ "ignorephase[7]", "ignorephase", 0 ],
 			"obj-2::obj-10::obj-19" : [ "selfmod12[10]", "selfmod12", 0 ],
 			"obj-2::obj-10::obj-22" : [ "selfmelodicbypass[8]", "selfmelodicbypass", 0 ],
 			"obj-2::obj-10::obj-254" : [ "harmonincpeakdecay[4]", "harmonincpeakdecay", 0 ],
@@ -12855,9 +12851,7 @@
 			"obj-2::obj-10::obj-860" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
 			"obj-2::obj-10::obj-865" : [ "selfharmonicngramorder[10]", "selfharmonicngramorder", 0 ],
 			"obj-2::obj-10::obj-870" : [ "selfharmonicbypass[10]", "selfharmonicbypass", 0 ],
-			"obj-2::obj-10::obj-998" : [ "__exp_regionmaskenable[10]", "__exp_regionmaskenable", 0 ],
 			"obj-2::obj-27::obj-98" : [ "live.text[1]", "live.text[26]", 0 ],
-			"obj-37::obj-76::obj-1007" : [ "rslider[8]", "rslider", 0 ],
 			"obj-37::obj-76::obj-1115" : [ "continuity[31]", "continuity", 0 ],
 			"obj-37::obj-76::obj-1175" : [ "heldnotesmode[3]", "heldnotesmode", 0 ],
 			"obj-37::obj-76::obj-1179" : [ "continuity[30]", "continuity", 0 ],
@@ -12872,7 +12866,6 @@
 			"obj-37::obj-76::obj-1444" : [ "outputprobability[4]", "outputprobability", 0 ],
 			"obj-37::obj-76::obj-152" : [ "selfngramorder[5]", "selfngramorder", 0 ],
 			"obj-37::obj-76::obj-154" : [ "melodicngramorder[9]", "melodicngramorder", 0 ],
-			"obj-37::obj-76::obj-163" : [ "ignorephase[4]", "ignorephase", 0 ],
 			"obj-37::obj-76::obj-19" : [ "selfmod12[9]", "selfmod12", 0 ],
 			"obj-37::obj-76::obj-22" : [ "selfmelodicbypass[7]", "selfmelodicbypass", 0 ],
 			"obj-37::obj-76::obj-254" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay", 0 ],
@@ -12905,9 +12898,7 @@
 			"obj-37::obj-76::obj-860" : [ "harmonincpeakdecay[2]", "harmonincpeakdecay[1]", 0 ],
 			"obj-37::obj-76::obj-865" : [ "selfharmonicngramorder[9]", "selfharmonicngramorder", 0 ],
 			"obj-37::obj-76::obj-870" : [ "selfharmonicbypass[9]", "selfharmonicbypass", 0 ],
-			"obj-37::obj-76::obj-998" : [ "__exp_regionmaskenable[9]", "__exp_regionmaskenable", 0 ],
 			"obj-40::obj-66::obj-98" : [ "live.text[11]", "live.text[26]", 0 ],
-			"obj-40::obj-76::obj-1007" : [ "rslider[4]", "rslider", 0 ],
 			"obj-40::obj-76::obj-1115" : [ "continuity[14]", "continuity", 0 ],
 			"obj-40::obj-76::obj-1175" : [ "heldnotesmode[5]", "heldnotesmode", 0 ],
 			"obj-40::obj-76::obj-1179" : [ "continuity[16]", "continuity", 0 ],
@@ -12922,7 +12913,6 @@
 			"obj-40::obj-76::obj-1444" : [ "outputprobability[5]", "outputprobability", 0 ],
 			"obj-40::obj-76::obj-152" : [ "selfngramorder[2]", "selfngramorder", 0 ],
 			"obj-40::obj-76::obj-154" : [ "melodicngramorder[6]", "melodicngramorder", 0 ],
-			"obj-40::obj-76::obj-163" : [ "ignorephase[5]", "ignorephase", 0 ],
 			"obj-40::obj-76::obj-19" : [ "selfmod12[6]", "selfmod12", 0 ],
 			"obj-40::obj-76::obj-22" : [ "selfmelodicbypass[4]", "selfmelodicbypass", 0 ],
 			"obj-40::obj-76::obj-254" : [ "harmonincpeakdecay[18]", "harmonincpeakdecay", 0 ],
@@ -12955,56 +12945,52 @@
 			"obj-40::obj-76::obj-860" : [ "harmonincpeakdecay[17]", "harmonincpeakdecay[1]", 0 ],
 			"obj-40::obj-76::obj-865" : [ "selfharmonicngramorder[6]", "selfharmonicngramorder", 0 ],
 			"obj-40::obj-76::obj-870" : [ "selfharmonicbypass[6]", "selfharmonicbypass", 0 ],
-			"obj-40::obj-76::obj-998" : [ "__exp_regionmaskenable[6]", "__exp_regionmaskenable", 0 ],
-			"obj-42::obj-23::obj-1007" : [ "rslider[6]", "rslider", 0 ],
-			"obj-42::obj-23::obj-1115" : [ "continuity[28]", "continuity", 0 ],
-			"obj-42::obj-23::obj-1175" : [ "heldnotesmode[7]", "heldnotesmode", 0 ],
-			"obj-42::obj-23::obj-1179" : [ "continuity[27]", "continuity", 0 ],
-			"obj-42::obj-23::obj-12" : [ "melodicmod12[10]", "melodicmod12", 0 ],
-			"obj-42::obj-23::obj-120" : [ "melodicbypass[5]", "melodicbypass", 0 ],
-			"obj-42::obj-23::obj-1218" : [ "simultaneousonsets[20]", "artificialmidities", 0 ],
-			"obj-42::obj-23::obj-126" : [ "harmonicbypass[7]", "harmonicbypass", 0 ],
-			"obj-42::obj-23::obj-134" : [ "continuity[18]", "continuity", 0 ],
-			"obj-42::obj-23::obj-1344" : [ "enforcetaboo[9]", "enforcetaboo", 0 ],
-			"obj-42::obj-23::obj-140" : [ "resetinfluences[8]", "resetinfluences", 0 ],
-			"obj-42::obj-23::obj-144" : [ "harmonicngramorder[6]", "harmonicngramorder", 0 ],
-			"obj-42::obj-23::obj-1444" : [ "outputprobability[2]", "outputprobability", 0 ],
-			"obj-42::obj-23::obj-152" : [ "selfngramorder[4]", "selfngramorder", 0 ],
-			"obj-42::obj-23::obj-154" : [ "melodicngramorder[8]", "melodicngramorder", 0 ],
-			"obj-42::obj-23::obj-163" : [ "ignorephase[3]", "ignorephase", 0 ],
-			"obj-42::obj-23::obj-19" : [ "selfmod12[8]", "selfmod12", 0 ],
-			"obj-42::obj-23::obj-22" : [ "selfmelodicbypass[6]", "selfmelodicbypass", 0 ],
+			"obj-42::obj-23::obj-1115" : [ "continuity[36]", "continuity", 0 ],
+			"obj-42::obj-23::obj-1175" : [ "heldnotesmode[9]", "heldnotesmode", 0 ],
+			"obj-42::obj-23::obj-1179" : [ "continuity[18]", "continuity", 0 ],
+			"obj-42::obj-23::obj-12" : [ "melodicmod12[13]", "melodicmod12", 0 ],
+			"obj-42::obj-23::obj-120" : [ "melodicbypass[8]", "melodicbypass", 0 ],
+			"obj-42::obj-23::obj-1218" : [ "simultaneousonsets[8]", "artificialmidities", 0 ],
+			"obj-42::obj-23::obj-126" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
+			"obj-42::obj-23::obj-134" : [ "continuity[19]", "continuity", 0 ],
+			"obj-42::obj-23::obj-1344" : [ "enforcetaboo[5]", "enforcetaboo", 0 ],
+			"obj-42::obj-23::obj-140" : [ "resetinfluences[2]", "resetinfluences", 0 ],
+			"obj-42::obj-23::obj-144" : [ "harmonicngramorder[9]", "harmonicngramorder", 0 ],
+			"obj-42::obj-23::obj-1444" : [ "outputprobability[8]", "outputprobability", 0 ],
+			"obj-42::obj-23::obj-152" : [ "selfngramorder[3]", "selfngramorder", 0 ],
+			"obj-42::obj-23::obj-154" : [ "melodicngramorder[7]", "melodicngramorder", 0 ],
+			"obj-42::obj-23::obj-19" : [ "selfmod12[7]", "selfmod12", 0 ],
+			"obj-42::obj-23::obj-22" : [ "selfmelodicbypass[9]", "selfmelodicbypass", 0 ],
 			"obj-42::obj-23::obj-254" : [ "harmonincpeakdecay[9]", "harmonincpeakdecay", 0 ],
-			"obj-42::obj-23::obj-255" : [ "melodicpeakdecay[8]", "melodicpeakdecay", 0 ],
-			"obj-42::obj-23::obj-256" : [ "selfpeakdecay[9]", "selfpeakdecay", 0 ],
-			"obj-42::obj-23::obj-270::obj-1226" : [ "width[5]", "Width", 0 ],
-			"obj-42::obj-23::obj-270::obj-1227" : [ "center[5]", "Center", 0 ],
-			"obj-42::obj-23::obj-270::obj-1240" : [ "live.slider[8]", "live.slider", 0 ],
-			"obj-42::obj-23::obj-270::obj-1241" : [ "live.numbox[8]", "live.numbox[2]", 0 ],
-			"obj-42::obj-23::obj-270::obj-622" : [ "__exp_velocityenable[5]", "__exp_velocityenable", 0 ],
-			"obj-42::obj-23::obj-270::obj-889" : [ "weight[5]", "Weight", 0 ],
+			"obj-42::obj-23::obj-255" : [ "melodicpeakdecay[7]", "melodicpeakdecay", 0 ],
+			"obj-42::obj-23::obj-256" : [ "selfpeakdecay[3]", "selfpeakdecay", 0 ],
+			"obj-42::obj-23::obj-270::obj-1226" : [ "width[8]", "Width", 0 ],
+			"obj-42::obj-23::obj-270::obj-1227" : [ "center[8]", "Center", 0 ],
+			"obj-42::obj-23::obj-270::obj-1240" : [ "live.slider[11]", "live.slider", 0 ],
+			"obj-42::obj-23::obj-270::obj-1241" : [ "live.numbox[1]", "live.numbox[2]", 0 ],
+			"obj-42::obj-23::obj-270::obj-622" : [ "__exp_velocityenable[8]", "__exp_velocityenable", 0 ],
+			"obj-42::obj-23::obj-270::obj-889" : [ "weight[8]", "Weight", 0 ],
 			"obj-42::obj-23::obj-295" : [ "playingmode[4]", "playingmode", 0 ],
-			"obj-42::obj-23::obj-298" : [ "simultaneousonsets[21]", "simultaneousonsets", 0 ],
-			"obj-42::obj-23::obj-328" : [ "decaybasis[3]", "decaybasis", 0 ],
-			"obj-42::obj-23::obj-570" : [ "__exp_melodicpitchfromchords[8]", "__exp_melodicpitchfromchords", 0 ],
+			"obj-42::obj-23::obj-298" : [ "simultaneousonsets[9]", "simultaneousonsets", 0 ],
+			"obj-42::obj-23::obj-328" : [ "decaybasis[2]", "decaybasis", 0 ],
+			"obj-42::obj-23::obj-570" : [ "__exp_melodicpitchfromchords[7]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-42::obj-23::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-42::obj-23::obj-642" : [ "__exp_numnotessigma[7]", "__exp_numnotessigma", 0 ],
-			"obj-42::obj-23::obj-653" : [ "__exp_numnotesenable[8]", "__exp_numnotesenable", 0 ],
-			"obj-42::obj-23::obj-656" : [ "__exp_numnotesmu[5]", "__exp_numnotesmu", 0 ],
-			"obj-42::obj-23::obj-688" : [ "__exp_durationsigma[8]", "__exp_durationsigma", 0 ],
-			"obj-42::obj-23::obj-702" : [ "__exp_durationmu[3]", "__exp_durationmu", 0 ],
-			"obj-42::obj-23::obj-722" : [ "__exp_octavebandsenable[8]", "__exp_octavebandsenable", 0 ],
-			"obj-42::obj-23::obj-733" : [ "__exp_octavebands[11]", "__exp_octavebands", 0 ],
-			"obj-42::obj-23::obj-746" : [ "__exp_selfpitchfromchords[8]", "__exp_selfpitchfromchords", 0 ],
-			"obj-42::obj-23::obj-763" : [ "__exp_autojumpforcejump[4]", "__exp_autojumpforcejump", 0 ],
-			"obj-42::obj-23::obj-774" : [ "__exp_autojumpenable[6]", "__exp_autojumpenable", 0 ],
-			"obj-42::obj-23::obj-777" : [ "__exp_autojumpactivate[8]", "__exp_autojumpactivate", 0 ],
-			"obj-42::obj-23::obj-799" : [ "__exp_tempoconsistencyenable[8]", "__exp_tempoconsistencyenable", 0 ],
-			"obj-42::obj-23::obj-802" : [ "__exp_tempoconsistencylen[2]", "__exp_tempoconsistencylen", 0 ],
-			"obj-42::obj-23::obj-860" : [ "harmonincpeakdecay[21]", "harmonincpeakdecay[1]", 0 ],
-			"obj-42::obj-23::obj-865" : [ "selfharmonicngramorder[8]", "selfharmonicngramorder", 0 ],
-			"obj-42::obj-23::obj-870" : [ "selfharmonicbypass[8]", "selfharmonicbypass", 0 ],
-			"obj-42::obj-23::obj-998" : [ "__exp_regionmaskenable[8]", "__exp_regionmaskenable", 0 ],
+			"obj-42::obj-23::obj-642" : [ "__exp_numnotessigma[10]", "__exp_numnotessigma", 0 ],
+			"obj-42::obj-23::obj-653" : [ "__exp_numnotesenable[7]", "__exp_numnotesenable", 0 ],
+			"obj-42::obj-23::obj-656" : [ "__exp_numnotesmu[7]", "__exp_numnotesmu", 0 ],
+			"obj-42::obj-23::obj-688" : [ "__exp_durationsigma[5]", "__exp_durationsigma", 0 ],
+			"obj-42::obj-23::obj-702" : [ "__exp_durationmu[2]", "__exp_durationmu", 0 ],
+			"obj-42::obj-23::obj-722" : [ "__exp_octavebandsenable[7]", "__exp_octavebandsenable", 0 ],
+			"obj-42::obj-23::obj-733" : [ "__exp_octavebands[4]", "__exp_octavebands", 0 ],
+			"obj-42::obj-23::obj-746" : [ "__exp_selfpitchfromchords[7]", "__exp_selfpitchfromchords", 0 ],
+			"obj-42::obj-23::obj-763" : [ "__exp_autojumpforcejump[10]", "__exp_autojumpforcejump", 0 ],
+			"obj-42::obj-23::obj-774" : [ "__exp_autojumpenable[2]", "__exp_autojumpenable", 0 ],
+			"obj-42::obj-23::obj-777" : [ "__exp_autojumpactivate[2]", "__exp_autojumpactivate", 0 ],
+			"obj-42::obj-23::obj-799" : [ "__exp_tempoconsistencyenable[7]", "__exp_tempoconsistencyenable", 0 ],
+			"obj-42::obj-23::obj-802" : [ "__exp_tempoconsistencylen[6]", "__exp_tempoconsistencylen", 0 ],
+			"obj-42::obj-23::obj-860" : [ "harmonincpeakdecay[8]", "harmonincpeakdecay[1]", 0 ],
+			"obj-42::obj-23::obj-865" : [ "selfharmonicngramorder[7]", "selfharmonicngramorder", 0 ],
+			"obj-42::obj-23::obj-870" : [ "selfharmonicbypass[7]", "selfharmonicbypass", 0 ],
 			"obj-42::obj-66::obj-98" : [ "live.text[10]", "live.text[26]", 0 ],
 			"obj-42::obj-8::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
 			"obj-42::obj-8::obj-35" : [ "[5]", "Level", 0 ],
@@ -13087,23 +13073,23 @@
 				}
 ,
 				"obj-42::obj-23::obj-270::obj-1226" : 				{
-					"parameter_longname" : "width[5]"
+					"parameter_longname" : "width[8]"
 				}
 ,
 				"obj-42::obj-23::obj-270::obj-1227" : 				{
-					"parameter_longname" : "center[5]"
+					"parameter_longname" : "center[8]"
 				}
 ,
 				"obj-42::obj-23::obj-270::obj-1240" : 				{
-					"parameter_longname" : "live.slider[8]"
+					"parameter_longname" : "live.slider[11]"
 				}
 ,
 				"obj-42::obj-23::obj-270::obj-1241" : 				{
-					"parameter_longname" : "live.numbox[8]"
+					"parameter_longname" : "live.numbox[1]"
 				}
 ,
 				"obj-42::obj-23::obj-270::obj-889" : 				{
-					"parameter_longname" : "weight[5]"
+					"parameter_longname" : "weight[8]"
 				}
 ,
 				"obj-42::obj-66::obj-98" : 				{
@@ -13117,35 +13103,35 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "OMax.yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Yin+.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/javascript",
 				"patcherrelativepath" : "../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "audio2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "bc.autoname.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/javascript",
 				"patcherrelativepath" : "../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
@@ -13164,7 +13150,7 @@
 			}
 , 			{
 				"name" : "computeMemoryPitchClass.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/javascript",
 				"patcherrelativepath" : "../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
@@ -13177,7 +13163,7 @@
 			}
 , 			{
 				"name" : "heldnotes.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
@@ -13206,28 +13192,28 @@
 			}
 , 			{
 				"name" : "midi2chroma.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "midi2chroma_nofilter.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "midichromaanalysis.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "midipitchanalysis.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/influencers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../patchers/resources/influencers",
 				"type" : "JSON",
 				"implicit" : 1
@@ -13252,161 +13238,168 @@
 			}
 , 			{
 				"name" : "somax.atom.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
 				"patcherrelativepath" : "../patchers/resources/player",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.audioinfluencer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.audiorenderer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.await_patcherargs.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.beatphase.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.corpusbuilder.core.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.corpuspath.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.filter_midichannels.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.interpreter.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midicorpusbuilder.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midiinfluencer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.midirenderer.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.path.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.player.core.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.player.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.print.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.relativepath.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.routesignal.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.server.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.serverstatus.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/server",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/server",
 				"patcherrelativepath" : "../patchers/resources/server",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.serverstatus.ui.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/server",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/server",
 				"patcherrelativepath" : "../patchers/resources/server",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.uniquename.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.uniquenumber.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "somax.winresize.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
@@ -13419,7 +13412,7 @@
 			}
 , 			{
 				"name" : "sr.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
 				"type" : "JSON",
 				"implicit" : 1
