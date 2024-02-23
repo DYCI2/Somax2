@@ -47,9 +47,11 @@
 * Memory Length:                        selfngramorder <1..∞>, selfharmonicngramorder <1..∞>, melodicngramorder <1..∞>, harmonicngramorder <1..∞>
 * Decay Time:                           selfpeakdecay <1..∞>, selfharmonicpeakdecay <1..∞>, melodicpeakdecay <1..∞>, harmonicpeakdecay <1..∞>
 
-* Region Mask Enable:                   region enabled <1..6> <1/0>
-* Region Mask Start/End:                region bounds <1..6> <start_ms> <end_ms>
-* Region Editable (GUI):                region editable <1..6>
+* Region Mask Toggle Enable All:        region enabled <1/0> (or region enabled 0 <1/0>)
+* Region Mask Enable Single:            region enabled <1..6> <1/0>
+* Region Mask Start/End (ms):           region bounds <1..6> <start_ms> <end_ms>
+* Region Mask Start/End (range):        region range <1..6> <start> <end> (where start and end are values between 0. and 1.)
+* Region Editable (GUI):                region editable <0..6> (0 to disable editing)
 * Region Reset to Default (Single):     region reset <1..6>
 * Region Reset to Default (All):        region reset
 

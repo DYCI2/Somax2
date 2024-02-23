@@ -24,8 +24,10 @@ class Region:
 class RegionMask:  # Note: not using Parametric since messages are more complex than just `(address, value)`
 
     N_REGIONS: int = 6
+    GLOBAL_ENABLE_INDEX: int = -1
 
     def __init__(self):
+        self.enabled: bool = True
         self.regions: List[Region] = [Region.default() for _ in range(self.N_REGIONS)]
 
     def process(self,
@@ -33,6 +35,9 @@ class RegionMask:  # Note: not using Parametric since messages are more complex 
                 corresponding_events: List[CorpusEvent],
                 taboo_mask: TabooMask,
                 corpus: Corpus = None) -> Tuple[Peaks, TabooMask]:
+        if not self.enabled:
+            return peaks, taboo_mask
+
         corpus_taboo_mask: Optional[np.ndarray] = self.compute_corpus_taboo_mask(corpus)
 
         if corpus_taboo_mask is None:  # all regions are disabled: ignore entire RegionMask rather than filter events
@@ -56,6 +61,10 @@ class RegionMask:  # Note: not using Parametric since messages are more complex 
 
     def enable_region(self, region_index: int, enabled: bool) -> None:
         """ raises: ParameterError if `region_index` is out of range """
+        if region_index == self.GLOBAL_ENABLE_INDEX:
+            self.enabled = enabled
+            return
+
         try:
             self.regions[region_index].enabled = enabled
         except IndexError:
