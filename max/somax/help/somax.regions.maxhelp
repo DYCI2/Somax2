@@ -1693,7 +1693,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 880.0, 242.0, 171.645833333333599, 29.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -3911,7 +3911,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 880.0, 242.0, 171.645833333333599, 29.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -5267,13 +5267,15 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
-									"id" : "obj-11",
-									"linecount" : 2,
+									"bubble" : 1,
+									"id" : "obj-10",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1116.0, 523.0, 150.0, 33.0 ],
-									"text" : "this is here to check that the init is right!"
+									"patching_rect" : [ 766.0, 486.0, 110.0, 24.0 ],
+									"presentation_linecount" : 2,
+									"text" : "reset all regions",
+									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
 
 							}
@@ -5528,7 +5530,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 766.0, 464.0, 150.0, 24.0 ],
+									"patching_rect" : [ 766.0, 461.0, 150.0, 24.0 ],
 									"text" : "edit the selected region",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
@@ -5920,19 +5922,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble" : 1,
-									"id" : "obj-66",
-									"linecount" : 7,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 1096.0, 561.0, 263.0, 104.0 ],
-									"text" : "bpatcher somax.regions (with attribute \"Argument(s)\" set to @buffername buffer-01)\n\n(Unfortunately, instantiating it like \"bpatcher somax.regions @args @buffername buffer-01\" doesn't work)"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-64",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -5963,7 +5952,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 726.0, 548.0, 50.0, 22.0 ],
-									"text" : "6 0."
+									"text" : "0 1"
 								}
 
 							}
@@ -5984,7 +5973,7 @@
 									"numoutlets" : 3,
 									"offset" : [ 0.0, 0.0 ],
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 542.0, 419.0, 247.0, 81.0 ],
+									"patching_rect" : [ 542.0, 419.0, 247.0, 91.0 ],
 									"varname" : "somax.regions[1]",
 									"viewvisibility" : 1
 								}
@@ -6187,7 +6176,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 889.0, 253.0, 163.0, 29.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -6306,6 +6295,26 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.788235, 0.470588, 1.0 ],
 									"hint" : "",
+									"id" : "obj-15",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 878.0, 488.0, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "9",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.788235, 0.470588, 1.0 ],
+									"hint" : "",
 									"id" : "obj-81",
 									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
@@ -6414,7 +6423,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 919.0, 466.0, 20.0, 20.0 ],
+									"patching_rect" : [ 919.0, 463.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "7",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
