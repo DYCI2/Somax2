@@ -58,7 +58,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 92.0, 126.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -96,7 +96,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 468.0, 193.54165195307155, 107.0, 78.0 ],
+									"patching_rect" : [ 468.0, 193.54165195307155, 109.0, 78.0 ],
 									"text" : "wear headphones or turn off Audio Out to avoid feedback!"
 								}
 
@@ -1049,7 +1049,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 137.0, 486.124997041798906, 121.0, 22.0 ],
-									"text" : "1 running"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -1737,7 +1737,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 92.0, 126.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2695,7 +2695,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 212.0, 519.0, 150.0, 22.0 ],
-									"text" : "1 running"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -3649,7 +3649,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
-									"midpoints" : [ 1221.5, 470.0, 865.5, 470.0 ],
+									"midpoints" : [ 1221.5, 469.5, 865.5, 469.5 ],
 									"source" : [ "obj-26", 0 ]
 								}
 
@@ -3666,7 +3666,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
-									"midpoints" : [ 620.5, 593.0, 839.0, 593.0, 839.0, 472.5, 865.5, 472.5 ],
+									"midpoints" : [ 620.5, 593.0, 839.0, 593.0, 839.0, 468.0, 865.5, 468.0 ],
 									"source" : [ "obj-28", 0 ]
 								}
 
@@ -3674,7 +3674,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
-									"midpoints" : [ 582.5, 593.5, 839.0, 593.5, 839.0, 472.5, 865.5, 472.5 ],
+									"midpoints" : [ 582.5, 593.5, 839.0, 593.5, 839.0, 468.5, 865.5, 468.5 ],
 									"source" : [ "obj-29", 0 ]
 								}
 

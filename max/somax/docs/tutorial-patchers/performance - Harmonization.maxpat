@@ -3,8 +3,8 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 5,
-			"revision" : 3,
+			"minor" : 6,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -116,7 +116,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 509.731105836006009, 632.0, 81.0, 22.0 ],
+					"patching_rect" : [ 510.0, 660.0, 81.0, 22.0 ],
 					"text" : "loadmess -12"
 				}
 
@@ -128,7 +128,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 477.231105836006009, 752.0, 35.0, 22.0 ],
+					"patching_rect" : [ 477.0, 780.0, 35.0, 22.0 ],
 					"text" : "dac~"
 				}
 
@@ -142,7 +142,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 725.0, 693.216077330972439, 196.0, 34.0 ]
+					"patching_rect" : [ 725.0, 721.0, 196.0, 34.0 ]
 				}
 
 			}
@@ -154,7 +154,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 974.541666666666742, 731.938164297010189, 58.0, 22.0 ],
+					"patching_rect" : [ 975.0, 760.0, 58.0, 22.0 ],
 					"style" : "default",
 					"text" : "loadbang"
 				}
@@ -169,7 +169,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 974.541666666666742, 768.438164297010189, 108.0, 35.0 ],
+					"patching_rect" : [ 975.0, 796.0, 108.0, 35.0 ],
 					"text" : "midiinfo @autopolloutput 1"
 				}
 
@@ -193,7 +193,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1002.250000000000227, 705.216077330972439, 177.0, 22.0 ],
+					"patching_rect" : [ 1002.0, 733.0, 177.0, 22.0 ],
 					"pattrmode" : 1,
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1,
@@ -207,7 +207,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 0,
-					"patching_rect" : [ 939.75, 699.216077330972439, 49.0, 22.0 ],
+					"patching_rect" : [ 940.0, 727.0, 49.0, 22.0 ],
 					"style" : "default",
 					"text" : "noteout"
 				}
@@ -720,8 +720,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 3,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1209,8 +1209,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 5,
-							"revision" : 3,
+							"minor" : 6,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1366,7 +1366,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 680.999999999999773, 600.958321664001232, 252.0, 64.0 ],
+					"patching_rect" : [ 681.0, 629.0, 252.0, 64.0 ],
 					"text" : "The Player UI looks exactly the same if loaded with an audio (A) or MIDI (M) corpus, but the renderer should match the right type of corpus (in this case, MIDI)"
 				}
 
@@ -1378,7 +1378,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1107.291666666666742, 610.458321664001232, 113.666666666666742, 47.0 ],
+					"patching_rect" : [ 1107.0, 638.0, 113.666666666666742, 47.0 ],
 					"text" : "Status: whether player is initialized on server or not"
 				}
 
@@ -1391,7 +1391,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1079.0, 621.958321664001232, 24.0, 24.0 ]
+					"patching_rect" : [ 1079.0, 650.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -1495,7 +1495,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 939.75, 621.958321664001232, 115.0, 22.0 ],
+					"patching_rect" : [ 940.0, 650.0, 115.0, 22.0 ],
 					"text" : "somax.midirenderer",
 					"varname" : "somax.audiorenderer"
 				}
@@ -1514,7 +1514,7 @@
 					"outlettype" : [ "multichannelsignal", "", "float", "list" ],
 					"parameter_enable" : 1,
 					"parameter_mappable" : 0,
-					"patching_rect" : [ 477.231105836006009, 676.216077330972439, 88.0, 45.0 ],
+					"patching_rect" : [ 477.0, 704.0, 88.0, 45.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_linknames" : 1,
@@ -1563,7 +1563,7 @@
 					"clipheight" : 55.0,
 					"data" : 					{
 						"clips" : [ 							{
-								"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Fabbrizio2c.wav",
+								"absolutepath" : "Fabbrizio2c.wav",
 								"filename" : "Fabbrizio2c.wav",
 								"filekind" : "audiofile",
 								"id" : "u934002975",
@@ -1648,7 +1648,7 @@
 					"numoutlets" : 4,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "int", "", "" ],
-					"patching_rect" : [ 939.75, 169.0, 243.0, 438.0 ],
+					"patching_rect" : [ 940.0, 156.0, 244.0, 480.0 ],
 					"varname" : "somax.player.ui",
 					"viewvisibility" : 1
 				}
@@ -1697,7 +1697,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-113", 0 ],
-					"midpoints" : [ 1090.750000000000227, 737.216077330972439, 1023.0, 737.216077330972439, 1023.0, 688.216077330972439, 949.25, 688.216077330972439 ],
+					"midpoints" : [ 1090.5, 764.77791303396225, 1023.458333333333258, 764.77791303396225, 1023.458333333333258, 715.77791303396225, 949.5, 715.77791303396225 ],
 					"source" : [ "obj-204", 1 ]
 				}
 
@@ -1757,7 +1757,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-148", 0 ],
-					"midpoints" : [ 949.25, 681.087199497486836, 734.5, 681.087199497486836 ],
+					"midpoints" : [ 949.5, 708.649035200476646, 734.5, 708.649035200476646 ],
 					"order" : 1,
 					"source" : [ "obj-27", 0 ]
 				}
@@ -1807,7 +1807,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-24", 0 ],
 					"hidden" : 1,
-					"midpoints" : [ 519.231105836006009, 664.60803866548622, 486.731105836006009, 664.60803866548622 ],
+					"midpoints" : [ 519.5, 692.16987436847603, 486.5, 692.16987436847603 ],
 					"source" : [ "obj-46", 0 ]
 				}
 
@@ -1823,7 +1823,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-69", 0 ],
-					"midpoints" : [ 896.5, 119.0, 949.25, 119.0 ],
+					"midpoints" : [ 896.5, 119.0, 949.5, 119.0 ],
 					"source" : [ "obj-52", 0 ]
 				}
 
@@ -1853,7 +1853,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-5", 0 ],
-					"midpoints" : [ 1023.916666666666629, 612.156233553443712, 1088.5, 612.156233553443712 ],
+					"midpoints" : [ 1024.5, 643.156233553443712, 1088.5, 643.156233553443712 ],
 					"source" : [ "obj-69", 1 ]
 				}
 
@@ -1861,7 +1861,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-69", 0 ],
-					"midpoints" : [ 527.231105836006009, 447.0, 924.0, 447.0, 924.0, 165.0, 949.25, 165.0 ],
+					"midpoints" : [ 527.231105836006009, 447.0, 924.0, 447.0, 924.0, 152.0, 949.5, 152.0 ],
 					"source" : [ "obj-75", 0 ]
 				}
 
@@ -1891,8 +1891,17 @@
 			"obj-69::obj-123::obj-1" : [ "live.text[33]", "live.text", 0 ],
 			"obj-69::obj-123::obj-2" : [ "live.text[34]", "live.text", 0 ],
 			"obj-69::obj-123::obj-3" : [ "live.text[35]", "live.text", 0 ],
+			"obj-69::obj-14::obj-12" : [ "live.slider[2]", "live.slider[2]", 0 ],
+			"obj-69::obj-14::obj-128" : [ "live.text[62]", "live.text", 1 ],
+			"obj-69::obj-14::obj-135" : [ "live.text[59]", "live.text", 1 ],
+			"obj-69::obj-14::obj-153" : [ "live.text[61]", "live.text", 1 ],
+			"obj-69::obj-14::obj-163" : [ "live.text[60]", "live.text", 1 ],
+			"obj-69::obj-14::obj-173" : [ "live.text[51]", "live.text", 1 ],
+			"obj-69::obj-14::obj-39" : [ "live.tab[1]", "live.tab", 0 ],
+			"obj-69::obj-14::obj-40" : [ "live.slider[4]", "live.slider[2]", 0 ],
+			"obj-69::obj-14::obj-64" : [ "live.text[52]", "live.text", 0 ],
 			"obj-69::obj-16::obj-26" : [ "corpusname[4]", "corpusname", 0 ],
-			"obj-69::obj-407::obj-1007" : [ "rslider[4]", "rslider", 0 ],
+			"obj-69::obj-32" : [ "heldnotesmode[3]", "heldnotesmode", 0 ],
 			"obj-69::obj-407::obj-1115" : [ "continuity[14]", "continuity", 0 ],
 			"obj-69::obj-407::obj-1175" : [ "heldnotesmode[5]", "heldnotesmode", 0 ],
 			"obj-69::obj-407::obj-1179" : [ "continuity[16]", "continuity", 0 ],
@@ -1907,7 +1916,6 @@
 			"obj-69::obj-407::obj-1444" : [ "outputprobability[5]", "outputprobability", 0 ],
 			"obj-69::obj-407::obj-152" : [ "selfngramorder[2]", "selfngramorder", 0 ],
 			"obj-69::obj-407::obj-154" : [ "melodicngramorder[6]", "melodicngramorder", 0 ],
-			"obj-69::obj-407::obj-163" : [ "ignorephase[5]", "ignorephase", 0 ],
 			"obj-69::obj-407::obj-19" : [ "selfmod12[6]", "selfmod12", 0 ],
 			"obj-69::obj-407::obj-22" : [ "selfmelodicbypass[4]", "selfmelodicbypass", 0 ],
 			"obj-69::obj-407::obj-254" : [ "harmonincpeakdecay[18]", "harmonincpeakdecay", 0 ],
@@ -1940,7 +1948,6 @@
 			"obj-69::obj-407::obj-860" : [ "harmonincpeakdecay[17]", "harmonincpeakdecay[1]", 0 ],
 			"obj-69::obj-407::obj-865" : [ "selfharmonicngramorder[6]", "selfharmonicngramorder", 0 ],
 			"obj-69::obj-407::obj-870" : [ "selfharmonicbypass[6]", "selfharmonicbypass", 0 ],
-			"obj-69::obj-407::obj-998" : [ "__exp_regionmaskenable[6]", "__exp_regionmaskenable", 0 ],
 			"obj-69::obj-79::obj-1" : [ "live.text[25]", "live.text", 0 ],
 			"obj-69::obj-79::obj-2" : [ "live.text[23]", "live.text", 0 ],
 			"obj-69::obj-79::obj-3" : [ "live.text[18]", "live.text", 0 ],
@@ -2070,8 +2077,8 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "Fabbrizio2c.wav",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/corpus",
-				"patcherrelativepath" : "../../corpus",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
+				"patcherrelativepath" : "../../media",
 				"type" : "WAVE",
 				"implicit" : 1
 			}
@@ -2179,6 +2186,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "somax.beatphase.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "somax.beattracker.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
@@ -2280,6 +2294,13 @@
 				"name" : "somax.receiveblock.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.regions.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}

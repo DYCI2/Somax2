@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 363.0, 216.0, 942.0, 597.0 ],
+		"rect" : [ 363.0, 215.0, 942.0, 597.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -588,7 +588,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -637,12 +636,75 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-6",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 375.0, 354.0, 422.0, 35.0 ],
+									"presentation_linecount" : 2,
+									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=p4nUd5pot4w&t=334s"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.290196, 0.309804, 0.301961, 0.0 ],
+									"id" : "obj-7",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 297.0, 302.0, 114.0, 24.0 ],
+									"text" : "Video Tutorial 2",
+									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
+									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
+									"underline" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-11",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 374.0, 219.0, 424.0, 35.0 ],
+									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=6Azyt_5C6KQ&t=100s"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.290196, 0.309804, 0.301961, 0.0 ],
+									"id" : "obj-16",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 297.0, 193.0, 114.0, 24.0 ],
+									"text" : "Video Tutorial 1",
+									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
+									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
+									"underline" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-5",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 307.5, 277.5, 419.0, 33.0 ],
+									"patching_rect" : [ 307.5, 266.0, 419.0, 33.0 ],
 									"text" : "In the second tutorial you will learn how to build a corpus from your audio materials, and interact with it "
 								}
 
@@ -654,7 +716,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 307.5, 165.0, 419.0, 33.0 ],
+									"patching_rect" : [ 307.5, 158.0, 419.0, 33.0 ],
 									"text" : "The first tutorial will give you an overview of the Somax2 application workflow, guiding you through immediate audio and MIDI interactions"
 								}
 
@@ -873,6 +935,14 @@
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
+									"destination" : [ "obj-11", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-16", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
 									"midpoints" : [ 162.5, 364.5, 17.0, 364.5 ],
@@ -886,6 +956,14 @@
 									"hidden" : 1,
 									"midpoints" : [ 162.5, 240.0, 17.0, 240.0 ],
 									"source" : [ "obj-37", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-6", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-7", 0 ]
 								}
 
 							}
@@ -1334,6 +1412,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,

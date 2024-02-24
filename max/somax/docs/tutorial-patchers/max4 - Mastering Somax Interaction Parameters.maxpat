@@ -1103,96 +1103,6 @@
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-105",
-									"maxclass" : "toggle",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 553.233343025048271, 499.466671292439628, 24.0, 24.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-102",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 553.233343025048271, 527.850017788289506, 123.0, 22.0 ],
-									"text" : "regionmaskenable $1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"format" : 6,
-									"id" : "obj-100",
-									"maxclass" : "flonum",
-									"maximum" : 1.0,
-									"minimum" : 0.0,
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 487.270832205812439, 500.000005055379233, 50.0, 22.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"format" : 6,
-									"id" : "obj-97",
-									"maxclass" : "flonum",
-									"maximum" : 1.0,
-									"minimum" : 0.0,
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 427.0, 500.000005055379233, 50.0, 22.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-95",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 427.16666666666697, 531.666670242945202, 79.0, 22.0 ],
-									"text" : "pak f f"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-94",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 427.16666666666697, 562.000005055379233, 104.0, 22.0 ],
-									"text" : "regionmask $1 $2"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-89",
-									"linecount" : 7,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 427.16666666666697, 598.750003863286338, 253.261122306187644, 100.0 ],
-									"text" : "When region mast is enabled, the player will only output events from a specific part of the corpus. \nTwo floats between 0 and 1 delimit the region in the corpus from which the player should generate events from, corresponding to the timeline of the corpus (linearly, by index). "
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-82",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -1423,7 +1333,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 24.0, 76.999991001861474, 369.5, 87.0 ],
-									"text" : "In this patch we are focusing on the parameters related to Output Control, in charge of defining the model behind the Player's behaviour.\n\nThese paremeters are Weights, Memory Lenghts and Region Mask.\n"
+									"text" : "In this patch we are focusing on the parameters related to Output Control, in charge of defining the model behind the Player's behaviour.\n\nThese paremeters are Weights and Memory Lenght.\n"
 								}
 
 							}
@@ -1899,29 +1809,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 581.472220718860626, 715.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "12",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-									"fontname" : "Arial Bold",
-									"fontsize" : 11.0,
-									"hint" : "",
-									"id" : "obj-104",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 535.638887325922951, 563.000005055379233, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "11",
+									"text" : "10",
 									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
@@ -1973,28 +1861,6 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 903.422559168002635, 424.416660132186678, 137.0, 22.0 ],
 									"text" : "corpus Ravel_Miroirs.gz"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
-									"fontname" : "Arial Bold",
-									"fontsize" : 11.0,
-									"hint" : "",
-									"id" : "obj-69",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 581.472220718860626, 501.466671292439628, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "10",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 								}
 
 							}
@@ -2315,7 +2181,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1094.958333333333712, 608.833331854232711, 170.0, 22.0 ],
-									"text" : "null"
+									"text" : "no loaded corpus"
 								}
 
 							}
@@ -2338,28 +2204,6 @@
 							}
  ],
 						"lines" : [ 							{
-								"patchline" : 								{
-									"destination" : [ "obj-95", 1 ],
-									"source" : [ "obj-100", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 562.733343025048271, 559.850017788289506, 689.116671512524135, 559.850017788289506, 689.116671512524135, 475.833331854232711, 1069.5, 475.833331854232711 ],
-									"source" : [ "obj-102", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-102", 0 ],
-									"source" : [ "obj-105", 0 ]
-								}
-
-							}
-, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-92", 0 ],
 									"source" : [ "obj-106", 0 ]
@@ -2940,28 +2784,6 @@
 								}
 
 							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-143", 0 ],
-									"midpoints" : [ 436.66666666666697, 594.000005055379233, 689.083333333333485, 594.000005055379233, 689.083333333333485, 475.333331854232711, 1069.5, 475.333331854232711 ],
-									"source" : [ "obj-94", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-94", 0 ],
-									"source" : [ "obj-95", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-95", 0 ],
-									"source" : [ "obj-97", 0 ]
-								}
-
-							}
  ]
 					}
 ,
@@ -2996,7 +2818,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 112.0, 126.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -3026,6 +2848,67 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 2,
+									"id" : "obj-48",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 104.25, 638.250003863286338, 201.0, 79.0 ],
+									"text" : "You can also use a specific regions module to dinamically monitor and control the generation of events. See this help for more:"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-30",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 119.052083333333258, 775.85391322175974, 161.0, 22.0 ],
+									"text" : "load somax.regions.maxhelp"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"id" : "obj-37",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 119.052083333333258, 717.85391322175974, 169.395833333333485, 34.0 ],
+									"rounded" : 8.0,
+									"text" : "somax.regions maxhelp",
+									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"truncate" : 0
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+									"hidden" : 1,
+									"id" : "obj-41",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 119.052083333333258, 804.85391322175974, 51.0, 22.0 ],
+									"text" : "pcontrol"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bubble" : 1,
 									"bubblepoint" : 0.4,
@@ -4319,7 +4202,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 24.0, 76.999991001861474, 365.5, 127.0 ],
-									"text" : "In this patch we are focusing on the parameters related to Output Control, in charge of defining the model behind the Player's behaviour.\n\nThese paremeters are Continuity, Output Probability, Sparse and Quality.\n\nNote that Continuity has already been described in the previous tutorial"
+									"text" : "In this patch we are focusing on the parameters related to Output Control, in charge of defining the model behind the Player's behaviour.\n\nThese paremeters are Continuity, Output Probability, Sparse, Quality and Regions.\n\nNote that Continuity has already been described in the previous tutorial"
 								}
 
 							}
@@ -4776,6 +4659,28 @@
 									"background" : 1,
 									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
 									"fontname" : "Arial Bold",
+									"fontsize" : 11.0,
+									"hint" : "",
+									"id" : "obj-50",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 193.75, 614.0, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "12",
+									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.658824, 0.14902, 1.0 ],
+									"fontname" : "Arial Bold",
 									"hint" : "",
 									"id" : "obj-10",
 									"ignoreclick" : 1,
@@ -5220,7 +5125,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1094.958333333333712, 608.833331854232711, 170.0, 22.0 ],
-									"text" : "null"
+									"text" : "no loaded corpus"
 								}
 
 							}
@@ -5401,6 +5306,14 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-41", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-30", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-335", 0 ],
 									"source" : [ "obj-308", 0 ]
 								}
@@ -5445,6 +5358,14 @@
 									"hidden" : 1,
 									"midpoints" : [ 846.27083333333303, 74.0, 957.635416666666515, 74.0, 957.635416666666515, 31.0, 1069.0, 31.0 ],
 									"source" : [ "obj-35", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-30", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-37", 0 ]
 								}
 
 							}
@@ -5797,7 +5718,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 112.0, 126.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -7918,7 +7839,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1121.0, 645.999995397163275, 170.0, 22.0 ],
-									"text" : "null"
+									"text" : "no loaded corpus"
 								}
 
 							}
@@ -8396,7 +8317,6 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-1::obj-143::obj-1007" : [ "rslider[3]", "rslider", 0 ],
 			"obj-1::obj-143::obj-1115" : [ "continuity[27]", "continuity", 0 ],
 			"obj-1::obj-143::obj-1175" : [ "heldnotesmode[4]", "heldnotesmode", 0 ],
 			"obj-1::obj-143::obj-1179" : [ "continuity[28]", "continuity", 0 ],
@@ -8443,8 +8363,6 @@
 			"obj-1::obj-143::obj-860" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay[1]", 0 ],
 			"obj-1::obj-143::obj-865" : [ "selfharmonicngramorder[6]", "selfharmonicngramorder", 0 ],
 			"obj-1::obj-143::obj-870" : [ "selfharmonicbypass[3]", "selfharmonicbypass", 0 ],
-			"obj-1::obj-143::obj-998" : [ "__exp_regionmaskenable[2]", "__exp_regionmaskenable", 0 ],
-			"obj-2::obj-143::obj-1007" : [ "rslider[2]", "rslider", 0 ],
 			"obj-2::obj-143::obj-1115" : [ "continuity[3]", "continuity", 0 ],
 			"obj-2::obj-143::obj-1175" : [ "heldnotesmode[3]", "heldnotesmode", 0 ],
 			"obj-2::obj-143::obj-1179" : [ "continuity[2]", "continuity", 0 ],
@@ -8491,10 +8409,8 @@
 			"obj-2::obj-143::obj-860" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
 			"obj-2::obj-143::obj-865" : [ "selfharmonicngramorder[5]", "selfharmonicngramorder", 0 ],
 			"obj-2::obj-143::obj-870" : [ "selfharmonicbypass[2]", "selfharmonicbypass", 0 ],
-			"obj-2::obj-143::obj-998" : [ "__exp_regionmaskenable[6]", "__exp_regionmaskenable", 0 ],
 			"obj-8::obj-11" : [ "live.gain~", "live.gain~", 0 ],
 			"obj-8::obj-13" : [ "somax2", "somax2", 0 ],
-			"obj-8::obj-143::obj-1007" : [ "rslider[1]", "rslider", 0 ],
 			"obj-8::obj-143::obj-1115" : [ "continuity[1]", "continuity", 0 ],
 			"obj-8::obj-143::obj-1175" : [ "heldnotesmode[2]", "heldnotesmode", 0 ],
 			"obj-8::obj-143::obj-1179" : [ "continuity[16]", "continuity", 0 ],
@@ -8541,7 +8457,6 @@
 			"obj-8::obj-143::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
 			"obj-8::obj-143::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-8::obj-143::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
-			"obj-8::obj-143::obj-998" : [ "__exp_regionmaskenable[1]", "__exp_regionmaskenable", 0 ],
 			"obj-8::obj-24" : [ "output[2]", "guide_audio", 0 ],
 			"obj-8::obj-27::obj-98" : [ "live.text[9]", "live.text[26]", 0 ],
 			"parameterbanks" : 			{
