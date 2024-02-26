@@ -249,13 +249,16 @@ class Reaper(TextFormat):
             logging.debug("Ignoring empty line")
             return None
 
-        pattern: re.Pattern[str] = re.compile(f"^\\s*.\\d+(?:\\d+|\\s*|.+)\\s+({Constants.FLOAT})")
+        # format is 00:0.000
+        pattern: re.Pattern[str] = re.compile(f"^\\s*\\w+\\s+\\w+\\s+(\\d+):(\\d+)\\.(\\d+)\\s*$")
         tokens = re.match(pattern, line)
 
         if tokens is None:
             raise ParsingError(f"Invalid format: {line}")
 
-        return float(tokens.group(1))
+        onset = float(tokens.group(1)) * 60 + float(tokens.group(2)) + float(tokens.group(3)) * 0.001
+
+        return onset
 
 
 class SoundStudio(UniformTextFormat):
