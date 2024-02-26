@@ -713,6 +713,11 @@ class OscAgent(Agent, AsyncioOscObject):
         return required_feature_types
 
     def learn_event(self, onset_ms: float, duration_ms: float, *features) -> None:
+        # specific use case where the Max object somax.audiorecord has not received any influences
+        if len(features) == 1 and features[0] == 0:
+            self.logger.error("No analysis/influences were provided - no event was recorded")
+            return
+
         try:
             parsed_features: List[CorpusFeature] = self.parse_features(features)
             event: CorpusEvent = self.player.learn_event(onset_ms / 1000, duration_ms / 1000, parsed_features)
