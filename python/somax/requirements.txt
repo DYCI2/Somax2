@@ -6,3 +6,4 @@ scikit-learn>=0.22.1
 pandas>=0.25.3
 python-osc>=1.7.4
 librosa>=0.10.1
+setuptools>=69.0.3
