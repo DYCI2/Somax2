@@ -501,7 +501,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-874",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -769,7 +768,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-203",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -870,7 +868,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-192",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -5461,6 +5458,7 @@
 , 			{
 				"box" : 				{
 					"focusbordercolor" : [ 0.313725490196078, 0.313725490196078, 0.313725490196078, 0.0 ],
+					"hidden" : 1,
 					"id" : "obj-40",
 					"ignoreclick" : 1,
 					"maxclass" : "live.slider",
@@ -5871,6 +5869,7 @@
 , 			{
 				"box" : 				{
 					"focusbordercolor" : [ 0.313725490196078, 0.313725490196078, 0.313725490196078, 0.0 ],
+					"hidden" : 1,
 					"id" : "obj-12",
 					"ignoreclick" : 1,
 					"maxclass" : "live.slider",
@@ -7882,6 +7881,7 @@
 					"bordercolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 0.0 ],
 					"fgcolor" : [ 0.827, 0.424, 0.996, 0.3 ],
 					"floatoutput" : 1,
+					"hidden" : 1,
 					"id" : "obj-176",
 					"ignoreclick" : 1,
 					"listmode" : 1,
@@ -8020,6 +8020,7 @@
 					"bordercolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 0.0 ],
 					"fgcolor" : [ 0.424, 0.494, 0.996, 0.3 ],
 					"floatoutput" : 1,
+					"hidden" : 1,
 					"id" : "obj-166",
 					"ignoreclick" : 1,
 					"listmode" : 1,
@@ -8158,6 +8159,7 @@
 					"bordercolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 0.0 ],
 					"fgcolor" : [ 0.357, 0.843, 0.839, 0.3 ],
 					"floatoutput" : 1,
+					"hidden" : 1,
 					"id" : "obj-156",
 					"ignoreclick" : 1,
 					"listmode" : 1,
@@ -8296,6 +8298,7 @@
 					"bordercolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 0.0 ],
 					"fgcolor" : [ 0.482, 0.847, 0.361, 0.3 ],
 					"floatoutput" : 1,
+					"hidden" : 1,
 					"id" : "obj-138",
 					"ignoreclick" : 1,
 					"listmode" : 1,
@@ -8343,7 +8346,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 529.875, 426.0, 170.0, 20.0 ],
+					"patching_rect" : [ 544.0, 426.0, 170.0, 20.0 ],
 					"text" : "reset UI state (on corpus load)"
 				}
 
@@ -8353,10 +8356,10 @@
 					"id" : "obj-115",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "bang", "bang" ],
-					"patching_rect" : [ 499.875, 425.0, 32.0, 22.0 ],
-					"text" : "t b b"
+					"numoutlets" : 3,
+					"outlettype" : [ "bang", "bang", "bang" ],
+					"patching_rect" : [ 480.0, 425.0, 58.0, 22.0 ],
+					"text" : "t b b b"
 				}
 
 			}
@@ -9025,6 +9028,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-9",
@@ -9133,7 +9137,7 @@
 									"maxclass" : "inlet",
 									"numinlets" : 0,
 									"numoutlets" : 1,
-									"outlettype" : [ "int" ],
+									"outlettype" : [ "bang" ],
 									"patching_rect" : [ 50.000005175378874, 40.0, 30.0, 30.0 ]
 								}
 
@@ -9661,7 +9665,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-43",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -9673,7 +9677,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-44",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -9721,21 +9725,21 @@
 					"restore" : 					{
 						"editable" : [ 0.0 ],
 						"editable_toggle" : [ 1 ],
-						"enabled1" : [ 1.0 ],
+						"enabled1" : [ 0.0 ],
 						"enabled2" : [ 0.0 ],
 						"enabled3" : [ 0.0 ],
 						"enabled4" : [ 0.0 ],
 						"enabled5" : [ 0.0 ],
 						"enabled6" : [ 0.0 ],
-						"enabled_toggle" : [ 1 ],
-						"region1" : [ 18031.253166198730469, 5234.879951477050781 ],
-						"region2" : [ 9694.222132364908248, 19388.444264729816496 ],
-						"region3" : [ 19388.444264729816496, 29082.666397094726562 ],
-						"region4" : [ 29082.666397094726562, 38776.888529459632991 ],
+						"enabled_toggle" : [ 0 ],
+						"region1" : [ 0.0, 0.0 ],
+						"region2" : [ 0.0, 0.0 ],
+						"region3" : [ 0.0, 0.0 ],
+						"region4" : [ 0.0, 0.0 ],
 						"region5" : [ 0.0, 0.0 ],
 						"region6" : [ 0.0, 0.0 ],
-						"unused0" : [ 39.369999999999997 ],
-						"unused1" : [ 11.43 ]
+						"unused0" : [ 0.0 ],
+						"unused1" : [ 0.0 ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -9952,6 +9956,7 @@
 					"bordercolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 0.0 ],
 					"fgcolor" : [ 1.0, 0.71, 0.196, 0.3 ],
 					"floatoutput" : 1,
+					"hidden" : 1,
 					"id" : "obj-132",
 					"ignoreclick" : 1,
 					"listmode" : 1,
@@ -10764,7 +10769,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to regions",
 					"id" : "obj-84",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -10801,7 +10806,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to associated somax.player",
 					"id" : "obj-70",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -10900,6 +10905,7 @@
 					"bordercolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 0.0 ],
 					"fgcolor" : [ 0.996, 0.424, 0.424, 0.75 ],
 					"floatoutput" : 1,
+					"hidden" : 1,
 					"id" : "obj-54",
 					"listmode" : 1,
 					"maxclass" : "rslider",
@@ -11297,7 +11303,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-115", 0 ],
-					"midpoints" : [ 90.5, 418.0, 509.375, 418.0 ],
+					"midpoints" : [ 90.5, 418.0, 489.5, 418.0 ],
 					"source" : [ "obj-113", 0 ]
 				}
 
@@ -11305,15 +11311,23 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-151", 0 ],
-					"midpoints" : [ 522.375, 464.068862275449078, 862.375, 464.068862275449078 ],
-					"source" : [ "obj-115", 1 ]
+					"midpoints" : [ 528.5, 464.068862275449078, 862.375, 464.068862275449078 ],
+					"source" : [ "obj-115", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-60", 0 ],
+					"midpoints" : [ 489.5, 696.0, 339.5, 696.0 ],
+					"source" : [ "obj-115", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-99", 0 ],
-					"source" : [ "obj-115", 0 ]
+					"source" : [ "obj-115", 1 ]
 				}
 
 			}
@@ -13013,11 +13027,42 @@
 
 			}
  ],
+		"parameters" : 		{
+			"obj-12" : [ "live.slider[2]", "live.slider[2]", 0 ],
+			"obj-128" : [ "live.text[62]", "live.text", 1 ],
+			"obj-135" : [ "live.text[59]", "live.text", 1 ],
+			"obj-153" : [ "live.text[61]", "live.text", 1 ],
+			"obj-163" : [ "live.text[60]", "live.text", 1 ],
+			"obj-173" : [ "live.text[51]", "live.text", 1 ],
+			"obj-39" : [ "live.tab[1]", "live.tab", 0 ],
+			"obj-40" : [ "live.slider[4]", "live.slider[2]", 0 ],
+			"obj-64" : [ "live.text[52]", "live.text", 0 ],
+			"parameterbanks" : 			{
+				"0" : 				{
+					"index" : 0,
+					"name" : "",
+					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "somax.await_patcherargs.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
-				"boxes" : [ "obj-117", "obj-115" ]
+				"boxes" : [ "obj-198", "obj-202", "obj-193", "obj-192", "obj-203", "obj-874" ]
 			}
 , 			{
-				"boxes" : [ "obj-198", "obj-202", "obj-193", "obj-192", "obj-203", "obj-874" ]
+				"boxes" : [ "obj-117", "obj-115" ]
 			}
  ]
 	}
