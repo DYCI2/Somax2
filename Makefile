@@ -5,7 +5,7 @@ PYINSTALLER_PATH = pyinstaller
 PYINSTALLER_TARGET = $(PY_LIB_PATH)/somax_server.py
 PYINSTALLER_TARGET_NAME = somax_server
 
-VERSION = $$(python3 python/somax/somax/utils/get_version.py)
+VERSION = $$(python3 $(CURDIR)/python/somax/somax/utils/get_version.py)
 
 MAX_BUILD_PARENT_FOLDER = build/somax
 MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/Somax-$(VERSION)
@@ -14,6 +14,7 @@ DMG_PATH = dist/$(DMG_NAME).dmg
 APP_PATH = dist/$(DMG_NAME).app
 
 WIN_PKG = Somax-$(VERSION)
+WIN_PKG_ZIP = $(WIN_PKG)-win64.zip
 
 
 
@@ -54,21 +55,9 @@ notarize:
 	xcrun notarytool submit "$(DMG_PATH)" --keychain-profile "repmus" --wait
 	xcrun stapler staple dist/somax_server.app
 
-max-package: clean
+max-package: clean max-package-common
 	@echo "\033[1mMAKE SURE THAT THE EXTERNAL HAS BEEN SIGNED AND NOTARIZED BEFORE CALLING THIS COMMAND!\nORDER SHOULD BE:\n    make pyinstaller\n    make codesignature \n    make notarize \n    make max-package\033[0m"
-	mkdir -p "$(MAX_BUILD_PARENT_FOLDER)"
-	cp -r "$(MAX_LIB_PATH)" "$(MAX_BUILD_PATH)"
-	# clean up local items
-	rm -rf "$(MAX_BUILD_PATH)"/state/*
-	cp "$(MAX_LIB_PATH)"/state/FactorySettings.json "$(MAX_BUILD_PATH)"/state
-	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
-	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.json
-	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
-	# copy binary (should already be codesigned)
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME).app" "$(MAX_BUILD_PATH)/misc/"
-	cp LICENSE README.md "Somax2 User's Guide.pdf" "$(MAX_BUILD_PATH)"
-	cp -r templates "$(MAX_BUILD_PATH)"
-	cp "$(MAX_BUILD_PATH)"/extras/somax2.overview.maxpat "$(MAX_BUILD_PATH)"/somax2.overview.maxpat
 	create-dmg \
 		--volname "$(DMG_NAME)" \
 		--window-pos 200 120 \
@@ -79,22 +68,38 @@ max-package: clean
 		"$(DMG_PATH)" \
 		"$(MAX_BUILD_PARENT_FOLDER)"
 
+pyinstaller-win:
+	@echo "####### Building Windows server binary with pyinstaller. THIS SHOULD BE RUN ON WINDOWS ########"
+	python3 -m PyInstaller $(PYINSTALLER_TARGET) \
+    --clean \
+    --noconfirm \
+    --name $(PYINSTALLER_TARGET_NAME) \
+    --exclude-module matplotlib \
+    --exclude-module PyQt5 \
+    --add-data="$(PY_LIB_PATH)/somax/classification/tables:somax/classification/tables" \
+    --add-data="$(PY_LIB_PATH)/somax/log:somax/log" 
 
-windows:
-	@echo "\033[1m####### Building Windows package folder... ########\033[0m"
+max-package-win: clean max-package-common
+	@echo "\033[1m####### Building Windows Max package. THIS SHOULD BE RUN ON MACOS ########\033[0m"
+	cp -a "dist/$(PYINSTALLER_TARGET_NAME)/somax_server.exe" "$(MAX_BUILD_PATH)/misc/"
+	cp -a "dist/$(PYINSTALLER_TARGET_NAME)/_internal" "$(MAX_BUILD_PATH)/misc/"
+	cd "$(MAX_BUILD_PARENT_FOLDER)" && zip -r "$(WIN_PKG_ZIP)" "$(WIN_PKG)"
+	mv "$(MAX_BUILD_PARENT_FOLDER)/$(WIN_PKG_ZIP)" dist/
+
+
+max-package-common:
 	mkdir -p "$(MAX_BUILD_PARENT_FOLDER)"
 	cp -r "$(MAX_LIB_PATH)" "$(MAX_BUILD_PATH)"
+	# clean up local items
 	rm -rf "$(MAX_BUILD_PATH)"/state/*
+	cp "$(MAX_LIB_PATH)"/state/FactorySettings.json "$(MAX_BUILD_PATH)"/state
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/_*
-	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.pickle
 	rm -rf "$(MAX_BUILD_PATH)"/corpus/*.json
 	rm -rf "$(MAX_BUILD_PATH)/misc/launch_local"
-	rm -rf "$(MAX_BUILD_PATH)/tutorial*"
-	cp LICENSE README.md "Introduction Somax.pdf" "$(MAX_BUILD_PATH)"
-	cp "$(PYINSTALLER_TARGET)" "$(MAX_BUILD_PATH)"
-	cd "$(MAX_BUILD_PARENT_FOLDER)" && zip -r "$(WIN_PKG).zip" "$(WIN_PKG)"
-	mv "$(MAX_BUILD_PARENT_FOLDER)/$(WIN_PKG).zip" dist/
-
+	# copy relevant resources
+	cp LICENSE README.md "Somax2 User's Guide.pdf" "$(MAX_BUILD_PATH)"
+	cp -r templates "$(MAX_BUILD_PATH)"
+	cp "$(MAX_BUILD_PATH)"/extras/somax2.overview.maxpat "$(MAX_BUILD_PATH)"/somax2.overview.maxpat
 
 clean:
 	rm -rf build
