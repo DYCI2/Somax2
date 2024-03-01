@@ -92,11 +92,6 @@
 		<seealso name="somax.player" />
 		<seealso name="somax.server" />
 		<seealso name="somax.audiorenderer" />
-		<seealso name="somax.midirenderer" />
-		<seealso name="somax.audioinfluencer" />
-        <seealso name="somax.midiinfluencer" />
-        <seealso name="somax.audiocorpusbuilder" />
-        <seealso name="somax.midicorpusbuilder" />
         <seealso name="somax.audiorecord" />
 	</seealsolist>
 	

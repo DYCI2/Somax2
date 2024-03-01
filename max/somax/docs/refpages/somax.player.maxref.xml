@@ -443,7 +443,7 @@
             <description>
                 The attribute <m>recordconfig</m> enables the <o>somax.player</o> to work with the <o>somax.audiorecord</o> in order to record a new corpus in real-time.
                 
-                The format is <m>recordconfig buffer_size n_channels descriptors_to_use</m>. The <m>buffer_size</m> should be set in ms, while the <m>n_channels</m>> could be 2 (stereo) or 1 (mono). 
+                The format is <m>recordconfig buffer_size n_channels descriptors_to_use</m>. The <m>buffer_size</m> should be set in ms, while the <m>n_channels</m> specifies the number of channels to use. 
                 Valid descriptors are: pitch, onsetchroma, meanchroma, beat and tempo.
                 <m>recordconfig</m> can also be sent, with its arguments, as a message to the <o>somax.player</o>. 
             </description>

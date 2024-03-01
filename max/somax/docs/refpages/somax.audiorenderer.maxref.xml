@@ -58,7 +58,10 @@
 		</attribute>
         <attribute name="buffername" get="1" set="0" type="symbol" size="1">
 			<digest>Set name of internal buffer</digest>
-			<description>The <m>buffername</m> attribute can be used to access the renderer's internal <o>buffer~</o> from outside. By default, the buffer will have an auto-generated name and therefore not be accessible.</description>
+			<description>The <m>buffername</m> attribute can be used to access the renderer's internal <o>buffer~</o> from outside. By default, the buffer will have an auto-generated name and therefore not be accessible.
+			<br />
+			This attribute must be coupled with the buffername argument of the <o>somax.audiorecord</o> if this latter object is used to record a corpus in real-time.
+			</description>
 		</attribute>
         <attribute name="crossfadecurve" get="1" set="1" type="symbol" size="1">
 			<digest>Set crossfade slope curve</digest>
@@ -102,6 +105,7 @@
 	<seealsolist>
 		<seealso name="somax.player" />
 		<seealso name="somax.midirenderer" />
+		<seealso name="somax.audiorecord" />
 	</seealsolist>
 	
 </c74object>

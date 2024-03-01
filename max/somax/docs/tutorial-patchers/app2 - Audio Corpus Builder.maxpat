@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 317.0, 168.0, 1130.0, 861.0 ],
+		"rect" : [ 317.0, 152.0, 1130.0, 861.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -29,8 +29,8 @@
 		"toolbars_unpinned_last_save" : 0,
 		"tallnewobj" : 0,
 		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
+		"enablehscroll" : 0,
+		"enablevscroll" : 0,
 		"devicewidth" : 0.0,
 		"description" : "",
 		"digest" : "",
@@ -986,7 +986,7 @@
 ,
 					"patching_rect" : [ 161.0, 418.0, 76.0, 80.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 3.0, 93.0, 1103.0, 679.0 ],
+					"presentation_rect" : [ 3.0, 93.0, 1103.0, 667.0 ],
 					"varname" : "corpusbuilder2",
 					"viewvisibility" : 1
 				}
@@ -1000,7 +1000,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-68",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1513,7 +1512,7 @@
 ,
 					"patching_rect" : [ 82.0, 418.0, 69.0, 73.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 106.0, 1117.0, 626.5 ],
+					"presentation_rect" : [ 7.0, 106.0, 1117.0, 725.0 ],
 					"varname" : "corpusbuilder1",
 					"viewvisibility" : 1
 				}
@@ -2288,6 +2287,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-36",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2658,7 +2658,7 @@
 ,
 					"patching_rect" : [ 12.0, 418.0, 61.0, 69.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 124.0, 1103.25, 600.0 ],
+					"presentation_rect" : [ 7.0, 124.0, 1103.0, 577.0 ],
 					"varname" : "introduction",
 					"viewvisibility" : 1
 				}
@@ -2692,7 +2692,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 497.0, 251.0, 773.0, 587.0 ],
+						"rect" : [ 493.0, 247.0, 773.0, 587.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2733,7 +2733,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 115.463079627726302, 147.0, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 115.463079627726302, 148.0, 37.045161290322596, 16.75 ],
+									"presentation_rect" : [ 115.0, 206.0, 37.045161290322596, 16.75 ],
 									"proportion" : 0.5
 								}
 
@@ -2762,19 +2762,19 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubblepoint" : 0.9,
+									"bubblepoint" : 0.1,
 									"fontface" : 0,
 									"fontsize" : 11.0,
 									"id" : "obj-1",
-									"linecount" : 3,
+									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 218.25, 476.0, 204.0, 47.0 ],
+									"patching_rect" : [ 218.25, 476.0, 204.0, 60.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
-									"presentation_rect" : [ 238.756756756756772, 328.0, 237.0, 47.0 ],
-									"text" : "With these parameters, the Player may occasonally get stuck: use this slider to manually change the state",
+									"presentation_rect" : [ 270.0, 411.0, 260.0, 47.0 ],
+									"text" : "With these parameters, the Player may occasonally get stuck: interact with the regions module to add control to the output state",
 									"textjustification" : 1
 								}
 
@@ -2845,7 +2845,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1383.83967856617187, 116.835175403544639, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 91.008240918048841, 499.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 91.0, 602.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "4",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2870,7 +2870,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1421.241968090322416, 107.677226082260049, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 203.7649976748055, 222.75, 21.0, 21.0 ],
+									"presentation_rect" : [ 204.0, 280.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "3.2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2891,7 +2891,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1392.595478229808123, 94.061723473481578, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 213.463079627726302, 232.0, 75.04516129032254, 21.75 ],
+									"presentation_rect" : [ 213.0, 289.0, 75.04516129032254, 21.75 ],
 									"proportion" : 0.5
 								}
 
@@ -2956,7 +2956,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1384.539289737127092, 81.089504019648189, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 104.764997674805613, 116.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 105.0, 174.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2977,7 +2977,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1385.115020324977877, 81.882250764049118, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 115.463079627726302, 127.0, 162.045161290322596, 24.75 ],
+									"presentation_rect" : [ 115.0, 185.0, 162.045161290322596, 24.75 ],
 									"proportion" : 0.5
 								}
 
@@ -3038,7 +3038,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1384.874062432847495, 113.80832419765018, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 105.963079627726302, 511.125, 186.04516129032254, 113.75 ],
+									"presentation_rect" : [ 106.0, 614.0, 186.04516129032254, 113.75 ],
 									"proportion" : 0.5
 								}
 
@@ -3733,7 +3733,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-22",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -3988,7 +3987,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
-					"hidden" : 1,
 					"id" : "obj-8",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -3996,7 +3994,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1046.0, 840.166676044464111, 60.0, 51.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 124.0, 442.0, 621.5 ],
+					"presentation_rect" : [ 7.0, 124.0, 440.0, 729.0 ],
 					"proportion" : 0.5,
 					"varname" : "cbpanel"
 				}
