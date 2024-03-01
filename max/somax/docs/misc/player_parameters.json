@@ -1,146 +1,182 @@
 {
-    "corpus": {
-        "title": "Corpus",
-        "description": "The corpus is the source of material that the player uses to generate its output from. A corpus is built from a single audio file or from one or more MIDI-files using the Corpus Builder module of the somax.server object.\n\nThe corpus that the player will use can be selected with this drop down menu. If a corpus is not available in the list after successfully built, select the '-- click to refresh --' option (or the «Refresh» button) and the menu will be updated.\n\nThis parameter is also available with the same behaviour in the compact interface."
-    },
-    "volatile": {
-        "title": "Corpus Volatile Flag",
-        "description": "Loading corpora built in an earlier version of Somax will not necessarily work - they will in most cases just provide a warning in the Max console that this is built using an old version. If you however still want to try, you can check this toggle at your own risk (don't worry, worst cases is that you'll have to restart the server - nothing will happen to the corpus itself or any part of Somax)!"
-    },
-    "pmode": {
-        "title": "Playing Mode",
-        "description": "This parameter controls the timing of when output is being generated.\n\nIf set to 'Manual', output will be generated each time an influence (or more specifically, an influence 'onset') is sent to the player. In most cases, this means that each time a note is played (from an audio or midi source), the player simultaneously responds with an output.\n\nIf set to 'Automatic', the player will continuously generate new output without any regards to the timing of the input (but of course regarding the melodic and harmonic content as usual, as well as the server tempo).\n\nThis parameter is controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Manual' and the 'Continuous' mode sets this parameter to 'Automatic'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters."
-    },
-    "igphase": {
-        "title": "Ignore Phase",
-        "description": "If this parameter is set to 'False', the player will apply a weight to each potential output candidate (at each generation time step) based on where it occurs in the beat. More specifically, it compares its position in the original corpus to the current beat of the server tempo. For example, if the player at any point in time where the server currently is on the second quaver of a beat, finds two matches in the corpus - one occuring at the first quaver of any beat and the other one occuring at the second - the player will apply a negative bias to the former match, thus prioritizing the match occuring at a similar time as the server time.\n\nIf this parameter is set to 'True', this behaviour will be entirely bypassed."
-    },
-    "notedur": {
-        "title": "Note Duration",
-        "description": "This parameter controls the durations of the generated output. If this parameter is set to 'As Original', the output will have the same duration as in the corpus (i.e. the original MIDI-file). If this parameter is set to 'Hold', Each output from its point of generation until the next point of generation. This can be used to sustain notes until the next onset is received while using the 'Manual' playing mode.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Hold' and the 'Continuous' mode sets this parameter to 'As Original'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters.\n\nThis parameter only applies to MIDI corpora."
-    },
-    "onsets": {
-        "title": "Onsets",
-        "description": "Somax is able to reproduce and synthesize the precise timing-related expressivity of the original corpus by storing «almost simultaneous» notes as a single chord together with their internal temporal offset, thus preserving appogiaturas and performative timing-related aspects of the corpus. In some cases, especially when generating output note-by-note, this behaviour may be perceived as inexact. In these cases, setting this parameter to 'Synchronized' will make the player disregard all temporal offsets within a chord and play all the notes simultaneously.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Synchronized' and the 'Continuous' mode sets this parameter to 'As Original'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters.\n\nThis parameter only applies to MIDI corpora."
-    },
-    "decaybasis": {
-        "title": "Decay Basis",
-        "description": "An important aspect of the idea that Somax is designed around is that matches found at a previous time step has a degree of impact on the generation process of the consecutive time steps. This behaviour is mainly controlled by the 'Decay time' parameter, which determines how many time steps previous peaks should be active for. These previous matches will also be shifted in time upon the consecutive time steps to align them to the amount of time that has passed since that previous match was generated.\n\nWhat this parameter does is to control the time scale of how this shifting is being made. When set to 'Event', the previous matches will be shifted by exactly the time corresponding to one event once the an influence 'onset' is received. When set to 'Time', the shift will be done continuously upon generating each note corresponding to the tempo of the server.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Synchronized' and the 'Continuous' mode sets this parameter to 'As Original'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters."
-    },
-    "contfactor": {
-        "title": "Continuity Factor",
-        "description": "In the corpus-based generative process that Somax uses, it's important to not simply replicate long fragments of the original corpus but to continuously make «jumps» in the corpus so that the output in some aspects result in something novel. At the same time, too frequent jumps may, depending on the corpus and influences, result in something completely incoherent. This parameter can be used to tune the balance between these two behaviours.\n\nA continuity factor of larger than one will prioritize continuation (and result in fewer jumps).\n\nA continuity factor of exactly 1.00 will result in no alterations (no bias introduced by this parameter).\n\nA continuity factor of less than one will prioritizing jumping."
-    },
-    "qualthresh": {
-        "title": "Quality Threshold",
-        "description": "The «Quality Threshold» controls the consistency between the input (influences) and output (what the player plays), so that if there's no good match between the two, the system will not play anything at all.\n\nUnder the hood, each match found in the corpus is assigned a score (probability), which is further altered by all of the biasing parameters. The player will use this score to determine the best match and use that for its output. But even if the score is very low, or even if there are no matches at all, the player will by default output something.\n\nThis parameter sets a minimum score required for a match to qualify as output. When combined with «Sparse», this will ensure that no events are played unless they are considered good matches.\n\nFor reference, a value of 0.01 will be sufficient to filter out all cases where there are no matches at all. A value of 0.1 will be sufficient to (assuming weights and other parameters are within common ranges) find rather good matches either harmonically or melodically, and a value of 1.0 (or larger) will generally remove everything but almost perfect replications of longer sections of the input."
-    },
-    "activetransp": {
-        "title": "Active Transpositions",
-        "description": "The player can also look for matches in transposed versions of the corpus as well as the original, which can be very useful for short corpora or other situations when there are problems with a low amount of matches. Given a corpus in C major, enabling the '0' and '+1' transposition means that it will look for matches in the same corpus transposed to C# as well as the original in C. The transposition range is set to -5 semitones (transposition to G major given corpus in C major) up to +6 semitones (transposition to F# major given corpus in C major).\n\nAny set of transpositions may be enabled, with or without the original ('0'), as long as at least one transposition is active (trying to remove the last transposition will result in an error message). But do note that a large amount of enabled transposition may impact the computation time of the player and in worst case result in perceiveable latency.\n\nAlso note that while this parameter should be operable in real-time, it may in some cases require a couple of seconds of computation time for large corpora, so make sure to experiment thoroughly with this parameter before altering it during a performance."
-    },
-    "atombypass": {
-        "title": "Layer Enable",
-        "description": "The player is trying to match incoming influences in multiple layers. One layer matching harmonic input, one layer matching melodic input and one layer matching the previous output of the player itself. Disabling one of these toggles will entirely bypass that specific layer, so that any matches in the bypassed layer won't be taken into account when generating the output."
-    },
-    "atomweight": {
-        "title": "Layer Balance",
-        "description": "These sliders are used to control the balance between the layers. In other words, determine whether the player should prioritize output corresponding to harmonic and/or melodic matches, or prioritize matches with its own previous output. In practice, this is done by applying a weight corresponding to the height of the slider to all matches in the corresponding layer.\n\nThese sliders are also available with the same behaviour in the compact interface."
-    },
-    "atommod12": {
-        "title": "Layer Modulo 12",
-        "description": "For layers that match some sort of pitch information (melodic/self layers), this button gives the option to choose between matching the exact pitch ('mod12'-button turned off) or the pitch class ('mod12'-button turned on). Enabling this will in most cases drastically increase the number of matches for that respective layer.\n\nThese buttons are also available with the same behaviour in the compact interface."
-    },
-    "memlen": {
-        "title": "Layer Memory Length",
-        "description": "So far in this documentation, the term 'match' hasn't really been explained. A match is, at a specific time step, a sequence in the corpus that matches the previous N influences sent to a specific layer. This parameter controls that «N». Setting this value to a low value will in other words look for short sequence in the memory (and in most cases increase the probability of finding matches, at the cost of each match containing less contextual information) while a high value will look for longer sequences (and in most cases reduce the probability of finding matches, where each match has a higher degree of contextual information). Finding the a good balance for this parameter is one of the most important aspects for generating meaningful output.\n\nThis parameter is also available with the same behaviour in the compact interface."
-    },
-    "decaytime": {
-        "title": "Layer Decay Time",
-        "description": "As briefly described under 'Decay Basis', matches from a previous time step has a degree of impact on the generation process for consecutive time steps. This parameter controls for how many events/how many beats previous matches inpact the generation process. Again, see 'Decay Basis' for more information."
-    },
-    "transconsistency": {
-        "title": "Transposition Consistency",
-        "description": "When using transpositions, the continuous transitions between different transpositions can in some cases make the generated result sound quite incoherent (especially for tonal music due to the difference in harmonic function). This parameter can be used to attenuate other transpositions so that transitions between different tranpositions become less likely, thus only occuring if the match found in another transposition is much better than that of the current.\n\nRange: 1.0 (no attenuation = off) to 0.0 (full attenuation = enforce current transposition)"
-    },
-    "reinstantiate": {
-        "title": "Reinstantiate",
-        "description": "Pressing this button will delete the player from the server and recreate it. This button is useful if you for some reason have to restart the server or the player.\n\nWARNING: This is not real-time compatible (it may pause the server for several seconds while reloading, thus interrupting any performance) and should only be used if something goes terribly wrong!"
-    },
-    "oscport": {
-        "title": "OSC Port",
-        "description": "The Open Sound Control port used to communicate with the server. It is not recommended to modify this value unless you really have to change this because of conflicts with other devices using the same OSC port."
-    },
-    "reset": {
-        "title": "Reset Influences",
-        "description": "In some corpora with specific settings, it is possible to reach a state where the player is getting stuck in a loop, repeating the same set of states over and over again. Pressing this button will reset the runtime state of the player (remove all previous matches) without altering any of the set parameters."
-    },
-    "outputselection": {
-        "title": "Output Selection Mode",
-        "description": "Controls how the output is selected at each step. The «Deterministic» mode will always select the best match, which will result in high quality matches but may lack variation. The «Probabilistic» mode will select the output stochastically among the matches, which results in a more varied output but at the risk of occasionally playing rather poor matches."
-    },
-    "layerpeaksinfo": {
-        "title": "Matches (per layer)",
-        "description": "Number of matches found in each in each of the four layers (internal melodic, internal harmonic, external melodic and external harmonic) for the last influence."
-    },
-    "corpusstatus": {
-        "title": "Corpus Status",
-        "description": "Status indicator when loading corpus. If corpus fails to load: see the Max Console for more information."
-    },
-    "stateinfoslider": {
-        "title": "State Slider",
-        "description": "Indicates the index of the current state in the corpus that is being played. This slider can also be clicked to manually go to a specific point in the corpus."
-    },
-    "peaksandquality": {
-        "title": "Matches & Quality",
-        "description": "These two displays indicate the state of the player at the previously output event. The left one displays the number of unique matches in the corpus (after all layers have been merged), the right one indicates the quality of the best match."
-    },
-    "flush": {
-        "title": "Flush (MIDI)",
-        "description": "If the player is using a MIDI corpus, use this button to flush all notes."
-    },
-    "cut": {
-        "title": "Cut Mid-Event",
-        "description": "In reactive mode, output is generated each time a new trigger (onset) arrives. If the player is in the middle of playing an event when a trigger arrives, this option controls whether the currently played event should be interrupted or not:\n\n- Allowed: Interrupt the current event and trigger the new event immediately when the new trigger arrives.\n\n- Not Allowed: Delay the trigger so that the new event starts playing once the current event has been completed."
-    },
-    "timeout": {
-        "title": "Timeout",
-        "description": "In reactive mode, this option controls whether the player should continue playing if no new trigger has arrived by the time the player has finished playing its current event. Setting this to a non-zero value will make the player continue for that number of seconds. It's also possible to disable this to make the player continue endlessly."
-    },
-    "timeoutbeh": {
-        "title": "Timeout Behaviour",
-        "description": "In reactive mode with timeout enabled and set to non-zero, this value controls how the generation should be handled in the timeout period:\n\n- Linear: Play the corpus linearly (i.e. without jumping) during the timeout period.\n\n- Recombine: Allow the player to jump in the corpus during the timeout period."
-    },
-    "midireactive": {
-        "title": "MIDI Reactive Mode",
-        "description": "In reactive mode when using a MIDI corpus, there are two options for how the player should play the events of the corpus:\n\n- Note by Note: Each trigger will trigger a single event (i.e. one or multiple MIDI notes) that will be held until the next trigger (or until timeout, if active)\n\n- Continue: Play the event corresponding to its initial duration and then continue playing (where the behaviour in this mode further depends on the «Timeout Behaviour» setting)"
-    },
-    "proba": {
-        "title": "Output Probability",
-        "description": "This option will condition each generated output with a probability, so that it may or may not play the event. This parameter is inactive when set to 1.0 (off), but any value lower than 1.0 will result in less than 100% of the events being played. For example, when set to 0.2, only 20% of the generated events will be played"
-    },
-    "sparse": {
-        "title": "Sparse",
-        "description": "If sparse is disabled (default), the player will generate output even if it doesn't find any match in the corpus corresponding to the input. Enabling sparse will ensure that the player only outputs something if it finds a good match, and if it doesn't, it will remain silent."
-    },
-    "taboo": {
-        "title": "Enforce Taboo",
-        "description": "A number of controls introduces a taboo on certain events, which can be described as a strong recommendation to not play the taboo'ed event.\n\nWhen this option is disabled, events with a taboo will only be played as a last resort. If enabled, events with a taboo will never be played.\n\nAn example of a control that introduces a taboo is the «Region Mask» filter, which will add a taboo to all events outside the selected region if enabled."
-    },
-    "timestretch": {
-        "title": "Time Stretch",
-        "description": "Each player has an internal tempo determined by the tempo of the corpus.\n\nWhen the mode is set to «Global Tempo», the player will synchronize its playback rate so that the internal tempo of the corpus matches the tempo of the Server object.\n\nWhen the mode is set to «Manual», the playback rate is defined by the tempo of the corpus, but the tempo can be scaled manually with the «Factor», where a factor of 1.0 means no change, 0.5 means half the original tempo and 2.0 double the tempo."
-    },
-    "renderersettings": {
-        "title": "Audio / MIDI Settings",
-        "description": "These buttons control settings that are specific for audio corpora and MIDI corpora respectively."
-    },
-    "regionmask": {
-        "title": "Region Mask",
-        "description": "When enabled, the player will only output events from a specific part of the corpus. The slider controls the region in the corpus from which the player should generate events from, and it corresponds to the timeline of the corpus (linearly, by index). For example, setting the slider to the first half means that only the first half of the events will be played.\n\nNote that events outside of the region may still be played as a last resort in some cases unless «Enforce Taboo» is on."
-    },
-    "experimental": {
-        "title": "Experimental",
-        "description": "This opens up the experimental section of the player interface. These controls in this section lack documentation and are not as stable as the normal controls. Use at own risk!"
-    }
+	"corpus" : 	{
+		"title" : "Corpus",
+		"description" : "The corpus is the source of material that the player uses to generate its output from. A corpus is built from a single audio file or from one or more MIDI-files using the Corpus Builder module of the somax.server object.\n\nThe corpus that the player will use can be selected with this drop down menu. If a corpus is not available in the list after successfully built, select the '-- click to refresh --' option (or the «Refresh» button) and the menu will be updated.\n\nThis parameter is also available with the same behaviour in the compact interface."
+	}
+,
+	"volatile" : 	{
+		"title" : "Corpus Volatile Flag",
+		"description" : "Loading corpora built in an earlier version of Somax will not necessarily work - they will in most cases just provide a warning in the Max console that this is built using an old version. If you however still want to try, you can check this toggle at your own risk (don't worry, worst cases is that you'll have to restart the server - nothing will happen to the corpus itself or any part of Somax)!"
+	}
+,
+	"pmode" : 	{
+		"title" : "Playing Mode",
+		"description" : "This parameter controls the timing of when output is being generated.\n\nIf set to 'Manual', output will be generated each time an influence (or more specifically, an influence 'onset') is sent to the player. In most cases, this means that each time a note is played (from an audio or midi source), the player simultaneously responds with an output.\n\nIf set to 'Automatic', the player will continuously generate new output without any regards to the timing of the input (but of course regarding the melodic and harmonic content as usual, as well as the server tempo).\n\nThis parameter is controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Manual' and the 'Continuous' mode sets this parameter to 'Automatic'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters."
+	}
+,
+	"igphase" : 	{
+		"title" : "Ignore Phase",
+		"description" : "If this parameter is set to 'False', the player will apply a weight to each potential output candidate (at each generation time step) based on where it occurs in the beat. More specifically, it compares its position in the original corpus to the current beat of the server tempo. For example, if the player at any point in time where the server currently is on the second quaver of a beat, finds two matches in the corpus - one occuring at the first quaver of any beat and the other one occuring at the second - the player will apply a negative bias to the former match, thus prioritizing the match occuring at a similar time as the server time.\n\nIf this parameter is set to 'True', this behaviour will be entirely bypassed."
+	}
+,
+	"notedur" : 	{
+		"title" : "Note Duration",
+		"description" : "This parameter controls the durations of the generated output. If this parameter is set to 'As Original', the output will have the same duration as in the corpus (i.e. the original MIDI-file). If this parameter is set to 'Hold', Each output from its point of generation until the next point of generation. This can be used to sustain notes until the next onset is received while using the 'Manual' playing mode.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Hold' and the 'Continuous' mode sets this parameter to 'As Original'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters.\n\nThis parameter only applies to MIDI corpora."
+	}
+,
+	"onsets" : 	{
+		"title" : "Onsets",
+		"description" : "Somax is able to reproduce and synthesize the precise timing-related expressivity of the original corpus by storing «almost simultaneous» notes as a single chord together with their internal temporal offset, thus preserving appogiaturas and performative timing-related aspects of the corpus. In some cases, especially when generating output note-by-note, this behaviour may be perceived as inexact. In these cases, setting this parameter to 'Synchronized' will make the player disregard all temporal offsets within a chord and play all the notes simultaneously.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Synchronized' and the 'Continuous' mode sets this parameter to 'As Original'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters.\n\nThis parameter only applies to MIDI corpora."
+	}
+,
+	"decaybasis" : 	{
+		"title" : "Decay Basis",
+		"description" : "An important aspect of the idea that Somax is designed around is that matches found at a previous time step has a degree of impact on the generation process of the consecutive time steps. This behaviour is mainly controlled by the 'Decay time' parameter, which determines how many time steps previous peaks should be active for. These previous matches will also be shifted in time upon the consecutive time steps to align them to the amount of time that has passed since that previous match was generated.\n\nWhat this parameter does is to control the time scale of how this shifting is being made. When set to 'Event', the previous matches will be shifted by exactly the time corresponding to one event once the an influence 'onset' is received. When set to 'Time', the shift will be done continuously upon generating each note corresponding to the tempo of the server.\n\nThis parameter is also controlled by the 'Playing mode' parameter in the compact interface, where the 'Reactive' mode sets this parameter to 'Synchronized' and the 'Continuous' mode sets this parameter to 'As Original'. Note that 'Playing mode' parameter in the compact interface also controls a number of other parameters."
+	}
+,
+	"contfactor" : 	{
+		"title" : "Continuity Factor",
+		"description" : "In the corpus-based generative process that Somax uses, it's important to not simply replicate long fragments of the original corpus but to continuously make «jumps» in the corpus so that the output in some aspects result in something novel. At the same time, too frequent jumps may, depending on the corpus and influences, result in something completely incoherent. This parameter can be used to tune the balance between these two behaviours.\n\nA continuity factor of larger than one will prioritize continuation (and result in fewer jumps).\n\nA continuity factor of exactly 1.00 will result in no alterations (no bias introduced by this parameter).\n\nA continuity factor of less than one will prioritizing jumping."
+	}
+,
+	"qualthresh" : 	{
+		"title" : "Quality Threshold",
+		"description" : "The «Quality Threshold» controls the consistency between the input (influences) and output (what the player plays), so that if there's no good match between the two, the system will not play anything at all.\n\nUnder the hood, each match found in the corpus is assigned a score (probability), which is further altered by all of the biasing parameters. The player will use this score to determine the best match and use that for its output. But even if the score is very low, or even if there are no matches at all, the player will by default output something.\n\nThis parameter sets a minimum score required for a match to qualify as output. When combined with «Sparse», this will ensure that no events are played unless they are considered good matches.\n\nFor reference, a value of 0.01 will be sufficient to filter out all cases where there are no matches at all. A value of 0.1 will be sufficient to (assuming weights and other parameters are within common ranges) find rather good matches either harmonically or melodically, and a value of 1.0 (or larger) will generally remove everything but almost perfect replications of longer sections of the input."
+	}
+,
+	"activetransp" : 	{
+		"title" : "Active Transpositions",
+		"description" : "The player can also look for matches in transposed versions of the corpus as well as the original, which can be very useful for short corpora or other situations when there are problems with a low amount of matches. Given a corpus in C major, enabling the '0' and '+1' transposition means that it will look for matches in the same corpus transposed to C# as well as the original in C. The transposition range is set to -5 semitones (transposition to G major given corpus in C major) up to +6 semitones (transposition to F# major given corpus in C major).\n\nAny set of transpositions may be enabled, with or without the original ('0'), as long as at least one transposition is active (trying to remove the last transposition will result in an error message). But do note that a large amount of enabled transposition may impact the computation time of the player and in worst case result in perceiveable latency.\n\nAlso note that while this parameter should be operable in real-time, it may in some cases require a couple of seconds of computation time for large corpora, so make sure to experiment thoroughly with this parameter before altering it during a performance."
+	}
+,
+	"atombypass" : 	{
+		"title" : "Layer Enable",
+		"description" : "The player is trying to match incoming influences in multiple layers. One layer matching harmonic input, one layer matching melodic input and one layer matching the previous output of the player itself. Disabling one of these toggles will entirely bypass that specific layer, so that any matches in the bypassed layer won't be taken into account when generating the output."
+	}
+,
+	"atomweight" : 	{
+		"title" : "Layer Balance",
+		"description" : "These sliders are used to control the balance between the layers. In other words, determine whether the player should prioritize output corresponding to harmonic and/or melodic matches, or prioritize matches with its own previous output. In practice, this is done by applying a weight corresponding to the height of the slider to all matches in the corresponding layer.\n\nThese sliders are also available with the same behaviour in the compact interface."
+	}
+,
+	"atommod12" : 	{
+		"title" : "Layer Modulo 12",
+		"description" : "For layers that match some sort of pitch information (melodic/self layers), this button gives the option to choose between matching the exact pitch ('mod12'-button turned off) or the pitch class ('mod12'-button turned on). Enabling this will in most cases drastically increase the number of matches for that respective layer.\n\nThese buttons are also available with the same behaviour in the compact interface."
+	}
+,
+	"memlen" : 	{
+		"title" : "Layer Memory Length",
+		"description" : "So far in this documentation, the term 'match' hasn't really been explained. A match is, at a specific time step, a sequence in the corpus that matches the previous N influences sent to a specific layer. This parameter controls that «N». Setting this value to a low value will in other words look for short sequence in the memory (and in most cases increase the probability of finding matches, at the cost of each match containing less contextual information) while a high value will look for longer sequences (and in most cases reduce the probability of finding matches, where each match has a higher degree of contextual information). Finding the a good balance for this parameter is one of the most important aspects for generating meaningful output.\n\nThis parameter is also available with the same behaviour in the compact interface."
+	}
+,
+	"decaytime" : 	{
+		"title" : "Layer Decay Time",
+		"description" : "As briefly described under 'Decay Basis', matches from a previous time step has a degree of impact on the generation process for consecutive time steps. This parameter controls for how many events/how many beats previous matches inpact the generation process. Again, see 'Decay Basis' for more information."
+	}
+,
+	"transconsistency" : 	{
+		"title" : "Transposition Consistency",
+		"description" : "When using transpositions, the continuous transitions between different transpositions can in some cases make the generated result sound quite incoherent (especially for tonal music due to the difference in harmonic function). This parameter can be used to attenuate other transpositions so that transitions between different tranpositions become less likely, thus only occuring if the match found in another transposition is much better than that of the current.\n\nRange: 1.0 (no attenuation = off) to 0.0 (full attenuation = enforce current transposition)"
+	}
+,
+	"reininitialize" : 	{
+		"title" : "Reinitialize",
+		"description" : "Pressing this button will delete the player from the server and recreate it. This button is useful if you for some reason have to restart the server or the player.\n\nWARNING: This is not real-time compatible (it may pause the server for several seconds while reloading, thus interrupting any performance) and should only be used if something goes terribly wrong!"
+	}
+,
+	"oscport" : 	{
+		"title" : "OSC Port",
+		"description" : "The Open Sound Control port used to communicate with the server. It is not recommended to modify this value unless you really have to change this because of conflicts with other devices using the same OSC port."
+	}
+,
+	"reset" : 	{
+		"title" : "Reset Influences",
+		"description" : "In some corpora with specific settings, it is possible to reach a state where the player is getting stuck in a loop, repeating the same set of states over and over again. Pressing this button will reset the runtime state of the player (remove all previous matches) without altering any of the set parameters."
+	}
+,
+	"outputselection" : 	{
+		"title" : "Output Selection Mode",
+		"description" : "Controls how the output is selected at each step. The «Deterministic» mode will always select the best match, which will result in high quality matches but may lack variation. The «Probabilistic» mode will select the output stochastically among the matches, which results in a more varied output but at the risk of occasionally playing rather poor matches."
+	}
+,
+	"layerpeaksinfo" : 	{
+		"title" : "Matches (per layer)",
+		"description" : "Number of matches found in each in each of the four layers (internal melodic, internal harmonic, external melodic and external harmonic) for the last influence."
+	}
+,
+	"corpusstatus" : 	{
+		"title" : "Corpus Status",
+		"description" : "Status indicator when loading corpus. If corpus fails to load: see the Max Console for more information."
+	}
+,
+	"stateinfoslider" : 	{
+		"title" : "State Slider",
+		"description" : "Indicates the index of the current state in the corpus that is being played. This slider can also be clicked to manually go to a specific point in the corpus."
+	}
+,
+	"peaksandquality" : 	{
+		"title" : "Matches & Quality",
+		"description" : "These two displays indicate the state of the player at the previously output event. The left one displays the number of unique matches in the corpus (after all layers have been merged), the right one indicates the quality of the best match."
+	}
+,
+	"flush" : 	{
+		"title" : "Flush (MIDI)",
+		"description" : "If the player is using a MIDI corpus, use this button to flush all notes."
+	}
+,
+	"cut" : 	{
+		"title" : "Cut Mid-Event",
+		"description" : "In reactive mode, output is generated each time a new trigger (onset) arrives. If the player is in the middle of playing an event when a trigger arrives, this option controls whether the currently played event should be interrupted or not:\n\n- Allowed: Interrupt the current event and trigger the new event immediately when the new trigger arrives.\n\n- Not Allowed: Delay the trigger so that the new event starts playing once the current event has been completed."
+	}
+,
+	"timeout" : 	{
+		"title" : "Timeout",
+		"description" : "In reactive mode, this option controls whether the player should continue playing if no new trigger has arrived by the time the player has finished playing its current event. Setting this to a non-zero value will make the player continue for that number of seconds. It's also possible to disable this to make the player continue endlessly."
+	}
+,
+	"timeoutbeh" : 	{
+		"title" : "Timeout Behaviour",
+		"description" : "In reactive mode with timeout enabled and set to non-zero, this value controls how the generation should be handled in the timeout period:\n\n- Linear: Play the corpus linearly (i.e. without jumping) during the timeout period.\n\n- Recombine: Allow the player to jump in the corpus during the timeout period."
+	}
+,
+	"midireactive" : 	{
+		"title" : "MIDI Reactive Mode",
+		"description" : "In reactive mode when using a MIDI corpus, there are two options for how the player should play the events of the corpus:\n\n- Note by Note: Each trigger will trigger a single event (i.e. one or multiple MIDI notes) that will be held until the next trigger (or until timeout, if active)\n\n- Continue: Play the event corresponding to its initial duration and then continue playing (where the behaviour in this mode further depends on the «Timeout Behaviour» setting)"
+	}
+,
+	"proba" : 	{
+		"title" : "Output Probability",
+		"description" : "This option will condition each generated output with a probability, so that it may or may not play the event. This parameter is inactive when set to 1.0 (off), but any value lower than 1.0 will result in less than 100% of the events being played. For example, when set to 0.2, only 20% of the generated events will be played"
+	}
+,
+	"sparse" : 	{
+		"title" : "Sparse",
+		"description" : "If sparse is disabled (default), the player will generate output even if it doesn't find any match in the corpus corresponding to the input. Enabling sparse will ensure that the player only outputs something if it finds a good match, and if it doesn't, it will remain silent."
+	}
+,
+	"taboo" : 	{
+		"title" : "Enforce Taboo",
+		"description" : "A number of controls introduces a taboo on certain events, which can be described as a strong recommendation to not play the taboo'ed event.\n\nWhen this option is disabled, events with a taboo will only be played as a last resort. If enabled, events with a taboo will never be played.\n\nAn example of a control that introduces a taboo is the «Region Mask» filter, which will add a taboo to all events outside the selected region if enabled."
+	}
+,
+	"timestretch" : 	{
+		"title" : "Time Stretch",
+		"description" : "Each player has an internal tempo determined by the tempo of the corpus.\n\nWhen the mode is set to «Global Tempo», the player will synchronize its playback rate so that the internal tempo of the corpus matches the tempo of the Server object.\n\nWhen the mode is set to «Manual», the playback rate is defined by the tempo of the corpus, but the tempo can be scaled manually with the «Factor», where a factor of 1.0 means no change, 0.5 means half the original tempo and 2.0 double the tempo."
+	}
+,
+	"renderersettings" : 	{
+		"title" : "Audio / MIDI Settings",
+		"description" : "These buttons control settings that are specific for audio corpora and MIDI corpora respectively."
+	}
+,
+	"beatalignment" : 	{
+		"title" : "Beat Alignment",
+		"description" : "When enabled, the player will use a beat alignment alogrithm to output events from the corpus that match a specific beat phase. This beat phase is a cyclic value between 0. and 1. representing the position of a certain event in the beat grid. \n\nType: choose between Hard Filter and Soft Filter, to set the strength of the Beat Alignment algorithm. \n\nHard Filter: remove all peaks that don't match the beat phase entirely and taboo any corpus event not matching the beat phase, meaning that if there are no peaks, the fallback mechanisms of Somax will rather play nothing than play an event out of phase. \n\nSoft Filter: do not remove any peaks, but scale those that don't match the beat phase by this amount. This means that events out of phase will be less likely to be played, but never completely removed. \n\nGrid Size: The number of steps each beat should be subdivided in. "
+	}
+,
+	"experimental" : 	{
+		"title" : "Experimental",
+		"description" : "This opens up the experimental section of the player interface. These controls in this section lack documentation and are not as stable as the normal controls. Use at own risk!"
+	}
+
 }
