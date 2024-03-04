@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 77.0, 126.0, 1056.0, 690.0 ],
+						"rect" : [ 0.0, 26.0, 1056.0, 690.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 782.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1718,7 +1718,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -2134,7 +2134,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1056.0, 690.0 ],
+						"rect" : [ 77.0, 126.0, 1056.0, 690.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 782.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3018,7 +3018,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -3167,7 +3167,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 417.0, 234.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "4",
+									"text" : "5",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
 								}
 
@@ -4503,7 +4503,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -5998,7 +5998,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 258.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -8068,7 +8068,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 889.0, 253.0, 163.0, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
