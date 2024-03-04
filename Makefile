@@ -42,7 +42,7 @@ pyinstaller:
 		--osx-entitlements-file="codesign/somax.entitlements"
 
 codesignature:
-	# Only the notiarization step is needed as of PyInstaller 4.10
+	# Only the notiarization step is needed as of PyInstaller 4.10 (when building on >10.13)
 	# Note: sklearn/.dylibs/libomp.dylib is High Sierra only and required to sign since it's in a hidden folder
 	 codesign --deep --timestamp --force -s "Developer ID Application: INST RECHER COORD ACOUST MUSICALE" \
 				--options=runtime  \
@@ -80,7 +80,7 @@ pyinstaller-win:
     --add-data="$(PY_LIB_PATH)/somax/log:somax/log" 
 
 max-package-win: clean max-package-common
-	@echo "\033[1m####### Building Windows Max package. THIS SHOULD BE RUN ON MACOS ########\033[0m"
+	@echo "\033[1m####### Building Windows Max package. THIS SHOULD BE RUN ON MACOS (and don't forget to change somax.interpreter loadmess) ########\033[0m"
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME)/somax_server.exe" "$(MAX_BUILD_PATH)/misc/"
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME)/_internal" "$(MAX_BUILD_PATH)/misc/"
 	cd "$(MAX_BUILD_PARENT_FOLDER)" && zip -r "$(WIN_PKG_ZIP)" "$(WIN_PKG)"
