@@ -643,9 +643,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 375.0, 354.0, 422.0, 35.0 ],
-									"presentation_linecount" : 2,
-									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=p4nUd5pot4w&t=334s"
+									"patching_rect" : [ 375.0, 354.0, 378.0, 35.0 ],
+									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=p4nUd5pot4w"
 								}
 
 							}
@@ -675,8 +674,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 374.0, 219.0, 424.0, 35.0 ],
-									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=6Azyt_5C6KQ&t=100s"
+									"patching_rect" : [ 374.0, 219.0, 380.0, 35.0 ],
+									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=6Azyt_5C6KQ"
 								}
 
 							}
