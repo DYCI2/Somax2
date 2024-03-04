@@ -15,7 +15,7 @@
 * Set Corpus (by path):                 corpus /path/to/corpus.pickle/.gz (absolute path or relative server's corpuspath)
 * Set Corpus (by name):                 corpus symbol <name_of_corpus_including_(A)_or_(M)>
 * Set Corpus (by index):                corpus <0..>
-* Refresh Corpora:                      refreshcorpora
+* Refresh Corpora:                      corpus refresh
 * Set Corpus Volatile Flag:             corpusvolatile <1/0>
 
 * Mode:                                 mode <1/0>
