@@ -5,15 +5,9 @@ While the application can be used straight out of the box with little configurat
 
 ## Requirements
 
-* macOS 10.13 or later
+* macOS 10.13 or later / Windows 10+
 * Max 8.5 or later
 * (Python 3.9 or later -- only needed for manual installation)
-
-**Note: It's currently not possible to run Somax natively on M1 machines: if you're using a M1 Mac, make sure to [run Max under Rosetta](https://docs.cycling74.com/max8/vignettes/apple_arm64)**
-
-#### WARNING: known issue for Mac Os 13 Ventura 
-**The Somax Server may indicate an issue with Terminal.app when you try to start it**.
-**To solve it, see this [post on the Ircam Forum](https://discussion.forum.ircam.fr/t/mac-os-ventura-issue/44698)**
 
 ## Installation
 
@@ -45,7 +39,7 @@ The document `Somax2 User's Guide.pdf` gives an overview of how the somax2 inter
 
 The `somax2.overview.maxpat` tutorial and help center is the starting point to begin exploring interactively the world of Somax2. From here you will be able to access all the different interactive tutorials, as well as to get access to ready-to-play patches defining specific performance strategies. Templates from one to four players are also available, as well as maxhelps for all the Somax2 objects.
 
-**Note that the first time you launch Somax, depending on your security settings you may be presented with a number of dialogues asking you to give permission to a number of externals (shell, bonk, ircamdescriptor, bc.virfun and bc.yinstats) that Somax requires to be able to run. You may also be asked for permission the first time you launch the server (this step is explained in the tutorial). Accept each of those to proceed.**
+**macOS: Note that the first time you launch Somax, depending on your security settings you may be presented with a number of dialogues asking you to give permission to a number of externals (shell, bonk, ircamdescriptor, bc.virfun and bc.yinstats) that Somax requires to be able to run. You may also be asked for permission the first time you launch the server (this step is explained in the tutorial). Accept each of those to proceed.**
 
 ## Documentation and Resources
 
@@ -57,7 +51,7 @@ Because of space limitations, only a few tiny audio corpora (marked with a «(A)
 
 ## Credits
 
-Somax2 (c) Ircam 2012-2023
+Somax2 (c) Ircam 2012-2024
 
 Somax2 is a totally renewed version of the Somax reactive co-improvisation paradigm born in the Music Representations Team at Ircam - STMS.
 
