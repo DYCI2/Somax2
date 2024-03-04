@@ -942,7 +942,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 42.0, 287.0, 217.0, 66.0 ],
+									"patching_rect" : [ 42.0, 287.0, 219.0, 66.0 ],
 									"text" : "pressing on the Settings button will open up its full window, where you can initialize the buffer and set its size"
 								}
 
@@ -973,7 +973,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
 									"patching_rect" : [ 297.0, 355.0, 259.0, 383.167647058823547 ],
-									"pic" : "audiorecord_window.ong.png"
+									"pic" : "audiorecord_window.png"
 								}
 
 							}
@@ -8797,7 +8797,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "audiorecord_window.ong.png",
+				"name" : "audiorecord_window.png",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
 				"patcherrelativepath" : "../media",
 				"type" : "PNG",
@@ -8832,13 +8832,6 @@
 			}
 , 			{
 				"name" : "player_audiorenderer.png",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
-				"patcherrelativepath" : "../media",
-				"type" : "PNG",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "player_compact.png",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
 				"patcherrelativepath" : "../media",
 				"type" : "PNG",

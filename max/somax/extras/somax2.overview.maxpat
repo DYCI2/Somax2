@@ -588,6 +588,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1017,7 +1018,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-7",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1036,7 +1036,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 345.0, 182.0, 1034.0, 600.0 ],
+						"rect" : [ 344.0, 182.0, 1034.0, 547.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1066,18 +1066,97 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-1",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 420.0, 524.0, 317.0, 35.0 ],
+									"presentation_linecount" : 2,
+									"text" : ";\rmax launchbrowser https://www.youtube.com/@ErcReach"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.290196, 0.309804, 0.301961, 0.0 ],
+									"id" : "obj-3",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 168.0, 393.0, 231.0, 19.0 ],
+									"text" : "https://www.youtube.com/@ErcReach",
+									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
+									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
+									"underline" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-11",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 65.0, 524.0, 319.0, 35.0 ],
+									"text" : ";\rmax launchbrowser https://www.instagram.com/erc_reach/"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.290196, 0.309804, 0.301961, 0.0 ],
+									"id" : "obj-16",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 163.0, 379.0, 231.0, 19.0 ],
+									"text" : "https://www.instagram.com/erc_reach/",
+									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
+									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
+									"underline" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-2",
-									"linecount" : 26,
+									"linecount" : 29,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 18.0, 900.0, 355.0 ],
-									"text" : "Somax2 is an application and a library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nIt is based on a machine listening, reactive engine and generative model that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisation, composition, installations etc.\nWritten in Max and Python, it features a modular multi-threaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM - STMS and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project of the European Research Council (director : Gérard Assayag).\n\nSomax2 development : Joakim Borg\nTutorials and help : Marco Fiorini and Joakim Borg\nSomax created by Gérard Assayag and Laurent Bonnasse-Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early prototype by Olivier Delerue.\nThanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.\n\nThanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini for their musical material used in Somax2 distribution corpus."
+									"patching_rect" : [ 10.0, 18.0, 900.0, 395.0 ],
+									"text" : "Somax2 is an application and a library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nIt is based on a machine listening, reactive engine and generative model that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisation, composition, installations etc.\nWritten in Max and Python, it features a modular multi-threaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM - STMS and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project of the European Research Council (director : Gérard Assayag).\n\nSomax2 development : Joakim Borg\nTutorials and help : Marco Fiorini and Joakim Borg\nSomax created by Gérard Assayag and Laurent Bonnasse-Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early prototype by Olivier Delerue.\nThanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.\n\nThanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini for their musical material used in Somax2 distribution corpus.\n\nERC REACH Instagram page: \nERC REACH Youtube channel: "
 								}
 
 							}
  ],
-						"lines" : [  ]
+						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-11", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-16", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-3", 0 ]
+								}
+
+							}
+ ]
 					}
 ,
 					"patching_rect" : [ 528.0, 391.5, 87.0, 77.0 ],

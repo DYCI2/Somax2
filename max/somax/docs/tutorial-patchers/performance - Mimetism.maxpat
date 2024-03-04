@@ -642,7 +642,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 518.0, 329.0, 711.0, 429.0 ],
+						"rect" : [ 428.0, 318.0, 824.0, 429.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -672,13 +672,37 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-11",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 678.0, 163.5, 118.0, 33.0 ],
+									"text" : "assign buffername to somax.regions"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-51",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 660.5, 133.0, 124.0, 22.0 ],
+									"text" : "buffername mimetism"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"bubble" : 1,
 									"bubbleside" : 3,
 									"id" : "obj-9",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 340.0, 385.5, 249.0, 24.0 ],
+									"patching_rect" : [ 469.0, 386.0, 249.0, 24.0 ],
 									"text" : "For more info on Player's parameters, see"
 								}
 
@@ -692,7 +716,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 598.0, 420.5, 123.0, 49.0 ],
+									"patching_rect" : [ 727.0, 421.0, 123.0, 49.0 ],
 									"text" : "loadunique somax.player.app.maxhelp"
 								}
 
@@ -708,7 +732,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 598.0, 383.0, 84.25, 29.0 ],
+									"patching_rect" : [ 727.0, 383.0, 84.25, 29.0 ],
 									"rounded" : 8.0,
 									"text" : "Player Documentation",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -726,7 +750,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 598.0, 471.5, 51.0, 22.0 ],
+									"patching_rect" : [ 727.0, 472.0, 51.0, 22.0 ],
 									"text" : "pcontrol"
 								}
 
@@ -806,7 +830,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 601.0, 134.0, 82.0, 20.0 ],
+									"patching_rect" : [ 553.0, 170.0, 82.0, 20.0 ],
 									"text" : "enable Player"
 								}
 
@@ -864,10 +888,10 @@
 									"id" : "obj-5",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
-									"numoutlets" : 5,
-									"outlettype" : [ "bang", "bang", "bang", "bang", "bang" ],
-									"patching_rect" : [ 33.0, 95.0, 521.0, 22.0 ],
-									"text" : "b 5"
+									"numoutlets" : 6,
+									"outlettype" : [ "bang", "bang", "bang", "bang", "bang", "bang" ],
+									"patching_rect" : [ 33.0, 95.0, 646.5, 22.0 ],
+									"text" : "b 6"
 								}
 
 							}
@@ -979,6 +1003,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-51", 0 ],
+									"source" : [ "obj-5", 5 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-7", 0 ],
 									"source" : [ "obj-5", 4 ]
 								}
@@ -988,6 +1019,14 @@
 								"patchline" : 								{
 									"destination" : [ "obj-8", 0 ],
 									"source" : [ "obj-5", 2 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-2", 0 ],
+									"midpoints" : [ 670.0, 330.0, 42.5, 330.0 ],
+									"source" : [ "obj-51", 0 ]
 								}
 
 							}
@@ -1328,12 +1367,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-27",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "multichannelsignal", "", "" ],
-					"patching_rect" : [ 940.0, 668.0, 122.0, 22.0 ],
-					"text" : "somax.audiorenderer",
+					"patching_rect" : [ 940.0, 668.0, 137.0, 35.0 ],
+					"text" : "somax.audiorenderer @buffername mimetism",
 					"varname" : "somax.audiorenderer"
 				}
 
@@ -1769,7 +1809,7 @@
 			"obj-1::obj-2::obj-395::obj-472" : [ "live.text[7]", "live.text[11]", 0 ],
 			"obj-1::obj-2::obj-395::obj-490" : [ "live.text[6]", "live.text[11]", 0 ],
 			"obj-24" : [ "output[2]", "guide_audio", 0 ],
-			"obj-27::obj-98" : [ "live.text[2]", "live.text[26]", 0 ],
+			"obj-27::obj-98" : [ "live.text[3]", "live.text[26]", 0 ],
 			"obj-69::obj-1115" : [ "continuity[22]", "continuity", 0 ],
 			"obj-69::obj-1150" : [ "live.text[36]", "live.text", 0 ],
 			"obj-69::obj-1175" : [ "heldnotesmode[1]", "heldnotesmode", 0 ],
@@ -1876,10 +1916,6 @@
 ,
 				"obj-1::obj-2::obj-395::obj-490" : 				{
 					"parameter_longname" : "live.text[6]"
-				}
-,
-				"obj-27::obj-98" : 				{
-					"parameter_longname" : "live.text[2]"
 				}
 ,
 				"obj-69::obj-1150" : 				{
