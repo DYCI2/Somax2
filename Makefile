@@ -9,7 +9,7 @@ VERSION = $$(python3 $(CURDIR)/python/somax/somax/utils/get_version.py)
 
 MAX_BUILD_PARENT_FOLDER = build/somax
 MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/Somax-$(VERSION)
-DMG_NAME = Somax-$(VERSION)
+DMG_NAME = Somax-$(VERSION)-macos-universal
 DMG_PATH = dist/$(DMG_NAME).dmg
 APP_PATH = dist/$(DMG_NAME).app
 
