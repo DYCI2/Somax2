@@ -8,13 +8,13 @@ PYINSTALLER_TARGET_NAME = somax_server
 VERSION = $$(python3 $(CURDIR)/python/somax/somax/utils/get_version.py)
 
 MAX_BUILD_PARENT_FOLDER = build/somax
-MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/Somax-$(VERSION)
-DMG_NAME = Somax-$(VERSION)-macos-universal
+MAX_DIR = Somax-$(VERSION)
+MAX_BUILD_PATH = $(MAX_BUILD_PARENT_FOLDER)/$(MAX_DIR)
+DMG_NAME = $(MAX_DIR)-macos-universal
 DMG_PATH = dist/$(DMG_NAME).dmg
 APP_PATH = dist/$(DMG_NAME).app
 
-WIN_PKG = Somax-$(VERSION)
-WIN_PKG_ZIP = $(WIN_PKG)-win64.zip
+WIN_PKG_ZIP = $(MAX_DIR)-win64.zip
 
 
 
@@ -63,7 +63,7 @@ max-package: clean max-package-common
 		--window-pos 200 120 \
 		--window-size 800 400 \
 		--icon-size 100 \
-		--icon "$(DMG_NAME)" 200 190 \
+		--icon "$(MAX_DIR)" 200 190 \
 		--background "media/dmg_installer_background.png" \
 		"$(DMG_PATH)" \
 		"$(MAX_BUILD_PARENT_FOLDER)"
@@ -83,7 +83,7 @@ max-package-win: clean max-package-common
 	@echo "\033[1m####### Building Windows Max package. THIS SHOULD BE RUN ON MACOS (and don't forget to change somax.interpreter loadmess) ########\033[0m"
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME)/somax_server.exe" "$(MAX_BUILD_PATH)/misc/"
 	cp -a "dist/$(PYINSTALLER_TARGET_NAME)/_internal" "$(MAX_BUILD_PATH)/misc/"
-	cd "$(MAX_BUILD_PARENT_FOLDER)" && zip -r "$(WIN_PKG_ZIP)" "$(WIN_PKG)"
+	cd "$(MAX_BUILD_PARENT_FOLDER)" && zip -r "$(WIN_PKG_ZIP)" "$(MAX_DIR)"
 	mv "$(MAX_BUILD_PARENT_FOLDER)/$(WIN_PKG_ZIP)" dist/
 
 
@@ -111,58 +111,3 @@ clean:
 
 clean-all: clean
 	rm -rf dist
-
-
-
-# max-pyinstaller: pyinstaller
-# 	if [ -d $(MAX_PYINSTALLER_LIBRARY) ]; then rm -r $(MAX_PYINSTALLER_LIBRARY); fi
-# 	mkdir -p $(MAX_PYINSTALLER_LIBRARY)
-# 	cp -r $(MAXLIBPATH) $(MAX_PYINSTALLER_LIBRARY)/somax
-# 	cp -r dist/$(PYINSTALLER_TARGET_NAME) $(MAX_PYINSTALLER_LIBRARY)/somax/misc
-#
-# max-standalone:
-# 	@echo "\033[1m####### Optimizing max standalone at ${MAX_STANDALONE} ########\033[0m"
-# 	mkdir -p "${MAX_STANDALONE_FOLDER}"
-# 	if [ ! -d $(MAX_STANDALONE) ]; then echo "\033[0;31;1mERROR: Manually build a max standalone to ${MAX_STANDALONE} before executing this command\033[0m" && exit 1; fi
-# 	rm $(MAX_STANDALONE)/Contents/Resources/MaxPluginScanner
-# 	rm -r "${MAX_STANDALONE}/Contents/Resources/C74/media"
-# 	rm -r "${MAX_STANDALONE}/Contents/Resources/C74/externals/jitter"
-# 	rm -r "${MAX_STANDALONE}/Contents/Resources/C74/externals/m4l"
-# 	rm -r "${MAX_STANDALONE}/Contents/Resources/C74/externals/max"
-# 	mkdir -p "${MAX_STANDALONE}/Contents/Resources/misc"
-# 	cp -r "dist/${PYINSTALLER_TARGET_NAME}" "${MAX_STANDALONE}/Contents/Resources/misc/${PYINSTALLER_TARGET_NAME}"
-# 	cp "${MAXLIBPATH}/misc/launch_server" "${MAX_STANDALONE}/Contents/Resources/misc"
-#
-# max-standalone-dmg:
-# 	create-dmg \
-# 		--volname "Somax Installer" \
-# 		--window-pos 200 120 \
-# 		--window-size 800 400 \
-# 		--icon-size 100 \
-# 		--icon "Somax.app" 200 190 \
-# 		--hide-extension "Somax.app" \
-# 		--app-drop-link 600 185 \
-# 		"Somax-Installer.dmg" \
-# 		"${MAX_STANDALONE_FOLDER}"
-# 		# --volicon "application_icon.icns" \
-# 		# --background "installer_background.png"
-# 	mv Somax-Installer.dmg "${MAX_STANDALONE_FOLDER}"
-#
-# max-python-dmg:
-# 	if [ -d $(LIB_BUILD_PATH) ]; then rm -r $(LIB_BUILD_PATH); fi
-# 	mkdir -p $(LIB_BUILD_FOLDER)
-# 	cp -RP max python README.md LICENSE somax2.maxpat tutorial.maxpat $(LIB_BUILD_FOLDER)
-# 	cp dist/$(PYINSTALLER_TARGET_NAME) $(LIB_BUILD_FOLDER)/max/somax/misc/
-# 	create-dmg \
-# 		--volname "Somax2" \
-# 		--window-pos 200 120 \
-# 		--window-size 800 400 \
-# 		--icon "Somax2" 200 190 \
-# 		--background "media/dmg_installer_background.png" \
-# 		"Somax2.dmg" \
-# 		$(LIB_BUILD_PATH)
-# 	mkdir -p dist/somax2-release/
-# 	mv Somax2.dmg dist/somax2-release
-
-
-
