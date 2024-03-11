@@ -23,7 +23,7 @@ from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus, RealtimeRecordedAudioCorpus
-from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
+from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent, SilenceEvent
 from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
     InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch, RecordingError
@@ -194,7 +194,7 @@ class OscAgent(Agent, AsyncioOscObject):
             #       make sure that it corresponds to `target time` rather than `trigger time`.
             # print(f"TRIG: new event: {scheduling_time}")
             event_transform_and_match_type = self.player.new_event(scheduling_time,
-                                                                   self.scheduling_handler.phase,
+                                                                   self.scheduling_handler.predict_phase(scheduling_time),
                                                                    scheduler_tempo,
                                                                    enforce_output=False)
             self._send_output_statistics()
@@ -206,6 +206,13 @@ class OscAgent(Agent, AsyncioOscObject):
         if event_transform_and_match_type is None:
             self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
+        elif isinstance(event_transform_and_match_type[0], SilenceEvent):
+            self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
+            event: SilenceEvent = typing.cast(SilenceEvent, event_transform_and_match_type[0])
+            retrigger: TriggerEvent = TriggerEvent(trigger.trigger_time + event.duration,
+                                                   trigger.target_time + event.duration)
+            self.scheduling_handler.add_trigger_event(retrigger, reschedule=True)
+            event_transform_and_match_type = None
 
         elif event_transform_and_match_type[2] is True:  # output from match
             self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
@@ -242,7 +249,7 @@ class OscAgent(Agent, AsyncioOscObject):
             if self.recombine:
                 # print(f"CONT: new event: {scheduling_time}")
                 event_transform_and_match_type = self.player.new_event(scheduling_time,
-                                                                       self.scheduling_handler.phase,
+                                                                       self.scheduling_handler.predict_phase(scheduling_time),
                                                                        self.scheduling_handler.tempo,
                                                                        enforce_output=True)
                 if event_transform_and_match_type is None:
@@ -261,7 +268,7 @@ class OscAgent(Agent, AsyncioOscObject):
             else:
                 # print(f"CONT: step: {scheduling_time}")
                 event_and_transform = self.player.step(scheduling_time,
-                                                       self.scheduling_handler.phase,
+                                                       self.scheduling_handler.predict_phase(scheduling_time),
                                                        self.scheduling_handler.tempo)
 
                 if event_and_transform is None:
@@ -706,12 +713,17 @@ class OscAgent(Agent, AsyncioOscObject):
         return required_feature_types
 
     def learn_event(self, onset_ms: float, duration_ms: float, *features) -> None:
+        # specific use case where the Max object somax.audiorecord has not received any influences
+        if len(features) == 1 and features[0] == 0:
+            self.logger.error("No analysis/influences were provided - no event was recorded")
+            return
+
         try:
             parsed_features: List[CorpusFeature] = self.parse_features(features)
             event: CorpusEvent = self.player.learn_event(onset_ms / 1000, duration_ms / 1000, parsed_features)
             self.target.send(PlayerSendProtocol.RECORD_LEARN_EVENT, [event.state_index,
-                                                                     event.onset,
-                                                                     event.duration,
+                                                                     event.onset * 1000,
+                                                                     event.duration * 1000,
                                                                      self.player.corpus.duration() * 1000])
         except (RecordingError, ValueError, IndexError) as e:
             self.logger.error(f"{str(e)}. No event was recorded")

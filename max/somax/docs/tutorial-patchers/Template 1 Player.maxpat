@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 5,
-			"revision" : 3,
+			"minor" : 6,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 84.0, 100.0, 1610.0, 983.0 ],
+		"rect" : [ 84.0, 100.0, 630.0, 983.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -50,13 +50,13 @@
 					"lockedsize" : 0,
 					"maxclass" : "bpatcher",
 					"name" : "somax.player.app.maxpat",
-					"numinlets" : 1,
+					"numinlets" : 2,
 					"numoutlets" : 5,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "multichannelsignal", "", "", "", "" ],
 					"patching_rect" : [ 793.0, 77.0, 250.0, 825.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 256.0, 4.0, 244.5, 825.0 ],
+					"presentation_rect" : [ 256.0, 4.0, 250.0, 969.0 ],
 					"varname" : "somax.player.app",
 					"viewvisibility" : 1
 				}
@@ -150,6 +150,14 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
+			"obj-11::obj-118::obj-114" : [ "live.gain~[1]", "live.gain~", 0 ],
+			"obj-11::obj-118::obj-119" : [ "live.text[67]", "live.text[30]", 0 ],
+			"obj-11::obj-118::obj-2::obj-119" : [ "live.text[35]", "live.text[30]", 0 ],
+			"obj-11::obj-118::obj-2::obj-13" : [ "live.text[65]", "live.text", 0 ],
+			"obj-11::obj-118::obj-2::obj-140" : [ "mc.live.gain~[9]", "mc.live.gain~", 0 ],
+			"obj-11::obj-118::obj-2::obj-62::obj-1" : [ "source[9]", "source", 0 ],
+			"obj-11::obj-118::obj-42" : [ "live.toggle", "live.toggle", 0 ],
+			"obj-11::obj-118::obj-55" : [ "live.gain~", "live.gain~", 0 ],
 			"obj-11::obj-17::obj-10::obj-21" : [ "onset[5]", "onset", 0 ],
 			"obj-11::obj-17::obj-10::obj-28" : [ "chromaonset[5]", "chromaonset", 0 ],
 			"obj-11::obj-17::obj-10::obj-29" : [ "enable[5]", "enable", 0 ],
@@ -184,8 +192,17 @@
 			"obj-11::obj-3::obj-123::obj-1" : [ "live.text[32]", "live.text", 0 ],
 			"obj-11::obj-3::obj-123::obj-2" : [ "live.text[33]", "live.text", 0 ],
 			"obj-11::obj-3::obj-123::obj-3" : [ "live.text[19]", "live.text", 0 ],
+			"obj-11::obj-3::obj-14::obj-12" : [ "live.slider[2]", "live.slider[2]", 0 ],
+			"obj-11::obj-3::obj-14::obj-128" : [ "live.text[62]", "live.text", 1 ],
+			"obj-11::obj-3::obj-14::obj-135" : [ "live.text[59]", "live.text", 1 ],
+			"obj-11::obj-3::obj-14::obj-153" : [ "live.text[61]", "live.text", 1 ],
+			"obj-11::obj-3::obj-14::obj-163" : [ "live.text[60]", "live.text", 1 ],
+			"obj-11::obj-3::obj-14::obj-173" : [ "live.text[51]", "live.text", 1 ],
+			"obj-11::obj-3::obj-14::obj-39" : [ "live.tab[1]", "live.tab", 0 ],
+			"obj-11::obj-3::obj-14::obj-40" : [ "live.slider[4]", "live.slider[2]", 0 ],
+			"obj-11::obj-3::obj-14::obj-64" : [ "live.text[52]", "live.text", 0 ],
 			"obj-11::obj-3::obj-16::obj-26" : [ "corpusname[4]", "corpusname", 0 ],
-			"obj-11::obj-3::obj-407::obj-1007" : [ "rslider[1]", "rslider", 0 ],
+			"obj-11::obj-3::obj-32" : [ "heldnotesmode[3]", "heldnotesmode", 0 ],
 			"obj-11::obj-3::obj-407::obj-1115" : [ "continuity[1]", "continuity", 0 ],
 			"obj-11::obj-3::obj-407::obj-1175" : [ "heldnotesmode[2]", "heldnotesmode", 0 ],
 			"obj-11::obj-3::obj-407::obj-1179" : [ "continuity[16]", "continuity", 0 ],
@@ -200,7 +217,6 @@
 			"obj-11::obj-3::obj-407::obj-1444" : [ "outputprobability[4]", "outputprobability", 0 ],
 			"obj-11::obj-3::obj-407::obj-152" : [ "selfngramorder[1]", "selfngramorder", 0 ],
 			"obj-11::obj-3::obj-407::obj-154" : [ "melodicngramorder[4]", "melodicngramorder", 0 ],
-			"obj-11::obj-3::obj-407::obj-163" : [ "ignorephase[4]", "ignorephase", 0 ],
 			"obj-11::obj-3::obj-407::obj-19" : [ "selfmod12[4]", "selfmod12", 0 ],
 			"obj-11::obj-3::obj-407::obj-22" : [ "selfmelodicbypass[1]", "selfmelodicbypass", 0 ],
 			"obj-11::obj-3::obj-407::obj-254" : [ "harmonincpeakdecay[2]", "harmonincpeakdecay", 0 ],
@@ -233,7 +249,6 @@
 			"obj-11::obj-3::obj-407::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
 			"obj-11::obj-3::obj-407::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-11::obj-3::obj-407::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
-			"obj-11::obj-3::obj-407::obj-998" : [ "__exp_regionmaskenable[1]", "__exp_regionmaskenable", 0 ],
 			"obj-11::obj-3::obj-79::obj-1" : [ "live.text[25]", "live.text", 0 ],
 			"obj-11::obj-3::obj-79::obj-2" : [ "live.text[23]", "live.text", 0 ],
 			"obj-11::obj-3::obj-79::obj-3" : [ "live.text[18]", "live.text", 0 ],
@@ -262,6 +277,12 @@
 			}
 ,
 			"parameter_overrides" : 			{
+				"obj-11::obj-118::obj-2::obj-62::obj-1" : 				{
+					"parameter_invisible" : 0,
+					"parameter_modmode" : 0,
+					"parameter_unitstyle" : 10
+				}
+,
 				"obj-11::obj-17::obj-10::obj-30" : 				{
 					"parameter_longname" : "chroma scaling factor[5]"
 				}
@@ -534,6 +555,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "monitor.png",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
+				"patcherrelativepath" : "../../media",
+				"type" : "PNG",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "omnimidiflush.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../../patchers/resources/misc",
@@ -604,6 +632,20 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "somax.audiorecord.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.audiorecord.ui.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "somax.audiorenderer.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
@@ -612,6 +654,13 @@
 			}
 , 			{
 				"name" : "somax.await_patcherargs.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.beatphase.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
@@ -789,6 +838,13 @@
 				"name" : "somax.receiveblock.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.regions.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}

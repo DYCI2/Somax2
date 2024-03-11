@@ -175,6 +175,7 @@
         <seealso name="somax.midiinfluencer" />
 		<seealso name="somax.audioinfluencer.ui" />
         <seealso name="somax.audioinfluencer.app" />
+        <seealso name="somax.audiorecord" />
 	</seealsolist>
 	
 </c74object>

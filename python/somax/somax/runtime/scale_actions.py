@@ -3,7 +3,7 @@ import logging
 from abc import ABC, abstractmethod
 from collections import deque
 from enum import Enum
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Union
 
 import numpy as np
 
@@ -21,6 +21,7 @@ from somax.runtime.peaks import Peaks
 from somax.runtime.taboo_mask import TabooMask
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
+from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling
 from somax.utils.introspective import StringParsed
 
 
@@ -153,47 +154,6 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         self._selectivity.value = value
 
 
-class DiscretePhaseModulationScaleAction(AbstractScaleAction):
-    DEFAULT_GRID_SIZE = 12
-
-    def __init__(self):
-        super().__init__()
-        self._grid_size: Parameter = Parameter(self.DEFAULT_GRID_SIZE, None, None, 'int', "this is a nice parameter")
-
-    def scale(self,
-              peaks: Peaks,
-              time: float,
-              beat_phase: float,
-              corresponding_events: List[CorpusEvent],
-              corresponding_transforms: List[AbstractTransform],
-              taboo_mask: TabooMask,
-              corpus: Corpus = None,
-              enforce_output: bool = False,
-              **kwargs) -> Tuple[Peaks, TabooMask]:
-        event_beat_phases: np.ndarray = np.floor(np.array([e.get_feature(BeatPhase).value()
-                                                           for e in
-                                                           corresponding_events]) * self._grid_size.value).astype(int)
-        beat_phase_index: int = int(np.floor(beat_phase * self._grid_size.value))
-        mask: np.ndarray = (event_beat_phases == beat_phase_index).astype(int)
-        peaks *= mask
-        return peaks, taboo_mask
-
-    def feedback(self,
-                 feedback_event: Optional[CorpusEvent],
-                 time: float,
-                 applied_transform: AbstractTransform) -> None:
-        pass
-
-    def update_transforms(self, transform_handler: TransformHandler):
-        pass
-
-    def clear(self) -> None:
-        pass
-
-    def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return corpus.has_feature(BeatPhase)
-
-
 class NextStateScaleAction(AbstractScaleAction):
     DEFAULT_FACTOR = 1.5
 
@@ -264,20 +224,26 @@ class AutoJumpScaleAction(AbstractScaleAction):
               enforce_output: bool = False,
               **kwargs) -> Tuple[Peaks, TabooMask]:
         event_indices: List[int] = [e[0].state_index for e in self._history.get_n_last(self.jump_threshold + 1)]
+
         if not event_indices:
             return peaks, taboo_mask
+
         previous_index: int = event_indices[0]
         num_consecutive_events: int = len(list(itertools.takewhile(lambda a: a == -1, np.diff(event_indices))))
+
         if num_consecutive_events >= self.jump_threshold:
             factor: float = 0.0
             # add taboo for all the N previous events and the following one (to force jump)
             taboo_mask.add_taboo(event_indices)
             if len(event_indices) > 0 and corpus is not None and corpus.length() > 0:
-                taboo_mask.add_taboo(event_indices[-1] + 1)
+                taboo_mask.add_taboo(event_indices[0] + 1)
+
         elif num_consecutive_events <= self.activation_threshold:
             factor: float = 1.0
+
         else:
             factor: float = 0.5 ** (num_consecutive_events - self.activation_threshold)
+
         event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         is_matching: np.ndarray = event_indices == previous_index + 1
         peaks.scale(factor, is_matching)
@@ -381,6 +347,9 @@ class StaticTabooScaleAction(AbstractScaleAction):
               corpus: Corpus = None,
               enforce_output: bool = False,
               **kwargs) -> Tuple[Peaks, TabooMask]:
+        if self._taboo_length.value <= 0:
+            return peaks, taboo_mask
+
         event_indices: np.ndarray = np.array([e.state_index for e in corresponding_events], dtype=int)
         matching_indices: np.ndarray = np.zeros(len(corresponding_events), dtype=bool)
         for taboo_index in self._taboo_indices:
@@ -795,6 +764,115 @@ class ThresholdScaleAction(AbstractScaleAction):
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
         return True
+
+
+class BeatPhaseScaleAction(AbstractScaleAction):
+    DEFAULT_GRID_SIZE = 12
+
+    def __init__(self):
+        super().__init__()
+        self._grid_size: Parameter = Parameter(self.DEFAULT_GRID_SIZE, 1, None, 'int',
+                                               "number of subdivisions of the beat")
+        self._always_allow_next: Parameter = Parameter(
+            False, False, True, 'bool',
+            "if enabled: never taboo the next event even if it doesn't match the phase")
+        self._round_beat: Parameter = Parameter(
+            True, False, True, 'bool',
+            "if enabled: round the beat to the nearest grid position rather than floor")
+        self._enforce_beat: Parameter = Parameter(
+            True, False, True, 'bool',
+            "if enabled always match the beat and taboo events that don't.")
+        self._scale_factor: Parameter = Parameter(
+            0.0, 0.0, None, 'float',
+            "if enforce_beat is disabled, scale any peaks that don't match the beat by this factor")
+        self._align_to_clock: Parameter = Parameter(
+            True, False, True, 'bool',
+            "if enabled: align the beat to the global clock, otherwise align with the previous event")
+
+        self._previous_event_and_time: Optional[Tuple[CorpusEvent, float]] = None
+
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              enforce_output: bool = False,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
+        if self._align_to_clock.value:
+            current_grid_position: int = self._grid_positions(beat_phase)
+        else:
+            current_grid_position = self._grid_positions(self._internal_beat_phase(time, corpus.scheduling_mode))
+
+        # Note: given this condition, taboo should still be applied even if `enforce_output` is True
+        if self._enforce_beat.value:
+            corpus_beat_phases: np.ndarray = np.array([e.get_feature(BeatPhase).value() for e in corpus.events])
+            corpus_grid_positions: np.ndarray = self._grid_positions(corpus_beat_phases)
+            corpus_taboos: np.ndarray = np.not_equal(corpus_grid_positions, current_grid_position)
+
+            if self._previous_event_and_time is not None and self._always_allow_next.value:
+                previous_event_index: int = self._previous_event_and_time[0].state_index
+                corpus_taboos[(previous_event_index + 1) % corpus.length()] = False
+
+            taboo_mask.add_taboo_by_mask(corpus_taboos)
+
+        if peaks.is_empty():
+            return peaks, taboo_mask
+
+        peak_beat_phases: np.ndarray = np.array([e.get_feature(BeatPhase).value() for e in corresponding_events])
+        peak_grid_positions: np.ndarray = self._grid_positions(peak_beat_phases)
+        peak_mask: np.ndarray = np.not_equal(peak_grid_positions, current_grid_position)
+        if self._enforce_beat.value:
+            peaks.scale(0, peak_mask)
+        else:
+            peaks.scale(self._scale_factor.value, peak_mask)
+
+        return peaks, taboo_mask
+
+    def feedback(self,
+                 feedback_event: Optional[CorpusEvent],
+                 time: float,
+                 applied_transform: AbstractTransform) -> None:
+        if feedback_event is not None:
+            self._previous_event_and_time = feedback_event, time
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        self._previous_event_and_time = None
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(BeatPhase) and corpus.has_feature(Tempo)
+
+    def _internal_beat_phase(self, current_time: float, scheduling_mode: SchedulingMode) -> float:
+        if self._previous_event_and_time is None:
+            return 0.0
+
+        elapsed: float = current_time - self._previous_event_and_time[1]
+        if elapsed < 0:
+            return 0.0
+
+        last_beast_phase: float = self._previous_event_and_time[0].get_feature(BeatPhase).value()
+
+        if isinstance(scheduling_mode, RelativeScheduling):
+            return (last_beast_phase + elapsed) % 1.0
+        else:
+            tempo: float = self._previous_event_and_time[0].get_feature(Tempo).value()
+            return (last_beast_phase + elapsed * tempo / 60.0) % 1.0
+
+    def _grid_positions(self, beat_phases: Union[float, np.ndarray]) -> Union[int, np.ndarray]:
+        if self._round_beat.value:
+            grid_positions = np.round(beat_phases * self._grid_size.value)
+        else:
+            grid_positions = np.floor(beat_phases * self._grid_size.value)
+
+        if isinstance(beat_phases, np.ndarray):
+            return grid_positions.astype(int)
+        else:
+            return int(grid_positions)
 
 
 class LabelScaleAction(AbstractScaleAction):

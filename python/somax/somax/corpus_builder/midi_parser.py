@@ -32,8 +32,18 @@ class BarNumberAnnotation(Enum):
 class _MidiNote:
     """ Temporary class used only while constructing the NoteMatrix"""
 
-    def __init__(self, note: int, vel: int, ch: int, onset_tick: int, onset_time: float, tempo: float, bar: float,
-                 track: str, end_tick: Optional[int] = None, end_time: Optional[float] = None):
+    def __init__(self,
+                 note: int,
+                 vel: int,
+                 ch: int,
+                 onset_tick: int,
+                 onset_time: float,
+                 tempo: float,
+                 bar: float,
+                 track: str,
+                 beat_phase: float,
+                 end_tick: Optional[int] = None,
+                 end_time: Optional[float] = None):
         self.note: int = note
         self.vel: int = vel
         self.ch: int = ch
@@ -42,6 +52,7 @@ class _MidiNote:
         self.tempo: float = tempo
         self.bar: float = bar
         self.track: str = track
+        self.beat_phase: float = beat_phase
         self.end_tick: Optional[int] = end_tick
         self.end_time: Optional[float] = end_time
 
@@ -86,7 +97,7 @@ class MidiParser:
         for nn, vel, ch, dur in zip(note_numbers, velocities, channels, durations_tick):
             quantized_duration_tick: int = round(dur * ppq)
             duration_sec: float = quantized_duration_tick / ppq * 60 / tempo
-            notes.append(_MidiNote(nn, vel, ch, onset_tick, onset_time, tempo, 0, "",
+            notes.append(_MidiNote(nn, vel, ch, onset_tick, onset_time, tempo, 0, "", 0.0,
                                    onset_tick + quantized_duration_tick, onset_time + duration_sec))
             onset_tick += quantized_duration_tick
             onset_time += duration_sec
@@ -102,16 +113,23 @@ class MidiParser:
         current_time: float = 0.0
         current_bar: float = 1.0
         current_bar_factor: int = 1
+        current_beat_phase: float = 0.0
+        current_phase_factor: float = 1.0
 
         for msg, track in MidiParser.__merge_tracks(midi_file.tracks):
             current_tick += msg.time
             current_time += mido.tick2second(msg.time, ticks_per_beat, mido.bpm2tempo(tempo_bpm))
             current_bar += msg.time / ticks_per_beat * current_bar_factor
+            current_beat_phase = (current_beat_phase + msg.time / ticks_per_beat * current_phase_factor) % 1.0
             track_name: str = track.name if track else ""
+
             if msg.type == 'set_tempo':
                 tempo_bpm = mido.tempo2bpm(msg.tempo)
             elif msg.type == 'time_signature':
                 current_bar_factor = msg.denominator / (4 * msg.numerator)
+                if msg.denominator > 0:
+                    current_phase_factor = msg.denominator / 4.0
+                current_beat_phase = 0.0
             elif msg.type == 'note_on' or msg.type == 'note_off':
                 # if the note is already held, complete the note regardless of whether the input is a note_on or
                 # note_off message. This is to avoid duplicate notes in a slice if re-triggered before its note_off
@@ -125,7 +143,7 @@ class MidiParser:
                 held_notes = [note for note in held_notes if not note.matches(msg.note, msg.channel, track_name)]
                 if msg.type == 'note_on' and msg.velocity > 0:
                     held_notes.append(_MidiNote(msg.note, msg.velocity, msg.channel, current_tick,
-                                                current_time, tempo_bpm, current_bar, track_name))
+                                                current_time, tempo_bpm, current_bar, track_name, current_beat_phase))
                 # elif msg.type == 'note_off' or (msg.type == 'note_on' and msg.velocity == 0):
 
         for note in held_notes:
@@ -270,8 +288,9 @@ class MidiParser:
             tempo_bpm: float = note.tempo
             bar_number: float = note.bar
             track_name: str = note.track
+            beat_phase: float = note.beat_phase
             note_matrix[i] = [note_number, velocity, channel, relative_onset, absolute_onset, relative_duration,
-                              absolute_duration, tempo_bpm, bar_number, track_name]
+                              absolute_duration, tempo_bpm, bar_number, track_name, beat_phase]
 
         note_matrix = note_matrix[note_matrix[:, Keys.REL_ONSET.value].argsort()]
 
@@ -294,6 +313,7 @@ class MidiParser:
             track: str = note[Keys.TRACK_NAME]
             end_tick: int = int(note[Keys.REL_DURATION] * ticks_per_beat) + onset_tick
             end_time: float = (note[Keys.ABS_DURATION] * 0.001) + onset_time
+            beat_phase: float = note[Keys.BEAT_PHASE]
             notes.append(_MidiNote(note_number, velocity, channel, onset_tick, onset_time, tempo, bar,
-                                   track, end_tick, end_time))
+                                   track, beat_phase, end_tick, end_time))
         return notes, duration

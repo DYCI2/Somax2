@@ -15,7 +15,7 @@
 * Set Corpus (by path):                 corpus /path/to/corpus.pickle/.gz (absolute path or relative server's corpuspath)
 * Set Corpus (by name):                 corpus symbol <name_of_corpus_including_(A)_or_(M)>
 * Set Corpus (by index):                corpus <0..>
-* Refresh Corpora:                      refreshcorpora
+* Refresh Corpora:                      corpus refresh
 * Set Corpus Volatile Flag:             corpusvolatile <1/0>
 
 * Mode:                                 mode <1/0>
@@ -31,20 +31,27 @@
 * Output Probability:                   outputprobability <0..1>
 * Sparse:                               sparse <1/0>
 * Ouptut Selection:                     outputfrom <1/0>
-* Ignore Phase:                         ignorephase <1/0>
 * Enforce Taboo:                        enforcetaboo <1/0>
 
 * Time Stretch Mode:                    timestretchmode <1/0>
 * Time Stretch Factor:                  timestretch <1/0>
+
+* Beat Phase Filter Enable:             beat enabled <1/0>
+* Beat Filter Type:                     beat hardfilter <1/0>
+* Grid Size:                            beat gridsize <1..∞>
+* Beat Attenuation Factor:              beat factor <0..∞>
+* Grid Mode (Round/Floor):              beat round <1/0>
 
 * Layer Enable:                         selfmelodicenable <1/0>, selfharmonicenable <1/0>, melodicenable <1/0>, harmonicenable <1/0>
 * Balance:                              weights <0..1> <0..1> <0..1> <0..1>
 * Memory Length:                        selfngramorder <1..∞>, selfharmonicngramorder <1..∞>, melodicngramorder <1..∞>, harmonicngramorder <1..∞>
 * Decay Time:                           selfpeakdecay <1..∞>, selfharmonicpeakdecay <1..∞>, melodicpeakdecay <1..∞>, harmonicpeakdecay <1..∞>
 
-* Region Mask Enable:                   region enabled <1..6> <1/0>
-* Region Mask Start/End:                region bounds <1..6> <start_ms> <end_ms>
-* Region Editable (GUI):                region editable <1..6>
+* Region Mask Toggle Enable All:        region enabled <1/0> (or region enabled 0 <1/0>)
+* Region Mask Enable Single:            region enabled <1..6> <1/0>
+* Region Mask Start/End (ms):           region bounds <1..6> <start_ms> <end_ms>
+* Region Mask Start/End (range):        region range <1..6> <start> <end> (where start and end are values between 0. and 1.)
+* Region Editable (GUI):                region editable <0..6> (0 to disable editing)
 * Region Reset to Default (Single):     region reset <1..6>
 * Region Reset to Default (All):        region reset
 
@@ -54,16 +61,19 @@
 
 #### PLAYER REAL-TIME RECORDING MESSAGES ####
 
-* Enable Recording Module:              audiorecord enabled
+* Initialize:                           audiorecord initialize <buffer_size_in_seconds> (buffer size is optional, will use default if not provided)
+* Clear Buffer:                         audiorecord clear (same as "corpus new")
+* Enable Recording Module:              audiorecord enabled <1/0>
 * Set Analysis Source:                  audiorecord source <Name_of_Influencer>
 * Set Recording Source:                 audiorecord audiodevice "Name of Device" (name of device as listed in the menu, for example "2 Input 2")
-* Toggle Recording Source:              audiorecord inputenabled <1/0>
-* Crossfade:                            audiorecord crossfade <0..>
 * Recording Source Gain:                audiorecord gain <-70..6>                                  
-* Start/Stop recording:                 audiorecord start/stop
+* Monitor Audio Input:                  audiorecord monitor <1/0>
+* Start/Stop recording:                 audiorecord record <1/0> (also just "audiorecord <1/0>", or "audiorecord start" / "audiorecord stop")
 * Pause Recording on Silence:           audiorecord autopause <1/0>
 * Silence Threshold:                    audiorecord pausethresh <-70..0> 
 * Pause Interval:                       audiorecord pauseinterval <0..>
+* Record End:                           audiorecord appendend <1/0>
+* Crossfade:                            audiorecord crossfade <0..>
 
 * Reset to New Empty Corpus:            corpus new
 * Save Recorded Corpus:                 savecorpus <Name_of_Corpus> (will write both .wav and .pickle file to corpuspath)
@@ -74,9 +84,9 @@
 
 #### PLAYER RUNTIME MESSAGES ####
 * Trigger Output:                       bang
-* Force Jump to event N:                jump N      (jump on next output)
-                                        jump N bang (jump and trigger output)
-                                        jump -1     (jump to random event)
+* Force Jump to event N:                jump N       (jump on next output)
+                                        jump N bang  (jump and trigger output)
+                                        jump -1 bang (jump to random event)
 * Influence:                            influence onset (same as bang)
                                         influence pitch <0..127>
                                         influence chroma <0..1> <0..1> ... <0..1> (12 floats)
@@ -97,8 +107,7 @@
 * Auto Jump Enable:                     __exp_autojumpenable <1/0>
 * Auto Jump Lower Threshold:            __exp_autojumpactivate <0..∞>
 * Auto Jump Upper Threshold:            __exp_autojumpforcejump <1..∞>
-* Taboo Enable:                         tabooenable <1/0>
-* Taboo Num Events:                     tabooduration <1..∞>
+* Taboo Num Events:                     tabooduration <0..∞> (0 to disable taboo)
 
 
 

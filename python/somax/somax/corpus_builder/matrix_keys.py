@@ -12,3 +12,4 @@ class MatrixKeys(Enum):
     TEMPO = 7
     BAR_NUMBER = 8
     TRACK_NAME = 9
+    BEAT_PHASE = 10

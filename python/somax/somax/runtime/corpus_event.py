@@ -169,6 +169,7 @@ class MidiCorpusEvent(CorpusEvent):
                  onset: float,
                  absolute_onset: float,
                  bar_number: float,
+                 raw_beat_phase: Optional[float] = None,
                  duration: Optional[float] = None,
                  absolute_duration: Optional[float] = None,
                  notes: Optional[List[Note]] = None,
@@ -180,6 +181,7 @@ class MidiCorpusEvent(CorpusEvent):
         self._relative_onset: float = onset
         self.absolute_onset: float = absolute_onset
         self.bar_number: float = bar_number
+        self.raw_beat_phase: float = raw_beat_phase  # Only used when building: use BeatPhase Feature everywhere else!!
 
         self._relative_duration: Optional[float] = duration
         self.absolute_duration: Optional[float] = absolute_duration
@@ -210,8 +212,15 @@ class MidiCorpusEvent(CorpusEvent):
         event_onset: float = raw_note[Keys.REL_ONSET]
         event_absolute_onset: float = raw_note[Keys.ABS_ONSET]
         bar_number: float = raw_note[Keys.BAR_NUMBER]
+        beat_phase: float = raw_note[Keys.BEAT_PHASE]
         notes: List[Note] = [Note.from_raw(raw_note, event_onset, event_absolute_onset)]
-        return cls(state_index, raw_note[Keys.TEMPO], event_onset, event_absolute_onset, bar_number, notes=notes)
+        return cls(state_index=state_index,
+                   tempo=raw_note[Keys.TEMPO],
+                   onset=event_onset,
+                   absolute_onset=event_absolute_onset,
+                   bar_number=bar_number,
+                   raw_beat_phase=beat_phase,
+                   notes=notes)
 
     def set_duration(self, end: float, absolute_end: float):
         """ Completes a CorpusEvent constructed with the `incomplete` constructor. """
@@ -308,3 +317,31 @@ class AudioCorpusEvent(CorpusEvent):
     @property
     def duration(self) -> float:
         return self._absolute_duration
+
+
+class SilenceEvent(CorpusEvent):
+    """ Note: This class should solely be used for passing silences from the Player to the SchedulingHandler,
+              and should therefore never be stored in a corpus """
+
+    def __init__(self, duration: float):
+        super().__init__(state_index=0)
+        self._duration: float = duration
+
+    @classmethod
+    def decode(cls, event_dict: Dict[str, Any], feature_classpath_dict: Dict[str, str]) -> 'CorpusEvent':
+        logging.getLogger(__name__).warning("A SilenceEvent should never be stored in a corpus "
+                                            "and should therefore never be decoded")
+        return SilenceEvent(0.0)
+
+    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
+        logging.getLogger(__name__).warning("A SilenceEvent should never be stored in a corpus "
+                                            "and should therefore never be decoded")
+        return {}
+
+    @property
+    def onset(self) -> float:
+        return 0.0
+
+    @property
+    def duration(self) -> float:
+        return self._duration
