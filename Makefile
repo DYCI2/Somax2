@@ -106,6 +106,7 @@ clean:
 	rm -rf "$(PYINSTALLER_TARGET_NAME)".spec
 	rm -rf "dist/rw.$(DMG_NAME).dmg"
 	rm -rf "$(DMG_PATH)"
+	rm -rf "dist/$(WIN_PKG_ZIP)"
 	@echo "\033[1mNOTE: This command does not remove the dist/ folder to avoid accidental removal of the codesigned external.\nTo perform a full clean, run make clean-all\033[0m"
 
 
