@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 88.0, 2140.0, 1249.0 ],
+		"rect" : [ 34.0, 100.0, 688.0, 346.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -9212,7 +9212,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-9",
@@ -9849,7 +9848,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-43",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -9861,7 +9860,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-44",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -10953,7 +10952,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to regions",
 					"id" : "obj-84",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -10990,7 +10989,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to associated somax.player",
 					"id" : "obj-70",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -13249,37 +13248,6 @@
 
 			}
  ],
-		"parameters" : 		{
-			"obj-12" : [ "live.slider[2]", "live.slider[2]", 0 ],
-			"obj-128" : [ "live.text[62]", "live.text", 1 ],
-			"obj-135" : [ "live.text[59]", "live.text", 1 ],
-			"obj-153" : [ "live.text[61]", "live.text", 1 ],
-			"obj-163" : [ "live.text[60]", "live.text", 1 ],
-			"obj-173" : [ "live.text[51]", "live.text", 1 ],
-			"obj-39" : [ "live.tab[1]", "live.tab", 0 ],
-			"obj-40" : [ "live.slider[4]", "live.slider[2]", 0 ],
-			"obj-64" : [ "live.text[52]", "live.text", 0 ],
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
-			}
-,
-			"inherited_shortname" : 1
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "somax.await_patcherargs.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-198", "obj-202", "obj-193", "obj-192", "obj-874" ]
 			}
