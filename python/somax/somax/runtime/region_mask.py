@@ -55,9 +55,9 @@ class RegionMask:  # Note: not using Parametric since messages are more complex 
         try:
             region: Region = self.regions[region_index]
             region.start_time = max(0.0, start_time)
-            region.end_time = max(region.start_time, end_time)
+            region.end_time = max(region.start_time, end_time) if end_time is not None else None
         except IndexError:
-            raise ParameterError(f"Region {region_index} is out of range, max is {self.N_REGIONS - 1}")
+            raise ParameterError(f"Region {region_index} is out of range, max is {len(self.regions) - 1}")
 
     def enable_region(self, region_index: int, enabled: bool) -> None:
         """ raises: ParameterError if `region_index` is out of range """
@@ -68,18 +68,28 @@ class RegionMask:  # Note: not using Parametric since messages are more complex 
         try:
             self.regions[region_index].enabled = enabled
         except IndexError:
-            raise ParameterError(f"Region {region_index} is out of range, max is {self.N_REGIONS - 1}")
+            raise ParameterError(f"Region {region_index} is out of range, max is {len(self.regions) - 1}")
+
+    def set_num_regions(self, new_num_regions: int) -> None:
+        if new_num_regions <= 0:
+            raise ParameterError(f"Number of regions must be an integer greater than 0");
+
+        current_num_regions: int = len(self.regions)
+        if new_num_regions < current_num_regions:
+            self.regions = self.regions[:new_num_regions]
+        elif new_num_regions > current_num_regions:
+            self.regions = self.regions + [Region.default() for _ in range(new_num_regions - current_num_regions)]
 
     def reset(self, region_index: Optional[int]) -> None:
         """ raises: ParameterError if `region_index` is out of range """
         if region_index is None:
-            self.regions = [Region.default() for _ in range(self.N_REGIONS)]
+            self.regions = [Region.default() for _ in range(len(self.regions))]
 
         else:
             try:
                 self.regions[region_index] = Region.default()
             except IndexError:
-                raise ParameterError(f"Region {region_index} is out of range, max is {self.N_REGIONS - 1}")
+                raise ParameterError(f"Region {region_index} is out of range, max is {len(self.regions) - 1}")
 
     def compute_corpus_taboo_mask(self, corpus: Corpus) -> Optional[np.ndarray]:
         """ returns a boolean mask where of the same size as `corpus.events`,

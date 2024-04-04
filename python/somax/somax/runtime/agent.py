@@ -194,7 +194,8 @@ class OscAgent(Agent, AsyncioOscObject):
             #       make sure that it corresponds to `target time` rather than `trigger time`.
             # print(f"TRIG: new event: {scheduling_time}")
             event_transform_and_match_type = self.player.new_event(scheduling_time,
-                                                                   self.scheduling_handler.predict_phase(scheduling_time),
+                                                                   self.scheduling_handler.predict_phase(
+                                                                       scheduling_time),
                                                                    scheduler_tempo,
                                                                    enforce_output=False)
             self._send_output_statistics()
@@ -249,7 +250,8 @@ class OscAgent(Agent, AsyncioOscObject):
             if self.recombine:
                 # print(f"CONT: new event: {scheduling_time}")
                 event_transform_and_match_type = self.player.new_event(scheduling_time,
-                                                                       self.scheduling_handler.predict_phase(scheduling_time),
+                                                                       self.scheduling_handler.predict_phase(
+                                                                           scheduling_time),
                                                                        self.scheduling_handler.tempo,
                                                                        enforce_output=True)
                 if event_transform_and_match_type is None:
@@ -496,10 +498,12 @@ class OscAgent(Agent, AsyncioOscObject):
     def set_region_mask(self, region_index: int, start_time: float, end_time: Optional[float]) -> None:
         try:
             start_time = max(0.0, start_time / 1000.0)
-            end_time = max(0.0, end_time / 1000.0)
 
-            if end_time is not None and start_time > end_time:
-                start_time, end_time = end_time, start_time
+            if end_time is not None:
+                end_time = max(0.0, end_time / 1000.0)
+
+                if start_time > end_time:
+                    start_time, end_time = end_time, start_time
 
             self.player.region_mask.set_region(region_index, start_time, end_time)
         except ParameterError as e:
@@ -508,6 +512,12 @@ class OscAgent(Agent, AsyncioOscObject):
     def set_region_enable(self, region_index: int, enabled: bool) -> None:
         try:
             self.player.region_mask.enable_region(region_index, enabled)
+        except ParameterError as e:
+            self.logger.error(f"{str(e)}. Parameter was not changed.")
+
+    def set_num_regions(self, num_regions: int) -> None:
+        try:
+            self.player.region_mask.set_num_regions(num_regions)
         except ParameterError as e:
             self.logger.error(f"{str(e)}. Parameter was not changed.")
 
