@@ -222,7 +222,7 @@ class ManualCorpusBuilder:
 
             # Last offset
             if has_offset[-1]:
-                duration_array[-1] = offsets[-1]
+                duration_array[-1] = eof - offsets[-1]
             else:
                 duration_array[-1] = eof - onset_array[-1]
 

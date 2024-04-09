@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 6,
-			"revision" : 0,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -40,12 +40,107 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-112",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "int", "int" ],
+					"patching_rect" : [ 1700.25, 758.591712811656066, 29.5, 22.0 ],
+					"text" : "t i i"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-121",
+					"linecount" : 4,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1851.25, 805.591712811656066, 350.0, 60.0 ],
+					"text" : "if number of channels doesn't change: simply `reset` the mc.record~ to align the sync outlet (When audio is on, the sync outlet of the record~ object will be based on the previous size and hence incorrectly aligned. `reset` will solve this)"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-120",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "reset" ],
+					"patching_rect" : [ 1799.25, 805.591712811656066, 42.0, 22.0 ],
+					"text" : "t reset"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-117",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1809.25, 666.591712811656066, 109.0, 20.0 ],
+					"text" : "default: 2 channels"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-109",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "int", "int" ],
+					"patching_rect" : [ 1772.25, 619.591712811656066, 29.5, 22.0 ],
+					"text" : "t i i"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-107",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 1700.25, 730.591712811656066, 91.419154228855859, 22.0 ],
+					"text" : "gate 2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-105",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"patching_rect" : [ 1700.25, 695.591712811656066, 29.5, 22.0 ],
+					"text" : "+ 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-94",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"patching_rect" : [ 1700.25, 665.591712811656066, 33.0, 22.0 ],
+					"text" : "== 2"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-93",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 504.0, 1384.0, 29.5, 22.0 ],
+					"patching_rect" : [ 502.0, 1384.0, 29.5, 22.0 ],
 					"text" : "&&"
 				}
 
@@ -57,7 +152,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 504.0, 1356.0, 48.0, 22.0 ],
+					"patching_rect" : [ 502.0, 1348.0, 48.0, 22.0 ],
 					"text" : "pak 0 0"
 				}
 
@@ -105,7 +200,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 401.0, 1380.0, 73.0, 22.0 ],
+					"patching_rect" : [ 401.0, 1384.0, 73.0, 22.0 ],
 					"text" : "syncstart $1"
 				}
 
@@ -302,7 +397,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
-					"patching_rect" : [ 1797.0, 443.5, 73.0, 22.0 ],
+					"patching_rect" : [ 1799.25, 441.591712811656066, 73.0, 22.0 ],
 					"text" : "t 0 b"
 				}
 
@@ -311,7 +406,7 @@
 				"box" : 				{
 					"comment" : "(bool) overflow",
 					"id" : "obj-64",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -400,7 +495,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1996.5, 592.0, 103.0, 22.0 ],
+					"patching_rect" : [ 1999.25, 589.591712811656066, 103.0, 22.0 ],
 					"text" : "s #0_overflow"
 				}
 
@@ -424,7 +519,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "int" ],
-					"patching_rect" : [ 1979.0, 560.0, 36.5, 22.0 ],
+					"patching_rect" : [ 1981.25, 557.591712811656066, 36.5, 22.0 ],
 					"text" : "t b 0"
 				}
 
@@ -535,7 +630,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1472.0, 622.0, 147.0, 22.0 ],
+					"patching_rect" : [ 1474.25, 619.591712811656066, 147.0, 22.0 ],
 					"text" : "s #0_has_valid_config"
 				}
 
@@ -548,7 +643,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2131.0, 406.0, 239.0, 87.0 ],
+					"patching_rect" : [ 2133.25, 403.591712811656066, 239.0, 87.0 ],
 					"text" : "reset: received immediately when the user sends  a \"corpus\" or \"recordconfig\" to the associated somax.player. This is to disable any recording in the gap between the command being issued and the buffer / corpus being allocated / loaded"
 				}
 
@@ -617,11 +712,11 @@
 				"box" : 				{
 					"comment" : "(signal/mc.signal) audio signal to record",
 					"id" : "obj-43",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "multichannelsignal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 73.672222222222217, 32.0, 30.0, 30.0 ]
 				}
 
@@ -639,7 +734,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 0,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -938,7 +1033,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 0,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1037,7 +1132,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 0,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1188,7 +1283,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 0,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1393,7 +1488,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 1704.0, 364.0, 29.5, 22.0 ],
+					"patching_rect" : [ 1706.25, 361.591712811656066, 29.5, 22.0 ],
 					"text" : "t l l"
 				}
 
@@ -1405,7 +1500,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1360.0, 622.0, 105.0, 22.0 ],
+					"patching_rect" : [ 1362.25, 619.591712811656066, 105.0, 22.0 ],
 					"text" : "s #0_dumpout"
 				}
 
@@ -1426,12 +1521,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-16",
-					"linecount" : 4,
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1780.916666666666742, 654.0, 338.0, 60.0 ],
-					"text" : "When audio is on, the sync outlet of the record~ object will be based on the previous size and hence incorrectly aligned. Restarting DSP or recreating the object will solve this, hence the script replace command here"
+					"patching_rect" : [ 1851.25, 878.591712811656066, 356.0, 33.0 ],
+					"text" : "If number of channels change, the mc.record~ object must be re-created. This shouldn't be done while other audio is ongoing"
 				}
 
 			}
@@ -1439,7 +1534,7 @@
 				"box" : 				{
 					"comment" : "(signal) sync outlet",
 					"id" : "obj-10",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1488,7 +1583,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 0,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1696,7 +1791,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 504.0, 1324.0, 116.0, 22.0 ],
+					"patching_rect" : [ 502.0, 1316.0, 116.0, 22.0 ],
 					"text" : "r #0_appendend"
 				}
 
@@ -1738,7 +1833,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 0,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1848,7 +1943,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 6,
-											"revision" : 0,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -2414,7 +2509,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 6,
-											"revision" : 0,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -3180,7 +3275,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 0,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3358,7 +3453,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1733.0, 574.0, 128.0, 22.0 ],
+					"patching_rect" : [ 1735.25, 571.591712811656066, 128.0, 22.0 ],
 					"text" : "s #0_buffer_length"
 				}
 
@@ -3383,7 +3478,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1979.0, 622.0, 137.0, 22.0 ],
+					"patching_rect" : [ 1981.25, 619.591712811656066, 137.0, 22.0 ],
 					"text" : "s #0_stop_recording"
 				}
 
@@ -3432,7 +3527,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 1733.0, 539.0, 131.257462686567351, 22.0 ],
+					"patching_rect" : [ 1735.25, 536.591712811656066, 131.257462686567351, 22.0 ],
 					"text" : "unjoin 3"
 				}
 
@@ -3444,7 +3539,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "bang" ],
-					"patching_rect" : [ 1714.5, 443.5, 56.0, 22.0 ],
+					"patching_rect" : [ 1717.25, 441.591712811656066, 56.0, 22.0 ],
 					"text" : "t 1 l b"
 				}
 
@@ -3457,7 +3552,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2000.0, 406.0, 115.0, 60.0 ],
+					"patching_rect" : [ 2002.25, 403.591712811656066, 115.0, 60.0 ],
 					"text" : "bufferconfig format: \n$1: buffer duration\n$2: num channels\n$3: file duration"
 				}
 
@@ -3568,7 +3663,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1807.0, 622.0, 183.0, 22.0 ],
+					"patching_rect" : [ 1809.25, 619.591712811656066, 183.0, 22.0 ],
 					"text" : "v #0_previous_segment_end"
 				}
 
@@ -3628,7 +3723,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1632.916666666666742, 622.0, 156.502487562189117, 22.0 ],
+					"patching_rect" : [ 1635.25, 805.591712811656066, 156.502487562189117, 22.0 ],
 					"text" : "join 2 @triggers 1"
 				}
 
@@ -3641,7 +3736,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1632.916666666666742, 654.0, 146.171641791044749, 49.0 ],
+					"patching_rect" : [ 1635.25, 878.591712811656066, 146.171641791044749, 49.0 ],
 					"text" : "script replace mcrecord newex 0 0 180 12 mc.record~ $1 $2"
 				}
 
@@ -3654,7 +3749,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 1632.916666666666742, 711.0, 67.0, 22.0 ],
+					"patching_rect" : [ 1635.25, 935.591712811656066, 67.0, 22.0 ],
 					"save" : [ "#N", "thispatcher", ";", "#Q", "end", ";" ],
 					"text" : "thispatcher"
 				}
@@ -3669,8 +3764,8 @@
 					"numinlets" : 3,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 218.0, 1380.0, 180.0, 22.0 ],
-					"text" : "mc.record~ 24235_buf 2",
+					"patching_rect" : [ 218.0, 1380.0, 96.0, 22.0 ],
+					"text" : "mc.record~ #1 2",
 					"varname" : "mcrecord"
 				}
 
@@ -3694,7 +3789,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2000.0, 473.0, 130.495024875621993, 60.0 ],
+					"patching_rect" : [ 2002.25, 470.591712811656066, 130.495024875621993, 60.0 ],
 					"text" : "sent when a corpus is loaded \n(including an empty RealtimeRecorded)"
 				}
 
@@ -3706,7 +3801,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 1714.5, 406.0, 266.5, 22.0 ],
+					"patching_rect" : [ 1717.25, 403.591712811656066, 266.5, 22.0 ],
 					"text" : "route bufferconfig reset terminated"
 				}
 
@@ -3937,7 +4032,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 0,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -4111,7 +4206,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-5",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -4123,7 +4218,7 @@
 				"box" : 				{
 					"comment" : "(bool) recording status",
 					"id" : "obj-4",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -4135,7 +4230,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to player",
 					"id" : "obj-3",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -4147,7 +4242,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to audiorecord",
 					"id" : "obj-2",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -4206,8 +4301,30 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-107", 0 ],
+					"source" : [ "obj-105", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-103", 0 ],
 					"source" : [ "obj-106", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-112", 0 ],
+					"source" : [ "obj-107", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-120", 0 ],
+					"midpoints" : [ 1782.169154228855859, 778.091712811656066, 1808.75, 778.091712811656066 ],
+					"source" : [ "obj-107", 1 ]
 				}
 
 			}
@@ -4229,8 +4346,39 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-107", 1 ],
+					"source" : [ "obj-109", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-94", 0 ],
+					"midpoints" : [ 1792.25, 649.841712811656066, 1709.75, 649.841712811656066 ],
+					"source" : [ "obj-109", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
 					"source" : [ "obj-11", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-106", 1 ],
+					"midpoints" : [ 1709.75, 796.591712811656066, 1782.252487562189117, 796.591712811656066 ],
+					"source" : [ "obj-112", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-94", 1 ],
+					"midpoints" : [ 1720.25, 790.091712811656066, 1754.0, 790.091712811656066, 1754.0, 658.091712811656066, 1723.75, 658.091712811656066 ],
+					"source" : [ "obj-112", 1 ]
 				}
 
 			}
@@ -4253,6 +4401,14 @@
 					"destination" : [ "obj-9", 0 ],
 					"midpoints" : [ 925.902848101266045, 151.0, 291.5, 151.0 ],
 					"source" : [ "obj-12", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-80", 0 ],
+					"midpoints" : [ 1808.75, 1374.5, 227.5, 1374.5 ],
+					"source" : [ "obj-120", 0 ]
 				}
 
 			}
@@ -4448,7 +4604,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-67", 0 ],
-					"midpoints" : [ 1724.0, 504.25, 1481.5, 504.25 ],
+					"midpoints" : [ 1726.75, 501.841712811656066, 1483.75, 501.841712811656066 ],
 					"source" : [ "obj-159", 0 ]
 				}
 
@@ -4456,14 +4612,14 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-96", 0 ],
-					"midpoints" : [ 1761.0, 474.0, 1988.5, 474.0 ],
+					"midpoints" : [ 1763.75, 471.591712811656066, 1990.75, 471.591712811656066 ],
 					"source" : [ "obj-159", 2 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-106", 1 ],
+					"destination" : [ "obj-109", 0 ],
 					"source" : [ "obj-161", 1 ]
 				}
 
@@ -4570,7 +4726,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-77", 1 ],
-					"midpoints" : [ 587.5, 1351.0, 542.5, 1351.0 ],
+					"midpoints" : [ 587.5, 1351.0, 540.5, 1351.0 ],
 					"source" : [ "obj-18", 2 ]
 				}
 
@@ -4653,7 +4809,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-19", 0 ],
-					"midpoints" : [ 1713.5, 397.25, 1369.5, 397.25 ],
+					"midpoints" : [ 1715.75, 394.841712811656066, 1371.75, 394.841712811656066 ],
 					"source" : [ "obj-22", 0 ]
 				}
 
@@ -4770,16 +4926,14 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-159", 0 ],
-					"source" : [ "obj-34", 0 ],
-					"watchpoint_flags" : 5,
-					"watchpoint_id" : 2
+					"source" : [ "obj-34", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-68", 0 ],
-					"midpoints" : [ 1889.0, 435.25, 1806.5, 435.25 ],
+					"midpoints" : [ 1891.75, 432.841712811656066, 1808.75, 432.841712811656066 ],
 					"source" : [ "obj-34", 2 ]
 				}
 
@@ -5060,7 +5214,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-19", 0 ],
-					"midpoints" : [ 1815.5, 398.75, 1369.5, 398.75 ],
+					"midpoints" : [ 1815.5, 398.75, 1371.75, 398.75 ],
 					"source" : [ "obj-62", 0 ]
 				}
 
@@ -5083,7 +5237,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-67", 0 ],
-					"midpoints" : [ 1806.5, 504.25, 1481.5, 504.25 ],
+					"midpoints" : [ 1808.75, 501.841712811656066, 1483.75, 501.841712811656066 ],
 					"source" : [ "obj-68", 0 ]
 				}
 
@@ -5091,7 +5245,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-96", 0 ],
-					"midpoints" : [ 1860.5, 474.25, 1988.5, 474.25 ],
+					"midpoints" : [ 1862.75, 471.841712811656066, 1990.75, 471.841712811656066 ],
 					"source" : [ "obj-68", 1 ]
 				}
 
@@ -5332,6 +5486,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-105", 0 ],
+					"source" : [ "obj-94", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-100", 0 ],
 					"source" : [ "obj-95", 0 ]
 				}
@@ -5360,6 +5521,22 @@
 
 			}
  ],
+		"dependency_cache" : [ 			{
+				"name" : "somax.await_patcherargs.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.routesignal.maxpat",
+				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-51", "obj-54" ]
 			}
@@ -5370,10 +5547,10 @@
 				"boxes" : [ "obj-8", "obj-17" ]
 			}
 , 			{
-				"boxes" : [ "obj-103", "obj-16" ]
+				"boxes" : [ "obj-34", "obj-57", "obj-157" ]
 			}
 , 			{
-				"boxes" : [ "obj-34", "obj-57", "obj-157" ]
+				"boxes" : [ "obj-103", "obj-16" ]
 			}
  ]
 	}
