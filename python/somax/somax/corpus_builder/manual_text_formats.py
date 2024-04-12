@@ -290,7 +290,7 @@ class SoundStudio(UniformTextFormat):
     def format_line(onset: float, duration: float, features: List[CorpusFeature]) -> str:
         minutes, seconds = divmod(onset, 60)  # type: float, float
         seconds, hundreds = divmod(seconds, 1)  # type: float, float
-        return f"{int(minutes)}'{int(seconds):0>2},{int(hundreds * 1000):0<4}\n"
+        return f"{int(minutes)}'{int(seconds):0>2},{int(hundreds * 1000):0>4}\n"
 
 
 class Audacity(UniformTextFormat):
