@@ -1,6 +1,5 @@
 import logging
 import random
-import typing
 from typing import Dict, Optional, Tuple, Type, List
 
 import numpy as np
@@ -287,7 +286,11 @@ class Player(Parametric, ContentAware):
 
         self.set_eligibility(self.corpus)
 
-    def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> CorpusEvent:
+    def learn_event(self, onset: float,
+                    duration: float,
+                    event_type: RealtimeRecordedAudioCorpus.RecordingEventType,
+                    latency: float,
+                    features: List[FeatureValue]) -> Optional[CorpusEvent]:
         """ raises: RecordingError if corpus is not record-enabled or if the event data is invalid """
         if self.corpus is None:
             raise RecordingError(f"A corpus must be initialized before learning events")
@@ -295,9 +298,15 @@ class Player(Parametric, ContentAware):
         if not isinstance(self.corpus, RealtimeRecordedAudioCorpus):
             raise RecordingError(f"Player '{self.name}' is not record enabled")
 
-        event: AudioCorpusEvent = self.corpus.learn_event(onset=onset, duration=duration, features=features)
-        for atom in self.atoms.values():
-            atom.learn_event(event)
+        event: Optional[AudioCorpusEvent] = self.corpus.learn_event(onset=onset,
+                                                                    duration=duration,
+                                                                    event_type=event_type,
+                                                                    latency=latency,
+                                                                    features=features)
+        if event is not None:
+            for atom in self.atoms.values():
+                atom.learn_event(event)
+
         return event
 
     # def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:

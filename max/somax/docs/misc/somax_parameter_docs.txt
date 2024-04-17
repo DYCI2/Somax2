@@ -74,6 +74,8 @@
 * Pause Interval:                       audiorecord pauseinterval <0..>
 * Record End:                           audiorecord appendend <1/0>
 * Crossfade:                            audiorecord crossfade <0..>
+* Auto Latency Correction:              audiorecord autolatency <1/0>
+* Manual Latency Correction (ms):       audiorecord latency <-∞..∞>
 
 * Reset to New Empty Corpus:            corpus new
 * Save Recorded Corpus:                 savecorpus <Name_of_Corpus> (will write both .wav and .pickle file to corpuspath)

@@ -12,6 +12,7 @@ import sys
 import typing
 import warnings
 from abc import ABC, abstractmethod
+from enum import Enum
 from typing import List, Optional, Type, Dict, Any, Tuple, Union, TypeVar, Generic, Iterable
 
 import librosa
@@ -491,6 +492,21 @@ class AudioCorpus(Corpus):
 class RealtimeRecordedAudioCorpus(AudioCorpus):
     RT_RECORDED_KEY: str = "realtime_recorded"
 
+    class RecordingEventType(Enum):
+        """ Event type newly recorded events
+            The latency correction for newly recorded events depends on the position of the event.
+            With no latency correction,
+                - the first event in each recorded sequence will be correctly aligned (onset) to the recorded buffer
+                  but its duration will be too long (equivalent to latency)
+                - all intermediate events will be shifted by the latency (onset) but have correct durations
+                - the last event (if append_end is enabled) will be shifted by the latency (onset) and its duration
+                  will be too short (equivalent to latency).
+                  (Or conversely, its offset will be in the correct position)
+        """
+        FIRST = 0
+        INTERMEDIATE = 1
+        LAST = 2
+
     ERROR_RESOLUTION_TIME = 1e-4
 
     def __init__(self,
@@ -521,6 +537,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         self.recording_features_determined: bool = recording_features_determined
 
         self.saved: bool = True
+        self.previous_latency: float = 0.0
 
     @classmethod
     def from_existing(cls,
@@ -567,8 +584,14 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                                            recording_features_determined=recording_features_determined
                                            )
 
-    def learn_event(self, onset: float, duration: float, features: List[FeatureValue]) -> AudioCorpusEvent:
-        """ raises: RecordingError if a feature is missing """
+    def learn_event(self,
+                    onset: float,
+                    duration: float,
+                    event_type: RecordingEventType,
+                    latency: float,
+                    features: List[FeatureValue]) -> Optional[AudioCorpusEvent]:
+        """ raises: RecordingError if a feature is missing
+            returns None if the event is too short to be recorded, otherwise the recorded event """
 
         # validate that all required features exist
         if self.recording_features_determined:
@@ -588,7 +611,13 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
             self._validate_corpus(self, required_features)
             self.feature_types = required_features
 
-        onset, duration = self._adjust_duration(onset, duration)
+        onset, duration = self._adjust_duration(onset=onset,
+                                                duration=duration,
+                                                event_type=event_type,
+                                                latency_correction=latency)
+
+        if onset < self.ERROR_RESOLUTION_TIME and duration < self.ERROR_RESOLUTION_TIME:
+            return None
 
         event: AudioCorpusEvent = AudioCorpusEvent(self.length(), onset, duration, {type(f): f for f in features})
         self.events.append(event)
@@ -596,8 +625,24 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         self.saved = False
         return event
 
-    def _adjust_duration(self, onset: float, duration: float) -> Tuple[float, float]:
+    def _adjust_duration(self,
+                         onset: float,
+                         duration: float,
+                         event_type: RecordingEventType,
+                         latency_correction: float) -> Tuple[float, float]:
+        onset_correction, duration_correction = self._compute_latency_correction(event_type, latency_correction)
+        onset_correction = min(onset - self.duration(), onset_correction)
+        duration_correction = min(duration, duration_correction)
+        # print(f"onset (initial): {onset:.3f},   "
+        #       f"duration (initial): {duration:.3f},   "
+        #       f"corpus_duration: {self.duration():.3f},   "
+        #       f"onset correction: {onset_correction:.3f},   "
+        #       f"duration correction: {duration_correction:.3f}   ", end="")
+        onset -= onset_correction
+        duration -= duration_correction
+
         if self.length() == 0:  # empty corpus
+            # print(f"onset (final): {onset:.3f},   duration (final): {duration:.3f}")
             return onset, duration
 
         diff: float = onset - self.duration()
@@ -606,7 +651,25 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         if abs(diff) > self.ERROR_RESOLUTION_TIME:
             self.logger.warning("Gap detected: adjusting onset position to end of previous event")
 
+        # print(f"onset (final): {self.duration():.3f},   duration (final): {duration + diff:.3f}")
         return self.duration(), duration + diff
+
+    def _compute_latency_correction(self, event_type: RecordingEventType, latency: float) -> Tuple[float, float]:
+        onset_correction: float
+        duration_correction: float
+        if event_type == RealtimeRecordedAudioCorpus.RecordingEventType.FIRST:
+            onset_correction = 0.0
+            duration_correction = latency
+        elif event_type == RealtimeRecordedAudioCorpus.RecordingEventType.LAST:
+            onset_correction = self.previous_latency
+            duration_correction = latency
+        else:
+            delta_latency: float = latency - self.previous_latency
+            onset_correction = self.previous_latency
+            duration_correction = delta_latency
+
+        self.previous_latency = latency
+        return onset_correction, duration_correction
 
     def export_realtime(self,
                         output_folder: str,
