@@ -2040,7 +2040,7 @@
 												"box" : 												{
 													"autopopulate" : 1,
 													"id" : "obj-16",
-													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "Dutilleux_Sonata_3.gz", ",", "Fabbrizio2c.pickle", ",", "Fabbrizio2c.wav", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Ligeti_Etudes.gz", ",", "Marco_guitar.pickle", ",", "Marco_guitar.wav", ",", "Palestrina_Missa_Papae.gz", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz" ],
+													"items" : [ "Bach_Invention_1.gz", ",", "Carine_Intuition.gz", ",", "Debussy_Preludes.gz", ",", "Debussy_String_Quartet.gz", ",", "Dutilleux_Sonata_3.gz", ",", "Fabrizio2c.pickle", ",", "Fabrizio2c.wav", ",", "Joelle.pickle", ",", "Joelle.wav", ",", "Ligeti_Etudes.gz", ",", "Marco_guitar.pickle", ",", "Marco_guitar.wav", ",", "Palestrina_Missa_Papae.gz", ",", "Ravel_Miroirs.gz", ",", "Ten_Jazz_Standards.gz" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -3529,8 +3529,8 @@
 									"clipheight" : 55.0,
 									"data" : 									{
 										"clips" : [ 											{
-												"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Fabbrizio2c.wav",
-												"filename" : "Fabbrizio2c.wav",
+												"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Fabrizio2c.wav",
+												"filename" : "Fabrizio2c.wav",
 												"filekind" : "audiofile",
 												"id" : "u815014955",
 												"loop" : 0,
@@ -4976,7 +4976,7 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "Fabbrizio2c.wav",
+				"name" : "Fabrizio2c.wav",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/corpus",
 				"patcherrelativepath" : "../../corpus",
 				"type" : "WAVE",

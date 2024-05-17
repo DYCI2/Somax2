@@ -390,7 +390,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 378.731105836006009, 29.999991001861474, 212.0, 39.0 ],
-					"text" : "Play the Audio File \"Fabbrizio2c.wav\" "
+					"text" : "Play the Audio File \"Fabrizio2c.wav\" "
 				}
 
 			}
@@ -458,7 +458,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 22.0, 76.0, 433.0, 74.0 ],
-					"text" : "In this ready-to-play performance strategy you will experience the mimetic behaviour of Somax2.\nWe will use the same audio material both for the Audio Influencer and for the Player's Corpus. This material will be the audio file \"Fabbrizio2c.wav\" provided with the Somax2 distribution, a free improvisation by Fabrizio Cassol."
+					"text" : "In this ready-to-play performance strategy you will experience the mimetic behaviour of Somax2.\nWe will use the same audio material both for the Audio Influencer and for the Player's Corpus. This material will be the audio file \"Fabrizio2c.wav\" provided with the Somax2 distribution, a free improvisation by Fabrizio Cassol."
 				}
 
 			}
@@ -904,7 +904,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 409.5, 186.0, 110.0, 35.0 ],
-									"text" : "corpus Fabbrizio2c.pickle"
+									"text" : "corpus Fabrizio2c.pickle"
 								}
 
 							}
@@ -1514,8 +1514,8 @@
 					"clipheight" : 55.0,
 					"data" : 					{
 						"clips" : [ 							{
-								"absolutepath" : "Fabbrizio2c.wav",
-								"filename" : "Fabbrizio2c.wav",
+								"absolutepath" : "Fabrizio2c.wav",
+								"filename" : "Fabrizio2c.wav",
 								"filekind" : "audiofile",
 								"id" : "u934002975",
 								"loop" : 1,
@@ -2002,7 +2002,7 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "Fabbrizio2c.wav",
+				"name" : "Fabrizio2c.wav",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
 				"patcherrelativepath" : "../../media",
 				"type" : "WAVE",

@@ -2454,7 +2454,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 99.441666666666606, 269.0, 144.0, 49.0 ],
-													"text" : "/Users/joakimborg/MaxDev/Somax2/max/somax/corpus/Fabbrizio2c.wav"
+													"text" : "/Users/joakimborg/MaxDev/Somax2/max/somax/corpus/Fabrizio2c.wav"
 												}
 
 											}
@@ -2490,7 +2490,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 10.941666666666606, 422.0, 155.0, 22.0 ],
-													"text" : "Fabbrizio2c"
+													"text" : "Fabrizio2c"
 												}
 
 											}
@@ -3092,7 +3092,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 82.458333333333314, 278.562499999999773, 105.0, 22.0 ],
-									"text" : "Fabbrizio2c.pickle"
+									"text" : "Fabrizio2c.pickle"
 								}
 
 							}
@@ -5823,7 +5823,7 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"patching_rect" : [ 23.0, 377.0, 326.666666666666913, 49.0 ],
-									"text" : "somax.player @autoinitialize 0 @melodicngramorder 1 @harmonicngramorder 1 @mode reactive @corpus Fabbrizio2c.pickle @transpositions -1 0 1",
+									"text" : "somax.player @autoinitialize 0 @melodicngramorder 1 @harmonicngramorder 1 @mode reactive @corpus Fabrizio2c.pickle @transpositions -1 0 1",
 									"varname" : "somax.player[1]"
 								}
 
@@ -7212,7 +7212,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 108.7340087890625, 278.0, 105.0, 22.0 ],
-									"text" : "Fabbrizio2c.pickle"
+									"text" : "Fabrizio2c.pickle"
 								}
 
 							}
@@ -12104,7 +12104,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 379.5, 327.229166666666799, 105.0, 22.0 ],
-									"text" : "Fabbrizio2c.pickle"
+									"text" : "Fabrizio2c.pickle"
 								}
 
 							}

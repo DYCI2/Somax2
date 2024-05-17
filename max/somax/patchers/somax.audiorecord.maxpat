@@ -45,8 +45,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2257.0, 619.59171281165618, 77.0, 22.0 ],
-					"text" : "s #0_error"
+					"patching_rect" : [ 2257.0, 619.59171281165618, 93.0, 22.0 ],
+					"text" : "s #0_warning"
 				}
 
 			}
@@ -542,13 +542,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-18",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 215.0, 528.0, 226.0, 49.0 ],
-									"text" : "loaded corpus has a different sample rate $1 than Max $2. Change Max sample rate or resample the corpus"
+									"patching_rect" : [ 215.0, 528.0, 526.0, 35.0 ],
+									"text" : "loaded corpus has a different sample rate $1 than Max $2. Change Max sample rate or resample the corpus in order to avoid recorded audio being out of tune"
 								}
 
 							}
