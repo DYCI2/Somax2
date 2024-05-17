@@ -895,7 +895,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 22.0, 76.0, 433.0, 100.0 ],
-					"text" : "In this ready-to-play performance strategy you will experience a unique behaviour of Somax2: the installation mode.\n\nWe will use two Players loaded with rich harmonic and melodic material. \nThis material will consist of the audio files \"Fabrizio2c.wav\" and \"Marco_guitar.wav\" provided with the Somax2 distribution, two free improvisations by Fabrizio Cassol and Marco Fiorini."
+					"text" : "In this ready-to-play performance strategy you will experience a unique behaviour of Somax2: the installation mode.\n\nWe will use two Players loaded with rich harmonic and melodic material. \nThis material will consist of the audio files \"Fabbrizio2c.wav\" and \"Marco_guitar.wav\" provided with the Somax2 distribution, two free improvisations by Fabrizio Cassol and Marco Fiorini."
 				}
 
 			}
@@ -1451,7 +1451,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 843.25, 202.5, 108.0, 35.0 ],
-									"text" : "corpus Fabrizio2c.pickle"
+									"text" : "corpus Fabbrizio2c.pickle"
 								}
 
 							}

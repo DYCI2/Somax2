@@ -475,7 +475,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 378.731105836006009, 29.999991001861474, 212.0, 39.0 ],
-					"text" : "Play the Audio File \"Fabrizio2c.wav\" "
+					"text" : "Play the Audio File \"Fabbrizio2c.wav\" "
 				}
 
 			}
@@ -1563,8 +1563,8 @@
 					"clipheight" : 55.0,
 					"data" : 					{
 						"clips" : [ 							{
-								"absolutepath" : "Fabrizio2c.wav",
-								"filename" : "Fabrizio2c.wav",
+								"absolutepath" : "Fabbrizio2c.wav",
+								"filename" : "Fabbrizio2c.wav",
 								"filekind" : "audiofile",
 								"id" : "u934002975",
 								"loop" : 0,
@@ -2076,7 +2076,7 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "Fabrizio2c.wav",
+				"name" : "Fabbrizio2c.wav",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
 				"patcherrelativepath" : "../../media",
 				"type" : "WAVE",

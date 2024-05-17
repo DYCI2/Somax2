@@ -970,7 +970,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 144.000004291534424, 216.000006437301636, 144.0, 22.0 ],
-									"text" : "corpus Fabrizio2c.pickle"
+									"text" : "corpus Fabbrizio2c.pickle"
 								}
 
 							}
@@ -3925,7 +3925,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 144.0, 395.0, 144.0, 22.0 ],
-									"text" : "corpus Fabrizio2c.pickle"
+									"text" : "corpus Fabbrizio2c.pickle"
 								}
 
 							}

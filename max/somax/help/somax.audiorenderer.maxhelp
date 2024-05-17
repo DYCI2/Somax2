@@ -1355,7 +1355,7 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"patching_rect" : [ 25.0, 272.0, 281.0, 49.0 ],
-									"text" : "somax.player @autoinitialize 0 @mode continuous @corpus Fabrizio2c.pickle @continuity 0. @transpositions -4 0 4",
+									"text" : "somax.player @autoinitialize 0 @mode continuous @corpus Fabbrizio2c.pickle @continuity 0. @transpositions -4 0 4",
 									"varname" : "somax.player"
 								}
 
