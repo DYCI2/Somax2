@@ -40,34 +40,8 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
-					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-					"fontface" : 1,
-					"fontsize" : 12.0,
-					"hidden" : 1,
-					"hint" : "",
-					"id" : "obj-8",
-					"ignoreclick" : 1,
-					"legacytextcolor" : 1,
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"outputmode" : 0,
-					"parameter_enable" : 0,
-					"patching_rect" : [ 1375.539638936519623, 792.682945728302002, 20.0, 20.0 ],
-					"rounded" : 60.0,
-					"text" : "4",
-					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "audioinfluencer_4_2"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 16.0,
-					"hidden" : 1,
 					"id" : "obj-61",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -99,7 +73,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-58",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -169,31 +142,6 @@
 					"fontsize" : 12.0,
 					"hidden" : 1,
 					"hint" : "",
-					"id" : "obj-51",
-					"ignoreclick" : 1,
-					"legacytextcolor" : 1,
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"outputmode" : 0,
-					"parameter_enable" : 0,
-					"patching_rect" : [ 1486.515251338481903, 586.585379838943481, 20.0, 20.0 ],
-					"rounded" : 60.0,
-					"text" : "3",
-					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "audioinfluencer_3_2"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-					"fontface" : 1,
-					"fontsize" : 12.0,
-					"hidden" : 1,
-					"hint" : "",
 					"id" : "obj-50",
 					"ignoreclick" : 1,
 					"legacytextcolor" : 1,
@@ -219,31 +167,6 @@
 					"fontsize" : 12.0,
 					"hidden" : 1,
 					"hint" : "",
-					"id" : "obj-49",
-					"ignoreclick" : 1,
-					"legacytextcolor" : 1,
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"outputmode" : 0,
-					"parameter_enable" : 0,
-					"patching_rect" : [ 1321.881101071834564, 510.975621938705444, 20.0, 20.0 ],
-					"rounded" : 60.0,
-					"text" : "2",
-					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "audioinfluencer_2_2"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-					"fontface" : 1,
-					"fontsize" : 12.0,
-					"hidden" : 1,
-					"hint" : "",
 					"id" : "obj-46",
 					"ignoreclick" : 1,
 					"legacytextcolor" : 1,
@@ -253,7 +176,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 465.8536696434021, 168.292686939239502, 20.0, 20.0 ],
+					"patching_rect" : [ 463.414645195007324, 168.292686939239502, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "2",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -279,6 +202,7 @@
 			}
 , 			{
 				"box" : 				{
+					"hidden" : 1,
 					"id" : "obj-31",
 					"linecount" : 5,
 					"maxclass" : "comment",
@@ -317,31 +241,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-					"fontface" : 1,
-					"fontsize" : 12.0,
-					"hidden" : 1,
-					"hint" : "",
-					"id" : "obj-29",
-					"ignoreclick" : 1,
-					"legacytextcolor" : 1,
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"outputmode" : 0,
-					"parameter_enable" : 0,
-					"patching_rect" : [ 1218.22256201505661, 417.073180675506592, 20.0, 20.0 ],
-					"rounded" : 60.0,
-					"text" : "1",
-					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "audioinfluencer_1_2"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 16.0,
 					"hidden" : 1,
@@ -360,7 +259,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.898039, 0.898039, 0.898039, 1 ],
-					"hidden" : 1,
 					"id" : "obj-23",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -393,12 +291,12 @@
 					"fontsize" : 14.0,
 					"hidden" : 1,
 					"id" : "obj-52",
-					"linecount" : 51,
+					"linecount" : 52,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1181.637195289134979, 195.121955871582031, 325.445145487785339, 804.0 ],
-					"text" : "After setting the corpuspath, you might want to start configuring your AudioInfluencer, to capture your instrument or fellow musician in the right way.\n\nLet's say you want to enable the AudioInfluencer, select the 1st channel of your soundcard as the input channel (for now assuming you have no external soundcard connected, but you want to use just your computer's microphone), and disable its audio output module, to avoid feedback.\n\nThanks to the ; syntax that we saw in the previous tab of this tutorial, you can do all the three things at the same time, by pressing on the message at point\n\nAt this point, you might want to select a certain algorithm for the onset detection of your AudioInfluencer, and tune its parameters, which you would usually do this by entering the \"Settings\" of the AudioInfluencer \n\nBut let's say we want to select Bonk as onset detection algorithm and, at the same time, set the Onset Limiter value to 0 ms.\nWe can do it by just pressing on the message at\n\nIf you now open the AudioInfluencer \"Settings\" you will notice that the two changes simultaneously occurred in it, saving us quite some time.\n\nAt this point, although you may have figured out the scripting process, it might still be unclear how to address the various parameters with their correct names, but don't worry, in this tutorial we will give you all the tools to figure it out.\n\nIn fact, just notice that on the output to each Somax2 module is a message \n\nThis message, linked to the penultimate outlet of each module (in this case of the AudioInfluencer), tells us which parameters have been changed and with what value. \nIn this case the message displayed should be \"onsetlimit 0\", which is exactly the last message we sent to the AudioInfluencer.\n\nBe careful to connect the penultimate outlet of the Somax2 modules well to the right inlet of the message, so that this can be used as a monitor.",
+					"patching_rect" : [ 1182.164642214775085, 195.121955871582031, 326.0, 820.0 ],
+					"text" : "After setting the corpuspath, you might want to start configuring your AudioInfluencer, to capture your instrument or fellow musician in the right way.\n\nLet's say you want to enable the AudioInfluencer, select the 1st channel of your soundcard as the input channel (for now assuming you have no external soundcard connected, but you want to use just your computer's microphone), and disable its audio output module, to avoid feedback.\n\nThanks to the ; syntax that we saw in the previous tab of this tutorial, you can do all the three things at the same time, by pressing on the message at step 1.\n\nAt this point, you might want to select a certain algorithm for the onset detection of your AudioInfluencer, and tune its parameters, which you would usually do this by entering the \"Settings\" of the AudioInfluencer (see step 2).\n\nBut let's say we want to select Bonk as onset detection algorithm and, at the same time, set the Onset Limiter value to 0 ms.\nWe can do it by just pressing on the message at step 3.\n\nIf you now open the AudioInfluencer \"Settings\" you will notice that the two changes simultaneously occurred in it, saving us quite some time.\n\nAt this point, although you may have figured out the scripting process, it might still be unclear how to address the various parameters with their correct names, but don't worry, in this tutorial we will give you all the tools to figure it out.\n\nIn fact, just notice that on the output to each Somax2 module is a message (see step 4).\n\nThis message, linked to the penultimate outlet of each module (in this case of the AudioInfluencer), tells us which parameters have been changed and with what value. \nIn this case the message displayed should be \"onsetlimit 0\", which is exactly the last message we sent to the AudioInfluencer.\n\nBe careful to connect the penultimate outlet of the Somax2 modules well to the right inlet of the message, so that this can be used as a monitor.",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "text_2"
 				}
@@ -716,30 +614,7 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hint" : "",
-					"id" : "obj-43",
-					"ignoreclick" : 1,
-					"legacytextcolor" : 1,
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"outputmode" : 0,
-					"parameter_enable" : 0,
-					"patching_rect" : [ 1300.000030994415283, 996.341487169265747, 20.0, 20.0 ],
-					"rounded" : 60.0,
-					"text" : "4",
-					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "introduction_4_2"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-					"fontface" : 1,
-					"fontsize" : 12.0,
+					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-42",
 					"ignoreclick" : 1,
@@ -761,6 +636,7 @@
 			}
 , 			{
 				"box" : 				{
+					"hidden" : 1,
 					"id" : "obj-41",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -774,6 +650,7 @@
 			}
 , 			{
 				"box" : 				{
+					"hidden" : 1,
 					"id" : "obj-39",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -789,30 +666,7 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hint" : "",
-					"id" : "obj-38",
-					"ignoreclick" : 1,
-					"legacytextcolor" : 1,
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"outputmode" : 0,
-					"parameter_enable" : 0,
-					"patching_rect" : [ 1204.878077507019043, 697.560992240905762, 20.0, 20.0 ],
-					"rounded" : 60.0,
-					"text" : "3",
-					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "introduction_3_2"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-					"fontface" : 1,
-					"fontsize" : 12.0,
+					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-37",
 					"ignoreclick" : 1,
@@ -837,30 +691,7 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hint" : "",
-					"id" : "obj-36",
-					"ignoreclick" : 1,
-					"legacytextcolor" : 1,
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"outputmode" : 0,
-					"parameter_enable" : 0,
-					"patching_rect" : [ 1424.390277862548828, 604.878063201904297, 20.0, 20.0 ],
-					"rounded" : 60.0,
-					"text" : "2",
-					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "introduction_2_2"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-					"fontface" : 1,
-					"fontsize" : 12.0,
+					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-35",
 					"ignoreclick" : 1,
@@ -882,6 +713,7 @@
 			}
 , 			{
 				"box" : 				{
+					"hidden" : 1,
 					"id" : "obj-34",
 					"linecount" : 2,
 					"maxclass" : "message",
@@ -898,6 +730,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-110",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -919,30 +752,7 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hint" : "",
-					"id" : "obj-22",
-					"ignoreclick" : 1,
-					"legacytextcolor" : 1,
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"outputmode" : 0,
-					"parameter_enable" : 0,
-					"patching_rect" : [ 1319.512226581573486, 337.804886102676392, 20.0, 20.0 ],
-					"rounded" : 60.0,
-					"text" : "1",
-					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "introduction_1_2"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-					"fontface" : 1,
-					"fontsize" : 12.0,
+					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-73",
 					"ignoreclick" : 1,
@@ -968,6 +778,7 @@
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
 					"border" : 4,
 					"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+					"hidden" : 1,
 					"id" : "obj-70",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -983,13 +794,14 @@
 				"box" : 				{
 					"fontface" : 0,
 					"fontsize" : 14.0,
+					"hidden" : 1,
 					"id" : "obj-21",
 					"linecount" : 55,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1184.146369695663452, 195.121955871582031, 331.0, 882.0 ],
-					"text" : "In this tutorial you will learn how to control any available parameter in the Somax2 .app objects using scripting messages in Max.\n\nThis will provide you a quick worflow and open up possibilities of automation and control of the wide array of parameters in the application.\n\nFirst of all, as always let's begin by pressing on the \"Start Server\" button\n\n\nThen, one of the first things we might want to script is the path to a certain folder containing our corpora.\n\nRemember that by default the corpora we're providing are stored in the \"corpus\" folder of your Somax2 distribution.\nHowever, a good practice is to have different corpus folders in your machine, according to the sound palette you might search for a certain concert/performance, etc.\nYou can select the desired corpus folder (called \"corpuspath\") by pressing on the \"Settings\" button of the somax.server.app and then press on the \"set\" button next to the Corpus Folder path\n\nYet, to speed up this process you can send a message directly to the somax.server.app object asking to set the corpuspath.\nThis can be done through the Max message shown at \n\nBy pressing this message you will see a window popping up, enabling you to select a corpuspath in your environment.\n\nThis is done thanks to the couple of send and receive objects in Max.\nNotice how every Somax2 module in this patch has a \"r\" object attached to them, where \"r\" is the shortcut for \"receive\".\nThe message you just pressed, on the other hand is linked to a \"s\" (for \"send\") object, providing the communication with the somax.server.app thanks to its argument having the same name as the one in the \"r\" object (in this case the name argument is \"server_msg\").\n\nAn alternative for \"s\" is to use ; inside a message, as shown at point \n\nFor compactness, we will rather use this last syntax in the next steps.\n",
+					"patching_rect" : [ 1184.146369695663452, 195.121955871582031, 330.0, 882.0 ],
+					"text" : "In this tutorial you will learn how to control any available parameter in the Somax2 .app objects using scripting messages in Max.\n\nThis will provide you a quick worflow and open up possibilities of automation and control of the wide array of parameters in the application.\n\nFirst of all, as always let's begin by pressing on the \"Start Server\" button (see step 1).\n\n\nThen, one of the first things we might want to script is the path to a certain folder containing our corpora.\n\nRemember that by default the corpora we're providing are stored in the \"corpus\" folder of your Somax2 distribution.\nHowever, a good practice is to have different corpus folders in your machine, according to the sound palette you might search for a certain concert/performance, etc.\nYou can select the desired corpus folder (called \"corpuspath\") by pressing on the \"Settings\" button of the somax.server.app and then press on the \"set\" button next to the Corpus Folder path (see step 2).\n\nYet, to speed up this process you can send a message directly to the somax.server.app object asking to set the corpuspath.\nThis can be done through the Max message shown at step 3.\n\nBy pressing this message you will see a window popping up, enabling you to select a corpuspath in your environment.\n\nThis is done thanks to the couple of send and receive objects in Max.\nNotice how every Somax2 module in this patch has a \"r\" object attached to them, where \"r\" is the shortcut for \"receive\".\nThe message you just pressed, on the other hand is linked to a \"s\" (for \"send\") object, providing the communication with the somax.server.app thanks to its argument having the same name as the one in the \"r\" object (in this case the name argument is \"server_msg\").\n\nAn alternative for \"s\" is to use ; inside a message, as shown at step 4.\n\nFor compactness, we will rather use this last syntax in the next steps.\n",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "introduction_text"
 				}
@@ -1340,8 +1152,8 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 100.0, 395.0, 22.0 ],
-													"text" : "script $1 next_3, script $1 midiinfluence_title, script $1 panel_intro_chord"
+													"patching_rect" : [ 50.0, 100.0, 399.0, 22.0 ],
+													"text" : "script $1 next_3, script $1 midiinfluencer_title, script $1 panel_intro_chord"
 												}
 
 											}
@@ -2019,6 +1831,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 16.0,
+					"hidden" : 1,
 					"id" : "obj-156",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -2148,7 +1961,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 299.673208177089691, 478.048791885375977, 191.826798975467682, 22.0 ],
-					"text" : "onsetlimit 0"
+					"text" : "continuouschroma 1"
 				}
 
 			}
