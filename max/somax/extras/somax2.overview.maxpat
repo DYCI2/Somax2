@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 363.0, 215.0, 942.0, 597.0 ],
+		"rect" : [ 362.0, 215.0, 942.0, 597.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -588,7 +588,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -607,7 +606,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 305.0, 250.0, 929.0, 480.0 ],
+						"rect" : [ 400.0, 195.0, 897.0, 480.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -637,6 +636,37 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-8",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 308.0, 327.0, 432.0, 33.0 ],
+									"presentation_linecount" : 3,
+									"text" : "In the third tutorial you will learn how to prepare your own Somax2 environment and how to script the module's parameters through interactive messages"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"button" : 1,
+									"fontface" : 0,
+									"fontname" : "Arial",
+									"fontsize" : 11.595186999999999,
+									"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"id" : "obj-10",
+									"maxclass" : "tab",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "int", "", "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 29.0, 304.5, 268.0, 78.0 ],
+									"tabs" : [ "3 - Script your Environment" ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-6",
 									"linecount" : 2,
@@ -644,7 +674,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 375.0, 354.0, 378.0, 35.0 ],
+									"patching_rect" : [ 473.0, 275.0, 378.0, 35.0 ],
 									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=p4nUd5pot4w"
 								}
 
@@ -658,7 +688,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 297.0, 302.0, 114.0, 24.0 ],
+									"patching_rect" : [ 297.0, 259.0, 114.0, 24.0 ],
 									"text" : "Video Tutorial 2",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -675,7 +705,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 374.0, 219.0, 380.0, 35.0 ],
+									"patching_rect" : [ 374.0, 191.0, 380.0, 35.0 ],
 									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=6Azyt_5C6KQ"
 								}
 
@@ -689,7 +719,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 297.0, 193.0, 114.0, 24.0 ],
+									"patching_rect" : [ 297.0, 165.0, 114.0, 24.0 ],
 									"text" : "Video Tutorial 1",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -704,7 +734,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 307.5, 266.0, 419.0, 33.0 ],
+									"patching_rect" : [ 308.0, 223.0, 419.0, 33.0 ],
 									"text" : "In the second tutorial you will learn how to build a corpus from your audio materials, and interact with it "
 								}
 
@@ -716,7 +746,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 307.5, 158.0, 419.0, 33.0 ],
+									"patching_rect" : [ 308.0, 130.0, 419.0, 33.0 ],
 									"text" : "The first tutorial will give you an overview of the Somax2 application workflow, guiding you through immediate audio and MIDI interactions"
 								}
 
@@ -734,7 +764,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 28.5, 255.0, 268.0, 78.0 ],
+									"patching_rect" : [ 29.0, 212.0, 268.0, 78.0 ],
 									"tabs" : [ "2 - Audio Corpus Builder" ]
 								}
 
@@ -776,7 +806,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 28.5, 146.0, 268.0, 78.0 ],
+									"patching_rect" : [ 29.0, 118.0, 268.0, 78.0 ],
 									"tabs" : [ "1 - First Steps with Somax2" ]
 								}
 
@@ -920,7 +950,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 7.5, 406.0, 68.0, 22.0 ],
+									"patching_rect" : [ 7.5, 432.0, 68.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -935,6 +965,14 @@
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
+									"destination" : [ "obj-9", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-10", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-11", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-16", 0 ]
@@ -945,7 +983,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 162.5, 364.5, 17.0, 364.5 ],
+									"midpoints" : [ 163.0, 364.5, 17.0, 364.5 ],
 									"source" : [ "obj-3", 1 ]
 								}
 
@@ -954,7 +992,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 162.5, 240.0, 17.0, 240.0 ],
+									"midpoints" : [ 163.0, 240.0, 17.0, 240.0 ],
 									"source" : [ "obj-37", 1 ]
 								}
 
@@ -1018,6 +1056,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-7",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1074,7 +1113,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 420.0, 524.0, 317.0, 35.0 ],
-									"presentation_linecount" : 2,
 									"text" : ";\rmax launchbrowser https://www.youtube.com/@ErcReach"
 								}
 
