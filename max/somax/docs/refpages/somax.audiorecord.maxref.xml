@@ -65,6 +65,18 @@
                 <m>0</m> stops the recording.
             </description>
 		</method>
+          <method name="latency">
+            <arglist />
+            <digest>Set latency correction for segments concatenation</digest>
+            <description>
+                Sets the value for latency compensation of segments concatenation in real-time corpus recording. 
+                <br />
+                When on auto (default), this value is retrieved from the <o>somax.audionfluencer</o> used for the analysis. 
+                You can also manually specify your latency value in ms. 
+                <br />
+                It's not recommended to change the latency value while recording.
+            </description>
+        </method>
         <method name="onset">
             <arglist />
             <digest>Learn next event</digest>
@@ -77,6 +89,15 @@
             <digest>Set the pitch of an event</digest>
             <description>
                 The message <m>pitch</m> followed by an <o>int</o> sets the the pitch of the currently recorded event to this value.         
+            </description>
+        </method>
+          <method name="srignore">
+            <arglist />
+            <digest>Ignore sample rate mismatch</digest>
+            <description>
+                When encountering a sample rate mismatch between Max and the loaded corpus sample rates, the message <m>srignore 1</m> will allow to ignore it.
+                <br />
+                This will result in pitch alterations due to recording and playing back the new corpus at the wrong sample rate. 
             </description>
         </method>
         <method name="start">
