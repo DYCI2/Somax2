@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 260.0, 112.0, 1271.0, 948.0 ],
+		"rect" : [ 259.0, 111.0, 1266.0, 948.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -29,8 +29,8 @@
 		"toolbars_unpinned_last_save" : 0,
 		"tallnewobj" : 0,
 		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
+		"enablehscroll" : 0,
+		"enablevscroll" : 0,
 		"devicewidth" : 0.0,
 		"description" : "",
 		"digest" : "",
@@ -40,13 +40,671 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 11.595186999999999,
+					"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+					"id" : "obj-92",
+					"maxclass" : "tab",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "int", "", "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1263.414664268493652, 363.414642810821533, 163.0, 35.0 ],
+					"tabcolor" : [ 0.764705882352941, 0.764705882352941, 0.764705882352941, 1.0 ],
+					"tabs" : [ "somax_parameter_docs.txt" ],
+					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"varname" : "docs_5"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-91",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patcher" : 					{
+						"fileversion" : 1,
+						"appversion" : 						{
+							"major" : 8,
+							"minor" : 6,
+							"revision" : 0,
+							"architecture" : "x64",
+							"modernui" : 1
+						}
+,
+						"classnamespace" : "box",
+						"rect" : [ 92.0, 119.0, 640.0, 480.0 ],
+						"bglocked" : 0,
+						"openinpresentation" : 0,
+						"default_fontsize" : 12.0,
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"gridonopen" : 1,
+						"gridsize" : [ 15.0, 15.0 ],
+						"gridsnaponopen" : 1,
+						"objectsnaponopen" : 1,
+						"statusbarvisible" : 2,
+						"toolbarvisible" : 1,
+						"lefttoolbarpinned" : 0,
+						"toptoolbarpinned" : 0,
+						"righttoolbarpinned" : 0,
+						"bottomtoolbarpinned" : 0,
+						"toolbars_unpinned_last_save" : 0,
+						"tallnewobj" : 0,
+						"boxanimatetime" : 200,
+						"enablehscroll" : 1,
+						"enablevscroll" : 1,
+						"devicewidth" : 0.0,
+						"description" : "",
+						"digest" : "",
+						"tags" : "",
+						"style" : "",
+						"subpatcher_template" : "",
+						"assistshowspatchername" : 0,
+						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-95",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 50.0, 167.0, 161.0, 22.0 ],
+									"text" : "combine file:/// s @triggers 1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-91",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "int" ],
+									"patching_rect" : [ 50.0, 135.59375, 133.0, 22.0 ],
+									"text" : "conformpath slash boot"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-88",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 50.0, 100.0, 100.0, 22.0 ],
+									"text" : "absolutepath"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-87",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 50.0, 195.0, 131.0, 35.0 ],
+									"text" : ";\rmax launchbrowser $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"comment" : "",
+									"id" : "obj-1",
+									"index" : 1,
+									"maxclass" : "inlet",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 50.0, 40.0, 30.0, 30.0 ]
+								}
+
+							}
+ ],
+						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-88", 0 ],
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-91", 0 ],
+									"source" : [ "obj-88", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-95", 1 ],
+									"source" : [ "obj-91", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-87", 0 ],
+									"source" : [ "obj-95", 0 ]
+								}
+
+							}
+ ]
+					}
+,
+					"patching_rect" : [ 1335.365885496139526, 418.292692899703979, 135.0, 22.0 ],
+					"saved_object_attributes" : 					{
+						"description" : "",
+						"digest" : "",
+						"globalpatchername" : "",
+						"tags" : ""
+					}
+,
+					"text" : "p load_parameter_docs"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 0,
+					"fontsize" : 14.0,
+					"id" : "obj-90",
+					"linecount" : 41,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1178.859768033027649, 186.585370302200317, 331.0, 663.0 ],
+					"presentation_linecount" : 41,
+					"text" : "What's next?\nHow to learn all the different parameters names and practice scripting with them?\n\nWe actually prepared a .txt file containing all the documentation of the available scripting messages for the Somax2 .app modules (somax.player.app, somax.audioinfluencer.app, somax.midiinfluencer.app and somax.server.app) shown in this tutorial.\n\n\n\n\n\nThe same document is available through the \"Help Center\" tab of the somax2.overview (accessible through the Extras menu of Max, or from the Somax2 package).\n\nWe recommend you go through the list and try the different messages yourself.\n\nIt's also recommended to create your own patch, with the Somax2 objects you need, and the different couples of \"send\" and \"receive\" messages to address them, so that you can practice and expand your possibilities of environment creation and scripting.\n\nYou can also go through the different maxhelps of the .app modules, available again from the \"Help Center\" tab of the somax2.overview.\n\nOnce you'll be confortable with scripting Somax2 .app modules, we recommend you start going through the \"Max Tutorials\" available from the somax2.overview, to start playing with the basic Somax2 objects and build your even more customizable environment!\n\n",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"varname" : "text_5"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 16.0,
+					"id" : "obj-89",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1187.499886751174927, 146.341466903686523, 130.0, 24.0 ],
+					"text" : "5. Learn Further",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"varname" : "learn_title"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"hint" : "",
+					"id" : "obj-88",
+					"ignoreclick" : 1,
+					"legacytextcolor" : 1,
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 796.341482400894165, 423.487816333770752, 20.0, 20.0 ],
+					"rounded" : 60.0,
+					"text" : "8",
+					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
+					"varname" : "player_8"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"hint" : "",
+					"id" : "obj-87",
+					"ignoreclick" : 1,
+					"legacytextcolor" : 1,
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1048.597583770751953, 995.29270601272583, 20.0, 20.0 ],
+					"rounded" : 60.0,
+					"text" : "7",
+					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
+					"varname" : "player_7"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-86",
+					"linecount" : 5,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 827.707339286804199, 968.29270601272583, 215.0, 76.0 ],
+					"text" : ";\rplayer_msg audiomixer gain -12;\rplayer_msg audiomixer pan -30;\rplayer_msg audiorenderer attack 80;\rplayer_msg audiorenderer release 120",
+					"varname" : "player_message_7"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"hint" : "",
+					"id" : "obj-84",
+					"ignoreclick" : 1,
+					"legacytextcolor" : 1,
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1011.97563624382019, 679.548794269561768, 20.0, 20.0 ],
+					"rounded" : 60.0,
+					"text" : "6",
+					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
+					"varname" : "player_6"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-83",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 832.707339286804199, 672.231720924377441, 173.0, 35.0 ],
+					"text" : ";\rplayer_msg region enabled 3 0",
+					"varname" : "player_message_6"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"hint" : "",
+					"id" : "obj-81",
+					"ignoreclick" : 1,
+					"legacytextcolor" : 1,
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 563.414647579193115, 663.414649963378906, 20.0, 20.0 ],
+					"rounded" : 60.0,
+					"text" : "5",
+					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
+					"varname" : "player_5"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"hint" : "",
+					"id" : "obj-80",
+					"ignoreclick" : 1,
+					"legacytextcolor" : 1,
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 550.0, 1111.170758485794067, 20.0, 20.0 ],
+					"rounded" : 60.0,
+					"text" : "4",
+					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
+					"varname" : "player_4"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"hint" : "",
+					"id" : "obj-79",
+					"ignoreclick" : 1,
+					"legacytextcolor" : 1,
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1025.707339286804199, 507.048791885375977, 20.0, 20.0 ],
+					"rounded" : 60.0,
+					"text" : "3",
+					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
+					"varname" : "player_3"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-78",
+					"linecount" : 5,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 832.707339286804199, 479.048791885375977, 185.0, 76.0 ],
+					"text" : ";\rplayer_msg weights 0.5 0 0.75 1;\rplayer_msg timeout 3;\rplayer_msg continuity 0.7;\rplayer_msg cut 0",
+					"varname" : "player_message_3"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 9.0,
+					"hidden" : 1,
+					"hint" : "",
+					"id" : "obj-76",
+					"ignoreclick" : 1,
+					"legacytextcolor" : 1,
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1048.561002969741821, 430.804889678955078, 20.0, 20.0 ],
+					"rounded" : 60.0,
+					"text" : "2.2",
+					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
+					"varname" : "player_2_2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 9.0,
+					"hidden" : 1,
+					"hint" : "",
+					"id" : "obj-75",
+					"ignoreclick" : 1,
+					"legacytextcolor" : 1,
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1016.853685140609741, 388.121961832046509, 20.0, 20.0 ],
+					"rounded" : 60.0,
+					"text" : "2.1",
+					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
+					"varname" : "player_2_1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"hint" : "",
+					"id" : "obj-74",
+					"ignoreclick" : 1,
+					"legacytextcolor" : 1,
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1081.707342863082886, 198.780492544174194, 20.0, 20.0 ],
+					"rounded" : 60.0,
+					"text" : "1",
+					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
+					"varname" : "player_1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-72",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 832.707339286804199, 423.487816333770752, 213.0, 35.0 ],
+					"text" : ";\rplayer_msg corpus Carine_Intuition.gz",
+					"varname" : "player_corpus_midi"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-69",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 832.707339286804199, 380.804888486862183, 179.0, 35.0 ],
+					"text" : ";\rplayer_msg corpus Joelle.pickle",
+					"varname" : "player_corpus_audio"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-67",
+					"linecount" : 3,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 832.707339286804199, 184.280492544174194, 244.0, 49.0 ],
+					"text" : ";\rplayer_msg router 0 source AudioInfluencer;\rplayer_msg router 1 source MidiInfluencer",
+					"varname" : "player_message_1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 0,
+					"fontsize" : 14.0,
+					"hidden" : 1,
+					"id" : "obj-65",
+					"linecount" : 55,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1180.359768033027649, 186.585370302200317, 328.0, 882.0 ],
+					"presentation_linecount" : 55,
+					"text" : "The somax.player.app is surely the most complex object, and also the one that has more scripting possibilities.\n\nLet's address each module, one at a time.\nTo start, ye might want to select both the AudioInfluencer and the MidiInfluencer as Influence Sources. You can do that by pressing on the message at step 1.\n\nNotice how you can assign each Influence Source object to a different index using the index number after the \"router\" keyword, starting from index 0.\n\nNext, you can load a corpus in the player.\nSee the syntax of the two different messages, wheater the corpus you want to load is an audio (step 2.1) or a MIDI one (step 2.2).\n\nAt this point, you can control any parameter of the player itself.\nLet's try the message at step 3, and see the changes in the player's interface.\n\nAs showed in a previous tab of this tutorial, you can retrieve the right command by changing any parameter, and see the result naming through the message attached at the parameters outlet of the somax.player.app (see step 4).\n\nLet's try for instance to play with the Region Filter.\nPress on the \"Enabled\" button at step 5, and see what message comes out of the player at step 4. \nThe message you read should be \n\"region enabled 0 1\"\nThis is the message to enable all the 6 availabe regions at once.\n\nIf now you want to disable region 3, for instance, you can press on the message at step 6.\n\nYou can also control the different Output Control parameters, by adding the \"audiomixer\" and/or \"audiorenderer\" keywords after addressing the player.\nLet's say you want to change the gain and the pan of the player, as well as the attack and release settings, you can do that by pressing on the message at step 7.\n\nYou can apply the same procedure to any parameter available through the \"Settings\" window at step 8. Try to open it, change any parameter, read their message at step 4 and write a new message to control it!\n",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"varname" : "text_4"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 0,
+					"fontsize" : 14.0,
+					"hidden" : 1,
+					"id" : "obj-64",
+					"linecount" : 49,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1181.448190808296204, 186.780500888824463, 328.0, 773.0 ],
+					"presentation_linecount" : 49,
+					"text" : "Let's now address the MidiInfluencer.\nIf you want to enable this module, you can send to it the following message:\n\n\n\n\n\nand then select your desired MIDI controller via the midiinput module.\nIn case you don't have any controller connected to your computer, you can use the keyboard below to play some MIDI notes and send them to the MidiInfluencer. \nNotice how this is done again through the \n\"s midiinfluencer_msg\" object.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOne important aspect of the Somax2 .app object is that they incorporate multiple modules dedicated do different function of each object.\nThe MidiInfluencer, for instance, has different modules to control the midiinput and midioutput.\nSo, if you want to disable the midioutput of the MidiInfluencer, you should send a message that addresses it, like this:\n\n\n\n\n\nAs always, you can combine multiple messages by chaining ;\nLet's say you want to enable again the midioutput but also send the MIDI signal outside of Max, to retrieve it in a VST or from your external MIDI port:",
+					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"varname" : "text_3"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-63",
+					"linecount" : 3,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1229.359768033027649, 974.390267133712769, 230.0, 49.0 ],
+					"text" : ";\rmidiinfluencer_msg midioutput enabled 1;\rmidioutput device \"from Max 1\"",
+					"varname" : "midi_message_3"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-54",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1230.579280257225037, 823.170751333236694, 227.0, 35.0 ],
+					"text" : ";\rmidiinfluencer_msg midioutput enabled 0",
+					"varname" : "midi_message_2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-33",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1261.448190808296204, 254.878054857254028, 168.0, 35.0 ],
+					"text" : ";\rmidiinfluencer_msg enabled 1",
+					"varname" : "midi_message"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-22",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1261.448190808296204, 600.000014305114746, 121.0, 22.0 ],
+					"text" : "s midiinfluencer_msg",
+					"varname" : "midi_send"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-209",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1261.448190808296204, 570.731720924377441, 121.0, 22.0 ],
+					"text" : "pack 0 0 0",
+					"varname" : "midi_pack"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-208",
+					"maxclass" : "newobj",
+					"numinlets" : 4,
+					"numoutlets" : 3,
+					"outlettype" : [ "float", "float", "float" ],
+					"patching_rect" : [ 1261.448190808296204, 541.463427543640137, 121.0, 22.0 ],
+					"text" : "makenote 100 500 1",
+					"varname" : "midi_makenote"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"hidden" : 1,
+					"id" : "obj-199",
+					"maxclass" : "kslider",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"offset" : 60,
+					"outlettype" : [ "int", "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1261.448190808296204, 476.829279661178589, 168.0, 53.0 ],
+					"range" : 24,
+					"varname" : "midi_kslider"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 16.0,
+					"hidden" : 1,
 					"id" : "obj-61",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2363.414690494537354, 146.341466903686523, 277.0, 24.0 ],
+					"patching_rect" : [ 1184.146369695663452, 146.341466903686523, 277.0, 24.0 ],
 					"text" : "4. Scripting the Player",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "player_title"
@@ -62,7 +720,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1980.487852096557617, 146.341466903686523, 277.0, 24.0 ],
+					"patching_rect" : [ 1184.146369695663452, 146.341466903686523, 277.0, 24.0 ],
 					"text" : "3. Scripting the MidiInfluencer",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "midiinfluencer_title"
@@ -73,6 +731,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-58",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -80,7 +739,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 2515.853718519210815, 1062.195147275924683, 147.0, 19.0 ],
+					"patching_rect" : [ 1352.368906676769257, 1062.195147275924683, 147.0, 19.0 ],
 					"rounded" : 8.0,
 					"text" : "continue to the next step -->",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -101,7 +760,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 2132.926880121231079, 1062.195147275924683, 147.0, 19.0 ],
+					"patching_rect" : [ 1352.368906676769257, 1062.195147275924683, 147.0, 19.0 ],
 					"rounded" : 8.0,
 					"text" : "continue to the next step -->",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -248,7 +907,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1185.36588191986084, 146.341466903686523, 277.0, 24.0 ],
+					"patching_rect" : [ 1184.146369695663452, 146.341466903686523, 277.0, 24.0 ],
 					"text" : "2. Scripting the AudioInfluencer",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "audioinfluencer_title"
@@ -295,7 +954,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1182.164642214775085, 195.121955871582031, 326.0, 820.0 ],
+					"patching_rect" : [ 1180.487833023071289, 186.585370302200317, 330.0, 820.0 ],
 					"text" : "After setting the corpuspath, you might want to start configuring your AudioInfluencer, to capture your instrument or fellow musician in the right way.\n\nLet's say you want to enable the AudioInfluencer, select the 1st channel of your soundcard as the input channel (for now assuming you have no external soundcard connected, but you want to use just your computer's microphone), and disable its audio output module, to avoid feedback.\n\nThanks to the ; syntax that we saw in the previous tab of this tutorial, you can do all the three things at the same time, by pressing on the message at step 1.\n\nAt this point, you might want to select a certain algorithm for the onset detection of your AudioInfluencer, and tune its parameters, which you would usually do this by entering the \"Settings\" of the AudioInfluencer (see step 2).\n\nBut let's say we want to select Bonk as onset detection algorithm and, at the same time, set the Onset Limiter value to 0 ms.\nWe can do it by just pressing on the message at step 3.\n\nIf you now open the AudioInfluencer \"Settings\" you will notice that the two changes simultaneously occurred in it, saving us quite some time.\n\nAt this point, although you may have figured out the scripting process, it might still be unclear how to address the various parameters with their correct names, but don't worry, in this tutorial we will give you all the tools to figure it out.\n\nIn fact, just notice that on the output to each Somax2 module is a message (see step 4).\n\nThis message, linked to the penultimate outlet of each module (in this case of the AudioInfluencer), tells us which parameters have been changed and with what value. \nIn this case the message displayed should be \"onsetlimit 0\", which is exactly the last message we sent to the AudioInfluencer.\n\nBe careful to connect the penultimate outlet of the Somax2 modules well to the right inlet of the message, so that this can be used as a monitor.",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "text_2"
@@ -330,8 +989,8 @@
 					"id" : "obj-47",
 					"maxclass" : "newobj",
 					"numinlets" : 4,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "" ],
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
@@ -373,18 +1032,6 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
-									"comment" : "",
-									"id" : "obj-1",
-									"index" : 4,
-									"maxclass" : "outlet",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 171.0, 121.0, 30.0, 30.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-2",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -410,18 +1057,6 @@
 							}
 , 							{
 								"box" : 								{
-									"comment" : "",
-									"id" : "obj-17",
-									"index" : 3,
-									"maxclass" : "outlet",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 128.0, 121.0, 30.0, 30.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-18",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -442,18 +1077,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 128.0, 29.0, 30.0, 30.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"comment" : "",
-									"id" : "obj-14",
-									"index" : 2,
-									"maxclass" : "outlet",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 83.0, 121.0, 30.0, 30.0 ]
 								}
 
 							}
@@ -536,7 +1159,8 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-14", 0 ],
+									"destination" : [ "obj-13", 0 ],
+									"midpoints" : [ 92.5, 110.0, 46.5, 110.0 ],
 									"source" : [ "obj-15", 0 ]
 								}
 
@@ -550,7 +1174,8 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-17", 0 ],
+									"destination" : [ "obj-13", 0 ],
+									"midpoints" : [ 137.5, 110.0, 46.5, 110.0 ],
 									"source" : [ "obj-18", 0 ]
 								}
 
@@ -564,7 +1189,8 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-1", 0 ],
+									"destination" : [ "obj-13", 0 ],
+									"midpoints" : [ 180.5, 110.0, 46.5, 110.0 ],
 									"source" : [ "obj-2", 0 ]
 								}
 
@@ -796,12 +1422,12 @@
 					"fontsize" : 14.0,
 					"hidden" : 1,
 					"id" : "obj-21",
-					"linecount" : 55,
+					"linecount" : 54,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1184.146369695663452, 195.121955871582031, 330.0, 882.0 ],
-					"text" : "In this tutorial you will learn how to control any available parameter in the Somax2 .app objects using scripting messages in Max.\n\nThis will provide you a quick worflow and open up possibilities of automation and control of the wide array of parameters in the application.\n\nFirst of all, as always let's begin by pressing on the \"Start Server\" button (see step 1).\n\n\nThen, one of the first things we might want to script is the path to a certain folder containing our corpora.\n\nRemember that by default the corpora we're providing are stored in the \"corpus\" folder of your Somax2 distribution.\nHowever, a good practice is to have different corpus folders in your machine, according to the sound palette you might search for a certain concert/performance, etc.\nYou can select the desired corpus folder (called \"corpuspath\") by pressing on the \"Settings\" button of the somax.server.app and then press on the \"set\" button next to the Corpus Folder path (see step 2).\n\nYet, to speed up this process you can send a message directly to the somax.server.app object asking to set the corpuspath.\nThis can be done through the Max message shown at step 3.\n\nBy pressing this message you will see a window popping up, enabling you to select a corpuspath in your environment.\n\nThis is done thanks to the couple of send and receive objects in Max.\nNotice how every Somax2 module in this patch has a \"r\" object attached to them, where \"r\" is the shortcut for \"receive\".\nThe message you just pressed, on the other hand is linked to a \"s\" (for \"send\") object, providing the communication with the somax.server.app thanks to its argument having the same name as the one in the \"r\" object (in this case the name argument is \"server_msg\").\n\nAn alternative for \"s\" is to use ; inside a message, as shown at step 4.\n\nFor compactness, we will rather use this last syntax in the next steps.\n",
+					"patching_rect" : [ 1181.448190808296204, 188.926836013793945, 325.823154449462891, 867.0 ],
+					"text" : "In this tutorial you will learn how to control any available parameter in the Somax2 .app objects using scripting messages in Max.\n\nThis will provide you a quick worflow and open up possibilities of automation and control of the wide array of parameters in the application.\nFirst of all, as always let's begin by pressing on the \"Start Server\" button (see step 1).\n\nThen, one of the first things we might want to script is the path to a certain folder containing our corpora.\n\nRemember that by default the corpora we're providing are stored in the \"corpus\" folder of your Somax2 distribution.\nHowever, a good practice is to have different corpus folders in your machine, according to the sound palette you might search for a certain concert/performance, etc.\nYou can select the desired corpus folder (called \"corpuspath\") by pressing on the \"Settings\" button of the somax.server.app and then press on the \"set\" button next to the Corpus Folder path (see step 2).\n\nYet, to speed up this process you can send a message directly to the somax.server.app object asking to set the corpuspath.\nThis can be done through the Max message shown at step 3.\n\nBy pressing this message you will see a window popping up, enabling you to select a corpuspath in your environment.\n\nThis is done thanks to the couple of send and receive objects in Max.\nNotice how every Somax2 module in this patch has a \"r\" object attached to them, where \"r\" is the shortcut for \"receive\".\nThe message you just pressed, on the other hand is linked to a \"s\" (for \"send\") object, providing the communication with the somax.server.app thanks to its argument having the same name as the one in the \"r\" object (in this case the name argument is \"server_msg\").\n\nAn alternative for \"s\" is to use ; inside a message, as shown at step 4.\n\nFor compactness, we will rather use this last syntax in the next steps.\n",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "introduction_text"
 				}
@@ -870,6 +1496,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"color" : [ 0.356862745098039, 0.584313725490196, 0.615686274509804, 1.0 ],
@@ -924,8 +1551,8 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 100.0, 153.0, 22.0 ],
-													"text" : "script $1 panel_intro_chord"
+													"patching_rect" : [ 50.0, 100.0, 443.0, 22.0 ],
+													"text" : "script $1 panel_intro_chord, script $1 learn_title, script $1 text_5, script $1 docs_5"
 												}
 
 											}
@@ -1034,12 +1661,13 @@
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-125",
+													"linecount" : 5,
 													"maxclass" : "message",
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 100.0, 358.0, 22.0 ],
-													"text" : "script $1 next_4, script $1 player_title, script $1 panel_intro_chord"
+													"patching_rect" : [ 50.0, 100.0, 590.0, 76.0 ],
+													"text" : "script $1 next_4, script $1 player_title, script $1 panel_intro_chord, script $1 text_4, script $1 player_message_1, script $1 player_1, script $1 player_2_1, script $1 player_2_2, script $1 player_corpus_audio, script $1 player_corpus_midi, script $1 player_message_3, script $1 player_3, script $1 player_4, script $1 player_5, script $1 player_6, script $1 player_message_6, script $1 player_message_7, script $1 player_7, script $1 player_8"
 												}
 
 											}
@@ -1064,7 +1692,7 @@
 													"maxclass" : "outlet",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 50.000005120414755, 182.000008463859558, 30.0, 30.0 ]
+													"patching_rect" : [ 50.0, 203.0, 30.0, 30.0 ]
 												}
 
 											}
@@ -1117,7 +1745,7 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 91.0, 119.0, 640.0, 480.0 ],
+										"rect" : [ 110.0, 173.0, 640.0, 480.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -1148,12 +1776,13 @@
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-124",
+													"linecount" : 3,
 													"maxclass" : "message",
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 100.0, 399.0, 22.0 ],
-													"text" : "script $1 next_3, script $1 midiinfluencer_title, script $1 panel_intro_chord"
+													"patching_rect" : [ 50.0, 100.0, 587.0, 49.0 ],
+													"text" : "script $1 next_3, script $1 midiinfluencer_title, script $1 panel_intro_chord, script $1 midi_message, script $1 midi_kslider, script $1 midi_pack, script $1 midi_send, script $1 midi_makenote, script $1 text_3, script $1 midi_message_2, script $1 midi_message_3"
 												}
 
 											}
@@ -1262,13 +1891,13 @@
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-117",
-													"linecount" : 5,
+													"linecount" : 6,
 													"maxclass" : "message",
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 49.999999781951914, 104.0, 452.000000218048058, 76.0 ],
-													"text" : "script $1 text_2, script $1 next_2, script $1 audioinfluencer_init, script $1 panel_intro_chord, script $1 audioinfluencer_title, script $1 audioinfluencer_1, script $1 audioinfluencer_1_2, script $1 audioinfluencer_2, script $1 audioinfluencer_2_2, script $1 audioinfluencer_3, script $1 audioinfluencer_3_2, script $1 audioinfluencer_onset, script $1 audioinfluencer_4, script $1 audioinfluencer_4_2"
+													"patching_rect" : [ 49.999999781951914, 104.0, 455.0, 89.0 ],
+													"text" : "script $1 text_2, script $1 next_2, script $1 audioinfluencer_init, script $1 panel_intro_chord, script $1 audioinfluencer_title, script $1 audioinfluencer_1, script $1 audioinfluencer_1_2, script $1 audioinfluencer_2, script $1 audioinfluencer_2_2, script $1 audioinfluencer_3, script $1 audioinfluencer_3_2, script $1 audioinfluencer_onset, script $1 audioinfluencer_4, script $1 audioinfluencer_4_2, script $1 midi_panel"
 												}
 
 											}
@@ -1377,13 +2006,13 @@
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-116",
-													"linecount" : 7,
+													"linecount" : 6,
 													"maxclass" : "message",
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 100.0, 421.0, 102.0 ],
-													"text" : "script $1 introduction, script $1 introduction_text, script $1 introduction_1, script $1 introduction_server_panel, script $1 introduction_corpuspath, script $1 introduction_2, script $1 introduction_next, script $1 introduction_1_2, script $1 introduction_2, script $1 introduction_2_2, script $1 introduction_3, script $1 introduction_3_2, script $1 introduction_4, script $1 introduction_4_2, script $1 introduction_set, script $1 introduction_s_msg, script $1 introduction_text_path"
+													"patching_rect" : [ 50.0, 100.0, 516.0, 89.0 ],
+													"text" : "script $1 introduction, script $1 introduction_text, script $1 introduction_1, script $1 introduction_server_panel, script $1 introduction_corpuspath, script $1 introduction_2, script $1 introduction_next, script $1 introduction_1_2, script $1 introduction_2, script $1 introduction_2_2, script $1 introduction_3, script $1 introduction_3_2, script $1 introduction_4, script $1 introduction_4_2, script $1 introduction_set, script $1 introduction_s_msg, script $1 introduction_text_path, script $1 midi_panel"
 												}
 
 											}
@@ -1944,12 +2573,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-20",
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 299.1040198802948, 807.317092418670654, 172.676475048065186, 22.0 ],
-					"text" : "continuouschroma 1"
+					"patching_rect" : [ 299.1040198802948, 807.317092418670654, 172.676475048065186, 35.0 ],
+					"text" : "midioutput device \"from Max 1\""
 				}
 
 			}
@@ -1968,13 +2598,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-17",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 573.173201024532318, 1110.170758485794067, 191.076798975467682, 35.0 ],
-					"text" : "midiinfluencer continuouschroma 1"
+					"patching_rect" : [ 573.173201024532318, 1110.170758485794067, 191.076798975467682, 22.0 ],
+					"text" : "audiorenderer attack 80."
 				}
 
 			}
@@ -2035,18 +2664,6 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 29.268293380737305, 100.000002384185791, 79.0, 22.0 ],
 					"text" : "r server_msg"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-9",
-					"maxclass" : "button",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 2704.878113269805908, 1745.121992826461792, 130.107532620429993, 130.107532620429993 ]
 				}
 
 			}
@@ -2181,54 +2798,6 @@
 				}
 
 			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"background" : 1,
-					"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
-					"id" : "obj-56",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1962.195168733596802, 134.146344661712646, 337.499967813491821, 961.249908328056335 ],
-					"proportion" : 0.5,
-					"varname" : "panel[2]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"background" : 1,
-					"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
-					"id" : "obj-59",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 2345.122007131576538, 134.146344661712646, 337.499967813491821, 961.249908328056335 ],
-					"proportion" : 0.5,
-					"varname" : "panel[3]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"background" : 1,
-					"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
-					"id" : "obj-53",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1557.317110300064087, 134.146344661712646, 337.499967813491821, 961.249908328056335 ],
-					"proportion" : 0.5,
-					"varname" : "panel[1]"
-				}
-
-			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
@@ -2278,6 +2847,52 @@
 					"destination" : [ "obj-14", 0 ],
 					"hidden" : 1,
 					"source" : [ "obj-18", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-208", 1 ],
+					"midpoints" : [ 1419.948190808296204, 533.43903648853302, 1304.948190808296204, 533.43903648853302 ],
+					"source" : [ "obj-199", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-208", 0 ],
+					"source" : [ "obj-199", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-209", 2 ],
+					"hidden" : 1,
+					"source" : [ "obj-208", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-209", 1 ],
+					"hidden" : 1,
+					"source" : [ "obj-208", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-209", 0 ],
+					"hidden" : 1,
+					"source" : [ "obj-208", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-22", 0 ],
+					"source" : [ "obj-209", 0 ]
 				}
 
 			}
@@ -2372,6 +2987,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-20", 1 ],
 					"source" : [ "obj-7", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-91", 0 ],
+					"hidden" : 1,
+					"source" : [ "obj-92", 1 ]
 				}
 
 			}
