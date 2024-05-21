@@ -92,11 +92,12 @@
 								"box" : 								{
 									"bubble" : 1,
 									"id" : "obj-44",
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 582.0, 286.0, 180.0, 24.0 ],
-									"text" : "ignore sample rate mismatch",
+									"patching_rect" : [ 582.0, 284.0, 331.041666666666515, 37.0 ],
+									"text" : "ignore sample rate mismatch (message only valid for the somax.audiorecord..ui and somax.audiorecord.app)",
 									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
 								}
 
@@ -219,7 +220,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 490.0, 287.0, 62.0, 22.0 ],
+									"patching_rect" : [ 490.0, 291.0, 62.0, 22.0 ],
 									"text" : "srignore 1"
 								}
 
@@ -579,12 +580,12 @@
 								"box" : 								{
 									"fontsize" : 13.0,
 									"id" : "obj-36",
-									"linecount" : 3,
+									"linecount" : 6,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 65.0, 614.0, 50.0 ],
-									"text" : "If you are trying to record a new corpus in a somax.player after you loaded an existing audio corpus, you might experiencing a Sample Rate Mismatch in the somax.audiorecord. \nThis happens when Max has a different sample rate than the audio file you have just loaded in the player."
+									"patching_rect" : [ 10.0, 65.0, 614.0, 94.0 ],
+									"text" : "If you are trying to record a new corpus in a somax.player after you loaded an existing audio corpus, you might experiencing a Sample Rate Mismatch in the somax.audiorecord.ui. \nThis happens when Max has a different sample rate than the audio file you have just loaded in the player.\nNote that, while matching Max and your audio file sample rates is always the recommended strategy, if you use the basic somax.audiorecord object you will always be able to record at a different sample rate (even though you will get a warning message in the Max Console)."
 								}
 
 							}
@@ -634,20 +635,6 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 1106.0, 94.0, 51.0, 22.0 ],
 									"text" : "pcontrol"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 13.0,
-									"id" : "obj-91",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 858.5, 282.0, 189.0, 21.0 ],
-									"text" : "\"playersmissing\" is ok here too!",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
 
 							}
@@ -1011,7 +998,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -1070,7 +1057,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 557.0, 288.0, 20.0, 20.0 ],
+									"patching_rect" : [ 557.0, 292.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "9",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
@@ -3259,7 +3246,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -4559,7 +4546,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -6044,7 +6031,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -7539,7 +7526,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 258.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -9609,7 +9596,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 889.0, 253.0, 163.0, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}

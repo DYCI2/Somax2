@@ -91,15 +91,6 @@
                 The message <m>pitch</m> followed by an <o>int</o> sets the the pitch of the currently recorded event to this value.         
             </description>
         </method>
-          <method name="srignore">
-            <arglist />
-            <digest>Ignore sample rate mismatch</digest>
-            <description>
-                When encountering a sample rate mismatch between Max and the loaded corpus sample rates, the message <m>srignore 1</m> will allow to ignore it.
-                <br />
-                This will result in pitch alterations due to recording and playing back the new corpus at the wrong sample rate. 
-            </description>
-        </method>
         <method name="start">
             <arglist />
             <digest>Start the recording</digest>

@@ -97,7 +97,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 994.0, 143.598661887744242, 142.0, 51.0 ],
-									"text" : "click here if you have a Sample Rate Mismatch error"
+									"text" : "click here if you have a Sample Rate Mismatch warning"
 								}
 
 							}
@@ -177,12 +177,12 @@
 , 											{
 												"box" : 												{
 													"id" : "obj-52",
-													"linecount" : 20,
+													"linecount" : 21,
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 375.0, 77.0, 446.0, 275.0 ],
-													"text" : "If you are trying to record a new corpus in the somax.player.app after you loaded an existing audio corpus, you might experiencing a Sample Rate Mismatch error. \n\nThis happens when Max has a different sample rate than the audio file you have just loaded in the player.\n\nFor instance, let's say you initialized the Corpus Recording module, and then you uploaded an already existing corpus in your somax.player.app with a sample rate of 44.1 kHz, but Max is set on 48kHz sampling rate.\nSince in Max buffers cannot be dynamically resampled, if you record something in your player, the samples you record will then be played back at a different sample rate, resulting in an alteration in pitch!\n\nWe then recommend to either change the sample rate of Max (from the menu Options -> Audio Status) to match the one of the loaded corpus, or resample the corpus to match the Max sampling rate.\n\nHowever, if you press on the \"ignore\" button in the Corpus Recording window you could still record your new corpus with the wrong sample rate, and then play some nice microtonal music!",
+													"patching_rect" : [ 375.0, 77.0, 448.0, 288.0 ],
+													"text" : "If you are trying to record a new corpus in the somax.player.app after you loaded an existing audio corpus, you might experiencing a Sample Rate Mismatch warning. \n\nThis happens when Max has a different sample rate than the audio file you have just loaded in the player.\n\nFor instance, let's say you initialized the Corpus Recording module, and then you uploaded an already existing corpus in your somax.player.app with a sample rate of 44.1 kHz, but Max is set on 48kHz sampling rate.\nSince in Max buffers cannot be dynamically resampled, if you record something in your player, the samples you record will then be played back at a different sample rate, resulting in an alteration in pitch!\n\nWe then recommend to either change the sample rate of Max (from the menu Options -> Audio Status) to match the one of the loaded corpus, or resample the corpus to match the Max sampling rate.\n\nHowever, if you press on the \"ignore\" button in the Corpus Recording window you could still record your new corpus with the wrong sample rate, and then play some nice microtonal music!",
 													"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 												}
 
