@@ -267,7 +267,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -507,7 +506,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 844.5, 365.0, 43.0, 15.0 ],
+									"patching_rect" : [ 835.0, 364.0, 43.0, 15.0 ],
 									"text" : "this",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -555,7 +554,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 837.5, 119.0, 321.0, 368.0 ],
+									"patching_rect" : [ 829.0, 119.0, 321.0, 368.0 ],
 									"text" : "Somax II is an application and a library for live co-creative interaction with musicians in improvisation composition or installation scenarios. It is based on a machine listening, reactive engine and  generative model  that provide stylistically coherent improvisation while continuously adapting to the external audio or MIDI musical context. It uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on  a globally learned harmonic and textural knowledge representation space.\n\nYou can interact with this tutorial by pressing the tab buttons on the top.\n\nFirst of all, we just need to make sure that everything is correctly configured. To the left is the main interface of Somax II. Does it look something like   \n               ? (click the button)\n\nIf it does, your Max configuration is all set. If not, make sure that the Somax folder really is in the Packages folder of Max.\n\n\nIf the interface now looks like in the image above, please continue to the second tab:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -3200,6 +3199,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-113",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
