@@ -9737,7 +9737,7 @@
 									"midpoints" : [ 230.944444013371367, 616.833329811692238, 158.999999568927024, 616.833329811692238 ],
 									"source" : [ "obj-36", 0 ],
 									"watchpoint_flags" : 5,
-									"watchpoint_id" : 5
+									"watchpoint_id" : 11
 								}
 
 							}
@@ -11071,7 +11071,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "simultaneousonsets[7]",
+							"parameter_longname" : "simultaneousonsets[5]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "simultaneousonsets",
@@ -13976,11 +13976,11 @@
 				"box" : 				{
 					"id" : "obj-1239",
 					"maxclass" : "newobj",
-					"numinlets" : 17,
-					"numoutlets" : 17,
-					"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 19.333333333333314, 418.0, 953.0, 22.0 ],
-					"text" : "route influence learn corpus getcorpus recordconfig savecorpus corpusquery thispatcher openwindow descriptor beat dump flush rawsend initialize reinitialize"
+					"numinlets" : 18,
+					"numoutlets" : 18,
+					"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+					"patching_rect" : [ 19.333333333333314, 418.0, 960.138888888888914, 22.0 ],
+					"text" : "route influence learn corpus getcorpus recordconfig savecorpus corpusquery thispatcher openwindow descriptor beat dump flush rawsend initialize reinitialize latency"
 				}
 
 			}
@@ -14251,7 +14251,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-844",
-					"index" : 0,
+					"index" : 4,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -18912,7 +18912,7 @@
 										}
 ,
 										"valueof" : 										{
-											"parameter_longname" : "live.numbox[3]",
+											"parameter_longname" : "live.numbox[5]",
 											"parameter_mmax" : 0.0,
 											"parameter_mmin" : -60.0,
 											"parameter_modmode" : 0,
@@ -18965,7 +18965,7 @@
 										}
 ,
 										"valueof" : 										{
-											"parameter_longname" : "live.slider[3]",
+											"parameter_longname" : "live.slider[5]",
 											"parameter_mmax" : 0.0,
 											"parameter_mmin" : -60.0,
 											"parameter_modmode" : 0,
@@ -19070,7 +19070,7 @@
 ,
 										"valueof" : 										{
 											"parameter_initial" : [ -30 ],
-											"parameter_longname" : "center[1]",
+											"parameter_longname" : "center[2]",
 											"parameter_mmax" : 0.0,
 											"parameter_mmin" : -60.0,
 											"parameter_modmode" : 0,
@@ -19143,7 +19143,7 @@
 										"valueof" : 										{
 											"parameter_initial" : [ 1 ],
 											"parameter_initial_enable" : 1,
-											"parameter_longname" : "weight[1]",
+											"parameter_longname" : "weight[2]",
 											"parameter_mmax" : 1.0,
 											"parameter_modmode" : 0,
 											"parameter_shortname" : "Weight",
@@ -19408,7 +19408,7 @@
 ,
 										"valueof" : 										{
 											"parameter_initial" : [ 30 ],
-											"parameter_longname" : "width[1]",
+											"parameter_longname" : "width[3]",
 											"parameter_mmax" : 30.0,
 											"parameter_mmin" : 0.001,
 											"parameter_modmode" : 0,
@@ -19566,7 +19566,7 @@
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_enum" : [ "off", "on" ],
-											"parameter_longname" : "__exp_velocityenable[1]",
+											"parameter_longname" : "__exp_velocityenable[2]",
 											"parameter_mmax" : 1,
 											"parameter_modmode" : 0,
 											"parameter_shortname" : "__exp_velocityenable",
@@ -24194,7 +24194,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "simultaneousonsets[2]",
+							"parameter_longname" : "simultaneousonsets[6]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "artificialmidities",
@@ -24292,7 +24292,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_tempoconsistencysigma[4]",
+							"parameter_longname" : "__exp_tempoconsistencysigma[6]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_tempoconsistencysigma",
 							"parameter_type" : 3
@@ -24385,7 +24385,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_tempoconsistencylen[4]",
+							"parameter_longname" : "__exp_tempoconsistencylen[6]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_tempoconsistencylen",
 							"parameter_type" : 3
@@ -24483,7 +24483,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_autojumpforcejump[1]",
+							"parameter_longname" : "__exp_autojumpforcejump[7]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_autojumpforcejump",
 							"parameter_type" : 3
@@ -24527,7 +24527,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_autojumpenable[1]",
+							"parameter_longname" : "__exp_autojumpenable[3]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_autojumpenable",
@@ -24559,7 +24559,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_autojumpactivate[1]",
+							"parameter_longname" : "__exp_autojumpactivate[3]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_autojumpactivate",
 							"parameter_type" : 3
@@ -24704,7 +24704,7 @@
 						"valueof" : 						{
 							"parameter_enum" : [ "Top note", "Virtual fundamental", "Bass note" ],
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_melodicpitchfromchords[4]",
+							"parameter_longname" : "__exp_melodicpitchfromchords[6]",
 							"parameter_mmax" : 2,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_melodicpitchfromchords",
@@ -24749,7 +24749,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_octavebands[1]",
+							"parameter_longname" : "__exp_octavebands[3]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_octavebands",
 							"parameter_type" : 3
@@ -24879,7 +24879,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_durationsigma[4]",
+							"parameter_longname" : "__exp_durationsigma[5]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_durationsigma",
 							"parameter_type" : 3
@@ -24944,7 +24944,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_durationmu[1]",
+							"parameter_longname" : "__exp_durationmu[3]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_durationmu",
 							"parameter_type" : 3
@@ -25025,7 +25025,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_numnotessigma[1]",
+							"parameter_longname" : "__exp_numnotessigma[2]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_numnotessigma",
 							"parameter_type" : 3
@@ -25069,7 +25069,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "__exp_numnotesenable[4]",
+							"parameter_longname" : "__exp_numnotesenable[2]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_numnotesenable",
@@ -25102,7 +25102,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "__exp_numnotesmu[1]",
+							"parameter_longname" : "__exp_numnotesmu[7]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "__exp_numnotesmu",
 							"parameter_type" : 3
@@ -25544,7 +25544,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[1]",
+							"parameter_longname" : "continuity[4]",
 							"parameter_mmax" : 10.0,
 							"parameter_mmin" : 0.1,
 							"parameter_modmode" : 0,
@@ -25750,7 +25750,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "outputprobability[4]",
+							"parameter_longname" : "outputprobability[2]",
 							"parameter_mmax" : 1.0,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "outputprobability",
@@ -25837,7 +25837,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "enforcetaboo[4]",
+							"parameter_longname" : "enforcetaboo[2]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "enforcetaboo",
@@ -25946,7 +25946,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[17]",
+							"parameter_longname" : "continuity[5]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "continuity",
 							"parameter_type" : 3
@@ -26972,7 +26972,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "selfharmonicbypass[4]",
+							"parameter_longname" : "selfharmonicbypass[3]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "selfharmonicbypass",
@@ -27000,7 +27000,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "harmonicbypass[1]",
+							"parameter_longname" : "harmonicbypass[3]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "harmonicbypass",
@@ -27028,7 +27028,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "melodicbypass[1]",
+							"parameter_longname" : "melodicbypass[3]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "melodicbypass",
@@ -27056,7 +27056,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "selfmelodicbypass[1]",
+							"parameter_longname" : "selfmelodicbypass[7]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "selfmelodicbypass",
@@ -27231,7 +27231,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[16]",
+							"parameter_longname" : "continuity[6]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "continuity",
 							"parameter_type" : 3
@@ -27343,7 +27343,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "heldnotesmode[2]",
+							"parameter_longname" : "heldnotesmode[4]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "heldnotesmode",
@@ -28657,7 +28657,7 @@
 				"box" : 				{
 					"comment" : "(int) status",
 					"id" : "obj-437",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -29208,7 +29208,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "selfharmonicngramorder[4]",
+							"parameter_longname" : "selfharmonicngramorder[6]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "selfharmonicngramorder",
 							"parameter_type" : 3
@@ -29284,7 +29284,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "harmonincpeakdecay[3]",
+							"parameter_longname" : "harmonincpeakdecay[6]",
 							"parameter_mmin" : 1.001,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "harmonincpeakdecay[1]",
@@ -31070,7 +31070,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "resetinfluences[1]",
+							"parameter_longname" : "resetinfluences[3]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "resetinfluences",
@@ -31462,7 +31462,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to player",
 					"id" : "obj-1",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -31900,7 +31900,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "selfmod12[4]",
+							"parameter_longname" : "selfmod12[3]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "selfmod12",
@@ -31935,7 +31935,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "melodicmod12[1]",
+							"parameter_longname" : "melodicmod12[7]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "melodicmod12",
@@ -32037,7 +32037,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "decaybasis[1]",
+							"parameter_longname" : "decaybasis[3]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "decaybasis",
@@ -32065,7 +32065,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "playingmode[4]",
+							"parameter_longname" : "playingmode[1]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "playingmode",
@@ -32140,7 +32140,7 @@
 					"patching_rect" : [ 1965.998681434600257, 89.5090360442681, 180.0, 27.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 21.41666666666697, 11.5, 401.10262443239094, 27.0 ],
-					"text" : "Player_2596",
+					"text" : "Player",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -32501,7 +32501,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-388",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -34301,7 +34301,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "harmonincpeakdecay[2]",
+							"parameter_longname" : "harmonincpeakdecay[7]",
 							"parameter_mmin" : 1.001,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "harmonincpeakdecay",
@@ -34369,7 +34369,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "selfpeakdecay[1]",
+							"parameter_longname" : "selfpeakdecay[3]",
 							"parameter_mmin" : 1.001,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "selfpeakdecay",
@@ -34534,7 +34534,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "melodicngramorder[4]",
+							"parameter_longname" : "melodicngramorder[6]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "melodicngramorder",
 							"parameter_type" : 3
@@ -34565,7 +34565,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "selfngramorder[1]",
+							"parameter_longname" : "selfngramorder[2]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "selfngramorder",
 							"parameter_type" : 3
@@ -34596,7 +34596,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "harmonicngramorder[1]",
+							"parameter_longname" : "harmonicngramorder[2]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "harmonicngramorder",
 							"parameter_type" : 3
@@ -34630,7 +34630,7 @@
 				"box" : 				{
 					"comment" : "(any) rendering messages from server",
 					"id" : "obj-119",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -36010,8 +36010,8 @@
 				"patchline" : 				{
 					"color" : [ 0.1294117647, 0.1294117647, 0.1294117647, 1.0 ],
 					"destination" : [ "obj-1262", 0 ],
-					"midpoints" : [ 962.833333333333258, 706.798883918782508, 28.833333333333314, 706.798883918782508 ],
-					"source" : [ "obj-1239", 16 ]
+					"midpoints" : [ 969.972222222222172, 706.798883918782508, 28.833333333333314, 706.798883918782508 ],
+					"source" : [ "obj-1239", 17 ]
 				}
 
 			}
@@ -36046,7 +36046,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"midpoints" : [ 904.458333333333258, 467.951116081217435, 1053.5, 467.951116081217435 ],
+					"midpoints" : [ 859.25, 467.951116081217435, 1053.5, 467.951116081217435 ],
 					"source" : [ "obj-1239", 15 ]
 				}
 
@@ -36054,7 +36054,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"midpoints" : [ 846.083333333333258, 467.951116081217435, 1053.5, 467.951116081217435 ],
+					"midpoints" : [ 803.888888888888914, 467.951116081217435, 1053.5, 467.951116081217435 ],
 					"source" : [ "obj-1239", 14 ]
 				}
 
@@ -36111,7 +36111,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
-					"midpoints" : [ 787.708333333333258, 590.250000000000114, 28.833333333333314, 590.250000000000114 ],
+					"midpoints" : [ 748.527777777777828, 590.250000000000114, 28.833333333333314, 590.250000000000114 ],
 					"source" : [ "obj-1239", 13 ]
 				}
 
@@ -42400,144 +42400,6 @@
 
 			}
  ],
-		"parameters" : 		{
-			"obj-1115" : [ "continuity[1]", "continuity", 0 ],
-			"obj-1175" : [ "heldnotesmode[2]", "heldnotesmode", 0 ],
-			"obj-1179" : [ "continuity[16]", "continuity", 0 ],
-			"obj-12" : [ "melodicmod12[1]", "melodicmod12", 0 ],
-			"obj-120" : [ "melodicbypass[1]", "melodicbypass", 0 ],
-			"obj-1218" : [ "simultaneousonsets[2]", "artificialmidities", 0 ],
-			"obj-126" : [ "harmonicbypass[1]", "harmonicbypass", 0 ],
-			"obj-134" : [ "continuity[17]", "continuity", 0 ],
-			"obj-1344" : [ "enforcetaboo[4]", "enforcetaboo", 0 ],
-			"obj-140" : [ "resetinfluences[1]", "resetinfluences", 0 ],
-			"obj-144" : [ "harmonicngramorder[1]", "harmonicngramorder", 0 ],
-			"obj-1444" : [ "outputprobability[4]", "outputprobability", 0 ],
-			"obj-152" : [ "selfngramorder[1]", "selfngramorder", 0 ],
-			"obj-154" : [ "melodicngramorder[4]", "melodicngramorder", 0 ],
-			"obj-19" : [ "selfmod12[4]", "selfmod12", 0 ],
-			"obj-22" : [ "selfmelodicbypass[1]", "selfmelodicbypass", 0 ],
-			"obj-254" : [ "harmonincpeakdecay[2]", "harmonincpeakdecay", 0 ],
-			"obj-255" : [ "melodicpeakdecay[4]", "melodicpeakdecay", 0 ],
-			"obj-256" : [ "selfpeakdecay[1]", "selfpeakdecay", 0 ],
-			"obj-270::obj-1226" : [ "width[1]", "Width", 0 ],
-			"obj-270::obj-1227" : [ "center[1]", "Center", 0 ],
-			"obj-270::obj-1240" : [ "live.slider[3]", "live.slider", 0 ],
-			"obj-270::obj-1241" : [ "live.numbox[3]", "live.numbox[2]", 0 ],
-			"obj-270::obj-622" : [ "__exp_velocityenable[1]", "__exp_velocityenable", 0 ],
-			"obj-270::obj-889" : [ "weight[1]", "Weight", 0 ],
-			"obj-295" : [ "playingmode[4]", "playingmode", 0 ],
-			"obj-298" : [ "simultaneousonsets[7]", "simultaneousonsets", 0 ],
-			"obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
-			"obj-570" : [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
-			"obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
-			"obj-642" : [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
-			"obj-653" : [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
-			"obj-656" : [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],
-			"obj-688" : [ "__exp_durationsigma[4]", "__exp_durationsigma", 0 ],
-			"obj-702" : [ "__exp_durationmu[1]", "__exp_durationmu", 0 ],
-			"obj-722" : [ "__exp_octavebandsenable[4]", "__exp_octavebandsenable", 0 ],
-			"obj-733" : [ "__exp_octavebands[1]", "__exp_octavebands", 0 ],
-			"obj-746" : [ "__exp_selfpitchfromchords[4]", "__exp_selfpitchfromchords", 0 ],
-			"obj-763" : [ "__exp_autojumpforcejump[1]", "__exp_autojumpforcejump", 0 ],
-			"obj-774" : [ "__exp_autojumpenable[1]", "__exp_autojumpenable", 0 ],
-			"obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
-			"obj-799" : [ "__exp_tempoconsistencyenable[4]", "__exp_tempoconsistencyenable", 0 ],
-			"obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
-			"obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
-			"obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
-			"obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
-			}
-,
-			"inherited_shortname" : 1
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "abstraction_path.js",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.atom.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/player",
-				"patcherrelativepath" : "./resources/player",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.await_patcherargs.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.beatphase.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.corpuspath.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.path.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.player.core.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.print.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.uniquename.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.uniquenumber.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.winresize.maxpat",
-				"bootpath" : "~/MaxDev/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-255", "obj-64" ]
 			}
@@ -42677,10 +42539,10 @@
 				"boxes" : [ "obj-882", "obj-601" ]
 			}
 , 			{
-				"boxes" : [ "obj-954", "obj-1239" ]
+				"boxes" : [ "obj-213", "obj-536" ]
 			}
 , 			{
-				"boxes" : [ "obj-213", "obj-536" ]
+				"boxes" : [ "obj-954", "obj-1239" ]
 			}
  ],
 		"styles" : [ 			{
