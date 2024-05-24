@@ -40,9 +40,23 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-59",
+					"linecount" : 4,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 832.707339286804199, 242.682932615280151, 269.000003576278687, 60.0 ],
+					"text" : "if you have multiple Somax2 players, you can also make them listen to eachother, for instance by putting the name of Player2 as a source for Player1, and viceversa",
+					"varname" : "player_comment"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontface" : 0,
 					"fontname" : "Arial",
 					"fontsize" : 11.595186999999999,
+					"hidden" : 1,
 					"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"id" : "obj-92",
 					"maxclass" : "tab",
@@ -214,13 +228,13 @@
 				"box" : 				{
 					"fontface" : 0,
 					"fontsize" : 14.0,
+					"hidden" : 1,
 					"id" : "obj-90",
 					"linecount" : 41,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1178.859768033027649, 186.585370302200317, 331.0, 663.0 ],
-					"presentation_linecount" : 41,
+					"patching_rect" : [ 1178.048808574676514, 186.585370302200317, 334.0, 663.0 ],
 					"text" : "What's next?\nHow to learn all the different parameters names and practice scripting with them?\n\nWe actually prepared a .txt file containing all the documentation of the available scripting messages for the Somax2 .app modules (somax.player.app, somax.audioinfluencer.app, somax.midiinfluencer.app and somax.server.app) shown in this tutorial.\n\n\n\n\n\nThe same document is available through the \"Help Center\" tab of the somax2.overview (accessible through the Extras menu of Max, or from the Somax2 package).\n\nWe recommend you go through the list and try the different messages yourself.\n\nIt's also recommended to create your own patch, with the Somax2 objects you need, and the different couples of \"send\" and \"receive\" messages to address them, so that you can practice and expand your possibilities of environment creation and scripting.\n\nYou can also go through the different maxhelps of the .app modules, available again from the \"Help Center\" tab of the somax2.overview.\n\nOnce you'll be confortable with scripting Somax2 .app modules, we recommend you start going through the \"Max Tutorials\" available from the somax2.overview, to start playing with the basic Somax2 objects and build your even more customizable environment!\n\n",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "text_5"
@@ -231,6 +245,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 16.0,
+					"hidden" : 1,
 					"id" : "obj-89",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -247,7 +262,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-88",
 					"ignoreclick" : 1,
@@ -272,7 +286,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-87",
 					"ignoreclick" : 1,
@@ -294,7 +307,6 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
 					"id" : "obj-86",
 					"linecount" : 5,
 					"maxclass" : "message",
@@ -312,7 +324,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-84",
 					"ignoreclick" : 1,
@@ -334,7 +345,6 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
 					"id" : "obj-83",
 					"linecount" : 2,
 					"maxclass" : "message",
@@ -352,7 +362,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-81",
 					"ignoreclick" : 1,
@@ -377,7 +386,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-80",
 					"ignoreclick" : 1,
@@ -402,7 +410,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-79",
 					"ignoreclick" : 1,
@@ -424,7 +431,6 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
 					"id" : "obj-78",
 					"linecount" : 5,
 					"maxclass" : "message",
@@ -442,7 +448,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 9.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-76",
 					"ignoreclick" : 1,
@@ -453,7 +458,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1048.561002969741821, 430.804889678955078, 20.0, 20.0 ],
+					"patching_rect" : [ 1011.97563624382019, 419.292692899703979, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "2.2",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -467,7 +472,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 9.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-75",
 					"ignoreclick" : 1,
@@ -478,7 +482,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1016.853685140609741, 388.121961832046509, 20.0, 20.0 ],
+					"patching_rect" : [ 1048.597583770751953, 377.012203931808472, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "2.1",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -492,7 +496,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-74",
 					"ignoreclick" : 1,
@@ -514,14 +517,13 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
 					"id" : "obj-72",
 					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 832.707339286804199, 423.487816333770752, 213.0, 35.0 ],
+					"patching_rect" : [ 828.707339286804199, 369.512203931808472, 213.0, 35.0 ],
 					"text" : ";\rplayer_msg corpus Carine_Intuition.gz",
 					"varname" : "player_corpus_midi"
 				}
@@ -529,14 +531,13 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
 					"id" : "obj-69",
 					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 832.707339286804199, 380.804888486862183, 179.0, 35.0 ],
+					"patching_rect" : [ 827.707339286804199, 411.792692899703979, 179.0, 35.0 ],
 					"text" : ";\rplayer_msg corpus Joelle.pickle",
 					"varname" : "player_corpus_audio"
 				}
@@ -544,7 +545,6 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
 					"id" : "obj-67",
 					"linecount" : 3,
 					"maxclass" : "message",
@@ -561,15 +561,13 @@
 				"box" : 				{
 					"fontface" : 0,
 					"fontsize" : 14.0,
-					"hidden" : 1,
 					"id" : "obj-65",
 					"linecount" : 55,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1180.359768033027649, 186.585370302200317, 328.0, 882.0 ],
-					"presentation_linecount" : 55,
-					"text" : "The somax.player.app is surely the most complex object, and also the one that has more scripting possibilities.\n\nLet's address each module, one at a time.\nTo start, ye might want to select both the AudioInfluencer and the MidiInfluencer as Influence Sources. You can do that by pressing on the message at step 1.\n\nNotice how you can assign each Influence Source object to a different index using the index number after the \"router\" keyword, starting from index 0.\n\nNext, you can load a corpus in the player.\nSee the syntax of the two different messages, wheater the corpus you want to load is an audio (step 2.1) or a MIDI one (step 2.2).\n\nAt this point, you can control any parameter of the player itself.\nLet's try the message at step 3, and see the changes in the player's interface.\n\nAs showed in a previous tab of this tutorial, you can retrieve the right command by changing any parameter, and see the result naming through the message attached at the parameters outlet of the somax.player.app (see step 4).\n\nLet's try for instance to play with the Region Filter.\nPress on the \"Enabled\" button at step 5, and see what message comes out of the player at step 4. \nThe message you read should be \n\"region enabled 0 1\"\nThis is the message to enable all the 6 availabe regions at once.\n\nIf now you want to disable region 3, for instance, you can press on the message at step 6.\n\nYou can also control the different Output Control parameters, by adding the \"audiomixer\" and/or \"audiorenderer\" keywords after addressing the player.\nLet's say you want to change the gain and the pan of the player, as well as the attack and release settings, you can do that by pressing on the message at step 7.\n\nYou can apply the same procedure to any parameter available through the \"Settings\" window at step 8. Try to open it, change any parameter, read their message at step 4 and write a new message to control it!\n",
+					"patching_rect" : [ 1181.987833023071289, 186.585370302200317, 331.0, 882.0 ],
+					"text" : "The somax.player.app is surely the most complex object, and also the one that has more scripting possibilities.\n\nLet's address each module, one at a time.\nTo start, ye might want to select both the AudioInfluencer and the MidiInfluencer as Influence Sources. You can do that by pressing on the message at step 1.\n\nNotice how you can assign each Influence Source object to a different index using the index number after the \"router\" keyword, starting from index 0.\n\nNext, you can load a corpus in the player.\nSee the syntax of the two different messages, wheater the corpus you want to load is a MIDI (step 2.1) or an audio one (step 2.2).\n\nAt this point, you can control any parameter of the player itself.\nLet's try the message at step 3, and see the changes in the player's interface.\n\nAs showed in a previous tab of this tutorial, you can retrieve the right command by changing any parameter, and see the result naming through the message attached at the parameters outlet of the somax.player.app (see step 4).\n\nLet's try for instance to play with the Region Filter.\nPress on the \"Enabled\" button at step 5, and see what message comes out of the player at step 4. \nThe message you read should be \n\"region enabled 0 1\"\nThis is the message to enable all the 6 availabe regions at once.\n\nIf now you want to disable region 3, for instance, you can press on the message at step 6.\n\nYou can also control the different Output Control parameters, by adding the \"audiomixer\" and/or \"audiorenderer\" keywords after addressing the player (in the case of an audio corpus).\nLet's say you want to change the gain and the pan of the player, as well as the attack and release settings, you can do that by pressing on the message at step 7.\n\nYou can apply the same procedure to any parameter available through the \"Settings\" window at step 8. Try to open it, change any parameter, read their message at step 4 and write a new message to control it!\n",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "text_4"
 				}
@@ -585,8 +583,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1181.448190808296204, 186.780500888824463, 328.0, 773.0 ],
-					"presentation_linecount" : 49,
+					"patching_rect" : [ 1179.268320798873901, 186.585370302200317, 328.0, 773.0 ],
 					"text" : "Let's now address the MidiInfluencer.\nIf you want to enable this module, you can send to it the following message:\n\n\n\n\n\nand then select your desired MIDI controller via the midiinput module.\nIn case you don't have any controller connected to your computer, you can use the keyboard below to play some MIDI notes and send them to the MidiInfluencer. \nNotice how this is done again through the \n\"s midiinfluencer_msg\" object.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOne important aspect of the Somax2 .app object is that they incorporate multiple modules dedicated do different function of each object.\nThe MidiInfluencer, for instance, has different modules to control the midiinput and midioutput.\nSo, if you want to disable the midioutput of the MidiInfluencer, you should send a message that addresses it, like this:\n\n\n\n\n\nAs always, you can combine multiple messages by chaining ;\nLet's say you want to enable again the midioutput but also send the MIDI signal outside of Max, to retrieve it in a VST or from your external MIDI port:",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "text_3"
@@ -602,8 +599,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1229.359768033027649, 974.390267133712769, 230.0, 49.0 ],
-					"text" : ";\rmidiinfluencer_msg midioutput enabled 1;\rmidioutput device \"from Max 1\"",
+					"patching_rect" : [ 1207.317101955413818, 974.390267133712769, 280.0, 49.0 ],
+					"text" : ";\rmidiinfluencer_msg midioutput enabled 1;\rmidiinfluencer_msg midioutput device \"from Max 1\"",
 					"varname" : "midi_message_3"
 				}
 
@@ -645,7 +642,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1261.448190808296204, 600.000014305114746, 121.0, 22.0 ],
+					"patching_rect" : [ 1263.487833023071289, 602.439038753509521, 121.0, 22.0 ],
 					"text" : "s midiinfluencer_msg",
 					"varname" : "midi_send"
 				}
@@ -659,7 +656,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1261.448190808296204, 570.731720924377441, 121.0, 22.0 ],
+					"patching_rect" : [ 1263.487833023071289, 573.170745372772217, 121.0, 22.0 ],
 					"text" : "pack 0 0 0",
 					"varname" : "midi_pack"
 				}
@@ -673,7 +670,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 3,
 					"outlettype" : [ "float", "float", "float" ],
-					"patching_rect" : [ 1261.448190808296204, 541.463427543640137, 121.0, 22.0 ],
+					"patching_rect" : [ 1263.487833023071289, 543.902451992034912, 121.0, 22.0 ],
 					"text" : "makenote 100 500 1",
 					"varname" : "midi_makenote"
 				}
@@ -689,7 +686,7 @@
 					"offset" : 60,
 					"outlettype" : [ "int", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1261.448190808296204, 476.829279661178589, 168.0, 53.0 ],
+					"patching_rect" : [ 1263.487833023071289, 479.268304109573364, 168.0, 53.0 ],
 					"range" : 24,
 					"varname" : "midi_kslider"
 				}
@@ -699,7 +696,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 16.0,
-					"hidden" : 1,
 					"id" : "obj-61",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -731,7 +727,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-58",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -868,7 +863,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 982.573193788528442, 968.29270601272583, 169.999983787536621, 74.0 ],
-					"text" : "you can also set the corpuspath by copying your corpus folder corpuspath and put it into this message instead of the command set",
+					"text" : "you can also set the corpuspath by copying your corpus folder file path and put it into this message instead of the command set",
 					"varname" : "introduction_text_path"
 				}
 
@@ -954,7 +949,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1180.487833023071289, 186.585370302200317, 330.0, 820.0 ],
+					"patching_rect" : [ 1180.487833023071289, 186.585370302200317, 334.0, 820.0 ],
 					"text" : "After setting the corpuspath, you might want to start configuring your AudioInfluencer, to capture your instrument or fellow musician in the right way.\n\nLet's say you want to enable the AudioInfluencer, select the 1st channel of your soundcard as the input channel (for now assuming you have no external soundcard connected, but you want to use just your computer's microphone), and disable its audio output module, to avoid feedback.\n\nThanks to the ; syntax that we saw in the previous tab of this tutorial, you can do all the three things at the same time, by pressing on the message at step 1.\n\nAt this point, you might want to select a certain algorithm for the onset detection of your AudioInfluencer, and tune its parameters, which you would usually do this by entering the \"Settings\" of the AudioInfluencer (see step 2).\n\nBut let's say we want to select Bonk as onset detection algorithm and, at the same time, set the Onset Limiter value to 0 ms.\nWe can do it by just pressing on the message at step 3.\n\nIf you now open the AudioInfluencer \"Settings\" you will notice that the two changes simultaneously occurred in it, saving us quite some time.\n\nAt this point, although you may have figured out the scripting process, it might still be unclear how to address the various parameters with their correct names, but don't worry, in this tutorial we will give you all the tools to figure it out.\n\nIn fact, just notice that on the output to each Somax2 module is a message (see step 4).\n\nThis message, linked to the penultimate outlet of each module (in this case of the AudioInfluencer), tells us which parameters have been changed and with what value. \nIn this case the message displayed should be \"onsetlimit 0\", which is exactly the last message we sent to the AudioInfluencer.\n\nBe careful to connect the penultimate outlet of the Somax2 modules well to the right inlet of the message, so that this can be used as a monitor.",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "text_2"
@@ -1422,11 +1417,11 @@
 					"fontsize" : 14.0,
 					"hidden" : 1,
 					"id" : "obj-21",
-					"linecount" : 54,
+					"linecount" : 53,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1181.448190808296204, 188.926836013793945, 325.823154449462891, 867.0 ],
+					"patching_rect" : [ 1181.448190808296204, 188.926836013793945, 330.0, 851.0 ],
 					"text" : "In this tutorial you will learn how to control any available parameter in the Somax2 .app objects using scripting messages in Max.\n\nThis will provide you a quick worflow and open up possibilities of automation and control of the wide array of parameters in the application.\nFirst of all, as always let's begin by pressing on the \"Start Server\" button (see step 1).\n\nThen, one of the first things we might want to script is the path to a certain folder containing our corpora.\n\nRemember that by default the corpora we're providing are stored in the \"corpus\" folder of your Somax2 distribution.\nHowever, a good practice is to have different corpus folders in your machine, according to the sound palette you might search for a certain concert/performance, etc.\nYou can select the desired corpus folder (called \"corpuspath\") by pressing on the \"Settings\" button of the somax.server.app and then press on the \"set\" button next to the Corpus Folder path (see step 2).\n\nYet, to speed up this process you can send a message directly to the somax.server.app object asking to set the corpuspath.\nThis can be done through the Max message shown at step 3.\n\nBy pressing this message you will see a window popping up, enabling you to select a corpuspath in your environment.\n\nThis is done thanks to the couple of send and receive objects in Max.\nNotice how every Somax2 module in this patch has a \"r\" object attached to them, where \"r\" is the shortcut for \"receive\".\nThe message you just pressed, on the other hand is linked to a \"s\" (for \"send\") object, providing the communication with the somax.server.app thanks to its argument having the same name as the one in the \"r\" object (in this case the name argument is \"server_msg\").\n\nAn alternative for \"s\" is to use ; inside a message, as shown at step 4.\n\nFor compactness, we will rather use this last syntax in the next steps.\n",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "introduction_text"
@@ -1496,7 +1491,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"color" : [ 0.356862745098039, 0.584313725490196, 0.615686274509804, 1.0 ],
@@ -1666,8 +1660,8 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 100.0, 590.0, 76.0 ],
-													"text" : "script $1 next_4, script $1 player_title, script $1 panel_intro_chord, script $1 text_4, script $1 player_message_1, script $1 player_1, script $1 player_2_1, script $1 player_2_2, script $1 player_corpus_audio, script $1 player_corpus_midi, script $1 player_message_3, script $1 player_3, script $1 player_4, script $1 player_5, script $1 player_6, script $1 player_message_6, script $1 player_message_7, script $1 player_7, script $1 player_8"
+													"patching_rect" : [ 50.0, 100.0, 593.0, 76.0 ],
+													"text" : "script $1 next_4, script $1 player_title, script $1 panel_intro_chord, script $1 text_4, script $1 player_message_1, script $1 player_1, script $1 player_2_1, script $1 player_2_2, script $1 player_corpus_audio, script $1 player_corpus_midi, script $1 player_message_3, script $1 player_3, script $1 player_4, script $1 player_5, script $1 player_6, script $1 player_message_6, script $1 player_message_7, script $1 player_7, script $1 player_8, script $1 player_comment"
 												}
 
 											}
@@ -2591,7 +2585,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 299.673208177089691, 478.048791885375977, 191.826798975467682, 22.0 ],
-					"text" : "continuouschroma 1"
+					"text" : "onsetlimit 18"
 				}
 
 			}
@@ -2603,7 +2597,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 573.173201024532318, 1110.170758485794067, 191.076798975467682, 22.0 ],
-					"text" : "audiorenderer attack 80."
+					"text" : "audiorenderer release 120."
 				}
 
 			}
@@ -2853,7 +2847,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-208", 1 ],
-					"midpoints" : [ 1419.948190808296204, 533.43903648853302, 1304.948190808296204, 533.43903648853302 ],
+					"midpoints" : [ 1421.987833023071289, 535.878060936927795, 1306.987833023071289, 535.878060936927795 ],
 					"source" : [ "obj-199", 1 ]
 				}
 
