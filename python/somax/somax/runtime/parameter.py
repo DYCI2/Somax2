@@ -4,7 +4,7 @@ from collections import abc
 from typing import TypeVar, Union, Dict, Any, Callable, List, Tuple, Optional
 
 # TODO: Poor type description
-MaxCompatible = TypeVar('MaxCompatible', int, float, bool)
+MaxCompatible = TypeVar('MaxCompatible', int, float, bool, str)
 Ranged = Union[MaxCompatible, None]
 
 

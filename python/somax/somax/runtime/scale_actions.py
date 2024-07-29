@@ -9,6 +9,7 @@ import numpy as np
 
 from somax.features import VerticalDensity, TotalEnergyDb
 from somax.features.energy_features import PeakEnergyDb
+from somax.features.label_feature import LabelFeature
 from somax.features.spectral_features import OctaveBands
 from somax.features.temporal_features import Tempo, BeatPhase
 from somax.runtime.content_aware import ContentAware
@@ -872,3 +873,49 @@ class BeatPhaseScaleAction(AbstractScaleAction):
             return grid_positions.astype(int)
         else:
             return int(grid_positions)
+
+
+class LabelScaleAction(AbstractScaleAction):
+    def __init__(self):
+        super().__init__()
+        self.label: Parameter = ParamWithSetter("", None, None, 'str',
+                                                 "label to match", self._set_label)
+
+    def scale(self,
+              peaks: Peaks,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              enforce_output: bool = False, **kwargs) -> Tuple[Peaks, TabooMask]:
+        corresponding_labels: List[str] = [e.get_feature(LabelFeature).value() for e in corresponding_events]
+        matching: np.ndarray = np.array([label == self.label for label in corresponding_labels], dtype=bool)
+        peaks.scale(0, ~matching)
+
+        corpus_mask: np.ndarray = np.array([event.get_feature(LabelFeature).value() == self.label.value
+                                            for event in corpus.events], dtype=bool)
+        taboo_mask.add_taboo(~corpus_mask)
+
+        return peaks, taboo_mask
+
+    def feedback(self, feedback_event: Optional[CorpusEvent], time: float,
+                 applied_transform: AbstractTransform) -> None:
+        pass
+
+    def update_transforms(self, transform_handler: TransformHandler):
+        pass
+
+    def clear(self) -> None:
+        pass
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        return corpus.has_feature(LabelFeature)
+
+    def _set_label(self, label: Optional[str]):
+        print("label", label)
+        if label is None:
+            self.label.value = ""
+        else:
+            self.label.value = label

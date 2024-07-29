@@ -124,7 +124,7 @@ class Atom(Parametric, ContentAware):
         return self.parameter_dict
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return True
+        return self._classifier.eligible
 
     @property
     def weight(self) -> float:

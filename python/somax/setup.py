@@ -25,8 +25,8 @@ setup(
     ],
     description="Somax Library",
     # TODO: Package requirements properly and update README (see https://stackoverflow.com/a/33685899)
-    install_requires=["numpy", "scipy", "maxosc", "mido", "scikit-learn", "pandas", "python-osc", "matplotlib",
-                      "librosa", "pysoundfile", "audioread"],
+    install_requires=["numpy", "scipy", "maxosc", "mido", "pandas", "python-osc", "matplotlib",
+                      "librosa", "audioread"],
     license="GNU General Public License v3",
     long_description=readme,
     long_description_content_type="text/markdown",
