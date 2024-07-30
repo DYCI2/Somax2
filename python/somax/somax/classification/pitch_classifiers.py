@@ -11,7 +11,7 @@ from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
 from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidLabelInput, TransformError
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence, FeatureInfluence
-from somax.runtime.label import IntLabel, AbstractLabel
+from somax.runtime.label import IntLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
 
@@ -37,7 +37,7 @@ class BasicPitchClassifier(AbstractClassifier, ABC):
     def classify_event(self, event: CorpusEvent) -> IntLabel:
         return self._label_from_corpus_event(event, NoTransform())
 
-    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[IntLabel, AbstractTransform]]:
         if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, RuntimeIntegerPitch):
             return [(self._label_from_feature(influence.feature, t), t) for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):

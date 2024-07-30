@@ -7,7 +7,7 @@ from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence
-from somax.runtime.label import AbstractLabel
+from somax.runtime.label import IntLabel
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.peak_event import PeakEvent
@@ -59,12 +59,12 @@ class Atom(Parametric, ContentAware):
             return
 
         self._classifier.cluster(self._corpus)
-        labels: List[AbstractLabel] = self._classifier.classify_corpus(self._corpus)
+        labels: List[IntLabel] = self._classifier.classify_corpus(self._corpus)
         self._memory_space.model(self._corpus, labels)
         self._activity_pattern.corpus = self._corpus
 
     def learn_event(self, event: AudioCorpusEvent) -> None:
-        label: AbstractLabel = self._classifier.classify_event(event)
+        label: IntLabel = self._classifier.classify_event(event)
         self._memory_space.learn_event(event, label)
 
     # influences the memory with incoming data
@@ -75,7 +75,7 @@ class Atom(Parametric, ContentAware):
             return 0
 
         self._update_peaks_on_influence(time)
-        label: List[Tuple[AbstractLabel, AbstractTransform]] = self._classifier.classify_influence(influence)
+        label: List[Tuple[IntLabel, AbstractTransform]] = self._classifier.classify_influence(influence)
         matched_events: List[PeakEvent] = self._memory_space.influence(label, time, **kwargs)
         if matched_events:
             self._activity_pattern.insert(matched_events)  # we insert the events into the activity profile

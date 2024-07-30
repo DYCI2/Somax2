@@ -6,7 +6,7 @@ from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.influence import AbstractInfluence
-from somax.runtime.label import AbstractLabel
+from somax.runtime.label import IntLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
@@ -32,16 +32,16 @@ class AbstractClassifier(StringParsed, ContentAware, ABC):
         pass
 
     @abstractmethod
-    def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
+    def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
         """ :returns List of untransformed labels of the same length as the corpus. """
         pass
 
     @abstractmethod
-    def classify_event(self, event: CorpusEvent) -> AbstractLabel:
+    def classify_event(self, event: CorpusEvent) -> IntLabel:
         """ :returns untransformed label of event """
 
     @abstractmethod
-    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[IntLabel, AbstractTransform]]:
         """ :returns List of inverse transformed labels of the same length as number of `AbstractTransforms`
                      applied in atom. """
         pass

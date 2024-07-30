@@ -162,7 +162,7 @@ class Corpus(Generic[E], Introspective, ABC):
         index_map_index: int = int(np.floor(time * self._grid_size))
         if index_map_index >= len(self._index_map) or index_map_index == self.INDEX_MAP_UNRECORDED:
             return self.events[-1]
-        index: int = self._index_map[index_map_index]
+        index: int = int(self._index_map[index_map_index])
 
         return self.event_at(index)
 
@@ -171,7 +171,7 @@ class Corpus(Generic[E], Introspective, ABC):
         if index_map_index >= len(self._index_map) - 1 or index_map_index == self.INDEX_MAP_UNRECORDED:
             return self.events[-1]
 
-        index: int = self._index_map[index_map_index]
+        index: int = int(self._index_map[index_map_index])
         return self.event_at(index)
 
     def events_around(self, times: np.ndarray) -> List[E]:

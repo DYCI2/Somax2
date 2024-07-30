@@ -8,7 +8,7 @@ from typing import Tuple, Dict, Union, Optional, List, Type
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import TransformError
-from somax.runtime.label import AbstractLabel
+from somax.runtime.label import IntLabel
 from somax.runtime.parameter import Parameter, ParamWithSetter
 from somax.runtime.parameter import Parametric
 from somax.runtime.peak_event import PeakEvent, ClassicPeakEvent
@@ -26,7 +26,7 @@ class AbstractMemorySpace(Parametric, StringParsed, ABC):
         super(AbstractMemorySpace, self).__init__()
         self.logger = logging.getLogger(__name__)
         self._corpus: Optional[Corpus] = None
-        self._labels: Optional[List[AbstractLabel]] = None
+        self._labels: Optional[List[IntLabel]] = None
         # Must be defined in `update_transforms`
         self._transform_handler: Optional[TransformHandler] = None
 
@@ -39,15 +39,15 @@ class AbstractMemorySpace(Parametric, StringParsed, ABC):
         return cls._from_string(memory_space, **kwargs)
 
     @abstractmethod
-    def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:
+    def model(self, corpus: Corpus, labels: List[IntLabel], **_kwargs) -> None:
         pass
 
     @abstractmethod
-    def learn_event(self, event: CorpusEvent, label: AbstractLabel) -> None:
+    def learn_event(self, event: CorpusEvent, label: IntLabel) -> None:
         pass
 
     @abstractmethod
-    def influence(self, labels: List[Tuple[AbstractLabel, AbstractTransform]], time: float,
+    def influence(self, labels: List[Tuple[IntLabel, AbstractTransform]], time: float,
                   **kwargs) -> List[PeakEvent]:
         pass
 
@@ -95,7 +95,7 @@ class NGramMemorySpace(AbstractMemorySpace):
     def __repr__(self):
         return f"NGramMemorySpace(_ngram_size={self._ngram_size.value}, corpus={self._corpus}, ...)"  #
 
-    def model(self, corpus: Corpus, labels: List[AbstractLabel], **_kwargs) -> None:
+    def model(self, corpus: Corpus, labels: List[IntLabel], **_kwargs) -> None:
         if self._transform_handler is None:
             raise TransformError("update_transforms must be called before modelling a corpus")
         self.logger.debug(f"[model] Modelling corpus '{corpus.name}'.")
@@ -106,8 +106,8 @@ class NGramMemorySpace(AbstractMemorySpace):
         for event, label in zip(self._corpus.events, self._labels):
             self.learn_event(event, label)
 
-    def learn_event(self, event: CorpusEvent, label: AbstractLabel) -> None:
-        self._learned_labels.append(hash(label))
+    def learn_event(self, event: CorpusEvent, label: IntLabel) -> None:
+        self._learned_labels.append(label.label)
         if len(self._learned_labels) < self._ngram_size.value:
             return
         else:
@@ -118,11 +118,11 @@ class NGramMemorySpace(AbstractMemorySpace):
             else:
                 self._structured_data[key] = [value]
 
-    def influence(self, labels: List[Tuple[AbstractLabel, AbstractTransform]], time: float,
+    def influence(self, labels: List[Tuple[IntLabel, AbstractTransform]], time: float,
                   **_kwargs) -> List[PeakEvent]:
         matches: List[PeakEvent] = []
         for (label, transform) in labels:
-            label_value: int = hash(label)
+            label_value: int = label.label
             transform_id: int = self._transform_handler.get_id(transform)
             self.logger.debug(f"[influence] Influencing memory space {self} with label {label_value}.")
             self._influence_history[transform_id].append(label_value)

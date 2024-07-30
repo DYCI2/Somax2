@@ -8,7 +8,7 @@ from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import InvalidLabelInput, TransformError
 from somax.runtime.influence import AbstractInfluence, FeatureInfluence, CorpusInfluence
-from somax.runtime.label import AbstractLabel, IntLabel
+from somax.runtime.label import IntLabel, IntLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
 
@@ -27,16 +27,16 @@ class StaticTextClassifier(AbstractClassifier):
             if index == self.UNMATCHED:
                 self._map.append(feature)
 
-    def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
+    def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
         return [self.classify_event(event) for event in corpus.events]
 
-    def classify_event(self, event: CorpusEvent) -> AbstractLabel:
+    def classify_event(self, event: CorpusEvent) -> IntLabel:
         try:
             return self._classify_feature(typing.cast(LabelFeature, event.get_feature(LabelFeature)))
         except KeyError:
             return IntLabel(self.UNMATCHED)
 
-    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[IntLabel, AbstractTransform]]:
         if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, LabelFeature):
             return [(self._classify_feature(typing.cast(LabelFeature, influence.feature)), NoTransform())]
         elif isinstance(influence, CorpusInfluence):

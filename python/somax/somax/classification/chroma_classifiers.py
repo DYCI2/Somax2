@@ -13,7 +13,7 @@ from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import InvalidLabelInput, TransformError
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence, FeatureInfluence
-from somax.runtime.label import AbstractLabel, IntLabel
+from somax.runtime.label import IntLabel, IntLabel
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 
@@ -75,7 +75,7 @@ class BaseSomChromaClassifier(ChromaClassifier):
     def classify_event(self, event: CorpusEvent) -> IntLabel:
         return self._label_from_chroma(event.get_feature(self.chroma_type).value())
 
-    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+    def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[IntLabel, AbstractTransform]]:
         """ :raises TransformError if no transforms exist """
         if not self._transforms:  # transforms is empty
             raise TransformError(f"No transforms exist in classifier {self}")
@@ -118,7 +118,7 @@ class MeanSomChromaClassifier(BaseSomChromaClassifier):
 #         self.max_iter: int = max_iter
 #         self.gmm: Optional[GaussianMixture] = None
 #
-#     def classify_corpus(self, corpus: Corpus) -> List[AbstractLabel]:
+#     def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
 #         if self.USE_MULTIPROCESSING:
 #             import multiprocessing
 #             with multiprocessing.Pool(processes=4) as pool:
@@ -136,7 +136,7 @@ class MeanSomChromaClassifier(BaseSomChromaClassifier):
 #     def _multiproc_compute_label(self, e: CorpusEvent) -> IntLabel:
 #         return IntLabel(int(self.gmm.predict(e.get_feature(OnsetChroma).value().reshape(1, -1))))
 #
-#     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[AbstractLabel, AbstractTransform]]:
+#     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[IntLabel, AbstractTransform]]:
 #         """ :raises TransformError if no transforms exist """
 #         if not self._transforms:
 #             raise TransformError(f"No Transforms exist in classifier {self}")
