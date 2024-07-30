@@ -9,6 +9,7 @@ from timeit import default_timer as timer
 from typing import Tuple, List, Optional, Dict, Any, Type, Union
 
 import librosa
+import librosa.feature
 import numpy as np
 import pandas as pd
 from audioread import NoBackendError
@@ -24,7 +25,7 @@ from somax.runtime.corpus import Corpus, AudioCorpus, MidiCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError, ParameterError
 from somax.runtime.osc_log_forwarder import OscLogForwarder
-from somax.runtime.send_protocol import PlayerSendProtocol, ServerSendProtocol
+from somax.runtime.send_protocol import ServerSendProtocol
 from somax.runtime.target import SimpleOscTarget
 from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduling
 
@@ -227,8 +228,12 @@ class CorpusBuilder:
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) completed feature analysis for "
                           f"{len(used_features)} features ({', '.join([f.__name__ for f in used_features])})")
 
-        corpus: MidiCorpus = MidiCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
-                                        feature_types=used_features, build_parameters=build_parameters)
+        corpus: MidiCorpus = MidiCorpus(events=events,
+                                        name=name,
+                                        scheduling_mode=metadata.content_type,
+                                        feature_types=used_features,
+                                        label_info={},
+                                        build_parameters=build_parameters)
 
         self.logger.debug(f"[_build_midi]: ({timer() - start_time:.2f}) completed construction of MIDI corpus")
 
@@ -322,10 +327,16 @@ class CorpusBuilder:
                                             }
 
         # TODO: Folder support - should not use filepaths[0]
-        corpus: AudioCorpus = AudioCorpus(events=events, name=name, scheduling_mode=metadata.content_type,
+        corpus: AudioCorpus = AudioCorpus(events=events,
+                                          name=name,
+                                          scheduling_mode=metadata.content_type,
                                           feature_types=used_features,
-                                          build_parameters=build_parameters, sr=sr, filepath=filepaths[0],
-                                          file_duration=metadata.duration, file_num_channels=metadata.channels)
+                                          label_info={},
+                                          build_parameters=build_parameters,
+                                          sr=sr,
+                                          filepath=filepaths[0],
+                                          file_duration=metadata.duration,
+                                          file_num_channels=metadata.channels)
 
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed construction of audio corpus")
 
@@ -342,7 +353,7 @@ class CorpusBuilder:
                 self.logger.warning(f"Ignoring file '{filepath}' since it has a different sample rate "
                                     f"({sr_y} compared to previously used value {sr})")
             else:
-                sr = sr_y
+                sr = int(sr_y)
                 content.append(y)
 
         try:
@@ -377,10 +388,16 @@ class CorpusBuilder:
         duration_times: np.ndarray = librosa.frames_to_time(duration_frames, sr=sr, hop_length=hop_length)
         return onset_times, duration_times, stats
 
-    def _slice_audio(self, audio_signal: np.ndarray, sr: float, onset_channels: Optional[List[int]] = None,
+    def _slice_audio(self,
+                     audio_signal: np.ndarray,
+                     sr: float,
+                     onset_channels: Optional[List[int]] = None,
                      segmentation_mode: AudioSegmentation = AudioSegmentation.ONSET,
-                     hop_length: int = 512, min_interval_s: float = 0.05, max_size_s: Optional[float] = None,
-                     off_threshold_db: Optional[float] = -120.0, discard_by_mean: bool = False,
+                     hop_length: int = 512,
+                     min_interval_s: float = 0.05,
+                     max_size_s: Optional[float] = None,
+                     off_threshold_db: Optional[float] = -120.0,
+                     discard_by_mean: bool = False,
                      segmentation_interval_s: float = 1.0,
                      **kwargs) -> Tuple[np.ndarray, np.ndarray, SegmentationStatistics]:
         """ segmentation_interval_s: Only used for when `segmentation_mode` is INTERVAL """

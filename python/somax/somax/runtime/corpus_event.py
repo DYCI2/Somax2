@@ -1,12 +1,13 @@
 import logging
 from abc import abstractmethod, ABC
-from typing import Optional, List, Dict, Type, Any
+from typing import Optional, List, Dict, Type, Any, Tuple
 
 import pandas as pd
 
 from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.features.feature_value import FeatureValue
 from somax.runtime.exceptions import FeatureError
+from somax.runtime.label import AbstractLabel
 from somax.runtime.memory_state import MemoryState
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling
 
@@ -121,18 +122,29 @@ class Note:
 
 
 class CorpusEvent(ABC):
-    def __init__(self, state_index: int, features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None):
+    def __init__(self,
+                 state_index: int,
+                 features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None,
+                 labels: Optional[Dict[int, AbstractLabel]] = None
+                 ):
         self.logger = logging.getLogger(__name__)
         self.state_index: int = state_index
-        self.features: Dict[Type[FeatureValue], FeatureValue] = features if features else {}
+        self.features: Dict[Type[FeatureValue], FeatureValue] = features if features is not None else {}
+        self.labels: Dict[int, AbstractLabel] = labels if labels is not None else {}
 
     @classmethod
     @abstractmethod
-    def decode(cls, event_dict: Dict[str, Any], feature_classpath_dict: Dict[str, str]) -> 'CorpusEvent':
+    def decode(cls,
+               event_dict: Dict[str, Any],
+               feature_classpath_dict: Dict[str, str],
+               label_info: Dict[str, Tuple[int, Type[AbstractLabel]]]
+               ) -> 'CorpusEvent':
         """ Raises: KeyError, AttributeError"""
 
     @abstractmethod
-    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
+    def encode(self,
+               features_dict: Dict[Type[FeatureValue], str],
+               label_names: Dict[int, str]) -> Dict[str, Any]:
         """ """
 
     @property
@@ -158,7 +170,24 @@ class CorpusEvent(ABC):
     def set_feature(self, feature: FeatureValue):
         """ Note! This call is strictly for constructing the corpus. Using it at runtime to edit an already loaded
                   corpus will not warrant well-defined behaviour """
+        # TODO: Handle with self.editable flag (see SOM-16)
         self.features[type(feature)] = feature
+
+    def get_label(self, label_id: int) -> AbstractLabel:
+        """ Raises KeyError"""
+        try:
+            return self.labels[label_id]
+        except KeyError as e:
+            raise KeyError(f"Event does not have label with id '{label_id}'") from e
+
+    def get_label_safe(self, label_id: int) -> Optional[AbstractLabel]:
+        return self.labels.get(label_id)
+
+    def set_label(self, label_id: int, label: AbstractLabel) -> None:
+        """ Note! This call is strictly for constructing the corpus. Using it at runtime to edit an already loaded
+                  corpus will not warrant well-defined behaviour """
+        # TODO: Handle with self.editable flag (see SOM-16)
+        self.labels[label_id] = label
 
 
 class MidiCorpusEvent(CorpusEvent):
@@ -174,8 +203,9 @@ class MidiCorpusEvent(CorpusEvent):
                  absolute_duration: Optional[float] = None,
                  notes: Optional[List[Note]] = None,
                  features: Optional[Dict[Type[FeatureValue], FeatureValue]] = None,
+                 labels: Optional[Dict[int, AbstractLabel]] = None,
                  scheduling_mode: SchedulingMode = RelativeScheduling()):
-        super().__init__(state_index=state_index, features=features)
+        super().__init__(state_index=state_index, features=features, labels=labels)
         self.scheduling_mode: SchedulingMode = scheduling_mode
         self.tempo: float = tempo
         self._relative_onset: float = onset
@@ -190,9 +220,12 @@ class MidiCorpusEvent(CorpusEvent):
         self.recorded_memory_state: Optional[MemoryState] = None
 
     @classmethod
-    def decode(cls, event_dict: Dict[str, Any], feature_dict: Dict[str, str]) -> 'MidiCorpusEvent':
+    def decode(cls,
+               event_dict: Dict[str, Any],
+               feature_dict: Dict[str, str],
+               label_info: Dict[str, Tuple[int, Type[AbstractLabel]]]) -> 'MidiCorpusEvent':
         """ Raises: KeyError, AttributeError"""
-        from somax.features.feature import CorpusFeature
+        from somax.features.feature import CorpusFeature  # Local import to avoid circular import
         return MidiCorpusEvent(state_index=event_dict["state_index"],
                                tempo=event_dict["tempo"],
                                onset=event_dict["onset"],
@@ -202,7 +235,9 @@ class MidiCorpusEvent(CorpusEvent):
                                bar_number=event_dict["bar"],
                                notes=[Note.from_json(note_dict) for note_dict in event_dict["notes"]],
                                features=dict([CorpusFeature.from_json(feature_dict[k], v)
-                                              for (k, v) in event_dict["features"].items()])
+                                              for (k, v) in event_dict["features"].items()]),
+                               labels={label_info[name][0]: label_info[name][1](value)
+                                       for (name, value) in event_dict["labels"].items()}
                                )
 
     @classmethod
@@ -280,7 +315,9 @@ class MidiCorpusEvent(CorpusEvent):
     def held_from(self) -> List[Note]:
         return [note for note in self.notes if note.is_held_from(self.duration)]
 
-    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
+    def encode(self,
+               features_dict: Dict[Type[FeatureValue], str],
+               label_names: Dict[int, str]) -> Dict[str, Any]:
         return {"state_index": self.state_index,
                 "tempo": self.tempo,
                 "onset": self._relative_onset,
@@ -289,9 +326,9 @@ class MidiCorpusEvent(CorpusEvent):
                 "duration": self._relative_duration,
                 "absolute_duration": self.absolute_duration,
                 "notes": [note.encode() for note in self.notes],
-                "features": {features_dict[cls]: obj for (cls, obj) in self.features.items()}
+                "features": {features_dict[cls]: obj for (cls, obj) in self.features.items()},
+                "labels": {label_names[label_id]: value for (label_id, value) in self.labels.items()}
                 }
-        # : Dict[Type[AbstractTrait], AbstractTrait] = event_parameters if event_parameters else {}
 
 
 class AudioCorpusEvent(CorpusEvent):
@@ -302,11 +339,17 @@ class AudioCorpusEvent(CorpusEvent):
         self._absolute_duration: float = absolute_duration
 
     @classmethod
-    def decode(cls, event_dict: Dict[str, Any], feature_classpath_dict: Dict[str, str]) -> 'CorpusEvent':
+    def decode(cls,
+               event_dict: Dict[str, Any],
+               feature_classpath_dict: Dict[str, str],
+               label_info: Dict[str, Tuple[int, Type[AbstractLabel]]]
+               ) -> 'CorpusEvent':
         # TODO: Remove from interface once pickling has been made the norm
         raise NotImplementedError("This function is not needed for pickling")
 
-    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
+    def encode(self,
+               features_dict: Dict[Type[FeatureValue], str],
+               label_names: Dict[int, str]) -> Dict[str, Any]:
         # TODO: Remove from interface once pickling has been made the norm
         raise NotImplementedError("This function is not needed for pickling")
 
@@ -328,12 +371,17 @@ class SilenceEvent(CorpusEvent):
         self._duration: float = duration
 
     @classmethod
-    def decode(cls, event_dict: Dict[str, Any], feature_classpath_dict: Dict[str, str]) -> 'CorpusEvent':
+    def decode(cls,
+               event_dict: Dict[str, Any],
+               feature_classpath_dict: Dict[str, str],
+               label_info: Dict[str, Tuple[int, Type[AbstractLabel]]]) -> 'CorpusEvent':
         logging.getLogger(__name__).warning("A SilenceEvent should never be stored in a corpus "
                                             "and should therefore never be decoded")
         return SilenceEvent(0.0)
 
-    def encode(self, features_dict: Dict[Type[FeatureValue], str]) -> Dict[str, Any]:
+    def encode(self,
+               features_dict: Dict[Type[FeatureValue], str],
+               label_names: Dict[int, str]) -> Dict[str, Any]:
         logging.getLogger(__name__).warning("A SilenceEvent should never be stored in a corpus "
                                             "and should therefore never be decoded")
         return {}

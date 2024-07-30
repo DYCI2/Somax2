@@ -18,6 +18,11 @@ class InvalidCorpus(Exception):
         super(InvalidCorpus, self).__init__(error)
 
 
+class CorpusUpdateError(Exception):
+    def __init__(self, error):
+        super(CorpusUpdateError, self).__init__(error)
+
+
 class ExternalDataMismatch(Exception):
     def __init__(self, error):
         super(ExternalDataMismatch, self).__init__(error)

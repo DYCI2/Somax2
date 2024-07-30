@@ -12,6 +12,7 @@ import sys
 import typing
 import warnings
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from enum import Enum
 from typing import List, Optional, Type, Dict, Any, Tuple, Union, TypeVar, Generic, Iterable
 
@@ -25,7 +26,8 @@ from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features.feature import CorpusFeature
 from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
-from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch, RecordingError
+from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch, RecordingError, CorpusUpdateError
+from somax.runtime.label import AbstractLabel
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.utils.get_version import VersionTools
 from somax.utils.introspective import Introspective
@@ -67,6 +69,13 @@ class HeldObject(Generic[E]):
         raise AttributeError(f"Cannot compare type '{type(other)}' with '{self.__class__}'")
 
 
+@dataclass
+class LabelInfo:
+    label_id: int
+    label_name: str
+    label_type: Type[AbstractLabel]
+
+
 class Corpus(Generic[E], Introspective, ABC):
     INDEX_MAP_SIZE = 1_000_000
     DEFAULT_CORPUS_DURATION: float = 1800  # seconds
@@ -78,6 +87,7 @@ class Corpus(Generic[E], Introspective, ABC):
                  name: str,
                  scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]],
+                 label_info: Dict[str, Tuple[int, Type[AbstractLabel]]],
                  build_parameters: Dict[str, Any],
                  **kwargs):
         self.logger = logging.getLogger(__name__)
@@ -85,6 +95,7 @@ class Corpus(Generic[E], Introspective, ABC):
         self.name: str = name
         self.scheduling_mode: SchedulingMode = scheduling_mode
         self.feature_types: List[Type[CorpusFeature]] = feature_types
+        self.label_info: Dict[str, Tuple[int, Type[AbstractLabel]]] = label_info
         self._build_parameters: Dict[str, Any] = build_parameters
 
         self._index_map: np.ndarray = np.array([])
@@ -184,6 +195,46 @@ class Corpus(Generic[E], Introspective, ABC):
         """ Returns the number of events in the corpus """
         return len(self.events)
 
+    def label_type_of(self, label_name: str) -> Type[AbstractLabel]:
+        """ Raises KeyError """
+        return self.label_info[label_name][1]
+
+    def label_id_of(self, label_name: str) -> int:
+        """ Raises KeyError """
+        return self.label_info[label_name][0]
+
+    def add_labels(self,
+                   labels: List[AbstractLabel],
+                   label_name: str,
+                   label_type: Type[AbstractLabel],
+                   override: bool = False) -> None:
+        """ Raises CorpusUpdateError
+            Note that this call is strictly for constructing the corpus. Using it at runtime to edit an already loaded
+                  corpus will not warrant well-defined behaviour """
+        # TODO: Handle with self.editable flag (see SOM-16)
+        if not override and label_name in self.label_info:
+            raise CorpusUpdateError(f"Label '{label_name}' already exists")
+
+        if len(labels) != self.length():
+            raise CorpusUpdateError(f"A label must be added to each event in the corpus for this operation to be valid")
+
+        if not all(isinstance(label, label_type) for label in labels):
+            raise CorpusUpdateError(f"All labels must be of type '{label_type.__name__}'")
+
+        label_ids: List[int] = [info[0] for info in self.label_info.values()]
+        label_id: int = max(label_ids) + 1 if len(label_ids) > 0 else 0
+        self.label_info[label_name] = (label_id, label_type)
+
+        for label, event in zip(labels, self.events):
+            event.set_label(label_id, label)
+
+    def get_labels(self, label_name: str) -> List[AbstractLabel]:
+        """ Raises KeyError
+            Note that all labels in the list are of the same type, which means that
+            it's not necessary to check the type for each event but only the first one """
+        label_id: int = self.label_id_of(label_name)
+        return [ev.get_label(label_id) for ev in self.events]
+
 
 class MidiCorpus(Corpus[MidiCorpusEvent]):
     def __init__(self,
@@ -191,11 +242,13 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
                  name: str,
                  scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]],
+                 label_info: Dict[str, Tuple[int, Type[AbstractLabel]]],
                  build_parameters: Dict[str, Any]):
         super().__init__(events=events,
                          name=name,
                          scheduling_mode=scheduling_mode,
                          feature_types=feature_types,
+                         label_info=label_info,
                          build_parameters=build_parameters)
         self.logger = logging.getLogger(__name__)
 
@@ -216,11 +269,24 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
 
             build_parameters: Dict[str, Any] = corpus_data["build_parameters"]
             features_dict: Dict[str, str] = corpus_data["features_dict"]
-            events: List[MidiCorpusEvent] = [MidiCorpusEvent.decode(event_dict, features_dict)
+
+            label_info: Dict[str, Tuple[int, Type[AbstractLabel]]] = {
+                name: (i, typing.cast(Type[AbstractLabel], AbstractLabel.parse_type(type_name)))
+                for i, (name, type_name) in enumerate(corpus_data["label_types"].items())
+            }
+
+            events: List[MidiCorpusEvent] = [MidiCorpusEvent.decode(event_dict=event_dict,
+                                                                    feature_dict=features_dict,
+                                                                    label_info=label_info)
                                              for event_dict in corpus_data["events"]]
             features: List[Type[CorpusFeature]] = [CorpusFeature.class_from_string(p) for p in features_dict.values()]
-            return cls(events=events, name=name, scheduling_mode=scheduling_mode,
-                       feature_types=features, build_parameters=build_parameters)
+
+            return cls(events=events,
+                       name=name,
+                       scheduling_mode=scheduling_mode,
+                       feature_types=features,
+                       label_info=label_info,
+                       build_parameters=build_parameters)
 
         # KeyError (from AbstractTrait.from_json, this), AttributeError (from AbstractTrait.from_json)
         except (KeyError, AttributeError) as e:
@@ -237,14 +303,17 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
         if len(set(features.keys())) < len(features.keys()):
             self.logger.warning("Two features with the same name exist in the library. Built corpus may not be properly"
                                 " constructed. Ensure that no two CorpusFeatures in the library have the same name.")
+        label_names = {label_id: label_name for (label_name, (label_id, _)) in self.label_info.items()}
+
         return {"name": self.name,
                 "content_type": self.scheduling_mode.encode(),
                 "version": somax.__version_corpus__,
                 "build_parameters": self._build_parameters,
                 "features_dict": {name: feature.classpath() for (feature, name) in features.items()},
+                "label_types": {name: label_type.__name__ for (name, (_, label_type)) in self.label_info.items()},
                 "length": self.length(),
                 "duration": self.duration(),
-                "events": [event.encode(features_dict=features) for event in self.events]
+                "events": [event.encode(features_dict=features, label_names=label_names) for event in self.events]
                 }
 
     def duration(self) -> float:
@@ -341,6 +410,7 @@ class AudioCorpus(Corpus):
                  name: str,
                  scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]],
+                 label_info: Dict[str, Tuple[int, Type[AbstractLabel]]],
                  build_parameters: Dict[str, Any],
                  sr: int,
                  filepath: str,
@@ -350,6 +420,7 @@ class AudioCorpus(Corpus):
                          name=name,
                          scheduling_mode=scheduling_mode,
                          feature_types=feature_types,
+                         label_info=label_info,
                          build_parameters=build_parameters)
         self.sr: int = sr
         self.filepath: str = filepath
@@ -418,6 +489,8 @@ class AudioCorpus(Corpus):
                                new_audio_duration: float,
                                new_audio_num_channels: int,
                                new_name: Optional[str] = None) -> 'AudioCorpus':
+        # TODO: Labels
+        warnings.warn("TODO: Label info missing")
         return cls(events=other.events,
                    name=new_name if new_name is not None else other.name,
                    scheduling_mode=other.scheduling_mode,
@@ -514,6 +587,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                  name: str,
                  scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]],
+                 label_info: Dict[str, Tuple[int, Type[AbstractLabel]]],
                  build_parameters: Dict[str, Any],
                  sr: int,
                  filepath: str,
@@ -524,6 +598,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                          name=name,
                          scheduling_mode=scheduling_mode,
                          feature_types=feature_types,
+                         label_info=label_info,
                          build_parameters=build_parameters,
                          sr=sr,
                          filepath=filepath,
@@ -555,6 +630,9 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         build_params: Dict[str, Any] = copy.copy(corpus._build_parameters)
         build_params[RealtimeRecordedAudioCorpus.RT_RECORDED_KEY] = True
 
+        # TODO: Labels (SOM-64)
+        warnings.warn("TODO: Label missing")
+
         return RealtimeRecordedAudioCorpus(events=corpus.events,
                                            name=corpus.name,
                                            scheduling_mode=corpus.scheduling_mode,
@@ -571,6 +649,9 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
 
         recording_features_determined: bool = target_features is not None
         target_features = [] if target_features is None else target_features
+
+        # TODO: Labels (SOM-64)
+        warnings.warn("TODO: Label missing")
 
         return RealtimeRecordedAudioCorpus(events=[],
                                            name="new",
@@ -679,6 +760,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                         overwrite: bool = False,
                         **kwargs) -> str:
         self.saved = True
+        # TODO: Sample rate missing?
         audio_corpus: AudioCorpus = AudioCorpus.from_realtime_recorded(self,
                                                                        new_audio_filepath=audio_filepath,
                                                                        new_audio_duration=audio_file_duration,

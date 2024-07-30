@@ -1,7 +1,19 @@
-from typing import Union
+from abc import ABC
+
+from somax.utils.introspective import StringParsed
 
 
-class IntLabel:
+class AbstractLabel(StringParsed, ABC):
+    @classmethod
+    def default(cls, **kwargs) -> 'StringParsed':
+        raise ValueError("No default type for class AbstractLabel")
+
+    @classmethod
+    def from_string(cls, class_name: str, **kwargs) -> 'StringParsed':
+        return cls._from_string(class_name, **kwargs)
+
+
+class IntLabel(AbstractLabel):
     def __init__(self, label: int):
         self._label = label
 
@@ -13,7 +25,7 @@ class IntLabel:
         return self._label
 
 
-class StrLabel:
+class StrLabel(AbstractLabel):
     def __init__(self, label: str):
         self._label = label
 
@@ -23,6 +35,3 @@ class StrLabel:
     @property
     def label(self) -> str:
         return self._label
-
-
-LabelType = Union[IntLabel, StrLabel]
