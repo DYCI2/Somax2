@@ -12,12 +12,13 @@ from typing import Any, Optional, List, Tuple, Type, Union
 import mido
 
 from somax import settings, log
-from somax.classification.classifier import AbstractClassifier
+from somax.classification.classifier import AbstractClassifier, FeatureClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features import Tempo
 from somax.features.feature import AbstractFeature, CorpusFeature, RuntimeRecordable
+from somax.features.feature_dictionary import FeatureDictionary, FeatureSpecification
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
@@ -26,7 +27,7 @@ from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus, RealtimeRecord
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent, SilenceEvent
 from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
-    InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch, RecordingError
+    InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch, RecordingError, InvalidConfiguration
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
@@ -473,15 +474,32 @@ class OscAgent(Agent, AsyncioOscObject):
         except (ValueError, KeyError) as e:
             self.logger.error(f"{str(e)} No peak selector was set.")
 
-    def set_classifier(self, path: str, classifier: str, **kwargs):
+    def set_classifier(self, path: str, classifier: str, descriptor: str, descriptor_is_label: bool) -> None:
         try:
+            # Case 1: descriptor is an `AbstractLabel`
+            if descriptor_is_label:
+                classifier: AbstractClassifier = LabelClassifier(descriptor)
+
+            else:
+                feature_info: FeatureSpecification = FeatureDictionary.get_entry(descriptor)
+
+                # Case 2: descriptor is a `CorpusFeature` but with default classifier
+                if classifier == "default" or classifier == "":
+                    classifier = feature_info.create_default_classifier()
+
+                # Case 3: descriptor is a `CorpusFeature` with a user-specified classifier
+                else:
+                    # TODO: If this is invalid, we should probably still set it (as None) but print a warning at this level
+                    classifier = FeatureClassifier.from_string(classifier,
+                                                               midi_feature=feature_info.midi_feature,
+                                                               audio_feature=feature_info.audio_feature)
+
             path_and_name: List[str] = self._string_to_path(path)
-            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             self.player.set_classifier(path_and_name, classifier)
             self._send_eligibility()
-            self.logger.debug(f"[set_peak_classifier] Classifier set to {type(classifier).__name__} "
-                              f"for player '{self.player.name}' (path='{path}').")
-        except (AssertionError, KeyError, ValueError, InvalidCorpus) as e:
+
+        # Note: InvalidCorpus if clustering fails
+        except (AssertionError, KeyError, ValueError, InvalidCorpus, InvalidConfiguration) as e:
             self.logger.error(f"{str(e)} No classifier was set.")
 
     def set_activity_pattern(self, path: str, activity_pattern: str, **kwargs):

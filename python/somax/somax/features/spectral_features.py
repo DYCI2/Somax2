@@ -32,7 +32,7 @@ class OctaveBands(CorpusFeature):
 
     @classmethod
     def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=trait_dict["band"])
+        return cls(value=np.array(trait_dict["band"]))
 
     def encode(self) -> Dict[str, Any]:
         return {"band": self._value.tolist()}

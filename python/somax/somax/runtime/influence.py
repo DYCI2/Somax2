@@ -1,19 +1,9 @@
 from abc import ABC
-from enum import Enum
 from typing import Any
 
 from somax.features.feature import RuntimeFeature
 from somax.runtime.corpus_event import CorpusEvent
-
-
-class InfluenceType(Enum):
-    PITCH = "pitch"
-    CHROMA = "chroma"
-
-    @classmethod
-    def from_string(cls, influence_type: str):
-        """ :raises ValueError """
-        return InfluenceType(influence_type.lower())
+from somax.runtime.label import AbstractLabel
 
 
 class AbstractInfluence(ABC):
@@ -33,3 +23,8 @@ class FeatureInfluence(AbstractInfluence):
     def from_keyword(cls, keyword: str, value: Any):
         """ :raises ValueError if a feature matching the keyword doesn't exist """
         return cls(RuntimeFeature.from_string(keyword, value))
+
+
+class LabelInfluence(AbstractInfluence):
+    def __init__(self, label: AbstractLabel):
+        self.label: AbstractLabel = label

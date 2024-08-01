@@ -166,6 +166,9 @@ class Corpus(Generic[E], Introspective, ABC):
     def has_feature(self, feature_type: Type[CorpusFeature]) -> bool:
         return feature_type in self.feature_types
 
+    def has_label(self, label_name: str) -> bool:
+        return label_name in self.label_info
+
     def event_at(self, index: int) -> E:
         return self.events[index]
 
@@ -228,11 +231,11 @@ class Corpus(Generic[E], Introspective, ABC):
         for label, event in zip(labels, self.events):
             event.set_label(label_id, label)
 
-    def get_labels(self, label_name: str) -> List[AbstractLabel]:
+    def get_labels(self, label_name_or_id: Union[str, int]) -> List[AbstractLabel]:
         """ Raises KeyError
             Note that all labels in the list are of the same type, which means that
             it's not necessary to check the type for each event but only the first one """
-        label_id: int = self.label_id_of(label_name)
+        label_id: int = label_name_or_id if isinstance(label_name_or_id, int) else self.label_id_of(label_name_or_id)
         return [ev.get_label(label_id) for ev in self.events]
 
 

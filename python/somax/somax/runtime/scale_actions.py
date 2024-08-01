@@ -9,7 +9,6 @@ import numpy as np
 
 from somax.features import VerticalDensity, TotalEnergyDb
 from somax.features.energy_features import PeakEnergyDb
-from somax.features.label_feature import LabelFeature
 from somax.features.spectral_features import OctaveBands
 from somax.features.temporal_features import Tempo, BeatPhase
 from somax.runtime.content_aware import ContentAware

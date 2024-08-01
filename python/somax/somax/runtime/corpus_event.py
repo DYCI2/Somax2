@@ -327,7 +327,7 @@ class MidiCorpusEvent(CorpusEvent):
                 "absolute_duration": self.absolute_duration,
                 "notes": [note.encode() for note in self.notes],
                 "features": {features_dict[cls]: obj for (cls, obj) in self.features.items()},
-                "labels": {label_names[label_id]: value for (label_id, value) in self.labels.items()}
+                "labels": {label_names[label_id]: label.label for (label_id, label) in self.labels.items()}
                 }
 
 

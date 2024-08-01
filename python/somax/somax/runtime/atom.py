@@ -43,19 +43,19 @@ class Atom(Parametric, ContentAware):
         self._parse_parameters()
 
     def read_corpus(self, corpus: Optional[Corpus] = None):
-        """ :raises RuntimeError """
-        if not self.eligible:
-            print(f"Returning because '{self.name}' cannot read corpus of type")
+        """ raises RuntimeError (rare, invalid configurations, shouldn't be caught)
+                   InvalidCorpus (clustering fails) """
+        if corpus is None:
+            self._corpus = None
+            self.clear()
             return
 
-        if corpus is not None:
-            self.logger.debug(f"[read]: Reading corpus {corpus}.")
-            self._corpus = corpus
-        elif self._corpus is not None:
-            self.logger.debug(f"[read]: Re-reading corpus {self._corpus}.")
-        else:
-            self.logger.debug(f"[read]: No corpus was provided and atom '{self.name}' does not have a corpus. "
-                              f"No action performed.")
+        self._corpus = corpus
+
+        if not self._is_eligible_for(corpus):
+            # TODO: Cannot raise exception here, but we need a better way to pass this information to Max than "print"
+            print(f"Returning because '{self.name}' cannot read corpus of type")
+            self.clear()
             return
 
         self._classifier.cluster(self._corpus)
@@ -96,6 +96,7 @@ class Atom(Parametric, ContentAware):
             self.influence(CorpusInfluence(feedback_event), time)
 
     def set_classifier(self, classifier: AbstractClassifier) -> None:
+        """ raises: InvalidCorpus"""
         self._classifier = classifier
         self.read_corpus()
 

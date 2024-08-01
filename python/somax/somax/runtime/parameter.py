@@ -9,14 +9,12 @@ Ranged = Union[MaxCompatible, None]
 
 
 class HasParameterDict(ABC):
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.parameter_dict: Dict[str, Union[Parametric, Parameter, Dict]] = {}
 
 
 class Parameter(HasParameterDict):
-
     def __init__(self, default_value: MaxCompatible, min: Ranged, max: Ranged,
                  type_str: str, description: str):
         super().__init__()
@@ -24,10 +22,6 @@ class Parameter(HasParameterDict):
         self.scope: Tuple[Ranged, Ranged] = (min, max)
         self.type_str: str = type_str
         self.description: str = description
-
-    def max_representation(self) -> Dict:
-        # TODO: Remove value from this
-        return vars(self)
 
     def set_value(self, value):
         # TODO: Check range
@@ -46,19 +40,12 @@ class ParamWithSetter(Parameter):
 
 
 class Parametric(HasParameterDict):
-
     def __init__(self, **kwargs):
         """ Parameter dict is a dict of dicts (of dicts of ...). Note: only dicts (no lists).
             It should be updated using parameter_dict() whenever parameter info is changed
-            (for example, upon creating a streamview, adding a mergeaction or deleting an atom) """
+            (for example, upon adding a scale action or deleting an atom) """
         super(Parametric, self).__init__(**kwargs)
         self.parameter_dict: Dict[str, Union[Parametric, Parameter]] = {}
-
-    def max_representation(self) -> Dict:
-        d = {}
-        for name, param in self.parameter_dict.items():
-            d[name] = param.max_representation()
-        return d
 
     def set_param(self, path: List[str], value: Any):
         """ raises IndexError: if path spec is invalid, for example empty list,

@@ -54,5 +54,8 @@ class TransformHandler:
         return transforms
         # return [t for t in self._transforms.values() if feature in t.valid_features()]
 
+    def get_all_valid_transforms(self) -> List[AbstractTransform]:
+        return [t for t in self._transforms.values() if not isinstance(t, RedundantTransform)]
+
     def clear(self):
         self._transforms = {k: t for (k, t) in self._transforms.items() if not isinstance(t, RedundantTransform)}
