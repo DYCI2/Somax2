@@ -6,7 +6,7 @@ from somax.classification.classifier import AbstractClassifier
 from somax.features.feature import CorpusFeature
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.exceptions import TransformError, InvalidLabelInput
+from somax.runtime.exceptions import TransformError, ClassificationError
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence, LabelInfluence
 from somax.runtime.label import AbstractLabel, IntLabel, StrLabel
 from somax.runtime.transform_handler import TransformHandler
@@ -17,14 +17,6 @@ class LabelClassifierComponent(ABC):
     @abstractmethod
     def classify(self, label: AbstractLabel) -> IntLabel:
         pass
-
-    @abstractmethod
-    def initialize(self) -> None:
-        """ Initialize classifier on (re-)classification of a corpus"""
-
-    @staticmethod
-    def supports(descriptor: Union[Type[CorpusFeature], Type[AbstractLabel]]) -> bool:
-        return issubclass(descriptor, AbstractLabel)
 
 
 class LabelClassifier(AbstractClassifier):
@@ -51,7 +43,7 @@ class LabelClassifier(AbstractClassifier):
         elif isinstance(influence, CorpusInfluence):
             input_label = influence.corpus_event.get_label(self._label_id)
         else:
-            raise InvalidLabelInput(f"Influence {influence} could not be classified by {self}.")
+            raise ClassificationError(f"Influence {influence} could not be classified by {self}.")
 
         classified_label: IntLabel = self._classify(input_label)
         return [(classified_label, t) for t in self._transforms]
@@ -88,6 +80,7 @@ class LabelClassifier(AbstractClassifier):
 
 class IntLabelClassifier(LabelClassifierComponent):
     def classify(self, label: AbstractLabel) -> IntLabel:
+        # When used inside LabelClassifier, we are guaranteed to have an IntLabel
         return typing.cast(label, IntLabel)
 
 
@@ -95,7 +88,8 @@ class StrLabelClassifier(LabelClassifierComponent):
     def __init__(self):
         self._map: List[str] = []
 
-    def _classify(self, label: AbstractLabel) -> IntLabel:
+    def classify(self, label: AbstractLabel) -> IntLabel:
+        # When used inside LabelClassifier, we are guaranteed to have a StrLabel
         label: StrLabel = typing.cast(label, StrLabel)
         label_value: str = label.label
 

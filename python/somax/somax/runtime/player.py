@@ -12,8 +12,8 @@ from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, RealtimeRecordedAudioCorpus, MidiCorpus, AudioCorpus
 from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent, SilenceEvent
-from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch, RecordingError
-from somax.runtime.exceptions import InvalidCorpus, InvalidLabelInput
+from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch, RecordingError, ClassificationError
+from somax.runtime.exceptions import InvalidCorpus
 from somax.runtime.fallback_peak_selector import FallbackPeakSelector
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
@@ -196,7 +196,8 @@ class Player(Parametric, ContentAware):
                 try:
                     num_peaks: int = atom.influence(influence, time, **kwargs)
                     num_generated_peaks[atom] = num_peaks
-                except InvalidLabelInput:
+                except ClassificationError:
+                    # TODO: This needs to be changed - influencing without a valid path should not be supported at all
                     # Ignore atom if label doesn't match
                     continue
         else:

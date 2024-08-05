@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 from typing import Type, Dict
 
-from somax.classification import PitchClassClassifier
-from somax.classification.classifier import AbstractClassifier, FeatureClassifier
+from somax.classification import PitchClassClassifier, PitchClassifier
+from somax.classification.chroma_classifiers import SomChromaClassifier
+from somax.classification.classifier import FeatureClassifier
 from somax.features import YinDiscretePitch, OnsetChroma, MeanChroma, TopNote, BassNote, VirtualFundamental
 from somax.features.feature import CorpusFeature
 

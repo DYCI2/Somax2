@@ -13,6 +13,7 @@ import mido
 
 from somax import settings, log
 from somax.classification.classifier import AbstractClassifier, FeatureClassifier
+from somax.classification.label_classifier import LabelClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
@@ -26,8 +27,8 @@ from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus, RealtimeRecordedAudioCorpus
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent, SilenceEvent
 from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
-from somax.runtime.exceptions import DuplicateKeyError, ParameterError, \
-    InvalidCorpus, InvalidLabelInput, TransformError, ExternalDataMismatch, RecordingError, InvalidConfiguration
+from somax.runtime.exceptions import (DuplicateKeyError, ParameterError, InvalidCorpus, TransformError,
+                                      ExternalDataMismatch, RecordingError, InvalidConfiguration, ClassificationError)
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
@@ -414,7 +415,7 @@ class OscAgent(Agent, AsyncioOscObject):
             scheduling_time: float = self.scheduling_handler.time
             self.player.influence(path_and_name, influence, scheduling_time)
             self.send_peaks()
-        except (AssertionError, KeyError, IndexError, InvalidLabelInput) as e:
+        except (AssertionError, KeyError, IndexError, ClassificationError) as e:
             self.logger.error(f"{str(e)} Could not influence target.")
             return
         except InvalidCorpus as e:
@@ -433,9 +434,16 @@ class OscAgent(Agent, AsyncioOscObject):
     # CREATION/DELETION OF ATOM
     ######################################################
 
-    def create_atom(self, path: str = "", weight: float = Atom.DEFAULT_WEIGHT, classifier: str = "",
-                    activity_pattern: str = "", memory_space: str = "", self_influenced: bool = False,
-                    enabled: bool = True, override: bool = False, **kwargs):
+    def create_atom(self,
+                    path: str = "",
+                    weight: float = Atom.DEFAULT_WEIGHT,
+                    classifier: str = "",
+                    activity_pattern: str = "",
+                    memory_space: str = "",
+                    self_influenced: bool = False,
+                    enabled: bool = True,
+                    override: bool = False,
+                    **kwargs):
         try:
             path_and_name: List[str] = self._string_to_path(path)
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
@@ -476,7 +484,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def set_classifier(self, path: str, classifier: str, descriptor: str, descriptor_is_label: bool) -> None:
         try:
-            # Case 1: descriptor is an `AbstractLabel`
+            # Case 1: `descriptor` is the name of an `AbstractLabel` (which may or may not exist in the corpus)
             if descriptor_is_label:
                 classifier: AbstractClassifier = LabelClassifier(descriptor)
 

@@ -8,11 +8,6 @@ class InvalidJsonFormat(Exception):
         super(InvalidJsonFormat, self).__init__(error)
 
 
-class InvalidLabelInput(Exception):
-    def __init__(self, error):
-        super(InvalidLabelInput, self).__init__(error)
-
-
 class InvalidCorpus(Exception):
     def __init__(self, error):
         super(InvalidCorpus, self).__init__(error)
@@ -66,3 +61,10 @@ class FeatureError(Exception):
 class RecordingError(Exception):
     def __init__(self, error):
         super(RecordingError, self).__init__(error)
+
+
+class ClassificationError(Exception):
+    """ Raised when a classification (clustering, classification of corpus/event/influence, etc.) fails."""
+
+    def __init__(self, error):
+        super(ClassificationError, self).__init__(error)

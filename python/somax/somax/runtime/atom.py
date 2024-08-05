@@ -6,6 +6,7 @@ from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent
+from somax.runtime.exceptions import ClassificationError
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence
 from somax.runtime.label import IntLabel
 from somax.runtime.memory_spaces import AbstractMemorySpace
@@ -43,23 +44,32 @@ class Atom(Parametric, ContentAware):
         self._parse_parameters()
 
     def read_corpus(self, corpus: Optional[Corpus] = None):
-        """ raises RuntimeError (rare, invalid configurations, shouldn't be caught)
-                   InvalidCorpus (clustering fails) """
+        """ noexcept """
+
         if corpus is None:
             self._corpus = None
             self.clear()
             return
 
         self._corpus = corpus
+        self.set_eligibility(corpus)
 
-        if not self._is_eligible_for(corpus):
-            # TODO: Cannot raise exception here, but we need a better way to pass this information to Max than "print"
+        if not self.eligible:
+            # If atom isn't eligible, no explicit error is needed as this is handled through eligibility
+            # TODO: Temporary debug print -- this case is handled through eligibility checks
             print(f"Returning because '{self.name}' cannot read corpus of type")
             self.clear()
             return
 
-        self._classifier.cluster(self._corpus)
-        labels: List[IntLabel] = self._classifier.classify_corpus(self._corpus)
+        try:
+            self._classifier.cluster(self._corpus)
+            labels: List[IntLabel] = self._classifier.classify_corpus(self._corpus)
+        except ClassificationError as e:
+            # In the rare case of clustering/classification failure for an eligible corpus, an explicit error is needed
+            self.logger.error(e)
+            self.clear()
+            return
+
         self._memory_space.model(self._corpus, labels)
         self._activity_pattern.corpus = self._corpus
 
@@ -69,8 +79,8 @@ class Atom(Parametric, ContentAware):
 
     # influences the memory with incoming data
     def influence(self, influence: AbstractInfluence, time: float, **kwargs) -> int:
-        """ :raises InvalidLabelInput
-            :returns Number of peaks generated """
+        """ raises ClassificationError
+            returns Number of peaks generated """
         if not self.is_enabled_and_eligible():
             return 0
 

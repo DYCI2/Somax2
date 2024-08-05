@@ -3,10 +3,11 @@ from typing import List, Tuple, Union, Type
 
 import somax.classification
 from somax.features.feature import CorpusFeature
+from somax.features.feature_value import FeatureValue
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import CorpusEvent
-from somax.runtime.exceptions import InvalidConfiguration
+from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
+from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent
+from somax.runtime.exceptions import InvalidConfiguration, ClassificationError
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.label import IntLabel, AbstractLabel
 from somax.runtime.transform_handler import TransformHandler
@@ -27,27 +28,29 @@ class AbstractClassifier(StringParsed, ContentAware, ABC):
 
     @classmethod
     def from_string(cls, name: str, **kwargs) -> 'AbstractClassifier':
-        """ raises ValueError"""
+        """ raises ValueError """
         return cls._from_string(name, module=somax.classification, **kwargs)
 
     @abstractmethod
     def cluster(self, corpus: Corpus) -> None:
-        """ raises InvalidCorpus if clustering fails."""
+        """ raises ClassificationError if clustering fails. """
         pass
 
     @abstractmethod
     def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
-        """ returns List of untransformed labels of the same length as the corpus. """
+        """ raises ClassificationError if classification fails.
+            returns List of untransformed labels of the same length as the corpus. """
         pass
 
     @abstractmethod
     def classify_event(self, event: CorpusEvent) -> IntLabel:
-        """ returns untransformed label of event """
+        """ raises ClassificationError if classification fails.
+            returns untransformed label of event """
 
     @abstractmethod
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[IntLabel, AbstractTransform]]:
-        """ returns List of inverse transformed labels of the same length as number of `AbstractTransforms`
-                     applied in atom. """
+        """ raises ClassificationError if classification fails.
+            returns List of inverse transformed labels of the same length as number of `AbstractTransforms` """
         pass
 
     @abstractmethod
@@ -63,30 +66,52 @@ class AbstractClassifier(StringParsed, ContentAware, ABC):
     @staticmethod
     @abstractmethod
     def supports(descriptor: Union[Type[CorpusFeature], Type[AbstractLabel]]) -> bool:
-        """ returns True if the classifier supports the given descriptor. """
+        """ returns True if the classifier supports the given descriptor type. """
 
 
 class FeatureClassifier(AbstractClassifier, ABC):
     """ Abstract base class for classifiers that uses `CorpusFeature` (as opposed to `AbstractLabel`)."""
+
     def __init__(self,
                  midi_feature_type: Type[CorpusFeature],
                  audio_feature_type: Type[CorpusFeature],
                  **kwargs):
+        """ raises InvalidConfiguration if feature type is not supported by this classifier. """
+
         super().__init__(**kwargs)
 
+        # Passing invalid feature type (independent of whether it exists in a runtime corpus or not)
         if not self.supports(midi_feature_type):
             raise InvalidConfiguration(f"Feature {midi_feature_type.__name__} is not supported by this classifier.")
 
+        # Passing invalid feature type (independent of whether it exists in a runtime corpus or not)
         if not self.supports(audio_feature_type):
             raise InvalidConfiguration(f"Feature {audio_feature_type.__name__} is not supported by this classifier.")
 
-        self._midi_feature: Type[CorpusFeature] = midi_feature_type
-        self._audio_feature: Type[CorpusFeature] = audio_feature_type
+        self._midi_feature_type: Type[CorpusFeature] = midi_feature_type
+        self._audio_feature_type: Type[CorpusFeature] = audio_feature_type
+
+    def get_event_feature(self, event: CorpusEvent) -> FeatureValue:
+        """ raises ClassificationError if event doesn't have the relevant feature """
+        try:
+            if isinstance(event, MidiCorpusEvent):
+                return event.get_feature(self.midi_feature_type)
+            else:
+                return event.get_feature(self.audio_feature_type)
+        except KeyError:
+            # Note: When called from Atom.read_corpus, eligibility checks will ensure that this case never occurs
+            ft = self._midi_feature_type if isinstance(event, MidiCorpusEvent) else self._audio_feature_type
+            raise ClassificationError(f"Event {event} does not have feature {ft.__name__}")
 
     @property
-    def midi_feature(self) -> Type[CorpusFeature]:
-        return self._midi_feature
+    def midi_feature_type(self) -> Type[CorpusFeature]:
+        return self._midi_feature_type
 
     @property
-    def audio_feature(self) -> Type[CorpusFeature]:
-        return self._audio_feature
+    def audio_feature_type(self) -> Type[CorpusFeature]:
+        return self._audio_feature_type
+
+    def _is_eligible_for(self, corpus: Corpus) -> bool:
+        """ Default implementation -- override if needed """
+        return corpus.has_feature(self.midi_feature_type) and isinstance(corpus, MidiCorpus) or \
+            corpus.has_feature(self.audio_feature_type) and isinstance(corpus, AudioCorpus)
