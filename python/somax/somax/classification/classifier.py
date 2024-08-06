@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Tuple, Union, Type
+from typing import List, Tuple, Union, Type, Optional
 
 import somax.classification
 from somax.features.feature import CorpusFeature
@@ -68,6 +68,10 @@ class AbstractClassifier(StringParsed, ContentAware, ABC):
     def supports(descriptor: Union[Type[CorpusFeature], Type[AbstractLabel]]) -> bool:
         """ returns True if the classifier supports the given descriptor type. """
 
+    @abstractmethod
+    def label_type(self) -> Optional[Type[AbstractLabel]]:
+        """ If the classifier supports labels, return the type of label supported, otherwise None. """
+
 
 class FeatureClassifier(AbstractClassifier, ABC):
     """ Abstract base class for classifiers that uses `CorpusFeature` (as opposed to `AbstractLabel`)."""
@@ -110,6 +114,9 @@ class FeatureClassifier(AbstractClassifier, ABC):
     @property
     def audio_feature_type(self) -> Type[CorpusFeature]:
         return self._audio_feature_type
+
+    def label_type(self) -> Optional[Type[AbstractLabel]]:
+        return None
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
         """ Default implementation -- override if needed """

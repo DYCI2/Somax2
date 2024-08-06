@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, Union, List, Optional, Tuple
+from typing import Dict, Union, List, Optional, Tuple, Type
 
 from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
@@ -8,7 +8,7 @@ from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent
 from somax.runtime.exceptions import ClassificationError
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence
-from somax.runtime.label import IntLabel
+from somax.runtime.label import IntLabel, AbstractLabel
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.peak_event import PeakEvent
@@ -20,9 +20,15 @@ from somax.runtime.transforms import AbstractTransform
 class Atom(Parametric, ContentAware):
     DEFAULT_WEIGHT = 1.0
 
-    def __init__(self, name: str, weight: float, classifier: AbstractClassifier,
-                 activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace, corpus: Corpus,
-                 self_influenced: bool, enabled: bool = True):
+    def __init__(self,
+                 name: str,
+                 weight: float,
+                 classifier: AbstractClassifier,
+                 activity_pattern: AbstractActivityPattern,
+                 memory_space: AbstractMemorySpace,
+                 corpus: Optional[Corpus],
+                 self_influenced: bool,
+                 enabled: bool = True):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.logger.debug(f"[__init__ Creating atom '{name}'.")
@@ -134,8 +140,11 @@ class Atom(Parametric, ContentAware):
                                "parameters": parameters}
         return self.parameter_dict
 
+    def label_type(self) -> Optional[Type[AbstractLabel]]:
+        return self._classifier.label_type()
+
     def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return self._classifier.eligible
+        return self._classifier._is_eligible_for(corpus)
 
     @property
     def weight(self) -> float:

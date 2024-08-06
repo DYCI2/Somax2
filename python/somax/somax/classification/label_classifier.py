@@ -66,13 +66,16 @@ class LabelClassifier(AbstractClassifier):
 
     @staticmethod
     def supports(descriptor: Union[Type[CorpusFeature], Type[AbstractLabel]]) -> bool:
-        return isinstance(descriptor, AbstractLabel)
+        return issubclass(descriptor, AbstractLabel)
+
+    def label_type(self) -> Optional[Type[AbstractLabel]]:
+        return self._label_type
 
     def _update_component(self, corpus: Corpus) -> None:
         # No need to check for existence of label here since `Atom` has already verified eligibility by this point
         self._label_id = corpus.label_id_of(self._label_name)
         self._label_type = corpus.label_type_of(self._label_name)
-        self._classifier = IntLabelClassifier() if isinstance(self._label_type, IntLabel) else StrLabelClassifier()
+        self._classifier = IntLabelClassifier() if issubclass(self._label_type, IntLabel) else StrLabelClassifier()
 
     def _classify(self, label: AbstractLabel) -> IntLabel:
         return self._classifier.classify(label)
@@ -81,7 +84,7 @@ class LabelClassifier(AbstractClassifier):
 class IntLabelClassifier(LabelClassifierComponent):
     def classify(self, label: AbstractLabel) -> IntLabel:
         # When used inside LabelClassifier, we are guaranteed to have an IntLabel
-        return typing.cast(label, IntLabel)
+        return typing.cast(IntLabel, label)
 
 
 class StrLabelClassifier(LabelClassifierComponent):
@@ -90,7 +93,7 @@ class StrLabelClassifier(LabelClassifierComponent):
 
     def classify(self, label: AbstractLabel) -> IntLabel:
         # When used inside LabelClassifier, we are guaranteed to have a StrLabel
-        label: StrLabel = typing.cast(label, StrLabel)
+        label: StrLabel = typing.cast(StrLabel, label)
         label_value: str = label.label
 
         if label_value in self._map:

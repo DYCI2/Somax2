@@ -1,11 +1,16 @@
 import functools
 from abc import ABC
 from collections import abc
+from enum import Enum
 from typing import TypeVar, Union, Dict, Any, Callable, List, Tuple, Optional
 
 # TODO: Poor type description
-MaxCompatible = TypeVar('MaxCompatible', int, float, bool, str)
+MaxCompatible = TypeVar('MaxCompatible', int, float, bool, str, tuple, None)
 Ranged = Union[MaxCompatible, None]
+
+
+class ParametricFlags(Enum):
+    CHANGES_ELIGIBILITY = 1
 
 
 class HasParameterDict(ABC):
@@ -15,27 +20,38 @@ class HasParameterDict(ABC):
 
 
 class Parameter(HasParameterDict):
-    def __init__(self, default_value: MaxCompatible, min: Ranged, max: Ranged,
-                 type_str: str, description: str):
+    def __init__(self,
+                 default_value: MaxCompatible,
+                 min_value: Ranged,
+                 max_value: Ranged,
+                 type_str: str,
+                 description: str,
+                 flags: Optional[List[ParametricFlags]] = None):
         super().__init__()
         self.value: MaxCompatible = default_value
-        self.scope: Tuple[Ranged, Ranged] = (min, max)
+        self.scope: Tuple[Ranged, Ranged] = (min_value, max_value)
         self.type_str: str = type_str
         self.description: str = description
+        self.flags: List[ParametricFlags] = flags if flags is not None else []
 
     def set_value(self, value):
         # TODO: Check range
         self.value = value
 
     def _parse_parameters(self):
-        # Base case: TODO: remove this
         return
 
 
 class ParamWithSetter(Parameter):
-    def __init__(self, default_value: MaxCompatible, min: Ranged, max: Ranged, type_str: str, description,
-                 set_function: Callable):
-        super().__init__(default_value, min, max, type_str, description)
+    def __init__(self,
+                 default_value: MaxCompatible,
+                 min_value: Ranged,
+                 max_value: Ranged,
+                 type_str: str,
+                 description: str,
+                 set_function: Callable[[MaxCompatible], None],
+                 flags: Optional[List[ParametricFlags]] = None) -> None:
+        super().__init__(default_value, min_value, max_value, type_str, description, flags)
         self.set_value = set_function
 
 
@@ -47,12 +63,13 @@ class Parametric(HasParameterDict):
         super(Parametric, self).__init__(**kwargs)
         self.parameter_dict: Dict[str, Union[Parametric, Parameter]] = {}
 
-    def set_param(self, path: List[str], value: Any):
+    def set_param(self, path: List[str], value: Any) -> List[ParametricFlags]:
         """ raises IndexError: if path spec is invalid, for example empty list,
                    ParameterError: if path spec is invalid or if trying to set an object that is not a Parameter.
         """
         param: Parameter = self.get_param(path)
         param.set_value(value)
+        return param.flags
 
     def get_param(self, param_path: List[str]) -> Parameter:
         """ raises KeyError """

@@ -30,13 +30,14 @@ from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import (DuplicateKeyError, ParameterError, InvalidCorpus, TransformError,
                                       ExternalDataMismatch, RecordingError, InvalidConfiguration, ClassificationError)
 from somax.runtime.improvisation_memory import ImprovisationMemory
-from somax.runtime.influence import FeatureInfluence
+from somax.runtime.influence import FeatureInfluence, LabelInfluence
+from somax.runtime.label import AbstractLabel
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.osc_log_forwarder import OscLogForwarder
-from somax.runtime.parameter import Parametric
+from somax.runtime.parameter import Parametric, ParametricFlags
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
-from somax.runtime.scale_actions import AbstractScaleAction
+from somax.runtime.filters import AbstractFilter
 from somax.runtime.send_protocol import PlayerSendProtocol
 from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
@@ -400,29 +401,34 @@ class OscAgent(Agent, AsyncioOscObject):
     # MAIN RUNTIME FUNCTIONS
     ######################################################
 
-    def influence(self, path: str, feature_keyword: str, *value):
+    def influence(self, path: str, feature_keyword: str, *value) -> None:
         if not self.scheduling_handler.running:
-            return
-        try:
-            influence: FeatureInfluence = FeatureInfluence.from_keyword(feature_keyword,
-                                                                        value if len(value) > 1 else value[0])
-        except ValueError as e:
-            self.logger.error(f"{str(e)}. No influence was computed.")
             return
 
         try:
             path_and_name: List[str] = self._string_to_path(path)
+
+            if feature_keyword == "label":
+                label_type: Optional[Type[AbstractLabel]] = self.player.atoms[path_and_name[0]].label_type()
+                influence: LabelInfluence = LabelInfluence(label_type.parse(value if len(value) > 1 else value[0]))
+
+            else:
+                influence: FeatureInfluence = FeatureInfluence.from_keyword(feature_keyword,
+                                                                            value if len(value) > 1 else value[0])
+
             scheduling_time: float = self.scheduling_handler.time
             self.player.influence(path_and_name, influence, scheduling_time)
             self.send_peaks()
-        except (AssertionError, KeyError, IndexError, ClassificationError) as e:
+
+        except (AssertionError, KeyError, IndexError, ValueError) as e:
+            self.logger.error(f"{str(e)}. No influence was processed.")
+            return
+        except ClassificationError as e:
             self.logger.error(f"{str(e)} Could not influence target.")
             return
-        except InvalidCorpus as e:
-            self.logger.debug(repr(e))
+        except InvalidCorpus:
+            # Influencing an agent without any corpus loaded is not considered an error
             return
-        self.logger.debug(f"[influence] Influence successfully completed for agent '{self.player.name}' "
-                          f"with path '{path}'.")
 
     def bang(self):
         """ Influence onset / trigger event """
@@ -449,9 +455,14 @@ class OscAgent(Agent, AsyncioOscObject):
             classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
-            self.player.create_atom(path=path_and_name, weight=weight, self_influenced=self_influenced,
-                                    classifier=classifier, activity_pattern=activity_pattern,
-                                    memory_space=memory_space, enabled=enabled, override=override)
+            self.player.create_atom(path=path_and_name,
+                                    weight=weight,
+                                    self_influenced=self_influenced,
+                                    classifier=classifier,
+                                    activity_pattern=activity_pattern,
+                                    memory_space=memory_space,
+                                    enabled=enabled,
+                                    override=override)
             self.send_atoms()
             self._send_eligibility()
             # self.logger.info(f"Created atom with path '{path}'.")
@@ -573,7 +584,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def add_scale_action(self, scale_action: str, override: bool = False, verbose: bool = True, **kwargs):
         try:
-            scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
+            scale_action: AbstractFilter = AbstractFilter.from_string(scale_action, **kwargs)
             self.player.add_scale_action(scale_action, override)
             self._send_eligibility()
             if verbose:
@@ -586,7 +597,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def remove_scale_action(self, scale_action: str, verbose: bool = True, **kwargs):
         try:
             # TODO: Not ideal that it instantiates one to remove it, could we parse class without creating instance?
-            scale_action: AbstractScaleAction = AbstractScaleAction.from_string(scale_action, **kwargs)
+            scale_action: AbstractFilter = AbstractFilter.from_string(scale_action, **kwargs)
             self.player.remove_scale_action(type(scale_action))
             self._send_eligibility()
             if verbose:
@@ -819,7 +830,12 @@ class OscAgent(Agent, AsyncioOscObject):
                           f"to {value} (type={type(value)})...")
         try:
             path_and_name: List[str] = self._string_to_path(path)
-            self.player.set_param(path_and_name, value)
+            flags: List[ParametricFlags] = self.player.set_param(path_and_name, value)
+
+            if ParametricFlags.CHANGES_ELIGIBILITY in flags:
+                self.player.set_eligibility(self.player.corpus)
+                self._send_eligibility()
+
         except (AssertionError, IndexError, ParameterError) as e:
             self.logger.error(f"{str(e)} Could not set parameter.")
         except KeyError as e:

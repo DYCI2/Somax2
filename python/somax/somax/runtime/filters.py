@@ -3,7 +3,7 @@ import logging
 from abc import ABC, abstractmethod
 from collections import deque
 from enum import Enum
-from typing import List, Tuple, Optional, Union
+from typing import List, Tuple, Optional, Union, Type, Any
 
 import numpy as np
 
@@ -15,7 +15,7 @@ from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.improvisation_memory import FeedbackQueue
-from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
+from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter, ParametricFlags
 from somax.runtime.peaks import Peaks
 from somax.runtime.taboo_mask import TabooMask
 from somax.runtime.transform_handler import TransformHandler
@@ -24,13 +24,13 @@ from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling
 from somax.utils.introspective import StringParsed
 
 
-class AbstractScaleAction(Parametric, ContentAware, StringParsed, ABC):
+class AbstractFilter(Parametric, ContentAware, StringParsed, ABC):
     def __init__(self):
         super().__init__()
         self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this ScaleAction.")
 
     @abstractmethod
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -56,26 +56,26 @@ class AbstractScaleAction(Parametric, ContentAware, StringParsed, ABC):
         """ """
 
     @classmethod
-    def default(cls, **_kwargs) -> 'AbstractScaleAction':
-        return NoScaleAction()
+    def default(cls, **_kwargs) -> 'AbstractFilter':
+        return NoFilter()
 
     @classmethod
-    def default_set(cls, **_kwargs) -> Tuple['AbstractScaleAction', ...]:
+    def default_set(cls, **_kwargs) -> Tuple['AbstractFilter', ...]:
         return ()
 
     @classmethod
-    def from_string(cls, scale_action: str, **kwargs) -> 'AbstractScaleAction':
+    def from_string(cls, scale_action: str, **kwargs) -> 'AbstractFilter':
         return cls._from_string(scale_action, **kwargs)
 
     def is_enabled_and_eligible(self):
         return self.enabled.value and self.eligible
 
 
-class NoScaleAction(AbstractScaleAction):
+class NoFilter(AbstractFilter):
     def __init__(self):
         super().__init__()
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -101,7 +101,7 @@ class NoScaleAction(AbstractScaleAction):
         return True  # valid for all types of corpora
 
 
-class PhaseModulationScaleAction(AbstractScaleAction):
+class PhaseModulationFilter(AbstractFilter):
     DEFAULT_SELECTIVITY = 3.0
 
     def __init__(self, selectivity=DEFAULT_SELECTIVITY):
@@ -111,7 +111,7 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         self._selectivity: Parameter = Parameter(selectivity, None, None, 'float', "Phase modulation")  # TODO
         self._parse_parameters()
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -153,7 +153,7 @@ class PhaseModulationScaleAction(AbstractScaleAction):
         self._selectivity.value = value
 
 
-class NextStateScaleAction(AbstractScaleAction):
+class NextStateFilter(AbstractFilter):
     DEFAULT_FACTOR = 1.5
 
     def __init__(self, factor: float = DEFAULT_FACTOR):
@@ -164,7 +164,7 @@ class NextStateScaleAction(AbstractScaleAction):
                                             "Scaling factor for peaks close to previous output.")
         self._previous_output_index: Optional[int] = None
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -201,7 +201,7 @@ class NextStateScaleAction(AbstractScaleAction):
         return self._factor.value
 
 
-class AutoJumpScaleAction(AbstractScaleAction):
+class AutoJumpFilter(AbstractFilter):
     DEFAULT_ACTIVATION_THRESHOLD = 2
     DEFAULT_JUMP_THRESHOLD = 8
 
@@ -212,7 +212,7 @@ class AutoJumpScaleAction(AbstractScaleAction):
         self._jump_threshold: Parameter = Parameter(jump_threshold, 1, None, "int", "TODO")
         self._history: FeedbackQueue = FeedbackQueue()
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -271,7 +271,7 @@ class AutoJumpScaleAction(AbstractScaleAction):
         return self._jump_threshold.value
 
 
-class TempoConsistencyScaleAction(AbstractScaleAction):
+class TempoConsistencyFilter(AbstractFilter):
     DEFAULT_NUM_EVENTS: int = 5
     DEFAULT_SIGMA: float = 5.0
 
@@ -281,7 +281,7 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
         self._history: FeedbackQueue = FeedbackQueue(max_length=self._history_len.value)
         self._sigma: Parameter = Parameter(sigma, None, None, 'float', "Standard deviation of gaussian")
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -324,7 +324,7 @@ class TempoConsistencyScaleAction(AbstractScaleAction):
         return self._sigma.value
 
 
-class StaticTabooScaleAction(AbstractScaleAction):
+class StaticTabooFilter(AbstractFilter):
     DEFAULT_TABOO_LENGTH = 10
 
     def __init__(self, taboo_length: int = DEFAULT_TABOO_LENGTH):
@@ -336,7 +336,7 @@ class StaticTabooScaleAction(AbstractScaleAction):
 
         self._taboo_indices: deque[int] = deque([], self.taboo_length)
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -382,7 +382,7 @@ class StaticTabooScaleAction(AbstractScaleAction):
         self.clear()
 
 
-class BinaryTransformContinuityScaleAction(AbstractScaleAction):
+class BinaryTransformContinuityFilter(AbstractFilter):
     DEFAULT_FACTOR = 0.5
 
     def __init__(self, factor: float = DEFAULT_FACTOR):
@@ -395,7 +395,7 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
         # Optional case should never have to be handled
         self._transform_handler: Optional[TransformHandler] = None
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -433,7 +433,7 @@ class BinaryTransformContinuityScaleAction(AbstractScaleAction):
         return self._factor.value
 
 
-class AbstractGaussianScale(AbstractScaleAction, ABC):
+class AbstractGaussianScale(AbstractFilter, ABC):
     def __init__(self, mu: float = 0.0, sigma: float = 1.0):
         super().__init__()
         self._mu: Parameter = Parameter(mu, None, None, 'float', "Mean value of gaussian.")
@@ -452,7 +452,7 @@ class AbstractGaussianScale(AbstractScaleAction, ABC):
         return self._sigma.value
 
 
-class EnergyScaleAction(AbstractScaleAction):
+class EnergyFilter(AbstractFilter):
     DEFAULT_ENERGY = 0.0
     DEFAULT_SIGMA = 3.0
     DEFAULT_MA_LEN = 5
@@ -484,7 +484,7 @@ class EnergyScaleAction(AbstractScaleAction):
 
         self.history: deque[float] = deque([], self.moving_average_len.value)
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -556,7 +556,7 @@ class VerticalDensityScaleAction(AbstractGaussianScale):
     def __init__(self, mu: float = DEFAULT_VERTICAL_DENSITY):
         super().__init__(mu=mu)
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -589,7 +589,7 @@ class DurationScaleAction(AbstractGaussianScale):
     def __init__(self, mu: float = DEFAULT_DURATION):
         super().__init__(mu=mu)
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -618,15 +618,15 @@ class DurationScaleAction(AbstractGaussianScale):
 
 
 # TODO: Update so that it takes transforms into account
-class OctaveBandsScaleAction(AbstractScaleAction):
+class OctaveBandsFilter(AbstractFilter):
     DEFAULT_BAND_DISTRIBUTION = np.ones(OctaveBands.NUM_BANDS, dtype=float)
 
     def __init__(self):
         super().__init__()
-        self._band_distribution: Parameter = ParamWithSetter(OctaveBandsScaleAction.DEFAULT_BAND_DISTRIBUTION, None,
+        self._band_distribution: Parameter = ParamWithSetter(OctaveBandsFilter.DEFAULT_BAND_DISTRIBUTION, None,
                                                              None, "list[11]", "TODO", self._set_band_distribution)
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -668,13 +668,13 @@ class OctaveBandsScaleAction(AbstractScaleAction):
         self._band_distribution.value = band_distribution
 
 
-class RegionMaskScaleAction(AbstractScaleAction):
+class RegionMaskFilter(AbstractFilter):
     def __init__(self):
         super().__init__()
         self._low_thresh: Parameter = Parameter(0, 0, 1.0, "float", "Fraction [0,1] marking start of region")
         self._high_thresh: Parameter = Parameter(1.0, 0, 1.0, "float", "Fraction [0,1] marking end of region")
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -726,7 +726,7 @@ class RegionMaskScaleAction(AbstractScaleAction):
         pass
 
 
-class ThresholdScaleAction(AbstractScaleAction):
+class ThresholdFilter(AbstractFilter):
     DEFAULT_THRESHOLD = 0.1
     DEFAULT_APPLY_TABOO = False
 
@@ -735,7 +735,7 @@ class ThresholdScaleAction(AbstractScaleAction):
         self._threshold: Parameter = Parameter(self.DEFAULT_THRESHOLD, 0, None, "float", "TODO")
         self._apply_taboo: Parameter = Parameter(self.DEFAULT_APPLY_TABOO, False, True, "bool", "TODO")
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -765,7 +765,7 @@ class ThresholdScaleAction(AbstractScaleAction):
         return True
 
 
-class BeatPhaseScaleAction(AbstractScaleAction):
+class BeatPhaseFilter(AbstractFilter):
     DEFAULT_GRID_SIZE = 12
 
     def __init__(self):
@@ -790,7 +790,7 @@ class BeatPhaseScaleAction(AbstractScaleAction):
 
         self._previous_event_and_time: Optional[Tuple[CorpusEvent, float]] = None
 
-    def scale(self,
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -874,13 +874,23 @@ class BeatPhaseScaleAction(AbstractScaleAction):
             return int(grid_positions)
 
 
-class LabelScaleAction(AbstractScaleAction):
+class LabelFilter(AbstractFilter):
     def __init__(self):
         super().__init__()
-        self.label: Parameter = ParamWithSetter("", None, None, 'str',
-                                                 "label to match", self._set_label)
+        self.label_name: Parameter = Parameter(None,
+                                               None,
+                                               None,
+                                               'str|None',
+                                               "name of the label to match",
+                                               [ParametricFlags.CHANGES_ELIGIBILITY])
 
-    def scale(self,
+        self.label_value: Parameter = Parameter(None,
+                                                None,
+                                                None,
+                                                'str|int|None',
+                                                "value of the label to match")
+
+    def apply(self,
               peaks: Peaks,
               time: float,
               beat_phase: float,
@@ -889,12 +899,21 @@ class LabelScaleAction(AbstractScaleAction):
               taboo_mask: TabooMask,
               corpus: Corpus = None,
               enforce_output: bool = False, **kwargs) -> Tuple[Peaks, TabooMask]:
-        corresponding_labels: List[str] = [e.get_feature(LabelFeature).value() for e in corresponding_events]
-        matching: np.ndarray = np.array([label == self.label for label in corresponding_labels], dtype=bool)
+        if not self._is_eligible_for(corpus) or self.label_name.value is None:
+            return peaks, taboo_mask
+
+        label_name: str = self.label_name.value
+        label_id: int = corpus.label_id_of(label_name)
+        value_type: Type[Any] = corpus.label_type_of(self.label_name.value).internal_type()
+
+        value_to_match: Union[int, str] = value_type(self.label_value.value)
+
+        corresponding_labels: Union[List[str], List[int]] = [e.get_label(label_id).label for e in corresponding_events]
+        matching: np.ndarray = np.array([label == value_to_match for label in corresponding_labels], dtype=bool)
         peaks.scale(0, ~matching)
 
-        corpus_mask: np.ndarray = np.array([event.get_feature(LabelFeature).value() == self.label.value
-                                            for event in corpus.events], dtype=bool)
+        corpus_mask: np.ndarray = np.array([label.label == value_to_match
+                                            for label in corpus.get_labels(label_id)], dtype=bool)
         taboo_mask.add_taboo(~corpus_mask)
 
         return peaks, taboo_mask
@@ -910,11 +929,5 @@ class LabelScaleAction(AbstractScaleAction):
         pass
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return corpus.has_feature(LabelFeature)
-
-    def _set_label(self, label: Optional[str]):
-        print("label", label)
-        if label is None:
-            self.label.value = ""
-        else:
-            self.label.value = label
+        name: str = self.label_name.value
+        return name is None or corpus.has_label(name)

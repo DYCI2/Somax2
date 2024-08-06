@@ -23,7 +23,7 @@ from somax.runtime.peak_post_processing import ProbabilityFilter
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.peaks import Peaks
 from somax.runtime.region_mask import RegionMask
-from somax.runtime.scale_actions import AbstractScaleAction
+from somax.runtime.filters import AbstractFilter
 from somax.runtime.taboo_mask import TabooMask
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
@@ -34,7 +34,7 @@ class Player(Parametric, ContentAware):
                  name: str,
                  peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
                  merge_action: AbstractMergeAction = AbstractMergeAction.default(),
-                 scale_actions: List[AbstractScaleAction] = AbstractScaleAction.default_set()):
+                 scale_actions: List[AbstractFilter] = AbstractFilter.default_set()):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.name: str = name
@@ -42,7 +42,7 @@ class Player(Parametric, ContentAware):
         self.peak_selector: AbstractPeakSelector = peak_selector
         self.fallback_selector: FallbackPeakSelector = FallbackPeakSelector()
         self.corpus: Optional[Corpus] = None
-        self.scale_actions: Dict[Type[AbstractScaleAction], AbstractScaleAction] = {}
+        self.scale_actions: Dict[Type[AbstractFilter], AbstractFilter] = {}
         self.region_mask: RegionMask = RegionMask()
         self.merge_action: AbstractMergeAction = merge_action
         self.post_filter: ProbabilityFilter = ProbabilityFilter(enabled=False)
@@ -345,7 +345,7 @@ class Player(Parametric, ContentAware):
         self.peak_selector = peak_selector
         self._parse_parameters()
 
-    def add_scale_action(self, scale_action: AbstractScaleAction, override: bool = False):
+    def add_scale_action(self, scale_action: AbstractFilter, override: bool = False):
         """ Raises: DuplicateKeyError """
         if type(scale_action) in self.scale_actions and not override:
             raise DuplicateKeyError(f"A Scale Action of type '{type(scale_action).__name__}' already exists."
@@ -356,7 +356,7 @@ class Player(Parametric, ContentAware):
 
         self._parse_parameters()
 
-    def remove_scale_action(self, scale_action_type: Type[AbstractScaleAction]):
+    def remove_scale_action(self, scale_action_type: Type[AbstractFilter]):
         """ Raises: KeyError """
         del self.scale_actions[scale_action_type]
         del self.parameter_dict[scale_action_type.__name__]
@@ -467,7 +467,7 @@ class Player(Parametric, ContentAware):
 
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled_and_eligible():
-                peaks, taboo_mask = scale_action.scale(peaks=peaks,
+                peaks, taboo_mask = scale_action.apply(peaks=peaks,
                                                        time=scheduler_time,
                                                        beat_phase=beat_phase,
                                                        corresponding_events=corresponding_events,

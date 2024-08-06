@@ -1,5 +1,5 @@
 from abc import ABC
-from typing import Any
+from typing import Any, Type
 
 from somax.features.feature import RuntimeFeature
 from somax.runtime.corpus_event import CorpusEvent
@@ -20,11 +20,13 @@ class FeatureInfluence(AbstractInfluence):
         self.feature = feature
 
     @classmethod
-    def from_keyword(cls, keyword: str, value: Any):
-        """ :raises ValueError if a feature matching the keyword doesn't exist """
+    def from_keyword(cls, keyword: str, value: Any) -> 'FeatureInfluence':
+        """ raises ValueError if a feature matching the keyword doesn't exist """
         return cls(RuntimeFeature.from_string(keyword, value))
 
 
 class LabelInfluence(AbstractInfluence):
     def __init__(self, label: AbstractLabel):
         self.label: AbstractLabel = label
+
+
