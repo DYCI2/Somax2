@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict, Any
 
 import numpy as np
 
@@ -17,6 +17,15 @@ class OctaveBands(AnalyzableFeature):
     @staticmethod
     def encode_keyword() -> str:
         return "band"
+
+    @classmethod
+    def decode(cls, values: Dict[str, Any]) -> 'OctaveBands':
+        return cls(value=np.array(values[cls.encode_keyword()]))
+
+    def encode(self) -> Dict[str, Any]:
+        return {self.encode_keyword(): self._value.tolist()}
+
+
 
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:

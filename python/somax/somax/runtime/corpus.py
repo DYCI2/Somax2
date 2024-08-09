@@ -95,7 +95,7 @@ class Corpus(Generic[E], Introspective, ABC):
         self.name: str = name
         self.scheduling_mode: SchedulingMode = scheduling_mode
         self.feature_types: List[Type[CorpusFeature]] = feature_types
-        self.label_info: Dict[str, Tuple[int, Type[AbstractLabel]]] = label_info
+        self.label_info: Dict[str, Tuple[int, Type[AbstractLabel]]] = label_info  # name: (label_id, label_type)
         self._build_parameters: Dict[str, Any] = build_parameters
 
         self._index_map: np.ndarray = np.array([])

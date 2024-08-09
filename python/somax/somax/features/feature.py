@@ -59,8 +59,9 @@ class CorpusFeature(AbstractFeature, ABC):
     @staticmethod
     @abstractmethod
     def encode_keyword() -> str:
-        """ Note: This implementation isn't ideal -- storing by class name would be much more efficient --
-                  but is preserved for compatibility with legacy corpora (pre 2.7.0) """
+        """ Note: This implementation is only preserved for backwards compatibility (legacy corpora, pre 2.7.0)
+                  The encoded json will already contain the name of the class,
+                  and this keyword solution is not needed anymore """
 
     @classmethod
     def classpath(cls) -> str:

@@ -218,7 +218,7 @@ class CorpusBuilder:
         metadata: MidiMetadata = MidiMetadata(filepath=filepaths[0], content_type=RelativeScheduling(), stft=stft)
 
         used_features: List[Type[AnalyzableFeature]] = []
-        for _, feature in AnalyzableFeature.classes():  # type: Type[AnalyzableFeature]
+        for feature in AnalyzableFeature.classes():  # type: Type[AnalyzableFeature]
             try:
                 feature.analyze(events, metadata)
                 used_features.append(feature)
@@ -307,7 +307,7 @@ class CorpusBuilder:
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) computed necessary metadata")
 
         used_features: List[Type[AnalyzableFeature]] = []
-        for _, feature in AnalyzableFeature.all_corpus_features():  # type: Type[AnalyzableFeature]
+        for feature in AnalyzableFeature.classes():  # type: Type[AnalyzableFeature]
             try:
                 feature.analyze(events, metadata)
                 used_features.append(feature)

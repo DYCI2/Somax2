@@ -1,3 +1,4 @@
+import typing
 from enum import Enum
 from typing import Type, Dict, Optional, List, Tuple, Union
 
@@ -21,6 +22,13 @@ class _CloneSpec(Enum):
     NO_CHANGE = 0
 
 
+class FeatureType(Enum):
+    MIDI = 0
+    AUDIO = 1
+    AUDIO_RT = 2
+    INFLUENCE = 3
+
+
 class FeatureSpecification:
 
     def __init__(self,
@@ -39,6 +47,11 @@ class FeatureSpecification:
 
         if self.default_classifier is not None and FeatureKeywordFlags.HAS_CLASSIFIER not in self.flags:
             self.flags.append(FeatureKeywordFlags.HAS_CLASSIFIER)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(midi_feature={self.midi_feature}, audio_feature={self.audio_feature}, " \
+               f"audio_rt_feature={self.audio_rt_feature}, influence_feature={self.influence_feature}, " \
+               f"flags={self.flags}, default_classifier={self.default_classifier})"
 
     @classmethod
     def midi_only(cls,
@@ -83,12 +96,23 @@ class FeatureSpecification:
     def create_default_classifier(self) -> FeatureClassifier:
         return self.default_classifier(midi_feature_type=self.midi_feature, audio_feature_type=self.audio_feature)
 
+    def get(self, feature_type: FeatureType) -> Optional[Type[CorpusFeature]]:
+        if feature_type == FeatureType.MIDI:
+            return self.midi_feature
+        if feature_type == FeatureType.AUDIO:
+            return self.audio_feature
+        if feature_type == FeatureType.AUDIO_RT:
+            return self.audio_rt_feature
+        if feature_type == FeatureType.INFLUENCE:
+            return self.influence_feature
+        return None
 
-class FeatureType(Enum):
-    MIDI = 0
-    AUDIO = 1
-    AUDIO_RT = 2
-    INFLUENCE = 3
+    def unique_types(self) -> List[Type[CorpusFeature]]:
+        unique_features: List[Type[CorpusFeature]] = []
+        for feature in [self.midi_feature, self.audio_feature, self.audio_rt_feature, self.influence_feature]:
+            if feature is not None and feature not in unique_features:
+                unique_features.append(feature)
+        return unique_features
 
 
 class FeatureDictionary:
@@ -104,7 +128,10 @@ class FeatureDictionary:
                                                                   audio_rt_feature=OnsetChroma,
                                                                   influence_feature=RuntimeChroma,
                                                                   flags=[],
-                                                                  default_classifier=SomChromaClassifier),
+                                                                  default_classifier=SomChromaClassifier)
+
+    _ReverseDictType = Dict[Type[AbstractFeature], List[Tuple[str, List[FeatureKeywordFlags]]]]
+    _REVERSE_DICT: Optional[_ReverseDictType] = None  # Populated on first use
 
     _DICTIONARY: Dict[str, FeatureSpecification] = {
         "pitch": _PITCH_TEMPLATE.cloned_with(flags=[FeatureKeywordFlags.MAIN_KEYWORD]),
@@ -160,36 +187,85 @@ class FeatureDictionary:
     }
 
     @staticmethod
+    def create_reverse_dict() -> Dict[Type[AbstractFeature], List[Tuple[str, List[FeatureKeywordFlags]]]]:
+        d: Dict[Type[AbstractFeature], List[Tuple[str, List[FeatureKeywordFlags]]]] = {
+            t: [] for t in AbstractFeature.classes(include_abstract=False)
+        }
+
+        for name, spec in FeatureDictionary._DICTIONARY.items():
+            if spec.midi_feature is not None:
+                d[spec.midi_feature].append((name, spec.flags))
+
+            if spec.audio_feature is not None:
+                d[spec.audio_feature].append((name, spec.flags))
+
+            if spec.audio_rt_feature is not None:
+                d[spec.audio_rt_feature].append((name, spec.flags))
+
+            if spec.influence_feature is not None:
+                d[spec.influence_feature].append((name, spec.flags))
+
+        return d
+
+    @staticmethod
     def get_entry(feature_name: str) -> 'FeatureSpecification':
         """ raises KeyError if not found """
         return FeatureDictionary._DICTIONARY[feature_name]
 
     @staticmethod
-    def keyword_of(feature: Union[AbstractFeature, Type[AbstractFeature]],
-                   feature_type: FeatureType) -> List[Tuple[str, List[FeatureKeywordFlags]]]:
-        """ raises KeyError if not found """
-
-    @staticmethod
     def midi_type_of(keyword: str) -> Type[CorpusFeature]:
         """ raises KeyError if not found """
+        return typing.cast(Type[CorpusFeature], FeatureDictionary._get(keyword, FeatureType.MIDI))
 
     @staticmethod
     def audio_type_of(keyword: str) -> Type[CorpusFeature]:
         """ raises KeyError if not found """
+        return typing.cast(Type[CorpusFeature], FeatureDictionary._get(keyword, FeatureType.AUDIO))
 
     @staticmethod
     def audio_rt_type_of(keyword: str) -> Type[CorpusFeature]:
         """ raises KeyError if not found """
+        return typing.cast(Type[CorpusFeature], FeatureDictionary._get(keyword, FeatureType.AUDIO_RT))
 
     @staticmethod
     def influence_type_of(keyword: str) -> Type[CorpusFeature]:
         """ raises KeyError if not found """
+        return typing.cast(Type[CorpusFeature], FeatureDictionary._get(keyword, FeatureType.INFLUENCE))
 
     @staticmethod
-    def _get(keyword: str, feature_type: FeatureType) -> Type[AbstractFeature]:
+    def unique_types_of(keyword: str) -> List[Type[CorpusFeature]]:
         """ raises KeyError if not found """
-        # TODO: Throw KeyError if None!
+        return FeatureDictionary.get_entry(keyword).unique_types()
+
+    @staticmethod
+    def _get(keyword: str, feature_type: FeatureType, allow_none: bool = False) -> Optional[Type[AbstractFeature]]:
+        """ raises KeyError if not found or if `allow_none` is False and item is None """
+        entry: FeatureSpecification = FeatureDictionary.get_entry(keyword)
+        t: Optional[Type[AbstractFeature]] = entry.get(feature_type)
+        if t is None and not allow_none:
+            raise KeyError("Feature does not have requested type")
+
+        return t
 
     @staticmethod
     def create_default_classifier(keyword: str) -> FeatureClassifier:
         """ raises KeyError if not found """
+        return FeatureDictionary.get_entry(keyword).create_default_classifier()
+
+    @staticmethod
+    def keywords_of(feature: Union[AbstractFeature, Type[AbstractFeature]]
+                    ) -> List[Tuple[str, List[FeatureKeywordFlags]]]:
+        """ raises KeyError if not found """
+
+        # Populate on first use
+        if FeatureDictionary._REVERSE_DICT is None:
+            FeatureDictionary._REVERSE_DICT = FeatureDictionary.create_reverse_dict()
+
+        ft: Type[AbstractFeature] = feature if isinstance(feature, type) else type(feature)
+        return FeatureDictionary._REVERSE_DICT[ft]
+
+    @staticmethod
+    def keywords_with_classifiers(feature: Union[AbstractFeature, Type[AbstractFeature]]) -> List[str]:
+        """ raises KeyError if not found """
+        return [k for k, _ in FeatureDictionary.keywords_of(feature) if
+                FeatureDictionary.get_entry(k).default_classifier is not None]

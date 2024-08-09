@@ -413,8 +413,8 @@ class OscAgent(Agent, AsyncioOscObject):
                 influence: LabelInfluence = LabelInfluence(label_type.parse(value if len(value) > 1 else value[0]))
 
             else:
-                influence: FeatureInfluence = FeatureInfluence.from_keyword(feature_keyword,
-                                                                            value if len(value) > 1 else value[0])
+                feature_type: Type[AbstractFeature] = FeatureDictionary.influence_type_of(feature_keyword)
+                influence: FeatureInfluence = FeatureInfluence(feature_type(value if len(value) > 1 else value[0]))
 
             scheduling_time: float = self.scheduling_handler.time
             self.player.influence(path_and_name, influence, scheduling_time)
@@ -933,7 +933,10 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
         try:
-            feature_types: List[Type[AbstractFeature]] = [AbstractFeature.parse_type(feature) for feature in features]
+            feature_types: List[Type[AbstractFeature]] = []
+            for feature_str in features:
+                feature_types.extend(FeatureDictionary.unique_types_of(feature_str))
+
         except KeyError as e:
             self.logger.error(f"Could not find feature {str(e)}. No rendering features were added")
             return

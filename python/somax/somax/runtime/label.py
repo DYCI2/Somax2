@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
 from typing import Any, Type
 
+from somax.utils.introspective import Introspective
 
-class AbstractLabel(ABC):
+
+class AbstractLabel(Introspective, ABC):
     @classmethod
     @abstractmethod
     def parse(cls, label: Any) -> 'AbstractLabel':
