@@ -4,7 +4,7 @@ from typing import List, Tuple, Type, Union
 from somax.classification.classifier import FeatureClassifier
 from somax.features.feature import CorpusFeature
 from somax.features.feature_value import FeatureValue
-from somax.features.pitch_features import RuntimeIntegerPitch, AbstractIntegerPitch
+from somax.features.pitch_features import RuntimeIntegerPitch, BaseIntegerPitch
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import TransformError, ClassificationError
@@ -41,13 +41,13 @@ class BasePitchClassifier(FeatureClassifier):
 
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[IntLabel, AbstractTransform]]:
         """ raises: ClassificationError if influence doesn't have the relevant features """
-        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, RuntimeIntegerPitch):
+        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, BaseIntegerPitch):
             return [(self._label_from_feature(influence.feature, t), t) for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
             return [(self._label_from_corpus_event(influence.corpus_event, t), t) for t in self._transforms]
         else:
             # Note: OnsetChroma is the base class for generic runtime chromas, hence OnsetChroma.keyword()
-            raise ClassificationError(f"Influence does not have feature '{RuntimeIntegerPitch.keyword()}'.")
+            raise ClassificationError(f"Influence does not have feature 'pitch'.")
 
     def clear(self) -> None:
         pass  # All basic pitch classifiers are stateless
@@ -71,14 +71,14 @@ class BasePitchClassifier(FeatureClassifier):
 
     def update_transforms(self, transform_handler: TransformHandler) -> List[AbstractTransform]:
         """ raises TransformError if transform_handler doesn't contain any applicable transforms """
-        self._transforms = transform_handler.get_by_feature(AbstractIntegerPitch)
+        self._transforms = transform_handler.get_by_feature(BaseIntegerPitch)
         if not self._transforms:
             raise TransformError(f"No applicable transform exists in classifier {self.__class__}.")
         return self._transforms
 
     @staticmethod
     def supports(descriptor: Union[Type[CorpusFeature], Type[AbstractLabel]]) -> bool:
-        return issubclass(descriptor, AbstractIntegerPitch)
+        return issubclass(descriptor, BaseIntegerPitch)
 
 
 class PitchClassifier(BasePitchClassifier, ABC):

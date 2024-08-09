@@ -1,18 +1,22 @@
-from typing import Any, Dict, List
+from typing import List
 
 import numpy as np
 
 from somax.corpus_builder.metadata import MidiMetadata
-from somax.features.feature import CorpusFeature, FeatureUtils
+from somax.features.feature import FeatureUtils, AnalyzableFeature
 from somax.runtime.corpus_event import MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
-class OctaveBands(CorpusFeature):
+class OctaveBands(AnalyzableFeature):
     NUM_BANDS = 11
 
     def __init__(self, value: np.ndarray):
         super().__init__(value=value)
+
+    @staticmethod
+    def encode_keyword() -> str:
+        return "band"
 
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
@@ -29,13 +33,6 @@ class OctaveBands(CorpusFeature):
             return events
         raise FeatureError(f"Feature '{cls.__name__}' does not support content of "
                            f"type {metadata.content_type.__class__.__name__}")
-
-    @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=np.array(trait_dict["band"]))
-
-    def encode(self) -> Dict[str, Any]:
-        return {"band": self._value.tolist()}
 
     def value(self) -> np.ndarray:
         return self._value

@@ -99,8 +99,7 @@ class SomChromaClassifier(AbstractChromaClassifier):
             chroma: FeatureValue = self.get_event_feature(influence.corpus_event)
             return [(self._label_from_chroma(t.inverse(chroma).value()), t) for t in self._transforms]
         else:
-            # Note: OnsetChroma is the base class for generic runtime chromas, hence OnsetChroma.keyword()
-            raise ClassificationError(f"Influence does not have feature '{OnsetChroma.keyword()}'.")
+            raise ClassificationError(f"Influence does not have feature 'chroma'")
 
     def _label_from_chroma(self, chroma: np.ndarray) -> IntLabel:
         rms: np.ndarray = np.sqrt(np.sum(np.power(chroma - self._som_data, 2), axis=1))

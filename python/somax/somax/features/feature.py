@@ -8,7 +8,7 @@ from somax import features
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
 from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
-from somax.utils.introspective import StringParsed, Introspective
+from somax.utils.introspective import Introspective
 
 
 class FeatureUtils:
@@ -22,39 +22,45 @@ class FeatureUtils:
 
 
 class AbstractFeature(FeatureValue, Introspective, ABC):
+    """ An AbstractFeature typically corresponds to an audio descriptor. There are three subtypes of features in Somax:
+        - Features that inherit directly from AbstractFeature: these cannot be stored in a corpus and are only used
+                for influencing an agent's behavior
+        - Features that inherit from CorpusFeature: these can be stored in a corpus but not used for offline
+                analysis. In other words, these can only be used while real-time recording a corpus and the
+                analysis is computed elsewhere.
+        - Features that inherit from AnalyzableFeatures: these can both be stored in a corpus but also directly
+                used for offline analysis of an audio file
+
+        When stored in a `Corpus`, each `CorpusEvent` may only contain one feature of each type, as they are stored
+                in a dictionary indexed by their type. A parallel system of descriptors indexed by custom names is
+                implemented through the `AbstractLabel` class.
+    """
+
     def __init__(self, value: Any):
         self._value = value
 
     @classmethod
     def classes(cls, include_abstract: bool = False) -> List[Type['AbstractFeature']]:
-        return list(cls._classes(somax.features, include_abstract=include_abstract).values())
-
-    @classmethod
-    def parse_type(cls, type_name: str) -> Type['AbstractFeature']:
-        class_dict: Dict[str, Type['AbstractFeature']]
-        class_dict = {c.__name__.lower(): c for c in cls.classes(include_abstract=False)}
-        return class_dict[type_name.lower()]
-
-    def name(self) -> str:
-        return self.__class__.__name__
+        # noinspection PyTypeChecker
+        return [c for c in cls._classes(somax.features, include_abstract=include_abstract).values()
+                if issubclass(c, cls)]
 
 
 class CorpusFeature(AbstractFeature, ABC):
-
     @classmethod
-    @abstractmethod
-    def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
-        """ raises: FeatureError if type of events doesn't match type of metadata """
-        pass
+    def decode(cls, values: Dict[str, Any]) -> 'CorpusFeature':
+        """ Default implementation, override when needed (e.g. type conversion) """
+        return cls(value=values[cls.encode_keyword()])
 
-    @classmethod
-    @abstractmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        """ TODO docstring """
-
-    @abstractmethod
     def encode(self) -> Dict[str, Any]:
-        """ TODO docstring """
+        """ Default implementation, override when needed (e.g. type conversion) """
+        return {self.encode_keyword(): self._value}
+
+    @staticmethod
+    @abstractmethod
+    def encode_keyword() -> str:
+        """ Note: This implementation isn't ideal -- storing by class name would be much more efficient --
+                  but is preserved for compatibility with legacy corpora (pre 2.7.0) """
 
     @classmethod
     def classpath(cls) -> str:
@@ -68,10 +74,10 @@ class CorpusFeature(AbstractFeature, ABC):
         return cls
 
     @staticmethod
-    def from_json(classpath: str, feature_kwargs: Dict[str, Any]) -> Tuple[Type['CorpusFeature'], 'CorpusFeature']:
+    def from_json(classpath: str, values: Dict[str, Any]) -> Tuple[Type['CorpusFeature'], 'CorpusFeature']:
         """ Raises: KeyError, AttributeError"""
         cls: Type[CorpusFeature] = CorpusFeature.class_from_string(classpath)
-        return cls, cls.decode(feature_kwargs)
+        return cls, cls.decode(values)
 
     @staticmethod
     def all_corpus_features() -> List[Tuple[str, Type['CorpusFeature']]]:
@@ -80,39 +86,9 @@ class CorpusFeature(AbstractFeature, ABC):
                                                       and issubclass(m, CorpusFeature))
 
 
-class RuntimeFeature(AbstractFeature, StringParsed, ABC):
+class AnalyzableFeature(CorpusFeature, ABC):
     @classmethod
-    def from_string(cls, keyword: str, value: Any = None, **kwargs) -> 'RuntimeFeature':
-        """ :raises ValueError if a feature matching the keyword doesn't exist """
-        for feature in cls._classes(somax.features).values():  # type: Type[RuntimeFeature]
-            if issubclass(feature, RuntimeFeature) and feature.keyword() == keyword:
-                return feature(value)
-        raise ValueError(f"No feature matches the keyword '{keyword}'")
-
-    @classmethod
-    def default(cls, **kwargs) -> 'StringParsed':
-        """ :raises ValueError. As no default Feature exists, this will always be raised"""
-        raise ValueError("No default feature exist")
-
-    @staticmethod
     @abstractmethod
-    def keyword() -> str:
-        """ The keyword that the class responds to when receiving runtime influences from the client. """
-
-
-class RuntimeRecordable(Introspective, ABC):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    @staticmethod
-    @abstractmethod
-    def recordable_keyword() -> str:
+    def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
+        """ raises: FeatureError if type of events doesn't match type of metadata """
         pass
-
-    @classmethod
-    def runtime_class_from_string(cls, keyword: str) -> Type['RuntimeRecordable']:
-        """ :raises ValueError if a feature matching the keyword doesn't exist """
-        for feature in cls._classes(somax.features).values():  # type: Type[RuntimeRecordable]
-            if issubclass(feature, RuntimeRecordable) and feature.recordable_keyword() == keyword:
-                return feature
-        raise ValueError(f"No feature matches the keyword '{keyword}'")

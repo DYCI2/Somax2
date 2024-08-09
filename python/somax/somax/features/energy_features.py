@@ -1,18 +1,22 @@
 import typing
-from typing import Any, Dict, List
+from typing import Any, List
 
 import librosa
 import numpy as np
 
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
-from somax.features.feature import CorpusFeature, FeatureUtils
+from somax.features.feature import FeatureUtils, AnalyzableFeature
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
-class TotalEnergyDb(CorpusFeature):
+class TotalEnergyDb(AnalyzableFeature):
     def __init__(self, value: float):
         super().__init__(value=value)
+
+    @staticmethod
+    def encode_keyword() -> str:
+        return "totalenergy"
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
@@ -50,21 +54,18 @@ class TotalEnergyDb(CorpusFeature):
             event.set_feature(cls(value=energy_db))
         return events
 
-    @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=trait_dict["totalenergy"])
-
-    def encode(self) -> Dict[str, Any]:
-        return {"totalenergy": self._value}
-
     def value(self) -> float:
         return self._value
 
 
 # TODO: Generalize duplicate code segment (post-merge)
-class PeakEnergyDb(CorpusFeature):
+class PeakEnergyDb(AnalyzableFeature):
     def __init__(self, value: float):
         super().__init__(value=value)
+
+    @staticmethod
+    def encode_keyword() -> str:
+        return "peakenergy"
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
@@ -102,20 +103,17 @@ class PeakEnergyDb(CorpusFeature):
             event.set_feature(cls(value=energy_db))
         return events
 
-    @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=trait_dict["peakenergy"])
-
-    def encode(self) -> Dict[str, Any]:
-        return {"peakenergy": self._value}
-
     def value(self) -> float:
         return self._value
 
 
-class VerticalDensity(CorpusFeature):
+class VerticalDensity(AnalyzableFeature):
     def __init__(self, value: int):
         super().__init__(value=value)
+
+    @staticmethod
+    def encode_keyword() -> str:
+        return "density"
 
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
@@ -125,13 +123,6 @@ class VerticalDensity(CorpusFeature):
             return events
         raise FeatureError(f"Feature '{cls.__name__}' does not support content of "
                            f"type {metadata.content_type.__class__.__name__}")
-
-    @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=trait_dict["density"])
-
-    def encode(self) -> Dict[str, Any]:
-        return {"density": self._value}
 
     def value(self) -> Any:
         return self._value

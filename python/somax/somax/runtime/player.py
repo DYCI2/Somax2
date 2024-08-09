@@ -12,9 +12,10 @@ from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, RealtimeRecordedAudioCorpus, MidiCorpus, AudioCorpus
 from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent, SilenceEvent
-from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch, RecordingError, ClassificationError
+from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch, RecordingError
 from somax.runtime.exceptions import InvalidCorpus
 from somax.runtime.fallback_peak_selector import FallbackPeakSelector
+from somax.runtime.filters import AbstractFilter
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
@@ -23,7 +24,6 @@ from somax.runtime.peak_post_processing import ProbabilityFilter
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.peaks import Peaks
 from somax.runtime.region_mask import RegionMask
-from somax.runtime.filters import AbstractFilter
 from somax.runtime.taboo_mask import TabooMask
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
@@ -34,7 +34,7 @@ class Player(Parametric, ContentAware):
                  name: str,
                  peak_selector: AbstractPeakSelector = AbstractPeakSelector.default(),
                  merge_action: AbstractMergeAction = AbstractMergeAction.default(),
-                 scale_actions: List[AbstractFilter] = AbstractFilter.default_set()):
+                 filters: List[AbstractFilter] = AbstractFilter.default_set()):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.name: str = name
@@ -42,15 +42,15 @@ class Player(Parametric, ContentAware):
         self.peak_selector: AbstractPeakSelector = peak_selector
         self.fallback_selector: FallbackPeakSelector = FallbackPeakSelector()
         self.corpus: Optional[Corpus] = None
-        self.scale_actions: Dict[Type[AbstractFilter], AbstractFilter] = {}
+        self.filters: Dict[Type[AbstractFilter], AbstractFilter] = {}
         self.region_mask: RegionMask = RegionMask()
         self.merge_action: AbstractMergeAction = merge_action
         self.post_filter: ProbabilityFilter = ProbabilityFilter(enabled=False)
 
         self.atoms: Dict[str, Atom] = {}
 
-        for scale_action in scale_actions:
-            self.add_scale_action(scale_action)
+        for filter_obj in filters:
+            self.add_filter(filter_obj)
 
         self.previous_peaks: Peaks = Peaks.create_empty()
         self.previous_output: Optional[tuple[CorpusEvent, AbstractTransform]] = None
@@ -58,7 +58,10 @@ class Player(Parametric, ContentAware):
 
         self._force_jump_index: Optional[int] = None
 
-        self.enabled: Parameter = Parameter(default_value=True, min=False, max=True, type_str="bool",
+        self.enabled: Parameter = Parameter(default_value=True,
+                                            min_value=False,
+                                            max_value=True,
+                                            type_str="bool",
                                             description="Enables this Player.")
 
         self._parse_parameters()
@@ -174,36 +177,29 @@ class Player(Parametric, ContentAware):
         return event_and_transform
 
     def influence(self, path: List[str], influence: AbstractInfluence, time: float, **kwargs) -> Dict[Atom, int]:
-        """ Raises: InvalidLabelInput (if influencing a specific path without matching label), KeyError
+        """ Raises: ClassificationError, KeyError, InvalidCorpus, ContentMismatch
             Return values are only for gathering statistics (Evaluator, etc.) and not used in runtime."""
         if not self.is_enabled():
             return {}
 
         if not self.eligible:
-            raise ContentMismatch(f"Player '{self.name}' couldn't handle corpus of type '{type(self.corpus).__name__}"
-                                  f"due to incompatibility with the following class: "
-                                  f"'{self._invalidated_by.__class__.__name__}'")
+            raise InvalidCorpus(f"Player '{self.name}' couldn't handle corpus of type '{type(self.corpus).__name__}"
+                                f"due to incompatibility with the following class: "
+                                f"'{self._invalidated_by.__class__.__name__}'")
 
         if self.corpus is None:
-            raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'.")
+            raise InvalidCorpus(f"No Corpus has been loaded in player '{self.name}'")
 
         if self.corpus.length() == 0:
-            raise InvalidCorpus(f"Corpus is empty in player '{self.name}'.")
+            raise InvalidCorpus(f"Corpus is empty")
 
-        num_generated_peaks: Dict[Atom, int] = {}
         if not path:
-            for atom in self._direct_influenced_atoms():
-                try:
-                    num_peaks: int = atom.influence(influence, time, **kwargs)
-                    num_generated_peaks[atom] = num_peaks
-                except ClassificationError:
-                    # TODO: This needs to be changed - influencing without a valid path should not be supported at all
-                    # Ignore atom if label doesn't match
-                    continue
-        else:
-            atom: Atom = self._get_atom(path)
-            num_peaks: int = atom.influence(influence, time, **kwargs)
-            num_generated_peaks[atom] = num_peaks
+            raise KeyError("an atom must be specified")
+
+        atom: Atom = self._get_atom(path)
+        num_generated_peaks: Dict[Atom, int] = {}
+        num_peaks: int = atom.influence(influence, time, **kwargs)
+        num_generated_peaks[atom] = num_peaks
         return num_generated_peaks
 
     def _update_peaks_on_new_event(self, time: float) -> None:
@@ -238,7 +234,7 @@ class Player(Parametric, ContentAware):
         self.fallback_selector.feedback(feedback_event, time, applied_transform)
         self.merge_action.feedback(feedback_event, time, applied_transform)
 
-        for scale_action in self.scale_actions.values():
+        for scale_action in self.filters.values():
             scale_action.feedback(feedback_event, time, applied_transform)
 
         for atom in self.atoms.values():
@@ -249,7 +245,7 @@ class Player(Parametric, ContentAware):
         self.previous_peaks = Peaks.create_empty()
         self.peak_selector.clear()
         self.fallback_selector.clear()
-        for scale_action in self.scale_actions.values():
+        for scale_action in self.filters.values():
             scale_action.clear()
 
         for atom in self.atoms.values():
@@ -310,11 +306,6 @@ class Player(Parametric, ContentAware):
 
         return event
 
-    # def set_scheduling_mode(self, scheduling_mode: SchedulingMode) -> None:
-    #     for atom in self.atoms.values():
-    #         atom.set_scheduling_mode(scheduling_mode)
-    #         print(f"setting scheduling mode for atom {atom.name} to {scheduling_mode}")
-
     def create_atom(self, path: List[str], weight: float, self_influenced: bool, classifier: AbstractClassifier,
                     activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
                     _transforms: None = None, enabled: bool = True, override: bool = False) -> None:
@@ -345,21 +336,21 @@ class Player(Parametric, ContentAware):
         self.peak_selector = peak_selector
         self._parse_parameters()
 
-    def add_scale_action(self, scale_action: AbstractFilter, override: bool = False):
+    def add_filter(self, filter_obj: AbstractFilter, override: bool = False):
         """ Raises: DuplicateKeyError """
-        if type(scale_action) in self.scale_actions and not override:
-            raise DuplicateKeyError(f"A Scale Action of type '{type(scale_action).__name__}' already exists."
+        if type(filter_obj) in self.filters and not override:
+            raise DuplicateKeyError(f"A Scale Action of type '{type(filter_obj).__name__}' already exists."
                                     f"To override: use 'override=True'.")
 
-        scale_action.update_transforms(self._transform_handler)
-        self.scale_actions[type(scale_action)] = scale_action
+        filter_obj.update_transforms(self._transform_handler)
+        self.filters[type(filter_obj)] = filter_obj
 
         self._parse_parameters()
 
-    def remove_scale_action(self, scale_action_type: Type[AbstractFilter]):
+    def remove_filter(self, filter_type: Type[AbstractFilter]):
         """ Raises: KeyError """
-        del self.scale_actions[scale_action_type]
-        del self.parameter_dict[scale_action_type.__name__]
+        del self.filters[filter_type]
+        del self.parameter_dict[filter_type.__name__]
         self._parse_parameters()
 
     def set_merge_action(self, merge_action: AbstractMergeAction) -> None:
@@ -465,7 +456,7 @@ class Player(Parametric, ContentAware):
 
         peaks, taboo_mask = self.region_mask.process(peaks, corresponding_events, taboo_mask, corpus)
 
-        for scale_action in self.scale_actions.values():
+        for scale_action in self.filters.values():
             if scale_action.is_enabled_and_eligible():
                 peaks, taboo_mask = scale_action.apply(peaks=peaks,
                                                        time=scheduler_time,
@@ -482,7 +473,7 @@ class Player(Parametric, ContentAware):
         return peaks, taboo_mask
 
     def _update_transforms(self):
-        for scale_action in self.scale_actions.values():
+        for scale_action in self.filters.values():
             scale_action.update_transforms(self._transform_handler)
 
         for atom in self.atoms.values():

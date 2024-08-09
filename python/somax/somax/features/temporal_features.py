@@ -1,20 +1,20 @@
-from typing import List, Dict, Any, Tuple
+from typing import List, Tuple
 
 import librosa
 import numpy as np
 
 from somax.corpus_builder.metadata import MidiMetadata, AudioMetadata, Metadata
-from somax.features.feature import CorpusFeature, FeatureUtils, RuntimeRecordable
+from somax.features.feature import FeatureUtils, AnalyzableFeature
 from somax.runtime.corpus_event import MidiCorpusEvent, AudioCorpusEvent, CorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
-class Tempo(RuntimeRecordable, CorpusFeature):
+class Tempo(AnalyzableFeature):
     def __init__(self, value: float):
         super().__init__(value=value)
 
     @staticmethod
-    def recordable_keyword() -> str:
+    def encode_keyword() -> str:
         return "tempo"
 
     @classmethod
@@ -45,13 +45,6 @@ class Tempo(RuntimeRecordable, CorpusFeature):
         for event in events:
             event.set_feature(cls(tempo))
 
-    @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=trait_dict["tempo"])
-
-    def encode(self) -> Dict[str, Any]:
-        return {"tempo": self._value}
-
     def value(self) -> int:
         return self._value
 
@@ -63,23 +56,23 @@ class Tempo(RuntimeRecordable, CorpusFeature):
         onset_envelope: np.ndarray = librosa.onset.onset_strength(y=metadata.foreground_data,
                                                                   sr=metadata.sr, hop_length=hop_length)
         tempo, beats_s = librosa.beat.beat_track(y=audio_data,
-                                               sr=sr,
-                                               onset_envelope=onset_envelope,
-                                               hop_length=hop_length,
-                                               start_bpm=metadata.estimated_initial_bpm,
-                                               tightness=metadata.beat_tightness,
-                                               units="time")
+                                                 sr=sr,
+                                                 onset_envelope=onset_envelope,
+                                                 hop_length=hop_length,
+                                                 start_bpm=metadata.estimated_initial_bpm,
+                                                 tightness=metadata.beat_tightness,
+                                                 units="time")
         return tempo, beats_s
 
 
-class BeatPhase(RuntimeRecordable, CorpusFeature):
+class BeatPhase(AnalyzableFeature):
     def __init__(self, value: float):
         """ value: float \in R[0, 1]"""
         super().__init__(value=value)
 
     @staticmethod
-    def recordable_keyword() -> str:
-        return "beat"
+    def encode_keyword() -> str:
+        return "beatphase"
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
@@ -97,9 +90,6 @@ class BeatPhase(RuntimeRecordable, CorpusFeature):
 
     @classmethod
     def _analyze_midi(cls, events: List[MidiCorpusEvent], _metadata: MidiMetadata) -> None:
-        # TODO: Temporary implementation of this feature for MIDI.
-        #       In practice, it will need access to meter / beat phase position.
-        #       See [[55. Time Tempo Phase]] for further discussion
         for event in events:
             if event.raw_beat_phase is not None:
                 event.set_feature(cls(event.raw_beat_phase))
@@ -108,9 +98,8 @@ class BeatPhase(RuntimeRecordable, CorpusFeature):
 
     @classmethod
     def _analyze_audio(cls, events: List[AudioCorpusEvent], metadata: AudioMetadata) -> None:
-        # TODO: Temp solution. Need to generalize this further in the Corpus Builder.
-        #       Currently there's unnecessary added cost due to computing the beat-tracking multiple times
-        _, beat_times = Tempo.beat_track_audio(metadata) # type: np.ndarray
+        # TODO: Currently there's unnecessary added cost due to computing the beat-tracking multiple times
+        _, beat_times = Tempo.beat_track_audio(metadata)  # type: np.ndarray
 
         for event in events:
             matches: np.ndarray = np.argwhere(beat_times <= event.onset).reshape(-1)
@@ -129,13 +118,6 @@ class BeatPhase(RuntimeRecordable, CorpusFeature):
                 beat_duration: float = beat_times[beat_index + 1] - beat_onset
                 beat_phase: float = (event.onset - beat_onset) / beat_duration
                 event.set_feature(cls(beat_phase))
-
-    @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=trait_dict["beatphase"])
-
-    def encode(self) -> Dict[str, Any]:
-        return {"beatphase": self._value}
 
     def value(self) -> int:
         return self._value

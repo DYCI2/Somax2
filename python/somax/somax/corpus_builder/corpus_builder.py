@@ -20,7 +20,7 @@ from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
-from somax.features.feature import CorpusFeature
+from somax.features.feature import AnalyzableFeature
 from somax.runtime.corpus import Corpus, AudioCorpus, MidiCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError, ParameterError
@@ -217,8 +217,8 @@ class CorpusBuilder:
         # TODO: Folder support - should not use filepaths[0]
         metadata: MidiMetadata = MidiMetadata(filepath=filepaths[0], content_type=RelativeScheduling(), stft=stft)
 
-        used_features: List[Type[CorpusFeature]] = []
-        for _, feature in CorpusFeature.all_corpus_features():  # type Type[CorpusFeature]
+        used_features: List[Type[AnalyzableFeature]] = []
+        for _, feature in AnalyzableFeature.classes():  # type: Type[AnalyzableFeature]
             try:
                 feature.analyze(events, metadata)
                 used_features.append(feature)
@@ -306,8 +306,8 @@ class CorpusBuilder:
 
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) computed necessary metadata")
 
-        used_features: List[Type[CorpusFeature]] = []
-        for _, feature in CorpusFeature.all_corpus_features():  # type: Type[CorpusFeature]
+        used_features: List[Type[AnalyzableFeature]] = []
+        for _, feature in AnalyzableFeature.all_corpus_features():  # type: Type[AnalyzableFeature]
             try:
                 feature.analyze(events, metadata)
                 used_features.append(feature)
@@ -440,12 +440,12 @@ class CorpusBuilder:
         """ y: mono signal [shape: (n,)]
             onsets: onset frames """
         rms_frames_db = 20 * np.log10(
-            np.abs(librosa.feature.rms(y=y, hop_length=hop_length)) + librosa.util.tiny(y)).reshape(-1)
-        eof = librosa.samples_to_frames(y.size, hop_length=hop_length)
+            np.abs(librosa.feature.rms(y=y, hop_length=int(hop_length))) + librosa.util.tiny(y)).reshape(-1)
+        eof = librosa.samples_to_frames(y.size, hop_length=int(hop_length))
         durations = np.diff(np.block([onsets, eof]))
 
         if max_size_s is not None:
-            max_size_frames = librosa.time_to_frames(max_size_s, sr=sr, hop_length=hop_length)
+            max_size_frames = librosa.time_to_frames(max_size_s, sr=sr, hop_length=int(hop_length))
             durations[durations > max_size_frames] = max_size_frames
 
         if off_threshold_db is not None:
@@ -464,7 +464,7 @@ class CorpusBuilder:
                         durations[i]
 
         if min_size_s is not None:
-            min_size_frames = librosa.time_to_frames(min_size_s, sr=sr, hop_length=hop_length)
+            min_size_frames = librosa.time_to_frames(min_size_s, sr=sr, hop_length=int(hop_length))
             valid_frames_mask = durations > min_size_frames
             onsets = onsets[valid_frames_mask]
             durations = durations[valid_frames_mask]

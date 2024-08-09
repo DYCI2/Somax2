@@ -18,7 +18,7 @@ from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.corpus_builder.midi_parser import BarNumberAnnotation
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features import Tempo
-from somax.features.feature import AbstractFeature, CorpusFeature, RuntimeRecordable
+from somax.features.feature import AbstractFeature, CorpusFeature
 from somax.features.feature_dictionary import FeatureDictionary, FeatureSpecification
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
@@ -29,6 +29,7 @@ from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpus
 from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import (DuplicateKeyError, ParameterError, InvalidCorpus, TransformError,
                                       ExternalDataMismatch, RecordingError, InvalidConfiguration, ClassificationError)
+from somax.runtime.filters import AbstractFilter
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.influence import FeatureInfluence, LabelInfluence
 from somax.runtime.label import AbstractLabel
@@ -37,7 +38,6 @@ from somax.runtime.osc_log_forwarder import OscLogForwarder
 from somax.runtime.parameter import Parametric, ParametricFlags
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
-from somax.runtime.filters import AbstractFilter
 from somax.runtime.send_protocol import PlayerSendProtocol
 from somax.runtime.target import Target
 from somax.runtime.transforms import AbstractTransform
@@ -582,29 +582,27 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. "
                               f"No transform was removed.")
 
-    def add_scale_action(self, scale_action: str, override: bool = False, verbose: bool = True, **kwargs):
+    def add_filter(self, filter_name: str, override: bool = False, verbose: bool = True, **kwargs):
         try:
-            scale_action: AbstractFilter = AbstractFilter.from_string(scale_action, **kwargs)
-            self.player.add_scale_action(scale_action, override)
+            filter_obj: AbstractFilter = AbstractFilter.from_string(filter_name, **kwargs)
+            self.player.add_filter(filter_obj, override)
             self._send_eligibility()
             if verbose:
-                self.logger.info(f"Added scale action {repr(scale_action)}")
-        except ValueError as e:
-            self.logger.error(f"{str(e)}. No scale action was added.")
-        except DuplicateKeyError as e:
-            self.logger.error(f"{str(e)}. No scale action was added.")
+                self.logger.info(f"Added filter {repr(filter_name)}")
+        except (ValueError, DuplicateKeyError) as e:
+            self.logger.error(f"{str(e)}. No filter was added.")
 
-    def remove_scale_action(self, scale_action: str, verbose: bool = True, **kwargs):
+    def remove_filter(self, filter_name: str, verbose: bool = True, **kwargs):
         try:
             # TODO: Not ideal that it instantiates one to remove it, could we parse class without creating instance?
-            scale_action: AbstractFilter = AbstractFilter.from_string(scale_action, **kwargs)
-            self.player.remove_scale_action(type(scale_action))
+            filter_obj: AbstractFilter = AbstractFilter.from_string(filter_name, **kwargs)
+            self.player.remove_filter(type(filter_obj))
             self._send_eligibility()
             if verbose:
-                self.logger.info(f"Removed scale action {repr(scale_action)}")
+                self.logger.info(f"Removed filter {repr(filter_name)}")
         except KeyError as e:
             if verbose:
-                self.logger.error(f"Could not remove scale action: {repr(e)}.")
+                self.logger.error(f"Could not remove filter: {repr(e)}.")
 
     def read_corpus(self,
                     filepath: str,
@@ -754,7 +752,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
         required_feature_types: List[Type[CorpusFeature]] = []
         for feature in required_features:
-            parsed_feature: Type[RuntimeRecordable] = RuntimeRecordable.runtime_class_from_string(feature)
+            parsed_feature: Type[CorpusFeature] = FeatureDictionary.audio_rt_type_of(feature)
             required_feature_types.append(typing.cast(Type[CorpusFeature], parsed_feature))
 
         return required_feature_types
@@ -815,9 +813,8 @@ class OscAgent(Agent, AsyncioOscObject):
 
     @staticmethod
     def _parse_feature(feature_keyword: str, feature_data: List[Any]) -> CorpusFeature:
-        parsed_feature: Type[CorpusFeature]
-        parsed_feature = typing.cast(Type[CorpusFeature],
-                                     RuntimeRecordable.runtime_class_from_string(feature_keyword))
+        parsed_feature: Type[CorpusFeature] = FeatureDictionary.audio_rt_type_of(feature_keyword)
+
         if len(feature_data) == 0:
             raise ValueError("A value is required for each feature keyword")
         if len(feature_data) == 1:

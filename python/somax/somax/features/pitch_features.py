@@ -1,41 +1,37 @@
 import typing
 from abc import ABC
-from typing import Dict, Any, List
+from typing import List
 
 import librosa
 import numpy as np
 
 from somax.corpus_builder.metadata import MidiMetadata, Metadata, AudioMetadata
 from somax.features import virfun
-from somax.features.feature import CorpusFeature, RuntimeFeature, AbstractFeature, FeatureUtils, RuntimeRecordable
+from somax.features.feature import AbstractFeature, FeatureUtils, AnalyzableFeature
 from somax.runtime.corpus_event import MidiCorpusEvent, CorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
-class AbstractIntegerPitch(AbstractFeature, ABC):
+class RuntimeIntegerPitch(AbstractFeature):
     def __init__(self, value: int):
         super().__init__(value=value)
 
     def value(self) -> int:
         return self._value
 
-    @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'AbstractIntegerPitch':
-        return cls(value=trait_dict["pitch"])
 
-    def encode(self) -> Dict[str, Any]:
-        return {"pitch": self._value}
-
-
-class RuntimeIntegerPitch(AbstractIntegerPitch, RuntimeFeature):
-    @staticmethod
-    def keyword() -> str:
-        return "pitch"
-
-
-class TopNote(AbstractIntegerPitch, CorpusFeature):
+class BaseIntegerPitch(AnalyzableFeature, ABC):
     def __init__(self, value: int):
         super().__init__(value=value)
+
+    def value(self) -> int:
+        return self._value
+
+
+class TopNote(BaseIntegerPitch):
+    @staticmethod
+    def encode_keyword() -> str:
+        return "topnote"
 
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
@@ -48,9 +44,10 @@ class TopNote(AbstractIntegerPitch, CorpusFeature):
                            f"type {metadata.content_type.__class__.__name__}")
 
 
-class VirtualFundamental(AbstractIntegerPitch, CorpusFeature):
-    def __init__(self, value: int):
-        super().__init__(value=value)
+class VirtualFundamental(BaseIntegerPitch):
+    @staticmethod
+    def encode_keyword() -> str:
+        return "virtualfundamental"
 
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
@@ -63,9 +60,10 @@ class VirtualFundamental(AbstractIntegerPitch, CorpusFeature):
                            f"type {metadata.content_type.__class__.__name__}")
 
 
-class BassNote(AbstractIntegerPitch, CorpusFeature):
-    def __init__(self, value: int):
-        super().__init__(value=value)
+class BassNote(BaseIntegerPitch):
+    @staticmethod
+    def encode_keyword() -> str:
+        return "bassnote"
 
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
@@ -78,11 +76,11 @@ class BassNote(AbstractIntegerPitch, CorpusFeature):
                            f"type {metadata.content_type.__class__.__name__}")
 
 
-class YinDiscretePitch(AbstractIntegerPitch, RuntimeRecordable, CorpusFeature):
+class YinDiscretePitch(BaseIntegerPitch):
 
     @staticmethod
-    def recordable_keyword() -> str:
-        return "pitch"
+    def encode_keyword() -> str:
+        return "yinpitch"
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
@@ -104,13 +102,3 @@ class YinDiscretePitch(AbstractIntegerPitch, RuntimeRecordable, CorpusFeature):
             event.set_feature(cls(value=pitch))
 
         return events
-
-    @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'CorpusFeature':
-        return cls(value=trait_dict["yinpitch"])
-
-    def encode(self) -> Dict[str, Any]:
-        return {"yinpitch": self.value()}
-
-    def value(self) -> Any:
-        return self._value

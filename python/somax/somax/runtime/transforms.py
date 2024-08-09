@@ -7,7 +7,7 @@ import numpy as np
 
 from somax.features.chroma_features import OnsetChroma
 from somax.features.feature import FeatureValue, AbstractFeature
-from somax.features.pitch_features import AbstractIntegerPitch
+from somax.features.pitch_features import BaseIntegerPitch
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import TransformError, TransformIdentityError
 from somax.utils.introspective import StringParsed
@@ -120,7 +120,7 @@ class TransposeTransform(AbstractTransform):
 
     @staticmethod
     def valid_features() -> List[Type[FeatureValue]]:
-        return [AbstractIntegerPitch, OnsetChroma]
+        return [BaseIntegerPitch, OnsetChroma]
 
     def apply(self, obj: Union[CorpusEvent, FeatureValue], **kwargs) -> Union[CorpusEvent, FeatureValue]:
         if isinstance(obj, CorpusEvent):
@@ -134,7 +134,7 @@ class TransposeTransform(AbstractTransform):
                 for note in event.notes:
                     note.pitch += self.semitones
             return event
-        elif isinstance(obj, AbstractIntegerPitch):
+        elif isinstance(obj, BaseIntegerPitch):
             pitch: int = obj.value() + self.semitones
             return obj.__class__(value=pitch)
         elif isinstance(obj, OnsetChroma):
@@ -155,7 +155,7 @@ class TransposeTransform(AbstractTransform):
             if isinstance(event, MidiCorpusEvent):
                 for note in event.notes:
                     note.pitch -= self.semitones
-        elif isinstance(obj, AbstractIntegerPitch):
+        elif isinstance(obj, BaseIntegerPitch):
             pitch: int = obj.value() - self.semitones
             return obj.__class__(value=pitch)
         elif isinstance(obj, OnsetChroma):

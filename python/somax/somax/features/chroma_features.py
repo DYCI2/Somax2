@@ -1,17 +1,26 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 from typing import Dict, Any, Union, List
 
 import librosa
+import librosa.feature
 import numpy as np
 
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
 from somax.corpus_builder.midi_chromagram import MidiChromagram
-from somax.features.feature import CorpusFeature, RuntimeFeature, FeatureUtils, RuntimeRecordable
+from somax.features.feature import FeatureUtils, AnalyzableFeature, AbstractFeature
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent
 from somax.runtime.exceptions import FeatureError
 
 
-class BaseChroma(CorpusFeature, RuntimeFeature):
+class RuntimeChroma(AbstractFeature):
+    def __init__(self, value: Union[np.ndarray, List[float]]):
+        super().__init__(value=np.array(value))
+
+    def value(self) -> np.ndarray:
+        return self._value
+
+
+class BaseChroma(AnalyzableFeature, ABC):
     def __init__(self, value: Union[np.ndarray, List[float]]):
         super().__init__(value=np.array(value))
 
@@ -30,8 +39,9 @@ class BaseChroma(CorpusFeature, RuntimeFeature):
         return events
 
     @classmethod
-    def decode(cls, trait_dict: Dict[str, Any]) -> 'BaseChroma':
-        return cls(value=np.array(trait_dict[cls.keyword()]))
+    def decode(cls, values: Dict[str, Any]) -> 'BaseChroma':
+        # Note: overridden for type conversion
+        return cls(value=np.array(values[cls.encode_keyword()]))
 
     @classmethod
     @abstractmethod
@@ -44,23 +54,20 @@ class BaseChroma(CorpusFeature, RuntimeFeature):
         """ """
 
     def encode(self) -> Dict[str, Any]:
-        return {self.keyword(): self._value.tolist()}
+        # Note: overridden for type conversion
+        return {self.encode_keyword(): self._value.tolist()}
 
-    def value(self) -> Any:
+    def value(self) -> np.ndarray:
         return self._value
 
 
-class OnsetChroma(RuntimeRecordable, BaseChroma):
+class OnsetChroma(BaseChroma):
     def __init__(self, value: Union[np.ndarray, List[float]]):
         super().__init__(value=np.array(value))
 
     @staticmethod
-    def keyword() -> str:
+    def encode_keyword() -> str:
         return "chroma"
-
-    @staticmethod
-    def recordable_keyword() -> str:
-        return "onsetchroma"
 
     @classmethod
     def _analyze_midi(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata):
@@ -79,16 +86,12 @@ class OnsetChroma(RuntimeRecordable, BaseChroma):
             event.set_feature(cls(chroma[:, onset_frame]))
 
 
-class MeanChroma(RuntimeRecordable, BaseChroma):
+class MeanChroma(BaseChroma):
     def __init__(self, value: Union[np.ndarray, List[float]]):
         super().__init__(value=np.array(value))
 
     @staticmethod
-    def keyword() -> str:
-        return "meanchroma"
-
-    @staticmethod
-    def recordable_keyword() -> str:
+    def encode_keyword() -> str:
         return "meanchroma"
 
     @classmethod
@@ -102,7 +105,6 @@ class MeanChroma(RuntimeRecordable, BaseChroma):
         chromagram: MidiChromagram = MidiChromagram.from_midi(metadata.stft)
         for event in events:
             event.set_feature(cls(chromagram.at(event.absolute_onset)))
-
 
     @classmethod
     def _analyze_audio(cls, events: List[AudioCorpusEvent], metadata: AudioMetadata) -> None:
