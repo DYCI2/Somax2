@@ -9,14 +9,10 @@ import typing
 from importlib import resources
 from typing import Any, Optional, List, Tuple, Type, Union
 
-import mido
-
 from somax import settings, log
 from somax.classification.classifier import AbstractClassifier, FeatureClassifier
 from somax.classification.label_classifier import LabelClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
-from somax.corpus_builder.midi_parser import BarNumberAnnotation
-from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features import Tempo
 from somax.features.feature import AbstractFeature, CorpusFeature
 from somax.features.feature_dictionary import FeatureDictionary, FeatureSpecification
@@ -441,20 +437,22 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     def create_atom(self,
-                    path: str = "",
-                    weight: float = Atom.DEFAULT_WEIGHT,
-                    classifier: str = "",
+                    path: str,
+                    classifier: str,
+                    descriptor: str,
+                    descriptor_is_label: Optional[bool],
                     activity_pattern: str = "",
                     memory_space: str = "",
+                    weight: float = Atom.DEFAULT_WEIGHT,
                     self_influenced: bool = False,
                     enabled: bool = True,
-                    override: bool = False,
-                    **kwargs):
+                    override: bool = False):
         try:
             path_and_name: List[str] = self._string_to_path(path)
-            classifier: AbstractClassifier = AbstractClassifier.from_string(classifier, **kwargs)
+            classifier: AbstractClassifier = self._parse_classifier(classifier, descriptor, descriptor_is_label)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
+
             self.player.create_atom(path=path_and_name,
                                     weight=weight,
                                     self_influenced=self_influenced,
@@ -466,7 +464,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self.send_atoms()
             self._send_eligibility()
             # self.logger.info(f"Created atom with path '{path}'.")
-        except (AssertionError, ValueError, KeyError, IndexError, DuplicateKeyError) as e:
+        except (AssertionError, ValueError, KeyError, InvalidConfiguration, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)} No atom was created.")
 
     def delete_atom(self, path: str):
@@ -493,32 +491,19 @@ class OscAgent(Agent, AsyncioOscObject):
         except (ValueError, KeyError) as e:
             self.logger.error(f"{str(e)} No peak selector was set.")
 
-    def set_classifier(self, path: str, classifier: str, descriptor: str, descriptor_is_label: bool) -> None:
+    def set_classifier(self,
+                       path: str,
+                       classifier_name: str,
+                       descriptor: str,
+                       descriptor_is_label: Optional[bool]) -> None:
         try:
-            # Case 1: `descriptor` is the name of an `AbstractLabel` (which may or may not exist in the corpus)
-            if descriptor_is_label:
-                classifier: AbstractClassifier = LabelClassifier(descriptor)
-
-            else:
-                feature_info: FeatureSpecification = FeatureDictionary.get_entry(descriptor)
-
-                # Case 2: descriptor is a `CorpusFeature` but with default classifier
-                if classifier == "default" or classifier == "":
-                    classifier = feature_info.create_default_classifier()
-
-                # Case 3: descriptor is a `CorpusFeature` with a user-specified classifier
-                else:
-                    # TODO: If this is invalid, we should probably still set it (as None) but print a warning at this level
-                    classifier = FeatureClassifier.from_string(classifier,
-                                                               midi_feature=feature_info.midi_feature,
-                                                               audio_feature=feature_info.audio_feature)
+            classifier: AbstractClassifier = self._parse_classifier(classifier_name, descriptor, descriptor_is_label)
 
             path_and_name: List[str] = self._string_to_path(path)
             self.player.set_classifier(path_and_name, classifier)
             self._send_eligibility()
 
-        # Note: InvalidCorpus if clustering fails
-        except (AssertionError, KeyError, ValueError, InvalidCorpus, InvalidConfiguration) as e:
+        except (AssertionError, KeyError, ValueError, InvalidConfiguration, InvalidCorpus) as e:
             self.logger.error(f"{str(e)} No classifier was set.")
 
     def set_activity_pattern(self, path: str, activity_pattern: str, **kwargs):
@@ -925,56 +910,19 @@ class OscAgent(Agent, AsyncioOscObject):
     def _set_experimental_relative_temporal_scaling_for_audio(self, enable: bool) -> None:
         self.scheduling_handler.set_experimental_relative_tempo_scaling_for_audio_mode(enable)
 
-    def render_features(self, features: List[str], associated_keywords: List[str]) -> None:
+    def render_features(self, *feature_names) -> None:
         """ Schedule and output the value of the event's features at the onset """
-        if len(features) != len(associated_keywords):
-            self.logger.error("The number of keywords and the number of features must be equal. "
-                              "No rendering features were added")
-            return
-
         try:
+            feature_names: List[str] = list(feature_names)
             feature_types: List[Type[AbstractFeature]] = []
-            for feature_str in features:
-                feature_types.extend(FeatureDictionary.unique_types_of(feature_str))
+            for feature_name in feature_names:
+                feature_types.extend(FeatureDictionary.unique_types_of(feature_name))
 
         except KeyError as e:
             self.logger.error(f"Could not find feature {str(e)}. No rendering features were added")
             return
 
-        self.scheduling_handler.set_rendering_features(list(zip(feature_types, associated_keywords)))
-
-    ######################################################
-    # PRIVATE
-    ######################################################
-
-    @staticmethod
-    def _string_to_path(path: str) -> List[str]:
-        """ :raises AssertionError if `path` is non-empty and not of type `str`. """
-        assert isinstance(path, str), "Argument 'path' should be a string."
-        if not path:
-            return []
-        elif settings.PATH_SEPARATOR in path:
-            return [s for s in path.split(settings.PATH_SEPARATOR) if s]
-        else:
-            return [path]
-
-    @staticmethod
-    def _path_to_string(path: List[str]) -> str:
-        return settings.PATH_SEPARATOR.join(path)
-
-    def _read_corpus(self, corpus: Optional[Corpus]):
-        self.clear()
-
-        self.player.set_eligibility(corpus)
-        self.player.read_corpus(corpus)
-        self._post_read_corpus()
-
-    def _post_read_corpus(self):
-        self.flush()
-        self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
-        self._try_update_server_tempo()  # immediately set tempo if player is tempo master
-        self._send_eligibility()
-        self.send_corpus_info()
+        self.scheduling_handler.set_rendering_features(list(zip(feature_types, feature_names)))
 
     ######################################################
     # MAX GETTERS
@@ -1042,31 +990,6 @@ class OscAgent(Agent, AsyncioOscObject):
                 corpus.duration()
             ])
 
-    def _send_eligibility(self):
-        corpus: Optional[Corpus] = self.player.corpus
-        if self.player.corpus is not None:
-            self.player.set_eligibility(corpus)
-
-        for path in self.player.get_children_paths([]):
-            # Default all parameters to eligible
-            self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), True])
-
-        not_eligible: List[ContentAware] = [e[0] for e in self.player.get_eligibility() if not e[1]]
-        not_eligible: List[Parametric] = [e for e in not_eligible if isinstance(e, Parametric)]
-
-        ne_paths: List[List[str]] = []
-        for ne in not_eligible:
-            ne_path: List[str] = self.player.get_parameter_path(target_obj=ne)
-            ne_paths.extend(ne.get_children_paths(ne_path))
-        ne_paths = [list(e) for e in set(tuple(e) for e in ne_paths)]
-
-        for path in ne_paths:
-            # Send not eligible status for ineligible parameters
-            self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), False])
-
-    def _send_output_statistics(self):
-        self.target.send(PlayerSendProtocol.TOTAL_PEAKS, self.player.get_output_statistics())
-
     def corpus_query(self, *args) -> None:
         if self.player.corpus is None:
             self.logger.error("No corpus loaded in player. Could not process query")
@@ -1097,38 +1020,89 @@ class OscAgent(Agent, AsyncioOscObject):
     def clear_memory(self):
         self.improvisation_memory = ImprovisationMemory()
 
-    def export_runtime_corpus(self, folder: str, filename: str, corpus_name: Optional[str] = None,
-                              initial_time_signature: Tuple[int, int] = (4, 4), ticks_per_beat: int = 480,
-                              annotations: str = BarNumberAnnotation.NONE.value, overwrite: bool = False,
-                              use_original_tempo: bool = False):
-        # TODO: Update for new architecture
-        self.logger.error("Exporting recorded corpus is currently not supported")
-        return
+    ######################################################
+    # PRIVATE
+    ######################################################
 
-        filepath = os.path.join(folder, filename)
-        if os.path.splitext(filepath)[-1] not in CorpusBuilder.MIDI_FILE_EXTENSIONS:
-            filepath += ".mid"
-        if os.path.exists(filepath) and not overwrite:
-            self.logger.error(f"The file '{filepath}' already exists. No corpus was exported. "
-                              f"To override, use 'overwrite= True'.")
-            return
-        if not os.path.isdir(folder):
-            self.logger.error(f"The folder '{folder}' does not exist. No corpus was exported.")
-            return
+    @staticmethod
+    def _string_to_path(path: str) -> List[str]:
+        """ :raises AssertionError if `path` is non-empty and not of type `str`. """
+        assert isinstance(path, str), "Argument 'path' should be a string."
+        if not path:
+            return []
+        elif settings.PATH_SEPARATOR in path:
+            return [s for s in path.split(settings.PATH_SEPARATOR) if s]
+        else:
+            return [path]
 
-        name: str = corpus_name if corpus_name is not None else filename
+    @staticmethod
+    def _path_to_string(path: List[str]) -> str:
+        return settings.PATH_SEPARATOR.join(path)
 
-        try:
-            corpus: MidiCorpus = self.improvisation_memory.export(corpus_name, self.player.corpus,
-                                                                  use_original_tempo=use_original_tempo)
-        except InvalidCorpus as e:
-            self.logger.error(f"{str(e)}. No MIDI data was exported.")
-            return
+    def _read_corpus(self, corpus: Optional[Corpus]):
+        self.clear()
 
-        bar_number_annotations: BarNumberAnnotation = BarNumberAnnotation.from_string(annotations)
+        self.player.set_eligibility(corpus)
+        self.player.read_corpus(corpus)
+        self._post_read_corpus()
 
-        note_matrix: NoteMatrix = corpus.to_note_matrix()
-        midi_file: mido.MidiFile = note_matrix.to_midi_file(name, filepath, initial_time_signature, ticks_per_beat,
-                                                            bar_number_annotations)
-        # midi_file.save(filename=filepath)
-        self.logger.info(f"The recorded corpus '{name}' was saved to '{filepath}'.")
+    def _post_read_corpus(self):
+        self.flush()
+        self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
+        self._try_update_server_tempo()  # immediately set tempo if player is tempo master
+        self._send_eligibility()
+        self.send_corpus_info()
+
+    def _send_eligibility(self):
+        corpus: Optional[Corpus] = self.player.corpus
+        if self.player.corpus is not None:
+            self.player.set_eligibility(corpus)
+
+        for path in self.player.get_children_paths([]):
+            # Default all parameters to eligible
+            self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), True])
+
+        not_eligible: List[ContentAware] = [e[0] for e in self.player.get_eligibility() if not e[1]]
+        not_eligible: List[Parametric] = [e for e in not_eligible if isinstance(e, Parametric)]
+
+        ne_paths: List[List[str]] = []
+        for ne in not_eligible:
+            ne_path: List[str] = self.player.get_parameter_path(target_obj=ne)
+            ne_paths.extend(ne.get_children_paths(ne_path))
+        ne_paths = [list(e) for e in set(tuple(e) for e in ne_paths)]
+
+        for path in ne_paths:
+            # Send not eligible status for ineligible parameters
+            self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), False])
+
+    def _send_output_statistics(self):
+        self.target.send(PlayerSendProtocol.TOTAL_PEAKS, self.player.get_output_statistics())
+
+    @staticmethod
+    def _parse_classifier(classifier_name: str,
+                          descriptor: str,
+                          descriptor_is_label: Optional[bool]) -> AbstractClassifier:
+        """ raises: ValueError, KeyError, InvalidConfiguration """
+
+        # Case 1: `descriptor` is the name of an `AbstractLabel` (which may or may not exist in the corpus)
+        # (AND) Case 3: `descriptor` doesn't have a specified type, but as it's not defined in
+        #                the dictionary of features, it's assumed to be a label
+        if descriptor_is_label or (descriptor_is_label is None and not FeatureDictionary.contains(descriptor)):
+            classifier: AbstractClassifier = LabelClassifier(descriptor)
+
+        # Case 2: `descriptor` is a `CorpusFeature` with...
+        else:
+            feature_info: FeatureSpecification = FeatureDictionary.get_entry(descriptor)
+
+            # Case 2.1: ...a default classifier
+            if classifier_name == "default" or classifier_name == "":
+                classifier = feature_info.create_default_classifier()
+
+            # Case 2.2: ...a user-specified classifier
+            else:
+                # TODO: If this is invalid, we should probably still set it (to None) but print a warning at this level
+                classifier = FeatureClassifier.from_string(classifier_name,
+                                                           midi_feature=feature_info.midi_feature,
+                                                           audio_feature=feature_info.audio_feature)
+
+        return classifier

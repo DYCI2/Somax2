@@ -31,7 +31,7 @@ class Atom(Parametric, ContentAware):
                  enabled: bool = True):
         super().__init__()
         self.logger = logging.getLogger(__name__)
-        self.logger.debug(f"[__init__ Creating atom '{name}'.")
+
         self.name = name
         self._weight: Parameter = Parameter(weight, 0.0, None, 'float', "Relative scaling of atom peaks.")
         self._enabled: Parameter = ParamWithSetter(enabled, False, True, "bool", "Enables this Atom.",

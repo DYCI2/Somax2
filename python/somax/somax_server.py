@@ -17,11 +17,12 @@ from audioread import NoBackendError
 
 import somax
 from somax import log
-from somax.classification.chroma_classifiers import OnsetSomChromaClassifier
+from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
 from somax.corpus_builder.manual_corpus_builder import ThreadedManualCorpusBuilder
 from somax.corpus_builder.manual_text_formats import TextFormat
+from somax.features import OnsetChroma
 from somax.runtime.agent import OscAgent, Agent
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.corpus import Corpus, AudioCorpus
@@ -511,7 +512,7 @@ if __name__ == "__main__":
         logging.config.fileConfig(path.absolute())
 
     # Called to enforce file io at start of program
-    OnsetSomChromaClassifier()
+    SomChromaClassifier(OnsetChroma, OnsetChroma)
 
     parsed_args = parser.parse_args()
     in_port = parsed_args.in_port

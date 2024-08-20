@@ -248,6 +248,11 @@ class FeatureDictionary:
         return t
 
     @staticmethod
+    def contains(keyword: str) -> bool:
+        return keyword in FeatureDictionary._DICTIONARY
+
+
+    @staticmethod
     def create_default_classifier(keyword: str) -> FeatureClassifier:
         """ raises KeyError if not found """
         return FeatureDictionary.get_entry(keyword).create_default_classifier()

@@ -306,9 +306,16 @@ class Player(Parametric, ContentAware):
 
         return event
 
-    def create_atom(self, path: List[str], weight: float, self_influenced: bool, classifier: AbstractClassifier,
-                    activity_pattern: AbstractActivityPattern, memory_space: AbstractMemorySpace,
-                    _transforms: None = None, enabled: bool = True, override: bool = False) -> None:
+    def create_atom(self,
+                    path: List[str],
+                    weight: float,
+                    self_influenced: bool,
+                    classifier: AbstractClassifier,
+                    activity_pattern: AbstractActivityPattern,
+                    memory_space: AbstractMemorySpace,
+                    _transforms: None = None,
+                    enabled: bool = True,
+                    override: bool = False) -> None:
         """ Raises KeyError, IndexError, DuplicateKeyError """
         new_atom_name: str = path.pop(0)
         if len(path) > 0:
@@ -318,9 +325,14 @@ class Player(Parametric, ContentAware):
             raise DuplicateKeyError(f"An Atom with name '{new_atom_name}' already exists."
                                     f"To override: use 'override=True'.")
 
-        self.atoms[new_atom_name] = Atom(name=new_atom_name, weight=weight, classifier=classifier,
-                                         activity_pattern=activity_pattern, memory_space=memory_space,
-                                         corpus=self.corpus, self_influenced=self_influenced, enabled=enabled)
+        self.atoms[new_atom_name] = Atom(name=new_atom_name,
+                                         weight=weight,
+                                         classifier=classifier,
+                                         activity_pattern=activity_pattern,
+                                         memory_space=memory_space,
+                                         corpus=self.corpus,
+                                         self_influenced=self_influenced,
+                                         enabled=enabled)
         self._parse_parameters()
 
     def delete_atom(self, path: List[str]) -> None:
