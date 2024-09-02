@@ -1,6 +1,6 @@
 import logging
 import random
-from typing import Dict, Optional, Tuple, Type, List
+from typing import Dict, Optional, Tuple, Type, List, Any
 
 import numpy as np
 
@@ -19,7 +19,7 @@ from somax.runtime.filters import AbstractFilter
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.merge_actions import AbstractMergeAction
-from somax.runtime.parameter import Parameter, Parametric
+from somax.runtime.parameter import Parameter, Parametric, ParametricFlags
 from somax.runtime.peak_post_processing import ProbabilityFilter
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.peaks import Peaks
@@ -258,8 +258,11 @@ class Player(Parametric, ContentAware):
         self._force_jump_index = index
 
     def read_corpus(self, corpus: Optional[Corpus]) -> None:
+        self.set_eligibility(corpus)
         self._update_transforms()
+
         self.corpus = corpus
+
         for atom in self.atoms.values():
             atom.read_corpus(corpus)
 
@@ -358,6 +361,7 @@ class Player(Parametric, ContentAware):
         self.filters[type(filter_obj)] = filter_obj
 
         self._parse_parameters()
+        self.set_eligibility(self.corpus)
 
     def remove_filter(self, filter_type: Type[AbstractFilter]):
         """ Raises: KeyError """
@@ -375,6 +379,7 @@ class Player(Parametric, ContentAware):
         atom.set_classifier(classifier)
         atom.update_transforms(self._transform_handler)
         self._parse_parameters()
+        self.set_eligibility(self.corpus)
 
     def set_memory_space(self, path: List[str], memory_space: AbstractMemorySpace) -> None:
         """ Raises: KeyError, IndexError """
@@ -395,6 +400,7 @@ class Player(Parametric, ContentAware):
         self._transform_handler.add(transform)
         self._update_transforms()
 
+
     def remove_transform(self, transform: AbstractTransform):
         """ :raises IndexError if key doesn't exist
                     TransformError if attempting to delete last transform
@@ -413,6 +419,15 @@ class Player(Parametric, ContentAware):
 
     def is_enabled(self) -> bool:
         return self.enabled.value
+
+    def set_param(self, path: List[str], value: Any) -> List[ParametricFlags]:
+        """ Overridden from Parameter to handle eligibility changes caused by setting parameters
+            raises: ParameterError
+        """
+        flags: List[ParametricFlags] = super().set_param(path, value)
+        if ParametricFlags.CHANGES_ELIGIBILITY in flags:
+            self.set_eligibility(self.corpus)
+        return flags
 
     ######################################################
     # PRIVATE

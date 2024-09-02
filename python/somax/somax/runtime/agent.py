@@ -31,7 +31,7 @@ from somax.runtime.influence import FeatureInfluence, LabelInfluence
 from somax.runtime.label import AbstractLabel
 from somax.runtime.memory_spaces import AbstractMemorySpace
 from somax.runtime.osc_log_forwarder import OscLogForwarder
-from somax.runtime.parameter import Parametric, ParametricFlags
+from somax.runtime.parameter import Parametric, ParametricFlags, Parameter
 from somax.runtime.peak_selector import AbstractPeakSelector
 from somax.runtime.player import Player
 from somax.runtime.send_protocol import PlayerSendProtocol
@@ -122,7 +122,6 @@ class OscAgent(Agent, AsyncioOscObject):
 
         # self.recording_buffer_size_ms: int = 0
 
-        self._send_eligibility()
         self.target.send(PlayerSendProtocol.SCHEDULER_RUNNING, True)
 
     ######################################################
@@ -461,9 +460,10 @@ class OscAgent(Agent, AsyncioOscObject):
                                     memory_space=memory_space,
                                     enabled=enabled,
                                     override=override)
-            self.send_atoms()
-            self._send_eligibility()
-            # self.logger.info(f"Created atom with path '{path}'.")
+
+            self.target.send(PlayerSendProtocol.ATOM_INSTANTIATED, path)
+            self._send_eligibility([path])
+            self.logger.info(f"Created atom with path '{path}'.")  # TODO: Change to debug
         except (AssertionError, ValueError, KeyError, InvalidConfiguration, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)} No atom was created.")
 
@@ -471,8 +471,8 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             path_and_name: List[str] = self._string_to_path(path)
             self.player.delete_atom(path_and_name)
-            self._send_eligibility()
-            self.logger.info(f"Deleted atom with path '{path}'.")
+            self.target.send(PlayerSendProtocol.ATOM_DELETED, path)
+            self.logger.info(f"Deleted atom with path '{path}'.")  # TODO: Change to debug
         except (AssertionError, KeyError, IndexError) as e:
             self.logger.error(f"{str(e)} No atom was deleted.")
 
@@ -484,7 +484,6 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             peak_selector: AbstractPeakSelector = AbstractPeakSelector.from_string(peak_selector, **kwargs)
             self.player.set_peak_selector(peak_selector)
-            self._send_eligibility()
             if verbose:
                 self.logger.info(f"[set_peak_selector] Peak selector set to {type(peak_selector).__name__} "
                                  f"for player '{self.player.name}.")
@@ -492,16 +491,16 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)} No peak selector was set.")
 
     def set_classifier(self,
-                       path: str,
+                       atom_path: str,
                        classifier_name: str,
                        descriptor: str,
                        descriptor_is_label: Optional[bool]) -> None:
         try:
             classifier: AbstractClassifier = self._parse_classifier(classifier_name, descriptor, descriptor_is_label)
 
-            path_and_name: List[str] = self._string_to_path(path)
+            path_and_name: List[str] = self._string_to_path(atom_path)
             self.player.set_classifier(path_and_name, classifier)
-            self._send_eligibility()
+            self._send_eligibility(path_and_name)
 
         except (AssertionError, KeyError, ValueError, InvalidConfiguration, InvalidCorpus) as e:
             self.logger.error(f"{str(e)} No classifier was set.")
@@ -511,7 +510,7 @@ class OscAgent(Agent, AsyncioOscObject):
             path_and_name: List[str] = self._string_to_path(path)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)
             self.player.set_activity_pattern(path_and_name, activity_pattern)
-            self._send_eligibility()
+
             self.logger.debug(f"[set_acitivity_pattern] Activity pattern set to {type(activity_pattern).__name__} "
                               f"for player '{self.player.name}.")
         except (AssertionError, KeyError, ValueError) as e:
@@ -571,7 +570,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             filter_obj: AbstractFilter = AbstractFilter.from_string(filter_name, **kwargs)
             self.player.add_filter(filter_obj, override)
-            self._send_eligibility()
+            self._send_eligibility([filter_name])
             if verbose:
                 self.logger.info(f"Added filter {repr(filter_name)}")
         except (ValueError, DuplicateKeyError) as e:
@@ -582,7 +581,7 @@ class OscAgent(Agent, AsyncioOscObject):
             # TODO: Not ideal that it instantiates one to remove it, could we parse class without creating instance?
             filter_obj: AbstractFilter = AbstractFilter.from_string(filter_name, **kwargs)
             self.player.remove_filter(type(filter_obj))
-            self._send_eligibility()
+
             if verbose:
                 self.logger.info(f"Removed filter {repr(filter_name)}")
         except KeyError as e:
@@ -815,11 +814,11 @@ class OscAgent(Agent, AsyncioOscObject):
             flags: List[ParametricFlags] = self.player.set_param(path_and_name, value)
 
             if ParametricFlags.CHANGES_ELIGIBILITY in flags:
-                self.player.set_eligibility(self.player.corpus)
-                self._send_eligibility()
+                if len(path_and_name) > 1:
+                    self._send_eligibility(path_and_name[:-1])
 
-        except (AssertionError, IndexError, ParameterError) as e:
-            self.logger.error(f"{str(e)} Could not set parameter.")
+        except ParameterError as e:
+            self.logger.error(f"{str(e)}. Could not set parameter.")
         except KeyError as e:
             self.logger.error(f"Could not find {str(e)}. No parameter was set.")
 
@@ -973,10 +972,6 @@ class OscAgent(Agent, AsyncioOscObject):
             self.target.send(PlayerSendProtocol.PLAYER_CORPUS_FILES, corpus)
         self.target.send(PlayerSendProtocol.PLAYER_CORPUS_FILES, Target.WRAPPED_BANG)
 
-    def send_atoms(self):
-        atom_names: List[str] = [atom.name for atom in self.player.all_atoms()]
-        self.target.send(PlayerSendProtocol.INSTANTIATED_ATOMS, atom_names)
-
     def send_corpus_info(self,
                          corpus: Optional[Corpus] = None,
                          protocol_address: List[str] = PlayerSendProtocol.PLAYER_LOADED_CORPUS) -> None:
@@ -1041,8 +1036,6 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def _read_corpus(self, corpus: Optional[Corpus]):
         self.clear()
-
-        self.player.set_eligibility(corpus)
         self.player.read_corpus(corpus)
         self._post_read_corpus()
 
@@ -1050,30 +1043,31 @@ class OscAgent(Agent, AsyncioOscObject):
         self.flush()
         self._update_synchronization()  # set absolute/relative and scaling mode audio/midi
         self._try_update_server_tempo()  # immediately set tempo if player is tempo master
-        self._send_eligibility()
+        self._send_eligibility()  # update eligibility for __all__ objects/parameters after reading corpus
         self.send_corpus_info()
 
-    def _send_eligibility(self):
-        corpus: Optional[Corpus] = self.player.corpus
-        if self.player.corpus is not None:
-            self.player.set_eligibility(corpus)
+    def _send_eligibility(self, path: Optional[List[str]] = None) -> None:
+        print(f"Sending eligiblity for: {path}")
+        if path is None:  # Send state for all objects
+            eligibility: List[Tuple[Parametric, bool]] = [(e, v) for e, v, _ in self.player.get_eligibility()
+                                                          if isinstance(e, Parametric)]
 
-        for path in self.player.get_children_paths([]):
-            # Default all parameters to eligible
-            self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), True])
+            for e, v in eligibility:
+                path: List[str] = self.player.get_parameter_path(target_obj=e)
+                self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), v])
 
-        not_eligible: List[ContentAware] = [e[0] for e in self.player.get_eligibility() if not e[1]]
-        not_eligible: List[Parametric] = [e for e in not_eligible if isinstance(e, Parametric)]
+        else:  # Send state for specific object
+            try:
+                obj: Union[Parametric, Parameter] = self.player.get_param(path.copy())
+                if not isinstance(obj, ContentAware):
+                    raise ParameterError(f"Object with path '{"::".join(path)}' does not handle eligibility")
 
-        ne_paths: List[List[str]] = []
-        for ne in not_eligible:
-            ne_path: List[str] = self.player.get_parameter_path(target_obj=ne)
-            ne_paths.extend(ne.get_children_paths(ne_path))
-        ne_paths = [list(e) for e in set(tuple(e) for e in ne_paths)]
+                _, v, _ = typing.cast(ContentAware, obj).get_eligibility()[0]
+                self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), v])
 
-        for path in ne_paths:
-            # Send not eligible status for ineligible parameters
-            self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), False])
+            except (ParameterError, IndexError, KeyError) as e:
+                self.logger.warning(f"{str(e)}. Couldn't send eligibility")
+                return
 
     def _send_output_statistics(self):
         self.target.send(PlayerSendProtocol.TOTAL_PEAKS, self.player.get_output_statistics())

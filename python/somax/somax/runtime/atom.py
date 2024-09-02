@@ -58,9 +58,11 @@ class Atom(Parametric, ContentAware):
             return
 
         self._corpus = corpus
-        self.set_eligibility(corpus)
 
-        if not self.eligible:
+        # We expect set_eligibility to be called before read_corpus when read_corpus is called from outside,
+        #    but when read_corpus is called as a result of a classifier change, we need to manually update eligibility
+        #    before reading the corpus
+        if not self.set_eligibility(corpus):
             # If atom isn't eligible, no explicit error is needed as this is handled through eligibility
             # TODO: Temporary debug print -- this case is handled through eligibility checks
             print(f"Returning because '{self.name}' cannot read corpus of type")

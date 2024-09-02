@@ -4,6 +4,8 @@ from collections import abc
 from enum import Enum
 from typing import TypeVar, Union, Dict, Any, Callable, List, Tuple, Optional
 
+from somax.runtime.exceptions import ParameterError
+
 # TODO: Poor type description
 MaxCompatible = TypeVar('MaxCompatible', int, float, bool, str, tuple, None)
 Ranged = Union[MaxCompatible, None]
@@ -64,18 +66,22 @@ class Parametric(HasParameterDict):
         self.parameter_dict: Dict[str, Union[Parametric, Parameter]] = {}
 
     def set_param(self, path: List[str], value: Any) -> List[ParametricFlags]:
-        """ raises IndexError: if path spec is invalid, for example empty list,
-                   ParameterError: if path spec is invalid or if trying to set an object that is not a Parameter.
-        """
-        param: Parameter = self.get_param(path)
-        param.set_value(value)
-        return param.flags
+        """ raises ParameterError: if path spec is invalid or if trying to set an object that is not a Parameter. """
+        try:
+            param: Parameter = self.get_param(path)
+            if not isinstance(param, Parameter):
+                raise ParameterError(f"Invalid path '{path}' for parameter. Path must end in a Parameter.")
 
-    def get_param(self, param_path: List[str]) -> Parameter:
-        """ raises KeyError """
+            param.set_value(value)
+            return param.flags
+        except (IndexError, KeyError) as e:
+            raise ParameterError(f"Invalid path '{path}' for parameter.") from e
+
+    def get_param(self, param_path: List[str]) -> Union['Parametric', Parameter]:
+        """ raises IndexError, KeyError """
         param_name: str = param_path.pop(-1)
-        parent_dict: Dict[str, Union[Parametric, Parameter]] = functools.reduce(lambda d, key: d[key].parameter_dict,
-                                                                                param_path, self.parameter_dict)
+        parent_dict: Dict[str, Union[Parametric, Parameter]]
+        parent_dict = functools.reduce(lambda d, key: d[key].parameter_dict, param_path, self.parameter_dict)
         return parent_dict[param_name]
 
     def _parse_parameters(self) -> {str: Parameter}:
@@ -97,7 +103,8 @@ class Parametric(HasParameterDict):
                             param_dict[parent.__name__] = item
         self.parameter_dict = param_dict
 
-    def get_parameter_path(self, target_obj: HasParameterDict,
+    def get_parameter_path(self,
+                           target_obj: HasParameterDict,
                            parent_path: Optional[List[str]] = None) -> List[str]:
         """ Temporary method to handle recursion through the Parametric hierarchy given an uneligible object returned
             from the `ContentAware` hierarchy. This is needed because the identifier of a given `ContentAware` object
@@ -120,7 +127,8 @@ class Parametric(HasParameterDict):
 
         return parent_path
 
-    def get_children_paths(self, parent_path: List[str],
+    def get_children_paths(self,
+                           parent_path: List[str],
                            output_paths: Optional[List[List[str]]] = None) -> List[List[str]]:
         if output_paths is None:
             output_paths = []
