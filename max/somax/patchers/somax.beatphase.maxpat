@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 6,
-			"revision" : 0,
+			"revision" : 4,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -46,7 +46,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1644.0, 525.0, 119.0, 51.0 ],
+					"patching_rect" : [ 1644.0, 525.0, 121.0, 51.0 ],
 					"text" : "Note: typically synchronized to other settings in player: should not be reset"
 				}
 
@@ -66,13 +66,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-23",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 465.0, 797.0, 139.0, 35.0 ],
-					"text" : "BeatPhaseScaleAction::enabled $1"
+					"patching_rect" : [ 465.0, 797.0, 160.0, 22.0 ],
+					"text" : "BeatPhaseFilter::enabled $1"
 				}
 
 			}
@@ -89,7 +88,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 0,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -566,7 +565,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 0,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -743,7 +742,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 0,
+							"revision" : 4,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1385,13 +1384,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-40",
-					"linecount" : 2,
+					"linecount" : 3,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1597.0, 791.0, 130.0, 35.0 ],
-					"text" : "BeatPhaseScaleAction::_align_to_clock $1"
+					"patching_rect" : [ 1597.0, 791.0, 101.0, 49.0 ],
+					"text" : "BeatPhaseFilter::_align_to_clock $1"
 				}
 
 			}
@@ -1449,8 +1448,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1398.0, 797.0, 125.0, 35.0 ],
-					"text" : "BeatPhaseScaleAction::_scale_factor $1"
+					"patching_rect" : [ 1398.0, 797.0, 102.0, 35.0 ],
+					"text" : "BeatPhaseFilter::_scale_factor $1"
 				}
 
 			}
@@ -1462,8 +1461,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1233.0, 797.0, 123.0, 35.0 ],
-					"text" : "BeatPhaseScaleAction::_enforce_beat $1"
+					"patching_rect" : [ 1233.0, 797.0, 103.0, 35.0 ],
+					"text" : "BeatPhaseFilter::_enforce_beat $1"
 				}
 
 			}
@@ -1512,13 +1511,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-21",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1026.0, 797.0, 122.0, 35.0 ],
-					"text" : "BeatPhaseScaleAction::_round_beat $1"
+					"patching_rect" : [ 1026.0, 797.0, 185.0, 22.0 ],
+					"text" : "BeatPhaseFilter::_round_beat $1"
 				}
 
 			}
@@ -1558,8 +1556,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 836.0, 797.0, 142.0, 35.0 ],
-					"text" : "BeatPhaseScaleAction::_always_allow_next $1"
+					"patching_rect" : [ 836.0, 797.0, 129.0, 35.0 ],
+					"text" : "BeatPhaseFilter::_always_allow_next $1"
 				}
 
 			}
@@ -1706,13 +1704,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-17",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 640.0, 797.0, 113.0, 35.0 ],
-					"text" : "BeatPhaseScaleAction::_grid_size $1"
+					"patching_rect" : [ 640.0, 797.0, 172.0, 22.0 ],
+					"text" : "BeatPhaseFilter::_grid_size $1"
 				}
 
 			}
@@ -1820,8 +1817,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 279.149999999999977, 797.0, 135.0, 35.0 ],
-					"text" : "remove_scale_action BeatPhaseScaleAction"
+					"patching_rect" : [ 279.149999999999977, 797.0, 108.0, 35.0 ],
+					"text" : "remove_filter BeatPhaseFilter"
 				}
 
 			}
@@ -1833,8 +1830,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 156.149999999999977, 797.0, 114.0, 49.0 ],
-					"text" : "add_scale_action BeatPhaseScaleAction override= True"
+					"patching_rect" : [ 156.149999999999977, 797.0, 101.0, 49.0 ],
+					"text" : "add_filter BeatPhaseFilter override= True"
 				}
 
 			}

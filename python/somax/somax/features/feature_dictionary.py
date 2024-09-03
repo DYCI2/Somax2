@@ -116,6 +116,8 @@ class FeatureSpecification:
 
 
 class FeatureDictionary:
+    DEFAULT_KEYWORD = "default"
+
     _PITCH_TEMPLATE: FeatureSpecification = FeatureSpecification(midi_feature=TopNote,
                                                                  audio_feature=YinDiscretePitch,
                                                                  audio_rt_feature=YinDiscretePitch,

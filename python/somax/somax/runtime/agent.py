@@ -437,9 +437,6 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def create_atom(self,
                     path: str,
-                    classifier: str,
-                    descriptor: str,
-                    descriptor_is_label: Optional[bool],
                     activity_pattern: str = "",
                     memory_space: str = "",
                     weight: float = Atom.DEFAULT_WEIGHT,
@@ -448,21 +445,20 @@ class OscAgent(Agent, AsyncioOscObject):
                     override: bool = False):
         try:
             path_and_name: List[str] = self._string_to_path(path)
-            classifier: AbstractClassifier = self._parse_classifier(classifier, descriptor, descriptor_is_label)
             activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
 
             self.player.create_atom(path=path_and_name,
                                     weight=weight,
                                     self_influenced=self_influenced,
-                                    classifier=classifier,
+                                    classifier=None,
                                     activity_pattern=activity_pattern,
                                     memory_space=memory_space,
                                     enabled=enabled,
                                     override=override)
 
             self.target.send(PlayerSendProtocol.ATOM_INSTANTIATED, path)
-            self._send_eligibility([path])
+            self._send_eligibility(path)
             self.logger.info(f"Created atom with path '{path}'.")  # TODO: Change to debug
         except (AssertionError, ValueError, KeyError, InvalidConfiguration, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)} No atom was created.")
@@ -473,8 +469,10 @@ class OscAgent(Agent, AsyncioOscObject):
             self.player.delete_atom(path_and_name)
             self.target.send(PlayerSendProtocol.ATOM_DELETED, path)
             self.logger.info(f"Deleted atom with path '{path}'.")  # TODO: Change to debug
-        except (AssertionError, KeyError, IndexError) as e:
+        except (AssertionError, IndexError) as e:
             self.logger.error(f"{str(e)} No atom was deleted.")
+        except KeyError as e:
+            self.logger.error(f"Atom '{path}' doesn't exist")
 
     ######################################################
     # MODIFY PLAYER/ATOM STATE
@@ -494,15 +492,19 @@ class OscAgent(Agent, AsyncioOscObject):
                        atom_path: str,
                        classifier_name: str,
                        descriptor: str,
-                       descriptor_is_label: Optional[bool]) -> None:
+                       descriptor_is_label: Optional[bool],
+                       silent: bool = False) -> None:
+        self.logger.info(f"Set classifier: path='{atom_path}', classifier_name='{classifier_name}', "
+                         f"descriptor='{descriptor}', descriptor_is_label={descriptor_is_label}")
         try:
-            classifier: AbstractClassifier = self._parse_classifier(classifier_name, descriptor, descriptor_is_label)
+            classifier: AbstractClassifier = self._parse_classifier(classifier_name, descriptor,
+                                                                    descriptor_is_label, silent)
 
             path_and_name: List[str] = self._string_to_path(atom_path)
             self.player.set_classifier(path_and_name, classifier)
-            self._send_eligibility(path_and_name)
+            self._send_eligibility(atom_path)
 
-        except (AssertionError, KeyError, ValueError, InvalidConfiguration, InvalidCorpus) as e:
+        except (AssertionError, KeyError, InvalidConfiguration, InvalidCorpus) as e:
             self.logger.error(f"{str(e)} No classifier was set.")
 
     def set_activity_pattern(self, path: str, activity_pattern: str, **kwargs):
@@ -570,7 +572,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             filter_obj: AbstractFilter = AbstractFilter.from_string(filter_name, **kwargs)
             self.player.add_filter(filter_obj, override)
-            self._send_eligibility([filter_name])
+            self._send_eligibility(filter_name)
             if verbose:
                 self.logger.info(f"Added filter {repr(filter_name)}")
         except (ValueError, DuplicateKeyError) as e:
@@ -811,7 +813,9 @@ class OscAgent(Agent, AsyncioOscObject):
                           f"to {value} (type={type(value)})...")
         try:
             path_and_name: List[str] = self._string_to_path(path)
-            flags: List[ParametricFlags] = self.player.set_param(path_and_name, value)
+
+            # note: set_param consumes its input, hence the copy
+            flags: List[ParametricFlags] = self.player.set_param(path_and_name.copy(), value)
 
             if ParametricFlags.CHANGES_ELIGIBILITY in flags:
                 if len(path_and_name) > 1:
@@ -913,15 +917,14 @@ class OscAgent(Agent, AsyncioOscObject):
         """ Schedule and output the value of the event's features at the onset """
         try:
             feature_names: List[str] = list(feature_names)
-            feature_types: List[Type[AbstractFeature]] = []
+            features: List[Tuple[Type[AbstractFeature], str]] = []
             for feature_name in feature_names:
-                feature_types.extend(FeatureDictionary.unique_types_of(feature_name))
+                features.extend((f, feature_name) for f in FeatureDictionary.unique_types_of(feature_name))
+
+            self.scheduling_handler.set_rendering_features(features)
 
         except KeyError as e:
             self.logger.error(f"Could not find feature {str(e)}. No rendering features were added")
-            return
-
-        self.scheduling_handler.set_rendering_features(list(zip(feature_types, feature_names)))
 
     ######################################################
     # MAX GETTERS
@@ -1046,7 +1049,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self._send_eligibility()  # update eligibility for __all__ objects/parameters after reading corpus
         self.send_corpus_info()
 
-    def _send_eligibility(self, path: Optional[List[str]] = None) -> None:
+    def _send_eligibility(self, path: Optional[Union[str | List[str]]] = None) -> None:
         print(f"Sending eligiblity for: {path}")
         if path is None:  # Send state for all objects
             eligibility: List[Tuple[Parametric, bool]] = [(e, v) for e, v, _ in self.player.get_eligibility()
@@ -1058,6 +1061,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
         else:  # Send state for specific object
             try:
+                path: List[str] = [path] if isinstance(path, str) else path
                 obj: Union[Parametric, Parameter] = self.player.get_param(path.copy())
                 if not isinstance(obj, ContentAware):
                     raise ParameterError(f"Object with path '{"::".join(path)}' does not handle eligibility")
@@ -1072,11 +1076,12 @@ class OscAgent(Agent, AsyncioOscObject):
     def _send_output_statistics(self):
         self.target.send(PlayerSendProtocol.TOTAL_PEAKS, self.player.get_output_statistics())
 
-    @staticmethod
-    def _parse_classifier(classifier_name: str,
+    def _parse_classifier(self,
+                          classifier_name: str,
                           descriptor: str,
-                          descriptor_is_label: Optional[bool]) -> AbstractClassifier:
-        """ raises: ValueError, KeyError, InvalidConfiguration """
+                          descriptor_is_label: Optional[bool],
+                          silent: bool = False) -> Optional[AbstractClassifier]:
+        """ raises: KeyError """
 
         # Case 1: `descriptor` is the name of an `AbstractLabel` (which may or may not exist in the corpus)
         # (AND) Case 3: `descriptor` doesn't have a specified type, but as it's not defined in
@@ -1084,19 +1089,31 @@ class OscAgent(Agent, AsyncioOscObject):
         if descriptor_is_label or (descriptor_is_label is None and not FeatureDictionary.contains(descriptor)):
             classifier: AbstractClassifier = LabelClassifier(descriptor)
 
+            if not silent:
+                if self.player.corpus is not None and not self.player.corpus.has_label(descriptor):
+                    self.logger.warning(f"No label '{descriptor}' exists in Corpus. Atom will be disabled")
+                elif not classifier_name == FeatureDictionary.DEFAULT_KEYWORD:
+                    self.logger.warning("Labels only support the default classifier. "
+                                        "Using classifier 'default' instead")
+
         # Case 2: `descriptor` is a `CorpusFeature` with...
         else:
             feature_info: FeatureSpecification = FeatureDictionary.get_entry(descriptor)
 
             # Case 2.1: ...a default classifier
-            if classifier_name == "default" or classifier_name == "":
+            if classifier_name == FeatureDictionary.DEFAULT_KEYWORD or classifier_name == "":
                 classifier = feature_info.create_default_classifier()
 
             # Case 2.2: ...a user-specified classifier
             else:
-                # TODO: If this is invalid, we should probably still set it (to None) but print a warning at this level
-                classifier = FeatureClassifier.from_string(classifier_name,
-                                                           midi_feature=feature_info.midi_feature,
-                                                           audio_feature=feature_info.audio_feature)
+                try:
+                    classifier = FeatureClassifier.from_string(classifier_name,
+                                                               midi_feature_type=feature_info.midi_feature,
+                                                               audio_feature_type=feature_info.audio_feature)
+                except (ValueError, InvalidConfiguration) as e:
+                    if not silent:
+                        self.logger.warning(f"{str(e)}. Atom will be disabled")
+
+                    classifier: Optional[AbstractClassifier] = None
 
         return classifier

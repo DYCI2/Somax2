@@ -23,9 +23,10 @@ class Atom(Parametric, ContentAware):
     def __init__(self,
                  name: str,
                  weight: float,
-                 classifier: AbstractClassifier,
+                 classifier: Optional[AbstractClassifier],
                  activity_pattern: AbstractActivityPattern,
                  memory_space: AbstractMemorySpace,
+                 transform_handler: TransformHandler,
                  corpus: Optional[Corpus],
                  self_influenced: bool,
                  enabled: bool = True):
@@ -37,11 +38,14 @@ class Atom(Parametric, ContentAware):
         self._enabled: Parameter = ParamWithSetter(enabled, False, True, "bool", "Enables this Atom.",
                                                    self._set_enabled)
 
-        self._classifier: AbstractClassifier = classifier
+        self._classifier: Optional[AbstractClassifier] = classifier
         self._memory_space: AbstractMemorySpace = memory_space
         self._activity_pattern: AbstractActivityPattern = activity_pattern
         self._self_influenced: Parameter = Parameter(self_influenced, 0, 1, 'bool',
                                                      "Whether new events creates by player should influence this atom or not.")
+
+        self._transform_handler: TransformHandler = transform_handler
+        self.update_transforms(self._transform_handler)
 
         self._corpus: Optional[Corpus] = None
         if corpus:
@@ -49,7 +53,7 @@ class Atom(Parametric, ContentAware):
 
         self._parse_parameters()
 
-    def read_corpus(self, corpus: Optional[Corpus] = None):
+    def read_corpus(self, corpus: Optional[Corpus] = None) -> None:
         """ noexcept """
 
         if corpus is None:
@@ -67,6 +71,9 @@ class Atom(Parametric, ContentAware):
             # TODO: Temporary debug print -- this case is handled through eligibility checks
             print(f"Returning because '{self.name}' cannot read corpus of type")
             self.clear()
+            return
+
+        if self._classifier is None:
             return
 
         try:
@@ -113,9 +120,10 @@ class Atom(Parametric, ContentAware):
         if self.self_influenced and feedback_event is not None:
             self.influence(CorpusInfluence(feedback_event), time)
 
-    def set_classifier(self, classifier: AbstractClassifier) -> None:
+    def set_classifier(self, classifier: Optional[AbstractClassifier]) -> None:
         """ raises: InvalidCorpus"""
         self._classifier = classifier
+        self.update_transforms(self._transform_handler)
         self.read_corpus()
 
     def set_memory_space(self, memory_space: AbstractMemorySpace) -> None:
@@ -126,12 +134,12 @@ class Atom(Parametric, ContentAware):
         activity_pattern.corpus = self._corpus
         self._activity_pattern = activity_pattern
 
-    # def set_scheduling_mode(self, scheduling_mode: SchedulingMode):
-    #     self._activity_pattern.set_scheduling_mode(scheduling_mode)
-
     def update_transforms(self, transform_handler: TransformHandler):
-        valid_transforms: List[AbstractTransform] = self._classifier.update_transforms(transform_handler)
-        self._memory_space.update_transforms(transform_handler, valid_transforms)
+        if self._classifier is not None:
+            valid_transforms: List[AbstractTransform] = self._classifier.update_transforms(transform_handler)
+            self._memory_space.update_transforms(transform_handler, valid_transforms)
+
+        # otherwise: no need to do anything since atom will be disabled
 
     def update_parameter_dict(self) -> Dict[str, Union[Parametric, Parameter, Dict]]:
         parameters = {}
@@ -143,25 +151,25 @@ class Atom(Parametric, ContentAware):
         return self.parameter_dict
 
     def label_type(self) -> Optional[Type[AbstractLabel]]:
-        return self._classifier.label_type()
+        return self._classifier.label_type() if self._classifier is not None else None
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
-        return self._classifier._is_eligible_for(corpus)
+        return self._classifier._is_eligible_for(corpus) if self._classifier is not None else False
 
     @property
     def weight(self) -> float:
         return self._weight.value
 
     @weight.setter
-    def weight(self, value: float):
+    def weight(self, value: float) -> None:
         self._weight.value = value
 
     @property
-    def classifier(self):
+    def classifier(self) -> Optional[AbstractClassifier]:
         return self._classifier
 
     @property
-    def memory_space(self):
+    def memory_space(self) -> AbstractMemorySpace:
         return self._memory_space
 
     @property
@@ -169,20 +177,22 @@ class Atom(Parametric, ContentAware):
         return self._self_influenced.value
 
     @self_influenced.setter
-    def self_influenced(self, self_influenced: bool):
+    def self_influenced(self, self_influenced: bool) -> None:
         self._self_influenced.value = self_influenced
 
-    def _set_enabled(self, enabled: bool):
+    def _set_enabled(self, enabled: bool) -> None:
         self._enabled.value = enabled
         self.clear()
 
-    def clear(self):
+    def clear(self) -> None:
+        if self._classifier is not None:
+            self._classifier.clear()
+
         self._activity_pattern.clear()
-        self._classifier.clear()
         self._memory_space.clear()
 
-    def is_enabled_and_eligible(self):
-        return self._enabled.value and self.eligible
+    def is_enabled_and_eligible(self) -> bool:
+        return self._enabled.value and self.eligible and self._classifier is not None and self._corpus is not None
 
     def pop_peaks(self) -> Peaks:
         """ get peaks: May have side effects inside activity_pattern. """

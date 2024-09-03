@@ -86,11 +86,13 @@ class FeatureClassifier(AbstractClassifier, ABC):
 
         # Passing invalid feature type (independent of whether it exists in a runtime corpus or not)
         if not self.supports(midi_feature_type):
-            raise InvalidConfiguration(f"Feature {midi_feature_type.__name__} is not supported by this classifier.")
+            raise InvalidConfiguration(f"Feature '{midi_feature_type.__name__}' is not supported by "
+                                       f"classifier '{self.__class__.__name__}'")
 
         # Passing invalid feature type (independent of whether it exists in a runtime corpus or not)
         if not self.supports(audio_feature_type):
-            raise InvalidConfiguration(f"Feature {audio_feature_type.__name__} is not supported by this classifier.")
+            raise InvalidConfiguration(f"Feature '{audio_feature_type.__name__}' is not supported by "
+                                       f"classifier '{self.__class__.__name__}'")
 
         self._midi_feature_type: Type[CorpusFeature] = midi_feature_type
         self._audio_feature_type: Type[CorpusFeature] = audio_feature_type

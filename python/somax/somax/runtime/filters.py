@@ -27,7 +27,7 @@ from somax.utils.introspective import StringParsed
 class AbstractFilter(Parametric, ContentAware, StringParsed, ABC):
     def __init__(self):
         super().__init__()
-        self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this ScaleAction.")
+        self.enabled: Parameter = Parameter(True, False, True, "bool", "Enables this filter.")
 
     @abstractmethod
     def apply(self,
@@ -550,7 +550,7 @@ class EnergyFilter(AbstractFilter):
         return self._width.value
 
 
-class VerticalDensityScaleAction(AbstractGaussianScale):
+class VerticalDensityFilter(AbstractGaussianScale):
     DEFAULT_VERTICAL_DENSITY = 4
 
     def __init__(self, mu: float = DEFAULT_VERTICAL_DENSITY):
@@ -583,7 +583,7 @@ class VerticalDensityScaleAction(AbstractGaussianScale):
         pass
 
 
-class DurationScaleAction(AbstractGaussianScale):
+class DurationFilter(AbstractGaussianScale):
     DEFAULT_DURATION = 1.0
 
     def __init__(self, mu: float = DEFAULT_DURATION):

@@ -16,12 +16,16 @@ class Introspective:
                     sys.modules[cls.__module__],
                     lambda member: inspect.isclass(member)
                                    and (include_abstract or not inspect.isabstract(member))
-                                   and member.__module__ == cls.__module__)
+                                   and member.__module__ == cls.__module__
+                )
             )
 
         else:
             classes: Dict[str, Any] = dict(
-                inspect.getmembers(module, lambda m: inspect.isclass(m) and not inspect.isabstract(m))
+                inspect.getmembers(
+                    module,
+                    lambda m: inspect.isclass(m) and (include_abstract or not inspect.isabstract(m))
+                )
             )
 
         return {k.lower(): v for (k, v) in classes.items()}
@@ -49,7 +53,7 @@ class StringParsed(Introspective, ABC):
 
     @classmethod
     def _from_string(cls, class_name: str, module: Optional[ModuleType] = None, **kwargs) -> 'StringParsed':
-        """ :raises ValueError if `default()` is not defined
+        """ :raises ValueError if `default()` is not defined or if `class_name` doesn't exist
                     TypeError if not all positional arguments for the class' `__init__` are provided as **kwargs
         """
         if not class_name:
@@ -59,6 +63,4 @@ class StringParsed(Introspective, ABC):
         try:
             return classes[class_name.lower()](**kwargs)
         except KeyError:
-            logging.getLogger(__name__).warning(f"No class named '{class_name} exists for the "
-                                                f"{cls.__module__} module. Using default value.")
-            return cls.default(**kwargs)
+            raise ValueError(f"Class '{class_name}' not found")

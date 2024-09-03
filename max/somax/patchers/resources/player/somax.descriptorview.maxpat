@@ -46,7 +46,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 247.0, 567.0, 221.0, 47.0 ],
-					"presentation_linecount" : 2,
 					"text" : "The actual entries of this umenu will always correspond to values that do exist in the currently loaded corpus"
 				}
 
@@ -601,19 +600,6 @@
 			}
 , 			{
 				"box" : 				{
-					"color" : [ 0.6141071916, 0.4755443037, 1.0, 1.0 ],
-					"id" : "obj-49",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 125.0, 91.0, 145.0, 22.0 ],
-					"text" : "somax.await_patcherargs"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-4",
@@ -635,13 +621,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"source" : [ "obj-4", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-65", 0 ],
-					"source" : [ "obj-49", 0 ]
 				}
 
 			}
@@ -712,7 +691,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-49", 0 ],
+					"destination" : [ "obj-65", 0 ],
 					"source" : [ "obj-63", 0 ]
 				}
 

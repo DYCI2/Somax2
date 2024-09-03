@@ -313,7 +313,7 @@ class Player(Parametric, ContentAware):
                     path: List[str],
                     weight: float,
                     self_influenced: bool,
-                    classifier: AbstractClassifier,
+                    classifier: Optional[AbstractClassifier],
                     activity_pattern: AbstractActivityPattern,
                     memory_space: AbstractMemorySpace,
                     _transforms: None = None,
@@ -333,6 +333,7 @@ class Player(Parametric, ContentAware):
                                          classifier=classifier,
                                          activity_pattern=activity_pattern,
                                          memory_space=memory_space,
+                                         transform_handler=self._transform_handler,
                                          corpus=self.corpus,
                                          self_influenced=self_influenced,
                                          enabled=enabled)
