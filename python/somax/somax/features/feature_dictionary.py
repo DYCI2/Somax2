@@ -190,21 +190,24 @@ class FeatureDictionary:
 
     @staticmethod
     def create_reverse_dict() -> Dict[Type[AbstractFeature], List[Tuple[str, List[FeatureKeywordFlags]]]]:
+
         d: Dict[Type[AbstractFeature], List[Tuple[str, List[FeatureKeywordFlags]]]] = {
             t: [] for t in AbstractFeature.classes(include_abstract=False)
         }
 
         for name, spec in FeatureDictionary._DICTIONARY.items():
-            if spec.midi_feature is not None:
+            v: Tuple[str, List[FeatureKeywordFlags]] = (name, spec.flags)
+
+            if spec.midi_feature is not None and v not in d[spec.midi_feature]:
                 d[spec.midi_feature].append((name, spec.flags))
 
-            if spec.audio_feature is not None:
+            if spec.audio_feature is not None and v not in d[spec.audio_feature]:
                 d[spec.audio_feature].append((name, spec.flags))
 
-            if spec.audio_rt_feature is not None:
+            if spec.audio_rt_feature is not None and v not in d[spec.audio_rt_feature]:
                 d[spec.audio_rt_feature].append((name, spec.flags))
 
-            if spec.influence_feature is not None:
+            if spec.influence_feature is not None and v not in d[spec.influence_feature]:
                 d[spec.influence_feature].append((name, spec.flags))
 
         return d
@@ -252,7 +255,6 @@ class FeatureDictionary:
     @staticmethod
     def contains(keyword: str) -> bool:
         return keyword in FeatureDictionary._DICTIONARY
-
 
     @staticmethod
     def create_default_classifier(keyword: str) -> FeatureClassifier:

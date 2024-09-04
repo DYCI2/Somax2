@@ -57,12 +57,14 @@ class PlayerSendProtocol:
 
     PLAYER_CORPUS_QUERY = "corpusquery"
     INSTANTIATED_PLAYER = "initialized"
-    INSTANTIATED_ATOMS = "atoms"
 
     # Atom Messages
     ATOM_ADDRESS = "atom"
     ATOM_INSTANTIATED = [ATOM_ADDRESS, "instantiated"]
     ATOM_DELETED = [ATOM_ADDRESS, "deleted"]
+
+    DESCRIPTOR_ADDRESS = "descriptorview"
+    EXISTING_DESCRIPTORS = [DESCRIPTOR_ADDRESS, "descriptors"]
 
 
     ELIGIBILITY = "eligibility"

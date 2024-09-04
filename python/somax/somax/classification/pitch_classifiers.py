@@ -41,7 +41,7 @@ class BasePitchClassifier(FeatureClassifier):
 
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[IntLabel, AbstractTransform]]:
         """ raises: ClassificationError if influence doesn't have the relevant features """
-        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, BaseIntegerPitch):
+        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, (BaseIntegerPitch, RuntimeIntegerPitch)):
             return [(self._label_from_feature(influence.feature, t), t) for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
             return [(self._label_from_corpus_event(influence.corpus_event, t), t) for t in self._transforms]

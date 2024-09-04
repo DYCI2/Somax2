@@ -56,6 +56,8 @@ class Atom(Parametric, ContentAware):
     def read_corpus(self, corpus: Optional[Corpus] = None) -> None:
         """ noexcept """
 
+        corpus = corpus if corpus is not None else self._corpus
+
         if corpus is None:
             self._corpus = None
             self.clear()

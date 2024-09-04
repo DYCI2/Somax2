@@ -8,14 +8,13 @@ import time
 import typing
 from importlib import resources
 from typing import Any, Optional, List, Tuple, Type, Union
-
 from somax import settings, log
 from somax.classification.classifier import AbstractClassifier, FeatureClassifier
 from somax.classification.label_classifier import LabelClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.features import Tempo
 from somax.features.feature import AbstractFeature, CorpusFeature
-from somax.features.feature_dictionary import FeatureDictionary, FeatureSpecification
+from somax.features.feature_dictionary import FeatureDictionary, FeatureSpecification, FeatureKeywordFlags
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
@@ -405,6 +404,11 @@ class OscAgent(Agent, AsyncioOscObject):
 
             if feature_keyword == "label":
                 label_type: Optional[Type[AbstractLabel]] = self.player.atoms[path_and_name[0]].label_type()
+
+                if label_type is None:
+                    self.logger.error(f"Atom cannot handle label influences")
+                    return
+
                 influence: LabelInfluence = LabelInfluence(label_type.parse(value if len(value) > 1 else value[0]))
 
             else:
@@ -504,8 +508,10 @@ class OscAgent(Agent, AsyncioOscObject):
             self.player.set_classifier(path_and_name, classifier)
             self._send_eligibility(atom_path)
 
-        except (AssertionError, KeyError, InvalidConfiguration, InvalidCorpus) as e:
+        except (AssertionError, InvalidConfiguration, InvalidCorpus) as e:
             self.logger.error(f"{str(e)} No classifier was set.")
+        except KeyError as e:
+            self.logger.error(f"Couldn't find feature '{str(e)}. No classifier was set")
 
     def set_activity_pattern(self, path: str, activity_pattern: str, **kwargs):
         try:
@@ -988,6 +994,21 @@ class OscAgent(Agent, AsyncioOscObject):
                 corpus.duration()
             ])
 
+    def send_descriptor_info(self):
+        corpus: Corpus = self.player.corpus
+        if corpus is not None:
+            descriptors: List[Tuple[str, bool]] = [] # [(keyword, is_label)]
+
+            for feature_type in corpus.feature_types:
+                for name, flags in FeatureDictionary.keywords_of(feature_type):
+                    if FeatureKeywordFlags.HIDDEN not in flags:
+                        descriptors.append((name, False))
+
+            descriptors.extend([(k, True) for k in corpus.label_info.keys()])
+
+            descriptors_flattened: List[Union[str, bool]] = [item for tup in descriptors for item in tup]
+            self.target.send(PlayerSendProtocol.EXISTING_DESCRIPTORS, descriptors_flattened)
+
     def corpus_query(self, *args) -> None:
         if self.player.corpus is None:
             self.logger.error("No corpus loaded in player. Could not process query")
@@ -1048,6 +1069,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self._try_update_server_tempo()  # immediately set tempo if player is tempo master
         self._send_eligibility()  # update eligibility for __all__ objects/parameters after reading corpus
         self.send_corpus_info()
+        self.send_descriptor_info()
 
     def _send_eligibility(self, path: Optional[Union[str | List[str]]] = None) -> None:
         print(f"Sending eligiblity for: {path}")

@@ -7,7 +7,7 @@ import numpy as np
 from somax.classification import tables
 from somax.classification.classifier import FeatureClassifier
 from somax.features import OnsetChroma
-from somax.features.chroma_features import BaseChroma
+from somax.features.chroma_features import BaseChroma, RuntimeChroma
 from somax.features.feature import CorpusFeature
 from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus import Corpus
@@ -92,7 +92,7 @@ class SomChromaClassifier(AbstractChromaClassifier):
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[IntLabel, AbstractTransform]]:
         """ raises ClassificationError if corpus doesn't have the relevant features """
 
-        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, BaseChroma):
+        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, (BaseChroma, RuntimeChroma)):
             chroma: FeatureValue = influence.feature
             return [((self._label_from_chroma(t.inverse(chroma).value())), t) for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
