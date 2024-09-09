@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 2104.0, 1258.0 ],
+		"rect" : [ 2614.0, 87.0, 792.0, 1258.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,26 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"bgcolor" : [ 0.4616160095, 1.0, 0.8905446529, 1.0 ],
+					"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_autogradient" : 0.0,
+					"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_color1" : [ 0.4616160095, 1.0, 0.8905446529, 1.0 ],
+					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_type" : "gradient",
+					"gradient" : 1,
+					"id" : "obj-10",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 147.0, 12.0, 393.0, 22.0 ],
+					"text" : "TODO: Remove freebang: this is misleading as it won't work as intended"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-17",
 					"maxclass" : "button",
@@ -2214,7 +2234,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[22]",
+							"parameter_longname" : "continuity[25]",
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "continuity",
 							"parameter_type" : 3
@@ -2291,7 +2311,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[23]",
+							"parameter_longname" : "continuity[26]",
 							"parameter_mmax" : 10.0,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "continuity",
@@ -3137,17 +3157,6 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-144",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 507.0, 324.0, 122.0, 20.0 ],
-					"text" : "(ignore nonmatching)"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
 					"fontface" : 1,
 					"fontname" : "Arial",
@@ -3297,7 +3306,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_invisible" : 1,
-							"parameter_longname" : "continuity[21]",
+							"parameter_longname" : "continuity[24]",
 							"parameter_mmax" : 1.0,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "continuity",
@@ -3479,9 +3488,9 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1651.0, 95.0, 143.0, 22.0 ],
 					"restore" : 					{
-						"decay" : [ 1.0 ],
+						"decay" : [ 2.0 ],
 						"enabled" : [ 1 ],
-						"ngramorder" : [ 1 ],
+						"ngramorder" : [ 2 ],
 						"selfinfluenced" : [ 0 ],
 						"weight" : [ 1.0 ]
 					}
@@ -4228,13 +4237,12 @@
 				"box" : 				{
 					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
 					"id" : "obj-213",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 287.0, 43.5, 200.0, 35.0 ],
-					"text" : "patcherargs name @autoinitialize 1 @uniquename 1 @loglevel 2"
+					"patching_rect" : [ 287.0, 43.5, 288.0, 22.0 ],
+					"text" : "patcherargs name @autoinitialize 1 @uniquename 1"
 				}
 
 			}
