@@ -474,7 +474,7 @@ class OscAgent(Agent, AsyncioOscObject):
             path_and_name: List[str] = self._string_to_path(path)
             self.player.delete_atom(path_and_name)
             self.target.send(PlayerSendProtocol.ATOM_DELETED, path)
-            self.logger.info(f"Deleted atom with path '{path}'.")  # TODO: Change to debug
+            self.logger.info(f"Deleted atom with path '{path}'.")
         except (AssertionError, IndexError) as e:
             self.logger.error(f"{str(e)} No atom was deleted.")
         except KeyError as e:
@@ -584,24 +584,34 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Please provide this argument on the form 'argname= value'. "
                               f"No transform was removed.")
 
-    def add_filter(self, filter_name: str, override: bool = False, verbose: bool = True, **kwargs):
+    def add_filter(self,
+                   filter_name: str,
+                   override: bool = False,
+                   verbose: bool = True,
+                   name_alias: str = "",
+                   **kwargs) -> None:
         try:
             filter_obj: AbstractFilter = AbstractFilter.from_string(filter_name, **kwargs)
-            self.player.add_filter(filter_obj, override)
+            alias: Optional[str] = name_alias if name_alias is not None  else None
+            self.player.add_filter(filter_obj, override, name_alias=alias)
             self._send_eligibility(filter_name)
             if verbose:
-                self.logger.info(f"Added filter {repr(filter_name)}")
+                alias_string: str = "" if not name_alias else f"(alias: {name_alias})"
+                self.logger.info(f"Added filter {repr(filter_name)}" + alias_string)
         except (ValueError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)}. No filter was added.")
 
-    def remove_filter(self, filter_name: str, verbose: bool = True, **kwargs):
+    def remove_filter(self, filter_name: str, verbose: bool = True, name_is_alias: bool = False, **kwargs):
         try:
-            # TODO: Not ideal that it instantiates one to remove it, could we parse class without creating instance?
-            filter_obj: AbstractFilter = AbstractFilter.from_string(filter_name, **kwargs)
-            self.player.remove_filter(type(filter_obj))
+            if name_is_alias:
+                self.player.remove_filter(filter_name)
+            else:
+                # TODO: Not ideal that it instantiates one to remove it, could we parse class without creating instance?
+                filter_obj: AbstractFilter = AbstractFilter.from_string(filter_name, **kwargs)
+                self.player.remove_filter(type(filter_obj))
 
             if verbose:
-                self.logger.info(f"Removed filter {repr(filter_name)}")
+                self.logger.info(f"Removed filter {filter_name}")
         except KeyError as e:
             if verbose:
                 self.logger.error(f"Could not remove filter: {repr(e)}.")

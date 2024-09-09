@@ -1,6 +1,6 @@
 import logging
 import random
-from typing import Dict, Optional, Tuple, Type, List, Any
+from typing import Dict, Optional, Tuple, Type, List, Any, Union
 
 import numpy as np
 
@@ -42,7 +42,7 @@ class Player(Parametric, ContentAware):
         self.peak_selector: AbstractPeakSelector = peak_selector
         self.fallback_selector: FallbackPeakSelector = FallbackPeakSelector()
         self.corpus: Optional[Corpus] = None
-        self.filters: Dict[Type[AbstractFilter], AbstractFilter] = {}
+        self.filters: Dict[Union[Type[AbstractFilter], str], AbstractFilter] = {}
         self.region_mask: RegionMask = RegionMask()
         self.merge_action: AbstractMergeAction = merge_action
         self.post_filter: ProbabilityFilter = ProbabilityFilter(enabled=False)
@@ -139,7 +139,7 @@ class Player(Parametric, ContentAware):
              scheduler_time: float,
              _beat_phase: float,
              _tempo: float) -> Optional[tuple[CorpusEvent, AbstractTransform]]:
-        # TODO: Step mechanism does not respect taboos since it doesn't use scale actions at all.
+        # TODO: Step mechanism does not respect taboos since it doesn't use filters at all.
         if not self.is_enabled():
             return None
 
@@ -352,22 +352,24 @@ class Player(Parametric, ContentAware):
         self.peak_selector = peak_selector
         self._parse_parameters()
 
-    def add_filter(self, filter_obj: AbstractFilter, override: bool = False):
+    def add_filter(self, filter_obj: AbstractFilter, override: bool = False, name_alias: Optional[str] =  None):
         """ Raises: DuplicateKeyError """
-        if type(filter_obj) in self.filters and not override:
-            raise DuplicateKeyError(f"A Scale Action of type '{type(filter_obj).__name__}' already exists."
-                                    f"To override: use 'override=True'.")
+        key: Union[Type[AbstractFilter], str] = type(filter_obj) if name_alias is None else name_alias
+
+        if key in self.filters and not override:
+            key_str: str = name_alias if name_alias is not None else type(filter_obj).__name__
+            raise DuplicateKeyError(f"A filter '{key_str}' already exists. To override: use 'override=True'.")
 
         filter_obj.update_transforms(self._transform_handler)
-        self.filters[type(filter_obj)] = filter_obj
+
+        self.filters[key] = filter_obj
 
         self._parse_parameters()
         self.set_eligibility(self.corpus)
 
-    def remove_filter(self, filter_type: Type[AbstractFilter]):
+    def remove_filter(self, filter_type_or_alias: Union[Type[AbstractFilter], str]):
         """ Raises: KeyError """
-        del self.filters[filter_type]
-        del self.parameter_dict[filter_type.__name__]
+        del self.filters[filter_type_or_alias]
         self._parse_parameters()
 
     def set_merge_action(self, merge_action: AbstractMergeAction) -> None:

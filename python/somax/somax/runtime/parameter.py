@@ -61,7 +61,7 @@ class Parametric(HasParameterDict):
     def __init__(self, **kwargs):
         """ Parameter dict is a dict of dicts (of dicts of ...). Note: only dicts (no lists).
             It should be updated using parameter_dict() whenever parameter info is changed
-            (for example, upon adding a scale action or deleting an atom) """
+            (for example, upon adding a filter or deleting an atom) """
         super(Parametric, self).__init__(**kwargs)
         self.parameter_dict: Dict[str, Union[Parametric, Parameter]] = {}
 

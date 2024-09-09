@@ -63,6 +63,11 @@ class PlayerSendProtocol:
     ATOM_INSTANTIATED = [ATOM_ADDRESS, "instantiated"]
     ATOM_DELETED = [ATOM_ADDRESS, "deleted"]
 
+    # Filter Messages
+    FILTER_ADDRESS = "filter"
+    FILTER_INSTANTIATED = [FILTER_ADDRESS, "instantiated"]
+    FILTER_DELETED = [FILTER_ADDRESS, "deleted"]
+
     DESCRIPTOR_ADDRESS = "descriptorview"
     EXISTING_DESCRIPTORS = [DESCRIPTOR_ADDRESS, "descriptors"]
 
