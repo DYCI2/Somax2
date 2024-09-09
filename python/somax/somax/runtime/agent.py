@@ -8,6 +8,7 @@ import time
 import typing
 from importlib import resources
 from typing import Any, Optional, List, Tuple, Type, Union
+
 from somax import settings, log
 from somax.classification.classifier import AbstractClassifier, FeatureClassifier
 from somax.classification.label_classifier import LabelClassifier
@@ -15,7 +16,7 @@ from somax.corpus_builder.corpus_builder import CorpusBuilder
 from somax.features import Tempo
 from somax.features.feature import AbstractFeature, CorpusFeature
 from somax.features.feature_dictionary import FeatureDictionary, FeatureSpecification, FeatureKeywordFlags
-from somax.runtime.activity_pattern import AbstractActivityPattern
+from somax.runtime.activity_pattern import AbstractActivityPattern, ClassicActivityPattern, ManualActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
@@ -118,6 +119,8 @@ class OscAgent(Agent, AsyncioOscObject):
             self.read_corpus(corpus_filepath)
 
         self.last_status_time: float = -1
+
+        self.default_ap_type: Type[AbstractActivityPattern] = ClassicActivityPattern
 
         # self.recording_buffer_size_ms: int = 0
 
@@ -441,7 +444,6 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def create_atom(self,
                     path: str,
-                    activity_pattern: str = "",
                     memory_space: str = "",
                     weight: float = Atom.DEFAULT_WEIGHT,
                     self_influenced: bool = False,
@@ -449,7 +451,7 @@ class OscAgent(Agent, AsyncioOscObject):
                     override: bool = False):
         try:
             path_and_name: List[str] = self._string_to_path(path)
-            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern)
+            activity_pattern: AbstractActivityPattern = self.default_ap_type()
             memory_space: AbstractMemorySpace = AbstractMemorySpace.from_string(memory_space)
 
             self.player.create_atom(path=path_and_name,
@@ -463,7 +465,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
             self.target.send(PlayerSendProtocol.ATOM_INSTANTIATED, path)
             self._send_eligibility(path)
-            self.logger.info(f"Created atom with path '{path}'.")  # TODO: Change to debug
+            self.logger.info(f"Created atom with path '{path}' and ap type '{activity_pattern.__class__.__name__}'.")  # TODO: Change to debug
         except (AssertionError, ValueError, KeyError, InvalidConfiguration, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)} No atom was created.")
 
@@ -513,16 +515,24 @@ class OscAgent(Agent, AsyncioOscObject):
         except KeyError as e:
             self.logger.error(f"Couldn't find feature '{str(e)}. No classifier was set")
 
-    def set_activity_pattern(self, path: str, activity_pattern: str, **kwargs):
-        try:
-            path_and_name: List[str] = self._string_to_path(path)
-            activity_pattern: AbstractActivityPattern = AbstractActivityPattern.from_string(activity_pattern, **kwargs)
-            self.player.set_activity_pattern(path_and_name, activity_pattern)
+    def set_decay_basis(self, decay_basis: str) -> None:
+        self.default_ap_type: Type[AbstractActivityPattern] = (ClassicActivityPattern if decay_basis == "time"
+                                                           else ManualActivityPattern)
 
-            self.logger.debug(f"[set_acitivity_pattern] Activity pattern set to {type(activity_pattern).__name__} "
-                              f"for player '{self.player.name}.")
-        except (AssertionError, KeyError, ValueError) as e:
-            self.logger.error(f"{str(e)} No activity pattern was set.")
+        # Simple workaround for updating same-valued parameters of the different instances of ActivityPattern.
+        #   Note that this needs to be formalized if the concept of ActivityPattern at some point in the future is
+        #   extended to be more complex than simply sharing `tau_mem_decay` between instances.
+        for atom in self.player.atoms.values():
+            current_tau: float = float(atom.activity_pattern.get_param(["tau_mem_decay"]).value)
+
+            # Note: we cannot do this with `set_param`, as this would call the setter which calculates tau from t/n
+            if decay_basis == "time":
+                new_ap: ClassicActivityPattern = ClassicActivityPattern()
+                new_ap.tau_mem_decay.value = current_tau
+            else:
+                new_ap: ManualActivityPattern = ManualActivityPattern()
+                new_ap.tau_mem_decay.value = current_tau
+            self.player.set_activity_pattern([atom.name], new_ap)
 
     def set_region_mask(self, region_index: int, start_time: float, end_time: Optional[float]) -> None:
         try:
@@ -997,7 +1007,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def send_descriptor_info(self):
         corpus: Corpus = self.player.corpus
         if corpus is not None:
-            descriptors: List[Tuple[str, bool]] = [] # [(keyword, is_label)]
+            descriptors: List[Tuple[str, bool]] = []  # [(keyword, is_label)]
 
             for feature_type in corpus.feature_types:
                 for name, flags in FeatureDictionary.keywords_of(feature_type):

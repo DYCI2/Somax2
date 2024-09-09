@@ -175,6 +175,10 @@ class Atom(Parametric, ContentAware):
         return self._memory_space
 
     @property
+    def activity_pattern(self) -> AbstractActivityPattern:
+        return self._activity_pattern
+
+    @property
     def self_influenced(self) -> float:
         return self._self_influenced.value
 
