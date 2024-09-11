@@ -899,7 +899,7 @@ class LabelFilter(AbstractFilter):
               taboo_mask: TabooMask,
               corpus: Corpus = None,
               enforce_output: bool = False, **kwargs) -> Tuple[Peaks, TabooMask]:
-        if not self._is_eligible_for(corpus) or self.label_name.value is None:
+        if not self._is_eligible_for(corpus) or self.label_name.value is None or self.label_value.value is None:
             return peaks, taboo_mask
 
         label_name: str = self.label_name.value

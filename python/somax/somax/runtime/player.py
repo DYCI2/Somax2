@@ -352,12 +352,15 @@ class Player(Parametric, ContentAware):
         self.peak_selector = peak_selector
         self._parse_parameters()
 
-    def add_filter(self, filter_obj: AbstractFilter, override: bool = False, name_alias: Optional[str] =  None):
+    def add_filter(self,
+                   filter_obj: AbstractFilter,
+                   override: bool = False,
+                   name_alias: Optional[str] =  None) -> str:
         """ Raises: DuplicateKeyError """
         key: Union[Type[AbstractFilter], str] = type(filter_obj) if name_alias is None else name_alias
+        key_str: str = key if name_alias is not None else key.__name__
 
         if key in self.filters and not override:
-            key_str: str = name_alias if name_alias is not None else type(filter_obj).__name__
             raise DuplicateKeyError(f"A filter '{key_str}' already exists. To override: use 'override=True'.")
 
         filter_obj.update_transforms(self._transform_handler)
@@ -366,6 +369,8 @@ class Player(Parametric, ContentAware):
 
         self._parse_parameters()
         self.set_eligibility(self.corpus)
+
+        return key_str
 
     def remove_filter(self, filter_type_or_alias: Union[Type[AbstractFilter], str]):
         """ Raises: KeyError """

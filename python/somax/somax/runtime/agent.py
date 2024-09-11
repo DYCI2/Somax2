@@ -592,12 +592,17 @@ class OscAgent(Agent, AsyncioOscObject):
                    **kwargs) -> None:
         try:
             filter_obj: AbstractFilter = AbstractFilter.from_string(filter_name, **kwargs)
-            alias: Optional[str] = name_alias if name_alias is not None  else None
-            self.player.add_filter(filter_obj, override, name_alias=alias)
-            self._send_eligibility(filter_name)
+            alias: Optional[str] = name_alias if name_alias != "" else None
+            path: str = self.player.add_filter(filter_obj, override, name_alias=alias)
+
+            self.target.send(PlayerSendProtocol.FILTER_INSTANTIATED, path)
+
             if verbose:
-                alias_string: str = "" if not name_alias else f"(alias: {name_alias})"
+                alias_string: str = "" if not name_alias else f" (alias: {name_alias})"
                 self.logger.info(f"Added filter {repr(filter_name)}" + alias_string)
+
+            self._send_eligibility(path)
+
         except (ValueError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)}. No filter was added.")
 
@@ -610,6 +615,7 @@ class OscAgent(Agent, AsyncioOscObject):
                 filter_obj: AbstractFilter = AbstractFilter.from_string(filter_name, **kwargs)
                 self.player.remove_filter(type(filter_obj))
 
+            self.target.send(PlayerSendProtocol.FILTER_DELETED, filter_name)
             if verbose:
                 self.logger.info(f"Removed filter {filter_name}")
         except KeyError as e:
@@ -835,7 +841,7 @@ class OscAgent(Agent, AsyncioOscObject):
             return parsed_feature(feature_data)
 
     def set_param(self, path: str, value: Any):
-        self.logger.debug(f"[set_param] Attempting to set parameter for player '{self.player.name}' at '{path}' "
+        self.logger.debug(f"[set_param] Attempting to set parameter for player {self.player.name} at {path} "
                           f"to {value} (type={type(value)})...")
         try:
             path_and_name: List[str] = self._string_to_path(path)
@@ -1159,3 +1165,11 @@ class OscAgent(Agent, AsyncioOscObject):
                     classifier: Optional[AbstractClassifier] = None
 
         return classifier
+
+    def _print_parameter_dict(self, d=None) ->None:
+        print(self.player.parameter_dict)
+        # if d is None:
+        #     d = self.player.parameter_dict
+        # for k, v in d.items():
+        #     print(k, end=": ")
+        #     if isinstance(v, Dict)

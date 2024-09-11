@@ -70,12 +70,12 @@ class Parametric(HasParameterDict):
         try:
             param: Parameter = self.get_param(path)
             if not isinstance(param, Parameter):
-                raise ParameterError(f"Invalid path '{path}' for parameter. Path must end in a Parameter.")
+                raise ParameterError(f"Invalid path {path} for parameter. Path must target a parameter.")
 
             param.set_value(value)
             return param.flags
         except (IndexError, KeyError) as e:
-            raise ParameterError(f"Invalid path '{path}' for parameter.") from e
+            raise ParameterError(f"Invalid path {path} for parameter.") from e
 
     def get_param(self, param_path: List[str]) -> Union['Parametric', Parameter]:
         """ raises IndexError, KeyError """
