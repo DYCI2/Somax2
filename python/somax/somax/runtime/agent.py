@@ -465,7 +465,8 @@ class OscAgent(Agent, AsyncioOscObject):
 
             self.target.send(PlayerSendProtocol.ATOM_INSTANTIATED, path)
             self._send_eligibility(path)
-            self.logger.info(f"Created atom with path '{path}' and ap type '{activity_pattern.__class__.__name__}'.")  # TODO: Change to debug
+            self.logger.info(f"Created atom {path} in {self.player.name}.")  # TODO: Change to debug
+            self.send_descriptor_info()
         except (AssertionError, ValueError, KeyError, InvalidConfiguration, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)} No atom was created.")
 
@@ -474,11 +475,11 @@ class OscAgent(Agent, AsyncioOscObject):
             path_and_name: List[str] = self._string_to_path(path)
             self.player.delete_atom(path_and_name)
             self.target.send(PlayerSendProtocol.ATOM_DELETED, path)
-            self.logger.info(f"Deleted atom with path '{path}'.")
+            self.logger.info(f"Deleted atom {path}.")
         except (AssertionError, IndexError) as e:
             self.logger.error(f"{str(e)} No atom was deleted.")
         except KeyError as e:
-            self.logger.error(f"Atom '{path}' doesn't exist")
+            self.logger.error(f"Atom {path} doesn't exist")
 
     ######################################################
     # MODIFY PLAYER/ATOM STATE
@@ -508,12 +509,11 @@ class OscAgent(Agent, AsyncioOscObject):
 
             path_and_name: List[str] = self._string_to_path(atom_path)
             self.player.set_classifier(path_and_name, classifier)
-            self._send_eligibility(atom_path)
 
-        except (AssertionError, InvalidConfiguration, InvalidCorpus) as e:
-            self.logger.error(f"{str(e)} No classifier was set.")
-        except KeyError as e:
-            self.logger.error(f"Couldn't find feature '{str(e)}. No classifier was set")
+        except (AssertionError, InvalidConfiguration, InvalidCorpus, KeyError, ValueError) as e:
+            self.logger.error(f"{str(e)}. No classifier was set.")
+
+        self._send_eligibility(atom_path)
 
     def set_decay_basis(self, decay_basis: str) -> None:
         self.default_ap_type: Type[AbstractActivityPattern] = (ClassicActivityPattern if decay_basis == "time"
@@ -1049,6 +1049,10 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Could not process query")
             return
 
+    def send_atoms(self) -> None:
+        atom_names: List[str]= list(self.player.atoms.keys())
+        self.target.send(PlayerSendProtocol.ATOM_NAMES, atom_names)
+
     ######################################################
     # OTHER
     ######################################################
@@ -1129,7 +1133,7 @@ class OscAgent(Agent, AsyncioOscObject):
                           descriptor: str,
                           descriptor_is_label: Optional[bool],
                           silent: bool = False) -> Optional[AbstractClassifier]:
-        """ raises: KeyError """
+        """ raises: KeyError, ValueError """
 
         # Case 1: `descriptor` is the name of an `AbstractLabel` (which may or may not exist in the corpus)
         # (AND) Case 3: `descriptor` doesn't have a specified type, but as it's not defined in

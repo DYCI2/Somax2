@@ -62,6 +62,7 @@ class PlayerSendProtocol:
     ATOM_ADDRESS = "atom"
     ATOM_INSTANTIATED = [ATOM_ADDRESS, "instantiated"]
     ATOM_DELETED = [ATOM_ADDRESS, "deleted"]
+    ATOM_NAMES = [ATOM_ADDRESS, "names"]
 
     # Filter Messages
     FILTER_ADDRESS = "filter"

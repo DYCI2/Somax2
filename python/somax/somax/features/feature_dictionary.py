@@ -94,6 +94,10 @@ class FeatureSpecification:
         )
 
     def create_default_classifier(self) -> FeatureClassifier:
+        """ raises: ValueError if there is no default classifier """
+        if self.default_classifier is None:
+            raise ValueError(f"Feature has no classifier")
+
         return self.default_classifier(midi_feature_type=self.midi_feature, audio_feature_type=self.audio_feature)
 
     def get(self, feature_type: FeatureType) -> Optional[Type[CorpusFeature]]:
@@ -183,9 +187,9 @@ class FeatureDictionary:
                                                    flags=[FeatureKeywordFlags.HIDDEN],
                                                    default_classifier=None),
 
-        "tempo": FeatureSpecification.singular(feature=Tempo, flags=[], default_classifier=None),
+        # "tempo": FeatureSpecification.singular(feature=Tempo, flags=[], default_classifier=None),
 
-        "beatphase": FeatureSpecification.singular(feature=BeatPhase, flags=[], default_classifier=None)
+        # "beatphase": FeatureSpecification.singular(feature=BeatPhase, flags=[], default_classifier=None)
     }
 
     @staticmethod
@@ -258,8 +262,11 @@ class FeatureDictionary:
 
     @staticmethod
     def create_default_classifier(keyword: str) -> FeatureClassifier:
-        """ raises KeyError if not found """
-        return FeatureDictionary.get_entry(keyword).create_default_classifier()
+        """ raises KeyError """
+        try:
+            return FeatureDictionary.get_entry(keyword).create_default_classifier()
+        except ValueError:
+            raise KeyError("Feature does not have a default classifier")
 
     @staticmethod
     def keywords_of(feature: Union[AbstractFeature, Type[AbstractFeature]]
