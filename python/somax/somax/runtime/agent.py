@@ -399,7 +399,7 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     def influence(self, path: str, feature_keyword: str, *value) -> None:
-        if not self.scheduling_handler.running:
+        if not self.scheduling_handler.running or self.player.corpus is None:
             return
 
         try:

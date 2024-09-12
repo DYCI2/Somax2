@@ -73,7 +73,7 @@ class LabelClassifier(AbstractClassifier):
         return issubclass(descriptor, AbstractLabel)
 
     def label_type(self) -> Optional[Type[AbstractLabel]]:
-        return self._classifier.label_type()
+        return self._classifier.label_type() if self._classifier is not None else None
 
     def _update_component(self, corpus: Corpus) -> None:
         # No need to check for existence of label here since `Atom` has already verified eligibility by this point
