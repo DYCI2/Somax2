@@ -1,5 +1,5 @@
 from abc import abstractmethod, ABC
-from typing import Dict, Any, Union, List
+from typing import Dict, Any, Union, List, Tuple
 
 import librosa
 import librosa.feature
@@ -60,6 +60,8 @@ class BaseChroma(AnalyzableFeature, ABC):
     def value(self) -> np.ndarray:
         return self._value
 
+
+ChromaTypes: Tuple[type, ...] = (RuntimeChroma, BaseChroma)
 
 class OnsetChroma(BaseChroma):
     def __init__(self, value: Union[np.ndarray, List[float]]):

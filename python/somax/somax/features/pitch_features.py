@@ -1,6 +1,6 @@
 import typing
 from abc import ABC
-from typing import List
+from typing import List, Tuple
 
 import librosa
 import numpy as np
@@ -26,6 +26,9 @@ class BaseIntegerPitch(AnalyzableFeature, ABC):
 
     def value(self) -> int:
         return self._value
+
+
+PitchTypes: Tuple[type, ...] = (RuntimeIntegerPitch, BaseIntegerPitch)
 
 
 class TopNote(BaseIntegerPitch):

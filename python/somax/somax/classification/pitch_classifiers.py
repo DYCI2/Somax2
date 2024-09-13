@@ -4,7 +4,7 @@ from typing import List, Tuple, Type, Union
 from somax.classification.classifier import FeatureClassifier
 from somax.features.feature import CorpusFeature
 from somax.features.feature_value import FeatureValue
-from somax.features.pitch_features import RuntimeIntegerPitch, BaseIntegerPitch
+from somax.features.pitch_features import RuntimeIntegerPitch, BaseIntegerPitch, PitchTypes
 from somax.runtime.corpus import Corpus
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import TransformError, ClassificationError
@@ -41,7 +41,7 @@ class BasePitchClassifier(FeatureClassifier):
 
     def classify_influence(self, influence: AbstractInfluence) -> List[Tuple[IntLabel, AbstractTransform]]:
         """ raises: ClassificationError if influence doesn't have the relevant features """
-        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, (BaseIntegerPitch, RuntimeIntegerPitch)):
+        if isinstance(influence, FeatureInfluence) and isinstance(influence.feature, PitchTypes):
             return [(self._label_from_feature(influence.feature, t), t) for t in self._transforms]
         elif isinstance(influence, CorpusInfluence):
             return [(self._label_from_corpus_event(influence.corpus_event, t), t) for t in self._transforms]
@@ -78,7 +78,7 @@ class BasePitchClassifier(FeatureClassifier):
 
     @staticmethod
     def supports(descriptor: Union[Type[CorpusFeature], Type[AbstractLabel]]) -> bool:
-        return issubclass(descriptor, BaseIntegerPitch)
+        return issubclass(descriptor, PitchTypes)
 
 
 class PitchClassifier(BasePitchClassifier, ABC):

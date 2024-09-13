@@ -1102,7 +1102,6 @@ class OscAgent(Agent, AsyncioOscObject):
         self.send_descriptor_info()
 
     def _send_eligibility(self, path: Optional[Union[str | List[str]]] = None) -> None:
-        print(f"Sending eligiblity for: {path}")
         if path is None:  # Send state for all objects
             eligibility: List[Tuple[Parametric, bool]] = [(e, v) for e, v, _ in self.player.get_eligibility()
                                                           if isinstance(e, Parametric)]

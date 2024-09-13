@@ -70,8 +70,6 @@ class Atom(Parametric, ContentAware):
         #    before reading the corpus
         if not self.set_eligibility(corpus):
             # If atom isn't eligible, no explicit error is needed as this is handled through eligibility
-            # TODO: Temporary debug print -- this case is handled through eligibility checks
-            print(f"Returning because '{self.name}' cannot read corpus of type")
             self.clear()
             return
 

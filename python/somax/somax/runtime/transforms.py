@@ -5,9 +5,9 @@ from typing import List, Type, Union, Any
 
 import numpy as np
 
-from somax.features.chroma_features import OnsetChroma
+from somax.features.chroma_features import OnsetChroma, BaseChroma, ChromaTypes
 from somax.features.feature import FeatureValue, AbstractFeature
-from somax.features.pitch_features import BaseIntegerPitch
+from somax.features.pitch_features import BaseIntegerPitch, PitchTypes
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import TransformError, TransformIdentityError
 from somax.utils.introspective import StringParsed
@@ -120,7 +120,7 @@ class TransposeTransform(AbstractTransform):
 
     @staticmethod
     def valid_features() -> List[Type[FeatureValue]]:
-        return [BaseIntegerPitch, OnsetChroma]
+        return [BaseIntegerPitch, BaseChroma]
 
     def apply(self, obj: Union[CorpusEvent, FeatureValue], **kwargs) -> Union[CorpusEvent, FeatureValue]:
         if isinstance(obj, CorpusEvent):
@@ -134,10 +134,10 @@ class TransposeTransform(AbstractTransform):
                 for note in event.notes:
                     note.pitch += self.semitones
             return event
-        elif isinstance(obj, BaseIntegerPitch):
+        elif isinstance(obj, PitchTypes):
             pitch: int = obj.value() + self.semitones
             return obj.__class__(value=pitch)
-        elif isinstance(obj, OnsetChroma):
+        elif isinstance(obj, ChromaTypes):
             chroma: np.ndarray = np.roll(obj.value(), self.semitones % 12)
             return obj.__class__(value=chroma)
         else:
@@ -155,10 +155,10 @@ class TransposeTransform(AbstractTransform):
             if isinstance(event, MidiCorpusEvent):
                 for note in event.notes:
                     note.pitch -= self.semitones
-        elif isinstance(obj, BaseIntegerPitch):
+        elif isinstance(obj, PitchTypes):
             pitch: int = obj.value() - self.semitones
             return obj.__class__(value=pitch)
-        elif isinstance(obj, OnsetChroma):
+        elif isinstance(obj, ChromaTypes):
             chroma: np.ndarray = np.roll(obj.value(), -(self.semitones % 12))
             return obj.__class__(value=chroma)
         raise TransformError(f"Could not apply inverse transform {type(self).__name__} to object {obj}. "
