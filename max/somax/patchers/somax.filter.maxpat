@@ -118,7 +118,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 253.0, 260.0, 99.0, 35.0 ],
+					"patching_rect" : [ 253.0, 260.0, 101.0, 35.0 ],
 					"text" : "somax.winresize 190 65"
 				}
 
@@ -172,7 +172,7 @@
 					"patching_rect" : [ 1545.0, 89.0, 113.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 29.0, 7.0, 152.000004529953003, 24.0 ],
-					"text" : "#0_Atom",
+					"text" : "#0_Filter",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -1468,7 +1468,7 @@
 					"numinlets" : 7,
 					"numoutlets" : 7,
 					"outlettype" : [ "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 31.0, 225.0, 351.999999999999773, 22.0 ],
+					"patching_rect" : [ 31.0, 225.0, 352.0, 22.0 ],
 					"text" : "route initialize terminate descriptor label openwindow thispatcher"
 				}
 
@@ -1861,7 +1861,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1228.0, 19.0, 211.0, 49.0 ],
+					"patching_rect" : [ 1228.0, 19.0, 214.0, 49.0 ],
 					"saved_object_attributes" : 					{
 						"client_rect" : [ 67, 153, 507, 479 ],
 						"parameter_enable" : 0,
@@ -1902,8 +1902,8 @@
 					"numinlets" : 6,
 					"numoutlets" : 6,
 					"outlettype" : [ "", "", "", "", "", "" ],
-					"patching_rect" : [ 610.5, 73.0, 446.0, 22.0 ],
-					"text" : "route instantiateatoms terminated eligibility filter descriptorview"
+					"patching_rect" : [ 610.5, 73.0, 445.666666666666742, 22.0 ],
+					"text" : "route instantiateparams terminated eligibility filter descriptorview"
 				}
 
 			}
@@ -3229,7 +3229,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-172", 0 ],
-					"midpoints" : [ 961.600000000000023, 288.0, 620.0, 288.0 ],
+					"midpoints" : [ 961.333333333333371, 288.0, 620.0, 288.0 ],
 					"source" : [ "obj-30", 4 ]
 				}
 
