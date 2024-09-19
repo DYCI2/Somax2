@@ -14,10 +14,6 @@ class OctaveBands(AnalyzableFeature):
     def __init__(self, value: np.ndarray):
         super().__init__(value=value)
 
-    @staticmethod
-    def encode_keyword() -> str:
-        return "band"
-
     @classmethod
     def decode(cls, values: Dict[str, Any]) -> 'OctaveBands':
         return cls(value=np.array(values[cls.encode_keyword()]))

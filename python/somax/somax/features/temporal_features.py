@@ -13,10 +13,6 @@ class Tempo(AnalyzableFeature):
     def __init__(self, value: float):
         super().__init__(value=value)
 
-    @staticmethod
-    def encode_keyword() -> str:
-        return "tempo"
-
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
         if FeatureUtils.is_valid_midi(events, metadata):
@@ -69,10 +65,6 @@ class BeatPhase(AnalyzableFeature):
     def __init__(self, value: float):
         """ value: float \in R[0, 1]"""
         super().__init__(value=value)
-
-    @staticmethod
-    def encode_keyword() -> str:
-        return "beatphase"
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:

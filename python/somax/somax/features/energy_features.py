@@ -2,6 +2,7 @@ import typing
 from typing import Any, List
 
 import librosa
+import librosa.feature
 import numpy as np
 
 from somax.corpus_builder.metadata import Metadata, MidiMetadata, AudioMetadata
@@ -13,10 +14,6 @@ from somax.runtime.exceptions import FeatureError
 class TotalEnergyDb(AnalyzableFeature):
     def __init__(self, value: float):
         super().__init__(value=value)
-
-    @staticmethod
-    def encode_keyword() -> str:
-        return "totalenergy"
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
@@ -63,10 +60,6 @@ class PeakEnergyDb(AnalyzableFeature):
     def __init__(self, value: float):
         super().__init__(value=value)
 
-    @staticmethod
-    def encode_keyword() -> str:
-        return "peakenergy"
-
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
         if FeatureUtils.is_valid_midi(events, metadata):
@@ -110,10 +103,6 @@ class PeakEnergyDb(AnalyzableFeature):
 class VerticalDensity(AnalyzableFeature):
     def __init__(self, value: int):
         super().__init__(value=value)
-
-    @staticmethod
-    def encode_keyword() -> str:
-        return "density"
 
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:

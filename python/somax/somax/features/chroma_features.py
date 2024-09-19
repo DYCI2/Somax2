@@ -67,10 +67,6 @@ class OnsetChroma(BaseChroma):
     def __init__(self, value: Union[np.ndarray, List[float]]):
         super().__init__(value=np.array(value))
 
-    @staticmethod
-    def encode_keyword() -> str:
-        return "chroma"
-
     @classmethod
     def _analyze_midi(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata):
         # Note! Due to how the chromagram in MIDI is constructed from discrete onsets
@@ -91,10 +87,6 @@ class OnsetChroma(BaseChroma):
 class MeanChroma(BaseChroma):
     def __init__(self, value: Union[np.ndarray, List[float]]):
         super().__init__(value=np.array(value))
-
-    @staticmethod
-    def encode_keyword() -> str:
-        return "meanchroma"
 
     @classmethod
     def _analyze_midi(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> None:

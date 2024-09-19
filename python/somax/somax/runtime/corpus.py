@@ -26,7 +26,8 @@ from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.features.feature import CorpusFeature
 from somax.features.feature_value import FeatureValue
 from somax.runtime.corpus_event import CorpusEvent, Note, AudioCorpusEvent, MidiCorpusEvent
-from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch, RecordingError, CorpusUpdateError
+from somax.runtime.exceptions import InvalidCorpus, ExternalDataMismatch, RecordingError, CorpusUpdateError, \
+    CorpusVersionError
 from somax.runtime.label import AbstractLabel
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.utils.get_version import VersionTools
@@ -89,6 +90,7 @@ class Corpus(Generic[E], Introspective, ABC):
                  feature_types: List[Type[CorpusFeature]],
                  label_info: Dict[str, Tuple[int, Type[AbstractLabel]]],
                  build_parameters: Dict[str, Any],
+                 version: str = VersionTools.corpus_version(),
                  **kwargs):
         self.logger = logging.getLogger(__name__)
         self.events: List[E] = events
@@ -97,6 +99,7 @@ class Corpus(Generic[E], Introspective, ABC):
         self.feature_types: List[Type[CorpusFeature]] = feature_types
         self.label_info: Dict[str, Tuple[int, Type[AbstractLabel]]] = label_info  # name: (label_id, label_type)
         self._build_parameters: Dict[str, Any] = build_parameters
+        self._version: str = version
 
         self._index_map: np.ndarray = np.array([])
         self._grid_size: int = -1
@@ -238,6 +241,17 @@ class Corpus(Generic[E], Introspective, ABC):
         label_id: int = label_name_or_id if isinstance(label_name_or_id, int) else self.label_id_of(label_name_or_id)
         return [ev.get_label(label_id) for ev in self.events]
 
+    def version(self) -> str:
+        """" noexcept """
+        try:
+            return self._version
+        except AttributeError:
+            # If corpus is loaded from a pickle older than version 2.7, the corpus won't have a `version` field at all.
+            #   In this case we should assume that the corpus version is '2.4.1-beta04', the previous version
+            #   before 2.7, which was in use from 2022-07 (git:f11e706) up to the release of 2.7.
+            #   Corpora older than this are not supported, but are extremely unlikely to be encountered
+            return "2.4.1-beta04"
+
 
 class MidiCorpus(Corpus[MidiCorpusEvent]):
     def __init__(self,
@@ -263,10 +277,10 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
                 corpus_data: Dict[str, Any] = json.load(f)
             version: str = corpus_data["version"]
             if not VersionTools.matches_current(version, use_corpus_version=True) and not volatile:
-                raise InvalidCorpus(f"The loaded corpus was built with an old version of Somax. "
-                                    f"While it may work, using it could result in a number of bugs. "
-                                    f"Recommended action: rebuild corpus. "
-                                    f"(To attempt to load the corpus anyway: enable the 'volatile' flag)")
+                raise CorpusVersionError(f"The loaded corpus was built with an old version of Somax. "
+                                         f"While it may work, using it could result in a number of bugs. "
+                                         f"Recommended action: rebuild corpus. "
+                                         f"(To attempt to load the corpus anyway: enable the 'volatile' flag)")
             name: str = os.path.basename(os.path.splitext(filepath)[0])
             scheduling_mode: SchedulingMode = SchedulingMode.from_string(corpus_data["content_type"])
 

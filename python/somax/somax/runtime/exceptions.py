@@ -13,6 +13,11 @@ class InvalidCorpus(Exception):
         super(InvalidCorpus, self).__init__(error)
 
 
+class CorpusVersionError(Exception):
+    def __init__(self, error):
+        super(CorpusVersionError, self).__init__(error)
+
+
 class CorpusUpdateError(Exception):
     def __init__(self, error):
         super(CorpusUpdateError, self).__init__(error)

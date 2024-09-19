@@ -57,11 +57,8 @@ class CorpusFeature(AbstractFeature, ABC):
         return {self.encode_keyword(): self._value}
 
     @staticmethod
-    @abstractmethod
     def encode_keyword() -> str:
-        """ Note: This implementation is only preserved for backwards compatibility (legacy corpora, pre 2.7.0)
-                  The encoded json will already contain the name of the class,
-                  and this keyword solution is not needed anymore """
+        return "value"
 
     @classmethod
     def classpath(cls) -> str:

@@ -32,10 +32,6 @@ PitchTypes: Tuple[type, ...] = (RuntimeIntegerPitch, BaseIntegerPitch)
 
 
 class TopNote(BaseIntegerPitch):
-    @staticmethod
-    def encode_keyword() -> str:
-        return "topnote"
-
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
         """ raises: FeatureError if invalid MIDI content """
@@ -48,10 +44,6 @@ class TopNote(BaseIntegerPitch):
 
 
 class VirtualFundamental(BaseIntegerPitch):
-    @staticmethod
-    def encode_keyword() -> str:
-        return "virtualfundamental"
-
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
         """ raises: FeatureError if invalid MIDI content """
@@ -64,10 +56,6 @@ class VirtualFundamental(BaseIntegerPitch):
 
 
 class BassNote(BaseIntegerPitch):
-    @staticmethod
-    def encode_keyword() -> str:
-        return "bassnote"
-
     @classmethod
     def analyze(cls, events: List[MidiCorpusEvent], metadata: MidiMetadata) -> List[MidiCorpusEvent]:
         """ raises: FeatureError if invalid MIDI content """
@@ -80,11 +68,6 @@ class BassNote(BaseIntegerPitch):
 
 
 class YinDiscretePitch(BaseIntegerPitch):
-
-    @staticmethod
-    def encode_keyword() -> str:
-        return "yinpitch"
-
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
         if not FeatureUtils.is_valid_audio(events, metadata):

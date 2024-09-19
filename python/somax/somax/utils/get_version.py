@@ -19,6 +19,12 @@ class VersionTools:
         return somax.__version__
 
     @staticmethod
+    def corpus_version() -> str:
+        import somax  # local import to avoid static loading of module that clashes with shell script usage
+        return somax.__version_corpus__
+
+
+    @staticmethod
     def decode(version: str) -> List[str]:
         """ version excluding alpha/beta information """
         return re.split("[.-]", version)  # . for major, minor, rev, - for beta/alpha
