@@ -41,9 +41,9 @@ class FallbackPeakSelector(Parametric, ContentAware):
         # No next event exists or event exists but is discarded because of taboo:
         if output is None or taboo_mask.is_taboo(output[0].state_index) and self.enforce_taboo.value:
             if self.default_to_first.value:
-                return self._select_first(corpus, taboo_mask)
+                return self.select_first(corpus, taboo_mask, self.enforce_taboo.value)
             else:
-                return self._select_random(corpus, taboo_mask)
+                return self.select_random(corpus, taboo_mask, self.enforce_taboo.value)
         else:
             return output
 
@@ -60,10 +60,11 @@ class FallbackPeakSelector(Parametric, ContentAware):
 
         return corpus.events[next_state_idx], last_transform
 
-    def _select_random(self,
-                       corpus: Corpus,
-                       taboo_mask: TabooMask) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
-        if self.enforce_taboo.value:
+    @staticmethod
+    def select_random(corpus: Corpus,
+                       taboo_mask: TabooMask,
+                       enforce_taboo: bool) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+        if enforce_taboo:
             valid_indices: np.ndarray = taboo_mask.non_taboo_indices()
             if valid_indices.size == 0:
                 return None
@@ -76,10 +77,11 @@ class FallbackPeakSelector(Parametric, ContentAware):
         else:
             return corpus.events[np.random.randint(corpus.length())], NoTransform()
 
-    def _select_first(self,
-                      corpus: Corpus,
-                      taboo_mask: TabooMask) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
-        if self.enforce_taboo.value:
+    @staticmethod
+    def select_first(corpus: Corpus,
+                      taboo_mask: TabooMask,
+                      enforce_taboo: bool) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+        if enforce_taboo:
             valid_indices: np.ndarray = taboo_mask.non_taboo_indices()
             if valid_indices.size == 0:
                 return None

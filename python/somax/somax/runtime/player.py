@@ -10,6 +10,7 @@ from somax.features.feature import CorpusFeature
 from somax.features.feature_value import FeatureValue
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.atom import Atom
+from somax.runtime.behaviour_handler import BehaviourHandler
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, RealtimeRecordedAudioCorpus, MidiCorpus, AudioCorpus
 from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent, SilenceEvent
@@ -40,6 +41,7 @@ class Player(Parametric, ContentAware):
         self.logger = logging.getLogger(__name__)
         self.name: str = name
         self._transform_handler: TransformHandler = TransformHandler()
+        self.behaviour_handler: BehaviourHandler = BehaviourHandler()
         self.peak_selector: AbstractPeakSelector = peak_selector
         self.fallback_selector: FallbackPeakSelector = FallbackPeakSelector()
         self.corpus: Optional[Corpus] = None
@@ -101,11 +103,32 @@ class Player(Parametric, ContentAware):
             self._update_peaks_on_new_event(scheduler_time)
             peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
             taboo_mask: TabooMask = TabooMask(self.corpus)
-            peaks, taboo_mask = self._scale_peaks(peaks, scheduler_time, beat_phase,
-                                                  self.corpus, taboo_mask, enforce_output)
+
+            corresponding_events: List[CorpusEvent] = self.corpus.events_around(peaks.times)
+            corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
+                                                                 for t in np.unique(peaks.transform_ids)]
+
+            peaks, taboo_mask = self.region_mask.process(peaks, corresponding_events, taboo_mask, self.corpus)
+
+            peaks, taboo_mask = self._scale_peaks(peaks=peaks,
+                                                  corresponding_events=corresponding_events,
+                                                  corresponding_transforms=corresponding_transforms,
+                                                  scheduler_time=scheduler_time,
+                                                  beat_phase=beat_phase,
+                                                  corpus=self.corpus,
+                                                  taboo_mask=taboo_mask,
+                                                  enforce_output=enforce_output)
+
+            self._remove_zero_peaks(peaks, corresponding_events, corresponding_transforms)
 
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
-            event_and_transform = self.peak_selector.decide(peaks, self.corpus, self._transform_handler)
+            event_and_transform = self.behaviour_handler.decide(peaks=peaks,
+                                                                taboo_mask=taboo_mask,
+                                                                corresponding_events=corresponding_events,
+                                                                corresponding_transforms=corresponding_transforms,
+                                                                corpus=self.corpus,
+                                                                transform_handler=self._transform_handler,
+                                                                peak_selector=self.peak_selector)
 
             # If no output: try fallback
             if event_and_transform is None:
@@ -443,18 +466,14 @@ class Player(Parametric, ContentAware):
 
     def _scale_peaks(self,
                      peaks: Peaks,
+                     corresponding_events: List[CorpusEvent],
+                     corresponding_transforms: List[AbstractTransform],
                      scheduler_time: float,
                      beat_phase: float,
                      corpus: Corpus,
                      taboo_mask: TabooMask,
                      enforce_output: bool,
                      **kwargs) -> Tuple[Peaks, TabooMask]:
-        corresponding_events: List[CorpusEvent] = corpus.events_around(peaks.times)
-        corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
-                                                             for t in np.unique(peaks.transform_ids)]
-
-        peaks, taboo_mask = self.region_mask.process(peaks, corresponding_events, taboo_mask, corpus)
-
         for scale_action in self.scale_actions.values():
             if scale_action.is_enabled_and_eligible():
                 peaks, taboo_mask = scale_action.scale(peaks=peaks,
@@ -466,10 +485,9 @@ class Player(Parametric, ContentAware):
                                                        corpus=corpus,
                                                        enforce_output=enforce_output,
                                                        **kwargs)
-
-        # Remove 0-scores
-        peaks.remove(peaks.scores < 1e-5)
         return peaks, taboo_mask
+
+
 
     def _update_transforms(self):
         for scale_action in self.scale_actions.values():
@@ -477,3 +495,23 @@ class Player(Parametric, ContentAware):
 
         for atom in self.atoms.values():
             atom.update_transforms(self._transform_handler)
+
+    @staticmethod
+    def _remove_zero_peaks(peaks: Peaks,
+                           corresponding_events: List[CorpusEvent],
+                           corresponding_transforms: List[AbstractTransform]
+                           ) -> Tuple[Peaks, List[CorpusEvent], List[AbstractTransform]]:
+        remove_mask: np.ndarray = peaks.scores < 1e-5
+        peaks.remove(remove_mask)
+
+        events: List[CorpusEvent] = []
+        transforms: List[AbstractTransform] = []
+
+        for event, transform, mask in zip(corresponding_events, corresponding_transforms, remove_mask):
+            if not mask:
+                events.append(event)
+                transforms.append(transform)
+
+        assert peaks.size() == len(events) == len(transforms) # TODO: Remove assertion
+
+        return peaks, events, transforms
