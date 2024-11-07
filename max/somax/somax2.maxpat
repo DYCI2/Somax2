@@ -12,7 +12,7 @@
 		"classnamespace" : "box",
 		"rect" : [ 34.0, 87.0, 2087.0, 956.0 ],
 		"bglocked" : 0,
-		"openinpresentation" : 1,
+		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
 		"default_fontface" : 0,
 		"default_fontname" : "Arial",
@@ -40,14 +40,84 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"bgcolor" : [ 0.4616160095, 1.0, 0.8905446529, 1.0 ],
+					"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_color1" : [ 0.4616160095, 1.0, 0.8905446529, 1.0 ],
+					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
+					"bgfillcolor_type" : "gradient",
+					"gradient" : 1,
+					"id" : "obj-22",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1457.0, 379.0, 480.0, 22.0 ],
+					"text" : "NOT WORKING: GOES OUTSIDE REGION + ONLY PLAYS EVENTS CONTINUOUSLY"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-20",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1178.0, 385.0, 250.0, 22.0 ],
+					"presentation_linecount" : 2,
+					"text" : "rawsend set_behaviour sublevel l4 l4 l3 None"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-18",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1178.0, 341.0, 228.0, 22.0 ],
+					"presentation_linecount" : 2,
+					"text" : "rawsend set_behaviour sublevel l4 l4 l3 7"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-17",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1178.0, 173.0, 227.0, 22.0 ],
+					"text" : "rawsend set_behaviour oneshot l4m12 l4"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-15",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1178.0, 77.0, 204.0, 22.0 ],
+					"presentation_linecount" : 2,
+					"text" : "rawsend set_behaviour oneshot l4 l4"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-14",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1390.0, 173.0, 188.0, 22.0 ],
+					"patching_rect" : [ 1530.0, 161.0, 234.0, 22.0 ],
 					"presentation_linecount" : 2,
-					"text" : "rawsend set_behaviour ^l2l3l4 ^l4"
+					"text" : "rawsend set_behaviour oneshot ^l2l3l4 ^l4"
 				}
 
 			}
@@ -58,7 +128,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1182.5, 181.0, 149.0, 22.0 ],
+					"patching_rect" : [ 1174.0, 232.0, 149.0, 22.0 ],
 					"text" : "rawsend clear_behaviours"
 				}
 
@@ -94,8 +164,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1178.0, 125.0, 169.0, 22.0 ],
-					"text" : "rawsend set_behaviour ^l4 ^l4"
+					"patching_rect" : [ 1178.0, 125.0, 215.0, 22.0 ],
+					"text" : "rawsend set_behaviour oneshot ^l4 ^l4"
 				}
 
 			}
@@ -244,8 +314,36 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"source" : [ "obj-15", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"source" : [ "obj-17", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"source" : [ "obj-18", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
 					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"source" : [ "obj-20", 0 ]
 				}
 
 			}

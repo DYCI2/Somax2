@@ -25,6 +25,10 @@ class Peaks:
         return cls(np.copy(other.scores), other.times, other.transform_ids)
 
     @classmethod
+    def copy(cls, other: 'Peaks') -> 'Peaks':
+        return cls(np.copy(other.scores), np.copy(other.times), np.copy(other.transform_ids))
+
+    @classmethod
     def concatenate(cls, peaks: List['Peaks']):
         if not peaks:
             return Peaks.create_empty()

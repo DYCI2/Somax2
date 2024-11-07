@@ -11,6 +11,12 @@ class TabooMask:
         # True == taboo, False == non-taboo
         self._mask: np.ndarray = np.zeros(corpus.length(), dtype=bool)
 
+    @classmethod
+    def copy(cls, other: 'TabooMask') -> 'TabooMask':
+        new_obj: TabooMask = cls(other.corpus)
+        new_obj._mask = np.copy(other._mask)
+        return new_obj
+
     def add_taboo(self, indices: Union[int, List[int], np.ndarray]) -> None:
         """ raises: IndexError if any index is out of range """
         self._mask[indices] = True
