@@ -1,4 +1,5 @@
 import enum
+import re
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Optional, Tuple, List
@@ -76,6 +77,8 @@ class OneShot(Behaviour):
                              corpus: Corpus,
                              transform_handler: TransformHandler,
                              peak_selector: AbstractPeakSelector) -> BehaviourOutput:
+        assert len(corresponding_events) == peaks.size()
+
         labels_str: List[str] = [e.get_feature(LabelFeature).value() for e in corresponding_events]
         matches: np.ndarray = np.array([self._matches(label_str, self._activation_condition)
                                         for label_str in labels_str], dtype=bool)
@@ -85,14 +88,19 @@ class OneShot(Behaviour):
             # event_and_transform should not be None here
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = peak_selector.decide(peaks, corpus, transform_handler)
+            if event_and_transform is not None:
+                print("MATCH FROM PEAKS (FILE INDEX):", event_and_transform[0].state_index + 2)
 
         else:
             labels_str: List[str] = [e.get_feature(LabelFeature).value() for e in corpus.events]
             matches: np.ndarray = np.array([self._matches(label_str, self._activation_condition)
                                             for label_str in labels_str], dtype=bool)
 
-            taboo_mask.add_taboo_by_mask(matches)
+            taboo_mask.add_taboo_by_mask(~matches)
             event_and_transform = FallbackPeakSelector.select_random(corpus, taboo_mask, enforce_taboo=True)
+
+            if event_and_transform is not None:
+                print("FALLBACK (FILE INDEX):", event_and_transform[0].state_index + 2)
 
         if event_and_transform is None:
             exit_flag: StateExitFlag = StateExitFlag.EXIT_ON_FAILED_ACTIVATION
@@ -117,18 +125,16 @@ class OneShot(Behaviour):
                                    state_exit_flag=StateExitFlag.SUCCESSFUL_EXIT)
 
         next_event: CorpusEvent = corpus.events[self.previous_event_index + 2]
-        if self._matches_deactivation_regex(next_event):
+        if self._matches(next_event.get_feature(LabelFeature).value(), self._deactivation_condition):
             return BehaviourOutput((output_event, self.previous_transform),
                                    state_exit_flag=StateExitFlag.SUCCESSFUL_EXIT)
 
+        self.previous_event_index = output_event.state_index
         return BehaviourOutput((output_event, self.previous_transform), state_exit_flag=StateExitFlag.NO_EXIT)
-
-    def _matches_deactivation_regex(self, event: CorpusEvent) -> bool:
-        pass  # TODO
 
     @staticmethod
     def _matches(label_str: str, regexp: str) -> bool:
-        pass  # TODO
+        return len(re.findall(regexp, label_str, flags=re.IGNORECASE)) > 0
 
     @staticmethod
     def _has_label_feature(corpus: Corpus) -> bool:

@@ -21,6 +21,7 @@ from somax.features.feature import AbstractFeature, CorpusFeature, RuntimeRecord
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
+from somax.runtime.behaviour import OneShot, Behaviour
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus, RealtimeRecordedAudioCorpus
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent, SilenceEvent
@@ -1076,3 +1077,20 @@ class OscAgent(Agent, AsyncioOscObject):
                                                             bar_number_annotations)
         # midi_file.save(filename=filepath)
         self.logger.info(f"The recorded corpus '{name}' was saved to '{filepath}'.")
+
+    ######################################################
+    # EXPERIMENTAL
+    ######################################################
+
+    def clear_behaviours(self) -> None:
+        self.player.behaviour_handler.clear()
+        self.logger.info("Cleared behaviour")
+
+    def next_behaviour(self) -> None:
+        self.player.behaviour_handler.next()
+        self.logger.info("Next behaviour")
+
+    def set_behaviour(self, start_regex: str, end_regex: str) -> None:
+        behaviour: Behaviour = OneShot(start_regex, end_regex)
+        self.player.behaviour_handler.set_behaviour(behaviour)
+        self.logger.info("Set behaviour to OneShot with start regex '{}' and end regex '{}'".format(start_regex, end_regex))

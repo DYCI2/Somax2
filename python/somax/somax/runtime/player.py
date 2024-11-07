@@ -104,6 +104,7 @@ class Player(Parametric, ContentAware):
             peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
             taboo_mask: TabooMask = TabooMask(self.corpus)
 
+            # note: corresponding_events and corresponding_transforms will not have the same length
             corresponding_events: List[CorpusEvent] = self.corpus.events_around(peaks.times)
             corresponding_transforms: List[AbstractTransform] = [self._transform_handler.get_transform(t)
                                                                  for t in np.unique(peaks.transform_ids)]
@@ -119,7 +120,9 @@ class Player(Parametric, ContentAware):
                                                   taboo_mask=taboo_mask,
                                                   enforce_output=enforce_output)
 
-            self._remove_zero_peaks(peaks, corresponding_events, corresponding_transforms)
+            peaks, corresponding_events, corresponding_transforms, = self._remove_zero_peaks(peaks,
+                                                                                             corresponding_events,
+                                                                                             corresponding_transforms)
 
             event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
             event_and_transform = self.behaviour_handler.decide(peaks=peaks,
@@ -501,17 +504,11 @@ class Player(Parametric, ContentAware):
                            corresponding_events: List[CorpusEvent],
                            corresponding_transforms: List[AbstractTransform]
                            ) -> Tuple[Peaks, List[CorpusEvent], List[AbstractTransform]]:
-        remove_mask: np.ndarray = peaks.scores < 1e-5
+        remove_mask: np.ndarray = (peaks.scores < 1e-5).astype(bool)
+
         peaks.remove(remove_mask)
+        corresponding_events = [e for e, m in zip(corresponding_events, remove_mask) if not m]
 
-        events: List[CorpusEvent] = []
-        transforms: List[AbstractTransform] = []
+        assert len(corresponding_events) == peaks.size()
 
-        for event, transform, mask in zip(corresponding_events, corresponding_transforms, remove_mask):
-            if not mask:
-                events.append(event)
-                transforms.append(transform)
-
-        assert peaks.size() == len(events) == len(transforms) # TODO: Remove assertion
-
-        return peaks, events, transforms
+        return peaks, corresponding_events, corresponding_transforms
