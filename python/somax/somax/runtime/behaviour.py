@@ -45,6 +45,11 @@ class Behaviour(ABC, Introspective):
                is_first_event: bool) -> BehaviourOutput:
         """ """
 
+    @classmethod
+    @abstractmethod
+    def _from_string(cls, *args):
+        """ raises: ValueError if the incorrect number of types of args are provided """
+
     @staticmethod
     def jump_to_start(peaks: Peaks,
                       taboo_mask: TabooMask,
@@ -172,12 +177,6 @@ class Behaviour(ABC, Introspective):
             raise ValueError(f"Unknown behaviour: {class_name}")
 
 
-    @classmethod
-    @abstractmethod
-    def _from_string(cls, *args):
-        """ raises: ValueError if the incorrect number of types of args are provided """
-
-
     @staticmethod
     def parse_string(arg) -> str:
         """ raises: ValueError if the argument cannot be converted to a string """
@@ -187,11 +186,18 @@ class Behaviour(ABC, Introspective):
         raise ValueError(f"Expected string argument. Got {type(arg)}")
 
     @staticmethod
-    def parse_int(arg) -> int:
+    def parse_int(arg) -> Optional[int]:
+        if arg is None:
+            return None
+
         try:
-            return int(arg)
+            v: int = int(arg)
+            if v <= 0:
+                raise ValueError("integer must be greater than or equal to 0 (or \"None\")")
+            return v
         except Exception as e:
             raise ValueError from e
+
 
 class OneShot(Behaviour):
     def __init__(self, start_level_regex: str, end_level_regex: str):

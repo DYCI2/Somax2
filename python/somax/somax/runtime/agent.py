@@ -21,7 +21,8 @@ from somax.features.feature import AbstractFeature, CorpusFeature, RuntimeRecord
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
-from somax.runtime.behaviour import OneShot, Behaviour, SubLevel
+from somax.runtime.behaviour import Behaviour
+from somax.runtime.behaviour_handler import RepeatedBehaviour
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus, RealtimeRecordedAudioCorpus
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent, SilenceEvent
@@ -1086,14 +1087,47 @@ class OscAgent(Agent, AsyncioOscObject):
         self.player.behaviour_handler.clear()
         self.logger.info("Cleared behaviour")
 
+    def clear_behaviour_queue(self) -> None:
+        self.player.behaviour_handler.clear_queue()
+        self.logger.info("Cleared behaviour queue")
+
     def next_behaviour(self) -> None:
         self.player.behaviour_handler.next()
         self.logger.info("Next behaviour")
 
-    def set_behaviour(self, type_str: str, *args) -> None:
+    def append_behaviour(self, num_repetitions: Optional[int], class_name: str, *class_args) -> None:
         try:
-            behaviour: Behaviour = Behaviour.from_string(type_str, *args)
-            self.player.behaviour_handler.set_behaviour(behaviour)
-            self.logger.info(f"Setting behaviour to {behaviour}")
+            behaviour: Behaviour = Behaviour.from_string(class_name, *class_args)
+            self.player.behaviour_handler.append(RepeatedBehaviour(behaviour, num_repetitions))
+            self.logger.info(f"Appended behaviour {behaviour}")
         except ValueError as e:
             self.logger.error(f"{str(e)}. No behaviour was added")
+
+    def insert_behaviour(self, index: int, num_repetitions: Optional[int], class_name: str, *class_args) -> None:
+        try:
+            behaviour: Behaviour = Behaviour.from_string(class_name, *class_args)
+            self.player.behaviour_handler.insert(index, RepeatedBehaviour(behaviour, num_repetitions))
+            self.logger.info(f"Inserted behaviour {behaviour} at index {index}")
+        except ValueError as e:
+            self.logger.error(f"{str(e)}. No behaviour was added")
+
+    def remove_behaviour(self, index: int) -> None:
+        try:
+            self.player.behaviour_handler.remove(index)
+            self.logger.info(f"Removed behaviour at index {index}")
+        except IndexError as e:
+            self.logger.error(f"{str(e)}. No behaviour was removed")
+
+    def remove_behaviour_by_type(self, class_name: str) -> None:
+        try:
+            t: Type[Behaviour] = typing.cast(Type[Behaviour], Behaviour.parse_type(class_name))
+            self.player.behaviour_handler.remove_by_type(t)
+        except KeyError:
+            self.logger.error(f"Could not find class {class_name}. No behaviours were removed")
+
+    def set_num_behaviour_repetitions(self, num_repetitions: Optional[int], index: Optional[int]) -> None:
+        try:
+            self.player.behaviour_handler.set_num_repetitions(num_repetitions, index)
+            self.logger.info(f"Set num repetitions to {num_repetitions} for index {index}")
+        except IndexError as e:
+            self.logger.error(f"{str(e)}. Could not change num repetitions")
