@@ -40,20 +40,51 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
-					"bgcolor" : [ 0.4616160095, 1.0, 0.8905446529, 1.0 ],
-					"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
-					"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
-					"bgfillcolor_color1" : [ 0.4616160095, 1.0, 0.8905446529, 1.0 ],
-					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
-					"bgfillcolor_type" : "gradient",
-					"gradient" : 1,
-					"id" : "obj-22",
+					"id" : "obj-16",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1457.0, 379.0, 480.0, 22.0 ],
-					"text" : "NOT WORKING: GOES OUTSIDE REGION + ONLY PLAYS EVENTS CONTINUOUSLY"
+					"patching_rect" : [ 1186.0, 569.0, 351.0, 22.0 ],
+					"presentation_linecount" : 2,
+					"text" : "rawsend clear_behaviours, rawsend set_behaviour oneshot l4 l4"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-12",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1186.0, 530.0, 205.0, 22.0 ],
+					"text" : "rawsend set_behaviour silence None"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1435.0, 206.0, 24.0, 24.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-1",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1178.0, 184.0, 237.0, 22.0 ],
+					"presentation_linecount" : 2,
+					"text" : "rawsend set_behaviour oneshot l2 l2, bang"
 				}
 
 			}
@@ -64,8 +95,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1178.0, 385.0, 250.0, 22.0 ],
-					"presentation_linecount" : 2,
+					"patching_rect" : [ 1182.0, 467.0, 250.0, 22.0 ],
 					"text" : "rawsend set_behaviour sublevel l4 l4 l3 None"
 				}
 
@@ -77,8 +107,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1178.0, 341.0, 228.0, 22.0 ],
-					"presentation_linecount" : 2,
+					"patching_rect" : [ 1182.0, 423.0, 228.0, 22.0 ],
 					"text" : "rawsend set_behaviour sublevel l4 l4 l3 7"
 				}
 
@@ -90,7 +119,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1178.0, 173.0, 227.0, 22.0 ],
+					"patching_rect" : [ 1182.0, 255.0, 227.0, 22.0 ],
 					"text" : "rawsend set_behaviour oneshot l4m12 l4"
 				}
 
@@ -103,7 +132,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1178.0, 77.0, 204.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "rawsend set_behaviour oneshot l4 l4"
 				}
 
@@ -116,7 +144,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1530.0, 161.0, 234.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "rawsend set_behaviour oneshot ^l2l3l4 ^l4"
 				}
 
@@ -128,7 +155,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1174.0, 232.0, 149.0, 22.0 ],
+					"patching_rect" : [ 1178.0, 314.0, 149.0, 22.0 ],
 					"text" : "rawsend clear_behaviours"
 				}
 
@@ -293,8 +320,22 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-9", 0 ],
 					"source" : [ "obj-10", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"source" : [ "obj-12", 0 ]
 				}
 
 			}
@@ -316,6 +357,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
 					"source" : [ "obj-15", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"source" : [ "obj-16", 0 ]
 				}
 
 			}
@@ -351,6 +399,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
 					"source" : [ "obj-5", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"source" : [ "obj-8", 0 ]
 				}
 
 			}

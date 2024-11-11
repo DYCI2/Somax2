@@ -249,10 +249,10 @@ class SubLevel(Behaviour):
             self._create_region(peaks, taboo_mask, corresponding_events, corpus, transform_handler, peak_selector)
 
         is_first_sub_level_event: bool = False
-        peaks, corresponding_events = Behaviour.remove_non_region_peaks(peaks, corresponding_events, self.region)
-        taboo_mask = Behaviour.taboo_non_region_events(corpus, taboo_mask, self.region)
 
         if self.ongoing_one_shot is None:
+            peaks, corresponding_events = Behaviour.remove_non_region_peaks(peaks, corresponding_events, self.region)
+            taboo_mask = Behaviour.taboo_non_region_events(corpus, taboo_mask, self.region)
             self.ongoing_one_shot: OneShot = OneShot(self.sub_label, self.sub_label)
             is_first_sub_level_event = True
 
@@ -265,14 +265,16 @@ class SubLevel(Behaviour):
                                                                        peak_selector,
                                                                        is_first_sub_level_event)
 
-        if not self._is_looping_indefinitely():
-            if Behaviour.is_exit(oneshot_output.state_exit_flag):
+        if Behaviour.is_exit(oneshot_output.state_exit_flag):
+            if not self._is_looping_indefinitely():
                 self.remaining_repetitions -= 1
-                print("##### Completed cycle: remaining repetitions:", self.remaining_repetitions, " (",
-                      oneshot_output.event_and_transform[0].state_index + 2, ")")
 
-            if self.remaining_repetitions <= 0:
-                return BehaviourOutput(oneshot_output.event_and_transform, StateExitFlag.SUCCESSFUL_EXIT)
+            self.ongoing_one_shot = None
+            print("##### Completed cycle: remaining repetitions:", self.remaining_repetitions, " (",
+                  oneshot_output.event_and_transform[0].state_index + 2, ")")
+
+        if not self._is_looping_indefinitely() and self.remaining_repetitions <= 0:
+            return BehaviourOutput(oneshot_output.event_and_transform, StateExitFlag.SUCCESSFUL_EXIT)
 
         return BehaviourOutput(oneshot_output.event_and_transform, StateExitFlag.NO_EXIT)
 
