@@ -1,9 +1,10 @@
 import copy
 import enum
 import re
+import typing
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Optional, Tuple, List
+from typing import Optional, Tuple, List, Type
 
 import numpy as np
 
@@ -16,6 +17,7 @@ from somax.runtime.peaks import Peaks
 from somax.runtime.taboo_mask import TabooMask
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
+from somax.utils.introspective import Introspective
 
 
 class StateExitFlag(enum.Enum):
@@ -30,7 +32,7 @@ class BehaviourOutput:
     state_exit_flag: StateExitFlag
 
 
-class Behaviour(ABC):
+class Behaviour(ABC, Introspective):
     @abstractmethod
     def decide(self,
                peaks: Peaks,
@@ -161,14 +163,59 @@ class Behaviour(ABC):
     def is_exit(exit_flag: StateExitFlag) -> bool:
         return exit_flag == StateExitFlag.SUCCESSFUL_EXIT or exit_flag == StateExitFlag.EXIT_ON_FAILED_ACTIVATION
 
+    @staticmethod
+    def from_string(class_name: str, *args) -> 'Behaviour':
+        try:
+            behaviour_class: Type[Behaviour] = typing.cast(Type[Behaviour], Behaviour._classes()[class_name])
+            return behaviour_class._from_string(*args)
+        except KeyError:
+            raise ValueError(f"Unknown behaviour: {class_name}")
+
+
+    @classmethod
+    @abstractmethod
+    def _from_string(cls, *args):
+        """ raises: ValueError if the incorrect number of types of args are provided """
+
+
+    @staticmethod
+    def parse_string(arg) -> str:
+        """ raises: ValueError if the argument cannot be converted to a string """
+        if isinstance(arg, str):
+            return arg
+
+        raise ValueError(f"Expected string argument. Got {type(arg)}")
+
+    @staticmethod
+    def parse_int(arg) -> int:
+        try:
+            return int(arg)
+        except Exception as e:
+            raise ValueError from e
 
 class OneShot(Behaviour):
-    def __init__(self, activation_condition: str, deactivation_condition: str):
-        self._activation_condition: str = activation_condition
-        self._deactivation_condition: str = deactivation_condition
+    def __init__(self, start_level_regex: str, end_level_regex: str):
+        self._start_level_regex: str = start_level_regex
+        self._end_level_regex: str = end_level_regex
 
-        self.previous_event_index: Optional[int] = None
-        self.previous_transform: Optional[AbstractTransform] = None
+        self._previous_event_index: Optional[int] = None
+        self._previous_transform: Optional[AbstractTransform] = None
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self._start_level_regex}, {self._end_level_regex})"
+
+    @classmethod
+    def _from_string(cls, *args):
+        if not all(isinstance(a, str) for a in args):
+            raise ValueError("start and/or end regexps must be string")
+
+        if len(args) == 1:
+            return cls(args[0], args[0])
+
+        if len(args) == 2:
+            return cls(args[0], args[1])
+
+        raise ValueError(f"Expected 2 arguments for {cls.__name__} behaviour. Got {len(args)}")
 
     def decide(self,
                peaks: Peaks,
@@ -202,39 +249,67 @@ class OneShot(Behaviour):
                                                      corpus,
                                                      transform_handler,
                                                      peak_selector,
-                                                     self._activation_condition)
+                                                     self._start_level_regex)
         event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]] = output.event_and_transform
         if event_and_transform is not None:
-            self.previous_event_index = event_and_transform[0].state_index
-            self.previous_transform = event_and_transform[1]
+            self._previous_event_index = event_and_transform[0].state_index
+            self._previous_transform = event_and_transform[1]
 
         return output
 
     def _on_continuation(self, corpus: Corpus) -> BehaviourOutput:
-        assert (self.previous_event_index is not None
-                and self.previous_transform is not None
-                and self.previous_event_index < corpus.length() - 1)
+        assert (self._previous_event_index is not None
+                and self._previous_transform is not None
+                and self._previous_event_index < corpus.length() - 1)
 
         output: BehaviourOutput = self.continuation(corpus,
-                                                    self.previous_event_index,
-                                                    self.previous_transform,
-                                                    self._deactivation_condition)
+                                                    self._previous_event_index,
+                                                    self._previous_transform,
+                                                    self._end_level_regex)
 
         if output.event_and_transform is not None:
-            self.previous_event_index = output.event_and_transform[0].state_index
+            self._previous_event_index = output.event_and_transform[0].state_index
 
         return output
 
 
 class SubLevel(Behaviour):
-    def __init__(self, region_start_label: str, region_end_label: str, sub_label: str, num_repetitions: Optional[int]):
-        self.region_start_label: str = region_start_label
-        self.region_end_label: str = region_end_label
-        self.sub_label: str = sub_label
-        self.remaining_repetitions: Optional[int] = num_repetitions
+    def __init__(self,
+                 region_start_level_regex: str,
+                 region_end_level_regex: Optional[str],
+                 sub_level_regex: str,
+                 num_repetitions: Optional[int] = None):
+        self._region_start_level_regex: str = region_start_level_regex
+        self._region_end_level_regex: str = (region_end_level_regex if region_end_level_regex is not None
+                                             else region_start_level_regex)
+        self._sub_level: str = sub_level_regex
+        self._remaining_repetitions: Optional[int] = num_repetitions
 
         self.region: Optional[Tuple[int, int]] = None
         self.ongoing_one_shot: Optional[OneShot] = None
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self._region_start_level_regex}, {self._region_end_level_regex}, " \
+               f"{self._sub_level}, {self._remaining_repetitions})"
+
+    @classmethod
+    def _from_string(cls, *args):
+        if len(args) == 2:
+            return cls(cls.parse_string(args[0]), None, cls.parse_string(args[1]))
+
+        if len(args) == 3:
+            if isinstance(args[2], int):
+                return cls(cls.parse_string(args[0]), None,
+                           cls.parse_string(args[1]), cls.parse_int(args[2]))
+            else:
+                return cls(cls.parse_string(args[0]), cls.parse_string(args[1]), cls.parse_string(args[2]))
+
+        if len(args) == 4:
+            return cls(cls.parse_string(args[0]), cls.parse_string(args[1]),
+                       cls.parse_string(args[2]), cls.parse_int(args[3]))
+
+        raise ValueError(f"Expected 2, 3 or 4 arguments for {cls.__name__} behaviour. Got {len(args)}")
+
 
     def decide(self,
                peaks: Peaks,
@@ -253,7 +328,7 @@ class SubLevel(Behaviour):
         if self.ongoing_one_shot is None:
             peaks, corresponding_events = Behaviour.remove_non_region_peaks(peaks, corresponding_events, self.region)
             taboo_mask = Behaviour.taboo_non_region_events(corpus, taboo_mask, self.region)
-            self.ongoing_one_shot: OneShot = OneShot(self.sub_label, self.sub_label)
+            self.ongoing_one_shot: OneShot = OneShot(self._sub_level, self._sub_level)
             is_first_sub_level_event = True
 
         oneshot_output: BehaviourOutput = self.ongoing_one_shot.decide(peaks,
@@ -267,13 +342,13 @@ class SubLevel(Behaviour):
 
         if Behaviour.is_exit(oneshot_output.state_exit_flag):
             if not self._is_looping_indefinitely():
-                self.remaining_repetitions -= 1
+                self._remaining_repetitions -= 1
 
             self.ongoing_one_shot = None
-            print("##### Completed cycle: remaining repetitions:", self.remaining_repetitions, " (",
+            print("##### Completed cycle: remaining repetitions:", self._remaining_repetitions, " (",
                   oneshot_output.event_and_transform[0].state_index + 2, ")")
 
-        if not self._is_looping_indefinitely() and self.remaining_repetitions <= 0:
+        if not self._is_looping_indefinitely() and self._remaining_repetitions <= 0:
             return BehaviourOutput(oneshot_output.event_and_transform, StateExitFlag.SUCCESSFUL_EXIT)
 
         return BehaviourOutput(oneshot_output.event_and_transform, StateExitFlag.NO_EXIT)
@@ -294,13 +369,13 @@ class SubLevel(Behaviour):
                                                                 corpus,
                                                                 transform_handler,
                                                                 peak_selector,
-                                                                self.region_start_label)
+                                                                self._region_start_level_regex)
 
         if region_start.event_and_transform is None:
             return BehaviourOutput(None, StateExitFlag.EXIT_ON_FAILED_ACTIVATION)
 
         start_index: int = region_start.event_and_transform[0].state_index
-        end_index: Optional[int] = Behaviour.region_from(start_index, self.region_end_label, corpus)
+        end_index: Optional[int] = Behaviour.region_from(start_index, self._region_end_level_regex, corpus)
 
         if end_index is None:
             return BehaviourOutput(None, StateExitFlag.EXIT_ON_FAILED_ACTIVATION)
@@ -309,4 +384,4 @@ class SubLevel(Behaviour):
         print(f"######## NEW SUBLEVEL REGION (IN FILE): ({self.region[0] + 2}, {self.region[1] + 2})")
 
     def _is_looping_indefinitely(self):
-        return self.remaining_repetitions is None
+        return self._remaining_repetitions is None

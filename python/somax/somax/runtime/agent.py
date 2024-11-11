@@ -1091,31 +1091,9 @@ class OscAgent(Agent, AsyncioOscObject):
         self.logger.info("Next behaviour")
 
     def set_behaviour(self, type_str: str, *args) -> None:
-        if type_str.lower() == "oneshot":
-            if len(args) != 2:
-                self.logger.error("Expected 2 arguments for OneShot behaviour. Got {}.".format(len(args)))
-                return
-
-            start_regex: str = args[0]
-            end_regex: str = args[1]
-
-            behaviour: Behaviour = OneShot(start_regex, end_regex)
-            self.logger.info("Setting behaviour to OneShot with start regex '{}' and end regex '{}'"
-                             .format(start_regex, end_regex))
-        else:
-            if len(args) != 4:
-                self.logger.error("Expected 4 arguments for SubLevel behaviour. Got {}.".format(len(args)))
-                return
-
-            region_start_regex: str = args[0]
-            region_end_regex: str = args[1]
-            sub_level: str = args[2]
-            num_repetitions: Optional[int] = int(args[3]) if args[3] is not None else None
-
-            behaviour: Behaviour = SubLevel(region_start_regex, region_end_regex, sub_level, num_repetitions)
-            self.logger.info(f"Setting behaviour to SubLevel with region start regex '{region_start_regex}', "
-                             f"region end regex '{region_end_regex}', "
-                             f"sub level '{sub_level}' "
-                             f"and {num_repetitions if num_repetitions is not None else 'indefinitely'} repetitions")
-
-        self.player.behaviour_handler.set_behaviour(behaviour)
+        try:
+            behaviour: Behaviour = Behaviour.from_string(type_str, *args)
+            self.player.behaviour_handler.set_behaviour(behaviour)
+            self.logger.info(f"Setting behaviour to {behaviour}")
+        except ValueError as e:
+            self.logger.error(f"{str(e)}. No behaviour was added")
