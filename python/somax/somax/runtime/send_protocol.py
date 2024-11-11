@@ -92,3 +92,9 @@ class PlayerSendProtocol:
     # Recording
     RECORD_LEARN_EVENT = "learned"
     RECORDING_BUFFER_SIZE = [AUDIO_RENDERER_ADDRESS, "record_buffer_size"]
+
+    # Behaviour
+    BEHAVIOUR_ADDRESS = "behaviour"
+    BEHAVIOUR_CURRENT_BEHAVIOUR = [BEHAVIOUR_ADDRESS, "current"]
+    BEHAVIOUR_QUEUE = [BEHAVIOUR_ADDRESS, "queue"]
+

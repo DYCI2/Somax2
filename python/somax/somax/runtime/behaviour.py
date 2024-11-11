@@ -4,7 +4,7 @@ import re
 import typing
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Optional, Tuple, List, Type
+from typing import Optional, Tuple, List, Type, Union
 
 import numpy as np
 
@@ -49,6 +49,10 @@ class Behaviour(ABC, Introspective):
     @abstractmethod
     def _from_string(cls, *args):
         """ raises: ValueError if the incorrect number of types of args are provided """
+
+    @abstractmethod
+    def render_info(self) -> str:
+        """ """
 
     @staticmethod
     def jump_to_start(peaks: Peaks,
@@ -210,6 +214,9 @@ class OneShot(Behaviour):
     def __repr__(self):
         return f"{self.__class__.__name__}({self._start_level_regex}, {self._end_level_regex})"
 
+    def render_info(self) -> str:
+        return f"{self.__class__.__name__} {self._start_level_regex} {self._end_level_regex}"
+
     @classmethod
     def _from_string(cls, *args):
         if not all(isinstance(a, str) for a in args):
@@ -297,6 +304,10 @@ class SubLevel(Behaviour):
     def __repr__(self):
         return f"{self.__class__.__name__}({self._region_start_level_regex}, {self._region_end_level_regex}, " \
                f"{self._sub_level}, {self._remaining_repetitions})"
+
+    def render_info(self) -> str:
+        return f"{self.__class__.__name__} {self._region_start_level_regex} {self._region_end_level_regex} " \
+               f"{self._sub_level} {self._remaining_repetitions}"
 
     @classmethod
     def _from_string(cls, *args):

@@ -1,4 +1,4 @@
-from typing import Optional, Tuple, List, Type
+from typing import Optional, Tuple, List, Type, Union
 
 from somax.runtime.behaviour import Behaviour, BehaviourOutput, StateExitFlag
 from somax.runtime.corpus import Corpus
@@ -28,7 +28,7 @@ class RepeatedBehaviour:
             return BehaviourOutput(peak_selector.decide(peaks, corpus, transform_handler),
                                    StateExitFlag.SUCCESSFUL_EXIT)
         else:
-            self.behaviour.decide(peaks,
+            return self.behaviour.decide(peaks,
                                   taboo_mask,
                                   corresponding_events,
                                   corresponding_transforms,
@@ -44,6 +44,9 @@ class RepeatedBehaviour:
 
     def is_completed(self) -> bool:
         return self.num_repetitions <= 0
+
+    def render_info(self) -> str:
+        return f"{self.num_repetitions} {self.behaviour.render_info() if self.behaviour is not None else 'None'}"
 
 
 class BehaviourHandler:
@@ -121,6 +124,18 @@ class BehaviourHandler:
     def remove_by_type(self, behaviour_type: Type[Behaviour]) -> None:
         self._queue = [b for b in self._queue if not isinstance(b.behaviour, behaviour_type)]
 
+    def current_behaviour_render_info(self) -> str:
+        if self._current_behaviour is None:
+            return "None"
+        return self._current_behaviour.render_info()
+
+    def current_queue_render_info(self) -> List[str]:
+        if self._queue_is_empty():
+            return "None"
+        return [b.render_info() for b in self._queue]
+
+
+
     def _try_pop_next(self) -> Optional[RepeatedBehaviour]:
         if not self._queue_is_empty():
             return self._queue.pop(0)
@@ -128,3 +143,4 @@ class BehaviourHandler:
 
     def _queue_is_empty(self) -> bool:
         return len(self._queue) == 0
+

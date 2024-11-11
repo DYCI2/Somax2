@@ -201,6 +201,7 @@ class OscAgent(Agent, AsyncioOscObject):
                                                                    scheduler_tempo,
                                                                    enforce_output=False)
             self._send_output_statistics()
+            self._send_behaviour_info()
         except InvalidCorpus as e:
             self.logger.debug(str(e))
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
@@ -294,6 +295,7 @@ class OscAgent(Agent, AsyncioOscObject):
                                                  event_and_transform=event_and_transform,
                                                  reset_timeout=False)
         self._send_output_statistics()
+        self._send_behaviour_info()
 
     def _process_control_message(self, message_type: PlayControl):
         if message_type == PlayControl.START:
@@ -1085,20 +1087,24 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def clear_behaviours(self) -> None:
         self.player.behaviour_handler.clear()
+        self._send_behaviour_info()
         self.logger.info("Cleared behaviour")
 
     def clear_behaviour_queue(self) -> None:
         self.player.behaviour_handler.clear_queue()
+        self._send_behaviour_info()
         self.logger.info("Cleared behaviour queue")
 
     def next_behaviour(self) -> None:
         self.player.behaviour_handler.next()
+        self._send_behaviour_info()
         self.logger.info("Next behaviour")
 
     def append_behaviour(self, num_repetitions: Optional[int], class_name: str, *class_args) -> None:
         try:
             behaviour: Behaviour = Behaviour.from_string(class_name, *class_args)
             self.player.behaviour_handler.append(RepeatedBehaviour(behaviour, num_repetitions))
+            self._send_behaviour_info()
             self.logger.info(f"Appended behaviour {behaviour}")
         except ValueError as e:
             self.logger.error(f"{str(e)}. No behaviour was added")
@@ -1107,6 +1113,7 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             behaviour: Behaviour = Behaviour.from_string(class_name, *class_args)
             self.player.behaviour_handler.insert(index, RepeatedBehaviour(behaviour, num_repetitions))
+            self._send_behaviour_info()
             self.logger.info(f"Inserted behaviour {behaviour} at index {index}")
         except ValueError as e:
             self.logger.error(f"{str(e)}. No behaviour was added")
@@ -1114,6 +1121,7 @@ class OscAgent(Agent, AsyncioOscObject):
     def remove_behaviour(self, index: int) -> None:
         try:
             self.player.behaviour_handler.remove(index)
+            self._send_behaviour_info()
             self.logger.info(f"Removed behaviour at index {index}")
         except IndexError as e:
             self.logger.error(f"{str(e)}. No behaviour was removed")
@@ -1122,12 +1130,23 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             t: Type[Behaviour] = typing.cast(Type[Behaviour], Behaviour.parse_type(class_name))
             self.player.behaviour_handler.remove_by_type(t)
+            self._send_behaviour_info()
+            self.logger.info(f"Removed behaviour matching {class_name}")
         except KeyError:
             self.logger.error(f"Could not find class {class_name}. No behaviours were removed")
 
     def set_num_behaviour_repetitions(self, num_repetitions: Optional[int], index: Optional[int]) -> None:
         try:
             self.player.behaviour_handler.set_num_repetitions(num_repetitions, index)
+            self._send_behaviour_info()
             self.logger.info(f"Set num repetitions to {num_repetitions} for index {index}")
         except IndexError as e:
             self.logger.error(f"{str(e)}. Could not change num repetitions")
+
+    def _send_behaviour_info(self) -> None:
+        self.target.send(PlayerSendProtocol.BEHAVIOUR_CURRENT_BEHAVIOUR,
+                         self.player.behaviour_handler.current_behaviour_render_info())
+        self.target.send(PlayerSendProtocol.BEHAVIOUR_QUEUE,
+                         self.player.behaviour_handler.current_queue_render_info())
+
+
