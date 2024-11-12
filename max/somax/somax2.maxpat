@@ -175,25 +175,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.4616160095, 1.0, 0.8905446529, 1.0 ],
-					"bgcolor2" : [ 0.2, 0.2, 0.2, 1 ],
-					"bgfillcolor_color" : [ 0.2, 0.2, 0.2, 1 ],
-					"bgfillcolor_color1" : [ 0.4616160095, 1.0, 0.8905446529, 1.0 ],
-					"bgfillcolor_color2" : [ 0.2, 0.2, 0.2, 1 ],
-					"bgfillcolor_type" : "gradient",
-					"gradient" : 1,
-					"id" : "obj-109",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 685.0, 1296.0, 320.0, 22.0 ],
-					"text" : "force_jump should clear the current one / current repetition"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-103",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -530,7 +511,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1658.5, 1372.0, 39.0, 29.0 ],
-					"text" : "6"
+					"text" : "5"
 				}
 
 			}
@@ -567,7 +548,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1458.0, 1265.0, 128.0, 49.0 ],
-					"text" : "rawsend set_num_behaviour_repetitions None -1"
+					"text" : "rawsend append_behaviour 1 oneshot l3"
 				}
 
 			}
@@ -591,7 +572,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1331.0, 1038.0, 87.0, 22.0 ],
-					"text" : "3 oneshot l4 l3"
+					"text" : "3 oneshot l4 l4"
 				}
 
 			}
@@ -680,13 +661,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-99",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1060.0, 1355.0, 536.0, 35.0 ],
-					"text" : "\"None OneShot l4 l4\" \"3 OneShot l4 l3\" \"2 SubLevel l4 l4 l3 3\" \"1 OneShot l3 l3\" \"4 OneShot l3 l3\" \"1 OneShot l3 l3\""
+					"patching_rect" : [ 1060.0, 1355.0, 536.0, 22.0 ],
+					"text" : "\"3 OneShot l4 l4\" \"2 SubLevel l4 l4 l3 3\" \"1 OneShot l3 l3\" \"4 OneShot l3 l3\" \"1 OneShot l3 l3\""
 				}
 
 			}
@@ -698,7 +678,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1060.0, 1319.0, 158.0, 22.0 ],
-					"text" : "\"2 SubLevel l4 l4 l3 3\""
+					"text" : "\"None OneShot l4 l4\""
 				}
 
 			}

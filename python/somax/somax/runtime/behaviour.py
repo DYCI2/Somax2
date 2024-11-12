@@ -25,6 +25,9 @@ class StateExitFlag(enum.Enum):
     EXIT_ON_FAILED_ACTIVATION = 1
     SUCCESSFUL_EXIT = 2
 
+    def is_exit_flag(self) -> bool:
+        return self != StateExitFlag.NO_EXIT
+
 
 @dataclass
 class BehaviourOutput:

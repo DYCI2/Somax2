@@ -1,4 +1,4 @@
-from typing import Optional, Tuple, List, Type, Union
+from typing import Optional, Tuple, List, Type
 
 from somax.runtime.behaviour import Behaviour, BehaviourOutput, StateExitFlag
 from somax.runtime.corpus import Corpus
@@ -28,12 +28,12 @@ class RepeatedBehaviour:
                                    StateExitFlag.SUCCESSFUL_EXIT)
         else:
             return self.behaviour.decide(peaks,
-                                  taboo_mask,
-                                  corresponding_events,
-                                  corresponding_transforms,
-                                  corpus,
-                                  transform_handler,
-                                  peak_selector)
+                                         taboo_mask,
+                                         corresponding_events,
+                                         corresponding_transforms,
+                                         corpus,
+                                         transform_handler,
+                                         peak_selector)
 
     def decrement_repetitions(self) -> None:
         """ returns True if behaviour should be removed from queue """
@@ -67,12 +67,12 @@ class BehaviourHandler:
                peak_selector: AbstractPeakSelector) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
 
         if self._current_behaviour is None:
-            next_behaviour: Optional[RepeatedBehaviour] = self._try_pop_next()
-            print("Next behaviour:", next_behaviour)
-            self._current_behaviour = next_behaviour
+            self._current_behaviour = self._try_pop_next()
+            print("Next behaviour:", self._current_behaviour)
 
-            if next_behaviour is None:
-                return peak_selector.decide(peaks, corpus, transform_handler)
+        # self._current_behaviour may have been updated in the previous section, these two should not be merged
+        if self._current_behaviour is None:
+            return peak_selector.decide(peaks, corpus, transform_handler)
 
         res: BehaviourOutput = self._current_behaviour.decide(peaks,
                                                               taboo_mask,
@@ -82,8 +82,7 @@ class BehaviourHandler:
                                                               transform_handler,
                                                               peak_selector)
 
-        if (res.state_exit_flag == StateExitFlag.SUCCESSFUL_EXIT
-                or res.state_exit_flag == StateExitFlag.EXIT_ON_FAILED_ACTIVATION):
+        if res.state_exit_flag.is_exit_flag():
             self._current_behaviour.decrement_repetitions()
             print(f"Remaining repetitions for {self._current_behaviour}: {self._current_behaviour.num_repetitions}")
             if self._current_behaviour is not None and self._current_behaviour.is_completed():
@@ -114,6 +113,12 @@ class BehaviourHandler:
     def next(self) -> None:
         self._current_behaviour = None
 
+    def next_repetition(self) -> None:
+        if self._current_behaviour is not None:
+            self._current_behaviour.decrement_repetitions()
+            if self._current_behaviour.is_completed():
+                self.next()
+
     def clear_queue(self) -> None:
         self._queue = []
 
@@ -137,8 +142,6 @@ class BehaviourHandler:
         if self._queue_is_empty():
             return ["None"]
         return [b.render_info() for b in self._queue]
-
-
 
     def _try_pop_next(self) -> Optional[RepeatedBehaviour]:
         if not self._queue_is_empty():

@@ -454,6 +454,7 @@ class Player(Parametric, ContentAware):
 
     def _force_jump(self) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
         self.clear()
+        self.behaviour_handler.next_repetition()
         index: Optional[int] = self._force_jump_index
         self._force_jump_index = None
 
