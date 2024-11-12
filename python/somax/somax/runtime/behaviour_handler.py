@@ -22,8 +22,7 @@ class RepeatedBehaviour:
                corresponding_transforms: List[AbstractTransform],
                corpus: Corpus,
                transform_handler: TransformHandler,
-               peak_selector: AbstractPeakSelector,
-               is_first_event: bool) -> BehaviourOutput:
+               peak_selector: AbstractPeakSelector) -> BehaviourOutput:
         if self.behaviour is None:
             return BehaviourOutput(peak_selector.decide(peaks, corpus, transform_handler),
                                    StateExitFlag.SUCCESSFUL_EXIT)
@@ -34,15 +33,19 @@ class RepeatedBehaviour:
                                   corresponding_transforms,
                                   corpus,
                                   transform_handler,
-                                  peak_selector,
-                                  is_first_event=is_first_event)
+                                  peak_selector)
 
-    def decrement_repetitions(self):
+    def decrement_repetitions(self) -> None:
         """ returns True if behaviour should be removed from queue """
         if self.num_repetitions is not None:
             self.num_repetitions -= 1
 
+        if self.behaviour is not None:
+            self.behaviour.reset()
+
     def is_completed(self) -> bool:
+        if self.num_repetitions is None:
+            return False
         return self.num_repetitions <= 0
 
     def render_info(self) -> str:
@@ -62,12 +65,11 @@ class BehaviourHandler:
                corpus: Corpus,
                transform_handler: TransformHandler,
                peak_selector: AbstractPeakSelector) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
-        is_first_event: bool = False
 
-        if self._current_behaviour is None or self._current_behaviour.is_completed():
+        if self._current_behaviour is None:
             next_behaviour: Optional[RepeatedBehaviour] = self._try_pop_next()
+            print("Next behaviour:", next_behaviour)
             self._current_behaviour = next_behaviour
-            is_first_event = True
 
             if next_behaviour is None:
                 return peak_selector.decide(peaks, corpus, transform_handler)
@@ -78,15 +80,14 @@ class BehaviourHandler:
                                                               corresponding_transforms,
                                                               corpus,
                                                               transform_handler,
-                                                              peak_selector,
-                                                              is_first_event=is_first_event)
+                                                              peak_selector)
 
         if (res.state_exit_flag == StateExitFlag.SUCCESSFUL_EXIT
                 or res.state_exit_flag == StateExitFlag.EXIT_ON_FAILED_ACTIVATION):
             self._current_behaviour.decrement_repetitions()
-
-        if is_first_event and res.event_and_transform is not None:
-            print("START INDEX (IN FILE):", res.event_and_transform[0].state_index + 2)
+            print(f"Remaining repetitions for {self._current_behaviour}: {self._current_behaviour.num_repetitions}")
+            if self._current_behaviour is not None and self._current_behaviour.is_completed():
+                self._current_behaviour = None
 
         return res.event_and_transform
 
@@ -98,6 +99,9 @@ class BehaviourHandler:
 
     def set_num_repetitions(self, num_repetitions: Optional[int], index: Optional[int] = None) -> None:
         """ raises IndexError if index is out of range """
+        if num_repetitions is not None:
+            num_repetitions = max(0, num_repetitions)
+
         if index is None:
             if self._current_behaviour is not None:
                 self._current_behaviour.num_repetitions = num_repetitions
@@ -131,7 +135,7 @@ class BehaviourHandler:
 
     def current_queue_render_info(self) -> List[str]:
         if self._queue_is_empty():
-            return "None"
+            return ["None"]
         return [b.render_info() for b in self._queue]
 
 

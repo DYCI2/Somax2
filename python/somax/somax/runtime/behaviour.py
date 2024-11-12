@@ -41,14 +41,17 @@ class Behaviour(ABC, Introspective):
                corresponding_transforms: List[AbstractTransform],
                corpus: Corpus,
                transform_handler: TransformHandler,
-               peak_selector: AbstractPeakSelector,
-               is_first_event: bool) -> BehaviourOutput:
+               peak_selector: AbstractPeakSelector) -> BehaviourOutput:
         """ """
 
     @classmethod
     @abstractmethod
     def _from_string(cls, *args):
         """ raises: ValueError if the incorrect number of types of args are provided """
+
+    @abstractmethod
+    def reset(self) -> None:
+        """ reset the object on consecutive repetitions of the same behaviour """
 
     @abstractmethod
     def render_info(self) -> str:
@@ -210,12 +213,18 @@ class OneShot(Behaviour):
 
         self._previous_event_index: Optional[int] = None
         self._previous_transform: Optional[AbstractTransform] = None
+        self._is_first_event: bool = True
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self._start_level_regex}, {self._end_level_regex})"
 
     def render_info(self) -> str:
         return f"{self.__class__.__name__} {self._start_level_regex} {self._end_level_regex}"
+
+    def reset(self) -> None:
+        self._previous_event_index = None
+        self._previous_transform = None
+        self._is_first_event = True
 
     @classmethod
     def _from_string(cls, *args):
@@ -237,9 +246,9 @@ class OneShot(Behaviour):
                corresponding_transforms: List[AbstractTransform],
                corpus: Corpus,
                transform_handler: TransformHandler,
-               peak_selector: AbstractPeakSelector,
-               is_first_event: bool) -> BehaviourOutput:
-        if is_first_event:
+               peak_selector: AbstractPeakSelector) -> BehaviourOutput:
+        if self._is_first_event:
+            self._is_first_event = False
             return self._on_activation(peaks,
                                        taboo_mask,
                                        corresponding_events,
@@ -296,14 +305,22 @@ class SubLevel(Behaviour):
         self._region_end_level_regex: str = (region_end_level_regex if region_end_level_regex is not None
                                              else region_start_level_regex)
         self._sub_level: str = sub_level_regex
+        self._total_repetitions: Optional[int] = num_repetitions
         self._remaining_repetitions: Optional[int] = num_repetitions
 
-        self.region: Optional[Tuple[int, int]] = None
-        self.ongoing_one_shot: Optional[OneShot] = None
+        self._region: Optional[Tuple[int, int]] = None
+        self._ongoing_one_shot: Optional[OneShot] = None
+        self._is_first_event: bool = True
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self._region_start_level_regex}, {self._region_end_level_regex}, " \
                f"{self._sub_level}, {self._remaining_repetitions})"
+
+    def reset(self) -> None:
+        self._remaining_repetitions = self._total_repetitions
+        self._region: Optional[Tuple[int, int]] = None
+        self._ongoing_one_shot: Optional[OneShot] = None
+        self._is_first_event: bool = True
 
     def render_info(self) -> str:
         return f"{self.__class__.__name__} {self._region_start_level_regex} {self._region_end_level_regex} " \
@@ -335,33 +352,29 @@ class SubLevel(Behaviour):
                corresponding_transforms: List[AbstractTransform],
                corpus: Corpus,
                transform_handler: TransformHandler,
-               peak_selector: AbstractPeakSelector,
-               is_first_event: bool) -> BehaviourOutput:
-        if is_first_event:
+               peak_selector: AbstractPeakSelector) -> BehaviourOutput:
+        if self._is_first_event:
+            self._is_first_event = False
             self._create_region(peaks, taboo_mask, corresponding_events, corpus, transform_handler, peak_selector)
 
-        is_first_sub_level_event: bool = False
+        if self._ongoing_one_shot is None:
+            peaks, corresponding_events = Behaviour.remove_non_region_peaks(peaks, corresponding_events, self._region)
+            taboo_mask = Behaviour.taboo_non_region_events(corpus, taboo_mask, self._region)
+            self._ongoing_one_shot: OneShot = OneShot(self._sub_level, self._sub_level)
 
-        if self.ongoing_one_shot is None:
-            peaks, corresponding_events = Behaviour.remove_non_region_peaks(peaks, corresponding_events, self.region)
-            taboo_mask = Behaviour.taboo_non_region_events(corpus, taboo_mask, self.region)
-            self.ongoing_one_shot: OneShot = OneShot(self._sub_level, self._sub_level)
-            is_first_sub_level_event = True
-
-        oneshot_output: BehaviourOutput = self.ongoing_one_shot.decide(peaks,
-                                                                       taboo_mask,
-                                                                       corresponding_events,
-                                                                       corresponding_transforms,
-                                                                       corpus,
-                                                                       transform_handler,
-                                                                       peak_selector,
-                                                                       is_first_sub_level_event)
+        oneshot_output: BehaviourOutput = self._ongoing_one_shot.decide(peaks,
+                                                                        taboo_mask,
+                                                                        corresponding_events,
+                                                                        corresponding_transforms,
+                                                                        corpus,
+                                                                        transform_handler,
+                                                                        peak_selector)
 
         if Behaviour.is_exit(oneshot_output.state_exit_flag):
             if not self._is_looping_indefinitely():
                 self._remaining_repetitions -= 1
 
-            self.ongoing_one_shot = None
+            self._ongoing_one_shot = None
             print("##### Completed cycle: remaining repetitions:", self._remaining_repetitions, " (",
                   oneshot_output.event_and_transform[0].state_index + 2, ")")
 
@@ -397,8 +410,8 @@ class SubLevel(Behaviour):
         if end_index is None:
             return BehaviourOutput(None, StateExitFlag.EXIT_ON_FAILED_ACTIVATION)
 
-        self.region = start_index, end_index
-        print(f"######## NEW SUBLEVEL REGION (IN FILE): ({self.region[0] + 2}, {self.region[1] + 2})")
+        self._region = start_index, end_index
+        print(f"######## NEW SUBLEVEL REGION (IN FILE): ({self._region[0] + 2}, {self._region[1] + 2})")
 
     def _is_looping_indefinitely(self):
         return self._remaining_repetitions is None

@@ -1124,7 +1124,7 @@ class OscAgent(Agent, AsyncioOscObject):
             self._send_behaviour_info()
             self.logger.info(f"Removed behaviour at index {index}")
         except IndexError as e:
-            self.logger.error(f"{str(e)}. No behaviour was removed")
+            self.logger.error(f"Index {index} does not exist in queue. No behaviour was removed")
 
     def remove_behaviour_by_type(self, class_name: str) -> None:
         try:
@@ -1133,9 +1133,9 @@ class OscAgent(Agent, AsyncioOscObject):
             self._send_behaviour_info()
             self.logger.info(f"Removed behaviour matching {class_name}")
         except KeyError:
-            self.logger.error(f"Could not find class {class_name}. No behaviours were removed")
+            self.logger.error(f"Could not find class '{class_name}'. No behaviours were removed")
 
-    def set_num_behaviour_repetitions(self, num_repetitions: Optional[int], index: Optional[int]) -> None:
+    def set_num_behaviour_repetitions(self, index: Optional[int], num_repetitions: Optional[int]) -> None:
         try:
             self.player.behaviour_handler.set_num_repetitions(num_repetitions, index)
             self._send_behaviour_info()
