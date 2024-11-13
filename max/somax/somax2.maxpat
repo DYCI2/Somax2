@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 2087.0, 1256.0 ],
+		"rect" : [ 34.0, 87.0, 2087.0, 1056.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -40,26 +40,37 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-196",
+					"id" : "obj-5",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1089.0, 1141.0, 78.0, 22.0 ],
-					"text" : "None silence"
+					"patching_rect" : [ 210.0, 25.0, 548.0, 22.0 ],
+					"text" : "corpuspath /Users/joakimborg/MaxProjects/SomaxResearch/classifiers/work2024/multilabel_morphos"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-195",
+					"id" : "obj-6",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1089.0, 1182.0, 163.0, 22.0 ],
-					"presentation_linecount" : 4,
-					"text" : "onehot l4, None silence, next"
+					"patching_rect" : [ 798.0, 117.0, 139.0, 22.0 ],
+					"text" : "append None oneshot l2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-198",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 793.0, 487.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -84,7 +95,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1032.0, 979.0, 53.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "sublevel"
 				}
 
@@ -119,7 +129,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1129.0, 752.0, 68.0, 20.0 ],
-					"presentation_linecount" : 3,
 					"text" : "clearqueue"
 				}
 
@@ -155,7 +164,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1437.0, 283.0, 122.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "setrepetitions 0 None"
 				}
 
@@ -180,7 +188,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1439.0, 215.0, 112.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "setrepetitions None"
 				}
 
@@ -193,7 +200,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1445.0, 177.0, 91.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "setrepetitions 5"
 				}
 
@@ -206,7 +212,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1360.0, 177.0, 68.0, 22.0 ],
-					"presentation_linecount" : 3,
 					"text" : "clearqueue"
 				}
 
@@ -219,7 +224,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1313.0, 177.0, 35.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "clear"
 				}
 
@@ -244,7 +248,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1128.0, 240.0, 95.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "remove oneshot"
 				}
 
@@ -257,7 +260,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1128.0, 209.0, 63.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "remove -1"
 				}
 
@@ -282,7 +284,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 963.0, 227.0, 155.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "insert -1 None oneshot l4 l4"
 				}
 
@@ -295,7 +296,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 963.0, 201.0, 133.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "insert -1 5 oneshot l4 l4"
 				}
 
@@ -308,7 +308,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 963.0, 173.0, 123.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "insert -1 oneshot l4 l4"
 				}
 
@@ -333,7 +332,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 798.0, 201.0, 152.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "append None oneshot l4 l4"
 				}
 
@@ -392,7 +390,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 849.0, 405.0, 536.0, 22.0 ],
-					"text" : "\"1 SubLevel l4 l4 l3 3\" \"1 SubLevel l4 l4 l3 3\" \"1 SubLevel l4 l4 l3 3\""
+					"text" : "None"
 				}
 
 			}
@@ -404,7 +402,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 849.0, 369.0, 158.0, 22.0 ],
-					"text" : "\"None OneShot l4 l4\""
+					"text" : "\"1 SubLevel l4 l4 l3 1\""
 				}
 
 			}
@@ -982,6 +980,27 @@
 				"patchline" : 				{
 					"destination" : [ "obj-152", 0 ],
 					"source" : [ "obj-176", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"source" : [ "obj-198", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-2", 0 ],
+					"source" : [ "obj-5", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-152", 0 ],
+					"source" : [ "obj-6", 0 ]
 				}
 
 			}

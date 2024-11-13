@@ -280,6 +280,12 @@ class OneShot(Behaviour):
             self._previous_event_index = event_and_transform[0].state_index
             self._previous_transform = event_and_transform[1]
 
+        if not output.state_exit_flag.is_exit_flag():
+            # Note: event_and_transform is not None here, and it is not the last event in the corpus
+            next_event: CorpusEvent = corpus.event_at(output.event_and_transform[0].state_index + 1)
+            if Behaviour.matches(next_event.get_feature(LabelFeature).value(), self._end_level_regex):
+                output.state_exit_flag = StateExitFlag.SUCCESSFUL_EXIT
+
         return output
 
     def _on_continuation(self, corpus: Corpus) -> BehaviourOutput:
@@ -287,7 +293,7 @@ class OneShot(Behaviour):
                 and self._previous_transform is not None
                 and self._previous_event_index < corpus.length() - 1)
 
-        output: BehaviourOutput = self.continuation(corpus,
+        output: BehaviourOutput = Behaviour.continuation(corpus,
                                                     self._previous_event_index,
                                                     self._previous_transform,
                                                     self._end_level_regex)
