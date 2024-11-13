@@ -10,7 +10,7 @@ from somax.features.feature import CorpusFeature
 from somax.features.feature_value import FeatureValue
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.atom import Atom
-from somax.runtime.behaviour_handler import BehaviourHandler
+from somax.runtime.behaviour_handler import BehaviourHandler, BehaviourHandlerOutput
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus, RealtimeRecordedAudioCorpus, MidiCorpus, AudioCorpus
 from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent, SilenceEvent
@@ -77,7 +77,7 @@ class Player(Parametric, ContentAware):
                   scheduler_time: float,
                   beat_phase: float,
                   _tempo: float,
-                  enforce_output: bool = False) -> Optional[Tuple[CorpusEvent, AbstractTransform, bool]]:
+                  enforce_output: bool = False) -> Optional[Tuple[CorpusEvent, AbstractTransform, bool, bool]]:
         self.logger.debug(f"[new_event] Player '{self.name}' attempting to create a new event "
                           f"at scheduler time '{scheduler_time}'.")
         if not self.is_enabled():
@@ -93,6 +93,8 @@ class Player(Parametric, ContentAware):
 
         if self.corpus.length() == 0:
             raise InvalidCorpus(f"Corpus is empty in player '{self.name}'.")
+
+        enforce_continuation: bool = False
 
         if self._force_jump_index is not None:
             self.clear()
@@ -124,14 +126,19 @@ class Player(Parametric, ContentAware):
                                                                                              corresponding_events,
                                                                                              corresponding_transforms)
 
-            event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
-            event_and_transform = self.behaviour_handler.decide(peaks=peaks,
+            behaviour_handler_output: BehaviourHandlerOutput
+            behaviour_handler_output = self.behaviour_handler.decide(peaks=peaks,
                                                                 taboo_mask=taboo_mask,
                                                                 corresponding_events=corresponding_events,
                                                                 corresponding_transforms=corresponding_transforms,
                                                                 corpus=self.corpus,
                                                                 transform_handler=self._transform_handler,
                                                                 peak_selector=self.peak_selector)
+
+            enforce_continuation = behaviour_handler_output.enforce_continuation
+
+            event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+            event_and_transform = behaviour_handler_output.event_and_transform
 
             # If no output: try fallback
             if event_and_transform is None:
@@ -155,9 +162,9 @@ class Player(Parametric, ContentAware):
         self._feedback(event, scheduler_time, transform)
 
         if not enforce_output and self.post_filter.insert_silence():
-            return SilenceEvent(event.duration), transform, False
+            return SilenceEvent(event.duration), transform, False, enforce_continuation
 
-        return event, transform, output_from_match
+        return event, transform, output_from_match, enforce_continuation
 
     def step(self,
              scheduler_time: float,

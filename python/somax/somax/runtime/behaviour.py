@@ -3,8 +3,7 @@ import enum
 import re
 import typing
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
-from typing import Optional, Tuple, List, Type, Union
+from typing import Optional, Tuple, List, Type
 
 import numpy as np
 
@@ -29,10 +28,18 @@ class StateExitFlag(enum.Enum):
         return self != StateExitFlag.NO_EXIT
 
 
-@dataclass
 class BehaviourOutput:
-    event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
-    state_exit_flag: StateExitFlag
+    def __init__(self,
+                 event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]],
+                 state_exit_flag: StateExitFlag,
+                 enforce_continuation: Optional[bool] = None):
+        self.event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]] = event_and_transform
+        self.state_exit_flag: StateExitFlag = state_exit_flag
+
+        # If enforce_continuation is not provided, default to enforcing continuation (timeout-like behaviour)
+        #   until the end of the current active Behaviour
+        self.enforce_continuation: bool = (enforce_continuation if enforce_continuation is not None
+                                           else not state_exit_flag.is_exit_flag())
 
 
 class Behaviour(ABC, Introspective):
@@ -186,7 +193,6 @@ class Behaviour(ABC, Introspective):
         except KeyError:
             raise ValueError(f"Unknown behaviour: {class_name}")
 
-
     @staticmethod
     def parse_string(arg) -> str:
         """ raises: ValueError if the argument cannot be converted to a string """
@@ -294,9 +300,9 @@ class OneShot(Behaviour):
                 and self._previous_event_index < corpus.length() - 1)
 
         output: BehaviourOutput = Behaviour.continuation(corpus,
-                                                    self._previous_event_index,
-                                                    self._previous_transform,
-                                                    self._end_level_regex)
+                                                         self._previous_event_index,
+                                                         self._previous_transform,
+                                                         self._end_level_regex)
 
         if output.event_and_transform is not None:
             self._previous_event_index = output.event_and_transform[0].state_index
@@ -353,7 +359,6 @@ class SubLevel(Behaviour):
 
         raise ValueError(f"Expected 2, 3 or 4 arguments for {cls.__name__} behaviour. Got {len(args)}")
 
-
     def decide(self,
                peaks: Peaks,
                taboo_mask: TabooMask,
@@ -388,9 +393,13 @@ class SubLevel(Behaviour):
                   oneshot_output.event_and_transform[0].state_index + 2, ")")
 
         if not self._is_looping_indefinitely() and self._remaining_repetitions <= 0:
-            return BehaviourOutput(oneshot_output.event_and_transform, StateExitFlag.SUCCESSFUL_EXIT)
+            return BehaviourOutput(oneshot_output.event_and_transform,
+                                   StateExitFlag.SUCCESSFUL_EXIT,
+                                   oneshot_output.enforce_continuation)
 
-        return BehaviourOutput(oneshot_output.event_and_transform, StateExitFlag.NO_EXIT)
+        return BehaviourOutput(oneshot_output.event_and_transform,
+                               StateExitFlag.NO_EXIT,
+                               oneshot_output.enforce_continuation)
 
     def _create_region(self,
                        peaks: Peaks,

@@ -190,16 +190,25 @@ class OscAgent(Agent, AsyncioOscObject):
         # print("TRIGGER")
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
+
+        enforce_continuation: bool = False
+
         try:
-            event_transform_and_match_type: Optional[Tuple[CorpusEvent, AbstractTransform, bool]]
+            if isinstance(self.scheduling_handler, ManualSchedulingHandler):
+                # In the reactive mode, we need to interrupt the current behaviour when a trigger is received
+                self.player.behaviour_handler.next_repetition()
+
+            new_event_output: Optional[Tuple[CorpusEvent, AbstractTransform, bool, bool]]
             # TODO: BeatPhase should not be `self.scheduling_handler.phase`, but needs to be stored in the trigger to
             #       make sure that it corresponds to `target time` rather than `trigger time`.
             # print(f"TRIG: new event: {scheduling_time}")
-            event_transform_and_match_type = self.player.new_event(scheduling_time,
-                                                                   self.scheduling_handler.predict_phase(
-                                                                       scheduling_time),
-                                                                   scheduler_tempo,
-                                                                   enforce_output=False)
+            new_event_output = self.player.new_event(scheduling_time,
+                                                     self.scheduling_handler.predict_phase(scheduling_time),
+                                                     scheduler_tempo,
+                                                     enforce_output=False)
+            if new_event_output is not None:
+                enforce_continuation = new_event_output[3]
+
             self._send_output_statistics()
             self._send_behaviour_info()
         except InvalidCorpus as e:
@@ -207,18 +216,18 @@ class OscAgent(Agent, AsyncioOscObject):
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
             return
 
-        if event_transform_and_match_type is None:
+        if new_event_output is None:
             self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
-        elif isinstance(event_transform_and_match_type[0], SilenceEvent):
+        elif isinstance(new_event_output[0], SilenceEvent):
             self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
-            event: SilenceEvent = typing.cast(SilenceEvent, event_transform_and_match_type[0])
+            event: SilenceEvent = typing.cast(SilenceEvent, new_event_output[0])
             retrigger: TriggerEvent = TriggerEvent(trigger.trigger_time + event.duration,
                                                    trigger.target_time + event.duration)
             self.scheduling_handler.add_trigger_event(retrigger, reschedule=True)
-            event_transform_and_match_type = None
+            new_event_output = None
 
-        elif event_transform_and_match_type[2] is True:  # output from match
+        elif new_event_output[2] is True:  # output from match
             self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
         else:  # output from fallback
             self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
@@ -232,8 +241,8 @@ class OscAgent(Agent, AsyncioOscObject):
         #                                  aligned_onsets=self.scheduling_handler.aligned_onsets)
 
         event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
-        event_and_transform = (event_transform_and_match_type[0], event_transform_and_match_type[1]) \
-            if event_transform_and_match_type is not None else None
+        event_and_transform = (new_event_output[0], new_event_output[1]) \
+            if new_event_output is not None else None
 
         # Note: Timeout will only be reset if `event_and_transform` is not None
 
@@ -242,33 +251,36 @@ class OscAgent(Agent, AsyncioOscObject):
 
         self.scheduling_handler.add_corpus_event(scheduling_time,
                                                  event_and_transform=event_and_transform,
-                                                 reset_timeout=True)
+                                                 reset_timeout=True,
+                                                 enforce_continuation=enforce_continuation)
 
     def _continue_output(self, continue_event: ContinueEvent) -> None:
         # print("CONTINUE")
         scheduling_time: float = continue_event.target_time
 
+        enforce_continuation: bool = False
+
         try:
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
-            if self.recombine:
+            if self.recombine or self.player.behaviour_handler.active():
                 # print(f"CONT: new event: {scheduling_time}")
-                event_transform_and_match_type = self.player.new_event(scheduling_time,
-                                                                       self.scheduling_handler.predict_phase(
-                                                                           scheduling_time),
-                                                                       self.scheduling_handler.tempo,
-                                                                       enforce_output=True)
-                if event_transform_and_match_type is None:
+                new_event_output = self.player.new_event(scheduling_time,
+                                                         self.scheduling_handler.predict_phase(scheduling_time),
+                                                         self.scheduling_handler.tempo,
+                                                         enforce_output=True)
+                if new_event_output is None:
                     self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_NOMATCH)
                     event_and_transform = None
                 else:
-                    output_from_match: bool = event_transform_and_match_type[2]
+                    enforce_continuation = new_event_output[3]
+                    output_from_match: bool = new_event_output[2]
                     if output_from_match:
                         self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_MATCH)
                     else:
                         self.target.send(PlayerSendProtocol.OUTPUT_TYPE,
                                          PlayerSendProtocol.OUTPUT_TYPE_TRIGGER_FALLBACK)
 
-                    event_and_transform = event_transform_and_match_type[0], event_transform_and_match_type[1]
+                    event_and_transform = new_event_output[0], new_event_output[1]
 
             else:
                 # print(f"CONT: step: {scheduling_time}")
@@ -293,7 +305,8 @@ class OscAgent(Agent, AsyncioOscObject):
 
         self.scheduling_handler.add_corpus_event(scheduling_time,
                                                  event_and_transform=event_and_transform,
-                                                 reset_timeout=False)
+                                                 reset_timeout=False,
+                                                 enforce_continuation=enforce_continuation)
         self._send_output_statistics()
         self._send_behaviour_info()
 
@@ -1148,5 +1161,3 @@ class OscAgent(Agent, AsyncioOscObject):
                          self.player.behaviour_handler.current_behaviour_render_info())
         self.target.send(PlayerSendProtocol.BEHAVIOUR_QUEUE,
                          self.player.behaviour_handler.current_queue_render_info())
-
-

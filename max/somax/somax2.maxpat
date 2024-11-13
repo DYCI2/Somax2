@@ -40,6 +40,32 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-9",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1142.0, 324.0, 148.0, 22.0 ],
+					"presentation_linecount" : 2,
+					"text" : "append 99 sublevel l4 l3 3"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 964.5, 107.0, 137.0, 22.0 ],
+					"presentation_linecount" : 2,
+					"text" : "append oneshot l4m2 l4"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-5",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -390,7 +416,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 849.0, 405.0, 536.0, 22.0 ],
-					"text" : "None"
+					"text" : "\"99 SubLevel l4 l4 l3 3\""
 				}
 
 			}
@@ -402,7 +428,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 849.0, 369.0, 158.0, 22.0 ],
-					"text" : "\"1 SubLevel l4 l4 l3 1\""
+					"text" : "None"
 				}
 
 			}
@@ -1001,6 +1027,20 @@
 				"patchline" : 				{
 					"destination" : [ "obj-152", 0 ],
 					"source" : [ "obj-6", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-152", 0 ],
+					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-152", 0 ],
+					"source" : [ "obj-9", 0 ]
 				}
 
 			}

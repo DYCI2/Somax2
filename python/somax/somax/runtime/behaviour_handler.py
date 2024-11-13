@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Optional, Tuple, List, Type
 
 from somax.runtime.behaviour import Behaviour, BehaviourOutput, StateExitFlag
@@ -52,6 +53,11 @@ class RepeatedBehaviour:
         return f"{self.num_repetitions} {self.behaviour.render_info() if self.behaviour is not None else 'None'}"
 
 
+@dataclass
+class BehaviourHandlerOutput:
+    event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]
+    enforce_continuation: bool
+
 class BehaviourHandler:
     def __init__(self):
         self._current_behaviour: Optional[RepeatedBehaviour] = None
@@ -64,7 +70,7 @@ class BehaviourHandler:
                corresponding_transforms: List[AbstractTransform],
                corpus: Corpus,
                transform_handler: TransformHandler,
-               peak_selector: AbstractPeakSelector) -> Optional[Tuple[CorpusEvent, AbstractTransform]]:
+               peak_selector: AbstractPeakSelector) -> BehaviourHandlerOutput:
 
         if self._current_behaviour is None:
             self._current_behaviour = self._try_pop_next()
@@ -72,8 +78,12 @@ class BehaviourHandler:
 
         # self._current_behaviour may have been updated in the previous section, these two should not be merged
         if self._current_behaviour is None:
-            return peak_selector.decide(peaks, corpus, transform_handler)
+            return BehaviourHandlerOutput(peak_selector.decide(peaks, corpus, transform_handler), False)
 
+        # TODO: since BehaviourOutput.event_and_transform may be none when returned here,
+        #  this may result in FallbackSelector being called, despite there being a queue of other behaviours.
+        #  This needs to be fixed / formalized at some point
+        #  (i.e. should we go to the next iteration or the next item in queue, etc.)
         res: BehaviourOutput = self._current_behaviour.decide(peaks,
                                                               taboo_mask,
                                                               corresponding_events,
@@ -88,7 +98,7 @@ class BehaviourHandler:
             if self._current_behaviour is not None and self._current_behaviour.is_completed():
                 self._current_behaviour = None
 
-        return res.event_and_transform
+        return BehaviourHandlerOutput(res.event_and_transform, res.enforce_continuation)
 
     def append(self, repeated_behaviour: RepeatedBehaviour) -> None:
         return self.insert(len(self._queue), repeated_behaviour)
@@ -142,6 +152,9 @@ class BehaviourHandler:
         if self._queue_is_empty():
             return ["None"]
         return [b.render_info() for b in self._queue]
+
+    def active(self) -> bool:
+        return self._current_behaviour is not None or not self._queue_is_empty()
 
     def _try_pop_next(self) -> Optional[RepeatedBehaviour]:
         if not self._queue_is_empty():
