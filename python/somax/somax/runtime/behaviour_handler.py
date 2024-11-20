@@ -16,6 +16,8 @@ class RepeatedBehaviour:
         self.behaviour: Optional[Behaviour] = behaviour
         self.num_repetitions: Optional[int] = num_repetitions
 
+        self._current_repetition_started: bool = False
+
     def decide(self,
                peaks: Peaks,
                taboo_mask: TabooMask,
@@ -24,6 +26,7 @@ class RepeatedBehaviour:
                corpus: Corpus,
                transform_handler: TransformHandler,
                peak_selector: AbstractPeakSelector) -> BehaviourOutput:
+        self._current_repetition_started = True
         if self.behaviour is None:
             return BehaviourOutput(peak_selector.decide(peaks, corpus, transform_handler),
                                    StateExitFlag.SUCCESSFUL_EXIT)
@@ -38,11 +41,15 @@ class RepeatedBehaviour:
 
     def decrement_repetitions(self) -> None:
         """ returns True if behaviour should be removed from queue """
-        if self.num_repetitions is not None:
+        if self.num_repetitions is not None and self._current_repetition_started:
             self.num_repetitions -= 1
 
         if self.behaviour is not None:
             self.behaviour.reset()
+
+        # Flag to avoid decrementing unstarted behaviours when called twice
+        #  (e.g. on continuous triggers in reactive+cut, force_jump, etc.
+        self._current_repetition_started = False
 
     def is_completed(self) -> bool:
         if self.num_repetitions is None:

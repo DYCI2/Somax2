@@ -291,6 +291,7 @@ class OneShot(Behaviour):
             next_event: CorpusEvent = corpus.event_at(output.event_and_transform[0].state_index + 1)
             if Behaviour.matches(next_event.get_feature(LabelFeature).value(), self._end_level_regex):
                 output.state_exit_flag = StateExitFlag.SUCCESSFUL_EXIT
+                output.enforce_continuation = False
 
         return output
 

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 2087.0, 1056.0 ],
+		"rect" : [ 34.0, 100.0, 1039.0, 786.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -40,13 +40,58 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-16",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 778.0, 665.0, 169.0, 22.0 ],
+					"text" : "clear, append 10 oneshot l2 l2"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-14",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 712.0, 384.0, 150.0, 20.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-12",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 835.0, 556.0, 24.0, 24.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "bang", "bang" ],
+					"patching_rect" : [ 838.0, 625.0, 32.0, 22.0 ],
+					"text" : "t b b"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-9",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1142.0, 324.0, 148.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "append 99 sublevel l4 l3 3"
 				}
 
@@ -59,7 +104,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 964.5, 107.0, 137.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "append oneshot l4m2 l4"
 				}
 
@@ -71,8 +115,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 210.0, 25.0, 548.0, 22.0 ],
-					"text" : "corpuspath /Users/joakimborg/MaxProjects/SomaxResearch/classifiers/work2024/multilabel_morphos"
+					"patching_rect" : [ 210.0, 25.0, 538.0, 22.0 ],
+					"text" : "corpuspath /Users/joakimborg/MaxProjects/SomaxResearch/classifiers/work2024/multilabel_morfos"
 				}
 
 			}
@@ -416,7 +460,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 849.0, 405.0, 536.0, 22.0 ],
-					"text" : "\"99 SubLevel l4 l4 l3 3\""
+					"text" : "None"
 				}
 
 			}
@@ -428,7 +472,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 849.0, 369.0, 158.0, 22.0 ],
-					"text" : "None"
+					"text" : "\"5 OneShot l4 l4\""
 				}
 
 			}
@@ -857,8 +901,29 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-16", 0 ],
+					"source" : [ "obj-1", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-152", 1 ],
 					"source" : [ "obj-11", 4 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"source" : [ "obj-12", 0 ]
 				}
 
 			}
@@ -915,6 +980,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-152", 0 ],
 					"source" : [ "obj-157", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-152", 0 ],
+					"source" : [ "obj-16", 0 ]
 				}
 
 			}
