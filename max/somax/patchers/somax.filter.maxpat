@@ -4,15 +4,15 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 6,
-			"revision" : 4,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 2087.0, 1258.0 ],
+		"rect" : [ 134.0, 87.0, 2087.0, 1257.0 ],
 		"bglocked" : 0,
-		"openinpresentation" : 0,
+		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
 		"default_fontface" : 0,
 		"default_fontname" : "Arial",
@@ -46,7 +46,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 951.0, 687.0, 97.0, 22.0 ],
+					"patching_rect" : [ 951.0, 687.0, 117.0, 22.0 ],
 					"text" : "r #0_label_value"
 				}
 
@@ -58,7 +58,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 198.0, 337.0, 99.0, 22.0 ],
+					"patching_rect" : [ 198.0, 337.0, 119.0, 22.0 ],
 					"text" : "s #0_label_value"
 				}
 
@@ -169,10 +169,10 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1545.0, 89.0, 113.0, 24.0 ],
+					"patching_rect" : [ 1545.0, 89.0, 123.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 29.0, 7.0, 152.000004529953003, 24.0 ],
-					"text" : "#0_Filter",
+					"text" : "17267_MyFilter",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -278,7 +278,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 695.5, 231.0, 83.0, 22.0 ],
+					"patching_rect" : [ 695.5, 231.0, 90.0, 22.0 ],
 					"text" : "s #0_status"
 				}
 
@@ -344,7 +344,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-844",
-					"index" : 0,
+					"index" : 4,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -356,7 +356,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-388",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -380,7 +380,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to associated somax.player",
 					"id" : "obj-119",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -483,7 +483,7 @@
 				"box" : 				{
 					"comment" : "(int, int) status, eligibility",
 					"id" : "obj-437",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -648,7 +648,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 216.0, 687.0, 111.0, 22.0 ],
+					"patching_rect" : [ 216.0, 687.0, 118.0, 22.0 ],
 					"text" : "r #0_delete_filter"
 				}
 
@@ -725,7 +725,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 73.0, 687.0, 112.0, 22.0 ],
+					"patching_rect" : [ 73.0, 687.0, 119.0, 22.0 ],
 					"text" : "r #0_create_filter"
 				}
 
@@ -787,7 +787,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 514.0, 687.0, 115.0, 22.0 ],
+					"patching_rect" : [ 514.0, 687.0, 121.0, 22.0 ],
 					"text" : "r #0_descriptor_v"
 				}
 
@@ -812,7 +812,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 514.0, 893.0, 104.0, 22.0 ],
+					"patching_rect" : [ 514.0, 893.0, 111.0, 22.0 ],
 					"text" : "v #0_descriptor"
 				}
 
@@ -835,7 +835,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 672.0, 804.0, 98.0, 22.0 ],
+					"patching_rect" : [ 672.0, 804.0, 105.0, 22.0 ],
 					"text" : "s #0_dumpout"
 				}
 
@@ -853,7 +853,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 4,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -940,6 +940,7 @@
 								"box" : 								{
 									"color" : [ 0.980525732, 0.5260759592, 0.0, 1.0 ],
 									"id" : "obj-9",
+									"linecount" : 2,
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 1,
@@ -987,7 +988,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 6,
-											"revision" : 4,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1477,7 +1478,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-20",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1506,7 +1507,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 142.0, 371.0, 117.0, 22.0 ],
+					"patching_rect" : [ 142.0, 371.0, 123.0, 22.0 ],
 					"text" : "s #0_descriptor_v"
 				}
 
@@ -1530,7 +1531,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 87.0, 404.0, 113.0, 22.0 ],
+					"patching_rect" : [ 87.0, 404.0, 120.0, 22.0 ],
 					"text" : "s #0_delete_filter"
 				}
 
@@ -1554,7 +1555,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 31.0, 436.0, 114.0, 22.0 ],
+					"patching_rect" : [ 31.0, 436.0, 121.0, 22.0 ],
 					"text" : "s #0_create_filter"
 				}
 
@@ -1618,7 +1619,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 610.5, 256.0, 114.0, 22.0 ],
+					"patching_rect" : [ 610.5, 256.0, 121.0, 22.0 ],
 					"text" : "s #0_create_filter"
 				}
 
@@ -1628,7 +1629,7 @@
 					"comment" : "(any) messages from somax.player",
 					"cool" : 1,
 					"id" : "obj-10",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1694,7 +1695,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 866.5, 111.0, 184.0, 22.0 ],
+					"patching_rect" : [ 951.833333333333371, 123.0, 184.0, 22.0 ],
 					"text" : "s #0_descriptorview_protocol"
 				}
 
@@ -1863,7 +1864,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1228.0, 19.0, 214.0, 49.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 507, 479 ],
+						"client_rect" : [ 67, 153, 461, 322 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -1932,13 +1933,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 6,
-							"revision" : 4,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 87.0, 1953.0, 1258.0 ],
+						"rect" : [ 34.0, 87.0, 1953.0, 1257.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1986,7 +1987,7 @@
 									"numinlets" : 3,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 47.0, 436.0, 93.0, 35.0 ],
+									"patching_rect" : [ 47.0, 436.0, 94.0, 35.0 ],
 									"text" : "combine #0 _ s @triggers 2"
 								}
 
@@ -2079,7 +2080,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 6,
-											"revision" : 4,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -3229,8 +3230,8 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-172", 0 ],
-					"midpoints" : [ 961.333333333333371, 288.0, 620.0, 288.0 ],
-					"source" : [ "obj-30", 4 ]
+					"midpoints" : [ 876.0, 288.0, 620.0, 288.0 ],
+					"source" : [ "obj-30", 3 ]
 				}
 
 			}
@@ -3252,7 +3253,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-35", 0 ],
-					"source" : [ "obj-30", 3 ]
+					"source" : [ "obj-30", 4 ]
 				}
 
 			}
@@ -3486,29 +3487,6 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "somax.await_patcherargs.maxpat",
-				"bootpath" : "~/MaxProjects/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.descriptorview.maxpat",
-				"bootpath" : "~/MaxProjects/Somax2/max/somax/patchers/resources/player",
-				"patcherrelativepath" : "./resources/player",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.winresize.maxpat",
-				"bootpath" : "~/MaxProjects/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-38", "obj-1" ]
 			}

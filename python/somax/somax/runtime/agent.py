@@ -1101,7 +1101,7 @@ class OscAgent(Agent, AsyncioOscObject):
         self.send_corpus_info()
         self.send_descriptor_info()
 
-    def _send_eligibility(self, path: Optional[Union[str | List[str]]] = None) -> None:
+    def _send_eligibility(self, path: Optional[Union[str, List[str]]] = None) -> None:
         if path is None:  # Send state for all objects
             eligibility: List[Tuple[Parametric, bool]] = [(e, v) for e, v, _ in self.player.get_eligibility()
                                                           if isinstance(e, Parametric)]
@@ -1115,7 +1115,7 @@ class OscAgent(Agent, AsyncioOscObject):
                 path: List[str] = [path] if isinstance(path, str) else path
                 obj: Union[Parametric, Parameter] = self.player.get_param(path.copy())
                 if not isinstance(obj, ContentAware):
-                    raise ParameterError(f"Object with path '{"::".join(path)}' does not handle eligibility")
+                    raise ParameterError(f"Object with path '{'::'.join(path)}' does not handle eligibility")
 
                 _, v, _ = typing.cast(ContentAware, obj).get_eligibility()[0]
                 self.target.send(PlayerSendProtocol.ELIGIBILITY, [self._path_to_string(path), v])
