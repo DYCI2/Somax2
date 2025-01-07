@@ -88,6 +88,9 @@ class Atom(Parametric, ContentAware):
         self._memory_space.model(self._corpus, labels)
         self._activity_pattern.corpus = self._corpus
 
+    def reclassify(self) -> None:
+        self.read_corpus(self._corpus)
+
     def learn_event(self, event: AudioCorpusEvent) -> None:
         label: IntLabel = self._classifier.classify_event(event)
         self._memory_space.learn_event(event, label)

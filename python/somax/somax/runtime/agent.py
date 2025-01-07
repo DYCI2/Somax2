@@ -853,10 +853,17 @@ class OscAgent(Agent, AsyncioOscObject):
                 if len(path_and_name) > 1:
                     self._send_eligibility(path_and_name[:-1])
 
+            if ParametricFlags.ATOM_REQUIRES_RECLASSIFICATION in flags:
+                if len(path_and_name) > 1:
+                    atom_name: str = path_and_name[0]
+                    if atom_name in self.player.atoms:
+                        self.player.atoms[atom_name].reclassify()
+
         except ParameterError as e:
             self.logger.error(f"{str(e)}. Could not set parameter.")
         except KeyError as e:
             self.logger.error(f"Could not find {str(e)}. No parameter was set.")
+
 
     ######################################################
     # SCHEDULING, RENDERING & STATE-RELATED PARAMETERS

@@ -1,14 +1,17 @@
 import typing
+from email.policy import default
 from enum import Enum
 from typing import Type, Dict, Optional, List, Tuple, Union
 
 from somax.classification import PitchClassClassifier, PitchClassifier
 from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.classification.classifier import FeatureClassifier
+from somax.classification.omax_mfcc_classifier import OmaxMfccClassifier
 from somax.features import (YinDiscretePitch, OnsetChroma, MeanChroma, TopNote, BassNote, VirtualFundamental,
                             RuntimeIntegerPitch, OctaveBands, TotalEnergyDb, PeakEnergyDb, VerticalDensity, Tempo,
                             BeatPhase, RuntimeChroma)
 from somax.features.feature import CorpusFeature, AbstractFeature
+from somax.features.mfcc_features import Mfcc
 
 
 class FeatureKeywordFlags(Enum):
@@ -61,6 +64,15 @@ class FeatureSpecification:
                   default_classifier: Optional[Type[FeatureClassifier]]
                   ) -> 'FeatureSpecification':
         return cls(midi_feature, None, None, influence_feature, flags, default_classifier)
+
+    @classmethod
+    def audio_only(cls,
+                  audio_feature: Optional[Type[CorpusFeature]],
+                  influence_feature: Optional[Type[AbstractFeature]],
+                  flags: List[FeatureKeywordFlags],
+                  default_classifier: Optional[Type[FeatureClassifier]]
+                  ) -> 'FeatureSpecification':
+        return cls(None, audio_feature, audio_feature, influence_feature, flags, default_classifier)
 
     @classmethod
     def singular(cls,
@@ -186,6 +198,11 @@ class FeatureDictionary:
                                                    influence_feature=VerticalDensity,
                                                    flags=[FeatureKeywordFlags.HIDDEN],
                                                    default_classifier=None),
+
+        "mfcc": FeatureSpecification.audio_only(audio_feature=Mfcc,
+                                                influence_feature=Mfcc,
+                                                flags=[FeatureKeywordFlags.MAIN_KEYWORD],
+                                                default_classifier=OmaxMfccClassifier),
 
         # "tempo": FeatureSpecification.singular(feature=Tempo, flags=[], default_classifier=None),
 

@@ -13,6 +13,7 @@ Ranged = Union[MaxCompatible, None]
 
 class ParametricFlags(Enum):
     CHANGES_ELIGIBILITY = 1
+    ATOM_REQUIRES_RECLASSIFICATION = 2
 
 
 class HasParameterDict(ABC):
