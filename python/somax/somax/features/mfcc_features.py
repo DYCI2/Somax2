@@ -32,11 +32,13 @@ class Mfcc(AnalyzableFeature):
 
     @classmethod
     def _analyze_audio(cls, events: List[CorpusEvent], metadata: AudioMetadata) -> None:
-        rmse: np.ndarray = cls._analyze_mfcc(metadata)  # shape: (n,) where n is the number of frames in audio file
-        mfcc: np.ndarray = cls._analyze_mfcc(metadata)  # shape: (n, cls.N_MFCCS)
+        # shape: (n,) where n is the number of frames in audio file
+        rmse: np.ndarray = cls._analyze_mfcc0_approximations(metadata)
+        # shape: (n, cls.N_MFCCS)
+        mfcc: np.ndarray = cls._analyze_mfcc(metadata)
 
         for event in events:
-            onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
+            onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=cls.HOP_LENGTH)
             feature: Mfcc = Mfcc(value=mfcc[onset_frame], mfcc0_approximation=float(rmse[onset_frame]))
             event.set_feature(feature)
 
@@ -56,7 +58,7 @@ class Mfcc(AnalyzableFeature):
         mfcc: np.ndarray = scipy.fftpack.dct(np.log(melspec + cls.EPSILON), axis=-2, type=2, norm='ortho')
         mfcc = mfcc * np.sqrt(2 / cls.N_MFCCS)
 
-        return mfcc
+        return mfcc.T
 
     @classmethod
     def _analyze_mfcc0_approximations(cls, metadata: AudioMetadata) -> np.ndarray:

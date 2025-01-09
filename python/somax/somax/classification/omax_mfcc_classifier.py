@@ -20,10 +20,10 @@ class OmaxMfccClassifier(FeatureClassifier):
     This classifier is designed to as closely as possible mimic the behavior of the OMax MFCC classifier
     (`OMax.MFCCs-Alphabet.maxpat`)
     """
-
+    N_MFCCS = Mfcc.N_MFCCS
     DEFAULT_DMAX = float(np.sqrt(5.0))
-    DEFAULT_WEIGHTS = np.ones(Mfcc.N_MFCCS)
-    FBE = -(np.sqrt(2 * Mfcc.N_MFCCS) * np.log(Mfcc.EPSILON))
+    DEFAULT_WEIGHTS = np.ones(N_MFCCS)
+    FBE = -(np.sqrt(2 * N_MFCCS) * np.log(Mfcc.EPSILON))
 
     def __init__(self, midi_feature_type: Type[CorpusFeature], audio_feature_type: Type[CorpusFeature], ):
         super().__init__(midi_feature_type, audio_feature_type)
@@ -31,13 +31,18 @@ class OmaxMfccClassifier(FeatureClassifier):
         self.d_max: Parameter = Parameter(self.DEFAULT_DMAX, 0.0, None, "float",
                                           "Maximum distance between classes as defined by the OMax MFCC classifier",
                                           [ParametricFlags.ATOM_REQUIRES_RECLASSIFICATION])
-        self.weights: Parameter = ParamWithSetter(self.DEFAULT_WEIGHTS, 0.0, None, "list[float(14)]", "", )
+
+        # Note: the Parameter value of weights is never actually used.
+        # We're using the setter to set the `_internal_weights`
+        self.weights: Parameter = ParamWithSetter(-1, 0.0, None, "list[int(14)]", "", self._set_weights)
+        self._internal_weights: np.ndarray = self.DEFAULT_WEIGHTS
 
     def cluster(self, corpus: Corpus) -> None:
         # No clustering required for class
         pass
 
     def classify_corpus(self, corpus: Corpus) -> List[IntLabel]:
+        self._classes = np.zeros(self.N_MFCCS).reshape(1, self.N_MFCCS)
         return [self.classify_event(event) for event in corpus.events]
 
     def classify_event(self, event: CorpusEvent) -> IntLabel:
@@ -80,6 +85,10 @@ class OmaxMfccClassifier(FeatureClassifier):
     def supports(descriptor: Union[Type[CorpusFeature], Type[AbstractLabel]]) -> bool:
         return issubclass(descriptor, Mfcc)
 
+    @classmethod
+    def handles_midi_corpus(cls) -> bool:
+        return False # MFCCs are Audio-only features, for now
+
     @staticmethod
     def fbe_mfcc(mfcc: np.ndarray) -> np.ndarray:
         v = mfcc.copy()
@@ -92,14 +101,32 @@ class OmaxMfccClassifier(FeatureClassifier):
         return IntLabel(int(np.argmin(distances)))
 
     def _distances(self, fbe_mfcc: np.ndarray) -> np.ndarray:
-        return np.sqrt(np.sum((self._classes - fbe_mfcc) ** 2, axis=1) * self.weights.value)
+        return np.sqrt(np.sum(((self._classes - fbe_mfcc) ** 2) * self._internal_weights, axis=1) )
 
     def _append_to_matrix(self, fbe_mfcc: np.ndarray) -> None:
-        self._classes = np.append(self._classes, fbe_mfcc.reshape(1, Mfcc.N_MFCCS), axis=0)
+        self._classes = np.append(self._classes, fbe_mfcc.reshape(1, self.N_MFCCS), axis=0)
 
-    def _set_weights(self, weights: List[float]):
-        # TODO
-        pass
+    def _set_weights(self, weight_classes: List[int]):
+        """
+        Weight classes as specified by the OMax implementation, where weight_class (c) yields the following weights (w):
+            c = 0 => weight 1.0
+            c > 0 => weight c^2
+            c < 0 => weight 1 / (|c| + 1)^2
+
+        """
+        w: np.ndarray = np.array(weight_classes, dtype=int)
+        w = np.pad(w, (0, self.N_MFCCS - len(w)))
+        conditions = [w < 0,
+                      w == 0,
+                      w >= 1]
+
+        choices = [1 / (np.abs(w) + 1) ** 2,
+                   np.ones_like(w),
+                   w ** 2]
+
+        self._internal_weights = np.select(conditions, choices)
+        print(self._internal_weights)
+
 
     def _num_classes(self) -> int:
         return self._classes.shape[0]

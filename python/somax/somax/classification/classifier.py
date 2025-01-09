@@ -72,6 +72,16 @@ class AbstractClassifier(StringParsed, ContentAware, ABC):
     def label_type(self) -> Optional[Type[AbstractLabel]]:
         """ If the classifier supports labels, return the type of label supported, otherwise None. """
 
+    @classmethod
+    def handles_midi_corpus(cls) -> bool:
+        """ Define whether class can handle `MidiCorpus` or not. Default implementation -- override if needed """
+        return True
+
+    @classmethod
+    def handles_audio_corpus(cls) -> bool:
+        """ Define whether class can handle `AudioCorpus` or not. Default implementation -- override if needed """
+        return True
+
 
 class FeatureClassifier(AbstractClassifier, ABC):
     """ Abstract base class for classifiers that uses `CorpusFeature` (as opposed to `AbstractLabel`)."""
@@ -85,12 +95,12 @@ class FeatureClassifier(AbstractClassifier, ABC):
         super().__init__(**kwargs)
 
         # Passing invalid feature type (independent of whether it exists in a runtime corpus or not)
-        if not self.supports(midi_feature_type):
+        if self.handles_midi_corpus() and not self.supports(midi_feature_type):
             raise InvalidConfiguration(f"Feature '{midi_feature_type.__name__}' is not supported by "
                                        f"classifier '{self.__class__.__name__}'")
 
         # Passing invalid feature type (independent of whether it exists in a runtime corpus or not)
-        if not self.supports(audio_feature_type):
+        if self.handles_audio_corpus() and not self.supports(audio_feature_type):
             raise InvalidConfiguration(f"Feature '{audio_feature_type.__name__}' is not supported by "
                                        f"classifier '{self.__class__.__name__}'")
 
@@ -122,5 +132,13 @@ class FeatureClassifier(AbstractClassifier, ABC):
 
     def _is_eligible_for(self, corpus: Corpus) -> bool:
         """ Default implementation -- override if needed """
-        return corpus.has_feature(self.midi_feature_type) and isinstance(corpus, MidiCorpus) or \
-            corpus.has_feature(self.audio_feature_type) and isinstance(corpus, AudioCorpus)
+        return (
+                (self.handles_midi_corpus()
+                 and corpus.has_feature(self.midi_feature_type)
+                 and isinstance(corpus, MidiCorpus)
+                 ) or
+                (self.handles_audio_corpus()
+                 and corpus.has_feature(self.audio_feature_type)
+                 and isinstance(corpus, AudioCorpus)
+                 )
+        )
