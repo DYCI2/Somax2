@@ -10,12 +10,13 @@ from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import InvalidConfiguration, ClassificationError
 from somax.runtime.influence import AbstractInfluence
 from somax.runtime.label import IntLabel, AbstractLabel
+from somax.runtime.parameter import Parametric
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform
 from somax.utils.introspective import StringParsed
 
 
-class AbstractClassifier(StringParsed, ContentAware, ABC):
+class AbstractClassifier(Parametric, StringParsed, ContentAware, ABC):
     def __init__(self, **kwargs):
         super().__init__(invalidate_parent=True, **kwargs)
         self._transforms: List[AbstractTransform] = []

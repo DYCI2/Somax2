@@ -37,6 +37,10 @@ class OmaxMfccClassifier(FeatureClassifier):
         self.weights: Parameter = ParamWithSetter(-1, 0.0, None, "list[int(14)]", "", self._set_weights)
         self._internal_weights: np.ndarray = self.DEFAULT_WEIGHTS
 
+        # Since there's currently no way to pass information back to the client from the classifier,
+        # we'll use a dummy parameter to store the number of classes on classification, so that we can display it in Max
+        self._num_classes_param: Parameter = Parameter(0, 0, None, "int", "Number of classes")
+
     def cluster(self, corpus: Corpus) -> None:
         # No clustering required for class
         pass
@@ -54,6 +58,7 @@ class OmaxMfccClassifier(FeatureClassifier):
 
         if distances[closest_index] > self.d_max.value:
             self._append_to_matrix(fbe_mfcc)
+            self._num_classes_param.value = self._num_classes()  # Store updated num classes to allow access from Max
             return IntLabel(self._num_classes() - 1)
         else:
             return IntLabel(closest_index)
@@ -87,7 +92,7 @@ class OmaxMfccClassifier(FeatureClassifier):
 
     @classmethod
     def handles_midi_corpus(cls) -> bool:
-        return False # MFCCs are Audio-only features, for now
+        return False  # MFCCs are Audio-only features, for now
 
     @staticmethod
     def fbe_mfcc(mfcc: np.ndarray) -> np.ndarray:
@@ -101,7 +106,7 @@ class OmaxMfccClassifier(FeatureClassifier):
         return IntLabel(int(np.argmin(distances)))
 
     def _distances(self, fbe_mfcc: np.ndarray) -> np.ndarray:
-        return np.sqrt(np.sum(((self._classes - fbe_mfcc) ** 2) * self._internal_weights, axis=1) )
+        return np.sqrt(np.sum(((self._classes - fbe_mfcc) ** 2) * self._internal_weights, axis=1))
 
     def _append_to_matrix(self, fbe_mfcc: np.ndarray) -> None:
         self._classes = np.append(self._classes, fbe_mfcc.reshape(1, self.N_MFCCS), axis=0)
@@ -127,6 +132,5 @@ class OmaxMfccClassifier(FeatureClassifier):
         self._internal_weights = np.select(conditions, choices)
         print(self._internal_weights)
 
-
     def _num_classes(self) -> int:
-        return self._classes.shape[0]
+        return int(self._classes.shape[0])
