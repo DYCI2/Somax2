@@ -103,7 +103,6 @@ class OmaxMfccClassifier(FeatureClassifier):
     def _classify_influence(self, influence_mfcc: MfccBase) -> IntLabel:
         fbe_mfcc: np.ndarray = self.fbe_mfcc(influence_mfcc.ircamdescriptor_mfcc())
         distances: np.ndarray = self._distances(fbe_mfcc)
-        print(int(np.argmin(distances)))
         return IntLabel(int(np.argmin(distances)))
 
     def _distances(self, fbe_mfcc: np.ndarray) -> np.ndarray:

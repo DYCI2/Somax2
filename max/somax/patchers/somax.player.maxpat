@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 0.0, 52.0, 450.0, 760.0 ],
+		"rect" : [ 0.0, 52.0, 2155.0, 1325.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -3077,6 +3077,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.647058823529412, 0.913725490196078, 0.909803921568627, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "selfmfccngramorder"
 				}
 
@@ -3141,6 +3142,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.647058823529412, 0.913725490196078, 0.909803921568627, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "selfmfccpeakdecay"
 				}
 
@@ -3251,6 +3253,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.358311964349916, 0.842696656897025, 0.838660117792465, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "mfccpeakdecay"
 				}
 
@@ -3283,6 +3286,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.358311964349916, 0.842696656897025, 0.838660117792465, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "mfccngramorder"
 				}
 
@@ -32461,6 +32465,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.827450980392157, 0.423529411764706, 0.996078431372549, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "selfharmonicngramorder"
 				}
 
@@ -32525,6 +32530,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.827450980392157, 0.423529411764706, 0.996078431372549, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "selfharmonicpeakdecay"
 				}
 
@@ -33989,15 +33995,15 @@
 						"fallback" : [ "Random" ],
 						"flush" : [ 0.0 ],
 						"harmonicenable" : [ 1 ],
-						"harmonicngramorder" : [ 2 ],
+						"harmonicngramorder" : [ 7 ],
 						"harmonicpeakdecay" : [ 3.001 ],
 						"melodicenable" : [ 1 ],
 						"melodicmod12" : [ 0 ],
-						"melodicngramorder" : [ 2 ],
+						"melodicngramorder" : [ 3 ],
 						"melodicpeakdecay" : [ 2.001 ],
 						"mfccdistance" : [ 5.0 ],
 						"mfccenable" : [ 1 ],
-						"mfccngramorder" : [ 2 ],
+						"mfccngramorder" : [ 5 ],
 						"mfccpeakdecay" : [ 3.001 ],
 						"mididurations" : [ "Sustained" ],
 						"midinotebynote" : [ 1 ],
@@ -34010,15 +34016,15 @@
 						"recombine" : [ 1 ],
 						"resetinfluences" : [ 0.0 ],
 						"selfharmonicenable" : [ 1 ],
-						"selfharmonicngramorder" : [ 2 ],
+						"selfharmonicngramorder" : [ 5 ],
 						"selfharmonicpeakdecay" : [ 3.001 ],
 						"selfmelodicenable" : [ 1 ],
 						"selfmfccdistance" : [ 5.0 ],
 						"selfmfccenable" : [ 1 ],
-						"selfmfccngramorder" : [ 2 ],
+						"selfmfccngramorder" : [ 5 ],
 						"selfmfccpeakdecay" : [ 3.001 ],
 						"selfmod12" : [ 0 ],
-						"selfngramorder" : [ 2 ],
+						"selfngramorder" : [ 5 ],
 						"selfpeakdecay" : [ 2.001 ],
 						"sparse" : [ 0 ],
 						"tabooduration" : [ 0 ],
@@ -34027,7 +34033,7 @@
 						"timestretch" : [ 1.0 ],
 						"timestretchmode" : [ 0 ],
 						"transpositionbias" : [ 1.0 ],
-						"weights" : [ 0.25, 0.25, 0.25, 1.0, 0.5, 0.5 ]
+						"weights" : [ 0.001000000047497, 0.001000000047497, 0.001000000047497, 0.001000000047497, 0.001000000047497, 0.001000000047497 ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -36059,6 +36065,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.423529411764706, 0.494117647058824, 0.996078431372549, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "harmonicpeakdecay"
 				}
 
@@ -36093,6 +36100,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "melodicpeakdecay"
 				}
 
@@ -36128,6 +36136,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.481437705647327, 0.846666309931507, 0.361908344245232, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "selfpeakdecay"
 				}
 
@@ -36220,6 +36229,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "melodicngramorder"
 				}
 
@@ -36252,6 +36262,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.481437705647327, 0.846666309931507, 0.361908344245232, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "selfngramorder"
 				}
 
@@ -36283,6 +36294,7 @@
 ,
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"tricolor" : [ 0.423529411764706, 0.494117647058824, 0.996078431372549, 1.0 ],
+					"triscale" : 0.8,
 					"varname" : "harmonicngramorder"
 				}
 
