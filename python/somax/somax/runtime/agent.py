@@ -991,15 +991,17 @@ class OscAgent(Agent, AsyncioOscObject):
         """ This function is simply an alias for `send_peaks` to call from the max client side """
         self.send_peaks()
 
-    def get_param(self, path: str):
+    def get_param(self, path: str, silent: bool = False):
         try:
             parameter_path: List[str] = self._string_to_path(path)
             self.target.send(PlayerSendProtocol.PLAYER_SINGLE_PARAMETER,
                              [path, self.player.get_param(parameter_path).value])
         except (IndexError, KeyError):
-            self.logger.error(f"Could not get parameter at given path.")
+            if not silent:
+                self.logger.error(f"Could not get parameter at given path.")
         except (ParameterError, AssertionError) as e:
-            self.logger.error(str(e))
+            if not silent:
+                self.logger.error(str(e))
 
     def send_peaks(self):
         """ Gets the current state in each layer, not including the merged layer """

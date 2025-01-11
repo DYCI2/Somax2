@@ -1,17 +1,36 @@
+from abc import ABC, abstractmethod
+
 import librosa
 import librosa.feature
 import numpy as np
 import scipy
 from scipy import signal
-from typing import Any, List, cast
+from typing import Any, List, cast, Tuple, Union
 
 from somax.corpus_builder.metadata import Metadata, AudioMetadata
+from somax.features import AbstractFeature
 from somax.features.feature import AnalyzableFeature, FeatureUtils
 from somax.runtime.corpus_event import CorpusEvent
 from somax.runtime.exceptions import FeatureError
 
+class MfccBase(ABC):
+    @abstractmethod
+    def ircamdescriptor_mfcc(self) -> np.ndarray:
+        """ Returns the MFCCs in a format that closely approximates the ircamdescriptor~ mfcc output """
 
-class Mfcc(AnalyzableFeature):
+
+class RuntimeMfcc(AbstractFeature, MfccBase):
+    def __init__(self, value: Union[np.ndarray, List[float]]):
+        super().__init__(value=np.array(value))
+
+    def value(self) -> np.ndarray:
+        return self._value
+
+    def ircamdescriptor_mfcc(self) -> np.ndarray:
+        return self._value
+
+
+class Mfcc(AnalyzableFeature, MfccBase):
     # fixed values to be consistent with somax.audioinfluencer's implementation
     FRAME_LENGTH = 4096
     HOP_LENGTH = 1024
@@ -86,3 +105,5 @@ class Mfcc(AnalyzableFeature):
 
         """
         return np.block([self.mfcc0_approximation, self._value[1:]])
+
+MfccTypes: Tuple[type, ...] = (RuntimeMfcc, Mfcc)

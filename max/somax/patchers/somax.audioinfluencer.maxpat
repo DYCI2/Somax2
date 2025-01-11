@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 86.0, 2492.0, 1257.0 ],
+		"rect" : [ 34.0, 86.0, 2087.0, 1257.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -70,7 +70,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1394.0, 1019.403345724907012, 113.0, 33.0 ],
-					"presentation_linecount" : 2,
 					"text" : "(loadmess handled by patcherargs)"
 				}
 
@@ -83,7 +82,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1411.0, 1208.403345724907012, 69.0, 33.0 ],
-					"presentation_linecount" : 2,
 					"text" : "output on onset only"
 				}
 
@@ -476,8 +474,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1640.0, 1061.403345724907012, 42.0, 44.0 ],
-					"presentation_linecount" : 4,
+					"patching_rect" : [ 1640.0, 1061.403345724907012, 44.0, 44.0 ],
 					"text" : "-10. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0."
 				}
 
@@ -2913,12 +2910,13 @@
 				"box" : 				{
 					"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
 					"id" : "obj-245",
+					"linecount" : 4,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 626.0, 45.62310791015625, 304.0, 22.0 ],
-					"text" : "patcherargs @continuouschroma 0 @continuouspitch 1"
+					"patching_rect" : [ 626.0, 19.903345724907012, 156.0, 62.0 ],
+					"text" : "patcherargs @continuouschroma 0 @continuousmfcc 0 @continuouspitch 1"
 				}
 
 			}
@@ -3400,7 +3398,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "int" ],
+					"outlettype" : [ "multichannelsignal" ],
 					"patching_rect" : [ 281.200000000000045, 45.62310791015625, 30.0, 30.0 ]
 				}
 
@@ -5280,7 +5278,7 @@
 						"bonkminvel" : [ 0.1 ],
 						"chromadecay" : [ 300 ],
 						"continuouschroma" : [ 1 ],
-						"continuousmfcc" : [ 1 ],
+						"continuousmfcc" : [ 0 ],
 						"continuouspitch" : [ 1 ],
 						"enabled" : [ 1 ],
 						"onsetlimit" : [ 150 ],
@@ -5311,7 +5309,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1859.0, 37.403345724907012, 254.0, 49.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 507, 479 ],
+						"client_rect" : [ 67, 153, 461, 322 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]

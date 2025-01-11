@@ -1,5 +1,4 @@
 import typing
-from email.policy import default
 from enum import Enum
 from typing import Type, Dict, Optional, List, Tuple, Union
 
@@ -8,10 +7,9 @@ from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.classification.classifier import FeatureClassifier
 from somax.classification.omax_mfcc_classifier import OmaxMfccClassifier
 from somax.features import (YinDiscretePitch, OnsetChroma, MeanChroma, TopNote, BassNote, VirtualFundamental,
-                            RuntimeIntegerPitch, OctaveBands, TotalEnergyDb, PeakEnergyDb, VerticalDensity, Tempo,
-                            BeatPhase, RuntimeChroma)
+                            RuntimeIntegerPitch, OctaveBands, TotalEnergyDb, PeakEnergyDb, VerticalDensity, RuntimeChroma)
 from somax.features.feature import CorpusFeature, AbstractFeature
-from somax.features.mfcc_features import Mfcc
+from somax.features.mfcc_features import Mfcc, RuntimeMfcc
 
 
 class FeatureKeywordFlags(Enum):
@@ -200,7 +198,7 @@ class FeatureDictionary:
                                                    default_classifier=None),
 
         "mfcc": FeatureSpecification.audio_only(audio_feature=Mfcc,
-                                                influence_feature=Mfcc,
+                                                influence_feature=RuntimeMfcc,
                                                 flags=[FeatureKeywordFlags.MAIN_KEYWORD],
                                                 default_classifier=OmaxMfccClassifier),
 

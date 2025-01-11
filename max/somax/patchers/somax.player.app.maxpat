@@ -41,6 +41,18 @@
 		"integercoordinates" : 1,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-119",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1110.0, 1666.0, 217.0, 22.0 ],
+					"text" : "continuouschroma 1, continuousmfcc 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
 					"id" : "obj-91",
 					"maxclass" : "newobj",
@@ -560,6 +572,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-92",
 					"linecount" : 2,
 					"maxclass" : "comment",
@@ -577,6 +590,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
+					"hidden" : 1,
 					"id" : "obj-94",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -593,6 +607,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-95",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -1686,9 +1701,9 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1091.5, 1658.0, 171.0, 22.0 ],
-					"text" : "loadmess continuouschroma 1"
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 1110.0, 1645.0, 58.0, 22.0 ],
+					"text" : "loadbang"
 				}
 
 			}
@@ -4517,7 +4532,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1605.75, 170.231283854636786, 313.0, 35.0 ],
 					"saved_object_attributes" : 					{
-						"client_rect" : [ 67, 153, 461, 322 ],
+						"client_rect" : [ 67, 153, 507, 479 ],
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0,
 						"storage_rect" : [ 794, -709, 1244, -510 ]
@@ -4834,8 +4849,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-4", 0 ],
-					"midpoints" : [ 1101.0, 1695.0, 1059.5, 1695.0 ],
+					"destination" : [ "obj-119", 0 ],
 					"source" : [ "obj-10", 0 ]
 				}
 
@@ -4946,6 +4960,14 @@
 					"source" : [ "obj-118", 0 ],
 					"watchpoint_flags" : 5,
 					"watchpoint_id" : 11
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"midpoints" : [ 1119.5, 1695.0, 1059.5, 1695.0 ],
+					"source" : [ "obj-119", 0 ]
 				}
 
 			}
