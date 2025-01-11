@@ -15461,12 +15461,36 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-14",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 369.0, 178.0, 150.0, 33.0 ],
+									"text" : "Both atom and descriptor are named \"mfcc\""
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-10",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 347.0, 149.0, 81.0, 22.0 ],
+									"text" : "prepend mfcc"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-13",
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 413.0, 200.0, 137.0, 22.0 ],
+									"patching_rect" : [ 559.666666666666629, 193.0, 137.0, 22.0 ],
 									"text" : "invalid influence type $1"
 								}
 
@@ -15502,7 +15526,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 413.0, 231.0, 165.0, 22.0 ],
+									"patching_rect" : [ 559.666666666666629, 224.0, 165.0, 22.0 ],
 									"text" : "print somax.player @level 2"
 								}
 
@@ -15571,11 +15595,11 @@
 								"box" : 								{
 									"id" : "obj-2",
 									"maxclass" : "newobj",
-									"numinlets" : 5,
-									"numoutlets" : 5,
-									"outlettype" : [ "", "", "", "", "" ],
-									"patching_rect" : [ 28.0, 114.0, 465.0, 22.0 ],
-									"text" : "routepass onset pitch chroma latency"
+									"numinlets" : 6,
+									"numoutlets" : 6,
+									"outlettype" : [ "", "", "", "", "", "" ],
+									"patching_rect" : [ 28.0, 114.0, 550.666666666666629, 22.0 ],
+									"text" : "routepass onset pitch chroma mfcc latency"
 								}
 
 							}
@@ -15602,6 +15626,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-8", 0 ],
+									"source" : [ "obj-10", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-6", 0 ],
 									"source" : [ "obj-13", 0 ]
 								}
@@ -15609,8 +15640,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-10", 0 ],
+									"source" : [ "obj-2", 3 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-13", 0 ],
-									"source" : [ "obj-2", 4 ]
+									"source" : [ "obj-2", 5 ]
 								}
 
 							}
