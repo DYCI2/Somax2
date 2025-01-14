@@ -40,6 +40,44 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
+					"id" : "obj-24",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1019.0, 318.75, 23.0, 24.673327137546494 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 0.0, 1.333333089947701, 198.666672587394714, 15.666667357087135 ],
+					"proportion" : 0.5,
+					"rounded" : 0,
+					"varname" : "serveruidisable"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+					"hidden" : 1,
+					"id" : "obj-39",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1099.0, 334.75, 23.0, 24.673327137546494 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 112.0, 0.999999970197678, 108.000003218650818, 16.000000476837158 ],
+					"proportion" : 0.5,
+					"rounded" : 0,
+					"varname" : "serveruidisable[1]"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-44",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -258,13 +296,13 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1512.0, 215.0, 143.0, 22.0 ],
 					"restore" : 					{
-						"_source" : [ "<None>" ],
+						"_source" : [ "AudioInfluencer" ],
 						"chroma" : [ 1.0 ],
 						"chromaonset" : [ 1 ],
 						"enable" : [ 1 ],
 						"mfcc" : [ 1.0 ],
-						"onset" : [ 0 ],
-						"pitch" : [ 0 ]
+						"onset" : [ 1 ],
+						"pitch" : [ 1 ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -438,7 +476,7 @@
 						}
 ,
 						"valueof" : 						{
-							"parameter_longname" : "chroma scaling factor[7]",
+							"parameter_longname" : "chroma scaling factor[10]",
 							"parameter_mmax" : 1.0,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "chroma",
@@ -512,25 +550,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 657.0, 523.0, 30.0, 30.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"id" : "obj-39",
-					"ignoreclick" : 0,
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1099.0, 334.75, 23.0, 24.673327137546494 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 112.25, 22.75, 90.637750191011435, 15.249999875000185 ],
-					"proportion" : 0.5,
-					"rounded" : 0,
-					"varname" : "serveruidisable[1]"
 				}
 
 			}
@@ -644,26 +663,6 @@
 			}
 , 			{
 				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
-					"id" : "obj-24",
-					"ignoreclick" : 0,
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1019.0, 318.75, 23.0, 24.673327137546494 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 42.25, 182.637750191011435, 15.249999875000185 ],
-					"proportion" : 0.5,
-					"rounded" : 0,
-					"varname" : "serveruidisable"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"checkedcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"id" : "obj-29",
 					"maxclass" : "toggle",
@@ -677,7 +676,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "enable[2]",
+							"parameter_longname" : "enable[4]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "enable",
@@ -706,7 +705,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "chromaonset[2]",
+							"parameter_longname" : "chromaonset[4]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "chromaonset",
@@ -735,7 +734,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "onset[2]",
+							"parameter_longname" : "onset[4]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "onset",
@@ -764,7 +763,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "pitch[2]",
+							"parameter_longname" : "pitch[4]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "pitch",
@@ -839,7 +838,7 @@
 						}
 ,
 						"valueof" : 						{
-							"parameter_longname" : "chroma scaling factor[2]",
+							"parameter_longname" : "chroma scaling factor[4]",
 							"parameter_mmax" : 1.0,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "chroma",
