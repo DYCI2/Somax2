@@ -2,12 +2,11 @@ import gzip
 import json
 import os
 import warnings
-from typing import Dict, Any, List, Type, cast
+from typing import Dict, Any, List, Type
 
 from somax.corpus_builder.corpus_builder import CorpusBuilder
-from somax.features import CorpusFeature, Mfcc
-from somax.features.feature import AnalyzableFeature
-from somax.runtime.corpus import AudioCorpus, MidiCorpus, Corpus
+from somax.features import CorpusFeature
+from somax.runtime.corpus import AudioCorpus, MidiCorpus
 from somax.runtime.corpus_event import AudioCorpusEvent, MidiCorpusEvent, Note
 from somax.runtime.exceptions import InvalidCorpus
 from somax.scheduler.scheduling_mode import SchedulingMode
@@ -50,7 +49,6 @@ class AudioCorpusUpdater:
             corpus = AudioCorpusUpdater._update_from_v241b4(corpus)
         else:
             raise InvalidCorpus(f"Cannot update corpus with unsupported version {corpus.version()}.")
-
 
         if add_missing_features:
             CorpusBuilder().add_missing_audio_features(corpus)
@@ -95,8 +93,6 @@ class MidiCorpusUpdater:
                     return MidiCorpusUpdater._load_corpus_v241b4(corpus_data, name)
                 else:
                     raise InvalidCorpus(f"Cannot update corpus with unsupported version {version}.")
-
-
 
         except (KeyError, AttributeError) as e:
             raise InvalidCorpus(f"The Corpus at '{filepath}' has an invalid format and could not be loaded") from e

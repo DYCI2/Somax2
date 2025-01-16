@@ -5,6 +5,7 @@ class ServerSendProtocol:
     # Submodules of Audio Corpus Builder (in UI)
     MANUAL_CORPUS_BUILDER_ADDRESS = [CORPUS_BUILDER_ADDRESS, "manual"]
     RELOCATE_CORPUS_ADDRESS = [CORPUS_BUILDER_ADDRESS, "relocate"]
+    UPDATE_CORPUS_ADDRESS = [CORPUS_BUILDER_ADDRESS, "update"]
 
     # Corpus Builder Protocol
     CORPUSBUILDER_AUDIO_STATS = [CORPUS_BUILDER_ADDRESS, "stats"]
@@ -15,6 +16,7 @@ class ServerSendProtocol:
     BUILDING_CORPUS_DONE = [CORPUS_BUILDER_ADDRESS, "corpus"]
     MANUAL_CORPUSBUILDER_STATUS = [MANUAL_CORPUS_BUILDER_ADDRESS, "status"]
     RELOCATE_AUDIO_CORPUS_STATUS = [RELOCATE_CORPUS_ADDRESS, "status"]
+    UPDATE_AUDIO_CORPUS_STATUS = [RELOCATE_CORPUS_ADDRESS, "status"]
 
     # Server Info
     SERVER_STATUS = "serverstatus"

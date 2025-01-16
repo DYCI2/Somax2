@@ -22,6 +22,7 @@ from somax.corpus_builder.chroma_filter import AbstractFilter
 from somax.corpus_builder.corpus_builder import CorpusBuilder, ThreadedCorpusBuilder, AudioSegmentation
 from somax.corpus_builder.manual_corpus_builder import ThreadedManualCorpusBuilder
 from somax.corpus_builder.manual_text_formats import TextFormat
+from somax.corpus_builder.threaded_corpus_updater import ThreadedAudioCorpusUpdater
 from somax.features import OnsetChroma
 from somax.runtime.agent import OscAgent, Agent
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
@@ -451,6 +452,28 @@ class SomaxServer(Somax, AsyncioOscObject):
 
         corpus_builder.start()
         self._corpus_builders.append(corpus_builder)
+
+    def update_corpus_version(self,
+                              source_filepath_or_folder: str,
+                              target_folder: str,
+                              corpus_path_folder: str,
+                              overwrite: bool = False,
+                              append_update_keyword: bool = False,
+                              builder_address: str = ""):
+        corpus_updater: ThreadedAudioCorpusUpdater = ThreadedAudioCorpusUpdater(
+            source_filepath_or_folder=source_filepath_or_folder,
+            target_folder=target_folder,
+            corpus_path_folder=corpus_path_folder,
+            overwrite_target_if_exists=overwrite,
+            append_update_keyword=append_update_keyword,
+            ip=self.ip,
+            send_port=self.send_port,
+            osc_address=self.address,
+            builder_address=builder_address
+        )
+
+        corpus_updater.start()
+        self._corpus_builders.append(corpus_updater)
 
     def test_audio_segmentation(self,
                                 filepath: str,

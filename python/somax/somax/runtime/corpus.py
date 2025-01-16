@@ -475,13 +475,15 @@ class AudioCorpus(Corpus):
                         new_audio_filepath: str = os.path.join(new_audio_path, os.path.basename(corpus.filepath))
                     else:
                         new_audio_filepath: str = new_audio_path
-                    cls.validate_audio_source(new_audio_filepath, corpus.sr,
-                                              corpus.file_duration, corpus.num_channels)
+
+                    if not volatile:
+                        cls.validate_audio_source(new_audio_filepath, corpus.sr,
+                                                  corpus.file_duration, corpus.num_channels)
                     corpus.filepath = new_audio_filepath
                     file_name: str = os.path.basename(os.path.splitext(filepath)[0])
                     corpus.name = file_name
 
-                else:
+                elif not volatile:
                     cls.validate_audio_source(corpus.filepath, corpus.sr, corpus.file_duration, corpus.num_channels)
 
         # Pickle tried to import module that was not supported
@@ -550,9 +552,14 @@ class AudioCorpus(Corpus):
         # This function is only specifically for JSON encoding which currently isn't supported for audio corpora
         raise RuntimeError("Not implemented")
 
-    def export(self, output_folder: str, overwrite: bool = False, copy_resources: bool = False, **kwargs) -> str:
+    def export(self,
+               output_folder: str,
+               name: Optional[str] = None,
+               overwrite: bool = False,
+               copy_resources: bool = False,
+               **kwargs) -> str:
         """ raises: IOError if export fails """
-        filepath = os.path.join(output_folder, self.name + ".pickle")
+        filepath = os.path.join(output_folder, (name if name is not None else self.name) + ".pickle")
         if os.path.exists(filepath) and not overwrite:
             raise IOError(f"Could not export corpus as file '{filepath}' already exists. "
                           f"Set overwrite flag to True to overwrite existing.")

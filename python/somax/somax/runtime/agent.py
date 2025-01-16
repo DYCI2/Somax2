@@ -13,6 +13,7 @@ from somax import settings, log
 from somax.classification.classifier import AbstractClassifier, FeatureClassifier
 from somax.classification.label_classifier import LabelClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
+from somax.corpus_builder.corpus_path_utils import CorpusPathUtils
 from somax.corpus_builder.corpus_updater import MidiCorpusUpdater, CorpusVersions, AudioCorpusUpdater
 from somax.features import Tempo
 from somax.features.feature import AbstractFeature, CorpusFeature
@@ -650,44 +651,14 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             _, file_extension = os.path.splitext(filepath)
             if file_extension == ".gz":
-                corpus: Corpus = self._read_midi_corpus(filepath, volatile)
+                corpus: Corpus = CorpusPathUtils.read_midi_corpus_updated(filepath, volatile)
             elif file_extension == ".pickle":
-                # If an explicit audio file is provided, load that one (and fail if it doesn't work)
-                if alternative_audio_file != "":
-                    corpus: Corpus = self._read_audio_corpus(filepath,
-                                                             volatile=volatile,
-                                                             new_audio_path=alternative_audio_file)
-                else:
-                    try:
-                        # try loading corpus with the audio filepath specified inside the pickle file
-                        corpus: Corpus = self._read_audio_corpus(filepath, volatile=volatile)
-                    except FileNotFoundError as e:
-                        # if fails and alternative folder for audio file provided, try relocating audio file
-                        if corpuspath_folder:
-                            try:
-                                self.logger.debug(f"{str(e)}. Looking for audio file in '{corpuspath_folder}'...")
-                                corpus: Corpus = self._read_audio_corpus(filepath,
-                                                                         volatile=volatile,
-                                                                         new_audio_path=corpuspath_folder)
-                            except FileNotFoundError as e:
-                                # In case corpus and audio file have been renamed, look for an audio file
-                                #    with the same name and path as corpus file
-                                base_path, _ = os.path.splitext(filepath)  # type: str
-                                found_match: bool = False
-                                for ext in CorpusBuilder.AUDIO_FILE_EXTENSIONS:  # type: str
-                                    if os.path.isfile(base_path + ext):
-                                        self.logger.debug(f"{str(e)}. Attempting to build from  "
-                                                          f"'{base_path + ext}'...")
-                                        found_match = True
-                                        corpus: Corpus = self._read_audio_corpus(filepath,
-                                                                                 volatile=volatile,
-                                                                                 new_audio_path=base_path + ext)
-                                        break
-                                if not found_match:
-                                    raise
-                        else:
-                            raise
-
+                corpus: Corpus = CorpusPathUtils.read_audio_corpus_and_find_audio_file(
+                    filepath=filepath,
+                    volatile=volatile,
+                    alternative_audio_file=alternative_audio_file,
+                    corpuspath_folder=corpuspath_folder
+                )
             else:
                 self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "failed")
                 raise IOError(f"Invalid file extension '{file_extension}'")
@@ -704,25 +675,6 @@ class OscAgent(Agent, AsyncioOscObject):
         self._read_corpus(corpus)
         self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
         self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
-
-    @staticmethod
-    def _read_midi_corpus(filepath: str, volatile: bool = False) -> MidiCorpus:
-        """ raises: InvalidCorpus if update fails """
-        try:
-            return MidiCorpus.from_json(filepath, volatile)
-        except CorpusVersionError:
-            return MidiCorpusUpdater.update_midi_corpus(filepath)
-
-    @staticmethod
-    def _read_audio_corpus(filepath: str, volatile: bool = False, new_audio_path: Optional[str] = None):
-        """ raises: InvalidCorpus if update fails """
-        corpus: AudioCorpus = AudioCorpus.from_json(filepath,
-                                                    volatile=volatile,
-                                                    new_audio_path=new_audio_path)
-        if corpus.version() != CorpusVersions.latest:
-            return AudioCorpusUpdater.update_audio_corpus(corpus)
-
-        return corpus
 
     def reload_corpus(self) -> None:
         if self.player.corpus is None:
