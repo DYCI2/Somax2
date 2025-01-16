@@ -271,7 +271,7 @@ class MidiCorpus(Corpus[MidiCorpusEvent]):
 
     @classmethod
     def from_json(cls, filepath: str, volatile: bool = False) -> 'MidiCorpus':
-        """ Raises: IOError, InvalidCorpus"""
+        """ Raises: IOError, InvalidCorpus, CorpusVersionError"""
         try:
             with gzip.open(filepath, 'rt', encoding='UTF-8') as f:
                 corpus_data: Dict[str, Any] = json.load(f)

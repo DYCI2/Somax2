@@ -13,6 +13,7 @@ from somax import settings, log
 from somax.classification.classifier import AbstractClassifier, FeatureClassifier
 from somax.classification.label_classifier import LabelClassifier
 from somax.corpus_builder.corpus_builder import CorpusBuilder
+from somax.corpus_builder.corpus_updater import MidiCorpusUpdater, CorpusVersions, AudioCorpusUpdater
 from somax.features import Tempo
 from somax.features.feature import AbstractFeature, CorpusFeature
 from somax.features.feature_dictionary import FeatureDictionary, FeatureSpecification, FeatureKeywordFlags
@@ -24,7 +25,8 @@ from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus, RealtimeRecord
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent, SilenceEvent
 from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import (DuplicateKeyError, ParameterError, InvalidCorpus, TransformError,
-                                      ExternalDataMismatch, RecordingError, InvalidConfiguration, ClassificationError)
+                                      ExternalDataMismatch, RecordingError, InvalidConfiguration, ClassificationError,
+                                      CorpusVersionError)
 from somax.runtime.filters import AbstractFilter
 from somax.runtime.improvisation_memory import ImprovisationMemory
 from somax.runtime.influence import FeatureInfluence, LabelInfluence
@@ -517,7 +519,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
     def set_decay_basis(self, decay_basis: str) -> None:
         self.default_ap_type: Type[AbstractActivityPattern] = (ClassicActivityPattern if decay_basis == "time"
-                                                           else ManualActivityPattern)
+                                                               else ManualActivityPattern)
 
         # Simple workaround for updating same-valued parameters of the different instances of ActivityPattern.
         #   Note that this needs to be formalized if the concept of ActivityPattern at some point in the future is
@@ -648,24 +650,25 @@ class OscAgent(Agent, AsyncioOscObject):
         try:
             _, file_extension = os.path.splitext(filepath)
             if file_extension == ".gz":
-                corpus: Corpus = MidiCorpus.from_json(filepath, volatile)
+                corpus: Corpus = self._read_midi_corpus(filepath, volatile)
             elif file_extension == ".pickle":
                 # If an explicit audio file is provided, load that one (and fail if it doesn't work)
                 if alternative_audio_file != "":
-                    corpus: Corpus = AudioCorpus.from_json(filepath,
-                                                           volatile=volatile,
-                                                           new_audio_path=alternative_audio_file)
+                    corpus: Corpus = self._read_audio_corpus(filepath,
+                                                             volatile=volatile,
+                                                             new_audio_path=alternative_audio_file)
                 else:
                     try:
                         # try loading corpus with the audio filepath specified inside the pickle file
-                        corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile)
+                        corpus: Corpus = self._read_audio_corpus(filepath, volatile=volatile)
                     except FileNotFoundError as e:
                         # if fails and alternative folder for audio file provided, try relocating audio file
                         if corpuspath_folder:
                             try:
                                 self.logger.debug(f"{str(e)}. Looking for audio file in '{corpuspath_folder}'...")
-                                corpus: Corpus = AudioCorpus.from_json(filepath, volatile=volatile,
-                                                                       new_audio_path=corpuspath_folder)
+                                corpus: Corpus = self._read_audio_corpus(filepath,
+                                                                         volatile=volatile,
+                                                                         new_audio_path=corpuspath_folder)
                             except FileNotFoundError as e:
                                 # In case corpus and audio file have been renamed, look for an audio file
                                 #    with the same name and path as corpus file
@@ -676,9 +679,9 @@ class OscAgent(Agent, AsyncioOscObject):
                                         self.logger.debug(f"{str(e)}. Attempting to build from  "
                                                           f"'{base_path + ext}'...")
                                         found_match = True
-                                        corpus: Corpus = AudioCorpus.from_json(filepath,
-                                                                               volatile=volatile,
-                                                                               new_audio_path=base_path + ext)
+                                        corpus: Corpus = self._read_audio_corpus(filepath,
+                                                                                 volatile=volatile,
+                                                                                 new_audio_path=base_path + ext)
                                         break
                                 if not found_match:
                                     raise
@@ -701,6 +704,25 @@ class OscAgent(Agent, AsyncioOscObject):
         self._read_corpus(corpus)
         self.target.send(PlayerSendProtocol.PLAYER_READING_CORPUS_STATUS, "success")
         self.logger.info(f"Corpus '{corpus.name}' successfully loaded in player '{self.player.name}'.")
+
+    @staticmethod
+    def _read_midi_corpus(filepath: str, volatile: bool = False) -> MidiCorpus:
+        """ raises: InvalidCorpus if update fails """
+        try:
+            return MidiCorpus.from_json(filepath, volatile)
+        except CorpusVersionError:
+            return MidiCorpusUpdater.update_midi_corpus(filepath)
+
+    @staticmethod
+    def _read_audio_corpus(filepath: str, volatile: bool = False, new_audio_path: Optional[str] = None):
+        """ raises: InvalidCorpus if update fails """
+        corpus: AudioCorpus = AudioCorpus.from_json(filepath,
+                                                    volatile=volatile,
+                                                    new_audio_path=new_audio_path)
+        if corpus.version() != CorpusVersions.latest:
+            return AudioCorpusUpdater.update_audio_corpus(corpus)
+
+        return corpus
 
     def reload_corpus(self) -> None:
         if self.player.corpus is None:
@@ -863,7 +885,6 @@ class OscAgent(Agent, AsyncioOscObject):
             self.logger.error(f"{str(e)}. Could not set parameter.")
         except KeyError as e:
             self.logger.error(f"Could not find {str(e)}. No parameter was set.")
-
 
     ######################################################
     # SCHEDULING, RENDERING & STATE-RELATED PARAMETERS
@@ -1059,7 +1080,7 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
     def send_atoms(self) -> None:
-        atom_names: List[str]= list(self.player.atoms.keys())
+        atom_names: List[str] = list(self.player.atoms.keys())
         self.target.send(PlayerSendProtocol.ATOM_NAMES, atom_names)
 
     ######################################################
@@ -1178,7 +1199,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
         return classifier
 
-    def _print_parameter_dict(self, d=None) ->None:
+    def _print_parameter_dict(self, d=None) -> None:
         print(self.player.parameter_dict)
         # if d is None:
         #     d = self.player.parameter_dict
