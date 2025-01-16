@@ -2,10 +2,12 @@ import gzip
 import json
 import os
 import warnings
-from typing import Dict, Any, List, Type
+from typing import Dict, Any, List, Type, cast
 
-from somax.features import CorpusFeature
-from somax.runtime.corpus import AudioCorpus, MidiCorpus
+from somax.corpus_builder.corpus_builder import CorpusBuilder
+from somax.features import CorpusFeature, Mfcc
+from somax.features.feature import AnalyzableFeature
+from somax.runtime.corpus import AudioCorpus, MidiCorpus, Corpus
 from somax.runtime.corpus_event import AudioCorpusEvent, MidiCorpusEvent, Note
 from somax.runtime.exceptions import InvalidCorpus
 from somax.scheduler.scheduling_mode import SchedulingMode
@@ -13,6 +15,12 @@ from somax.utils.get_version import VersionTools
 
 
 class CorpusVersions:
+    """
+    Known and supported values for `__corpus_version__`
+
+    In the future, if `__corpus_version__` is updated, this class should be updated as follows:
+    - add an entry for the old value of `__corpus_version__` (the value that was used before the update)
+    """
     # Known and supported values for __corpus_version__:
     latest = VersionTools.corpus_version()
     v241b4 = "2.4.1-beta04"
@@ -33,15 +41,20 @@ class AudioCorpusUpdater:
     """
 
     @staticmethod
-    def update_audio_corpus(corpus: AudioCorpus) -> AudioCorpus:
+    def update_audio_corpus(corpus: AudioCorpus, add_missing_features: bool = False) -> AudioCorpus:
         """ raises: InvalidCorpus if corpus cannot be updated to the latest version"""
         if corpus.version() == CorpusVersions.latest:
             warnings.warn("Attempt to update corpus with same version. Skipping.")
             return corpus
         elif corpus.version() == CorpusVersions.v241b4:
-            return AudioCorpusUpdater._update_from_v241b4(corpus)
+            corpus = AudioCorpusUpdater._update_from_v241b4(corpus)
         else:
             raise InvalidCorpus(f"Cannot update corpus with unsupported version {corpus.version()}.")
+
+
+        if add_missing_features:
+            CorpusBuilder().add_missing_audio_features(corpus)
+        return corpus
 
     @staticmethod
     def _update_from_v241b4(corpus: AudioCorpus) -> AudioCorpus:
@@ -68,7 +81,7 @@ class MidiCorpusUpdater:
     """
 
     @staticmethod
-    def update_midi_corpus(filepath: str) -> MidiCorpus:
+    def update_midi_corpus(filepath: str, add_missing_features: bool = False) -> MidiCorpus:
         try:
             with gzip.open(filepath, 'rt', encoding='UTF-8') as f:
                 corpus_data: Dict[str, Any] = json.load(f)

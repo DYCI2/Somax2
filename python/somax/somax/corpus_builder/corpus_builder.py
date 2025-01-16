@@ -6,7 +6,7 @@ import warnings
 from enum import Enum
 from importlib import resources
 from timeit import default_timer as timer
-from typing import Tuple, List, Optional, Dict, Any, Type, Union
+from typing import Tuple, List, Optional, Dict, Any, Type, Union, cast
 
 import librosa
 import librosa.feature
@@ -20,7 +20,7 @@ from somax.corpus_builder.matrix_keys import MatrixKeys as Keys
 from somax.corpus_builder.metadata import AudioMetadata, MidiMetadata
 from somax.corpus_builder.note_matrix import NoteMatrix
 from somax.corpus_builder.spectrogram import Spectrogram
-from somax.features.feature import AnalyzableFeature
+from somax.features.feature import AnalyzableFeature, CorpusFeature
 from somax.runtime.corpus import Corpus, AudioCorpus, MidiCorpus
 from somax.runtime.corpus_event import Note, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import FeatureError, ParameterError
@@ -567,3 +567,43 @@ class CorpusBuilder:
         build_parameters["slice_tolerance_ms"] = slice_tolerance_ms
 
         return events
+
+    def add_missing_audio_features(self, corpus: AudioCorpus,
+                                   hop_length: int = 512,
+                                   estimated_initial_bpm: float = 120.0,
+                                   beat_tightness: float = 100.0, ):
+        existing_features: List[Type[CorpusFeature]] = corpus.feature_types
+        all_features: List[Type[AnalyzableFeature]] = cast(List[Type[AnalyzableFeature]], AnalyzableFeature.classes())
+        missing_features: List[Type[AnalyzableFeature]] = [feature for feature in all_features
+                                                           if feature not in existing_features]
+
+        if len(missing_features) == 0:
+            return
+
+        y, sr = self._load_audio_files([corpus.filepath])
+        foreground_data: np.ndarray = self._parse_channels(y, channels=None)
+        background_data: np.ndarray = self._parse_channels(y, channels=None)
+        metadata: AudioMetadata = AudioMetadata(
+            filepath=corpus.filepath,
+            content_type=AbsoluteScheduling(),
+            raw_data=y,
+            foreground_data=foreground_data,
+            background_data=background_data,
+            sr=sr,
+            hop_length=hop_length,
+            stft=None,  # While this technically is invalid, no modern features use the default spectrogram
+            estimated_initial_bpm=estimated_initial_bpm,
+            beat_tightness=beat_tightness
+        )
+
+        added_features: List[Type[AnalyzableFeature]] = []
+        for feature in missing_features:  # type: Type[AnalyzableFeature]
+            try:
+                feature.analyze(corpus.events, metadata)
+                added_features.append(feature)
+            except FeatureError as e:
+                self.logger.debug(repr(e))
+
+        corpus.feature_types.extend(added_features)
+        self.logger.info("Added features: " + ", ".join([f.__name__ for f in added_features]))
+        return corpus
