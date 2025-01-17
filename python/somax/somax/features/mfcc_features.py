@@ -5,7 +5,7 @@ import librosa.feature
 import numpy as np
 import scipy
 from scipy import signal
-from typing import Any, List, cast, Tuple, Union
+from typing import Any, List, cast, Tuple, Union, Optional
 
 from somax.corpus_builder.metadata import Metadata, AudioMetadata
 from somax.features import AbstractFeature
@@ -37,9 +37,15 @@ class Mfcc(AnalyzableFeature, MfccBase):
     N_MFCCS = 14  # Ircamdescriptor uses 13 (coefficients mfcc1-13, mfcc0 is discarded)
     EPSILON = 1e-6
 
-    def __init__(self, value: np.ndarray, mfcc0_approximation: float):
-        super().__init__(value=value)
-        self.mfcc0_approximation: float = mfcc0_approximation
+    def __init__(self, value: Union[np.ndarray, List[float]], mfcc0_approximation: Optional[float] = None):
+        """
+        This class is instantiated in two situations:
+        - When analyzing an offline corpus (`Mfcc.analyze, in which mfcc0_approximation always is provided
+        - When realtime learning data from a player, in which case the data is received from Max (ircamdescriptor)
+            and by default approximates mfcc0, so no such value is needed
+        """
+        super().__init__(value=np.array(value))
+        self.mfcc0_approximation: Optional[float] = mfcc0_approximation
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata: Metadata) -> List[CorpusEvent]:
@@ -104,6 +110,10 @@ class Mfcc(AnalyzableFeature, MfccBase):
         `OmaxMfccClassifier`. For this reason, the `ircamdescriptor_mfcc` should be used in such comparisong instead.
 
         """
+        if self.mfcc0_approximation is None:
+            # Data stored was received externally from ircamdescriptor, which means that it's format is already correct
+            return self._value
+
         return np.block([self.mfcc0_approximation, self._value[1:]])
 
 MfccTypes: Tuple[type, ...] = (RuntimeMfcc, Mfcc)

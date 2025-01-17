@@ -508,12 +508,11 @@ class AudioCorpus(Corpus):
                                new_audio_duration: float,
                                new_audio_num_channels: int,
                                new_name: Optional[str] = None) -> 'AudioCorpus':
-        # TODO: Labels
-        warnings.warn("TODO: Label info missing")
         return cls(events=other.events,
                    name=new_name if new_name is not None else other.name,
                    scheduling_mode=other.scheduling_mode,
                    feature_types=other.feature_types,
+                   label_info={},
                    build_parameters=other._build_parameters,
                    sr=new_sample_rate,
                    filepath=new_audio_filepath,
@@ -611,7 +610,6 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                  name: str,
                  scheduling_mode: SchedulingMode,
                  feature_types: List[Type[CorpusFeature]],
-                 label_info: Dict[str, Tuple[int, Type[AbstractLabel]]],
                  build_parameters: Dict[str, Any],
                  sr: int,
                  filepath: str,
@@ -622,7 +620,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
                          name=name,
                          scheduling_mode=scheduling_mode,
                          feature_types=feature_types,
-                         label_info=label_info,
+                         label_info={},
                          build_parameters=build_parameters,
                          sr=sr,
                          filepath=filepath,
@@ -654,8 +652,12 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         build_params: Dict[str, Any] = copy.copy(corpus._build_parameters)
         build_params[RealtimeRecordedAudioCorpus.RT_RECORDED_KEY] = True
 
-        # TODO: Labels (SOM-64)
-        warnings.warn("TODO: Label missing")
+        # As of version 2.7.0, there's not yet support for realtime recording of labels
+        # Since a corpus cannot be partially labelled (or partially contain a particular feature), we need to remove
+        # existing labels when converting the corpus to a RealtimeRecordedAudioCorpus.
+        # If labels are later supported, the code below should be removed
+        for event in corpus.events: # type: AudioCorpusEvent
+            event.labels = {}
 
         return RealtimeRecordedAudioCorpus(events=corpus.events,
                                            name=corpus.name,
@@ -673,9 +675,6 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
 
         recording_features_determined: bool = target_features is not None
         target_features = [] if target_features is None else target_features
-
-        # TODO: Labels (SOM-64)
-        warnings.warn("TODO: Label missing")
 
         return RealtimeRecordedAudioCorpus(events=[],
                                            name="new",
@@ -787,6 +786,7 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
         # TODO: Sample rate missing?
         audio_corpus: AudioCorpus = AudioCorpus.from_realtime_recorded(self,
                                                                        new_audio_filepath=audio_filepath,
+                                                                       new_sample_rate=self.sr,
                                                                        new_audio_duration=audio_file_duration,
                                                                        new_audio_num_channels=audio_num_channels)
         return audio_corpus.export(output_folder=output_folder,

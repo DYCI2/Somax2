@@ -468,7 +468,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
             self.target.send(PlayerSendProtocol.ATOM_INSTANTIATED, path)
             self._send_eligibility(path)
-            self.logger.info(f"Created atom {path} in {self.player.name}.")  # TODO: Change to debug
+            self.logger.debug(f"Created atom {path} in {self.player.name}.")
             self.send_descriptor_info()
         except (AssertionError, ValueError, KeyError, InvalidConfiguration, IndexError, DuplicateKeyError) as e:
             self.logger.error(f"{str(e)} No atom was created.")
@@ -504,7 +504,7 @@ class OscAgent(Agent, AsyncioOscObject):
                        descriptor: str,
                        descriptor_is_label: Optional[bool],
                        silent: bool = False) -> None:
-        self.logger.info(f"Set classifier: path='{atom_path}', classifier_name='{classifier_name}', "
+        self.logger.debug(f"Set classifier: path='{atom_path}', classifier_name='{classifier_name}', "
                          f"descriptor='{descriptor}', descriptor_is_label={descriptor_is_label}")
         try:
             classifier: AbstractClassifier = self._parse_classifier(classifier_name, descriptor,

@@ -27,7 +27,10 @@ class OmaxMfccClassifier(FeatureClassifier):
 
     def __init__(self, midi_feature_type: Type[CorpusFeature], audio_feature_type: Type[CorpusFeature], ):
         super().__init__(midi_feature_type, audio_feature_type)
-        self._classes: np.ndarray = np.array([])  # shape (n, N_MFCCs) where n is the number of events in the corpus
+
+        # shape (n, N_MFCCs) where n is the number of events in the corpus
+        self._classes = np.zeros(self.N_MFCCS).reshape(1, self.N_MFCCS)
+
         self.d_max: Parameter = Parameter(self.DEFAULT_DMAX, 0.0, None, "float",
                                           "Maximum distance between classes as defined by the OMax MFCC classifier",
                                           [ParametricFlags.ATOM_REQUIRES_RECLASSIFICATION])

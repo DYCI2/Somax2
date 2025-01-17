@@ -7,7 +7,8 @@ from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.classification.classifier import FeatureClassifier
 from somax.classification.omax_mfcc_classifier import OmaxMfccClassifier
 from somax.features import (YinDiscretePitch, OnsetChroma, MeanChroma, TopNote, BassNote, VirtualFundamental,
-                            RuntimeIntegerPitch, OctaveBands, TotalEnergyDb, PeakEnergyDb, VerticalDensity, RuntimeChroma)
+                            RuntimeIntegerPitch, OctaveBands, TotalEnergyDb, PeakEnergyDb, VerticalDensity,
+                            RuntimeChroma, Tempo, BeatPhase)
 from somax.features.feature import CorpusFeature, AbstractFeature
 from somax.features.mfcc_features import Mfcc, RuntimeMfcc
 
@@ -202,9 +203,9 @@ class FeatureDictionary:
                                                 flags=[FeatureKeywordFlags.MAIN_KEYWORD],
                                                 default_classifier=OmaxMfccClassifier),
 
-        # "tempo": FeatureSpecification.singular(feature=Tempo, flags=[], default_classifier=None),
+        "tempo": FeatureSpecification.singular(feature=Tempo, flags=[], default_classifier=None),
 
-        # "beatphase": FeatureSpecification.singular(feature=BeatPhase, flags=[], default_classifier=None)
+        "beat": FeatureSpecification.singular(feature=BeatPhase, flags=[], default_classifier=None)
     }
 
     @staticmethod
