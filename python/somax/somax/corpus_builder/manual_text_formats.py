@@ -231,7 +231,7 @@ class Reaper(TextFormat):
         with open(analysis_file_path, 'r') as f:
 
             found_markers: bool = False
-            pattern: re.Pattern[str] = re.compile("   #                                 Name          Start")
+            pattern: re.Pattern[str] = re.compile(r"\s+#\s+Name\s+Start")
             while not found_markers:
                 try:
                     found_markers = bool(re.match(pattern, next(f)))
@@ -244,44 +244,81 @@ class Reaper(TextFormat):
 
             onsets: List[float] = []
             offsets: List[Optional[float]] = []
+            labels: List[str] = []
 
             reached_end_of_markers: bool = False
             while not reached_end_of_markers:
                 try:
-                    onset: Optional[float] = cls.parse_line(next(f))
-                    if onset is None:
+                    onset_and_label_data: Optional[Tuple[float, str]] = cls.parse_line(next(f))
+                    if onset_and_label_data is None:
                         reached_end_of_markers = True
                     else:
-                        onsets.append(onset)
+                        onsets.append(onset_and_label_data[0])
                         offsets.append(None)
+                        labels.append(onset_and_label_data[1])
 
                 except ParsingError as e:
                     raise RuntimeError from e
                 except StopIteration:
                     reached_end_of_markers = True
 
-        return onsets, offsets
+        return onsets, offsets, labels
 
     @staticmethod
     def format_line(onset: float, duration: float, features: List[CorpusFeature]) -> str:
         raise RuntimeError("Not implemented")
 
     @staticmethod
-    def parse_line(line: str) -> Optional[float]:
+    def parse_line(line: str) -> Optional[Tuple[float, str]]:
+        """
+        Input format:
+          <MARKER_NAME> <LABELS> <TIME>
+
+          where
+          <MARKER_NAME> is a string containing the marker's name.
+
+        Example 1 (three labels with '/'-separated values and shorthand format on second line):
+            M3                              aeolian/yellow/2       0:09.000
+            M4                              flz//                  0:11.000
+
+        Example 2 (no labels):
+            M3                                                     0:09.000
+            M4                                                     0:11.000
+
+        Note that the labels will be sorted by marker index and not by time, so it's possible to create markers
+
+        """
         if re.match(Constants.EMPTY, line):
             logging.debug("Ignoring empty line")
             return None
-
-        # format is 00:0.000
-        pattern: re.Pattern[str] = re.compile(f"^\\s*\\w+\\s+\\w+\\s+(\\d+):(\\d+)\\.(\\d+)\\s*$")
+        pattern: re.Pattern[str] = re.compile(
+            r"""
+            ^\s*                
+            \w+                 # Marker name
+            \s+
+            (?P<label_data>\S*) # Label data: Any non-whitespace character or empty string          
+            \s+                 
+            (?P<minutes>\d+)
+            :                   # Time colon separator
+            (?P<seconds>\d+)    
+            \.                  # Time dot separator
+            (?P<millis>\d+)
+            \s*$                
+            """,
+            re.VERBOSE
+        )
         tokens = re.match(pattern, line)
 
         if tokens is None:
             raise ParsingError(f"Invalid format: {line}")
 
-        onset = float(tokens.group(1)) * 60 + float(tokens.group(2)) + float(tokens.group(3)) * 0.001
+        label_data = tokens.group("label_data")
 
-        return onset
+        onset = (float(tokens.group("minutes")) * 60
+                 + float(tokens.group("seconds"))
+                 + float(tokens.group("millis")) * 0.001)
+
+        return onset, label_data
 
 
 class SoundStudio(UniformTextFormat):
@@ -346,9 +383,19 @@ class Audacity(UniformTextFormat):
             where LINE = <ONSET>\t<OFFSET>\t[<LABELS>]
                   ONSET       = float
                   OFFSET      = float
-                  LABELS      = [] | LABEL | SEPARATOR LABELS
-                  SEPARATOR   = (user-specified): ";", ",", "/", ...
-                  LABEL       = string | int
+                  LABELS      = str
+
+            LABELS are parsed as a single string, where multiple are handled by the ManualCorpusBuilder
+
+            Example 1 (three labels with shorthand format):
+                0.000 0.255 Lmm;pink;0
+                0.255 0.615 lll;;1
+                0.615 0.800 ;blue;
+
+            Example 2 (no labels):
+                0.000 0.255
+                0.255 0.615
+                0.615 0.800
 
             Note that in the case where ONSET ≈ OFFSET, OFFSET will be parsed as the next marker's onset
 

@@ -161,8 +161,8 @@ class ManualCorpusBuilder:
 
         onsets: List[float]
         offsets: List[Optional[float]]
-        labels_data: List[LabelsData]
-        onsets, offsets, labels_data = analysis_format.parse_file(analysis_file_path=analysis_file_path,
+        label_data: List[LabelsData]
+        onsets, offsets, label_data = analysis_format.parse_file(analysis_file_path=analysis_file_path,
                                                                   use_tempo_annotations=use_tempo_annotations,
                                                                   pre_analysed_descriptors=pre_analysed_descriptors,
                                                                   ignore_invalid_lines=ignore_invalid_lines)
@@ -170,7 +170,10 @@ class ManualCorpusBuilder:
         if len(onsets) == 0:
             raise RuntimeError("Annotation file did not contain any valid lines")
 
-        labels: Optional[Dict[str, List[AbstractLabel]]] = MultiLabelFormatParser.parse_labels(labels_data,
+
+        onsets, offsets, label_data = self._sort_by_onset(onsets, offsets, label_data)
+
+        labels: Optional[Dict[str, List[AbstractLabel]]] = MultiLabelFormatParser.parse_labels(label_data,
                                                                                                labels_separator,
                                                                                                label_names)
 
@@ -209,6 +212,14 @@ class ManualCorpusBuilder:
                                           file_num_channels=metadata.channels)
 
         return corpus
+
+    @staticmethod
+    def _sort_by_onset(onsets: List[float], offsets: List[Optional[float]], label_data: List[LabelsData]):
+        indices = np.argsort(onsets)
+        onsets = [onsets[i] for i in indices]
+        offsets = [offsets[i] for i in indices]
+        label_data = [label_data[i] for i in indices]
+        return onsets, offsets, label_data
 
     @staticmethod
     def _parse_onsets_and_durations(onsets: List[float],
