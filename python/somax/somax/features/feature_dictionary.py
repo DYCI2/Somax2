@@ -203,9 +203,13 @@ class FeatureDictionary:
                                                 flags=[FeatureKeywordFlags.MAIN_KEYWORD],
                                                 default_classifier=OmaxMfccClassifier),
 
-        "tempo": FeatureSpecification.singular(feature=Tempo, flags=[], default_classifier=None),
+        "tempo": FeatureSpecification.singular(feature=Tempo,
+                                               flags=[FeatureKeywordFlags.HIDDEN],
+                                               default_classifier=None),
 
-        "beat": FeatureSpecification.singular(feature=BeatPhase, flags=[], default_classifier=None)
+        "beat": FeatureSpecification.singular(feature=BeatPhase,
+                                              flags=[FeatureKeywordFlags.HIDDEN],
+                                              default_classifier=None)
     }
 
     @staticmethod

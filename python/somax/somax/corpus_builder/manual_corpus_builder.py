@@ -1,23 +1,25 @@
+import copy
 import logging
 import multiprocessing
-import re
-from typing import Dict, Type, List, Optional, Any, Tuple
+from typing import Dict, Type, List, Optional, Tuple, cast
 
 import librosa
 import numpy as np
 from audioread import NoBackendError
 
 from somax.corpus_builder.corpus_builder import CorpusBuilder
-from somax.corpus_builder.manual_text_formats import TextFormat, ParsingError
+from somax.corpus_builder.manual_text_formats import TextFormat, LabelsData
 from somax.corpus_builder.metadata import AudioMetadata
+from somax.corpus_builder.multilabel_format_parser import MultiLabelFormatParser
 from somax.corpus_builder.spectrogram import Spectrogram
 from somax.features import YinDiscretePitch, TotalEnergyDb
-from somax.features.feature import CorpusFeature
+from somax.features.feature import CorpusFeature, AnalyzableFeature
 from somax.runtime.corpus import Corpus, AudioCorpus
 from somax.runtime.corpus_event import AudioCorpusEvent
 from somax.runtime.exceptions import FeatureError, ParameterError
+from somax.runtime.label import AbstractLabel
 from somax.runtime.osc_log_forwarder import OscLogForwarder
-from somax.runtime.send_protocol import PlayerSendProtocol, ServerSendProtocol
+from somax.runtime.send_protocol import ServerSendProtocol
 from somax.runtime.target import SimpleOscTarget
 from somax.scheduler.scheduling_mode import AbsoluteScheduling
 
@@ -146,9 +148,11 @@ class ManualCorpusBuilder:
               corpus_name: str,
               analysis_format: Type[TextFormat],
               pre_analysed_descriptors: Optional[List[Type[CorpusFeature]]] = None,
+              label_names: Optional[List[str]] = None,
               use_tempo_annotations: bool = False,
               segmentation_offset_ms: int = 0,
-              ignore_invalid_lines: bool = False) -> Corpus:
+              ignore_invalid_lines: bool = False,
+              labels_separator: str = ";") -> Corpus:
         """ raises: RuntimeError if invalid line encountered and `ignore_invalid_line` is False
                     NotImplementedError for certain features
         """
@@ -157,21 +161,24 @@ class ManualCorpusBuilder:
 
         onsets: List[float]
         offsets: List[Optional[float]]
-        onsets, offsets = analysis_format.parse_file(analysis_file_path=analysis_file_path,
-                                                     use_tempo_annotations=use_tempo_annotations,
-                                                     pre_analysed_descriptors=pre_analysed_descriptors,
-                                                     ignore_invalid_lines=ignore_invalid_lines)
+        labels_data: List[LabelsData]
+        onsets, offsets, labels_data = analysis_format.parse_file(analysis_file_path=analysis_file_path,
+                                                                  use_tempo_annotations=use_tempo_annotations,
+                                                                  pre_analysed_descriptors=pre_analysed_descriptors,
+                                                                  ignore_invalid_lines=ignore_invalid_lines)
 
         if len(onsets) == 0:
             raise RuntimeError("Annotation file did not contain any valid lines")
 
-        x, sr = librosa.load(audio_file_path, sr=None, mono=False)
-        x_mono = CorpusBuilder._parse_channels(x)
-        file_duration: float = x_mono.size / sr
+        labels: Optional[Dict[str, List[AbstractLabel]]] = MultiLabelFormatParser.parse_labels(labels_data,
+                                                                                               labels_separator,
+                                                                                               label_names)
+
+        x_mono, sr, file_duration, metadata = self._read_audio(audio_file_path, self.HOP_LENGTH)
 
         onset_array: np.ndarray
         duration_array: np.ndarray
-        onset_array, duration_array = self.parse_onsets_and_durations(onsets, offsets, eof=file_duration)
+        onset_array, duration_array = self._parse_onsets_and_durations(onsets, offsets, eof=file_duration)
 
         # adjust in time
         onset_array = np.maximum(0.0, onset_array + segmentation_offset_ms * 0.001)
@@ -181,31 +188,20 @@ class ManualCorpusBuilder:
                                                            absolute_duration=duration)
                                           for i, (onset, duration) in enumerate(zip(onset_array, duration_array))]
 
-        stft: Spectrogram = Spectrogram.from_audio(x_mono, sample_rate=sr, hop_length=self.HOP_LENGTH)
-        metadata: AudioMetadata = AudioMetadata(filepath=audio_file_path,
-                                                content_type=AbsoluteScheduling(),
-                                                raw_data=x,
-                                                foreground_data=x_mono,
-                                                background_data=x_mono,
-                                                sr=sr,
-                                                hop_length=self.HOP_LENGTH,
-                                                stft=stft,
-                                                estimated_initial_bpm=120.0,
-                                                beat_tightness=1.0)
+        label_info: Dict[str, Tuple[int, Type[AbstractLabel]]] = {}
+        if labels is not None:
+            label_info: Dict[str, Tuple[int, Type[AbstractLabel]]] = self._append_labels(events, labels)
 
-        used_features = []
-        for _, feature in CorpusFeature.all_corpus_features():
-            try:
-                if feature not in used_features:
-                    feature.analyze(events, metadata)
-                used_features.append(feature)
-            except FeatureError:
-                self.logger.debug(f"ignoring feature {feature.__name__}")
+        all_features: List[Type[CorpusFeature]] = self._analyze_events(events,
+                                                                       metadata,
+                                                                       pre_analyzed=pre_analysed_descriptors,
+                                                                       logger=self.logger)
 
         corpus: AudioCorpus = AudioCorpus(events=events,
                                           name=corpus_name,
                                           scheduling_mode=metadata.content_type,
-                                          feature_types=used_features,
+                                          feature_types=all_features,
+                                          label_info=label_info,
                                           build_parameters={},
                                           sr=sr,
                                           filepath=audio_file_path,
@@ -215,9 +211,9 @@ class ManualCorpusBuilder:
         return corpus
 
     @staticmethod
-    def parse_onsets_and_durations(onsets: List[float],
-                                   offsets: List[Optional[float]],
-                                   eof: float) -> Tuple[np.ndarray, np.ndarray]:
+    def _parse_onsets_and_durations(onsets: List[float],
+                                    offsets: List[Optional[float]],
+                                    eof: float) -> Tuple[np.ndarray, np.ndarray]:
         if len(onsets) != len(offsets):
             raise RuntimeError("Onset and offset arrays are of different lengths")
 
@@ -248,3 +244,57 @@ class ManualCorpusBuilder:
             duration_array = np.block([np.diff(onsets), eof - onsets[-1]])
 
         return onset_array, duration_array
+
+    @staticmethod
+    def _read_audio(audio_file_path: str, hop_length: int) -> Tuple[np.ndarray, int, float, AudioMetadata]:
+        x, sr = librosa.load(audio_file_path, sr=None, mono=False)
+        x_mono = CorpusBuilder._parse_channels(x)
+        file_duration: float = x_mono.size / sr
+
+        stft: Spectrogram = Spectrogram.from_audio(x_mono, sample_rate=int(sr), hop_length=hop_length)
+        metadata: AudioMetadata = AudioMetadata(filepath=audio_file_path,
+                                                content_type=AbsoluteScheduling(),
+                                                raw_data=x,
+                                                foreground_data=x_mono,
+                                                background_data=x_mono,
+                                                sr=sr,
+                                                hop_length=hop_length,
+                                                stft=stft,
+                                                estimated_initial_bpm=120.0,
+                                                beat_tightness=1.0)
+
+        return x_mono, int(sr), file_duration, metadata
+
+    @staticmethod
+    def _analyze_events(events: List[AudioCorpusEvent],
+                        metadata: AudioMetadata,
+                        pre_analyzed: List[Type[CorpusFeature]],
+                        logger=logging.Logger(__name__)) -> List[Type[CorpusFeature]]:
+        used_features: List[Type[AnalyzableFeature]] = cast(List[Type[AnalyzableFeature]],
+                                                            copy.deepcopy(pre_analyzed))
+        for feature in AnalyzableFeature.classes():  # type: Type[AnalyzableFeature]
+            try:
+                feature.analyze(events, metadata)
+                used_features.append(feature)
+            except FeatureError as e:
+                logger.debug(repr(e))
+
+        return used_features
+
+    @staticmethod
+    def _append_labels(
+            events: List[AudioCorpusEvent]
+            , labels: Dict[str, List[AbstractLabel]]
+    ) -> Dict[str, Tuple[int, Type[AbstractLabel]]]:
+        """
+        Since label access is a real-time critical operation, each label is stored by an index rather than a string
+        in each event, and access is provided by finding the corresponding index in the AudioCorpus' label_info.
+        """
+        label_info: Dict[str, Tuple[int, Type[AbstractLabel]]] = {}
+        for i, (label_name, label_list) in enumerate(labels.items()):
+            label_info[label_name] = (i, type(label_list[0]))
+
+            for j, label in enumerate(label_list):
+                events[j].labels[i] = label
+
+        return label_info

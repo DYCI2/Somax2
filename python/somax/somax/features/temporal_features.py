@@ -63,7 +63,7 @@ class Tempo(AnalyzableFeature):
 
 class BeatPhase(AnalyzableFeature):
     def __init__(self, value: float):
-        """ value: float \in R[0, 1]"""
+        """ value: float in R[0, 1]"""
         super().__init__(value=value)
 
     @classmethod

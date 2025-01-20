@@ -602,7 +602,7 @@ class OscAgent(Agent, AsyncioOscObject):
 
             if verbose:
                 alias_string: str = "" if not name_alias else f" (alias: {name_alias})"
-                self.logger.info(f"Added filter {repr(filter_name)}" + alias_string)
+                self.logger.debug(f"Added filter {repr(filter_name)}" + alias_string)
 
             self._send_eligibility(path)
 
