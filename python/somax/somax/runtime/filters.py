@@ -906,6 +906,10 @@ class LabelFilter(AbstractFilter):
         label_id: int = corpus.label_id_of(label_name)
         value_type: Type[Any] = corpus.label_type_of(self.label_name.value).internal_type()
 
+        if value_type != type(self.label_value.value):
+            # Invalid label_value passed, e.g. str label to an int classifier or vice versa
+            return peaks, taboo_mask
+
         value_to_match: Union[int, str] = value_type(self.label_value.value)
 
         corresponding_labels: Union[List[str], List[int]] = [e.get_label(label_id).label for e in corresponding_events]
