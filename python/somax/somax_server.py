@@ -422,10 +422,11 @@ class SomaxServer(Somax, AsyncioOscObject):
                                       corpus_name: str,
                                       analysis_format: str,
                                       output_folder: str,
-                                      # pre_analysed_descriptors: Optional[List[str]] = None,   # TODO
+                                      label_names: Optional[List[str]] = None,
                                       use_tempo_annotations: bool = False,
                                       segmentation_offset_ms: int = 0,
                                       ignore_invalid_lines: bool = False,
+                                      label_separator: str = ";",
                                       overwrite: bool = False,
                                       builder_address: str = ""):
         try:
@@ -433,6 +434,14 @@ class SomaxServer(Somax, AsyncioOscObject):
         except KeyError as e:
             self.logger.error(f"Could not find annotation file format '{e}'. No corpus was built")
             return
+
+        def _parse_label_separator(label_separator: str) -> str:
+            # Since we cannot easily pass symbols "," or ";" in Max, we have aliases for those
+            if label_separator == "COMMA":
+                return ","
+            elif label_separator == "SEMICOLON":
+                return ";"
+            return label_separator
 
         corpus_builder: ThreadedManualCorpusBuilder = ThreadedManualCorpusBuilder(
             audio_file_path=audio_file_path,
@@ -443,9 +452,11 @@ class SomaxServer(Somax, AsyncioOscObject):
             send_port=self.send_port,
             osc_address=self.address,
             corpus_name=corpus_name,
+            label_names=label_names,
             use_tempo_annotations=use_tempo_annotations,
             segmentation_offset_ms=segmentation_offset_ms,
             ignore_invalid_lines=ignore_invalid_lines,
+            label_separator=_parse_label_separator(label_separator),
             overwrite=overwrite,
             builder_address=builder_address
         )

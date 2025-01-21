@@ -1,6 +1,7 @@
 import copy
 import logging
 import multiprocessing
+from cProfile import label
 from typing import Dict, Type, List, Optional, Tuple, cast
 
 import librosa
@@ -56,9 +57,11 @@ class ThreadedManualCorpusBuilder(multiprocessing.Process):
                  osc_address: str,
                  corpus_name: Optional[str] = None,
                  pre_analysed_descriptors: Optional[List[Type[CorpusFeature]]] = None,
+                 label_names: Optional[List[str]] = None,
                  use_tempo_annotations: bool = False,
                  segmentation_offset_ms: int = 0,
                  ignore_invalid_lines: bool = False,
+                 label_separator: str = ",",
                  overwrite: bool = False,
                  copy_resources: bool = False,
                  builder_address: str = "",
@@ -71,9 +74,11 @@ class ThreadedManualCorpusBuilder(multiprocessing.Process):
         self.corpus_name: str = corpus_name
         self.analysis_format: Type[TextFormat] = analysis_format
         self.pre_analysed_descriptors: Optional[List[Type[CorpusFeature]]] = pre_analysed_descriptors
+        self.label_names: Optional[List[str]] = label_names
         self.use_tempo_annotations: bool = use_tempo_annotations
         self.segmentation_offset_ms: int = segmentation_offset_ms
         self.ignore_invalid_lines: bool = ignore_invalid_lines
+        self.label_separator: str = label_separator
         self.overwrite: bool = overwrite
         self.copy_resources: bool = copy_resources
         self.builder_address: str = builder_address
@@ -91,9 +96,11 @@ class ThreadedManualCorpusBuilder(multiprocessing.Process):
                                                          corpus_name=self.corpus_name,
                                                          analysis_format=self.analysis_format,
                                                          pre_analysed_descriptors=self.pre_analysed_descriptors,
+                                                         label_names=self.label_names,
                                                          use_tempo_annotations=self.use_tempo_annotations,
                                                          segmentation_offset_ms=self.segmentation_offset_ms,
-                                                         ignore_invalid_lines=self.ignore_invalid_lines)
+                                                         ignore_invalid_lines=self.ignore_invalid_lines,
+                                                         label_separator=self.label_separator)
 
         except NotImplementedError as e:
             self.logger.error(f"{str(e)}. No corpus was built")
@@ -152,7 +159,7 @@ class ManualCorpusBuilder:
               use_tempo_annotations: bool = False,
               segmentation_offset_ms: int = 0,
               ignore_invalid_lines: bool = False,
-              labels_separator: str = ";") -> Corpus:
+              label_separator: str = ";") -> Corpus:
         """ raises: RuntimeError if invalid line encountered and `ignore_invalid_line` is False
                     NotImplementedError for certain features
         """
@@ -174,7 +181,7 @@ class ManualCorpusBuilder:
         onsets, offsets, label_data = self._sort_by_onset(onsets, offsets, label_data)
 
         labels: Optional[Dict[str, List[AbstractLabel]]] = MultiLabelFormatParser.parse_labels(label_data,
-                                                                                               labels_separator,
+                                                                                               label_separator,
                                                                                                label_names)
 
         x_mono, sr, file_duration, metadata = self._read_audio(audio_file_path, self.HOP_LENGTH)
