@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 6,
-			"revision" : 0,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -56,7 +56,7 @@
 					"outlettype" : [ "multichannelsignal", "", "", "", "" ],
 					"patching_rect" : [ 793.0, 77.0, 250.0, 825.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 256.0, 4.0, 250.0, 969.0 ],
+					"presentation_rect" : [ 256.0, 4.0, 272.0, 969.0 ],
 					"varname" : "somax.player.app",
 					"viewvisibility" : 1
 				}
@@ -152,31 +152,39 @@
 		"parameters" : 		{
 			"obj-11::obj-118::obj-114" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-11::obj-118::obj-119" : [ "live.text[67]", "live.text[30]", 0 ],
-			"obj-11::obj-118::obj-2::obj-119" : [ "live.text[35]", "live.text[30]", 0 ],
+			"obj-11::obj-118::obj-2::obj-119" : [ "live.text[66]", "live.text[30]", 0 ],
 			"obj-11::obj-118::obj-2::obj-13" : [ "live.text[65]", "live.text", 0 ],
 			"obj-11::obj-118::obj-2::obj-140" : [ "mc.live.gain~[9]", "mc.live.gain~", 0 ],
 			"obj-11::obj-118::obj-2::obj-62::obj-1" : [ "source[9]", "source", 0 ],
 			"obj-11::obj-118::obj-42" : [ "live.toggle", "live.toggle", 0 ],
 			"obj-11::obj-118::obj-55" : [ "live.gain~", "live.gain~", 0 ],
+			"obj-11::obj-17::obj-10::obj-103" : [ "influence delay[2]", "influencedelay", 0 ],
 			"obj-11::obj-17::obj-10::obj-21" : [ "onset[5]", "onset", 0 ],
+			"obj-11::obj-17::obj-10::obj-26" : [ "chroma scaling factor[5]", "chroma", 0 ],
 			"obj-11::obj-17::obj-10::obj-28" : [ "chromaonset[5]", "chromaonset", 0 ],
 			"obj-11::obj-17::obj-10::obj-29" : [ "enable[5]", "enable", 0 ],
-			"obj-11::obj-17::obj-10::obj-30" : [ "chroma scaling factor[5]", "chroma", 0 ],
+			"obj-11::obj-17::obj-10::obj-30" : [ "chroma scaling factor[6]", "chroma", 0 ],
 			"obj-11::obj-17::obj-10::obj-46::obj-1" : [ "source[7]", "source", 0 ],
 			"obj-11::obj-17::obj-10::obj-9" : [ "pitch[5]", "pitch", 0 ],
+			"obj-11::obj-17::obj-2::obj-103" : [ "influence delay", "influencedelay", 0 ],
 			"obj-11::obj-17::obj-2::obj-21" : [ "onset[2]", "onset", 0 ],
+			"obj-11::obj-17::obj-2::obj-26" : [ "chroma scaling factor[10]", "chroma", 0 ],
 			"obj-11::obj-17::obj-2::obj-28" : [ "chromaonset[2]", "chromaonset", 0 ],
 			"obj-11::obj-17::obj-2::obj-29" : [ "enable[2]", "enable", 0 ],
 			"obj-11::obj-17::obj-2::obj-30" : [ "chroma scaling factor[2]", "chroma", 0 ],
 			"obj-11::obj-17::obj-2::obj-46::obj-1" : [ "source[5]", "source", 0 ],
 			"obj-11::obj-17::obj-2::obj-9" : [ "pitch[2]", "pitch", 0 ],
+			"obj-11::obj-17::obj-33::obj-103" : [ "influence delay[3]", "influencedelay", 0 ],
 			"obj-11::obj-17::obj-33::obj-21" : [ "onset[6]", "onset", 0 ],
+			"obj-11::obj-17::obj-33::obj-26" : [ "chroma scaling factor[11]", "chroma", 0 ],
 			"obj-11::obj-17::obj-33::obj-28" : [ "chromaonset[6]", "chromaonset", 0 ],
 			"obj-11::obj-17::obj-33::obj-29" : [ "enable[6]", "enable", 0 ],
-			"obj-11::obj-17::obj-33::obj-30" : [ "chroma scaling factor[6]", "chroma", 0 ],
+			"obj-11::obj-17::obj-33::obj-30" : [ "chroma scaling factor[12]", "chroma", 0 ],
 			"obj-11::obj-17::obj-33::obj-46::obj-1" : [ "source[8]", "source", 0 ],
 			"obj-11::obj-17::obj-33::obj-9" : [ "pitch[6]", "pitch", 0 ],
+			"obj-11::obj-17::obj-6::obj-103" : [ "influence delay[1]", "influencedelay", 0 ],
 			"obj-11::obj-17::obj-6::obj-21" : [ "onset[4]", "onset", 0 ],
+			"obj-11::obj-17::obj-6::obj-26" : [ "chroma scaling factor[3]", "chroma", 0 ],
 			"obj-11::obj-17::obj-6::obj-28" : [ "chromaonset[4]", "chromaonset", 0 ],
 			"obj-11::obj-17::obj-6::obj-29" : [ "enable[4]", "enable", 0 ],
 			"obj-11::obj-17::obj-6::obj-30" : [ "chroma scaling factor[4]", "chroma", 0 ],
@@ -186,7 +194,7 @@
 			"obj-11::obj-25::obj-44" : [ "live.dial[1]", "Width", 0 ],
 			"obj-11::obj-25::obj-46" : [ "live.dial", "Pan", 0 ],
 			"obj-11::obj-3::obj-1115" : [ "continuity[22]", "continuity", 0 ],
-			"obj-11::obj-3::obj-1150" : [ "live.text[34]", "live.text", 0 ],
+			"obj-11::obj-3::obj-1150" : [ "live.text[63]", "live.text", 0 ],
 			"obj-11::obj-3::obj-1175" : [ "heldnotesmode[5]", "heldnotesmode", 0 ],
 			"obj-11::obj-3::obj-1179" : [ "continuity[23]", "continuity", 0 ],
 			"obj-11::obj-3::obj-123::obj-1" : [ "live.text[32]", "live.text", 0 ],
@@ -203,6 +211,13 @@
 			"obj-11::obj-3::obj-14::obj-64" : [ "live.text[52]", "live.text", 0 ],
 			"obj-11::obj-3::obj-16::obj-26" : [ "corpusname[4]", "corpusname", 0 ],
 			"obj-11::obj-3::obj-32" : [ "heldnotesmode[3]", "heldnotesmode", 0 ],
+			"obj-11::obj-3::obj-407::obj-1001::obj-89::obj-1" : [ "live.text[8]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-1001::obj-89::obj-2" : [ "live.text[10]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-1001::obj-89::obj-3" : [ "live.text[15]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-1039::obj-89::obj-1" : [ "live.text[20]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-1039::obj-89::obj-2" : [ "live.text[16]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-1039::obj-89::obj-3" : [ "live.text[17]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-1105" : [ "harmonincpeakdecay[8]", "harmonincpeakdecay", 0 ],
 			"obj-11::obj-3::obj-407::obj-1115" : [ "continuity[1]", "continuity", 0 ],
 			"obj-11::obj-3::obj-407::obj-1175" : [ "heldnotesmode[2]", "heldnotesmode", 0 ],
 			"obj-11::obj-3::obj-407::obj-1179" : [ "continuity[16]", "continuity", 0 ],
@@ -231,11 +246,21 @@
 			"obj-11::obj-3::obj-407::obj-295" : [ "playingmode[4]", "playingmode", 0 ],
 			"obj-11::obj-3::obj-407::obj-298" : [ "simultaneousonsets[7]", "simultaneousonsets", 0 ],
 			"obj-11::obj-3::obj-407::obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
+			"obj-11::obj-3::obj-407::obj-387::obj-89::obj-1" : [ "live.text[43]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-387::obj-89::obj-2" : [ "live.text[41]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-387::obj-89::obj-3" : [ "live.text[42]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-497::obj-89::obj-1" : [ "live.text[40]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-497::obj-89::obj-2" : [ "live.text[38]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-497::obj-89::obj-3" : [ "live.text[39]", "live.text", 0 ],
 			"obj-11::obj-3::obj-407::obj-570" : [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-11::obj-3::obj-407::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-11::obj-3::obj-407::obj-642" : [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
 			"obj-11::obj-3::obj-407::obj-653" : [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
 			"obj-11::obj-3::obj-407::obj-656" : [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],
+			"obj-11::obj-3::obj-407::obj-667" : [ "selfharmonicbypass[1]", "selfharmonicbypass", 0 ],
+			"obj-11::obj-3::obj-407::obj-670" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
+			"obj-11::obj-3::obj-407::obj-679" : [ "selfharmonicngramorder[1]", "selfharmonicngramorder", 0 ],
+			"obj-11::obj-3::obj-407::obj-685" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
 			"obj-11::obj-3::obj-407::obj-688" : [ "__exp_durationsigma[4]", "__exp_durationsigma", 0 ],
 			"obj-11::obj-3::obj-407::obj-702" : [ "__exp_durationmu[1]", "__exp_durationmu", 0 ],
 			"obj-11::obj-3::obj-407::obj-722" : [ "__exp_octavebandsenable[4]", "__exp_octavebandsenable", 0 ],
@@ -246,12 +271,24 @@
 			"obj-11::obj-3::obj-407::obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
 			"obj-11::obj-3::obj-407::obj-799" : [ "__exp_tempoconsistencyenable[4]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-11::obj-3::obj-407::obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
+			"obj-11::obj-3::obj-407::obj-814" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay", 0 ],
+			"obj-11::obj-3::obj-407::obj-842::obj-89::obj-1" : [ "live.text[37]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-842::obj-89::obj-2" : [ "live.text[35]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-842::obj-89::obj-3" : [ "live.text[36]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-843" : [ "harmonicngramorder[2]", "harmonicngramorder", 0 ],
 			"obj-11::obj-3::obj-407::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
 			"obj-11::obj-3::obj-407::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-11::obj-3::obj-407::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
+			"obj-11::obj-3::obj-407::obj-871" : [ "harmonincpeakdecay[7]", "harmonincpeakdecay", 0 ],
+			"obj-11::obj-3::obj-407::obj-96::obj-89::obj-1" : [ "live.text[34]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-96::obj-89::obj-2" : [ "live.text[13]", "live.text", 0 ],
+			"obj-11::obj-3::obj-407::obj-96::obj-89::obj-3" : [ "live.text[14]", "live.text", 0 ],
 			"obj-11::obj-3::obj-79::obj-1" : [ "live.text[25]", "live.text", 0 ],
 			"obj-11::obj-3::obj-79::obj-2" : [ "live.text[23]", "live.text", 0 ],
 			"obj-11::obj-3::obj-79::obj-3" : [ "live.text[18]", "live.text", 0 ],
+			"obj-11::obj-3::obj-85::obj-1" : [ "live.text[44]", "live.text", 0 ],
+			"obj-11::obj-3::obj-85::obj-2" : [ "live.text[45]", "live.text", 0 ],
+			"obj-11::obj-3::obj-85::obj-3" : [ "live.text[46]", "live.text", 0 ],
 			"obj-11::obj-3::obj-87::obj-1" : [ "live.text[12]", "live.text", 0 ],
 			"obj-11::obj-3::obj-87::obj-2" : [ "live.text[11]", "live.text", 0 ],
 			"obj-11::obj-3::obj-87::obj-3" : [ "live.text[9]", "live.text", 0 ],
@@ -261,6 +298,9 @@
 			"obj-11::obj-3::obj-91::obj-1" : [ "live.text[29]", "live.text", 0 ],
 			"obj-11::obj-3::obj-91::obj-2" : [ "live.text[31]", "live.text", 0 ],
 			"obj-11::obj-3::obj-91::obj-3" : [ "live.text[30]", "live.text", 0 ],
+			"obj-11::obj-3::obj-94::obj-1" : [ "live.text[47]", "live.text", 0 ],
+			"obj-11::obj-3::obj-94::obj-2" : [ "live.text[49]", "live.text", 0 ],
+			"obj-11::obj-3::obj-94::obj-3" : [ "live.text[48]", "live.text", 0 ],
 			"obj-11::obj-6::obj-98" : [ "live.text[6]", "live.text[26]", 0 ],
 			"obj-2::obj-13::obj-1" : [ "source[4]", "source", 0 ],
 			"obj-2::obj-2::obj-395::obj-2" : [ "live.text[5]", "live.text[4]", 0 ],
@@ -277,14 +317,26 @@
 			}
 ,
 			"parameter_overrides" : 			{
+				"obj-11::obj-118::obj-2::obj-119" : 				{
+					"parameter_longname" : "live.text[66]"
+				}
+,
 				"obj-11::obj-118::obj-2::obj-62::obj-1" : 				{
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
 				}
 ,
-				"obj-11::obj-17::obj-10::obj-30" : 				{
+				"obj-11::obj-17::obj-10::obj-103" : 				{
+					"parameter_longname" : "influence delay[2]"
+				}
+,
+				"obj-11::obj-17::obj-10::obj-26" : 				{
 					"parameter_longname" : "chroma scaling factor[5]"
+				}
+,
+				"obj-11::obj-17::obj-10::obj-30" : 				{
+					"parameter_longname" : "chroma scaling factor[6]"
 				}
 ,
 				"obj-11::obj-17::obj-10::obj-46::obj-1" : 				{
@@ -293,20 +345,40 @@
 					"parameter_unitstyle" : 10
 				}
 ,
+				"obj-11::obj-17::obj-2::obj-30" : 				{
+					"parameter_longname" : "chroma scaling factor[2]"
+				}
+,
 				"obj-11::obj-17::obj-2::obj-46::obj-1" : 				{
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
 				}
 ,
+				"obj-11::obj-17::obj-33::obj-103" : 				{
+					"parameter_longname" : "influence delay[3]"
+				}
+,
+				"obj-11::obj-17::obj-33::obj-26" : 				{
+					"parameter_longname" : "chroma scaling factor[11]"
+				}
+,
 				"obj-11::obj-17::obj-33::obj-30" : 				{
-					"parameter_longname" : "chroma scaling factor[6]"
+					"parameter_longname" : "chroma scaling factor[12]"
 				}
 ,
 				"obj-11::obj-17::obj-33::obj-46::obj-1" : 				{
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-11::obj-17::obj-6::obj-103" : 				{
+					"parameter_longname" : "influence delay[1]"
+				}
+,
+				"obj-11::obj-17::obj-6::obj-26" : 				{
+					"parameter_longname" : "chroma scaling factor[3]"
 				}
 ,
 				"obj-11::obj-17::obj-6::obj-30" : 				{
@@ -346,6 +418,30 @@
 					"parameter_unitstyle" : 10
 				}
 ,
+				"obj-11::obj-3::obj-407::obj-1001::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[8]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-1001::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[10]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-1001::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[15]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-1039::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[20]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-1039::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[16]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-1039::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[17]"
+				}
+,
 				"obj-11::obj-3::obj-407::obj-270::obj-1226" : 				{
 					"parameter_longname" : "width[1]"
 				}
@@ -364,6 +460,66 @@
 ,
 				"obj-11::obj-3::obj-407::obj-270::obj-889" : 				{
 					"parameter_longname" : "weight[1]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-387::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[43]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-387::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[41]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-387::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[42]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-497::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[40]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-497::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[38]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-497::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[39]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-842::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[37]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-842::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[35]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-842::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[36]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-96::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[34]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-96::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[13]"
+				}
+,
+				"obj-11::obj-3::obj-407::obj-96::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[14]"
+				}
+,
+				"obj-11::obj-3::obj-85::obj-1" : 				{
+					"parameter_longname" : "live.text[44]"
+				}
+,
+				"obj-11::obj-3::obj-85::obj-2" : 				{
+					"parameter_longname" : "live.text[45]"
+				}
+,
+				"obj-11::obj-3::obj-85::obj-3" : 				{
+					"parameter_longname" : "live.text[46]"
 				}
 ,
 				"obj-11::obj-3::obj-87::obj-1" : 				{
@@ -400,6 +556,18 @@
 ,
 				"obj-11::obj-3::obj-91::obj-3" : 				{
 					"parameter_longname" : "live.text[30]"
+				}
+,
+				"obj-11::obj-3::obj-94::obj-1" : 				{
+					"parameter_longname" : "live.text[47]"
+				}
+,
+				"obj-11::obj-3::obj-94::obj-2" : 				{
+					"parameter_longname" : "live.text[49]"
+				}
+,
+				"obj-11::obj-3::obj-94::obj-3" : 				{
+					"parameter_longname" : "live.text[48]"
 				}
 ,
 				"obj-11::obj-6::obj-98" : 				{
@@ -691,6 +859,13 @@
 				"name" : "somax.corpusview.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.descriptorview.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../../patchers/resources/player",
 				"type" : "JSON",
 				"implicit" : 1
 			}
