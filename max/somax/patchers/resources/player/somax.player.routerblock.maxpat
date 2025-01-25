@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 68.0, 100.0, 1087.0, 636.0 ],
+		"rect" : [ 68.0, 100.0, 371.0, 234.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -530,7 +530,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1019.0, 685.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 1.666666321456432, 198.666672587394714, 15.666667357087135 ],
+					"presentation_rect" : [ 0.0, 1.75, 198.666672587394714, 15.666667357087135 ],
 					"proportion" : 0.5,
 					"rounded" : 0,
 					"varname" : "serveruidisable"
@@ -541,7 +541,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-39",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -549,7 +548,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1099.0, 701.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 112.25, 1.5, 140.25, 16.0 ],
+					"presentation_rect" : [ 112.25, 1.0, 140.25, 16.0 ],
 					"proportion" : 0.5,
 					"rounded" : 0,
 					"varname" : "serveruidisable[1]"
@@ -776,14 +775,14 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1512.0, 215.0, 143.0, 22.0 ],
 					"restore" : 					{
-						"_source" : [ "AudioInfluencer" ],
-						"chroma" : [ 0.8 ],
+						"_source" : [ "<None>" ],
+						"chroma" : [ 1.0 ],
 						"chromaonset" : [ 1 ],
 						"enable" : [ 1 ],
-						"influencedelay" : [ 5591.999999999999091 ],
-						"mfcc" : [ 0.535433070866143 ],
+						"influencedelay" : [ 0.0 ],
+						"mfcc" : [ 1.0 ],
 						"onset" : [ 1 ],
-						"pitch" : [ 0 ]
+						"pitch" : [ 1 ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -938,7 +937,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 568.0, 694.0, 20.0, 14.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 163.637750191011435, 2.0, 19.0, 14.0 ],
+					"presentation_rect" : [ 180.75, 2.0, 19.0, 14.0 ],
 					"saved_attribute_attributes" : 					{
 						"activebgcolor" : 						{
 							"expression" : ""
@@ -1157,7 +1156,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "enable[4]",
+							"parameter_longname" : "enable[2]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "enable",
@@ -1182,11 +1181,11 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 231.0, 698.0, 15.0, 15.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 183.5, 1.5, 15.0, 15.0 ],
+					"presentation_rect" : [ 165.06024706363678, 1.606425762176514, 15.0, 15.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "chromaonset[4]",
+							"parameter_longname" : "chromaonset[2]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "chromaonset",
@@ -1215,7 +1214,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "onset[4]",
+							"parameter_longname" : "onset[2]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "onset",
@@ -1244,7 +1243,7 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "pitch[4]",
+							"parameter_longname" : "pitch[2]",
 							"parameter_mmax" : 1,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "pitch",
@@ -1319,7 +1318,7 @@
 						}
 ,
 						"valueof" : 						{
-							"parameter_longname" : "chroma scaling factor[4]",
+							"parameter_longname" : "chroma scaling factor[2]",
 							"parameter_mmax" : 1.0,
 							"parameter_modmode" : 0,
 							"parameter_shortname" : "chroma",
@@ -1710,7 +1709,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 236.0, 303.0, 44.0, 14.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 199.5, 2.5, 36.0, 14.0 ],
+					"presentation_rect" : [ 199.5, 2.0, 36.0, 14.0 ],
 					"saved_attribute_attributes" : 					{
 						"activebgcolor" : 						{
 							"expression" : ""
