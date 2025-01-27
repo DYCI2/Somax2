@@ -37,7 +37,8 @@ class OmaxMfccClassifier(FeatureClassifier):
 
         # Note: the Parameter value of weights is never actually used.
         # We're using the setter to set the `_internal_weights`
-        self.weights: Parameter = ParamWithSetter(-1, 0.0, None, "list[int(14)]", "", self._set_weights)
+        self.weights: Parameter = ParamWithSetter(-1, 0.0, None, "list[int(14)]", "", self._set_weights,
+                                                  [ParametricFlags.ATOM_REQUIRES_RECLASSIFICATION])
         self._internal_weights: np.ndarray = self.DEFAULT_WEIGHTS
 
         # Since there's currently no way to pass information back to the client from the classifier,
