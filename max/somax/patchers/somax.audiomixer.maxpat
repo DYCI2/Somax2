@@ -119,7 +119,7 @@
 
 							}
  ],
-						"originid" : "pat-5291"
+						"originid" : "pat-1663"
 					}
 ,
 					"patching_rect" : [ 487.499999999999886, 564.5, 71.0, 22.0 ],
@@ -677,7 +677,7 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
-					"checkedcolor" : [ 0.9, 0.65, 0.05, 1.0 ],
+					"checkedcolor" : [ 0.901960784313726, 0.650980392156863, 0.050980392156863, 1.0 ],
 					"id" : "obj-45",
 					"maxclass" : "toggle",
 					"numinlets" : 1,
@@ -688,13 +688,6 @@
 					"patching_rect" : [ 430.499999999999886, 504.0, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 7.749999910593033, 6.049869389220248, 18.0, 18.0 ],
-					"saved_attribute_attributes" : 					{
-						"checkedcolor" : 						{
-							"expression" : "themecolor.live_control_selection"
-						}
-
-					}
-,
 					"svg" : "",
 					"uncheckedcolor" : [ 0.6, 0.6, 0.6, 1.0 ],
 					"varname" : "monocorpus"
@@ -1241,7 +1234,7 @@
 
 			}
  ],
-		"originid" : "pat-5289",
+		"originid" : "pat-1661",
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"button" : 				{

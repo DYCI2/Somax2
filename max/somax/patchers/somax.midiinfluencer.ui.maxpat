@@ -41,7 +41,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-105",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -49,7 +48,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 507.627755300445642, 362.580104217683584, 19.0, 18.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 0.0, 252.216203451156616, 70.491801261901855 ],
+					"presentation_rect" : [ 4.0, -3.0, 252.216203451156616, 70.491801261901855 ],
 					"proportion" : 0.5,
 					"rounded" : 0
 				}
@@ -664,7 +663,7 @@
 
 			}
  ],
-		"originid" : "pat-5389",
+		"originid" : "pat-1761",
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"button" : 				{

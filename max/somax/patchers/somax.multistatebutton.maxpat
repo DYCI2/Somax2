@@ -2,42 +2,17 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 8,
-			"minor" : 3,
-			"revision" : 2,
+			"major" : 9,
+			"minor" : 0,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1037.0, 79.0, 123.0, 50.0 ],
-		"bglocked" : 0,
+		"rect" : [ 810.0, 271.0, 401.0, 452.0 ],
 		"openinpresentation" : 1,
-		"default_fontsize" : 12.0,
-		"default_fontface" : 0,
-		"default_fontname" : "Arial",
-		"gridonopen" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 1,
-		"objectsnaponopen" : 1,
-		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
-		"lefttoolbarpinned" : 0,
-		"toptoolbarpinned" : 0,
-		"righttoolbarpinned" : 0,
-		"bottomtoolbarpinned" : 0,
-		"toolbars_unpinned_last_save" : 0,
-		"tallnewobj" : 0,
-		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
-		"devicewidth" : 0.0,
-		"description" : "",
-		"digest" : "",
-		"tags" : "",
-		"style" : "",
-		"subpatcher_template" : "",
-		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-16",
@@ -164,7 +139,7 @@
 				"box" : 				{
 					"comment" : "(int) mode",
 					"id" : "obj-65",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -188,7 +163,7 @@
 				"box" : 				{
 					"comment" : "(int) mode",
 					"id" : "obj-63",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -208,8 +183,8 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 395.783333333333303, 806.5, 67.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 19.0, -1.0, 67.0, 18.0 ],
-					"text" : "Name1",
+					"presentation_rect" : [ 17.490354450471045, -1.0, 67.0, 18.0 ],
+					"text" : "Continuous",
 					"textcolor" : [ 0.481437705647327, 0.846666309931507, 0.361908344245232, 1.0 ],
 					"textjustification" : 1
 				}
@@ -225,8 +200,8 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 466.674999999999955, 806.5, 67.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 19.0, -1.0, 67.0, 18.0 ],
-					"text" : "Name2",
+					"presentation_rect" : [ 17.490354450471045, -1.0, 67.0, 18.0 ],
+					"text" : "Reactive",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -243,8 +218,8 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 537.566666666666606, 806.5, 67.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 19.0, -1.0, 67.0, 18.0 ],
-					"text" : "Name3",
+					"presentation_rect" : [ 17.490354450471045, -1.0, 67.0, 18.0 ],
+					"text" : "(Custom)",
 					"textcolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
 					"textjustification" : 1
 				}
@@ -268,6 +243,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 1.0 ],
 					"id" : "obj-3",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -286,6 +262,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 1.0 ],
 					"id" : "obj-2",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -833,8 +810,7 @@
 
 			}
  ],
-		"dependency_cache" : [  ],
-		"autosave" : 0,
+		"originid" : "pat-964",
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"button" : 				{

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 819.0, 187.0, 611.0, 983.0 ],
+		"rect" : [ 819.0, 100.0, 611.0, 983.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"integercoordinates" : 1,
@@ -168,7 +168,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"checkedcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"id" : "obj-128",
 					"maxclass" : "toggle",
@@ -729,7 +728,7 @@
 
 			}
  ],
-		"originid" : "pat-5435",
+		"originid" : "pat-1807",
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"button" : 				{
