@@ -569,7 +569,7 @@
 
 							}
  ],
-						"originid" : "pat-1671"
+						"originid" : "pat-194"
 					}
 ,
 					"patching_rect" : [ 632.0, 770.0, 87.0, 22.0 ],
@@ -1070,7 +1070,7 @@
 
 							}
  ],
-						"originid" : "pat-1673"
+						"originid" : "pat-196"
 					}
 ,
 					"patching_rect" : [ 356.5, 776.0, 101.0, 22.0 ],
@@ -1244,7 +1244,7 @@
 
 							}
  ],
-						"originid" : "pat-1675"
+						"originid" : "pat-198"
 					}
 ,
 					"patching_rect" : [ 1532.0, 1077.0, 93.0, 22.0 ],
@@ -2399,7 +2399,7 @@
 
 							}
  ],
-						"originid" : "pat-1677"
+						"originid" : "pat-200"
 					}
 ,
 					"patching_rect" : [ 679.0, 220.171875, 143.0, 22.0 ],
@@ -3087,7 +3087,7 @@
 
 							}
  ],
-						"originid" : "pat-1711",
+						"originid" : "pat-234",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4037,7 +4037,7 @@
 
 			}
  ],
-		"originid" : "pat-1669",
+		"originid" : "pat-192",
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"button" : 				{
