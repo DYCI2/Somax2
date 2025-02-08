@@ -544,7 +544,7 @@
 
 							}
  ],
-						"originid" : "pat-1614"
+						"originid" : "pat-137"
 					}
 ,
 					"patching_rect" : [ 1714.75, 1223.9900090000001, 91.0, 22.0 ],
@@ -560,7 +560,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-92",
 					"linecount" : 2,
 					"maxclass" : "comment",
@@ -578,7 +577,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
-					"hidden" : 1,
 					"id" : "obj-94",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -595,7 +593,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-95",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -1072,7 +1069,7 @@
 
 							}
  ],
-						"originid" : "pat-1635"
+						"originid" : "pat-158"
 					}
 ,
 					"patching_rect" : [ 365.0, 1516.0, 87.666666666666629, 36.0 ],
@@ -1140,7 +1137,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 535.345238095238074, 556.952314739831309, 98.0, 18.0 ],
+					"patching_rect" : [ 572.0, 557.0, 98.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 23.0, 224.0, 220.0, 18.0 ],
 					"text" : "Player Controls",
@@ -1596,7 +1593,7 @@
 
 							}
  ],
-						"originid" : "pat-1637"
+						"originid" : "pat-160"
 					}
 ,
 					"patching_rect" : [ 1050.0, 1262.0, 104.0, 22.0 ],
@@ -2024,7 +2021,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 359.333333333333314, 1127.25, 90.0, 22.0 ],
+					"patching_rect" : [ 369.0, 1127.0, 90.0, 22.0 ],
 					"text" : "s #0_status"
 				}
 
@@ -2717,7 +2714,7 @@
 
 							}
  ],
-						"originid" : "pat-1639"
+						"originid" : "pat-162"
 					}
 ,
 					"patching_rect" : [ 1175.0, 1262.0, 114.0, 22.0 ],
@@ -2918,7 +2915,7 @@
 
 							}
  ],
-						"originid" : "pat-1641"
+						"originid" : "pat-164"
 					}
 ,
 					"patching_rect" : [ 1135.0, 1156.0, 99.0, 22.0 ],
@@ -3357,7 +3354,7 @@
 
 											}
  ],
-										"originid" : "pat-1715"
+										"originid" : "pat-238"
 									}
 ,
 									"patching_rect" : [ 127.5625, 159.0, 84.0, 22.0 ],
@@ -3545,7 +3542,7 @@
 
 											}
  ],
-										"originid" : "pat-1717"
+										"originid" : "pat-240"
 									}
 ,
 									"patching_rect" : [ 30.0, 159.0, 87.0, 22.0 ],
@@ -3892,7 +3889,7 @@
 
 															}
  ],
-														"originid" : "pat-1721"
+														"originid" : "pat-244"
 													}
 ,
 													"patching_rect" : [ 89.0, 99.0, 173.0, 22.0 ],
@@ -4033,7 +4030,7 @@
 
 											}
  ],
-										"originid" : "pat-1719"
+										"originid" : "pat-242"
 									}
 ,
 									"patching_rect" : [ 364.0, 542.0, 35.0, 22.0 ],
@@ -4394,7 +4391,7 @@
 
 											}
  ],
-										"originid" : "pat-1723"
+										"originid" : "pat-246"
 									}
 ,
 									"patching_rect" : [ 304.0, 182.0, 91.0, 22.0 ],
@@ -4847,7 +4844,7 @@
 
 											}
  ],
-										"originid" : "pat-1725"
+										"originid" : "pat-248"
 									}
 ,
 									"patching_rect" : [ 556.0, 196.0, 51.0, 22.0 ],
@@ -5513,7 +5510,7 @@
 
 							}
  ],
-						"originid" : "pat-1713",
+						"originid" : "pat-236",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5754,7 +5751,7 @@
 					"numoutlets" : 4,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "", "int", "", "" ],
-					"patching_rect" : [ 285.0, 548.0, 242.0, 437.0 ],
+					"patching_rect" : [ 285.0, 546.0, 271.0, 446.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 2.0, 241.0, 263.0, 478.0 ],
 					"varname" : "somax.player.ui",
@@ -5819,7 +5816,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 535.345238095238074, 556.952314739831309, 98.0, 18.0 ],
+					"patching_rect" : [ 572.0, 557.0, 98.0, 18.0 ],
 					"proportion" : 0.5
 				}
 
@@ -6884,7 +6881,7 @@
 
 			}
  ],
-		"originid" : "pat-1485",
+		"originid" : "pat-8",
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-94", "obj-92", "obj-95" ]
 			}
