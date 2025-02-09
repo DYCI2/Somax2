@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 468.0, 100.0, 792.0, 983.0 ],
+		"rect" : [ 758.0, 100.0, 502.0, 983.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"integercoordinates" : 1,
@@ -5787,7 +5787,7 @@
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 1050.0, 1711.0, 246.0, 69.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 3.0, 706.0, 264.0, 68.0 ],
+					"presentation_rect" : [ 3.0, 711.0, 264.0, 68.0 ],
 					"varname" : "audioinfluencer",
 					"viewvisibility" : 1
 				}
