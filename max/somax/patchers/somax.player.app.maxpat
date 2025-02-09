@@ -10,11 +10,29 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 468.0, 100.0, 826.0, 983.0 ],
+		"rect" : [ 468.0, 100.0, 792.0, 983.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"integercoordinates" : 1,
 		"boxes" : [ 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.172137149796092, 0.172137100044002, 0.172137113045018, 0.0 ],
+					"border" : 1,
+					"bordercolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
+					"id" : "obj-134",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1931.0, 43.0, 76.0, 15.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 179.0, 313.0, 76.0, 15.0 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"id" : "obj-129",
@@ -3081,7 +3099,7 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 1.0 ],
+					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.0 ],
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-908",
@@ -3093,7 +3111,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1882.0, 42.0, 54.0, 19.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 179.0, 310.0, 79.0, 15.0 ],
+					"presentation_rect" : [ 177.0, 313.0, 79.0, 15.0 ],
 					"rounded" : 8.0,
 					"spacing_y" : 1.1,
 					"text" : "Save/Load",
