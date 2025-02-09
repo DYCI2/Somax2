@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 868.0, 100.0, 426.0, 983.0 ],
+		"rect" : [ 706.0, 100.0, 560.0, 983.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"showontab" : 0,
@@ -27,7 +27,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 725.0, 1596.0, 23.0, 25.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 3.0, 52.0, 264.0, 398.0 ],
+					"presentation_rect" : [ 3.0, 49.0, 264.0, 398.0 ],
 					"proportion" : 0.5,
 					"rounded" : 0
 				}
@@ -45,7 +45,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 448.0, 808.0, 19.0, 19.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 3.0, 52.0, 264.0, 398.0 ],
+					"presentation_rect" : [ 3.0, 49.0, 264.0, 398.0 ],
 					"proportion" : 0.5,
 					"rounded" : 0
 				}
@@ -110,7 +110,7 @@
 					"angle" : 270.0,
 					"bgcolor" : [ 0.172137149796092, 0.172137100044002, 0.172137113045018, 0.0 ],
 					"border" : 1,
-					"bordercolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
+					"bordercolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"id" : "obj-29",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -118,7 +118,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 272.0, 979.0, 77.0, 19.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 179.0, 54.0, 76.0, 14.0 ],
+					"presentation_rect" : [ 177.0, 54.0, 79.0, 14.0 ],
 					"proportion" : 0.5
 				}
 
@@ -786,7 +786,7 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.0 ],
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-434",
