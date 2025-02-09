@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 785.0, 100.0, 1226.0, 983.0 ],
+		"rect" : [ 468.0, 100.0, 826.0, 983.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"integercoordinates" : 1,
@@ -88,7 +88,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 23.0, 143.0, 220.0, 18.0 ],
 					"text" : "Corpus Recording",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -135,7 +135,7 @@
 				"box" : 				{
 					"id" : "obj-105",
 					"justification" : 1,
-					"linecolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"linecolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -544,7 +544,7 @@
 
 							}
  ],
-						"originid" : "pat-137"
+						"originid" : "pat-1532"
 					}
 ,
 					"patching_rect" : [ 1714.75, 1223.9900090000001, 91.0, 22.0 ],
@@ -560,7 +560,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-92",
 					"linecount" : 2,
 					"maxclass" : "comment",
@@ -578,7 +577,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
-					"hidden" : 1,
 					"id" : "obj-94",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -595,7 +593,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-95",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -1072,7 +1069,7 @@
 
 							}
  ],
-						"originid" : "pat-158"
+						"originid" : "pat-1553"
 					}
 ,
 					"patching_rect" : [ 365.0, 1516.0, 87.666666666666629, 36.0 ],
@@ -1144,7 +1141,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 23.0, 224.0, 220.0, 18.0 ],
 					"text" : "Player Controls",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -1153,7 +1150,7 @@
 				"box" : 				{
 					"id" : "obj-115",
 					"justification" : 1,
-					"linecolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"linecolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1182,7 +1179,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 24.0, 778.0, 220.0, 18.0 ],
 					"text" : "Output Control",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -1191,7 +1188,7 @@
 				"box" : 				{
 					"id" : "obj-110",
 					"justification" : 1,
-					"linecolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"linecolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1220,7 +1217,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 24.0, 689.0, 220.0, 18.0 ],
 					"text" : "Outgoing Influences",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -1229,7 +1226,7 @@
 				"box" : 				{
 					"id" : "obj-107",
 					"justification" : 1,
-					"linecolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"linecolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1596,7 +1593,7 @@
 
 							}
  ],
-						"originid" : "pat-160"
+						"originid" : "pat-1555"
 					}
 ,
 					"patching_rect" : [ 1050.0, 1262.0, 104.0, 22.0 ],
@@ -2717,7 +2714,7 @@
 
 							}
  ],
-						"originid" : "pat-162"
+						"originid" : "pat-1557"
 					}
 ,
 					"patching_rect" : [ 1175.0, 1262.0, 114.0, 22.0 ],
@@ -2918,7 +2915,7 @@
 
 							}
  ],
-						"originid" : "pat-164"
+						"originid" : "pat-1559"
 					}
 ,
 					"patching_rect" : [ 1135.0, 1156.0, 99.0, 22.0 ],
@@ -3357,7 +3354,7 @@
 
 											}
  ],
-										"originid" : "pat-238"
+										"originid" : "pat-1633"
 									}
 ,
 									"patching_rect" : [ 127.5625, 159.0, 84.0, 22.0 ],
@@ -3545,7 +3542,7 @@
 
 											}
  ],
-										"originid" : "pat-240"
+										"originid" : "pat-1635"
 									}
 ,
 									"patching_rect" : [ 30.0, 159.0, 87.0, 22.0 ],
@@ -3892,7 +3889,7 @@
 
 															}
  ],
-														"originid" : "pat-244"
+														"originid" : "pat-1639"
 													}
 ,
 													"patching_rect" : [ 89.0, 99.0, 173.0, 22.0 ],
@@ -4033,7 +4030,7 @@
 
 											}
  ],
-										"originid" : "pat-242"
+										"originid" : "pat-1637"
 									}
 ,
 									"patching_rect" : [ 364.0, 542.0, 35.0, 22.0 ],
@@ -4394,7 +4391,7 @@
 
 											}
  ],
-										"originid" : "pat-246"
+										"originid" : "pat-1641"
 									}
 ,
 									"patching_rect" : [ 304.0, 182.0, 91.0, 22.0 ],
@@ -4847,7 +4844,7 @@
 
 											}
  ],
-										"originid" : "pat-248"
+										"originid" : "pat-1643"
 									}
 ,
 									"patching_rect" : [ 556.0, 196.0, 51.0, 22.0 ],
@@ -5513,7 +5510,7 @@
 
 							}
  ],
-						"originid" : "pat-236",
+						"originid" : "pat-1631",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5618,7 +5615,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 11.0, 4.0, 232.0, 22.0 ],
 					"text" : "Player",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -5628,7 +5625,7 @@
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
 					"border" : 1,
-					"bordercolor" : [ 0.6, 0.6, 0.6, 1.0 ],
+					"bordercolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"id" : "obj-68",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -6884,7 +6881,7 @@
 
 			}
  ],
-		"originid" : "pat-8",
+		"originid" : "pat-1403",
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-94", "obj-92", "obj-95" ]
 			}
