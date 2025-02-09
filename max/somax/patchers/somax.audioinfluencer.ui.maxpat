@@ -25,7 +25,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 141.0, 425.0, 128.0, 128.0 ],
+					"patching_rect" : [ 337.0, 523.0, 44.0, 46.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 201.0, 3.0, 52.0, 37.0 ],
 					"proportion" : 0.5,
@@ -44,7 +44,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 126.0, 410.0, 128.0, 128.0 ],
+					"patching_rect" : [ 243.0, 523.0, 44.0, 46.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 130.0, 3.0, 52.0, 37.0 ],
 					"proportion" : 0.5,
@@ -74,7 +74,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-105",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -100,7 +99,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 199.0, 42.0, 56.0, 18.0 ],
 					"text" : "MFCC",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -216,7 +215,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 21.719928590260793, 73.913211087696993, 41.0, 18.0 ],
 					"text" : "Enable",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -438,7 +437,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 4.0, 42.0, 40.0, 18.0 ],
 					"text" : "Onset",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -455,7 +454,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 58.0, 42.0, 56.0, 18.0 ],
 					"text" : "Pitch",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -472,7 +471,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 128.0, 42.0, 56.0, 18.0 ],
 					"text" : "Chroma",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
 
