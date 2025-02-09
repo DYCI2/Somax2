@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 453.0, 100.0, 1226.0, 983.0 ],
+		"rect" : [ 785.0, 100.0, 1226.0, 983.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"integercoordinates" : 1,
@@ -112,7 +112,7 @@
 					"outlettype" : [ "", "", "", "signal", "multichannelsignal", "", "" ],
 					"patching_rect" : [ 881.0, 403.0, 227.0, 65.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 159.0, 252.0, 65.0 ],
+					"presentation_rect" : [ 7.0, 159.0, 258.0, 65.0 ],
 					"varname" : "somax.audiorecord.ui",
 					"viewvisibility" : 1
 				}
@@ -5075,7 +5075,7 @@
 									"patching_rect" : [ 139.0, 368.0, 100.0, 19.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 5.416666507720947, 50.96435546875, 132.0, 18.5 ],
-									"text" : "Player-20250208",
+									"text" : "Player-20250209",
 									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textjustification" : 1
 								}
@@ -5728,7 +5728,7 @@
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 1050.0, 1711.0, 246.0, 69.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -2.0, 706.0, 264.0, 68.0 ],
+					"presentation_rect" : [ 3.0, 706.0, 264.0, 68.0 ],
 					"varname" : "audioinfluencer",
 					"viewvisibility" : 1
 				}
