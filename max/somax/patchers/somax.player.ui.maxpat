@@ -7605,9 +7605,9 @@
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 2613.13840572784693, 759.554370433660551, 111.0, 18.439567114741294 ],
+					"patching_rect" : [ 2613.0, 760.0, 111.0, 18.439567114741294 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 153.0, 196.0, 104.0, 19.0 ],
+					"presentation_rect" : [ 154.0, 196.0, 104.0, 19.0 ],
 					"viewvisibility" : 1
 				}
 
