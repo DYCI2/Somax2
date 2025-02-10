@@ -453,7 +453,7 @@
 
 							}
  ],
-						"originid" : "pat-1623"
+						"originid" : "pat-228"
 					}
 ,
 					"patching_rect" : [ 104.0, 499.0, 151.0, 23.0 ],
@@ -488,6 +488,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-39",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -646,7 +647,7 @@
 
 							}
  ],
-						"originid" : "pat-1625"
+						"originid" : "pat-230"
 					}
 ,
 					"patching_rect" : [ 1200.0, 141.0, 35.0, 22.0 ],
@@ -694,11 +695,11 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1512.0, 215.0, 143.0, 22.0 ],
 					"restore" : 					{
-						"_source" : [ "<None>" ],
+						"_source" : [ "AudioInfluencer" ],
 						"chroma" : [ 1.0 ],
 						"chromaonset" : [ 1 ],
 						"enable" : [ 1 ],
-						"influencedelay" : [ 0.0 ],
+						"influencedelay" : [ 3542.0 ],
 						"mfcc" : [ 1.0 ],
 						"onset" : [ 1 ],
 						"pitch" : [ 1 ]
@@ -1625,7 +1626,7 @@
 , 			{
 				"box" : 				{
 					"activebgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"activeslidercolor" : [ 0.439216, 0.74902, 0.254902, 1.0 ],
+					"activeslidercolor" : [ 0.368627450980392, 0.631372549019608, 0.215686274509804, 1.0 ],
 					"appearance" : 2,
 					"background" : 1,
 					"fontface" : 1,
@@ -2281,7 +2282,7 @@
 
 			}
  ],
-		"originid" : "pat-1621",
+		"originid" : "pat-226",
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-86", "obj-41" ]
 			}
