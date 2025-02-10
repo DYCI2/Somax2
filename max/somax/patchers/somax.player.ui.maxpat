@@ -27,7 +27,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 725.0, 1596.0, 23.0, 25.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 305.0, 616.0, 264.0, 398.0 ],
+					"presentation_rect" : [ 3.0, 50.0, 264.0, 398.0 ],
 					"proportion" : 0.5,
 					"rounded" : 0
 				}
@@ -45,7 +45,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 448.0, 808.0, 19.0, 19.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 305.0, 616.0, 264.0, 398.0 ],
+					"presentation_rect" : [ 3.0, 50.0, 264.0, 398.0 ],
 					"proportion" : 0.5,
 					"rounded" : 0
 				}
@@ -1602,7 +1602,7 @@
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 1599.666403124279896, 1550.119441176056171, 244.0, 95.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 23.0, 266.0, 228.0, 86.0 ],
+					"presentation_rect" : [ 21.0, 266.0, 228.0, 86.0 ],
 					"varname" : "somax.regionmask",
 					"viewvisibility" : 1
 				}
