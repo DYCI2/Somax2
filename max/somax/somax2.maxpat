@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ -459.0, -1237.0, 811.0, 956.0 ],
+		"rect" : [ 69.0, 100.0, 811.0, 956.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -124,7 +124,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-5588",
+		"originid" : "pat-6",
 		"parameters" : 		{
 			"obj-11::obj-118::obj-114" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-11::obj-118::obj-119" : [ "live.text[67]", "live.text[30]", 0 ],
