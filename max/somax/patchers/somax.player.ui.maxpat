@@ -81,7 +81,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 448.0, 807.0, 23.0, 25.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 86.0, 528.0, 264.0, 398.0 ],
+					"presentation_rect" : [ 3.0, 51.0, 264.0, 398.0 ],
 					"proportion" : 0.5,
 					"rounded" : 0
 				}
@@ -99,7 +99,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 725.0, 1599.0, 19.0, 19.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 86.0, 528.0, 264.0, 398.0 ],
+					"presentation_rect" : [ 3.0, 51.0, 264.0, 398.0 ],
 					"proportion" : 0.5,
 					"rounded" : 0
 				}
@@ -843,21 +843,6 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-112",
-					"linecount" : 6,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 788.0, 539.0, 150.0, 87.0 ],
-					"presentation" : 1,
-					"presentation_linecount" : 6,
-					"presentation_rect" : [ 873.0, 405.0, 150.0, 87.0 ],
-					"text" : "Another question here is whether we should have two different visualiations, one for MIDI Corpora (no mfcc) and one for Audio Corpora (MFCC)?"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"color" : [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
 					"id" : "obj-106",
 					"maxclass" : "newobj",
@@ -911,118 +896,6 @@
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"texton" : "Continuous",
 					"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-138",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 190.0, 841.0, 150.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 605.0, 271.0, 49.0, 20.0 ],
-					"text" : "PEAKS"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-127",
-					"linecount" : 3,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 102.0, 641.0, 150.0, 47.0 ],
-					"presentation" : 1,
-					"presentation_linecount" : 2,
-					"presentation_rect" : [ 776.0, 170.0, 173.0, 33.0 ],
-					"text" : "(panel over ngram order when MFCC atom is disabled)"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-122",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 615.0, 589.0, 150.0, 33.0 ],
-					"presentation" : 1,
-					"presentation_linecount" : 2,
-					"presentation_rect" : [ 610.0, 357.0, 203.0, 33.0 ],
-					"text" : "Panels over weights (for when atom is disabled)"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-121",
-					"linecount" : 3,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 101.0, 619.0, 150.0, 47.0 ],
-					"presentation" : 1,
-					"presentation_linecount" : 2,
-					"presentation_rect" : [ 592.0, 178.0, 179.0, 33.0 ],
-					"text" : "(panel over ngram order when MFCC atom is disabled)"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-119",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 52.0, 696.0, 150.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 794.0, 277.0, 49.0, 20.0 ],
-					"text" : "PEAKS"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-114",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 35.0, 572.0, 150.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 783.0, 73.0, 110.0, 20.0 ],
-					"text" : "EXT MFCC Layer"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-113",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 75.0, 593.0, 150.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 611.0, 75.0, 110.0, 20.0 ],
-					"text" : "SELF MFCC Layer"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 1,
-					"id" : "obj-111",
-					"linecount" : 3,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 97.0, 561.0, 151.0, 47.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 600.0, 29.0, 292.0, 20.0 ],
-					"text" : "TODO (delete all black-text comments afterwards)"
 				}
 
 			}
@@ -8512,24 +8385,6 @@
 					"patching_rect" : [ 728.390809542303032, 1323.920199000000139, 47.679254055023193, 18.0 ],
 					"proportion" : 0.5,
 					"rounded" : 0
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.358311964349916, 0.842696656897025, 0.838660117792465, 0.0 ],
-					"border" : 3,
-					"bordercolor" : [ 0.358311964349916, 0.842696656897025, 0.838660117792465, 1.0 ],
-					"id" : "obj-139",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 189.0, 611.0, 128.0, 128.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 588.0, 537.0, 421.0, 458.0 ],
-					"proportion" : 0.5
 				}
 
 			}
