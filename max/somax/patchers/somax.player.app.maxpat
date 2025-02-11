@@ -619,7 +619,7 @@
 
 							}
  ],
-						"originid" : "pat-137"
+						"originid" : "pat-5719"
 					}
 ,
 					"patching_rect" : [ 1714.75, 1223.9900090000001, 91.0, 22.0 ],
@@ -828,7 +828,7 @@
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 738.0, 2086.0, 248.0, 31.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 6.0, 890.0, 262.0, 31.0 ],
+					"presentation_rect" : [ 17.0, 890.0, 262.0, 31.0 ],
 					"varname" : "midioutput",
 					"viewvisibility" : 1
 				}
@@ -1150,7 +1150,7 @@
 
 							}
  ],
-						"originid" : "pat-158"
+						"originid" : "pat-5740"
 					}
 ,
 					"patching_rect" : [ 365.0, 1516.0, 87.666666666666629, 36.0 ],
@@ -1675,7 +1675,7 @@
 
 							}
  ],
-						"originid" : "pat-160"
+						"originid" : "pat-5742"
 					}
 ,
 					"patching_rect" : [ 1050.0, 1262.0, 104.0, 22.0 ],
@@ -2833,7 +2833,7 @@
 
 							}
  ],
-						"originid" : "pat-162"
+						"originid" : "pat-5744"
 					}
 ,
 					"patching_rect" : [ 1175.0, 1262.0, 114.0, 22.0 ],
@@ -3034,7 +3034,7 @@
 
 							}
  ],
-						"originid" : "pat-164"
+						"originid" : "pat-5746"
 					}
 ,
 					"patching_rect" : [ 1135.0, 1156.0, 99.0, 22.0 ],
@@ -3473,7 +3473,7 @@
 
 											}
  ],
-										"originid" : "pat-238"
+										"originid" : "pat-5820"
 									}
 ,
 									"patching_rect" : [ 127.5625, 159.0, 84.0, 22.0 ],
@@ -3661,7 +3661,7 @@
 
 											}
  ],
-										"originid" : "pat-240"
+										"originid" : "pat-5822"
 									}
 ,
 									"patching_rect" : [ 30.0, 159.0, 87.0, 22.0 ],
@@ -4008,7 +4008,7 @@
 
 															}
  ],
-														"originid" : "pat-244"
+														"originid" : "pat-5826"
 													}
 ,
 													"patching_rect" : [ 89.0, 99.0, 173.0, 22.0 ],
@@ -4149,7 +4149,7 @@
 
 											}
  ],
-										"originid" : "pat-242"
+										"originid" : "pat-5824"
 									}
 ,
 									"patching_rect" : [ 364.0, 542.0, 35.0, 22.0 ],
@@ -4510,7 +4510,7 @@
 
 											}
  ],
-										"originid" : "pat-246"
+										"originid" : "pat-5828"
 									}
 ,
 									"patching_rect" : [ 304.0, 182.0, 91.0, 22.0 ],
@@ -4963,7 +4963,7 @@
 
 											}
  ],
-										"originid" : "pat-248"
+										"originid" : "pat-5830"
 									}
 ,
 									"patching_rect" : [ 556.0, 196.0, 51.0, 22.0 ],
@@ -5629,7 +5629,7 @@
 
 							}
  ],
-						"originid" : "pat-236",
+						"originid" : "pat-5818",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -7000,7 +7000,7 @@
 
 			}
  ],
-		"originid" : "pat-8",
+		"originid" : "pat-5590",
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-94", "obj-92", "obj-95" ]
 			}
