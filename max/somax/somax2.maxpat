@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 78.0, 100.0, 811.0, 956.0 ],
+		"rect" : [ -459.0, -1237.0, 811.0, 956.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -31,7 +31,7 @@
 					"outlettype" : [ "multichannelsignal", "", "", "", "" ],
 					"patching_rect" : [ 793.0, 77.0, 254.0, 968.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 256.0, 4.0, 272.0, 924.0 ],
+					"presentation_rect" : [ 263.0, 4.0, 272.0, 924.0 ],
 					"varname" : "somax.player.app",
 					"viewvisibility" : 1
 				}
@@ -79,7 +79,7 @@
 					"outlettype" : [ "", "multichannelsignal", "", "", "" ],
 					"patching_rect" : [ 277.0, 77.0, 251.0, 324.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.5, 4.0, 251.0, 323.0 ],
+					"presentation_rect" : [ 2.0, 4.0, 259.0, 323.0 ],
 					"varname" : "somax.audioinfluencer.app",
 					"viewvisibility" : 1
 				}
@@ -94,7 +94,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 22.75, 467.0, 45.0, 45.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 537.75, 209.0, 45.0, 45.0 ]
+					"presentation_rect" : [ 566.0, 209.0, 45.0, 45.0 ]
 				}
 
 			}
@@ -124,7 +124,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-1483",
+		"originid" : "pat-5588",
 		"parameters" : 		{
 			"obj-11::obj-118::obj-114" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-11::obj-118::obj-119" : [ "live.text[67]", "live.text[30]", 0 ],
