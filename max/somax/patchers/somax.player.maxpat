@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 163.0, 269.0, 450.0, 760.0 ],
+		"rect" : [ 50.0, 66.0, 1332.0, 760.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"toolbarvisible" : 0,
@@ -1130,6 +1130,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"id" : "obj-88",
 					"ignoreclick" : 1,
 					"maxclass" : "multislider",
@@ -1166,6 +1167,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"id" : "obj-78",
 					"ignoreclick" : 1,
 					"maxclass" : "multislider",
@@ -30873,6 +30875,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"color" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"columns" : 12,
 					"elementcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
@@ -30963,6 +30966,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"id" : "obj-887",
 					"ignoreclick" : 1,
 					"maxclass" : "multislider",
@@ -32671,7 +32675,7 @@
 						"__exp_tempoconsistencylen" : [ 5 ],
 						"__exp_tempoconsistencysigma" : [ 5 ],
 						"_transpositions" : [ 5, 0, 1.0 ],
-						"_weights" : [ 0.25, 0.25, 0.25, 1.0, 0.07665108812099, 0.119798226761166 ],
+						"_weights" : [ 0.25, 0.25, 0.25, 1.0, 0.5, 0.5 ],
 						"artificialmidities" : [ 0 ],
 						"continuity" : [ 1.5 ],
 						"cut" : [ 1 ],
@@ -34124,6 +34128,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"id" : "obj-468",
 					"ignoreclick" : 1,
 					"maxclass" : "multislider",
@@ -34143,6 +34148,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"id" : "obj-467",
 					"ignoreclick" : 1,
 					"maxclass" : "multislider",
@@ -34162,6 +34168,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"id" : "obj-466",
 					"ignoreclick" : 1,
 					"maxclass" : "multislider",
@@ -34194,6 +34201,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"id" : "obj-431",
 					"ignoreclick" : 1,
 					"maxclass" : "multislider",
