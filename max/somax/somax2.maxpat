@@ -116,7 +116,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 15.0, 77.0, 254.0, 299.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 2.5, 552.5, 254.0, 299.0 ],
+					"presentation_rect" : [ 3.0, 553.0, 258.0, 299.0 ],
 					"varname" : "somax.server.app",
 					"viewvisibility" : 1
 				}
@@ -124,7 +124,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-4838",
+		"originid" : "pat-11082",
 		"parameters" : 		{
 			"obj-11::obj-118::obj-114" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-11::obj-118::obj-119" : [ "live.text[67]", "live.text[30]", 0 ],
