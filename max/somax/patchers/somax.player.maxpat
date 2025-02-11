@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 48.0, 66.0, 1269.0, 760.0 ],
+		"rect" : [ 48.0, 66.0, 1391.0, 760.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"toolbarvisible" : 0,
@@ -5506,7 +5506,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
-					"hidden" : 1,
 					"id" : "obj-1072",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -12618,7 +12617,7 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"candicane2" : [ 0.827450980392157, 0.423529411764706, 0.996078431372549, 1.0 ],
 					"candicane3" : [ 0.647058823529412, 0.913725490196078, 0.909803921568627, 1.0 ],
 					"candicane4" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ],
@@ -15703,7 +15702,7 @@
 					"patching_rect" : [ 1469.563818565402016, 4208.5, 161.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 21.41666666666697, 62.5, 202.84395863590575, 20.0 ],
-					"text" : "Fabbrizio2c",
+					"text" : "Joelle",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -27389,7 +27388,6 @@
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"gradient" : 1,
-					"hidden" : 1,
 					"id" : "obj-503",
 					"ignoreclick" : 1,
 					"maxclass" : "message",
@@ -27408,7 +27406,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"hidden" : 1,
 					"id" : "obj-1310",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -27475,7 +27472,7 @@
 					"patching_rect" : [ 1937.808440881044589, 4246.907651035666277, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 259.044702227558446, 381.369562898984498, 147.150410870214955, 12.0 ],
-					"size" : 235.0,
+					"size" : 80.0,
 					"thickness" : 70.0
 				}
 
@@ -28952,6 +28949,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
+					"hidden" : 1,
 					"id" : "obj-1167",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -30517,7 +30515,7 @@
 					"patching_rect" : [ 2208.308440881044589, 4246.907651035666277, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 23.0, 621.0, 182.0, 15.0 ],
-					"size" : 235.0
+					"size" : 80.0
 				}
 
 			}
@@ -30782,7 +30780,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"color" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"columns" : 12,
 					"elementcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
@@ -32581,7 +32578,7 @@
 						"__exp_tempoconsistencylen" : [ 5 ],
 						"__exp_tempoconsistencysigma" : [ 5 ],
 						"_transpositions" : [ 5, 0, 1.0 ],
-						"_weights" : [ 0.25, 0.25, 0.25, 1.0, 0.5, 0.5 ],
+						"_weights" : [ 0.25, 0.25, 0.25, 1.0, 0.654890909107317, 0.5 ],
 						"artificialmidities" : [ 0 ],
 						"continuity" : [ 1.5 ],
 						"cut" : [ 1 ],
@@ -32591,7 +32588,7 @@
 						"fallback" : [ "Random" ],
 						"flush" : [ 0.0 ],
 						"harmonicenable" : [ 1 ],
-						"harmonicngramorder" : [ 1 ],
+						"harmonicngramorder" : [ 2 ],
 						"harmonicpeakdecay" : [ 3.001 ],
 						"melodicenable" : [ 1 ],
 						"melodicmod12" : [ 0 ],
@@ -32599,17 +32596,17 @@
 						"melodicpeakdecay" : [ 2.001 ],
 						"mfccdistance" : [ 5.0 ],
 						"mfccenable" : [ 1 ],
-						"mfccngramorder" : [ 7 ],
+						"mfccngramorder" : [ 2 ],
 						"mfccpeakdecay" : [ 3.001 ],
 						"mididurations" : [ "Sustained" ],
-						"midinotebynote" : [ 0 ],
+						"midinotebynote" : [ 1 ],
 						"midionsets" : [ 0 ],
 						"outputfrom" : [ 0 ],
 						"outputprobability" : [ 1.0 ],
-						"playingmode" : [ 0 ],
+						"playingmode" : [ 1 ],
 						"pollpeaks" : [ 1 ],
 						"quality" : [ 0.0 ],
-						"recombine" : [ 0 ],
+						"recombine" : [ 1 ],
 						"resetinfluences" : [ 0.0 ],
 						"selfharmonicenable" : [ 1 ],
 						"selfharmonicngramorder" : [ 2 ],
@@ -32618,7 +32615,7 @@
 						"selfmfccdistance" : [ 5.0 ],
 						"selfmfccenable" : [ 1 ],
 						"selfmfccngramorder" : [ 2 ],
-						"selfmfccpeakdecay" : [ 1.001 ],
+						"selfmfccpeakdecay" : [ 3.001 ],
 						"selfmod12" : [ 0 ],
 						"selfngramorder" : [ 2 ],
 						"selfpeakdecay" : [ 2.001 ],
@@ -32628,7 +32625,7 @@
 						"timeoutenable" : [ 1 ],
 						"timestretch" : [ 1.0 ],
 						"timestretchmode" : [ 0 ],
-						"transpositionbias" : [ 0.0 ]
+						"transpositionbias" : [ 1.0 ]
 					}
 ,
 					"text" : "autopattr @autorestore 0",
@@ -34985,7 +34982,7 @@
 					"patching_rect" : [ 2111.547364733938593, 4246.907651035666277, 60.000000000000114, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 23.41666666666697, 621.634642261746535, 182.0, 14.5 ],
-					"size" : 235.0
+					"size" : 80.0
 				}
 
 			}
@@ -35033,7 +35030,7 @@
 					"patching_rect" : [ 1299.191666666667516, 4217.5, 136.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 66.0, 532.612867779498515, 162.360810332475694, 18.0 ],
-					"text" : "Fabbrizio2c",
+					"text" : "Joelle",
 					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ]
 				}
 
@@ -35049,7 +35046,7 @@
 					"patching_rect" : [ 1853.069517028150585, 4246.907651035666277, 44.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 144.835656285099049, 647.134642261746535, 57.0, 18.0 ],
-					"text" : "235",
+					"text" : "80",
 					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
