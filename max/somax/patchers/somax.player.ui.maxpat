@@ -5918,6 +5918,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"id" : "obj-188",
 					"ignoreclick" : 1,
 					"maxclass" : "led",
