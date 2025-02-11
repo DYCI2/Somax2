@@ -55,7 +55,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 533.0, 77.0, 250.0, 221.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 2.5, 329.0, 249.0, 220.0 ],
+					"presentation_rect" : [ 3.0, 329.0, 258.0, 220.0 ],
 					"varname" : "somax.midiinfluencer.app",
 					"viewvisibility" : 1
 				}
@@ -124,7 +124,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-6",
+		"originid" : "pat-4838",
 		"parameters" : 		{
 			"obj-11::obj-118::obj-114" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-11::obj-118::obj-119" : [ "live.text[67]", "live.text[30]", 0 ],
