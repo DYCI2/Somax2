@@ -3135,6 +3135,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"bordercolor" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"fontface" : 1,
 					"id" : "obj-17",
@@ -3146,7 +3147,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 903.25, 731.794871794871824, 137.0, 28.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 2.0, 66.5, 171.0, 20.5 ],
+					"presentation_rect" : [ 2.0, 66.75, 171.0, 20.5 ],
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
