@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 0.0, 125.0, 360.0, 780.0 ],
+		"rect" : [ 34.0, 125.0, 342.0, 885.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"toolbarvisible" : 0,
@@ -901,7 +901,7 @@
 
 											}
  ],
-										"originid" : "pat-15024"
+										"originid" : "pat-1309"
 									}
 ,
 									"patching_rect" : [ 515.624999999999773, 112.439567114741294, 51.0, 22.0 ],
@@ -1599,7 +1599,7 @@
 
 							}
  ],
-						"originid" : "pat-15022",
+						"originid" : "pat-1307",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-1080", "obj-1068", "obj-1022", "obj-1121", "obj-74", "obj-1020", "obj-1015" ]
 							}
@@ -1850,7 +1850,7 @@
 
 							}
  ],
-						"originid" : "pat-15026"
+						"originid" : "pat-1311"
 					}
 ,
 					"patching_rect" : [ 337.0, 196.0, 115.0, 22.0 ],
@@ -2489,7 +2489,7 @@
 
 							}
  ],
-						"originid" : "pat-15028"
+						"originid" : "pat-1313"
 					}
 ,
 					"patching_rect" : [ 415.125, 937.5, 71.0, 22.0 ],
@@ -2664,7 +2664,7 @@
 
 							}
  ],
-						"originid" : "pat-15030"
+						"originid" : "pat-1315"
 					}
 ,
 					"patching_rect" : [ 253.0, 509.0, 71.0, 22.0 ],
@@ -2835,7 +2835,7 @@
 
 							}
  ],
-						"originid" : "pat-15032"
+						"originid" : "pat-1317"
 					}
 ,
 					"patching_rect" : [ 1027.25, 517.663336431226753, 87.75, 22.0 ],
@@ -3198,7 +3198,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 979.0, 272.0, 1904.0, 1259.0 ],
+						"rect" : [ 68.0, 100.0, 1626.0, 983.0 ],
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
@@ -3326,6 +3326,7 @@
 								"box" : 								{
 									"fontface" : 1,
 									"fontsize" : 10.0,
+									"hidden" : 1,
 									"id" : "obj-185",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -3343,6 +3344,7 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.2, 0.2, 0.2, 0.8 ],
+									"hidden" : 1,
 									"id" : "obj-193",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -3359,6 +3361,7 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+									"hidden" : 1,
 									"id" : "obj-195",
 									"ignoreclick" : 0,
 									"maxclass" : "panel",
@@ -3658,7 +3661,7 @@
 
 											}
  ],
-										"originid" : "pat-15063"
+										"originid" : "pat-1348"
 									}
 ,
 									"patching_rect" : [ 1721.25, 762.790996860009272, 35.0, 22.0 ],
@@ -4805,7 +4808,7 @@
 
 																			}
  ],
-																		"originid" : "pat-15070"
+																		"originid" : "pat-1355"
 																	}
 ,
 																	"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -4854,7 +4857,7 @@
 
 															}
  ],
-														"originid" : "pat-15068"
+														"originid" : "pat-1353"
 													}
 ,
 													"patching_rect" : [ 235.666666984558105, 38.333333998918533, 22.0, 20.0 ],
@@ -5418,7 +5421,7 @@
 
 																			}
  ],
-																		"originid" : "pat-15075"
+																		"originid" : "pat-1360"
 																	}
 ,
 																	"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -5467,7 +5470,7 @@
 
 															}
  ],
-														"originid" : "pat-15073"
+														"originid" : "pat-1358"
 													}
 ,
 													"patching_rect" : [ 235.666666984558105, 55.833333998918533, 22.0, 57.66666778922081 ],
@@ -5743,7 +5746,7 @@
 
 															}
  ],
-														"originid" : "pat-15077"
+														"originid" : "pat-1362"
 													}
 ,
 													"patching_rect" : [ 439.624999999999773, 179.939567114741294, 51.0, 22.0 ],
@@ -5863,7 +5866,7 @@
 
 											}
  ],
-										"originid" : "pat-15065",
+										"originid" : "pat-1350",
 										"boxgroups" : [ 											{
 												"boxes" : [ "obj-2", "obj-3" ]
 											}
@@ -7873,7 +7876,7 @@
 
 															}
  ],
-														"originid" : "pat-15086"
+														"originid" : "pat-1371"
 													}
 ,
 													"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -7922,7 +7925,7 @@
 
 											}
  ],
-										"originid" : "pat-15084"
+										"originid" : "pat-1369"
 									}
 ,
 									"patching_rect" : [ 128.0, 784.316693863061573, 22.0, 60.0 ],
@@ -10374,7 +10377,7 @@
 
 							}
  ],
-						"originid" : "pat-15061",
+						"originid" : "pat-1346",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-185", "obj-193", "obj-195" ]
 							}
@@ -10647,7 +10650,7 @@
 
 											}
  ],
-										"originid" : "pat-15138"
+										"originid" : "pat-1375"
 									}
 ,
 									"patching_rect" : [ 1376.60909090909081, 393.0, 50.0, 22.0 ],
@@ -11019,7 +11022,7 @@
 
 											}
  ],
-										"originid" : "pat-15122"
+										"originid" : "pat-1377"
 									}
 ,
 									"patching_rect" : [ 1203.654545454545314, 323.0, 110.0, 22.0 ],
@@ -11059,13 +11062,13 @@
 							}
 , 							{
 								"box" : 								{
+									"hidden" : 1,
 									"id" : "obj-107",
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 1241.654545454545314, 383.0, 33.0, 22.0 ],
-									"text" : "|"
+									"patching_rect" : [ 1241.654545454545314, 383.0, 33.0, 22.0 ]
 								}
 
 							}
@@ -11740,7 +11743,6 @@
 									"patching_rect" : [ 493.0, 266.0, 171.0, 25.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 137.708282499999996, 130.460829493087545, 157.416717500000004, 20.0 ],
-									"text" : "tibetan-bowl-26240",
 									"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"textjustification" : 1
 								}
@@ -11876,15 +11878,12 @@
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-11",
-									"linecount" : 5,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 91.0, 306.0, 156.0, 62.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 4,
 									"presentation_rect" : [ 17.0, 51.828514913465298, 186.0, 51.0 ],
-									"text" : "/Users/joakimborg/MaxProjects/SomaxResearch/classifiers/work2024/multilabel_corpusbuilder/corpora/tibetan-bowl-26240.aif",
 									"textcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 1.0 ]
 								}
 
@@ -12246,7 +12245,7 @@
 
 											}
  ],
-										"originid" : "pat-15090"
+										"originid" : "pat-1379"
 									}
 ,
 									"patching_rect" : [ 747.304545454545405, 152.439567114741294, 51.0, 22.0 ],
@@ -13297,7 +13296,7 @@
 
 							}
  ],
-						"originid" : "pat-15088",
+						"originid" : "pat-1373",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-61", "obj-62", "obj-65", "obj-69", "obj-56", "obj-66", "obj-67", "obj-1013" ]
 							}
@@ -14069,7 +14068,7 @@
 
 											}
  ],
-										"originid" : "pat-15094"
+										"originid" : "pat-1383"
 									}
 ,
 									"patching_rect" : [ 515.624999999999773, 112.439567114741294, 51.0, 22.0 ],
@@ -14697,7 +14696,7 @@
 
 							}
  ],
-						"originid" : "pat-15092",
+						"originid" : "pat-1381",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-1080", "obj-1068", "obj-1022", "obj-1121", "obj-74", "obj-1020", "obj-1015" ]
 							}
@@ -16315,7 +16314,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 9.0, 9.0, 315.0, 24.0 ],
 					"text" : "Audio Corpus Builder",
-					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
 
@@ -16360,7 +16359,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 19,
 					"presentation_rect" : [ 341.416666507720947, 31.0, 189.0, 261.0 ],
-					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/joakimborg/MaxProjects/Somax2/max/somax/corpus builder_address= 5343_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
+					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus builder_address= 1196_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -16385,7 +16384,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"bordercolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
 					"id" : "obj-1322",
 					"maxclass" : "panel",
@@ -17802,7 +17801,7 @@
 
 			}
  ],
-		"originid" : "pat-15020",
+		"originid" : "pat-1305",
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-1259", "obj-856" ]
 			}
