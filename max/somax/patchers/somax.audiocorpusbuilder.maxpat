@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 120.0, 340.0, 780.0 ],
+		"rect" : [ 44.0, 108.0, 340.0, 780.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"toolbarvisible" : 0,
@@ -8636,7 +8636,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 5.0, 41.0, 315.101168246139082, 105.0 ],
 									"selectioncolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
-									"setmode" : 3,
+									"setmode" : 1,
 									"waveformcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 								}
 
@@ -16156,6 +16156,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 271.029707603766269, 211.100000000000023, 18.869071761581608, 18.869071761581608 ],
 					"svg" : "",
+					"uncheckedcolor" : [ 0.6, 0.6, 0.6, 1.0 ],
 					"varname" : "windowadvanced"
 				}
 
