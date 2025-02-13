@@ -37,7 +37,6 @@
 					"bgcolor" : [ 0.172137149796092, 0.172137100044002, 0.172137113045018, 0.0 ],
 					"border" : 1,
 					"bordercolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
-					"hidden" : 1,
 					"id" : "obj-4",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -364,7 +363,7 @@
 
 							}
  ],
-						"originid" : "pat-2539"
+						"originid" : "pat-1086"
 					}
 ,
 					"patching_rect" : [ 371.499999999999773, 121.5, 103.0, 22.0 ],
@@ -454,7 +453,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1110.514512690056108, 207.0, 143.0, 22.0 ],
 					"restore" : 					{
-						"audiodevice" : [ "1 Input 1" ],
+						"audiodevice" : [ "Audio File" ],
 						"enabled" : [ 1 ],
 						"playlist" : [ 							{
 								"data" : 								{
@@ -888,7 +887,7 @@
 
 							}
  ],
-						"originid" : "pat-2541"
+						"originid" : "pat-1088"
 					}
 ,
 					"patching_rect" : [ 149.5, 366.0, 101.0, 22.0 ],
@@ -959,6 +958,7 @@
 			}
 , 			{
 				"box" : 				{
+					"hidden" : 1,
 					"id" : "obj-423",
 					"maxclass" : "meter~",
 					"numinlets" : 1,
@@ -976,6 +976,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-66",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -993,6 +994,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
+					"hidden" : 1,
 					"id" : "obj-68",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -1230,7 +1232,7 @@
 
 							}
  ],
-						"originid" : "pat-2543"
+						"originid" : "pat-1090"
 					}
 ,
 					"patching_rect" : [ 333.25, 761.0, 71.0, 22.0 ],
@@ -1284,7 +1286,6 @@
 					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.0 ],
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-299",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -1306,7 +1307,6 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
-					"hidden" : 1,
 					"id" : "obj-65",
 					"maxclass" : "meter~",
 					"numinlets" : 1,
@@ -1371,7 +1371,6 @@
 ,
 					"followglobaltempo" : 0,
 					"formantcorrection" : 0,
-					"hidden" : 1,
 					"id" : "obj-67",
 					"maxclass" : "playlist~",
 					"mode" : "basic",
@@ -1901,7 +1900,7 @@
 
 			}
  ],
-		"originid" : "pat-2537"
+		"originid" : "pat-1084"
 	}
 
 }
