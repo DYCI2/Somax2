@@ -24,6 +24,7 @@
 * Timeout (enable):                     timeoutenable <1/0>
 * Timeout (value):                      timeout <0..∞>
 * Timeout Behaviour:                    recombine <0/1>
+* Timeout Release time:                 timeoutrelease <0..∞> (0 is equivalent to off / legacy behaviour)
 * MIDI Reactive Mode:                   midinotebynote <0/1>
 
 * Continuity Factor:                    continuity <0..∞>
