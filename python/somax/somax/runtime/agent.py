@@ -176,7 +176,6 @@ class OscAgent(Agent, AsyncioOscObject):
                     self._trigger_output(trigger=event)
                 elif isinstance(event, ContinueEvent):
                     num_continue_events_left = sum([isinstance(e, ContinueEvent) for e in self.scheduling_handler._scheduler.queue])
-                    print("Num continue events left to process:", num_continue_events_left)
                     self._continue_output(continue_event=event)
                 elif isinstance(event, TempoEvent) and self.is_tempo_master:
                     self.tempo_send_queue.put(TempoMessage(tempo=event.tempo))
@@ -190,14 +189,12 @@ class OscAgent(Agent, AsyncioOscObject):
             self.last_status_time = current_time
 
     def _trigger_output(self, trigger: TriggerEvent):
-        # print("TRIGGER")
         scheduling_time: float = trigger.target_time
         scheduler_tempo: float = self.scheduling_handler.tempo
         try:
             event_transform_and_match_type: Optional[Tuple[CorpusEvent, AbstractTransform, bool]]
             # TODO: BeatPhase should not be `self.scheduling_handler.phase`, but needs to be stored in the trigger to
             #       make sure that it corresponds to `target time` rather than `trigger time`.
-            # print(f"TRIG: new event: {scheduling_time}")
             event_transform_and_match_type = self.player.new_event(scheduling_time,
                                                                    self.scheduling_handler.predict_phase(
                                                                        scheduling_time),
@@ -247,13 +244,11 @@ class OscAgent(Agent, AsyncioOscObject):
                                                  reset_timeout=True)
 
     def _continue_output(self, continue_event: ContinueEvent) -> None:
-        print("CONTINUE")
         scheduling_time: float = continue_event.target_time
 
         try:
             event_and_transform: Optional[tuple[CorpusEvent, AbstractTransform]]
             if self.recombine:
-                print(f"CONT: new event: {scheduling_time}")
                 event_transform_and_match_type = self.player.new_event(scheduling_time,
                                                                        self.scheduling_handler.predict_phase(
                                                                            scheduling_time),
@@ -273,7 +268,6 @@ class OscAgent(Agent, AsyncioOscObject):
                     event_and_transform = event_transform_and_match_type[0], event_transform_and_match_type[1]
 
             else:
-                print(f"CONT: step: {scheduling_time}")
                 event_and_transform = self.player.step(scheduling_time,
                                                        self.scheduling_handler.predict_phase(scheduling_time),
                                                        self.scheduling_handler.tempo)
@@ -288,7 +282,6 @@ class OscAgent(Agent, AsyncioOscObject):
             return
 
         if event_and_transform is None:
-            #     print("!!! NONE FROM CONTINUE !!!")
             self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_TIMEOUT)
         else:
             self.target.send(PlayerSendProtocol.OUTPUT_TYPE, PlayerSendProtocol.OUTPUT_TYPE_CONTINUE)
@@ -441,7 +434,6 @@ class OscAgent(Agent, AsyncioOscObject):
         """ Influence onset / trigger event """
         if self._enabled:
             self.scheduling_handler.add_trigger_event()
-            # print("-- Adding trigger")
 
     ######################################################
     # CREATION/DELETION OF ATOM

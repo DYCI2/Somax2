@@ -11,7 +11,7 @@ from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.audio_state_handler import AudioStateHandler
 from somax.scheduler.midi_state_handler import MidiStateHandler, NoteOffMode
 from somax.scheduler.scheduled_event import ScheduledEvent, TriggerEvent, ContinueEvent, AudioOffEvent, MidiNoteEvent, \
-    TimeoutInfoEvent, AudioContinueEvent
+    TimeoutInfoEvent, AudioContinueEvent, TimeoutReleaseEndEvent, TimeoutReleaseCancelEvent, TimeoutReleaseStartEvent
 from somax.scheduler.scheduler import Scheduler
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling, AbsoluteScheduling
 from somax.scheduler.time_object import Time
@@ -203,14 +203,10 @@ class SchedulingHandler(Introspective, ABC):
     def _handle_timeout_audio(self, current_time: float, events: List[ScheduledEvent]) -> List[ScheduledEvent]:
         audio_continuation_occurred: bool = any(isinstance(e, AudioContinueEvent) for e in events)
 
-        # if an AudioContinueEvent and an AudioOffEvent in the same buffer points at the same time, delete the AudioOffEvent:
+        # if an AudioContinueEvent and an AudioOffEvent exist in the same output buffer, delete the AudioOffEvent:
         if audio_continuation_occurred:
-            # # TODO: TEMPTEMPTEMP
-            # if any(isinstance(e, AudioOffEvent) for e in events):
-            #     print(f"Deleting AudioOffEvent: {[f'trig={e.trigger_time:.3f}, rel={e._release_time:.3f}' for e in events if isinstance(e, AudioOffEvent)]} due to continue events:"
-            #           f" {[f'continue trig={e.trigger_time:.3f}' for e in events if isinstance(e, AudioContinueEvent)]} at current time={current_time:.3f}")
-            # # TODO: END TEMPTEMPTMPE
-            return [e for e in events if not (isinstance(e, AudioOffEvent) and e.targets_current_time())]
+            return [e for e in events if not isinstance(e, AudioOffEvent)]
+
         # if no AudioContinueEvent occurred and an AudioOffEvent occurred, inform the AudioStateHandler
         else:
             if any(isinstance(e, AudioOffEvent) for e in events):
@@ -260,8 +256,6 @@ class SchedulingHandler(Introspective, ABC):
             Note: This function could be overloaded if the `SchedulingHandler` needs to store/handle state of received
                   `CorpusEvents`, but make sure to call `super().add_corpus_event` if overloading.
         """
-        print(f"------ trigger time: {trigger_time:.3f}")
-
         if event_and_transform is not None:
             event, applied_transform = event_and_transform  # type: CorpusEvent, AbstractTransform
 
@@ -272,6 +266,7 @@ class SchedulingHandler(Introspective, ABC):
             self._scheduler.remove_by_type(ContinueEvent)
             self._scheduler.remove_by_type(TriggerEvent)
             self._scheduler.remove_by_type(AudioOffEvent)
+            self._cancel_ongoing_timeout_release()
 
             if isinstance(event, MidiCorpusEvent):
                 scheduler_events: List[ScheduledEvent] = self.midi_handler.process(trigger_time=trigger_time,
@@ -375,31 +370,34 @@ class SchedulingHandler(Introspective, ABC):
                             f"mode '{self.scheduling_mode.__class__}'")
 
     def _handle_continue_event(self, continue_event: ContinueEvent, current_event_duration: float) -> None:
-        print(f"Continue event: trig={continue_event.trigger_time:.3f}, target={continue_event.target_time:.3f}, d: {current_event_duration:.3f}")
         if self._last_trigger_time is None:
             # Flushing has occurred
             self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
         elif self._timeout is None or continue_event.trigger_time - self._last_trigger_time < self._timeout:
             # Timeout has not passed: Player should continue playing for at least one more event
-            print(f"  Adding continue event: {continue_event.target_time:.2f} (trigger time: {continue_event.trigger_time:.2f})"
-                  f"timeout not passed: {continue_event.trigger_time - self._last_trigger_time:.2f} (timeout: {self._timeout})")
             self._scheduler.add_event(continue_event)
         else:
             # Timeout has passed: stop queueing ContinueEvent and if audio queue AudioOff
-            if self._timeout_release is None:
-                print("  timeout release NONE")
-                # Trigger AudioOff at the end of current event (Legacy behaviour maintained for backwards compatibility)
-                self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
-                self._scheduler.add_event(TimeoutInfoEvent(continue_event.target_time))
-            else:
-                # Trigger AudioOff so that the release (fadeout) ends exactly at the end of the current event
+            self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
+            self._scheduler.add_event(TimeoutInfoEvent(continue_event.target_time))
+
+            # If release is enabled, schedule a release envelope matching the end of the event that triggered this call
+            if self._timeout_release is not None:
                 timeout_release_time: float = min(self._timeout_release, current_event_duration)
                 timeout_trigger_time: float = continue_event.target_time - timeout_release_time
-                print(f"  timeout trigger time: {timeout_trigger_time:.2f}, timeout release time: {timeout_release_time:.2f}")
-                self._scheduler.add_event(AudioOffEvent(trigger_time=timeout_trigger_time,
-                                                        release_time=timeout_release_time))
-                self._scheduler.add_event(TimeoutInfoEvent(timeout_trigger_time))
-                self.audio_handler.clear_current_event()
+                self._scheduler.add_event(TimeoutReleaseStartEvent(trigger_time=timeout_trigger_time,
+                                                                   release_time=timeout_release_time))
+                self._scheduler.add_event(TimeoutReleaseEndEvent(trigger_time=continue_event.target_time))
+
+    def _cancel_ongoing_timeout_release(self) -> None:
+        release_end_event: List[ScheduledEvent] = self._scheduler.remove_by_type(TimeoutReleaseEndEvent)
+        if len(release_end_event) > 0:
+            self._scheduler.add_event(TimeoutReleaseCancelEvent(self.time))
+        # Note that an `AudioOffEvent` will still exist at the end of the timeout release,
+        #   so if this is called by a trigger that ultimately won't call `add_corpus_event` (e.g. from sparsity),
+        #   this will still turn of the audio as intended, just not with a proper timeout release.
+        # While this behaviour isn't perfect, we can safely assume that any user who deliberately sends triggers should
+        #   not be surprised by the fact that the timeout is cancelled under these circumstances.
 
     def start(self) -> None:
         self._scheduler.start()
@@ -513,6 +511,8 @@ class ManualSchedulingHandler(SchedulingHandler):
 
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
         if self._scheduler.running:
+            self._cancel_ongoing_timeout_release()
+
             if trigger_event is not None:
                 self._scheduler.add_event(trigger_event)
             else:
@@ -595,6 +595,8 @@ class IndirectSchedulingHandler(SchedulingHandler):
     def _on_trigger_received(self, trigger_event: Optional[TriggerEvent] = None) -> None:
         if not self._scheduler.running:
             return
+
+        self._cancel_ongoing_timeout_release()
 
         if self._scheduler.has_by_type(TriggerEvent):
             return

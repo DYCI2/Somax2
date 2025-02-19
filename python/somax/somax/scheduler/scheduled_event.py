@@ -23,6 +23,13 @@ class TempoEvent(ScheduledEvent):
         self.tempo = tempo
 
 
+class TimeoutReleaseEndEvent(ScheduledEvent):
+    """ Event indicating the end of the timeout release period."""
+
+    def __init__(self, trigger_time: float):
+        super().__init__(trigger_time=trigger_time)
+
+
 class RendererEvent(ScheduledEvent, ABC):
     def __init__(self, trigger_time: float):
         super().__init__(trigger_time=trigger_time)
@@ -136,16 +143,27 @@ class AudioContinueEvent(AudioBase):
 
 
 class AudioOffEvent(RendererEvent):
-    def __init__(self, trigger_time: float, release_time: Optional[float] = None):
+    def __init__(self, trigger_time: float):
+        super().__init__(trigger_time)
+
+    def render(self) -> List[RendererMessage]:
+        return [RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_OFF, content="")]
+
+
+class TimeoutReleaseStartEvent(RendererEvent):
+    def __init__(self, trigger_time: float, release_time: float):
         super().__init__(trigger_time)
         self._release_time: Optional[float] = release_time
 
     def render(self) -> List[RendererMessage]:
-        return [RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_OFF,
+        return [RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_TIMEOUT_RELEASE_START,
                                 content=self._release_time * 1000.0 if self._release_time is not None else "bang")]
 
-    def targets_current_time(self) -> bool:
-        return self._release_time is None or self._release_time == 0.0
+
+class TimeoutReleaseCancelEvent(RendererEvent):
+    """ Event for handling a continuation that occurs before the end of a timeout """
+    def render(self) -> List[RendererMessage]:
+        return [RendererMessage(keyword=PlayerSendProtocol.SEND_AUDIO_TIMEOUT_RELEASE_CANCEL, content="bang")]
 
 
 class TimeoutInfoEvent(RendererEvent):
