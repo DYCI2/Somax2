@@ -64,7 +64,6 @@
 					"fontface" : 1,
 					"fontsize" : 9.5,
 					"gradient" : 1,
-					"hidden" : 1,
 					"id" : "obj-43",
 					"ignoreclick" : 1,
 					"maxclass" : "message",
@@ -108,7 +107,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"hidden" : 1,
 					"id" : "obj-46",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -215,7 +213,7 @@
 
 							}
  ],
-						"originid" : "pat-3222"
+						"originid" : "pat-3374"
 					}
 ,
 					"patching_rect" : [ 280.0, 734.0, 48.0, 22.0 ],
@@ -488,7 +486,7 @@
 
 							}
  ],
-						"originid" : "pat-3220"
+						"originid" : "pat-3376"
 					}
 ,
 					"patching_rect" : [ 195.5, 734.0, 78.0, 22.0 ],
@@ -1150,7 +1148,7 @@
 
 							}
  ],
-						"originid" : "pat-1983"
+						"originid" : "pat-3378"
 					}
 ,
 					"patching_rect" : [ 632.0, 770.0, 87.0, 22.0 ],
@@ -1651,7 +1649,7 @@
 
 							}
  ],
-						"originid" : "pat-1985"
+						"originid" : "pat-3380"
 					}
 ,
 					"patching_rect" : [ 356.5, 776.0, 101.0, 22.0 ],
@@ -1825,7 +1823,7 @@
 
 							}
  ],
-						"originid" : "pat-1987"
+						"originid" : "pat-3382"
 					}
 ,
 					"patching_rect" : [ 1532.0, 1077.0, 93.0, 22.0 ],
@@ -2980,7 +2978,7 @@
 
 							}
  ],
-						"originid" : "pat-1989"
+						"originid" : "pat-3384"
 					}
 ,
 					"patching_rect" : [ 679.0, 220.171875, 143.0, 22.0 ],
@@ -3421,7 +3419,7 @@
 				"box" : 				{
 					"comment" : "(unused)",
 					"id" : "obj-8",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -3434,7 +3432,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-67",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3458,7 +3456,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-7",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -3668,7 +3666,7 @@
 
 							}
  ],
-						"originid" : "pat-2023",
+						"originid" : "pat-3418",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3751,7 +3749,7 @@
 				"box" : 				{
 					"comment" : "(list) Formatted messages to server",
 					"id" : "obj-3",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3936,7 +3934,7 @@
 							"parameter_initial" : [ 0 ],
 							"parameter_initial_enable" : 1,
 							"parameter_longname" : "influence delay[4]",
-							"parameter_mmax" : 1000.0,
+							"parameter_mmax" : 10000.0,
 							"parameter_modmode" : 3,
 							"parameter_osc_name" : "<default>",
 							"parameter_shortname" : "influencedelay",
@@ -4743,7 +4741,108 @@
 
 			}
  ],
-		"originid" : "pat-1981",
+		"originid" : "pat-3372",
+		"parameters" : 		{
+			"obj-103" : [ "influence delay[4]", "influencedelay", 0 ],
+			"obj-10::obj-103" : [ "influence delay[2]", "influencedelay", 0 ],
+			"obj-10::obj-21" : [ "onset[4]", "onset", 0 ],
+			"obj-10::obj-26" : [ "chroma scaling factor[9]", "chroma", 0 ],
+			"obj-10::obj-28" : [ "chromaonset[4]", "chromaonset", 0 ],
+			"obj-10::obj-29" : [ "enable[4]", "enable", 0 ],
+			"obj-10::obj-30" : [ "chroma scaling factor[4]", "chroma", 0 ],
+			"obj-10::obj-46::obj-1" : [ "source[7]", "source", 0 ],
+			"obj-10::obj-9" : [ "pitch[4]", "pitch", 0 ],
+			"obj-2::obj-103" : [ "influence delay", "influencedelay", 0 ],
+			"obj-2::obj-21" : [ "onset[2]", "onset", 0 ],
+			"obj-2::obj-26" : [ "chroma scaling factor[7]", "chroma", 0 ],
+			"obj-2::obj-28" : [ "chromaonset[2]", "chromaonset", 0 ],
+			"obj-2::obj-29" : [ "enable[2]", "enable", 0 ],
+			"obj-2::obj-30" : [ "chroma scaling factor[2]", "chroma", 0 ],
+			"obj-2::obj-46::obj-1" : [ "source[5]", "source", 0 ],
+			"obj-2::obj-9" : [ "pitch[2]", "pitch", 0 ],
+			"obj-33::obj-103" : [ "influence delay[3]", "influencedelay", 0 ],
+			"obj-33::obj-21" : [ "onset[5]", "onset", 0 ],
+			"obj-33::obj-26" : [ "chroma scaling factor[11]", "chroma", 0 ],
+			"obj-33::obj-28" : [ "chromaonset[5]", "chromaonset", 0 ],
+			"obj-33::obj-29" : [ "enable[5]", "enable", 0 ],
+			"obj-33::obj-30" : [ "chroma scaling factor[10]", "chroma", 0 ],
+			"obj-33::obj-46::obj-1" : [ "source[8]", "source", 0 ],
+			"obj-33::obj-9" : [ "pitch[5]", "pitch", 0 ],
+			"obj-6::obj-103" : [ "influence delay[1]", "influencedelay", 0 ],
+			"obj-6::obj-21" : [ "onset[3]", "onset", 0 ],
+			"obj-6::obj-26" : [ "chroma scaling factor[8]", "chroma", 0 ],
+			"obj-6::obj-28" : [ "chromaonset[3]", "chromaonset", 0 ],
+			"obj-6::obj-29" : [ "enable[3]", "enable", 0 ],
+			"obj-6::obj-30" : [ "chroma scaling factor[3]", "chroma", 0 ],
+			"obj-6::obj-46::obj-1" : [ "source[6]", "source", 0 ],
+			"obj-6::obj-9" : [ "pitch[3]", "pitch", 0 ],
+			"parameterbanks" : 			{
+				"0" : 				{
+					"index" : 0,
+					"name" : "",
+					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"parameter_overrides" : 			{
+				"obj-10::obj-103" : 				{
+					"parameter_longname" : "influence delay[2]"
+				}
+,
+				"obj-10::obj-26" : 				{
+					"parameter_longname" : "chroma scaling factor[9]"
+				}
+,
+				"obj-10::obj-30" : 				{
+					"parameter_longname" : "chroma scaling factor[4]"
+				}
+,
+				"obj-33::obj-103" : 				{
+					"parameter_longname" : "influence delay[3]"
+				}
+,
+				"obj-33::obj-26" : 				{
+					"parameter_longname" : "chroma scaling factor[11]"
+				}
+,
+				"obj-33::obj-30" : 				{
+					"parameter_longname" : "chroma scaling factor[10]"
+				}
+,
+				"obj-6::obj-103" : 				{
+					"parameter_longname" : "influence delay[1]"
+				}
+,
+				"obj-6::obj-26" : 				{
+					"parameter_longname" : "chroma scaling factor[8]"
+				}
+,
+				"obj-6::obj-30" : 				{
+					"parameter_longname" : "chroma scaling factor[3]"
+				}
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "somax.player.routerblock.maxpat",
+				"bootpath" : "~/MaxProjects/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.receiveblock.maxpat",
+				"bootpath" : "~/MaxProjects/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"button" : 				{
