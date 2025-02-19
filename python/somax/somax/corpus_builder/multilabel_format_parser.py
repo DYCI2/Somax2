@@ -5,7 +5,7 @@ from somax.runtime.label import AbstractLabel, IntLabel, StrLabel
 
 class MultiLabelFormatParser:
     @staticmethod
-    def parse_labels(label_data: List[str],
+    def parse_labels(label_data: List[Optional[str]],
                      labels_separator: str,
                      label_names: Optional[List[str]] = None
                      ) -> Optional[Dict[str, List[AbstractLabel]]]:
@@ -29,9 +29,9 @@ class MultiLabelFormatParser:
         return dict(formatted_labels)
 
     @staticmethod
-    def _contains_label(label_data: List[str], label_names: Optional[List[str]]) -> bool:
+    def _contains_label(label_data: List[Optional[str]], label_names: Optional[List[str]]) -> bool:
         """ raises RuntimeError if label data content is invalid """
-        label_data_contains_labels: bool = not all(label == "" for label in label_data)
+        label_data_contains_labels: bool = not all(label is None or label == "" for label in label_data)
         label_names_exist: bool = label_names is not None
 
         if label_names_exist and not label_data_contains_labels:
