@@ -2,42 +2,17 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 8,
-			"minor" : 6,
-			"revision" : 2,
+			"major" : 9,
+			"minor" : 0,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
 		"rect" : [ 84.0, 100.0, 630.0, 983.0 ],
-		"bglocked" : 0,
 		"openinpresentation" : 1,
-		"default_fontsize" : 12.0,
-		"default_fontface" : 0,
-		"default_fontname" : "Arial",
-		"gridonopen" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 1,
-		"objectsnaponopen" : 1,
-		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
-		"lefttoolbarpinned" : 0,
-		"toptoolbarpinned" : 0,
-		"righttoolbarpinned" : 0,
-		"bottomtoolbarpinned" : 0,
-		"toolbars_unpinned_last_save" : 0,
-		"tallnewobj" : 0,
-		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
-		"devicewidth" : 0.0,
-		"description" : "",
-		"digest" : "",
-		"tags" : "",
-		"style" : "",
-		"subpatcher_template" : "",
-		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"bgmode" : 0,
@@ -56,7 +31,7 @@
 					"outlettype" : [ "multichannelsignal", "", "", "", "" ],
 					"patching_rect" : [ 793.0, 77.0, 250.0, 825.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 256.0, 4.0, 272.0, 969.0 ],
+					"presentation_rect" : [ 272.0, 4.0, 272.0, 925.0 ],
 					"varname" : "somax.player.app",
 					"viewvisibility" : 1
 				}
@@ -80,7 +55,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 533.0, 77.0, 250.0, 221.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 2.5, 329.0, 249.0, 220.0 ],
+					"presentation_rect" : [ 3.0, 329.0, 261.0, 220.0 ],
 					"varname" : "somax.midiinfluencer.app",
 					"viewvisibility" : 1
 				}
@@ -104,7 +79,7 @@
 					"outlettype" : [ "", "multichannelsignal", "", "", "" ],
 					"patching_rect" : [ 277.0, 77.0, 251.0, 324.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1.5, 4.0, 251.0, 323.0 ],
+					"presentation_rect" : [ 2.0, 4.0, 263.0, 323.0 ],
 					"varname" : "somax.audioinfluencer.app",
 					"viewvisibility" : 1
 				}
@@ -141,7 +116,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 15.0, 77.0, 254.0, 299.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 2.5, 552.5, 254.0, 299.0 ],
+					"presentation_rect" : [ 3.0, 553.0, 261.0, 299.0 ],
 					"varname" : "somax.server.app",
 					"viewvisibility" : 1
 				}
@@ -149,6 +124,7 @@
 			}
  ],
 		"lines" : [  ],
+		"originid" : "pat-1455",
 		"parameters" : 		{
 			"obj-11::obj-118::obj-114" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-11::obj-118::obj-119" : [ "live.text[67]", "live.text[30]", 0 ],
@@ -195,7 +171,6 @@
 			"obj-11::obj-25::obj-46" : [ "live.dial", "Pan", 0 ],
 			"obj-11::obj-3::obj-1115" : [ "continuity[22]", "continuity", 0 ],
 			"obj-11::obj-3::obj-1150" : [ "live.text[63]", "live.text", 0 ],
-			"obj-11::obj-3::obj-1175" : [ "heldnotesmode[5]", "heldnotesmode", 0 ],
 			"obj-11::obj-3::obj-1179" : [ "continuity[23]", "continuity", 0 ],
 			"obj-11::obj-3::obj-123::obj-1" : [ "live.text[32]", "live.text", 0 ],
 			"obj-11::obj-3::obj-123::obj-2" : [ "live.text[33]", "live.text", 0 ],
@@ -210,6 +185,7 @@
 			"obj-11::obj-3::obj-14::obj-40" : [ "live.slider[4]", "live.slider[2]", 0 ],
 			"obj-11::obj-3::obj-14::obj-64" : [ "live.text[52]", "live.text", 0 ],
 			"obj-11::obj-3::obj-16::obj-26" : [ "corpusname[4]", "corpusname", 0 ],
+			"obj-11::obj-3::obj-2" : [ "heldnotesmode[6]", "heldnotesmode", 0 ],
 			"obj-11::obj-3::obj-32" : [ "heldnotesmode[3]", "heldnotesmode", 0 ],
 			"obj-11::obj-3::obj-407::obj-1001::obj-89::obj-1" : [ "live.text[8]", "live.text", 0 ],
 			"obj-11::obj-3::obj-407::obj-1001::obj-89::obj-2" : [ "live.text[10]", "live.text", 0 ],
@@ -345,6 +321,10 @@
 					"parameter_unitstyle" : 10
 				}
 ,
+				"obj-11::obj-17::obj-2::obj-26" : 				{
+					"parameter_longname" : "chroma scaling factor[10]"
+				}
+,
 				"obj-11::obj-17::obj-2::obj-30" : 				{
 					"parameter_longname" : "chroma scaling factor[2]"
 				}
@@ -397,7 +377,7 @@
 				}
 ,
 				"obj-11::obj-3::obj-1150" : 				{
-					"parameter_longname" : "live.text[34]"
+					"parameter_longname" : "live.text[63]"
 				}
 ,
 				"obj-11::obj-3::obj-123::obj-1" : 				{

@@ -70,6 +70,9 @@ class AudioStateHandler(AbstractStateHandler):
     def flush(self, current_time: float) -> List[ScheduledEvent]:
         return self._clear(current_time)
 
+    def clear_current_event(self) -> None:
+        self._currently_playing = None
+
     def _clear(self, current_time: float) -> List[ScheduledEvent]:
         # If currently playing
         output: List[ScheduledEvent] = []

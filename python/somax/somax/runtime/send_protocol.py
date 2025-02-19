@@ -90,6 +90,8 @@ class PlayerSendProtocol:
     SEND_AUDIO_EVENT = [AUDIO_RENDERER_ADDRESS, "event"]
     SEND_AUDIO_CONTINUATION = [AUDIO_RENDERER_ADDRESS, "continuation"]
     SEND_AUDIO_OFF = [AUDIO_RENDERER_ADDRESS, "audio_off"]
+    SEND_AUDIO_TIMEOUT_RELEASE_START = [AUDIO_RENDERER_ADDRESS,  "timeout_release_start"]
+    SEND_AUDIO_TIMEOUT_RELEASE_CANCEL = [AUDIO_RENDERER_ADDRESS,  "timeout_release_cancel"]
 
     SEND_STATE_EVENT = "state"
     SEND_POSITION_EVENT = "position"
