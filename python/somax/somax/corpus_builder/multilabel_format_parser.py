@@ -1,4 +1,5 @@
 from typing import List, Optional, Tuple, Dict
+import re
 
 from somax.runtime.label import AbstractLabel, IntLabel, StrLabel
 
@@ -31,7 +32,7 @@ class MultiLabelFormatParser:
     @staticmethod
     def _contains_label(label_data: List[Optional[str]], label_names: Optional[List[str]]) -> bool:
         """ raises RuntimeError if label data content is invalid """
-        label_data_contains_labels: bool = not all(label is None or label == "" for label in label_data)
+        label_data_contains_labels: bool = not all(label is None or re.match(r'^\s*$', label) for label in label_data)
         label_names_exist: bool = label_names is not None
 
         if label_names_exist and not label_data_contains_labels:
