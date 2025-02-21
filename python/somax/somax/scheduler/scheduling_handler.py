@@ -377,17 +377,31 @@ class SchedulingHandler(Introspective, ABC):
             # Timeout has not passed: Player should continue playing for at least one more event
             self._scheduler.add_event(continue_event)
         else:
-            # Timeout has passed: stop queueing ContinueEvent and if audio queue AudioOff
-            self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
+            # Timeout has passed
             self._scheduler.add_event(TimeoutInfoEvent(continue_event.target_time))
 
-            # If release is enabled, schedule a release envelope matching the end of the event that triggered this call
+            # If release is enabled, schedule a release envelope
             if self._timeout_release is not None:
-                timeout_release_time: float = min(self._timeout_release, current_event_duration)
-                timeout_trigger_time: float = continue_event.target_time - timeout_release_time
-                self._scheduler.add_event(TimeoutReleaseStartEvent(trigger_time=timeout_trigger_time,
-                                                                   release_time=timeout_release_time))
-                self._scheduler.add_event(TimeoutReleaseEndEvent(trigger_time=continue_event.target_time))
+                # Since we don't know whether this event will trigger an attack envelope or not (recombine),
+                #   make sure that there's room for at least some semblance of an attack in the event's duration
+                #   (to prevent completely silent events)
+                max_release_period_within_event: float = 0.9 * current_event_duration
+
+                if max_release_period_within_event >= self._timeout_release:
+                    # release envelope fits within event: schedule the release envelope to match the end of the event
+                    timeout_trigger_time: float = continue_event.target_time - self._timeout_release
+                    self._scheduler.add_event(TimeoutReleaseStartEvent(trigger_time=timeout_trigger_time,
+                                                                       release_time=self._timeout_release))
+                    self._scheduler.add_event(TimeoutReleaseEndEvent(trigger_time=continue_event.target_time))
+                    self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
+                else:
+                    # Otherwise schedule the timeout release period after the end of the event
+                    self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time,
+                                                            release_time=self._timeout_release))
+
+            else:
+                # With no timeout release, simply schedule a normal audio off event at the end of the event
+                self._scheduler.add_event(AudioOffEvent(trigger_time=continue_event.target_time))
 
     def _cancel_ongoing_timeout_release(self) -> None:
         release_end_event: List[ScheduledEvent] = self._scheduler.remove_by_type(TimeoutReleaseEndEvent)
