@@ -2,42 +2,19 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 8,
-			"minor" : 6,
-			"revision" : 0,
+			"major" : 9,
+			"minor" : 0,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 362.0, 215.0, 942.0, 597.0 ],
-		"bglocked" : 0,
+		"rect" : [ 362.0, 214.0, 942.0, 597.0 ],
 		"openinpresentation" : 1,
-		"default_fontsize" : 12.0,
-		"default_fontface" : 0,
-		"default_fontname" : "Arial",
-		"gridonopen" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 1,
-		"objectsnaponopen" : 1,
-		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
-		"lefttoolbarpinned" : 0,
-		"toptoolbarpinned" : 0,
-		"righttoolbarpinned" : 0,
-		"bottomtoolbarpinned" : 0,
-		"toolbars_unpinned_last_save" : 0,
-		"tallnewobj" : 0,
-		"boxanimatetime" : 200,
 		"enablehscroll" : 0,
 		"enablevscroll" : 0,
-		"devicewidth" : 0.0,
-		"description" : "",
-		"digest" : "",
-		"tags" : "",
-		"style" : "",
-		"subpatcher_template" : "",
-		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"hidden" : 1,
@@ -80,7 +57,8 @@
 					"patching_rect" : [ 35.0, 495.5, 388.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 117.5, 106.0, 388.0, 20.0 ],
-					"text" : "Get more info, context, demos and medias at the Somax2 project page:"
+					"text" : "Get more info, context, demos and medias at the Somax2 project page:",
+					"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 				}
 
 			}
@@ -96,7 +74,8 @@
 					"presentation" : 1,
 					"presentation_linecount" : 2,
 					"presentation_rect" : [ 117.5, 73.0, 736.0, 33.0 ],
-					"text" : "Max application and library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nDeveloped by the Music Representation team at IRCAM."
+					"text" : "Max application and library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nDeveloped by the Music Representation team at IRCAM.",
+					"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 				}
 
 			}
@@ -130,42 +109,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 359.0, 254.0, 930.0, 518.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontface" : 1,
@@ -175,7 +128,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 408.5, 112.59375, 154.0, 21.0 ],
-									"text" : "Performance Strategies"
+									"text" : "Performance Strategies",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -188,7 +142,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 30.0, 112.59375, 72.0, 21.0 ],
-									"text" : "Templates"
+									"text" : "Templates",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -202,42 +157,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 600.0, 169.0, 250.0, 246.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-2",
@@ -328,15 +257,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-3830"
 									}
 ,
 									"patching_rect" : [ 533.0, 403.0, 121.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p load_performances"
@@ -356,6 +283,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 408.5, 137.0, 268.0, 165.0 ],
+									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "Mimetism", "Harmonization", "Installation" ]
 								}
 
@@ -368,7 +296,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 16.0, 729.0, 22.0 ],
-									"text" : "These patches will provide you templates and performance strategies for you to explore specific Somax2 behaviours"
+									"text" : "These patches will provide you templates and performance strategies for you to explore specific Somax2 behaviours",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -380,7 +309,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 45.0, 856.0, 33.0 ],
-									"text" : "Use the template patches as the starting point for your performances, and go through the ready-to-use performance strategies recipes to learn more about how to achieve specific behaviours"
+									"text" : "Use the template patches as the starting point for your performances, and go through the ready-to-use performance strategies recipes to learn more about how to achieve specific behaviours",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -397,6 +327,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 28.5, 137.0, 268.0, 231.0 ],
+									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "Template 1 Player", "Template 2 Players", "Template 3 Players", "Template 4 Players" ]
 								}
 
@@ -411,42 +342,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 600.0, 169.0, 250.0, 246.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-2",
@@ -537,15 +442,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-3832"
 									}
 ,
 									"patching_rect" : [ 153.0, 403.0, 100.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p load_templates"
@@ -569,7 +472,8 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-3828"
 					}
 ,
 					"patching_rect" : [ 248.5, 391.5, 87.0, 77.0 ],
@@ -588,6 +492,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -598,42 +503,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 400.0, 195.0, 897.0, 480.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-8",
@@ -641,9 +520,9 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 327.0, 432.0, 33.0 ],
-									"presentation_linecount" : 3,
-									"text" : "In the third tutorial you will learn how to prepare your own Somax2 environment and how to script the module's parameters through interactive messages"
+									"patching_rect" : [ 308.0, 327.0, 433.0, 33.0 ],
+									"text" : "In the third tutorial you will learn how to prepare your own Somax2 environment and how to script the module's parameters through interactive messages",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -661,6 +540,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 29.0, 304.5, 268.0, 78.0 ],
+									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "3 - Script your Environment" ]
 								}
 
@@ -735,7 +615,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 308.0, 223.0, 419.0, 33.0 ],
-									"text" : "In the second tutorial you will learn how to build a corpus from your audio materials, and interact with it "
+									"text" : "In the second tutorial you will learn how to build a corpus from your audio materials, and interact with it ",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -747,7 +628,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 308.0, 130.0, 419.0, 33.0 ],
-									"text" : "The first tutorial will give you an overview of the Somax2 application workflow, guiding you through immediate audio and MIDI interactions"
+									"text" : "The first tutorial will give you an overview of the Somax2 application workflow, guiding you through immediate audio and MIDI interactions",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -765,6 +647,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 29.0, 212.0, 268.0, 78.0 ],
+									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "2 - Audio Corpus Builder" ]
 								}
 
@@ -777,7 +660,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 16.0, 525.0, 22.0 ],
-									"text" : "These tutorials will guide you through the usage of the Somax2 application"
+									"text" : "These tutorials will guide you through the usage of the Somax2 application",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -789,7 +673,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 45.0, 854.0, 47.0 ],
-									"text" : "The application implementation of Somax2 provides modular objects for immediate musical interaction. \nAfter completing these tutorials, we recommend moving to the \"Max Tutorials\" tab to explore the potentiality of Somax2 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours."
+									"text" : "The application implementation of Somax2 provides modular objects for immediate musical interaction. \nAfter completing these tutorials, we recommend moving to the \"Max Tutorials\" tab to explore the potentiality of Somax2 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours.",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -807,6 +692,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 29.0, 118.0, 268.0, 78.0 ],
+									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "1 - First Steps with Somax2" ]
 								}
 
@@ -821,42 +707,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 680.0, 304.0, 213.0, 233.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-2",
@@ -947,15 +807,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-3837"
 									}
 ,
 									"patching_rect" : [ 7.5, 432.0, 68.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p load_app"
@@ -1005,7 +863,8 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-3835"
 					}
 ,
 					"patching_rect" : [ 19.011363636363626, 391.5, 87.0, 77.0 ],
@@ -1044,7 +903,8 @@
 					"patching_rect" : [ 114.522727272727252, 66.0, 1296.0, 27.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 117.5, 33.0, 98.0, 27.0 ],
-					"text" : "Somax2"
+					"text" : "Somax2",
+					"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 				}
 
 			}
@@ -1067,42 +927,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 344.0, 182.0, 1034.0, 547.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"hidden" : 1,
@@ -1173,7 +1007,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 18.0, 900.0, 395.0 ],
-									"text" : "Somax2 is an application and a library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nIt is based on a machine listening, reactive engine and generative model that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisation, composition, installations etc.\nWritten in Max and Python, it features a modular multi-threaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM - STMS and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project of the European Research Council (director : Gérard Assayag).\n\nSomax2 development : Joakim Borg\nTutorials and help : Marco Fiorini and Joakim Borg\nSomax created by Gérard Assayag and Laurent Bonnasse-Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early prototype by Olivier Delerue.\nThanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.\n\nThanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini for their musical material used in Somax2 distribution corpus.\n\nERC REACH Instagram page: \nERC REACH Youtube channel: "
+									"text" : "Somax2 is an application and a library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nIt is based on a machine listening, reactive engine and generative model that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisation, composition, installations etc.\nWritten in Max and Python, it features a modular multi-threaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM - STMS and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project of the European Research Council (director : Gérard Assayag).\n\nSomax2 development : Joakim Borg\nTutorials and help : Marco Fiorini and Joakim Borg\nSomax created by Gérard Assayag and Laurent Bonnasse-Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early prototype by Olivier Delerue.\nThanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.\n\nThanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini for their musical material used in Somax2 distribution corpus.\n\nERC REACH Instagram page: \nERC REACH Youtube channel: ",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -1194,7 +1029,8 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-3840"
 					}
 ,
 					"patching_rect" : [ 528.0, 391.5, 87.0, 77.0 ],
@@ -1224,42 +1060,16 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 359.0, 254.0, 930.0, 518.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontsize" : 14.0,
@@ -1268,7 +1078,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 16.0, 525.0, 22.0 ],
-									"text" : "These tutorials will guide you through the usage of the Somax2 core abstractions"
+									"text" : "These tutorials will guide you through the usage of the Somax2 core abstractions",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -1280,7 +1091,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.5, 45.0, 854.0, 33.0 ],
-									"text" : "With these abstractions, implemented to provide you a complete Max-style workflow, you could achieve the same results as the App objects but, thanks to their modular architecture, you could build custom patches and unlock unimagined new behaviours of interaction."
+									"text" : "With these abstractions, implemented to provide you a complete Max-style workflow, you could achieve the same results as the App objects but, thanks to their modular architecture, you could build custom patches and unlock unimagined new behaviours of interaction.",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -1297,6 +1109,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 28.5, 106.0, 268.0, 272.0 ],
+									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "1 - Basic Workflow", "2 - Introducing Parameters", "3 - Building a Corpus", "4 - Mastering Somax Interaction Parameters", "5 - Advanced Players Interaction", "6 - Introducing User Interfaces", "7 - UI versus App", "8 - Real Time Corpus Recording" ]
 								}
 
@@ -1311,42 +1124,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 600.0, 169.0, 250.0, 246.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-2",
@@ -1437,15 +1224,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-3845"
 									}
 ,
 									"patching_rect" : [ 153.0, 413.0, 103.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p load_max_tutos"
@@ -1461,7 +1246,8 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-3843"
 					}
 ,
 					"patching_rect" : [ 135.5, 391.5, 87.0, 77.0 ],
@@ -1528,7 +1314,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1539,45 +1324,20 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 302.0, 245.0, 881.0, 516.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.850980392156863, 0.850980392156863, 0.850980392156863, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 0,
 									"id" : "obj-12",
@@ -1586,7 +1346,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 599.0, 147.59375, 221.0, 66.0 ],
-									"text" : "Click here to have access to the list of Max messages available to control all the parameters of the Somax2 objects"
+									"text" : "Click here to have access to the list of Max messages available to control all the parameters of the Somax2 objects",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -1599,7 +1360,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 527.0, 83.59375, 178.0, 21.0 ],
-									"text" : "Parameters Documentation"
+									"text" : "Parameters Documentation",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -1616,6 +1378,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 527.0, 105.59375, 163.0, 35.0 ],
+									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "somax_parameter_docs.txt" ]
 								}
 
@@ -1630,42 +1393,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 92.0, 119.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-95",
@@ -1757,15 +1494,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-3850"
 									}
 ,
 									"patching_rect" : [ 599.0, 174.0, 135.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p load_parameter_docs"
@@ -1781,7 +1516,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 279.0, 83.59375, 108.0, 21.0 ],
-									"text" : "Max Application"
+									"text" : "Max Application",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -1794,7 +1530,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 30.0, 83.59375, 116.0, 21.0 ],
-									"text" : "Max Abstractions"
+									"text" : "Max Abstractions",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -1811,6 +1548,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 30.0, 105.59375, 163.0, 280.0 ],
+									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "somax.server", "somax.player", "somax.audioinfluencer", "somax.midiinfluencer", "somax.audiorenderer", "somax.midirenderer", "somax.audiocorpusbuilder", "somax.midicorpusbuilder", "somax.audiorecord", "somax.regions" ]
 								}
 
@@ -1828,6 +1566,7 @@
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 279.0, 105.59375, 163.0, 140.0 ],
+									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "somax.server.app", "somax.player.app", "somax.audioinfluencer.app", "somax.midiinfluencer.app" ]
 								}
 
@@ -1839,7 +1578,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.0, 42.0, 818.0, 20.0 ],
-									"text" : "Here you will find documentation for all the Somax2 objects, as well a list of available Max messages to script the parameters of the Somax2 objects."
+									"text" : "Here you will find documentation for all the Somax2 objects, as well a list of available Max messages to script the parameters of the Somax2 objects.",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -1853,42 +1593,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 505.0, 295.0, 207.0, 236.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-2",
@@ -1941,15 +1655,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-3852"
 									}
 ,
 									"patching_rect" : [ 231.0, 451.0, 77.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p load_helps"
@@ -1964,7 +1676,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.0, 15.0, 270.0, 22.0 ],
-									"text" : "Welcome to the Help Center of Somax2"
+									"text" : "Welcome to the Help Center of Somax2",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
 							}
@@ -1995,7 +1708,8 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-3848"
 					}
 ,
 					"patching_rect" : [ 395.5, 391.5, 87.0, 77.0 ],
@@ -2197,7 +1911,7 @@
 					"patching_rect" : [ 6.0, 140.0, 930.0, 26.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.0, 140.0, 930.0, 26.0 ],
-					"tabcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ],
+					"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"tabs" : [ "App Tutorials", "Max Tutorials", "Performance Strategies", "Help Center", "Credits" ]
 				}
 
@@ -2553,6 +2267,7 @@
 
 			}
  ],
+		"originid" : "pat-3825",
 		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
