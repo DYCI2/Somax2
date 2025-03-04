@@ -363,7 +363,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 102.0, 100.0, 349.0, 516.0 ],
+						"rect" : [ 102.0, 100.0, 338.0, 499.0 ],
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"visible" : 1,
@@ -701,7 +701,7 @@
 									"patching_rect" : [ 3424.0, 249.0, 238.0, 107.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 9,
-									"presentation_rect" : [ 39.734768736105565, 94.0, 238.0, 107.0 ],
+									"presentation_rect" : [ 39.25, 90.25000011920929, 238.0, 107.0 ],
 									"text" : "Max has a different sample rate than the loaded audio file from the corpus. \n\nRecording under these conditions is possible, but any recorded audio will be detuned to match the sample rate of the audio file.\n\nRecommended action: change the sample rate of Max or resample the corpus",
 									"textcolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ]
 								}
@@ -720,7 +720,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 3577.5, 201.625, 39.0, 17.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 241.734768736105565, 202.0, 39.0, 17.0 ],
+									"presentation_rect" : [ 241.25, 198.25000011920929, 39.0, 17.0 ],
 									"rounded" : 8.0,
 									"text" : "ignore",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
@@ -739,7 +739,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 3502.5, 200.625, 71.0, 29.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 38.734768736105565, 74.0, 144.0, 18.0 ],
+									"presentation_rect" : [ 38.25, 70.25000011920929, 144.0, 18.0 ],
 									"text" : "Sample Rate Mismatch",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
@@ -758,7 +758,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 3448.5, 200.625, 21.0, 18.75 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 27.734768736105565, 64.0, 261.0, 164.0 ],
+									"presentation_rect" : [ 27.25, 60.25000011920929, 261.0, 164.0 ],
 									"proportion" : 0.5
 								}
 
@@ -775,7 +775,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 3476.5, 200.625, 19.0, 18.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ -1.265231263894435, 31.0, 339.5, 471.5 ],
+									"presentation_rect" : [ -1.75, 27.25000011920929, 339.5, 471.5 ],
 									"proportion" : 0.5
 								}
 
@@ -784,7 +784,6 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
-									"hidden" : 1,
 									"id" : "obj-281",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -792,7 +791,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 2802.0, 210.0, 30.0, 27.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ -1.265231263894435, 28.0, 336.0, 471.0 ],
+									"presentation_rect" : [ -1.75, 24.25000011920929, 336.0, 471.0 ],
 									"proportion" : 0.5
 								}
 
@@ -808,7 +807,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1268.0, 234.0, 120.0, 18.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 82.734768736105565, 89.0, 131.0, 18.0 ],
+									"presentation_rect" : [ 82.25, 85.25000011920929, 131.0, 18.0 ],
 									"text" : "Is the server started?",
 									"textcolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
 									"textjustification" : 1
@@ -826,7 +825,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1276.0, 204.0, 164.0, 22.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 58.734768736105565, 64.0, 179.0, 22.0 ],
+									"presentation_rect" : [ 58.25, 60.25000011920929, 179.0, 22.0 ],
 									"text" : "Player Missing",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ],
 									"textjustification" : 1
@@ -846,7 +845,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1267.0, 168.0, 30.0, 27.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 57.734768736105565, 62.0, 180.0, 48.0 ],
+									"presentation_rect" : [ 57.25, 58.25000011920929, 180.0, 48.0 ],
 									"proportion" : 0.5
 								}
 
@@ -854,7 +853,7 @@
 , 							{
 								"box" : 								{
 									"angle" : 270.0,
-									"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+									"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
 									"hidden" : 1,
 									"id" : "obj-79",
 									"maxclass" : "panel",
@@ -863,7 +862,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1302.0, 168.0, 30.0, 27.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 5.734768736105565, 28.0, 329.0, 471.0 ],
+									"presentation_rect" : [ 5.25, 24.25000011920929, 329.0, 471.0 ],
 									"proportion" : 0.5
 								}
 
@@ -880,7 +879,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1160.5, 954.0, 14.0, 24.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 4.734768736105565, 136.0, 326.0, 362.0 ],
+									"presentation_rect" : [ 4.25, 132.25000011920929, 326.0, 362.0 ],
 									"proportion" : 0.5
 								}
 
@@ -897,7 +896,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 2557.0, 272.0, 87.0, 29.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 89.734768736105565, 197.0, 144.0, 18.0 ],
+									"presentation_rect" : [ 89.25, 193.25000011920929, 144.0, 18.0 ],
 									"text" : "Audio output is not enabled!",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
@@ -915,7 +914,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 2533.0, 278.0, 19.0, 18.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 82.734768736105565, 188.0, 156.0, 34.0 ],
+									"presentation_rect" : [ 82.25, 184.25000011920929, 156.0, 34.0 ],
 									"proportion" : 0.5
 								}
 
@@ -932,7 +931,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 2643.5, 277.5, 19.0, 18.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 8.734768736105565, 169.0, 329.0, 324.0 ],
+									"presentation_rect" : [ 8.25, 165.25000011920929, 329.0, 324.0 ],
 									"proportion" : 0.5
 								}
 
@@ -949,7 +948,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 2591.5, 859.0, 30.0, 27.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 5.734768736105565, 28.0, 329.0, 471.0 ],
+									"presentation_rect" : [ 5.25, 24.25000011920929, 329.0, 471.0 ],
 									"proportion" : 0.5
 								}
 
@@ -3102,7 +3101,6 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
-									"hidden" : 1,
 									"id" : "obj-297",
 									"ignoreclick" : 0,
 									"maxclass" : "panel",
@@ -10221,7 +10219,7 @@
 										"autolatency" : [ 1 ],
 										"autopause" : [ 0 ],
 										"crossfade" : [ 250 ],
-										"enabled" : [ 1 ],
+										"enabled" : [ 0 ],
 										"gain" : [ 0.0 ],
 										"initialize" : [ -1 ],
 										"latency" : [ 0 ],
@@ -12961,7 +12959,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 2214.0, 1575.5, 30.0, 29.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ -1.265231263894435, -1.0, 338.53046252778887, 503.0 ],
+									"presentation_rect" : [ -1.75, -4.74999988079071, 338.53046252778887, 503.0 ],
 									"proportion" : 0.5
 								}
 
@@ -15527,7 +15525,7 @@
 								"boxes" : [ "obj-97", "obj-101" ]
 							}
 , 							{
-								"boxes" : [ "obj-463", "obj-37", "obj-79", "obj-281", "obj-370", "obj-191", "obj-160", "obj-380", "obj-369", "obj-371", "obj-206", "obj-173", "obj-14", "obj-156", "obj-98", "obj-373" ]
+								"boxes" : [ "obj-463", "obj-37", "obj-206", "obj-173", "obj-79", "obj-281", "obj-370", "obj-380", "obj-156", "obj-98", "obj-373", "obj-371", "obj-191", "obj-14", "obj-369", "obj-160" ]
 							}
  ]
 					}
@@ -15661,7 +15659,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-139",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -16335,7 +16332,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-297",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
