@@ -453,7 +453,7 @@
 
 							}
  ],
-						"originid" : "pat-228"
+						"originid" : "pat-4080"
 					}
 ,
 					"patching_rect" : [ 104.0, 499.0, 151.0, 23.0 ],
@@ -469,7 +469,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-24",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -477,7 +476,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1019.0, 685.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.375, 1.666666321456432, 198.666672587394714, 15.666667357087135 ],
+					"presentation_rect" : [ 0.0, 2.0, 235.0, 16.0 ],
 					"proportion" : 0.5,
 					"rounded" : 0,
 					"varname" : "serveruidisable"
@@ -647,7 +646,7 @@
 
 							}
  ],
-						"originid" : "pat-230"
+						"originid" : "pat-4082"
 					}
 ,
 					"patching_rect" : [ 1200.0, 141.0, 35.0, 22.0 ],
@@ -698,8 +697,8 @@
 						"_source" : [ "AudioInfluencer" ],
 						"chroma" : [ 1.0 ],
 						"chromaonset" : [ 1 ],
-						"enable" : [ 1 ],
-						"influencedelay" : [ 3542.0 ],
+						"enable" : [ 0 ],
+						"influencedelay" : [ 0.0 ],
 						"mfcc" : [ 1.0 ],
 						"onset" : [ 1 ],
 						"pitch" : [ 1 ]
@@ -876,7 +875,7 @@
 						}
 ,
 						"valueof" : 						{
-							"parameter_longname" : "chroma scaling factor[7]",
+							"parameter_longname" : "chroma scaling factor[10]",
 							"parameter_mmax" : 1.0,
 							"parameter_modmode" : 0,
 							"parameter_osc_name" : "<default>",
@@ -2282,7 +2281,7 @@
 
 			}
  ],
-		"originid" : "pat-226",
+		"originid" : "pat-4078",
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-86", "obj-41" ]
 			}
