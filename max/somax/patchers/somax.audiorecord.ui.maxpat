@@ -363,7 +363,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 102.0, 100.0, 338.0, 499.0 ],
+						"rect" : [ 102.0, 100.0, 339.0, 500.0 ],
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"visible" : 1,
@@ -405,7 +405,6 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
-									"hidden" : 1,
 									"id" : "obj-381",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -422,7 +421,6 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
-									"hidden" : 1,
 									"id" : "obj-379",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -784,6 +782,7 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
+									"hidden" : 1,
 									"id" : "obj-281",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -871,7 +870,6 @@
 								"box" : 								{
 									"angle" : 270.0,
 									"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
-									"hidden" : 1,
 									"id" : "obj-173",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -922,7 +920,7 @@
 , 							{
 								"box" : 								{
 									"angle" : 270.0,
-									"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+									"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
 									"hidden" : 1,
 									"id" : "obj-206",
 									"maxclass" : "panel",
@@ -939,7 +937,7 @@
 , 							{
 								"box" : 								{
 									"angle" : 270.0,
-									"bgcolor" : [ 0.368627450980392, 0.368627450980392, 0.368627450980392, 0.82 ],
+									"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
 									"hidden" : 1,
 									"id" : "obj-37",
 									"maxclass" : "panel",
@@ -10215,11 +10213,11 @@
 									"patching_rect" : [ 2243.0, 152.0, 143.0, 22.0 ],
 									"restore" : 									{
 										"appendend" : [ 1 ],
-										"audiodevice" : [ "1 Input 1" ],
+										"audiodevice" : [ "<None>" ],
 										"autolatency" : [ 1 ],
 										"autopause" : [ 0 ],
 										"crossfade" : [ 250 ],
-										"enabled" : [ 0 ],
+										"enabled" : [ 1 ],
 										"gain" : [ 0.0 ],
 										"initialize" : [ -1 ],
 										"latency" : [ 0 ],
@@ -15525,7 +15523,7 @@
 								"boxes" : [ "obj-97", "obj-101" ]
 							}
 , 							{
-								"boxes" : [ "obj-463", "obj-37", "obj-206", "obj-173", "obj-79", "obj-281", "obj-370", "obj-380", "obj-156", "obj-98", "obj-373", "obj-371", "obj-191", "obj-14", "obj-369", "obj-160" ]
+								"boxes" : [ "obj-463", "obj-37", "obj-206", "obj-173", "obj-79", "obj-281", "obj-370", "obj-156", "obj-380", "obj-98", "obj-373", "obj-371", "obj-191", "obj-14", "obj-369", "obj-160" ]
 							}
  ]
 					}
@@ -15659,6 +15657,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-139",
 					"ignoreclick" : 0,
 					"maxclass" : "panel",
@@ -15687,7 +15686,7 @@
 					"fontsize" : 10.0,
 					"id" : "obj-135",
 					"ignoreclick" : 1,
-					"items" : "1 Input 1",
+					"items" : "<None>",
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -15792,7 +15791,7 @@
 					"fontsize" : 10.0,
 					"id" : "obj-125",
 					"ignoreclick" : 1,
-					"items" : "AudioInfluencer",
+					"items" : "<None>",
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
