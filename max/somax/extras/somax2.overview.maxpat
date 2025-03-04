@@ -258,7 +258,7 @@
 
 											}
  ],
-										"originid" : "pat-3830"
+										"originid" : "pat-11"
 									}
 ,
 									"patching_rect" : [ 533.0, 403.0, 121.0, 22.0 ],
@@ -443,7 +443,7 @@
 
 											}
  ],
-										"originid" : "pat-3832"
+										"originid" : "pat-13"
 									}
 ,
 									"patching_rect" : [ 153.0, 403.0, 100.0, 22.0 ],
@@ -473,7 +473,7 @@
 
 							}
  ],
-						"originid" : "pat-3828"
+						"originid" : "pat-9"
 					}
 ,
 					"patching_rect" : [ 248.5, 391.5, 87.0, 77.0 ],
@@ -808,7 +808,7 @@
 
 											}
  ],
-										"originid" : "pat-3837"
+										"originid" : "pat-18"
 									}
 ,
 									"patching_rect" : [ 7.5, 432.0, 68.0, 22.0 ],
@@ -864,7 +864,7 @@
 
 							}
  ],
-						"originid" : "pat-3835"
+						"originid" : "pat-16"
 					}
 ,
 					"patching_rect" : [ 19.011363636363626, 391.5, 87.0, 77.0 ],
@@ -1030,7 +1030,7 @@
 
 							}
  ],
-						"originid" : "pat-3840"
+						"originid" : "pat-21"
 					}
 ,
 					"patching_rect" : [ 528.0, 391.5, 87.0, 77.0 ],
@@ -1225,7 +1225,7 @@
 
 											}
  ],
-										"originid" : "pat-3845"
+										"originid" : "pat-26"
 									}
 ,
 									"patching_rect" : [ 153.0, 413.0, 103.0, 22.0 ],
@@ -1247,7 +1247,7 @@
 
 							}
  ],
-						"originid" : "pat-3843"
+						"originid" : "pat-24"
 					}
 ,
 					"patching_rect" : [ 135.5, 391.5, 87.0, 77.0 ],
@@ -1337,7 +1337,7 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.850980392156863, 0.850980392156863, 0.850980392156863, 1.0 ],
+									"bubble_bgcolor" : [ 0.964705882352941, 0.964705882352941, 0.964705882352941, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 0,
 									"id" : "obj-12",
@@ -1495,7 +1495,7 @@
 
 											}
  ],
-										"originid" : "pat-3850"
+										"originid" : "pat-31"
 									}
 ,
 									"patching_rect" : [ 599.0, 174.0, 135.0, 22.0 ],
@@ -1656,7 +1656,7 @@
 
 											}
  ],
-										"originid" : "pat-3852"
+										"originid" : "pat-33"
 									}
 ,
 									"patching_rect" : [ 231.0, 451.0, 77.0, 22.0 ],
@@ -1709,7 +1709,7 @@
 
 							}
  ],
-						"originid" : "pat-3848"
+						"originid" : "pat-29"
 					}
 ,
 					"patching_rect" : [ 395.5, 391.5, 87.0, 77.0 ],
@@ -2267,7 +2267,7 @@
 
 			}
  ],
-		"originid" : "pat-3825",
+		"originid" : "pat-6",
 		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
