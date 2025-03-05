@@ -736,6 +736,7 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
+					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-55",
 					"ignoreclick" : 1,
@@ -760,6 +761,7 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
+					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-50",
 					"ignoreclick" : 1,
@@ -784,6 +786,7 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
+					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-46",
 					"ignoreclick" : 1,
@@ -805,6 +808,7 @@
 			}
 , 			{
 				"box" : 				{
+					"hidden" : 1,
 					"id" : "obj-40",
 					"linecount" : 3,
 					"maxclass" : "message",
@@ -819,7 +823,6 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
 					"id" : "obj-31",
 					"linecount" : 5,
 					"maxclass" : "comment",
@@ -836,6 +839,7 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
+					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-30",
 					"ignoreclick" : 1,
@@ -859,6 +863,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 16.0,
+					"hidden" : 1,
 					"id" : "obj-28",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -874,6 +879,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+					"hidden" : 1,
 					"id" : "obj-23",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -894,6 +900,7 @@
 			}
 , 			{
 				"box" : 				{
+					"hidden" : 1,
 					"id" : "obj-16",
 					"linecount" : 4,
 					"maxclass" : "message",
@@ -910,6 +917,7 @@
 				"box" : 				{
 					"fontface" : 0,
 					"fontsize" : 14.0,
+					"hidden" : 1,
 					"id" : "obj-52",
 					"linecount" : 52,
 					"maxclass" : "comment",
@@ -926,6 +934,7 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
+					"hidden" : 1,
 					"id" : "obj-48",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -1172,7 +1181,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-42",
 					"ignoreclick" : 1,
@@ -1194,7 +1202,6 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
 					"id" : "obj-41",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -1208,7 +1215,6 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
 					"id" : "obj-39",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -1224,7 +1230,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-37",
 					"ignoreclick" : 1,
@@ -1249,7 +1254,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-35",
 					"ignoreclick" : 1,
@@ -1271,7 +1275,6 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
 					"id" : "obj-34",
 					"linecount" : 2,
 					"maxclass" : "message",
@@ -1288,7 +1291,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-110",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -1310,7 +1312,6 @@
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
-					"hidden" : 1,
 					"hint" : "",
 					"id" : "obj-73",
 					"ignoreclick" : 1,
@@ -1336,7 +1337,6 @@
 					"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
 					"border" : 4,
 					"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-					"hidden" : 1,
 					"id" : "obj-70",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -1352,13 +1352,12 @@
 				"box" : 				{
 					"fontface" : 0,
 					"fontsize" : 14.0,
-					"hidden" : 1,
 					"id" : "obj-21",
 					"linecount" : 52,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1181.448190808296204, 188.926836013793945, 334.0, 835.0 ],
+					"patching_rect" : [ 1181.448190808296204, 188.926836013793945, 338.0, 835.0 ],
 					"text" : "In this tutorial you will learn how to control any available parameter in the Somax2 .app objects using scripting messages in Max.\n\nThis will provide you a quick worflow and open up possibilities of automation and control of the wide array of parameters in the application.\nFirst of all, as always let's begin by pressing on the \"Start Server\" button (see step 1).\n\nThen, one of the first things we might want to script is the path to a certain folder containing our corpora.\n\nRemember that by default the corpora we're providing are stored in the \"corpus\" folder of your Somax2 distribution.\nHowever, a good practice is to have different corpus folders in your machine, according to the sound palette you might search for a certain concert/performance, etc.\nYou can select the desired corpus folder (called \"corpuspath\") by pressing on the \"Settings\" button of the somax.server.app and then press on the \"set\" button next to the Corpus Folder path (see step 2).\n\nYet, to speed up this process you can send a message directly to the somax.server.app object asking to set the corpuspath.\nThis can be done through the Max message shown at step 3.\n\nBy pressing this message you will see a window popping up, enabling you to select a corpuspath in your environment.\n\nThis is done thanks to the couple of send and receive objects in Max.\nNotice how every Somax2 module in this patch has a \"r\" object attached to them, where \"r\" is the shortcut for \"receive\".\nThe message you just pressed, on the other hand is linked to a \"s\" (for \"send\") object, providing the communication with the somax.server.app thanks to its argument having the same name as the one in the \"r\" object (in this case the name argument is \"server_msg\").\n\nAn alternative for \"s\" is to use ; inside a message, as shown at step 4.\n\nFor compactness, we will rather use this last syntax in the next steps.\n",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "introduction_text"
@@ -2223,7 +2222,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 16.0,
-					"hidden" : 1,
 					"id" : "obj-156",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -2238,7 +2236,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"id" : "obj-155",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -2315,7 +2313,7 @@
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 29.0, 58.439024448394775, 1484.146376848220825, 25.609756708145142 ],
-					"tabcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+					"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"tabs" : [ "1. Introduction", "2. AudioInfluencer", "3. MidiInfluencer", "4. Player", "5. Learn Further" ]
 				}
 
