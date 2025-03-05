@@ -2,8 +2,8 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 8,
-			"minor" : 5,
+			"major" : 9,
+			"minor" : 0,
 			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
@@ -12,35 +12,13 @@
 		"classnamespace" : "box",
 		"rect" : [ 118.0, 100.0, 1340.0, 800.0 ],
 		"openrect" : [ 0.0, 0.0, 1340.0, 800.0 ],
-		"bglocked" : 0,
-		"openinpresentation" : 0,
 		"default_fontsize" : 14.0,
-		"default_fontface" : 0,
 		"default_fontname" : "Monaco",
-		"gridonopen" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 1,
-		"objectsnaponopen" : 1,
-		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
-		"lefttoolbarpinned" : 0,
-		"toptoolbarpinned" : 0,
-		"righttoolbarpinned" : 0,
-		"bottomtoolbarpinned" : 0,
-		"toolbars_unpinned_last_save" : 0,
-		"tallnewobj" : 0,
-		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
-		"devicewidth" : 0.0,
-		"description" : "",
-		"digest" : "",
-		"tags" : "",
 		"style" : "IRCAM",
 		"subpatcher_template" : "monaco_template",
 		"showrootpatcherontab" : 0,
 		"showontab" : 0,
-		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-2",
@@ -50,43 +28,17 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 5,
+							"major" : 9,
+							"minor" : 0,
 							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 118.0, 126.0, 1340.0, 774.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
@@ -98,8 +50,18 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 161.0, 395.624997041798906, 337.350000000000136, 79.0 ],
-									"text" : "By default, players will automatically be initailized on the server when created. But if this is not the case (i.e., if they have been created with @autoinitialize 0) this message will initialize them",
-									"textcolor" : [ 0.137254901960784, 0.137254901960784, 0.137254901960784, 1.0 ]
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "By default, players will automatically be initailized on the server when created. But if this is not the case (i.e., if they have been created with @autoinitialize 0) this message will initialize them"
 								}
 
 							}
@@ -126,8 +88,8 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 5,
+											"major" : 9,
+											"minor" : 0,
 											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
@@ -135,33 +97,7 @@
 ,
 										"classnamespace" : "box",
 										"rect" : [ 565.0, 287.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-81",
@@ -434,15 +370,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-26309"
 									}
 ,
 									"patching_rect" : [ 364.5, 370.083333333333371, 125.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p route_server_status"
@@ -467,7 +401,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1052.000000000000227, 424.999995397163275, 24.0, 24.0 ]
+									"patching_rect" : [ 1052.000000000000227, 424.999995397163275, 24.0, 24.0 ],
+									"svg" : ""
 								}
 
 							}
@@ -514,7 +449,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 354.0, 323.083333333333371, 24.0, 24.0 ]
+									"patching_rect" : [ 354.0, 323.083333333333371, 24.0, 24.0 ],
+									"svg" : ""
 								}
 
 							}
@@ -756,7 +692,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 41.0, 170.166658940093953, 443.0, 42.0 ],
 									"text" : "NB: Only one server can be present in an open Max window -- take care not to instantiate multiple servers!",
-									"textcolor" : [ 0.831372549019608, 0.035294117647059, 0.035294117647059, 1.0 ]
+									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
 
 							}
@@ -926,7 +862,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 161.0, 323.083333333333371, 24.0, 24.0 ]
+									"patching_rect" : [ 161.0, 323.083333333333371, 24.0, 24.0 ],
+									"svg" : ""
 								}
 
 							}
@@ -1423,7 +1360,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1087.333333333333258, 521.833331854232711, 24.0, 24.0 ]
+									"patching_rect" : [ 1087.333333333333258, 521.833331854232711, 24.0, 24.0 ],
+									"svg" : ""
 								}
 
 							}
@@ -1875,15 +1813,13 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-26307"
 					}
 ,
 					"patching_rect" : [ 208.0, 215.0, 177.0, 26.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "patcher \"Basic MIDI\"",
@@ -1900,8 +1836,8 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 5,
+							"major" : 9,
+							"minor" : 0,
 							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
@@ -1909,34 +1845,8 @@
 ,
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
@@ -1948,8 +1858,18 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 178.166666666666629, 145.499991001861474, 337.350000000000136, 79.0 ],
-									"text" : "By default, players will automatically be initailized on the server when created. But if this is not the case (i.e., if they have been created with @autoinitialize 0) this message will initialize them",
-									"textcolor" : [ 0.137254901960784, 0.137254901960784, 0.137254901960784, 1.0 ]
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "By default, players will automatically be initailized on the server when created. But if this is not the case (i.e., if they have been created with @autoinitialize 0) this message will initialize them"
 								}
 
 							}
@@ -1976,8 +1896,8 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 5,
+											"major" : 9,
+											"minor" : 0,
 											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
@@ -1985,33 +1905,7 @@
 ,
 										"classnamespace" : "box",
 										"rect" : [ 513.0, 262.0, 737.0, 632.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-28",
@@ -2165,7 +2059,7 @@
 													"clipheight" : 81.0,
 													"data" : 													{
 														"clips" : [ 															{
-																"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Joelle.wav",
+																"absolutepath" : "Joelle.wav",
 																"filename" : "Joelle.wav",
 																"filekind" : "audiofile",
 																"id" : "u397001342",
@@ -2192,6 +2086,37 @@
 													"patching_rect" : [ 339.0, 221.0, 350.0, 82.0 ],
 													"pitchcorrection" : 0,
 													"quality" : "basic",
+													"saved_attribute_attributes" : 													{
+														"candicane2" : 														{
+															"expression" : ""
+														}
+,
+														"candicane3" : 														{
+															"expression" : ""
+														}
+,
+														"candicane4" : 														{
+															"expression" : ""
+														}
+,
+														"candicane5" : 														{
+															"expression" : ""
+														}
+,
+														"candicane6" : 														{
+															"expression" : ""
+														}
+,
+														"candicane7" : 														{
+															"expression" : ""
+														}
+,
+														"candicane8" : 														{
+															"expression" : ""
+														}
+
+													}
+,
 													"timestretch" : [ 0 ]
 												}
 
@@ -2317,15 +2242,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-26831"
 									}
 ,
 									"patching_rect" : [ 706.731105836006009, 376.624985286404922, 100.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p listen_corpus"
@@ -2343,8 +2266,8 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 5,
+											"major" : 9,
+											"minor" : 0,
 											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
@@ -2352,33 +2275,7 @@
 ,
 										"classnamespace" : "box",
 										"rect" : [ 326.0, 247.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-47",
@@ -2477,15 +2374,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-26833"
 									}
 ,
 									"patching_rect" : [ 861.231105836005895, 157.499991001861474, 120.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p read_opendialog"
@@ -2525,6 +2420,8 @@
 											"parameter_longname" : "live.gain~",
 											"parameter_mmax" : 6.0,
 											"parameter_mmin" : -70.0,
+											"parameter_modmode" : 0,
+											"parameter_osc_name" : "<default>",
 											"parameter_shortname" : "live.gain~",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4
@@ -2592,7 +2489,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1081.75, 422.95832873049676, 24.0, 24.0 ]
+									"patching_rect" : [ 1081.75, 422.95832873049676, 24.0, 24.0 ],
+									"svg" : ""
 								}
 
 							}
@@ -2605,7 +2503,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 197.333333333333314, 341.95832873049676, 24.0, 24.0 ]
+									"patching_rect" : [ 197.333333333333314, 341.95832873049676, 24.0, 24.0 ],
+									"svg" : ""
 								}
 
 							}
@@ -2617,7 +2516,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 328.0, 246.624985286404922, 24.0, 24.0 ]
+									"patching_rect" : [ 328.0, 246.624985286404922, 24.0, 24.0 ],
+									"svg" : ""
 								}
 
 							}
@@ -2657,7 +2557,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1093.5, 128.499991001861474, 223.0, 47.0 ],
 									"text" : "NB: when the sound file stops, the somax.player will stop playing, since there won't be any influences",
-									"textcolor" : [ 0.831372549019608, 0.035294117647059, 0.035294117647059, 1.0 ]
+									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
 
 							}
@@ -2920,7 +2820,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 63.0, 508.673499104757866, 443.0, 42.0 ],
 									"text" : "NB: Only one server can be present in an open Max window -- take care not to instantiate multiple servers!",
-									"textcolor" : [ 0.831372549019608, 0.035294117647059, 0.035294117647059, 1.0 ]
+									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
 
 							}
@@ -3178,6 +3078,8 @@
 											"parameter_longname" : "output[2]",
 											"parameter_mmax" : 6.0,
 											"parameter_mmin" : -70.0,
+											"parameter_modmode" : 0,
+											"parameter_osc_name" : "<default>",
 											"parameter_shortname" : "guide_audio",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4
@@ -3225,6 +3127,8 @@
 											"parameter_longname" : "somax2",
 											"parameter_mmax" : 6.0,
 											"parameter_mmin" : -70.0,
+											"parameter_modmode" : 0,
+											"parameter_osc_name" : "<default>",
 											"parameter_shortname" : "somax2",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4
@@ -3366,8 +3270,14 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 861.231105836005895, 272.291658200543736, 64.0, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Corpus",
-									"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 									"varname" : "HelpTitle[3]"
 								}
 
@@ -3529,7 +3439,7 @@
 									"clipheight" : 55.0,
 									"data" : 									{
 										"clips" : [ 											{
-												"absolutepath" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus/Fabbrizio2c.wav",
+												"absolutepath" : "Fabbrizio2c.wav",
 												"filename" : "Fabbrizio2c.wav",
 												"filekind" : "audiofile",
 												"id" : "u815014955",
@@ -3556,6 +3466,37 @@
 									"patching_rect" : [ 847.231105836006009, 87.499991001861474, 239.0, 56.0 ],
 									"pitchcorrection" : 0,
 									"quality" : "basic",
+									"saved_attribute_attributes" : 									{
+										"candicane2" : 										{
+											"expression" : ""
+										}
+,
+										"candicane3" : 										{
+											"expression" : ""
+										}
+,
+										"candicane4" : 										{
+											"expression" : ""
+										}
+,
+										"candicane5" : 										{
+											"expression" : ""
+										}
+,
+										"candicane6" : 										{
+											"expression" : ""
+										}
+,
+										"candicane7" : 										{
+											"expression" : ""
+										}
+,
+										"candicane8" : 										{
+											"expression" : ""
+										}
+
+									}
+,
 									"timestretch" : [ 0 ]
 								}
 
@@ -3569,7 +3510,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1142.083333333333258, 521.499995397163275, 24.0, 24.0 ]
+									"patching_rect" : [ 1142.083333333333258, 521.499995397163275, 24.0, 24.0 ],
+									"svg" : ""
 								}
 
 							}
@@ -3914,15 +3856,13 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-26829"
 					}
 ,
 					"patching_rect" : [ 123.0, 157.0, 185.0, 26.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "patcher \"Basic Audio\"",
@@ -3939,44 +3879,31 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 5,
+							"major" : 9,
+							"minor" : 0,
 							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
+						"rect" : [ 118.0, 126.0, 1340.0, 774.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"autofit" : 2,
+									"id" : "obj-12",
+									"maxclass" : "fpic",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "jit_matrix" ],
+									"patching_rect" : [ 447.0, 511.0, 84.5, 21.0 ],
+									"pic" : "Macintosh HD:/Users/marcofiorini/Desktop/Screenshot 2025-03-05 at 11.57.11.png"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"arrows" : 2,
 									"border" : 2.0,
@@ -3997,7 +3924,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 894.75, 387.0, 180.0, 47.0 ],
 									"text" : "the influences are the triggers for the co-improvisational behaviour of the Player",
-									"textcolor" : [ 0.986251831054688, 0.007236152887344, 0.027423052117229, 1.0 ]
+									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
 								}
 
 							}
@@ -4058,7 +3985,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 479.5, 369.0, 138.0, 47.0 ],
 									"text" : "the corpus is the actual musical material loaded into a Player",
-									"textcolor" : [ 0.000066079199314, 0.001801013946533, 0.998228549957275, 1.0 ]
+									"textcolor" : [ 0.352941176470588, 0.352941176470588, 1.0, 1.0 ]
 								}
 
 							}
@@ -4315,22 +4242,6 @@
 									"style" : "default",
 									"text" : "somax.midiinfluencer",
 									"varname" : "somax.midiinfluencer"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"autofit" : 1,
-									"data" : [ 5309, "png", "IBkSG0fBZn....PCIgDQRA..AHA....YHX....fR676R....DLmPIQEBHf.B7g.YHB..TPWRDEDU3wY6cmFTSb9GG.+aBDPQEPkKEMHJQzpEOphsdfG3QqNhZszpshTOpxT0A0AcfRa83OBNpSsUsNdfoEzW3QkwiphGXQEQDOpEOJnffZQMnQ4TI.I7+ELrMOYyA3BIoN+97Jd17ra1GdR9sO6ywFQEVXg0BBgPD.wV5S.Bg7eeTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHX1JzCfioO6FU9utaeCpUjMMp8QTspQ+KJ1F09PHj+UoCVdy5w2r2hD6UqzrrODBw7wrGHwYU2yrrODBw7wrGHw0WkIDqopFb9EqoJ31qxrY7LhPHBkYOPhcZJGdU1w.psA7yoSs0BuJ6XPhlxa9OwHDxaLA2YquIZWk2B..OnMS.ZDamdyiXMUAuJ6Xb4kPHVurHAR.pKXRqqp.7LG7GEauLnxl1Cf55XUmUcO31qxjZIBg7eDVr.I.0caNdV9YgmkeVK4oAgPDHAGHYDq84MEmGDBoYzQNRy6wmlYqDBQvn.IDBQvn.IDBQvn.IDBQvn.IDBQvn.IDBQvn.IDBQvn.IDBQvn.IDBQvn.IDBQvn.IDBQvL6KZOQhDgANvAht0stAO8zSzt10NTTQEgBJn.TPAEf7yOeTRIkzfOdd5omvWe8EcoKcARkJEpUqF4kWdHu7xC4latPoRi+XZzWe8EsoMsA..4kWd3ku7kvN6rCCe3CG8rm8Dt5pqnlZpAEUTQ35W+53xW9xL6uM1XCFxPFB5Se5Cb0UWQ0UWMd3CeHxM2bwEu3EaPkAwhECO8zSHUpT3kWdAu7xKzl1zFTQEUfRKsTjSN4fqd0qhW7hWvaecxImfLYxX1VVYkEppJC+vipu8suvVa+2p9byMWTbwE2fNW0USc8oyN6LjISF7wGefO93CDKVLWcYN4jCd4KeoQ2+d1ydhV0pVwUtJojRfe94GBHf.f6t6NJrvBQlYlId9yeNb0UW41uadyaBUpTYxyuALfAv82JUpD4me9Vzxw0t10L44r4fnBKrvFvSXHCKnfBpAm2QMpQg4Mu4gN0oNYv7nVsZbxSdRr0stUi9g61111hvBKLL9wOdHRjH8lGMZzf8su8gctycZvuXc7ieb3niNB..4xkizSOcr90udz111V8l+rxJKDd3gipqtZzqd0KrpUsJ3gGdn279W+0eg0t10hG8nGo2WWjHQXJSYJXFyXFvM2byfkU.fJqrRDe7wi8u+8CMZzvs8QMpQgUu5Uyj28rm8fsssso2iyDlvDPTQEEy1V0pVEN8oOsQe+0mlx5SarwFL24NW7EewW.wh0eCkUqVM1yd1CjKWNTqVsdySJojBr2d6A.P7wGOjJUJF6XGKu78hW7Bzt10NtzqYMqAm3Dmvfme..8qe8CadyalKcVYkE95u9qsnkiTRIErhUrBiddC.bjl4UsmY6VaFwHFAV4JWoQ+PGPcUDie7iGacqakqkB5xe+8G6cu6ESXBSvfAQ.p6J8Se5SG+xu7Kn6cu6l7bre8qeXSaZSFLHB.fe94GBO7vg+96O94e9mMXPD.f9zm9fXiMVXiM7ep4aiM1fUtxUhktzkZxfH..snEs.KbgKDwEWbLa+rm8r7Z4yzm9zgu95Kuigmd5IBO7vY114O+4eiBhzTVeJUpTryctSDRHgXvu7U+wJzPCEae6aGd5oml7bL3fCVue4C.7ZIggxm19vO7CYR+G+wevj1RTNzWqTsDLKARb0UWw28ceGy+bKqrxvYO6YQRIkDN0oNEd9yYebDHUpTdUb..N5niH5nilqYe0qnhJBokVZ3RW5R7Z1nWd4EV25VGZYKaoQOO6W+5GbvAG3RWbwEiryNa7pW8Jl7M4IOY7C+vOvc6ApUqF4me9nfBJ.0pyiPRu81aLwINQduWiXDi.AFXfLa6Uu5UHszRCG8nGEojRJ3d2i+C85gLjgvKHQbwEGSY1FarAQEUTLAvpOvk1kOEJTvKvTCQSY8oDIRvF1vF3En+IO4IH0TSEolZp3IO4ILuVO5QOPLwDiQuHBPc21mgrqcsKlak48du2Csu8s2f42N6rCibjijKcM0TCN0oNkEubXpVQYtXV5ijALfAv0LM.fTSMUDSLwfJqrRtsIQhDDczQiQO5QysswO9wiCbfCvbrhHhHXpvqpppvO8S+DN7gOL21DIRDl8rmMBMzP49vtKt3Bl6bmKSSSMj6e+6iXiMVjSN4fZqsVz912dr90ud81pladyahXiMVtaewEWbAadyaFctyclKOCZPCBG5PGhY+BN3fYRmRJof0st0gJpnBlsOvANP7se62xTlmzjlDV25VGW5hKtXDWbwwrMe7wGDRHgfe8W+U..Lm4LGzyd1StWWsZ0XkqbknrxJyj++PWMk0mSaZSCcricjKsJUpvN1wNv92+9YBJGTPAgkrjk.IRj...YxjgfBJHl5cC4gO7g3Dm3DnhJp.CbfCDsrksDYkUVH0TSEiabiC.0050QO5Qi8su8o2iwvF1vXBBmVZowz2OVpxwcu6cM49YNXVZQhe94GSZ4xky7gN.fpqtZrksrElqRHSlLluP9AevGfQMpQwreKcoKkWkPs0VK10t1Euq19Iexmft10tZzy0xJqLDUTQgryNatO.nToRrksrEd4UgBEH7vCmoOPd9yeN9lu4aXxm1e.CntNRq28t2boezidDhIlX3EDA.3JW4J7du083A.jd5oyKXUngFJ7xKufe94GlwLlAyqIWtbbyadSdGmFhlp5SWbwELyYNSl8Kt3hC6ae6iWK6NxQNBV1xVFy19pu5qPqacqM54ZokVJVzhVD18t2MRJojPTQEEV7hWL..98e+2Yxa8AUzGcaM0wO9wsZJGVCLKARzsCkl3DmnduGxm+7mi0st0gDRHADarwhErfE.EJTv858su8kI+m6bmC23F2vfuum3Dm.Ymc1boqeDVLlMsoMgBKrPda+5W+5n5pqlYawGe75sSbyO+7QQEUDWZc6GEWbwEbm6bGtqnczidTdGaceu0l1sFPaadyaFO7gOjKsDIRvJVwJ3caHW6ZWCIlXhF78yTZppOG0nFEysalVZogyblyXv22qd0qhKbgKvk1YmcF8u+82nmq6XG6vfib2e9m+Id7ieLW5t28titzktvKessssECbfCjKsRkJYF8NKc4vZfY4Vat5UuJl7jmLW5fCNXz291WbxSdRb4KeYlN95jm7jF733kWdwjtg7kgDSLQDar+6O2mRkJ0n4W2g2UaJUpjInfwthdIkTBWmnp8PsB.bgKbAtOH0xV1RiNTsN5ni3ce22kYa5d7pmJUpvpV0pv12914xit2N1Ke4KwpW8p4ckxFilp5SsacBPc2hjobgKbALrgMLtzlpydu0sL9uBAm3Dm.yYNygK8XG6XwN1wNXxyXFyXX9e9IO4IYBlZMTNrzLaARToREyURkISFjISFV3BWHTnPAt7kuLxHiLvUtxUvqe8q06wQ6.IZznA4kWdl78N2bykIswBjTd4kazdAW6yKMZzfm9zmZv71PlSBZeLcxImfWd4E5Tm5DjJUJ5bm6L2bJwTcFm1xImbfb4xw7l2738Z0VasXMqYMB9JaMU0m59kmYMqYYxQOQ2VLn6Wh0k9Zco1N9wONl8rmM2+i0WfDcukGsusF.qixgklYIPR4kWNVxRVBhKt3zaOP6t6tifBJHDTPAAUpTgzRKMHWtb7fG7.t7HQhDl9FPoRknlZpwju2JTn.pUqlaDLLVfD80GEFqL0Pd+MF6ryNL9wOdDbvAyq0VBwd1ydP.AD.5QO5Ay1SN4jQFYjgfO9ME0m.7+ximd5YCZ3P0lwtRtRkJMXPr5oPgBbsqcMtIZlGd3A7yO+PVYkE.paT2zdTxtyctCJnfBXNFVCkCKMy17HIqrxBgEVXHyLyjYBUoK6s2dDXfAhctych.BH.tsaiM1v7E2560aSQsZ0L25fg5eA.vqCCaN0wN1Qr+8ueDQDQXxfH5N7yuo5bm6rQmeCMFBs9D.Fc3VanL1Pi1Pa40wN1wXRqcKPzskE5lW.qmxgkjYcJx+nG8HrzktT3pqth.BH.3u+9i92+9q242gCN3.VyZVCBKrvvsu8sgJUpX9RPC8KDN3fCLGeiMcsER+FzX3ryNiMtwMBWbwEduV0UWMJnfBPt4lKxKu7PN4jCxN6raTSZrPBIDdsFA.n28t2HjPBAIjPBB57udBo9DfeeNIWtbi1oy5iwlp4Mz5yyctygxKubtQNYjibjXiabiPsZ0LARToRERIkT3s+VKkCKIKxOPVO6YOCG7fGDG7fGD1ZqsvO+7Cu+6+9Hv.CDt6t6b4SjHQXvCdv31291n1ZqEEVXgb2aoiN5HZYKaoIaxmtiXxa5ZJoozTm5T40z2ie7iijRJIbu6cOdiJhtWwyX8YRO5QOvrl0rL3qOqYMKjQFYfbxIm2fyb86Mo9Dnt.QZW+bwKdwlzyqFppppJblybFtNP1QGcDCX.C.UVYkLm+m+7mGkWN+e8GsVJGVRM62ZiM1XCFzfFD9zO8SQDQDAl5TmJyqWSM0fqe8qist0shfCNXdSHnAMnAw82+y+7OLuloFxL.1EYE.3MiKsD5W+5GS55GYoryNa8t1KzctuXn.I1au836+9umYDFxLyLwUu5U4Raqs1hUrhUXzawyXZJqO0cMHo8bqwP71auwbm6bwLm4LwXFyXP25V2diJG5R2aYY3Ce3LyjU.9cxZ8rlJGVJM6sHoUspUX8qe8b2JhBEJvAO3A0ad0nQCRHgDvm8YeF21z9pwZOGI..l6bmqQWgs1au87lHVMEc1nP8Nuy6vj1Pe.EntfFe7G+wLayP8OzhVzhX5L4JpnBr10tVHVrXjXhIxMyLkJUJVzhVD1vF1Pi9bu4r9blyblH4jS1nc587m+7wPG5P4RepScJdKZw2D+8e+2H+7yGd6s2..Hf.BfoueTnPAS.YsYMUNrTZ1aQRokVJSu06t6tya5gqMsuhE.XlvPG5PGhoiSkISFu.E0SrXwXgKbgLqvyZqs1FzX72bS2OfYrEs2xW9xYluA.0MZO5ZvCdvLysCf5lfZEUTQ3oO8o7VMvSdxSFCdvCVuum0ORE95qu7lGJMk0mm9zmFkVZoboae6aOV7hWrdWji.0MeNzcBEp6r4UHzNftSN4Dyh2L4jS1f8Ug0V4vRvrLpMm8rr+HgufEr.L+4OelUCpDIRvTlxTvxW9xYxa5omN2e+3G+Xr28tWlWOrvBCqZUqhqOGDIRD71auwO9i+HlxTlBSdO7gOrUQOfq6hwKpnhhYHFqueFhN5n06B9S2UQqyN6LuGM.YlYlLSA7jRJIdyB3nhJJ3ryNyrMIRjfcu6cicsqcgcsqcA4xkycU550TUeVRIkvaNa7QezGgssssAe80WtV83fCNfu7K+RDczQybac28t2kaXZaJjbxIavgz2XsZzZqbXIXV5r0e629MLtwMNtwJ2VasEgDRHXFyXFPoRkn5pqFt3hK7Zx9Se5SQRIkDy1RLwDwXG6XY5bq.CLPDXfAhJpnBHVrX8NpA2+92GaZSapYnz03kbxIC+82etzcnCc.wGe7392+9nxJqD93iOFsOLbxImf6t6N2zMOxHij4pm0eKM5Jt3hCIjPBnEsnE.nto9cjQFIhLxHaTm+Mk0mG4HGASbhSjIPZO6YO4VctkTRIncsqc7lMukVZo3+8+9eMpyaS4ku7kHiLxf4VN.p64JiolPXVSkCKAyRKRJqrxvxW9x4sRSEIRDbwEWPG5PG38gtm8rmgkrjkvaTYprxJw7m+7wktzk389zpV0J8FD4RW5RXgKbgFcpnaNcpScJlkfNPc+unacqanW8pW7BhjVZowagINlwLF.T2JAV2O3uksrEl05S8JrvB4ckygNzghIMoI0nN+aJqO0nQCBO7v06U7s2d6gat4Fuu7Ud4kiHhHBC9zISHz27DQeaSWVakCyMy1DR6gO7gXZSaZHwDSzfcBUM0TCxM2bwt28twm+4etAexhoToRrrksLDWbwgBKrPCduq25V2BqYMqAKaYKi4dX0l1S1KSMTxZOg0LUd09002DcKlXhAqcsq0f2pkJUpvMtwMPDQDAhLxH4sHvpedhDZngxr8LyLSbzidTCddcfCb.dqQHsOFZzngY58qa550TVeVd4kiXiMVrrksLjWd4YvaunhJp.IjPBH3fCF24N2Qu4owTepOomd5LyoiW+5Wy6AXjgXMUNL2LqOpEqmDIRfGd3A7vCO35nwbyMWb+6e+F8D4AntE9l2d6M71augHQhfBEJvidziL5ZgwZgs1ZK2Tp1M2bCEWbwHu7xCEVXgFcFiZMoot9zVasERkJEcsqcEspUsBJTn.O9wOFO4IO4M53YoXMUNZteTKZQBjPHDyq2ZdlsRHj2dQARHDhfQARHDhfQARHDhfQARHDhfQARHDhfQARHDhfQARHDhfI3EsWpQx+wEHgPrtn+EHRSGKxiZw5Uk3Vim4f+nX6kAU1T2C7F6UqDNq5dvsWkIjng+i0NRSOpdv5v+kqGD7Tj2wzm8az98hVza7f1LAnQL+GRO..h0TE7prig1Uo08OLP+WGUOXcn4tdnzAKWHmdljEoEIunE8F463jALxCwXMhsqt7.PeHtYBUOXc3sg5AydmsVs3ViGzlIXz+owQjH7f1LATsXi+CrLowipGrN71R8fYOPRQN3uAa9l9nQrcnHG72zYjznP0CVGdaodvrGHoX6kYV1GhwQ0CVGdaodvrGHo9dit4deHFGUOXc3sk5AAOpMDBgPyrUBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHXTfDBgHX+eYnNzusMYGhF.....IUjSD4pPfIH" ],
-									"embed" : 1,
-									"forceaspect" : 1,
-									"id" : "obj-12",
-									"maxclass" : "fpic",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "jit_matrix" ],
-									"patching_rect" : [ 447.0, 505.830900263177227, 95.0, 34.67153284671533 ],
-									"pic" : "Macintosh HD:/Users/marcofiorini/Desktop/Screenshot 2023-02-06 at 13.04.53.png"
 								}
 
 							}
@@ -4691,15 +4602,13 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-27439"
 					}
 ,
 					"patching_rect" : [ 57.0, 82.0, 210.0, 26.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "patcher \"Basic Workflow\"",
@@ -4709,15 +4618,22 @@
 			}
  ],
 		"lines" : [  ],
+		"originid" : "pat-26305",
 		"parameters" : 		{
-			"obj-2::obj-143::obj-1007" : [ "rslider[2]", "rslider", 0 ],
+			"obj-2::obj-143::obj-1001::obj-89::obj-1" : [ "live.text[53]", "live.text", 0 ],
+			"obj-2::obj-143::obj-1001::obj-89::obj-2" : [ "live.text[54]", "live.text", 0 ],
+			"obj-2::obj-143::obj-1001::obj-89::obj-3" : [ "live.text[55]", "live.text", 0 ],
+			"obj-2::obj-143::obj-1039::obj-89::obj-1" : [ "live.text[56]", "live.text", 0 ],
+			"obj-2::obj-143::obj-1039::obj-89::obj-2" : [ "live.text[57]", "live.text", 0 ],
+			"obj-2::obj-143::obj-1039::obj-89::obj-3" : [ "live.text[58]", "live.text", 0 ],
+			"obj-2::obj-143::obj-1105" : [ "harmonincpeakdecay[18]", "harmonincpeakdecay", 0 ],
 			"obj-2::obj-143::obj-1115" : [ "continuity[3]", "continuity", 0 ],
 			"obj-2::obj-143::obj-1175" : [ "heldnotesmode[3]", "heldnotesmode", 0 ],
 			"obj-2::obj-143::obj-1179" : [ "continuity[2]", "continuity", 0 ],
 			"obj-2::obj-143::obj-12" : [ "melodicmod12[6]", "melodicmod12", 0 ],
 			"obj-2::obj-143::obj-120" : [ "melodicbypass[2]", "melodicbypass", 0 ],
 			"obj-2::obj-143::obj-1218" : [ "simultaneousonsets[4]", "artificialmidities", 0 ],
-			"obj-2::obj-143::obj-126" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
+			"obj-2::obj-143::obj-126" : [ "harmonicbypass[5]", "harmonicbypass", 0 ],
 			"obj-2::obj-143::obj-134" : [ "continuity[26]", "continuity", 0 ],
 			"obj-2::obj-143::obj-1344" : [ "enforcetaboo[1]", "enforcetaboo", 0 ],
 			"obj-2::obj-143::obj-140" : [ "resetinfluences[2]", "resetinfluences", 0 ],
@@ -4725,7 +4641,6 @@
 			"obj-2::obj-143::obj-1444" : [ "outputprobability[1]", "outputprobability", 0 ],
 			"obj-2::obj-143::obj-152" : [ "selfngramorder[6]", "selfngramorder", 0 ],
 			"obj-2::obj-143::obj-154" : [ "melodicngramorder[5]", "melodicngramorder", 0 ],
-			"obj-2::obj-143::obj-163" : [ "ignorephase[2]", "ignorephase", 0 ],
 			"obj-2::obj-143::obj-19" : [ "selfmod12[2]", "selfmod12", 0 ],
 			"obj-2::obj-143::obj-22" : [ "selfmelodicbypass[6]", "selfmelodicbypass", 0 ],
 			"obj-2::obj-143::obj-254" : [ "harmonincpeakdecay[4]", "harmonincpeakdecay", 0 ],
@@ -4740,11 +4655,21 @@
 			"obj-2::obj-143::obj-295" : [ "playingmode[5]", "playingmode", 0 ],
 			"obj-2::obj-143::obj-298" : [ "simultaneousonsets[3]", "simultaneousonsets", 0 ],
 			"obj-2::obj-143::obj-328" : [ "decaybasis[2]", "decaybasis", 0 ],
+			"obj-2::obj-143::obj-387::obj-89::obj-1" : [ "live.text[62]", "live.text", 0 ],
+			"obj-2::obj-143::obj-387::obj-89::obj-2" : [ "live.text[63]", "live.text", 0 ],
+			"obj-2::obj-143::obj-387::obj-89::obj-3" : [ "live.text[64]", "live.text", 0 ],
+			"obj-2::obj-143::obj-497::obj-89::obj-1" : [ "live.text[59]", "live.text", 0 ],
+			"obj-2::obj-143::obj-497::obj-89::obj-2" : [ "live.text[60]", "live.text", 0 ],
+			"obj-2::obj-143::obj-497::obj-89::obj-3" : [ "live.text[61]", "live.text", 0 ],
 			"obj-2::obj-143::obj-570" : [ "__exp_melodicpitchfromchords[5]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-2::obj-143::obj-575" : [ "__exp_tempoconsistencysigma[5]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-2::obj-143::obj-642" : [ "__exp_numnotessigma[6]", "__exp_numnotessigma", 0 ],
 			"obj-2::obj-143::obj-653" : [ "__exp_numnotesenable[1]", "__exp_numnotesenable", 0 ],
 			"obj-2::obj-143::obj-656" : [ "__exp_numnotesmu[6]", "__exp_numnotesmu", 0 ],
+			"obj-2::obj-143::obj-667" : [ "selfharmonicbypass[6]", "selfharmonicbypass", 0 ],
+			"obj-2::obj-143::obj-670" : [ "harmonicbypass[6]", "harmonicbypass", 0 ],
+			"obj-2::obj-143::obj-679" : [ "selfharmonicngramorder[7]", "selfharmonicngramorder", 0 ],
+			"obj-2::obj-143::obj-685" : [ "harmonincpeakdecay[16]", "harmonincpeakdecay[1]", 0 ],
 			"obj-2::obj-143::obj-688" : [ "__exp_durationsigma[3]", "__exp_durationsigma", 0 ],
 			"obj-2::obj-143::obj-702" : [ "__exp_durationmu[2]", "__exp_durationmu", 0 ],
 			"obj-2::obj-143::obj-722" : [ "__exp_octavebandsenable[6]", "__exp_octavebandsenable", 0 ],
@@ -4755,18 +4680,32 @@
 			"obj-2::obj-143::obj-777" : [ "__exp_autojumpactivate[2]", "__exp_autojumpactivate", 0 ],
 			"obj-2::obj-143::obj-799" : [ "__exp_tempoconsistencyenable[6]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-2::obj-143::obj-802" : [ "__exp_tempoconsistencylen[5]", "__exp_tempoconsistencylen", 0 ],
-			"obj-2::obj-143::obj-860" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
+			"obj-2::obj-143::obj-814" : [ "harmonincpeakdecay[14]", "harmonincpeakdecay", 0 ],
+			"obj-2::obj-143::obj-842::obj-89::obj-1" : [ "live.text[50]", "live.text", 0 ],
+			"obj-2::obj-143::obj-842::obj-89::obj-2" : [ "live.text[51]", "live.text", 0 ],
+			"obj-2::obj-143::obj-842::obj-89::obj-3" : [ "live.text[52]", "live.text", 0 ],
+			"obj-2::obj-143::obj-843" : [ "harmonicngramorder[5]", "harmonicngramorder", 0 ],
+			"obj-2::obj-143::obj-860" : [ "harmonincpeakdecay[15]", "harmonincpeakdecay[1]", 0 ],
 			"obj-2::obj-143::obj-865" : [ "selfharmonicngramorder[5]", "selfharmonicngramorder", 0 ],
 			"obj-2::obj-143::obj-870" : [ "selfharmonicbypass[2]", "selfharmonicbypass", 0 ],
-			"obj-2::obj-143::obj-998" : [ "__exp_regionmaskenable[6]", "__exp_regionmaskenable", 0 ],
-			"obj-7::obj-17::obj-395::obj-2" : [ "live.text[4]", "live.text[4]", 0 ],
+			"obj-2::obj-143::obj-871" : [ "harmonincpeakdecay[17]", "harmonincpeakdecay", 0 ],
+			"obj-2::obj-143::obj-96::obj-89::obj-1" : [ "live.text[47]", "live.text", 0 ],
+			"obj-2::obj-143::obj-96::obj-89::obj-2" : [ "live.text[48]", "live.text", 0 ],
+			"obj-2::obj-143::obj-96::obj-89::obj-3" : [ "live.text[49]", "live.text", 0 ],
+			"obj-7::obj-17::obj-395::obj-2" : [ "live.text[21]", "live.text[4]", 0 ],
 			"obj-7::obj-17::obj-395::obj-375" : [ "mc.live.gain~[6]", "click", 0 ],
 			"obj-7::obj-17::obj-395::obj-441" : [ "mc.live.gain~[5]", "corpus", 0 ],
-			"obj-7::obj-17::obj-395::obj-469" : [ "live.text[12]", "live.text[11]", 0 ],
-			"obj-7::obj-17::obj-395::obj-472" : [ "live.text[2]", "live.text[11]", 0 ],
-			"obj-7::obj-17::obj-395::obj-490" : [ "live.text[11]", "live.text[11]", 0 ],
-			"obj-7::obj-25::obj-98" : [ "live.text[6]", "live.text[26]", 0 ],
-			"obj-7::obj-9::obj-1007" : [ "rslider[3]", "rslider", 0 ],
+			"obj-7::obj-17::obj-395::obj-469" : [ "live.text[27]", "live.text[11]", 0 ],
+			"obj-7::obj-17::obj-395::obj-472" : [ "live.text[26]", "live.text[11]", 0 ],
+			"obj-7::obj-17::obj-395::obj-490" : [ "live.text[22]", "live.text[11]", 0 ],
+			"obj-7::obj-25::obj-98" : [ "live.text[28]", "live.text[26]", 0 ],
+			"obj-7::obj-9::obj-1001::obj-89::obj-1" : [ "live.text[4]", "live.text", 0 ],
+			"obj-7::obj-9::obj-1001::obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],
+			"obj-7::obj-9::obj-1001::obj-89::obj-3" : [ "live.text[6]", "live.text", 0 ],
+			"obj-7::obj-9::obj-1039::obj-89::obj-1" : [ "live.text[7]", "live.text", 0 ],
+			"obj-7::obj-9::obj-1039::obj-89::obj-2" : [ "live.text[8]", "live.text", 0 ],
+			"obj-7::obj-9::obj-1039::obj-89::obj-3" : [ "live.text[9]", "live.text", 0 ],
+			"obj-7::obj-9::obj-1105" : [ "harmonincpeakdecay[8]", "harmonincpeakdecay", 0 ],
 			"obj-7::obj-9::obj-1115" : [ "continuity[4]", "continuity", 0 ],
 			"obj-7::obj-9::obj-1175" : [ "heldnotesmode[4]", "heldnotesmode", 0 ],
 			"obj-7::obj-9::obj-1179" : [ "continuity[6]", "continuity", 0 ],
@@ -4781,10 +4720,9 @@
 			"obj-7::obj-9::obj-1444" : [ "outputprobability[2]", "outputprobability", 0 ],
 			"obj-7::obj-9::obj-152" : [ "selfngramorder[2]", "selfngramorder", 0 ],
 			"obj-7::obj-9::obj-154" : [ "melodicngramorder[6]", "melodicngramorder", 0 ],
-			"obj-7::obj-9::obj-163" : [ "ignorephase[3]", "ignorephase", 0 ],
 			"obj-7::obj-9::obj-19" : [ "selfmod12[3]", "selfmod12", 0 ],
 			"obj-7::obj-9::obj-22" : [ "selfmelodicbypass[7]", "selfmelodicbypass", 0 ],
-			"obj-7::obj-9::obj-254" : [ "harmonincpeakdecay[7]", "harmonincpeakdecay", 0 ],
+			"obj-7::obj-9::obj-254" : [ "harmonincpeakdecay[9]", "harmonincpeakdecay", 0 ],
 			"obj-7::obj-9::obj-255" : [ "melodicpeakdecay[4]", "melodicpeakdecay", 0 ],
 			"obj-7::obj-9::obj-256" : [ "selfpeakdecay[3]", "selfpeakdecay", 0 ],
 			"obj-7::obj-9::obj-270::obj-1226" : [ "width[3]", "Width", 0 ],
@@ -4796,11 +4734,21 @@
 			"obj-7::obj-9::obj-295" : [ "playingmode[1]", "playingmode", 0 ],
 			"obj-7::obj-9::obj-298" : [ "simultaneousonsets[5]", "simultaneousonsets", 0 ],
 			"obj-7::obj-9::obj-328" : [ "decaybasis[3]", "decaybasis", 0 ],
+			"obj-7::obj-9::obj-387::obj-89::obj-1" : [ "live.text[19]", "live.text", 0 ],
+			"obj-7::obj-9::obj-387::obj-89::obj-2" : [ "live.text[20]", "live.text", 0 ],
+			"obj-7::obj-9::obj-387::obj-89::obj-3" : [ "live.text[13]", "live.text", 0 ],
+			"obj-7::obj-9::obj-497::obj-89::obj-1" : [ "live.text[10]", "live.text", 0 ],
+			"obj-7::obj-9::obj-497::obj-89::obj-2" : [ "live.text[11]", "live.text", 0 ],
+			"obj-7::obj-9::obj-497::obj-89::obj-3" : [ "live.text[12]", "live.text", 0 ],
 			"obj-7::obj-9::obj-570" : [ "__exp_melodicpitchfromchords[6]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-7::obj-9::obj-575" : [ "__exp_tempoconsistencysigma[6]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-7::obj-9::obj-642" : [ "__exp_numnotessigma[2]", "__exp_numnotessigma", 0 ],
 			"obj-7::obj-9::obj-653" : [ "__exp_numnotesenable[2]", "__exp_numnotesenable", 0 ],
 			"obj-7::obj-9::obj-656" : [ "__exp_numnotesmu[7]", "__exp_numnotesmu", 0 ],
+			"obj-7::obj-9::obj-667" : [ "selfharmonicbypass[1]", "selfharmonicbypass", 0 ],
+			"obj-7::obj-9::obj-670" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
+			"obj-7::obj-9::obj-679" : [ "selfharmonicngramorder[1]", "selfharmonicngramorder", 0 ],
+			"obj-7::obj-9::obj-685" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
 			"obj-7::obj-9::obj-688" : [ "__exp_durationsigma[5]", "__exp_durationsigma", 0 ],
 			"obj-7::obj-9::obj-702" : [ "__exp_durationmu[3]", "__exp_durationmu", 0 ],
 			"obj-7::obj-9::obj-722" : [ "__exp_octavebandsenable[4]", "__exp_octavebandsenable", 0 ],
@@ -4811,13 +4759,27 @@
 			"obj-7::obj-9::obj-777" : [ "__exp_autojumpactivate[3]", "__exp_autojumpactivate", 0 ],
 			"obj-7::obj-9::obj-799" : [ "__exp_tempoconsistencyenable[4]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-7::obj-9::obj-802" : [ "__exp_tempoconsistencylen[6]", "__exp_tempoconsistencylen", 0 ],
-			"obj-7::obj-9::obj-860" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay[1]", 0 ],
+			"obj-7::obj-9::obj-814" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay", 0 ],
+			"obj-7::obj-9::obj-842::obj-89::obj-1" : [ "live.text[1]", "live.text", 0 ],
+			"obj-7::obj-9::obj-842::obj-89::obj-2" : [ "live.text[2]", "live.text", 0 ],
+			"obj-7::obj-9::obj-842::obj-89::obj-3" : [ "live.text[3]", "live.text", 0 ],
+			"obj-7::obj-9::obj-843" : [ "harmonicngramorder[3]", "harmonicngramorder", 0 ],
+			"obj-7::obj-9::obj-860" : [ "harmonincpeakdecay[1]", "harmonincpeakdecay[1]", 0 ],
 			"obj-7::obj-9::obj-865" : [ "selfharmonicngramorder[6]", "selfharmonicngramorder", 0 ],
 			"obj-7::obj-9::obj-870" : [ "selfharmonicbypass[3]", "selfharmonicbypass", 0 ],
-			"obj-7::obj-9::obj-998" : [ "__exp_regionmaskenable[7]", "__exp_regionmaskenable", 0 ],
+			"obj-7::obj-9::obj-871" : [ "harmonincpeakdecay[7]", "harmonincpeakdecay", 0 ],
+			"obj-7::obj-9::obj-96::obj-89::obj-1" : [ "live.text[25]", "live.text", 0 ],
+			"obj-7::obj-9::obj-96::obj-89::obj-2" : [ "live.text[23]", "live.text", 0 ],
+			"obj-7::obj-9::obj-96::obj-89::obj-3" : [ "live.text[18]", "live.text", 0 ],
 			"obj-8::obj-11" : [ "live.gain~", "live.gain~", 0 ],
 			"obj-8::obj-13" : [ "somax2", "somax2", 0 ],
-			"obj-8::obj-143::obj-1007" : [ "rslider[1]", "rslider", 0 ],
+			"obj-8::obj-143::obj-1001::obj-89::obj-1" : [ "live.text[24]", "live.text", 0 ],
+			"obj-8::obj-143::obj-1001::obj-89::obj-2" : [ "live.text[35]", "live.text", 0 ],
+			"obj-8::obj-143::obj-1001::obj-89::obj-3" : [ "live.text[36]", "live.text", 0 ],
+			"obj-8::obj-143::obj-1039::obj-89::obj-1" : [ "live.text[37]", "live.text", 0 ],
+			"obj-8::obj-143::obj-1039::obj-89::obj-2" : [ "live.text[38]", "live.text", 0 ],
+			"obj-8::obj-143::obj-1039::obj-89::obj-3" : [ "live.text[39]", "live.text", 0 ],
+			"obj-8::obj-143::obj-1105" : [ "harmonincpeakdecay[12]", "harmonincpeakdecay", 0 ],
 			"obj-8::obj-143::obj-1115" : [ "continuity[1]", "continuity", 0 ],
 			"obj-8::obj-143::obj-1175" : [ "heldnotesmode[2]", "heldnotesmode", 0 ],
 			"obj-8::obj-143::obj-1179" : [ "continuity[16]", "continuity", 0 ],
@@ -4832,7 +4794,6 @@
 			"obj-8::obj-143::obj-1444" : [ "outputprobability[4]", "outputprobability", 0 ],
 			"obj-8::obj-143::obj-152" : [ "selfngramorder[1]", "selfngramorder", 0 ],
 			"obj-8::obj-143::obj-154" : [ "melodicngramorder[4]", "melodicngramorder", 0 ],
-			"obj-8::obj-143::obj-163" : [ "ignorephase[4]", "ignorephase", 0 ],
 			"obj-8::obj-143::obj-19" : [ "selfmod12[4]", "selfmod12", 0 ],
 			"obj-8::obj-143::obj-22" : [ "selfmelodicbypass[1]", "selfmelodicbypass", 0 ],
 			"obj-8::obj-143::obj-254" : [ "harmonincpeakdecay[2]", "harmonincpeakdecay", 0 ],
@@ -4847,11 +4808,21 @@
 			"obj-8::obj-143::obj-295" : [ "playingmode[4]", "playingmode", 0 ],
 			"obj-8::obj-143::obj-298" : [ "simultaneousonsets[7]", "simultaneousonsets", 0 ],
 			"obj-8::obj-143::obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
+			"obj-8::obj-143::obj-387::obj-89::obj-1" : [ "live.text[43]", "live.text", 0 ],
+			"obj-8::obj-143::obj-387::obj-89::obj-2" : [ "live.text[44]", "live.text", 0 ],
+			"obj-8::obj-143::obj-387::obj-89::obj-3" : [ "live.text[45]", "live.text", 0 ],
+			"obj-8::obj-143::obj-497::obj-89::obj-1" : [ "live.text[40]", "live.text", 0 ],
+			"obj-8::obj-143::obj-497::obj-89::obj-2" : [ "live.text[41]", "live.text", 0 ],
+			"obj-8::obj-143::obj-497::obj-89::obj-3" : [ "live.text[42]", "live.text", 0 ],
 			"obj-8::obj-143::obj-570" : [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-8::obj-143::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-8::obj-143::obj-642" : [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
 			"obj-8::obj-143::obj-653" : [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
 			"obj-8::obj-143::obj-656" : [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],
+			"obj-8::obj-143::obj-667" : [ "selfharmonicbypass[5]", "selfharmonicbypass", 0 ],
+			"obj-8::obj-143::obj-670" : [ "harmonicbypass[4]", "harmonicbypass", 0 ],
+			"obj-8::obj-143::obj-679" : [ "selfharmonicngramorder[2]", "selfharmonicngramorder", 0 ],
+			"obj-8::obj-143::obj-685" : [ "harmonincpeakdecay[10]", "harmonincpeakdecay[1]", 0 ],
 			"obj-8::obj-143::obj-688" : [ "__exp_durationsigma[4]", "__exp_durationsigma", 0 ],
 			"obj-8::obj-143::obj-702" : [ "__exp_durationmu[1]", "__exp_durationmu", 0 ],
 			"obj-8::obj-143::obj-722" : [ "__exp_octavebandsenable[5]", "__exp_octavebandsenable", 0 ],
@@ -4862,12 +4833,20 @@
 			"obj-8::obj-143::obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
 			"obj-8::obj-143::obj-799" : [ "__exp_tempoconsistencyenable[5]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-8::obj-143::obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
+			"obj-8::obj-143::obj-814" : [ "harmonincpeakdecay[13]", "harmonincpeakdecay", 0 ],
+			"obj-8::obj-143::obj-842::obj-89::obj-1" : [ "live.text[32]", "live.text", 0 ],
+			"obj-8::obj-143::obj-842::obj-89::obj-2" : [ "live.text[33]", "live.text", 0 ],
+			"obj-8::obj-143::obj-842::obj-89::obj-3" : [ "live.text[34]", "live.text", 0 ],
+			"obj-8::obj-143::obj-843" : [ "harmonicngramorder[4]", "harmonicngramorder", 0 ],
 			"obj-8::obj-143::obj-860" : [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
 			"obj-8::obj-143::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
 			"obj-8::obj-143::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
-			"obj-8::obj-143::obj-998" : [ "__exp_regionmaskenable[1]", "__exp_regionmaskenable", 0 ],
+			"obj-8::obj-143::obj-871" : [ "harmonincpeakdecay[11]", "harmonincpeakdecay", 0 ],
+			"obj-8::obj-143::obj-96::obj-89::obj-1" : [ "live.text[29]", "live.text", 0 ],
+			"obj-8::obj-143::obj-96::obj-89::obj-2" : [ "live.text[30]", "live.text", 0 ],
+			"obj-8::obj-143::obj-96::obj-89::obj-3" : [ "live.text[31]", "live.text", 0 ],
 			"obj-8::obj-24" : [ "output[2]", "guide_audio", 0 ],
-			"obj-8::obj-27::obj-98" : [ "live.text[9]", "live.text[26]", 0 ],
+			"obj-8::obj-27::obj-98" : [ "live.text[46]", "live.text[26]", 0 ],
 			"parameterbanks" : 			{
 				"0" : 				{
 					"index" : 0,
@@ -4878,6 +4857,30 @@
 			}
 ,
 			"parameter_overrides" : 			{
+				"obj-2::obj-143::obj-1001::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[53]"
+				}
+,
+				"obj-2::obj-143::obj-1001::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[54]"
+				}
+,
+				"obj-2::obj-143::obj-1001::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[55]"
+				}
+,
+				"obj-2::obj-143::obj-1039::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[56]"
+				}
+,
+				"obj-2::obj-143::obj-1039::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[57]"
+				}
+,
+				"obj-2::obj-143::obj-1039::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[58]"
+				}
+,
 				"obj-2::obj-143::obj-270::obj-1226" : 				{
 					"parameter_longname" : "width[2]"
 				}
@@ -4898,8 +4901,56 @@
 					"parameter_longname" : "weight[5]"
 				}
 ,
+				"obj-2::obj-143::obj-387::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[62]"
+				}
+,
+				"obj-2::obj-143::obj-387::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[63]"
+				}
+,
+				"obj-2::obj-143::obj-387::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[64]"
+				}
+,
+				"obj-2::obj-143::obj-497::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[59]"
+				}
+,
+				"obj-2::obj-143::obj-497::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[60]"
+				}
+,
+				"obj-2::obj-143::obj-497::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[61]"
+				}
+,
+				"obj-2::obj-143::obj-842::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[50]"
+				}
+,
+				"obj-2::obj-143::obj-842::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[51]"
+				}
+,
+				"obj-2::obj-143::obj-842::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[52]"
+				}
+,
+				"obj-2::obj-143::obj-96::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[47]"
+				}
+,
+				"obj-2::obj-143::obj-96::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[48]"
+				}
+,
+				"obj-2::obj-143::obj-96::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[49]"
+				}
+,
 				"obj-7::obj-17::obj-395::obj-2" : 				{
-					"parameter_longname" : "live.text[4]"
+					"parameter_longname" : "live.text[21]"
 				}
 ,
 				"obj-7::obj-17::obj-395::obj-375" : 				{
@@ -4911,19 +4962,43 @@
 				}
 ,
 				"obj-7::obj-17::obj-395::obj-469" : 				{
-					"parameter_longname" : "live.text[12]"
+					"parameter_longname" : "live.text[27]"
 				}
 ,
 				"obj-7::obj-17::obj-395::obj-472" : 				{
-					"parameter_longname" : "live.text[2]"
+					"parameter_longname" : "live.text[26]"
 				}
 ,
 				"obj-7::obj-17::obj-395::obj-490" : 				{
-					"parameter_longname" : "live.text[11]"
+					"parameter_longname" : "live.text[22]"
 				}
 ,
 				"obj-7::obj-25::obj-98" : 				{
+					"parameter_longname" : "live.text[28]"
+				}
+,
+				"obj-7::obj-9::obj-1001::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[4]"
+				}
+,
+				"obj-7::obj-9::obj-1001::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[5]"
+				}
+,
+				"obj-7::obj-9::obj-1001::obj-89::obj-3" : 				{
 					"parameter_longname" : "live.text[6]"
+				}
+,
+				"obj-7::obj-9::obj-1039::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[7]"
+				}
+,
+				"obj-7::obj-9::obj-1039::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[8]"
+				}
+,
+				"obj-7::obj-9::obj-1039::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[9]"
 				}
 ,
 				"obj-7::obj-9::obj-270::obj-1226" : 				{
@@ -4946,6 +5021,66 @@
 					"parameter_longname" : "weight[2]"
 				}
 ,
+				"obj-7::obj-9::obj-387::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[19]"
+				}
+,
+				"obj-7::obj-9::obj-387::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[20]"
+				}
+,
+				"obj-7::obj-9::obj-387::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[13]"
+				}
+,
+				"obj-7::obj-9::obj-497::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[10]"
+				}
+,
+				"obj-7::obj-9::obj-497::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[11]"
+				}
+,
+				"obj-7::obj-9::obj-497::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[12]"
+				}
+,
+				"obj-7::obj-9::obj-842::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[1]"
+				}
+,
+				"obj-7::obj-9::obj-842::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[2]"
+				}
+,
+				"obj-7::obj-9::obj-842::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[3]"
+				}
+,
+				"obj-8::obj-143::obj-1001::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[24]"
+				}
+,
+				"obj-8::obj-143::obj-1001::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[35]"
+				}
+,
+				"obj-8::obj-143::obj-1001::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[36]"
+				}
+,
+				"obj-8::obj-143::obj-1039::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[37]"
+				}
+,
+				"obj-8::obj-143::obj-1039::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[38]"
+				}
+,
+				"obj-8::obj-143::obj-1039::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[39]"
+				}
+,
 				"obj-8::obj-143::obj-270::obj-1226" : 				{
 					"parameter_longname" : "width[1]"
 				}
@@ -4966,8 +5101,56 @@
 					"parameter_longname" : "weight[1]"
 				}
 ,
+				"obj-8::obj-143::obj-387::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[43]"
+				}
+,
+				"obj-8::obj-143::obj-387::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[44]"
+				}
+,
+				"obj-8::obj-143::obj-387::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[45]"
+				}
+,
+				"obj-8::obj-143::obj-497::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[40]"
+				}
+,
+				"obj-8::obj-143::obj-497::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[41]"
+				}
+,
+				"obj-8::obj-143::obj-497::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[42]"
+				}
+,
+				"obj-8::obj-143::obj-842::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[32]"
+				}
+,
+				"obj-8::obj-143::obj-842::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[33]"
+				}
+,
+				"obj-8::obj-143::obj-842::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[34]"
+				}
+,
+				"obj-8::obj-143::obj-96::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[29]"
+				}
+,
+				"obj-8::obj-143::obj-96::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[30]"
+				}
+,
+				"obj-8::obj-143::obj-96::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[31]"
+				}
+,
 				"obj-8::obj-27::obj-98" : 				{
-					"parameter_longname" : "live.text[9]"
+					"parameter_longname" : "live.text[46]"
 				}
 
 			}
@@ -4977,15 +5160,15 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "Fabbrizio2c.wav",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/corpus",
-				"patcherrelativepath" : "../../corpus",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
+				"patcherrelativepath" : "../../media",
 				"type" : "WAVE",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "Joelle.wav",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/corpus",
-				"patcherrelativepath" : "../../corpus",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
+				"patcherrelativepath" : "../../media",
 				"type" : "WAVE",
 				"implicit" : 1
 			}
@@ -4994,6 +5177,13 @@
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
 				"patcherrelativepath" : "../../patchers/resources/influencers",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "Screenshot 2025-03-05 at 11.57.11.png",
+				"bootpath" : "~/Desktop",
+				"patcherrelativepath" : "../../../../../../../Desktop",
+				"type" : "PNG",
 				"implicit" : 1
 			}
 , 			{
@@ -5083,6 +5273,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "peakmeter.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../../patchers/resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "somax.atom.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
 				"patcherrelativepath" : "../../patchers/resources/player",
@@ -5118,6 +5315,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "somax.beatphase.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "somax.corpusbuilder.core.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
@@ -5128,6 +5332,13 @@
 				"name" : "somax.corpuspath.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.descriptorview.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../../patchers/resources/player",
 				"type" : "JSON",
 				"implicit" : 1
 			}
