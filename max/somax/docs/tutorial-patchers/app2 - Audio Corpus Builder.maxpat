@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 169.0, 139.0, 1377.0, 861.0 ],
+		"rect" : [ 314.0, 169.0, 1147.0, 861.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"enablehscroll" : 0,
@@ -117,7 +117,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 229.0, 215.0, 1147.0, 839.0 ],
+						"rect" : [ 260.0, 180.0, 1147.0, 839.0 ],
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
@@ -137,7 +137,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 721.5, 597.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 142.0, 203.25, 21.0, 21.0 ],
+									"presentation_rect" : [ 141.0, 198.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "5.2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -201,7 +201,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 58.5, 470.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 149.054455445544505, 281.852144469525911, 21.0, 21.0 ],
+									"presentation_rect" : [ 148.0, 277.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "6",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -222,7 +222,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 68.5, 479.0, 80.0, 79.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 159.876237623762336, 282.352144469525911, 241.178217821782141, 42.5 ],
+									"presentation_rect" : [ 159.0, 277.0, 241.178217821782141, 42.5 ],
 									"proportion" : 0.5
 								}
 
@@ -251,6 +251,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 3,
 									"fontface" : 0,
 									"fontsize" : 12.235294117647058,
@@ -263,7 +264,19 @@
 									"presentation" : 1,
 									"presentation_linecount" : 3,
 									"presentation_rect" : [ 569.82689950980398, 493.0, 172.31372549019602, 52.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Again, if this fails, see the Max Window for more information",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -285,7 +298,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 420.5, 180.6875, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 305.5, 54.8125, 21.0, 21.0 ],
+									"presentation_rect" : [ 304.0, 50.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "6.1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -306,7 +319,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 426.5, 187.0, 80.0, 79.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 311.454838709677404, 61.125, 89.599616735867073, 32.75 ],
+									"presentation_rect" : [ 309.0, 56.0, 89.599616735867073, 32.75 ],
 									"proportion" : 0.5
 								}
 
@@ -324,7 +337,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 295.5, 318.0, 80.0, 79.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 156.0, 186.25, 227.0, 99.5 ],
+									"presentation_rect" : [ 155.0, 181.0, 227.0, 99.5 ],
 									"proportion" : 0.5
 								}
 
@@ -395,6 +408,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 3,
 									"fontface" : 0,
 									"fontsize" : 12.1875,
@@ -407,7 +421,19 @@
 									"presentation" : 1,
 									"presentation_linecount" : 5,
 									"presentation_rect" : [ 562.5, 360.0, 179.640625, 79.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "You can read more about these parameters in the \"audio corpus builder (2)\" tab of the somax.server.app help file:",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -472,7 +498,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 45.5, 618.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 149.876237623762336, 367.0, 20.0, 20.0 ],
+									"presentation_rect" : [ 149.0, 362.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5.1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -493,7 +519,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 56.5, 629.0, 80.0, 79.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 158.876237623762336, 376.5, 242.178217821782141, 162.0 ],
+									"presentation_rect" : [ 158.0, 372.0, 242.178217821782141, 162.0 ],
 									"proportion" : 0.5
 								}
 
@@ -515,7 +541,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 286.5, 472.5, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 156.5, 344.5, 20.0, 20.0 ],
+									"presentation_rect" : [ 156.0, 340.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -536,7 +562,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 293.5, 479.0, 61.0, 51.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 159.876237623762336, 350.0, 166.623762376237664, 27.5 ],
+									"presentation_rect" : [ 159.0, 345.0, 166.623762376237664, 27.5 ],
 									"proportion" : 0.5
 								}
 
@@ -583,6 +609,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 3,
 									"fontface" : 0,
 									"fontsize" : 12.1875,
@@ -595,7 +622,19 @@
 									"presentation" : 1,
 									"presentation_linecount" : 4,
 									"presentation_rect" : [ 574.5, 136.0, 174.0, 65.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "If some step along the way doesn't work, you can get information about the error in the Max Window",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -660,7 +699,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 45.75, 244.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 146.0, 156.75, 21.0, 21.0 ],
+									"presentation_rect" : [ 145.0, 152.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "4",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -681,7 +720,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 989.25, 172.0, 80.0, 79.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 156.0, 167.75, 152.0, 21.0 ],
+									"presentation_rect" : [ 155.0, 163.0, 152.0, 21.0 ],
 									"proportion" : 0.5
 								}
 
@@ -829,7 +868,7 @@
 , 							{
 								"box" : 								{
 									"angle" : 270.0,
-									"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+									"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"id" : "obj-155",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -880,7 +919,7 @@
 
 							}
  ],
-						"originid" : "pat-10160",
+						"originid" : "pat-11686",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -939,7 +978,7 @@
 ,
 					"patching_rect" : [ 161.0, 418.0, 76.0, 80.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 325.0, 1430.0, 1103.0, 667.0 ],
+					"presentation_rect" : [ 18.0, 95.0, 1103.0, 667.0 ],
 					"varname" : "corpusbuilder2",
 					"viewvisibility" : 1
 				}
@@ -1098,7 +1137,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 3,
 									"fontface" : 0,
 									"id" : "obj-57",
@@ -1122,7 +1160,6 @@
 									}
 ,
 									"text" : "longer files will of course work too, but building the corpus may take a long time. Expect around 10 seconds of build time per minute of audio.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -1396,7 +1433,7 @@
 
 							}
  ],
-						"originid" : "pat-10163",
+						"originid" : "pat-11689",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1469,7 +1506,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-166",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1489,7 +1525,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 396.0, 151.0, 1112.0, 839.0 ],
+						"rect" : [ 382.0, 161.0, 1150.0, 839.0 ],
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
@@ -1504,7 +1540,7 @@
 									"patching_rect" : [ 710.25, 726.0, 318.0, 102.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 7,
-									"presentation_rect" : [ 737.75, 543.0, 345.0, 102.0 ],
+									"presentation_rect" : [ 770.0, 543.0, 345.0, 102.0 ],
 									"text" : "This was a brief introduction to using an audio corpus in Somax, but there are plenty of things to experiment with. The next step would be to go back to the somax2.overview and go through the \"Max Tutorials\" tab to explore the potentiality of Somax 2.5 as a Max library, and to the \"Performance Strategies\" tab for ready-to-use recipes defining specific behaviours.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1664,7 +1700,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1184.427377251334747, 51.816502463054178, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 353.75, 123.875, 21.0, 21.0 ],
+									"presentation_rect" : [ 410.0, 127.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "3.2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1685,7 +1721,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1187.83048502913698, 50.129002463054178, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 250.0, 138.5, 119.04516129032254, 29.625 ],
+									"presentation_rect" : [ 282.0, 139.0, 142.0, 30.0 ],
 									"proportion" : 0.5
 								}
 
@@ -1707,7 +1743,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1190.161140716303407, 78.25123152709358, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 226.75, 525.375, 21.0, 21.0 ],
+									"presentation_rect" : [ 262.0, 494.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "3.1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1728,7 +1764,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1193.564248494105641, 76.921182266009851, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 0.0, 500.0, 235.04516129032254, 71.75 ],
+									"presentation_rect" : [ 22.0, 503.0, 252.0, 72.0 ],
 									"proportion" : 0.5
 								}
 
@@ -1750,7 +1786,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1193.75, 70.137931034482762, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 0.0, 404.25, 21.0, 21.0 ],
+									"presentation_rect" : [ 27.0, 407.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1771,7 +1807,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1193.536210530951621, 70.536945812807886, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 6.0, 413.0, 76.04516129032254, 28.75 ],
+									"presentation_rect" : [ 33.0, 416.0, 76.04516129032254, 28.75 ],
 									"proportion" : 0.5
 								}
 
@@ -1786,7 +1822,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 732.25, 641.0, 316.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 762.25, 361.0, 148.0, 20.0 ],
+									"presentation_rect" : [ 794.0, 361.0, 148.0, 20.0 ],
 									"text" : "Enable the MidiInfluencer.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1809,7 +1845,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 707.75, 645.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 737.75, 361.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 770.0, 361.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1827,7 +1863,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1004.0, 751.0, 252.0, 53.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 782.178715404332706, 484.0, 252.0, 53.0 ],
+									"presentation_rect" : [ 814.0, 484.0, 252.0, 53.0 ],
 									"range" : 36
 								}
 
@@ -1844,7 +1880,7 @@
 									"patching_rect" : [ 731.25, 644.0, 318.0, 74.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 5,
-									"presentation_rect" : [ 762.25, 397.0, 318.0, 74.0 ],
+									"presentation_rect" : [ 794.0, 397.0, 318.0, 74.0 ],
 									"text" : "Play a couple of notes on the keyboard below. Each note should trigger a new slice in the audio corpus. If it for some reason doesn't work, make sure that the indicators at (3.1) respond when you're playing and that the indicators at (3.2) show the same thing.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1867,7 +1903,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 706.75, 648.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 737.75, 401.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 770.0, 401.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "3",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1892,7 +1928,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1188.142407369223974, 45.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 238.0, 64.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 270.0, 64.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1913,7 +1949,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1187.683918837876263, 54.376847290640399, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 250.0, 76.0, 176.04516129032254, 91.75 ],
+									"presentation_rect" : [ 282.0, 76.0, 204.0, 92.0 ],
 									"proportion" : 0.5
 								}
 
@@ -1930,7 +1966,7 @@
 									"patching_rect" : [ 730.75, 563.0, 318.0, 88.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 6,
-									"presentation_rect" : [ 762.25, 266.0, 318.0, 88.0 ],
+									"presentation_rect" : [ 794.0, 266.0, 318.0, 88.0 ],
 									"text" : "Select the «MidiInfluencer» as source in the «Influence sources» section of the Player. You can keep all the toggles on, they indicate that the Player should listen to the (P)itch, (O)nset, (C)hroma and (C)hroma_(O)nset  of the MIDI influencer, and will generally only be used when mixing input from multiple sources.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1947,7 +1983,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 943.25, 447.0, 231.0, 24.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 657.25, 151.0, 76.0, 24.0 ],
+									"presentation_rect" : [ 689.0, 151.0, 76.0, 24.0 ],
 									"text" : "click this",
 									"textjustification" : 1
 								}
@@ -1964,7 +2000,7 @@
 									"patching_rect" : [ 784.678715404332706, 803.5, 203.0, 62.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
-									"presentation_rect" : [ 742.178715404332706, 138.5, 323.071284595667294, 49.0 ],
+									"presentation_rect" : [ 774.0, 139.0, 323.071284595667294, 49.0 ],
 									"text" : "mode 1, ignorephase 1, decaybasis 1, continuity 0.8, selfpeakdecay 1.5, melodicpeakdecay 1.5, harmonicpeakdecay 1.5, timeout 0"
 								}
 
@@ -1981,7 +2017,7 @@
 									"patching_rect" : [ 707.5, 411.0, 316.0, 34.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
-									"presentation_rect" : [ 737.75, 105.0, 340.75, 34.0 ],
+									"presentation_rect" : [ 770.0, 105.0, 340.75, 34.0 ],
 									"text" : "Finally, let's try to interact with and influence the player. Again, let's start by setting some parameters:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1999,7 +2035,7 @@
 									"patching_rect" : [ 730.5, 521.0, 323.0, 74.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 5,
-									"presentation_rect" : [ 737.75, 191.0, 343.0, 74.0 ],
+									"presentation_rect" : [ 770.0, 191.0, 343.0, 74.0 ],
 									"text" : "For this step, we'll use the MIDI influencer through the keyboard below (the Audio Influencer would of course work just as well) to influence the Player. In order to do so we need to return to what was described in the the first tab: the wireless paradigm.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2022,7 +2058,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 718.75, 565.5, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 737.75, 270.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 770.0, 270.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2039,7 +2075,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 634.5, 122.5, 299.0, 12.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 737.75, 93.0, 340.75, 13.0 ],
+									"presentation_rect" : [ 770.0, 93.0, 340.75, 13.0 ],
 									"saved_attribute_attributes" : 									{
 										"linecolor" : 										{
 											"expression" : ""
@@ -2060,7 +2096,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 634.5, 96.0, 311.0, 27.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 737.75, 66.5, 340.75, 27.0 ],
+									"presentation_rect" : [ 770.0, 67.0, 340.75, 27.0 ],
 									"text" : "5. Listening & Interacting",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2069,7 +2105,7 @@
 , 							{
 								"box" : 								{
 									"angle" : 270.0,
-									"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+									"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"id" : "obj-155",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -2077,7 +2113,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 624.0, 82.852144469525911, 319.5, 611.943566591422268 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 722.107430808665413, 55.852144469525911, 372.142569191334587, 599.147855530474089 ],
+									"presentation_rect" : [ 754.0, 56.0, 372.142569191334587, 599.147855530474089 ],
 									"proportion" : 0.5
 								}
 
@@ -2133,7 +2169,7 @@
 
 							}
  ],
-						"originid" : "pat-10166",
+						"originid" : "pat-11692",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2192,7 +2228,7 @@
 ,
 					"patching_rect" : [ 332.0, 418.0, 81.0, 80.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1573.0, 92.0, 1120.0, 813.0 ],
+					"presentation_rect" : [ -13.0, 65.0, 1212.0, 812.0 ],
 					"varname" : "interaction2",
 					"viewvisibility" : 1
 				}
@@ -2206,6 +2242,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-36",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2547,7 +2584,7 @@
 
 							}
  ],
-						"originid" : "pat-10169"
+						"originid" : "pat-11695"
 					}
 ,
 					"patching_rect" : [ 12.0, 418.0, 61.0, 69.0 ],
@@ -2586,7 +2623,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 493.0, 247.0, 773.0, 587.0 ],
+						"rect" : [ 276.0, 271.0, 996.0, 587.0 ],
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
@@ -2602,7 +2639,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 115.463079627726302, 147.0, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 115.0, 206.0, 37.045161290322596, 16.75 ],
+									"presentation_rect" : [ 120.0, 209.0, 37.045161290322596, 16.75 ],
 									"proportion" : 0.5
 								}
 
@@ -2610,6 +2647,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.2,
 									"bubbleside" : 3,
 									"fontface" : 0,
@@ -2623,7 +2661,19 @@
 									"presentation" : 1,
 									"presentation_linecount" : 4,
 									"presentation_rect" : [ 469.756756756756772, 169.0, 133.0, 60.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Or use one of the example audio corpora with names starting with \"(A)\"",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -2631,6 +2681,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.1,
 									"fontface" : 0,
 									"fontsize" : 11.0,
@@ -2643,7 +2694,19 @@
 									"presentation" : 1,
 									"presentation_linecount" : 3,
 									"presentation_rect" : [ 270.0, 411.0, 260.0, 47.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "With these parameters, the Player may occasonally get stuck: interact with the regions module to add control to the output state",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -2714,7 +2777,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1383.83967856617187, 116.835175403544639, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 91.0, 602.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 84.0, 574.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "4",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2739,7 +2802,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1421.241968090322416, 107.677226082260049, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 204.0, 280.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 196.0, 261.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "3.2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2760,7 +2823,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1392.595478229808123, 94.061723473481578, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 213.0, 289.0, 75.04516129032254, 21.75 ],
+									"presentation_rect" : [ 205.0, 270.0, 99.0, 22.0 ],
 									"proportion" : 0.5
 								}
 
@@ -2782,7 +2845,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1400.899427888698028, 109.195979502953861, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 304.008240918048841, 62.5, 21.0, 21.0 ],
+									"presentation_rect" : [ 312.0, 62.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "3.1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2803,7 +2866,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1394.909576718352582, 115.682089229870542, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 310.985660272887571, 69.6875, 51.04516129032254, 51.75 ],
+									"presentation_rect" : [ 319.0, 69.0, 51.04516129032254, 51.75 ],
 									"proportion" : 0.5
 								}
 
@@ -2825,7 +2888,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1384.539289737127092, 81.089504019648189, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 105.0, 174.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 110.0, 177.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2846,7 +2909,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1385.115020324977877, 81.882250764049118, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 115.0, 185.0, 162.045161290322596, 24.75 ],
+									"presentation_rect" : [ 120.0, 188.0, 162.045161290322596, 24.75 ],
 									"proportion" : 0.5
 								}
 
@@ -2868,7 +2931,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1414.89165130780475, 71.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 459.7649976748055, 83.8125, 21.0, 21.0 ],
+									"presentation_rect" : [ 482.0, 81.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2889,7 +2952,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1415.359749407816253, 71.720678858546293, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 468.754916976687809, 93.8125, 62.753323941361032, 41.75 ],
+									"presentation_rect" : [ 491.0, 91.0, 62.753323941361032, 41.75 ],
 									"proportion" : 0.5
 								}
 
@@ -2907,7 +2970,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1384.874062432847495, 113.80832419765018, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 106.0, 614.0, 186.04516129032254, 113.75 ],
+									"presentation_rect" : [ 99.0, 586.0, 205.0, 114.0 ],
 									"proportion" : 0.5
 								}
 
@@ -3232,7 +3295,7 @@
 , 							{
 								"box" : 								{
 									"angle" : 270.0,
-									"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+									"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"id" : "obj-155",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -3275,7 +3338,7 @@
 
 							}
  ],
-						"originid" : "pat-10172",
+						"originid" : "pat-11698",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3334,7 +3397,7 @@
 ,
 					"patching_rect" : [ 249.0, 418.0, 69.0, 80.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1158.0, 32.0, 984.25, 812.0 ],
+					"presentation_rect" : [ 171.0, 120.0, 984.25, 812.0 ],
 					"varname" : "interaction1",
 					"viewvisibility" : 1
 				}
@@ -3765,7 +3828,7 @@
 
 							}
  ],
-						"originid" : "pat-10175",
+						"originid" : "pat-11701",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3980,7 +4043,7 @@
 
 							}
  ],
-						"originid" : "pat-10258",
+						"originid" : "pat-11784",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4506,7 +4569,7 @@
 
 			}
  ],
-		"originid" : "pat-10157",
+		"originid" : "pat-11683",
 		"parameters" : 		{
 			"obj-1::obj-121" : [ "Gain[4]", "Gain", 0 ],
 			"obj-1::obj-46" : [ "live.dial[2]", "Pan", 0 ],
