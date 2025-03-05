@@ -2,42 +2,19 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 8,
-			"minor" : 6,
-			"revision" : 0,
+			"major" : 9,
+			"minor" : 0,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 317.0, 152.0, 1130.0, 861.0 ],
-		"bglocked" : 0,
+		"rect" : [ 169.0, 139.0, 1377.0, 861.0 ],
 		"openinpresentation" : 1,
-		"default_fontsize" : 12.0,
-		"default_fontface" : 0,
-		"default_fontname" : "Arial",
-		"gridonopen" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 1,
-		"objectsnaponopen" : 1,
-		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
-		"lefttoolbarpinned" : 0,
-		"toptoolbarpinned" : 0,
-		"righttoolbarpinned" : 0,
-		"bottomtoolbarpinned" : 0,
-		"toolbars_unpinned_last_save" : 0,
-		"tallnewobj" : 0,
-		"boxanimatetime" : 200,
 		"enablehscroll" : 0,
 		"enablevscroll" : 0,
-		"devicewidth" : 0.0,
-		"description" : "",
-		"digest" : "",
-		"tags" : "",
-		"style" : "",
-		"subpatcher_template" : "",
-		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"border" : 2.0,
@@ -132,42 +109,17 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 229.0, 215.0, 1147.0, 839.0 ],
-						"bglocked" : 0,
 						"openinpresentation" : 1,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
@@ -928,6 +880,7 @@
 
 							}
  ],
+						"originid" : "pat-10160",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -986,7 +939,7 @@
 ,
 					"patching_rect" : [ 161.0, 418.0, 76.0, 80.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 3.0, 93.0, 1103.0, 667.0 ],
+					"presentation_rect" : [ 325.0, 1430.0, 1103.0, 667.0 ],
 					"varname" : "corpusbuilder2",
 					"viewvisibility" : 1
 				}
@@ -1000,6 +953,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-68",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1011,42 +965,17 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 190.0, 180.0, 1164.0, 656.0 ],
-						"bglocked" : 0,
+						"rect" : [ 278.0, 220.0, 1164.0, 656.0 ],
 						"openinpresentation" : 1,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"comment" : "",
@@ -1115,7 +1044,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 272.0, 128.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 605.75, 103.0, 20.0, 20.0 ],
+									"presentation_rect" : [ 633.0, 102.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1140,7 +1069,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 51.75, 164.5, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 142.75, 22.0, 20.0, 20.0 ],
+									"presentation_rect" : [ 144.0, 22.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "3",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1161,7 +1090,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 59.25, 177.0, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 153.25, 29.0, 159.0, 52.0 ],
+									"presentation_rect" : [ 154.0, 29.0, 158.0, 53.0 ],
 									"proportion" : 0.5
 								}
 
@@ -1169,6 +1098,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 3,
 									"fontface" : 0,
 									"id" : "obj-57",
@@ -1180,7 +1110,19 @@
 									"presentation" : 1,
 									"presentation_linecount" : 5,
 									"presentation_rect" : [ 569.75, 372.5, 189.0, 78.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "longer files will of course work too, but building the corpus may take a long time. Expect around 10 seconds of build time per minute of audio.",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -1288,7 +1230,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 917.75, 312.5, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 445.25, 274.0, 20.0, 20.0 ],
+									"presentation_rect" : [ 454.0, 276.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1352,7 +1294,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 260.0, 117.0, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 456.75, 283.5, 58.0, 24.0 ],
+									"presentation_rect" : [ 466.0, 286.0, 58.0, 24.0 ],
 									"proportion" : 0.5
 								}
 
@@ -1414,7 +1356,7 @@
 , 							{
 								"box" : 								{
 									"angle" : 270.0,
-									"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+									"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"id" : "obj-155",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -1440,7 +1382,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 230.0, 87.0, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 615.75, 108.5, 61.0, 41.0 ],
+									"presentation_rect" : [ 643.0, 108.0, 61.0, 41.0 ],
 									"proportion" : 0.5
 								}
 
@@ -1454,6 +1396,7 @@
 
 							}
  ],
+						"originid" : "pat-10163",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1512,7 +1455,7 @@
 ,
 					"patching_rect" : [ 82.0, 418.0, 69.0, 73.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 106.0, 1117.0, 725.0 ],
+					"presentation_rect" : [ 18.0, 103.0, 1117.0, 725.0 ],
 					"varname" : "corpusbuilder1",
 					"viewvisibility" : 1
 				}
@@ -1538,42 +1481,17 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 396.0, 151.0, 1112.0, 839.0 ],
-						"bglocked" : 0,
 						"openinpresentation" : 1,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontface" : 0,
@@ -2215,6 +2133,7 @@
 
 							}
  ],
+						"originid" : "pat-10166",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2273,7 +2192,7 @@
 ,
 					"patching_rect" : [ 332.0, 418.0, 81.0, 80.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 11.0, 68.0, 1120.0, 813.0 ],
+					"presentation_rect" : [ 1573.0, 92.0, 1120.0, 813.0 ],
 					"varname" : "interaction2",
 					"viewvisibility" : 1
 				}
@@ -2287,7 +2206,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-36",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2299,42 +2217,17 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 239.0, 323.0, 1073.0, 660.0 ],
-						"bglocked" : 0,
+						"rect" : [ 358.0, 270.0, 1129.0, 660.0 ],
 						"openinpresentation" : 1,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"comment" : "",
@@ -2442,7 +2335,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 55.75, 109.0, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 253.0, 19.5, 183.0, 93.0 ],
+									"presentation_rect" : [ 253.0, 20.0, 203.0, 93.0 ],
 									"proportion" : 0.5
 								}
 
@@ -2549,7 +2442,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 242.0, 98.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 605.75, 84.5, 20.0, 20.0 ],
+									"presentation_rect" : [ 633.0, 85.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -2570,7 +2463,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 230.0, 87.0, 373.0, 332.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 615.75, 90.5, 61.0, 41.0 ],
+									"presentation_rect" : [ 643.0, 91.0, 61.0, 41.0 ],
 									"proportion" : 0.5
 								}
 
@@ -2632,7 +2525,7 @@
 , 							{
 								"box" : 								{
 									"angle" : 270.0,
-									"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+									"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"id" : "obj-155",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -2653,12 +2546,13 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-10169"
 					}
 ,
 					"patching_rect" : [ 12.0, 418.0, 61.0, 69.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 124.0, 1103.0, 577.0 ],
+					"presentation_rect" : [ 19.321284595667294, 120.0, 1103.0, 577.0 ],
 					"varname" : "introduction",
 					"viewvisibility" : 1
 				}
@@ -2684,42 +2578,17 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 493.0, 247.0, 773.0, 587.0 ],
-						"bglocked" : 0,
 						"openinpresentation" : 1,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"angle" : 270.0,
@@ -3406,6 +3275,7 @@
 
 							}
  ],
+						"originid" : "pat-10172",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3464,7 +3334,7 @@
 ,
 					"patching_rect" : [ 249.0, 418.0, 69.0, 80.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 154.0, 119.5, 984.25, 812.0 ],
+					"presentation_rect" : [ 1158.0, 32.0, 984.25, 812.0 ],
 					"varname" : "interaction1",
 					"viewvisibility" : 1
 				}
@@ -3473,7 +3343,7 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"id" : "obj-155",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -3481,7 +3351,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 325.25, 1350.0, 103.5, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 725.928715404332706, 124.0, 384.321284595667294, 600.0 ],
+					"presentation_rect" : [ 738.0, 124.0, 384.321284595667294, 600.0 ],
 					"proportion" : 0.5
 				}
 
@@ -3705,7 +3575,7 @@
 					"patching_rect" : [ 6.0, 66.0, 927.0, 28.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 29.0, 56.0, 1063.0, 28.0 ],
-					"tabcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+					"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"tabs" : [ "1. Introduction", "2. Corpus Builder I", "3. Corpus Builder II", "4. Interaction I", "5. Interaction II" ]
 				}
 
@@ -3733,6 +3603,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-22",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -3745,43 +3616,18 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 89.0, 100.0, 1082.0, 839.0 ],
-						"bglocked" : 0,
 						"openinpresentation" : 1,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 0,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-7",
@@ -3919,6 +3765,7 @@
 
 							}
  ],
+						"originid" : "pat-10175",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3977,7 +3824,7 @@
 ,
 					"patching_rect" : [ 1124.0, 622.0, 264.0, 667.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 159.0, 106.0, 250.0, 654.5 ],
+					"presentation_rect" : [ 171.0, 103.0, 250.0, 651.0 ],
 					"varname" : "audiocorpusbuilder",
 					"viewvisibility" : 1
 				}
@@ -3986,7 +3833,8 @@
 , 			{
 				"box" : 				{
 					"angle" : 270.0,
-					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
+					"bgcolor" : [ 0.125, 0.125, 0.125, 0.64 ],
+					"hidden" : 1,
 					"id" : "obj-8",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -3994,7 +3842,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1046.0, 840.166676044464111, 60.0, 51.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 124.0, 440.0, 729.0 ],
+					"presentation_rect" : [ 7.0, 120.0, 468.0, 702.0 ],
 					"proportion" : 0.5,
 					"varname" : "cbpanel"
 				}
@@ -4020,43 +3868,18 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 89.0, 100.0, 1082.0, 839.0 ],
-						"bglocked" : 0,
+						"rect" : [ 89.0, 100.0, 351.0, 814.0 ],
 						"openinpresentation" : 1,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 0,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"comment" : "",
@@ -4128,7 +3951,7 @@
 									"outlettype" : [ "multichannelsignal", "", "", "", "" ],
 									"patching_rect" : [ 35.333328008651733, 96.333323836326599, 128.0, 128.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 9.0, 7.0, 248.0, 999.0 ],
+									"presentation_rect" : [ 9.0, 7.0, 270.0, 924.0 ],
 									"varname" : "somax.player.app",
 									"viewvisibility" : 1
 								}
@@ -4157,6 +3980,7 @@
 
 							}
  ],
+						"originid" : "pat-10258",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4215,7 +4039,7 @@
 ,
 					"patching_rect" : [ 578.0, 622.0, 196.0, 738.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 254.0, 119.5, 200.0, 742.0 ],
+					"presentation_rect" : [ 266.0, 120.0, 209.0, 702.0 ],
 					"varname" : "tutorialplayer",
 					"viewvisibility" : 1
 				}
@@ -4240,7 +4064,7 @@
 					"outlettype" : [ "", "multichannelsignal", "", "", "" ],
 					"patching_rect" : [ 6.0, 582.0, 250.0, 326.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 124.0, 245.0, 315.0 ],
+					"presentation_rect" : [ 7.0, 124.0, 263.0, 315.0 ],
 					"varname" : "audioplayer",
 					"viewvisibility" : 1
 				}
@@ -4265,7 +4089,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 6.0, 985.0, 245.0, 220.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 7.0, 448.0, 245.0, 218.0 ],
+					"presentation_rect" : [ 7.0, 448.0, 263.0, 218.0 ],
 					"varname" : "midiplayer",
 					"viewvisibility" : 1
 				}
@@ -4275,7 +4099,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"background" : 1,
-					"bgcolor" : [ 0.898039215686275, 0.898039215686275, 0.898039215686275, 0.64 ],
+					"bgcolor" : [ 0.125, 0.125, 0.125, 0.64 ],
 					"hidden" : 1,
 					"id" : "obj-6",
 					"maxclass" : "panel",
@@ -4284,7 +4108,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1046.0, 769.166676044464111, 60.0, 51.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 456.0, 124.0, 262.0, 304.5 ],
+					"presentation_rect" : [ 475.0, 121.0, 262.0, 303.0 ],
 					"proportion" : 0.5,
 					"varname" : "cbpanel2"
 				}
@@ -4309,7 +4133,7 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 735.0, 1408.0, 248.0, 298.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 456.0, 124.0, 250.0, 295.0 ],
+					"presentation_rect" : [ 477.0, 124.0, 258.0, 295.0 ],
 					"varname" : "somax.server.io",
 					"viewvisibility" : 1
 				}
@@ -4682,16 +4506,17 @@
 
 			}
  ],
+		"originid" : "pat-10157",
 		"parameters" : 		{
 			"obj-1::obj-121" : [ "Gain[4]", "Gain", 0 ],
 			"obj-1::obj-46" : [ "live.dial[2]", "Pan", 0 ],
 			"obj-1::obj-95" : [ "Delay", "Delay", 0 ],
-			"obj-22::obj-90::obj-395::obj-2" : [ "live.text[5]", "live.text[4]", 0 ],
+			"obj-22::obj-90::obj-395::obj-2" : [ "live.text[66]", "live.text[4]", 0 ],
 			"obj-22::obj-90::obj-395::obj-375" : [ "mc.live.gain~[2]", "click", 0 ],
 			"obj-22::obj-90::obj-395::obj-441" : [ "mc.live.gain~[1]", "corpus", 0 ],
 			"obj-22::obj-90::obj-395::obj-469" : [ "live.text[11]", "live.text[11]", 0 ],
-			"obj-22::obj-90::obj-395::obj-472" : [ "live.text[7]", "live.text[11]", 0 ],
-			"obj-22::obj-90::obj-395::obj-490" : [ "live.text[6]", "live.text[11]", 0 ],
+			"obj-22::obj-90::obj-395::obj-472" : [ "live.text[64]", "live.text[11]", 0 ],
+			"obj-22::obj-90::obj-395::obj-490" : [ "live.text[68]", "live.text[11]", 0 ],
 			"obj-23::obj-1::obj-118::obj-114" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-23::obj-1::obj-118::obj-119" : [ "live.text[67]", "live.text[30]", 0 ],
 			"obj-23::obj-1::obj-118::obj-2::obj-119" : [ "live.text[63]", "live.text[30]", 0 ],
@@ -4700,25 +4525,34 @@
 			"obj-23::obj-1::obj-118::obj-2::obj-62::obj-1" : [ "source[10]", "source", 0 ],
 			"obj-23::obj-1::obj-118::obj-42" : [ "live.toggle", "live.toggle", 0 ],
 			"obj-23::obj-1::obj-118::obj-55" : [ "live.gain~", "live.gain~", 0 ],
+			"obj-23::obj-1::obj-17::obj-103" : [ "influence delay[4]", "influencedelay", 0 ],
+			"obj-23::obj-1::obj-17::obj-10::obj-103" : [ "influence delay[2]", "influencedelay", 0 ],
 			"obj-23::obj-1::obj-17::obj-10::obj-21" : [ "onset[8]", "onset", 0 ],
+			"obj-23::obj-1::obj-17::obj-10::obj-26" : [ "chroma scaling factor[2]", "chroma", 0 ],
 			"obj-23::obj-1::obj-17::obj-10::obj-28" : [ "chromaonset[8]", "chromaonset", 0 ],
 			"obj-23::obj-1::obj-17::obj-10::obj-29" : [ "enable[8]", "enable", 0 ],
 			"obj-23::obj-1::obj-17::obj-10::obj-30" : [ "chroma scaling factor[8]", "chroma", 0 ],
 			"obj-23::obj-1::obj-17::obj-10::obj-46::obj-1" : [ "source[8]", "source", 0 ],
 			"obj-23::obj-1::obj-17::obj-10::obj-9" : [ "pitch[8]", "pitch", 0 ],
+			"obj-23::obj-1::obj-17::obj-2::obj-103" : [ "influence delay", "influencedelay", 0 ],
 			"obj-23::obj-1::obj-17::obj-2::obj-21" : [ "onset[6]", "onset", 0 ],
+			"obj-23::obj-1::obj-17::obj-2::obj-26" : [ "chroma scaling factor[10]", "chroma", 0 ],
 			"obj-23::obj-1::obj-17::obj-2::obj-28" : [ "chromaonset[6]", "chromaonset", 0 ],
 			"obj-23::obj-1::obj-17::obj-2::obj-29" : [ "enable[6]", "enable", 0 ],
 			"obj-23::obj-1::obj-17::obj-2::obj-30" : [ "chroma scaling factor[6]", "chroma", 0 ],
 			"obj-23::obj-1::obj-17::obj-2::obj-46::obj-1" : [ "source[6]", "source", 0 ],
 			"obj-23::obj-1::obj-17::obj-2::obj-9" : [ "pitch[6]", "pitch", 0 ],
+			"obj-23::obj-1::obj-17::obj-33::obj-103" : [ "influence delay[3]", "influencedelay", 0 ],
 			"obj-23::obj-1::obj-17::obj-33::obj-21" : [ "onset[9]", "onset", 0 ],
+			"obj-23::obj-1::obj-17::obj-33::obj-26" : [ "chroma scaling factor[11]", "chroma", 0 ],
 			"obj-23::obj-1::obj-17::obj-33::obj-28" : [ "chromaonset[9]", "chromaonset", 0 ],
 			"obj-23::obj-1::obj-17::obj-33::obj-29" : [ "enable[9]", "enable", 0 ],
 			"obj-23::obj-1::obj-17::obj-33::obj-30" : [ "chroma scaling factor[9]", "chroma", 0 ],
 			"obj-23::obj-1::obj-17::obj-33::obj-46::obj-1" : [ "source[9]", "source", 0 ],
 			"obj-23::obj-1::obj-17::obj-33::obj-9" : [ "pitch[9]", "pitch", 0 ],
+			"obj-23::obj-1::obj-17::obj-6::obj-103" : [ "influence delay[1]", "influencedelay", 0 ],
 			"obj-23::obj-1::obj-17::obj-6::obj-21" : [ "onset[7]", "onset", 0 ],
+			"obj-23::obj-1::obj-17::obj-6::obj-26" : [ "chroma scaling factor[1]", "chroma", 0 ],
 			"obj-23::obj-1::obj-17::obj-6::obj-28" : [ "chromaonset[7]", "chromaonset", 0 ],
 			"obj-23::obj-1::obj-17::obj-6::obj-29" : [ "enable[7]", "enable", 0 ],
 			"obj-23::obj-1::obj-17::obj-6::obj-30" : [ "chroma scaling factor[7]", "chroma", 0 ],
@@ -4728,8 +4562,7 @@
 			"obj-23::obj-1::obj-25::obj-44" : [ "live.dial[3]", "Width", 0 ],
 			"obj-23::obj-1::obj-25::obj-46" : [ "live.dial[4]", "Pan", 0 ],
 			"obj-23::obj-1::obj-3::obj-1115" : [ "continuity[25]", "continuity", 0 ],
-			"obj-23::obj-1::obj-3::obj-1150" : [ "live.text[45]", "live.text", 0 ],
-			"obj-23::obj-1::obj-3::obj-1175" : [ "heldnotesmode[7]", "heldnotesmode", 0 ],
+			"obj-23::obj-1::obj-3::obj-1150" : [ "live.text[57]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-1179" : [ "continuity[26]", "continuity", 0 ],
 			"obj-23::obj-1::obj-3::obj-123::obj-1" : [ "live.text[16]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-123::obj-2" : [ "live.text[17]", "live.text", 0 ],
@@ -4744,7 +4577,15 @@
 			"obj-23::obj-1::obj-3::obj-14::obj-40" : [ "live.slider[1]", "live.slider[2]", 0 ],
 			"obj-23::obj-1::obj-3::obj-14::obj-64" : [ "live.text[52]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-16::obj-26" : [ "corpusname[1]", "corpusname", 0 ],
+			"obj-23::obj-1::obj-3::obj-2" : [ "heldnotesmode[1]", "heldnotesmode", 0 ],
 			"obj-23::obj-1::obj-3::obj-32" : [ "heldnotesmode[3]", "heldnotesmode", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-1001::obj-89::obj-1" : [ "live.text[3]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-1001::obj-89::obj-2" : [ "live.text[4]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-1001::obj-89::obj-3" : [ "live.text[5]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-1039::obj-89::obj-1" : [ "live.text[6]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-1039::obj-89::obj-2" : [ "live.text[7]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-1039::obj-89::obj-3" : [ "live.text[8]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-1105" : [ "harmonincpeakdecay[8]", "harmonincpeakdecay", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-1115" : [ "continuity[3]", "continuity", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-1175" : [ "heldnotesmode[6]", "heldnotesmode", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-1179" : [ "continuity[2]", "continuity", 0 ],
@@ -4755,7 +4596,7 @@
 			"obj-23::obj-1::obj-3::obj-407::obj-134" : [ "continuity[24]", "continuity", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-1344" : [ "enforcetaboo[1]", "enforcetaboo", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-140" : [ "resetinfluences[2]", "resetinfluences", 0 ],
-			"obj-23::obj-1::obj-3::obj-407::obj-144" : [ "harmonicngramorder[2]", "harmonicngramorder", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-144" : [ "harmonicngramorder[3]", "harmonicngramorder", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-1444" : [ "outputprobability[1]", "outputprobability", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-152" : [ "selfngramorder[2]", "selfngramorder", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-154" : [ "melodicngramorder[1]", "melodicngramorder", 0 ],
@@ -4773,11 +4614,21 @@
 			"obj-23::obj-1::obj-3::obj-407::obj-295" : [ "playingmode[1]", "playingmode", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-298" : [ "simultaneousonsets[3]", "simultaneousonsets", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-328" : [ "decaybasis[2]", "decaybasis", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-387::obj-89::obj-1" : [ "live.text[10]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-387::obj-89::obj-2" : [ "live.text[47]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-387::obj-89::obj-3" : [ "live.text[48]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-497::obj-89::obj-1" : [ "live.text[45]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-497::obj-89::obj-2" : [ "live.text[46]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-497::obj-89::obj-3" : [ "live.text[9]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-570" : [ "__exp_melodicpitchfromchords[1]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-575" : [ "__exp_tempoconsistencysigma[1]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-642" : [ "__exp_numnotessigma[2]", "__exp_numnotessigma", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-653" : [ "__exp_numnotesenable[1]", "__exp_numnotesenable", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-656" : [ "__exp_numnotesmu[2]", "__exp_numnotesmu", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-667" : [ "selfharmonicbypass[2]", "selfharmonicbypass", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-670" : [ "harmonicbypass[3]", "harmonicbypass", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-679" : [ "selfharmonicngramorder[1]", "selfharmonicngramorder", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-685" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-688" : [ "__exp_durationsigma[1]", "__exp_durationsigma", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-702" : [ "__exp_durationmu[2]", "__exp_durationmu", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-722" : [ "__exp_octavebandsenable[1]", "__exp_octavebandsenable", 0 ],
@@ -4788,12 +4639,24 @@
 			"obj-23::obj-1::obj-3::obj-407::obj-777" : [ "__exp_autojumpactivate[2]", "__exp_autojumpactivate", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-799" : [ "__exp_tempoconsistencyenable[1]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-802" : [ "__exp_tempoconsistencylen[1]", "__exp_tempoconsistencylen", 0 ],
-			"obj-23::obj-1::obj-3::obj-407::obj-860" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
-			"obj-23::obj-1::obj-3::obj-407::obj-865" : [ "selfharmonicngramorder[1]", "selfharmonicngramorder", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-814" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-842::obj-89::obj-1" : [ "live.text[34]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-842::obj-89::obj-2" : [ "live.text[1]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-842::obj-89::obj-3" : [ "live.text[2]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-843" : [ "harmonicngramorder[2]", "harmonicngramorder", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-860" : [ "harmonincpeakdecay[9]", "harmonincpeakdecay[1]", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-865" : [ "selfharmonicngramorder[2]", "selfharmonicngramorder", 0 ],
 			"obj-23::obj-1::obj-3::obj-407::obj-870" : [ "selfharmonicbypass[1]", "selfharmonicbypass", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-871" : [ "harmonincpeakdecay[7]", "harmonincpeakdecay", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-96::obj-89::obj-1" : [ "live.text[25]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-96::obj-89::obj-2" : [ "live.text[23]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-407::obj-96::obj-89::obj-3" : [ "live.text[18]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-79::obj-1" : [ "live.text[36]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-79::obj-2" : [ "live.text[35]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-79::obj-3" : [ "live.text[31]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-85::obj-1" : [ "live.text[49]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-85::obj-2" : [ "live.text[53]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-85::obj-3" : [ "live.text[54]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-87::obj-1" : [ "live.text[38]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-87::obj-2" : [ "live.text[37]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-87::obj-3" : [ "live.text[39]", "live.text", 0 ],
@@ -4803,6 +4666,9 @@
 			"obj-23::obj-1::obj-3::obj-91::obj-1" : [ "live.text[44]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-91::obj-2" : [ "live.text[43]", "live.text", 0 ],
 			"obj-23::obj-1::obj-3::obj-91::obj-3" : [ "live.text[42]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-94::obj-1" : [ "live.text[55]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-94::obj-2" : [ "live.text[50]", "live.text", 0 ],
+			"obj-23::obj-1::obj-3::obj-94::obj-3" : [ "live.text[56]", "live.text", 0 ],
 			"obj-23::obj-1::obj-6::obj-98" : [ "live.text[24]", "live.text[26]", 0 ],
 			"obj-5::obj-13::obj-1" : [ "source[3]", "source", 0 ],
 			"obj-5::obj-2::obj-395::obj-2" : [ "live.text[27]", "live.text[4]", 0 ],
@@ -4816,6 +4682,10 @@
 			}
 ,
 			"parameter_overrides" : 			{
+				"obj-22::obj-90::obj-395::obj-2" : 				{
+					"parameter_longname" : "live.text[66]"
+				}
+,
 				"obj-22::obj-90::obj-395::obj-375" : 				{
 					"parameter_longname" : "mc.live.gain~[2]"
 				}
@@ -4828,8 +4698,12 @@
 					"parameter_longname" : "live.text[11]"
 				}
 ,
+				"obj-22::obj-90::obj-395::obj-472" : 				{
+					"parameter_longname" : "live.text[64]"
+				}
+,
 				"obj-22::obj-90::obj-395::obj-490" : 				{
-					"parameter_longname" : "live.text[6]"
+					"parameter_longname" : "live.text[68]"
 				}
 ,
 				"obj-23::obj-1::obj-118::obj-2::obj-119" : 				{
@@ -4840,6 +4714,14 @@
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-23::obj-1::obj-17::obj-10::obj-103" : 				{
+					"parameter_longname" : "influence delay[2]"
+				}
+,
+				"obj-23::obj-1::obj-17::obj-10::obj-26" : 				{
+					"parameter_longname" : "chroma scaling factor[2]"
 				}
 ,
 				"obj-23::obj-1::obj-17::obj-10::obj-30" : 				{
@@ -4862,6 +4744,14 @@
 					"parameter_unitstyle" : 10
 				}
 ,
+				"obj-23::obj-1::obj-17::obj-33::obj-103" : 				{
+					"parameter_longname" : "influence delay[3]"
+				}
+,
+				"obj-23::obj-1::obj-17::obj-33::obj-26" : 				{
+					"parameter_longname" : "chroma scaling factor[11]"
+				}
+,
 				"obj-23::obj-1::obj-17::obj-33::obj-30" : 				{
 					"parameter_longname" : "chroma scaling factor[9]"
 				}
@@ -4870,6 +4760,14 @@
 					"parameter_invisible" : 0,
 					"parameter_modmode" : 0,
 					"parameter_unitstyle" : 10
+				}
+,
+				"obj-23::obj-1::obj-17::obj-6::obj-103" : 				{
+					"parameter_longname" : "influence delay[1]"
+				}
+,
+				"obj-23::obj-1::obj-17::obj-6::obj-26" : 				{
+					"parameter_longname" : "chroma scaling factor[1]"
 				}
 ,
 				"obj-23::obj-1::obj-17::obj-6::obj-30" : 				{
@@ -4895,7 +4793,7 @@
 				}
 ,
 				"obj-23::obj-1::obj-3::obj-1150" : 				{
-					"parameter_longname" : "live.text[45]"
+					"parameter_longname" : "live.text[57]"
 				}
 ,
 				"obj-23::obj-1::obj-3::obj-123::obj-1" : 				{
@@ -4920,6 +4818,30 @@
 					"parameter_unitstyle" : 10
 				}
 ,
+				"obj-23::obj-1::obj-3::obj-407::obj-1001::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[3]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-1001::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[4]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-1001::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[5]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-1039::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[6]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-1039::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[7]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-1039::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[8]"
+				}
+,
 				"obj-23::obj-1::obj-3::obj-407::obj-270::obj-1226" : 				{
 					"parameter_longname" : "width[2]"
 				}
@@ -4940,6 +4862,42 @@
 					"parameter_longname" : "weight[2]"
 				}
 ,
+				"obj-23::obj-1::obj-3::obj-407::obj-387::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[10]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-387::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[47]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-387::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[48]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-497::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[45]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-497::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[46]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-497::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[9]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-842::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[34]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-842::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[1]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-407::obj-842::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[2]"
+				}
+,
 				"obj-23::obj-1::obj-3::obj-79::obj-1" : 				{
 					"parameter_longname" : "live.text[36]"
 				}
@@ -4950,6 +4908,18 @@
 ,
 				"obj-23::obj-1::obj-3::obj-79::obj-3" : 				{
 					"parameter_longname" : "live.text[31]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-85::obj-1" : 				{
+					"parameter_longname" : "live.text[49]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-85::obj-2" : 				{
+					"parameter_longname" : "live.text[53]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-85::obj-3" : 				{
+					"parameter_longname" : "live.text[54]"
 				}
 ,
 				"obj-23::obj-1::obj-3::obj-87::obj-1" : 				{
@@ -4986,6 +4956,18 @@
 ,
 				"obj-23::obj-1::obj-3::obj-91::obj-3" : 				{
 					"parameter_longname" : "live.text[42]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-94::obj-1" : 				{
+					"parameter_longname" : "live.text[55]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-94::obj-2" : 				{
+					"parameter_longname" : "live.text[50]"
+				}
+,
+				"obj-23::obj-1::obj-3::obj-94::obj-3" : 				{
+					"parameter_longname" : "live.text[56]"
 				}
 ,
 				"obj-23::obj-1::obj-6::obj-98" : 				{
@@ -5264,6 +5246,13 @@
 				"name" : "somax.corpusview.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
 				"patcherrelativepath" : "../../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.descriptorview.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../../patchers/resources/player",
 				"type" : "JSON",
 				"implicit" : 1
 			}
