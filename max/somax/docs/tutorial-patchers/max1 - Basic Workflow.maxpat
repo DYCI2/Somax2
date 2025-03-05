@@ -371,7 +371,7 @@
 
 											}
  ],
-										"originid" : "pat-36357"
+										"originid" : "pat-43665"
 									}
 ,
 									"patching_rect" : [ 364.5, 370.083333333333371, 125.0, 22.0 ],
@@ -1814,7 +1814,7 @@
 
 							}
  ],
-						"originid" : "pat-36355"
+						"originid" : "pat-43663"
 					}
 ,
 					"patching_rect" : [ 208.0, 215.0, 177.0, 26.0 ],
@@ -1844,12 +1844,11 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 118.0, 126.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
-									"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"contdata" : 1,
 									"ghostbar" : 20,
 									"id" : "obj-9",
@@ -1861,8 +1860,6 @@
 									"parameter_enable" : 0,
 									"parameter_mappable" : 0,
 									"patching_rect" : [ 1183.0, 288.0, 64.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 124.5, 90.25, 47.0, 15.0 ],
 									"setminmax" : [ -10.0, 10.0 ],
 									"setstyle" : 1,
 									"signed" : 1,
@@ -2268,7 +2265,7 @@
 
 											}
  ],
-										"originid" : "pat-36879"
+										"originid" : "pat-44187"
 									}
 ,
 									"patching_rect" : [ 706.731105836006009, 376.624985286404922, 100.0, 22.0 ],
@@ -2400,7 +2397,7 @@
 
 											}
  ],
-										"originid" : "pat-36881"
+										"originid" : "pat-44189"
 									}
 ,
 									"patching_rect" : [ 861.231105836005895, 157.499991001861474, 120.0, 22.0 ],
@@ -2864,7 +2861,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"id" : "obj-84",
 									"maxclass" : "multislider",
 									"numinlets" : 1,
@@ -3891,7 +3887,7 @@
 
 							}
  ],
-						"originid" : "pat-36877"
+						"originid" : "pat-44185"
 					}
 ,
 					"patching_rect" : [ 123.0, 157.0, 185.0, 26.0 ],
@@ -3921,7 +3917,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 118.0, 126.0, 1340.0, 774.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
 						"boxes" : [ 							{
@@ -4637,7 +4633,7 @@
 
 							}
  ],
-						"originid" : "pat-37487"
+						"originid" : "pat-44795"
 					}
 ,
 					"patching_rect" : [ 57.0, 82.0, 210.0, 26.0 ],
@@ -4652,7 +4648,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-36353",
+		"originid" : "pat-43661",
 		"parameters" : 		{
 			"obj-2::obj-143::obj-1001::obj-89::obj-1" : [ "live.text[53]", "live.text", 0 ],
 			"obj-2::obj-143::obj-1001::obj-89::obj-2" : [ "live.text[54]", "live.text", 0 ],
