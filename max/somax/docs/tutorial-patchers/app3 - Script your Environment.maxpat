@@ -161,7 +161,7 @@
 
 							}
  ],
-						"originid" : "pat-39"
+						"originid" : "pat-8740"
 					}
 ,
 					"patching_rect" : [ 1335.365885496139526, 418.292692899703979, 135.0, 22.0 ],
@@ -1146,7 +1146,7 @@
 
 							}
  ],
-						"originid" : "pat-41"
+						"originid" : "pat-8742"
 					}
 ,
 					"patching_rect" : [ 1351.219544410705566, 1123.170758485794067, 86.0, 22.0 ],
@@ -1342,7 +1342,7 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 197.560980319976807, 236.585371494293213, 62.499994039535522, 46.249995589256287 ],
+					"patching_rect" : [ 198.780492544174194, 235.365859270095825, 62.499994039535522, 46.249995589256287 ],
 					"proportion" : 0.5,
 					"varname" : "introduction_server_panel"
 				}
@@ -1357,7 +1357,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1181.448190808296204, 188.926836013793945, 338.0, 835.0 ],
+					"patching_rect" : [ 1181.448190808296204, 188.926836013793945, 342.0, 835.0 ],
 					"text" : "In this tutorial you will learn how to control any available parameter in the Somax2 .app objects using scripting messages in Max.\n\nThis will provide you a quick worflow and open up possibilities of automation and control of the wide array of parameters in the application.\nFirst of all, as always let's begin by pressing on the \"Start Server\" button (see step 1).\n\nThen, one of the first things we might want to script is the path to a certain folder containing our corpora.\n\nRemember that by default the corpora we're providing are stored in the \"corpus\" folder of your Somax2 distribution.\nHowever, a good practice is to have different corpus folders in your machine, according to the sound palette you might search for a certain concert/performance, etc.\nYou can select the desired corpus folder (called \"corpuspath\") by pressing on the \"Settings\" button of the somax.server.app and then press on the \"set\" button next to the Corpus Folder path (see step 2).\n\nYet, to speed up this process you can send a message directly to the somax.server.app object asking to set the corpuspath.\nThis can be done through the Max message shown at step 3.\n\nBy pressing this message you will see a window popping up, enabling you to select a corpuspath in your environment.\n\nThis is done thanks to the couple of send and receive objects in Max.\nNotice how every Somax2 module in this patch has a \"r\" object attached to them, where \"r\" is the shortcut for \"receive\".\nThe message you just pressed, on the other hand is linked to a \"s\" (for \"send\") object, providing the communication with the somax.server.app thanks to its argument having the same name as the one in the \"r\" object (in this case the name argument is \"server_msg\").\n\nAn alternative for \"s\" is to use ; inside a message, as shown at step 4.\n\nFor compactness, we will rather use this last syntax in the next steps.\n",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "introduction_text"
@@ -1475,7 +1475,7 @@
 
 											}
  ],
-										"originid" : "pat-45"
+										"originid" : "pat-8746"
 									}
 ,
 									"patching_rect" : [ 364.0, 185.0, 61.0, 22.0 ],
@@ -1562,7 +1562,7 @@
 
 											}
  ],
-										"originid" : "pat-47"
+										"originid" : "pat-8748"
 									}
 ,
 									"patching_rect" : [ 285.0, 185.0, 61.0, 22.0 ],
@@ -1649,7 +1649,7 @@
 
 											}
  ],
-										"originid" : "pat-49"
+										"originid" : "pat-8750"
 									}
 ,
 									"patching_rect" : [ 205.0, 185.0, 61.0, 22.0 ],
@@ -1736,7 +1736,7 @@
 
 											}
  ],
-										"originid" : "pat-51"
+										"originid" : "pat-8752"
 									}
 ,
 									"patching_rect" : [ 130.0, 185.0, 61.0, 22.0 ],
@@ -1823,7 +1823,7 @@
 
 											}
  ],
-										"originid" : "pat-53"
+										"originid" : "pat-8754"
 									}
 ,
 									"patching_rect" : [ 50.0, 185.0, 61.0, 22.0 ],
@@ -2206,7 +2206,7 @@
 
 							}
  ],
-						"originid" : "pat-43"
+						"originid" : "pat-8744"
 					}
 ,
 					"patching_rect" : [ 135.365856885910034, 85.365855693817139, 91.0, 22.0 ],
@@ -2759,7 +2759,7 @@
 
 			}
  ],
-		"originid" : "pat-37",
+		"originid" : "pat-8738",
 		"parameters" : 		{
 			"obj-1::obj-13::obj-1" : [ "source[9]", "source", 0 ],
 			"obj-1::obj-2::obj-395::obj-2" : [ "live.text[5]", "live.text[4]", 0 ],
