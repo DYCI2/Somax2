@@ -371,7 +371,7 @@
 
 											}
  ],
-										"originid" : "pat-26309"
+										"originid" : "pat-36357"
 									}
 ,
 									"patching_rect" : [ 364.5, 370.083333333333371, 125.0, 22.0 ],
@@ -1814,7 +1814,7 @@
 
 							}
  ],
-						"originid" : "pat-26307"
+						"originid" : "pat-36355"
 					}
 ,
 					"patching_rect" : [ 208.0, 215.0, 177.0, 26.0 ],
@@ -1844,10 +1844,35 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
+						"rect" : [ 118.0, 126.0, 1340.0, 774.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
+									"contdata" : 1,
+									"ghostbar" : 20,
+									"id" : "obj-9",
+									"ignoreclick" : 1,
+									"maxclass" : "multislider",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"parameter_enable" : 0,
+									"parameter_mappable" : 0,
+									"patching_rect" : [ 1183.0, 288.0, 64.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 124.5, 90.25, 47.0, 15.0 ],
+									"setminmax" : [ -10.0, 10.0 ],
+									"setstyle" : 1,
+									"signed" : 1,
+									"size" : 14,
+									"slidercolor" : [ 0.358311964349916, 0.842696656897025, 0.838660117792465, 1.0 ],
+									"spacing" : 1
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bubble" : 1,
 									"bubblepoint" : 0.1,
@@ -2243,7 +2268,7 @@
 
 											}
  ],
-										"originid" : "pat-26831"
+										"originid" : "pat-36879"
 									}
 ,
 									"patching_rect" : [ 706.731105836006009, 376.624985286404922, 100.0, 22.0 ],
@@ -2375,7 +2400,7 @@
 
 											}
  ],
-										"originid" : "pat-26833"
+										"originid" : "pat-36881"
 									}
 ,
 									"patching_rect" : [ 861.231105836005895, 157.499991001861474, 120.0, 22.0 ],
@@ -2839,13 +2864,14 @@
 							}
 , 							{
 								"box" : 								{
+									"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"id" : "obj-84",
 									"maxclass" : "multislider",
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1120.027980836006009, 288.208321743474301, 60.0, 20.0 ],
+									"patching_rect" : [ 1113.694647502672751, 288.0, 60.0, 20.0 ],
 									"setminmax" : [ 0.0, 1.0 ],
 									"setstyle" : 1,
 									"size" : 12,
@@ -2863,7 +2889,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 1079.361314169339494, 288.208321743474301, 32.0, 20.0 ]
+									"patching_rect" : [ 1076.0, 288.0, 32.0, 20.0 ]
 								}
 
 							}
@@ -2883,11 +2909,11 @@
 								"box" : 								{
 									"id" : "obj-76",
 									"maxclass" : "newobj",
-									"numinlets" : 4,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 1038.694647502672751, 256.208321743474301, 141.0, 22.0 ],
-									"text" : "route onset pitch chroma"
+									"numinlets" : 5,
+									"numoutlets" : 5,
+									"outlettype" : [ "", "", "", "", "" ],
+									"patching_rect" : [ 1038.694647502672751, 256.208321743474301, 169.0, 22.0 ],
+									"text" : "route onset pitch chroma mfcc"
 								}
 
 							}
@@ -3856,8 +3882,16 @@
 								}
 
 							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-9", 0 ],
+									"midpoints" : [ 1160.694647502672751, 283.104160871737122, 1192.5, 283.104160871737122 ],
+									"source" : [ "obj-76", 3 ]
+								}
+
+							}
  ],
-						"originid" : "pat-26829"
+						"originid" : "pat-36877"
 					}
 ,
 					"patching_rect" : [ 123.0, 157.0, 185.0, 26.0 ],
@@ -3887,7 +3921,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 118.0, 126.0, 1340.0, 774.0 ],
+						"rect" : [ 0.0, 26.0, 1340.0, 774.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
 						"boxes" : [ 							{
@@ -4603,7 +4637,7 @@
 
 							}
  ],
-						"originid" : "pat-27439"
+						"originid" : "pat-37487"
 					}
 ,
 					"patching_rect" : [ 57.0, 82.0, 210.0, 26.0 ],
@@ -4618,7 +4652,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-26305",
+		"originid" : "pat-36353",
 		"parameters" : 		{
 			"obj-2::obj-143::obj-1001::obj-89::obj-1" : [ "live.text[53]", "live.text", 0 ],
 			"obj-2::obj-143::obj-1001::obj-89::obj-2" : [ "live.text[54]", "live.text", 0 ],
