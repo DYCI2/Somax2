@@ -2,9 +2,9 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 8,
-			"minor" : 6,
-			"revision" : 0,
+			"major" : 9,
+			"minor" : 0,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -12,35 +12,9 @@
 		"classnamespace" : "box",
 		"rect" : [ 84.0, 100.0, 1055.0, 690.0 ],
 		"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
-		"bglocked" : 0,
-		"openinpresentation" : 0,
-		"default_fontsize" : 12.0,
-		"default_fontface" : 0,
-		"default_fontname" : "Arial",
-		"gridonopen" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 1,
-		"objectsnaponopen" : 1,
-		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
-		"lefttoolbarpinned" : 0,
-		"toptoolbarpinned" : 0,
-		"righttoolbarpinned" : 0,
-		"bottomtoolbarpinned" : 0,
-		"toolbars_unpinned_last_save" : 0,
-		"tallnewobj" : 0,
-		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
-		"devicewidth" : 0.0,
-		"description" : "",
-		"digest" : "",
-		"tags" : "",
-		"style" : "",
-		"subpatcher_template" : "",
 		"showrootpatcherontab" : 0,
 		"showontab" : 0,
-		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-24",
@@ -50,44 +24,18 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
+						"rect" : [ 84.0, 126.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-130",
@@ -134,9 +82,16 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 347.687499999999886, 125.062499999999801, 68.0, 21.0 ],
+									"patching_rect" : [ 347.687499999999886, 125.062499999999801, 69.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "message",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -149,8 +104,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 334.0, 64.333333333333258, 55.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "attribute",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -164,8 +126,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 316.249999999999886, 64.333333333333258, 300.0, 50.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "All attribute changes (set when the player is created, through messages or through the user interface) are output on the third outlet",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -179,8 +148,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 316.249999999999886, 125.062499999999801, 300.0, 50.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Most message to the somax.player generates a response on the first outlet, typically prepended with the name of the function calling it",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -194,8 +170,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 696.554166666666561, 415.0, 145.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "access any information to/from the player",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -209,8 +192,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 696.554166666666561, 397.000000000000057, 114.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "4th outlet: debug",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -224,8 +214,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 489.0, 415.0, 162.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "parameters controlling the behaviour of the player",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -239,8 +236,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 489.0, 397.000000000000057, 160.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "3rd outlet: attributes",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -254,8 +258,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 307.0, 397.000000000000057, 117.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "2nd outlet: status",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -269,8 +280,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 55.0, 397.000000000000057, 137.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "1st outlet: messages",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -284,8 +302,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 307.0, 415.0, 148.687499999999886, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "whether the player is initialized on server",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -299,8 +324,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 55.0, 415.0, 165.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "responses to messages and/or ongoing generation",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -314,7 +346,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 253.0, 438.333333333333428, 48.666666666666629, 48.666666666666629 ]
+									"patching_rect" : [ 253.0, 438.333333333333428, 48.666666666666629, 48.666666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -326,8 +359,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 64.333333333333258, 280.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Understanding the output protocol of the player",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -341,8 +381,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 764.604166666666401, 530.0, 87.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "internal state of layers",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -356,8 +403,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 660.000000000000114, 530.0, 69.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "matches per layer",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -371,8 +425,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 561.031249999999886, 530.0, 78.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "generated influences",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -386,8 +447,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 458.031249999999886, 530.0, 93.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "messages to midirenderer",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -401,8 +469,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 356.687499999999886, 530.0, 93.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "messages to audiorenderer",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -416,8 +491,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 288.499999999999943, 629.5, 87.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "transposition (semitones)",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -431,8 +513,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 236.624999999999943, 629.5, 59.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "index",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -459,8 +548,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 253.624999999999943, 530.0, 74.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "last played event",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -474,8 +570,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 110.4840087890625, 629.5, 79.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "bang when terminated",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -502,8 +605,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 14.208333333333371, 629.5, 92.0, 50.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "bang when initialization is done",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -518,8 +628,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 850.499999999999773, 571.0, 104.583333333333258, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "corpusquery: see \"corpus\" tab",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -557,42 +674,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 583.0, 395.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"hidden" : 1,
@@ -842,7 +933,8 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "int" ],
 													"parameter_enable" : 0,
-													"patching_rect" : [ 436.285714285714278, 154.0, 22.0, 22.0 ]
+													"patching_rect" : [ 436.285714285714278, 154.0, 22.0, 22.0 ],
+													"svg" : ""
 												}
 
 											}
@@ -866,7 +958,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 31.0, 154.0, 85.0, 22.0 ],
-													"text" : "Player_4340"
+													"text" : "Player_2920"
 												}
 
 											}
@@ -957,15 +1049,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10224"
 									}
 ,
 									"patching_rect" : [ 952.062499999999773, 571.0, 83.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p \"misc info\""
@@ -982,42 +1072,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 1446.0, 220.0, 604.0, 486.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-11",
@@ -1335,15 +1399,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10226"
 									}
 ,
 									"patching_rect" : [ 444.249999999999886, 571.0, 44.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p midi"
@@ -1360,42 +1422,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"hidden" : 1,
@@ -1776,15 +1812,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10228"
 									}
 ,
 									"patching_rect" : [ 342.687499999999886, 571.0, 51.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p audio"
@@ -1801,42 +1835,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 425.0, 328.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -1900,15 +1908,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10230"
 									}
 ,
 									"patching_rect" : [ 468.0, 465.0, 84.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p parameters"
@@ -1925,42 +1931,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 446.0, 335.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -2024,15 +2004,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10232"
 									}
 ,
 									"patching_rect" : [ 683.0, 465.0, 70.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p dumpout"
@@ -2049,42 +2027,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 487.0, 327.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -2243,15 +2195,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10234"
 									}
 ,
 									"patching_rect" : [ 545.812499999999886, 571.0, 79.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p influences"
@@ -2268,42 +2218,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -2585,15 +2509,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10236"
 									}
 ,
 									"patching_rect" : [ 748.937499999999773, 571.0, 85.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p corpusview"
@@ -2611,42 +2533,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 84.0, 131.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-16",
@@ -3068,15 +2964,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10238"
 									}
 ,
 									"patching_rect" : [ 647.374999999999773, 571.0, 68.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p matches",
@@ -3131,42 +3025,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -3321,15 +3189,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10284"
 									}
 ,
 									"patching_rect" : [ 55.0, 205.562499999999773, 120.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p disable_other_tabs"
@@ -3345,8 +3211,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 814.062499999999773, 353.791666666666515, 189.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "\"playersmissing\" is ok here too!",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -3360,8 +3233,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 854.125, 135.562499999999773, 164.0, 94.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -3376,42 +3256,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 342.0, 285.0, 698.0, 357.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"bubble" : 1,
@@ -3593,15 +3447,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10286"
 									}
 ,
 									"patching_rect" : [ 741.041666666666515, 257.58333333333303, 165.041666666666515, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p server_placeholder"
@@ -3611,19 +3463,32 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-59",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 63.0, 121.562499999999773, 203.0, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Enable player to start generation",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-49",
 									"linecount" : 2,
@@ -3631,8 +3496,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 612.041666666666515, 202.791666666666515, 128.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "make sure that the server is active",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -3696,7 +3572,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 38.0, 152.999999999999972, 36.124999999999602, 36.124999999999602 ]
+									"patching_rect" : [ 38.0, 152.999999999999972, 36.124999999999602, 36.124999999999602 ],
+									"svg" : ""
 								}
 
 							}
@@ -3709,7 +3586,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 741.041666666666515, 207.791666666666515, 25.025000000000205, 25.025000000000205 ]
+									"patching_rect" : [ 741.041666666666515, 207.791666666666515, 25.025000000000205, 25.025000000000205 ],
+									"svg" : ""
 								}
 
 							}
@@ -3743,14 +3621,26 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-28",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 800.08333333333303, 92.854166666666458, 164.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "initialize the server \n(if not already initialized)",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -3825,7 +3715,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 814.062499999999773, 299.791666666666515, 44.541666666666629, 44.541666666666629 ]
+									"patching_rect" : [ 814.062499999999773, 299.791666666666515, 44.541666666666629, 44.541666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -3867,8 +3758,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 316.249999999999886, 192.229166666666742, 240.0, 123.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Some messages (for example jump, bang, influence) are asynchronous and will not generate a response per se (but may trigger output for the rendering) \n\nIn addition, a number of messages will arrive on the first outlet as a result of rendering when the player is running",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -4231,15 +4129,13 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-10222"
 					}
 ,
 					"patching_rect" : [ 310.5, 35.0, 106.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p \"output protocol\"",
@@ -4256,44 +4152,18 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 126.0, 1055.0, 664.0 ],
+						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-11",
@@ -4302,8 +4172,16 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 728.125, 111.187499999999943, 150.0, 60.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"style" : "helpfile_label",
 									"text" : "It's possible to use either audio or MIDI influences, as well as a combination of the two",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"varname" : "autohelp_top_digest[5]"
 								}
 
@@ -4311,6 +4189,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-49",
 									"linecount" : 3,
@@ -4318,8 +4197,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 645.666666666666515, 292.574999999999932, 108.0, 51.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "make sure that the server is active",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -4333,22 +4223,41 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 419.125, 541.791666666666515, 178.0, 65.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "these number indicates how many events in the corpus that matches the influence of corresponding type",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-7",
 									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 379.33333333333394, 96.0, 115.0, 64.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "play notes to trigger matching output from the player",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -4360,8 +4269,16 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 40.0, 322.354166666666686, 234.9840087890625, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"style" : "helpfile_label",
 									"text" : "- influence chroma: guide the player, generating matches in the harmonic layer",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"varname" : "autohelp_top_digest[4]"
 								}
 
@@ -4374,8 +4291,16 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 40.0, 280.677083333333371, 231.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"style" : "helpfile_label",
 									"text" : "- influence pitch: guide the player, generating matches in the melodic layer",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"varname" : "autohelp_top_digest[3]"
 								}
 
@@ -4388,8 +4313,16 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 40.0, 239.000000000000057, 183.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"style" : "helpfile_label",
 									"text" : "- influence onset: triggers output in reactive mode (same as bang)",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"varname" : "autohelp_top_digest[2]"
 								}
 
@@ -4403,8 +4336,16 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 60.000000000000014, 588.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"style" : "helpfile_label",
 									"text" : "The main way of interacting with the player is through sending \"influences\", messages guiding the player towards events in the corpus that matches the influence melodically and/or harmonically",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"varname" : "autohelp_top_digest[1]"
 								}
 
@@ -4419,8 +4360,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 781.687499999999773, 513.0, 177.0, 79.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "the player will also output influences corresponding to the content it's currently playing, which can be used to influence another player",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -4504,42 +4452,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 616.0, 132.0, 789.0, 545.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -5024,15 +4946,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10758"
 									}
 ,
 									"patching_rect" : [ 279.66666666666697, 612.0, 170.0, 24.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p understanding_matches"
@@ -5086,14 +5006,26 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-41",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 360.125, 383.0, 193.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "this player is pre-configured to be highly reactive to influences",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -5143,42 +5075,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -5333,15 +5239,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10760"
 									}
 ,
 									"patching_rect" : [ 40.0, 205.562499999999773, 120.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p disable_other_tabs"
@@ -5357,8 +5261,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 822.687499999999773, 451.562499999999829, 189.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "\"playersmissing\" is ok here too!",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -5372,8 +5283,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 858.125, 230.562499999999773, 177.0, 79.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -5388,42 +5306,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 342.0, 285.0, 698.0, 357.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"bubble" : 1,
@@ -5605,15 +5497,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-10762"
 									}
 ,
 									"patching_rect" : [ 749.666666666666515, 355.354166666666345, 165.041666666666515, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p server_placeholder"
@@ -5623,6 +5513,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.0,
 									"bubbleside" : 2,
 									"id" : "obj-59",
@@ -5630,8 +5521,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 45.0, 96.0, 108.0, 39.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Enable the player",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -5651,26 +5553,50 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-45",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 119.0, 129.187499999999943, 127.0, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "initialize the player",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-51",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 98.833333333333314, 597.75, 77.166666666666686, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "start dsp",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -5721,7 +5647,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 23.0, 152.999999999999972, 36.124999999999602, 36.124999999999602 ]
+									"patching_rect" : [ 23.0, 152.999999999999972, 36.124999999999602, 36.124999999999602 ],
+									"svg" : ""
 								}
 
 							}
@@ -5734,7 +5661,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 749.666666666666515, 305.562499999999829, 25.025000000000205, 25.025000000000205 ]
+									"patching_rect" : [ 749.666666666666515, 305.562499999999829, 25.025000000000205, 25.025000000000205 ],
+									"svg" : ""
 								}
 
 							}
@@ -5748,7 +5676,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 125.555555555555657, 439.0, 48.666666666666629, 48.666666666666629 ]
+									"patching_rect" : [ 125.555555555555657, 439.0, 48.666666666666629, 48.666666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -5831,14 +5760,26 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-78",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 810.666666666666515, 189.916666666666515, 164.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "initialize the server \n(if not already initialized)",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -5913,7 +5854,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 822.687499999999773, 397.562499999999829, 44.541666666666629, 44.541666666666629 ]
+									"patching_rect" : [ 822.687499999999773, 397.562499999999829, 44.541666666666629, 44.541666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -6583,15 +6525,13 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-10756"
 					}
 ,
 					"patching_rect" : [ 154.0, 35.0, 73.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p influences",
@@ -6608,9 +6548,9 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -6618,37 +6558,12 @@
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.2,
 									"bubbleside" : 2,
 									"id" : "obj-1",
@@ -6657,8 +6572,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 567.041666666666515, 391.791666666666515, 137.0, 52.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Query information about loaded corpus",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -6671,8 +6597,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 421.066666666666606, 347.041666666666629, 74.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "build status",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -6686,42 +6619,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -6847,15 +6754,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-11376"
 									}
 ,
 									"patching_rect" : [ 412.0, 252.0, 119.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p build_from_midifile"
@@ -6884,8 +6789,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 621.541666666666515, 531.0, 109.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "path/name of loaded corpus",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -6928,6 +6840,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.0,
 									"bubbleside" : 2,
 									"id" : "obj-47",
@@ -6935,8 +6848,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 346.0, 176.124999999999659, 299.0, 39.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Choose one of these methods for loading a corpus",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -6962,8 +6886,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 442.0, 210.562499999999773, 210.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "build a corpus from a MIDI file and load it (may take some time...)",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -6990,8 +6921,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 245.275675455729186, 205.562499999999773, 91.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "load a corpus by filepath",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7029,42 +6967,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-6",
@@ -7174,15 +7086,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-11412"
 									}
 ,
 									"patching_rect" : [ 245.275675455729186, 277.791666666666515, 111.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p read_any_corpus"
@@ -7199,8 +7109,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 89.0, 205.562499999999773, 90.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "load a corpus by name",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7260,8 +7177,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 60.333333333333258, 751.0, 50.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "The corpus is the source material, constructed from an audio or MIDI file, that the player \"generates\" output from. The player will never play anything that is not in the source file (hence the qutation marks around generation), but by jumping, recombining and transposing the content, with regards to incoming influences, the resulting output may be completely different from the original",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7276,42 +7200,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -7466,15 +7364,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-11422"
 									}
 ,
 									"patching_rect" : [ 55.0, 205.562499999999773, 120.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p disable_other_tabs"
@@ -7490,8 +7386,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 814.062499999999773, 428.791666666666515, 189.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "\"playersmissing\" is ok here too!",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7505,8 +7408,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 854.125, 210.562499999999773, 164.0, 94.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7521,42 +7431,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 342.0, 285.0, 698.0, 357.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"bubble" : 1,
@@ -7738,15 +7622,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-11424"
 									}
 ,
 									"patching_rect" : [ 741.041666666666515, 332.58333333333303, 165.041666666666515, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p server_placeholder"
@@ -7769,19 +7651,32 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-59",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 63.0, 121.562499999999773, 203.0, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Enable player to start generation",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-49",
 									"linecount" : 2,
@@ -7789,8 +7684,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 612.041666666666515, 277.791666666666515, 128.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "make sure that the server is active",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7810,26 +7716,50 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-45",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 191.666666666666629, 161.354166666666401, 127.0, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "initialize the player",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-51",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 113.833333333333314, 598.25, 77.166666666666686, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "start dsp",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7891,7 +7821,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 38.0, 152.999999999999972, 36.124999999999602, 36.124999999999602 ]
+									"patching_rect" : [ 38.0, 152.999999999999972, 36.124999999999602, 36.124999999999602 ],
+									"svg" : ""
 								}
 
 							}
@@ -7904,7 +7835,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 741.041666666666515, 282.791666666666515, 25.025000000000205, 25.025000000000205 ]
+									"patching_rect" : [ 741.041666666666515, 282.791666666666515, 25.025000000000205, 25.025000000000205 ],
+									"svg" : ""
 								}
 
 							}
@@ -7918,7 +7850,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 169.333333333333343, 471.999999999999943, 48.666666666666629, 48.666666666666629 ]
+									"patching_rect" : [ 169.333333333333343, 471.999999999999943, 48.666666666666629, 48.666666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -8026,14 +7959,26 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-20",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 800.08333333333303, 167.854166666666458, 164.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "initialize the server \n(if not already initialized)",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8108,7 +8053,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 814.062499999999773, 374.791666666666515, 44.541666666666629, 44.541666666666629 ]
+									"patching_rect" : [ 814.062499999999773, 374.791666666666515, 44.541666666666629, 44.541666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -8166,42 +8112,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 34.0, 87.0, 1063.0, 700.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -9102,15 +9022,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-11926"
 									}
 ,
 									"patching_rect" : [ 501.5, 440.5, 101.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p corpus_queries"
@@ -9556,15 +9474,13 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-11374"
 					}
 ,
 					"patching_rect" : [ 240.0, 35.0, 55.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p corpus",
@@ -9581,9 +9497,9 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -9591,37 +9507,12 @@
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 0,
 									"id" : "obj-36",
@@ -9630,14 +9521,26 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 47.625000000000227, 302.0, 141.625000000000227, 79.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "in continuous mode, the player will trigger a new event immediately after finishing the previous",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.0,
 									"bubbleside" : 0,
 									"id" : "obj-35",
@@ -9645,9 +9548,20 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 202.125000000000227, 302.0, 127.0, 66.0 ],
+									"patching_rect" : [ 202.0, 302.0, 118.0, 66.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "in reactive mode, bang triggers a new event",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -9661,8 +9575,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 461.361111111110858, 502.0, 261.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "the first outlet can be used to parse useful information about what's being generated",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -9676,8 +9597,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 735.08333333333303, 610.25, 107.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "corpus: name of loaded corpus",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -9689,7 +9617,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 577.361111111110972, 574.0, 29.0, 29.0 ]
+									"patching_rect" : [ 577.361111111110972, 574.0, 29.0, 29.0 ],
+									"svg" : ""
 								}
 
 							}
@@ -9703,8 +9632,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 543.734004077695545, 610.25, 98.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "running: player is generating ",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -9730,8 +9666,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 425.0, 610.25, 106.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "state: index of last played event",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -9771,14 +9714,22 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 438.0, 204.5, 236.228113149958745, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "continuity: bias towards playing the following event (linearly) in the corpus",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.2,
 									"id" : "obj-54",
 									"linecount" : 4,
@@ -9786,8 +9737,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 506.75, 246.000000000000114, 178.0, 64.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "with the default settings and no influences, the corpus will only be played linearly. Try changing continuity to 0",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -9878,8 +9840,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 43.625000000000227, 205.437500000000227, 110.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "mode: when to play the next event",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -9894,42 +9863,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -10084,15 +10027,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-11930"
 									}
 ,
 									"patching_rect" : [ 40.0, 172.562499999999773, 120.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p disable_other_tabs"
@@ -10108,8 +10049,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 771.062499999999773, 289.000000000000114, 189.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "\"playersmissing\" is ok here too!",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -10123,8 +10071,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 809.604166666666515, 103.000000000000099, 186.0, 79.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -10139,42 +10094,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 342.0, 285.0, 698.0, 357.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"bubble" : 1,
@@ -10356,15 +10285,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-11932"
 									}
 ,
 									"patching_rect" : [ 698.041666666666515, 192.791666666666686, 165.041666666666515, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p server_placeholder"
@@ -10387,19 +10314,32 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-59",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 48.0, 88.562499999999773, 203.0, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "enable player to start generation",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-49",
 									"linecount" : 2,
@@ -10407,8 +10347,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 569.041666666666515, 138.000000000000114, 128.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "make sure that the server is active",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -10428,13 +10379,25 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-45",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 176.666666666666629, 128.354166666666401, 127.0, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "initialize the player",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -10452,14 +10415,26 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-55",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 522.0, 405.0, 135.125000000000227, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "A corpus is already loaded in the player",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -10510,7 +10485,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 23.0, 119.999999999999972, 36.124999999999602, 36.124999999999602 ]
+									"patching_rect" : [ 23.0, 119.999999999999972, 36.124999999999602, 36.124999999999602 ],
+									"svg" : ""
 								}
 
 							}
@@ -10523,7 +10499,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 698.041666666666515, 143.000000000000114, 25.025000000000205, 25.025000000000205 ]
+									"patching_rect" : [ 698.041666666666515, 143.000000000000114, 25.025000000000205, 25.025000000000205 ],
+									"svg" : ""
 								}
 
 							}
@@ -10535,8 +10512,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 539.816666666666606, 457.333333333333258, 196.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "all parameter changes are available on the third outlet",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -10548,7 +10532,15 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 351.75, 457.333333333333258, 174.25, 22.0 ],
-									"text" : "enabled 0"
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "enabled 0",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -10562,7 +10554,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 184.333333333333343, 449.5, 48.666666666666629, 48.666666666666629 ]
+									"patching_rect" : [ 184.333333333333343, 449.5, 48.666666666666629, 48.666666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -10622,14 +10615,26 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-78",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 838.25, 60.000000000000014, 155.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "initialize the server \n(if not already initialized)",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -10704,7 +10709,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 771.062499999999773, 235.000000000000114, 44.541666666666629, 44.541666666666629 ]
+									"patching_rect" : [ 771.062499999999773, 235.000000000000114, 44.541666666666629, 44.541666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -10745,8 +10751,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 65.66666666666697, 255.0, 54.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "reactive",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -10759,8 +10772,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 65.66666666666697, 239.166666666666742, 64.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "continous",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -10788,8 +10808,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 156.625000000000227, 205.437500000000227, 121.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "bang: trigger next (reactive mode only)",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -10802,8 +10829,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 281.5, 204.5, 132.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "jump to event by index \n(on next trigger)",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -11224,6 +11258,7 @@
 
 							}
  ],
+						"originid" : "pat-11928",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-69", "obj-178" ]
 							}
@@ -11232,10 +11267,7 @@
 ,
 					"patching_rect" : [ 88.5, 35.0, 57.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p mode",
@@ -11252,9 +11284,9 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -11262,45 +11294,17 @@
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
 						"isolateaudio" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [  ],
-						"lines" : [  ]
+						"lines" : [  ],
+						"originid" : "pat-12408"
 					}
 ,
 					"patching_rect" : [ 432.0, 35.0, 25.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p ?",
@@ -11317,9 +11321,9 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -11327,37 +11331,12 @@
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1055.0, 664.0 ],
 						"openrect" : [ 0.0, 0.0, 1056.0, 690.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 13.0,
 									"id" : "obj-20",
@@ -11365,8 +11344,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 209.666666666666629, 444.333333333333258, 100.0, 25.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "player status",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11380,8 +11370,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 484.066666666666606, 531.0, 186.0, 65.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "the audio / MIDI renderer reads from the output protocol of the player and converts the messages into audio / MIDI",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11424,8 +11421,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 188.062499999999886, 169.437500000000199, 292.0, 79.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "the actual player exists on the remote server, the somax.player object is simply a means of communicating with the remote player. The \"initialize\" command instantiates the player on the server (assuming that the server is running)",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11439,8 +11443,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 137.062499999999943, 335.0, 201.437500000000114, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "terminate: terminates the player and deletes it from the server",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11455,14 +11466,22 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 738.104166666666288, 572.25, 272.0, 65.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "with the default configuration, the player will simply play the corpus linearly. The other tabs describe how to control the generative behaviour of the player!",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 2,
 									"id" : "obj-59",
@@ -11471,8 +11490,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 18.0, 137.999999999999972, 101.0, 52.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Enable player to start generation",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11487,42 +11517,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 59.0, 106.0, 640.0, 480.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -11677,15 +11681,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-12412"
 									}
 ,
 									"patching_rect" : [ 40.0, 264.0, 120.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p disable_other_tabs"
@@ -11702,8 +11704,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 70.166666666666629, 481.666666666666515, 229.000000000000028, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "the status indicator displays whether the player is initialized on the server",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -11711,6 +11720,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-49",
 									"linecount" : 5,
@@ -11718,8 +11728,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 564.460416666667015, 194.512500000000102, 122.0, 78.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Toggling the server's \"active\" attribute off will pause generation in all players",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11739,19 +11760,32 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-44",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 388.5, 268.791666666666572, 105.0, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Load a corpus ",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.0,
 									"bubbleside" : 2,
 									"id" : "obj-41",
@@ -11759,8 +11793,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 125.666666666666629, 140.791666666666629, 112.0, 39.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "initialize the player",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11773,21 +11818,40 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 75.0, 627.0, 198.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "only necessary for audio corpora",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-19",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 99.833333333333314, 599.25, 77.166666666666686, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "start dsp",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11841,14 +11905,26 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-24",
 									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 464.0, 385.0, 231.350000000000136, 51.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "By default, players will automatically be initailized on the server when created. @autoinitialize 0 disables this",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11888,8 +11964,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 791.562499999999773, 367.0, 235.0, 123.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "the status \"playersmissing\" means that there are local somax.player objects that are not initialized on the server. In this help patcher, we can ignore this message, it simply means that there are players in the other tabs that we haven't initialized yet. As long as the toggle is active, we're good to go!",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11914,7 +11997,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 24.0, 212.437500000000199, 36.124999999999602, 36.124999999999602 ]
+									"patching_rect" : [ 24.0, 212.437500000000199, 36.124999999999602, 36.124999999999602 ],
+									"svg" : ""
 								}
 
 							}
@@ -11927,7 +12011,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 689.041666666666515, 221.0, 25.025000000000205, 25.025000000000205 ]
+									"patching_rect" : [ 689.041666666666515, 221.0, 25.025000000000205, 25.025000000000205 ],
+									"svg" : ""
 								}
 
 							}
@@ -11939,8 +12024,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 478.06666666666672, 444.333333333333258, 196.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "all parameter changes are available on the third outlet",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11952,7 +12044,15 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 339.750000000000057, 444.333333333333258, 124.5, 22.0 ],
-									"text" : "enabled 0"
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "enabled 0",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -11966,7 +12066,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 163.833333333333343, 430.999999999999943, 48.666666666666629, 48.666666666666629 ]
+									"patching_rect" : [ 163.833333333333343, 430.999999999999943, 48.666666666666629, 48.666666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -12065,8 +12166,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 493.062499999999886, 328.229166666666799, 101.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "an audio corpus",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -12079,8 +12187,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 493.062499999999886, 299.729166666666799, 89.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "a MIDI corpus",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -12169,22 +12284,41 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 829.125, 181.0, 177.0, 79.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-78",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 829.125, 137.999999999999972, 182.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "initialize the server (and wait for status indicator below)",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -12259,7 +12393,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 796.562499999999773, 311.562499999999829, 44.541666666666629, 44.541666666666629 ]
+									"patching_rect" : [ 796.562499999999773, 311.562499999999829, 44.541666666666629, 44.541666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -12323,6 +12458,7 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 3,
 									"fontname" : "Arial",
 									"fontsize" : 13.0,
@@ -12331,8 +12467,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 694.041666666666515, 321.333333333333144, 100.0, 25.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "server status",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -12737,6 +12884,7 @@
 
 							}
  ],
+						"originid" : "pat-12410",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-69", "obj-178" ]
 							}
@@ -12745,10 +12893,7 @@
 ,
 					"patching_rect" : [ 26.0, 35.0, 47.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p basic",
@@ -12758,7 +12903,15 @@
 			}
  ],
 		"lines" : [  ],
+		"originid" : "pat-10220",
 		"parameters" : 		{
+			"obj-24::obj-76::obj-1001::obj-89::obj-1" : [ "live.text[83]", "live.text", 0 ],
+			"obj-24::obj-76::obj-1001::obj-89::obj-2" : [ "live.text[84]", "live.text", 0 ],
+			"obj-24::obj-76::obj-1001::obj-89::obj-3" : [ "live.text[85]", "live.text", 0 ],
+			"obj-24::obj-76::obj-1039::obj-89::obj-1" : [ "live.text[86]", "live.text", 0 ],
+			"obj-24::obj-76::obj-1039::obj-89::obj-2" : [ "live.text[87]", "live.text", 0 ],
+			"obj-24::obj-76::obj-1039::obj-89::obj-3" : [ "live.text[88]", "live.text", 0 ],
+			"obj-24::obj-76::obj-1105" : [ "harmonincpeakdecay[30]", "harmonincpeakdecay", 0 ],
 			"obj-24::obj-76::obj-1115" : [ "continuity[1]", "continuity", 0 ],
 			"obj-24::obj-76::obj-1175" : [ "heldnotesmode[2]", "heldnotesmode", 0 ],
 			"obj-24::obj-76::obj-1179" : [ "continuity[35]", "continuity", 0 ],
@@ -12775,7 +12928,7 @@
 			"obj-24::obj-76::obj-154" : [ "melodicngramorder[4]", "melodicngramorder", 0 ],
 			"obj-24::obj-76::obj-19" : [ "selfmod12[4]", "selfmod12", 0 ],
 			"obj-24::obj-76::obj-22" : [ "selfmelodicbypass[1]", "selfmelodicbypass", 0 ],
-			"obj-24::obj-76::obj-254" : [ "harmonincpeakdecay[7]", "harmonincpeakdecay", 0 ],
+			"obj-24::obj-76::obj-254" : [ "harmonincpeakdecay[32]", "harmonincpeakdecay", 0 ],
 			"obj-24::obj-76::obj-255" : [ "melodicpeakdecay[4]", "melodicpeakdecay", 0 ],
 			"obj-24::obj-76::obj-256" : [ "selfpeakdecay[2]", "selfpeakdecay", 0 ],
 			"obj-24::obj-76::obj-270::obj-1226" : [ "width[1]", "Width", 0 ],
@@ -12787,11 +12940,21 @@
 			"obj-24::obj-76::obj-295" : [ "playingmode[7]", "playingmode", 0 ],
 			"obj-24::obj-76::obj-298" : [ "simultaneousonsets[7]", "simultaneousonsets", 0 ],
 			"obj-24::obj-76::obj-328" : [ "decaybasis[1]", "decaybasis", 0 ],
+			"obj-24::obj-76::obj-387::obj-89::obj-1" : [ "live.text[93]", "live.text", 0 ],
+			"obj-24::obj-76::obj-387::obj-89::obj-2" : [ "live.text[94]", "live.text", 0 ],
+			"obj-24::obj-76::obj-387::obj-89::obj-3" : [ "live.text[92]", "live.text", 0 ],
+			"obj-24::obj-76::obj-497::obj-89::obj-1" : [ "live.text[89]", "live.text", 0 ],
+			"obj-24::obj-76::obj-497::obj-89::obj-2" : [ "live.text[90]", "live.text", 0 ],
+			"obj-24::obj-76::obj-497::obj-89::obj-3" : [ "live.text[91]", "live.text", 0 ],
 			"obj-24::obj-76::obj-570" : [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-24::obj-76::obj-575" : [ "__exp_tempoconsistencysigma[7]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-24::obj-76::obj-642" : [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
 			"obj-24::obj-76::obj-653" : [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
 			"obj-24::obj-76::obj-656" : [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],
+			"obj-24::obj-76::obj-667" : [ "selfharmonicbypass[11]", "selfharmonicbypass", 0 ],
+			"obj-24::obj-76::obj-670" : [ "harmonicbypass[12]", "harmonicbypass", 0 ],
+			"obj-24::obj-76::obj-679" : [ "selfharmonicngramorder[13]", "selfharmonicngramorder", 0 ],
+			"obj-24::obj-76::obj-685" : [ "harmonincpeakdecay[28]", "harmonincpeakdecay[1]", 0 ],
 			"obj-24::obj-76::obj-688" : [ "__exp_durationsigma[11]", "__exp_durationsigma", 0 ],
 			"obj-24::obj-76::obj-702" : [ "__exp_durationmu[1]", "__exp_durationmu", 0 ],
 			"obj-24::obj-76::obj-722" : [ "__exp_octavebandsenable[4]", "__exp_octavebandsenable", 0 ],
@@ -12802,9 +12965,25 @@
 			"obj-24::obj-76::obj-777" : [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
 			"obj-24::obj-76::obj-799" : [ "__exp_tempoconsistencyenable[4]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-24::obj-76::obj-802" : [ "__exp_tempoconsistencylen[5]", "__exp_tempoconsistencylen", 0 ],
-			"obj-24::obj-76::obj-860" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay[1]", 0 ],
+			"obj-24::obj-76::obj-814" : [ "harmonincpeakdecay[27]", "harmonincpeakdecay", 0 ],
+			"obj-24::obj-76::obj-842::obj-89::obj-1" : [ "live.text[80]", "live.text", 0 ],
+			"obj-24::obj-76::obj-842::obj-89::obj-2" : [ "live.text[81]", "live.text", 0 ],
+			"obj-24::obj-76::obj-842::obj-89::obj-3" : [ "live.text[82]", "live.text", 0 ],
+			"obj-24::obj-76::obj-843" : [ "harmonicngramorder[5]", "harmonicngramorder", 0 ],
+			"obj-24::obj-76::obj-860" : [ "harmonincpeakdecay[31]", "harmonincpeakdecay[1]", 0 ],
 			"obj-24::obj-76::obj-865" : [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
-			"obj-24::obj-76::obj-870" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
+			"obj-24::obj-76::obj-870" : [ "selfharmonicbypass[12]", "selfharmonicbypass", 0 ],
+			"obj-24::obj-76::obj-871" : [ "harmonincpeakdecay[29]", "harmonincpeakdecay", 0 ],
+			"obj-24::obj-76::obj-96::obj-89::obj-1" : [ "live.text[77]", "live.text", 0 ],
+			"obj-24::obj-76::obj-96::obj-89::obj-2" : [ "live.text[78]", "live.text", 0 ],
+			"obj-24::obj-76::obj-96::obj-89::obj-3" : [ "live.text[79]", "live.text", 0 ],
+			"obj-2::obj-10::obj-1001::obj-89::obj-1" : [ "live.text[4]", "live.text", 0 ],
+			"obj-2::obj-10::obj-1001::obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],
+			"obj-2::obj-10::obj-1001::obj-89::obj-3" : [ "live.text[6]", "live.text", 0 ],
+			"obj-2::obj-10::obj-1039::obj-89::obj-1" : [ "live.text[7]", "live.text", 0 ],
+			"obj-2::obj-10::obj-1039::obj-89::obj-2" : [ "live.text[8]", "live.text", 0 ],
+			"obj-2::obj-10::obj-1039::obj-89::obj-3" : [ "live.text[9]", "live.text", 0 ],
+			"obj-2::obj-10::obj-1105" : [ "harmonincpeakdecay[8]", "harmonincpeakdecay", 0 ],
 			"obj-2::obj-10::obj-1115" : [ "continuity[33]", "continuity", 0 ],
 			"obj-2::obj-10::obj-1175" : [ "heldnotesmode[8]", "heldnotesmode", 0 ],
 			"obj-2::obj-10::obj-1179" : [ "continuity[32]", "continuity", 0 ],
@@ -12833,11 +13012,21 @@
 			"obj-2::obj-10::obj-295" : [ "playingmode[6]", "playingmode", 0 ],
 			"obj-2::obj-10::obj-298" : [ "simultaneousonsets[2]", "simultaneousonsets", 0 ],
 			"obj-2::obj-10::obj-328" : [ "decaybasis[9]", "decaybasis", 0 ],
+			"obj-2::obj-10::obj-387::obj-89::obj-1" : [ "live.text[19]", "live.text", 0 ],
+			"obj-2::obj-10::obj-387::obj-89::obj-2" : [ "live.text[20]", "live.text", 0 ],
+			"obj-2::obj-10::obj-387::obj-89::obj-3" : [ "live.text[13]", "live.text", 0 ],
+			"obj-2::obj-10::obj-497::obj-89::obj-1" : [ "live.text[10]", "live.text", 0 ],
+			"obj-2::obj-10::obj-497::obj-89::obj-2" : [ "live.text[11]", "live.text", 0 ],
+			"obj-2::obj-10::obj-497::obj-89::obj-3" : [ "live.text[12]", "live.text", 0 ],
 			"obj-2::obj-10::obj-570" : [ "__exp_melodicpitchfromchords[10]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-2::obj-10::obj-575" : [ "__exp_tempoconsistencysigma[6]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-2::obj-10::obj-642" : [ "__exp_numnotessigma[9]", "__exp_numnotessigma", 0 ],
 			"obj-2::obj-10::obj-653" : [ "__exp_numnotesenable[10]", "__exp_numnotesenable", 0 ],
 			"obj-2::obj-10::obj-656" : [ "__exp_numnotesmu[8]", "__exp_numnotesmu", 0 ],
+			"obj-2::obj-10::obj-667" : [ "selfharmonicbypass[1]", "selfharmonicbypass", 0 ],
+			"obj-2::obj-10::obj-670" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
+			"obj-2::obj-10::obj-679" : [ "selfharmonicngramorder[1]", "selfharmonicngramorder", 0 ],
+			"obj-2::obj-10::obj-685" : [ "harmonincpeakdecay[9]", "harmonincpeakdecay[1]", 0 ],
 			"obj-2::obj-10::obj-688" : [ "__exp_durationsigma[10]", "__exp_durationsigma", 0 ],
 			"obj-2::obj-10::obj-702" : [ "__exp_durationmu[9]", "__exp_durationmu", 0 ],
 			"obj-2::obj-10::obj-722" : [ "__exp_octavebandsenable[10]", "__exp_octavebandsenable", 0 ],
@@ -12848,10 +13037,26 @@
 			"obj-2::obj-10::obj-777" : [ "__exp_autojumpactivate[10]", "__exp_autojumpactivate", 0 ],
 			"obj-2::obj-10::obj-799" : [ "__exp_tempoconsistencyenable[10]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-2::obj-10::obj-802" : [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
+			"obj-2::obj-10::obj-814" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay", 0 ],
+			"obj-2::obj-10::obj-842::obj-89::obj-1" : [ "live.text[1]", "live.text", 0 ],
+			"obj-2::obj-10::obj-842::obj-89::obj-2" : [ "live.text[2]", "live.text", 0 ],
+			"obj-2::obj-10::obj-842::obj-89::obj-3" : [ "live.text[3]", "live.text", 0 ],
+			"obj-2::obj-10::obj-843" : [ "harmonicngramorder[2]", "harmonicngramorder", 0 ],
 			"obj-2::obj-10::obj-860" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
 			"obj-2::obj-10::obj-865" : [ "selfharmonicngramorder[10]", "selfharmonicngramorder", 0 ],
 			"obj-2::obj-10::obj-870" : [ "selfharmonicbypass[10]", "selfharmonicbypass", 0 ],
-			"obj-2::obj-27::obj-98" : [ "live.text[1]", "live.text[26]", 0 ],
+			"obj-2::obj-10::obj-871" : [ "harmonincpeakdecay[7]", "harmonincpeakdecay", 0 ],
+			"obj-2::obj-10::obj-96::obj-89::obj-1" : [ "live.text[25]", "live.text", 0 ],
+			"obj-2::obj-10::obj-96::obj-89::obj-2" : [ "live.text[23]", "live.text", 0 ],
+			"obj-2::obj-10::obj-96::obj-89::obj-3" : [ "live.text[18]", "live.text", 0 ],
+			"obj-2::obj-27::obj-98" : [ "live.text[21]", "live.text[26]", 0 ],
+			"obj-37::obj-76::obj-1001::obj-89::obj-1" : [ "live.text[16]", "live.text", 0 ],
+			"obj-37::obj-76::obj-1001::obj-89::obj-2" : [ "live.text[17]", "live.text", 0 ],
+			"obj-37::obj-76::obj-1001::obj-89::obj-3" : [ "live.text[29]", "live.text", 0 ],
+			"obj-37::obj-76::obj-1039::obj-89::obj-1" : [ "live.text[30]", "live.text", 0 ],
+			"obj-37::obj-76::obj-1039::obj-89::obj-2" : [ "live.text[31]", "live.text", 0 ],
+			"obj-37::obj-76::obj-1039::obj-89::obj-3" : [ "live.text[32]", "live.text", 0 ],
+			"obj-37::obj-76::obj-1105" : [ "harmonincpeakdecay[13]", "harmonincpeakdecay", 0 ],
 			"obj-37::obj-76::obj-1115" : [ "continuity[31]", "continuity", 0 ],
 			"obj-37::obj-76::obj-1175" : [ "heldnotesmode[3]", "heldnotesmode", 0 ],
 			"obj-37::obj-76::obj-1179" : [ "continuity[30]", "continuity", 0 ],
@@ -12880,11 +13085,21 @@
 			"obj-37::obj-76::obj-295" : [ "playingmode[5]", "playingmode", 0 ],
 			"obj-37::obj-76::obj-298" : [ "simultaneousonsets[22]", "simultaneousonsets", 0 ],
 			"obj-37::obj-76::obj-328" : [ "decaybasis[8]", "decaybasis", 0 ],
+			"obj-37::obj-76::obj-387::obj-89::obj-1" : [ "live.text[36]", "live.text", 0 ],
+			"obj-37::obj-76::obj-387::obj-89::obj-2" : [ "live.text[37]", "live.text", 0 ],
+			"obj-37::obj-76::obj-387::obj-89::obj-3" : [ "live.text[38]", "live.text", 0 ],
+			"obj-37::obj-76::obj-497::obj-89::obj-1" : [ "live.text[33]", "live.text", 0 ],
+			"obj-37::obj-76::obj-497::obj-89::obj-2" : [ "live.text[34]", "live.text", 0 ],
+			"obj-37::obj-76::obj-497::obj-89::obj-3" : [ "live.text[35]", "live.text", 0 ],
 			"obj-37::obj-76::obj-570" : [ "__exp_melodicpitchfromchords[9]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-37::obj-76::obj-575" : [ "__exp_tempoconsistencysigma[5]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-37::obj-76::obj-642" : [ "__exp_numnotessigma[8]", "__exp_numnotessigma", 0 ],
 			"obj-37::obj-76::obj-653" : [ "__exp_numnotesenable[9]", "__exp_numnotesenable", 0 ],
 			"obj-37::obj-76::obj-656" : [ "__exp_numnotesmu[6]", "__exp_numnotesmu", 0 ],
+			"obj-37::obj-76::obj-667" : [ "selfharmonicbypass[2]", "selfharmonicbypass", 0 ],
+			"obj-37::obj-76::obj-670" : [ "harmonicbypass[3]", "harmonicbypass", 0 ],
+			"obj-37::obj-76::obj-679" : [ "selfharmonicngramorder[11]", "selfharmonicngramorder", 0 ],
+			"obj-37::obj-76::obj-685" : [ "harmonincpeakdecay[10]", "harmonincpeakdecay[1]", 0 ],
 			"obj-37::obj-76::obj-688" : [ "__exp_durationsigma[9]", "__exp_durationsigma", 0 ],
 			"obj-37::obj-76::obj-702" : [ "__exp_durationmu[8]", "__exp_durationmu", 0 ],
 			"obj-37::obj-76::obj-722" : [ "__exp_octavebandsenable[9]", "__exp_octavebandsenable", 0 ],
@@ -12895,17 +13110,33 @@
 			"obj-37::obj-76::obj-777" : [ "__exp_autojumpactivate[9]", "__exp_autojumpactivate", 0 ],
 			"obj-37::obj-76::obj-799" : [ "__exp_tempoconsistencyenable[9]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-37::obj-76::obj-802" : [ "__exp_tempoconsistencylen[3]", "__exp_tempoconsistencylen", 0 ],
+			"obj-37::obj-76::obj-814" : [ "harmonincpeakdecay[12]", "harmonincpeakdecay", 0 ],
+			"obj-37::obj-76::obj-842::obj-89::obj-1" : [ "live.text[28]", "live.text", 0 ],
+			"obj-37::obj-76::obj-842::obj-89::obj-2" : [ "live.text[14]", "live.text", 0 ],
+			"obj-37::obj-76::obj-842::obj-89::obj-3" : [ "live.text[15]", "live.text", 0 ],
+			"obj-37::obj-76::obj-843" : [ "harmonicngramorder[3]", "harmonicngramorder", 0 ],
 			"obj-37::obj-76::obj-860" : [ "harmonincpeakdecay[2]", "harmonincpeakdecay[1]", 0 ],
 			"obj-37::obj-76::obj-865" : [ "selfharmonicngramorder[9]", "selfharmonicngramorder", 0 ],
 			"obj-37::obj-76::obj-870" : [ "selfharmonicbypass[9]", "selfharmonicbypass", 0 ],
-			"obj-40::obj-66::obj-98" : [ "live.text[11]", "live.text[26]", 0 ],
+			"obj-37::obj-76::obj-871" : [ "harmonincpeakdecay[11]", "harmonincpeakdecay", 0 ],
+			"obj-37::obj-76::obj-96::obj-89::obj-1" : [ "live.text[24]", "live.text", 0 ],
+			"obj-37::obj-76::obj-96::obj-89::obj-2" : [ "live.text[26]", "live.text", 0 ],
+			"obj-37::obj-76::obj-96::obj-89::obj-3" : [ "live.text[27]", "live.text", 0 ],
+			"obj-40::obj-66::obj-98" : [ "live.text[57]", "live.text[26]", 0 ],
+			"obj-40::obj-76::obj-1001::obj-89::obj-1" : [ "live.text[45]", "live.text", 0 ],
+			"obj-40::obj-76::obj-1001::obj-89::obj-2" : [ "live.text[46]", "live.text", 0 ],
+			"obj-40::obj-76::obj-1001::obj-89::obj-3" : [ "live.text[47]", "live.text", 0 ],
+			"obj-40::obj-76::obj-1039::obj-89::obj-1" : [ "live.text[48]", "live.text", 0 ],
+			"obj-40::obj-76::obj-1039::obj-89::obj-2" : [ "live.text[49]", "live.text", 0 ],
+			"obj-40::obj-76::obj-1039::obj-89::obj-3" : [ "live.text[50]", "live.text", 0 ],
+			"obj-40::obj-76::obj-1105" : [ "harmonincpeakdecay[18]", "harmonincpeakdecay", 0 ],
 			"obj-40::obj-76::obj-1115" : [ "continuity[14]", "continuity", 0 ],
 			"obj-40::obj-76::obj-1175" : [ "heldnotesmode[5]", "heldnotesmode", 0 ],
 			"obj-40::obj-76::obj-1179" : [ "continuity[16]", "continuity", 0 ],
 			"obj-40::obj-76::obj-12" : [ "melodicmod12[8]", "melodicmod12", 0 ],
 			"obj-40::obj-76::obj-120" : [ "melodicbypass[2]", "melodicbypass", 0 ],
 			"obj-40::obj-76::obj-1218" : [ "simultaneousonsets[17]", "artificialmidities", 0 ],
-			"obj-40::obj-76::obj-126" : [ "harmonicbypass[3]", "harmonicbypass", 0 ],
+			"obj-40::obj-76::obj-126" : [ "harmonicbypass[4]", "harmonicbypass", 0 ],
 			"obj-40::obj-76::obj-134" : [ "continuity[15]", "continuity", 0 ],
 			"obj-40::obj-76::obj-1344" : [ "enforcetaboo[2]", "enforcetaboo", 0 ],
 			"obj-40::obj-76::obj-140" : [ "resetinfluences[6]", "resetinfluences", 0 ],
@@ -12915,7 +13146,7 @@
 			"obj-40::obj-76::obj-154" : [ "melodicngramorder[6]", "melodicngramorder", 0 ],
 			"obj-40::obj-76::obj-19" : [ "selfmod12[6]", "selfmod12", 0 ],
 			"obj-40::obj-76::obj-22" : [ "selfmelodicbypass[4]", "selfmelodicbypass", 0 ],
-			"obj-40::obj-76::obj-254" : [ "harmonincpeakdecay[18]", "harmonincpeakdecay", 0 ],
+			"obj-40::obj-76::obj-254" : [ "harmonincpeakdecay[20]", "harmonincpeakdecay", 0 ],
 			"obj-40::obj-76::obj-255" : [ "melodicpeakdecay[6]", "melodicpeakdecay", 0 ],
 			"obj-40::obj-76::obj-256" : [ "selfpeakdecay[1]", "selfpeakdecay", 0 ],
 			"obj-40::obj-76::obj-270::obj-1226" : [ "width[2]", "Width", 0 ],
@@ -12927,11 +13158,21 @@
 			"obj-40::obj-76::obj-295" : [ "playingmode[2]", "playingmode", 0 ],
 			"obj-40::obj-76::obj-298" : [ "simultaneousonsets[16]", "simultaneousonsets", 0 ],
 			"obj-40::obj-76::obj-328" : [ "decaybasis[6]", "decaybasis", 0 ],
+			"obj-40::obj-76::obj-387::obj-89::obj-1" : [ "live.text[54]", "live.text", 0 ],
+			"obj-40::obj-76::obj-387::obj-89::obj-2" : [ "live.text[55]", "live.text", 0 ],
+			"obj-40::obj-76::obj-387::obj-89::obj-3" : [ "live.text[56]", "live.text", 0 ],
+			"obj-40::obj-76::obj-497::obj-89::obj-1" : [ "live.text[51]", "live.text", 0 ],
+			"obj-40::obj-76::obj-497::obj-89::obj-2" : [ "live.text[52]", "live.text", 0 ],
+			"obj-40::obj-76::obj-497::obj-89::obj-3" : [ "live.text[53]", "live.text", 0 ],
 			"obj-40::obj-76::obj-570" : [ "__exp_melodicpitchfromchords[6]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-40::obj-76::obj-575" : [ "__exp_tempoconsistencysigma[2]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-40::obj-76::obj-642" : [ "__exp_numnotessigma[4]", "__exp_numnotessigma", 0 ],
 			"obj-40::obj-76::obj-653" : [ "__exp_numnotesenable[6]", "__exp_numnotesenable", 0 ],
 			"obj-40::obj-76::obj-656" : [ "__exp_numnotesmu[4]", "__exp_numnotesmu", 0 ],
+			"obj-40::obj-76::obj-667" : [ "selfharmonicbypass[3]", "selfharmonicbypass", 0 ],
+			"obj-40::obj-76::obj-670" : [ "harmonicbypass[5]", "harmonicbypass", 0 ],
+			"obj-40::obj-76::obj-679" : [ "selfharmonicngramorder[2]", "selfharmonicngramorder", 0 ],
+			"obj-40::obj-76::obj-685" : [ "harmonincpeakdecay[14]", "harmonincpeakdecay[1]", 0 ],
 			"obj-40::obj-76::obj-688" : [ "__exp_durationsigma[4]", "__exp_durationsigma", 0 ],
 			"obj-40::obj-76::obj-702" : [ "__exp_durationmu[6]", "__exp_durationmu", 0 ],
 			"obj-40::obj-76::obj-722" : [ "__exp_octavebandsenable[6]", "__exp_octavebandsenable", 0 ],
@@ -12942,26 +13183,42 @@
 			"obj-40::obj-76::obj-777" : [ "__exp_autojumpactivate[6]", "__exp_autojumpactivate", 0 ],
 			"obj-40::obj-76::obj-799" : [ "__exp_tempoconsistencyenable[6]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-40::obj-76::obj-802" : [ "__exp_tempoconsistencylen[10]", "__exp_tempoconsistencylen", 0 ],
+			"obj-40::obj-76::obj-814" : [ "harmonincpeakdecay[19]", "harmonincpeakdecay", 0 ],
+			"obj-40::obj-76::obj-842::obj-89::obj-1" : [ "live.text[42]", "live.text", 0 ],
+			"obj-40::obj-76::obj-842::obj-89::obj-2" : [ "live.text[43]", "live.text", 0 ],
+			"obj-40::obj-76::obj-842::obj-89::obj-3" : [ "live.text[44]", "live.text", 0 ],
+			"obj-40::obj-76::obj-843" : [ "harmonicngramorder[9]", "harmonicngramorder", 0 ],
 			"obj-40::obj-76::obj-860" : [ "harmonincpeakdecay[17]", "harmonincpeakdecay[1]", 0 ],
 			"obj-40::obj-76::obj-865" : [ "selfharmonicngramorder[6]", "selfharmonicngramorder", 0 ],
 			"obj-40::obj-76::obj-870" : [ "selfharmonicbypass[6]", "selfharmonicbypass", 0 ],
+			"obj-40::obj-76::obj-871" : [ "harmonincpeakdecay[15]", "harmonincpeakdecay", 0 ],
+			"obj-40::obj-76::obj-96::obj-89::obj-1" : [ "live.text[39]", "live.text", 0 ],
+			"obj-40::obj-76::obj-96::obj-89::obj-2" : [ "live.text[40]", "live.text", 0 ],
+			"obj-40::obj-76::obj-96::obj-89::obj-3" : [ "live.text[41]", "live.text", 0 ],
+			"obj-42::obj-23::obj-1001::obj-89::obj-1" : [ "live.text[64]", "live.text", 0 ],
+			"obj-42::obj-23::obj-1001::obj-89::obj-2" : [ "live.text[65]", "live.text", 0 ],
+			"obj-42::obj-23::obj-1001::obj-89::obj-3" : [ "live.text[66]", "live.text", 0 ],
+			"obj-42::obj-23::obj-1039::obj-89::obj-1" : [ "live.text[67]", "live.text", 0 ],
+			"obj-42::obj-23::obj-1039::obj-89::obj-2" : [ "live.text[68]", "live.text", 0 ],
+			"obj-42::obj-23::obj-1039::obj-89::obj-3" : [ "live.text[69]", "live.text", 0 ],
+			"obj-42::obj-23::obj-1105" : [ "harmonincpeakdecay[25]", "harmonincpeakdecay", 0 ],
 			"obj-42::obj-23::obj-1115" : [ "continuity[36]", "continuity", 0 ],
 			"obj-42::obj-23::obj-1175" : [ "heldnotesmode[9]", "heldnotesmode", 0 ],
 			"obj-42::obj-23::obj-1179" : [ "continuity[18]", "continuity", 0 ],
 			"obj-42::obj-23::obj-12" : [ "melodicmod12[13]", "melodicmod12", 0 ],
 			"obj-42::obj-23::obj-120" : [ "melodicbypass[8]", "melodicbypass", 0 ],
 			"obj-42::obj-23::obj-1218" : [ "simultaneousonsets[8]", "artificialmidities", 0 ],
-			"obj-42::obj-23::obj-126" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
+			"obj-42::obj-23::obj-126" : [ "harmonicbypass[10]", "harmonicbypass", 0 ],
 			"obj-42::obj-23::obj-134" : [ "continuity[19]", "continuity", 0 ],
 			"obj-42::obj-23::obj-1344" : [ "enforcetaboo[5]", "enforcetaboo", 0 ],
 			"obj-42::obj-23::obj-140" : [ "resetinfluences[2]", "resetinfluences", 0 ],
-			"obj-42::obj-23::obj-144" : [ "harmonicngramorder[9]", "harmonicngramorder", 0 ],
+			"obj-42::obj-23::obj-144" : [ "harmonicngramorder[11]", "harmonicngramorder", 0 ],
 			"obj-42::obj-23::obj-1444" : [ "outputprobability[8]", "outputprobability", 0 ],
 			"obj-42::obj-23::obj-152" : [ "selfngramorder[3]", "selfngramorder", 0 ],
 			"obj-42::obj-23::obj-154" : [ "melodicngramorder[7]", "melodicngramorder", 0 ],
 			"obj-42::obj-23::obj-19" : [ "selfmod12[7]", "selfmod12", 0 ],
 			"obj-42::obj-23::obj-22" : [ "selfmelodicbypass[9]", "selfmelodicbypass", 0 ],
-			"obj-42::obj-23::obj-254" : [ "harmonincpeakdecay[9]", "harmonincpeakdecay", 0 ],
+			"obj-42::obj-23::obj-254" : [ "harmonincpeakdecay[26]", "harmonincpeakdecay", 0 ],
 			"obj-42::obj-23::obj-255" : [ "melodicpeakdecay[7]", "melodicpeakdecay", 0 ],
 			"obj-42::obj-23::obj-256" : [ "selfpeakdecay[3]", "selfpeakdecay", 0 ],
 			"obj-42::obj-23::obj-270::obj-1226" : [ "width[8]", "Width", 0 ],
@@ -12973,11 +13230,21 @@
 			"obj-42::obj-23::obj-295" : [ "playingmode[4]", "playingmode", 0 ],
 			"obj-42::obj-23::obj-298" : [ "simultaneousonsets[9]", "simultaneousonsets", 0 ],
 			"obj-42::obj-23::obj-328" : [ "decaybasis[2]", "decaybasis", 0 ],
+			"obj-42::obj-23::obj-387::obj-89::obj-1" : [ "live.text[73]", "live.text", 0 ],
+			"obj-42::obj-23::obj-387::obj-89::obj-2" : [ "live.text[74]", "live.text", 0 ],
+			"obj-42::obj-23::obj-387::obj-89::obj-3" : [ "live.text[75]", "live.text", 0 ],
+			"obj-42::obj-23::obj-497::obj-89::obj-1" : [ "live.text[70]", "live.text", 0 ],
+			"obj-42::obj-23::obj-497::obj-89::obj-2" : [ "live.text[71]", "live.text", 0 ],
+			"obj-42::obj-23::obj-497::obj-89::obj-3" : [ "live.text[72]", "live.text", 0 ],
 			"obj-42::obj-23::obj-570" : [ "__exp_melodicpitchfromchords[7]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-42::obj-23::obj-575" : [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-42::obj-23::obj-642" : [ "__exp_numnotessigma[10]", "__exp_numnotessigma", 0 ],
 			"obj-42::obj-23::obj-653" : [ "__exp_numnotesenable[7]", "__exp_numnotesenable", 0 ],
 			"obj-42::obj-23::obj-656" : [ "__exp_numnotesmu[7]", "__exp_numnotesmu", 0 ],
+			"obj-42::obj-23::obj-667" : [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
+			"obj-42::obj-23::obj-670" : [ "harmonicbypass[11]", "harmonicbypass", 0 ],
+			"obj-42::obj-23::obj-679" : [ "selfharmonicngramorder[12]", "selfharmonicngramorder", 0 ],
+			"obj-42::obj-23::obj-685" : [ "harmonincpeakdecay[24]", "harmonincpeakdecay[1]", 0 ],
 			"obj-42::obj-23::obj-688" : [ "__exp_durationsigma[5]", "__exp_durationsigma", 0 ],
 			"obj-42::obj-23::obj-702" : [ "__exp_durationmu[2]", "__exp_durationmu", 0 ],
 			"obj-42::obj-23::obj-722" : [ "__exp_octavebandsenable[7]", "__exp_octavebandsenable", 0 ],
@@ -12988,10 +13255,19 @@
 			"obj-42::obj-23::obj-777" : [ "__exp_autojumpactivate[2]", "__exp_autojumpactivate", 0 ],
 			"obj-42::obj-23::obj-799" : [ "__exp_tempoconsistencyenable[7]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-42::obj-23::obj-802" : [ "__exp_tempoconsistencylen[6]", "__exp_tempoconsistencylen", 0 ],
-			"obj-42::obj-23::obj-860" : [ "harmonincpeakdecay[8]", "harmonincpeakdecay[1]", 0 ],
+			"obj-42::obj-23::obj-814" : [ "harmonincpeakdecay[22]", "harmonincpeakdecay", 0 ],
+			"obj-42::obj-23::obj-842::obj-89::obj-1" : [ "live.text[61]", "live.text", 0 ],
+			"obj-42::obj-23::obj-842::obj-89::obj-2" : [ "live.text[62]", "live.text", 0 ],
+			"obj-42::obj-23::obj-842::obj-89::obj-3" : [ "live.text[63]", "live.text", 0 ],
+			"obj-42::obj-23::obj-843" : [ "harmonicngramorder[10]", "harmonicngramorder", 0 ],
+			"obj-42::obj-23::obj-860" : [ "harmonincpeakdecay[21]", "harmonincpeakdecay[1]", 0 ],
 			"obj-42::obj-23::obj-865" : [ "selfharmonicngramorder[7]", "selfharmonicngramorder", 0 ],
 			"obj-42::obj-23::obj-870" : [ "selfharmonicbypass[7]", "selfharmonicbypass", 0 ],
-			"obj-42::obj-66::obj-98" : [ "live.text[10]", "live.text[26]", 0 ],
+			"obj-42::obj-23::obj-871" : [ "harmonincpeakdecay[23]", "harmonincpeakdecay", 0 ],
+			"obj-42::obj-23::obj-96::obj-89::obj-1" : [ "live.text[58]", "live.text", 0 ],
+			"obj-42::obj-23::obj-96::obj-89::obj-2" : [ "live.text[59]", "live.text", 0 ],
+			"obj-42::obj-23::obj-96::obj-89::obj-3" : [ "live.text[60]", "live.text", 0 ],
+			"obj-42::obj-66::obj-98" : [ "live.text[76]", "live.text[26]", 0 ],
 			"obj-42::obj-8::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
 			"obj-42::obj-8::obj-35" : [ "[5]", "Level", 0 ],
 			"parameterbanks" : 			{
@@ -13004,6 +13280,102 @@
 			}
 ,
 			"parameter_overrides" : 			{
+				"obj-24::obj-76::obj-1001::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[83]"
+				}
+,
+				"obj-24::obj-76::obj-1001::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[84]"
+				}
+,
+				"obj-24::obj-76::obj-1001::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[85]"
+				}
+,
+				"obj-24::obj-76::obj-1039::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[86]"
+				}
+,
+				"obj-24::obj-76::obj-1039::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[87]"
+				}
+,
+				"obj-24::obj-76::obj-1039::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[88]"
+				}
+,
+				"obj-24::obj-76::obj-387::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[93]"
+				}
+,
+				"obj-24::obj-76::obj-387::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[94]"
+				}
+,
+				"obj-24::obj-76::obj-387::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[92]"
+				}
+,
+				"obj-24::obj-76::obj-497::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[89]"
+				}
+,
+				"obj-24::obj-76::obj-497::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[90]"
+				}
+,
+				"obj-24::obj-76::obj-497::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[91]"
+				}
+,
+				"obj-24::obj-76::obj-842::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[80]"
+				}
+,
+				"obj-24::obj-76::obj-842::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[81]"
+				}
+,
+				"obj-24::obj-76::obj-842::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[82]"
+				}
+,
+				"obj-24::obj-76::obj-96::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[77]"
+				}
+,
+				"obj-24::obj-76::obj-96::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[78]"
+				}
+,
+				"obj-24::obj-76::obj-96::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[79]"
+				}
+,
+				"obj-2::obj-10::obj-1001::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[4]"
+				}
+,
+				"obj-2::obj-10::obj-1001::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[5]"
+				}
+,
+				"obj-2::obj-10::obj-1001::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[6]"
+				}
+,
+				"obj-2::obj-10::obj-1039::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[7]"
+				}
+,
+				"obj-2::obj-10::obj-1039::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[8]"
+				}
+,
+				"obj-2::obj-10::obj-1039::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[9]"
+				}
+,
 				"obj-2::obj-10::obj-270::obj-1226" : 				{
 					"parameter_longname" : "width[7]"
 				}
@@ -13024,8 +13396,68 @@
 					"parameter_longname" : "weight[7]"
 				}
 ,
-				"obj-2::obj-27::obj-98" : 				{
+				"obj-2::obj-10::obj-387::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[19]"
+				}
+,
+				"obj-2::obj-10::obj-387::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[20]"
+				}
+,
+				"obj-2::obj-10::obj-387::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[13]"
+				}
+,
+				"obj-2::obj-10::obj-497::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[10]"
+				}
+,
+				"obj-2::obj-10::obj-497::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[11]"
+				}
+,
+				"obj-2::obj-10::obj-497::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[12]"
+				}
+,
+				"obj-2::obj-10::obj-842::obj-89::obj-1" : 				{
 					"parameter_longname" : "live.text[1]"
+				}
+,
+				"obj-2::obj-10::obj-842::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[2]"
+				}
+,
+				"obj-2::obj-10::obj-842::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[3]"
+				}
+,
+				"obj-2::obj-27::obj-98" : 				{
+					"parameter_longname" : "live.text[21]"
+				}
+,
+				"obj-37::obj-76::obj-1001::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[16]"
+				}
+,
+				"obj-37::obj-76::obj-1001::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[17]"
+				}
+,
+				"obj-37::obj-76::obj-1001::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[29]"
+				}
+,
+				"obj-37::obj-76::obj-1039::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[30]"
+				}
+,
+				"obj-37::obj-76::obj-1039::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[31]"
+				}
+,
+				"obj-37::obj-76::obj-1039::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[32]"
 				}
 ,
 				"obj-37::obj-76::obj-270::obj-1226" : 				{
@@ -13048,8 +13480,80 @@
 					"parameter_longname" : "weight[6]"
 				}
 ,
+				"obj-37::obj-76::obj-387::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[36]"
+				}
+,
+				"obj-37::obj-76::obj-387::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[37]"
+				}
+,
+				"obj-37::obj-76::obj-387::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[38]"
+				}
+,
+				"obj-37::obj-76::obj-497::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[33]"
+				}
+,
+				"obj-37::obj-76::obj-497::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[34]"
+				}
+,
+				"obj-37::obj-76::obj-497::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[35]"
+				}
+,
+				"obj-37::obj-76::obj-842::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[28]"
+				}
+,
+				"obj-37::obj-76::obj-842::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[14]"
+				}
+,
+				"obj-37::obj-76::obj-842::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[15]"
+				}
+,
+				"obj-37::obj-76::obj-96::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[24]"
+				}
+,
+				"obj-37::obj-76::obj-96::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[26]"
+				}
+,
+				"obj-37::obj-76::obj-96::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[27]"
+				}
+,
 				"obj-40::obj-66::obj-98" : 				{
-					"parameter_longname" : "live.text[11]"
+					"parameter_longname" : "live.text[57]"
+				}
+,
+				"obj-40::obj-76::obj-1001::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[45]"
+				}
+,
+				"obj-40::obj-76::obj-1001::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[46]"
+				}
+,
+				"obj-40::obj-76::obj-1001::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[47]"
+				}
+,
+				"obj-40::obj-76::obj-1039::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[48]"
+				}
+,
+				"obj-40::obj-76::obj-1039::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[49]"
+				}
+,
+				"obj-40::obj-76::obj-1039::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[50]"
 				}
 ,
 				"obj-40::obj-76::obj-270::obj-1226" : 				{
@@ -13072,6 +13576,78 @@
 					"parameter_longname" : "weight[2]"
 				}
 ,
+				"obj-40::obj-76::obj-387::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[54]"
+				}
+,
+				"obj-40::obj-76::obj-387::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[55]"
+				}
+,
+				"obj-40::obj-76::obj-387::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[56]"
+				}
+,
+				"obj-40::obj-76::obj-497::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[51]"
+				}
+,
+				"obj-40::obj-76::obj-497::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[52]"
+				}
+,
+				"obj-40::obj-76::obj-497::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[53]"
+				}
+,
+				"obj-40::obj-76::obj-842::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[42]"
+				}
+,
+				"obj-40::obj-76::obj-842::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[43]"
+				}
+,
+				"obj-40::obj-76::obj-842::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[44]"
+				}
+,
+				"obj-40::obj-76::obj-96::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[39]"
+				}
+,
+				"obj-40::obj-76::obj-96::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[40]"
+				}
+,
+				"obj-40::obj-76::obj-96::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[41]"
+				}
+,
+				"obj-42::obj-23::obj-1001::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[64]"
+				}
+,
+				"obj-42::obj-23::obj-1001::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[65]"
+				}
+,
+				"obj-42::obj-23::obj-1001::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[66]"
+				}
+,
+				"obj-42::obj-23::obj-1039::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[67]"
+				}
+,
+				"obj-42::obj-23::obj-1039::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[68]"
+				}
+,
+				"obj-42::obj-23::obj-1039::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[69]"
+				}
+,
 				"obj-42::obj-23::obj-270::obj-1226" : 				{
 					"parameter_longname" : "width[8]"
 				}
@@ -13092,8 +13668,56 @@
 					"parameter_longname" : "weight[8]"
 				}
 ,
+				"obj-42::obj-23::obj-387::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[73]"
+				}
+,
+				"obj-42::obj-23::obj-387::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[74]"
+				}
+,
+				"obj-42::obj-23::obj-387::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[75]"
+				}
+,
+				"obj-42::obj-23::obj-497::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[70]"
+				}
+,
+				"obj-42::obj-23::obj-497::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[71]"
+				}
+,
+				"obj-42::obj-23::obj-497::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[72]"
+				}
+,
+				"obj-42::obj-23::obj-842::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[61]"
+				}
+,
+				"obj-42::obj-23::obj-842::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[62]"
+				}
+,
+				"obj-42::obj-23::obj-842::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[63]"
+				}
+,
+				"obj-42::obj-23::obj-96::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[58]"
+				}
+,
+				"obj-42::obj-23::obj-96::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[59]"
+				}
+,
+				"obj-42::obj-23::obj-96::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[60]"
+				}
+,
 				"obj-42::obj-66::obj-98" : 				{
-					"parameter_longname" : "live.text[10]"
+					"parameter_longname" : "live.text[76]"
 				}
 
 			}
@@ -13219,6 +13843,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "peakmeter.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../patchers/resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "random.svg",
 				"bootpath" : "C74:/media/max/picts/m4l-picts",
 				"type" : "svg",
@@ -13282,6 +13913,13 @@
 				"name" : "somax.corpuspath.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.descriptorview.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../patchers/resources/player",
 				"type" : "JSON",
 				"implicit" : 1
 			}
