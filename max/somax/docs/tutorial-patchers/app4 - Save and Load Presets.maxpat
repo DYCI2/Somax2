@@ -30,7 +30,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 881.707338094711304, 774.390262365341187, 20.0, 20.0 ],
+					"patching_rect" : [ 867.341489553451538, 445.564009308815002, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "4",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -48,7 +48,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 907.317094802856445, 767.07318902015686, 229.0, 35.0 ],
+					"patching_rect" : [ 892.95124626159668, 438.246935963630676, 229.0, 35.0 ],
 					"presentation_linecount" : 2,
 					"text" : ";\rplayer_msg savestate load tutorialconfig2",
 					"varname" : "load_tutorialconfig2"
@@ -71,7 +71,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 881.707338094711304, 729.268310070037842, 20.0, 20.0 ],
+					"patching_rect" : [ 867.341489553451538, 400.442057013511658, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "3",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -89,7 +89,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 907.317094802856445, 721.951236724853516, 229.0, 35.0 ],
+					"patching_rect" : [ 892.95124626159668, 393.124983668327332, 229.0, 35.0 ],
 					"presentation_linecount" : 2,
 					"text" : ";\rplayer_msg savestate load tutorialconfig1",
 					"varname" : "load_tutorialconfig1"
@@ -275,7 +275,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 881.707338094711304, 464.207327961921692, 20.0, 20.0 ],
+					"patching_rect" : [ 871.951240301132202, 464.634157419204712, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "6",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -340,7 +340,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 907.317094802856445, 456.707327961921692, 232.0, 35.0 ],
+					"patching_rect" : [ 897.560997009277344, 457.317084074020386, 232.0, 35.0 ],
 					"text" : ";\rplayer_msg savestate save tutorialconfig1",
 					"varname" : "savestate"
 				}
