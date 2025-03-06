@@ -258,7 +258,7 @@
 
 											}
  ],
-										"originid" : "pat-5312"
+										"originid" : "pat-2394"
 									}
 ,
 									"patching_rect" : [ 533.0, 403.0, 121.0, 22.0 ],
@@ -443,7 +443,7 @@
 
 											}
  ],
-										"originid" : "pat-5314"
+										"originid" : "pat-2396"
 									}
 ,
 									"patching_rect" : [ 153.0, 403.0, 100.0, 22.0 ],
@@ -473,7 +473,7 @@
 
 							}
  ],
-						"originid" : "pat-5310"
+						"originid" : "pat-2392"
 					}
 ,
 					"patching_rect" : [ 248.5, 391.5, 87.0, 77.0 ],
@@ -492,7 +492,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -511,16 +510,49 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 400.0, 195.0, 897.0, 480.0 ],
+						"rect" : [ 399.0, 192.0, 897.0, 480.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-13",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 308.0, 348.0, 433.0, 33.0 ],
+									"presentation_linecount" : 2,
+									"text" : "In the fourth tutorial you will understand how to save and load the parameters of your Somax2 players, to quickly retrieve presets on the fly",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"button" : 1,
+									"fontface" : 0,
+									"fontname" : "Arial",
+									"fontsize" : 11.595186999999999,
+									"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"id" : "obj-12",
+									"maxclass" : "tab",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "int", "", "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 29.0, 337.0, 266.0, 55.5 ],
+									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
+									"tabs" : [ "4 - Save and Load Presets" ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-8",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 327.0, 433.0, 33.0 ],
+									"patching_rect" : [ 308.0, 271.0, 450.0, 33.0 ],
 									"text" : "In the third tutorial you will learn how to prepare your own Somax2 environment and how to script the module's parameters through interactive messages",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
@@ -539,7 +571,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 304.5, 268.0, 78.0 ],
+									"patching_rect" : [ 29.0, 260.0, 266.0, 55.5 ],
 									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "3 - Script your Environment" ]
 								}
@@ -554,7 +586,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 473.0, 275.0, 378.0, 35.0 ],
+									"patching_rect" : [ 477.0, 213.0, 378.0, 35.0 ],
 									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=p4nUd5pot4w"
 								}
 
@@ -568,7 +600,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 297.0, 259.0, 114.0, 24.0 ],
+									"patching_rect" : [ 297.0, 213.0, 114.0, 24.0 ],
 									"text" : "Video Tutorial 2",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -585,7 +617,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 374.0, 191.0, 380.0, 35.0 ],
+									"patching_rect" : [ 482.0, 144.0, 380.0, 35.0 ],
 									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=6Azyt_5C6KQ"
 								}
 
@@ -599,7 +631,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 297.0, 165.0, 114.0, 24.0 ],
+									"patching_rect" : [ 297.0, 138.0, 114.0, 24.0 ],
 									"text" : "Video Tutorial 1",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -614,7 +646,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 223.0, 419.0, 33.0 ],
+									"patching_rect" : [ 308.0, 184.0, 407.0, 33.0 ],
 									"text" : "In the second tutorial you will learn how to build a corpus from your audio materials, and interact with it ",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
@@ -627,7 +659,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 130.0, 419.0, 33.0 ],
+									"patching_rect" : [ 308.0, 109.0, 418.0, 33.0 ],
 									"text" : "The first tutorial will give you an overview of the Somax2 application workflow, guiding you through immediate audio and MIDI interactions",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
@@ -646,7 +678,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 212.0, 268.0, 78.0 ],
+									"patching_rect" : [ 29.0, 184.0, 266.0, 55.5 ],
 									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "2 - Audio Corpus Builder" ]
 								}
@@ -691,7 +723,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 118.0, 268.0, 78.0 ],
+									"patching_rect" : [ 29.0, 109.0, 266.0, 55.5 ],
 									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "1 - First Steps with Somax2" ]
 								}
@@ -808,7 +840,7 @@
 
 											}
  ],
-										"originid" : "pat-5319"
+										"originid" : "pat-2401"
 									}
 ,
 									"patching_rect" : [ 7.5, 432.0, 68.0, 22.0 ],
@@ -825,7 +857,17 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
+									"midpoints" : [ 162.0, 323.6953125, 17.0, 323.6953125 ],
 									"source" : [ "obj-10", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-9", 0 ],
+									"hidden" : 1,
+									"midpoints" : [ 162.0, 412.25, 17.0, 412.25 ],
+									"source" : [ "obj-12", 1 ]
 								}
 
 							}
@@ -841,7 +883,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 163.0, 364.5, 17.0, 364.5 ],
+									"midpoints" : [ 162.0, 254.0625, 17.0, 254.0625 ],
 									"source" : [ "obj-3", 1 ]
 								}
 
@@ -850,7 +892,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 163.0, 240.0, 17.0, 240.0 ],
+									"midpoints" : [ 162.0, 177.47265625, 17.0, 177.47265625 ],
 									"source" : [ "obj-37", 1 ]
 								}
 
@@ -864,7 +906,7 @@
 
 							}
  ],
-						"originid" : "pat-5317"
+						"originid" : "pat-2399"
 					}
 ,
 					"patching_rect" : [ 19.011363636363626, 391.5, 87.0, 77.0 ],
@@ -1030,7 +1072,7 @@
 
 							}
  ],
-						"originid" : "pat-5322"
+						"originid" : "pat-2404"
 					}
 ,
 					"patching_rect" : [ 528.0, 391.5, 87.0, 77.0 ],
@@ -1225,7 +1267,7 @@
 
 											}
  ],
-										"originid" : "pat-5327"
+										"originid" : "pat-2409"
 									}
 ,
 									"patching_rect" : [ 153.0, 413.0, 103.0, 22.0 ],
@@ -1247,7 +1289,7 @@
 
 							}
  ],
-						"originid" : "pat-5325"
+						"originid" : "pat-2407"
 					}
 ,
 					"patching_rect" : [ 135.5, 391.5, 87.0, 77.0 ],
@@ -1314,6 +1356,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1337,7 +1380,6 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 0,
 									"id" : "obj-12",
@@ -1357,8 +1399,7 @@
 
 									}
 ,
-									"text" : "Click here to have access to the list of Max messages available to control all the parameters of the Somax2 objects",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Click here to have access to the list of Max messages available to control all the parameters of the Somax2 objects"
 								}
 
 							}
@@ -1506,7 +1547,7 @@
 
 											}
  ],
-										"originid" : "pat-5332"
+										"originid" : "pat-2414"
 									}
 ,
 									"patching_rect" : [ 599.0, 174.0, 135.0, 22.0 ],
@@ -1667,7 +1708,7 @@
 
 											}
  ],
-										"originid" : "pat-5334"
+										"originid" : "pat-2416"
 									}
 ,
 									"patching_rect" : [ 231.0, 451.0, 77.0, 22.0 ],
@@ -1720,7 +1761,7 @@
 
 							}
  ],
-						"originid" : "pat-5330"
+						"originid" : "pat-2412"
 					}
 ,
 					"patching_rect" : [ 395.5, 391.5, 87.0, 77.0 ],
@@ -2278,7 +2319,7 @@
 
 			}
  ],
-		"originid" : "pat-5307",
+		"originid" : "pat-2389",
 		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
