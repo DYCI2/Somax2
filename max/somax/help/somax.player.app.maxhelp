@@ -2,44 +2,18 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 8,
-			"minor" : 6,
-			"revision" : 0,
+			"major" : 9,
+			"minor" : 0,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
 		"rect" : [ 99.0, 100.0, 1168.0, 905.0 ],
-		"bglocked" : 0,
-		"openinpresentation" : 0,
-		"default_fontsize" : 12.0,
-		"default_fontface" : 0,
-		"default_fontname" : "Arial",
-		"gridonopen" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 1,
-		"objectsnaponopen" : 1,
-		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
-		"lefttoolbarpinned" : 0,
-		"toptoolbarpinned" : 0,
-		"righttoolbarpinned" : 0,
-		"bottomtoolbarpinned" : 0,
-		"toolbars_unpinned_last_save" : 0,
-		"tallnewobj" : 0,
-		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
-		"devicewidth" : 0.0,
-		"description" : "",
-		"digest" : "",
-		"tags" : "",
-		"style" : "",
-		"subpatcher_template" : "",
 		"showrootpatcherontab" : 0,
 		"showontab" : 0,
-		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
@@ -50,46 +24,22 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 99.0, 126.0, 1168.0, 879.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
+						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"fontface" : 1,
 									"id" : "obj-8",
 									"linecount" : 3,
@@ -97,7 +47,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 994.0, 143.598661887744242, 142.0, 51.0 ],
-									"text" : "click here if you have a Sample Rate Mismatch warning"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "click here if you have a Sample Rate Mismatch warning",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -125,42 +91,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 107.0, 100.0, 835.0, 618.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontface" : 1,
@@ -241,15 +181,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-21903"
 									}
 ,
 									"patching_rect" : [ 865.0, 313.351239669421489, 157.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p audiorecord_sr_mismatch"
@@ -279,8 +217,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 659.0, 796.0, 289.0, 20.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Save the recorded corpus in the current corpus path.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -314,8 +259,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 659.0, 769.0, 228.0, 20.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Specify the name of the recorded corpus.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -349,8 +301,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 659.0, 743.0, 456.0, 20.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Recording status. When recording the light turns red, when stopped it gets yellow.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -384,8 +343,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 659.0, 716.0, 325.0, 20.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "View of the recording signal as a waveform into the buffer.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -419,8 +385,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 659.0, 689.0, 325.0, 20.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Monitor the incoming audio signal and start/stop Recording.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -455,8 +428,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 659.0, 543.0, 495.0, 141.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Start/Stop Settings: Enable/Disable Record Append End. By default this is enabled, meaning that when recording is stopped, the somax.audiorecord will learn as a new event whatever has been recorded into its buffer~ since the last event. Reversely, if Record End is disabled, the somax.audiorecord will discard everything since the last recorded event.\nCrossfade value sets the time (in ms) the somax.audiorecord will wait before it actually stops recording when recording is toggled off.\nLatency sets the value for latency compensation of segments concatenation in real-time corpus recording. When on auto (default), this value is retrieved from the AudioInfluencer used for the Analysis. You can also manually specify your latency value in ms (not recommended to change its value while recording)",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -491,8 +471,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 659.0, 490.0, 495.0, 47.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Auto-Pause Settings: Enable/Disable Pause on Silence and control its settings. This parameter will tell the somax.audiorecord to pause the recording if the incoming audio level is below the Silence Threshold (in dB) for the Silence Period amount of time (in ms).",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -527,8 +514,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 659.0, 450.0, 456.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Set the Audio Input Source. This can be any channel available in your dac configuration. You can also set the recording gain.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -563,8 +557,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 567.0, 207.0, 190.0, 47.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "The compact interface includes most of the settings available in the complete window",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -713,8 +714,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 240.0, 229.0, 98.0, 20.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "after initialization",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -753,8 +761,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 659.0, 410.0, 456.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Set the Input Analysis source. This should be any of the somax.audioinfluencer.app available in your environment, and will therefore use its configuration and settings.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -788,8 +803,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 659.0, 382.0, 344.0, 20.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Set the buffer length (in seconds) or clear and empty the buffer.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -823,8 +845,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 659.0, 355.0, 190.0, 20.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Enable/Disable the whole module.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -1107,6 +1136,8 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-10",
 									"linecount" : 2,
@@ -1114,13 +1145,31 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 139.0, 382.0, 163.0, 37.0 ],
-									"text" : "After initialization, the full window will look like this"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "After initialization, the full window will look like this",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 2,
 									"id" : "obj-9",
 									"linecount" : 3,
@@ -1128,13 +1177,31 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 42.0, 287.0, 219.0, 66.0 ],
-									"text" : "pressing on the Settings button will open up its full window, where you can initialize the buffer and set its size"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "pressing on the Settings button will open up its full window, where you can initialize the buffer and set its size",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 2,
 									"id" : "obj-18",
 									"linecount" : 2,
@@ -1142,7 +1209,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 56.0, 153.0, 217.0, 52.0 ],
-									"text" : "Before initialization, the compact somax.audiorecord.ui will look like this"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Before initialization, the compact somax.audiorecord.ui will look like this",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -1173,7 +1256,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
-									"patching_rect" : [ 22.0, 355.0, 259.0, 385.841642228739033 ],
+									"patching_rect" : [ 22.0, 355.0, 259.000000000000057, 385.84164222873909 ],
 									"pic" : "audiorecord_init.png"
 								}
 
@@ -1244,6 +1327,8 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -1253,14 +1338,31 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 56.0, 765.0, 234.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "For more information on the core somax.audiorecord module see its help",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -1270,8 +1372,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 96.0, 823.0, 195.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "For some application examples in different use-cases, see the ",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -1345,7 +1462,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 67.0, 233.0, 20.0 ],
-									"text" : "Recording a new audio corpus in real-time"
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Recording a new audio corpus in real-time",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -1357,8 +1482,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 89.0, 674.0, 47.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "The somax.player.app is capable of recording in real-time a live stream of incoming audio and create a corpus directly from it.\nThis is done via the somax.audiorecord module, embedded in the somax.player.app thanks to a dedicated user interface and specific settings controllable from it, as well as from a more detailed settings window.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -1434,6 +1566,7 @@
 
 							}
  ],
+						"originid" : "pat-21901",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1492,10 +1625,7 @@
 ,
 					"patching_rect" : [ 401.0, 19.0, 116.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p \"corpus recording\"",
@@ -1513,43 +1643,17 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 0,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"hidden" : 1,
@@ -2005,15 +2109,13 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-21905"
 					}
 ,
 					"patching_rect" : [ 229.0, 18.961538461538453, 61.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p controls"
@@ -2030,85 +2132,114 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-1",
 									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 325.5, 428.662276555141261, 594.0, 60.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "When set to a non-zero value, all MIDI messages will be output on src channel. \nThe default value 0 (== src) will use the original channels from the source (e.g. the corpus or the MIDI file). \nThus, if you have a MIDI file with MIDI data on channels 1 2 3 and 5, setting \"ch\" to 1 will output everything on channel 1. Setting it to \"src\"/0 will output it on channels 1 2 3 and 5",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.0,
 									"id" : "obj-10",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 325.5, 398.645228215767702, 175.0, 24.0 ],
-									"text" : "Select MIDI Output Channel"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Select MIDI Output Channel",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 0,
 									"id" : "obj-9",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 107.258828785171318, 405.645228215767702, 152.0, 39.0 ],
-									"text" : "Select MIDI Output Device"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Select MIDI Output Device",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 0,
 									"id" : "obj-5",
 									"linecount" : 3,
@@ -2116,7 +2247,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 19.0, 405.645228215767702, 85.0, 66.0 ],
-									"text" : "Enable or Disable MIDI Output"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Enable or Disable MIDI Output",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -2139,6 +2286,8 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.0,
 									"id" : "obj-13",
 									"linecount" : 2,
@@ -2146,13 +2295,31 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 321.5, 345.662276555141261, 598.0, 37.0 ],
-									"text" : "All MIDI channel information is preserved in the corpus, and all channels will by default be output. This control can be used to turn individual MIDI channels on and off"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "All MIDI channel information is preserved in the corpus, and all channels will by default be output. This control can be used to turn individual MIDI channels on and off",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 1.0,
 									"id" : "obj-12",
 									"linecount" : 2,
@@ -2160,20 +2327,53 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 321.5, 282.662276555141261, 598.0, 37.0 ],
-									"text" : "By default, the MIDI velocity of the output will be the same as in the corpus. This slider can be used to map the output to a more narrow range of the velocity spectrum"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "By default, the MIDI velocity of the output will be the same as in the corpus. This slider can be used to map the output to a more narrow range of the velocity spectrum",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-8",
 									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 351.5, 206.662276555141261, 568.0, 60.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Somax is able to reproduce and synthesize the precise timing-related expressivity of the original corpus by storing «almost simultaneous» notes as a single chord together with their internal temporal differences, thus preserving appogiaturas and performative timing-related aspects of the corpus. In some cases, especially when generating output note-by-note, this behaviour may be perceived as inexact.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -2195,30 +2395,66 @@
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-4",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 67.0, 326.0, 20.0 ],
-									"text" : "Working with MIDI corpora in Somax"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Working with MIDI corpora in Somax",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-3",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 89.0, 557.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "When loading a MIDI corpus in a somax.player, there are a number of additional parameters available to control how the MIDI output generation is handled. ",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
  ],
 						"lines" : [  ],
+						"originid" : "pat-21907",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2277,10 +2513,7 @@
 ,
 					"patching_rect" : [ 524.0, 19.0, 41.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p midi",
@@ -2298,43 +2531,17 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"border" : 0,
@@ -2354,6 +2561,8 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.0,
 									"id" : "obj-27",
 									"linecount" : 4,
@@ -2361,7 +2570,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 334.0, 569.844580777096098, 413.0, 64.0 ],
-									"text" : "In very fast-paced corpora with a lot of jumps, it is sometimes necessary to increase the number of voices in order to avoid clipping. Make sure to restart the DAC (turn the audio on and off in Max) for this change to take effect."
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "In very fast-paced corpora with a lot of jumps, it is sometimes necessary to increase the number of voices in order to avoid clipping. Make sure to restart the DAC (turn the audio on and off in Max) for this change to take effect.",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -2381,6 +2606,8 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"id" : "obj-24",
 									"linecount" : 4,
@@ -2388,13 +2615,31 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 334.0, 487.344580777096098, 471.0, 78.0 ],
-									"text" : "The «Timestretch Mode» controls the time stretching / pitch shifting algorithm used. «efficient» is recommended when using multiple agents or when performance is a concern. \n\n"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "The «Timestretch Mode» controls the time stretching / pitch shifting algorithm used. «efficient» is recommended when using multiple agents or when performance is a concern. \n\n",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 2,
 									"id" : "obj-23",
@@ -2403,7 +2648,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 820.0, 500.344580777096098, 311.0, 52.0 ],
-									"text" : "See the «timestretch» tab of the groove~ maxhelp for more info on the different timestretch modes"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "See the «timestretch» tab of the groove~ maxhelp for more info on the different timestretch modes",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -2456,46 +2717,101 @@
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-19",
 									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 376.5, 439.051872443762818, 377.0, 47.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "When transpositions are active (see «Active Transpositions» in the «parameters» tab), the content of the slices will be pitch shifted according to the transposition. ",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-17",
 									"linecount" : 6,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 334.0, 237.0, 410.0, 91.0 ],
-									"text" : "The «Shift Mode» controls from where each segment should be played: \n(a) from slightly before the start of the segment so that the crossfade is completed at the start of the segment or\n(b) from the start of the segment, so that the first part of the segment, which will be more accurate timing-wise but may result in less clear attacks for certain corpora"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "The «Shift Mode» controls from where each segment should be played: \n(a) from slightly before the start of the segment so that the crossfade is completed at the start of the segment or\n(b) from the start of the segment, so that the first part of the segment, which will be more accurate timing-wise but may result in less clear attacks for certain corpora",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 1.0,
 									"id" : "obj-15",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 332.0, 414.051872443762818, 561.0, 24.0 ],
-									"text" : "«Crossfade slope» controls how abrupt the crossfade should be. Use 0.5 for equal-power crossfade."
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "«Crossfade slope» controls how abrupt the crossfade should be. Use 0.5 for equal-power crossfade.",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.8,
 									"id" : "obj-12",
 									"linecount" : 2,
@@ -2503,13 +2819,31 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 334.0, 353.344580777096098, 311.0, 37.0 ],
-									"text" : "«Attack» and «Release» controls the crossfade time (in milliseconds) at the start and end of each segment"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "«Attack» and «Release» controls the crossfade time (in milliseconds) at the start and end of each segment",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.3,
 									"bubbleside" : 0,
 									"id" : "obj-11",
@@ -2518,13 +2852,31 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 805.5, 332.422290388548049, 311.0, 66.0 ],
-									"text" : "At segment (b): audio is played from start of segment (green line) and crossfade gain (gray line) reaches its maximum after the start of the segment."
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "At segment (b): audio is played from start of segment (green line) and crossfade gain (gray line) reaches its maximum after the start of the segment.",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.3,
 									"bubbleside" : 2,
 									"id" : "obj-10",
@@ -2533,7 +2885,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 812.5, 166.422290388548049, 311.0, 66.0 ],
-									"text" : "Pre-segment (a): slice is played from slightly before the start of the segment (green line) and crossfade gain (gray line) reaches maximum at the start of the segment "
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Pre-segment (a): slice is played from slightly before the start of the segment (green line) and crossfade gain (gray line) reaches maximum at the start of the segment ",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -2556,6 +2924,8 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.3,
 									"bubbleside" : 2,
 									"fontface" : 1,
@@ -2565,7 +2935,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 19.0, 194.0, 320.0, 66.0 ],
-									"text" : "In an audio player, pressing the «Settings» button in the Output Control module will bring up the audio rendering settings"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "In an audio player, pressing the «Settings» button in the Output Control module will bring up the audio rendering settings",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -2587,25 +2973,60 @@
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-4",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 67.0, 326.0, 20.0 ],
-									"text" : "Working with audio corpora in Somax"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Working with audio corpora in Somax",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-3",
 									"linecount" : 6,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 89.0, 557.0, 87.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "When loading an audio corpus in a somax.player, there are a number of additional parameters available to control how the audio output is rendered. \n\nWhen the player jumps between two non-consecutive slices, it does so by crossfading the two slices of the audio file, so that they are sounding simultaneously for a short (but in most cases inaudible) period of time. The renderer window presents the user a number of options for controlling this behaviour.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -2627,6 +3048,7 @@
 
 							}
  ],
+						"originid" : "pat-21909",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2685,10 +3107,7 @@
 ,
 					"patching_rect" : [ 324.0, 18.961538461538453, 48.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p audio",
@@ -2706,43 +3125,17 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 167.0, 172.0, 1168.0, 879.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 0,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"border" : 0,
@@ -3107,6 +3500,7 @@
 
 							}
  ],
+						"originid" : "pat-21911",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3165,10 +3559,7 @@
 ,
 					"patching_rect" : [ 794.833333333333258, 17.0, 62.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p wireless",
@@ -3186,53 +3577,25 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [  ],
-						"lines" : [  ]
+						"lines" : [  ],
+						"originid" : "pat-21913"
 					}
 ,
 					"patching_rect" : [ 715.499999999999886, 14.0, 25.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p ?"
@@ -3249,43 +3612,18 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
-						"bglocked" : 0,
+						"rect" : [ 99.0, 126.0, 1168.0, 879.0 ],
 						"openinpresentation" : 1,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"border" : 0,
@@ -3369,6 +3707,8 @@
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-83",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -3378,8 +3718,23 @@
 									"presentation" : 1,
 									"presentation_linecount" : 8,
 									"presentation_rect" : [ 813.0, 362.747434752328104, 248.0, 114.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Parameters can also be set by sending a message on the player's rightmost inlet. The address of each parameter can be found in the text document below, but it's also possible to access them through the player's rightmost outlet, which will be updated each time a parameter is changed (in the UI or by message)",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -3954,7 +4309,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 521.0, 558.0, 24.0, 24.0 ]
+									"patching_rect" : [ 521.0, 558.0, 24.0, 24.0 ],
+									"svg" : ""
 								}
 
 							}
@@ -4243,6 +4599,8 @@
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-2",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -4252,8 +4610,23 @@
 									"presentation" : 1,
 									"presentation_linecount" : 8,
 									"presentation_rect" : [ 813.0, 209.445306280665704, 245.0, 114.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Note: Several parameters consist of both a slider and a number box that can be manipulated. As a general rule, sliders have a lower and upper bound specifying a reasonable range for the parameter. It is however in many cases possible to use the numbox to set the parameter to a value outside of this range.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -4319,6 +4692,8 @@
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-4",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -4326,12 +4701,30 @@
 									"patching_rect" : [ 5.0, 568.0, 326.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 10.0, 67.0, 326.0, 20.0 ],
-									"text" : "Parameters"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Parameters",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-1",
 									"linecount" : 4,
 									"maxclass" : "comment",
@@ -4341,8 +4734,23 @@
 									"presentation" : 1,
 									"presentation_linecount" : 4,
 									"presentation_rect" : [ 10.0, 89.0, 684.0, 60.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "While the player is fully usable with the default settings, the quality of the output is largerly determined by how well the parameters are tuned to the input and the corpus. Here, each parameter is described in detail. Note that apart from setting the corpus, all of these parameters can (unless otherwise specified in their descriptions) be controlled in real-time as a means of interacting with the player.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -4949,6 +5357,8 @@
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"fontface" : 1,
 									"fontsize" : 18.0,
 									"id" : "obj-156",
@@ -4958,13 +5368,30 @@
 									"patching_rect" : [ 686.5, 10.5, 299.0, 27.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 474.0, 226.445306280665704, 244.0, 27.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Corpus",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
@@ -4976,8 +5403,23 @@
 									"presentation" : 1,
 									"presentation_linecount" : 14,
 									"presentation_rect" : [ 450.0, 259.945306280665704, 273.0, 194.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "The corpus is the source of material that the player uses to generate its output from. A corpus is built from a single audio file or from one or more MIDI-files using the Corpus Builder module of the somax.server object.\n\nThe corpus that the player will use can be selected with this drop down menu. If a corpus is not available in the list after successfully built, select the '-- click to refresh --' option (or the «Refresh» button) and the menu will be updated.\n\nThis parameter is also available with the same behaviour in the compact interface.",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -5418,6 +5860,8 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.0,
 									"bubbleside" : 2,
 									"fontface" : 0,
@@ -5430,7 +5874,23 @@
 									"presentation" : 1,
 									"presentation_linecount" : 3,
 									"presentation_rect" : [ 44.0, 173.5, 116.0, 66.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "click any of the numbered buttons for more info",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -6288,15 +6748,13 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-21915"
 					}
 ,
 					"patching_rect" : [ 593.583333333333258, 14.0, 88.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p parameters"
@@ -6313,43 +6771,17 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-25",
@@ -6358,8 +6790,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 265.710051990884381, 450.0, 238.659788846969604, 47.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "When saved, the settings are then stored into a json file located in the somax/state folder",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -6383,6 +6822,8 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"id" : "obj-21",
 									"linecount" : 2,
@@ -6390,7 +6831,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 220.909994807510202, 318.0, 282.288655519485474, 37.0 ],
-									"text" : "Press the «Save/Load» button to save or load a specific configuration of parameters"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Press the «Save/Load» button to save or load a specific configuration of parameters",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -6409,6 +6866,8 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"fontface" : 1,
 									"id" : "obj-16",
 									"linecount" : 2,
@@ -6416,7 +6875,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 174.0, 740.0, 143.0, 37.0 ],
-									"text" : "click here for a brief description of these"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "click here for a brief description of these",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -6444,42 +6919,16 @@
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
-											"major" : 8,
-											"minor" : 6,
-											"revision" : 0,
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 3,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
 ,
 										"classnamespace" : "box",
 										"rect" : [ 107.0, 100.0, 1173.0, 914.0 ],
-										"bglocked" : 0,
-										"openinpresentation" : 0,
-										"default_fontsize" : 12.0,
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
-										"gridonopen" : 1,
 										"gridsize" : [ 15.0, 15.0 ],
-										"gridsnaponopen" : 1,
-										"objectsnaponopen" : 1,
-										"statusbarvisible" : 2,
-										"toolbarvisible" : 1,
-										"lefttoolbarpinned" : 0,
-										"toptoolbarpinned" : 0,
-										"righttoolbarpinned" : 0,
-										"bottomtoolbarpinned" : 0,
-										"toolbars_unpinned_last_save" : 0,
-										"tallnewobj" : 0,
-										"boxanimatetime" : 200,
-										"enablehscroll" : 1,
-										"enablevscroll" : 1,
-										"devicewidth" : 0.0,
-										"description" : "",
-										"digest" : "",
-										"tags" : "",
-										"style" : "",
-										"subpatcher_template" : "",
-										"assistshowspatchername" : 0,
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-40",
@@ -7063,7 +7512,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "jit_matrix" ],
-													"patching_rect" : [ 660.0, 468.0, 218.0, 441.449999999999989 ],
+													"patching_rect" : [ 660.0, 468.0, 217.999999999999972, 441.449999999999989 ],
 													"pic" : "player_compact_2-6.png"
 												}
 
@@ -7320,15 +7769,13 @@
 												}
 
 											}
- ]
+ ],
+										"originid" : "pat-21919"
 									}
 ,
 									"patching_rect" : [ 45.0, 823.0, 167.0, 22.0 ],
 									"saved_object_attributes" : 									{
-										"description" : "",
-										"digest" : "",
-										"globalpatchername" : "",
-										"tags" : ""
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p player_ui_main_parameters"
@@ -7345,14 +7792,24 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 45.0, 660.0, 298.0, 60.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"style" : "default",
-									"text" : "While the somax.player has a wide set of parameters, fully documented in the «parameters» tab of this maxhelp, the somax.player.ui gives you access to a selection of main parameters"
+									"text" : "While the somax.player has a wide set of parameters, fully documented in the «parameters» tab of this maxhelp, the somax.player.ui gives you access to a selection of main parameters",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-18",
 									"linecount" : 3,
@@ -7360,7 +7817,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 767.302780930253903, 770.318232035566552, 156.0, 51.0 ],
-									"text" : "See somax.player documentation for more info"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "See somax.player documentation for more info",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7419,8 +7892,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 749.0, 692.0, 331.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "The player can of course also be initialized as a normal max object without any visible user interface at all:",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7462,13 +7942,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 724.443311214447021, 832.122158191900326, 370.0, 33.0 ],
-									"text" : "In most cases, it's easier to use the somax.player.app object to initialize and use the player. "
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "In most cases, it's easier to use the somax.player.app object to initialize and use the player. ",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 1.0,
 									"id" : "obj-11",
 									"linecount" : 2,
@@ -7476,13 +7966,31 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 220.909994807510202, 279.0, 329.711333274841309, 37.0 ],
-									"text" : "Press the «Settings» button to access the full interface (shown on the right) in a new window"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Press the «Settings» button to access the full interface (shown on the right) in a new window",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.0,
 									"bubbleside" : 2,
 									"id" : "obj-9",
@@ -7491,13 +7999,31 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 177.0, 198.0, 190.0, 79.0 ],
-									"text" : "UI Interface: To create the object, (pressing N and) type:\n\nbpatcher somax.player.ui"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "UI Interface: To create the object, (pressing N and) type:\n\nbpatcher somax.player.ui",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.0,
 									"bubbleside" : 2,
 									"id" : "obj-7",
@@ -7506,7 +8032,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 945.0, 122.0, 176.0, 79.0 ],
-									"text" : "Main interface: To create the object, (pressing N and) type:\n\nbpatcher somax.player"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Main interface: To create the object, (pressing N and) type:\n\nbpatcher somax.player",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7550,7 +8092,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 67.0, 326.0, 20.0 ],
-									"text" : "UI & Initialization"
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "UI & Initialization",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7562,8 +8112,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 89.0, 684.0, 87.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Like most objects of the somax package, the player can be initialized in a number of ways depending on what interface the user prefers.\nThe \"wireless\" somax.player.app  main ui wraps around simpler objects shown here (you'll need to create them only if you program your own somax-based patches, see the somax max tutorials).\nThe somax.player.ui (left) shows the same compact ui than somax.player.app, and the full parameter interface (somax.player, right) is accessible through the «Setting» button and fully explained in the Parameters tab.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7622,6 +8179,7 @@
 
 							}
  ],
+						"originid" : "pat-21917",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -7680,10 +8238,7 @@
 ,
 					"patching_rect" : [ 76.916666666666657, 13.961538461538462, 113.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p \"ui & initialization\"",
@@ -7701,43 +8256,17 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1168.0, 879.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
@@ -7769,8 +8298,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 697.0, 435.0, 440.0, 33.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Audio corpora can also be recorded in real-time. See the «corpus recording» tab for more on this.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7800,13 +8336,31 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-50",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 806.0, 580.0, 201.0, 37.0 ],
-									"text" : "see the somax.regions help for more information on this module"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "see the somax.regions help for more information on this module",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7908,13 +8462,31 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-34",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 918.0, 675.0, 224.0, 37.0 ],
-									"text" : "see the Audio or MIDI Influencer documentations for more info"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "see the Audio or MIDI Influencer documentations for more info",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7945,8 +8517,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 698.0, 788.0, 440.0, 20.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "MIDI Output Module. See the «midi» tab for more on this.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -7981,8 +8560,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 698.0, 723.0, 440.0, 60.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Audio Output Module, with controls for audio channels, Pan, Gain and advanced settings. In an audio player, pressing the «Settings» button in the Output Control module will bring up the audio rendering settings. See the «audio» tab on this same help for more on this.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8017,8 +8603,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 698.0, 623.0, 440.0, 47.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Audio or MIDI influencer, according to the kind of corpus chosen, which will analyze the output from the player itself and wirelessly sending it as influences, making it possible for multiple players to listen to each other's influences.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8082,13 +8675,31 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-46",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 918.25, 393.0, 224.0, 37.0 ],
-									"text" : "see the Corpus Builder Tutorials for more information on building corpora"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "see the Corpus Builder Tutorials for more information on building corpora",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8148,8 +8759,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 698.0, 531.0, 440.0, 47.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "State and matches monitors: This module shows the last played state in the corpus, as well as the number of matches per layer. It's also possible to enable a multi-region filter to select specific areas of the corpus to play.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8184,8 +8802,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 698.0, 478.0, 437.0, 47.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Player Controls: main controls for tuning the player's parameters. \nSee the «ui & initialization» tab for more information on the controls and the «parameters» tab for more information on all the parameters.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8220,8 +8845,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 698.25, 342.0, 440.0, 47.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Set the Corpus: source of material used to generate the player's output. This can be audio (A) or MIDI (M). The influence and output modules of the player will adapt corresponding to the kind of corpus chosen.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8256,8 +8888,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 698.25, 236.0, 437.0, 100.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Influence Sources routing module: all available influencers are listed and can be selected as sources for the player to listen to. It's also possible to select and mix between the dimensions (pitch, onset, chroma). The bottom row indicates the pitch, onset and chroma influences received. For chroma, this will only be triggered when a «chroma onset» (CO) is received, so at least one CO must be enabled for the player to actually receive any chroma.\nClick on the little question mark to know more.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8292,8 +8931,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 698.25, 89.0, 437.0, 141.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "The player.app can be given a name to differentiate it from other influencers, using the bpatchers @args attribute, i.e.:\n\nbpatcher somax.player.app @args <name>\n\nIf no argument is provided, the player will automatically be created with a unique name (for wireless influence routing) and unique OSC ports for sending to and receving from the server\nThe name attribute can also be set using the «Argument(s)» field in the Max Inspector.",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8551,6 +9197,8 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 1.0,
 									"id" : "obj-9",
 									"linecount" : 3,
@@ -8558,7 +9206,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 407.5, 157.0, 250.0, 51.0 ],
-									"text" : "To create a player.app, press N and type:\n\nbpatcher somax.player.app"
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "To create a player.app, press N and type:\n\nbpatcher somax.player.app",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8661,7 +9325,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
-									"patching_rect" : [ 267.0, 191.0, 164.248975579630667, 649.560763506275975 ],
+									"patching_rect" : [ 267.0, 191.0, 164.248975579630638, 649.560763506275862 ],
 									"pic" : "player_app_midi_2-6.png"
 								}
 
@@ -8675,7 +9339,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
-									"patching_rect" : [ 39.0, 191.0, 163.278128022267481, 643.074922251635371 ],
+									"patching_rect" : [ 39.0, 191.0, 163.278128022267452, 643.074922251635371 ],
 									"pic" : "player_app_audio_2-6.png"
 								}
 
@@ -8751,7 +9415,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 67.0, 267.0, 20.0 ],
-									"text" : "Main generative object of the Somax application "
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "Main generative object of the Somax application ",
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8763,8 +9435,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 89.0, 648.0, 60.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "The somax.player.app is a wrapper around the somax.player, encapsulating it together with other useful tools for routing influences, rendering and playing back audio or MIDI output. The somax.player.app has a graphic interface to control all its parameters and provide the user with better interaction. Thanks to this app object, Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). ",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -8882,15 +9561,13 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-22389"
 					}
 ,
 					"patching_rect" : [ 11.0, 13.961538461538462, 47.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p basic"
@@ -8899,7 +9576,15 @@
 			}
  ],
 		"lines" : [  ],
+		"originid" : "pat-21899",
 		"parameters" : 		{
+			"obj-3::obj-17::obj-1001::obj-89::obj-1" : [ "live.text[4]", "live.text", 0 ],
+			"obj-3::obj-17::obj-1001::obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],
+			"obj-3::obj-17::obj-1001::obj-89::obj-3" : [ "live.text[6]", "live.text", 0 ],
+			"obj-3::obj-17::obj-1039::obj-89::obj-1" : [ "live.text[7]", "live.text", 0 ],
+			"obj-3::obj-17::obj-1039::obj-89::obj-2" : [ "live.text[8]", "live.text", 0 ],
+			"obj-3::obj-17::obj-1039::obj-89::obj-3" : [ "live.text[9]", "live.text", 0 ],
+			"obj-3::obj-17::obj-1105" : [ "harmonincpeakdecay[8]", "harmonincpeakdecay", 0 ],
 			"obj-3::obj-17::obj-1115" : [ "continuity[14]", "continuity", 0 ],
 			"obj-3::obj-17::obj-1175" : [ "heldnotesmode[5]", "heldnotesmode", 0 ],
 			"obj-3::obj-17::obj-1179" : [ "continuity[16]", "continuity", 0 ],
@@ -8928,11 +9613,21 @@
 			"obj-3::obj-17::obj-295" : [ "playingmode[2]", "playingmode", 0 ],
 			"obj-3::obj-17::obj-298" : [ "simultaneousonsets[16]", "simultaneousonsets", 0 ],
 			"obj-3::obj-17::obj-328" : [ "decaybasis[6]", "decaybasis", 0 ],
+			"obj-3::obj-17::obj-387::obj-89::obj-1" : [ "live.text[20]", "live.text", 0 ],
+			"obj-3::obj-17::obj-387::obj-89::obj-2" : [ "live.text[13]", "live.text", 0 ],
+			"obj-3::obj-17::obj-387::obj-89::obj-3" : [ "live.text[19]", "live.text", 0 ],
+			"obj-3::obj-17::obj-497::obj-89::obj-1" : [ "live.text[10]", "live.text", 0 ],
+			"obj-3::obj-17::obj-497::obj-89::obj-2" : [ "live.text[11]", "live.text", 0 ],
+			"obj-3::obj-17::obj-497::obj-89::obj-3" : [ "live.text[12]", "live.text", 0 ],
 			"obj-3::obj-17::obj-570" : [ "__exp_melodicpitchfromchords[6]", "__exp_melodicpitchfromchords", 0 ],
 			"obj-3::obj-17::obj-575" : [ "__exp_tempoconsistencysigma[2]", "__exp_tempoconsistencysigma", 0 ],
 			"obj-3::obj-17::obj-642" : [ "__exp_numnotessigma[4]", "__exp_numnotessigma", 0 ],
 			"obj-3::obj-17::obj-653" : [ "__exp_numnotesenable[6]", "__exp_numnotesenable", 0 ],
 			"obj-3::obj-17::obj-656" : [ "__exp_numnotesmu[4]", "__exp_numnotesmu", 0 ],
+			"obj-3::obj-17::obj-667" : [ "selfharmonicbypass[1]", "selfharmonicbypass", 0 ],
+			"obj-3::obj-17::obj-670" : [ "harmonicbypass[2]", "harmonicbypass", 0 ],
+			"obj-3::obj-17::obj-679" : [ "selfharmonicngramorder[1]", "selfharmonicngramorder", 0 ],
+			"obj-3::obj-17::obj-685" : [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
 			"obj-3::obj-17::obj-688" : [ "__exp_durationsigma[4]", "__exp_durationsigma", 0 ],
 			"obj-3::obj-17::obj-702" : [ "__exp_durationmu[6]", "__exp_durationmu", 0 ],
 			"obj-3::obj-17::obj-722" : [ "__exp_octavebandsenable[6]", "__exp_octavebandsenable", 0 ],
@@ -8943,9 +9638,18 @@
 			"obj-3::obj-17::obj-777" : [ "__exp_autojumpactivate[6]", "__exp_autojumpactivate", 0 ],
 			"obj-3::obj-17::obj-799" : [ "__exp_tempoconsistencyenable[6]", "__exp_tempoconsistencyenable", 0 ],
 			"obj-3::obj-17::obj-802" : [ "__exp_tempoconsistencylen[10]", "__exp_tempoconsistencylen", 0 ],
+			"obj-3::obj-17::obj-814" : [ "harmonincpeakdecay[6]", "harmonincpeakdecay", 0 ],
+			"obj-3::obj-17::obj-842::obj-89::obj-1" : [ "live.text[1]", "live.text", 0 ],
+			"obj-3::obj-17::obj-842::obj-89::obj-2" : [ "live.text[2]", "live.text", 0 ],
+			"obj-3::obj-17::obj-842::obj-89::obj-3" : [ "live.text[3]", "live.text", 0 ],
+			"obj-3::obj-17::obj-843" : [ "harmonicngramorder[2]", "harmonicngramorder", 0 ],
 			"obj-3::obj-17::obj-860" : [ "harmonincpeakdecay[17]", "harmonincpeakdecay[1]", 0 ],
 			"obj-3::obj-17::obj-865" : [ "selfharmonicngramorder[6]", "selfharmonicngramorder", 0 ],
 			"obj-3::obj-17::obj-870" : [ "selfharmonicbypass[6]", "selfharmonicbypass", 0 ],
+			"obj-3::obj-17::obj-871" : [ "harmonincpeakdecay[7]", "harmonincpeakdecay", 0 ],
+			"obj-3::obj-17::obj-96::obj-89::obj-1" : [ "live.text[25]", "live.text", 0 ],
+			"obj-3::obj-17::obj-96::obj-89::obj-2" : [ "live.text[23]", "live.text", 0 ],
+			"obj-3::obj-17::obj-96::obj-89::obj-3" : [ "live.text[18]", "live.text", 0 ],
 			"parameterbanks" : 			{
 				"0" : 				{
 					"index" : 0,
@@ -8956,6 +9660,30 @@
 			}
 ,
 			"parameter_overrides" : 			{
+				"obj-3::obj-17::obj-1001::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[4]"
+				}
+,
+				"obj-3::obj-17::obj-1001::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[5]"
+				}
+,
+				"obj-3::obj-17::obj-1001::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[6]"
+				}
+,
+				"obj-3::obj-17::obj-1039::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[7]"
+				}
+,
+				"obj-3::obj-17::obj-1039::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[8]"
+				}
+,
+				"obj-3::obj-17::obj-1039::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[9]"
+				}
+,
 				"obj-3::obj-17::obj-270::obj-1226" : 				{
 					"parameter_longname" : "width[2]"
 				}
@@ -8974,6 +9702,42 @@
 ,
 				"obj-3::obj-17::obj-270::obj-889" : 				{
 					"parameter_longname" : "weight[2]"
+				}
+,
+				"obj-3::obj-17::obj-387::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[20]"
+				}
+,
+				"obj-3::obj-17::obj-387::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[13]"
+				}
+,
+				"obj-3::obj-17::obj-387::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[19]"
+				}
+,
+				"obj-3::obj-17::obj-497::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[10]"
+				}
+,
+				"obj-3::obj-17::obj-497::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[11]"
+				}
+,
+				"obj-3::obj-17::obj-497::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[12]"
+				}
+,
+				"obj-3::obj-17::obj-842::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[1]"
+				}
+,
+				"obj-3::obj-17::obj-842::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[2]"
+				}
+,
+				"obj-3::obj-17::obj-842::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[3]"
 				}
 
 			}
@@ -9051,6 +9815,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "peakmeter.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../patchers/resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "player_app_audio_2-6.png",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
 				"patcherrelativepath" : "../media",
@@ -9117,6 +9888,13 @@
 				"name" : "somax.corpuspath.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
 				"patcherrelativepath" : "../patchers/resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.descriptorview.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "../patchers/resources/player",
 				"type" : "JSON",
 				"implicit" : 1
 			}
