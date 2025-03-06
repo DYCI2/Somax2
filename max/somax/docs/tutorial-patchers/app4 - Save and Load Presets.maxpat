@@ -293,10 +293,10 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 857.31709361076355, 274.390250444412231, 20.0, 20.0 ],
 					"rounded" : 60.0,
-					"text" : "3",
+					"text" : "4",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "saveload_3"
+					"varname" : "saveload_4"
 				}
 
 			}
@@ -410,7 +410,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 892.95124626159668, 393.124983668327332, 229.0, 35.0 ],
+					"patching_rect" : [ 892.95124626159668, 392.942057013511658, 229.0, 35.0 ],
 					"text" : ";\rplayer_msg savestate load tutorialconfig1",
 					"varname" : "load_tutorialconfig1"
 				}
@@ -623,12 +623,12 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 903.658558130264282, 410.548790097236633, 20.0, 20.0 ],
+					"patching_rect" : [ 898.207338094711304, 179.268296957015991, 20.0, 20.0 ],
 					"rounded" : 60.0,
-					"text" : "5",
+					"text" : "3",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "saveload_5"
+					"varname" : "saveload_3"
 				}
 
 			}
@@ -650,10 +650,10 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1042.499905347824097, 274.390250444412231, 20.0, 20.0 ],
 					"rounded" : 60.0,
-					"text" : "4",
+					"text" : "5",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "saveload_4"
+					"varname" : "saveload_5"
 				}
 
 			}
@@ -681,7 +681,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 929.268314838409424, 403.048790097236633, 199.0, 35.0 ],
+					"patching_rect" : [ 923.817094802856445, 171.951223611831665, 199.0, 35.0 ],
 					"text" : ";\rplayer_msg savestate openwindow",
 					"varname" : "openwindow"
 				}
@@ -1083,108 +1083,6 @@
 			}
 , 			{
 				"box" : 				{
-					"hidden" : 1,
-					"id" : "obj-63",
-					"linecount" : 3,
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 2007.317121028900146, 1303.658567667007446, 280.0, 49.0 ],
-					"text" : ";\rmidiinfluencer_msg midioutput enabled 1;\rmidiinfluencer_msg midioutput device \"from Max 1\"",
-					"varname" : "midi_message_3"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"hidden" : 1,
-					"id" : "obj-54",
-					"linecount" : 2,
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 2030.487853288650513, 1152.439051866531372, 227.0, 35.0 ],
-					"text" : ";\rmidiinfluencer_msg midioutput enabled 0",
-					"varname" : "midi_message_2"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"hidden" : 1,
-					"id" : "obj-33",
-					"linecount" : 2,
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1717.073211669921875, 53.743902802467346, 168.0, 35.0 ],
-					"text" : ";\rmidiinfluencer_msg enabled 1",
-					"varname" : "midi_message"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"hidden" : 1,
-					"id" : "obj-22",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 2071.951268911361694, 1106.09758734703064, 121.0, 22.0 ],
-					"text" : "s midiinfluencer_msg",
-					"varname" : "midi_send"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"hidden" : 1,
-					"id" : "obj-209",
-					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 2071.951268911361694, 1076.829293966293335, 121.0, 22.0 ],
-					"text" : "pack 0 0 0",
-					"varname" : "midi_pack"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"hidden" : 1,
-					"id" : "obj-208",
-					"maxclass" : "newobj",
-					"numinlets" : 4,
-					"numoutlets" : 3,
-					"outlettype" : [ "float", "float", "float" ],
-					"patching_rect" : [ 2071.951268911361694, 1047.56100058555603, 121.0, 22.0 ],
-					"text" : "makenote 100 500 1",
-					"varname" : "midi_makenote"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"hidden" : 1,
-					"id" : "obj-199",
-					"maxclass" : "kslider",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"offset" : 60,
-					"outlettype" : [ "int", "int" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 2071.951268911361694, 982.926852703094482, 168.0, 53.0 ],
-					"range" : 24,
-					"varname" : "midi_kslider"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 16.0,
 					"hidden" : 1,
@@ -1266,8 +1164,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1596.341501474380493, 146.341466903686523, 277.0, 24.0 ],
-					"text" : "2. Scripting the AudioInfluencer",
+					"patching_rect" : [ 1160.536617159843445, 145.951223611831665, 277.0, 24.0 ],
+					"text" : "2. Saving a Player's State",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "audioinfluencer_title"
 				}
@@ -1276,15 +1174,15 @@
 , 			{
 				"box" : 				{
 					"fontface" : 0,
-					"fontsize" : 14.0,
+					"fontsize" : 16.0,
 					"hidden" : 1,
 					"id" : "obj-52",
-					"linecount" : 52,
+					"linecount" : 47,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1596.341501474380493, 180.487809181213379, 334.0, 820.0 ],
-					"text" : "After setting the corpuspath, you might want to start configuring your AudioInfluencer, to capture your instrument or fellow musician in the right way.\n\nLet's say you want to enable the AudioInfluencer, select the 1st channel of your soundcard as the input channel (for now assuming you have no external soundcard connected, but you want to use just your computer's microphone), and disable its audio output module, to avoid feedback.\n\nThanks to the ; syntax that we saw in the previous tab of this tutorial, you can do all the three things at the same time, by pressing on the message at step 1.\n\nAt this point, you might want to select a certain algorithm for the onset detection of your AudioInfluencer, and tune its parameters, which you would usually do this by entering the \"Settings\" of the AudioInfluencer (see step 2).\n\nBut let's say we want to select Bonk as onset detection algorithm and, at the same time, set the Onset Limiter value to 0 ms.\nWe can do it by just pressing on the message at step 3.\n\nIf you now open the AudioInfluencer \"Settings\" you will notice that the two changes simultaneously occurred in it, saving us quite some time.\n\nAt this point, although you may have figured out the scripting process, it might still be unclear how to address the various parameters with their correct names, but don't worry, in this tutorial we will give you all the tools to figure it out.\n\nIn fact, just notice that on the output to each Somax2 module is a message (see step 4).\n\nThis message, linked to the penultimate outlet of each module (in this case of the AudioInfluencer), tells us which parameters have been changed and with what value. \nIn this case the message displayed should be \"onsetlimit 0\", which is exactly the last message we sent to the AudioInfluencer.\n\nBe careful to connect the penultimate outlet of the Somax2 modules well to the right inlet of the message, so that this can be used as a monitor.",
+					"patching_rect" : [ 1163.146373271942139, 190.829282939434052, 342.0, 847.0 ],
+					"text" : "We have implemented an embedded mechanism to save and load a player’s parameters.\n\nClick on the “Save/Load” button in the Somax2 Player (step 1). This will open a specific module in the top left part of your screen, which looks exactly like the one shown in step 2. However, the one in step 2 is just an image, so you won’t be able to interact with it. Instead, use the actual module in the top left part of your screen.\n\nYou can also open the Save/Load window by sending a message directly to the player (see step 3).\n\nFrom this module, you can save the configuration we defined for the Somax2 Player in the previous step of this tutorial. Give your preset a name (step 4) and save it by clicking the “Save” button (step 5).\n\nAlternatively, you can save a preset directly by sending a message to the player using the syntax shown in step 6. You can simply specify the desired preset name, such as “tutorialconfig1,” or include the file format. In this case, the correct format would be “tutorialconfig1.json,” as required by our implementation.\n\nEvery saved preset is stored as a .json file in the “state” folder of your local Somax2 installation (e.g., Documents/Max 9/Packages/somax-2.v/state).\n\nAt this point, we have stored the previous preset as “tutorialconfig1.” Now, let’s say we want to create a new configuration. Press the message at step 7 to change the parameters of the Somax2 Player.\n\nYou can then save this new configuration by selecting a new name and repeating steps 4 and 5, or you can send a new message to store it as “tutorialconfig2” (step 8).",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "text_2"
 				}
@@ -2499,7 +2397,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1160.536617159843445, 145.951223611831665, 350.0, 24.0 ],
+					"patching_rect" : [ 1160.536617159843445, 145.951223611831665, 292.0, 24.0 ],
 					"text" : "1. Intro to saving and loading presets",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "introduction"
@@ -2880,52 +2778,6 @@
 					"destination" : [ "obj-14", 0 ],
 					"hidden" : 1,
 					"source" : [ "obj-18", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-208", 1 ],
-					"midpoints" : [ 2230.451268911361694, 1039.536609530448914, 2115.451268911361694, 1039.536609530448914 ],
-					"source" : [ "obj-199", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-208", 0 ],
-					"source" : [ "obj-199", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-209", 2 ],
-					"hidden" : 1,
-					"source" : [ "obj-208", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-209", 1 ],
-					"hidden" : 1,
-					"source" : [ "obj-208", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-209", 0 ],
-					"hidden" : 1,
-					"source" : [ "obj-208", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-22", 0 ],
-					"source" : [ "obj-209", 0 ]
 				}
 
 			}
