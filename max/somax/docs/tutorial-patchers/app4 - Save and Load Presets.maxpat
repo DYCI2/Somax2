@@ -103,7 +103,7 @@
 					"text" : "1",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
-					"varname" : "load_1[1]"
+					"varname" : "view_1"
 				}
 
 			}
@@ -2442,7 +2442,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 29.0, 58.439024448394775, 1484.146376848220825, 25.609756708145142 ],
 					"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
-					"tabs" : [ "1. Introduction", "2. Save State", "3. Load State", "4. Player", "5. Learn Further" ]
+					"tabs" : [ "1. Introduction", "2. Save State", "3. Load State", "4. Using Text and Messages", "5. Learn Further" ]
 				}
 
 			}
