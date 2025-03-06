@@ -2,44 +2,19 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 8,
-			"minor" : 6,
-			"revision" : 0,
+			"major" : 9,
+			"minor" : 0,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 67.0, 66.0, 1058.0, 722.0 ],
-		"bglocked" : 0,
-		"openinpresentation" : 0,
-		"default_fontsize" : 12.0,
-		"default_fontface" : 0,
-		"default_fontname" : "Arial",
-		"gridonopen" : 1,
+		"rect" : [ 68.0, 66.0, 1058.0, 722.0 ],
 		"gridsize" : [ 15.0, 15.0 ],
-		"gridsnaponopen" : 1,
-		"objectsnaponopen" : 1,
-		"statusbarvisible" : 2,
-		"toolbarvisible" : 1,
-		"lefttoolbarpinned" : 0,
-		"toptoolbarpinned" : 0,
-		"righttoolbarpinned" : 0,
-		"bottomtoolbarpinned" : 0,
 		"toolbars_unpinned_last_save" : 2,
-		"tallnewobj" : 0,
-		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
-		"enablevscroll" : 1,
-		"devicewidth" : 0.0,
-		"description" : "",
-		"digest" : "",
-		"tags" : "",
-		"style" : "",
-		"subpatcher_template" : "",
 		"showrootpatcherontab" : 0,
 		"showontab" : 0,
-		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-6",
@@ -49,54 +24,26 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 1058.0, 696.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
 						"isolateaudio" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [  ],
-						"lines" : [  ]
+						"lines" : [  ],
+						"originid" : "pat-15336"
 					}
 ,
 					"patching_rect" : [ 157.0, 27.0, 25.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p ?",
@@ -113,45 +60,19 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 8,
-							"minor" : 6,
-							"revision" : 0,
+							"major" : 9,
+							"minor" : 0,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 67.0, 92.0, 1058.0, 696.0 ],
+						"rect" : [ 68.0, 92.0, 1058.0, 696.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
 						"showontab" : 1,
 						"isolateaudio" : 1,
-						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-12",
@@ -173,8 +94,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 495.516877637130847, 471.312499999999886, 144.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "last modified parameter",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -187,8 +115,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 23.0, 653.312499999999886, 311.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "The built audio corpus will have the extension .pickle",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -215,8 +150,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 23.0, 482.854166666666401, 129.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Path of built corpus (or -1 if build failed)",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -225,24 +167,18 @@
 									"arrows" : 2,
 									"id" : "obj-74",
 									"justification" : 3,
-									"linecolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
 									"maxclass" : "live.line",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 506.5, 276.854166666666401, 100.6875, 155.458333333333485 ],
-									"saved_attribute_attributes" : 									{
-										"linecolor" : 										{
-											"expression" : ""
-										}
-
-									}
-
+									"patching_rect" : [ 506.5, 276.854166666666401, 100.6875, 155.458333333333485 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.0,
 									"bubbleside" : 2,
 									"id" : "obj-73",
@@ -251,8 +187,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 498.25, 206.0, 143.0, 52.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "choose either method to build an audio corpus",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -261,18 +212,10 @@
 									"arrows" : 1,
 									"id" : "obj-72",
 									"justification" : 3,
-									"linecolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
 									"maxclass" : "live.line",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 224.90625, 191.5, 260.1875, 73.0 ],
-									"saved_attribute_attributes" : 									{
-										"linecolor" : 										{
-											"expression" : ""
-										}
-
-									}
-
+									"patching_rect" : [ 224.90625, 191.5, 260.1875, 73.0 ]
 								}
 
 							}
@@ -286,8 +229,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 654.0, 553.312499999999886, 237.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "See the corpus builder tutorial for more info",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -301,21 +251,45 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 172.0, 568.89583333333303, 129.0, 65.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Audio outlet is only needed when using \"Test Segmentation\" in the UI",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-67",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 640.0, 437.562499999999886, 148.0, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "double-click to open UI",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -387,14 +361,31 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-58",
 									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 247.5, 363.0, 234.0, 51.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Achieving a good segmentation is critical for the final result. These are the two most important parameters",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -407,8 +398,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 118.000000000000057, 351.312499999999886, 34.0, 21.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "(ms)",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -422,8 +420,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 113.770833333333314, 296.770833333333258, 300.0, 36.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "If no explicit corpus_name is provided, the corpus will have the same name as the audio file",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -437,8 +442,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 113.770833333333314, 241.0, 300.0, 50.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Two supported formats:\n- build <path/to/audiofile.wav>\n- build <path/to/audiofile.wav> <corpus_name>",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -501,8 +513,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 844.75, 351.312499999999886, 175.0, 50.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "The corpora will be stored in the server's corpuspath folder. This can be changed:",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -541,8 +560,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 321.0, 561.39583333333303, 240.0, 65.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "It's not necessary to \"initialize\" the corpus builder, but it does require a server to be running. It will change to \"inprogress\" while building a corpus",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -556,7 +582,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 321.0, 514.854166666666401, 44.541666666666629, 44.541666666666629 ]
+									"patching_rect" : [ 321.0, 514.854166666666401, 44.541666666666629, 44.541666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -584,22 +611,46 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 341.541666666666742, 152.5, 202.0, 50.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Building a corpus takes some time: expect around 10 seconds of build time per minute of audio",
-									"textcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-3",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 59.25, 152.5, 169.25, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "select an audio file (mono or stereo) to build a corpus",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -613,21 +664,45 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 815.25, 152.5, 157.0, 65.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "If the status is \"duplicate\" and you already have another server running, go to the next step",
-									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
+									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-78",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 684.25, 152.5, 125.0, 24.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "initialize the server",
-									"textcolor" : [ 0.349019607843137, 0.349019607843137, 0.349019607843137, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -702,7 +777,8 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 769.1875, 296.770833333333258, 44.541666666666629, 44.541666666666629 ]
+									"patching_rect" : [ 769.1875, 296.770833333333258, 44.541666666666629, 44.541666666666629 ],
+									"svg" : ""
 								}
 
 							}
@@ -1152,15 +1228,13 @@
 								}
 
 							}
- ]
+ ],
+						"originid" : "pat-15338"
 					}
 ,
 					"patching_rect" : [ 94.0, 27.0, 47.0, 22.0 ],
 					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p basic",
@@ -1170,6 +1244,7 @@
 			}
  ],
 		"lines" : [  ],
+		"originid" : "pat-15334",
 		"parameters" : 		{
 			"obj-3::obj-5::obj-395::obj-2" : [ "live.text[5]", "live.text[4]", 0 ],
 			"obj-3::obj-5::obj-395::obj-375" : [ "mc.live.gain~[2]", "click", 0 ],
