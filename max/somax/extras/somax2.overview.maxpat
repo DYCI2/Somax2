@@ -258,7 +258,7 @@
 
 											}
  ],
-										"originid" : "pat-11"
+										"originid" : "pat-5312"
 									}
 ,
 									"patching_rect" : [ 533.0, 403.0, 121.0, 22.0 ],
@@ -443,7 +443,7 @@
 
 											}
  ],
-										"originid" : "pat-13"
+										"originid" : "pat-5314"
 									}
 ,
 									"patching_rect" : [ 153.0, 403.0, 100.0, 22.0 ],
@@ -473,7 +473,7 @@
 
 							}
  ],
-						"originid" : "pat-9"
+						"originid" : "pat-5310"
 					}
 ,
 					"patching_rect" : [ 248.5, 391.5, 87.0, 77.0 ],
@@ -808,7 +808,7 @@
 
 											}
  ],
-										"originid" : "pat-18"
+										"originid" : "pat-5319"
 									}
 ,
 									"patching_rect" : [ 7.5, 432.0, 68.0, 22.0 ],
@@ -864,7 +864,7 @@
 
 							}
  ],
-						"originid" : "pat-16"
+						"originid" : "pat-5317"
 					}
 ,
 					"patching_rect" : [ 19.011363636363626, 391.5, 87.0, 77.0 ],
@@ -1030,7 +1030,7 @@
 
 							}
  ],
-						"originid" : "pat-21"
+						"originid" : "pat-5322"
 					}
 ,
 					"patching_rect" : [ 528.0, 391.5, 87.0, 77.0 ],
@@ -1225,7 +1225,7 @@
 
 											}
  ],
-										"originid" : "pat-26"
+										"originid" : "pat-5327"
 									}
 ,
 									"patching_rect" : [ 153.0, 413.0, 103.0, 22.0 ],
@@ -1247,7 +1247,7 @@
 
 							}
  ],
-						"originid" : "pat-24"
+						"originid" : "pat-5325"
 					}
 ,
 					"patching_rect" : [ 135.5, 391.5, 87.0, 77.0 ],
@@ -1337,7 +1337,7 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.964705882352941, 0.964705882352941, 0.964705882352941, 1.0 ],
+									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 0,
 									"id" : "obj-12",
@@ -1346,8 +1346,19 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 599.0, 147.59375, 221.0, 66.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
 									"text" : "Click here to have access to the list of Max messages available to control all the parameters of the Somax2 objects",
-									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
+									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
 								}
 
 							}
@@ -1495,7 +1506,7 @@
 
 											}
  ],
-										"originid" : "pat-31"
+										"originid" : "pat-5332"
 									}
 ,
 									"patching_rect" : [ 599.0, 174.0, 135.0, 22.0 ],
@@ -1656,7 +1667,7 @@
 
 											}
  ],
-										"originid" : "pat-33"
+										"originid" : "pat-5334"
 									}
 ,
 									"patching_rect" : [ 231.0, 451.0, 77.0, 22.0 ],
@@ -1709,7 +1720,7 @@
 
 							}
  ],
-						"originid" : "pat-29"
+						"originid" : "pat-5330"
 					}
 ,
 					"patching_rect" : [ 395.5, 391.5, 87.0, 77.0 ],
@@ -2267,7 +2278,7 @@
 
 			}
  ],
-		"originid" : "pat-6",
+		"originid" : "pat-5307",
 		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
