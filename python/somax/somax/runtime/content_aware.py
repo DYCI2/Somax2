@@ -51,6 +51,11 @@ class ContentAware(ABC):
         self._invalidated_by = None
         self._eligible: bool = self._set_eligibility(corpus)
         for z, child in self.__dict__.items():
+            # If the object contains a parameter_dict (from HasParameterDict), it's possible that this hasn't been
+            #   updated when `set_eligibility` is called, and therefore may contain invalid duplicates of the
+            #   member variables of the class itself.
+            if z == "parameter_dict":
+                continue
             if isinstance(child, ContentAware):
                 child_eligibility: bool = child.set_eligibility(corpus)
                 if not child_eligibility and child._invalidates_parent:
