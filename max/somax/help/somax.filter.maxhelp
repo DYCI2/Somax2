@@ -615,7 +615,7 @@
 
 											}
  ],
-										"originid" : "pat-17737"
+										"originid" : "pat-6217"
 									}
 ,
 									"patching_rect" : [ 540.750001013278961, 344.000000953674316, 71.5, 22.0 ],
@@ -910,7 +910,7 @@
 
 											}
  ],
-										"originid" : "pat-17739"
+										"originid" : "pat-6219"
 									}
 ,
 									"patching_rect" : [ 453.833332538604736, 344.000000953674316, 71.5, 22.0 ],
@@ -1733,7 +1733,7 @@
 
 											}
  ],
-										"originid" : "pat-17741"
+										"originid" : "pat-6221"
 									}
 ,
 									"patching_rect" : [ 756.0, 200.0, 165.041666666666515, 22.0 ],
@@ -3128,7 +3128,7 @@
 
 							}
  ],
-						"originid" : "pat-17735"
+						"originid" : "pat-6215"
 					}
 ,
 					"patching_rect" : [ 387.0, 44.0, 170.0, 22.0 ],
@@ -3165,7 +3165,7 @@
 						"isolateaudio" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-18289"
+						"originid" : "pat-6769"
 					}
 ,
 					"patching_rect" : [ 766.0, 40.0, 25.0, 22.0 ],
@@ -3201,6 +3201,114 @@
 						"showontab" : 1,
 						"isolateaudio" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-68",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 924.0, 354.0, 29.5, 22.0 ],
+									"text" : "c"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-60",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 850.0, 380.0, 51.0, 22.0 ],
+									"text" : "label $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-61",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 844.0, 334.0, 31.0, 22.0 ],
+									"text" : "loud"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-62",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 811.0, 334.0, 29.5, 22.0 ],
+									"text" : "soft"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-63",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 716.0, 426.0, 115.0, 22.0 ],
+									"text" : "descriptor dynamics"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-64",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 685.0, 402.0, 92.0, 22.0 ],
+									"text" : "descriptor initial"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-59",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 642.0, 342.0, 51.0, 22.0 ],
+									"text" : "label $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-57",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 636.0, 296.0, 31.0, 22.0 ],
+									"text" : "loud"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-56",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 603.0, 296.0, 29.5, 22.0 ],
+									"text" : "soft"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-44",
 									"maxclass" : "message",
@@ -3329,7 +3437,7 @@
 									"numoutlets" : 5,
 									"offset" : [ 0.0, 0.0 ],
 									"outlettype" : [ "multichannelsignal", "", "", "", "" ],
-									"patching_rect" : [ 721.0, 507.0, 274.0, 923.0 ],
+									"patching_rect" : [ 738.5, 501.0, 274.0, 923.0 ],
 									"varname" : "somax.player.app",
 									"viewvisibility" : 1
 								}
@@ -4416,8 +4524,71 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-59", 0 ],
+									"source" : [ "obj-56", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-59", 0 ],
+									"source" : [ "obj-57", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-4", 0 ],
+									"source" : [ "obj-59", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-54", 0 ],
 									"source" : [ "obj-6", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-42", 0 ],
+									"source" : [ "obj-60", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-60", 0 ],
+									"source" : [ "obj-61", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-60", 0 ],
+									"source" : [ "obj-62", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-42", 0 ],
+									"source" : [ "obj-63", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-42", 0 ],
+									"source" : [ "obj-64", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-60", 0 ],
+									"source" : [ "obj-68", 0 ]
 								}
 
 							}
@@ -4439,7 +4610,7 @@
 
 							}
  ],
-						"originid" : "pat-18291"
+						"originid" : "pat-6771"
 					}
 ,
 					"patching_rect" : [ 24.0, 38.0, 47.0, 22.0 ],
@@ -4454,7 +4625,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-17733",
+		"originid" : "pat-6213",
 		"parameters" : 		{
 			"obj-1::obj-14::obj-1001::obj-89::obj-1" : [ "live.text[4]", "live.text", 0 ],
 			"obj-1::obj-14::obj-1001::obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],
