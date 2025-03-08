@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 362.0, 214.0, 942.0, 597.0 ],
+		"rect" : [ 361.0, 213.0, 942.0, 597.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"enablehscroll" : 0,
@@ -258,7 +258,7 @@
 
 											}
  ],
-										"originid" : "pat-2394"
+										"originid" : "pat-11"
 									}
 ,
 									"patching_rect" : [ 533.0, 403.0, 121.0, 22.0 ],
@@ -443,7 +443,7 @@
 
 											}
  ],
-										"originid" : "pat-2396"
+										"originid" : "pat-13"
 									}
 ,
 									"patching_rect" : [ 153.0, 403.0, 100.0, 22.0 ],
@@ -473,7 +473,7 @@
 
 							}
  ],
-						"originid" : "pat-2392"
+						"originid" : "pat-9"
 					}
 ,
 					"patching_rect" : [ 248.5, 391.5, 87.0, 77.0 ],
@@ -492,6 +492,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -519,8 +520,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 348.0, 433.0, 33.0 ],
-									"presentation_linecount" : 2,
+									"patching_rect" : [ 308.0, 348.0, 435.0, 33.0 ],
 									"text" : "In the fourth tutorial you will understand how to save and load the parameters of your Somax2 players, to quickly retrieve presets on the fly",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
@@ -840,7 +840,7 @@
 
 											}
  ],
-										"originid" : "pat-2401"
+										"originid" : "pat-18"
 									}
 ,
 									"patching_rect" : [ 7.5, 432.0, 68.0, 22.0 ],
@@ -906,7 +906,7 @@
 
 							}
  ],
-						"originid" : "pat-2399"
+						"originid" : "pat-16"
 					}
 ,
 					"patching_rect" : [ 19.011363636363626, 391.5, 87.0, 77.0 ],
@@ -1072,7 +1072,7 @@
 
 							}
  ],
-						"originid" : "pat-2404"
+						"originid" : "pat-21"
 					}
 ,
 					"patching_rect" : [ 528.0, 391.5, 87.0, 77.0 ],
@@ -1267,7 +1267,7 @@
 
 											}
  ],
-										"originid" : "pat-2409"
+										"originid" : "pat-26"
 									}
 ,
 									"patching_rect" : [ 153.0, 413.0, 103.0, 22.0 ],
@@ -1289,7 +1289,7 @@
 
 							}
  ],
-						"originid" : "pat-2407"
+						"originid" : "pat-24"
 					}
 ,
 					"patching_rect" : [ 135.5, 391.5, 87.0, 77.0 ],
@@ -1356,7 +1356,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1375,7 +1374,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 302.0, 245.0, 881.0, 516.0 ],
+						"rect" : [ 456.0, 260.0, 881.0, 516.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
 								"box" : 								{
@@ -1547,7 +1546,7 @@
 
 											}
  ],
-										"originid" : "pat-2414"
+										"originid" : "pat-31"
 									}
 ,
 									"patching_rect" : [ 599.0, 174.0, 135.0, 22.0 ],
@@ -1601,7 +1600,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 30.0, 105.59375, 163.0, 280.0 ],
 									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
-									"tabs" : [ "somax.server", "somax.player", "somax.audioinfluencer", "somax.midiinfluencer", "somax.audiorenderer", "somax.midirenderer", "somax.audiocorpusbuilder", "somax.midicorpusbuilder", "somax.audiorecord", "somax.regions" ]
+									"tabs" : [ "somax.server", "somax.player", "somax.audioinfluencer", "somax.midiinfluencer", "somax.audiorenderer", "somax.midirenderer", "somax.audiocorpusbuilder", "somax.midicorpusbuilder", "somax.audiorecord", "somax.regions", "somax.filter" ]
 								}
 
 							}
@@ -1708,7 +1707,7 @@
 
 											}
  ],
-										"originid" : "pat-2416"
+										"originid" : "pat-33"
 									}
 ,
 									"patching_rect" : [ 231.0, 451.0, 77.0, 22.0 ],
@@ -1761,7 +1760,7 @@
 
 							}
  ],
-						"originid" : "pat-2412"
+						"originid" : "pat-29"
 					}
 ,
 					"patching_rect" : [ 395.5, 391.5, 87.0, 77.0 ],
@@ -2319,7 +2318,7 @@
 
 			}
  ],
-		"originid" : "pat-2389",
+		"originid" : "pat-6",
 		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
