@@ -31,7 +31,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 77.0, 126.0, 1056.0, 690.0 ],
+						"rect" : [ 0.0, 26.0, 1056.0, 690.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 782.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
@@ -39,8 +39,6 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-44",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -62,8 +60,7 @@
 
 									}
 ,
-									"text" : "ignore sample rate mismatch (message only valid for the somax.audiorecord..ui and somax.audiorecord.app)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "ignore sample rate mismatch (message only valid for the somax.audiorecord..ui and somax.audiorecord.app)"
 								}
 
 							}
@@ -82,16 +79,13 @@
 
 									}
 ,
-									"text" : "You now have two choices:\n\nmatch Max and corpus sample rate to record at the right sample rate, or\n\nignore the sample rate issue and record at the wrong sample rate, resulting in pitch alterations!",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "You now have two choices:\n\nmatch Max and corpus sample rate to record at the right sample rate, or\n\nignore the sample rate issue and record at the wrong sample rate, resulting in pitch alterations!"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 0,
 									"id" : "obj-16",
@@ -115,16 +109,13 @@
 
 									}
 ,
-									"text" : "change Max sampling rate to match the loaded corpus sample rate",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "change Max sampling rate to match the loaded corpus sample rate"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"fontface" : 1,
 									"id" : "obj-5",
@@ -148,16 +139,13 @@
 
 									}
 ,
-									"text" : "Sample Rate Mismatch error (warning message printed also in the Max Console)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Sample Rate Mismatch error (warning message printed also in the Max Console)"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-43",
 									"linecount" : 2,
@@ -180,8 +168,7 @@
 
 									}
 ,
-									"text" : "set Max sampling rate at 44.1kHz",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "set Max sampling rate at 44.1kHz"
 								}
 
 							}
@@ -200,8 +187,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-38",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -223,16 +208,13 @@
 
 									}
 ,
-									"text" : "load a corpus with a  48kHz sample rate",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "load a corpus with a  48kHz sample rate"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-37",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -253,8 +235,7 @@
 
 									}
 ,
-									"text" : "initialize somax.audiorecord",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize somax.audiorecord"
 								}
 
 							}
@@ -392,8 +373,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-28",
 									"linecount" : 2,
@@ -416,8 +395,7 @@
 
 									}
 ,
-									"text" : "make sure that the server is active",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "make sure that the server is active"
 								}
 
 							}
@@ -438,8 +416,7 @@
 
 									}
 ,
-									"text" : "See the real-time corpus recording tutorial for more",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "See the real-time corpus recording tutorial for more"
 								}
 
 							}
@@ -504,8 +481,7 @@
 
 									}
 ,
-									"text" : "influences",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "influences"
 								}
 
 							}
@@ -523,8 +499,7 @@
 
 									}
 ,
-									"text" : "audio signal to record",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "audio signal to record"
 								}
 
 							}
@@ -577,8 +552,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-13",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -599,8 +572,7 @@
 
 									}
 ,
-									"text" : "make sure to start dsp",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "make sure to start dsp"
 								}
 
 							}
@@ -705,8 +677,7 @@
 
 									}
 ,
-									"text" : "If you are trying to record a new corpus in a somax.player after you loaded an existing audio corpus, you might experiencing a Sample Rate Mismatch in the somax.audiorecord.ui. \nThis happens when Max has a different sample rate than the audio file you have just loaded in the player.\nNote that, while matching Max and your audio file sample rates is always the recommended strategy, if you use the basic somax.audiorecord object you will always be able to record at a different sample rate (even though you will get a warning message in the Max Console).",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "If you are trying to record a new corpus in a somax.player after you loaded an existing audio corpus, you might experiencing a Sample Rate Mismatch in the somax.audiorecord.ui. \nThis happens when Max has a different sample rate than the audio file you have just loaded in the player.\nNote that, while matching Max and your audio file sample rates is always the recommended strategy, if you use the basic somax.audiorecord object you will always be able to record at a different sample rate (even though you will get a warning message in the Max Console)."
 								}
 
 							}
@@ -776,8 +747,7 @@
 
 									}
 ,
-									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step"
 								}
 
 							}
@@ -984,7 +954,7 @@
 
 											}
  ],
-										"originid" : "pat-16301"
+										"originid" : "pat-4840"
 									}
 ,
 									"patching_rect" : [ 748.0, 192.0, 165.041666666666515, 22.0 ],
@@ -1052,8 +1022,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-78",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -1075,8 +1043,7 @@
 
 									}
 ,
-									"text" : "initialize the server \n(if not already initialized)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize the server \n(if not already initialized)"
 								}
 
 							}
@@ -1117,7 +1084,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -1672,7 +1639,7 @@
 
 							}
  ],
-						"originid" : "pat-15606"
+						"originid" : "pat-4145"
 					}
 ,
 					"patching_rect" : [ 548.0, 38.0, 144.0, 22.0 ],
@@ -1781,8 +1748,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-28",
 									"linecount" : 2,
@@ -1805,8 +1770,7 @@
 
 									}
 ,
-									"text" : "make sure that the server is active",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "make sure that the server is active"
 								}
 
 							}
@@ -1827,8 +1791,7 @@
 
 									}
 ,
-									"text" : "See the real-time corpus recording tutorial for more",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "See the real-time corpus recording tutorial for more"
 								}
 
 							}
@@ -1882,8 +1845,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-5",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -1905,8 +1866,7 @@
 
 									}
 ,
-									"text" : "Open the subpatch to try and explore these messages",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Open the subpatch to try and explore these messages"
 								}
 
 							}
@@ -1925,8 +1885,7 @@
 
 									}
 ,
-									"text" : "As any Somax object, the somax.audiorecord.ui is scriptable through messages, but it takes more messages than the somax.audiorecord, to handle utility and control information",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "As any Somax object, the somax.audiorecord.ui is scriptable through messages, but it takes more messages than the somax.audiorecord, to handle utility and control information"
 								}
 
 							}
@@ -2691,7 +2650,7 @@
 
 											}
  ],
-										"originid" : "pat-16357"
+										"originid" : "pat-4896"
 									}
 ,
 									"patching_rect" : [ 676.0, 486.0, 143.0, 22.0 ],
@@ -2717,8 +2676,7 @@
 
 									}
 ,
-									"text" : "influences",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "influences"
 								}
 
 							}
@@ -2736,8 +2694,7 @@
 
 									}
 ,
-									"text" : "audio signal to record",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "audio signal to record"
 								}
 
 							}
@@ -2790,8 +2747,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-13",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -2812,8 +2767,7 @@
 
 									}
 ,
-									"text" : "make sure to start dsp",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "make sure to start dsp"
 								}
 
 							}
@@ -2830,8 +2784,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 2,
 									"id" : "obj-11",
 									"linecount" : 3,
@@ -2854,16 +2806,13 @@
 
 									}
 ,
-									"text" : "somax.audiorenderer must have the same buffername as the somax.audiorecord.ui",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "somax.audiorenderer must have the same buffername as the somax.audiorecord.ui"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-54",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -2885,16 +2834,13 @@
 
 									}
 ,
-									"text" : "in the Inspector, set Argument(s) to \"@buffername buffer-05\" to display the waveform ",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "in the Inspector, set Argument(s) to \"@buffername buffer-05\" to display the waveform "
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-29",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -2916,8 +2862,7 @@
 
 									}
 ,
-									"text" : "instantiated with [bpatcher somax.audiorecord.ui]",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "instantiated with [bpatcher somax.audiorecord.ui]"
 								}
 
 							}
@@ -2949,8 +2894,7 @@
 
 									}
 ,
-									"text" : "When connecting the somax.audiorecord.ui in a loop with a somax.player you can avoid specifying the @recordconfig for the latter. This is automatically handled through their connection when the player is initialized.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "When connecting the somax.audiorecord.ui in a loop with a somax.player you can avoid specifying the @recordconfig for the latter. This is automatically handled through their connection when the player is initialized."
 								}
 
 							}
@@ -3032,8 +2976,7 @@
 
 									}
 ,
-									"text" : "The somax.audiorecord.ui is a wrapper around the core object, with a dedicated user interface and automatic handling of app modules. Every somax.audioinfluencer.app in your environment and every input channel is directly available and could be selected via the menu. You can use this ui object also in hybrid configuration, connecting it to core Somax objects, thanks to its inlets for influences and audio signal (when set to <None>).",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "The somax.audiorecord.ui is a wrapper around the core object, with a dedicated user interface and automatic handling of app modules. Every somax.audioinfluencer.app in your environment and every input channel is directly available and could be selected via the menu. You can use this ui object also in hybrid configuration, connecting it to core Somax objects, thanks to its inlets for influences and audio signal (when set to <None>)."
 								}
 
 							}
@@ -3102,8 +3045,7 @@
 
 									}
 ,
-									"text" : "\"playersmissing\" is ok here too!",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "\"playersmissing\" is ok here too!"
 								}
 
 							}
@@ -3124,8 +3066,7 @@
 
 									}
 ,
-									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step"
 								}
 
 							}
@@ -3332,7 +3273,7 @@
 
 											}
  ],
-										"originid" : "pat-17000"
+										"originid" : "pat-5539"
 									}
 ,
 									"patching_rect" : [ 748.0, 192.0, 165.041666666666515, 22.0 ],
@@ -3400,8 +3341,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-78",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -3423,8 +3362,7 @@
 
 									}
 ,
-									"text" : "initialize the server \n(if not already initialized)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize the server \n(if not already initialized)"
 								}
 
 							}
@@ -3465,7 +3403,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -3849,7 +3787,7 @@
 
 							}
  ],
-						"originid" : "pat-16303"
+						"originid" : "pat-4842"
 					}
 ,
 					"patching_rect" : [ 485.0, 38.0, 31.0, 22.0 ],
@@ -3887,8 +3825,6 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-39",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -3909,8 +3845,7 @@
 
 									}
 ,
-									"text" : "initialize the players",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize the players"
 								}
 
 							}
@@ -4001,8 +3936,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-31",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -4024,8 +3957,7 @@
 
 									}
 ,
-									"text" : "this records the same audio and the same segmentation in three different players",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "this records the same audio and the same segmentation in three different players"
 								}
 
 							}
@@ -4045,8 +3977,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-30",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -4067,16 +3997,13 @@
 
 									}
 ,
-									"text" : "make sure to start dsp",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "make sure to start dsp"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 1.0,
 									"bubbleside" : 2,
 									"id" : "obj-9",
@@ -4099,16 +4026,13 @@
 
 									}
 ,
-									"text" : "bang any player to trigger its output",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "bang any player to trigger its output"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 2,
 									"id" : "obj-8",
@@ -4131,16 +4055,13 @@
 
 									}
 ,
-									"text" : "create a new empty corpus for all three players",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "create a new empty corpus for all three players"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-59",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -4161,8 +4082,7 @@
 
 									}
 ,
-									"text" : "play an audio source",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "play an audio source"
 								}
 
 							}
@@ -4327,8 +4247,7 @@
 
 									}
 ,
-									"text" : "When you have one somax.audiorecord recording simultaneously into different somax.players, each with a separate somax.audiorenderer referring to the same buffer, setting \"@linkto null\" in two of the renderers is recommended (but not mandatory) to avoid duplicate messages between the somax.renderer and the somax.record\n",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "When you have one somax.audiorecord recording simultaneously into different somax.players, each with a separate somax.audiorenderer referring to the same buffer, setting \"@linkto null\" in two of the renderers is recommended (but not mandatory) to avoid duplicate messages between the somax.renderer and the somax.record\n"
 								}
 
 							}
@@ -4464,8 +4383,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-20",
 									"linecount" : 2,
@@ -4488,8 +4405,7 @@
 
 									}
 ,
-									"text" : "make sure that the server is active",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "make sure that the server is active"
 								}
 
 							}
@@ -4509,8 +4425,7 @@
 
 									}
 ,
-									"text" : "\"playersmissing\" is ok here too!",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "\"playersmissing\" is ok here too!"
 								}
 
 							}
@@ -4531,8 +4446,7 @@
 
 									}
 ,
-									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step"
 								}
 
 							}
@@ -4739,7 +4653,7 @@
 
 											}
  ],
-										"originid" : "pat-18064"
+										"originid" : "pat-6603"
 									}
 ,
 									"patching_rect" : [ 748.0, 192.0, 165.041666666666515, 22.0 ],
@@ -4807,8 +4721,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-78",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -4830,8 +4742,7 @@
 
 									}
 ,
-									"text" : "initialize the server \n(if not already initialized)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize the server \n(if not already initialized)"
 								}
 
 							}
@@ -4872,7 +4783,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -4893,8 +4804,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-12",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -4915,8 +4824,7 @@
 
 									}
 ,
-									"text" : "start recording",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "start recording"
 								}
 
 							}
@@ -5570,7 +5478,7 @@
 
 							}
  ],
-						"originid" : "pat-17002"
+						"originid" : "pat-5541"
 					}
 ,
 					"patching_rect" : [ 296.0, 38.0, 175.0, 22.0 ],
@@ -5634,8 +5542,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 2,
 									"id" : "obj-20",
 									"maxclass" : "comment",
@@ -5657,8 +5563,7 @@
 
 									}
 ,
-									"text" : "initialize the player",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize the player"
 								}
 
 							}
@@ -5688,8 +5593,7 @@
 
 									}
 ,
-									"text" : "learned <index> <onset_ms> <duration_ms> <new_corpus_duration_ms>",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "learned <index> <onset_ms> <duration_ms> <new_corpus_duration_ms>"
 								}
 
 							}
@@ -5719,16 +5623,13 @@
 
 									}
 ,
-									"text" : "The somax.audiorecord takes as inputs an audio stream and a segmentation analysis, usually generated by a somax.audioinfluencer.\nIn this example we'll illustrate how the segmentation and the learning of events could work using custom data and manual annotation of labels.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "The somax.audiorecord takes as inputs an audio stream and a segmentation analysis, usually generated by a somax.audioinfluencer.\nIn this example we'll illustrate how the segmentation and the learning of events could work using custom data and manual annotation of labels."
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-30",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -5749,8 +5650,7 @@
 
 									}
 ,
-									"text" : "make sure to start dsp",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "make sure to start dsp"
 								}
 
 							}
@@ -5767,8 +5667,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-25",
 									"maxclass" : "comment",
@@ -5790,16 +5688,13 @@
 
 									}
 ,
-									"text" : "last larned event",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "last larned event"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 2,
 									"id" : "obj-13",
@@ -5823,8 +5718,7 @@
 
 									}
 ,
-									"text" : "we'll record this noise oscillator in the buffer",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "we'll record this noise oscillator in the buffer"
 								}
 
 							}
@@ -5952,7 +5846,7 @@
 
 											}
  ],
-										"originid" : "pat-18598"
+										"originid" : "pat-7137"
 									}
 ,
 									"patching_rect" : [ 159.0, 228.0, 106.0, 22.0 ],
@@ -5967,8 +5861,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 2,
 									"id" : "obj-5",
@@ -5992,8 +5884,7 @@
 
 									}
 ,
-									"text" : "create a new empty corpus or load an existing one",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "create a new empty corpus or load an existing one"
 								}
 
 							}
@@ -6062,8 +5953,7 @@
 
 									}
 ,
-									"text" : "\"playersmissing\" is ok here too!",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "\"playersmissing\" is ok here too!"
 								}
 
 							}
@@ -6084,8 +5974,7 @@
 
 									}
 ,
-									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step"
 								}
 
 							}
@@ -6292,7 +6181,7 @@
 
 											}
  ],
-										"originid" : "pat-18600"
+										"originid" : "pat-7139"
 									}
 ,
 									"patching_rect" : [ 748.0, 192.0, 165.041666666666515, 22.0 ],
@@ -6360,8 +6249,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-78",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -6383,8 +6270,7 @@
 
 									}
 ,
-									"text" : "initialize the server \n(if not already initialized)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize the server \n(if not already initialized)"
 								}
 
 							}
@@ -6425,7 +6311,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 234.0, 171.645833333333599, 29.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -6470,16 +6356,13 @@
 
 									}
 ,
-									"text" : "if buffer reaches its end: overflow message on dumpout. There's no way to resize an existing buffer in max, you'll need to save the corpus (savecorpus my_corpus), resize the buffer (recordconfig ...), reload (corpus my_corpus)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "if buffer reaches its end: overflow message on dumpout. There's no way to resize an existing buffer in max, you'll need to save the corpus (savecorpus my_corpus), resize the buffer (recordconfig ...), reload (corpus my_corpus)"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-21",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -6500,8 +6383,7 @@
 
 									}
 ,
-									"text" : "bang to trigger segmentation / learn message",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "bang to trigger segmentation / learn message"
 								}
 
 							}
@@ -6520,8 +6402,7 @@
 
 									}
 ,
-									"text" : "We'd normally use influencers to annotate real pitch, chroma, tempo, etc. \nThese are fake data to illustrate how learning and labelling works",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "We'd normally use influencers to annotate real pitch, chroma, tempo, etc. \nThese are fake data to illustrate how learning and labelling works"
 								}
 
 							}
@@ -6658,8 +6539,7 @@
 
 									}
 ,
-									"text" : "amplitude varying noise just to be able to see it in properly in the waveform~",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "amplitude varying noise just to be able to see it in properly in the waveform~"
 								}
 
 							}
@@ -6794,7 +6674,7 @@
 
 											}
  ],
-										"originid" : "pat-18602"
+										"originid" : "pat-7141"
 									}
 ,
 									"patching_rect" : [ 514.0, 272.0, 73.0, 22.0 ],
@@ -6819,8 +6699,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-12",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -6841,8 +6719,7 @@
 
 									}
 ,
-									"text" : "start recording",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "start recording"
 								}
 
 							}
@@ -7425,7 +7302,7 @@
 
 							}
  ],
-						"originid" : "pat-18596"
+						"originid" : "pat-7135"
 					}
 ,
 					"patching_rect" : [ 169.0, 38.0, 113.0, 22.0 ],
@@ -7463,8 +7340,6 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-6",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -7485,8 +7360,7 @@
 
 									}
 ,
-									"text" : "initialize the player",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize the player"
 								}
 
 							}
@@ -7518,8 +7392,7 @@
 
 									}
 ,
-									"text" : "Details on the initialization of somax.audiorecord and somax.audiorenderer.\nWhen a corpus is loaded, the somax.audiorenderer will internally send a message (using the send address somax.buffer.<buffer_name>) to any somax.audiorecord using the same buffer name to inform it of its size (and where to start recording into the buffer, if the corpus isn't empty)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Details on the initialization of somax.audiorecord and somax.audiorenderer.\nWhen a corpus is loaded, the somax.audiorenderer will internally send a message (using the send address somax.buffer.<buffer_name>) to any somax.audiorecord using the same buffer name to inform it of its size (and where to start recording into the buffer, if the corpus isn't empty)"
 								}
 
 							}
@@ -7588,8 +7461,7 @@
 
 									}
 ,
-									"text" : "\"playersmissing\" is ok here too!",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "\"playersmissing\" is ok here too!"
 								}
 
 							}
@@ -7610,8 +7482,7 @@
 
 									}
 ,
-									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "if the status is \"duplicate\" and you already have an initialized (and active) server running in another window, you may skip this step"
 								}
 
 							}
@@ -7818,7 +7689,7 @@
 
 											}
  ],
-										"originid" : "pat-19136"
+										"originid" : "pat-7675"
 									}
 ,
 									"patching_rect" : [ 748.0, 216.0, 165.041666666666515, 22.0 ],
@@ -7886,8 +7757,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-78",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -7909,8 +7778,7 @@
 
 									}
 ,
-									"text" : "initialize the server \n(if not already initialized)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize the server \n(if not already initialized)"
 								}
 
 							}
@@ -7951,7 +7819,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 872.0, 258.0, 171.645833333333599, 29.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -7972,8 +7840,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 2,
 									"id" : "obj-10",
@@ -7996,16 +7862,13 @@
 
 									}
 ,
-									"text" : "buffer information can be retrieved from the righmost outlet of the somax.audiorenderer",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "buffer information can be retrieved from the righmost outlet of the somax.audiorenderer"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 2,
 									"id" : "obj-9",
@@ -8029,8 +7892,7 @@
 
 									}
 ,
-									"text" : "create a new empty corpus or load an existing one",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "create a new empty corpus or load an existing one"
 								}
 
 							}
@@ -8061,8 +7923,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 2,
 									"id" : "obj-1",
@@ -8085,8 +7945,7 @@
 
 									}
 ,
-									"text" : "@recordconfig can also be set as a message",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "@recordconfig can also be set as a message"
 								}
 
 							}
@@ -8275,8 +8134,7 @@
 
 									}
 ,
-									"text" : "internally, when we send the \"recordconfig\" message to the somax.player, this will:\n(a) tell the somax.player which descriptors to expect\n(b) send a \"bufferconfig\" message on the first outlet determining the internal buffer size and channels to use",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "internally, when we send the \"recordconfig\" message to the somax.player, this will:\n(a) tell the somax.player which descriptors to expect\n(b) send a \"bufferconfig\" message on the first outlet determining the internal buffer size and channels to use"
 								}
 
 							}
@@ -8295,8 +8153,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 1.0,
 									"bubbleside" : 2,
 									"id" : "obj-4",
@@ -8320,8 +8176,7 @@
 
 									}
 ,
-									"text" : "These two objects must have the same buffer name (just like buffer~ and record~)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "These two objects must have the same buffer name (just like buffer~ and record~)"
 								}
 
 							}
@@ -8732,7 +8587,7 @@
 
 							}
  ],
-						"originid" : "pat-19134"
+						"originid" : "pat-7673"
 					}
 ,
 					"patching_rect" : [ 81.0, 38.0, 81.0, 22.0 ],
@@ -9208,7 +9063,7 @@
 							}
  ],
 						"lines" : [  ],
-						"originid" : "pat-19668"
+						"originid" : "pat-8207"
 					}
 ,
 					"patching_rect" : [ 806.0, 38.0, 73.0, 22.0 ],
@@ -9245,7 +9100,7 @@
 						"isolateaudio" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-19670"
+						"originid" : "pat-8209"
 					}
 ,
 					"patching_rect" : [ 900.0, 38.0, 25.0, 22.0 ],
@@ -9275,7 +9130,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1056.0, 690.0 ],
+						"rect" : [ 77.0, 126.0, 1056.0, 690.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
@@ -9293,8 +9148,6 @@
 									"parameter_enable" : 0,
 									"parameter_mappable" : 0,
 									"patching_rect" : [ 167.0, 325.0, 54.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 124.5, 90.25, 47.0, 15.0 ],
 									"setminmax" : [ -10.0, 10.0 ],
 									"setstyle" : 1,
 									"signed" : 1,
@@ -9368,16 +9221,13 @@
 
 									}
 ,
-									"text" : "The new corpus will be stored in the server's corpuspath folder. See the",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "The new corpus will be stored in the server's corpuspath folder. See the"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 2,
 									"id" : "obj-18",
@@ -9400,16 +9250,13 @@
 
 									}
 ,
-									"text" : "save new corpus",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "save new corpus"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 2,
 									"id" : "obj-9",
@@ -9432,8 +9279,7 @@
 
 									}
 ,
-									"text" : "custom format (default '.wav')",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "custom format (default '.wav')"
 								}
 
 							}
@@ -9452,8 +9298,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.1,
 									"bubbleside" : 2,
 									"id" : "obj-29",
@@ -9476,8 +9320,7 @@
 
 									}
 ,
-									"text" : "overwrite existing",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "overwrite existing"
 								}
 
 							}
@@ -9508,8 +9351,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-64",
 									"linecount" : 2,
@@ -9532,16 +9373,13 @@
 
 									}
 ,
-									"text" : "make sure that the server is active",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "make sure that the server is active"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-63",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -9562,16 +9400,13 @@
 
 									}
 ,
-									"text" : "event learned in the new corpus",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "event learned in the new corpus"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-59",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -9593,16 +9428,13 @@
 
 									}
 ,
-									"text" : "buffer can be referenced in a waveform~ object",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "buffer can be referenced in a waveform~ object"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-54",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -9623,16 +9455,13 @@
 
 									}
 ,
-									"text" : "play an audio source",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "play an audio source"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-51",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -9653,8 +9482,7 @@
 
 									}
 ,
-									"text" : "bang player to generate output",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "bang player to generate output"
 								}
 
 							}
@@ -9672,8 +9500,7 @@
 
 									}
 ,
-									"text" : "rec status",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "rec status"
 								}
 
 							}
@@ -9787,8 +9614,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 2,
 									"id" : "obj-56",
 									"maxclass" : "comment",
@@ -9810,8 +9635,7 @@
 
 									}
 ,
-									"text" : "start / stop recording",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "start / stop recording"
 								}
 
 							}
@@ -9843,8 +9667,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-46",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -9865,8 +9687,7 @@
 
 									}
 ,
-									"text" : "initialize the player",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize the player"
 								}
 
 							}
@@ -9898,8 +9719,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-25",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -9920,8 +9739,7 @@
 
 									}
 ,
-									"text" : "start dsp & set gain",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "start dsp & set gain"
 								}
 
 							}
@@ -9942,8 +9760,7 @@
 
 									}
 ,
-									"text" : "See the real-time corpus recording tutorial for more info",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "See the real-time corpus recording tutorial for more info"
 								}
 
 							}
@@ -9997,8 +9814,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-78",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -10019,8 +9834,7 @@
 
 									}
 ,
-									"text" : "initialize the server",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize the server"
 								}
 
 							}
@@ -10041,8 +9855,7 @@
 
 									}
 ,
-									"text" : "If the status is \"duplicate\" and you already have another server running (and active), go to the next step",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "If the status is \"duplicate\" and you already have another server running (and active), go to the next step"
 								}
 
 							}
@@ -10257,7 +10070,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 889.0, 253.0, 163.0, 29.0 ],
-									"text" : "0 offline"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -10290,8 +10103,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"fontname" : "Arial",
 									"fontsize" : 13.0,
@@ -10315,8 +10126,7 @@
 
 									}
 ,
-									"text" : "server status",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "server status"
 								}
 
 							}
@@ -10344,8 +10154,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-24",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -10367,8 +10175,7 @@
 
 									}
 ,
-									"text" : "the somax.audiorenderer's @buffername attribute must be provided for somax.audiorecord to work",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "the somax.audiorenderer's @buffername attribute must be provided for somax.audiorecord to work"
 								}
 
 							}
@@ -10426,16 +10233,13 @@
 
 									}
 ,
-									"text" : "valid descriptors are:\n- pitch\n- onsetchroma (chroma at onset of the slice)\n- meanchroma (mean chroma of the slice)\n- tempo\n- beat (position in beat as a number between 0 and 1)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "valid descriptors are:\n- pitch\n- onsetchroma (chroma at onset of the slice)\n- meanchroma (mean chroma of the slice)\n- tempo\n- beat (position in beat as a number between 0 and 1)"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-15",
 									"linecount" : 4,
 									"maxclass" : "comment",
@@ -10457,8 +10261,7 @@
 
 									}
 ,
-									"text" : "@recordconfig format:\n- record buffer size (ms)\n- number of channels\n- required descriptors",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "@recordconfig format:\n- record buffer size (ms)\n- number of channels\n- required descriptors"
 								}
 
 							}
@@ -10490,8 +10293,7 @@
 
 									}
 ,
-									"text" : "remaining time before buffer is full",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "remaining time before buffer is full"
 								}
 
 							}
@@ -10525,8 +10327,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-7",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -10548,8 +10348,7 @@
 
 									}
 ,
-									"text" : "buffer name is the first mandatory argument, object will not run without a provided name",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "buffer name is the first mandatory argument, object will not run without a provided name"
 								}
 
 							}
@@ -11143,7 +10942,7 @@
 
 							}
  ],
-						"originid" : "pat-19672"
+						"originid" : "pat-8211"
 					}
 ,
 					"patching_rect" : [ 24.0, 38.0, 47.0, 22.0 ],
@@ -11158,7 +10957,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-15604",
+		"originid" : "pat-4143",
 		"parameters" : 		{
 			"obj-10::obj-1::obj-114" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-10::obj-1::obj-119" : [ "live.text[118]", "live.text[30]", 0 ],
