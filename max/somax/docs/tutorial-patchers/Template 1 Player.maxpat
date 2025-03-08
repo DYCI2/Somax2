@@ -15,6 +15,7 @@
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
 				"box" : 				{
+					"args" : [ "Player1" ],
 					"bgmode" : 0,
 					"border" : 0,
 					"clickthrough" : 0,
@@ -124,7 +125,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-1455",
+		"originid" : "pat-15312",
 		"parameters" : 		{
 			"obj-11::obj-118::obj-114" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-11::obj-118::obj-119" : [ "live.text[67]", "live.text[30]", 0 ],
@@ -134,6 +135,7 @@
 			"obj-11::obj-118::obj-2::obj-62::obj-1" : [ "source[9]", "source", 0 ],
 			"obj-11::obj-118::obj-42" : [ "live.toggle", "live.toggle", 0 ],
 			"obj-11::obj-118::obj-55" : [ "live.gain~", "live.gain~", 0 ],
+			"obj-11::obj-17::obj-103" : [ "influence delay[4]", "influencedelay", 0 ],
 			"obj-11::obj-17::obj-10::obj-103" : [ "influence delay[2]", "influencedelay", 0 ],
 			"obj-11::obj-17::obj-10::obj-21" : [ "onset[5]", "onset", 0 ],
 			"obj-11::obj-17::obj-10::obj-26" : [ "chroma scaling factor[5]", "chroma", 0 ],
