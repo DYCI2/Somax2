@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 361.0, 213.0, 942.0, 597.0 ],
+		"rect" : [ 360.0, 211.0, 942.0, 597.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"enablehscroll" : 0,
@@ -492,7 +492,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -515,12 +514,77 @@
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
 								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-17",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 477.0, 429.0, 378.0, 35.0 ],
+									"presentation_linecount" : 2,
+									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=p4nUd5pot4w"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.290196, 0.309804, 0.301961, 0.0 ],
+									"id" : "obj-18",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 297.0, 386.0, 114.0, 24.0 ],
+									"text" : "Video Tutorial 5",
+									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
+									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
+									"underline" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-15",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 308.0, 360.0, 571.0, 33.0 ],
+									"presentation_linecount" : 2,
+									"text" : "In this tutorial you will be guided through the full workflow of using your own custom labels. This goes from manual annotation in Reaper/Audacity, to manual corpus building, filtering and matching in Somax2.",
+									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"button" : 1,
+									"fontface" : 0,
+									"fontname" : "Arial",
+									"fontsize" : 11.595186999999999,
+									"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"id" : "obj-14",
+									"maxclass" : "tab",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "int", "", "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 29.0, 364.0, 266.0, 41.0 ],
+									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
+									"tabs" : [ "5 - Using Custom Labels" ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-13",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 348.0, 435.0, 33.0 ],
+									"patching_rect" : [ 308.0, 304.25, 571.0, 33.0 ],
 									"text" : "In the fourth tutorial you will understand how to save and load the parameters of your Somax2 players, to quickly retrieve presets on the fly",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
@@ -539,7 +603,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 337.0, 266.0, 55.5 ],
+									"patching_rect" : [ 29.0, 300.25, 266.0, 41.0 ],
 									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "4 - Save and Load Presets" ]
 								}
@@ -552,7 +616,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 271.0, 450.0, 33.0 ],
+									"patching_rect" : [ 308.0, 240.5, 586.0, 33.0 ],
 									"text" : "In the third tutorial you will learn how to prepare your own Somax2 environment and how to script the module's parameters through interactive messages",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
@@ -571,7 +635,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 260.0, 266.0, 55.5 ],
+									"patching_rect" : [ 29.0, 236.5, 266.0, 41.0 ],
 									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "3 - Script your Environment" ]
 								}
@@ -600,7 +664,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 297.0, 213.0, 114.0, 24.0 ],
+									"patching_rect" : [ 297.0, 187.0, 114.0, 24.0 ],
 									"text" : "Video Tutorial 2",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -631,7 +695,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 297.0, 138.0, 114.0, 24.0 ],
+									"patching_rect" : [ 509.0, 120.0, 114.0, 24.0 ],
 									"text" : "Video Tutorial 1",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -642,12 +706,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-5",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 184.0, 407.0, 33.0 ],
-									"text" : "In the second tutorial you will learn how to build a corpus from your audio materials, and interact with it ",
+									"patching_rect" : [ 308.0, 172.0, 561.0, 20.0 ],
+									"text" : "In the second tutorial you will learn how to build a corpus from your audio materials, and interact with it.",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
@@ -659,8 +722,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 109.0, 418.0, 33.0 ],
-									"text" : "The first tutorial will give you an overview of the Somax2 application workflow, guiding you through immediate audio and MIDI interactions",
+									"patching_rect" : [ 308.0, 109.0, 554.0, 33.0 ],
+									"text" : "The first tutorial will give you an overview of the Somax2 application workflow, guiding you through immediate audio and MIDI interactions. ",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
@@ -678,7 +741,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 184.0, 266.0, 55.5 ],
+									"patching_rect" : [ 29.0, 172.75, 266.0, 41.0 ],
 									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "2 - Audio Corpus Builder" ]
 								}
@@ -723,7 +786,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 109.0, 266.0, 55.5 ],
+									"patching_rect" : [ 29.0, 109.0, 266.0, 41.0 ],
 									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"tabs" : [ "1 - First Steps with Somax2" ]
 								}
@@ -866,8 +929,17 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 162.0, 412.25, 17.0, 412.25 ],
+									"midpoints" : [ 162.0, 346.265625, 17.0, 346.265625 ],
 									"source" : [ "obj-12", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-9", 0 ],
+									"hidden" : 1,
+									"midpoints" : [ 162.0, 420.66015625, 17.0, 420.66015625 ],
+									"source" : [ "obj-14", 1 ]
 								}
 
 							}
@@ -881,9 +953,17 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-17", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-18", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 162.0, 254.0625, 17.0, 254.0625 ],
+									"midpoints" : [ 162.0, 211.30078125, 17.0, 211.30078125 ],
 									"source" : [ "obj-3", 1 ]
 								}
 
@@ -892,7 +972,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 162.0, 177.47265625, 17.0, 177.47265625 ],
+									"midpoints" : [ 162.0, 154.3046875, 17.0, 154.3046875 ],
 									"source" : [ "obj-37", 1 ]
 								}
 
@@ -1356,6 +1436,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
