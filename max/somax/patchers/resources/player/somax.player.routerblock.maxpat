@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 617.0, 487.0, 371.0, 234.0 ],
+		"rect" : [ 34.0, 100.0, 1444.0, 785.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -136,9 +136,9 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 3,
-									"outlettype" : [ "clear", "stop", "bang" ],
-									"patching_rect" : [ 44.0, 124.0, 222.0, 22.0 ],
-									"text" : "t clear stop b"
+									"outlettype" : [ "clear", "stop", "int" ],
+									"patching_rect" : [ 44.0, 124.0, 205.0, 22.0 ],
+									"text" : "t clear stop 0"
 								}
 
 							}
@@ -408,7 +408,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-14", 3 ],
+									"destination" : [ "obj-14", 2 ],
 									"source" : [ "obj-20", 2 ]
 								}
 
@@ -416,7 +416,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-16", 0 ],
-									"midpoints" : [ 155.0, 364.0, 205.5, 364.0 ],
+									"midpoints" : [ 146.5, 364.0, 205.5, 364.0 ],
 									"source" : [ "obj-20", 1 ]
 								}
 
@@ -453,7 +453,7 @@
 
 							}
  ],
-						"originid" : "pat-4080"
+						"originid" : "pat-1266"
 					}
 ,
 					"patching_rect" : [ 104.0, 499.0, 151.0, 23.0 ],
@@ -469,6 +469,7 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.82 ],
+					"hidden" : 1,
 					"id" : "obj-24",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -487,7 +488,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-39",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -646,7 +646,7 @@
 
 							}
  ],
-						"originid" : "pat-4082"
+						"originid" : "pat-1268"
 					}
 ,
 					"patching_rect" : [ 1200.0, 141.0, 35.0, 22.0 ],
@@ -694,10 +694,10 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 1512.0, 215.0, 143.0, 22.0 ],
 					"restore" : 					{
-						"_source" : [ "AudioInfluencer" ],
+						"_source" : [ "<None>" ],
 						"chroma" : [ 1.0 ],
 						"chromaonset" : [ 1 ],
-						"enable" : [ 0 ],
+						"enable" : [ 1 ],
 						"influencedelay" : [ 0.0 ],
 						"mfcc" : [ 1.0 ],
 						"onset" : [ 1 ],
@@ -757,7 +757,7 @@
 				"box" : 				{
 					"comment" : "(list) Messages to mfcc dict",
 					"id" : "obj-58",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -906,7 +906,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-73",
-					"index" : 7,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -931,7 +931,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-37",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -945,7 +945,7 @@
 				"box" : 				{
 					"comment" : "(list) descriptors",
 					"id" : "obj-12",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1407,7 +1407,7 @@
 				"box" : 				{
 					"comment" : "(bang) Chroma onset if enabled",
 					"id" : "obj-7",
-					"index" : 6,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1419,7 +1419,7 @@
 				"box" : 				{
 					"comment" : "(list) Messages to chroma dict",
 					"id" : "obj-6",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1431,7 +1431,7 @@
 				"box" : 				{
 					"comment" : "(bang) Onset if enabled",
 					"id" : "obj-5",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1443,7 +1443,7 @@
 				"box" : 				{
 					"comment" : "(int) Pitch if enabled",
 					"id" : "obj-4",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2281,7 +2281,46 @@
 
 			}
  ],
-		"originid" : "pat-4078",
+		"originid" : "pat-1264",
+		"parameters" : 		{
+			"obj-103" : [ "influence delay", "influencedelay", 0 ],
+			"obj-21" : [ "onset[2]", "onset", 0 ],
+			"obj-26" : [ "chroma scaling factor[10]", "chroma", 0 ],
+			"obj-28" : [ "chromaonset[2]", "chromaonset", 0 ],
+			"obj-29" : [ "enable[2]", "enable", 0 ],
+			"obj-30" : [ "chroma scaling factor[2]", "chroma", 0 ],
+			"obj-46::obj-1" : [ "source[5]", "source", 0 ],
+			"obj-9" : [ "pitch[2]", "pitch", 0 ],
+			"parameterbanks" : 			{
+				"0" : 				{
+					"index" : 0,
+					"name" : "",
+					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"parameter_overrides" : 			{
+				"obj-46::obj-1" : 				{
+					"parameter_invisible" : 0,
+					"parameter_modmode" : 0,
+					"parameter_unitstyle" : 10
+				}
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "somax.receiveblock.maxpat",
+				"bootpath" : "~/MaxProjects/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "../misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-86", "obj-41" ]
 			}
