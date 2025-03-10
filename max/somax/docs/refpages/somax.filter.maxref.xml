@@ -3,95 +3,117 @@
 
 <c74object name="somax.filter" module="somax" kind="patcher">
 
-	<digest>
-		Filter
-	</digest>
+    <digest>
+        Filters specific segments (events) of a corpus loaded into a <o>somax.player</o> based on descriptors and labels.
+    </digest>
 
-	<description>
-		Filter 
+    <description>
+        The <o>somax.filter</o> object allows filtering of segments (events) within a corpus that has been loaded into a <o>somax.player</o>. Filtering is based on descriptors and labels, allowing fine-grained selection of custom material.
+    </description>
 
-	</description>
+    <!--METADATA-->
+    <metadatalist>
+        <metadata name="author">ircam</metadata>
+        <metadata name="tag">somax</metadata>
+    </metadatalist>
 
-	<!--METADATA-->
-	<metadatalist>
-		<metadata name="author">ircam</metadata>
-		<metadata name="tag">somax</metadata>
-	</metadatalist>
-
-	<!--ARGUMENTS-->
-	<objarglist>
-		
-    </objarglist>    
-
-	<!--MESSAGES-->
-	<methodlist>
-		 <method name="bounds">
-            <arglist><arg name="input" optional="0" type="int" /></arglist>
-            <digest>Set region bounds</digest>
+    <!-- ARGUMENTS -->
+    <objarglist>
+        <objarg name="#1" optional="1" type="symbol">
+            <digest>
+                Filter name
+            </digest>
             <description>
-                The message <m>bounds</m> sets the bounds, and thus the size, of a specific region.
+                The optional first argument sets the <m>name</m> of the <o>somax.filter</o>.
                 <br />
-                The syntax is <m>bounds index start_ms end_ms</m> where <m>index</m> is the number of the region (between 1 and 6) and <m>start_ms</m> and <m>end_ms</m> are the start and end time (in ms) of the region. 
+                If no name is provided, the default name is <m>Filter</m>. 
                 <br />
-                I.e., the message <m>bounds 1 0. 6000.</m> will resize region 1 with start bound at 0 ms and end bound at 6000 ms, selecting the first 6 seconds of the corpus.
+                Unless <m>uniquename</m> is set to 0, the name will be formatted as <m>#0_Name</m>.
+            </description>
+        </objarg>
+    </objarglist>
+
+    <!--MESSAGES-->
+    <methodlist>
+        <method name="initialize">
+            <digest>Initialize a filter connected to a player.</digest>
+            <description>
+                The <m>initialize</m> message will instantiate the <o>somax.filter</o> if this is correctly connected to the first outlet of a <o>somax.player</o>, or to the last outlet of a <o>somax.player.app</o>. 
+                <br />
+                At the same time, the signal from the first outlet of the <o>somax.filter</o> should be connected to the first inlet of the <o>somax.player</o> or <o>somax.player.app</o>.         
             </description>
         </method>
-        <method name="editable">
-			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Select the region to edit</digest>
+        <method name="label">
+            <arglist><arg name="label_value" optional="0" type="symbol" /></arglist>
+            <digest>Set label to match until further notice.</digest>
+            <description>
+                The <m>label</m> message sets the label to match and filter accordingly. 
+                <br />
+                When influencing with labels, they are simply referred to as "label" without specifying a descriptor name.
+            </description>
+        </method>
+        <method name="openwindow">
+        	<arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Open the <o>somax.filter</o> user interface</digest>
 			<description>
-                The message <m>editable</m> followed by an <o>int</o> between 1 and 6 sets the corresponding region as editable.         
-            </description>
-		</method>
-        <method name="enabled">
-            <arglist><arg name="input" optional="0" type="int" /></arglist>
-            <digest>Enable/Disable regions</digest>
-            <description>
-                The message <m>enabled</m> is used to enable or disable all regions or one specific region at a time. 
-				<br />
-                The message <m>enabled 1/0</m> will enable (1) or disable (0) all regions.
-                <br />
-                To address one region the syntax is <m>enabled index state</m>, where <m>index</m> is the number of the region (between 1 and 6) you want to enable or disable, and <m>state</m> is 1 if enabled, 0 if disabled.
+                Open the <o>somax.filter</o> window. This window will give you access to the list of available descriptors, from which you could select the active one.    
             </description>
         </method>
-        <method name="range">
-            <arglist><arg name="input" optional="0" type="int" /></arglist>
-            <digest>Set region range size</digest>
+        <method name="terminate">
+            <digest>Delete the filter from the connected player.</digest>
             <description>
-                The message <m>range</m> sets the size of a specific region in a relative range between 0. and 1.
+                When an object is deleted, the patch cords are removed before the object itself, preventing freebangs from being received by connected objects.
                 <br />
-                The syntax is <m>range index start end</m> where <m>index</m> is the number of the region (between 1 and 6) and <m>start</m> and <m>end</m> are the start and end <o>float</o> values (between 0. and 1.) of the range you want to select within the region.
+                Since communication between <o>somax.filter</o> and <o>somax.player</o> happens through patch cords, deleting the object does not automatically remove the filter from the player. 
+                <br />
+                The <m>terminate</m> message must be sent manually before deleting the <o>somax.filter</o> to ensure proper cleanup.
             </description>
         </method>
-        <method name="reset">
-            <arglist><arg name="input" optional="0" type="int" /></arglist>
-            <digest>Reset regions</digest>
-            <description>
-                The message <m>reset</m> followed by an <o>int</o> between 1 and 6 reset the corresponding region to its original size.
-                <br />
-                The message <m>reset</m>, without any argument, resets all the regions to their default values, equally dividing them according to the corpus's length. 
-            </description>
-        </method>
-	</methodlist>
+    </methodlist>
 
     <!--ATTRIBUTES-->
-	<attributelist>
-		<attribute name="buffername" optional="1" type="symbol">
-			<digest>Buffer name</digest>
-			<description>This optional argument sets the <m>name</m> of the <o>buffer~</o> used by the somax.audiorecord to display the audio recorded in as a waveform.
-				<br />
-                When using somax.regions through a bpatcher, buffer name could be configured in the Max Inspector, by setting Argument(s) to @buffername name_of_your_buffer.
+    <attributelist>
+        <attribute name="autoinitialize" get="1" set="1" type="int" size="1">
+        	<digest>Enable/Disable autoinitialization of the filter.</digest>
+            <description>
+                By default the <o>somax.filter</o> will be automatically initalized when created. Set this attribute to 0 to disable this behaviour. 
             </description>
+        </attribute>
+        <attribute name="descriptor" get="1" set="1" type="symbol" size="1">
+    		<digest>Specify a descriptor name for filtering.</digest>
+    		<description>
+        		This attribute <m>descriptor descriptorname</m> is used to set a specific descriptor to filter. The argument <m>descriptorname</m> currently supports only labels.
+        		<br />
+       			It is possible to assign a descriptor even if it is invalid at the time of assignment, which is useful for pre-configuring the system before the player or server is started. 
+       			<br />
+        		The descriptor can be persistent across different corpora, ensuring that if the feature is switched or reloaded, the descriptor value remains consistent.
+        		In cases where the specified descriptor is not available in the current corpus, a warning will be generated in the terminal or dump output.
+        		<br />
+        		If a corpus does not support the requested descriptor, the associated <o>somax.atom</o>'s eligibility will be set to 0, disabling it.
+    		</description>
 		</attribute>
-	</attributelist>
-	
-	
-	<!--SEEALSO-->
-	<seealsolist>
-		<seealso name="somax.player" />
-		<seealso name="somax.server" />
-		<seealso name="somax.audiorenderer" />
-        <seealso name="somax.audiorecord" />
-	</seealsolist>
-	
+        <attribute name="enabled" get="1" set="1" type="int" size="1">
+            <digest>Enable/Disable the filter.</digest>
+            <description>
+                The message <m>enabled 1</m> will enable the <o>somax.filter</o>. The message <m>enabled 0</m> will disable it.
+            </description>
+        </attribute>
+        <attribute name="uniquename" get="1" set="1" type="int" size="1">
+    		<digest>Enable/Disable unique name for filter.</digest>
+    		<description>
+        		This attribute controls whether the filter name should be unique. By default, the <m>uniquename</m> is set to <m>1</m>, indicating that the filter name should be unique.
+        		 <br />
+        		To ensure uniqueness, prepend <m>#0_</m> to the filter name. If set to <m>0</m>, the filter name will not be enforced as unique.
+    		</description>
+		</attribute>
+    </attributelist>
+
+    <!--SEEALSO-->
+    <seealsolist>
+        <seealso name="somax.atom" />
+        <seealso name="somax.player" />
+        <seealso name="somax.player.app" />
+        <seealso name="somax.audiocorpusbuilder" />
+    </seealsolist>
+
 </c74object>
