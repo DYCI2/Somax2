@@ -470,7 +470,7 @@
 
 							}
  ],
-						"originid" : "pat-46163"
+						"originid" : "pat-56526"
 					}
 ,
 					"patching_rect" : [ 6.0, 117.0, 91.0, 22.0 ],
@@ -988,7 +988,7 @@
 
 											}
  ],
-										"originid" : "pat-46168"
+										"originid" : "pat-56531"
 									}
 ,
 									"patching_rect" : [ 471.0, 687.795711060948179, 83.0, 22.0 ],
@@ -1210,7 +1210,7 @@
 
 							}
  ],
-						"originid" : "pat-46166",
+						"originid" : "pat-56529",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1470,7 +1470,7 @@
 
 											}
  ],
-										"originid" : "pat-46173"
+										"originid" : "pat-56536"
 									}
 ,
 									"patching_rect" : [ 456.0, 672.795711060948179, 73.0, 22.0 ],
@@ -1823,7 +1823,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 634.5, 136.5, 344.0, 462.0 ],
+									"patching_rect" : [ 634.5, 136.5, 347.0, 462.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 34,
 									"presentation_rect" : [ 735.5, 80.0, 347.0, 462.0 ],
@@ -1864,7 +1864,7 @@
 
 							}
  ],
-						"originid" : "pat-46171",
+						"originid" : "pat-56534",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1956,10 +1956,78 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 201.0, 178.0, 1437.0, 839.0 ],
+						"rect" : [ 120.0, 174.0, 1437.0, 839.0 ],
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontface" : 0,
+									"fontsize" : 12.162162162162161,
+									"id" : "obj-8",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 788.0, 638.0, 317.0, 47.0 ],
+									"presentation" : 1,
+									"presentation_linecount" : 3,
+									"presentation_rect" : [ 788.0, 648.5, 318.0, 47.0 ],
+									"text" : "Play with Continuity value in the Player, to drive the direction and trajectory of the output generation, enter or exit loops based on the selected descriptor.",
+									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"hint" : "",
+									"id" : "obj-16",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 764.0, 645.0, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 764.0, 655.5, 21.0, 21.0 ],
+									"rounded" : 60.0,
+									"text" : "7",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"hint" : "",
+									"id" : "obj-4",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 415.0, 335.0, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 415.0, 333.0, 18.0, 18.0 ],
+									"rounded" : 60.0,
+									"text" : "7",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bubble" : 1,
 									"bubblepoint" : 0.8,
@@ -1972,7 +2040,7 @@
 									"patching_rect" : [ 648.0, 790.0, 150.0, 93.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
-									"presentation_rect" : [ 793.5, 676.0, 293.0, 52.0 ],
+									"presentation_rect" : [ 794.0, 705.0, 295.0, 52.0 ],
 									"text" : "see these two maxhelps for more information on how to use somax.atom and somax.filter with labels"
 								}
 
@@ -1990,7 +2058,7 @@
 									"patching_rect" : [ 633.0, 775.0, 150.0, 93.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
-									"presentation_rect" : [ 794.0, 676.0, 292.0, 52.0 ],
+									"presentation_rect" : [ 794.0, 705.0, 295.0, 52.0 ],
 									"text" : "see these two maxhelps for more information on how to use somax.atom and somax.filter with labels"
 								}
 
@@ -2008,7 +2076,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 303.0, 697.0, 115.0, 38.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 820.0, 730.0, 109.0, 26.0 ],
+									"presentation_rect" : [ 820.0, 759.0, 109.0, 26.0 ],
 									"rounded" : 8.0,
 									"text" : "somax.atom help",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -2038,7 +2106,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 303.0, 763.0, 185.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "loadunique somax.atom.maxhelp"
 								}
 
@@ -2056,7 +2123,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 118.0, 697.0, 115.0, 38.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 955.0, 730.0, 109.0, 26.0 ],
+									"presentation_rect" : [ 955.0, 759.0, 109.0, 26.0 ],
 									"rounded" : 8.0,
 									"text" : "somax.filter help",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -2577,7 +2644,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 749.178715404332706, 487.0, 316.0, 102.0 ],
+									"patching_rect" : [ 749.178715404332706, 487.0, 317.0, 102.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 7,
 									"presentation_rect" : [ 788.0, 413.0, 318.0, 102.0 ],
@@ -2681,8 +2748,8 @@
 									"patching_rect" : [ 538.0, 845.0, 408.0, 35.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
-									"presentation_rect" : [ 779.0, 162.5, 336.0, 35.0 ],
-									"text" : "corpus Anais_words_2labels_reaper.pickle, mode continuous, continuity 1, transpositions 0 0 0 1 1 1 1 1 0 0 0 0"
+									"presentation_rect" : [ 771.714357702166353, 162.5, 336.571284595667294, 35.0 ],
+									"text" : "corpus Anais_words_2labels_reaper.pickle, mode continuous, continuity 0.7, transpositions 0 0 0 1 1 1 1 1 0 0 0 0"
 								}
 
 							}
@@ -2695,7 +2762,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 707.5, 411.0, 316.0, 47.0 ],
+									"patching_rect" : [ 707.5, 411.0, 319.0, 47.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
 									"presentation_rect" : [ 770.0, 105.0, 340.75, 47.0 ],
@@ -2716,7 +2783,7 @@
 									"patching_rect" : [ 747.178715404332706, 367.0, 323.0, 47.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 3,
-									"presentation_rect" : [ 768.571284595667294, 208.0, 343.0, 47.0 ],
+									"presentation_rect" : [ 768.571284595667294, 208.0, 347.0, 47.0 ],
 									"text" : "For this step, we'll use the somax.atom.app module to self-influence the Player output based on available descriptors in the corpus.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -2794,7 +2861,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 624.0, 82.852144469525911, 319.5, 611.943566591422268 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 754.0, 56.0, 372.0, 723.0 ],
+									"presentation_rect" : [ 754.0, 56.0, 372.0, 747.0 ],
 									"proportion" : 0.5
 								}
 
@@ -2843,7 +2910,7 @@
 
 							}
  ],
-						"originid" : "pat-46176",
+						"originid" : "pat-56539",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-29", "obj-65" ]
 							}
@@ -2906,7 +2973,7 @@
 ,
 					"patching_rect" : [ 332.0, 418.0, 81.0, 80.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 42.0, 85.0, 1895.0, 770.0 ],
+					"presentation_rect" : [ 42.0, 85.0, 1895.0, 852.0 ],
 					"varname" : "interacting",
 					"viewvisibility" : 1
 				}
@@ -2966,9 +3033,9 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 658.75, 505.5, 309.0, 33.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 4,
-									"presentation_rect" : [ 735.0, 557.0, 154.0, 60.0 ],
-									"text" : "With that said, let's move on to the main topic of this tutorial: building an Audio Corpus",
+									"presentation_linecount" : 3,
+									"presentation_rect" : [ 735.0, 557.0, 154.0, 47.0 ],
+									"text" : "With that said, let's move on to the main topic of this tutorial: working with labels",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -3006,95 +3073,9 @@
 									"patching_rect" : [ 655.75, 453.5, 321.0, 74.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 4,
-									"presentation_rect" : [ 735.0, 487.0, 343.25, 60.0 ],
+									"presentation_rect" : [ 736.0, 451.0, 343.25, 60.0 ],
 									"text" : "It's not possible to have multiple instances of the server open at the same time, so if you already have another Somax 2 tutorial (or any patcher using Somax II) open, make sure to close it before starting this tutorial!",
 									"textcolor" : [ 0.996078431372549, 0.423529411764706, 0.423529411764706, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-29",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 45.5, 107.0, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 155.0, 43.0, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "2",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 4,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-30",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 55.75, 109.0, 373.0, 332.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 165.0, 56.0, 220.0, 101.0 ],
-									"proportion" : 0.5
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 0,
-									"fontsize" : 12.0,
-									"id" : "obj-27",
-									"linecount" : 4,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 656.75, 388.5, 309.0, 60.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 4,
-									"presentation_rect" : [ 767.0, 416.0, 289.0, 60.0 ],
-									"text" : "The Player will not listen to any of the Influencers by default: it's necessary to select which ones to listen to in the «Influencer sources & routing» module.\nSo please, select AudioInfluencer from there.",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-28",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 633.5, 392.0, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 744.0, 420.0, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "2",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
 
 							}
@@ -3109,7 +3090,7 @@
 									"patching_rect" : [ 635.5, 346.5, 308.0, 20.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
-									"presentation_rect" : [ 768.0, 374.0, 286.0, 33.0 ],
+									"presentation_rect" : [ 770.0, 386.0, 286.0, 33.0 ],
 									"text" : "You have to «Start Server» for the application to work.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -3132,7 +3113,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 619.75, 420.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 745.0, 378.0, 20.0, 20.0 ],
+									"presentation_rect" : [ 747.0, 390.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -3228,10 +3209,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 619.5, 121.5, 311.0, 275.0 ],
+									"patching_rect" : [ 619.5, 121.5, 313.0, 275.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 18,
-									"presentation_rect" : [ 735.0, 116.0, 353.0, 248.0 ],
+									"presentation_rect" : [ 735.0, 116.0, 356.0, 248.0 ],
 									"text" : "This tutorial will guide you through the full workflow of working with custom labels in Somax2.\n\nYou will learn how to manually annotate your audio file in an external DAW (Reaper or Audacity), how to build a corpus from these manual annotations, and how to interact with them in Somax2.\n\nThis tutorial assumes that you've already completed the previous application tutorials and that you're familiar with the basic components of Somax2, and DAW concepts, as these won't be explained here.\n\nWhile in the previous tutorials we were building audio corpora using the automatic Somax2 segmentation mode, it is possible to build a corpus from your own manual annotation\n\nLet's begin by reviewing a couple of things to be aware of:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -3262,7 +3243,7 @@
 
 							}
  ],
-						"originid" : "pat-46179"
+						"originid" : "pat-56542"
 					}
 ,
 					"patching_rect" : [ 12.0, 418.0, 61.0, 69.0 ],
@@ -3544,11 +3525,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-2",
-									"linecount" : 36,
+									"linecount" : 35,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 891.0, 360.0, 268.0, 489.0 ],
+									"patching_rect" : [ 891.0, 360.0, 274.0, 476.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 32,
 									"presentation_rect" : [ 629.0, 63.0, 345.0, 435.0 ],
@@ -3564,6 +3545,7 @@
 									"embed" : 1,
 									"enablehscroll" : 0,
 									"enablevscroll" : 0,
+									"hidden" : 1,
 									"id" : "obj-32",
 									"lockeddragscroll" : 0,
 									"lockedsize" : 0,
@@ -3674,7 +3656,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-46185"
+										"originid" : "pat-56548"
 									}
 ,
 									"patching_rect" : [ 620.0, 67.0, 61.0, 69.0 ],
@@ -3875,7 +3857,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-46188"
+										"originid" : "pat-56551"
 									}
 ,
 									"patching_rect" : [ 690.0, 67.0, 61.0, 69.0 ],
@@ -3987,7 +3969,6 @@
 									"embed" : 1,
 									"enablehscroll" : 0,
 									"enablevscroll" : 0,
-									"hidden" : 1,
 									"id" : "obj-36",
 									"lockeddragscroll" : 0,
 									"lockedsize" : 0,
@@ -4230,7 +4211,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-46191"
+										"originid" : "pat-56554"
 									}
 ,
 									"patching_rect" : [ 760.0, 67.0, 61.0, 69.0 ],
@@ -4474,7 +4455,7 @@
 
 							}
  ],
-						"originid" : "pat-46182",
+						"originid" : "pat-56545",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4776,7 +4757,7 @@
 
 							}
  ],
-						"originid" : "pat-48336",
+						"originid" : "pat-56557",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4966,7 +4947,7 @@
 
 							}
  ],
-						"originid" : "pat-47496",
+						"originid" : "pat-56622",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5156,7 +5137,7 @@
 
 							}
  ],
-						"originid" : "pat-46277",
+						"originid" : "pat-56727",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5393,7 +5374,7 @@
 
 							}
  ],
-						"originid" : "pat-46513",
+						"originid" : "pat-56963",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5560,7 +5541,7 @@
 
 			}
  ],
-		"originid" : "pat-46161",
+		"originid" : "pat-56524",
 		"parameters" : 		{
 			"obj-1::obj-1::obj-13::obj-1" : [ "source[5]", "source", 0 ],
 			"obj-1::obj-1::obj-2::obj-395::obj-2" : [ "live.text[113]", "live.text[4]", 0 ],
