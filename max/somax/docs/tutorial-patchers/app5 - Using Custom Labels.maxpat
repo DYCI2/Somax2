@@ -470,7 +470,7 @@
 
 							}
  ],
-						"originid" : "pat-57949"
+						"originid" : "pat-1458"
 					}
 ,
 					"patching_rect" : [ 6.0, 117.0, 91.0, 22.0 ],
@@ -988,7 +988,7 @@
 
 											}
  ],
-										"originid" : "pat-57954"
+										"originid" : "pat-1463"
 									}
 ,
 									"patching_rect" : [ 471.0, 687.795711060948179, 83.0, 22.0 ],
@@ -1210,7 +1210,7 @@
 
 							}
  ],
-						"originid" : "pat-57952",
+						"originid" : "pat-1461",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1470,7 +1470,7 @@
 
 											}
  ],
-										"originid" : "pat-57959"
+										"originid" : "pat-1468"
 									}
 ,
 									"patching_rect" : [ 456.0, 672.795711060948179, 73.0, 22.0 ],
@@ -1864,7 +1864,7 @@
 
 							}
  ],
-						"originid" : "pat-57957",
+						"originid" : "pat-1466",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1937,6 +1937,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-166",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2910,7 +2911,7 @@
 
 							}
  ],
-						"originid" : "pat-57962",
+						"originid" : "pat-1471",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-29", "obj-65" ]
 							}
@@ -3243,7 +3244,7 @@
 
 							}
  ],
-						"originid" : "pat-57965"
+						"originid" : "pat-1474"
 					}
 ,
 					"patching_rect" : [ 12.0, 418.0, 61.0, 69.0 ],
@@ -3262,7 +3263,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-147",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -3489,7 +3489,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 748.75, 595.5, 15.0, 15.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 865.0, 159.0, 15.0, 15.0 ],
+									"presentation_rect" : [ 889.0, 227.5, 15.0, 15.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -3656,7 +3656,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-57971"
+										"originid" : "pat-1480"
 									}
 ,
 									"patching_rect" : [ 620.0, 67.0, 61.0, 69.0 ],
@@ -3746,7 +3746,6 @@
 									"embed" : 1,
 									"enablehscroll" : 0,
 									"enablevscroll" : 0,
-									"hidden" : 1,
 									"id" : "obj-26",
 									"lockeddragscroll" : 0,
 									"lockedsize" : 0,
@@ -3857,7 +3856,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-57974"
+										"originid" : "pat-1483"
 									}
 ,
 									"patching_rect" : [ 690.0, 67.0, 61.0, 69.0 ],
@@ -3969,6 +3968,7 @@
 									"embed" : 1,
 									"enablehscroll" : 0,
 									"enablevscroll" : 0,
+									"hidden" : 1,
 									"id" : "obj-36",
 									"lockeddragscroll" : 0,
 									"lockedsize" : 0,
@@ -4211,7 +4211,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-57977"
+										"originid" : "pat-1486"
 									}
 ,
 									"patching_rect" : [ 760.0, 67.0, 61.0, 69.0 ],
@@ -4455,7 +4455,7 @@
 
 							}
  ],
-						"originid" : "pat-57968",
+						"originid" : "pat-1477",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4634,6 +4634,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-8",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -4757,7 +4758,7 @@
 
 							}
  ],
-						"originid" : "pat-57980",
+						"originid" : "pat-1489",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4831,6 +4832,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-5",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -4947,7 +4949,7 @@
 
 							}
  ],
-						"originid" : "pat-58045",
+						"originid" : "pat-1554",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5021,6 +5023,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-1",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -5137,7 +5140,7 @@
 
 							}
  ],
-						"originid" : "pat-58150",
+						"originid" : "pat-1659",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5211,6 +5214,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-23",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -5374,7 +5378,7 @@
 
 							}
  ],
-						"originid" : "pat-58386",
+						"originid" : "pat-1895",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5541,7 +5545,7 @@
 
 			}
  ],
-		"originid" : "pat-57947",
+		"originid" : "pat-1456",
 		"parameters" : 		{
 			"obj-1::obj-1::obj-13::obj-1" : [ "source[5]", "source", 0 ],
 			"obj-1::obj-1::obj-2::obj-395::obj-2" : [ "live.text[113]", "live.text[4]", 0 ],
