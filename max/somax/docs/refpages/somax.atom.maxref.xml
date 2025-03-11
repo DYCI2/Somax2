@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.filter" module="somax" kind="patcher">
+
+    <digest>
+        Filters specific segments (events) of a corpus loaded into a <o>somax.player</o> based on descriptors and labels.
+    </digest>
+
+    <description>
+        The <o>somax.filter</o> object allows filtering of segments (events) within a corpus that has been loaded into a <o>somax.player</o>. Filtering is based on descriptors and labels, allowing fine-grained selection of custom material.
+    </description>
+
+    <!--METADATA-->
+    <metadatalist>
+        <metadata name="author">ircam</metadata>
+        <metadata name="tag">somax</metadata>
+    </metadatalist>
+
+    <!-- ARGUMENTS -->
+    <objarglist>
+        <objarg name="#1" optional="1" type="symbol">
+            <digest>
+                Filter name
+            </digest>
+            <description>
+                The optional first argument sets the <m>name</m> of the <o>somax.filter</o>.
+                <br />
+                If no name is provided, the default name is <m>Filter</m>. 
+                <br />
+                Unless <m>uniquename</m> is set to <m>0</m>, the name will be formatted as <m>#0_Name</m>.
+            </description>
+        </objarg>
+    </objarglist>
+
+    <!--MESSAGES-->
+    <methodlist>
+        <method name="initialize">
+            <digest>Initialize a filter connected to a player.</digest>
+            <description>
+                The <m>initialize</m> message will instantiate the <o>somax.filter</o> if this is correctly connected to the first outlet of a <o>somax.player</o>, or to the last outlet of a <o>somax.player.app</o>. 
+                <br />
+                At the same time, the signal from the first outlet of the <o>somax.filter</o> should be connected to the first inlet of the <o>somax.player</o> or <o>somax.player.app</o>.         
+            </description>
+        </method>
+        <method name="label">
+            <arglist><arg name="label_value" optional="0" type="symbol" /></arglist>
+            <digest>Set label to match until further notice.</digest>
+            <description>
+                The <m>label</m> message sets the label to match and filter accordingly. 
+                <br />
+                When influencing with labels, they are simply referred to as "label" without specifying a descriptor name.
+            </description>
+        </method>
+        <method name="openwindow">
+        	<arglist><arg name="input" optional="0" type="int" /></arglist>
+            <digest>Open the <o>somax.filter</o> user interface</digest>
+			<description>
+                Open the <o>somax.filter</o> window. This window will give you access to the list of available descriptors, from which you could select the active one.    
+            </description>
+        </method>
+        <method name="terminate">
+            <digest>Delete the filter from the connected player.</digest>
+            <description>
+                When an object is deleted, the patch cords are removed before the object itself, preventing freebangs from being received by connected objects.
+                <br />
+                Since communication between <o>somax.filter</o> and <o>somax.player</o> happens through patch cords, deleting the object does not automatically remove the filter from the player. 
+                <br />
+                The <m>terminate</m> message must be sent manually before deleting the <o>somax.filter</o> to ensure proper cleanup.
+            </description>
+        </method>
+    </methodlist>
+
+    <!--ATTRIBUTES-->
+    <attributelist>
+        <attribute name="autoinitialize" get="1" set="1" type="int" size="1">
+        	<digest>Enable/Disable autoinitialization of the filter.</digest>
+            <description>
+                By default the <o>somax.filter</o> will be automatically initalized when created. Set this attribute to <m>0</m> to disable this behaviour. 
+            </description>
+        </attribute>
+        <attribute name="descriptor" get="1" set="1" type="symbol" size="1">
+    		<digest>Specify a descriptor name for filtering.</digest>
+    		<description>
+        		This attribute <m>descriptor descriptorname</m> is used to set a specific descriptor to filter. The argument <m>descriptorname</m> currently supports only labels.
+        		<br />
+       			It is possible to assign a descriptor even if it is invalid at the time of assignment, which is useful for pre-configuring the system before the player or server is started. 
+       			<br />
+        		The descriptor can be persistent across different corpora, ensuring that if the feature is switched or reloaded, the descriptor value remains consistent.
+        		In cases where the specified descriptor is not available in the current corpus, a warning will be generated in the terminal or dump output.
+        		<br />
+        		If a corpus does not support the requested descriptor, the associated <o>somax.atom</o>'s eligibility will be set to 0, disabling it.
+    		</description>
+		</attribute>
+        <attribute name="enabled" get="1" set="1" type="int" size="1">
+            <digest>Enable/Disable the filter.</digest>
+            <description>
+                The message <m>enabled 1</m> will enable the <o>somax.filter</o>. The message <m>enabled 0</m> will disable it.
+            </description>
+        </attribute>
+        <attribute name="uniquename" get="1" set="1" type="int" size="1">
+    		<digest>Enable/Disable unique name for filter.</digest>
+    		<description>
+        		This attribute controls whether the filter name should be unique. By default, the <m>uniquename</m> is set to <m>1</m>, indicating that the filter name should be unique.
+        		 <br />
+        		To ensure uniqueness, prepend <m>#0_</m> to the filter name. If set to <m>0</m>, the filter name will not be enforced as unique.
+    		</description>
+		</attribute>
+    </attributelist>
+
+    <!--SEEALSO-->
+    <seealsolist>
+        <seealso name="somax.atom" />
+        <seealso name="somax.player" />
+        <seealso name="somax.player.app" />
+        <seealso name="somax.audiocorpusbuilder" />
+    </seealsolist>
+
+</c74object>

@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 360.0, 211.0, 942.0, 597.0 ],
+		"rect" : [ 360.0, 208.0, 942.0, 597.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"enablehscroll" : 0,
@@ -111,7 +111,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -159,7 +159,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -258,14 +258,10 @@
 
 											}
  ],
-										"originid" : "pat-11"
+										"originid" : "pat-19273"
 									}
 ,
 									"patching_rect" : [ 533.0, 403.0, 121.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p load_performances"
 								}
 
@@ -344,7 +340,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -443,14 +439,10 @@
 
 											}
  ],
-										"originid" : "pat-13"
+										"originid" : "pat-19275"
 									}
 ,
 									"patching_rect" : [ 153.0, 403.0, 100.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p load_templates"
 								}
 
@@ -473,7 +465,7 @@
 
 							}
  ],
-						"originid" : "pat-9"
+						"originid" : "pat-19271"
 					}
 ,
 					"patching_rect" : [ 248.5, 391.5, 87.0, 77.0 ],
@@ -492,6 +484,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -504,7 +497,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -522,7 +515,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 477.0, 429.0, 378.0, 35.0 ],
-									"presentation_linecount" : 2,
 									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=p4nUd5pot4w"
 								}
 
@@ -551,8 +543,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 360.0, 571.0, 33.0 ],
-									"presentation_linecount" : 2,
+									"patching_rect" : [ 308.0, 360.0, 575.0, 33.0 ],
 									"text" : "In this tutorial you will be guided through the full workflow of using your own custom labels. This goes from manual annotation in Reaper/Audacity, to manual corpus building, filtering and matching in Somax2.",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
@@ -804,7 +795,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -903,14 +894,10 @@
 
 											}
  ],
-										"originid" : "pat-18"
+										"originid" : "pat-19280"
 									}
 ,
 									"patching_rect" : [ 7.5, 432.0, 68.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p load_app"
 								}
 
@@ -986,7 +973,7 @@
 
 							}
  ],
-						"originid" : "pat-16"
+						"originid" : "pat-19278"
 					}
 ,
 					"patching_rect" : [ 19.011363636363626, 391.5, 87.0, 77.0 ],
@@ -1051,7 +1038,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1152,7 +1139,7 @@
 
 							}
  ],
-						"originid" : "pat-21"
+						"originid" : "pat-19283"
 					}
 ,
 					"patching_rect" : [ 528.0, 391.5, 87.0, 77.0 ],
@@ -1184,7 +1171,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1248,7 +1235,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1347,14 +1334,10 @@
 
 											}
  ],
-										"originid" : "pat-26"
+										"originid" : "pat-19288"
 									}
 ,
 									"patching_rect" : [ 153.0, 413.0, 103.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p load_max_tutos"
 								}
 
@@ -1369,7 +1352,7 @@
 
 							}
  ],
-						"originid" : "pat-24"
+						"originid" : "pat-19286"
 					}
 ,
 					"patching_rect" : [ 135.5, 391.5, 87.0, 77.0 ],
@@ -1436,7 +1419,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1449,7 +1431,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1527,7 +1509,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1627,14 +1609,10 @@
 
 											}
  ],
-										"originid" : "pat-31"
+										"originid" : "pat-19293"
 									}
 ,
 									"patching_rect" : [ 599.0, 174.0, 135.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p load_parameter_docs"
 								}
 
@@ -1679,9 +1657,9 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 30.0, 105.59375, 163.0, 280.0 ],
+									"patching_rect" : [ 30.0, 106.0, 163.0, 302.0 ],
 									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
-									"tabs" : [ "somax.server", "somax.player", "somax.audioinfluencer", "somax.midiinfluencer", "somax.audiorenderer", "somax.midirenderer", "somax.audiocorpusbuilder", "somax.midicorpusbuilder", "somax.audiorecord", "somax.regions", "somax.filter" ]
+									"tabs" : [ "somax.server", "somax.player", "somax.audioinfluencer", "somax.midiinfluencer", "somax.audiorenderer", "somax.midirenderer", "somax.audiocorpusbuilder", "somax.midicorpusbuilder", "somax.audiorecord", "somax.regions", "somax.filter", "somax.atom" ]
 								}
 
 							}
@@ -1727,7 +1705,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1788,14 +1766,10 @@
 
 											}
  ],
-										"originid" : "pat-33"
+										"originid" : "pat-19295"
 									}
 ,
 									"patching_rect" : [ 231.0, 451.0, 77.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p load_helps"
 								}
 
@@ -1841,7 +1815,7 @@
 
 							}
  ],
-						"originid" : "pat-29"
+						"originid" : "pat-19291"
 					}
 ,
 					"patching_rect" : [ 395.5, 391.5, 87.0, 77.0 ],
@@ -2399,7 +2373,7 @@
 
 			}
  ],
-		"originid" : "pat-6",
+		"originid" : "pat-19268",
 		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
