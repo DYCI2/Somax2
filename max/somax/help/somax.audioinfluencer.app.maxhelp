@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -26,7 +26,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -87,8 +87,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-44",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -110,8 +108,7 @@
 
 									}
 ,
-									"text" : "MIDI Output module: the audio influencer will synthesize MIDI messages corresponding to the pitch estimation, routing them to the selected MIDI output device.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "MIDI Output module: the audio influencer will synthesize MIDI messages corresponding to the pitch estimation, routing them to the selected MIDI output device."
 								}
 
 							}
@@ -140,8 +137,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-42",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -163,8 +158,7 @@
 
 									}
 ,
-									"text" : "Audio Output module: Select the Left and Right audio channel, control Pan, Delay and Gain.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Audio Output module: Select the Left and Right audio channel, control Pan, Delay and Gain."
 								}
 
 							}
@@ -193,8 +187,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-40",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -216,8 +208,7 @@
 
 									}
 ,
-									"text" : "Audio Influencer module: this corresponds to the somax.audioinfluencer.ui object and it's a compact interface for the visualization of influences.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Audio Influencer module: this corresponds to the somax.audioinfluencer.ui object and it's a compact interface for the visualization of influences."
 								}
 
 							}
@@ -246,8 +237,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-38",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -269,8 +258,7 @@
 
 									}
 ,
-									"text" : "Audio Input module: Select between an Audio File (press the «Read» button) or any input of your sound card.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Audio Input module: Select between an Audio File (press the «Read» button) or any input of your sound card."
 								}
 
 							}
@@ -299,8 +287,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-36",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -321,8 +307,7 @@
 
 									}
 ,
-									"text" : "The «Settings» button displays all the available parameters.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "The «Settings» button displays all the available parameters."
 								}
 
 							}
@@ -351,8 +336,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-34",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -373,8 +356,7 @@
 
 									}
 ,
-									"text" : "Enable or disable the audioinfluencer.app",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Enable or disable the audioinfluencer.app"
 								}
 
 							}
@@ -415,7 +397,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 41.499999791383743, 504.870205774419787, 20.0, 20.0 ],
+									"patching_rect" : [ 48.5, 509.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "7",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -459,7 +441,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 48.5, 361.735987485334249, 20.0, 20.0 ],
+									"patching_rect" : [ 39.5, 343.25, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "5",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -503,7 +485,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 213.5, 243.069321022316785, 20.0, 20.0 ],
+									"patching_rect" : [ 223.0, 243.069321022316785, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "3",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -544,7 +526,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 65.333333313465118, 243.069321022316785, 70.666668146848679, 21.00000087916851 ],
+									"patching_rect" : [ 65.0, 242.5, 78.5, 21.0 ],
 									"proportion" : 0.5
 								}
 
@@ -560,7 +542,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 58.333331942558289, 503.870205774419787, 231.83334019780159, 24.00000011920929 ],
+									"patching_rect" : [ 64.0, 499.0, 238.0, 23.870205774419787 ],
 									"proportion" : 0.5
 								}
 
@@ -576,7 +558,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 58.333331942558289, 409.370205714815143, 231.83334019780159, 93.970588356256485 ],
+									"patching_rect" : [ 58.5, 409.5, 247.5, 91.5 ],
 									"proportion" : 0.5
 								}
 
@@ -592,7 +574,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 58.333331942558289, 340.999999284744263, 231.66667366027832, 68.000001430511475 ],
+									"patching_rect" : [ 54.0, 337.5, 252.5, 70.5 ],
 									"proportion" : 0.5
 								}
 
@@ -608,7 +590,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 229.666670650243759, 245.069320262357564, 52.333334714174271, 18.000001639127731 ],
+									"patching_rect" : [ 245.0, 246.0, 55.0, 15.0 ],
 									"proportion" : 0.5
 								}
 
@@ -624,15 +606,13 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 61.666666090488434, 265.069321901485296, 220.333339273929596, 73.930677383258967 ],
+									"patching_rect" : [ 61.5, 265.0, 232.5, 74.5 ],
 									"proportion" : 0.5
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-27",
 									"linecount" : 9,
 									"maxclass" : "comment",
@@ -654,8 +634,7 @@
 
 									}
 ,
-									"text" : "The audioinfluencer.app can be given a name to differentiate it from other influencers, using the bpatchers @args attribute, i.e.:\n\nbpatcher somax.audioinfluencer.app @args <name>\n\nIf no argument is provided, the influencer will automatically be assigned a unique name.\nThe name attribute can also be set using the «Argument(s)» field in the Max Inspector.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "The audioinfluencer.app can be given a name to differentiate it from other influencers, using the bpatchers @args attribute, i.e.:\n\nbpatcher somax.audioinfluencer.app @args <name>\n\nIf no argument is provided, the influencer will automatically be assigned a unique name.\nThe name attribute can also be set using the «Argument(s)» field in the Max Inspector."
 								}
 
 							}
@@ -696,7 +675,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 52.0, 203.235987485334249, 20.0, 20.0 ],
+									"patching_rect" : [ 58.333331942558289, 203.235987485334249, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -715,7 +694,7 @@
 									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 65.333333313465118, 212.402654112264486, 195.333338528871536, 24.00000011920929 ],
+									"patching_rect" : [ 75.5, 212.5, 195.5, 21.0 ],
 									"proportion" : 0.5
 								}
 
@@ -800,8 +779,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-18",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -823,8 +800,7 @@
 
 									}
 ,
-									"text" : "See                             for more information on wireless routing",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "See                             for more information on wireless routing"
 								}
 
 							}
@@ -853,8 +829,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-16",
 									"linecount" : 3,
@@ -877,16 +851,13 @@
 
 									}
 ,
-									"text" : "The name of the influencer (and all of its influences) will be available in the routing section of the somax.player.app module.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "The name of the influencer (and all of its influences) will be available in the routing section of the somax.player.app module."
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 1.0,
 									"id" : "obj-7",
 									"linecount" : 4,
@@ -909,8 +880,7 @@
 
 									}
 ,
-									"text" : "To create an audioinfluencer.app, press N and type:\n\nbpatcher somax.audioinfluencer.app",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "To create an audioinfluencer.app, press N and type:\n\nbpatcher somax.audioinfluencer.app"
 								}
 
 							}
@@ -931,7 +901,7 @@
 									"numoutlets" : 5,
 									"offset" : [ 0.0, 0.0 ],
 									"outlettype" : [ "", "multichannelsignal", "", "", "" ],
-									"patching_rect" : [ 48.5, 209.235987485334249, 249.0, 325.0 ],
+									"patching_rect" : [ 48.5, 209.0, 261.5, 327.5 ],
 									"varname" : "somax.audio.io",
 									"viewvisibility" : 1
 								}
@@ -939,8 +909,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-4",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -961,15 +929,12 @@
 
 									}
 ,
-									"text" : "Wrapper around the somax.audioinfluencer object",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Wrapper around the somax.audioinfluencer object"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-3",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -991,8 +956,7 @@
 
 									}
 ,
-									"text" : "The somax.audioinfluencer.app object is a convenient wrapper around the audio influencer with some additional user interface to handle input and output. Thanks to this app object, Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). ",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "The somax.audioinfluencer.app object is a convenient wrapper around the audio influencer with some additional user interface to handle input and output. Thanks to this app object, Somax can send influences between influencers and players wirelessly (i.e. without max patch cords). "
 								}
 
 							}
@@ -1052,7 +1016,7 @@
 
 							}
  ],
-						"originid" : "pat-22445",
+						"originid" : "pat-30362",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1110,10 +1074,6 @@
 					}
 ,
 					"patching_rect" : [ 20.0, 15.0, 47.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p basic",
 					"varname" : "midi output[1]"
 				}
@@ -1145,7 +1105,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1157,8 +1117,6 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 2,
 									"id" : "obj-15",
 									"linecount" : 3,
@@ -1181,16 +1139,13 @@
 
 									}
 ,
-									"text" : "Click on the «Settings» button to monitor parameter's changes",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Click on the «Settings» button to monitor parameter's changes"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-13",
 									"linecount" : 3,
@@ -1213,8 +1168,7 @@
 
 									}
 ,
-									"text" : "See yin~ documentation for more info",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "See yin~ documentation for more info"
 								}
 
 							}
@@ -1285,8 +1239,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-66",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -1308,8 +1260,7 @@
 
 									}
 ,
-									"text" : "Yin Minimum Frequency",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Yin Minimum Frequency"
 								}
 
 							}
@@ -1356,8 +1307,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.3,
 									"bubbleside" : 0,
 									"id" : "obj-59",
@@ -1381,15 +1330,12 @@
 
 									}
 ,
-									"text" : "These (and additional) parameters are also available in the main interface by clicking the «Settings» button",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "These (and additional) parameters are also available in the main interface by clicking the «Settings» button"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-57",
 									"linecount" : 5,
 									"maxclass" : "comment",
@@ -1411,8 +1357,7 @@
 
 									}
 ,
-									"text" : "Finally, load the file «anton.aif». For polyphonic content like this, the pitch estimation won't work properly no matter what settings are used. Fortunately, chroma and onset can still be used. See the «polyphonic/unpitched» tab for more info.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Finally, load the file «anton.aif». For polyphonic content like this, the pitch estimation won't work properly no matter what settings are used. Fortunately, chroma and onset can still be used. See the «polyphonic/unpitched» tab for more info."
 								}
 
 							}
@@ -1441,8 +1386,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-55",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -1463,15 +1406,12 @@
 
 									}
 ,
-									"text" : "List of detected pitches",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "List of detected pitches"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-54",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -1492,15 +1432,12 @@
 
 									}
 ,
-									"text" : "# detected pitches",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "# detected pitches"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-52",
 									"linecount" : 8,
 									"maxclass" : "comment",
@@ -1522,8 +1459,7 @@
 
 									}
 ,
-									"text" : "These settings are however much too high for content where the pitched component is less prominent. Load the audio file «cherokee.aif» and play it. With the settings from the previous example, we get no output at all.\n\nTry decreasing the value of the «Quality» back to around 0.8 and the «Yin Window» to around 30 ms.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "These settings are however much too high for content where the pitched component is less prominent. Load the audio file «cherokee.aif» and play it. With the settings from the previous example, we get no output at all.\n\nTry decreasing the value of the «Quality» back to around 0.8 and the «Yin Window» to around 30 ms."
 								}
 
 							}
@@ -1552,8 +1488,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-51",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -1574,15 +1508,12 @@
 
 									}
 ,
-									"text" : "Yin Window",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Yin Window"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-49",
 									"linecount" : 9,
 									"maxclass" : "comment",
@@ -1604,8 +1535,7 @@
 
 									}
 ,
-									"text" : "Load the audio file «duduk.aif» and play it a few times. With the default settings, around 50 pitches are detected in this example. The longer notes with vibrato are perceived as multiple, separate pitches.\n\nIncrease the value of the «Quality» parameter even further (around 0.98), increase the «Yin Window» to around 40 ms and try again.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Load the audio file «duduk.aif» and play it a few times. With the default settings, around 50 pitches are detected in this example. The longer notes with vibrato are perceived as multiple, separate pitches.\n\nIncrease the value of the «Quality» parameter even further (around 0.98), increase the «Yin Window» to around 40 ms and try again."
 								}
 
 							}
@@ -1634,8 +1564,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-43",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -1656,8 +1584,7 @@
 
 									}
 ,
-									"text" : "Quality",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Quality"
 								}
 
 							}
@@ -1756,8 +1683,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-27",
 									"linecount" : 9,
 									"maxclass" : "comment",
@@ -1779,8 +1704,7 @@
 
 									}
 ,
-									"text" : "Load the audio file «vibes-a1.aif» and play it a few times. While there's only a single note in the audio file, the pitch estimator will sometimes incorrectly detect two notes.\n\nTry to increase the value of the «Quality» parameter slightly (0.85 would be a better value in this situation) and try again. This time, only a single pitch should be detected.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Load the audio file «vibes-a1.aif» and play it a few times. While there's only a single note in the audio file, the pitch estimator will sometimes incorrectly detect two notes.\n\nTry to increase the value of the «Quality» parameter slightly (0.85 would be a better value in this situation) and try again. This time, only a single pitch should be detected."
 								}
 
 							}
@@ -1846,7 +1770,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1971,8 +1895,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "int" ],
 													"parameter_enable" : 0,
-													"patching_rect" : [ 81.666666666666686, 138.180412371134025, 24.0, 24.0 ],
-													"svg" : ""
+													"patching_rect" : [ 81.666666666666686, 138.180412371134025, 24.0, 24.0 ]
 												}
 
 											}
@@ -2092,14 +2015,10 @@
 
 											}
  ],
-										"originid" : "pat-22559"
+										"originid" : "pat-30476"
 									}
 ,
 									"patching_rect" : [ 155.0, 428.0, 195.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p autoclear"
 								}
 
@@ -2220,7 +2139,7 @@
 									"numoutlets" : 3,
 									"offset" : [ 0.0, 0.0 ],
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 155.0, 267.0, 237.0, 105.0 ],
+									"patching_rect" : [ 155.0, 267.0, 261.0, 109.0 ],
 									"varname" : "somax.audioinfluencer.ui",
 									"viewvisibility" : 1
 								}
@@ -2228,8 +2147,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-4",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -2250,15 +2167,12 @@
 
 									}
 ,
-									"text" : "Handling monophonic input",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Handling monophonic input"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-3",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -2280,8 +2194,7 @@
 
 									}
 ,
-									"text" : "Depending on the character of the monophonic input, tuning of the internal parameters of the pitch estimator may be necessary.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Depending on the character of the monophonic input, tuning of the internal parameters of the pitch estimator may be necessary."
 								}
 
 							}
@@ -2465,7 +2378,7 @@
 
 							}
  ],
-						"originid" : "pat-22557",
+						"originid" : "pat-30474",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2523,10 +2436,6 @@
 					}
 ,
 					"patching_rect" : [ 266.0, 15.0, 84.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p monophonic",
 					"varname" : "monophonic"
 				}
@@ -2544,7 +2453,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2606,7 +2515,7 @@
 							}
  ],
 						"lines" : [  ],
-						"originid" : "pat-22635",
+						"originid" : "pat-30552",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2664,10 +2573,6 @@
 					}
 ,
 					"patching_rect" : [ 572.0, 15.0, 109.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p \"chroma filtering\""
 				}
 
@@ -2684,7 +2589,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2701,8 +2606,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 346.5, 394.0, 24.0, 24.0 ],
-									"svg" : ""
+									"patching_rect" : [ 364.5, 395.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -2713,7 +2617,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 346.5, 441.0, 53.5, 22.0 ],
+									"patching_rect" : [ 364.5, 442.0, 53.5, 22.0 ],
 									"text" : "gate"
 								}
 
@@ -2724,7 +2628,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 3,
 									"numoutlets" : 0,
-									"patching_rect" : [ 346.5, 522.0, 49.0, 22.0 ],
+									"patching_rect" : [ 364.5, 523.0, 49.0, 22.0 ],
 									"text" : "noteout"
 								}
 
@@ -2736,7 +2640,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 346.5, 473.0, 78.0, 22.0 ],
+									"patching_rect" : [ 364.5, 474.0, 78.0, 22.0 ],
 									"text" : "route midiout"
 								}
 
@@ -2760,14 +2664,12 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-20",
 									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 400.5, 514.5, 150.0, 37.0 ],
+									"patching_rect" : [ 418.5, 516.0, 150.0, 37.0 ],
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -2783,8 +2685,7 @@
 
 									}
 ,
-									"text" : "don't forget to select MIDI output device",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "don't forget to select MIDI output device"
 								}
 
 							}
@@ -2797,7 +2698,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 267.0, 392.0, 70.0, 22.0 ],
+									"patching_rect" : [ 285.5, 393.0, 70.0, 22.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -2822,7 +2723,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 259.5, 396.0, 83.0, 20.0 ],
+									"patching_rect" : [ 277.5, 397.0, 83.0, 20.0 ],
 									"text" : "Listen to MIDI",
 									"textcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ]
 								}
@@ -2830,8 +2731,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-15",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -2852,8 +2751,7 @@
 
 									}
 ,
-									"text" : "Listen to audio",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Listen to audio"
 								}
 
 							}
@@ -2946,8 +2844,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 51.0, 356.0, 24.0, 24.0 ],
-									"svg" : ""
+									"patching_rect" : [ 51.0, 356.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -3010,7 +2907,7 @@
 									"numoutlets" : 3,
 									"offset" : [ 0.0, 0.0 ],
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 155.0, 271.0, 245.0, 101.0 ],
+									"patching_rect" : [ 155.0, 271.0, 263.0, 105.0 ],
 									"varname" : "somax.audioinfluencer.ui",
 									"viewvisibility" : 1
 								}
@@ -3018,14 +2915,12 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-5",
 									"linecount" : 5,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 407.0, 284.5, 338.0, 74.0 ],
+									"patching_rect" : [ 426.0, 286.5, 338.0, 74.0 ],
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -3041,15 +2936,12 @@
 
 									}
 ,
-									"text" : "Using the third outlet, the audio influencer will synthesize MIDI messages corresponding to the pitch estimation. Try for example with the «cherkoee.aif». This can be very useful for evaluating analysis quality while tuning the pitch estimator parameters (work better for monophonic, pitched content)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Using the third outlet, the audio influencer will synthesize MIDI messages corresponding to the pitch estimation. Try for example with the «cherkoee.aif». This can be very useful for evaluating analysis quality while tuning the pitch estimator parameters (work better for monophonic, pitched content)"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-4",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -3070,15 +2962,12 @@
 
 									}
 ,
-									"text" : "MIDI synthesis and output",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "MIDI synthesis and output"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-3",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -3099,8 +2988,7 @@
 
 									}
 ,
-									"text" : "The fourth outlet is generating MIDI messages synthesized from the pitch estimation.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "The fourth outlet is generating MIDI messages synthesized from the pitch estimation."
 								}
 
 							}
@@ -3236,7 +3124,7 @@
 
 							}
  ],
-						"originid" : "pat-22637",
+						"originid" : "pat-30554",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3294,10 +3182,6 @@
 					}
 ,
 					"patching_rect" : [ 683.0, 15.0, 86.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p \"midi output\"",
 					"varname" : "midi output"
 				}
@@ -3315,7 +3199,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3327,8 +3211,6 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-9",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -3350,8 +3232,7 @@
 
 									}
 ,
-									"text" : "Click on the «Settings» button to monitor parameter's changes",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Click on the «Settings» button to monitor parameter's changes"
 								}
 
 							}
@@ -3443,8 +3324,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-39",
 									"linecount" : 4,
 									"maxclass" : "comment",
@@ -3466,16 +3345,13 @@
 
 									}
 ,
-									"text" : "This menu is also available in the main interface («Settings» button)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "This menu is also available in the main interface («Settings» button)"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-38",
 									"linecount" : 6,
@@ -3498,8 +3374,7 @@
 
 									}
 ,
-									"text" : "Like the pitch detection, the onset detection algorithm has a number of parameters available for tuning in the main interface. For more documentation on these, see the bonk~ object's reference.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Like the pitch detection, the onset detection algorithm has a number of parameters available for tuning in the main interface. For more documentation on these, see the bonk~ object's reference."
 								}
 
 							}
@@ -3528,8 +3403,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-29",
 									"linecount" : 10,
 									"maxclass" : "comment",
@@ -3551,8 +3424,7 @@
 
 									}
 ,
-									"text" : "In some cases, for example with a noisy input such as «rainstick.aif», where there are no distinct onsets or where the onsets are musically irrelevant, we can synchronize the output to an external beat by sending bangs to the second inlet.\n\nTo do this, set the umenu above to «External Only (Inlet)» and send pulses with the button below:",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "In some cases, for example with a noisy input such as «rainstick.aif», where there are no distinct onsets or where the onsets are musically irrelevant, we can synchronize the output to an external beat by sending bangs to the second inlet.\n\nTo do this, set the umenu above to «External Only (Inlet)» and send pulses with the button below:"
 								}
 
 							}
@@ -3571,8 +3443,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubbleside" : 3,
 									"id" : "obj-25",
 									"linecount" : 2,
@@ -3595,8 +3465,7 @@
 
 									}
 ,
-									"text" : "this button indicates onsets detected",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "this button indicates onsets detected"
 								}
 
 							}
@@ -3669,8 +3538,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-15",
 									"linecount" : 4,
 									"maxclass" : "comment",
@@ -3692,8 +3559,7 @@
 
 									}
 ,
-									"text" : "As mentioned on the first tab, onsets are used to trigger output from a target player as well as segment the continuous stream of chroma. Therefore it's important that the audio influencer generates onsets even for polyphonic content.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "As mentioned on the first tab, onsets are used to trigger output from a target player as well as segment the continuous stream of chroma. Therefore it's important that the audio influencer generates onsets even for polyphonic content."
 								}
 
 							}
@@ -3744,7 +3610,7 @@
 									"numoutlets" : 3,
 									"offset" : [ 0.0, 0.0 ],
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 141.0, 337.0, 240.0, 106.0 ],
+									"patching_rect" : [ 141.0, 337.0, 264.0, 110.0 ],
 									"varname" : "somax.audioinfluencer.ui",
 									"viewvisibility" : 1
 								}
@@ -3752,8 +3618,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-6",
 									"linecount" : 16,
 									"maxclass" : "comment",
@@ -3775,15 +3639,12 @@
 
 									}
 ,
-									"text" : "Since the onsets by default are computed from the pitch estimation, there won't be any meaningful output at all for content where monophonic pitch estimation is not relevant. Load the audio file «brushes.aif»\n\nSince no onsets are detected, by default no chroma information will be used by the receiving player either (as the chroma is segmented through the onset at a later stage in the architecture).\n\nHowever, if we change the Onset analysis below to «Onset Detection (Bonk)», the onset analysis works perfectly and we can now use the chroma as well.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Since the onsets by default are computed from the pitch estimation, there won't be any meaningful output at all for content where monophonic pitch estimation is not relevant. Load the audio file «brushes.aif»\n\nSince no onsets are detected, by default no chroma information will be used by the receiving player either (as the chroma is segmented through the onset at a later stage in the architecture).\n\nHowever, if we change the Onset analysis below to «Onset Detection (Bonk)», the onset analysis works perfectly and we can now use the chroma as well."
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-4",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -3804,15 +3665,12 @@
 
 									}
 ,
-									"text" : "Handling polyphonic and/or unpitched input",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Handling polyphonic and/or unpitched input"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-3",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -3833,8 +3691,7 @@
 
 									}
 ,
-									"text" : "As explained in the «monophonic» tab, the pitch estimation will not work for polyphonic (or unpitched) content. ",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "As explained in the «monophonic» tab, the pitch estimation will not work for polyphonic (or unpitched) content. "
 								}
 
 							}
@@ -3921,7 +3778,7 @@
 
 							}
  ],
-						"originid" : "pat-22713",
+						"originid" : "pat-30630",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3979,10 +3836,6 @@
 					}
 ,
 					"patching_rect" : [ 380.0, 15.0, 140.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p polyphonic/unpitched",
 					"varname" : "polyphonic/unpitched"
 				}
@@ -4000,7 +3853,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -4011,14 +3864,10 @@
 						"showontab" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-22789"
+						"originid" : "pat-30706"
 					}
 ,
 					"patching_rect" : [ 990.0, 15.0, 25.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p ?"
 				}
 
@@ -4035,7 +3884,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -4693,7 +4542,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 511.0, 134.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
-									"text" : "1",
+									"text" : "6",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
@@ -4730,7 +4579,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 686.5, 4.0, 163.0, 87.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 539.0, 128.0, 295.0, 33.0 ],
+									"presentation_rect" : [ 539.0, 128.0, 319.0, 33.0 ],
 									"saved_attribute_attributes" : 									{
 										"textcolor" : 										{
 											"expression" : "themecolor.theme_textcolor"
@@ -4738,8 +4587,7 @@
 
 									}
 ,
-									"text" : "Onset Detection from",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Continuous Chroma/MFCC"
 								}
 
 							}
@@ -4748,14 +4596,14 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 2,
+									"linecount" : 21,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 686.5, 69.220703125, 198.0, 33.0 ],
+									"patching_rect" : [ 686.5, 69.220703125, 199.0, 288.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 2,
-									"presentation_rect" : [ 539.0, 168.5, 304.0, 33.0 ],
+									"presentation_linecount" : 12,
+									"presentation_rect" : [ 539.0, 168.5, 307.0, 167.0 ],
 									"saved_attribute_attributes" : 									{
 										"textcolor" : 										{
 											"expression" : "themecolor.theme_textcolor"
@@ -4763,8 +4611,7 @@
 
 									}
 ,
-									"text" : "This determines which algorithm should be used for onset detection.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "By default, chroma and MFCCs are only output whenever an onset is detected. Turning continuous chroma/MFCC on will generate output continuously. When influencing a player, the player will use the chroma/MFCC influences look for sequences in its corpus matching the N last influences it received. With continuouschroma/continuousmfcc 1 , the resolution will be too high and generate way too many matches. continuouscrhoma/continuousmfcc 1 can however still be useful for mixing chromas/MFCC from multiple audio influencers, but it requires segmentation of the combined chromas/MFCC afterwards."
 								}
 
 							}
@@ -4821,7 +4668,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 522.0, 438.25390625, 21.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 176.5, 467.5, 175.5, 28.0 ],
+									"presentation_rect" : [ 175.0, 468.0, 161.0, 38.0 ],
 									"proportion" : 0.5
 								}
 
@@ -4970,7 +4817,7 @@
 									"outlettype" : [ "", "", "" ],
 									"patching_rect" : [ 13.0, 10.0, 454.0, 616.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 34.0, 123.0, 454.0, 616.0 ],
+									"presentation_rect" : [ 34.0, 123.0, 420.0, 574.0 ],
 									"varname" : "somax.audioinfluencer",
 									"viewvisibility" : 1
 								}
@@ -4992,8 +4839,7 @@
 
 									}
 ,
-									"text" : "Parameters",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Parameters"
 								}
 
 							}
@@ -5013,8 +4859,7 @@
 
 									}
 ,
-									"text" : "This tab explains all the available parameters in the main user interface.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "This tab explains all the available parameters in the main user interface."
 								}
 
 							}
@@ -5418,7 +5263,7 @@
 
 							}
  ],
-						"originid" : "pat-22791",
+						"originid" : "pat-30708",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5476,10 +5321,6 @@
 					}
 ,
 					"patching_rect" : [ 897.0, 15.0, 88.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p parameters",
 					"varname" : "parameters"
 				}
@@ -5497,7 +5338,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -5509,8 +5350,6 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-3",
 									"linecount" : 4,
 									"maxclass" : "comment",
@@ -5532,8 +5371,7 @@
 
 									}
 ,
-									"text" : "See somax.audioinfluencer documentation for more info",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "See somax.audioinfluencer documentation for more info"
 								}
 
 							}
@@ -5604,8 +5442,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"fontface" : 1,
 									"id" : "obj-11",
 									"linecount" : 3,
@@ -5628,15 +5464,12 @@
 
 									}
 ,
-									"text" : "In most cases, it's easier to use the somax.audioinfluencer.app object to initialize and use the audio influencer. ",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "In most cases, it's easier to use the somax.audioinfluencer.app object to initialize and use the audio influencer. "
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-6",
 									"linecount" : 4,
 									"maxclass" : "comment",
@@ -5658,16 +5491,13 @@
 
 									}
 ,
-									"text" : "The kslider in the audioinfluencer.ui is only displaying the pitch class of the pitch influence, but the output will always be the full range of MIDI pitches.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "The kslider in the audioinfluencer.ui is only displaying the pitch class of the pitch influence, but the output will always be the full range of MIDI pitches."
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.0,
 									"bubbleside" : 2,
 									"id" : "obj-9",
@@ -5691,8 +5521,7 @@
 
 									}
 ,
-									"text" : "UI Interface: To create the object, (pressing N and) type:\n\nbpatcher somax.audioinfluencer.ui",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "UI Interface: To create the object, (pressing N and) type:\n\nbpatcher somax.audioinfluencer.ui"
 								}
 
 							}
@@ -5712,7 +5541,7 @@
 									"numoutlets" : 3,
 									"offset" : [ 0.0, 0.0 ],
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 484.5, 191.0, 247.0, 101.0 ],
+									"patching_rect" : [ 485.0, 191.0, 263.0, 101.0 ],
 									"varname" : "somax.audioinfluencer.ui",
 									"viewvisibility" : 1
 								}
@@ -5720,14 +5549,12 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-10",
 									"linecount" : 6,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 733.5, 198.0, 179.0, 87.0 ],
+									"patching_rect" : [ 752.0, 191.0, 179.0, 87.0 ],
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -5743,15 +5570,12 @@
 
 									}
 ,
-									"text" : "This compact interface is just a wrapper around the main interface. No parameters are visible here, but all parameters are available by pressing the «Settings» button.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "This compact interface is just a wrapper around the main interface. No parameters are visible here, but all parameters are available by pressing the «Settings» button."
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-12",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -5773,16 +5597,13 @@
 
 									}
 ,
-									"text" : "The audio influencer can of course also be initialized as a normal max object without any visible user interface at all:",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "The audio influencer can of course also be initialized as a normal max object without any visible user interface at all:"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"bubblepoint" : 0.0,
 									"bubbleside" : 2,
 									"id" : "obj-1",
@@ -5806,8 +5627,7 @@
 
 									}
 ,
-									"text" : "Main object interface: To create the object, (pressing N and) type:\n\nbpatcher somax.audioinfluencer",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Main object interface: To create the object, (pressing N and) type:\n\nbpatcher somax.audioinfluencer"
 								}
 
 							}
@@ -5848,8 +5668,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-7",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -5870,15 +5688,12 @@
 
 									}
 ,
-									"text" : "UI & Initialization",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "UI & Initialization"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-									"bubble_outlinecolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"id" : "obj-8",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -5899,8 +5714,7 @@
 
 									}
 ,
-									"text" : "Like most objects of the somax package, the audio influencer can be initialized in a number of ways depending on which type of interface the user prefers.",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Like most objects of the somax package, the audio influencer can be initialized in a number of ways depending on which type of interface the user prefers."
 								}
 
 							}
@@ -5922,7 +5736,7 @@
 
 							}
  ],
-						"originid" : "pat-22845",
+						"originid" : "pat-30762",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5980,10 +5794,6 @@
 					}
 ,
 					"patching_rect" : [ 135.0, 15.0, 113.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p \"ui & initialization\"",
 					"varname" : "ui & initialization"
 				}
@@ -6001,7 +5811,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -6496,7 +6306,7 @@
 
 							}
  ],
-						"originid" : "pat-23005",
+						"originid" : "pat-30922",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -6554,10 +6364,6 @@
 					}
 ,
 					"patching_rect" : [ 813.0, 18.0, 77.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p core object",
 					"varname" : "basic"
 				}
@@ -6565,7 +6371,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-22443",
+		"originid" : "pat-30360",
 		"parameters" : 		{
 			"obj-11::obj-17::obj-103" : [ "influence delay", "influencedelay", 0 ],
 			"obj-11::obj-17::obj-21" : [ "onset", "onset", 0 ],

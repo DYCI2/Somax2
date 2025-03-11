@@ -12,8 +12,8 @@
         "description": "This determines which algorithm should be used for onset detection."
     },
     "continuouschroma": {
-        "title": "Continuous Chroma",
-        "description": "By default, chroma is only output whenever an onset is detected. Turning continuous chroma on will generate output continuously. When influencing a player, the player will use the chroma influences look for sequences in its corpus matching the N last influences it received. With continuouschroma 1, the resolution will be too high and generate way too many matches. continuouscrhoma 1 can however still be useful for mixing chromas from multiple audio influencers, but it requires segmentation of the combined chromas afterwards."
+        "title": "Continuous Chroma/MFCC",
+        "description": "By default, chroma and MFCCs are only output whenever an onset is detected. Turning continuous chroma/MFCC on will generate output continuously. When influencing a player, the player will use the chroma/MFCC influences look for sequences in its corpus matching the N last influences it received. With continuouschroma/continuousmfcc 1 , the resolution will be too high and generate way too many matches. continuouscrhoma/continuousmfcc 1 can however still be useful for mixing chromas/MFCC from multiple audio influencers, but it requires segmentation of the combined chromas/MFCC afterwards."
     },
     "onsetlimiter": {
         "title": "Onset Limiter",
