@@ -110,7 +110,8 @@
 
     <!--SEEALSO-->
     <seealsolist>
-        <seealso name="somax.atom" />
+        <seealso name="somax.atom.app" />
+        <seealso name="somax.filter" />
         <seealso name="somax.player" />
         <seealso name="somax.player.app" />
         <seealso name="somax.audiocorpusbuilder" />

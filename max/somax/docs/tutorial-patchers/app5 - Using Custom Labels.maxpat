@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 256.0, 110.0, 1271.0, 945.0 ],
+		"rect" : [ 256.0, 110.0, 1271.0, 908.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"enablehscroll" : 0,
@@ -27,7 +27,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -469,14 +469,10 @@
 
 							}
  ],
-						"originid" : "pat-45287"
+						"originid" : "pat-33243"
 					}
 ,
 					"patching_rect" : [ 6.0, 117.0, 91.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p panel_control"
 				}
 
@@ -577,7 +573,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1379,7 +1375,7 @@
 
 							}
  ],
-						"originid" : "pat-41131",
+						"originid" : "pat-33246",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1452,7 +1448,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-68",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1466,16 +1461,359 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 278.0, 220.0, 1164.0, 656.0 ],
+						"rect" : [ 211.0, 264.0, 1153.0, 656.0 ],
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
+								"box" : 								{
+									"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
+									"id" : "obj-17",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patcher" : 									{
+										"fileversion" : 1,
+										"appversion" : 										{
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 5,
+											"architecture" : "x64",
+											"modernui" : 1
+										}
+,
+										"classnamespace" : "box",
+										"rect" : [ 643.0, 192.0, 389.0, 780.0 ],
+										"gridsize" : [ 15.0, 15.0 ],
+										"boxes" : [ 											{
+												"box" : 												{
+													"id" : "obj-9",
+													"linecount" : 66,
+													"maxclass" : "comment",
+													"numinlets" : 1,
+													"numoutlets" : 0,
+													"patching_rect" : [ 12.0, 6.0, 370.0, 905.0 ],
+													"text" : "   #                                 Name          Start            End         Length\n---- ------------------------------------ -------------- -------------- --------------\n  M1                               b/soft       0:00.000                              \n  M2                               b/loud      0:00.984                              \n  M3                               b/soft       0:01.990                              \n  M4                               b/loud      0:03.050                              \n  M5                               c/soft       0:04.150                              \n  M6                               c/loud      0:05.300                              \n  M7                               c/soft       0:06.190                              \n  M8                               c/loud      0:07.174                              \n  M9                               d/soft       0:08.034                              \n M10                              d/loud      0:08.984                              \n M11                              d/soft       0:09.964                              \n M12                              d/loud      0:11.004                              \n M13                              e/soft       0:11.885                              \n M14                              e/loud      0:12.728                              \n M15                              e/soft       0:13.820                              \n M16                              e/loud      0:14.711                              \n M17                              f/soft        0:15.401                              \n M18                              f/loud       0:16.493                              \n M19                              f/soft        0:17.403                              \n M20                              f/loud       0:18.362                              \n M21                              g/soft       0:19.611                              \n M22                              g/loud      0:20.552                              \n M23                              g/soft       0:21.714                              \n M24                              g/loud      0:22.540                              \n M25                              h/soft       0:23.763                              \n M26                              h/loud      0:24.748                              \n M27                              h/soft       0:25.848                              \n M28                              h/loud      0:26.948                              \n M29                              j/soft        0:27.986                              \n M30                              j/loud       0:28.901                              \n M31                              j/soft        0:29.974                              \n M32                              j/loud       0:30.774                              \n M33                              m/soft      0:31.988                              \n M34                              m/loud     0:33.061                              \n M35                              m/soft      0:34.106                              \n M36                              m/loud     0:34.974                              \n M37                              o/soft       0:35.800                              \n M38                              o/loud      0:36.913                              \n M39                              o/soft       0:38.095                              \n M40                              o/loud      0:38.839                              \n M41                              p/soft       0:39.717                              \n M42                              p/loud      0:40.636                              \n M43                              p/soft       0:41.625                              \n M44                              p/loud      0:42.486                              \n M45                              r/soft        0:43.797                              \n M46                              r/loud       0:44.757                              \n M47                              r/soft        0:45.605                              \n M48                              r/loud       0:46.378                              \n M49                              s/soft       0:47.473                              \n M50                              s/loud      0:48.971                              \n M51                              s/soft       0:50.270                              \n M52                              s/loud      0:51.394                              \n M53                              t/soft        0:52.705                              \n M54                              t/loud       0:53.654                              \n M55                              t/soft        0:54.930                              \n M56                              t/loud       0:56.042                              \n M57                              w/soft       0:56.803                              \n M58                              w/loud      0:57.476                              \n M59                              w/soft       0:58.524                              \n M60                              w/loud      0:59.595                              \n M61                              z/soft        1:00.432                              \n M62                              z/loud       1:01.807                              \n M63                              z/soft        1:02.931                              \n M64                              z/loud       1:03.774                              \n"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"hidden" : 1,
+													"id" : "obj-8",
+													"maxclass" : "message",
+													"numinlets" : 2,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 449.0, 92.0, 33.0, 22.0 ],
+													"text" : "front"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+													"hidden" : 1,
+													"id" : "obj-5",
+													"linecount" : 2,
+													"maxclass" : "newobj",
+													"numinlets" : 1,
+													"numoutlets" : 2,
+													"outlettype" : [ "", "" ],
+													"patching_rect" : [ 449.0, 129.0, 66.0, 35.0 ],
+													"save" : [ "#N", "thispatcher", ";", "#Q", "end", ";" ],
+													"text" : "thispatcher"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"comment" : "",
+													"hidden" : 1,
+													"id" : "obj-4",
+													"index" : 1,
+													"maxclass" : "inlet",
+													"numinlets" : 0,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 449.0, 40.0, 30.0, 30.0 ]
+												}
+
+											}
+ ],
+										"lines" : [ 											{
+												"patchline" : 												{
+													"destination" : [ "obj-8", 0 ],
+													"hidden" : 1,
+													"source" : [ "obj-4", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-5", 0 ],
+													"hidden" : 1,
+													"source" : [ "obj-8", 0 ]
+												}
+
+											}
+ ],
+										"originid" : "pat-37397"
+									}
+,
+									"patching_rect" : [ 456.0, 672.795711060948179, 73.0, 22.0 ],
+									"text" : "p reaper_txt"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"id" : "obj-16",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 456.0, 628.0, 42.0, 19.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 988.0, 443.0, 33.0, 19.0 ],
+									"rounded" : 8.0,
+									"text" : "this",
+									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 9.0,
+									"hint" : "",
+									"id" : "obj-15",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 842.0, 378.0, 15.0, 15.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 841.0, 378.0, 15.0, 15.0 ],
+									"rounded" : 60.0,
+									"text" : "3",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 4,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-14",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 177.0, 32.0, 373.0, 332.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 181.0, 33.0, 60.0, 27.0 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"hint" : "",
+									"id" : "obj-13",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 238.0, 36.0, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 181.0, 36.5, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "2",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 9.0,
+									"hint" : "",
+									"id" : "obj-12",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 984.0, 228.0, 15.0, 15.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 984.0, 230.0, 15.0, 15.0 ],
+									"rounded" : 60.0,
+									"text" : "2",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 0,
+									"fontface" : 0,
+									"id" : "obj-11",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 1132.0, 511.0, 232.0, 52.0 ],
+									"presentation" : 1,
+									"presentation_linecount" : 2,
+									"presentation_rect" : [ 5.0, 84.0, 167.5, 52.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "right click on the ruler and select \"Minutes:Seconds\"",
+									"textjustification" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 4,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-10",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 1159.0, 114.0, 373.0, 332.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 42.0, 62.0, 60.0, 27.0 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"hint" : "",
+									"id" : "obj-7",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 1143.0, 255.0, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 27.0, 384.5, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "3",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"hint" : "",
+									"id" : "obj-6",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 684.0, 98.0, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 108.0, 65.5, 20.0, 20.0 ],
+									"rounded" : 60.0,
+									"text" : "1",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"autofit" : 2,
+									"id" : "obj-5",
+									"maxclass" : "fpic",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "jit_matrix" ],
+									"patching_rect" : [ 340.0, 495.0, 100.0, 50.0 ],
+									"pic" : "reaper_region_marker_manager.png",
+									"presentation" : 1,
+									"presentation_rect" : [ 39.125, 313.0, 608.75, 327.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"autofit" : 2,
+									"id" : "obj-4",
+									"maxclass" : "fpic",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "jit_matrix" ],
+									"patching_rect" : [ 95.0, 172.0, 100.0, 50.0 ],
+									"pic" : "reaper_waveform_annotation.png",
+									"presentation" : 1,
+									"presentation_rect" : [ 37.5, 22.0, 610.5, 277.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"comment" : "",
 									"id" : "obj-3",
@@ -1484,24 +1822,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 573.5, 797.0, 30.0, 30.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 0,
-									"fontsize" : 12.0,
-									"id" : "obj-1",
-									"linecount" : 6,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 740.75, 803.5, 313.0, 87.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 5,
-									"presentation_rect" : [ 738.75, 469.5, 350.0, 74.0 ],
-									"text" : "The first and most important step when constructing the corpus is to slice the audio file into short segments, that the player later will recombine freely when improvising over the corpus. In the next step, we'll look at how to tune the parameters controlling the segmentation and to verify the quality of the segmentation",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
 							}
@@ -1530,234 +1850,7 @@
 								"box" : 								{
 									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-73",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 272.0, 128.0, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 633.0, 102.0, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "1",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-58",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 51.75, 164.5, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 144.0, 22.0, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "3",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 4,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-59",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 59.25, 177.0, 373.0, 332.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 154.0, 29.0, 158.0, 53.0 ],
-									"proportion" : 0.5
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"bubbleside" : 3,
-									"fontface" : 0,
-									"id" : "obj-57",
-									"linecount" : 4,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 1055.0, 635.0, 232.0, 64.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 5,
-									"presentation_rect" : [ 569.75, 372.5, 189.0, 78.0 ],
-									"saved_attribute_attributes" : 									{
-										"bubble_bgcolor" : 										{
-											"expression" : "themecolor.theme_bubble_bgcolor"
-										}
-,
-										"textcolor" : 										{
-											"expression" : "themecolor.theme_textcolor"
-										}
-
-									}
-,
-									"text" : "longer files will of course work too, but building the corpus may take a long time. Expect around 10 seconds of build time per minute of audio.",
-									"textjustification" : 1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 0,
-									"fontsize" : 12.0,
-									"id" : "obj-54",
-									"linecount" : 7,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 730.75, 671.5, 313.0, 100.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 7,
-									"presentation_rect" : [ 763.75, 344.5, 322.0, 100.0 ],
-									"text" : "Now, select an audio file of your own that you would like to use as a corpus for the Somax II improvisation. For this tutorial, It's recommended to select a short file (1-3 minutes), mono or stereo, in one of the formats wav, aiff or flac. Drop the file onto the yellow area (or locate it using the «Read» button). The waveform of the file should now be drawn in the lower part of the window.",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-55",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 705.75, 677.5, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 738.75, 350.5, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "3",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 0,
-									"fontsize" : 12.0,
-									"id" : "obj-45",
-									"linecount" : 5,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 733.75, 593.5, 313.0, 74.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 5,
-									"presentation_rect" : [ 763.75, 265.5, 320.0, 74.0 ],
-									"text" : "Next, the «Audio» and «MIDI» (Corpus Builder) buttons should become available once the server has started. Normally, we'd go here whenever we want to build an audio corpus, but in this tutorial, we'll use the copy of the Audio Corpus Builder on the left in this patch.",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-43",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 705.75, 592.5, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 738.75, 271.5, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "2",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-42",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 917.75, 312.5, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 454.0, 276.0, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "2",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 0,
-									"fontsize" : 12.0,
-									"id" : "obj-41",
-									"linecount" : 5,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 730.5, 521.0, 312.0, 74.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 5,
-									"presentation_rect" : [ 763.75, 185.5, 315.0, 74.0 ],
-									"text" : "The first step is once again to start the server. Once clicked, the server should start in a new window and the «Start Server» button should disappear. This won't be present if you already started the server in the first tab of the tutorial. ",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
+									"fontsize" : 9.0,
 									"hint" : "",
 									"id" : "obj-40",
 									"ignoreclick" : 1,
@@ -1768,31 +1861,13 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 718.75, 565.5, 20.0, 20.0 ],
+									"patching_rect" : [ 718.75, 565.5, 15.0, 15.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 738.75, 192.5, 20.0, 20.0 ],
+									"presentation_rect" : [ 975.0, 163.0, 15.0, 15.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 4,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-70",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 260.0, 117.0, 373.0, 332.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 466.0, 286.0, 58.0, 24.0 ],
-									"proportion" : 0.5
 								}
 
 							}
@@ -1827,7 +1902,7 @@
 									"patching_rect" : [ 634.5, 96.0, 299.0, 27.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 735.5, 39.5, 343.0, 27.0 ],
-									"text" : "2. The (Audio) Corpus Builder",
+									"text" : "2. Labels in Reaper",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1837,15 +1912,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 8,
+									"linecount" : 35,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 634.5, 136.5, 312.0, 114.0 ],
+									"patching_rect" : [ 634.5, 136.5, 312.0, 476.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 7,
-									"presentation_rect" : [ 735.5, 80.0, 343.25, 100.0 ],
-									"text" : "A concept that hasn't been explained so far is how to build a corpus from your own set of (audio or MIDI) files. In the previous tutorial, we were using some pre-built corpora.\n\nThere are a few short pre-build audio corpora distributed in Somax II, but in this tutorial, we're going to build our own corpus from an audio file.",
+									"presentation_linecount" : 33,
+									"presentation_rect" : [ 735.5, 80.0, 343.25, 449.0 ],
+									"text" : "Let's say you have your desired audio file in Reaper, and you want to manually annotate to construct a corpus with specific segments and labels.\nFirst, be sure to place the audio file at the very beginning of the timeline 0:00.000\nAnother important thing is to set the unit of Reaper ruler to Minutes:Seconds. Right click on the ruler at       to select this unit. The time should be displayed as in the figure here.\n\nNow you can start place your markers. From the Insert menu, select Marker, or just press M to add a marker at the desired selection. Double click on the marker number       and add your desired label name.\nNote that you can add multiple labels. In this case we added the initial letter of the words recorded in the corpus, and their intensity, resulting in labels like \"b/loud\". \nYou can add as label separators comma (,) semicolon (;) slash (/) or use a custom label.\n\nOnce you have completed your manual annotation, it's time to export your markers. From the View menu, select Region/Marker Manager (⌥⇧⌘R). This will give you the manager shown at      .\nFrom here, select all the markers by clicking on one of them and then pressing ⌘A, right click on them and select Export region/markers...\n\nThis will give you a .txt file that should look like this    .\nAs you can see, here there's full annotation of labels on the segments, and start time for each of them.\nSave this .txt file in the same folder as your audio file, as it will be used in a later step to build the corpus out of the desired manual annotation.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1866,24 +1941,6 @@
 								}
 
 							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 4,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-2",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 230.0, 87.0, 373.0, 332.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 643.0, 108.0, 61.0, 41.0 ],
-									"proportion" : 0.5
-								}
-
-							}
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
@@ -1892,8 +1949,15 @@
 								}
 
 							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-17", 0 ],
+									"source" : [ "obj-16", 0 ]
+								}
+
+							}
  ],
-						"originid" : "pat-41134",
+						"originid" : "pat-33249",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1952,7 +2016,7 @@
 ,
 					"patching_rect" : [ 82.0, 418.0, 69.0, 73.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1468.0, 920.0, 1117.0, 725.0 ],
+					"presentation_rect" : [ 73.0, 130.0, 1117.0, 725.0 ],
 					"varname" : "reaper",
 					"viewvisibility" : 1
 				}
@@ -1980,7 +2044,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2630,7 +2694,7 @@
 
 							}
  ],
-						"originid" : "pat-41137",
+						"originid" : "pat-33252",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2703,6 +2767,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-36",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2716,7 +2781,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3044,7 +3109,7 @@
 
 							}
  ],
-						"originid" : "pat-41140"
+						"originid" : "pat-33255"
 					}
 ,
 					"patching_rect" : [ 12.0, 418.0, 61.0, 69.0 ],
@@ -3077,7 +3142,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3794,7 +3859,7 @@
 
 							}
  ],
-						"originid" : "pat-41143",
+						"originid" : "pat-33258",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3868,9 +3933,9 @@
 					"mode" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 325.25, 1350.0, 103.5, 128.0 ],
+					"patching_rect" : [ 350.0, 1433.0, 103.5, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 803.0, 124.0, 447.0, 775.0 ],
+					"presentation_rect" : [ 1448.0, 124.0, 447.0, 775.0 ],
 					"proportion" : 0.5
 				}
 
@@ -3988,7 +4053,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-22",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -4003,7 +4067,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -4150,7 +4214,7 @@
 
 							}
  ],
-						"originid" : "pat-41146",
+						"originid" : "pat-33261",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4219,7 +4283,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125, 0.125, 0.125, 0.64 ],
-					"hidden" : 1,
 					"id" : "obj-8",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -4242,6 +4305,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-1",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -4255,7 +4319,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -4358,7 +4422,7 @@
 
 							}
  ],
-						"originid" : "pat-41229",
+						"originid" : "pat-33344",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4432,6 +4496,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-23",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -4445,7 +4510,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -4555,7 +4620,7 @@
 
 							}
  ],
-						"originid" : "pat-41465",
+						"originid" : "pat-33580",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4741,7 +4806,7 @@
 
 			}
  ],
-		"originid" : "pat-41128",
+		"originid" : "pat-33241",
 		"parameters" : 		{
 			"obj-1::obj-1::obj-13::obj-1" : [ "source[5]", "source", 0 ],
 			"obj-1::obj-1::obj-2::obj-395::obj-2" : [ "live.text[113]", "live.text[4]", 0 ],
@@ -5352,6 +5417,20 @@
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
 				"patcherrelativepath" : "../../patchers/resources/player",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "reaper_region_marker_manager.png",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
+				"patcherrelativepath" : "../../media",
+				"type" : "PNG",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "reaper_waveform_annotation.png",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
+				"patcherrelativepath" : "../../media",
+				"type" : "PNG",
 				"implicit" : 1
 			}
 , 			{
