@@ -469,7 +469,7 @@
 
 							}
  ],
-						"originid" : "pat-33243"
+						"originid" : "pat-38812"
 					}
 ,
 					"patching_rect" : [ 6.0, 117.0, 91.0, 22.0 ],
@@ -559,6 +559,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-99",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -840,9 +841,22 @@
 										}
 ,
 										"classnamespace" : "box",
-										"rect" : [ 643.0, 192.0, 540.0, 780.0 ],
+										"rect" : [ 643.0, 192.0, 342.0, 780.0 ],
 										"gridsize" : [ 15.0, 15.0 ],
 										"boxes" : [ 											{
+												"box" : 												{
+													"bubble" : 1,
+													"id" : "obj-3",
+													"linecount" : 2,
+													"maxclass" : "comment",
+													"numinlets" : 1,
+													"numoutlets" : 0,
+													"patching_rect" : [ 200.0, 6.0, 119.0, 37.0 ],
+													"text" : "Audacity .txt annotation format"
+												}
+
+											}
+, 											{
 												"box" : 												{
 													"id" : "obj-9",
 													"linecount" : 64,
@@ -915,11 +929,10 @@
 
 											}
  ],
-										"originid" : "pat-38806"
+										"originid" : "pat-38817"
 									}
 ,
 									"patching_rect" : [ 471.0, 687.795711060948179, 83.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "p audacity_txt"
 								}
 
@@ -1053,7 +1066,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 730.5, 521.0, 316.0, 468.0 ],
+									"patching_rect" : [ 730.5, 521.0, 318.0, 468.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 33,
 									"presentation_rect" : [ 744.0, 90.0, 336.0, 455.0 ],
@@ -1138,7 +1151,7 @@
 
 							}
  ],
-						"originid" : "pat-33246",
+						"originid" : "pat-38815",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1211,7 +1224,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-68",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1254,7 +1266,21 @@
 										"classnamespace" : "box",
 										"rect" : [ 643.0, 192.0, 389.0, 780.0 ],
 										"gridsize" : [ 15.0, 15.0 ],
+										"visible" : 1,
 										"boxes" : [ 											{
+												"box" : 												{
+													"bubble" : 1,
+													"id" : "obj-3",
+													"linecount" : 2,
+													"maxclass" : "comment",
+													"numinlets" : 1,
+													"numoutlets" : 0,
+													"patching_rect" : [ 253.0, 37.0, 119.0, 37.0 ],
+													"text" : "Reaper .txt annotation format"
+												}
+
+											}
+, 											{
 												"box" : 												{
 													"id" : "obj-9",
 													"linecount" : 66,
@@ -1327,7 +1353,7 @@
 
 											}
  ],
-										"originid" : "pat-38802"
+										"originid" : "pat-38822"
 									}
 ,
 									"patching_rect" : [ 456.0, 672.795711060948179, 73.0, 22.0 ],
@@ -1676,14 +1702,14 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 36,
+									"linecount" : 34,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 634.5, 136.5, 312.0, 489.0 ],
+									"patching_rect" : [ 634.5, 136.5, 335.0, 462.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 34,
-									"presentation_rect" : [ 735.5, 80.0, 343.25, 462.0 ],
+									"presentation_rect" : [ 735.5, 80.0, 347.0, 462.0 ],
 									"text" : "Let's say you have your desired audio file in Reaper, and you want to manually annotate to construct a corpus with specific segments and labels.\nFirst, be sure to place the audio file at the very beginning of the timeline 0:00.000\nAnother important thing is to set the unit of Reaper ruler to Minutes:Seconds. Right click on the ruler at       to select this unit. The time should be displayed as in the figure here.\n\nNow you can start placing your markers. From the Insert menu, select Marker, or just press M to add a marker at the desired selection. Double click on the marker number       and add your desired label name.\nNote that you can add multiple labels for each marker. In this case we added the initial letter of the words recorded in the corpus, and their intensity, resulting in labels like \"b/loud\". \nYou can add as label separators comma (,) semicolon (;) slash (/) or use a custom label. Here we used /\n\nOnce you have completed your manual annotation, it's time to export your markers. From the View menu, select Region/Marker Manager (⌥⇧⌘R). This will give you the manager shown at      .\nFrom here, select all the markers by clicking on one of them and then pressing ⌘A, right click on them and select Export region/markers...\n\nThis will give you a .txt file that should look like this    .\nAs you can see, here there's full annotation of labels on the segments, and start time for each of them.\n\nSave this .txt file in the same folder as your audio file, as it will be used in a later step to build the corpus out of the desired manual annotation.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -1721,7 +1747,7 @@
 
 							}
  ],
-						"originid" : "pat-33249",
+						"originid" : "pat-38820",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2458,7 +2484,7 @@
 
 							}
  ],
-						"originid" : "pat-33252",
+						"originid" : "pat-38825",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2873,7 +2899,7 @@
 
 							}
  ],
-						"originid" : "pat-33255"
+						"originid" : "pat-38828"
 					}
 ,
 					"patching_rect" : [ 12.0, 418.0, 61.0, 69.0 ],
@@ -3623,7 +3649,7 @@
 
 							}
  ],
-						"originid" : "pat-33258",
+						"originid" : "pat-38831",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3978,7 +4004,7 @@
 
 							}
  ],
-						"originid" : "pat-33261",
+						"originid" : "pat-38834",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4186,7 +4212,7 @@
 
 							}
  ],
-						"originid" : "pat-33344",
+						"originid" : "pat-38917",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4384,7 +4410,7 @@
 
 							}
  ],
-						"originid" : "pat-33580",
+						"originid" : "pat-39153",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4454,6 +4480,7 @@
 					"angle" : 270.0,
 					"background" : 1,
 					"bgcolor" : [ 0.125, 0.125, 0.125, 0.64 ],
+					"hidden" : 1,
 					"id" : "obj-6",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -4569,7 +4596,7 @@
 
 			}
  ],
-		"originid" : "pat-33241",
+		"originid" : "pat-38810",
 		"parameters" : 		{
 			"obj-1::obj-1::obj-13::obj-1" : [ "source[5]", "source", 0 ],
 			"obj-1::obj-1::obj-2::obj-395::obj-2" : [ "live.text[113]", "live.text[4]", 0 ],
