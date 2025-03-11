@@ -470,7 +470,7 @@
 
 							}
  ],
-						"originid" : "pat-56526"
+						"originid" : "pat-57949"
 					}
 ,
 					"patching_rect" : [ 6.0, 117.0, 91.0, 22.0 ],
@@ -988,7 +988,7 @@
 
 											}
  ],
-										"originid" : "pat-56531"
+										"originid" : "pat-57954"
 									}
 ,
 									"patching_rect" : [ 471.0, 687.795711060948179, 83.0, 22.0 ],
@@ -1210,7 +1210,7 @@
 
 							}
  ],
-						"originid" : "pat-56529",
+						"originid" : "pat-57952",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1470,7 +1470,7 @@
 
 											}
  ],
-										"originid" : "pat-56536"
+										"originid" : "pat-57959"
 									}
 ,
 									"patching_rect" : [ 456.0, 672.795711060948179, 73.0, 22.0 ],
@@ -1864,7 +1864,7 @@
 
 							}
  ],
-						"originid" : "pat-56534",
+						"originid" : "pat-57957",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2040,7 +2040,7 @@
 									"patching_rect" : [ 648.0, 790.0, 150.0, 93.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
-									"presentation_rect" : [ 794.0, 705.0, 295.0, 52.0 ],
+									"presentation_rect" : [ 794.0, 713.0, 295.0, 52.0 ],
 									"text" : "see these two maxhelps for more information on how to use somax.atom and somax.filter with labels"
 								}
 
@@ -2058,7 +2058,7 @@
 									"patching_rect" : [ 633.0, 775.0, 150.0, 93.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
-									"presentation_rect" : [ 794.0, 705.0, 295.0, 52.0 ],
+									"presentation_rect" : [ 794.0, 713.0, 295.0, 52.0 ],
 									"text" : "see these two maxhelps for more information on how to use somax.atom and somax.filter with labels"
 								}
 
@@ -2076,7 +2076,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 303.0, 697.0, 115.0, 38.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 820.0, 759.0, 109.0, 26.0 ],
+									"presentation_rect" : [ 820.0, 765.0, 109.0, 26.0 ],
 									"rounded" : 8.0,
 									"text" : "somax.atom help",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -2123,7 +2123,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 118.0, 697.0, 115.0, 38.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 955.0, 759.0, 109.0, 26.0 ],
+									"presentation_rect" : [ 955.0, 765.0, 109.0, 26.0 ],
 									"rounded" : 8.0,
 									"text" : "somax.filter help",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -2748,7 +2748,7 @@
 									"patching_rect" : [ 538.0, 845.0, 408.0, 35.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 2,
-									"presentation_rect" : [ 771.714357702166353, 162.5, 336.571284595667294, 35.0 ],
+									"presentation_rect" : [ 771.714357702166353, 162.5, 340.0, 35.0 ],
 									"text" : "corpus Anais_words_2labels_reaper.pickle, mode continuous, continuity 0.7, transpositions 0 0 0 1 1 1 1 1 0 0 0 0"
 								}
 
@@ -2910,7 +2910,7 @@
 
 							}
  ],
-						"originid" : "pat-56539",
+						"originid" : "pat-57962",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-29", "obj-65" ]
 							}
@@ -3212,7 +3212,7 @@
 									"patching_rect" : [ 619.5, 121.5, 313.0, 275.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 18,
-									"presentation_rect" : [ 735.0, 116.0, 356.0, 248.0 ],
+									"presentation_rect" : [ 735.0, 116.0, 357.0, 248.0 ],
 									"text" : "This tutorial will guide you through the full workflow of working with custom labels in Somax2.\n\nYou will learn how to manually annotate your audio file in an external DAW (Reaper or Audacity), how to build a corpus from these manual annotations, and how to interact with them in Somax2.\n\nThis tutorial assumes that you've already completed the previous application tutorials and that you're familiar with the basic components of Somax2, and DAW concepts, as these won't be explained here.\n\nWhile in the previous tutorials we were building audio corpora using the automatic Somax2 segmentation mode, it is possible to build a corpus from your own manual annotation\n\nLet's begin by reviewing a couple of things to be aware of:",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
@@ -3243,7 +3243,7 @@
 
 							}
  ],
-						"originid" : "pat-56542"
+						"originid" : "pat-57965"
 					}
 ,
 					"patching_rect" : [ 12.0, 418.0, 61.0, 69.0 ],
@@ -3529,7 +3529,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 891.0, 360.0, 274.0, 476.0 ],
+									"patching_rect" : [ 891.0, 360.0, 275.0, 476.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 32,
 									"presentation_rect" : [ 629.0, 63.0, 345.0, 435.0 ],
@@ -3656,7 +3656,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-56548"
+										"originid" : "pat-57971"
 									}
 ,
 									"patching_rect" : [ 620.0, 67.0, 61.0, 69.0 ],
@@ -3857,7 +3857,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-56551"
+										"originid" : "pat-57974"
 									}
 ,
 									"patching_rect" : [ 690.0, 67.0, 61.0, 69.0 ],
@@ -4211,7 +4211,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-56554"
+										"originid" : "pat-57977"
 									}
 ,
 									"patching_rect" : [ 760.0, 67.0, 61.0, 69.0 ],
@@ -4455,7 +4455,7 @@
 
 							}
  ],
-						"originid" : "pat-56545",
+						"originid" : "pat-57968",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4757,7 +4757,7 @@
 
 							}
  ],
-						"originid" : "pat-56557",
+						"originid" : "pat-57980",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4947,7 +4947,7 @@
 
 							}
  ],
-						"originid" : "pat-56622",
+						"originid" : "pat-58045",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5137,7 +5137,7 @@
 
 							}
  ],
-						"originid" : "pat-56727",
+						"originid" : "pat-58150",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5374,7 +5374,7 @@
 
 							}
  ],
-						"originid" : "pat-56963",
+						"originid" : "pat-58386",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5541,7 +5541,7 @@
 
 			}
  ],
-		"originid" : "pat-56524",
+		"originid" : "pat-57947",
 		"parameters" : 		{
 			"obj-1::obj-1::obj-13::obj-1" : [ "source[5]", "source", 0 ],
 			"obj-1::obj-1::obj-2::obj-395::obj-2" : [ "live.text[113]", "live.text[4]", 0 ],
