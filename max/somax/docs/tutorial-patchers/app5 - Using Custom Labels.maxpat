@@ -559,7 +559,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-99",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -583,6 +582,64 @@
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 1.0,
+									"bubbleside" : 0,
+									"fontface" : 0,
+									"id" : "obj-14",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 63.0, 371.0, 232.0, 39.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 512.0, 567.5, 149.0, 39.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "export labels into a .txt file",
+									"textjustification" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.7,
+									"bubbleside" : 2,
+									"fontface" : 0,
+									"id" : "obj-2",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 253.0, 10.0, 232.0, 39.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 41.0, 304.426072234762955, 219.0, 39.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "rename labes with desired label names",
+									"textjustification" : 1
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"fontface" : 1,
@@ -1035,7 +1092,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 513.5, 874.5, 147.0, 19.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 829.763157894736878, 586.5, 154.736842105263122, 20.0 ],
+									"presentation_rect" : [ 831.0, 557.0, 154.736842105263122, 20.0 ],
 									"rounded" : 8.0,
 									"text" : "continue to the next step -->",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -1224,6 +1281,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-68",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1248,6 +1306,64 @@
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
 								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 1.0,
+									"bubbleside" : 2,
+									"fontface" : 0,
+									"id" : "obj-2",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 48.0, 356.0, 232.0, 39.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 18.0, 354.0, 161.0, 39.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "export markers into a .txt file",
+									"textjustification" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubblepoint" : 0.01,
+									"bubbleside" : 2,
+									"fontface" : 0,
+									"id" : "obj-1",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 253.0, 10.0, 232.0, 39.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 230.0, 5.0, 200.0, 39.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "rename markers with desired labels",
+									"textjustification" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
 									"id" : "obj-17",
 									"maxclass" : "newobj",
@@ -1266,7 +1382,6 @@
 										"classnamespace" : "box",
 										"rect" : [ 643.0, 192.0, 389.0, 780.0 ],
 										"gridsize" : [ 15.0, 15.0 ],
-										"visible" : 1,
 										"boxes" : [ 											{
 												"box" : 												{
 													"bubble" : 1,
@@ -1442,7 +1557,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 238.0, 36.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 181.0, 36.5, 20.0, 20.0 ],
+									"presentation_rect" : [ 165.0, 36.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1540,7 +1655,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 1143.0, 255.0, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 27.0, 384.5, 20.0, 20.0 ],
+									"presentation_rect" : [ 253.0, 313.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "3",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -4480,7 +4595,6 @@
 					"angle" : 270.0,
 					"background" : 1,
 					"bgcolor" : [ 0.125, 0.125, 0.125, 0.64 ],
-					"hidden" : 1,
 					"id" : "obj-6",
 					"maxclass" : "panel",
 					"mode" : 0,
