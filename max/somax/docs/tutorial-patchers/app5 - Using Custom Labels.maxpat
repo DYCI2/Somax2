@@ -483,7 +483,7 @@
 
 							}
  ],
-						"originid" : "pat-43491"
+						"originid" : "pat-44829"
 					}
 ,
 					"patching_rect" : [ 6.0, 117.0, 91.0, 22.0 ],
@@ -1001,7 +1001,7 @@
 
 											}
  ],
-										"originid" : "pat-43496"
+										"originid" : "pat-44834"
 									}
 ,
 									"patching_rect" : [ 471.0, 687.795711060948179, 83.0, 22.0 ],
@@ -1138,7 +1138,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 730.5, 521.0, 321.0, 468.0 ],
+									"patching_rect" : [ 730.5, 521.0, 325.0, 468.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 33,
 									"presentation_rect" : [ 744.0, 90.0, 336.0, 455.0 ],
@@ -1223,7 +1223,7 @@
 
 							}
  ],
-						"originid" : "pat-43494",
+						"originid" : "pat-44832",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1483,7 +1483,7 @@
 
 											}
  ],
-										"originid" : "pat-43501"
+										"originid" : "pat-44839"
 									}
 ,
 									"patching_rect" : [ 456.0, 672.795711060948179, 73.0, 22.0 ],
@@ -1836,7 +1836,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 634.5, 136.5, 338.0, 462.0 ],
+									"patching_rect" : [ 634.5, 136.5, 341.0, 462.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 34,
 									"presentation_rect" : [ 735.5, 80.0, 347.0, 462.0 ],
@@ -1877,7 +1877,7 @@
 
 							}
  ],
-						"originid" : "pat-43499",
+						"originid" : "pat-44837",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2614,7 +2614,7 @@
 
 							}
  ],
-						"originid" : "pat-43504",
+						"originid" : "pat-44842",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3029,7 +3029,7 @@
 
 							}
  ],
-						"originid" : "pat-43507"
+						"originid" : "pat-44845"
 					}
 ,
 					"patching_rect" : [ 12.0, 418.0, 61.0, 69.0 ],
@@ -3071,6 +3071,18 @@
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-1",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "bang" ],
+									"patching_rect" : [ 407.0, 109.0, 58.0, 22.0 ],
+									"text" : "loadbang"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 									"fontface" : 1,
@@ -3298,14 +3310,14 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-2",
-									"linecount" : 57,
+									"linecount" : 53,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 891.0, 360.0, 150.0, 771.0 ],
+									"patching_rect" : [ 891.0, 360.0, 172.0, 717.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 32,
-									"presentation_rect" : [ 629.0, 63.0, 340.5, 435.0 ],
+									"presentation_rect" : [ 629.0, 63.0, 343.0, 435.0 ],
 									"text" : "Now that you have your annotated .txt files, either from Reaper or Audacity, you can build a corpus out of that segmentation and labels content. \n\nFirst, as usual let's go to the                                 and open the somax.audiocorpusbuilder       \n\nNow, please click here: \nYou are now in the somax.audiocorpusbuilder, where you usually build Somax2 corpus from automatic segmentation.\n\nHere, however, there's a specific module for manual corpus building, let's click on it: \n\nThe manual corpus builder will let you build corpus from manual annotation .txt files.\nFirst, let's drag your audio file in \nThen, let's drag the corresponding annotation .txt file in\n\nNow, select the annotation format (Reaper or Audacity) in\nand select the multi-label separator you used during the annotation process, in \nYou can also name the labels as you wish in \nNote that you can give a specific corpus name      , skip invalid lines and eventually overwrite an existing corpus that had the same name.\n\nOnce you're ready, you can build the corpus\n\nYou can then go back to your Somax2 patcher, refresh the corpus list in Somax2 Players, and load the new corpus in there!"
 								}
 
@@ -3318,7 +3330,6 @@
 									"embed" : 1,
 									"enablehscroll" : 0,
 									"enablevscroll" : 0,
-									"hidden" : 1,
 									"id" : "obj-32",
 									"lockeddragscroll" : 0,
 									"lockedsize" : 0,
@@ -3429,7 +3440,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-43513"
+										"originid" : "pat-44851"
 									}
 ,
 									"patching_rect" : [ 620.0, 67.0, 61.0, 69.0 ],
@@ -3451,7 +3462,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 478.0, 100.0, 147.0, 19.0 ],
+									"patching_rect" : [ 478.0, 56.0, 147.0, 19.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 762.0, 225.0, 123.0, 20.0 ],
 									"rounded" : 8.0,
@@ -3630,7 +3641,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-43516"
+										"originid" : "pat-44854"
 									}
 ,
 									"patching_rect" : [ 690.0, 67.0, 61.0, 69.0 ],
@@ -3691,7 +3702,7 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 478.0, 121.0, 147.0, 19.0 ],
+									"patching_rect" : [ 478.0, 87.0, 147.0, 19.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 758.0, 158.0, 105.0, 20.0 ],
 									"rounded" : 8.0,
@@ -3742,6 +3753,7 @@
 									"embed" : 1,
 									"enablehscroll" : 0,
 									"enablevscroll" : 0,
+									"hidden" : 1,
 									"id" : "obj-36",
 									"lockeddragscroll" : 0,
 									"lockedsize" : 0,
@@ -3984,7 +3996,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-43519"
+										"originid" : "pat-44857"
 									}
 ,
 									"patching_rect" : [ 760.0, 67.0, 61.0, 69.0 ],
@@ -4082,6 +4094,13 @@
 							}
  ],
 						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-17", 0 ],
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-4", 0 ],
 									"source" : [ "obj-110", 0 ]
@@ -4221,7 +4240,7 @@
 
 							}
  ],
-						"originid" : "pat-43510",
+						"originid" : "pat-44848",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4577,7 +4596,7 @@
 
 							}
  ],
-						"originid" : "pat-43522",
+						"originid" : "pat-44860",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4786,7 +4805,7 @@
 
 							}
  ],
-						"originid" : "pat-43605",
+						"originid" : "pat-44943",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4984,7 +5003,7 @@
 
 							}
  ],
-						"originid" : "pat-43841",
+						"originid" : "pat-45179",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5156,7 +5175,7 @@
 
 			}
  ],
-		"originid" : "pat-43489",
+		"originid" : "pat-44827",
 		"parameters" : 		{
 			"obj-1::obj-1::obj-13::obj-1" : [ "source[5]", "source", 0 ],
 			"obj-1::obj-1::obj-2::obj-395::obj-2" : [ "live.text[113]", "live.text[4]", 0 ],
