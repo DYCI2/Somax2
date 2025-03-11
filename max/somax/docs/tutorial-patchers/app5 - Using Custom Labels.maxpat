@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 256.0, 110.0, 1271.0, 908.0 ],
+		"rect" : [ 256.0, 109.0, 1271.0, 908.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"enablehscroll" : 0,
@@ -559,7 +559,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-99",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -588,7 +587,7 @@
 									"fontface" : 1,
 									"fontsize" : 9.0,
 									"hint" : "",
-									"id" : "obj-2",
+									"id" : "obj-13",
 									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
 									"maxclass" : "textbutton",
@@ -597,13 +596,352 @@
 									"outlettype" : [ "", "", "int" ],
 									"outputmode" : 0,
 									"parameter_enable" : 0,
-									"patching_rect" : [ 721.5, 597.0, 20.0, 20.0 ],
+									"patching_rect" : [ 1051.0, 649.0, 15.0, 15.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 141.0, 198.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 1020.0, 405.0, 15.0, 15.0 ],
 									"rounded" : 60.0,
-									"text" : "5.2",
+									"text" : "4",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"hint" : "",
+									"id" : "obj-11",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 668.0, 564.0, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 606.0, 543.0, 21.0, 21.0 ],
+									"rounded" : 60.0,
+									"text" : "4",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 4,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-10",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 614.0, 550.0, 80.0, 79.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 614.0, 550.0, 72.0, 21.0 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"hint" : "",
+									"id" : "obj-9",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 106.0, 419.0, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 298.0, 419.0, 21.0, 21.0 ],
+									"rounded" : 60.0,
+									"text" : "3",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 9.0,
+									"hint" : "",
+									"id" : "obj-8",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 870.0, 391.0, 15.0, 15.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 1061.0, 378.0, 15.0, 15.0 ],
+									"rounded" : 60.0,
+									"text" : "3",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 4,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-7",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 1127.0, 186.0, 80.0, 79.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 178.0, 342.0, 48.0, 21.0 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"hint" : "",
+									"id" : "obj-6",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 226.0, 342.0, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 226.0, 342.0, 21.0, 21.0 ],
+									"rounded" : 60.0,
+									"text" : "2",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 9.0,
+									"hint" : "",
+									"id" : "obj-12",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 1014.0, 258.0, 15.0, 15.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 929.0, 229.0, 15.0, 15.0 ],
+									"rounded" : 60.0,
+									"text" : "2",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"hint" : "",
+									"id" : "obj-5",
+									"ignoreclick" : 1,
+									"legacytextcolor" : 1,
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 1144.0, 117.0, 20.0, 20.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 45.0, 358.0, 21.0, 21.0 ],
+									"rounded" : 60.0,
+									"text" : "1",
+									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"autofit" : 2,
+									"id" : "obj-4",
+									"maxclass" : "fpic",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "jit_matrix" ],
+									"patching_rect" : [ 380.0, 463.0, 100.0, 50.0 ],
+									"pic" : "audacity_edit_labels.png",
+									"presentation" : 1,
+									"presentation_rect" : [ 19.0, 407.0, 672.0, 283.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"autofit" : 2,
+									"id" : "obj-3",
+									"maxclass" : "fpic",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "jit_matrix" ],
+									"patching_rect" : [ 235.0, 308.0, 100.0, 50.0 ],
+									"pic" : "Macintosh HD:/Users/marcofiorini/Documents/GitHub/Somax2/max/somax/media/audacity_waveform_annotation.png",
+									"presentation" : 1,
+									"presentation_rect" : [ 8.0, 28.0, 694.0, 373.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
+									"id" : "obj-17",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patcher" : 									{
+										"fileversion" : 1,
+										"appversion" : 										{
+											"major" : 9,
+											"minor" : 0,
+											"revision" : 5,
+											"architecture" : "x64",
+											"modernui" : 1
+										}
+,
+										"classnamespace" : "box",
+										"rect" : [ 643.0, 192.0, 540.0, 780.0 ],
+										"gridsize" : [ 15.0, 15.0 ],
+										"boxes" : [ 											{
+												"box" : 												{
+													"id" : "obj-9",
+													"linecount" : 64,
+													"maxclass" : "comment",
+													"numinlets" : 1,
+													"numoutlets" : 0,
+													"patching_rect" : [ 12.0, 6.0, 206.0, 878.0 ],
+													"text" : "0.000000\t        0.000000     \tb;soft\r0.819302 \t       0.819302\t     b;loud\r1.945841\t        1.945841\t     b;soft\r2.990442\t        2.990442\t     b;loud\r4.086271\t        4.086271\t     c;soft\r5.294492\t        5.294492\t     c;loud\r6.193634\t        6.193634\t     c;soft\r7.120874\t        7.120874\t     c;loud\r8.041990\t        8.041990\t     d;soft\r8.975353\t        8.975353\t     d;loud\r9.930691\t        9.930691\t     d;soft\r10.914127 \t     10.914127\t   d;loud\r11.858594\t      11.858594\t    e;soft\r12.689941\t      12.689941\t    e;loud\r13.833042\t      13.833042    \te;soft\r14.677379\t      14.677379\t    e;loud\r15.378827\t      15.378827\t    f;soft\r16.489953\t      16.489953\t    f;loud\r17.497266\t      17.497266\t    f;soft\r18.405499\t      18.405499\t    f;loud\r19.602715\t      19.602715\t    g;soft\r20.593515\t      20.593515\t    g;loud\r21.715023\t      21.715023\t    g;soft\r22.598486\t      22.598486\t    g;loud\r23.828729\t      23.828729\t    h;soft\r24.769988\t      24.769988\t    h;loud\r25.851611\t      25.851611\t     h;soft\r26.891951\t      26.891951\t    h;loud \r28.039627\t      28.039627\t    j;soft\r28.898320\t      28.898320\t    j;loud\r30.037739\t      30.037739\t    j;soft\r30.731299\t      30.731299\t    j;loud\r31.978055\t      31.978055\t   m;soft\r33.026651\t      33.026651\t   m;loud\r34.083504\t      34.083504\t   m;soft\r34.942197\t      34.942197   \tm;loud\r35.792633\t      35.792633\t   o;soft\r36.865999\t      36.865999\t   o;loud\r38.063216\t      38.063216\t   o;soft\r38.798059\t      38.798059\t   o;loud\r39.681521\t      39.681521\t   p;soft\r40.598011\t      40.598011\t    p;loud\r41.597067\t      41.597067\t   p;soft\r42.472274\t      42.472274\t   p;loud\r43.768570\t      43.768570\t   r;soft\r44.734599\t      44.734599\t   r;loud\r45.568522\t      45.568522\t   r;soft\r46.352905\t      46.352905\t   r;loud\r47.500581\t      47.500581\t   s;soft\r48.953754\t      48.953754\t   s;loud\r50.464723\t      50.464723\t   s;soft\r51.397726\t      51.397726\t   s;loud\r52.702279\t      52.702279\t   t;soft\r53.618768\t      53.618768\t   t;loud\r54.964604\t      54.964604\t   t;soft\r55.905864\t      55.905864\t   t;loud\r56.789327\t      56.789327   \tw;soft\r57.400320\t      57.400320   \tw;loud\r58.531483\t      58.531483   \tw;soft\r59.580079\t      59.580079\t   w;loud\r60.463542\t      60.463542\t   z;soft\r61.768094\t      61.768094\t   z;loud\r63.014851\t      63.014851\t   z;soft\r63.749694\t      63.749694\t   z;loud\r"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"hidden" : 1,
+													"id" : "obj-8",
+													"maxclass" : "message",
+													"numinlets" : 2,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 449.0, 92.0, 33.0, 22.0 ],
+													"text" : "front"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"color" : [ 0.8266150951, 0.1539679319, 0.6292977333, 1.0 ],
+													"hidden" : 1,
+													"id" : "obj-5",
+													"linecount" : 2,
+													"maxclass" : "newobj",
+													"numinlets" : 1,
+													"numoutlets" : 2,
+													"outlettype" : [ "", "" ],
+													"patching_rect" : [ 449.0, 129.0, 66.0, 35.0 ],
+													"save" : [ "#N", "thispatcher", ";", "#Q", "end", ";" ],
+													"text" : "thispatcher"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"comment" : "",
+													"hidden" : 1,
+													"id" : "obj-4",
+													"index" : 1,
+													"maxclass" : "inlet",
+													"numinlets" : 0,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 449.0, 40.0, 30.0, 30.0 ]
+												}
+
+											}
+ ],
+										"lines" : [ 											{
+												"patchline" : 												{
+													"destination" : [ "obj-8", 0 ],
+													"hidden" : 1,
+													"source" : [ "obj-4", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-5", 0 ],
+													"hidden" : 1,
+													"source" : [ "obj-8", 0 ]
+												}
+
+											}
+ ],
+										"originid" : "pat-38806"
+									}
+,
+									"patching_rect" : [ 471.0, 687.795711060948179, 83.0, 22.0 ],
+									"presentation_linecount" : 2,
+									"text" : "p audacity_txt"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 10.0,
+									"id" : "obj-16",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 471.0, 643.0, 42.0, 19.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 1000.0, 442.0, 33.0, 19.0 ],
+									"rounded" : 8.0,
+									"text" : "this",
+									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
 								}
 
 							}
@@ -652,101 +990,6 @@
 									"fontface" : 1,
 									"fontsize" : 9.0,
 									"hint" : "",
-									"id" : "obj-97",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 58.5, 470.0, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 148.0, 277.0, 21.0, 21.0 ],
-									"rounded" : 60.0,
-									"text" : "6",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 4,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-98",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 68.5, 479.0, 80.0, 79.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 159.0, 277.0, 241.178217821782141, 42.5 ],
-									"proportion" : 0.5
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 1,
-									"fontsize" : 10.0,
-									"id" : "obj-96",
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 1183.518518518518249, 768.5, 79.0, 21.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 644.601151315789593, 546.0, 75.789473684210407, 20.0 ],
-									"rounded" : 8.0,
-									"text" : "max window",
-									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"bubbleside" : 3,
-									"fontface" : 0,
-									"fontsize" : 12.235294117647058,
-									"id" : "obj-95",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 1071.75, 609.0, 235.0, 38.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 3,
-									"presentation_rect" : [ 569.82689950980398, 493.0, 172.31372549019602, 52.0 ],
-									"saved_attribute_attributes" : 									{
-										"bubble_bgcolor" : 										{
-											"expression" : "themecolor.theme_bubble_bgcolor"
-										}
-,
-										"textcolor" : 										{
-											"expression" : "themecolor.theme_textcolor"
-										}
-
-									}
-,
-									"text" : "Again, if this fails, see the Max Window for more information",
-									"textjustification" : 1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 9.0,
-									"hint" : "",
 									"id" : "obj-92",
 									"ignoreclick" : 1,
 									"legacytextcolor" : 1,
@@ -758,426 +1001,11 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 420.5, 180.6875, 20.0, 20.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 304.0, 50.0, 21.0, 21.0 ],
+									"presentation_rect" : [ 1435.0, -2.0, 21.0, 21.0 ],
 									"rounded" : 60.0,
 									"text" : "6.1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
 									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 4,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-93",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 426.5, 187.0, 80.0, 79.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 309.0, 56.0, 89.599616735867073, 32.75 ],
-									"proportion" : 0.5
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 4,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-88",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 295.5, 318.0, 80.0, 79.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 155.0, 181.0, 227.0, 99.5 ],
-									"proportion" : 0.5
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 0,
-									"fontsize" : 12.199999999999999,
-									"id" : "obj-85",
-									"linecount" : 4,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 729.5, 824.5, 319.0, 61.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 4,
-									"presentation_rect" : [ 763.209677419354875, 525.5, 321.333333333333258, 61.0 ],
-									"text" : "When you're happy with the segmentation, press the «Build» button to build the corpus. The status indicator (6.1) will blink until the corpus has been constructed, and then export the corpus so that it's available in the Player.",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 9.0,
-									"hint" : "",
-									"id" : "obj-86",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 704.5, 831.0, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 738.5, 530.5, 21.0, 21.0 ],
-									"rounded" : 60.0,
-									"text" : "6",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 1,
-									"id" : "obj-196",
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 785.518518518518249, 962.5, 22.0, 22.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 669.245888157894797, 418.0, 19.0, 19.0 ],
-									"rounded" : 99.0,
-									"text" : "?",
-									"texton" : "?",
-									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"bubbleside" : 3,
-									"fontface" : 0,
-									"fontsize" : 12.1875,
-									"id" : "obj-84",
-									"linecount" : 4,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 1045.75, 689.5, 237.0, 65.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 5,
-									"presentation_rect" : [ 562.5, 360.0, 179.640625, 79.0 ],
-									"saved_attribute_attributes" : 									{
-										"bubble_bgcolor" : 										{
-											"expression" : "themecolor.theme_bubble_bgcolor"
-										}
-,
-										"textcolor" : 										{
-											"expression" : "themecolor.theme_textcolor"
-										}
-
-									}
-,
-									"text" : "You can read more about these parameters in the \"audio corpus builder (2)\" tab of the somax.server.app help file:",
-									"textjustification" : 1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 0,
-									"fontsize" : 12.048387096774194,
-									"id" : "obj-82",
-									"linecount" : 18,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 731.5, 575.5, 320.0, 249.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 18,
-									"presentation_rect" : [ 763.209677419354875, 271.5, 321.290322580645125, 249.0 ],
-									"text" : "If the segmentation is good, you can go immediately to step 6. If not, you should change some parameters in the segmentation. The most important parameters are\n\n- Interval Duration: the duration of the segments (if you're using the «Interval» mode)\n\n- Peak Window: basically the resolution of onset detection (if you're using the «Onset» mode)\n\n- Peak Gain Threshold: How big the difference in energy between a potential onset and its surrounding must be for it to be considered an onset (if you're using the «Onset» mode)\n\nFor now, it's recommended to experiment with changing these parameters a little and see/listen to how it changes the number of segments",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 9.0,
-									"hint" : "",
-									"id" : "obj-83",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 706.5, 582.0, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 738.5, 278.0, 21.0, 21.0 ],
-									"rounded" : 60.0,
-									"text" : "5.2",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 9.0,
-									"hint" : "",
-									"id" : "obj-79",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 45.5, 618.0, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 149.0, 362.0, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "5.1",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 4,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-80",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 56.5, 629.0, 80.0, 79.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 158.0, 372.0, 242.178217821782141, 162.0 ],
-									"proportion" : 0.5
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-77",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 286.5, 472.5, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 156.0, 340.0, 20.0, 20.0 ],
-									"rounded" : 60.0,
-									"text" : "5",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 4,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-78",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 293.5, 479.0, 61.0, 51.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 159.0, 345.0, 166.623762376237664, 27.5 ],
-									"proportion" : 0.5
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 0,
-									"fontsize" : 12.25531914893617,
-									"id" : "obj-76",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 730.5, 525.5, 318.0, 48.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 3,
-									"presentation_rect" : [ 763.493243243243228, 220.0, 326.808510638297889, 48.0 ],
-									"text" : "To inspect the segmentation you can select a region and play it back with aural indicators of onsets. You can also zoom in/out by ⌘-dragging (up/down).",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 1,
-									"fontsize" : 10.0,
-									"id" : "obj-75",
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 1091.5, 768.5, 79.0, 21.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 640.851151315789593, 205.0, 75.789473684210407, 20.0 ],
-									"rounded" : 8.0,
-									"text" : "max window",
-									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"bubbleside" : 3,
-									"fontface" : 0,
-									"fontsize" : 12.1875,
-									"id" : "obj-57",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 1085.0, 665.0, 235.0, 51.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 4,
-									"presentation_rect" : [ 574.5, 136.0, 174.0, 65.0 ],
-									"saved_attribute_attributes" : 									{
-										"bubble_bgcolor" : 										{
-											"expression" : "themecolor.theme_bubble_bgcolor"
-										}
-,
-										"textcolor" : 										{
-											"expression" : "themecolor.theme_textcolor"
-										}
-
-									}
-,
-									"text" : "If some step along the way doesn't work, you can get information about the error in the Max Window",
-									"textjustification" : 1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 0,
-									"fontsize" : 12.363636363636363,
-									"id" : "obj-72",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 727.75, 488.5, 322.0, 48.0 ],
-									"presentation" : 1,
-									"presentation_linecount" : 3,
-									"presentation_rect" : [ 763.493243243243228, 167.0, 322.696969696969745, 48.0 ],
-									"text" : "Press «Test Segmentation» button to visualize the segmentation on top of the waveform in the display below.",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-73",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 702.75, 494.5, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 738.5, 173.0, 21.0, 21.0 ],
-									"rounded" : 60.0,
-									"text" : "5",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-71",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 45.75, 244.0, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 145.0, 152.0, 21.0, 21.0 ],
-									"rounded" : 60.0,
-									"text" : "4",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
-									"border" : 4,
-									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"id" : "obj-53",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 989.25, 172.0, 80.0, 79.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 155.0, 163.0, 152.0, 21.0 ],
-									"proportion" : 0.5
 								}
 
 							}
@@ -1218,69 +1046,19 @@
 							}
 , 							{
 								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 9.0,
-									"hint" : "",
-									"id" : "obj-43",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 705.75, 592.5, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 738.5, 225.5, 21.0, 21.0 ],
-									"rounded" : 60.0,
-									"text" : "5.1",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"fontface" : 0,
 									"fontsize" : 12.162162162162161,
 									"id" : "obj-41",
-									"linecount" : 6,
+									"linecount" : 34,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 730.5, 521.0, 316.0, 88.0 ],
+									"patching_rect" : [ 730.5, 521.0, 316.0, 468.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 5,
-									"presentation_rect" : [ 763.493243243243228, 89.5, 321.0, 74.0 ],
-									"text" : "There are two main modes for segmentation: «Onset», where the audio content is segmented based on detected onsets, and «Interval», where the content is sliced into segments of a fixed duration. Depending on the type of content, one of the two may work better than the other.",
+									"presentation_linecount" : 33,
+									"presentation_rect" : [ 744.0, 90.0, 336.0, 455.0 ],
+									"text" : "Let's say you have your desired audio file in Audacity, and you want to manually annotate to construct a corpus with specific segments and labels.\nFirst, be sure to place the audio file at the very beginning of the timeline 0:00.000\n\nNow you can start placing your labels. From the Tracks menu, select Add New, and then Label Track. Aternitavily, from the Edit menu, select Labels and then Add Label at Selection, or just press ⌘B. Then double click on the label and add your desired label name     .\n\nNote that you can add multiple names for each label. \nIn this case we added the initial letter of the words recorded in the corpus, and their intensity, resulting in labels like \"b/loud\". \nYou can add as label separators comma (,) semicolon (;) slash (/) or use a custom label. Here we used ;\n\nOnce you have completed your manual annotation, it's time to export your labels. From the Edit menu, select Labels and then Edit Labels. This will give you the manager shown at    .\n\nFrom here, you can click on the Export... button at      to export the labels in a .txt file.\n\nThis will give you a .txt file that should look like this    .\nAs you can see, here there's full annotation of labels on the segments, and start and end time for each of them.\n\nSave this .txt file in the same folder as your audio file, as it will be used in a later step to build the corpus out of the desired manual annotation.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
-									"fontface" : 1,
-									"fontsize" : 12.0,
-									"hint" : "",
-									"id" : "obj-40",
-									"ignoreclick" : 1,
-									"legacytextcolor" : 1,
-									"maxclass" : "textbutton",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "int" ],
-									"outputmode" : 0,
-									"parameter_enable" : 0,
-									"patching_rect" : [ 718.75, 565.5, 20.0, 20.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 741.75, 96.5, 21.0, 21.0 ],
-									"rounded" : 60.0,
-									"text" : "4",
-									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
-									"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ]
 								}
 
 							}
@@ -1309,14 +1087,13 @@
 									"fontface" : 1,
 									"fontsize" : 18.666666666666668,
 									"id" : "obj-156",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 634.5, 96.0, 311.0, 48.0 ],
+									"patching_rect" : [ 634.5, 96.0, 311.0, 27.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 741.75, 45.0, 340.75, 27.0 ],
-									"text" : "3. The (Audio) Corpus Builder (cont.)",
+									"text" : "3. Labels in Audacity",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -1347,15 +1124,8 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-89", 0 ],
-									"source" : [ "obj-196", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-49", 0 ],
-									"source" : [ "obj-75", 0 ]
+									"destination" : [ "obj-17", 0 ],
+									"source" : [ "obj-16", 0 ]
 								}
 
 							}
@@ -1364,13 +1134,6 @@
 									"destination" : [ "obj-87", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-89", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-49", 0 ],
-									"source" : [ "obj-96", 0 ]
 								}
 
 							}
@@ -1434,7 +1197,7 @@
 ,
 					"patching_rect" : [ 161.0, 418.0, 76.0, 80.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1654.0, 178.0, 1103.0, 667.0 ],
+					"presentation_rect" : [ 69.863008618354797, 124.0, 1103.0, 667.0 ],
 					"varname" : "audacity",
 					"viewvisibility" : 1
 				}
@@ -1448,6 +1211,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-68",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1563,7 +1327,7 @@
 
 											}
  ],
-										"originid" : "pat-37397"
+										"originid" : "pat-38802"
 									}
 ,
 									"patching_rect" : [ 456.0, 672.795711060948179, 73.0, 22.0 ],
@@ -1677,7 +1441,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 984.0, 228.0, 15.0, 15.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 984.0, 230.0, 15.0, 15.0 ],
+									"presentation_rect" : [ 1027.0, 230.0, 15.0, 15.0 ],
 									"rounded" : 60.0,
 									"text" : "2",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1912,15 +1676,15 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-152",
-									"linecount" : 35,
+									"linecount" : 36,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 634.5, 136.5, 312.0, 476.0 ],
+									"patching_rect" : [ 634.5, 136.5, 312.0, 489.0 ],
 									"presentation" : 1,
-									"presentation_linecount" : 33,
-									"presentation_rect" : [ 735.5, 80.0, 343.25, 449.0 ],
-									"text" : "Let's say you have your desired audio file in Reaper, and you want to manually annotate to construct a corpus with specific segments and labels.\nFirst, be sure to place the audio file at the very beginning of the timeline 0:00.000\nAnother important thing is to set the unit of Reaper ruler to Minutes:Seconds. Right click on the ruler at       to select this unit. The time should be displayed as in the figure here.\n\nNow you can start place your markers. From the Insert menu, select Marker, or just press M to add a marker at the desired selection. Double click on the marker number       and add your desired label name.\nNote that you can add multiple labels. In this case we added the initial letter of the words recorded in the corpus, and their intensity, resulting in labels like \"b/loud\". \nYou can add as label separators comma (,) semicolon (;) slash (/) or use a custom label.\n\nOnce you have completed your manual annotation, it's time to export your markers. From the View menu, select Region/Marker Manager (⌥⇧⌘R). This will give you the manager shown at      .\nFrom here, select all the markers by clicking on one of them and then pressing ⌘A, right click on them and select Export region/markers...\n\nThis will give you a .txt file that should look like this    .\nAs you can see, here there's full annotation of labels on the segments, and start time for each of them.\nSave this .txt file in the same folder as your audio file, as it will be used in a later step to build the corpus out of the desired manual annotation.",
+									"presentation_linecount" : 34,
+									"presentation_rect" : [ 735.5, 80.0, 343.25, 462.0 ],
+									"text" : "Let's say you have your desired audio file in Reaper, and you want to manually annotate to construct a corpus with specific segments and labels.\nFirst, be sure to place the audio file at the very beginning of the timeline 0:00.000\nAnother important thing is to set the unit of Reaper ruler to Minutes:Seconds. Right click on the ruler at       to select this unit. The time should be displayed as in the figure here.\n\nNow you can start placing your markers. From the Insert menu, select Marker, or just press M to add a marker at the desired selection. Double click on the marker number       and add your desired label name.\nNote that you can add multiple labels for each marker. In this case we added the initial letter of the words recorded in the corpus, and their intensity, resulting in labels like \"b/loud\". \nYou can add as label separators comma (,) semicolon (;) slash (/) or use a custom label. Here we used /\n\nOnce you have completed your manual annotation, it's time to export your markers. From the View menu, select Region/Marker Manager (⌥⇧⌘R). This will give you the manager shown at      .\nFrom here, select all the markers by clicking on one of them and then pressing ⌘A, right click on them and select Export region/markers...\n\nThis will give you a .txt file that should look like this    .\nAs you can see, here there's full annotation of labels on the segments, and start time for each of them.\n\nSave this .txt file in the same folder as your audio file, as it will be used in a later step to build the corpus out of the desired manual annotation.",
 									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 								}
 
@@ -4690,7 +4454,6 @@
 					"angle" : 270.0,
 					"background" : 1,
 					"bgcolor" : [ 0.125, 0.125, 0.125, 0.64 ],
-					"hidden" : 1,
 					"id" : "obj-6",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -5317,6 +5080,20 @@
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/javascript",
 				"patcherrelativepath" : "../../javascript",
 				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "audacity_edit_labels.png",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
+				"patcherrelativepath" : "../../media",
+				"type" : "PNG",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "audacity_waveform_annotation.png",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
+				"patcherrelativepath" : "../../media",
+				"type" : "PNG",
 				"implicit" : 1
 			}
 , 			{
