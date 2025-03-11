@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 68.0, 100.0, 211.0, 205.0 ],
+		"rect" : [ 68.0, 100.0, 234.0, 212.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -99,7 +99,7 @@
 					"patching_rect" : [ 342.0, 305.0, 72.0, 29.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 2,
-					"presentation_rect" : [ 53.0, 123.0, 99.0, 29.0 ],
+					"presentation_rect" : [ 56.666668355464935, 119.500003129243851, 99.0, 29.0 ],
 					"text" : "Not attached to a player",
 					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
@@ -117,7 +117,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 314.0, 305.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 2.0, 103.0, 201.0, 76.375 ],
+					"presentation_rect" : [ 5.333333492279053, 99.500002533197403, 193.333339095115662, 76.666668951511383 ],
 					"proportion" : 0.5
 				}
 
@@ -134,7 +134,7 @@
 					"patching_rect" : [ 303.0, 737.0, 55.0, 40.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 2,
-					"presentation_rect" : [ 56.5, 123.0, 99.0, 29.0 ],
+					"presentation_rect" : [ 56.666668355464935, 123.333337008953094, 99.0, 29.0 ],
 					"text" : "Player not initialized",
 					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
@@ -152,7 +152,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 303.0, 704.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 3.5, 104.0, 199.0, 76.375 ],
+					"presentation_rect" : [ 6.666666865348816, 99.333336293697357, 190.666672348976135, 76.000002264976501 ],
 					"proportion" : 0.5
 				}
 
@@ -170,7 +170,7 @@
 					"patching_rect" : [ 362.0, 737.0, 110.0, 62.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 3,
-					"presentation_rect" : [ 23.5, 117.5, 158.0, 40.0 ],
+					"presentation_rect" : [ 25.0, 120.0, 158.0, 40.0 ],
 					"text" : "Invalid configuration \n(typically, corpus doesn't have a descriptor with that name)",
 					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
@@ -189,7 +189,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 362.0, 704.0, 23.0, 24.673327137546494 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 2.5, 104.5, 199.0, 75.625 ],
+					"presentation_rect" : [ 6.0, 107.0, 195.0, 71.0 ],
 					"proportion" : 0.5
 				}
 
@@ -1999,13 +1999,13 @@
  ],
 		"originid" : "pat-26589",
 		"boxgroups" : [ 			{
-				"boxes" : [ "obj-39", "obj-45" ]
+				"boxes" : [ "obj-33", "obj-51" ]
 			}
 , 			{
 				"boxes" : [ "obj-279", "obj-36" ]
 			}
 , 			{
-				"boxes" : [ "obj-33", "obj-51" ]
+				"boxes" : [ "obj-39", "obj-45" ]
 			}
  ]
 	}
