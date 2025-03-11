@@ -38,10 +38,10 @@
 						"isolateaudio" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-5022"
+						"originid" : "pat-28054"
 					}
 ,
-					"patching_rect" : [ 91.0, 38.0, 25.0, 22.0 ],
+					"patching_rect" : [ 93.0, 38.0, 25.0, 22.0 ],
 					"text" : "p ?",
 					"varname" : "basic[3]"
 				}
@@ -71,6 +71,53 @@
 						"isolateaudio" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-61",
+									"maxclass" : "toggle",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 525.0, 190.0, 24.0, 24.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-64",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 525.0, 216.0, 99.0, 22.0 ],
+									"text" : "selfinfluenced $1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-63",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 600.0, 556.0, 32.0, 22.0 ],
+									"text" : "print"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-62",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 283.0, 330.0, 75.0, 22.0 ],
+									"text" : "openwindow"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"bubble" : 1,
 									"id" : "obj-60",
 									"linecount" : 2,
@@ -78,7 +125,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 788.999999999999886, 568.5, 176.041666666666629, 37.0 ],
-									"presentation_linecount" : 3,
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -1155,7 +1201,7 @@
 
 											}
  ],
-										"originid" : "pat-5026"
+										"originid" : "pat-28058"
 									}
 ,
 									"patching_rect" : [ 578.0, 330.0, 93.0, 22.0 ],
@@ -1243,7 +1289,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 635.0, 576.0, 77.0, 22.0 ],
-									"text" : "initial"
+									"text" : "pitch"
 								}
 
 							}
@@ -1290,7 +1336,7 @@
 
 									}
 ,
-									"text" : "See this tutorial for more info on somax.filter and somax.player.app/ui"
+									"text" : "See this tutorial for more info on somax.atom and somax.player.app/ui"
 								}
 
 							}
@@ -1348,8 +1394,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 467.0, 395.0, 51.0, 22.0 ],
-									"text" : "label $1"
+									"patching_rect" : [ 467.0, 395.0, 102.0, 22.0 ],
+									"text" : "influence label $1"
 								}
 
 							}
@@ -1543,7 +1589,7 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "", "", "", "" ],
 									"patching_rect" : [ 412.0, 452.0, 230.0, 22.0 ],
-									"text" : "somax.filter",
+									"text" : "somax.atom tutorial_atom",
 									"varname" : "somax.filter"
 								}
 
@@ -1826,8 +1872,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 37.0, 366.0, 235.0, 22.0 ],
-									"text" : "corpus Anais_words_2labels_reaper.pickle"
+									"patching_rect" : [ 37.0, 366.0, 245.0, 22.0 ],
+									"text" : "corpus Anais_words_2labels_audacity.pickle"
 								}
 
 							}
@@ -1980,7 +2026,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 889.0, 245.0, 163.0, 29.0 ],
-									"text" : "1 running"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -2064,7 +2110,7 @@
 									"filename" : "helpdetails.js",
 									"id" : "obj-2",
 									"ignoreclick" : 1,
-									"jsarguments" : [ "somax.filter" ],
+									"jsarguments" : [ "somax.atom" ],
 									"maxclass" : "jsui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
@@ -2456,6 +2502,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-16", 1 ],
 									"midpoints" : [ 562.166666666666629, 484.487499999999898, 594.5, 484.487499999999898 ],
+									"order" : 1,
 									"source" : [ "obj-4", 2 ]
 								}
 
@@ -2465,6 +2512,14 @@
 									"destination" : [ "obj-20", 0 ],
 									"midpoints" : [ 491.833333333333314, 484.487499999999898, 438.5, 484.487499999999898 ],
 									"source" : [ "obj-4", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-63", 0 ],
+									"order" : 0,
+									"source" : [ "obj-4", 2 ]
 								}
 
 							}
@@ -2561,6 +2616,28 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-64", 0 ],
+									"source" : [ "obj-61", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-4", 0 ],
+									"midpoints" : [ 292.5, 430.31640625, 421.5, 430.31640625 ],
+									"source" : [ "obj-62", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-4", 0 ],
+									"source" : [ "obj-64", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-58", 0 ],
 									"hidden" : 1,
 									"source" : [ "obj-65", 0 ]
@@ -2646,7 +2723,7 @@
 
 							}
  ],
-						"originid" : "pat-5024"
+						"originid" : "pat-28056"
 					}
 ,
 					"patching_rect" : [ 24.0, 38.0, 47.0, 22.0 ],
@@ -2657,7 +2734,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-5020",
+		"originid" : "pat-28052",
 		"parameters" : 		{
 			"obj-1::obj-14::obj-1001::obj-89::obj-1" : [ "live.text[4]", "live.text", 0 ],
 			"obj-1::obj-14::obj-1001::obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],
@@ -2732,6 +2809,9 @@
 			"obj-1::obj-14::obj-96::obj-89::obj-2" : [ "live.text[23]", "live.text", 0 ],
 			"obj-1::obj-14::obj-96::obj-89::obj-3" : [ "live.text[18]", "live.text", 0 ],
 			"obj-1::obj-23::obj-98" : [ "live.text[21]", "live.text[26]", 0 ],
+			"obj-1::obj-4::obj-89::obj-1" : [ "live.text[22]", "live.text", 0 ],
+			"obj-1::obj-4::obj-89::obj-2" : [ "live.text[24]", "live.text", 0 ],
+			"obj-1::obj-4::obj-89::obj-3" : [ "live.text[26]", "live.text", 0 ],
 			"parameterbanks" : 			{
 				"0" : 				{
 					"index" : 0,
@@ -2805,6 +2885,18 @@
 				"obj-1::obj-23::obj-98" : 				{
 					"parameter_longname" : "live.text[21]"
 				}
+,
+				"obj-1::obj-4::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[22]"
+				}
+,
+				"obj-1::obj-4::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[24]"
+				}
+,
+				"obj-1::obj-4::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[26]"
+				}
 
 			}
 ,
@@ -2870,13 +2962,6 @@
 				"name" : "somax.descriptorview.maxpat",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
 				"patcherrelativepath" : "../patchers/resources/player",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.filter.maxpat",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
-				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
