@@ -483,7 +483,7 @@
 
 							}
  ],
-						"originid" : "pat-44829"
+						"originid" : "pat-46163"
 					}
 ,
 					"patching_rect" : [ 6.0, 117.0, 91.0, 22.0 ],
@@ -1001,7 +1001,7 @@
 
 											}
  ],
-										"originid" : "pat-44834"
+										"originid" : "pat-46168"
 									}
 ,
 									"patching_rect" : [ 471.0, 687.795711060948179, 83.0, 22.0 ],
@@ -1138,7 +1138,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 730.5, 521.0, 325.0, 468.0 ],
+									"patching_rect" : [ 730.5, 521.0, 326.0, 468.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 33,
 									"presentation_rect" : [ 744.0, 90.0, 336.0, 455.0 ],
@@ -1223,7 +1223,7 @@
 
 							}
  ],
-						"originid" : "pat-44832",
+						"originid" : "pat-46166",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1483,7 +1483,7 @@
 
 											}
  ],
-										"originid" : "pat-44839"
+										"originid" : "pat-46173"
 									}
 ,
 									"patching_rect" : [ 456.0, 672.795711060948179, 73.0, 22.0 ],
@@ -1836,7 +1836,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 634.5, 136.5, 341.0, 462.0 ],
+									"patching_rect" : [ 634.5, 136.5, 344.0, 462.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 34,
 									"presentation_rect" : [ 735.5, 80.0, 347.0, 462.0 ],
@@ -1877,7 +1877,7 @@
 
 							}
  ],
-						"originid" : "pat-44837",
+						"originid" : "pat-46171",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2614,7 +2614,7 @@
 
 							}
  ],
-						"originid" : "pat-44842",
+						"originid" : "pat-46176",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -3029,7 +3029,7 @@
 
 							}
  ],
-						"originid" : "pat-44845"
+						"originid" : "pat-46179"
 					}
 ,
 					"patching_rect" : [ 12.0, 418.0, 61.0, 69.0 ],
@@ -3310,14 +3310,14 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-2",
-									"linecount" : 53,
+									"linecount" : 36,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 891.0, 360.0, 172.0, 717.0 ],
+									"patching_rect" : [ 891.0, 360.0, 268.0, 489.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 32,
-									"presentation_rect" : [ 629.0, 63.0, 343.0, 435.0 ],
+									"presentation_rect" : [ 629.0, 63.0, 345.0, 435.0 ],
 									"text" : "Now that you have your annotated .txt files, either from Reaper or Audacity, you can build a corpus out of that segmentation and labels content. \n\nFirst, as usual let's go to the                                 and open the somax.audiocorpusbuilder       \n\nNow, please click here: \nYou are now in the somax.audiocorpusbuilder, where you usually build Somax2 corpus from automatic segmentation.\n\nHere, however, there's a specific module for manual corpus building, let's click on it: \n\nThe manual corpus builder will let you build corpus from manual annotation .txt files.\nFirst, let's drag your audio file in \nThen, let's drag the corresponding annotation .txt file in\n\nNow, select the annotation format (Reaper or Audacity) in\nand select the multi-label separator you used during the annotation process, in \nYou can also name the labels as you wish in \nNote that you can give a specific corpus name      , skip invalid lines and eventually overwrite an existing corpus that had the same name.\n\nOnce you're ready, you can build the corpus\n\nYou can then go back to your Somax2 patcher, refresh the corpus list in Somax2 Players, and load the new corpus in there!"
 								}
 
@@ -3440,7 +3440,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-44851"
+										"originid" : "pat-46185"
 									}
 ,
 									"patching_rect" : [ 620.0, 67.0, 61.0, 69.0 ],
@@ -3641,7 +3641,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-44854"
+										"originid" : "pat-46188"
 									}
 ,
 									"patching_rect" : [ 690.0, 67.0, 61.0, 69.0 ],
@@ -3830,15 +3830,15 @@
 												"box" : 												{
 													"bubble" : 1,
 													"id" : "obj-3",
-													"linecount" : 4,
+													"linecount" : 3,
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 317.0, 239.0, 148.0, 64.0 ],
+													"patching_rect" : [ 317.0, 239.0, 148.0, 51.0 ],
 													"presentation" : 1,
 													"presentation_linecount" : 2,
 													"presentation_rect" : [ 330.0, 281.0, 191.0, 37.0 ],
-													"text" : "this is an image, not the actual somax.audiocorpusbuilder"
+													"text" : "this is an image, not the actual manual audiocorpusbuilder"
 												}
 
 											}
@@ -3996,7 +3996,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-44857"
+										"originid" : "pat-46191"
 									}
 ,
 									"patching_rect" : [ 760.0, 67.0, 61.0, 69.0 ],
@@ -4032,7 +4032,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 297.5, 774.5, 147.0, 19.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 717.0, 549.0, 154.736842105263122, 20.0 ],
+									"presentation_rect" : [ 717.0, 526.0, 154.736842105263122, 20.0 ],
 									"rounded" : 8.0,
 									"text" : "continue to the next step -->",
 									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
@@ -4240,7 +4240,7 @@
 
 							}
  ],
-						"originid" : "pat-44848",
+						"originid" : "pat-46182",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4596,7 +4596,7 @@
 
 							}
  ],
-						"originid" : "pat-44860",
+						"originid" : "pat-46194",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4805,7 +4805,7 @@
 
 							}
  ],
-						"originid" : "pat-44943",
+						"originid" : "pat-46277",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5003,7 +5003,7 @@
 
 							}
  ],
-						"originid" : "pat-45179",
+						"originid" : "pat-46513",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5175,7 +5175,7 @@
 
 			}
  ],
-		"originid" : "pat-44827",
+		"originid" : "pat-46161",
 		"parameters" : 		{
 			"obj-1::obj-1::obj-13::obj-1" : [ "source[5]", "source", 0 ],
 			"obj-1::obj-1::obj-2::obj-395::obj-2" : [ "live.text[113]", "live.text[4]", 0 ],
