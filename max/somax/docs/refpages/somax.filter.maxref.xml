@@ -28,7 +28,7 @@
                 <br />
                 If no name is provided, the default name is <m>Filter</m>. 
                 <br />
-                Unless <m>uniquename</m> is set to 0, the name will be formatted as <m>#0_Name</m>.
+                Unless <m>uniquename</m> is set to <m>0</m>, the name will be formatted as <m>#0_Name</m>.
             </description>
         </objarg>
     </objarglist>
@@ -76,7 +76,7 @@
         <attribute name="autoinitialize" get="1" set="1" type="int" size="1">
         	<digest>Enable/Disable autoinitialization of the filter.</digest>
             <description>
-                By default the <o>somax.filter</o> will be automatically initalized when created. Set this attribute to 0 to disable this behaviour. 
+                By default the <o>somax.filter</o> will be automatically initalized when created. Set this attribute to <m>0</m> to disable this behaviour. 
             </description>
         </attribute>
         <attribute name="descriptor" get="1" set="1" type="symbol" size="1">
