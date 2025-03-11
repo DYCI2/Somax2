@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 360.0, 208.0, 942.0, 597.0 ],
+		"rect" : [ 360.0, 207.0, 942.0, 597.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"enablehscroll" : 0,
@@ -1677,7 +1677,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 279.0, 105.59375, 163.0, 140.0 ],
 									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
-									"tabs" : [ "somax.server.app", "somax.player.app", "somax.audioinfluencer.app", "somax.midiinfluencer.app" ]
+									"tabs" : [ "somax.server.app", "somax.player.app", "somax.audioinfluencer.app", "somax.midiinfluencer.app", "somax.atom.app" ]
 								}
 
 							}
