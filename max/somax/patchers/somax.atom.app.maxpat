@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 68.0, 100.0, 241.0, 217.0 ],
+		"rect" : [ 68.0, 100.0, 219.0, 183.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -453,7 +453,7 @@
 
 							}
  ],
-						"originid" : "pat-26591"
+						"originid" : "pat-14731"
 					}
 ,
 					"patching_rect" : [ 28.0, 206.0, 94.0, 22.0 ],
@@ -677,7 +677,7 @@
 
 							}
  ],
-						"originid" : "pat-26593"
+						"originid" : "pat-14733"
 					}
 ,
 					"patching_rect" : [ 314.0, 272.0, 42.0, 22.0 ],
@@ -841,7 +841,7 @@
 
 							}
  ],
-						"originid" : "pat-26595"
+						"originid" : "pat-14735"
 					}
 ,
 					"patching_rect" : [ 303.0, 666.0, 78.0, 22.0 ],
@@ -942,7 +942,7 @@
 
 							}
  ],
-						"originid" : "pat-26597"
+						"originid" : "pat-14737"
 					}
 ,
 					"patching_rect" : [ 800.0, 695.0, 50.0, 22.0 ],
@@ -985,7 +985,7 @@
 					"patching_rect" : [ 961.0, 519.0, 130.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 7.360257499999989, 2.0, 197.279485000000022, 22.0 ],
-					"text" : "6269_Atom",
+					"text" : "3465_Atom",
 					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
@@ -2018,7 +2018,7 @@
 
 			}
  ],
-		"originid" : "pat-26589",
+		"originid" : "pat-14729",
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-33", "obj-51" ]
 			}
@@ -2029,8 +2029,6 @@
 				"boxes" : [ "obj-39", "obj-45" ]
 			}
  ],
-		"bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
-		"editing_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 		"saved_attribute_attributes" : 		{
 			"editing_bgcolor" : 			{
 				"expression" : "themecolor.theme_locked_bgcolor"
