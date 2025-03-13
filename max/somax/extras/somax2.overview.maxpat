@@ -258,7 +258,7 @@
 
 											}
  ],
-										"originid" : "pat-19273"
+										"originid" : "pat-11"
 									}
 ,
 									"patching_rect" : [ 533.0, 403.0, 121.0, 22.0 ],
@@ -439,7 +439,7 @@
 
 											}
  ],
-										"originid" : "pat-19275"
+										"originid" : "pat-13"
 									}
 ,
 									"patching_rect" : [ 153.0, 403.0, 100.0, 22.0 ],
@@ -465,7 +465,7 @@
 
 							}
  ],
-						"originid" : "pat-19271"
+						"originid" : "pat-9"
 					}
 ,
 					"patching_rect" : [ 248.5, 391.5, 87.0, 77.0 ],
@@ -484,7 +484,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -514,7 +513,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 477.0, 429.0, 378.0, 35.0 ],
+									"patching_rect" : [ 477.0, 435.0, 378.0, 35.0 ],
 									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=p4nUd5pot4w"
 								}
 
@@ -528,7 +527,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 297.0, 386.0, 114.0, 24.0 ],
+									"patching_rect" : [ 295.0, 381.0, 114.0, 24.0 ],
 									"text" : "Video Tutorial 5",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -543,28 +542,9 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 360.0, 575.0, 33.0 ],
+									"patching_rect" : [ 306.0, 355.0, 575.0, 33.0 ],
 									"text" : "In this tutorial you will be guided through the full workflow of using your own custom labels. This goes from manual annotation in Reaper/Audacity, to manual corpus building, filtering and matching in Somax2.",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"button" : 1,
-									"fontface" : 0,
-									"fontname" : "Arial",
-									"fontsize" : 11.595186999999999,
-									"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-									"id" : "obj-14",
-									"maxclass" : "tab",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "int", "", "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 364.0, 266.0, 41.0 ],
-									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
-									"tabs" : [ "5 - Using Custom Labels" ]
 								}
 
 							}
@@ -575,28 +555,9 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 304.25, 571.0, 33.0 ],
+									"patching_rect" : [ 308.0, 302.0, 571.0, 33.0 ],
 									"text" : "In the fourth tutorial you will understand how to save and load the parameters of your Somax2 players, to quickly retrieve presets on the fly",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"button" : 1,
-									"fontface" : 0,
-									"fontname" : "Arial",
-									"fontsize" : 11.595186999999999,
-									"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-									"id" : "obj-12",
-									"maxclass" : "tab",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "int", "", "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 300.25, 266.0, 41.0 ],
-									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
-									"tabs" : [ "4 - Save and Load Presets" ]
 								}
 
 							}
@@ -607,28 +568,9 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 240.5, 586.0, 33.0 ],
+									"patching_rect" : [ 308.0, 243.0, 586.0, 33.0 ],
 									"text" : "In the third tutorial you will learn how to prepare your own Somax2 environment and how to script the module's parameters through interactive messages",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"button" : 1,
-									"fontface" : 0,
-									"fontname" : "Arial",
-									"fontsize" : 11.595186999999999,
-									"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-									"id" : "obj-10",
-									"maxclass" : "tab",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "int", "", "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 236.5, 266.0, 41.0 ],
-									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
-									"tabs" : [ "3 - Script your Environment" ]
 								}
 
 							}
@@ -641,7 +583,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 477.0, 213.0, 378.0, 35.0 ],
+									"patching_rect" : [ 477.0, 219.0, 378.0, 35.0 ],
 									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=p4nUd5pot4w"
 								}
 
@@ -655,7 +597,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 297.0, 187.0, 114.0, 24.0 ],
+									"patching_rect" : [ 297.0, 195.0, 114.0, 24.0 ],
 									"text" : "Video Tutorial 2",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -672,7 +614,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 482.0, 144.0, 380.0, 35.0 ],
+									"patching_rect" : [ 509.0, 141.0, 380.0, 35.0 ],
 									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=6Azyt_5C6KQ"
 								}
 
@@ -686,7 +628,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 509.0, 120.0, 114.0, 24.0 ],
+									"patching_rect" : [ 509.0, 133.0, 114.0, 24.0 ],
 									"text" : "Video Tutorial 1",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -700,7 +642,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 172.0, 561.0, 20.0 ],
+									"patching_rect" : [ 308.0, 180.0, 561.0, 20.0 ],
 									"text" : "In the second tutorial you will learn how to build a corpus from your audio materials, and interact with it.",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
@@ -713,28 +655,9 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 109.0, 554.0, 33.0 ],
+									"patching_rect" : [ 308.0, 122.0, 554.0, 33.0 ],
 									"text" : "The first tutorial will give you an overview of the Somax2 application workflow, guiding you through immediate audio and MIDI interactions. ",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"button" : 1,
-									"fontface" : 0,
-									"fontname" : "Arial",
-									"fontsize" : 11.595186999999999,
-									"htabcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
-									"id" : "obj-3",
-									"maxclass" : "tab",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "int", "", "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 172.75, 266.0, 41.0 ],
-									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
-									"tabs" : [ "2 - Audio Corpus Builder" ]
 								}
 
 							}
@@ -777,9 +700,9 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 29.0, 109.0, 266.0, 41.0 ],
+									"patching_rect" : [ 29.0, 109.0, 261.0, 300.0 ],
 									"tabcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
-									"tabs" : [ "1 - First Steps with Somax2" ]
+									"tabs" : [ "1 - First Steps with Somax2", "2 - Audio Corpus Builder", "3 - Script your Environment", "4 - Save and Load Presets", "5 - Using Custom Labels" ]
 								}
 
 							}
@@ -894,7 +817,7 @@
 
 											}
  ],
-										"originid" : "pat-19280"
+										"originid" : "pat-18"
 									}
 ,
 									"patching_rect" : [ 7.5, 432.0, 68.0, 22.0 ],
@@ -904,33 +827,6 @@
 							}
  ],
 						"lines" : [ 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"hidden" : 1,
-									"midpoints" : [ 162.0, 323.6953125, 17.0, 323.6953125 ],
-									"source" : [ "obj-10", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"hidden" : 1,
-									"midpoints" : [ 162.0, 346.265625, 17.0, 346.265625 ],
-									"source" : [ "obj-12", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"hidden" : 1,
-									"midpoints" : [ 162.0, 420.66015625, 17.0, 420.66015625 ],
-									"source" : [ "obj-14", 1 ]
-								}
-
-							}
-, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-11", 0 ],
 									"hidden" : 1,
@@ -950,16 +846,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-9", 0 ],
 									"hidden" : 1,
-									"midpoints" : [ 162.0, 211.30078125, 17.0, 211.30078125 ],
-									"source" : [ "obj-3", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"hidden" : 1,
-									"midpoints" : [ 162.0, 154.3046875, 17.0, 154.3046875 ],
+									"midpoints" : [ 159.5, 421.734375, 17.0, 421.734375 ],
 									"source" : [ "obj-37", 1 ]
 								}
 
@@ -973,7 +860,7 @@
 
 							}
  ],
-						"originid" : "pat-19278"
+						"originid" : "pat-16"
 					}
 ,
 					"patching_rect" : [ 19.011363636363626, 391.5, 87.0, 77.0 ],
@@ -1139,7 +1026,7 @@
 
 							}
  ],
-						"originid" : "pat-19283"
+						"originid" : "pat-21"
 					}
 ,
 					"patching_rect" : [ 528.0, 391.5, 87.0, 77.0 ],
@@ -1334,7 +1221,7 @@
 
 											}
  ],
-										"originid" : "pat-19288"
+										"originid" : "pat-26"
 									}
 ,
 									"patching_rect" : [ 153.0, 413.0, 103.0, 22.0 ],
@@ -1352,7 +1239,7 @@
 
 							}
  ],
-						"originid" : "pat-19286"
+						"originid" : "pat-24"
 					}
 ,
 					"patching_rect" : [ 135.5, 391.5, 87.0, 77.0 ],
@@ -1419,6 +1306,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-13",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1609,7 +1497,7 @@
 
 											}
  ],
-										"originid" : "pat-19293"
+										"originid" : "pat-31"
 									}
 ,
 									"patching_rect" : [ 599.0, 174.0, 135.0, 22.0 ],
@@ -1766,7 +1654,7 @@
 
 											}
  ],
-										"originid" : "pat-19295"
+										"originid" : "pat-33"
 									}
 ,
 									"patching_rect" : [ 231.0, 451.0, 77.0, 22.0 ],
@@ -1815,7 +1703,7 @@
 
 							}
  ],
-						"originid" : "pat-19291"
+						"originid" : "pat-29"
 					}
 ,
 					"patching_rect" : [ 395.5, 391.5, 87.0, 77.0 ],
@@ -2373,7 +2261,7 @@
 
 			}
  ],
-		"originid" : "pat-19268",
+		"originid" : "pat-6",
 		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
