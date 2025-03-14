@@ -258,7 +258,7 @@
 
 											}
  ],
-										"originid" : "pat-11"
+										"originid" : "pat-1328"
 									}
 ,
 									"patching_rect" : [ 533.0, 403.0, 121.0, 22.0 ],
@@ -439,7 +439,7 @@
 
 											}
  ],
-										"originid" : "pat-13"
+										"originid" : "pat-1330"
 									}
 ,
 									"patching_rect" : [ 153.0, 403.0, 100.0, 22.0 ],
@@ -465,7 +465,7 @@
 
 							}
  ],
-						"originid" : "pat-9"
+						"originid" : "pat-1326"
 					}
 ,
 					"patching_rect" : [ 248.5, 391.5, 87.0, 77.0 ],
@@ -484,6 +484,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -817,7 +818,7 @@
 
 											}
  ],
-										"originid" : "pat-18"
+										"originid" : "pat-1335"
 									}
 ,
 									"patching_rect" : [ 7.5, 432.0, 68.0, 22.0 ],
@@ -860,7 +861,7 @@
 
 							}
  ],
-						"originid" : "pat-16"
+						"originid" : "pat-1333"
 					}
 ,
 					"patching_rect" : [ 19.011363636363626, 391.5, 87.0, 77.0 ],
@@ -912,7 +913,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-7",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -935,6 +935,38 @@
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
 								"box" : 								{
+									"bgcolor" : [ 0.290196, 0.309804, 0.301961, 0.0 ],
+									"id" : "obj-5",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 126.0, 371.0, 128.0, 19.0 ],
+									"text" : "https://reach.ircam.fr",
+									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
+									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
+									"underline" : 1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-4",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 126.0, 428.0, 225.0, 35.0 ],
+									"presentation_linecount" : 2,
+									"text" : ";\rmax launchbrowser https://reach.ircam.fr"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-1",
 									"linecount" : 2,
@@ -942,7 +974,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 420.0, 524.0, 317.0, 35.0 ],
+									"patching_rect" : [ 502.0, 478.0, 317.0, 35.0 ],
 									"text" : ";\rmax launchbrowser https://www.youtube.com/@ErcReach"
 								}
 
@@ -956,7 +988,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 168.0, 393.0, 231.0, 19.0 ],
+									"patching_rect" : [ 168.0, 398.0, 231.0, 19.0 ],
 									"text" : "https://www.youtube.com/@ErcReach",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -973,7 +1005,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 65.0, 524.0, 319.0, 35.0 ],
+									"patching_rect" : [ 163.0, 478.0, 319.0, 35.0 ],
 									"text" : ";\rmax launchbrowser https://www.instagram.com/erc_reach/"
 								}
 
@@ -987,7 +1019,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 163.0, 379.0, 231.0, 19.0 ],
+									"patching_rect" : [ 163.0, 384.0, 231.0, 19.0 ],
 									"text" : "https://www.instagram.com/erc_reach/",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -998,12 +1030,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-2",
-									"linecount" : 29,
+									"linecount" : 30,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 18.0, 900.0, 395.0 ],
-									"text" : "Somax2 is an application and a library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nIt is based on a machine listening, reactive engine and generative model that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisation, composition, installations etc.\nWritten in Max and Python, it features a modular multi-threaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM - STMS and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project of the European Research Council (director : Gérard Assayag).\n\nSomax2 development : Joakim Borg\nTutorials and help : Marco Fiorini and Joakim Borg\nSomax created by Gérard Assayag and Laurent Bonnasse-Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early prototype by Olivier Delerue.\nThanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.\n\nThanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini for their musical material used in Somax2 distribution corpus.\n\nERC REACH Instagram page: \nERC REACH Youtube channel: ",
+									"patching_rect" : [ 10.0, 9.0, 900.0, 409.0 ],
+									"text" : "Somax2 is an application and a library for live co-creative interaction with musicians in improvisation, composition or installation scenarios. \nIt is based on a machine listening, reactive engine and generative model that provide stylistically coherent improvisation while continuously adapting to the external audio or midi musical context. \nIt uses a cognitive memory model based on music corpuses it analyses and learns as stylistic bases, using a process similar to concatenative synthesis to render the result, and it relies on a globally learned harmonic and textural knowledge representation space using Machine Learning techniques.\n\nSomax2 has been totally rewritten from Somax, one of the multiple descendant of the well known Omax developed in the Music Representation team over the years and offers now a powerful and reliable environment for co-improvisation, composition, installations etc.\nWritten in Max and Python, it features a modular multi-threaded implementation, multiple wireless interacting players (AI agents), new UI design with tutorials and documentation, as well as a number of new interaction flavors and parameters.\n\nIn the new 2.5 version, it is also now designed as a Max library, allowing the user to program custom Somax2 patches allowing everybody to design one's own environment and processing, involving as many sources, players, influencers, renderers as needed. \nWith these abstractions, implemented to provide complete Max-style programming and workflow, the user could achieve the same results as the Somax2 application but, thanks to their modular architecture, it is also possible to build custom patches and unlock unseen behaviours of interaction and control.\n \nSomax2 is developed by the Music Representation team at IRCAM - STMS and is part of ANR project MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) project of the European Research Council (director : Gérard Assayag).\n\nSomax2 development : Joakim Borg\nTutorials and help : Marco Fiorini and Joakim Borg\nSomax created by Gérard Assayag and Laurent Bonnasse-Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early prototype by Olivier Delerue.\nThanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.\n\nThanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini, Anaïs del Sordo for their musical material used in Somax2 distribution corpus.\n\nERC REACH webiste:\nERC REACH Instagram page: \nERC REACH Youtube channel: ",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
@@ -1025,8 +1057,16 @@
 								}
 
 							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-4", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-5", 0 ]
+								}
+
+							}
  ],
-						"originid" : "pat-21"
+						"originid" : "pat-1338"
 					}
 ,
 					"patching_rect" : [ 528.0, 391.5, 87.0, 77.0 ],
@@ -1221,7 +1261,7 @@
 
 											}
  ],
-										"originid" : "pat-26"
+										"originid" : "pat-1343"
 									}
 ,
 									"patching_rect" : [ 153.0, 413.0, 103.0, 22.0 ],
@@ -1239,7 +1279,7 @@
 
 							}
  ],
-						"originid" : "pat-24"
+						"originid" : "pat-1341"
 					}
 ,
 					"patching_rect" : [ 135.5, 391.5, 87.0, 77.0 ],
@@ -1497,7 +1537,7 @@
 
 											}
  ],
-										"originid" : "pat-31"
+										"originid" : "pat-1348"
 									}
 ,
 									"patching_rect" : [ 599.0, 174.0, 135.0, 22.0 ],
@@ -1654,7 +1694,7 @@
 
 											}
  ],
-										"originid" : "pat-33"
+										"originid" : "pat-1350"
 									}
 ,
 									"patching_rect" : [ 231.0, 451.0, 77.0, 22.0 ],
@@ -1703,7 +1743,7 @@
 
 							}
  ],
-						"originid" : "pat-29"
+						"originid" : "pat-1346"
 					}
 ,
 					"patching_rect" : [ 395.5, 391.5, 87.0, 77.0 ],
@@ -2261,7 +2301,7 @@
 
 			}
  ],
-		"originid" : "pat-6",
+		"originid" : "pat-1323",
 		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
