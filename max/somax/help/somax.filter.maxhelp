@@ -186,7 +186,7 @@
 
 											}
  ],
-										"originid" : "pat-1638"
+										"originid" : "pat-10635"
 									}
 ,
 									"patching_rect" : [ 620.5, 304.0, 93.0, 22.0 ],
@@ -465,12 +465,13 @@
 							}
 , 							{
 								"box" : 								{
+									"hidden" : 1,
 									"id" : "obj-9",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 302.0, 181.0, 70.0, 22.0 ],
+									"patching_rect" : [ 302.0, 170.0, 70.0, 22.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -1184,7 +1185,7 @@
 
 											}
  ],
-										"originid" : "pat-63"
+										"originid" : "pat-10659"
 									}
 ,
 									"patching_rect" : [ 756.0, 200.0, 165.041666666666515, 22.0 ],
@@ -1564,7 +1565,7 @@
 
 											}
  ],
-										"originid" : "pat-66",
+										"originid" : "pat-10662",
 										"styles" : [ 											{
 												"name" : "dUG Yello 01-1",
 												"button" : 												{
@@ -2070,12 +2071,13 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-54", 0 ],
+									"hidden" : 1,
 									"source" : [ "obj-9", 0 ]
 								}
 
 							}
  ],
-						"originid" : "pat-37"
+						"originid" : "pat-10633"
 					}
 ,
 					"patching_rect" : [ 118.0, 38.0, 182.0, 22.0 ],
@@ -2108,7 +2110,7 @@
 						"isolateaudio" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-1048"
+						"originid" : "pat-11644"
 					}
 ,
 					"patching_rect" : [ 396.0, 38.0, 25.0, 22.0 ],
@@ -2524,7 +2526,7 @@
 
 											}
  ],
-										"originid" : "pat-1052"
+										"originid" : "pat-11648"
 									}
 ,
 									"patching_rect" : [ 578.0, 330.0, 93.0, 22.0 ],
@@ -2748,12 +2750,13 @@
 							}
 , 							{
 								"box" : 								{
+									"hidden" : 1,
 									"id" : "obj-6",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 412.0, 188.0, 70.0, 22.0 ],
+									"patching_rect" : [ 412.0, 173.0, 70.0, 22.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -3924,6 +3927,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-54", 0 ],
+									"hidden" : 1,
 									"source" : [ "obj-6", 0 ]
 								}
 
@@ -4015,7 +4019,7 @@
 
 							}
  ],
-						"originid" : "pat-1050"
+						"originid" : "pat-11646"
 					}
 ,
 					"patching_rect" : [ 24.0, 38.0, 47.0, 22.0 ],
@@ -4026,7 +4030,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-35",
+		"originid" : "pat-10631",
 		"parameters" : 		{
 			"obj-1::obj-14::obj-1001::obj-89::obj-1" : [ "live.text[4]", "live.text", 0 ],
 			"obj-1::obj-14::obj-1001::obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],
@@ -4322,6 +4326,18 @@
 ,
 				"obj-1::obj-14::obj-842::obj-89::obj-3" : 				{
 					"parameter_longname" : "live.text[3]"
+				}
+,
+				"obj-1::obj-14::obj-96::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[25]"
+				}
+,
+				"obj-1::obj-14::obj-96::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[23]"
+				}
+,
+				"obj-1::obj-14::obj-96::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[18]"
 				}
 ,
 				"obj-1::obj-23::obj-98" : 				{
