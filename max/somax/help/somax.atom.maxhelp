@@ -38,7 +38,7 @@
 						"isolateaudio" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-12228"
+						"originid" : "pat-26970"
 					}
 ,
 					"patching_rect" : [ 93.0, 38.0, 25.0, 22.0 ],
@@ -72,13 +72,35 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
+									"bubbleside" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 13.0,
+									"id" : "obj-70",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 671.0, 625.0, 241.0, 40.0 ],
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "See this tutorial for more info on how to build a corpus with custom labels"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
 									"bubbleside" : 2,
 									"id" : "obj-79",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 239.25, 292.5, 250.5, 39.0 ],
-									"presentation_linecount" : 3,
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -109,7 +131,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 534.0, 308.0, 372.0, 52.0 ],
-									"presentation_linecount" : 2,
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -140,7 +161,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 534.0, 308.0, 372.0, 52.0 ],
-									"presentation_linecount" : 2,
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -171,7 +191,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 534.0, 308.0, 372.0, 52.0 ],
-									"presentation_linecount" : 8,
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -200,8 +219,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 690.599999999999909, 553.0, 243.0, 52.0 ],
-									"presentation_linecount" : 3,
+									"patching_rect" : [ 690.599999999999909, 553.0, 246.0, 52.0 ],
 									"text" : "monitor matches produced by the dynamics atom with the label selected at step 6"
 								}
 
@@ -228,7 +246,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 843.0, 528.5, 89.0, 35.0 ],
-									"text" : "6037_tutorial_atom"
+									"text" : "8817_tutorial_atom"
 								}
 
 							}
@@ -591,29 +609,6 @@
 							}
 , 							{
 								"box" : 								{
-									"bubble" : 1,
-									"bubbleside" : 3,
-									"fontname" : "Arial",
-									"fontsize" : 13.0,
-									"id" : "obj-70",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 662.5, 625.0, 247.0, 40.0 ],
-									"saved_attribute_attributes" : 									{
-										"textcolor" : 										{
-											"expression" : "themecolor.theme_textcolor"
-										}
-
-									}
-,
-									"text" : "See this tutorial for more info on somax.atom and somax.player.app/ui"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-58",
 									"maxclass" : "message",
@@ -735,13 +730,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-16",
-									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 521.0, 495.0, 83.0, 35.0 ],
-									"text" : "selfinfluenced 0"
+									"patching_rect" : [ 521.0, 495.0, 85.0, 22.0 ],
+									"text" : "enabled 1"
 								}
 
 							}
@@ -1806,7 +1800,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-16", 1 ],
-									"midpoints" : [ 562.166666666666629, 484.487499999999898, 594.5, 484.487499999999898 ],
+									"midpoints" : [ 562.166666666666629, 484.487499999999898, 596.5, 484.487499999999898 ],
 									"source" : [ "obj-4", 2 ]
 								}
 
@@ -2035,7 +2029,7 @@
 
 							}
  ],
-						"originid" : "pat-12230"
+						"originid" : "pat-26972"
 					}
 ,
 					"patching_rect" : [ 24.0, 38.0, 47.0, 22.0 ],
@@ -2046,7 +2040,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-12226",
+		"originid" : "pat-26968",
 		"parameters" : 		{
 			"obj-1::obj-14::obj-1001::obj-89::obj-1" : [ "live.text[28]", "live.text", 0 ],
 			"obj-1::obj-14::obj-1001::obj-89::obj-2" : [ "live.text[26]", "live.text", 0 ],
