@@ -2078,8 +2078,8 @@
 						"originid" : "pat-37"
 					}
 ,
-					"patching_rect" : [ 118.0, 38.0, 240.0, 22.0 ],
-					"text" : "p \"filter connection with somax.playaer.app\"",
+					"patching_rect" : [ 118.0, 38.0, 182.0, 22.0 ],
+					"text" : "p \"usage with somax.player.app\"",
 					"varname" : "basic[2]"
 				}
 
