@@ -38,6 +38,35 @@
 						"isolateaudio" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 3,
+									"id" : "obj-1",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 626.0, 144.012500000000102, 128.0, 37.0 ],
+									"saved_attribute_attributes" : 									{
+										"bubble_bgcolor" : 										{
+											"expression" : "themecolor.theme_bubble_bgcolor"
+										}
+,
+										"bubble_outlinecolor" : 										{
+											"expression" : "themecolor.theme_bubble_outlinecolor"
+										}
+,
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "make sure that the server is active"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"color" : [ 0.356862745098039, 0.584313725490196, 0.615686274509804, 1.0 ],
 									"id" : "obj-81",
 									"maxclass" : "newobj",
@@ -186,7 +215,7 @@
 
 											}
  ],
-										"originid" : "pat-10635"
+										"originid" : "pat-14263"
 									}
 ,
 									"patching_rect" : [ 620.5, 304.0, 93.0, 22.0 ],
@@ -1185,7 +1214,7 @@
 
 											}
  ],
-										"originid" : "pat-10659"
+										"originid" : "pat-14287"
 									}
 ,
 									"patching_rect" : [ 756.0, 200.0, 165.041666666666515, 22.0 ],
@@ -1281,7 +1310,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 880.0, 242.0, 171.645833333333599, 29.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -1565,7 +1594,7 @@
 
 											}
  ],
-										"originid" : "pat-10662",
+										"originid" : "pat-14290",
 										"styles" : [ 											{
 												"name" : "dUG Yello 01-1",
 												"button" : 												{
@@ -2077,7 +2106,7 @@
 
 							}
  ],
-						"originid" : "pat-10633"
+						"originid" : "pat-14261"
 					}
 ,
 					"patching_rect" : [ 118.0, 38.0, 182.0, 22.0 ],
@@ -2110,7 +2139,7 @@
 						"isolateaudio" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-11644"
+						"originid" : "pat-15272"
 					}
 ,
 					"patching_rect" : [ 396.0, 38.0, 25.0, 22.0 ],
@@ -2526,7 +2555,7 @@
 
 											}
  ],
-										"originid" : "pat-11648"
+										"originid" : "pat-15276"
 									}
 ,
 									"patching_rect" : [ 578.0, 330.0, 93.0, 22.0 ],
@@ -3352,7 +3381,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 889.0, 245.0, 163.0, 29.0 ],
-									"text" : "0 offline"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -4019,7 +4048,7 @@
 
 							}
  ],
-						"originid" : "pat-11646"
+						"originid" : "pat-15274"
 					}
 ,
 					"patching_rect" : [ 24.0, 38.0, 47.0, 22.0 ],
@@ -4030,7 +4059,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-10631",
+		"originid" : "pat-14259",
 		"parameters" : 		{
 			"obj-1::obj-14::obj-1001::obj-89::obj-1" : [ "live.text[4]", "live.text", 0 ],
 			"obj-1::obj-14::obj-1001::obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],
