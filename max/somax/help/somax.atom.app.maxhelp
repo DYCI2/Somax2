@@ -32,7 +32,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 126.0, 1054.0, 710.0 ],
+						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
 						"boxes" : [ 							{
@@ -425,11 +425,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-42",
-									"linecount" : 12,
+									"linecount" : 11,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 596.25, 509.0, 362.0, 167.0 ],
+									"patching_rect" : [ 596.25, 509.0, 365.0, 154.0 ],
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -479,7 +479,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 596.25, 436.0, 362.0, 74.0 ],
+									"patching_rect" : [ 596.25, 436.0, 365.0, 74.0 ],
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -961,7 +961,7 @@
 
 							}
  ],
-						"originid" : "pat-60727",
+						"originid" : "pat-64650",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1042,10 +1042,187 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
+						"rect" : [ 84.0, 126.0, 1054.0, 710.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"fontname" : "Arial",
+									"fontsize" : 13.0,
+									"id" : "obj-26",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 141.0, 591.0, 229.0, 40.0 ],
+									"presentation_linecount" : 2,
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "See the somax.atom help for more information on its parameters"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"id" : "obj-29",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 21.0, 592.0, 115.0, 38.0 ],
+									"rounded" : 8.0,
+									"text" : "somax.atom help",
+									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"truncate" : 0
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"fontname" : "Arial",
+									"fontsize" : 13.0,
+									"id" : "obj-70",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 141.0, 653.0, 352.0, 40.0 ],
+									"presentation_linecount" : 2,
+									"saved_attribute_attributes" : 									{
+										"textcolor" : 										{
+											"expression" : "themecolor.theme_textcolor"
+										}
+
+									}
+,
+									"text" : "See this tutorial for more info on how to build a corpus with custom labels and how to use the somax.atom.app"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 12.0,
+									"id" : "obj-24",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"outputmode" : 0,
+									"parameter_enable" : 0,
+									"patching_rect" : [ 21.0, 654.0, 115.0, 38.0 ],
+									"rounded" : 8.0,
+									"text" : "Using Custom Labels Tutorial",
+									"textoncolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"textovercolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
+									"truncate" : 0
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-19",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 506.0, 573.0, 529.0, 33.0 ],
+									"text" : "\t\tIf a corpus does not support the requested descriptor, the associated atom's  eligibility will be set to 0, disabling it."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-17",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 506.0, 524.0, 529.0, 33.0 ],
+									"text" : "In cases where the specified descriptor is not available in the current corpus, a warning will be generated in the terminal or dump output."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-15",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 506.0, 477.0, 529.0, 33.0 ],
+									"text" : "\t\tThe selected descriptor can be persistent across different corpora, ensuring that if the feature is switched or reloaded, the descriptor value remains consistent."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-13",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 585.0, 370.0, 147.0, 22.0 ],
+									"text" : "descriptor descriptorname"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"bubbleside" : 0,
+									"id" : "obj-9",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 39.0, 408.0, 343.0, 52.0 ],
+									"text" : "Descriptors can be default corpus features (i.e., pitch, chroma, mfcc) or user-defined labels (in this case, initial, dynamics)"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bubble" : 1,
+									"id" : "obj-6",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 295.0, 237.0, 193.0, 51.0 ],
+									"text" : "The descriptor list allows you to select which descriptor assign to the current somax.atom.app"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-20",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 149.0, 244.0, 123.0, 155.0 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-63",
@@ -1055,7 +1232,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 960.25, 70.0, 143.0, 35.0 ],
-									"presentation_linecount" : 2,
 									"text" : "loadunique somax2.overview.maxpat"
 								}
 
@@ -1099,12 +1275,12 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-5",
-									"linecount" : 13,
+									"linecount" : 5,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 320.0, 194.0, 519.0, 181.0 ],
-									"text" : "This attribute <m>descriptor descriptorname</m> is used to set a specific descriptor to add as atom. The argument <m>descriptorname</m> currently supports only labels.\n        \t\t<br />\n       \t\t\tIt is possible to assign a descriptor even if it is invalid at the time of assignment, which is useful for pre-configuring the system before the player or server is started. \n       \t\t\t<br />\n        \t\tThe descriptor can be persistent across different corpora, ensuring that if the feature is switched or reloaded, the descriptor value remains consistent.\n        \t\tIn cases where the specified descriptor is not available in the current corpus, a warning will be generated in the terminal or dump output.\n        \t\t<br />\n        \t\tIf a corpus does not support the requested descriptor, the associated <o>somax.atom</o>'s eligibility will be set to 0, disabling it."
+									"patching_rect" : [ 506.0, 371.0, 529.0, 87.0 ],
+									"text" : "The message                                              can be used to set a specific descriptor to add as atom. \n\nThrough this message, It is possible to assign a descriptor even if it is invalid at the time of assignment, which is useful for pre-configuring the system before the player or server is started. \n      \n"
 								}
 
 							}
@@ -1116,7 +1292,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "jit_matrix" ],
-									"patching_rect" : [ 42.0, 167.0, 221.0, 228.0 ],
+									"patching_rect" : [ 66.0, 167.0, 221.0, 228.0 ],
 									"pic" : "atom_descriptor_list.png"
 								}
 
@@ -1140,11 +1316,10 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-3",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 89.0, 684.0, 33.0 ],
+									"patching_rect" : [ 10.0, 89.0, 684.0, 20.0 ],
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -1160,7 +1335,7 @@
 
 									}
 ,
-									"text" : "When working with polyphonic input, the idea that each Note On message triggers an onset  is not always ideal. This means that when you play a chord, the MIDI influencer will send multiple sets of influences instead of just one."
+									"text" : "The somax.atom.app can handle all the descriptors contained into the corpus loaded into the attached somax.player.app"
 								}
 
 							}
@@ -1208,7 +1383,7 @@
 
 							}
  ],
-						"originid" : "pat-60777",
+						"originid" : "pat-64652",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1294,7 +1469,7 @@
 						"showontab" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-60871"
+						"originid" : "pat-64654"
 					}
 ,
 					"patching_rect" : [ 364.0, 46.0, 25.0, 22.0 ],
@@ -1325,6 +1500,38 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-2",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 92.0, 546.0, 130.0, 46.0 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 2,
+									"bordercolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+									"id" : "obj-20",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 129.0, 227.0, 129.0, 30.0 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-63",
 									"linecount" : 2,
@@ -1333,7 +1540,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 960.25, 70.0, 143.0, 35.0 ],
-									"presentation_linecount" : 2,
 									"text" : "loadunique somax2.overview.maxpat"
 								}
 
@@ -1384,7 +1590,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 567.0, 413.0, 206.0, 51.0 ],
-									"presentation_linecount" : 3,
 									"text" : "Once the selected Player is initialized, the somax.atom.app will look like this"
 								}
 
@@ -1424,7 +1629,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 269.0, 544.0, 206.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "This is because the selected Player is not initialized yet"
 								}
 
@@ -1437,8 +1641,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 269.0, 454.0, 206.0, 51.0 ],
-									"presentation_linecount" : 3,
+									"patching_rect" : [ 269.0, 454.0, 209.0, 51.0 ],
 									"text" : "It might happen that even when selecting a Player, the atom is still not correctly initialized"
 								}
 
@@ -1452,7 +1655,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 269.0, 222.0, 206.0, 37.0 ],
-									"presentation_linecount" : 2,
 									"text" : "Select a somax.player.app from the list of available Players"
 								}
 
@@ -1465,7 +1667,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 269.0, 178.0, 206.0, 37.0 ],
+									"patching_rect" : [ 269.0, 178.0, 208.0, 37.0 ],
 									"text" : "In this case, no Player is attached to the somax.atom.app"
 								}
 
@@ -1582,7 +1784,7 @@
 
 							}
  ],
-						"originid" : "pat-60919",
+						"originid" : "pat-64656",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1647,7 +1849,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-60725",
+		"originid" : "pat-64648",
 		"dependency_cache" : [ 			{
 				"name" : "atom_app.png",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
