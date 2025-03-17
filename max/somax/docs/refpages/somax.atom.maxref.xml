@@ -3,12 +3,12 @@
 
 <c74object name="somax.atom" module="somax" kind="patcher">
 
-    <digest>
-        Filters specific segments (events) of a corpus loaded into a <o>somax.player</o> based on descriptors and labels.
-    </digest>
+    <digest>  
+        Handles elementary corpus units (atoms) based on features or user-defined labels, influencing a <o>somax.player</o>. 
+    </digest>  
 
     <description>
-        The <o>somax.filter</o> object allows filtering of segments (events) within a corpus that has been loaded into a <o>somax.player</o>. Filtering is based on descriptors and labels, allowing fine-grained selection of custom material.
+        The <o>somax.atom</o> object manages an elementary unit (atom) within a corpus, representing a specific feature (e.g., pitch, chroma, MFCC) or a user-defined custom label. When linked to a <o>somax.player</o>, the <o>somax.atom</o> decodes incoming data into influences corresponding to the selected feature or label, generating matches and peaks within the <o>somax.player</o>. Additional parameters, such as ngram order, weights, and decay time, provide further control over its behavior.
     </description>
 
     <!--METADATA-->

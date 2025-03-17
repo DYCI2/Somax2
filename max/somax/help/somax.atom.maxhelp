@@ -31,7 +31,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 69.0, 126.0, 1056.0, 691.0 ],
+						"rect" : [ 0.0, 26.0, 1056.0, 691.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
@@ -350,7 +350,7 @@
 
 											}
  ],
-										"originid" : "pat-6691"
+										"originid" : "pat-41334"
 									}
 ,
 									"patching_rect" : [ 412.0, 213.0, 200.0, 22.0 ],
@@ -487,7 +487,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 843.0, 528.5, 89.0, 35.0 ],
-									"text" : "2902_tutorial_atom_2"
+									"text" : "7299_tutorial_atom_2"
 								}
 
 							}
@@ -887,12 +887,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-16",
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 521.0, 495.0, 85.0, 22.0 ],
-									"text" : "decay 2."
+									"patching_rect" : [ 521.0, 495.0, 85.0, 35.0 ],
+									"text" : "selfinfluenced 0"
 								}
 
 							}
@@ -1538,7 +1539,7 @@
 
 											}
  ],
-										"originid" : "pat-7227"
+										"originid" : "pat-41870"
 									}
 ,
 									"patching_rect" : [ 756.0, 200.0, 165.041666666666515, 22.0 ],
@@ -1634,7 +1635,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 880.0, 242.0, 171.645833333333599, 29.0 ],
-									"text" : "0 offline"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -2272,7 +2273,7 @@
 
 							}
  ],
-						"originid" : "pat-6689"
+						"originid" : "pat-41332"
 					}
 ,
 					"patching_rect" : [ 89.0, 38.0, 188.0, 22.0 ],
@@ -2305,7 +2306,7 @@
 						"isolateaudio" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-7229"
+						"originid" : "pat-41872"
 					}
 ,
 					"patching_rect" : [ 343.0, 38.0, 25.0, 22.0 ],
@@ -2331,7 +2332,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1056.0, 691.0 ],
+						"rect" : [ 69.0, 126.0, 1056.0, 691.0 ],
 						"openrect" : [ 0.0, 0.0, 1055.0, 690.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
@@ -2513,7 +2514,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 843.0, 528.5, 89.0, 35.0 ],
-									"text" : "2134_tutorial_atom"
+									"text" : "7362_tutorial_atom"
 								}
 
 							}
@@ -3549,7 +3550,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 889.0, 245.0, 163.0, 29.0 ],
-									"text" : "0 offline"
+									"text" : "0 duplicate"
 								}
 
 							}
@@ -3639,7 +3640,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 10.0, 10.0, 645.5, 134.0 ]
+									"patching_rect" : [ 10.0, 10.0, 746.025000000000205, 155.0 ]
 								}
 
 							}
@@ -4297,7 +4298,7 @@
 
 							}
  ],
-						"originid" : "pat-7231"
+						"originid" : "pat-41874"
 					}
 ,
 					"patching_rect" : [ 24.0, 38.0, 47.0, 22.0 ],
@@ -4308,7 +4309,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-6687",
+		"originid" : "pat-41330",
 		"parameters" : 		{
 			"obj-1::obj-14::obj-1001::obj-89::obj-1" : [ "live.text[28]", "live.text", 0 ],
 			"obj-1::obj-14::obj-1001::obj-89::obj-2" : [ "live.text[26]", "live.text", 0 ],
