@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="somax.atom.app" module="somax" kind="patcher">
+
+	<digest>
+		Wrapper around the <o>somax.atom</o> object
+	</digest>
+
+	<description>
+		The <o>somax.atom.app</o> object is a convenient wrapper around the <o>somax.atom</o> with some additional user interface to handle connection to players and parameters controls. Thanks to this app object, Somax players can receive influences associated to the selected atom wirelessly (i.e. without max patch cords). 
+	</description>
+
+    <!--ARGUMENTS-->
+	<objarglist>
+        <objarg name="#1" optional="1" type="symbol">
+            <digest>
+                Atom name
+            </digest>
+            <description>
+                The optional first argument sets the <m>name</m> of the <o>somax.atom</o>.
+                <br />
+                If no name is provided, the default name is <m>Atom</m>. 
+                <br />
+                Unless <m>uniquename</m> is set to <m>0</m>, the name will be formatted as <m>#0_Name</m>.
+            </description>
+        </objarg>
+    </objarglist>
+
+    <!--MESSAGES-->
+    <methodlist>
+        <method name="player">
+            <digest>Link the atom to a player.</digest>
+            <description>
+                The <m>player</m> message, followed by the name of the player, will link the <o>somax.atom.app</o> to the selected <o>somax.player.app</o>.
+                <br />
+                It's perfectly valid to change the associated player at runtime (e.g. switch from Player1 to Player2 while Player1 and Player2 are playing). What happens internally then is that: atom is deleted from player1; atom is created in player2; all parameters are updated in the Player2 atom; the corpus of Player2 (if there is one loaded) will be loaded into the atom.         
+            </description>
+            </method>
+    </methodlist>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">ircam</metadata>
+		<metadata name="tag">somax</metadata>
+	</metadatalist>
+
+	
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="somax.atom" />
+		<seealso name="somax.player.app" />
+        <seealso name="somax.filter" />
+	</seealsolist>
+	
+</c74object>
