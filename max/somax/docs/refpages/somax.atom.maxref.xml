@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
 
-<c74object name="somax.filter" module="somax" kind="patcher">
+<c74object name="somax.atom" module="somax" kind="patcher">
 
     <digest>
         Filters specific segments (events) of a corpus loaded into a <o>somax.player</o> based on descriptors and labels.
@@ -21,12 +21,12 @@
     <objarglist>
         <objarg name="#1" optional="1" type="symbol">
             <digest>
-                Filter name
+                Atom name
             </digest>
             <description>
-                The optional first argument sets the <m>name</m> of the <o>somax.filter</o>.
+                The optional first argument sets the <m>name</m> of the <o>somax.atom</o>.
                 <br />
-                If no name is provided, the default name is <m>Filter</m>. 
+                If no name is provided, the default name is <m>Atom</m>. 
                 <br />
                 Unless <m>uniquename</m> is set to <m>0</m>, the name will be formatted as <m>#0_Name</m>.
             </description>
@@ -36,37 +36,40 @@
     <!--MESSAGES-->
     <methodlist>
         <method name="initialize">
-            <digest>Initialize a filter connected to a player.</digest>
+            <digest>Initialize an atom connected to a player.</digest>
             <description>
-                The <m>initialize</m> message will instantiate the <o>somax.filter</o> if this is correctly connected to the first outlet of a <o>somax.player</o>, or to the last outlet of a <o>somax.player.app</o>. 
+                The <m>initialize</m> message will instantiate the <o>somax.atom</o> if this is correctly connected to the first outlet of a <o>somax.player</o>, or to the last outlet of a <o>somax.player.app</o>. 
                 <br />
-                At the same time, the signal from the first outlet of the <o>somax.filter</o> should be connected to the first inlet of the <o>somax.player</o> or <o>somax.player.app</o>.         
+                At the same time, the signal from the first outlet of the <o>somax.atom</o> should be connected to the first inlet of the <o>somax.player</o> or <o>somax.player.app</o>.         
             </description>
         </method>
-        <method name="label">
-            <arglist><arg name="label_value" optional="0" type="symbol" /></arglist>
-            <digest>Set label to match until further notice.</digest>
+        <method name="influence">
+            <arglist><arg name="input" optional="0" type="symbol" /></arglist>
+            <digest>Parse influence associated to the atom.</digest>
             <description>
-                The <m>label</m> message sets the label to match and filter accordingly. 
+                The <m>influence</m> message, followed by a <m>feature/label</m> and a <m>value</m>, is used to parse data that the <o>somax.atom</o> can decode to find matches. 
                 <br />
-                When influencing with labels, they are simply referred to as "label" without specifying a descriptor name.
+                Influences can be default features (i.e. pitch, chroma, MFCC) or custom labels.
+                When influencing with labels, they are simply referred to as "label" without specifying a descriptor name. 
+                <br /> For example, if a corpus has <m>descriptor colors</m>, we can use the message <m>influence label red</m>, assuming that red is a valid label for the descriptor colors.
+                An example of usage with features is <m>influence pitch 60</m>.
             </description>
         </method>
         <method name="openwindow">
         	<arglist><arg name="input" optional="0" type="int" /></arglist>
-            <digest>Open the <o>somax.filter</o> user interface</digest>
+            <digest>Open the <o>somax.atom</o> user interface</digest>
 			<description>
-                Open the <o>somax.filter</o> window. This window will give you access to the list of available descriptors, from which you could select the active one.    
+                Open the <o>somax.atom</o> window. This window will give you access to the list of available descriptors, from which you could select the active one, as well as all the other atom's parameters.    
             </description>
         </method>
         <method name="terminate">
-            <digest>Delete the filter from the connected player.</digest>
+            <digest>Delete the atom from the connected player.</digest>
             <description>
                 When an object is deleted, the patch cords are removed before the object itself, preventing freebangs from being received by connected objects.
                 <br />
-                Since communication between <o>somax.filter</o> and <o>somax.player</o> happens through patch cords, deleting the object does not automatically remove the filter from the player. 
+                Since communication between <o>somax.atom</o> and <o>somax.player</o> happens through patch cords, deleting the object does not automatically remove the filter from the player. 
                 <br />
-                The <m>terminate</m> message must be sent manually before deleting the <o>somax.filter</o> to ensure proper cleanup.
+                The <m>terminate</m> message must be sent manually before deleting the <o>somax.atom</o> to ensure proper cleanup.
             </description>
         </method>
     </methodlist>
@@ -74,15 +77,21 @@
     <!--ATTRIBUTES-->
     <attributelist>
         <attribute name="autoinitialize" get="1" set="1" type="int" size="1">
-        	<digest>Enable/Disable autoinitialization of the filter.</digest>
+        	<digest>Enable/Disable autoinitialization of the atom.</digest>
             <description>
-                By default the <o>somax.filter</o> will be automatically initalized when created. Set this attribute to <m>0</m> to disable this behaviour. 
+                By default the <o>somax.atom</o> will be automatically initalized when created. Set this attribute to <m>0</m> to disable this behaviour. 
+            </description>
+        </attribute>
+        <attribute name="decay" get="1" set="1" type="float" size="1">
+            <digest>Set decay time value for peaks of this atom</digest>
+            <description>
+                The message <m>decay</m>, followed by a <o>float</o> (default 2.0) higher than 1, will set the value (in seconds) for the decay time of previous matches/peaks of this atom. 
             </description>
         </attribute>
         <attribute name="descriptor" get="1" set="1" type="symbol" size="1">
-    		<digest>Specify a descriptor name for filtering.</digest>
+    		<digest>Specify a descriptor name for the atom.</digest>
     		<description>
-        		This attribute <m>descriptor descriptorname</m> is used to set a specific descriptor to filter. The argument <m>descriptorname</m> currently supports only labels.
+        		This attribute <m>descriptor descriptorname</m> is used to set a specific descriptor to add as atom. The argument <m>descriptorname</m> currently supports only labels.
         		<br />
        			It is possible to assign a descriptor even if it is invalid at the time of assignment, which is useful for pre-configuring the system before the player or server is started. 
        			<br />
@@ -93,19 +102,48 @@
     		</description>
 		</attribute>
         <attribute name="enabled" get="1" set="1" type="int" size="1">
-            <digest>Enable/Disable the filter.</digest>
+            <digest>Enable/Disable the atom.</digest>
             <description>
-                The message <m>enabled 1</m> will enable the <o>somax.filter</o>. The message <m>enabled 0</m> will disable it.
+                The message <m>enabled 1</m> will enable the <o>somax.atom</o>. The message <m>enabled 0</m> will disable it.
+            </description>
+        </attribute>
+        <attribute name="ngramorder" get="1" set="1" type="int" size="1">
+            <digest>Set value for atom memory length</digest>
+            <description>
+                The message <m>ngramorder</m>, followed by an <o>int</o> between 1 and 10, will set the value for the memory length (or n-gram order) of the influences linked to this atom. 
+                <br />
+                Similarly to the default atoms in a <o>somax.player</o>, this value corresponds to the lenght of the sequence of last n influences to look for in this atom layer, when searching for a match. 
+                <br />
+                Setting this value to a low value will in other words look for short sequence in the memory (and in most cases increase the probability of finding matches, at the cost of each match containing less contextual information), while a high value will look for longer sequences (and in most cases reduce the probability of finding matches, where each match has a higher degree of contextual information). Finding the a good balance for this parameter is one of the most important aspects for generating meaningful output.
+            </description>
+        </attribute>
+        <attribute name="selfinfluenced" get="1" set="1" type="symbol" size="1">
+            <digest>Enable/Disable internal influences</digest>
+            <description>
+                The message <m>selfinfluenced 1</m> will cause the <o>somax.atom</o> to listen to its internal influences when generating events. 
+                <br />
+                This internal feedback mechanism is similar to the internal atoms in the <o>somax.player</o>.
+                The message <m>selfinfluenced 0</m> will disable this (as default), looking only for external influences incoming in the <o>somax.atom</o>.
             </description>
         </attribute>
         <attribute name="uniquename" get="1" set="1" type="int" size="1">
-    		<digest>Enable/Disable unique name for filter.</digest>
+    		<digest>Enable/Disable unique name for atom.</digest>
     		<description>
-        		This attribute controls whether the filter name should be unique. By default, the <m>uniquename</m> is set to <m>1</m>, indicating that the filter name should be unique.
+        		This attribute controls whether the atom name should be unique. By default, the <m>uniquename</m> is set to <m>1</m>, indicating that the atom name should be unique.
         		 <br />
-        		To ensure uniqueness, prepend <m>#0_</m> to the filter name. If set to <m>0</m>, the filter name will not be enforced as unique.
+        		To ensure uniqueness, prepend <m>#0_</m> to the atom name. If set to <m>0</m>, the filter name will not be enforced as unique.
     		</description>
 		</attribute>
+        <attribute name="weight" get="1" set="1" type="float" size="1">
+            <digest>Set value for the weight of the atom</digest>
+            <description>
+                The message <m>weight</m>, followed by a <m>float</m> between 0 and 1 (default 1.0), will control the balance between the current atom and the other existing atoms attached to a <o>somax.player</o>, including its default ones. 
+                <br />
+                Weights are relative values that constitute the listening machine of the <o>somax.player</o>. According to their weights, atoms might output different match values.
+                <br />
+                Remember that by default, a <o>somax.player</o> has already weights for internal and external atoms such as: pitch, chroma and MFCC.
+            </description>
+        </attribute>
     </attributelist>
 
     <!--SEEALSO-->

@@ -89,7 +89,7 @@
         		The descriptor can be persistent across different corpora, ensuring that if the feature is switched or reloaded, the descriptor value remains consistent.
         		In cases where the specified descriptor is not available in the current corpus, a warning will be generated in the terminal or dump output.
         		<br />
-        		If a corpus does not support the requested descriptor, the associated <o>somax.atom</o>'s eligibility will be set to 0, disabling it.
+        		If a corpus does not support the requested descriptor, the associated <o>somax.filter</o>'s eligibility will be set to 0, disabling it.
     		</description>
 		</attribute>
         <attribute name="enabled" get="1" set="1" type="int" size="1">
