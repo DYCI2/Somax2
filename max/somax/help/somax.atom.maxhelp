@@ -12,7 +12,8 @@
 		"classnamespace" : "box",
 		"rect" : [ 69.0, 100.0, 1056.0, 717.0 ],
 		"gridsize" : [ 15.0, 15.0 ],
-		"showontab" : 1,
+		"showrootpatcherontab" : 0,
+		"showontab" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-5",
@@ -38,13 +39,13 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubblepoint" : 0.01,
-									"bubbleside" : 3,
+									"bubblepoint" : 1.0,
+									"bubbleside" : 0,
 									"id" : "obj-108",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 656.0, 170.0, 100.0, 24.0 ],
+									"patching_rect" : [ 673.0, 165.0, 85.0, 39.0 ],
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -100,7 +101,7 @@
 									"maxclass" : "live.line",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 40.5, 185.0, 123.0, 15.0 ]
+									"patching_rect" : [ 41.0, 186.0, 123.0, 15.0 ]
 								}
 
 							}
@@ -1207,7 +1208,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 65.0, 720.0, 50.0 ],
+									"patching_rect" : [ 10.0, 65.0, 781.0, 50.0 ],
 									"saved_attribute_attributes" : 									{
 										"textcolor" : 										{
 											"expression" : "themecolor.theme_textcolor"
@@ -1215,7 +1216,7 @@
 
 									}
 ,
-									"text" : "In this tab we'll show you how to use the somax.atom when not selfinfluenced. In the optimal case, you would need to provide a meaningful real-time analysis of the label you want to process, as the interaction goes. For sakes of demonstration, we will use sequences of initial letters."
+									"text" : "In this tab we'll show you how to use the somax.atom when not selfinfluenced. In the optimal case, you would need to provide a meaningful real-time analysis of your input, to retrieve the labels you want to process as external influences. For sakes of demonstration, we will use dummy sequences of initial letters."
 								}
 
 							}
@@ -1703,7 +1704,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 634.0, 172.0, 20.0, 20.0 ],
+									"patching_rect" : [ 650.5, 182.5, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "4",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
@@ -1723,7 +1724,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 220.0, 140.0, 20.0, 20.0 ],
+									"patching_rect" : [ 219.0, 140.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "7",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ]
@@ -2277,8 +2278,8 @@
 						"originid" : "pat-13113"
 					}
 ,
-					"patching_rect" : [ 89.0, 38.0, 182.0, 22.0 ],
-					"text" : "p \"usage with somax.player.app\"",
+					"patching_rect" : [ 89.0, 38.0, 188.0, 22.0 ],
+					"text" : "p \"usage with external influences\"",
 					"varname" : "basic[2]"
 				}
 
