@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -26,7 +26,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -53,14 +53,10 @@
 							}
  ],
 						"lines" : [  ],
-						"originid" : "pat-9660"
+						"originid" : "pat-37"
 					}
 ,
 					"patching_rect" : [ 142.0, 31.0, 25.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p ?"
 				}
 
@@ -76,7 +72,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -102,7 +98,6 @@
 									}
 ,
 									"text" : "terminated by user",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -122,8 +117,7 @@
 
 									}
 ,
-									"text" : "current time as response to a bang",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "current time as response to a bang"
 								}
 
 							}
@@ -143,7 +137,6 @@
 									}
 ,
 									"text" : "transport is active",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -164,7 +157,6 @@
 									}
 ,
 									"text" : "initialization finished",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -172,7 +164,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-4",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -190,8 +181,7 @@
 
 									}
 ,
-									"text" : "see this patcher for a better understanding of the server's status outlet",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "see this patcher for a better understanding of the server's status outlet"
 								}
 
 							}
@@ -209,8 +199,7 @@
 
 									}
 ,
-									"text" : "server status:",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "server status:"
 								}
 
 							}
@@ -226,7 +215,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -449,14 +438,10 @@
 
 											}
  ],
-										"originid" : "pat-9664"
+										"originid" : "pat-41"
 									}
 ,
 									"patching_rect" : [ 859.833333000000039, 256.5, 133.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p transport_and_tempo"
 								}
 
@@ -475,7 +460,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -577,14 +562,10 @@
 
 											}
  ],
-										"originid" : "pat-9666"
+										"originid" : "pat-43"
 									}
 ,
 									"patching_rect" : [ 865.833333000000039, 222.0, 127.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p manual_initialization"
 								}
 
@@ -592,7 +573,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"bubbleside" : 0,
 									"id" : "obj-56",
 									"linecount" : 5,
@@ -611,8 +591,7 @@
 
 									}
 ,
-									"text" : "the global send address somax.server can be used to send messages to a somax.server object if it exists (if multiple server objects exist, only the non-\"duplicate\" will receive it)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "the global send address somax.server can be used to send messages to a somax.server object if it exists (if multiple server objects exist, only the non-\"duplicate\" will receive it)"
 								}
 
 							}
@@ -667,8 +646,7 @@
 
 									}
 ,
-									"text" : "initialize all local somax.player objects (same as sending \"initialize\" to all of them individually)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "initialize all local somax.player objects (same as sending \"initialize\" to all of them individually)"
 								}
 
 							}
@@ -687,15 +665,13 @@
 
 									}
 ,
-									"text" : "bang server to get current time",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "bang server to get current time"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-78",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -712,8 +688,7 @@
 
 									}
 ,
-									"text" : "Initialize a player on the server",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Initialize a player on the server"
 								}
 
 							}
@@ -792,8 +767,7 @@
 
 									}
 ,
-									"text" : "if on: player is initialized on the server",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "if on: player is initialized on the server"
 								}
 
 							}
@@ -812,8 +786,7 @@
 
 									}
 ,
-									"text" : "See the somax.player documentation for more info on using the player",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "See the somax.player documentation for more info on using the player"
 								}
 
 							}
@@ -845,7 +818,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-62",
 									"linecount" : 3,
 									"maxclass" : "comment",
@@ -863,8 +835,7 @@
 
 									}
 ,
-									"text" : "Activate server's transport to start generation for all players",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "Activate server's transport to start generation for all players"
 								}
 
 							}
@@ -883,8 +854,7 @@
 
 									}
 ,
-									"text" : "reload: reloads the somax.server object. This is the same as deleting the object and creating it again",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "reload: reloads the somax.server object. This is the same as deleting the object and creating it again"
 								}
 
 							}
@@ -902,8 +872,7 @@
 
 									}
 ,
-									"text" : "terminate: shut down the external server if running",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "terminate: shut down the external server if running"
 								}
 
 							}
@@ -935,7 +904,6 @@
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-20",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -953,15 +921,13 @@
 
 									}
 ,
-									"text" : "launch the external server application (opens in a separate window)",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "launch the external server application (opens in a separate window)"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"bubble" : 1,
-									"bubble_bgcolor" : [ 0.235, 0.235, 0.235, 1.0 ],
 									"id" : "obj-19",
 									"linecount" : 2,
 									"maxclass" : "comment",
@@ -979,8 +945,7 @@
 
 									}
 ,
-									"text" : "By default, the server will automatically be initailized when created. @autoinitialize 0 disables this",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "By default, the server will automatically be initailized when created. @autoinitialize 0 disables this"
 								}
 
 							}
@@ -997,7 +962,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1157,14 +1122,10 @@
 
 											}
  ],
-										"originid" : "pat-9674"
+										"originid" : "pat-51"
 									}
 ,
 									"patching_rect" : [ 47.149999999999864, 338.229166666666629, 111.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p update_toggle_ui"
 								}
 
@@ -1190,8 +1151,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 780.166666666666629, 449.666666666666686, 36.333333333333371, 36.333333333333371 ],
-									"svg" : ""
+									"patching_rect" : [ 780.166666666666629, 449.666666666666686, 36.333333333333371, 36.333333333333371 ]
 								}
 
 							}
@@ -1235,7 +1195,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1270,7 +1230,7 @@
 														"appversion" : 														{
 															"major" : 9,
 															"minor" : 0,
-															"revision" : 3,
+															"revision" : 5,
 															"architecture" : "x64",
 															"modernui" : 1
 														}
@@ -1803,14 +1763,10 @@
 															}
  ],
 														"lines" : [  ],
-														"originid" : "pat-10146"
+														"originid" : "pat-523"
 													}
 ,
 													"patching_rect" : [ 461.5, 366.0, 134.0, 24.0 ],
-													"saved_object_attributes" : 													{
-														"globalpatchername" : ""
-													}
-,
 													"text" : "p status_cheatsheet"
 												}
 
@@ -2180,8 +2136,7 @@
 													"numoutlets" : 1,
 													"outlettype" : [ "int" ],
 													"parameter_enable" : 0,
-													"patching_rect" : [ 472.0, 117.687499999999943, 44.541666666666629, 44.541666666666629 ],
-													"svg" : ""
+													"patching_rect" : [ 472.0, 117.687499999999943, 44.541666666666629, 44.541666666666629 ]
 												}
 
 											}
@@ -2264,14 +2219,10 @@
 
 											}
  ],
-										"originid" : "pat-10144"
+										"originid" : "pat-521"
 									}
 ,
 									"patching_rect" : [ 211.583333333333371, 414.833333333333371, 154.0, 24.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p understanding_status"
 								}
 
@@ -2290,8 +2241,7 @@
 
 									}
 ,
-									"text" : "beat phase",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "beat phase"
 								}
 
 							}
@@ -2309,8 +2259,7 @@
 
 									}
 ,
-									"text" : "tempo",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "tempo"
 								}
 
 							}
@@ -2328,8 +2277,7 @@
 
 									}
 ,
-									"text" : "seconds",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "seconds"
 								}
 
 							}
@@ -2347,8 +2295,7 @@
 
 									}
 ,
-									"text" : "ticks",
-									"textcolor" : [ 0.85, 0.85, 0.85, 1.0 ]
+									"text" : "ticks"
 								}
 
 							}
@@ -2489,8 +2436,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 126.0, 498.833333333333371, 24.0, 24.0 ],
-									"svg" : ""
+									"patching_rect" : [ 126.0, 498.833333333333371, 24.0, 24.0 ]
 								}
 
 							}
@@ -2589,8 +2535,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 31.0, 147.5, 53.5, 53.5 ],
-									"svg" : ""
+									"patching_rect" : [ 31.0, 147.5, 53.5, 53.5 ]
 								}
 
 							}
@@ -2604,8 +2549,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 162.0, 365.458333333333314, 44.541666666666629, 44.541666666666629 ],
-									"svg" : ""
+									"patching_rect" : [ 162.0, 365.458333333333314, 44.541666666666629, 44.541666666666629 ]
 								}
 
 							}
@@ -2724,6 +2668,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-11", 1 ],
+									"midpoints" : [ 171.5, 350.614583333333258, 409.041666666666629, 350.614583333333258 ],
 									"order" : 0,
 									"source" : [ "obj-1", 1 ]
 								}
@@ -2973,14 +2918,10 @@
 
 							}
  ],
-						"originid" : "pat-9662"
+						"originid" : "pat-39"
 					}
 ,
 					"patching_rect" : [ 79.0, 31.0, 47.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p basic",
 					"varname" : "basic"
 				}
@@ -2988,7 +2929,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-9658",
+		"originid" : "pat-35",
 		"parameters" : 		{
 			"obj-2::obj-55::obj-1001::obj-89::obj-1" : [ "live.text[4]", "live.text", 0 ],
 			"obj-2::obj-55::obj-1001::obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],
@@ -3150,6 +3091,18 @@
 ,
 				"obj-2::obj-55::obj-842::obj-89::obj-3" : 				{
 					"parameter_longname" : "live.text[3]"
+				}
+,
+				"obj-2::obj-55::obj-96::obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[25]"
+				}
+,
+				"obj-2::obj-55::obj-96::obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[23]"
+				}
+,
+				"obj-2::obj-55::obj-96::obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[18]"
 				}
 
 			}
