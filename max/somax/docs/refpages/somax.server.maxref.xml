@@ -90,7 +90,7 @@
 		</method>
         <method name="corpuspath">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Quary/Set the server corpuspath</digest>
+			<digest>Query/Set the server corpuspath</digest>
 			<description>
 				The message <m>corpuspath</m> will cause the <o>somax.server</o> to output the location of its corpuspath, out the left outlet.
 				<br />
