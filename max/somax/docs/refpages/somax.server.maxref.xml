@@ -90,9 +90,11 @@
 		</method>
         <method name="corpuspath">
 			<arglist><arg name="input" optional="0" type="int" /></arglist>
-			<digest>Query the current corpuspath</digest>
+			<digest>Quary/Set the server corpuspath</digest>
 			<description>
 				The message <m>corpuspath</m> will cause the <o>somax.server</o> to output the location of its corpuspath, out the left outlet.
+				<br />
+				The message <m>corpuspath</m> followed by an absolute path will set this new path as the corpuspath for the <o>somax.server</o>. The message <m>corpuspath reset</m> will reset the corpus path to the default one in the Somax2 package. The message <m>corpuspath set</m> will open a dialog popup to select a folder to set as new corpuspath.
 			</description>
 		</method>
         <method name="initialize">
