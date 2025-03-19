@@ -32,7 +32,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
+						"rect" : [ 84.0, 126.0, 1054.0, 710.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
 						"boxes" : [ 							{
@@ -429,7 +429,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 596.25, 509.0, 365.0, 154.0 ],
+									"patching_rect" : [ 596.25, 509.0, 366.0, 154.0 ],
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -479,7 +479,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 596.25, 436.0, 365.0, 74.0 ],
+									"patching_rect" : [ 596.25, 436.0, 367.0, 74.0 ],
 									"saved_attribute_attributes" : 									{
 										"bubble_bgcolor" : 										{
 											"expression" : "themecolor.theme_bubble_bgcolor"
@@ -875,7 +875,7 @@
 
 									}
 ,
-									"text" : "The somax.atom.app object is a convenient wrapper around the somax.atom with some additional user interface to handle connection to players and parameters controls. Thanks to this app object, Somax players can receive influences associated to the selected atom wirelessly (i.e. without max patch cords). "
+									"text" : "The somax.atom.app object is a convenient wrapper around the somax.atom with some additional user interface to handle connection to players and parameters controls. Thanks to this app object, Somax players can receive influences associated to the selected atom wirelessly (i.e. without max patch chords). "
 								}
 
 							}
@@ -961,7 +961,7 @@
 
 							}
  ],
-						"originid" : "pat-64650",
+						"originid" : "pat-13019",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1042,7 +1042,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 84.0, 126.0, 1054.0, 710.0 ],
+						"rect" : [ 0.0, 26.0, 1054.0, 710.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"showontab" : 1,
 						"boxes" : [ 							{
@@ -1056,7 +1056,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 141.0, 591.0, 229.0, 40.0 ],
-									"presentation_linecount" : 2,
 									"saved_attribute_attributes" : 									{
 										"textcolor" : 										{
 											"expression" : "themecolor.theme_textcolor"
@@ -1099,7 +1098,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 141.0, 653.0, 352.0, 40.0 ],
-									"presentation_linecount" : 2,
 									"saved_attribute_attributes" : 									{
 										"textcolor" : 										{
 											"expression" : "themecolor.theme_textcolor"
@@ -1188,7 +1186,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 39.0, 408.0, 343.0, 52.0 ],
+									"patching_rect" : [ 39.0, 408.0, 345.0, 52.0 ],
 									"text" : "Descriptors can be default corpus features (i.e., pitch, chroma, mfcc) or user-defined labels (in this case, initial, dynamics)"
 								}
 
@@ -1201,7 +1199,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 295.0, 237.0, 193.0, 51.0 ],
+									"patching_rect" : [ 295.0, 237.0, 196.0, 51.0 ],
 									"text" : "The descriptor list allows you to select which descriptor assign to the current somax.atom.app"
 								}
 
@@ -1279,7 +1277,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 506.0, 371.0, 529.0, 87.0 ],
+									"patching_rect" : [ 506.0, 371.0, 531.0, 87.0 ],
 									"text" : "The message                                              can be used to set a specific descriptor to add as atom. \n\nThrough this message, It is possible to assign a descriptor even if it is invalid at the time of assignment, which is useful for pre-configuring the system before the player or server is started. \n      \n"
 								}
 
@@ -1383,7 +1381,7 @@
 
 							}
  ],
-						"originid" : "pat-64652",
+						"originid" : "pat-13021",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1469,7 +1467,7 @@
 						"showontab" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-64654"
+						"originid" : "pat-13023"
 					}
 ,
 					"patching_rect" : [ 364.0, 46.0, 25.0, 22.0 ],
@@ -1784,7 +1782,7 @@
 
 							}
  ],
-						"originid" : "pat-64656",
+						"originid" : "pat-13025",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1849,7 +1847,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-64648",
+		"originid" : "pat-13017",
 		"dependency_cache" : [ 			{
 				"name" : "atom_app.png",
 				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/media",
