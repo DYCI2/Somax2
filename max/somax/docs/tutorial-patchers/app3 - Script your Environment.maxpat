@@ -4,17 +4,73 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 259.0, 111.0, 1266.0, 948.0 ],
+		"rect" : [ 223.0, 128.0, 1266.0, 948.0 ],
 		"gridsize" : [ 15.0, 15.0 ],
 		"enablehscroll" : 0,
 		"enablevscroll" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"bubble" : 1,
+					"bubblepoint" : 0.8,
+					"bubbleside" : 2,
+					"id" : "obj-29",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 923.146366119384766, 843.902459144592285, 242.0, 66.0 ],
+					"presentation_linecount" : 3,
+					"text" : "you can also set the corpuspath by copying your corpus folder file path and put it into this message instead of the command set",
+					"varname" : "introduction_text_path"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
+					"fontface" : 1,
+					"fontsize" : 12.0,
+					"hint" : "",
+					"id" : "obj-8",
+					"ignoreclick" : 1,
+					"legacytextcolor" : 1,
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"outputmode" : 0,
+					"parameter_enable" : 0,
+					"patching_rect" : [ 929.634170532226562, 902.439045906066895, 20.0, 20.0 ],
+					"rounded" : 60.0,
+					"text" : "4",
+					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
+					"textoncolor" : [ 0.780610322952271, 0.870786786079407, 0.912208139896393, 1.0 ],
+					"varname" : "introduction_5"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-9",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 952.804902791976929, 895.121972560882568, 208.0, 35.0 ],
+					"presentation_linecount" : 3,
+					"text" : ";\rserver_msg corpuspath yourpathhere",
+					"varname" : "introduction_corpuspath2"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"hidden" : 1,
 					"id" : "obj-59",
@@ -61,7 +117,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -161,14 +217,10 @@
 
 							}
  ],
-						"originid" : "pat-23379"
+						"originid" : "pat-2875"
 					}
 ,
 					"patching_rect" : [ 1335.365885496139526, 418.292692899703979, 135.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p load_parameter_docs"
 				}
 
@@ -823,19 +875,6 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-31",
-					"linecount" : 5,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 991.463438272476196, 968.29270601272583, 170.0, 74.0 ],
-					"text" : "you can also set the corpuspath by copying your corpus folder file path and put it into this message instead of the command set",
-					"varname" : "introduction_text_path"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"bgcolor" : [ 1.0, 0.694117647058824, 0.513725490196078, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 12.0,
@@ -965,7 +1004,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1146,14 +1185,10 @@
 
 							}
  ],
-						"originid" : "pat-23381"
+						"originid" : "pat-2877"
 					}
 ,
 					"patching_rect" : [ 1351.219544410705566, 1123.170758485794067, 86.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p scroll_pages"
 				}
 
@@ -1191,7 +1226,7 @@
 					"outlettype" : [ "", "", "int" ],
 					"outputmode" : 0,
 					"parameter_enable" : 0,
-					"patching_rect" : [ 968.29270601272583, 934.146363735198975, 20.0, 20.0 ],
+					"patching_rect" : [ 967.073193788528442, 798.78050684928894, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "4",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -1281,7 +1316,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 991.463438272476196, 926.829290390014648, 169.999983787536621, 35.0 ],
+					"patching_rect" : [ 990.243926048278809, 791.463433504104614, 169.999983787536621, 35.0 ],
 					"text" : ";\rserver_msg corpuspath set",
 					"varname" : "introduction_corpuspath"
 				}
@@ -1353,11 +1388,11 @@
 					"fontface" : 0,
 					"fontsize" : 14.0,
 					"id" : "obj-21",
-					"linecount" : 52,
+					"linecount" : 54,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1181.448190808296204, 188.926836013793945, 346.0, 835.0 ],
+					"patching_rect" : [ 1181.707345247268677, 188.926836013793945, 325.609763860702515, 867.0 ],
 					"text" : "In this tutorial you will learn how to control any available parameter in the Somax2 .app objects using scripting messages in Max.\n\nThis will provide you a quick worflow and open up possibilities of automation and control of the wide array of parameters in the application.\nFirst of all, as always let's begin by pressing on the \"Start Server\" button (see step 1).\n\nThen, one of the first things we might want to script is the path to a certain folder containing our corpora.\n\nRemember that by default the corpora we're providing are stored in the \"corpus\" folder of your Somax2 distribution.\nHowever, a good practice is to have different corpus folders in your machine, according to the sound palette you might search for a certain concert/performance, etc.\nYou can select the desired corpus folder (called \"corpuspath\") by pressing on the \"Settings\" button of the somax.server.app and then press on the \"set\" button next to the Corpus Folder path (see step 2).\n\nYet, to speed up this process you can send a message directly to the somax.server.app object asking to set the corpuspath.\nThis can be done through the Max message shown at step 3.\n\nBy pressing this message you will see a window popping up, enabling you to select a corpuspath in your environment.\n\nThis is done thanks to the couple of send and receive objects in Max.\nNotice how every Somax2 module in this patch has a \"r\" object attached to them, where \"r\" is the shortcut for \"receive\".\nThe message you just pressed, on the other hand is linked to a \"s\" (for \"send\") object, providing the communication with the somax.server.app thanks to its argument having the same name as the one in the \"r\" object (in this case the name argument is \"server_msg\").\n\nAn alternative for \"s\" is to use ; inside a message, as shown at step 4.\n\nFor compactness, we will rather use this last syntax in the next steps.\n",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"varname" : "introduction_text"
@@ -1393,13 +1428,13 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 329.0, 466.0, 539.0, 480.0 ],
+						"rect" : [ 328.0, 465.0, 539.0, 480.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
 								"box" : 								{
@@ -1414,7 +1449,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1475,14 +1510,10 @@
 
 											}
  ],
-										"originid" : "pat-23385"
+										"originid" : "pat-2881"
 									}
 ,
 									"patching_rect" : [ 364.0, 185.0, 61.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p panel_5"
 								}
 
@@ -1500,7 +1531,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1562,14 +1593,10 @@
 
 											}
  ],
-										"originid" : "pat-23387"
+										"originid" : "pat-2883"
 									}
 ,
 									"patching_rect" : [ 285.0, 185.0, 61.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p panel_4"
 								}
 
@@ -1587,7 +1614,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1649,14 +1676,10 @@
 
 											}
  ],
-										"originid" : "pat-23389"
+										"originid" : "pat-2885"
 									}
 ,
 									"patching_rect" : [ 205.0, 185.0, 61.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p panel_3"
 								}
 
@@ -1674,7 +1697,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1736,14 +1759,10 @@
 
 											}
  ],
-										"originid" : "pat-23391"
+										"originid" : "pat-2887"
 									}
 ,
 									"patching_rect" : [ 130.0, 185.0, 61.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p panel_2"
 								}
 
@@ -1761,7 +1780,7 @@
 										"appversion" : 										{
 											"major" : 9,
 											"minor" : 0,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1772,13 +1791,13 @@
 										"boxes" : [ 											{
 												"box" : 												{
 													"id" : "obj-116",
-													"linecount" : 6,
+													"linecount" : 7,
 													"maxclass" : "message",
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 100.0, 516.0, 89.0 ],
-													"text" : "script $1 introduction, script $1 introduction_text, script $1 introduction_1, script $1 introduction_server_panel, script $1 introduction_corpuspath, script $1 introduction_2, script $1 introduction_next, script $1 introduction_1_2, script $1 introduction_2, script $1 introduction_2_2, script $1 introduction_3, script $1 introduction_3_2, script $1 introduction_4, script $1 introduction_4_2, script $1 introduction_set, script $1 introduction_s_msg, script $1 introduction_text_path, script $1 midi_panel"
+													"patching_rect" : [ 50.0, 100.0, 516.0, 102.0 ],
+													"text" : "script $1 introduction, script $1 introduction_text, script $1 introduction_1, script $1 introduction_server_panel, script $1 introduction_corpuspath, script $1 introduction_2, script $1 introduction_next, script $1 introduction_1_2, script $1 introduction_2, script $1 introduction_2_2, script $1 introduction_3, script $1 introduction_3_2, script $1 introduction_4, script $1 introduction_4_2, script $1 introduction_set, script $1 introduction_s_msg, script $1 introduction_text_path, script $1 midi_panel, script $1 introduction_5, script $1 introduction_corpuspath2"
 												}
 
 											}
@@ -1823,14 +1842,10 @@
 
 											}
  ],
-										"originid" : "pat-23393"
+										"originid" : "pat-2889"
 									}
 ,
 									"patching_rect" : [ 50.0, 185.0, 61.0, 22.0 ],
-									"saved_object_attributes" : 									{
-										"globalpatchername" : ""
-									}
-,
 									"text" : "p panel_1"
 								}
 
@@ -2206,14 +2221,10 @@
 
 							}
  ],
-						"originid" : "pat-23383"
+						"originid" : "pat-2879"
 					}
 ,
 					"patching_rect" : [ 135.365856885910034, 85.365855693817139, 91.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p panel_control"
 				}
 
@@ -2759,7 +2770,7 @@
 
 			}
  ],
-		"originid" : "pat-23377",
+		"originid" : "pat-2873",
 		"parameters" : 		{
 			"obj-1::obj-13::obj-1" : [ "source[9]", "source", 0 ],
 			"obj-1::obj-2::obj-395::obj-2" : [ "live.text[5]", "live.text[4]", 0 ],
@@ -3114,6 +3125,18 @@
 ,
 				"obj-5::obj-3::obj-407::obj-96::obj-89::obj-3" : 				{
 					"parameter_longname" : "live.text[26]"
+				}
+,
+				"obj-5::obj-3::obj-79::obj-1" : 				{
+					"parameter_longname" : "live.text[25]"
+				}
+,
+				"obj-5::obj-3::obj-79::obj-2" : 				{
+					"parameter_longname" : "live.text[23]"
+				}
+,
+				"obj-5::obj-3::obj-79::obj-3" : 				{
+					"parameter_longname" : "live.text[18]"
 				}
 ,
 				"obj-5::obj-3::obj-85::obj-1" : 				{
