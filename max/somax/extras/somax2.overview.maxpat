@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 360.0, 207.0, 942.0, 597.0 ],
+		"rect" : [ 410.0, 279.0, 942.0, 597.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"enablehscroll" : 0,
@@ -258,7 +258,7 @@
 
 											}
  ],
-										"originid" : "pat-1328"
+										"originid" : "pat-9"
 									}
 ,
 									"patching_rect" : [ 533.0, 403.0, 121.0, 22.0 ],
@@ -439,7 +439,7 @@
 
 											}
  ],
-										"originid" : "pat-1330"
+										"originid" : "pat-11"
 									}
 ,
 									"patching_rect" : [ 153.0, 403.0, 100.0, 22.0 ],
@@ -465,7 +465,7 @@
 
 							}
  ],
-						"originid" : "pat-1326"
+						"originid" : "pat-7"
 					}
 ,
 					"patching_rect" : [ 248.5, 391.5, 87.0, 77.0 ],
@@ -484,7 +484,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-3",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -503,9 +502,41 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 399.0, 192.0, 897.0, 480.0 ],
+						"rect" : [ 399.0, 191.0, 897.0, 480.0 ],
 						"gridsize" : [ 15.0, 15.0 ],
 						"boxes" : [ 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-3",
+									"linecount" : 2,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 297.0, 546.0, 373.0, 35.0 ],
+									"presentation_linecount" : 2,
+									"text" : ";\rmax launchbrowser https://vimeo.com/1067006622?share=copy#t=0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.290196, 0.309804, 0.301961, 0.0 ],
+									"id" : "obj-10",
+									"maxclass" : "textbutton",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 297.0, 320.0, 114.0, 24.0 ],
+									"text" : "Video Tutorial 4",
+									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
+									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
+									"underline" : 1
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"hidden" : 1,
 									"id" : "obj-17",
@@ -514,8 +545,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 477.0, 435.0, 378.0, 35.0 ],
-									"text" : ";\rmax launchbrowser https://www.youtube.com/watch?v=p4nUd5pot4w"
+									"patching_rect" : [ 426.0, 432.0, 373.0, 35.0 ],
+									"text" : ";\rmax launchbrowser https://vimeo.com/1067006622?share=copy#t=0"
 								}
 
 							}
@@ -528,7 +559,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 295.0, 381.0, 114.0, 24.0 ],
+									"patching_rect" : [ 295.0, 382.0, 114.0, 24.0 ],
 									"text" : "Video Tutorial 5",
 									"textoncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 									"textovercolor" : [ 0.317647, 0.654902, 0.976471, 1.0 ],
@@ -543,7 +574,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 306.0, 355.0, 575.0, 33.0 ],
+									"patching_rect" : [ 306.0, 356.0, 575.0, 33.0 ],
 									"text" : "In this tutorial you will be guided through the full workflow of using your own custom labels. This goes from manual annotation in Reaper/Audacity, to manual corpus building, filtering and matching in Somax2.",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
@@ -556,8 +587,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 308.0, 302.0, 571.0, 33.0 ],
-									"text" : "In the fourth tutorial you will understand how to save and load the parameters of your Somax2 players, to quickly retrieve presets on the fly",
+									"patching_rect" : [ 308.0, 294.0, 571.0, 33.0 ],
+									"text" : "In the fourth tutorial you will understand how to save and load the parameters of your Somax2 players, to quickly retrieve presets on the fly.",
 									"textcolor" : [ 0.125, 0.125, 0.125, 1.0 ]
 								}
 
@@ -818,7 +849,7 @@
 
 											}
  ],
-										"originid" : "pat-1335"
+										"originid" : "pat-16"
 									}
 ,
 									"patching_rect" : [ 7.5, 432.0, 68.0, 22.0 ],
@@ -828,6 +859,14 @@
 							}
  ],
 						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-3", 0 ],
+									"hidden" : 1,
+									"source" : [ "obj-10", 0 ]
+								}
+
+							}
+, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-11", 0 ],
 									"hidden" : 1,
@@ -861,7 +900,7 @@
 
 							}
  ],
-						"originid" : "pat-1333"
+						"originid" : "pat-14"
 					}
 ,
 					"patching_rect" : [ 19.011363636363626, 391.5, 87.0, 77.0 ],
@@ -913,6 +952,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-7",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -960,7 +1000,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 126.0, 428.0, 225.0, 35.0 ],
-									"presentation_linecount" : 2,
 									"text" : ";\rmax launchbrowser https://reach.ircam.fr"
 								}
 
@@ -1066,7 +1105,7 @@
 
 							}
  ],
-						"originid" : "pat-1338"
+						"originid" : "pat-19"
 					}
 ,
 					"patching_rect" : [ 528.0, 391.5, 87.0, 77.0 ],
@@ -1261,7 +1300,7 @@
 
 											}
  ],
-										"originid" : "pat-1343"
+										"originid" : "pat-24"
 									}
 ,
 									"patching_rect" : [ 153.0, 413.0, 103.0, 22.0 ],
@@ -1279,7 +1318,7 @@
 
 							}
  ],
-						"originid" : "pat-1341"
+						"originid" : "pat-22"
 					}
 ,
 					"patching_rect" : [ 135.5, 391.5, 87.0, 77.0 ],
@@ -1537,7 +1576,7 @@
 
 											}
  ],
-										"originid" : "pat-1348"
+										"originid" : "pat-29"
 									}
 ,
 									"patching_rect" : [ 599.0, 174.0, 135.0, 22.0 ],
@@ -1694,7 +1733,7 @@
 
 											}
  ],
-										"originid" : "pat-1350"
+										"originid" : "pat-31"
 									}
 ,
 									"patching_rect" : [ 231.0, 451.0, 77.0, 22.0 ],
@@ -1743,7 +1782,7 @@
 
 							}
  ],
-						"originid" : "pat-1346"
+						"originid" : "pat-27"
 					}
 ,
 					"patching_rect" : [ 395.5, 391.5, 87.0, 77.0 ],
@@ -2301,7 +2340,7 @@
 
 			}
  ],
-		"originid" : "pat-1323",
+		"originid" : "pat-4",
 		"dependency_cache" : [  ],
 		"autosave" : 0,
 		"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
