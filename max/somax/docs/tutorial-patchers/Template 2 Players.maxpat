@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 84.0, 100.0, 1485.0, 983.0 ],
+		"rect" : [ 84.0, 100.0, 932.0, 983.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -450,7 +450,7 @@
 
 							}
  ],
-						"originid" : "pat-70420"
+						"originid" : "pat-10628"
 					}
 ,
 					"patching_rect" : [ 451.0, 444.0, 84.0, 22.0 ],
@@ -895,7 +895,7 @@
 
 							}
  ],
-						"originid" : "pat-70422"
+						"originid" : "pat-10630"
 					}
 ,
 					"patching_rect" : [ 427.0, 788.0, 84.0, 22.0 ],
@@ -1310,7 +1310,7 @@
 
 							}
  ],
-						"originid" : "pat-70424"
+						"originid" : "pat-10632"
 					}
 ,
 					"patching_rect" : [ 1566.0, 946.0, 84.0, 22.0 ],
@@ -1725,7 +1725,7 @@
 
 							}
  ],
-						"originid" : "pat-70426"
+						"originid" : "pat-10634"
 					}
 ,
 					"patching_rect" : [ 1285.0, 946.0, 84.0, 22.0 ],
@@ -2170,7 +2170,7 @@
 
 							}
  ],
-						"originid" : "pat-70428"
+						"originid" : "pat-10636"
 					}
 ,
 					"patching_rect" : [ 1008.0, 946.0, 84.0, 22.0 ],
@@ -2615,7 +2615,7 @@
 
 							}
  ],
-						"originid" : "pat-70430"
+						"originid" : "pat-10638"
 					}
 ,
 					"patching_rect" : [ 733.0, 946.0, 84.0, 22.0 ],
@@ -2884,7 +2884,7 @@
 
 			}
  ],
-		"originid" : "pat-70418",
+		"originid" : "pat-10626",
 		"parameters" : 		{
 			"obj-11::obj-118::obj-114" : [ "live.gain~[1]", "live.gain~", 0 ],
 			"obj-11::obj-118::obj-119" : [ "live.text[67]", "live.text[30]", 0 ],
