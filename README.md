@@ -6,7 +6,7 @@ While the application can be used straight out of the box with little configurat
 ## Requirements
 
 * macOS 10.13 or later / Windows 10+
-* Max 8.5 or later
+* Max 8.6 or later / Max 9.0.3 or later
 * (Python 3.9 or later -- only needed for manual installation)
 
 ## Installation
@@ -51,19 +51,19 @@ Because of space limitations, only a few tiny audio corpora (marked with a «(A)
 
 ## Credits
 
-Somax2 (c) Ircam 2012-2024
+Somax2 (c) Ircam 2012-2025
 
 Somax2 is a totally renewed version of the Somax reactive co-improvisation paradigm born in the Music Representations Team at Ircam - STMS.
 
 It is  part of the research projects ANR MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) directed by Gérard Assayag.
 
-Somax2 development by Joakim Borg, documentations and tutorials by Joakim Borg and Marco Fiorini.
+Somax2 development, documentations and tutorials by Joakim Borg and Marco Fiorini.
 
 Somax created by Gérard Assayag and Laurent Bonnasse-Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early prototype by Olivier Delerue.
 
-Thanks to Georges Bloch, Mikhaïl Malt and Marco Fiorini for their continuous expertise.
+Thanks to Georges Bloch, Mikhaïl Malt for their continuous expertise.
 
-Thanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini for their musical material used in Somax2 distribution corpus.
+Thanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini, Anaïs del Sordo for their musical material used in Somax2 distribution corpus.
 
 
 ## Contacting the team
