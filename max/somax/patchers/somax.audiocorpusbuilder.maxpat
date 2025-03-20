@@ -210,7 +210,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 134.0, 138.0, 450.0, 193.0 ],
+						"rect" : [ 134.0, 138.0, 440.0, 170.0 ],
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"toolbarvisible" : 0,
@@ -1125,7 +1125,7 @@
 
 											}
  ],
-										"originid" : "pat-8688"
+										"originid" : "pat-13073"
 									}
 ,
 									"patching_rect" : [ 515.624999999999773, 112.439567114741294, 51.0, 22.0 ],
@@ -1821,7 +1821,7 @@
 
 							}
  ],
-						"originid" : "pat-8686",
+						"originid" : "pat-13071",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2065,7 +2065,7 @@
 
 							}
  ],
-						"originid" : "pat-8690"
+						"originid" : "pat-13075"
 					}
 ,
 					"patching_rect" : [ 337.0, 196.0, 115.0, 22.0 ],
@@ -2703,7 +2703,7 @@
 
 							}
  ],
-						"originid" : "pat-8692"
+						"originid" : "pat-13077"
 					}
 ,
 					"patching_rect" : [ 415.125, 937.5, 71.0, 22.0 ],
@@ -2874,7 +2874,7 @@
 
 							}
  ],
-						"originid" : "pat-8694"
+						"originid" : "pat-13079"
 					}
 ,
 					"patching_rect" : [ 253.0, 509.0, 71.0, 22.0 ],
@@ -3041,7 +3041,7 @@
 
 							}
  ],
-						"originid" : "pat-8696"
+						"originid" : "pat-13081"
 					}
 ,
 					"patching_rect" : [ 1027.25, 517.663336431226753, 87.75, 22.0 ],
@@ -4095,7 +4095,7 @@
 
 											}
  ],
-										"originid" : "pat-8727"
+										"originid" : "pat-13112"
 									}
 ,
 									"patching_rect" : [ 1721.25, 762.790996860009272, 35.0, 22.0 ],
@@ -5237,7 +5237,7 @@
 
 																			}
  ],
-																		"originid" : "pat-8734"
+																		"originid" : "pat-13119"
 																	}
 ,
 																	"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -5285,7 +5285,7 @@
 
 															}
  ],
-														"originid" : "pat-8732"
+														"originid" : "pat-13117"
 													}
 ,
 													"patching_rect" : [ 235.666666984558105, 38.333333998918533, 22.0, 20.0 ],
@@ -5849,7 +5849,7 @@
 
 																			}
  ],
-																		"originid" : "pat-8739"
+																		"originid" : "pat-13124"
 																	}
 ,
 																	"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -5897,7 +5897,7 @@
 
 															}
  ],
-														"originid" : "pat-8737"
+														"originid" : "pat-13122"
 													}
 ,
 													"patching_rect" : [ 235.666666984558105, 55.833333998918533, 22.0, 57.66666778922081 ],
@@ -6173,7 +6173,7 @@
 
 															}
  ],
-														"originid" : "pat-8741"
+														"originid" : "pat-13126"
 													}
 ,
 													"patching_rect" : [ 439.624999999999773, 179.939567114741294, 51.0, 22.0 ],
@@ -6289,7 +6289,7 @@
 
 											}
  ],
-										"originid" : "pat-8729",
+										"originid" : "pat-13114",
 										"boxgroups" : [ 											{
 												"boxes" : [ "obj-2", "obj-3" ]
 											}
@@ -8293,7 +8293,7 @@
 
 															}
  ],
-														"originid" : "pat-8750"
+														"originid" : "pat-13135"
 													}
 ,
 													"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -8341,7 +8341,7 @@
 
 											}
  ],
-										"originid" : "pat-8748"
+										"originid" : "pat-13133"
 									}
 ,
 									"patching_rect" : [ 128.0, 784.316693863061573, 22.0, 60.0 ],
@@ -10805,7 +10805,7 @@
 
 							}
  ],
-						"originid" : "pat-8725",
+						"originid" : "pat-13110",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-306", "obj-199" ]
 							}
@@ -10888,6 +10888,8 @@
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"toolbarvisible" : 0,
+						"enablehscroll" : 0,
+						"enablevscroll" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"angle" : 270.0,
@@ -11191,7 +11193,7 @@
 
 											}
  ],
-										"originid" : "pat-8754"
+										"originid" : "pat-13139"
 									}
 ,
 									"patching_rect" : [ 1376.60909090909081, 393.0, 50.0, 22.0 ],
@@ -11559,7 +11561,7 @@
 
 											}
  ],
-										"originid" : "pat-8756"
+										"originid" : "pat-13141"
 									}
 ,
 									"patching_rect" : [ 1203.654545454545314, 323.0, 110.0, 22.0 ],
@@ -12794,7 +12796,7 @@
 
 											}
  ],
-										"originid" : "pat-8758"
+										"originid" : "pat-13143"
 									}
 ,
 									"patching_rect" : [ 747.304545454545405, 152.439567114741294, 51.0, 22.0 ],
@@ -13843,7 +13845,7 @@
 
 							}
  ],
-						"originid" : "pat-8752",
+						"originid" : "pat-13137",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -13982,13 +13984,86 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 34.0, 79.0, 440.0, 170.0 ],
+						"rect" : [ 68.0, 100.0, 445.0, 183.0 ],
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"toolbarvisible" : 0,
 						"enablehscroll" : 0,
 						"enablevscroll" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 1,
+									"bordercolor" : [ 0.6, 0.6, 0.6, 1.0 ],
+									"id" : "obj-30",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 574.0, 234.0, 99.0, 24.25 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 13.0, 14.208525, 195.943815999999998, 20.0 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 1,
+									"bordercolor" : [ 0.6, 0.6, 0.6, 1.0 ],
+									"id" : "obj-29",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 448.0, 327.0, 99.0, 24.25 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 121.0, 116.460829000000004, 110.696427, 31.583335000000002 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 1,
+									"bordercolor" : [ 0.6, 0.6, 0.6, 1.0 ],
+									"id" : "obj-27",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 440.0, 217.0, 99.0, 24.25 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 221.071426000000002, 14.208525, 196.015242999999998, 20.0 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
+									"border" : 1,
+									"bordercolor" : [ 0.6, 0.6, 0.6, 1.0 ],
+									"id" : "obj-32",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 333.0, 342.0, 99.0, 24.25 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 13.0, 114.460829000000004, 94.0, 35.0 ],
+									"proportion" : 0.5
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-41",
 									"maxclass" : "newobj",
@@ -14106,7 +14181,7 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 121.0, 116.460829493087545, 80.0, 18.0 ],
 									"text" : "Status:",
-									"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
+									"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 									"textjustification" : 1
 								}
 
@@ -14199,6 +14274,7 @@
 							}
 , 							{
 								"box" : 								{
+									"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.0 ],
 									"blinkcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 									"blinktime" : 250,
 									"id" : "obj-1022",
@@ -14207,6 +14283,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
+									"outlinecolor" : [ 0.6, 0.6, 0.6, 1.0 ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 604.554545454545405, 526.649999999999636, 24.0, 24.0 ],
 									"presentation" : 1,
@@ -14265,7 +14342,7 @@
 , 							{
 								"box" : 								{
 									"angle" : 270.0,
-									"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+									"bgcolor" : [ 0.2, 0.2, 0.2, 0.0 ],
 									"id" : "obj-1121",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -14318,6 +14395,7 @@
 							}
 , 							{
 								"box" : 								{
+									"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.0 ],
 									"fontface" : 1,
 									"fontsize" : 13.0,
 									"id" : "obj-10",
@@ -14609,7 +14687,7 @@
 
 											}
  ],
-										"originid" : "pat-8762"
+										"originid" : "pat-13147"
 									}
 ,
 									"patching_rect" : [ 515.624999999999773, 112.439567114741294, 51.0, 22.0 ],
@@ -14796,6 +14874,7 @@
 							}
 , 							{
 								"box" : 								{
+									"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.0 ],
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-5",
@@ -14840,6 +14919,7 @@
 							}
 , 							{
 								"box" : 								{
+									"bgcolor" : [ 0.125490196078431, 0.125490196078431, 0.125490196078431, 0.0 ],
 									"fontface" : 1,
 									"fontsize" : 10.0,
 									"id" : "obj-34",
@@ -14873,7 +14953,7 @@
 , 							{
 								"box" : 								{
 									"angle" : 270.0,
-									"bgcolor" : [ 0.372549019607843, 0.372549019607843, 0.372549019607843, 1.0 ],
+									"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 									"id" : "obj-260",
 									"maxclass" : "panel",
 									"mode" : 0,
@@ -15233,11 +15313,7 @@
 
 							}
  ],
-						"originid" : "pat-8760",
-						"boxgroups" : [ 							{
-								"boxes" : [ "obj-1080", "obj-1068", "obj-1022", "obj-1121", "obj-74", "obj-1020", "obj-1015" ]
-							}
- ],
+						"originid" : "pat-13145",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -16912,7 +16988,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 19,
 					"presentation_rect" : [ 341.416666507720947, 31.0, 189.0, 261.0 ],
-					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus builder_address= 2382_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
+					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus builder_address= 3158_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -18354,7 +18430,7 @@
 
 			}
  ],
-		"originid" : "pat-8684",
+		"originid" : "pat-13069",
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-1259", "obj-856" ]
 			}
