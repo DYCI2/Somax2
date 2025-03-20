@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 68.0, 100.0, 334.0, 873.0 ],
+		"rect" : [ 68.0, 100.0, 340.0, 874.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"toolbarvisible" : 0,
@@ -1126,7 +1126,7 @@
 
 											}
  ],
-										"originid" : "pat-13189"
+										"originid" : "pat-33773"
 									}
 ,
 									"patching_rect" : [ 515.624999999999773, 112.439567114741294, 51.0, 22.0 ],
@@ -1822,7 +1822,7 @@
 
 							}
  ],
-						"originid" : "pat-13187",
+						"originid" : "pat-33771",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2066,7 +2066,7 @@
 
 							}
  ],
-						"originid" : "pat-13191"
+						"originid" : "pat-33775"
 					}
 ,
 					"patching_rect" : [ 337.0, 196.0, 115.0, 22.0 ],
@@ -2198,7 +2198,7 @@
 				"box" : 				{
 					"comment" : "(mc.signal) audio from test segmentation",
 					"id" : "obj-275",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2223,7 +2223,7 @@
 				"box" : 				{
 					"comment" : "(int, str) status",
 					"id" : "obj-437",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2235,7 +2235,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-844",
-					"index" : 0,
+					"index" : 5,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2247,7 +2247,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-388",
-					"index" : 0,
+					"index" : 4,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2259,7 +2259,7 @@
 				"box" : 				{
 					"comment" : "(symbol) path to built corpus",
 					"id" : "obj-115",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2704,7 +2704,7 @@
 
 							}
  ],
-						"originid" : "pat-13193"
+						"originid" : "pat-33777"
 					}
 ,
 					"patching_rect" : [ 415.125, 937.5, 71.0, 22.0 ],
@@ -2875,7 +2875,7 @@
 
 							}
  ],
-						"originid" : "pat-13195"
+						"originid" : "pat-33779"
 					}
 ,
 					"patching_rect" : [ 253.0, 509.0, 71.0, 22.0 ],
@@ -3042,7 +3042,7 @@
 
 							}
  ],
-						"originid" : "pat-13197"
+						"originid" : "pat-33781"
 					}
 ,
 					"patching_rect" : [ 1027.25, 517.663336431226753, 87.75, 22.0 ],
@@ -3329,13 +3329,12 @@
 				"box" : 				{
 					"color" : [ 0.3574509025, 0.5837691426, 0.6141206622, 1.0 ],
 					"id" : "obj-263",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 426.490740518518123, 291.40580908636025, 105.0, 35.0 ],
-					"text" : "somax.winresize 360 780"
+					"patching_rect" : [ 426.490740518518123, 291.40580908636025, 144.0, 22.0 ],
+					"text" : "somax.winresize 340 874"
 				}
 
 			}
@@ -4096,7 +4095,7 @@
 
 											}
  ],
-										"originid" : "pat-13228"
+										"originid" : "pat-33812"
 									}
 ,
 									"patching_rect" : [ 1721.25, 762.790996860009272, 35.0, 22.0 ],
@@ -5238,7 +5237,7 @@
 
 																			}
  ],
-																		"originid" : "pat-13235"
+																		"originid" : "pat-33819"
 																	}
 ,
 																	"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -5286,7 +5285,7 @@
 
 															}
  ],
-														"originid" : "pat-13233"
+														"originid" : "pat-33817"
 													}
 ,
 													"patching_rect" : [ 235.666666984558105, 38.333333998918533, 22.0, 20.0 ],
@@ -5850,7 +5849,7 @@
 
 																			}
  ],
-																		"originid" : "pat-13240"
+																		"originid" : "pat-33824"
 																	}
 ,
 																	"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -5898,7 +5897,7 @@
 
 															}
  ],
-														"originid" : "pat-13238"
+														"originid" : "pat-33822"
 													}
 ,
 													"patching_rect" : [ 235.666666984558105, 55.833333998918533, 22.0, 57.66666778922081 ],
@@ -6174,7 +6173,7 @@
 
 															}
  ],
-														"originid" : "pat-13242"
+														"originid" : "pat-33826"
 													}
 ,
 													"patching_rect" : [ 439.624999999999773, 179.939567114741294, 51.0, 22.0 ],
@@ -6290,7 +6289,7 @@
 
 											}
  ],
-										"originid" : "pat-13230",
+										"originid" : "pat-33814",
 										"boxgroups" : [ 											{
 												"boxes" : [ "obj-2", "obj-3" ]
 											}
@@ -8294,7 +8293,7 @@
 
 															}
  ],
-														"originid" : "pat-13251"
+														"originid" : "pat-33835"
 													}
 ,
 													"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -8342,7 +8341,7 @@
 
 											}
  ],
-										"originid" : "pat-13249"
+										"originid" : "pat-33833"
 									}
 ,
 									"patching_rect" : [ 128.0, 784.316693863061573, 22.0, 60.0 ],
@@ -10806,7 +10805,7 @@
 
 							}
  ],
-						"originid" : "pat-13226",
+						"originid" : "pat-33810",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-306", "obj-199" ]
 							}
@@ -11194,7 +11193,7 @@
 
 											}
  ],
-										"originid" : "pat-13255"
+										"originid" : "pat-33839"
 									}
 ,
 									"patching_rect" : [ 1376.60909090909081, 393.0, 50.0, 22.0 ],
@@ -11562,7 +11561,7 @@
 
 											}
  ],
-										"originid" : "pat-13257"
+										"originid" : "pat-33841"
 									}
 ,
 									"patching_rect" : [ 1203.654545454545314, 323.0, 110.0, 22.0 ],
@@ -12797,7 +12796,7 @@
 
 											}
  ],
-										"originid" : "pat-13259"
+										"originid" : "pat-33843"
 									}
 ,
 									"patching_rect" : [ 747.304545454545405, 152.439567114741294, 51.0, 22.0 ],
@@ -13846,7 +13845,7 @@
 
 							}
  ],
-						"originid" : "pat-13253",
+						"originid" : "pat-33837",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -14687,7 +14686,7 @@
 
 											}
  ],
-										"originid" : "pat-13263"
+										"originid" : "pat-33847"
 									}
 ,
 									"patching_rect" : [ 515.624999999999773, 112.439567114741294, 51.0, 22.0 ],
@@ -15313,7 +15312,7 @@
 
 							}
  ],
-						"originid" : "pat-13261",
+						"originid" : "pat-33845",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -16922,7 +16921,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to audio corpus builder",
 					"id" : "obj-13",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -16987,8 +16986,8 @@
 					"patching_rect" : [ 664.875, 1737.0, 1176.0, 47.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 19,
-					"presentation_rect" : [ 341.416666507720947, 31.0, 169.0, 261.0 ],
-					"text" : "build_corpus 0 overwrite= 0 0 0 builder_address= 3322_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
+					"presentation_rect" : [ 341.416666507720947, 31.0, 187.0, 261.0 ],
+					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus builder_address= 6938_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -18430,82 +18429,7 @@
 
 			}
  ],
-		"originid" : "pat-13185",
-		"parameters" : 		{
-			"obj-395::obj-2" : [ "live.text[5]", "live.text[4]", 0 ],
-			"obj-395::obj-375" : [ "mc.live.gain~[8]", "click", 0 ],
-			"obj-395::obj-441" : [ "mc.live.gain~[7]", "corpus", 0 ],
-			"obj-395::obj-469" : [ "live.text[24]", "live.text[11]", 0 ],
-			"obj-395::obj-472" : [ "live.text[7]", "live.text[11]", 0 ],
-			"obj-395::obj-490" : [ "live.text[53]", "live.text[11]", 0 ],
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
-			}
-,
-			"inherited_shortname" : 1
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "abstraction_path.js",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.corpusbuilder.core.maxpat",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.corpuspath.maxpat",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.pan2.maxpat",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.path.maxpat",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "somax.winresize.maxpat",
-				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
-				"patcherrelativepath" : "./resources/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "wfknob.png",
-				"bootpath" : "C74:/media/max/picts",
-				"type" : "PNG",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "wfmodes.png",
-				"bootpath" : "C74:/media/max/picts",
-				"type" : "PNG",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0,
+		"originid" : "pat-33769",
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-1259", "obj-856" ]
 			}
