@@ -10,10 +10,12 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 50.0, 106.0, 360.0, 780.0 ],
+		"rect" : [ 68.0, 100.0, 334.0, 873.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"toolbarvisible" : 0,
+		"enablehscroll" : 0,
+		"enablevscroll" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"angle" : 270.0,
@@ -216,7 +218,6 @@
 						"toolbarvisible" : 0,
 						"enablehscroll" : 0,
 						"enablevscroll" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"angle" : 270.0,
@@ -1125,7 +1126,7 @@
 
 											}
  ],
-										"originid" : "pat-13073"
+										"originid" : "pat-13189"
 									}
 ,
 									"patching_rect" : [ 515.624999999999773, 112.439567114741294, 51.0, 22.0 ],
@@ -1821,7 +1822,7 @@
 
 							}
  ],
-						"originid" : "pat-13071",
+						"originid" : "pat-13187",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -2065,7 +2066,7 @@
 
 							}
  ],
-						"originid" : "pat-13075"
+						"originid" : "pat-13191"
 					}
 ,
 					"patching_rect" : [ 337.0, 196.0, 115.0, 22.0 ],
@@ -2197,7 +2198,7 @@
 				"box" : 				{
 					"comment" : "(mc.signal) audio from test segmentation",
 					"id" : "obj-275",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2222,7 +2223,7 @@
 				"box" : 				{
 					"comment" : "(int, str) status",
 					"id" : "obj-437",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2234,7 +2235,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-844",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2246,7 +2247,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-388",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2258,7 +2259,7 @@
 				"box" : 				{
 					"comment" : "(symbol) path to built corpus",
 					"id" : "obj-115",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -2703,7 +2704,7 @@
 
 							}
  ],
-						"originid" : "pat-13077"
+						"originid" : "pat-13193"
 					}
 ,
 					"patching_rect" : [ 415.125, 937.5, 71.0, 22.0 ],
@@ -2874,7 +2875,7 @@
 
 							}
  ],
-						"originid" : "pat-13079"
+						"originid" : "pat-13195"
 					}
 ,
 					"patching_rect" : [ 253.0, 509.0, 71.0, 22.0 ],
@@ -3041,7 +3042,7 @@
 
 							}
  ],
-						"originid" : "pat-13081"
+						"originid" : "pat-13197"
 					}
 ,
 					"patching_rect" : [ 1027.25, 517.663336431226753, 87.75, 22.0 ],
@@ -4095,7 +4096,7 @@
 
 											}
  ],
-										"originid" : "pat-13112"
+										"originid" : "pat-13228"
 									}
 ,
 									"patching_rect" : [ 1721.25, 762.790996860009272, 35.0, 22.0 ],
@@ -5237,7 +5238,7 @@
 
 																			}
  ],
-																		"originid" : "pat-13119"
+																		"originid" : "pat-13235"
 																	}
 ,
 																	"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -5285,7 +5286,7 @@
 
 															}
  ],
-														"originid" : "pat-13117"
+														"originid" : "pat-13233"
 													}
 ,
 													"patching_rect" : [ 235.666666984558105, 38.333333998918533, 22.0, 20.0 ],
@@ -5849,7 +5850,7 @@
 
 																			}
  ],
-																		"originid" : "pat-13124"
+																		"originid" : "pat-13240"
 																	}
 ,
 																	"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -5897,7 +5898,7 @@
 
 															}
  ],
-														"originid" : "pat-13122"
+														"originid" : "pat-13238"
 													}
 ,
 													"patching_rect" : [ 235.666666984558105, 55.833333998918533, 22.0, 57.66666778922081 ],
@@ -6173,7 +6174,7 @@
 
 															}
  ],
-														"originid" : "pat-13126"
+														"originid" : "pat-13242"
 													}
 ,
 													"patching_rect" : [ 439.624999999999773, 179.939567114741294, 51.0, 22.0 ],
@@ -6289,7 +6290,7 @@
 
 											}
  ],
-										"originid" : "pat-13114",
+										"originid" : "pat-13230",
 										"boxgroups" : [ 											{
 												"boxes" : [ "obj-2", "obj-3" ]
 											}
@@ -8293,7 +8294,7 @@
 
 															}
  ],
-														"originid" : "pat-13135"
+														"originid" : "pat-13251"
 													}
 ,
 													"patching_rect" : [ 15.0, 127.5, 54.0, 21.0 ],
@@ -8341,7 +8342,7 @@
 
 											}
  ],
-										"originid" : "pat-13133"
+										"originid" : "pat-13249"
 									}
 ,
 									"patching_rect" : [ 128.0, 784.316693863061573, 22.0, 60.0 ],
@@ -10805,7 +10806,7 @@
 
 							}
  ],
-						"originid" : "pat-13110",
+						"originid" : "pat-13226",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-306", "obj-199" ]
 							}
@@ -11193,7 +11194,7 @@
 
 											}
  ],
-										"originid" : "pat-13139"
+										"originid" : "pat-13255"
 									}
 ,
 									"patching_rect" : [ 1376.60909090909081, 393.0, 50.0, 22.0 ],
@@ -11561,7 +11562,7 @@
 
 											}
  ],
-										"originid" : "pat-13141"
+										"originid" : "pat-13257"
 									}
 ,
 									"patching_rect" : [ 1203.654545454545314, 323.0, 110.0, 22.0 ],
@@ -12796,7 +12797,7 @@
 
 											}
  ],
-										"originid" : "pat-13143"
+										"originid" : "pat-13259"
 									}
 ,
 									"patching_rect" : [ 747.304545454545405, 152.439567114741294, 51.0, 22.0 ],
@@ -13845,7 +13846,7 @@
 
 							}
  ],
-						"originid" : "pat-13137",
+						"originid" : "pat-13253",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -13984,13 +13985,12 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 68.0, 100.0, 445.0, 183.0 ],
+						"rect" : [ 68.0, 100.0, 440.0, 170.0 ],
 						"openinpresentation" : 1,
 						"gridsize" : [ 15.0, 15.0 ],
 						"toolbarvisible" : 0,
 						"enablehscroll" : 0,
 						"enablevscroll" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"angle" : 270.0,
@@ -14687,7 +14687,7 @@
 
 											}
  ],
-										"originid" : "pat-13147"
+										"originid" : "pat-13263"
 									}
 ,
 									"patching_rect" : [ 515.624999999999773, 112.439567114741294, 51.0, 22.0 ],
@@ -15313,7 +15313,7 @@
 
 							}
  ],
-						"originid" : "pat-13145",
+						"originid" : "pat-13261",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -16922,7 +16922,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to audio corpus builder",
 					"id" : "obj-13",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -16987,8 +16987,8 @@
 					"patching_rect" : [ 664.875, 1737.0, 1176.0, 47.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 19,
-					"presentation_rect" : [ 341.416666507720947, 31.0, 189.0, 261.0 ],
-					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus builder_address= 3158_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
+					"presentation_rect" : [ 341.416666507720947, 31.0, 169.0, 261.0 ],
+					"text" : "build_corpus 0 overwrite= 0 0 0 builder_address= 3322_corpusbuilder segmentation_mode= onset max_size_s= None off_threshold_db= None discard_by_mean= 0 pick_peak_delta_gain= 0.07 segmentation_interval_s= 0.50 estimated_initial_bpm= 120 hop_length= 512 min_interval_s= 0.05 copy_resources= 0 pick_peak_pre_mean_s= 0.40 pick_peak_pre_max_s= 0.40 pick_peak_post_mean_s= 0.40 pick_peak_post_max_s= 0.40",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -18430,7 +18430,82 @@
 
 			}
  ],
-		"originid" : "pat-13069",
+		"originid" : "pat-13185",
+		"parameters" : 		{
+			"obj-395::obj-2" : [ "live.text[5]", "live.text[4]", 0 ],
+			"obj-395::obj-375" : [ "mc.live.gain~[8]", "click", 0 ],
+			"obj-395::obj-441" : [ "mc.live.gain~[7]", "corpus", 0 ],
+			"obj-395::obj-469" : [ "live.text[24]", "live.text[11]", 0 ],
+			"obj-395::obj-472" : [ "live.text[7]", "live.text[11]", 0 ],
+			"obj-395::obj-490" : [ "live.text[53]", "live.text[11]", 0 ],
+			"parameterbanks" : 			{
+				"0" : 				{
+					"index" : 0,
+					"name" : "",
+					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "abstraction_path.js",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpusbuilder.core.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpuspath.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.pan2.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.path.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "wfknob.png",
+				"bootpath" : "C74:/media/max/picts",
+				"type" : "PNG",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "wfmodes.png",
+				"bootpath" : "C74:/media/max/picts",
+				"type" : "PNG",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-1259", "obj-856" ]
 			}
