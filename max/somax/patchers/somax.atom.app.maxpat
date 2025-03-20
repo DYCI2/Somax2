@@ -10,9 +10,12 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 68.0, 100.0, 219.0, 183.0 ],
+		"rect" : [ 68.0, 100.0, 207.0, 183.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
+		"toolbarvisible" : 0,
+		"enablehscroll" : 0,
+		"enablevscroll" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"angle" : 270.0,
@@ -108,7 +111,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-45",
 					"linecount" : 2,
 					"maxclass" : "comment",
@@ -128,7 +130,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-39",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -145,7 +146,6 @@
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 10.0,
-					"hidden" : 1,
 					"id" : "obj-36",
 					"linecount" : 3,
 					"maxclass" : "comment",
@@ -165,7 +165,6 @@
 				"box" : 				{
 					"angle" : 270.0,
 					"bgcolor" : [ 0.125, 0.125, 0.125, 0.82 ],
-					"hidden" : 1,
 					"id" : "obj-279",
 					"maxclass" : "panel",
 					"mode" : 0,
@@ -453,7 +452,7 @@
 
 							}
  ],
-						"originid" : "pat-14731"
+						"originid" : "pat-17731"
 					}
 ,
 					"patching_rect" : [ 28.0, 206.0, 94.0, 22.0 ],
@@ -677,7 +676,7 @@
 
 							}
  ],
-						"originid" : "pat-14733"
+						"originid" : "pat-17733"
 					}
 ,
 					"patching_rect" : [ 314.0, 272.0, 42.0, 22.0 ],
@@ -841,7 +840,7 @@
 
 							}
  ],
-						"originid" : "pat-14735"
+						"originid" : "pat-17735"
 					}
 ,
 					"patching_rect" : [ 303.0, 666.0, 78.0, 22.0 ],
@@ -942,7 +941,7 @@
 
 							}
  ],
-						"originid" : "pat-14737"
+						"originid" : "pat-17737"
 					}
 ,
 					"patching_rect" : [ 800.0, 695.0, 50.0, 22.0 ],
@@ -985,7 +984,7 @@
 					"patching_rect" : [ 961.0, 519.0, 130.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 7.360257499999989, 2.0, 197.279485000000022, 22.0 ],
-					"text" : "3465_Atom",
+					"text" : "4123_Atom",
 					"textcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
 					"textjustification" : 1
 				}
@@ -1371,7 +1370,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-844",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1383,7 +1382,7 @@
 				"box" : 				{
 					"comment" : "(int, int) status, eligibility",
 					"id" : "obj-437",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1395,7 +1394,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-388",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1407,7 +1406,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to associated somax.player",
 					"id" : "obj-119",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1455,7 +1454,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-2",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -2018,7 +2017,86 @@
 
 			}
  ],
-		"originid" : "pat-14729",
+		"originid" : "pat-17729",
+		"parameters" : 		{
+			"obj-3::obj-1" : [ "source[13]", "source", 0 ],
+			"obj-4::obj-89::obj-1" : [ "live.text[121]", "live.text", 0 ],
+			"obj-4::obj-89::obj-2" : [ "live.text[120]", "live.text", 0 ],
+			"obj-4::obj-89::obj-3" : [ "live.text[122]", "live.text", 0 ],
+			"obj-89::obj-1" : [ "live.text[1]", "live.text", 0 ],
+			"obj-89::obj-2" : [ "live.text[2]", "live.text", 0 ],
+			"obj-89::obj-3" : [ "live.text[3]", "live.text", 0 ],
+			"parameterbanks" : 			{
+				"0" : 				{
+					"index" : 0,
+					"name" : "",
+					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"parameter_overrides" : 			{
+				"obj-89::obj-1" : 				{
+					"parameter_longname" : "live.text[1]"
+				}
+,
+				"obj-89::obj-2" : 				{
+					"parameter_longname" : "live.text[2]"
+				}
+,
+				"obj-89::obj-3" : 				{
+					"parameter_longname" : "live.text[3]"
+				}
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "peakmeter.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "./resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.atom.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "./resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.await_patcherargs.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.descriptorview.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "./resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.receiveblock2.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-33", "obj-51" ]
 			}

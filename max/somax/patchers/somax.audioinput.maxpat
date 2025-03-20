@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 68.0, 100.0, 1226.0, 983.0 ],
+		"rect" : [ 68.0, 100.0, 248.0, 77.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -71,7 +71,7 @@
 				"box" : 				{
 					"comment" : "(any) control messages",
 					"id" : "obj-3",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -108,7 +108,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-39",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -120,7 +120,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-38",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -144,7 +144,7 @@
 				"box" : 				{
 					"comment" : "(signal) audio out",
 					"id" : "obj-104",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -238,7 +238,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -363,14 +363,10 @@
 
 							}
  ],
-						"originid" : "pat-1086"
+						"originid" : "pat-18813"
 					}
 ,
 					"patching_rect" : [ 371.499999999999773, 121.5, 103.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p parse_playback"
 				}
 
@@ -710,7 +706,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -887,14 +883,10 @@
 
 							}
  ],
-						"originid" : "pat-1088"
+						"originid" : "pat-18815"
 					}
 ,
 					"patching_rect" : [ 149.5, 366.0, 101.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p populate_menu"
 				}
 
@@ -1020,7 +1012,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1232,14 +1224,10 @@
 
 							}
  ],
-						"originid" : "pat-1090"
+						"originid" : "pat-18817"
 					}
 ,
 					"patching_rect" : [ 333.25, 761.0, 71.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p panel_ctrl"
 				}
 
@@ -1306,7 +1294,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"id" : "obj-65",
 					"maxclass" : "meter~",
 					"numinlets" : 1,
@@ -1362,7 +1349,6 @@
 , 			{
 				"box" : 				{
 					"basictuning" : 440,
-					"bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"channelcount" : 1,
 					"color" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"data" : 					{
@@ -1900,7 +1886,9 @@
 
 			}
  ],
-		"originid" : "pat-1084"
+		"originid" : "pat-18811",
+		"dependency_cache" : [  ],
+		"autosave" : 0
 	}
 
 }

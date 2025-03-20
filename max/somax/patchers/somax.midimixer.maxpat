@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 351.0, 164.0, 872.0, 582.0 ],
+		"rect" : [ 109.0, 152.0, 260.0, 96.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -200,7 +200,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-55",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -212,7 +212,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-17",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -224,7 +224,7 @@
 				"box" : 				{
 					"comment" : "(list) note_number velocity channel",
 					"id" : "obj-52",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -286,7 +286,7 @@
 				"box" : 				{
 					"comment" : "(list) note_number velocity channel",
 					"id" : "obj-16",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -516,7 +516,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -906,14 +906,10 @@
 
 							}
  ],
-						"originid" : "pat-176"
+						"originid" : "pat-20659"
 					}
 ,
 					"patching_rect" : [ 503.392300999999975, 558.297667632704361, 120.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p populate_matrixctrl"
 				}
 
@@ -1327,7 +1323,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1460,14 +1456,10 @@
 
 							}
  ],
-						"originid" : "pat-180"
+						"originid" : "pat-20663"
 					}
 ,
 					"patching_rect" : [ 390.725634333333289, 879.051300193918223, 109.850000000000023, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p map_velocity"
 				}
 
@@ -1839,7 +1831,37 @@
 
 			}
  ],
-		"originid" : "pat-170",
+		"originid" : "pat-20653",
+		"dependency_cache" : [ 			{
+				"name" : "heldnotes.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "kslider.compact.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.filter_midichannels.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-497", "obj-495", "obj-462", "obj-461", "obj-460", "obj-458", "obj-457", "obj-456", "obj-10", "obj-472", "obj-471", "obj-470", "obj-473", "obj-469", "obj-459", "obj-494", "obj-493", "obj-490", "obj-474" ]
 			}

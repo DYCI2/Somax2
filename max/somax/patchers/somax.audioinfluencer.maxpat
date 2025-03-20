@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 68.0, 100.0, 440.0, 590.0 ],
+		"rect" : [ 68.0, 100.0, 426.0, 580.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -231,7 +231,6 @@
 					"patching_rect" : [ 1496.0, 1070.403345724907012, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 142.999999761581421, 365.598510201250292, 16.000000476837158, 16.000000476837158 ],
-					"svg" : "",
 					"uncheckedcolor" : [ 0.6, 0.6, 0.6, 1.0 ],
 					"varname" : "continuousmfcc"
 				}
@@ -250,7 +249,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -445,14 +444,10 @@
 
 							}
  ],
-						"originid" : "pat-1098"
+						"originid" : "pat-18303"
 					}
 ,
 					"patching_rect" : [ 1527.0, 1002.403345724907012, 132.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p reset_when_disabled"
 				}
 
@@ -527,22 +522,6 @@
 			}
 , 			{
 				"box" : 				{
-					"angle" : 270.0,
-					"bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
-					"id" : "obj-189",
-					"maxclass" : "panel",
-					"mode" : 0,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1576.0, 1308.403345724907012, 55.489608750000116, 21.326672862453506 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 1576.0, 1308.403345724907012, 55.489608750000116, 21.326672862453506 ],
-					"proportion" : 0.5
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-190",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -580,7 +559,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -739,7 +718,7 @@
 
 							}
  ],
-						"originid" : "pat-1100",
+						"originid" : "pat-18305",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-9", "obj-46" ]
 							}
@@ -747,10 +726,6 @@
 					}
 ,
 					"patching_rect" : [ 1591.0, 662.595884703763204, 44.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p mfcc"
 				}
 
@@ -780,7 +755,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -924,14 +899,10 @@
 
 							}
  ],
-						"originid" : "pat-1102"
+						"originid" : "pat-18307"
 					}
 ,
 					"patching_rect" : [ 2497.0, 572.403345724907012, 53.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p format"
 				}
 
@@ -949,7 +920,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1067,14 +1038,10 @@
 
 							}
  ],
-						"originid" : "pat-1104"
+						"originid" : "pat-18309"
 					}
 ,
 					"patching_rect" : [ 2507.0, 783.403345724907012, 57.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p latency"
 				}
 
@@ -1190,7 +1157,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1393,14 +1360,10 @@
 
 							}
  ],
-						"originid" : "pat-1106"
+						"originid" : "pat-18311"
 					}
 ,
 					"patching_rect" : [ 721.0, 286.0, 107.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p map_downsamp"
 				}
 
@@ -1418,7 +1381,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1557,14 +1520,10 @@
 
 							}
  ],
-						"originid" : "pat-1108"
+						"originid" : "pat-18313"
 					}
 ,
 					"patching_rect" : [ 563.5, 286.0, 78.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p map_onset"
 				}
 
@@ -1604,7 +1563,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1684,14 +1643,10 @@
 
 							}
  ],
-						"originid" : "pat-1110"
+						"originid" : "pat-18315"
 					}
 ,
 					"patching_rect" : [ 281.200000000000045, 144.666578405938594, 88.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p mc_to_mono"
 				}
 
@@ -1721,7 +1676,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1755,14 +1710,10 @@
 							}
  ],
 						"lines" : [  ],
-						"originid" : "pat-1114"
+						"originid" : "pat-18319"
 					}
 ,
 					"patching_rect" : [ 610.0, 1088.403345724907012, 42.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p note"
 				}
 
@@ -2005,7 +1956,6 @@
 					"parameter_enable" : 0,
 					"parameter_mappable" : 0,
 					"patching_rect" : [ 685.0, 1055.403345724907012, 24.0, 24.0 ],
-					"svg" : "",
 					"varname" : "continuouspitch"
 				}
 
@@ -2198,7 +2148,6 @@
 					"patching_rect" : [ 1163.5, 1059.403345724907012, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 143.0, 346.598510201250349, 16.0, 16.0 ],
-					"svg" : "",
 					"uncheckedcolor" : [ 0.6, 0.6, 0.6, 1.0 ],
 					"varname" : "continuouschroma"
 				}
@@ -2242,7 +2191,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2490,14 +2439,10 @@
 
 							}
  ],
-						"originid" : "pat-1118"
+						"originid" : "pat-18323"
 					}
 ,
 					"patching_rect" : [ 291.0, 1050.20824742267996, 78.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p onset_gate"
 				}
 
@@ -2515,7 +2460,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2597,14 +2542,10 @@
 
 							}
  ],
-						"originid" : "pat-1120"
+						"originid" : "pat-18325"
 					}
 ,
 					"patching_rect" : [ 2539.0, 1060.403345724907012, 71.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p panel_ctrl"
 				}
 
@@ -2690,7 +2631,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -2885,14 +2826,10 @@
 
 							}
  ],
-						"originid" : "pat-1124"
+						"originid" : "pat-18329"
 					}
 ,
 					"patching_rect" : [ 1195.0, 990.635747101815696, 132.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p reset_when_disabled"
 				}
 
@@ -2935,7 +2872,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3015,14 +2952,10 @@
 
 							}
  ],
-						"originid" : "pat-1126"
+						"originid" : "pat-18331"
 					}
 ,
 					"patching_rect" : [ 101.0, 923.957664504230024, 71.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p panel_ctrl"
 				}
 
@@ -3095,11 +3028,11 @@
 				"box" : 				{
 					"comment" : "(any/signal/mc.signal) messages or audio input to audio influencer",
 					"id" : "obj-194",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "int" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 281.200000000000045, 45.62310791015625, 30.0, 30.0 ]
 				}
 
@@ -3120,7 +3053,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-5",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -3515,7 +3448,6 @@
 					"patching_rect" : [ 148.0, 512.921706077539056, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 331.0, 11.0, 22.0, 22.0 ],
-					"svg" : "",
 					"uncheckedcolor" : [ 0.6, 0.6, 0.6, 1.0 ],
 					"varname" : "enabled"
 				}
@@ -4650,7 +4582,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-78",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -5014,10 +4946,10 @@
 						"bonklowthresh" : [ 0.0 ],
 						"bonkminvel" : [ 0.1 ],
 						"chromadecay" : [ 300 ],
-						"continuouschroma" : [ 1 ],
-						"continuousmfcc" : [ 1 ],
+						"continuouschroma" : [ 0 ],
+						"continuousmfcc" : [ 0 ],
 						"continuouspitch" : [ 1 ],
-						"enabled" : [ 0 ],
+						"enabled" : [ 1 ],
 						"onsetlimit" : [ 150 ],
 						"onsetmethod" : [ 2 ],
 						"yindownsample" : [ "2" ],
@@ -5293,7 +5225,7 @@
 				"box" : 				{
 					"comment" : "(list) influences",
 					"id" : "obj-24",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -7187,7 +7119,81 @@
 
 			}
  ],
-		"originid" : "pat-1096",
+		"originid" : "pat-18301",
+		"dependency_cache" : [ 			{
+				"name" : "OMax.yin+.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "Yin+.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "audio2chroma.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/influencers",
+				"patcherrelativepath" : "./resources/influencers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "bc.autoname.js",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "bc.yinstats.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "bonk~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "ircamdescriptor~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "somax.await_patcherargs.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.routesignal.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "sr.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "yin~.mxo",
+				"type" : "iLaX"
+			}
+ ],
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"button" : 				{

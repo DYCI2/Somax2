@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 529.0, 145.0, 824.0, 639.0 ],
+		"rect" : [ 113.0, 175.0, 263.0, 89.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -39,7 +39,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -119,14 +119,10 @@
 
 							}
  ],
-						"originid" : "pat-186"
+						"originid" : "pat-18829"
 					}
 ,
 					"patching_rect" : [ 487.499999999999886, 564.5, 71.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p panel_ctrl"
 				}
 
@@ -147,7 +143,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-55",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -159,7 +155,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-83",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -171,11 +167,11 @@
 				"box" : 				{
 					"comment" : "(mc.signal) audio input from renderer",
 					"id" : "obj-72",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "multichannelsignal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 348.833333790302277, 59.0, 30.0, 30.0 ]
 				}
 
@@ -369,7 +365,7 @@
 				"box" : 				{
 					"comment" : "(mc.signal) audio out",
 					"id" : "obj-31",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -591,7 +587,6 @@
 							"parameter_initial_enable" : 1,
 							"parameter_longname" : "live.dial[1]",
 							"parameter_modmode" : 0,
-							"parameter_osc_name" : "<default>",
 							"parameter_shortname" : "Width",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 0
@@ -648,7 +643,6 @@
 							"parameter_longname" : "live.dial",
 							"parameter_mmin" : -127.0,
 							"parameter_modmode" : 0,
-							"parameter_osc_name" : "<default>",
 							"parameter_shortname" : "Pan",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 6
@@ -688,7 +682,6 @@
 					"patching_rect" : [ 430.499999999999886, 504.0, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 7.749999910593033, 6.049869389220248, 18.0, 18.0 ],
-					"svg" : "",
 					"uncheckedcolor" : [ 0.6, 0.6, 0.6, 1.0 ],
 					"varname" : "monocorpus"
 				}
@@ -696,7 +689,7 @@
 			}
 , 			{
 				"box" : 				{
-					"bubble_bgcolor" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"bubble_bgcolor" : [ 0.125, 0.125, 0.125, 1.0 ],
 					"fontface" : 1,
 					"fontsize" : 10.0,
 					"id" : "obj-40",
@@ -864,7 +857,6 @@
 							"parameter_mmax" : 12.0,
 							"parameter_mmin" : -70.0,
 							"parameter_modmode" : 0,
-							"parameter_osc_name" : "<default>",
 							"parameter_shortname" : "Gain",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 4
@@ -1234,7 +1226,39 @@
 
 			}
  ],
-		"originid" : "pat-184",
+		"originid" : "pat-18827",
+		"parameters" : 		{
+			"obj-1" : [ "Gain", "Gain", 0 ],
+			"obj-44" : [ "live.dial[1]", "Width", 0 ],
+			"obj-46" : [ "live.dial", "Pan", 0 ],
+			"parameterbanks" : 			{
+				"0" : 				{
+					"index" : 0,
+					"name" : "",
+					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
+		"dependency_cache" : [ 			{
+				"name" : "somax.pan2.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"button" : 				{

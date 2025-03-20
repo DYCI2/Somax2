@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 134.0, 138.0, 381.0, 432.0 ],
+		"rect" : [ 134.0, 138.0, 335.0, 389.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"toolbarvisible" : 0,
@@ -228,7 +228,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -290,14 +290,10 @@
 
 							}
  ],
-						"originid" : "pat-1299"
+						"originid" : "pat-20265"
 					}
 ,
 					"patching_rect" : [ 435.0, 427.505225409584114, 45.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p reset"
 				}
 
@@ -378,7 +374,7 @@
 				"box" : 				{
 					"comment" : "(int, str) status",
 					"id" : "obj-437",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -390,7 +386,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-844",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -402,7 +398,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-388",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -569,7 +565,6 @@
 					"patching_rect" : [ 773.0, 421.684568745085016, 24.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 352.25, 252.129159756023455, 24.0, 24.0 ],
-					"svg" : "",
 					"uncheckedcolor" : [ 0.6, 0.6, 0.6, 1.0 ],
 					"varname" : "echoic"
 				}
@@ -1291,7 +1286,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to midi corpus builder",
 					"id" : "obj-13",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1304,7 +1299,7 @@
 				"box" : 				{
 					"comment" : "(symbol) path to built corpus",
 					"id" : "obj-115",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1366,11 +1361,11 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 434.777777777777601, 864.5, 809.570164191081631, 33.0 ],
+					"patching_rect" : [ 434.777777777777601, 864.5, 813.0, 33.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 2,
 					"presentation_rect" : [ 336.416666507720947, 31.0, 605.0, 33.0 ],
-					"text" : "build_corpus 0 overwrite= 0 0 output_folder= /Users/marcofiorini/Documents/GitHub/Somax2/max/somax/corpus builder_address= 1263_corpusbuilder 0",
+					"text" : "build_corpus 0 overwrite= 0 0 0 builder_address= 4507_corpusbuilder fg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] bg_channels= [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ] filter_class= NoFilter",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ]
 				}
 
@@ -1388,7 +1383,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1602,14 +1597,10 @@
 
 							}
  ],
-						"originid" : "pat-1301"
+						"originid" : "pat-20267"
 					}
 ,
 					"patching_rect" : [ 559.777777777777601, 496.505225409584114, 99.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p selectChannel"
 				}
 
@@ -1640,7 +1631,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1854,14 +1845,10 @@
 
 							}
  ],
-						"originid" : "pat-1303"
+						"originid" : "pat-20269"
 					}
 ,
 					"patching_rect" : [ 435.0, 490.740932361964838, 99.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p selectChannel"
 				}
 
@@ -2238,7 +2225,44 @@
 
 			}
  ],
-		"originid" : "pat-1271",
+		"originid" : "pat-20237",
+		"dependency_cache" : [ 			{
+				"name" : "abstraction_path.js",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpusbuilder.core.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.corpuspath.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.path.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-1259", "obj-856" ]
 			}

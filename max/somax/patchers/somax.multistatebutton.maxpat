@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 810.0, 271.0, 401.0, 452.0 ],
+		"rect" : [ 106.0, 147.0, 123.0, 50.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -193,7 +193,7 @@
 				"box" : 				{
 					"comment" : "(int) mode",
 					"id" : "obj-65",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -217,7 +217,7 @@
 				"box" : 				{
 					"comment" : "(int) mode",
 					"id" : "obj-63",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -238,7 +238,7 @@
 					"patching_rect" : [ 395.783333333333303, 806.5, 67.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 17.713348933275228, 0.0, 67.0, 18.0 ],
-					"text" : "Continuous",
+					"text" : "Name1",
 					"textcolor" : [ 0.481437705647327, 0.846666309931507, 0.361908344245232, 1.0 ],
 					"textjustification" : 1
 				}
@@ -255,7 +255,7 @@
 					"patching_rect" : [ 466.674999999999955, 806.5, 67.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 17.713348933275228, 0.0, 67.0, 18.0 ],
-					"text" : "Reactive",
+					"text" : "Name2",
 					"textcolor" : [ 1.0, 0.709803921568627, 0.196078431372549, 1.0 ],
 					"textjustification" : 1
 				}
@@ -273,7 +273,7 @@
 					"patching_rect" : [ 537.566666666666606, 806.5, 67.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 17.713348933275228, 0.0, 67.0, 18.0 ],
-					"text" : "(Custom)",
+					"text" : "Name3",
 					"textcolor" : [ 0.647058823529412, 0.647058823529412, 0.647058823529412, 1.0 ],
 					"textjustification" : 1
 				}
@@ -864,7 +864,9 @@
 
 			}
  ],
-		"originid" : "pat-964",
+		"originid" : "pat-20731",
+		"dependency_cache" : [  ],
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "dUG Yello 01-1",
 				"button" : 				{

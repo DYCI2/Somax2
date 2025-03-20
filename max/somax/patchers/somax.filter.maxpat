@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 68.0, 100.0, 1626.0, 983.0 ],
+		"rect" : [ 68.0, 100.0, 193.0, 74.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -171,7 +171,7 @@
 					"patching_rect" : [ 1545.0, 89.0, 123.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 29.0, 7.0, 152.000004529953003, 24.0 ],
-					"text" : "1199_Filter",
+					"text" : "#0_Filter",
 					"textcolor" : [ 0.933333333333333, 0.933333333333333, 0.933333333333333, 1.0 ],
 					"textjustification" : 1
 				}
@@ -343,7 +343,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-844",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -355,7 +355,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-388",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -379,7 +379,7 @@
 				"box" : 				{
 					"comment" : "(any) messages to associated somax.player",
 					"id" : "obj-119",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -482,7 +482,7 @@
 				"box" : 				{
 					"comment" : "(int, int) status, eligibility",
 					"id" : "obj-437",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1135,7 +1135,7 @@
 
 											}
  ],
-										"originid" : "pat-1549",
+										"originid" : "pat-20199",
 										"boxgroups" : [ 											{
 												"boxes" : [ "obj-12", "obj-10" ]
 											}
@@ -1362,7 +1362,7 @@
 
 							}
  ],
-						"originid" : "pat-1547"
+						"originid" : "pat-20197"
 					}
 ,
 					"patching_rect" : [ 537.0, 760.0, 154.0, 22.0 ],
@@ -1412,7 +1412,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-20",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1563,7 +1563,7 @@
 					"comment" : "(any) messages from somax.player",
 					"cool" : 1,
 					"id" : "obj-10",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -2183,7 +2183,7 @@
 
 											}
  ],
-										"originid" : "pat-1555"
+										"originid" : "pat-20205"
 									}
 ,
 									"patching_rect" : [ 142.0, 167.0, 160.0, 22.0 ],
@@ -2398,7 +2398,7 @@
 
 							}
  ],
-						"originid" : "pat-1553",
+						"originid" : "pat-20203",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-54", "obj-153" ]
 							}
@@ -3374,7 +3374,30 @@
 
 			}
  ],
-		"originid" : "pat-1543",
+		"originid" : "pat-20193",
+		"dependency_cache" : [ 			{
+				"name" : "somax.await_patcherargs.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.descriptorview.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/player",
+				"patcherrelativepath" : "./resources/player",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "somax.winresize.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-38", "obj-1" ]
 			}

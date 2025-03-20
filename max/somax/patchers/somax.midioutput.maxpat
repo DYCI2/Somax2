@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 9,
 			"minor" : 0,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 582.0, 172.0, 471.0, 544.0 ],
+		"rect" : [ 97.0, 154.0, 245.0, 50.0 ],
 		"openinpresentation" : 1,
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
@@ -172,7 +172,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -233,14 +233,10 @@
 
 							}
  ],
-						"originid" : "pat-6658"
+						"originid" : "pat-20705"
 					}
 ,
 					"patching_rect" : [ 221.212547400163999, 296.0, 71.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p panel_ctrl"
 				}
 
@@ -348,7 +344,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -487,14 +483,10 @@
 
 							}
  ],
-						"originid" : "pat-6660"
+						"originid" : "pat-20707"
 					}
 ,
 					"patching_rect" : [ 622.212547400163999, 390.94418193207548, 101.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p populate_menu"
 				}
 
@@ -746,7 +738,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -826,14 +818,10 @@
 
 							}
  ],
-						"originid" : "pat-6662"
+						"originid" : "pat-20709"
 					}
 ,
 					"patching_rect" : [ 389.087547400163999, 580.00000799999998, 71.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p panel_ctrl"
 				}
 
@@ -842,7 +830,7 @@
 				"box" : 				{
 					"comment" : "(any) dumpout",
 					"id" : "obj-39",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -854,7 +842,7 @@
 				"box" : 				{
 					"comment" : "(list) parameters",
 					"id" : "obj-38",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -878,7 +866,7 @@
 				"box" : 				{
 					"comment" : "(list) midi through [nn vel ch]",
 					"id" : "obj-36",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1085,7 +1073,7 @@
 						"appversion" : 						{
 							"major" : 9,
 							"minor" : 0,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1184,14 +1172,10 @@
 
 							}
  ],
-						"originid" : "pat-6664"
+						"originid" : "pat-20711"
 					}
 ,
 					"patching_rect" : [ 99.712547400163999, 528.47208696603775, 71.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"globalpatchername" : ""
-					}
-,
 					"text" : "p is_noteon"
 				}
 
@@ -1224,7 +1208,7 @@
 				"box" : 				{
 					"comment" : "(list) midi messages [nn vel ch]",
 					"id" : "obj-43",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1698,7 +1682,16 @@
 
 			}
  ],
-		"originid" : "pat-6654",
+		"originid" : "pat-20701",
+		"dependency_cache" : [ 			{
+				"name" : "heldnotes.maxpat",
+				"bootpath" : "~/Documents/GitHub/Somax2/max/somax/patchers/resources/misc",
+				"patcherrelativepath" : "./resources/misc",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"boxgroups" : [ 			{
 				"boxes" : [ "obj-14", "obj-13", "obj-17", "obj-11" ]
 			}
