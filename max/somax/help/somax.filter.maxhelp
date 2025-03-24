@@ -123,7 +123,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 358.0, 300.0, 57.0, 22.0 ],
+													"patching_rect" : [ 358.0, 297.0, 57.0, 22.0 ],
 													"text" : "tosymbol"
 												}
 
@@ -205,7 +205,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 180.0, 300.0, 92.0, 22.0 ],
+													"patching_rect" : [ 180.0, 333.0, 92.0, 22.0 ],
 													"text" : "prepend corpus"
 												}
 
@@ -360,7 +360,7 @@
 
 											}
  ],
-										"originid" : "pat-1640"
+										"originid" : "pat-6948"
 									}
 ,
 									"patching_rect" : [ 210.0, 144.012500000000102, 154.0, 22.0 ],
@@ -547,7 +547,7 @@
 
 											}
  ],
-										"originid" : "pat-1642"
+										"originid" : "pat-6950"
 									}
 ,
 									"patching_rect" : [ 620.5, 304.0, 93.0, 22.0 ],
@@ -1532,7 +1532,7 @@
 
 											}
  ],
-										"originid" : "pat-1666"
+										"originid" : "pat-6974"
 									}
 ,
 									"patching_rect" : [ 756.0, 200.0, 165.041666666666515, 22.0 ],
@@ -1628,7 +1628,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 880.0, 242.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -1912,7 +1912,7 @@
 
 											}
  ],
-										"originid" : "pat-1669",
+										"originid" : "pat-6977",
 										"styles" : [ 											{
 												"name" : "dUG Yello 01-1",
 												"button" : 												{
@@ -2438,7 +2438,7 @@
 
 							}
  ],
-						"originid" : "pat-1638"
+						"originid" : "pat-6946"
 					}
 ,
 					"patching_rect" : [ 118.0, 38.0, 182.0, 22.0 ],
@@ -2471,7 +2471,7 @@
 						"isolateaudio" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-2651"
+						"originid" : "pat-7959"
 					}
 ,
 					"patching_rect" : [ 396.0, 38.0, 25.0, 22.0 ],
@@ -2554,7 +2554,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 228.0, 263.0, 57.0, 22.0 ],
+													"patching_rect" : [ 228.0, 260.0, 57.0, 22.0 ],
 													"text" : "tosymbol"
 												}
 
@@ -2636,7 +2636,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 263.0, 92.0, 22.0 ],
+													"patching_rect" : [ 50.0, 296.0, 92.0, 22.0 ],
 													"text" : "prepend corpus"
 												}
 
@@ -2769,7 +2769,7 @@
 
 											}
  ],
-										"originid" : "pat-2655"
+										"originid" : "pat-7963"
 									}
 ,
 									"patching_rect" : [ 53.0, 333.0, 154.0, 22.0 ],
@@ -3161,7 +3161,7 @@
 
 											}
  ],
-										"originid" : "pat-2657"
+										"originid" : "pat-7965"
 									}
 ,
 									"patching_rect" : [ 578.0, 330.0, 93.0, 22.0 ],
@@ -3975,7 +3975,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 889.0, 245.0, 163.0, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -4656,7 +4656,7 @@
 
 							}
  ],
-						"originid" : "pat-2653"
+						"originid" : "pat-7961"
 					}
 ,
 					"patching_rect" : [ 24.0, 38.0, 47.0, 22.0 ],
@@ -4667,7 +4667,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-1636",
+		"originid" : "pat-6944",
 		"parameters" : 		{
 			"obj-1::obj-14::obj-1001::obj-89::obj-1" : [ "live.text[4]", "live.text", 0 ],
 			"obj-1::obj-14::obj-1001::obj-89::obj-2" : [ "live.text[5]", "live.text", 0 ],

@@ -170,7 +170,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 251.0, 92.0, 22.0 ],
+													"patching_rect" : [ 50.0, 284.0, 92.0, 22.0 ],
 													"text" : "prepend corpus"
 												}
 
@@ -303,7 +303,7 @@
 
 											}
  ],
-										"originid" : "pat-4838"
+										"originid" : "pat-5804"
 									}
 ,
 									"patching_rect" : [ 53.0, 339.0, 154.0, 22.0 ],
@@ -625,7 +625,7 @@
 
 											}
  ],
-										"originid" : "pat-4840"
+										"originid" : "pat-5806"
 									}
 ,
 									"patching_rect" : [ 412.0, 213.0, 200.0, 22.0 ],
@@ -762,7 +762,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 843.0, 528.5, 89.0, 35.0 ],
-									"text" : "2589_tutorial_atom_2"
+									"text" : "2362_tutorial_atom_2"
 								}
 
 							}
@@ -1801,7 +1801,7 @@
 
 											}
  ],
-										"originid" : "pat-5376"
+										"originid" : "pat-6342"
 									}
 ,
 									"patching_rect" : [ 756.0, 200.0, 165.041666666666515, 22.0 ],
@@ -1897,7 +1897,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 880.0, 242.0, 171.645833333333599, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -2549,7 +2549,7 @@
 
 							}
  ],
-						"originid" : "pat-4836"
+						"originid" : "pat-5802"
 					}
 ,
 					"patching_rect" : [ 89.0, 38.0, 188.0, 22.0 ],
@@ -2582,7 +2582,7 @@
 						"isolateaudio" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-5378"
+						"originid" : "pat-6344"
 					}
 ,
 					"patching_rect" : [ 343.0, 38.0, 25.0, 22.0 ],
@@ -2665,7 +2665,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 228.0, 257.0, 57.0, 22.0 ],
+													"patching_rect" : [ 228.0, 253.0, 57.0, 22.0 ],
 													"text" : "tosymbol"
 												}
 
@@ -2747,7 +2747,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 257.0, 92.0, 22.0 ],
+													"patching_rect" : [ 50.0, 290.0, 92.0, 22.0 ],
 													"text" : "prepend corpus"
 												}
 
@@ -2880,7 +2880,7 @@
 
 											}
  ],
-										"originid" : "pat-5382"
+										"originid" : "pat-6348"
 									}
 ,
 									"patching_rect" : [ 53.0, 333.0, 154.0, 22.0 ],
@@ -3065,7 +3065,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 843.0, 528.5, 89.0, 35.0 ],
-									"text" : "2652_tutorial_atom"
+									"text" : "2425_tutorial_atom"
 								}
 
 							}
@@ -4088,7 +4088,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 889.0, 245.0, 163.0, 29.0 ],
-									"text" : "1 playersmissing"
+									"text" : "0 offline"
 								}
 
 							}
@@ -4850,7 +4850,7 @@
 
 							}
  ],
-						"originid" : "pat-5380"
+						"originid" : "pat-6346"
 					}
 ,
 					"patching_rect" : [ 24.0, 38.0, 47.0, 22.0 ],
@@ -4861,7 +4861,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-4834",
+		"originid" : "pat-5800",
 		"parameters" : 		{
 			"obj-1::obj-14::obj-1001::obj-89::obj-1" : [ "live.text[28]", "live.text", 0 ],
 			"obj-1::obj-14::obj-1001::obj-89::obj-2" : [ "live.text[26]", "live.text", 0 ],
