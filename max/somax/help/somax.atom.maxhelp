@@ -83,6 +83,18 @@
 										"gridsize" : [ 15.0, 15.0 ],
 										"boxes" : [ 											{
 												"box" : 												{
+													"id" : "obj-4",
+													"maxclass" : "newobj",
+													"numinlets" : 1,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 228.0, 251.0, 57.0, 22.0 ],
+													"text" : "tosymbol"
+												}
+
+											}
+, 											{
+												"box" : 												{
 													"id" : "obj-7",
 													"maxclass" : "comment",
 													"numinlets" : 1,
@@ -98,7 +110,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 82.0, 308.0, 119.0, 20.0 ],
+													"patching_rect" : [ 82.0, 336.0, 119.0, 20.0 ],
 													"text" : "load corpus in player"
 												}
 
@@ -109,7 +121,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 271.0, 308.0, 182.0, 20.0 ],
+													"patching_rect" : [ 271.0, 336.0, 182.0, 20.0 ],
 													"text" : "set new corpuspath in the server"
 												}
 
@@ -122,7 +134,7 @@
 													"maxclass" : "outlet",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 228.0, 303.0, 30.0, 30.0 ]
+													"patching_rect" : [ 228.0, 331.0, 30.0, 30.0 ]
 												}
 
 											}
@@ -134,7 +146,7 @@
 													"maxclass" : "outlet",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 50.0, 303.0, 30.0, 30.0 ]
+													"patching_rect" : [ 50.0, 331.0, 30.0, 30.0 ]
 												}
 
 											}
@@ -158,7 +170,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 223.0, 92.0, 22.0 ],
+													"patching_rect" : [ 50.0, 251.0, 92.0, 22.0 ],
 													"text" : "prepend corpus"
 												}
 
@@ -170,7 +182,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 5,
 													"outlettype" : [ "", "", "", "", "" ],
-													"patching_rect" : [ 228.0, 223.0, 313.0, 22.0 ],
+													"patching_rect" : [ 228.0, 216.0, 313.0, 22.0 ],
 													"text" : "regexp Anais_words_2labels_audacity.pickle @substitute"
 												}
 
@@ -182,7 +194,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 228.0, 256.0, 115.0, 22.0 ],
+													"patching_rect" : [ 228.0, 284.0, 115.0, 22.0 ],
 													"text" : "prepend corpuspath"
 												}
 
@@ -240,7 +252,7 @@
 											}
 , 											{
 												"patchline" : 												{
-													"destination" : [ "obj-116", 0 ],
+													"destination" : [ "obj-4", 0 ],
 													"source" : [ "obj-115", 0 ]
 												}
 
@@ -283,8 +295,15 @@
 												}
 
 											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-116", 0 ],
+													"source" : [ "obj-4", 0 ]
+												}
+
+											}
  ],
-										"originid" : "pat-28357"
+										"originid" : "pat-4838"
 									}
 ,
 									"patching_rect" : [ 53.0, 339.0, 154.0, 22.0 ],
@@ -606,7 +625,7 @@
 
 											}
  ],
-										"originid" : "pat-28359"
+										"originid" : "pat-4840"
 									}
 ,
 									"patching_rect" : [ 412.0, 213.0, 200.0, 22.0 ],
@@ -743,7 +762,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 843.0, 528.5, 89.0, 35.0 ],
-									"text" : "8304_tutorial_atom_2"
+									"text" : "2589_tutorial_atom_2"
 								}
 
 							}
@@ -1782,7 +1801,7 @@
 
 											}
  ],
-										"originid" : "pat-28895"
+										"originid" : "pat-5376"
 									}
 ,
 									"patching_rect" : [ 756.0, 200.0, 165.041666666666515, 22.0 ],
@@ -1878,7 +1897,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 880.0, 242.0, 171.645833333333599, 29.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -2530,7 +2549,7 @@
 
 							}
  ],
-						"originid" : "pat-28355"
+						"originid" : "pat-4836"
 					}
 ,
 					"patching_rect" : [ 89.0, 38.0, 188.0, 22.0 ],
@@ -2563,7 +2582,7 @@
 						"isolateaudio" : 1,
 						"boxes" : [  ],
 						"lines" : [  ],
-						"originid" : "pat-28897"
+						"originid" : "pat-5378"
 					}
 ,
 					"patching_rect" : [ 343.0, 38.0, 25.0, 22.0 ],
@@ -2641,6 +2660,18 @@
 										"gridsize" : [ 15.0, 15.0 ],
 										"boxes" : [ 											{
 												"box" : 												{
+													"id" : "obj-4",
+													"maxclass" : "newobj",
+													"numinlets" : 1,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 228.0, 257.0, 57.0, 22.0 ],
+													"text" : "tosymbol"
+												}
+
+											}
+, 											{
+												"box" : 												{
 													"id" : "obj-7",
 													"maxclass" : "comment",
 													"numinlets" : 1,
@@ -2656,7 +2687,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 82.0, 308.0, 119.0, 20.0 ],
+													"patching_rect" : [ 82.0, 342.0, 119.0, 20.0 ],
 													"text" : "load corpus in player"
 												}
 
@@ -2667,7 +2698,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 271.0, 308.0, 182.0, 20.0 ],
+													"patching_rect" : [ 271.0, 342.0, 182.0, 20.0 ],
 													"text" : "set new corpuspath in the server"
 												}
 
@@ -2680,7 +2711,7 @@
 													"maxclass" : "outlet",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 228.0, 303.0, 30.0, 30.0 ]
+													"patching_rect" : [ 228.0, 337.0, 30.0, 30.0 ]
 												}
 
 											}
@@ -2692,7 +2723,7 @@
 													"maxclass" : "outlet",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 50.0, 303.0, 30.0, 30.0 ]
+													"patching_rect" : [ 50.0, 337.0, 30.0, 30.0 ]
 												}
 
 											}
@@ -2716,7 +2747,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 223.0, 92.0, 22.0 ],
+													"patching_rect" : [ 50.0, 257.0, 92.0, 22.0 ],
 													"text" : "prepend corpus"
 												}
 
@@ -2728,7 +2759,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 5,
 													"outlettype" : [ "", "", "", "", "" ],
-													"patching_rect" : [ 228.0, 223.0, 303.0, 22.0 ],
+													"patching_rect" : [ 228.0, 216.0, 303.0, 22.0 ],
 													"text" : "regexp Anais_words_2labels_reaper.pickle @substitute"
 												}
 
@@ -2740,7 +2771,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 228.0, 256.0, 115.0, 22.0 ],
+													"patching_rect" : [ 228.0, 290.0, 115.0, 22.0 ],
 													"text" : "prepend corpuspath"
 												}
 
@@ -2798,7 +2829,7 @@
 											}
 , 											{
 												"patchline" : 												{
-													"destination" : [ "obj-116", 0 ],
+													"destination" : [ "obj-4", 0 ],
 													"source" : [ "obj-115", 0 ]
 												}
 
@@ -2841,8 +2872,15 @@
 												}
 
 											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-116", 0 ],
+													"source" : [ "obj-4", 0 ]
+												}
+
+											}
  ],
-										"originid" : "pat-28901"
+										"originid" : "pat-5382"
 									}
 ,
 									"patching_rect" : [ 53.0, 333.0, 154.0, 22.0 ],
@@ -3027,7 +3065,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 843.0, 528.5, 89.0, 35.0 ],
-									"text" : "8367_tutorial_atom"
+									"text" : "2652_tutorial_atom"
 								}
 
 							}
@@ -4050,7 +4088,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 889.0, 245.0, 163.0, 29.0 ],
-									"text" : "0 offline"
+									"text" : "1 playersmissing"
 								}
 
 							}
@@ -4812,7 +4850,7 @@
 
 							}
  ],
-						"originid" : "pat-28899"
+						"originid" : "pat-5380"
 					}
 ,
 					"patching_rect" : [ 24.0, 38.0, 47.0, 22.0 ],
@@ -4823,7 +4861,7 @@
 			}
  ],
 		"lines" : [  ],
-		"originid" : "pat-28353",
+		"originid" : "pat-4834",
 		"parameters" : 		{
 			"obj-1::obj-14::obj-1001::obj-89::obj-1" : [ "live.text[28]", "live.text", 0 ],
 			"obj-1::obj-14::obj-1001::obj-89::obj-2" : [ "live.text[26]", "live.text", 0 ],

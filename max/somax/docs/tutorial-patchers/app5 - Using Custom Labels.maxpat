@@ -470,7 +470,7 @@
 
 							}
  ],
-						"originid" : "pat-13348"
+						"originid" : "pat-37"
 					}
 ,
 					"patching_rect" : [ 6.0, 117.0, 91.0, 22.0 ],
@@ -988,7 +988,7 @@
 
 											}
  ],
-										"originid" : "pat-13353"
+										"originid" : "pat-42"
 									}
 ,
 									"patching_rect" : [ 471.0, 687.795711060948179, 83.0, 22.0 ],
@@ -1210,7 +1210,7 @@
 
 							}
  ],
-						"originid" : "pat-13351",
+						"originid" : "pat-40",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1283,6 +1283,7 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hidden" : 1,
 					"id" : "obj-68",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1469,7 +1470,7 @@
 
 											}
  ],
-										"originid" : "pat-13358"
+										"originid" : "pat-47"
 									}
 ,
 									"patching_rect" : [ 456.0, 672.795711060948179, 73.0, 22.0 ],
@@ -1863,7 +1864,7 @@
 
 							}
  ],
-						"originid" : "pat-13356",
+						"originid" : "pat-45",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -1936,7 +1937,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-166",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -2006,6 +2006,18 @@
 										"gridsize" : [ 15.0, 15.0 ],
 										"boxes" : [ 											{
 												"box" : 												{
+													"id" : "obj-2",
+													"maxclass" : "newobj",
+													"numinlets" : 1,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 50.0, 250.0, 57.0, 22.0 ],
+													"text" : "tosymbol"
+												}
+
+											}
+, 											{
+												"box" : 												{
 													"id" : "obj-7",
 													"maxclass" : "comment",
 													"numinlets" : 1,
@@ -2021,7 +2033,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 93.0, 301.0, 182.0, 20.0 ],
+													"patching_rect" : [ 93.0, 339.0, 182.0, 20.0 ],
 													"text" : "set new corpuspath in the server"
 												}
 
@@ -2034,7 +2046,7 @@
 													"maxclass" : "outlet",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 50.0, 296.0, 30.0, 30.0 ]
+													"patching_rect" : [ 50.0, 334.0, 30.0, 30.0 ]
 												}
 
 											}
@@ -2070,7 +2082,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 249.0, 115.0, 22.0 ],
+													"patching_rect" : [ 50.0, 287.0, 115.0, 22.0 ],
 													"text" : "prepend corpuspath"
 												}
 
@@ -2121,7 +2133,7 @@
 											}
 , 											{
 												"patchline" : 												{
-													"destination" : [ "obj-116", 0 ],
+													"destination" : [ "obj-2", 0 ],
 													"source" : [ "obj-115", 0 ]
 												}
 
@@ -2155,8 +2167,15 @@
 												}
 
 											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-116", 0 ],
+													"source" : [ "obj-2", 0 ]
+												}
+
+											}
  ],
-										"originid" : "pat-13363"
+										"originid" : "pat-52"
 									}
 ,
 									"patching_rect" : [ 815.0, 755.0, 154.0, 22.0 ],
@@ -3166,7 +3185,7 @@
 
 							}
  ],
-						"originid" : "pat-13361",
+						"originid" : "pat-50",
 						"boxgroups" : [ 							{
 								"boxes" : [ "obj-29", "obj-65" ]
 							}
@@ -3499,7 +3518,7 @@
 
 							}
  ],
-						"originid" : "pat-13366"
+						"originid" : "pat-55"
 					}
 ,
 					"patching_rect" : [ 12.0, 418.0, 61.0, 69.0 ],
@@ -3911,7 +3930,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-13372"
+										"originid" : "pat-61"
 									}
 ,
 									"patching_rect" : [ 620.0, 67.0, 61.0, 69.0 ],
@@ -4112,7 +4131,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-13375"
+										"originid" : "pat-64"
 									}
 ,
 									"patching_rect" : [ 690.0, 67.0, 61.0, 69.0 ],
@@ -4467,7 +4486,7 @@
 											}
  ],
 										"lines" : [  ],
-										"originid" : "pat-13378"
+										"originid" : "pat-67"
 									}
 ,
 									"patching_rect" : [ 760.0, 67.0, 61.0, 69.0 ],
@@ -4711,7 +4730,7 @@
 
 							}
  ],
-						"originid" : "pat-13369",
+						"originid" : "pat-58",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -4890,7 +4909,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-8",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -5014,7 +5032,7 @@
 
 							}
  ],
-						"originid" : "pat-13381",
+						"originid" : "pat-70",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5088,7 +5106,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-5",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -5205,7 +5222,7 @@
 
 							}
  ],
-						"originid" : "pat-13446",
+						"originid" : "pat-135",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5279,7 +5296,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-1",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -5396,7 +5412,7 @@
 
 							}
  ],
-						"originid" : "pat-13551",
+						"originid" : "pat-240",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5470,7 +5486,6 @@
 					"embed" : 1,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
-					"hidden" : 1,
 					"id" : "obj-23",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -5634,7 +5649,7 @@
 
 							}
  ],
-						"originid" : "pat-13787",
+						"originid" : "pat-476",
 						"styles" : [ 							{
 								"name" : "dUG Yello 01-1",
 								"button" : 								{
@@ -5801,7 +5816,7 @@
 
 			}
  ],
-		"originid" : "pat-13346",
+		"originid" : "pat-35",
 		"parameters" : 		{
 			"obj-1::obj-1::obj-13::obj-1" : [ "source[5]", "source", 0 ],
 			"obj-1::obj-1::obj-2::obj-395::obj-2" : [ "live.text[113]", "live.text[4]", 0 ],
