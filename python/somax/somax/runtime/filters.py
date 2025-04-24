@@ -484,6 +484,36 @@ class EnergyFilter(AbstractFilter):
 
         self.history: deque[float] = deque([], self.moving_average_len.value)
 
+    # OLD APPLY FUNCTION
+    # def apply(self,
+    #           peaks: Peaks,
+    #           time: float,
+    #           beat_phase: float,
+    #           corresponding_events: List[CorpusEvent],
+    #           corresponding_transforms: List[AbstractTransform],
+    #           taboo_mask: TabooMask,
+    #           corpus: Corpus = None,
+    #           enforce_output: bool = False,
+    #           **kwargs) -> Tuple[Peaks, TabooMask]:
+    #     if self.center is None:
+    #         return peaks, taboo_mask
+    #
+    #     if self._mean_or_peak.value:
+    #         velocities: np.ndarray = np.array([event.get_feature(PeakEnergyDb).value()
+    #                                            for event in corresponding_events])
+    #     else:
+    #         velocities: np.ndarray = np.array([event.get_feature(TotalEnergyDb).value()
+    #                                            for event in corresponding_events])
+    #
+    #     if self._binary_mode.value:
+    #         factor: np.ndarray = (self.center - self.width) <= velocities <= (self.center + self.width)
+    #     else:
+    #         factor = np.exp(-((velocities - self.center) ** 2 / (2 * self.width ** 2)))
+    #
+    #     peaks.scores *= 1 - self._weight.value + self._weight.value * factor
+    #
+    #     return peaks, taboo_mask
+
     def apply(self,
               peaks: Peaks,
               time: float,
@@ -494,22 +524,48 @@ class EnergyFilter(AbstractFilter):
               corpus: Corpus = None,
               enforce_output: bool = False,
               **kwargs) -> Tuple[Peaks, TabooMask]:
-        if self.center is None:
+        if self.center is None or not corresponding_events:
             return peaks, taboo_mask
 
+        # Choose which energy feature to use
         if self._mean_or_peak.value:
-            velocities: np.ndarray = np.array([event.get_feature(PeakEnergyDb).value()
-                                               for event in corresponding_events])
+            velocities: np.ndarray = np.array([
+                event.get_feature(PeakEnergyDb).value()
+                for event in corresponding_events
+            ])
         else:
-            velocities: np.ndarray = np.array([event.get_feature(TotalEnergyDb).value()
-                                               for event in corresponding_events])
+            velocities: np.ndarray = np.array([
+                event.get_feature(TotalEnergyDb).value()
+                for event in corresponding_events
+            ])
 
+        # Snap center to the closest energy in the current data if it's out of range
+        min_energy = np.min(velocities)
+        max_energy = np.max(velocities)
+        effective_center = np.clip(self.center, min_energy, max_energy)
+
+        # Apply filtering
         if self._binary_mode.value:
-            factor: np.ndarray = (self.center - self.width) <= velocities <= (self.center + self.width)
+            factor: np.ndarray = ((effective_center - self.width) <= velocities) & (
+                        velocities <= (effective_center + self.width))
+            factor = factor.astype(float)  # Convert bool array to float (0 or 1)
         else:
-            factor = np.exp(-((velocities - self.center) ** 2 / (2 * self.width ** 2)))
+            factor = np.exp(-((velocities - effective_center) ** 2) / (2 * self.width ** 2))
 
+        # Apply scoring adjustment
         peaks.scores *= 1 - self._weight.value + self._weight.value * factor
+
+        # Find and print the loudness of the top-scored event (after filtering)
+        top_idx = int(np.argmax(peaks.scores))
+        selected_event = corresponding_events[top_idx]
+
+        # Use the same feature as above (mean or peak energy)
+        selected_energy = (selected_event.get_feature(PeakEnergyDb).value()
+                           if self._mean_or_peak.value
+                           else selected_event.get_feature(TotalEnergyDb).value())
+
+        print(
+            f"[EnergyFilter] Selected event energy: {selected_energy:.2f} dB (target was {self.center:.2f}, snapped to {effective_center:.2f})")
 
         return peaks, taboo_mask
 
