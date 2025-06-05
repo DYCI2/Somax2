@@ -564,8 +564,8 @@ class EnergyFilter(AbstractFilter):
                            if self._mean_or_peak.value
                            else selected_event.get_feature(TotalEnergyDb).value())
 
-        print(
-            f"[EnergyFilter] Selected event energy: {selected_energy:.2f} dB (target was {self.center:.2f}, snapped to {effective_center:.2f})")
+        #print(
+        #    f"[EnergyFilter] Selected event energy: {selected_energy:.2f} dB (target was {self.center:.2f}, snapped to {effective_center:.2f})")
 
         return peaks, taboo_mask
 
