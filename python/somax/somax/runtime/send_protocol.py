@@ -109,4 +109,5 @@ class PlayerSendProtocol:
 
     # Recording
     RECORD_LEARN_EVENT = "learned"
+    RECORD_MIDI_LEARN_EVENT = "learned_midi"
     RECORDING_BUFFER_SIZE = [AUDIO_RENDERER_ADDRESS, "record_buffer_size"]

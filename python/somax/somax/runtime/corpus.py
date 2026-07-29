@@ -807,3 +807,158 @@ class RealtimeRecordedAudioCorpus(AudioCorpus):
     def _missing_features(features: List[Type[CorpusFeature]],
                           required: Iterable[Type[CorpusFeature]]) -> List[Type[CorpusFeature]]:
         return [feature for feature in required if feature not in features]
+
+
+class RealtimeRecordedMidiCorpus(MidiCorpus):
+    RT_RECORDED_KEY: str = "realtime_recorded"
+    ERROR_RESOLUTION_TIME = 1e-4
+    
+    class RecordingEventType(Enum):
+        FIRST = 0
+        INTERMEDIATE = 1
+        LAST = 2
+
+    def __init__(self,
+                 events: List[MidiCorpusEvent],
+                 name: str,
+                 scheduling_mode: SchedulingMode,
+                 feature_types: List[Type[CorpusFeature]],
+                 build_parameters: Dict[str, Any],
+                 recording_features_determined: bool):
+        super().__init__(events=events,
+                         name=name,
+                         scheduling_mode=scheduling_mode,
+                         feature_types=feature_types,
+                         label_info={},
+                         build_parameters=build_parameters)
+        
+        self._compute_index_map(max(self.duration() + self.MINIMUM_RECORD_BUFFER_DURATION,
+                                    self.DEFAULT_CORPUS_DURATION))
+        
+        self.recording_features_determined: bool = recording_features_determined
+        self.saved: bool = True
+        self.previous_latency: float = 0.0
+
+    @classmethod
+    def from_existing(cls,
+                      corpus: MidiCorpus,
+                      required_features: Optional[List[Type[CorpusFeature]]]) -> 'RealtimeRecordedMidiCorpus':
+        
+        # If the user asks for specific features, validate them against the corpus
+        if required_features is not None and len(required_features) > 0:
+            cls._validate_corpus(corpus, required_features)
+            final_features = required_features
+        else:
+            # THE FIX: If no features are sent, strictly inherit the corpus's original features!
+            final_features = corpus.feature_types
+
+        # Since the corpus already exists, the features are permanently locked in
+        recording_features_determined = True
+
+        build_params: Dict[str, Any] = copy.copy(corpus._build_parameters)
+        build_params[cls.RT_RECORDED_KEY] = True
+
+        # Strip labels (mirroring the audio architecture safety constraints)
+        for event in corpus.events: 
+            event.labels = {}
+
+        return cls(events=corpus.events,
+                   name=corpus.name,
+                   scheduling_mode=corpus.scheduling_mode,
+                   feature_types=final_features,
+                   build_parameters=build_params,
+                   recording_features_determined=recording_features_determined)
+
+    @classmethod
+    def new(cls, target_features: Optional[List[Type[CorpusFeature]]]) -> 'RealtimeRecordedMidiCorpus':
+        recording_features_determined: bool = target_features is not None
+        target_features = [] if target_features is None else target_features
+        
+        return cls(events=[],
+                   name="new_midi_live",
+                   scheduling_mode=AbsoluteScheduling(), # Use RelativeScheduling if syncing to transport ticks
+                   feature_types=target_features,
+                   build_parameters={cls.RT_RECORDED_KEY: True},
+                   recording_features_determined=recording_features_determined)
+
+    def learn_midi_event(self,
+                         onset: float,
+                         duration: float,
+                         event_type: RecordingEventType,
+                         latency: float,
+                         notes: List[Note],
+                         features: List[FeatureValue]) -> Optional[MidiCorpusEvent]:
+        
+        # 1. Feature Validation (Mirroring Audio Logic)
+        if self.recording_features_determined:
+            missing_features: List[Type[CorpusFeature]] = self._missing_features(
+                features=[type(typing.cast(CorpusFeature, feature)) for feature in features],
+                required=self.feature_types
+            )
+            if len(missing_features) > 0:
+                raise RecordingError(f"The following features are missing in the recorded event: "
+                                     f"{' '.join([str(t.__name__).lower() for t in missing_features])}")
+        else:
+            required_features: List[Type[CorpusFeature]] = [type(typing.cast(CorpusFeature, feature))
+                                                            for feature in features]
+            self._validate_corpus(self, required_features)
+            self.feature_types = required_features
+            self.recording_features_determined = True
+
+        # 2. Latency correction
+        if event_type == self.RecordingEventType.FIRST:
+            onset_correction, duration_correction = 0.0, latency
+        elif event_type == self.RecordingEventType.LAST:
+            onset_correction, duration_correction = self.previous_latency, latency
+        else:
+            onset_correction = self.previous_latency
+            duration_correction = latency - self.previous_latency
+            
+        self.previous_latency = latency
+
+        onset -= min(onset - self.duration(), onset_correction)
+        duration -= min(duration, duration_correction)
+
+        # 3. Prevent Overdub gaps
+        if self.length() > 0:
+            diff = onset - self.duration()
+            if diff < -self.ERROR_RESOLUTION_TIME:
+                raise RecordingError("Overdubbing MIDI events is not supported")
+            onset = self.duration()
+            duration += diff
+
+        if onset < self.ERROR_RESOLUTION_TIME and duration < self.ERROR_RESOLUTION_TIME:
+            return None
+
+        # 4. Create and append the event (now including features dictionary)
+        event = MidiCorpusEvent(state_index=self.length(),
+                                tempo=120.0, 
+                                onset=onset,
+                                absolute_onset=onset * 1000,
+                                bar_number=0,
+                                duration=duration,
+                                absolute_duration=duration * 1000,
+                                notes=notes,
+                                features={type(f): f for f in features})
+        
+        self.events.append(event)
+        self._append_to_index_map(event) # Forces real-time KD-tree availability
+        self.saved = False
+        return event
+
+    @staticmethod
+    def _validate_corpus(corpus: MidiCorpus, required_features: List[Type[CorpusFeature]]) -> None:
+        if corpus.length() > 0:
+            missing_features: List[Type[CorpusFeature]]
+            missing_features = RealtimeRecordedMidiCorpus._missing_features(corpus.feature_types, required_features)
+            if len(missing_features) > 0:
+                raise RecordingError(f"Currently loaded corpus is missing these requested features: "
+                                     f"{' '.join([str(t.__name__).lower() for t in missing_features])}")
+
+    @staticmethod
+    def _missing_features(features: List[Type[CorpusFeature]],
+                          required: Iterable[Type[CorpusFeature]]) -> List[Type[CorpusFeature]]:
+        # Compare by class name (string) to avoid Pickle import mismatches
+        feature_names = [f.__name__ for f in features]
+        return [req for req in required if req.__name__ not in feature_names]
+    

@@ -22,8 +22,8 @@ from somax.runtime.activity_pattern import AbstractActivityPattern, ClassicActiv
 from somax.runtime.asyncio_osc_object import AsyncioOscObject
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus, RealtimeRecordedAudioCorpus
-from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent, SilenceEvent
+from somax.runtime.corpus import Corpus, MidiCorpus, AudioCorpus, RealtimeRecordedAudioCorpus, RealtimeRecordedMidiCorpus
+from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent, AudioCorpusEvent, SilenceEvent, Note
 from somax.runtime.corpus_query_manager import CorpusQueryManager, QueryResponse
 from somax.runtime.exceptions import (DuplicateKeyError, ParameterError, InvalidCorpus, TransformError,
                                       ExternalDataMismatch, RecordingError, InvalidConfiguration, ClassificationError,
@@ -800,6 +800,126 @@ class OscAgent(Agent, AsyncioOscObject):
     @staticmethod
     def _parse_feature(feature_keyword: str, feature_data: List[Any]) -> CorpusFeature:
         parsed_feature: Type[CorpusFeature] = FeatureDictionary.audio_rt_type_of(feature_keyword)
+
+        if len(feature_data) == 0:
+            raise ValueError("A value is required for each feature keyword")
+        if len(feature_data) == 1:
+            return parsed_feature(feature_data[0])
+        else:
+            return parsed_feature(feature_data)
+        
+    def record_midi_enable(self, *required_features) -> None:
+        try:
+            # Ignore empty lists, "auto", or a stray Max "bang"
+            if len(required_features) == 0 or (len(required_features) == 1 and required_features[0] in ["auto", "bang"]):
+                required_feature_types = None
+            else:
+                # USE THE NEW MIDI PARSER HERE:
+                required_feature_types = self._parse_midi_feature_types(*required_features)
+                
+            self.player.enable_midi_recording(required_feature_types)
+            self._post_read_corpus()
+        except (RecordingError, ValueError) as e:
+            self.logger.error(f"{str(e)}. MIDI Recording aborted")
+
+    def learn_midi_event(self,
+                         onset_ms: float,
+                         duration_ms: float,
+                         event_type: int,
+                         latency_ms: float,
+                         *payload) -> None: # payload contains features AND notes
+        
+        try:
+            # 1. Split the payload into features and notes
+            # Max should send a literal string "notes" to divide the two sections
+            payload_list = list(payload)
+            if "notes" not in payload_list:
+                self.logger.error("MIDI record payload missing 'notes' separator.")
+                return
+                
+            separator_idx = payload_list.index("notes")
+            unparsed_feature_data = payload_list[:separator_idx]
+            raw_notes = payload_list[separator_idx + 1:]
+
+            # 2. Parse the features (using the new MIDI parser)
+            parsed_features: List[CorpusFeature] = self.parse_midi_features(unparsed_feature_data)
+
+            # 3. Parse the MIDI notes
+            if len(raw_notes) % 5 != 0:
+                self.logger.error(f"Invalid MIDI note format. Expected multiple of 5, got length {len(raw_notes)}. Data: {raw_notes}")
+                return
+
+            notes: List[Note] = []
+            for i in range(0, len(raw_notes), 5):
+                n = Note(pitch=int(raw_notes[i]),
+                         velocity=int(raw_notes[i+1]),
+                         channel=int(raw_notes[i+2]),
+                         onset=float(raw_notes[i+3]) / 1000.0,
+                         duration=float(raw_notes[i+4]) / 1000.0,
+                         track="live_midi",
+                         absolute_onset=float(raw_notes[i+3]),
+                         absolute_duration=float(raw_notes[i+4]))
+                notes.append(n)
+
+            # 4. Pass everything to the Player
+            parsed_event_type = RealtimeRecordedMidiCorpus.RecordingEventType(event_type)
+            
+            event = self.player.learn_midi_event(onset=onset_ms / 1000,
+                                                 duration=duration_ms / 1000,
+                                                 event_type=parsed_event_type,
+                                                 latency=latency_ms / 1000,
+                                                 notes=notes,
+                                                 features=parsed_features) # Added features
+            
+            if event is None: 
+                return
+
+            self.target.send(PlayerSendProtocol.RECORD_MIDI_LEARN_EVENT, [event.state_index,
+                                                                     event.onset * 1000,
+                                                                     event.duration * 1000,
+                                                                     self.player.corpus.duration() * 1000])
+        except (RecordingError, ValueError, IndexError) as e:
+            self.logger.error(f"{str(e)}. No MIDI event was recorded")
+            self.target.send(PlayerSendProtocol.RECORD_MIDI_LEARN_EVENT, -1)
+    
+    @staticmethod
+    def _parse_midi_feature_types(*required_features) -> Optional[List[Type[CorpusFeature]]]:
+        if len(required_features) == 0:
+            raise ValueError("A list of enabled descriptors is required")
+
+        required_feature_types: List[Type[CorpusFeature]] = []
+        for feature in required_features:
+            # Uses the native dictionary method you just showed me!
+            parsed_feature: Type[CorpusFeature] = FeatureDictionary.midi_type_of(feature)
+            required_feature_types.append(typing.cast(Type[CorpusFeature], parsed_feature))
+
+        return required_feature_types
+
+    @staticmethod
+    def parse_midi_features(unparsed_feature_data) -> List[CorpusFeature]:
+        """ parses MIDI-specific features to avoid audio-algorithm conflicts """
+        parsed_features: List[CorpusFeature] = []
+        feature_keyword: Optional[str] = None
+        feature_data: List[Any] = []
+        
+        for element in unparsed_feature_data:
+            if isinstance(element, str):
+                if feature_keyword is not None:
+                    parsed_features.append(OscAgent._parse_midi_feature(feature_keyword, feature_data))
+                    feature_data = []
+                feature_keyword = element
+            else:
+                feature_data.append(element)
+
+        if feature_keyword is not None:
+            parsed_features.append(OscAgent._parse_midi_feature(feature_keyword, feature_data))
+
+        return parsed_features
+
+    @staticmethod
+    def _parse_midi_feature(feature_keyword: str, feature_data: List[Any]) -> CorpusFeature:
+        # Uses the native dictionary method
+        parsed_feature: Type[CorpusFeature] = FeatureDictionary.midi_type_of(feature_keyword)
 
         if len(feature_data) == 0:
             raise ValueError("A value is required for each feature keyword")

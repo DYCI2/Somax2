@@ -5,7 +5,7 @@ from somax.classification.classifier import AbstractClassifier
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.content_aware import ContentAware
 from somax.runtime.corpus import Corpus
-from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent
+from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import ClassificationError
 from somax.runtime.influence import AbstractInfluence, CorpusInfluence
 from somax.runtime.label import IntLabel, AbstractLabel
@@ -90,6 +90,11 @@ class Atom(Parametric, ContentAware):
 
     def reclassify(self) -> None:
         self.read_corpus(self._corpus)
+
+    def learn_midi_event(self, event: MidiCorpusEvent) -> None:
+        # Assuming your classifier supports MIDI features (like Pitch or Chroma)
+        label: IntLabel = self._classifier.classify_event(event)
+        self._memory_space.learn_event(event, label)
 
     def learn_event(self, event: AudioCorpusEvent) -> None:
         label: IntLabel = self._classifier.classify_event(event)

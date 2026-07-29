@@ -10,9 +10,9 @@ from somax.features.feature_value import FeatureValue
 from somax.runtime.activity_pattern import AbstractActivityPattern
 from somax.runtime.atom import Atom
 from somax.runtime.content_aware import ContentAware
-from somax.runtime.corpus import Corpus, RealtimeRecordedAudioCorpus, MidiCorpus, AudioCorpus
-from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent, SilenceEvent
-from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch, RecordingError
+from somax.runtime.corpus import Corpus, RealtimeRecordedAudioCorpus, MidiCorpus, AudioCorpus, RealtimeRecordedMidiCorpus
+from somax.runtime.corpus_event import CorpusEvent, AudioCorpusEvent, SilenceEvent, Note
+from somax.runtime.exceptions import DuplicateKeyError, ContentMismatch, RecordingError, ClassificationError
 from somax.runtime.exceptions import InvalidCorpus
 from somax.runtime.fallback_peak_selector import FallbackPeakSelector
 from somax.runtime.filters import AbstractFilter
@@ -513,3 +513,43 @@ class Player(Parametric, ContentAware):
 
         for atom in self.atoms.values():
             atom.update_transforms(self._transform_handler)
+
+    def enable_midi_recording(self, required_features: Optional[List[Type[CorpusFeature]]]) -> None:
+        if isinstance(self.corpus, RealtimeRecordedMidiCorpus):
+            raise RecordingError("Corpus is already MIDI record enabled")
+            
+        # NEW: If a static MIDI corpus is loaded, convert it so we can append to it!
+        elif isinstance(self.corpus, MidiCorpus):
+            self.corpus = RealtimeRecordedMidiCorpus.from_existing(self.corpus, required_features)
+            print(f"BACH FEATURES ARE: {[f.__name__ for f in self.corpus.feature_types]}")
+            
+        elif self.corpus is None:
+            corpus: Corpus = RealtimeRecordedMidiCorpus.new(required_features)
+            self.read_corpus(corpus)
+        else:
+            raise RecordingError(f"Cannot enable MIDI recording for existing corpus type {type(self.corpus).__name__}")
+        
+        self.set_eligibility(self.corpus)
+
+    def learn_midi_event(self, onset: float, duration: float,
+                            event_type: RealtimeRecordedMidiCorpus.RecordingEventType,
+                            latency: float, notes: List[Note], 
+                            features: List[FeatureValue]) -> Optional[CorpusEvent]: 
+            
+        if not isinstance(self.corpus, RealtimeRecordedMidiCorpus):
+            raise RecordingError(f"Player '{self.name}' is not MIDI record enabled")
+
+        event = self.corpus.learn_midi_event(onset=onset, duration=duration, 
+                                            event_type=event_type, latency=latency, 
+                                            notes=notes, features=features) 
+        if event is not None:
+            for atom in self.atoms.values():
+                try:
+                    # Tell the atom to learn the event
+                    atom.learn_midi_event(event) 
+                except (ClassificationError, AttributeError):
+                    # Silently ignore missing features OR audio-only atoms (like MFCC) failing on MIDI
+                    pass
+                    
+        return event
+    
